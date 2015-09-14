@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
+		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */; };
 		08DE942D1B8C58AC00D278AB /* StepicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE942C1B8C58AC00D278AB /* StepicTests.swift */; };
+		08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */; };
+		08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIExtensions.swift */; };
+		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
+		08FCEB661B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB651B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift */; };
+		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
+		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +46,12 @@
 		08DE94261B8C58AC00D278AB /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE942B1B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE942C1B8C58AC00D278AB /* StepicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicTests.swift; sourceTree = "<group>"; };
+		08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		08DE94381B8E3FCE00D278AB /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
+		08FCEB651B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
+		8860CAAA0935A0F996492A1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FB44B0005272E61AC9AE7E31 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +79,8 @@
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				08DE94291B8C58AC00D278AB /* StepicTests */,
 				08DE94121B8C58AC00D278AB /* Products */,
+				E270F1F62B9C580DD3F2548F /* Pods */,
+				1BAD14BA674336E6C1C0716C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +96,17 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */,
 				08DE94161B8C58AC00D278AB /* AppDelegate.swift */,
 				08DE94181B8C58AC00D278AB /* ViewController.swift */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
 				08DE941D1B8C58AC00D278AB /* Images.xcassets */,
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08DE94141B8C58AC00D278AB /* Supporting Files */,
+				08DE94381B8E3FCE00D278AB /* UIExtensions.swift */,
+				08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */,
+				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
+				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -112,6 +136,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				013481E40EB75169773E2F21 /* Pods.framework */,
+				08FCEB651B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E270F1F62B9C580DD3F2548F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB44B0005272E61AC9AE7E31 /* Pods.debug.xcconfig */,
+				8860CAAA0935A0F996492A1F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +161,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
+				B91127E6367E22FD37A6EAC7 /* Check Pods Manifest.lock */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
+				7A56EFD8DAE895B29171C151 /* Embed Pods Frameworks */,
+				D53C95D41D846AD960448116 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,13 +252,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7A56EFD8DAE895B29171C151 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B91127E6367E22FD37A6EAC7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D53C95D41D846AD960448116 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		08DE940D1B8C58AC00D278AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
+				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,
+				08FCEB661B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift in Sources */,
+				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
+				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +439,7 @@
 		};
 		08DE94311B8C58AC00D278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB44B0005272E61AC9AE7E31 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -350,6 +450,7 @@
 		};
 		08DE94321B8C58AC00D278AB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8860CAAA0935A0F996492A1F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -411,6 +512,7 @@
 				08DE94321B8C58AC00D278AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08DE94331B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "StepicTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +521,7 @@
 				08DE94351B8C58AC00D278AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
