@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
+		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
+		0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
+		0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		0885F8501BA83F3600F2A188 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84F1BA83F3600F2A188 /* Course.swift */; };
+		0885F8521BA9D64400F2A188 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
+		0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
+		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
@@ -36,6 +43,13 @@
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
+		0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDataDownloader.swift; sourceTree = "<group>"; };
+		0885F84F1BA83F3600F2A188 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		0885F8511BA9D64300F2A188 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0885F8531BA9DB5C00F2A188 /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
+		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +87,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0885F8491BA8374000F2A188 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
+				0885F84B1BA8376D00F2A188 /* Network */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0885F84A1BA8375C00F2A188 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */,
+				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
+				0885F84C1BA8378B00F2A188 /* Courses */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0885F84B1BA8376D00F2A188 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */,
+				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
+				0885F84F1BA83F3600F2A188 /* Course.swift */,
+				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
+				0885F8551BA9F18900F2A188 /* Parser.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		0885F84C1BA8378B00F2A188 /* Courses */ = {
+			isa = PBXGroup;
+			children = (
+				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
+				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+			);
+			name = Courses;
+			sourceTree = "<group>";
+		};
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +150,8 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
-				08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */,
+				0885F84A1BA8375C00F2A188 /* Controllers */,
+				0885F8491BA8374000F2A188 /* Model */,
 				08DE94161B8C58AC00D278AB /* AppDelegate.swift */,
 				08DE94181B8C58AC00D278AB /* ViewController.swift */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
@@ -104,9 +159,7 @@
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08DE94141B8C58AC00D278AB /* Supporting Files */,
 				08DE94381B8E3FCE00D278AB /* UIExtensions.swift */,
-				08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */,
-				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
-				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
+				0885F8511BA9D64300F2A188 /* Constants.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -237,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
@@ -306,13 +360,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				0885F8501BA83F3600F2A188 /* Course.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,
+				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
+				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				08FCEB661B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
+				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
