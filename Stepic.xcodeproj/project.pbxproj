@@ -16,6 +16,8 @@
 		0885F8521BA9D64400F2A188 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
 		0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
+		0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* StepicAPI.swift */; };
+		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		0885F8511BA9D64300F2A188 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0885F8531BA9DB5C00F2A188 /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		0885F8571BAAD43300F2A188 /* StepicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicAPI.swift; sourceTree = "<group>"; };
+		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +94,9 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
+				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
 				0885F84B1BA8376D00F2A188 /* Network */,
 			);
 			name = Model;
@@ -113,7 +119,6 @@
 				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
 				0885F84F1BA83F3600F2A188 /* Course.swift */,
 				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
-				0885F8551BA9F18900F2A188 /* Parser.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			children = (
 				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
 				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -369,9 +375,11 @@
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				08FCEB661B9ED38000FC4F8B /* Alamofire-SwiftyJSON.swift in Sources */,
+				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,10 +15,19 @@ class ApiDataDownloader: NSObject {
     static let sharedDownloader = ApiDataDownloader()
     private override init() {}
     
-    func getCoursesWith(featured: Bool?, page: Int, success : ([Course], Bool) -> Void, failure : (error : NSError) -> Void) {
-        let params : [String : NSObject] = [:]
+    func getCoursesWith(featured: Bool?, page: Int?, success : ([Course], Meta) -> Void, failure : (error : NSError) -> Void) {
+        
+        let headers = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        var params : [String : NSObject] = [:]
+        if let f = featured {
+            params["is_featured"] = f
+        }
+        
+        if let p = page {
+            params["page"] = p
+        }
 
-        Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, encoding: .URL).responseSwiftyJSON({
+        Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
             if let e = error {
@@ -31,6 +40,7 @@ class ApiDataDownloader: NSObject {
             for courseJSON in json["courses"].arrayValue {
                 courses += [Course(json: courseJSON)]
             }
+            success(courses, meta)
         })
     }
 }

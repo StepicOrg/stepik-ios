@@ -305,7 +305,7 @@
                         <outlet property="emailTextField" destination="iIb-Ou-ABM" id="CGz-4j-WZw"/>
                         <outlet property="errorLabel" destination="5ss-uq-4Dy" id="1ai-H3-1Tf"/>
                         <outlet property="passwordTextField" destination="UoZ-CZ-ikS" id="E0r-0x-50J"/>
-                        <segue destination="hRS-2a-8JM" kind="show" identifier="signedInSegue" id="l4B-KA-g0S"/>
+                        <segue destination="0uJ-IX-W04" kind="show" identifier="signedInSegue" id="l4B-KA-g0S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -315,7 +315,7 @@
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
             <objects>
-                <viewController id="taR-j4-5Jv" sceneMemberID="viewController">
+                <viewController id="taR-j4-5Jv" customClass="FindCoursesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CHk-No-T5F"/>
                         <viewControllerLayoutGuide type="bottom" id="lea-1q-JQL"/>
@@ -325,8 +325,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xJl-BW-RIC">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="taR-j4-5Jv" id="e2v-ou-feq"/>
+                                    <outlet property="delegate" destination="taR-j4-5Jv" id="QOE-WB-IbD"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -350,15 +354,19 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0"/>
+                    <connections>
+                        <outlet property="tableView" destination="xJl-BW-RIC" id="936-m7-90I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853" y="722"/>
+            <point key="canvasLocation" x="2665" y="722"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Best Courses-->
         <scene sceneID="Xcs-LO-Ogd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Best Courses" id="D6B-Zy-xmi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -370,6 +378,24 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Un-RL-Hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853" y="722"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="h7W-ra-FMl">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="0uJ-IX-W04" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="4cz-m9-gep">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="hRS-2a-8JM" kind="relationship" relationship="viewControllers" id="yjK-nr-rC0"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="emr-b4-LSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1041" y="722"/>
         </scene>

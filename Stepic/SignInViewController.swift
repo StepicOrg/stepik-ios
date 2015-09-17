@@ -27,12 +27,11 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInPressed(sender: UIButton) {
-        var token : StepicToken?
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text, password: passwordTextField.text, 
             
             success: {
             t in
-            token = t
+            StepicAPI.shared.token = t
             self.performSegueWithIdentifier("signedInSegue", sender: self)
             }, 
             
