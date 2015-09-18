@@ -23,6 +23,14 @@ class Course: NSObject {
         
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
+        
+        if beginDate == nil {
+            println("begin date for \(title) is nil!!!")
+        }
+        
+        if endDate == nil {
+            println("end date for \(title) is nil!!!")
+        }
     }
     
 
@@ -31,7 +39,6 @@ class Course: NSObject {
 
 extension NSTimeInterval {
     init(timeString: String) {
-        println("time string -> \(timeString)")
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         formatter.locale = NSLocale(localeIdentifier: "en_US")

@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
+		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
@@ -43,8 +45,10 @@
 
 /* Begin PBXFileReference section */
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDataDownloader.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08DE94141B8C58AC00D278AB /* Supporting Files */,
 				08DE94381B8E3FCE00D278AB /* UIExtensions.swift */,
+				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
+				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
 				0885F8511BA9D64300F2A188 /* Constants.swift */,
 			);
 			path = Stepic;
@@ -366,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0885F8501BA83F3600F2A188 /* Course.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
@@ -380,6 +387,7 @@
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
+				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

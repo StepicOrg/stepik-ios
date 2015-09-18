@@ -14,7 +14,10 @@ class FindCoursesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
+        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         
         ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, page: nil, success: {
@@ -28,6 +31,10 @@ class FindCoursesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+//        return UIStatusBarStyle.LightContent
+//    }
+//    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

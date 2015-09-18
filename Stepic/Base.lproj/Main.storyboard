@@ -353,20 +353,28 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0"/>
+                    <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0">
+                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="845-TM-ZHx"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="BV8-jU-MG5"/>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="xJl-BW-RIC" id="936-m7-90I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2665" y="722"/>
+            <point key="canvasLocation" x="2543" y="722"/>
         </scene>
-        <!--Best Courses-->
+        <!--All Courses-->
         <scene sceneID="Xcs-LO-Ogd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Best Courses" id="D6B-Zy-xmi"/>
+                    <tabBarItem key="tabBarItem" title="All Courses" image="Courses" selectedImage="Courses Filled" id="D6B-Zy-xmi">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Courses Filled"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -381,6 +389,90 @@
             </objects>
             <point key="canvasLocation" x="1853" y="722"/>
         </scene>
+        <!--My courses-->
+        <scene sceneID="Eot-ep-83N">
+            <objects>
+                <navigationController id="NxB-SA-EGM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My courses" image="Elective" selectedImage="Elective Filled" id="I8C-zf-fZb">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Elective Filled"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nen-ML-6eo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wRW-Xr-pb6" kind="relationship" relationship="rootViewController" id="4OY-68-oX7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ew3-dP-tFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853" y="1436"/>
+        </scene>
+        <!--Best lessons-->
+        <scene sceneID="ru8-w5-nX0">
+            <objects>
+                <navigationController id="gnM-th-vWa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Best lessons" image="Star" selectedImage="Star Filled" id="Nrw-xt-FGQ">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Star Filled"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Y2l-yL-pBf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="nzq-hk-Uwa" kind="relationship" relationship="rootViewController" id="yOK-pF-Mxa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbz-TZ-1b8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1848" y="2171"/>
+        </scene>
+        <!--Best lessons-->
+        <scene sceneID="YSi-WV-mGt">
+            <objects>
+                <viewController id="nzq-hk-Uwa" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oUT-qe-d8S"/>
+                        <viewControllerLayoutGuide type="bottom" id="rX9-EA-gdN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kPs-QE-he9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Best lessons" id="a0x-Ee-d5v">
+                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="mtO-uu-c60"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GyQ-zY-iXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2543" y="2171"/>
+        </scene>
+        <!--My courses-->
+        <scene sceneID="Qyk-4b-RfK">
+            <objects>
+                <viewController id="wRW-Xr-pb6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fg2-eF-38F"/>
+                        <viewControllerLayoutGuide type="bottom" id="tY7-f0-H8c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fc7-nx-kqj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My courses" id="g7g-TI-yPj">
+                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="4JT-qM-oPW"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="daD-hw-lxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2543" y="1436"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="h7W-ra-FMl">
             <objects>
@@ -393,6 +485,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="hRS-2a-8JM" kind="relationship" relationship="viewControllers" id="yjK-nr-rC0"/>
+                        <segue destination="NxB-SA-EGM" kind="relationship" relationship="viewControllers" id="Mdt-J3-Xrw"/>
+                        <segue destination="gnM-th-vWa" kind="relationship" relationship="viewControllers" id="SFQ-0n-hVk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emr-b4-LSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -401,7 +495,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Circled User Male" width="25" height="25"/>
+        <image name="Courses" width="25" height="25"/>
+        <image name="Courses Filled" width="25" height="25"/>
         <image name="Delete Sign-100" width="100" height="100"/>
+        <image name="Elective" width="25" height="25"/>
+        <image name="Elective Filled" width="25" height="25"/>
+        <image name="Star" width="25" height="25"/>
+        <image name="Star Filled" width="25" height="25"/>
         <image name="blurred_blue_background" width="1280" height="960"/>
         <image name="btn_signin_active" width="250" height="44"/>
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
