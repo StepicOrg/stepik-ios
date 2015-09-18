@@ -31,10 +31,11 @@ class Course: NSObject {
 
 extension NSTimeInterval {
     init(timeString: String) {
+        println("time string -> \(timeString)")
         let formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        formatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         self = formatter.dateFromString(timeString)!.timeIntervalSince1970
     }
 }

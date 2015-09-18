@@ -17,7 +17,7 @@ class FindCoursesViewController: UIViewController {
 
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         
-        ApiDataDownloader.sharedDownloader.getCoursesWith(true, page: nil, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, page: nil, success: {
             (courses, _) in
             self.courses = courses
             self.tableView.reloadData()
