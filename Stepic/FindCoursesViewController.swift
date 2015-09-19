@@ -12,6 +12,8 @@ class FindCoursesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,15 +21,12 @@ class FindCoursesViewController: UIViewController {
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
-        
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, page: nil, success: {
-            (courses, _) in
-            self.courses = courses
-            self.tableView.reloadData()
-        }, failure: {
-            error in 
-            println(error.localizedDescription)
-        })
+        tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
+
+        refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
+        refreshControl.beginRefreshing()
+//        refreshCourses()
         // Do any additional setup after loading the view.
     }
 
@@ -40,6 +39,23 @@ class FindCoursesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func refreshCourses() {
+        isRefreshing = true
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, page: 0, success: {
+            (courses, meta) in
+            self.courses = courses
+            self.meta = meta
+            self.tableView.reloadData()
+            self.isRefreshing = false
+            self.currentPage = 0
+            self.refreshControl.endRefreshing()
+            }, failure: {
+                error in 
+                println(error.localizedDescription)
+                self.isRefreshing = false
+                self.refreshControl.endRefreshing()
+        })
+    }
 
     /*
     // MARK: - Navigation
@@ -52,12 +68,51 @@ class FindCoursesViewController: UIViewController {
     */
 
     var courses : [Course] = []
+    var meta : Meta?
+    
+    private var isLoadingMore = false
+    private var isRefreshing = false
+    private var currentPage = 0
+    
+    func needRefresh() -> Bool {
+        if let m = meta {
+            return m.hasNext
+        } else {
+            return true
+        }
+    }
+    
+    func loadNextPage() {
+        if isRefreshing || isLoadingMore {
+            return
+        }
+        
+        isLoadingMore = true
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, page: currentPage + 1, success: {
+            (courses, meta) in
+            self.currentPage += 1
+            self.courses += courses
+            self.meta = meta
+            self.tableView.reloadData()
+            self.isLoadingMore = false
+            
+            }, failure: {
+                error in 
+                println(error.localizedDescription)
+                self.isLoadingMore = false
+        })
+    }
+    
 }
 
 
 extension FindCoursesViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        if indexPath.row == courses.count && needRefresh() {
+            return 60
+        } else {
+            return 120
+        }
     }
 }
 
@@ -68,10 +123,20 @@ extension FindCoursesViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courses.count
+        
+        return courses.count + (needRefresh() ? 1 : 0)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row == courses.count && needRefresh() {
+            let cell = tableView.dequeueReusableCellWithIdentifier("RefreshTableViewCell", forIndexPath: indexPath) as! RefreshTableViewCell
+            cell.initWithMessage("Loading new courses...")
+            
+            loadNextPage()
+            
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
         
         cell.initWithCourse(courses[indexPath.row])
