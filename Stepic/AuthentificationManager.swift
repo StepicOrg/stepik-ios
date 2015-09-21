@@ -16,16 +16,15 @@ class AuthentificationManager : NSObject {
     private override init() {}
     
     
-    func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : NSError) -> Void) {
+    func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
         
-        var manager = Manager.sharedInstance
         // Specifying the Headers we need
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
             "Authorization" : "Basic MXIxNVJneXhQdmI5MUtTU0RHd0RabEZXekVYbGVnRDl1ejUyTU40TzpwbEtyc0NFUmhRSkc5ajgzTHZYMmtHWk9HajFGNEdJenZnYXpyejFXMEppOG5ReHZuZHJiaUlwbXgxdE11RDFjaWlOMzJScDNmYjRjZTVKRnBmTDNacTBTM0xxREFuSGphREI2d0xUdG53QjI1VmxuZ1NPNThjREJMVnFrN2RHQQ=="
         ]
         
-        var params = [
+        let params = [
             "grant_type" : "password",
             "password" : password,
             "username" : username
@@ -36,12 +35,11 @@ class AuthentificationManager : NSObject {
             (_,_, json, error) in
             
             if let e = error {
-                println(e.localizedDescription)
                 failure(error: e)
                 return
             }
-            println(json)
-            println("no error")
+            print(json)
+            print("no error")
             let token = StepicToken(json: json)
             success(token: token)
         })
@@ -64,12 +62,11 @@ class AuthentificationManager : NSObject {
         Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params,  headers: headers).responseSwiftyJSON({
             (_, _, json, error) in
             
-            if let e = error {
-                println(e.localizedDescription)
+            if let _ = error {
                 return
             }
             
-            println(json)
+            print(json)
             
         })
         

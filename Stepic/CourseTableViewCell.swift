@@ -39,7 +39,7 @@ class CourseTableViewCell: UITableViewCell {
 //        var attributes = courseDescriptionLabel.attributedText.attributesAtIndex(0, effectiveRange: &range!)
 //        attributes.merge([NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType])
         
-        let attributedDescription = NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil, error: nil) 
+        let attributedDescription = try? NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) 
         let normalText = attributedDescription!.string
         courseDescriptionLabel.text = normalText
         

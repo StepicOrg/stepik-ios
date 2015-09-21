@@ -51,7 +51,7 @@ class FindCoursesViewController: UIViewController {
             self.refreshControl.endRefreshing()
             }, failure: {
                 error in 
-                println(error.localizedDescription)
+                print("Failed refreshing courses")
                 self.isRefreshing = false
                 self.refreshControl.endRefreshing()
         })
@@ -98,7 +98,7 @@ class FindCoursesViewController: UIViewController {
             
             }, failure: {
                 error in 
-                println(error.localizedDescription)
+                print("Next courses not loaded")
                 self.isLoadingMore = false
         })
     }

@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInPressed(sender: UIButton) {
-        AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text, password: passwordTextField.text, 
+        AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             
             success: {
             t in

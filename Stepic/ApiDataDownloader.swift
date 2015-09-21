@@ -15,7 +15,7 @@ class ApiDataDownloader: NSObject {
     static let sharedDownloader = ApiDataDownloader()
     private override init() {}
     
-    func getCoursesWithFeatured(featured: Bool?, page: Int?, success : ([Course], Meta) -> Void, failure : (error : NSError) -> Void) {
+    func getCoursesWithFeatured(featured: Bool?, page: Int?, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
         var params : [String : NSObject] = [:]
@@ -35,7 +35,7 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            println(json)
+            print(json)
             
             let meta = Meta(json: json["meta"])
             var courses : [Course] = []

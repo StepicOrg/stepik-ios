@@ -25,11 +25,11 @@ class Course: NSObject {
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
         
         if beginDate == nil {
-            println("begin date for \(title) is nil!!!")
+            print("begin date for \(title) is nil!!!")
         }
         
         if endDate == nil {
-            println("end date for \(title) is nil!!!")
+            print("end date for \(title) is nil!!!")
         }
     }
     
