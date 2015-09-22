@@ -26,7 +26,7 @@ class FindCoursesViewController: UIViewController {
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         refreshControl.beginRefreshing()
-//        refreshCourses()
+        refreshCourses()
         // Do any additional setup after loading the view.
     }
 
@@ -41,7 +41,7 @@ class FindCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 0, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 1, success: {
             (courses, meta) in
             self.courses = courses
             self.meta = meta
@@ -72,13 +72,13 @@ class FindCoursesViewController: UIViewController {
     
     private var isLoadingMore = false
     private var isRefreshing = false
-    private var currentPage = 0
+    private var currentPage = 1
     
     func needRefresh() -> Bool {
         if let m = meta {
             return m.hasNext
         } else {
-            return true
+            return false
         }
     }
     

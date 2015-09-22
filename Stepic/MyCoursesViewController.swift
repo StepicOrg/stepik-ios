@@ -41,7 +41,7 @@ class MyCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 0, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 1, success: {
             (courses, meta) in
             self.courses = courses
             self.meta = meta
@@ -72,7 +72,7 @@ class MyCoursesViewController: UIViewController {
     
     private var isLoadingMore = false
     private var isRefreshing = false
-    private var currentPage = 0
+    private var currentPage = 1
     
     func needRefresh() -> Bool {
         if let m = meta {
