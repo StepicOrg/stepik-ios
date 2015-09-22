@@ -19,4 +19,10 @@ class StepicToken: NSObject {
         refreshToken = json["refresh_token"].stringValue
         tokenType = json["token_type"].stringValue
     }
+    
+    init(accessToken: String, refreshToken: String, tokenType: String) {
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
+        self.tokenType = tokenType
+    }
 }

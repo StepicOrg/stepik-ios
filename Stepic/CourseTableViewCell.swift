@@ -28,6 +28,28 @@ class CourseTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    private func getTextFromDates(course: Course) -> String {
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeZone = .None
+        
+        
+        if course.beginDate == nil && course.endDate == nil {
+            return ""
+        }
+        
+        if course.beginDate == nil && course.endDate != nil {
+            return "до \(formatter.stringFromDate(course.endDate!))"
+        }
+        
+        if course.beginDate != nil && course.endDate == nil {
+            return "с \(formatter.stringFromDate(course.beginDate!))"
+        }
+        
+        return "\(formatter.stringFromDate(course.beginDate!)) - \(formatter.stringFromDate(course.endDate!))"
+    }
+    
     func initWithCourse(course: Course) {
         courseNameLabel.text = course.title
         
@@ -42,15 +64,8 @@ class CourseTableViewCell: UITableViewCell {
         let attributedDescription = try? NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) 
         let normalText = attributedDescription!.string
         courseDescriptionLabel.text = normalText
-        
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeZone = .None
-        
-        if let bd = course.beginDate, 
-            ed = course.endDate {
-            deadlinesLabel.text = "\(formatter.stringFromDate(bd)) - \(formatter.stringFromDate(ed))"
-        }
+    
+        deadlinesLabel.text = getTextFromDates(course)
         
         courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!)
         

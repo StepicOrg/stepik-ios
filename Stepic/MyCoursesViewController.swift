@@ -1,19 +1,19 @@
 //
-//  FindCoursesViewController.swift
+//  MyCoursesViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 17.09.15.
-//  Copyright (c) 2015 Alex Karpov. All rights reserved.
+//  Created by Alexander Karpov on 22.09.15.
+//  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-class FindCoursesViewController: UIViewController {
+class MyCoursesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,18 +22,18 @@ class FindCoursesViewController: UIViewController {
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
-
+        
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         refreshControl.beginRefreshing()
-//        refreshCourses()
+        //        refreshCourses()
         // Do any additional setup after loading the view.
     }
-
-//    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-//        return UIStatusBarStyle.LightContent
-//    }
-//    
+    
+    //    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    //        return UIStatusBarStyle.LightContent
+    //    }
+    //    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,7 +41,7 @@ class FindCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 0, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 0, success: {
             (courses, meta) in
             self.courses = courses
             self.meta = meta
@@ -56,17 +56,17 @@ class FindCoursesViewController: UIViewController {
                 self.refreshControl.endRefreshing()
         })
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
     var courses : [Course] = []
     var meta : Meta?
     
@@ -88,7 +88,7 @@ class FindCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: currentPage + 1, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses
@@ -106,7 +106,7 @@ class FindCoursesViewController: UIViewController {
 }
 
 
-extension FindCoursesViewController : UITableViewDelegate {
+extension MyCoursesViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == courses.count && needRefresh() {
             return 60
@@ -116,7 +116,7 @@ extension FindCoursesViewController : UITableViewDelegate {
     }
 }
 
-extension FindCoursesViewController : UITableViewDataSource {
+extension MyCoursesViewController : UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
