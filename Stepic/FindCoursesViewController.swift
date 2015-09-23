@@ -111,7 +111,7 @@ extension FindCoursesViewController : UITableViewDelegate {
         if indexPath.row == courses.count && needRefresh() {
             return 60
         } else {
-            return 120
+            return 100
         }
     }
 }

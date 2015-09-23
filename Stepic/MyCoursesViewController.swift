@@ -13,7 +13,7 @@ class MyCoursesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,7 +78,7 @@ class MyCoursesViewController: UIViewController {
         if let m = meta {
             return m.hasNext
         } else {
-            return true
+            return false
         }
     }
     
@@ -88,7 +88,7 @@ class MyCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: currentPage + 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses
@@ -111,7 +111,7 @@ extension MyCoursesViewController : UITableViewDelegate {
         if indexPath.row == courses.count && needRefresh() {
             return 60
         } else {
-            return 120
+            return 100
         }
     }
 }
@@ -123,7 +123,6 @@ extension MyCoursesViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return courses.count + (needRefresh() ? 1 : 0)
     }
     

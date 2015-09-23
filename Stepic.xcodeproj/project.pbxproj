@@ -23,6 +23,8 @@
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* StepicAPI.swift */; };
 		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
+		08B361081BB2E3D400090843 /* UserPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B361071BB2E3D400090843 /* UserPreferencesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		08B3610A1BB2E61C00090843 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B361091BB2E61C00090843 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
@@ -64,6 +66,8 @@
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* StepicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicAPI.swift; sourceTree = "<group>"; };
 		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
+		08B361071BB2E3D400090843 /* UserPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferencesViewController.swift; sourceTree = "<group>"; };
+		08B361091BB2E61C00090843 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08B361061BB2E3C100090843 /* User Preferences */,
 				08687BAB1BACB41F00F5BDE1 /* Generic */,
 				08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */,
 				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
@@ -139,6 +144,7 @@
 				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
 				0885F84F1BA83F3600F2A188 /* Course.swift */,
 				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
+				08B361091BB2E61C00090843 /* Profile.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -152,6 +158,14 @@
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 			);
 			name = Courses;
+			sourceTree = "<group>";
+		};
+		08B361061BB2E3C100090843 /* User Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				08B361071BB2E3D400090843 /* UserPreferencesViewController.swift */,
+			);
+			name = "User Preferences";
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -411,12 +425,14 @@
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
+				08B361081BB2E3D400090843 /* UserPreferencesViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
+				08B3610A1BB2E61C00090843 /* Profile.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 			);

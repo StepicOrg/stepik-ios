@@ -569,6 +569,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wRW-Xr-pb6" id="85P-Xm-7am"/>
+                                    <outlet property="delegate" destination="wRW-Xr-pb6" id="Bn9-nX-2Eh"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>

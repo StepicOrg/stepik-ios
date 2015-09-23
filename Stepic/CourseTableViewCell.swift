@@ -67,7 +67,8 @@ class CourseTableViewCell: UITableViewCell {
     
         deadlinesLabel.text = getTextFromDates(course)
         
-        courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!)
+        
+        courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!, placeholderImage: UIImage(named: "stepic_logo_black_and_white")!)
         
     }
 }

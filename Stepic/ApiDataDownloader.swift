@@ -59,12 +59,49 @@ class ApiDataDownloader: NSObject {
             // print(json)
             
             let meta = Meta(json: json["meta"])
-            print(json["courses"])
+//            print(json["courses"])
             var courses : [Course] = []
             for courseJSON in json["courses"].arrayValue {
                 courses += [Course(json: courseJSON)]
             }
             success(courses, meta)
+        })
+    }
+    
+    func getCurrentUserProfile(success : (Profile) -> Void, failure : (error : ErrorType) -> Void) {
+        
+        let headers : [String : String] = [:] 
+        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        
+        var params : [String : NSObject] = [:]
+               
+        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+            (t) in
+            StepicAPI.shared.token = t
+            params["access_token"] = t.accessToken
+            print(t.accessToken)
+            self.getCurrentUserProfileApiCall(params, headers: headers, success: success, failure: failure)
+            }, failure: {
+                _ in
+                print("error while refreshing the token")
+        })
+
+    }
+    
+    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String], success : (Profile) -> Void, failure : (error : ErrorType) -> Void) {
+        Alamofire.request(.GET, "https://stepic.org/api/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+            (_, _, json, error) in
+            
+            if let e = error {
+                failure(error: e)
+                return
+            }
+            
+            // print(json)
+            
+            print(json["profiles"])
+            let profile : Profile = Profile(json: json["profiles"].arrayValue[0])
+            success(profile)
         })
     }
 }

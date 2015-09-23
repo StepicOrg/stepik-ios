@@ -94,7 +94,7 @@ class AuthentificationManager : NSObject {
                 return
             }
             
-            print(json)
+//            print(json)
             
         })
     }
