@@ -47,7 +47,7 @@ class FindCoursesViewController: UIViewController {
             self.meta = meta
             self.tableView.reloadData()
             self.isRefreshing = false
-            self.currentPage = 0
+            self.currentPage = 1
             self.refreshControl.endRefreshing()
             }, failure: {
                 error in 

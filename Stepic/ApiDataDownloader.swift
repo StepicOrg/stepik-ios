@@ -59,7 +59,7 @@ class ApiDataDownloader: NSObject {
             // print(json)
             
             let meta = Meta(json: json["meta"])
-            print(json["meta"])
+            print(json["courses"])
             var courses : [Course] = []
             for courseJSON in json["courses"].arrayValue {
                 courses += [Course(json: courseJSON)]

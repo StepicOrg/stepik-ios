@@ -38,8 +38,8 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-            print(json)
-            print("no error")
+//            print(json)
+//            print("no error")
             let token : StepicToken = StepicToken(json: json)
             print(token.accessToken)
             success(token: token)
@@ -64,8 +64,8 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-            print(json)
-            print("no error")
+//            print(json)
+//            print("no error")
             let token : StepicToken = StepicToken(json: json)
             print(token.accessToken)
             success(token: token)

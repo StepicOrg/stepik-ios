@@ -365,7 +365,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="tableView" destination="xJl-BW-RIC" id="936-m7-90I"/>
+                        <outlet property="tableView" destination="xJl-BW-RIC" id="f6Q-fZ-qqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -584,7 +584,7 @@
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="4JT-qM-oPW"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="grI-00-Wn1" id="ZJ7-L6-6E6"/>
+                        <outlet property="tableView" destination="grI-00-Wn1" id="ExN-dj-CNu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daD-hw-lxS" userLabel="First Responder" sceneMemberID="firstResponder"/>

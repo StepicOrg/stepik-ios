@@ -26,7 +26,7 @@ class MyCoursesViewController: UIViewController {
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         refreshControl.beginRefreshing()
-        //        refreshCourses()
+        refreshCourses()
         // Do any additional setup after loading the view.
     }
     
@@ -47,7 +47,7 @@ class MyCoursesViewController: UIViewController {
             self.meta = meta
             self.tableView.reloadData()
             self.isRefreshing = false
-            self.currentPage = 0
+            self.currentPage = 1
             self.refreshControl.endRefreshing()
             }, failure: {
                 error in 
