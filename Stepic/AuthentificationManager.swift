@@ -46,7 +46,7 @@ class AuthentificationManager : NSObject {
         })
     }
     
-    func logInWithRefreshToken(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
+    func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
@@ -97,8 +97,6 @@ class AuthentificationManager : NSObject {
             print(json)
             
         })
-        
     }
-    
     
 }

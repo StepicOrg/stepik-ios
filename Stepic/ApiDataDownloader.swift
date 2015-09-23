@@ -17,7 +17,9 @@ class ApiDataDownloader: NSObject {
     
     func getCoursesWithFeatured(featured: Bool?, enrolled: Bool?, page: Int?, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         
-        let headers = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        let headers : [String : String] = [:] 
+        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        
         var params : [String : NSObject] = [:]
         if let f = featured {
             params["is_featured"] = f ? "true" : "false"
@@ -30,7 +32,22 @@ class ApiDataDownloader: NSObject {
         if let p = page {
             params["page"] = p
         }
-
+        
+        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+            (t) in
+            StepicAPI.shared.token = t
+            params["access_token"] = t.accessToken
+            self.getCoursesApiCall(params, headers: headers, success: success, failure: failure)
+            }, failure: {
+                _ in
+                print("error while refreshing the token")
+        })
+        
+        
+    }
+    
+    private func getCoursesApiCall(params: [String : NSObject], headers : [String : String], success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
+        
         Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
@@ -39,7 +56,7 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-//            print(json)
+            // print(json)
             
             let meta = Meta(json: json["meta"])
             print(json["meta"])

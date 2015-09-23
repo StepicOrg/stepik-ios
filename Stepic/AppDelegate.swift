@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        setRootController()
         return true
     }
 
@@ -41,6 +42,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private func setRootController() {
+        if StepicAPI.shared.isAuthorized {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            // instantiate your desired ViewController
+            let rootController = storyboard.instantiateViewControllerWithIdentifier("MainTabBarController") 
+            
+            // Because self.window is an optional you should check it's value first and assign your rootViewController
+            if self.window != nil {
+                self.window!.rootViewController = rootController
+            }
+        }
+    }
+    
 
 }
 

@@ -22,6 +22,7 @@ class StepicAPI: NSObject {
             defaults.setValue(newToken?.accessToken, forKey: "access_token")
             defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
             defaults.setValue(newToken?.tokenType, forKey: "token_type")
+            defaults.synchronize()
         }
         
         get {
@@ -37,5 +38,9 @@ class StepicAPI: NSObject {
                 return _token!
             }
         }
+    }
+    
+    var isAuthorized : Bool {
+        return token != nil
     }
 }
