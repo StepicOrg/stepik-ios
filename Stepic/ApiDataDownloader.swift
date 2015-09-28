@@ -61,6 +61,14 @@ class ApiDataDownloader: NSObject {
             let meta = Meta(json: json["meta"])
 //            print(json["courses"])
             var courses : [Course] = []
+            
+            
+            //NOT AN OOP THING, FIX IT SOMEHOW IN THE FUTURE
+            if meta.page == 1 {
+                Course.deleteAll()
+            }
+            
+            
             for courseJSON in json["courses"].arrayValue {
                 courses += [Course(json: courseJSON)]
             }

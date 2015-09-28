@@ -25,6 +25,17 @@ class FindCoursesViewController: UIViewController {
 
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        do {
+            courses = try Course.getCourses()
+            tableView.reloadData()
+        }
+        catch {
+            print("error while getting courses")
+            courses = []
+            tableView.reloadData()
+        }
+        
         refreshControl.beginRefreshing()
         refreshCourses()
         // Do any additional setup after loading the view.
@@ -44,6 +55,7 @@ class FindCoursesViewController: UIViewController {
         ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 1, success: {
             (courses, meta) in
             self.courses = courses
+            CoreDataHelper.instance.save()
             self.meta = meta
             self.tableView.reloadData()
             self.isRefreshing = false

@@ -1,22 +1,23 @@
 //
 //  Course.swift
-//  Stepic
+//  
 //
-//  Created by Alexander Karpov on 15.09.15.
-//  Copyright (c) 2015 Alex Karpov. All rights reserved.
+//  Created by Alexander Karpov on 25.09.15.
+//
 //
 
-import UIKit
+import Foundation
+import CoreData
 import SwiftyJSON
 
-class Course: NSObject {
-    var title : String
-    var courseDescription : String
-    var beginDate : NSDate?
-    var endDate : NSDate?
-    var coverURLString : String
+@objc
+class Course: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
     
-    init(json: JSON) {
+    convenience init(json: JSON) {
+        self.init()
+        id = json["id"].intValue
         title = json["title"].stringValue
         courseDescription = json["description"].stringValue
         coverURLString = Constants.sharedConstants.stepicURLString + json["cover"].stringValue
@@ -31,10 +32,50 @@ class Course: NSObject {
         if endDate == nil {
             print("end date for \(title) is nil!!!")
         }
+        
+        enrolled = json["enrollment"].string != nil
+        featured = json["is_featured"].boolValue
     }
     
-
+    class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
+        let request = NSFetchRequest(entityName: "Course")
+        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
+        var predicate = NSPredicate(value: true)
+        
+        if let f = featured {
+            let p = NSPredicate(format: "managedFeatured == %@", f as NSNumber)
+            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+        }
+        
+        if let e = enrolled {
+            let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
+            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+        }
+        
+        request.predicate = predicate
+        request.sortDescriptors = [descriptor]
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            return results as! [Course]
+        }
+        catch {
+            throw FetchError.RequestExecution
+        }
+    }
     
+    class func deleteAll() {
+        do {
+            let c = try getCourses()
+            for course in c {
+                CoreDataHelper.instance.context.deleteObject(course)
+            }
+            CoreDataHelper.instance.save()
+        }
+        catch {
+            print("Error while deleting course objects")
+        }    
+    }
 }
 
 extension NSTimeInterval {
