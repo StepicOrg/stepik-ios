@@ -26,15 +26,7 @@ class FindCoursesViewController: UIViewController {
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
-        do {
-            courses = try Course.getCourses()
-            tableView.reloadData()
-        }
-        catch {
-            print("error while getting courses")
-            courses = []
-            tableView.reloadData()
-        }
+        getCachedCourses()
         
         refreshControl.beginRefreshing()
         refreshCourses()
@@ -45,6 +37,27 @@ class FindCoursesViewController: UIViewController {
 //        return UIStatusBarStyle.LightContent
 //    }
 //    
+    
+    private func getCachedCourses() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            do {
+                self.courses = try Course.getCourses()
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }            
+            }
+            catch {
+                print("error while getting courses")
+                self.courses = []
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
