@@ -27,6 +27,6 @@ extension UIColor {
     }
     
     class func stepicGreenColor() -> UIColor {
-        return UIColor(hex: 0x8dcb5d)
+        return UIColor(hex: 0x66CC66)
     }
 }

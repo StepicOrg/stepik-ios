@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
@@ -28,17 +29,21 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInPressed(sender: UIButton) {
+        
+        SVProgressHUD.show()
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             
             success: {
             t in
             StepicAPI.shared.token = t
+            SVProgressHUD.showSuccessWithStatus("Signed in!")
             self.performSegueWithIdentifier("signedInSegue", sender: self)
             }, 
             
             failure: {
             e in
             self.errorLabel.hidden = false
+            SVProgressHUD.showErrorWithStatus("Failed to sign in")
         })
 
     }

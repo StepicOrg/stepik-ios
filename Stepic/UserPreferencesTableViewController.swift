@@ -20,7 +20,6 @@ class UserPreferencesTableViewController: UITableViewController {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-
         
         ApiDataDownloader.sharedDownloader.getCurrentUserProfile({
             profile in
@@ -59,6 +58,15 @@ class UserPreferencesTableViewController: UITableViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func signOutButtonPressed(sender: UIButton) {
+        StepicAPI.shared.token = nil
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
+        self.presentViewController(vc, animated: true, completion: {
+//            self.dismissViewControllerAnimated(false, completion: nil)
+        })
+        
+    }
     
 
     /*
