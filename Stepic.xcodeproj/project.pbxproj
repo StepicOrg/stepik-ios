@@ -26,6 +26,16 @@
 		0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* StepicAPI.swift */; };
 		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
 		08B3610A1BB2E61C00090843 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B361091BB2E61C00090843 /* Profile.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59E21BBD25B4008DC44D /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; settings = {ASSET_TAGS = (); }; };
@@ -74,6 +84,16 @@
 		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
 		08B361091BB2E61C00090843 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
+		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
+		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
+		08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherCollectionViewCell.xib; sourceTree = "<group>"; };
+		08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVideoTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59E91BBD3D55008DC44D /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
+		08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -138,6 +158,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08CA59D71BBC0067008DC44D /* Course */,
 				08B361061BB2E3C100090843 /* User Preferences */,
 				08687BAB1BACB41F00F5BDE1 /* Generic */,
 				08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */,
@@ -178,6 +199,30 @@
 				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
 			);
 			name = "User Preferences";
+			sourceTree = "<group>";
+		};
+		08CA59D71BBC0067008DC44D /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				08CA59DE1BBD2563008DC44D /* Cell classes */,
+				08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */,
+				08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */,
+				08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */,
+			);
+			name = Course;
+			sourceTree = "<group>";
+		};
+		08CA59DE1BBD2563008DC44D /* Cell classes */ = {
+			isa = PBXGroup;
+			children = (
+				08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */,
+				08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */,
+				08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */,
+				08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */,
+				08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */,
+				08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */,
+			);
+			name = "Cell classes";
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -250,6 +295,7 @@
 				08DE94381B8E3FCE00D278AB /* UIExtensions.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
+				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -362,6 +408,7 @@
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
+				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,10 +476,14 @@
 			files = (
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
+				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
+				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
+				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
@@ -443,13 +494,18 @@
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
+				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
+				08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */,
+				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
 				08B3610A1BB2E61C00090843 /* Profile.swift in Sources */,
+				08CA59E21BBD25B4008DC44D /* GeneralInfoTableViewCell.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,

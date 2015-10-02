@@ -22,7 +22,16 @@ extension Course {
     @NSManaged var managedImageURL: String?
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
+    
+    @NSManaged var managedSummary: String?
+    @NSManaged var managedWorkload: String?
+    @NSManaged var managedIntroURL: String?
+    @NSManaged var managedFormat: String?
+    @NSManaged var managedAudience: String?
+    @NSManaged var managedCertificate: String?
+    @NSManaged var managedRequirements: String?
 
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Course", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -100,6 +109,69 @@ extension Course {
         }
         get {
             return managedFeatured?.boolValue ?? false
+        }
+    }
+    
+    var summary : String {
+        set(value){
+            self.managedSummary = value
+        }
+        get {
+            return managedSummary ?? "No summary"
+        }
+    }
+    
+    var workload : String {
+        set(value){
+            self.managedWorkload = value
+        }
+        get {
+            return managedWorkload ?? "No workload"
+        }
+    }
+    
+    var introURL : String {
+        set(value){
+            self.managedIntroURL = value
+        }
+        get {
+            return managedIntroURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+        }
+    }
+    
+    var format : String {
+        set(value){
+            self.managedFormat = value
+        }
+        get {
+            return managedFormat ?? "No format"
+        }
+    }
+    
+    var audience : String {
+        set(value){
+            self.managedAudience = value
+        }
+        get {
+            return managedAudience ?? "No audience"
+        }
+    }
+    
+    var certificate : String {
+        set(value){
+            self.managedCertificate = value
+        }
+        get {
+            return managedCertificate ?? "No certificate"
+        }
+    }
+    
+    var requirements : String {
+        set(value){
+            self.managedRequirements = value
+        }
+        get {
+            return managedRequirements ?? "No requirements"
         }
     }
 }

@@ -128,6 +128,12 @@ class FindCoursesViewController: UIViewController {
         })
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCourse" {
+            let dvc = segue.destinationViewController as! CoursePreviewViewController
+            dvc.course = courses[(sender as! NSIndexPath).row]
+        }
+    }
 }
 
 
@@ -138,6 +144,10 @@ extension FindCoursesViewController : UITableViewDelegate {
         } else {
             return 100
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showCourse", sender: indexPath)
     }
 }
 

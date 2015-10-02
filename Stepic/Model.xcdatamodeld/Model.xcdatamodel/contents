@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A282a" minimumToolsVersion="Xcode 7.0">
     <entity name="Course" representedClassName=".Course" syncable="YES">
+        <attribute name="managedAudience" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedCertificate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedCourseDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedEndDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="managedEnrolled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="managedFeatured" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedFormat" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedIntroURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedRequirements" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSummary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="270"/>
     </elements>
 </model>

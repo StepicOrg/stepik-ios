@@ -25,16 +25,25 @@ class Course: NSManagedObject {
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
         
-        if beginDate == nil {
-            print("begin date for \(title) is nil!!!")
-        }
-        
-        if endDate == nil {
-            print("end date for \(title) is nil!!!")
-        }
+//        if beginDate == nil {
+//            print("begin date for \(title) is nil!!!")
+//        }
+//        
+//        if endDate == nil {
+//            print("end date for \(title) is nil!!!")
+//        }
         
         enrolled = json["enrollment"].string != nil
         featured = json["is_featured"].boolValue
+        
+        summary = json["summary"].stringValue
+        workload = json["workload"].stringValue
+        introURL = json["intro"].stringValue
+        format = json["course_format"].stringValue
+        audience = json["target_audience"].stringValue
+        certificate = json["certificate"].stringValue
+        requirements = json["requirements"].stringValue
+        
     }
     
     class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
