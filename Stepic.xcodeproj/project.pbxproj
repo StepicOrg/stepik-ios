@@ -37,6 +37,8 @@
 		08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59F21BBFD65E008DC44D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; settings = {ASSET_TAGS = (); }; };
@@ -96,6 +98,8 @@
 		08CA59E91BBD3D55008DC44D /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		08CA59F01BBFD65E008DC44D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -148,6 +152,10 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */,
+				08D1EF721BB5636700BE84E6 /* Course.swift */,
+				08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */,
+				08CA59F01BBFD65E008DC44D /* User.swift */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
 				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
@@ -185,8 +193,6 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
-				08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */,
-				08D1EF721BB5636700BE84E6 /* Course.swift */,
 				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
 				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
 				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
@@ -495,9 +501,11 @@
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
+				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
+				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
