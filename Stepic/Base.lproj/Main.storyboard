@@ -587,7 +587,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="086-sc-YZR">
-                                    <rect key="frame" x="0.0" y="718" width="600" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="762" width="600" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -643,6 +643,7 @@
                                                         <segment title="Overview"/>
                                                         <segment title="Detailed"/>
                                                     </segments>
+                                                    <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="displayingSegmentedControlValueChanged:" destination="D75-Zh-Yxy" eventType="valueChanged" id="hte-lP-bWw"/>
                                                     </connections>
@@ -653,9 +654,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="b8c-PG-IWL"/>
                                                     </constraints>
-                                                    <state key="normal" title="Join the course" backgroundImage="btn_signin_active">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" title="Join the course">
+                                                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="joinButtonPressed:" destination="D75-Zh-Yxy" eventType="touchUpInside" id="CMl-xz-f32"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <animations/>
@@ -675,6 +679,7 @@
                                         <animations/>
                                         <connections>
                                             <outlet property="courseNameLabel" destination="8q0-dk-g4x" id="foa-5l-Z9J"/>
+                                            <outlet property="joinButton" destination="MZy-dW-Bj2" id="w0K-eL-iRo"/>
                                             <outlet property="typeSegmentedControl" destination="uiF-lQ-kcC" id="dDW-dO-eRK"/>
                                         </connections>
                                     </tableViewCell>
@@ -820,6 +825,16 @@
                                         <connections>
                                             <outlet property="descriptionLabel" destination="y9y-0V-gfH" id="FLC-sj-Swm"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DefaultTableViewCell" id="7PO-UK-V3c">
+                                        <rect key="frame" x="0.0" y="718" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7PO-UK-V3c" id="Xnv-R7-55u">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -11,7 +11,7 @@ import UIKit
 class CoursePreviewViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+        
     var course : Course? = nil
     
     var displayingInfoType : DisplayingInfoType = .Overview 
@@ -21,7 +21,7 @@ class CoursePreviewViewController: UIViewController {
 
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -43,9 +43,22 @@ class CoursePreviewViewController: UIViewController {
     
     @IBAction func displayingSegmentedControlValueChanged(sender: UISegmentedControl) {
         displayingInfoType = sender.selectedSegmentIndex == 0 ? .Overview : .Detailed
-        tableView.reloadData()
+//        tableView.reloadData()
+        reloadTableView()
     }
     
+    @IBAction func joinButtonPressed(sender: UIButton) {
+        
+    }
+    
+    
+    func reloadTableView() {
+        var changingIndexPaths : [NSIndexPath] = []
+        for i in 0..<2 {
+            changingIndexPaths += [NSIndexPath(forRow: i, inSection: 1)]
+        }
+        tableView.reloadRowsAtIndexPaths(changingIndexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
 }
 
 extension CoursePreviewViewController : UITableViewDataSource {
@@ -64,6 +77,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
         }
     }
     
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0  { 
@@ -80,9 +94,12 @@ extension CoursePreviewViewController : UITableViewDataSource {
                     cell.initWithCourse(course!)
                     return cell
                 
-                default://case 1:
+                case 1:
                     let cell = tableView.dequeueReusableCellWithIdentifier("SummaryTableViewCell", forIndexPath: indexPath) as! SummaryTableViewCell
                     cell.initWithCourse(course!)
+                    return cell
+                default:
+                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
                     return cell
                 }
             } else {
@@ -91,10 +108,14 @@ extension CoursePreviewViewController : UITableViewDataSource {
                     let cell = tableView.dequeueReusableCellWithIdentifier("DescriptionTableViewCell", forIndexPath: indexPath) as! DescriptionTableViewCell
                     cell.initWithCourse(course!)
                     return cell
-                default://case 1:
+                case 1:
                     let cell = tableView.dequeueReusableCellWithIdentifier("DateInfoTableViewCell", forIndexPath: indexPath) as! DateInfoTableViewCell
                     cell.initWithCourse(course!)
                     return cell
+                default:
+                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+                    return cell
+
                 }
             }
         }
@@ -135,8 +156,10 @@ extension CoursePreviewViewController : UITableViewDelegate {
                 case 0:
                     return 100
                     
-                default://case 1:
+                case 1:
                     return SummaryTableViewCell.heightForCourse(course!)
+                default:
+                    return 0
                 }
                 
             } else {
@@ -144,8 +167,10 @@ extension CoursePreviewViewController : UITableViewDelegate {
                 case 0:
                     return DescriptionTableViewCell.heightForCourse(course!)
                     
-                default://case 1:
+                case 1:
                     return 67
+                default:
+                    return 0
                 }
             }
         }

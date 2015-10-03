@@ -36,6 +36,7 @@
 		08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; settings = {ASSET_TAGS = (); }; };
@@ -94,6 +95,7 @@
 		08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59E91BBD3D55008DC44D /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
 				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
+				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
+				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,

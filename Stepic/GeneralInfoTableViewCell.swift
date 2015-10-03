@@ -17,11 +17,14 @@ class GeneralInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var courseNameLabel: UILabel!
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
   
+    @IBOutlet weak var joinButton: UIButton!
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
