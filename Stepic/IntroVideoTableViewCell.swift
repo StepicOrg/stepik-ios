@@ -10,6 +10,8 @@ import UIKit
 
 class IntroVideoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var videoWebView: UIWebView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +24,7 @@ class IntroVideoTableViewCell: UITableViewCell {
     }
 
     func initWithCourse(course: Course) {
-        
+        videoWebView.loadRequest(NSURLRequest(URL: NSURL(string: course.introURL)!))
     }
     
 }

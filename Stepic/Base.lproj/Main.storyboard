@@ -587,41 +587,44 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="086-sc-YZR">
-                                    <rect key="frame" x="0.0" y="799" width="600" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="846" width="600" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntroVideoTableViewCell" rowHeight="276" id="F7g-3J-LJM" customClass="IntroVideoTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="276"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntroVideoTableViewCell" rowHeight="323" id="F7g-3J-LJM" customClass="IntroVideoTableViewCell" customModule="Stepic" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="323"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F7g-3J-LJM" id="jaQ-AQ-6ho">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="275"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60D-9U-WG4">
-                                                    <rect key="frame" x="0.0" y="-5" width="600" height="280"/>
+                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FoH-qg-Irx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
                                                     <animations/>
-                                                    <color key="backgroundColor" red="0.3219270427" green="0.60932601310000001" blue="0.81007339020000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                </view>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="FoH-qg-Irx" secondAttribute="height" multiplier="16:9" id="KsN-Kd-EMV"/>
+                                                    </constraints>
+                                                </webView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstItem="60D-9U-WG4" firstAttribute="top" secondItem="jaQ-AQ-6ho" secondAttribute="topMargin" constant="-13" id="0gm-hE-MWf"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="60D-9U-WG4" secondAttribute="bottom" constant="-8" id="6rC-Le-Hrn"/>
-                                                <constraint firstItem="60D-9U-WG4" firstAttribute="width" secondItem="jaQ-AQ-6ho" secondAttribute="width" id="Yv5-I9-GJ8"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="60D-9U-WG4" secondAttribute="trailing" constant="-8" id="btY-6N-sQu"/>
-                                                <constraint firstItem="60D-9U-WG4" firstAttribute="leading" secondItem="jaQ-AQ-6ho" secondAttribute="leadingMargin" constant="-8" id="plk-kZ-rhr"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="FoH-qg-Irx" secondAttribute="trailing" constant="-8" id="9a4-aT-ibn"/>
+                                                <constraint firstItem="FoH-qg-Irx" firstAttribute="width" secondItem="jaQ-AQ-6ho" secondAttribute="width" id="P7k-U6-7VR"/>
+                                                <constraint firstItem="FoH-qg-Irx" firstAttribute="leading" secondItem="jaQ-AQ-6ho" secondAttribute="leadingMargin" constant="-8" id="T7p-6f-98M"/>
+                                                <constraint firstItem="FoH-qg-Irx" firstAttribute="top" secondItem="jaQ-AQ-6ho" secondAttribute="topMargin" constant="-8" id="i9e-Ut-6cX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FoH-qg-Irx" secondAttribute="bottom" constant="-8" id="ldU-ik-HZh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="60D-9U-WG4" secondAttribute="height" multiplier="16:9" id="XPM-i6-CJ3"/>
-                                        </constraints>
+                                        <connections>
+                                            <outlet property="videoWebView" destination="FoH-qg-Irx" id="yLt-PW-9ec"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralInfoTableViewCell" rowHeight="119" id="b6J-rC-ibi" customClass="GeneralInfoTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="368" width="600" height="119"/>
+                                        <rect key="frame" x="0.0" y="415" width="600" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6J-rC-ibi" id="oqz-ov-022">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="118"/>
@@ -684,7 +687,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummaryTableViewCell" rowHeight="32" id="EW9-tz-rhq" customClass="SummaryTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="487" width="600" height="32"/>
+                                        <rect key="frame" x="0.0" y="534" width="600" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EW9-tz-rhq" id="h4V-KP-LWI">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="31"/>
@@ -712,7 +715,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeachersTableViewCell" rowHeight="137" id="abo-eS-oYO" customClass="TeachersTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="519" width="600" height="137"/>
+                                        <rect key="frame" x="0.0" y="566" width="600" height="137"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="abo-eS-oYO" id="XH4-7K-rzd">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="136"/>
@@ -748,7 +751,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateInfoTableViewCell" rowHeight="67" id="1Sv-jQ-vsy" customClass="DateInfoTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="656" width="600" height="67"/>
+                                        <rect key="frame" x="0.0" y="703" width="600" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Sv-jQ-vsy" id="dQ5-v8-cGL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
@@ -799,7 +802,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionTableViewCell" rowHeight="32" id="Wcz-2E-W7y" customClass="DescriptionTableViewCell" customModule="Stepic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="723" width="600" height="32"/>
+                                        <rect key="frame" x="0.0" y="770" width="600" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wcz-2E-W7y" id="j2n-83-46X">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="31"/>
@@ -827,7 +830,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DefaultTableViewCell" id="7PO-UK-V3c">
-                                        <rect key="frame" x="0.0" y="755" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="802" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7PO-UK-V3c" id="Xnv-R7-55u">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
