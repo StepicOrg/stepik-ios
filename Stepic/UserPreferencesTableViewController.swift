@@ -21,9 +21,9 @@ class UserPreferencesTableViewController: UITableViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         
-        ApiDataDownloader.sharedDownloader.getCurrentUserProfile({
-            profile in
-            self.initWithProfile(profile)
+        ApiDataDownloader.sharedDownloader.getCurrentUser({
+            user in
+            self.initWithUser(user)
             }
             , failure: {
             error in
@@ -37,9 +37,9 @@ class UserPreferencesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    private func initWithProfile(profile : Profile) {
-        avatarImageView.sd_setImageWithURL(NSURL(string: profile.avatarURL), placeholderImage: Constants.sharedConstants.placeholderImage)
-        userNameLabel.text = "\(profile.firstName) \(profile.lastName)"
+    private func initWithUser(user : User) {
+        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.sharedConstants.placeholderImage)
+        userNameLabel.text = "\(user.firstName) \(user.lastName)"
     }
     
     override func didReceiveMemoryWarning() {

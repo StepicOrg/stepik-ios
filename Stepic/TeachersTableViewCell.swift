@@ -12,12 +12,14 @@ class TeachersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var instructors : [User] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.collectionView?.registerNib(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -27,27 +29,30 @@ class TeachersTableViewCell: UITableViewCell {
     }
 
     func initWithCourse(course: Course) {
+        instructors = course.instructors
         collectionView.reloadData()
     }
 }
 
-//extension TeachersTableViewCell : UICollectionViewDataSource {
-//    
-//    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return teachers.count
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        
-//    }
-//    
-//    
-//}
-//
-//extension TeachersTableViewCell : UICollectionViewDelegate {
-//    
-//}
+extension TeachersTableViewCell : UICollectionViewDataSource {
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return instructors.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TeacherCollectionViewCell", forIndexPath: indexPath) as! TeacherCollectionViewCell
+        cell.initWithUser(instructors[indexPath.item])
+        return cell
+    }
+    
+    
+}
+
+extension TeachersTableViewCell : UICollectionViewDelegate {
+    
+}

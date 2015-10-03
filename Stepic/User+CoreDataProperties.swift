@@ -24,7 +24,8 @@ extension User {
     @NSManaged var managedAvatarURL: String?
     @NSManaged var managedLevel: NSNumber?
 
-    
+    @NSManaged var managedInstructedCourses : NSSet?
+
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("User", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -115,5 +116,16 @@ extension User {
         }
     }
     
+    var instructedCourses : [Course] {
+        get {
+            return managedInstructedCourses?.allObjects as! [Course]
+        }
+    }
     
+    func addInstructedCourse(course : Course) {
+        var mutableItems = managedInstructedCourses?.allObjects as! [Course]
+        mutableItems += [course]
+        managedInstructedCourses = NSSet(array: mutableItems)
+    }
+
 }

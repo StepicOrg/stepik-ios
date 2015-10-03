@@ -30,7 +30,8 @@ extension Course {
     @NSManaged var managedAudience: String?
     @NSManaged var managedCertificate: String?
     @NSManaged var managedRequirements: String?
-
+    
+    @NSManaged var managedInstructors : NSOrderedSet?
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Course", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -173,5 +174,17 @@ extension Course {
         get {
             return managedRequirements ?? "No requirements"
         }
+    }
+    
+    var instructors : [User] {
+        get {
+            return managedInstructors?.array as! [User]
+        }
+    }
+    
+    func addInstructor(instructor : User) {
+        let mutableItems = managedInstructors?.mutableCopy() as! NSMutableOrderedSet
+        mutableItems.addObject(instructor)
+        managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
 }

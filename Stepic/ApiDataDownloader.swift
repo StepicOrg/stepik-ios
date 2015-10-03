@@ -76,7 +76,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func getCurrentUserProfile(success : (Profile) -> Void, failure : (error : ErrorType) -> Void) {
+    func getCurrentUser(success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:] 
         // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
@@ -96,7 +96,7 @@ class ApiDataDownloader: NSObject {
 
     }
     
-    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String], success : (Profile) -> Void, failure : (error : ErrorType) -> Void) {
+    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String], success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         Alamofire.request(.GET, "https://stepic.org/api/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
@@ -107,9 +107,62 @@ class ApiDataDownloader: NSObject {
             
             // print(json)
             
-            print(json["profiles"])
-            let profile : Profile = Profile(json: json["profiles"].arrayValue[0])
-            success(profile)
+            print(json["users"])
+            let user : User = User(json: json["users"].arrayValue[0])
+            success(user)
         })
     }
+    
+    func getUserById(id: Int, success : (User) -> Void, failure : (error : ErrorType) -> Void) {
+        let headers : [String : String] = [:] 
+        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        
+        var params : [String : NSObject] = [:]
+        
+        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+            (t) in
+            StepicAPI.shared.token = t
+            params["access_token"] = t.accessToken
+            print(t.accessToken)
+            self.getUserByIdApiCall(id, params: params, headers: headers, success: success, failure: failure)
+            }, failure: {
+                _ in
+                print("error while refreshing the token")
+        })
+    }
+    
+    private func getUserByIdApiCall(id: Int, params: [String : NSObject], headers : [String : String], success : (User) -> Void, failure : (error : ErrorType) -> Void) {
+        Alamofire.request(.GET, "https://stepic.org/api/users/\(id)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+            (_, _, json, error) in
+            
+            if let e = error {
+                failure(error: e)
+                return
+            }
+            
+            // print(json)
+            
+            print(json["users"])
+            let user : User = User(json: json["users"].arrayValue[0])
+            success(user)
+        })
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

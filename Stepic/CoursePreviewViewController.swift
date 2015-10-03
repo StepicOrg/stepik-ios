@@ -154,7 +154,7 @@ extension CoursePreviewViewController : UITableViewDelegate {
             if displayingInfoType == .Overview {
                 switch indexPath.row {
                 case 0:
-                    return 100
+                    return 137
                     
                 case 1:
                     return SummaryTableViewCell.heightForCourse(course!)

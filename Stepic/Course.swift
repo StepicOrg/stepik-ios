@@ -44,6 +44,21 @@ class Course: NSManagedObject {
         certificate = json["certificate"].stringValue
         requirements = json["requirements"].stringValue
         
+        getInstructors(json["instructors"])
+        
+    }
+    
+    private func getInstructors(json: JSON) {
+        let instructorArr = json.arrayObject as! [Int] 
+        for instructorId in instructorArr {
+            ApiDataDownloader.sharedDownloader.getUserById(instructorId, success: {
+                user in
+                    self.addInstructor(user)
+                }, failure: {
+                error in
+                    print("Error while downloading instructors")
+                })
+        }
     }
     
     class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {

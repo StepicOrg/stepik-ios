@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
+@objc
 class User: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass

@@ -10,9 +10,26 @@ import UIKit
 
 class TeacherCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Initialization codex
     }
 
+    func initWithUser(user: User) {
+    
+        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.sharedConstants.placeholderImage, completed: {
+            _, _, _, _ in
+            self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.whiteColor())
+
+        })
+//        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.sharedConstants.placeholderImage)
+//        avatarImageView.setRoundedBounds(width: 1, color: UIColor.whiteColor())
+        nameLabel.text = "\(user.firstName) \(user.lastName)"
+        infoLabel.text = user.bio
+    }
+    
 }

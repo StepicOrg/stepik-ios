@@ -8,51 +8,57 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TeacherCollectionViewCell" id="gTV-IL-0wX" customClass="TeacherCollectionViewCell" customModule="Stepic" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="278" height="342"/>
+            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="278" height="342"/>
+                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N0Y-oQ-CRH">
-                        <rect key="frame" x="8" y="8" width="262" height="262"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Teacher name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67e-Jv-o6c">
+                        <rect key="frame" x="0.0" y="68" width="120" height="15"/>
                         <animations/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="N0Y-oQ-CRH" secondAttribute="height" multiplier="1:1" id="RWa-Ss-trB"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teacher name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67e-Jv-o6c">
-                        <rect key="frame" x="8" y="278" width="262" height="17"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Teacher info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZy-1E-sY5">
-                        <rect key="frame" x="8" y="303" width="262" height="31"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Teacher info info info info info info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZy-1E-sY5">
+                        <rect key="frame" x="0.0" y="91" width="120" height="29"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="N0Y-oQ-CRH">
+                        <rect key="frame" x="30" y="0.0" width="60" height="60"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="NZL-d6-FXx"/>
+                            <constraint firstAttribute="width" secondItem="N0Y-oQ-CRH" secondAttribute="height" multiplier="1:1" id="RWa-Ss-trB"/>
+                            <constraint firstAttribute="height" constant="60" id="ZNV-vr-Ql9"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <animations/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="uZy-1E-sY5" secondAttribute="trailing" constant="8" id="8k0-gu-lmQ"/>
-                <constraint firstAttribute="bottom" secondItem="uZy-1E-sY5" secondAttribute="bottom" constant="8" id="AtA-xN-nOQ"/>
-                <constraint firstItem="N0Y-oQ-CRH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ECv-wo-cF3"/>
-                <constraint firstAttribute="trailing" secondItem="67e-Jv-o6c" secondAttribute="trailing" constant="8" id="FHJ-B8-SCg"/>
+                <constraint firstItem="N0Y-oQ-CRH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="8cH-cr-w6T"/>
+                <constraint firstAttribute="trailing" secondItem="uZy-1E-sY5" secondAttribute="trailing" id="8k0-gu-lmQ"/>
+                <constraint firstAttribute="bottom" secondItem="uZy-1E-sY5" secondAttribute="bottom" id="AtA-xN-nOQ"/>
+                <constraint firstAttribute="trailing" secondItem="67e-Jv-o6c" secondAttribute="trailing" id="FHJ-B8-SCg"/>
                 <constraint firstItem="67e-Jv-o6c" firstAttribute="top" secondItem="N0Y-oQ-CRH" secondAttribute="bottom" constant="8" id="QRU-V6-daW"/>
-                <constraint firstItem="67e-Jv-o6c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="h9z-ON-tli"/>
+                <constraint firstItem="67e-Jv-o6c" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="h9z-ON-tli"/>
                 <constraint firstItem="uZy-1E-sY5" firstAttribute="top" secondItem="67e-Jv-o6c" secondAttribute="bottom" constant="8" id="ifX-tI-5Dw"/>
-                <constraint firstItem="N0Y-oQ-CRH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="kdS-ar-mB0"/>
-                <constraint firstItem="uZy-1E-sY5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="obS-au-LXF"/>
-                <constraint firstAttribute="trailing" secondItem="N0Y-oQ-CRH" secondAttribute="trailing" constant="8" id="zLb-5E-s7W"/>
+                <constraint firstItem="N0Y-oQ-CRH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kdS-ar-mB0"/>
+                <constraint firstItem="uZy-1E-sY5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="obS-au-LXF"/>
             </constraints>
-            <size key="customSize" width="278" height="342"/>
-            <point key="canvasLocation" x="413" y="564"/>
+            <size key="customSize" width="184" height="198"/>
+            <connections>
+                <outlet property="avatarImageView" destination="N0Y-oQ-CRH" id="YK8-Hl-kMk"/>
+                <outlet property="infoLabel" destination="uZy-1E-sY5" id="qlP-zO-N4s"/>
+                <outlet property="nameLabel" destination="67e-Jv-o6c" id="D29-Rk-ezi"/>
+            </connections>
+            <point key="canvasLocation" x="327.5" y="439.5"/>
         </collectionViewCell>
     </objects>
 </document>

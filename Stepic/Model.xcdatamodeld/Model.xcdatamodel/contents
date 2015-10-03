@@ -16,7 +16,7 @@
         <attribute name="managedSummary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="managedInstructors" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
+        <relationship name="managedInstructors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="managedAvatarURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,7 +28,7 @@
         <attribute name="managedLevel" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedPrivate" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="managedProfile" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="managedInstructedCourses" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
+        <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
     </entity>
     <elements>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="285"/>

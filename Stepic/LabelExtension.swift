@@ -22,20 +22,23 @@ extension UILabel {
         self.text = attributedDescription!.string
     }
     
-    class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize: CGFloat, width : CGFloat, html : Bool = false) -> CGFloat {
+    class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
         
         label.numberOfLines = lines
+        
         if html {
             label.setTextWithHTMLString(text)
         } else {
             label.text = text
         }
-        label.font = UIFont.systemFontOfSize(standardFontOfSize)
         
+        label.font = UIFont.systemFontOfSize(size)
+        label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        label.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
         label.sizeToFit()
         
-        print(label.bounds.height)
+//        print(label.bounds.height)
         return label.bounds.height
     }
 }

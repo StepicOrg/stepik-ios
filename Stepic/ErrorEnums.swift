@@ -11,3 +11,7 @@ import Foundation
 enum FetchError : ErrorType {
     case RequestExecution
 }
+
+enum ConnectionError : ErrorType {
+    case NoDataRecievedError, ParsingError, TokenRefreshError
+}
