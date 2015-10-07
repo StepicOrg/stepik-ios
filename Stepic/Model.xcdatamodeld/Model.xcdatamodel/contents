@@ -14,9 +14,18 @@
         <attribute name="managedIntroURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedRequirements" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedSummary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedTabNumber" optional="YES" attributeType="Integer 64" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedInstructors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Section" representedClassName=".Section" syncable="YES">
+        <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedEndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="managedAvatarURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +40,8 @@
         <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="300"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
+        <element name="Section" positionX="-54" positionY="126" width="128" height="135"/>
     </elements>
 </model>

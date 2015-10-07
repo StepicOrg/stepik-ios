@@ -1,19 +1,21 @@
 //
-//  MyCoursesViewController.swift
+//  FindCoursesViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 22.09.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
+//  Created by Alexander Karpov on 17.09.15.
+//  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
 class MyCoursesViewController: UIViewController {
-
+    
+    let TAB_NUMBER = 2
+    
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +27,9 @@ class MyCoursesViewController: UIViewController {
         
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        getCachedCourses()
+        
         refreshControl.beginRefreshing()
         refreshCourses()
         // Do any additional setup after loading the view.
@@ -34,6 +39,27 @@ class MyCoursesViewController: UIViewController {
     //        return UIStatusBarStyle.LightContent
     //    }
     //    
+    
+    private func getCachedCourses() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            do {
+                self.courses = try Course.getCourses(tabNumber: self.TAB_NUMBER)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }            
+            }
+            catch {
+                print("error while getting courses")
+                self.courses = []
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,9 +67,11 @@ class MyCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.courses = courses
+            print("courses count -> \(courses.count)")
+            CoreDataHelper.instance.save()
             self.meta = meta
             self.tableView.reloadData()
             self.isRefreshing = false
@@ -88,7 +116,7 @@ class MyCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses
@@ -103,6 +131,12 @@ class MyCoursesViewController: UIViewController {
         })
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showCourse" {
+            let dvc = segue.destinationViewController as! CoursePreviewViewController
+            dvc.course = courses[(sender as! NSIndexPath).row]
+        }
+    }
 }
 
 
@@ -114,6 +148,10 @@ extension MyCoursesViewController : UITableViewDelegate {
             return 100
         }
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showCourse", sender: indexPath)
+    }
 }
 
 extension MyCoursesViewController : UITableViewDataSource {
@@ -123,6 +161,7 @@ extension MyCoursesViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return courses.count + (needRefresh() ? 1 : 0)
     }
     

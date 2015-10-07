@@ -15,7 +15,7 @@ class ApiDataDownloader: NSObject {
     static let sharedDownloader = ApiDataDownloader()
     private override init() {}
     
-    func getCoursesWithFeatured(featured: Bool?, enrolled: Bool?, page: Int?, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
+    func getCoursesWithFeatured(featured: Bool?, enrolled: Bool?, page: Int?, tabNumber: Int, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:] 
         // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
@@ -37,7 +37,8 @@ class ApiDataDownloader: NSObject {
             (t) in
             StepicAPI.shared.token = t
             params["access_token"] = t.accessToken
-            self.getCoursesApiCall(params, headers: headers, success: success, failure: failure)
+            print("token -> \(t.accessToken)")
+            self.getCoursesApiCall(tabNumber, params: params, headers: headers, success: success, failure: failure)
             }, failure: {
                 _ in
                 print("error while refreshing the token")
@@ -46,7 +47,7 @@ class ApiDataDownloader: NSObject {
         
     }
     
-    private func getCoursesApiCall(params: [String : NSObject], headers : [String : String], success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
+    private func getCoursesApiCall(tabNumber: Int, params: [String : NSObject], headers : [String : String], success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         
         Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
@@ -59,18 +60,19 @@ class ApiDataDownloader: NSObject {
             // print(json)
             
             let meta = Meta(json: json["meta"])
-//            print(json["courses"])
+            print("--------------------------")
+            print(json["courses"])
             var courses : [Course] = []
             
             
             //NOT AN OOP THING, FIX IT SOMEHOW IN THE FUTURE
             if meta.page == 1 {
-                Course.deleteAll()
+                Course.deleteAll(tabNumber)
             }
             
             
             for courseJSON in json["courses"].arrayValue {
-                courses += [Course(json: courseJSON)]
+                courses += [Course(json: courseJSON, tabNumber: tabNumber)]
             }
             success(courses, meta)
         })
@@ -107,28 +109,33 @@ class ApiDataDownloader: NSObject {
             
             // print(json)
             
-            print(json["users"])
+//            print(json["users"])
             let user : User = User(json: json["users"].arrayValue[0])
             success(user)
         })
     }
     
-    func getUserById(id: Int, success : (User) -> Void, failure : (error : ErrorType) -> Void) {
+    func getUserById(id: Int, refreshToken: Bool = true, success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         let headers : [String : String] = [:] 
         // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
         
         var params : [String : NSObject] = [:]
         
-        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
-            (t) in
-            StepicAPI.shared.token = t
-            params["access_token"] = t.accessToken
-            print(t.accessToken)
+        if refreshToken {
+            AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+                (t) in
+                StepicAPI.shared.token = t
+                params["access_token"] = t.accessToken
+                print(t.accessToken)
+                self.getUserByIdApiCall(id, params: params, headers: headers, success: success, failure: failure)
+                }, failure: {
+                    _ in
+                    print("error while refreshing the token")
+                })
+        } else {
+            params["access_token"] = StepicAPI.shared.token
             self.getUserByIdApiCall(id, params: params, headers: headers, success: success, failure: failure)
-            }, failure: {
-                _ in
-                print("error while refreshing the token")
-        })
+        }
     }
     
     private func getUserByIdApiCall(id: Int, params: [String : NSObject], headers : [String : String], success : (User) -> Void, failure : (error : ErrorType) -> Void) {
@@ -142,27 +149,11 @@ class ApiDataDownloader: NSObject {
             
             // print(json)
             
-            print(json["users"])
+//            print(json["users"])
             let user : User = User(json: json["users"].arrayValue[0])
             success(user)
         })
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }

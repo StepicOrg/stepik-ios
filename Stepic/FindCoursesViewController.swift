@@ -10,6 +10,8 @@ import UIKit
 
 class FindCoursesViewController: UIViewController {
 
+    let TAB_NUMBER = 1
+    
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
@@ -42,7 +44,7 @@ class FindCoursesViewController: UIViewController {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             do {
-                self.courses = try Course.getCourses()
+                self.courses = try Course.getCourses(tabNumber: self.TAB_NUMBER)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }            
@@ -65,7 +67,7 @@ class FindCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.courses = courses
             CoreDataHelper.instance.save()
@@ -113,7 +115,7 @@ class FindCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses

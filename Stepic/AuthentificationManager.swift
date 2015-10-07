@@ -38,7 +38,7 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-//            print(json)
+            print(json)
 //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             print(token.accessToken)
@@ -64,13 +64,23 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-//            print(json)
+            print(json)
 //            print("no error")
             let token : StepicToken = StepicToken(json: json)
-            print(token.accessToken)
+//            print(token.accessToken)
             success(token: token)
         })
         
+    }
+    
+    func autoRefreshToken() {
+        refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+                (t) in
+                StepicAPI.shared.token = t
+            }, failure : {
+            error in
+            print("error while auto refresh token")
+          })
     }
     
     
@@ -94,7 +104,7 @@ class AuthentificationManager : NSObject {
                 return
             }
             
-//            print(json)
+            print(json)
             
         })
     }

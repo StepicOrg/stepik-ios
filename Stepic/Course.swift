@@ -15,7 +15,7 @@ class Course: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    convenience init(json: JSON) {
+    convenience init(json: JSON, tabNumber: Int) {
         self.init()
         id = json["id"].intValue
         title = json["title"].stringValue
@@ -36,6 +36,8 @@ class Course: NSManagedObject {
         enrolled = json["enrollment"].string != nil
         featured = json["is_featured"].boolValue
         
+        self.tabNumber = tabNumber
+        
         summary = json["summary"].stringValue
         workload = json["workload"].stringValue
         introURL = json["intro"].stringValue
@@ -50,8 +52,9 @@ class Course: NSManagedObject {
     
     private func getInstructors(json: JSON) {
         let instructorArr = json.arrayObject as! [Int] 
+//        AuthentificationManager.sharedManager.autoRefreshToken()
         for instructorId in instructorArr {
-            ApiDataDownloader.sharedDownloader.getUserById(instructorId, success: {
+            ApiDataDownloader.sharedDownloader.getUserById(instructorId, refreshToken: false, success: {
                 user in
                     self.addInstructor(user)
                 }, failure: {
@@ -61,10 +64,13 @@ class Course: NSManagedObject {
         }
     }
     
-    class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
+    class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil, tabNumber: Int) throws -> [Course] {
         let request = NSFetchRequest(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         var predicate = NSPredicate(value: true)
+        
+        let p = NSPredicate(format: "managedTabNumber == %@", tabNumber as NSNumber)
+        predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p]) 
         
         if let f = featured {
             let p = NSPredicate(format: "managedFeatured == %@", f as NSNumber)
@@ -88,9 +94,9 @@ class Course: NSManagedObject {
         }
     }
     
-    class func deleteAll() {
+    class func deleteAll(tabNumber: Int) {
         do {
-            let c = try getCourses()
+            let c = try getCourses(tabNumber: tabNumber)
             for course in c {
                 CoreDataHelper.instance.context.deleteObject(course)
             }
