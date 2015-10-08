@@ -20,6 +20,7 @@ class TeachersTableViewCell: UITableViewCell {
         self.collectionView?.registerNib(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -29,8 +30,13 @@ class TeachersTableViewCell: UITableViewCell {
     }
 
     func initWithCourse(course: Course) {
-        instructors = course.instructors
-        collectionView.reloadData()
+//        instructors = course.instructors
+        course.loadAllInstructors(success: {
+            self.instructors = course.instructors
+            print("instructors count -> \(self.instructors.count)")
+            self.collectionView.reloadData()
+        })
+//        collectionView.reloadData()
     }
 }
 

@@ -47,24 +47,24 @@ class Course: NSManagedObject {
         requirements = json["requirements"].stringValue
         
         sectionsArray = json["sections"].arrayObject as! [Int]
-        
-        getInstructors(json["instructors"])
+        instructorsArray = json["instructors"].arrayObject as! [Int]
+//        getInstructors(json["instructors"])
 //        getSections(json["sections"])
     }
     
-    private func getInstructors(json: JSON) {
-        let instructorArr = json.arrayObject as! [Int] 
-//        AuthentificationManager.sharedManager.autoRefreshToken()
-        for instructorId in instructorArr {
-            ApiDataDownloader.sharedDownloader.getUserById(instructorId, refreshToken: false, success: {
-                user in
-                    self.addInstructor(user)
-                }, failure: {
-                error in
-                    print("Error while downloading instructors")
-                })
-        }
-    }
+//    private func getInstructors(json: JSON) {
+//        let instructorArr = json.arrayObject as! [Int] 
+////        AuthentificationManager.sharedManager.autoRefreshToken()
+//        for instructorId in instructorArr {
+//            ApiDataDownloader.sharedDownloader.getUserById(instructorId, refreshToken: false, success: {
+//                user in
+//                    self.addInstructor(user)
+//                }, failure: {
+//                error in
+//                    print("Error while downloading instructors")
+//                })
+//        }
+//    }
     
 //    private func getSections(json: JSON) {
 //        let sectionArr = json.arrayObject as! [Int] 
@@ -75,12 +75,26 @@ class Course: NSManagedObject {
 //        }
 //    }
     
+    func loadAllInstructors(success success: (Void -> Void)) {
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, success: {
+                users in
+                print("instructors count inside Course class -> \(users.count)")
+                self.setInstructors(users)
+                CoreDataHelper.instance.save()
+                success()  
+                }, failure : {
+                    error in
+                    print("error while loading section")
+            })
+        })        
+    }
+    
     func loadAllSections(success success: (Void -> Void)) {
-        
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, success: {
-                    sections in
-                    self.setSections(sections)
+                    secs in
+                    self.setSections(secs)
                     CoreDataHelper.instance.save()
                     success()  
                 }, failure : {
