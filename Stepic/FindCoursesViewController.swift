@@ -11,6 +11,7 @@ import UIKit
 class FindCoursesViewController: UIViewController {
 
     let TAB_NUMBER = 1
+    let LOAD_ENROLLED : Bool? = nil
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -67,7 +68,7 @@ class FindCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: 1, tabNumber: TAB_NUMBER, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.courses = courses
             CoreDataHelper.instance.save()
@@ -115,7 +116,7 @@ class FindCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: nil, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses

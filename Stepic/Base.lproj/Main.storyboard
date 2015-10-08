@@ -526,8 +526,34 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wpd-Wa-kKd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GVk-Xu-aqZ">
                                         <rect key="frame" x="0.0" y="236" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GVk-Xu-aqZ" id="D14-RI-ggY">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agG-Sd-F49">
+                                                    <rect key="frame" x="8" y="7" width="584" height="30"/>
+                                                    <animations/>
+                                                    <state key="normal" title="Print token"/>
+                                                    <connections>
+                                                        <action selector="printTokenButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="WV8-wW-PYJ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="agG-Sd-F49" firstAttribute="top" secondItem="D14-RI-ggY" secondAttribute="topMargin" constant="-1" id="0lF-43-Bga"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="agG-Sd-F49" secondAttribute="trailing" id="IT5-TK-7BV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="agG-Sd-F49" secondAttribute="bottom" constant="-2" id="KUC-A6-3cA"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="agG-Sd-F49" secondAttribute="leading" id="sEx-hz-RZZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wpd-Wa-kKd">
+                                        <rect key="frame" x="0.0" y="280" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wpd-Wa-kKd" id="hQX-4o-beF">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>

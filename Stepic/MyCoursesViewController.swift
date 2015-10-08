@@ -11,6 +11,7 @@ import UIKit
 class MyCoursesViewController: UIViewController {
     
     let TAB_NUMBER = 2
+    let LOAD_ENROLLED : Bool? = true
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -67,10 +68,9 @@ class MyCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: 1, tabNumber: TAB_NUMBER, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.courses = courses
-            print("courses count -> \(courses.count)")
             CoreDataHelper.instance.save()
             self.meta = meta
             self.tableView.reloadData()
@@ -116,7 +116,7 @@ class MyCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: true, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
+        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
             (courses, meta) in
             self.currentPage += 1
             self.courses += courses
@@ -136,6 +136,11 @@ class MyCoursesViewController: UIViewController {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = courses[(sender as! NSIndexPath).row]
         }
+        
+        if segue.identifier == "showSections" {
+            let dvc = segue.destinationViewController as! SectionsViewController
+            dvc.course = courses[(sender as! NSIndexPath).row]
+        }
     }
 }
 
@@ -150,7 +155,11 @@ extension MyCoursesViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showCourse", sender: indexPath)
+        if courses[indexPath.row].enrolled {
+            self.performSegueWithIdentifier("showSections", sender: indexPath)
+        } else {
+            self.performSegueWithIdentifier("showCourse", sender: indexPath)
+        }
     }
 }
 

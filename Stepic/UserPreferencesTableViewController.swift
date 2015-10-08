@@ -58,6 +58,12 @@ class UserPreferencesTableViewController: UITableViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    @IBAction func printTokenButtonPressed(sender: UIButton) {
+        print(StepicAPI.shared.token?.accessToken)
+    }
+    
+    
     @IBAction func signOutButtonPressed(sender: UIButton) {
         StepicAPI.shared.token = nil
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
