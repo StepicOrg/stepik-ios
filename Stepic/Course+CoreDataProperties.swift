@@ -151,7 +151,8 @@ extension Course {
             self.managedIntroURL = value
         }
         get {
-            return managedIntroURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+            //YOU ARE GETTING RICK ROLLED HERE
+            return (managedIntroURL != nil && managedIntroURL != "") ? managedIntroURL! : "https://player.vimeo.com/video/2619976"
         }
     }
     

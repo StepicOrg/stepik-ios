@@ -24,7 +24,7 @@ class SectionTableViewCell: UITableViewCell {
     }
     
     func initWithSection(section: Section) {
-        titleLabel.text = section.title
+        titleLabel.text = "\(section.position). \(section.title)"
     }
     
 }
