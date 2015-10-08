@@ -22,9 +22,6 @@ extension Section {
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
     
-    @NSManaged var managedLoaded: NSNumber?
-
-    
     @NSManaged var managedCourse : Course?
 
     
@@ -99,16 +96,7 @@ extension Section {
             return managedActive?.boolValue ?? false
         }
     }
-    
-    var loaded : Bool {
-        set(value){
-            self.managedLoaded = value
-        }
-        get {
-            return managedLoaded?.boolValue ?? false
-        }
-    }
-    
+        
     var course : Course? {
         return managedCourse
     }

@@ -17,7 +17,7 @@ class SectionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        course.loadAllSectionsIfNotLoaded(success: {
+        course.loadAllSections(success: {
             self.tableView.reloadData()
         })
         

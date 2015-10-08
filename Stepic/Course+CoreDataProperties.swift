@@ -34,6 +34,9 @@ extension Course {
     
     @NSManaged var managedInstructors : NSOrderedSet?
     @NSManaged var managedSections : NSOrderedSet?
+    
+    @NSManaged var managedSectionsArray : NSObject?
+    @NSManaged var managedInstructorsArray : NSObject?
 
     
     class var entity : NSEntityDescription {
@@ -200,11 +203,36 @@ extension Course {
         managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
     
+    var sectionsArray: [Int] {
+        set(value){
+            self.managedSectionsArray = value
+        }
+        get {
+            return (self.managedSectionsArray as? [Int]) ?? []
+        }
+    }
+    
+    var instructorsArray: [Int] {
+        set(value){
+            self.managedInstructorsArray = value
+        }
+        get {
+            return (self.managedInstructorsArray as? [Int]) ?? []
+        }
+    }
     
     var sections : [Section] {
         get {
             return managedSections?.array as! [Section]
         }
+    }
+    
+    func setSections(sections: [Section]) {
+        managedSections = NSOrderedSet(array: sections)
+    }
+    
+    func setInstructors(instructors: [User]) {
+        managedInstructors = NSOrderedSet(array: instructors)
     }
     
     func addSection(section: Section) {

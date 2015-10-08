@@ -16,12 +16,6 @@ class Section: NSManagedObject {
 // Insert code here to add functionality to your managed object subclass
 
     
-    convenience init(id: Int) {
-        self.init()
-        self.id = id
-        loaded = false
-    }
-    
     convenience init(json: JSON){
         self.init()
         initialize(json)
@@ -35,7 +29,6 @@ class Section: NSManagedObject {
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
-        loaded = true
     }
     
     class func getSections(id: Int) throws -> [Section] {
@@ -60,19 +53,19 @@ class Section: NSManagedObject {
         }
     }
     
-    func loadIfNotLoaded(success success : (Void -> Void)) {
-        if !loaded {
-            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
-                    sec in
-                    success()
-                }, failure: {
-                    error in
-                    print("failed to load section with id -> \(self.id)")
-            })
-        } else {
-            success()
-        }
-    }
+//    func loadIfNotLoaded(success success : (Void -> Void)) {
+//        if !loaded {
+//            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
+//                    sec in
+//                    success()
+//                }, failure: {
+//                    error in
+//                    print("failed to load section with id -> \(self.id)")
+//            })
+//        } else {
+//            success()
+//        }
+//    }
 }
 
 

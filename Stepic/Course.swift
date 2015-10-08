@@ -46,8 +46,10 @@ class Course: NSManagedObject {
         certificate = json["certificate"].stringValue
         requirements = json["requirements"].stringValue
         
+        sectionsArray = json["sections"].arrayObject as! [Int]
+        
         getInstructors(json["instructors"])
-        getSections(json["sections"])
+//        getSections(json["sections"])
     }
     
     private func getInstructors(json: JSON) {
@@ -64,30 +66,28 @@ class Course: NSManagedObject {
         }
     }
     
-    private func getSections(json: JSON) {
-        let sectionArr = json.arrayObject as! [Int] 
-        //        AuthentificationManager.sharedManager.autoRefreshToken()
-        for sectionId in sectionArr {
-            addSection(Section(id: sectionId))
-        }
-    }
+//    private func getSections(json: JSON) {
+//        let sectionArr = json.arrayObject as! [Int] 
+//        sectionsArray = sectionArr
+//        //        AuthentificationManager.sharedManager.autoRefreshToken()
+//        for sectionId in sectionArr {
+//            addSection(Section(id: sectionId))
+//        }
+//    }
     
-    func loadAllSectionsIfNotLoaded(success success: (Void -> Void)) {
-        var loadedSectionsCount = 0
-        let expectedSectionsCount = sections.count
+    func loadAllSections(success success: (Void -> Void)) {
         
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            for section in self.sections {
-                section.loadIfNotLoaded(success: {
-                    loadedSectionsCount += 1
-                    print("loaded section")
-                    if loadedSectionsCount == expectedSectionsCount {
-                        success()
-                    }
+            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, success: {
+                    sections in
+                    self.setSections(sections)
+                    CoreDataHelper.instance.save()
+                    success()  
+                }, failure : {
+                        error in
+                        print("error while loading section")
                 })
-            }
-        })
-        
+        })        
     }
     
     class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil, tabNumber: Int) throws -> [Course] {
