@@ -33,6 +33,8 @@ extension Course {
     @NSManaged var managedRequirements: String?
     
     @NSManaged var managedInstructors : NSOrderedSet?
+    @NSManaged var managedSections : NSOrderedSet?
+
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Course", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -197,4 +199,18 @@ extension Course {
         mutableItems.addObject(instructor)
         managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
+    
+    
+    var sections : [Section] {
+        get {
+            return managedSections?.array as! [Section]
+        }
+    }
+    
+    func addSection(section: Section) {
+        let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet
+        mutableItems.addObject(section)
+        managedSections = mutableItems.copy() as? NSOrderedSet
+    }
+    
 }

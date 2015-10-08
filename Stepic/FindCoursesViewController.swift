@@ -135,6 +135,11 @@ class FindCoursesViewController: UIViewController {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = courses[(sender as! NSIndexPath).row]
         }
+        
+        if segue.identifier == "showSections" {
+            let dvc = segue.destinationViewController as! SectionsViewController
+            dvc.course = courses[(sender as! NSIndexPath).row]
+        }
     }
 }
 
@@ -149,7 +154,11 @@ extension FindCoursesViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showCourse", sender: indexPath)
+        if courses[indexPath.row].enrolled {
+            self.performSegueWithIdentifier("showSections", sender: indexPath)
+        } else {
+            self.performSegueWithIdentifier("showCourse", sender: indexPath)
+        }
     }
 }
 

@@ -156,4 +156,51 @@ class ApiDataDownloader: NSObject {
     }
     
     
+    func getSectionById(id: Int, existingSection: Section? = nil, refreshToken: Bool = true, success : ((Section) -> Void)?, failure : (error : ErrorType) -> Void) {
+        let headers : [String : String] = [:] 
+        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        
+        var params : [String : NSObject] = [:]
+        
+        if refreshToken {
+            AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+                (t) in
+                StepicAPI.shared.token = t
+                params["access_token"] = t.accessToken
+                print(t.accessToken)
+                self.getSectionByIdApiCall(id, existingSection: existingSection, params: params, headers: headers, success: success, failure: failure)
+                }, failure: {
+                    _ in
+                    print("error while refreshing the token")
+            })
+        } else {
+            params["access_token"] = StepicAPI.shared.token
+            self.getSectionByIdApiCall(id, existingSection: existingSection, params: params, headers: headers, success: success, failure: failure)
+        }
+    }
+    
+    private func getSectionByIdApiCall(id: Int, existingSection: Section? = nil, params: [String : NSObject], headers : [String : String], success : ((Section) -> Void)?, failure : (error : ErrorType) -> Void) {
+        Alamofire.request(.GET, "https://stepic.org/api/sections/\(id)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+            (_, _, json, error) in
+            
+            if let e = error {
+                failure(error: e)
+                return
+            }
+            
+            // print(json)
+            
+            //print(json["sections"])
+            if let es = existingSection {
+                es.initialize(json["sections"].arrayValue[0])
+                if success != nil { success!(es) }
+            } else {
+                let section : Section = Section(json: json["sections"].arrayValue[0])
+                if success != nil { success!(section) }
+            }
+            
+        })
+    }
+    
+    
 }

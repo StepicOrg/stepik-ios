@@ -33,7 +33,7 @@ class Course: NSManagedObject {
 //            print("end date for \(title) is nil!!!")
 //        }
         
-        enrolled = json["enrollment"].string != nil
+        enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
         
         self.tabNumber = tabNumber
@@ -47,7 +47,7 @@ class Course: NSManagedObject {
         requirements = json["requirements"].stringValue
         
         getInstructors(json["instructors"])
-        
+        getSections(json["sections"])
     }
     
     private func getInstructors(json: JSON) {
@@ -62,6 +62,32 @@ class Course: NSManagedObject {
                     print("Error while downloading instructors")
                 })
         }
+    }
+    
+    private func getSections(json: JSON) {
+        let sectionArr = json.arrayObject as! [Int] 
+        //        AuthentificationManager.sharedManager.autoRefreshToken()
+        for sectionId in sectionArr {
+            addSection(Section(id: sectionId))
+        }
+    }
+    
+    func loadAllSectionsIfNotLoaded(success success: (Void -> Void)) {
+        var loadedSectionsCount = 0
+        let expectedSectionsCount = sections.count
+        
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            for section in self.sections {
+                section.loadIfNotLoaded(success: {
+                    loadedSectionsCount += 1
+                    print("loaded section")
+                    if loadedSectionsCount == expectedSectionsCount {
+                        success()
+                    }
+                })
+            }
+        })
+        
     }
     
     class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil, tabNumber: Int) throws -> [Course] {

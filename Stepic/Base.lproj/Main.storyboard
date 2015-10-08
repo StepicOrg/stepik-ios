@@ -371,6 +371,7 @@
                     <connections>
                         <outlet property="tableView" destination="xJl-BW-RIC" id="f6Q-fZ-qqB"/>
                         <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="Had-eU-CRB"/>
+                        <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="ste-Lr-Bip"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -876,7 +877,53 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cds-4V-qU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3375" y="816"/>
+            <point key="canvasLocation" x="3327" y="390"/>
+        </scene>
+        <!--Course-->
+        <scene sceneID="9kw-Mv-ATb">
+            <objects>
+                <viewController id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0cz-24-l3w"/>
+                        <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z7c-c8-8wj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Zo1-Oj-Hsk" id="zBn-9O-FKh"/>
+                                    <outlet property="delegate" destination="Zo1-Oj-Hsk" id="6jt-pg-jVy"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="L7p-o7-VTy" firstAttribute="top" secondItem="L6O-ow-pfW" secondAttribute="bottom" id="BGA-Hp-GSU"/>
+                            <constraint firstItem="L6O-ow-pfW" firstAttribute="leading" secondItem="z7c-c8-8wj" secondAttribute="leading" id="N2u-d2-ezu"/>
+                            <constraint firstItem="L6O-ow-pfW" firstAttribute="top" secondItem="z7c-c8-8wj" secondAttribute="top" id="dwe-fR-Yv1"/>
+                            <constraint firstAttribute="trailing" secondItem="L6O-ow-pfW" secondAttribute="trailing" id="fqE-YW-KlI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Course" id="1al-js-zDv">
+                        <barButtonItem key="rightBarButtonItem" title="Overview" id="eJg-m5-c03">
+                            <connections>
+                                <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="Ymm-um-wgY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="L6O-ow-pfW" id="N9z-Nh-VqO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btP-0Y-Fhv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3327" y="1262"/>
         </scene>
         <!--Best lessons-->
         <scene sceneID="YSi-WV-mGt">
@@ -945,6 +992,7 @@
                     <connections>
                         <outlet property="tableView" destination="grI-00-Wn1" id="ExN-dj-CNu"/>
                         <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="nf5-of-tUO"/>
+                        <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="WuO-Je-0sX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daD-hw-lxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1171,7 +1219,8 @@
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RJf-bv-ine"/>
-        <segue reference="nf5-of-tUO"/>
+        <segue reference="ste-Lr-Bip"/>
+        <segue reference="qb1-8x-83E"/>
+        <segue reference="Ymm-um-wgY"/>
     </inferredMetricsTieBreakers>
 </document>
