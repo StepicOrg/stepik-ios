@@ -1,0 +1,65 @@
+//
+//  Lesson+CoreDataProperties.swift
+//  Stepic
+//
+//  Created by Alexander Karpov on 09.10.15.
+//  Copyright © 2015 Alex Karpov. All rights reserved.
+//
+//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
+//  to delete and recreate this implementation file for your updated model.
+//
+
+import Foundation
+import CoreData
+
+extension Lesson {
+
+    @NSManaged var managedId: NSNumber?
+    @NSManaged var managedFeatured: NSNumber?
+    @NSManaged var managedPublic: NSNumber?
+    @NSManaged var managedTitle: String?
+
+    class var entity : NSEntityDescription {
+        return NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataHelper.instance.context)!
+    }
+    
+    convenience init() {
+        self.init(entity: Lesson.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+    }
+    
+    var id : Int {
+        set(newId){
+            self.managedId = newId
+        }
+        get {
+            return managedId?.integerValue ?? -1
+        }
+    }
+    
+    var title : String {
+        set(value){
+            self.managedTitle = value
+        }
+        get {
+            return managedTitle ?? "No title"
+        }
+    }
+    
+    var isFeatured : Bool {
+        set(value){
+            self.managedFeatured = value
+        }
+        get {
+            return managedFeatured?.boolValue ?? false
+        }
+    }
+    
+    var isPublic : Bool {
+        set(value){
+            self.managedPublic = value
+        }
+        get {
+            return managedPublic?.boolValue ?? false
+        }
+    }
+}

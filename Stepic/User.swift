@@ -11,11 +11,11 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class User: NSManagedObject {
+class User: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
     
-    convenience init(json: JSON) {
+    convenience required init(json: JSON) {
         self.init()
         id = json["id"].intValue
         profile = json["profile"].intValue

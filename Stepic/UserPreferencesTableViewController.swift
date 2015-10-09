@@ -63,6 +63,10 @@ class UserPreferencesTableViewController: UITableViewController {
         print(StepicAPI.shared.token?.accessToken)
     }
     
+    @IBAction func printDocumentsPathButtonPressed(sender: UIButton) {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        print(documentsPath)
+    }
     
     @IBAction func signOutButtonPressed(sender: UIButton) {
         StepicAPI.shared.token = nil

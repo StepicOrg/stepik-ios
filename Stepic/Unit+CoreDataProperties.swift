@@ -1,8 +1,8 @@
 //
-//  Section+CoreDataProperties.swift
+//  Unit+CoreDataProperties.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 08.10.15.
+//  Created by Alexander Karpov on 09.10.15.
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,28 +12,25 @@
 import Foundation
 import CoreData
 
-extension Section {
+extension Unit {
 
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
-    @NSManaged var managedTitle: String?
     @NSManaged var managedBeginDate: NSDate?
     @NSManaged var managedSoftDeadline: NSDate?
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
-    
-    @NSManaged var managedUnitsArray : NSObject?
+    @NSManaged var managedLessonId: NSNumber?
 
-    @NSManaged var managedUnits : NSOrderedSet?
-    @NSManaged var managedCourse : Course?
+    @NSManaged var managedSection: Section?
+    @NSManaged var managedLesson: NSManagedObject?
 
-    
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Section", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entityForName("Unit", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Section.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Unit.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
     }
     
     var id : Int {
@@ -44,7 +41,16 @@ extension Section {
             return managedId?.integerValue ?? -1
         }
     }
-
+    
+    var lessonId : Int {
+        set(newId){
+            self.managedLessonId = newId
+        }
+        get {
+            return managedLessonId?.integerValue ?? -1
+        }
+    }
+    
     var position : Int {
         set(value){
             self.managedPosition = value
@@ -54,14 +60,6 @@ extension Section {
         }
     }
 
-    var title : String {
-        set(value){
-            self.managedTitle = value
-        }
-        get {
-            return managedTitle ?? "No title"
-        }
-    }
     
     var beginDate : NSDate? {
         set(date){
@@ -89,7 +87,7 @@ extension Section {
             return managedHardDeadline
         }
     }
-
+    
     var isActive : Bool {
         set(value){
             self.managedActive = value
@@ -98,27 +96,17 @@ extension Section {
             return managedActive?.boolValue ?? false
         }
     }
-        
-    var course : Course? {
-        return managedCourse
+    
+    var section : Section {
+        return managedSection!
     }
     
-    var units : [Unit] {
+    var lesson : Lesson? {
         get {
-            return (managedUnits?.array as? [Unit]) ?? []
+            return managedLesson as? Lesson
         }
         set(value) {
-            managedUnits = NSOrderedSet(array: value)
-        }
-    }
-    
-    
-    var unitsArray: [Int] {
-        set(value){
-            self.managedUnitsArray = value
-        }
-        get {
-            return (self.managedUnitsArray as? [Int]) ?? []
+            self.managedLesson = value
         }
     }
     

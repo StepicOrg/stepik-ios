@@ -22,6 +22,12 @@
         <relationship name="managedInstructors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
         <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
     </entity>
+    <entity name="Lesson" representedClassName=".Lesson" syncable="YES">
+        <attribute name="managedFeatured" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPublic" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Section" representedClassName=".Section" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -30,7 +36,20 @@
         <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedUnitsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedSections" inverseEntity="Course" syncable="YES"/>
+        <relationship name="managedUnits" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Unit" inverseName="managedSection" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Unit" representedClassName=".Unit" syncable="YES">
+        <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedHardDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedLessonId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" syncable="YES"/>
+        <relationship name="managedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="managedUnits" inverseEntity="Section" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="managedAvatarURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,7 +65,9 @@
     </entity>
     <elements>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="Lesson" positionX="-36" positionY="153" width="128" height="105"/>
+        <element name="Section" positionX="-54" positionY="126" width="128" height="195"/>
+        <element name="Unit" positionX="-45" positionY="144" width="128" height="180"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
-        <element name="Section" positionX="-54" positionY="126" width="128" height="165"/>
     </elements>
 </model>

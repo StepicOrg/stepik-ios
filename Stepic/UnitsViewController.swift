@@ -1,32 +1,31 @@
 //
-//  SectionsViewController.swift
+//  UnitsViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 08.10.15.
+//  Created by Alexander Karpov on 09.10.15.
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
 import UIKit
 
-class SectionsViewController: UIViewController {
+class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var course : Course! 
+    var section : Section!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        course.loadAllSections(success: {
-            self.tableView.reloadData()
-        })
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        tableView.registerNib(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
-
         
+        tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
+        
+        section.loadUnits(completion: {
+            self.tableView.reloadData()
+        })
         // Do any additional setup after loading the view.
     }
 
@@ -35,16 +34,6 @@ class SectionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showCourse" {
-            let dvc = segue.destinationViewController as! CoursePreviewViewController
-            dvc.course = course
-        }
-        if segue.identifier == "showUnits" {
-            let dvc = segue.destinationViewController as! UnitsViewController
-            dvc.section = course.sections[sender as! Int]
-        }
-    }
 
     /*
     // MARK: - Navigation
@@ -58,29 +47,26 @@ class SectionsViewController: UIViewController {
 
 }
 
-extension SectionsViewController : UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showUnits", sender: indexPath.row)
-    }
-    
+extension UnitsViewController : UITableViewDelegate {
     
 }
 
-extension SectionsViewController : UITableViewDataSource {
-    
+extension UnitsViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return course.sections.count
+        return self.section.units.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SectionTableViewCell", forIndexPath: indexPath) as! SectionTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("UnitTableViewCell", forIndexPath: indexPath) as! UnitTableViewCell
         
-        cell.initWithSection(course.sections[indexPath.row])
+        cell.initWithUnit(self.section.units[indexPath.row])
         
         return cell
     }
+    
+    
 }

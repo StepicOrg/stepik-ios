@@ -196,6 +196,9 @@ extension Course {
         get {
             return managedInstructors?.array as! [User]
         }
+        set(instructors) {
+            managedInstructors = NSOrderedSet(array: instructors)
+        }
     }
     
     func addInstructor(instructor : User) {
@@ -226,15 +229,12 @@ extension Course {
         get {
             return managedSections?.array as! [Section]
         }
+        
+        set(sections) {
+            managedSections = NSOrderedSet(array: sections)
+        }
     }
     
-    func setSections(sections: [Section]) {
-        managedSections = NSOrderedSet(array: sections)
-    }
-    
-    func setInstructors(instructors: [User]) {
-        managedInstructors = NSOrderedSet(array: instructors)
-    }
     
     func addSection(section: Section) {
         let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet

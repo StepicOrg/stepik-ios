@@ -11,11 +11,11 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class Course: NSManagedObject {
+class Course: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
     
-    convenience init(json: JSON, tabNumber: Int) {
+    convenience required init(json: JSON) {
         self.init()
         id = json["id"].intValue
         title = json["title"].stringValue
@@ -25,19 +25,17 @@ class Course: NSManagedObject {
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
         
-//        if beginDate == nil {
-//            print("begin date for \(title) is nil!!!")
-//        }
-//        
-//        if endDate == nil {
-//            print("end date for \(title) is nil!!!")
-//        }
+        //        if beginDate == nil {
+        //            print("begin date for \(title) is nil!!!")
+        //        }
+        //        
+        //        if endDate == nil {
+        //            print("end date for \(title) is nil!!!")
+        //        }
         
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
-        
-        self.tabNumber = tabNumber
-        
+                
         summary = json["summary"].stringValue
         workload = json["workload"].stringValue
         introURL = json["intro"].stringValue
@@ -48,39 +46,20 @@ class Course: NSManagedObject {
         
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
-//        getInstructors(json["instructors"])
-//        getSections(json["sections"])
     }
+
     
-//    private func getInstructors(json: JSON) {
-//        let instructorArr = json.arrayObject as! [Int] 
-////        AuthentificationManager.sharedManager.autoRefreshToken()
-//        for instructorId in instructorArr {
-//            ApiDataDownloader.sharedDownloader.getUserById(instructorId, refreshToken: false, success: {
-//                user in
-//                    self.addInstructor(user)
-//                }, failure: {
-//                error in
-//                    print("Error while downloading instructors")
-//                })
-//        }
-//    }
-    
-//    private func getSections(json: JSON) {
-//        let sectionArr = json.arrayObject as! [Int] 
-//        sectionsArray = sectionArr
-//        //        AuthentificationManager.sharedManager.autoRefreshToken()
-//        for sectionId in sectionArr {
-//            addSection(Section(id: sectionId))
-//        }
-//    }
-    
+    convenience init(json: JSON, tabNumber: Int) {
+        self.init(json: json)
+        self.tabNumber = tabNumber
+    }
+        
     func loadAllInstructors(success success: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, success: {
                 users in
                 print("instructors count inside Course class -> \(users.count)")
-                self.setInstructors(users)
+                self.instructors = users
                 CoreDataHelper.instance.save()
                 success()  
                 }, failure : {
@@ -94,7 +73,7 @@ class Course: NSManagedObject {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, success: {
                     secs in
-                    self.setSections(secs)
+                    self.sections = secs
                     CoreDataHelper.instance.save()
                     success()  
                 }, failure : {

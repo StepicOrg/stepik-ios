@@ -11,12 +11,12 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class Section: NSManagedObject {
+class Section: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
 
     
-    convenience init(json: JSON){
+    convenience required init(json: JSON){
         self.init()
         initialize(json)
     }
@@ -29,6 +29,8 @@ class Section: NSManagedObject {
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
+        
+        unitsArray = json["units"].arrayObject as! [Int]
     }
     
     class func getSections(id: Int) throws -> [Section] {
@@ -51,6 +53,43 @@ class Section: NSManagedObject {
         catch {
             throw FetchError.RequestExecution
         }
+    }
+    
+    func loadUnits(completion completion: (Void -> Void)) {
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, success: {
+                newUnits in 
+                self.units = newUnits
+                self.loadLessonsForUnits(completion: completion)
+                }, failure: {
+                    error in
+                    print("Error while downloading units")
+            })
+        }) 
+    }
+
+    func loadLessonsForUnits(completion completion: (Void -> Void)) {
+        var lessonIds : [Int] = []
+        for unit in units {
+            lessonIds += [unit.lessonId]
+        }
+        
+        ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: [], success: {
+            lessons in
+            for i in 0 ..< self.units.count {
+                if let delLesson = self.units[i].lesson {
+                    CoreDataHelper.instance.context.deleteObject(delLesson)
+                }
+                self.units[i].lesson = lessons[i]
+            }
+            
+            CoreDataHelper.instance.save()
+    
+            completion()
+        }, failure: {
+            error in
+            print("Error while downloading units")
+        })
     }
     
 //    func loadIfNotLoaded(success success : (Void -> Void)) {
