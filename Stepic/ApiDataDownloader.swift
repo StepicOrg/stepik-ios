@@ -116,45 +116,6 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-//    func getUsersByIds(ids: [Int], deleteUsers : [User], success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) {
-//        
-//        let headers : [String : String] = [:] 
-//        
-//        var params : [String : NSObject] = [:]
-//        params["access_token"] = StepicAPI.shared.token?.accessToken
-//        
-//        let userString = constructIdsString(array: ids)
-//        if userString == "" {
-//            success?([])
-//            return
-//        }
-//        
-//        Alamofire.request(.GET, "https://stepic.org/api/users?" + userString, parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-//            (_, _, json, error) in
-//            
-//            if let e = error {
-//                failure(error: e)
-//                return
-//            }
-//            
-//            // print(json)
-//            // print(json["users"])
-//            
-//            for user in deleteUsers {
-//                CoreDataHelper.instance.context.deleteObject(user)
-//            }
-//            CoreDataHelper.instance.save()
-//            
-//            var newUsers : [User] = []
-//            for userJSON in json["users"].arrayValue {
-//                newUsers += [User(json: userJSON)]
-//            }
-//            
-//            success?(newUsers) 
-//
-//        })
-//    }
-    
     private func constructIdsString(array arr: [Int]) -> String {
         var result = ""
         for element in arr {
@@ -167,84 +128,7 @@ class ApiDataDownloader: NSObject {
     }
     
         
-//    func getSectionsByIds(ids: [Int], existingSections : [Section], success : (([Section]) -> Void)?, failure : (error : ErrorType) -> Void) {
-//        let headers : [String : String] = [:]
-//        var params : [String : NSObject] = [:]
-//        
-//        params["access_token"] = StepicAPI.shared.token?.accessToken
-//        
-//        let sectionString = constructIdsString(array: ids)
-//        if sectionString == "" {
-//            success?([])
-//            return
-//        }
-//        
-//        Alamofire.request(.GET, "https://stepic.org/api/sections?" + sectionString, parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-//            (_, _, json, error) in
-//            
-//            if let e = error {
-//                failure(error: e)
-//                return
-//            }
-//            
-//            // print(json)
-//            
-////            print(json["sections"])
-////            print("existing sections count -> \(existingSections.count)")
-//            for section in existingSections {
-//                CoreDataHelper.instance.context.deleteObject(section)
-//            }
-//            CoreDataHelper.instance.save()
-//            
-//            var newSections : [Section] = []
-//            for sectionJSON in json["sections"].arrayValue {
-//                newSections += [Section(json: sectionJSON)]
-//            }
-//            
-//            success?(newSections) 
-//        })
-//        
-//    }
-    
-//    func getUnitsByIds(ids: [Int], deleteUnits : [Unit], success : (([Unit]) -> Void)?, failure : (error : ErrorType) -> Void) {
-//        
-//        let headers : [String : String] = [:]
-//        var params : [String : NSObject] = [:]
-//        
-//        params["access_token"] = StepicAPI.shared.token?.accessToken
-//        
-//        let idString = constructIdsString(array: ids)
-//        if idString == "" {
-//            success?([])
-//            return
-//        }
-//        
-//        Alamofire.request(.GET, "https://stepic.org/api/units?" + idString, parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-//            (_, _, json, error) in
-//            
-//            if let e = error {
-//                failure(error: e)
-//                return
-//            }
-//            
-//            // print(json)
-//            
-//            //            print(json["sections"])
-//            //            print("existing sections count -> \(existingSections.count)")
-//            for unit in deleteUnits {
-//                CoreDataHelper.instance.context.deleteObject(unit)
-//            }
-//            CoreDataHelper.instance.save()
-//            
-//            
-//            var newUnits : [Unit] = []
-//            for unitJSON in json["units"].arrayValue {
-//                newUnits += [Unit(json: unitJSON)]
-//            }
-//            
-//            success?(newUnits) 
-//        })
-//    }
+
     
     func getUsersByIds(ids: [Int], deleteUsers : [User], success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) {
         getObjectsByIds(requestString: "users", ids: ids, deleteObjects: deleteUsers, success: success, failure: failure)

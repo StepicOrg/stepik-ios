@@ -925,11 +925,12 @@
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
                         <outlet property="tableView" destination="mgq-Q2-Hep" id="8cY-TB-KvR"/>
+                        <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="LaP-cg-j2K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cds-4V-qU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3327" y="390"/>
+            <point key="canvasLocation" x="3327" y="474"/>
         </scene>
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
@@ -990,7 +991,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1312,8 +1313,8 @@
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ste-Lr-Bip"/>
         <segue reference="qb1-8x-83E"/>
+        <segue reference="LaP-cg-j2K"/>
         <segue reference="Ymm-um-wgY"/>
     </inferredMetricsTieBreakers>
 </document>

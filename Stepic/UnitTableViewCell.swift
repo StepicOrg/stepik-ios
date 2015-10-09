@@ -24,6 +24,7 @@ class UnitTableViewCell: UITableViewCell {
     }
     
     func initWithUnit(unit: Unit) {
-        titleLabel.text = "\(unit.position). \(unit.lesson?.title)"
+        let defaultTitle = "Ooops, somethig got wrong"
+        titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
     }
 }

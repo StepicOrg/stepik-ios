@@ -35,7 +35,11 @@ class GeneralInfoTableViewCell: UITableViewCell {
     
     func initWithCourse(course: Course) {
         courseNameLabel.text = course.title
+        if course.enrolled {
+            joinButton.setDisabledJoined()
+        }
     }
     
 
 }
+

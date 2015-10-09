@@ -22,6 +22,7 @@ class CoursePreviewViewController: UIViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         
+        print("course enrollment status -> \(course?.enrolled)")
         // Do any additional setup after loading the view.
     }
 
@@ -31,15 +32,19 @@ class CoursePreviewViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSections" {
+            let dvc = segue.destinationViewController as! SectionsViewController
+            dvc.course = course
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
     
     @IBAction func displayingSegmentedControlValueChanged(sender: UISegmentedControl) {
         displayingInfoType = sender.selectedSegmentIndex == 0 ? .Overview : .Detailed
@@ -48,7 +53,15 @@ class CoursePreviewViewController: UIViewController {
     }
     
     @IBAction func joinButtonPressed(sender: UIButton) {
-        
+        print("join pressed")
+        if let c = course {
+            AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
+                sender.setDisabledJoined()
+                self.course?.enrolled = true
+                CoreDataHelper.instance.save()
+                self.performSegueWithIdentifier("showSections", sender: nil)
+            }) 
+        }
     }
     
     

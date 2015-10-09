@@ -15,4 +15,12 @@ extension UIButton {
         self.layer.borderColor = borderColor.CGColor;
         self.clipsToBounds = true
     }
+    
+    func setDisabledJoined() {
+        let attributedTitle = NSAttributedString(string: Constants.sharedConstants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.grayColor()])
+        setAttributedTitle(attributedTitle, forState: .Normal )
+        enabled = false
+        layer.borderColor = UIColor.grayColor().CGColor
+        self.titleLabel?.textColor = UIColor.grayColor()
+    }
 }

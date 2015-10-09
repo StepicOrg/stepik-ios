@@ -25,14 +25,6 @@ class Course: NSManagedObject, JSONInitializable {
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
         
-        //        if beginDate == nil {
-        //            print("begin date for \(title) is nil!!!")
-        //        }
-        //        
-        //        if endDate == nil {
-        //            print("end date for \(title) is nil!!!")
-        //        }
-        
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
                 

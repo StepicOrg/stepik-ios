@@ -194,7 +194,7 @@ extension Course {
     
     var instructors : [User] {
         get {
-            return managedInstructors?.array as! [User]
+            return (managedInstructors?.array as? [User]) ?? []
         }
         set(instructors) {
             managedInstructors = NSOrderedSet(array: instructors)
@@ -227,7 +227,7 @@ extension Course {
     
     var sections : [Section] {
         get {
-            return managedSections?.array as! [Section]
+            return (managedSections?.array as? [Section]) ?? []
         }
         
         set(sections) {

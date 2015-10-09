@@ -110,4 +110,30 @@ class AuthentificationManager : NSObject {
         })
     }
     
+    func joinCourseWithId(courseId: Int, success : (Void -> Void)) {
+        let headers : [String : String] = [
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+        ]
+        
+        let params : [String : AnyObject] = [
+            "enrollment" : [
+                "course" : "\(courseId)"
+            ]
+        ]
+        
+//        params["access_token"] = StepicAPI.shared.token!.accessToken
+        
+        Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            (_, _, json, error) in
+            
+            if let _ = error {
+                return
+            }
+            
+//            print(json)
+            success()
+        })
+    }
+    
 }

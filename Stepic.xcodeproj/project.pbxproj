@@ -62,7 +62,7 @@
 		08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */; };
 		08DE942D1B8C58AC00D278AB /* StepicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE942C1B8C58AC00D278AB /* StepicTests.swift */; };
 		08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */; };
-		08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIExtensions.swift */; };
+		08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
 		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -140,7 +140,7 @@
 		08DE942B1B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE942C1B8C58AC00D278AB /* StepicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicTests.swift; sourceTree = "<group>"; };
 		08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		08DE94381B8E3FCE00D278AB /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 		8860CAAA0935A0F996492A1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +166,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
+				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +239,6 @@
 				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
 				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
 				0885F84B1BA8376D00F2A188 /* Network */,
-				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */,
 			);
 			name = Model;
@@ -239,7 +247,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				08CA59D71BBC0067008DC44D /* Course */,
+				08CA59D71BBC0067008DC44D /* Course preview */,
 				08B361061BB2E3C100090843 /* User Preferences */,
 				08687BAB1BACB41F00F5BDE1 /* Generic */,
 				0828FF841BC81EA9000AFEA7 /* Registration & Sign in */,
@@ -279,7 +287,7 @@
 			name = "User Preferences";
 			sourceTree = "<group>";
 		};
-		08CA59D71BBC0067008DC44D /* Course */ = {
+		08CA59D71BBC0067008DC44D /* Course preview */ = {
 			isa = PBXGroup;
 			children = (
 				08CA59DE1BBD2563008DC44D /* Cell classes */,
@@ -287,7 +295,7 @@
 				08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */,
 				08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */,
 			);
-			name = Course;
+			name = "Course preview";
 			sourceTree = "<group>";
 		};
 		08CA59DE1BBD2563008DC44D /* Cell classes */ = {
@@ -328,6 +336,7 @@
 			children = (
 				0885F84A1BA8375C00F2A188 /* Controllers */,
 				0885F8491BA8374000F2A188 /* Model */,
+				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				08DE94161B8C58AC00D278AB /* AppDelegate.swift */,
 				08DE94181B8C58AC00D278AB /* ViewController.swift */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
@@ -370,8 +379,7 @@
 		08F204931BB0157F00D080C0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				08DE94381B8E3FCE00D278AB /* UIExtensions.swift */,
-				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
+				08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */,
 				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
 				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
 				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
@@ -592,7 +600,7 @@
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* ImageViewExtension.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
-				08DE94391B8E3FCE00D278AB /* UIExtensions.swift in Sources */,
+				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */,
