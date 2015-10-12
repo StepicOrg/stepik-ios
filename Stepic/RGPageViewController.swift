@@ -198,7 +198,8 @@ class RGPageViewController: UIViewController, UIPageViewControllerDataSource, UI
         
         // remove hairline image in navigation bar if attached to top
         if let navController = navigationController where !navController.navigationBar.hidden {
-            barTop = 64
+            barTop = 0//64
+            //CHANGE WAS MADE HERE
             
             navController.navigationBar.hideHairline()
         }

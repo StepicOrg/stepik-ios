@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StepsViewController: RGPageViewController, RGPageViewControllerDelegate {
+class StepsViewController: RGPageViewController {
 
     var lesson : Lesson?
     
@@ -17,6 +17,10 @@ class StepsViewController: RGPageViewController, RGPageViewControllerDelegate {
 
         datasource = self
         delegate = self
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
+        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         
         lesson?.loadSteps(completion: {
             self.reloadData()
@@ -29,6 +33,63 @@ class StepsViewController: RGPageViewController, RGPageViewControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    override var pagerOrientation: UIPageViewControllerNavigationOrientation {
+        get {
+            return .Horizontal
+        }
+    }
+    
+    override var tabbarPosition: RGTabbarPosition {
+        get {
+            return .Top
+        }
+    }
+    
+    override var tabbarStyle: RGTabbarStyle {
+        get {
+            return RGTabbarStyle.Solid
+        }
+    }
+    
+    override var tabIndicatorColor: UIColor {
+        get {
+            return UIColor.whiteColor()
+        }
+    }
+    
+    override var barTintColor: UIColor? {
+        get {
+            return UIColor.stepicGreenColor()
+        }
+    }
+    
+    override var tabStyle: RGTabStyle {
+        get {
+            return .InactiveFaded
+        }
+    }
+    
+    override var tabbarWidth: CGFloat {
+        get {
+            return 44.0
+        }
+    }
+    
+    override var tabbarHeight : CGFloat {
+        get {
+            return 44.0
+        }
+    }
+    
+    override var tabMargin: CGFloat {
+        get {
+            return 16.0
+        }
+    }
+    
+    
     
 
     /*
@@ -44,6 +105,7 @@ class StepsViewController: RGPageViewController, RGPageViewControllerDelegate {
 }
 
 
+
 extension StepsViewController : RGPageViewControllerDataSource {
     func numberOfPagesForViewController(pageViewController: RGPageViewController) -> Int {
         return lesson?.steps.count ?? 0
@@ -54,7 +116,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
         
         tabView.font = UIFont.systemFontOfSize(17)
         tabView.text = lesson?.steps[index].block.name
-        
+        tabView.textColor = UIColor.whiteColor()
         tabView.sizeToFit()
         return tabView
     }
@@ -64,4 +126,19 @@ extension StepsViewController : RGPageViewControllerDataSource {
         stepController.stepId = index
         return stepController
     } 
+}
+
+extension StepsViewController : RGPageViewControllerDelegate {
+    func heightForTabAtIndex(index: Int) -> CGFloat {
+        return 44.0 
+    }
+    
+    // use this to set a custom width for a tab
+    func widthForTabAtIndex(index: Int) -> CGFloat {
+        let tabSize = lesson?.steps[index].block.name.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(17)])
+        if let size = tabSize {
+            return size.width + 32
+        }
+        return 150
+    }
 }
