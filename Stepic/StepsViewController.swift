@@ -85,7 +85,7 @@ class StepsViewController: RGPageViewController {
     
     override var tabMargin: CGFloat {
         get {
-            return 16.0
+            return 8.0
         }
     }
     
@@ -112,13 +112,17 @@ extension StepsViewController : RGPageViewControllerDataSource {
     }
     
     func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
-        let tabView = UILabel()
-        
-        tabView.font = UIFont.systemFontOfSize(17)
-        tabView.text = lesson?.steps[index].block.name
-        tabView.textColor = UIColor.whiteColor()
-        tabView.sizeToFit()
-        return tabView
+        let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        iv.setImageWithColor(image: lesson?.steps[index].block.image ?? Constants.sharedConstants.placeholderImage, color: UIColor.whiteColor())
+//        iv.image = lesson?.steps[index].block.image//Constants.sharedConstants.placeholderImage
+        iv.contentMode = UIViewContentMode.ScaleAspectFit
+//        let tabView = UILabel()
+//        
+//        tabView.font = UIFont.systemFontOfSize(17)
+//        tabView.text = lesson?.steps[index].block.name
+//        tabView.textColor = UIColor.whiteColor()
+//        tabView.sizeToFit()
+        return iv
     }
     
     func viewControllerForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIViewController? {
@@ -135,10 +139,11 @@ extension StepsViewController : RGPageViewControllerDelegate {
     
     // use this to set a custom width for a tab
     func widthForTabAtIndex(index: Int) -> CGFloat {
-        let tabSize = lesson?.steps[index].block.name.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(17)])
-        if let size = tabSize {
-            return size.width + 32
-        }
-        return 150
+        return 44.0
+//        let tabSize = lesson?.steps[index].block.name.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(17)])
+//        if let size = tabSize {
+//            return size.width + 32
+//        }
+//        return 150
     }
 }

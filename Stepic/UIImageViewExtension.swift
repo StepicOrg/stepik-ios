@@ -16,4 +16,10 @@ extension UIImageView {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
+    
+    func setImageWithColor(image i: UIImage, color: UIColor) {
+        self.image = i
+//        self.image = i.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+//        self.tintColor = color
+    }
 }

@@ -71,6 +71,16 @@ extension Block {
             return BlockTypes(rawValue: name) ?? .Text
         }
     }
+    
+    var image : UIImage {
+        var resultName = "ic_theory"
+        switch (name) {
+        case "text" : resultName = "ic_theory"
+        default: resultName = "ic_\(name)"
+        }
+        
+        return UIImage(named: resultName)!
+    }
 }
 
 enum BlockTypes : String {

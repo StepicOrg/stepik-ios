@@ -34,6 +34,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, success: {
                 newSteps in 
                 self.steps = newSteps
+                CoreDataHelper.instance.save()
                 completion()
                 }, failure: {
                     error in
