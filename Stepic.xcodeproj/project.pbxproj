@@ -30,6 +30,9 @@
 		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; settings = {ASSET_TAGS = (); }; };
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; settings = {ASSET_TAGS = (); }; };
+		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0841569F1BCC0B31006B8C73 /* StepContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569E1BCC0B31006B8C73 /* StepContentViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; settings = {ASSET_TAGS = (); }; };
@@ -107,6 +110,9 @@
 		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
+		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		0841569E1BCC0B31006B8C73 /* StepContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepContentViewController.swift; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -233,6 +239,16 @@
 			name = Units;
 			sourceTree = "<group>";
 		};
+		084156981BCC08F9006B8C73 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
+				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
+				0841569E1BCC0B31006B8C73 /* StepContentViewController.swift */,
+			);
+			name = Steps;
+			sourceTree = "<group>";
+		};
 		08687BAB1BACB41F00F5BDE1 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +275,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				084156981BCC08F9006B8C73 /* Steps */,
 				08CA59D71BBC0067008DC44D /* Course preview */,
 				08B361061BB2E3C100090843 /* User Preferences */,
 				08687BAB1BACB41F00F5BDE1 /* Generic */,
@@ -592,6 +609,8 @@
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
+				0841569F1BCC0B31006B8C73 /* StepContentViewController.swift in Sources */,
+				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
@@ -604,6 +623,7 @@
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,

@@ -150,7 +150,7 @@ class ApiDataDownloader: NSObject {
         getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, success: success, failure: failure)
     }
     
-    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, ids: [Int], deleteObjects : [T], success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
+    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
@@ -166,6 +166,10 @@ class ApiDataDownloader: NSObject {
         Alamofire.request(.GET, "https://stepic.org/api/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
+            if printOutput { 
+                print(json)
+            }
+            
             if let e = error {
                 failure(error: e)
                 return
@@ -175,7 +179,6 @@ class ApiDataDownloader: NSObject {
                 CoreDataHelper.instance.context.deleteObject(object as! NSManagedObject)
             }
             CoreDataHelper.instance.save()
-            
             
             var newObjects : [T] = []
             for objectJSON in json[requestString].arrayValue {

@@ -35,20 +35,26 @@ class UnitsViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showSteps" {
+            let dvc = segue.destinationViewController as! StepsViewController
+            dvc.lesson = section.units[sender as! Int].lesson
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
 
 extension UnitsViewController : UITableViewDelegate {
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("showSteps", sender: indexPath.row)
+    }
 }
 
 extension UnitsViewController : UITableViewDataSource {
