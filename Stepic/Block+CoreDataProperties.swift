@@ -21,6 +21,14 @@ extension Block {
     
     @NSManaged var managedStep: Step?
 
+    class var entity : NSEntityDescription {
+        return NSEntityDescription.entityForName("Block", inManagedObjectContext: CoreDataHelper.instance.context)!
+    }
+    
+    convenience init() {
+        self.init(entity: Block.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+    }
+    
     var name : String {
         get {
             return managedName ?? "no name"
