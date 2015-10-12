@@ -24,5 +24,21 @@ class Lesson: NSManagedObject, JSONInitializable {
         title = json["title"].stringValue
         isFeatured = json["is_featured"].boolValue
         isPublic = json["is_public"].boolValue
+        
+        stepsArray = json["steps"].arrayObject as! [Int]
+
+    }
+    
+    func loadSteps(completion completion: (Void -> Void)) {
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, success: {
+                newSteps in 
+                self.steps = newSteps
+                completion()
+                }, failure: {
+                    error in
+                    print("Error while downloading units")
+            })
+        }) 
     }
 }

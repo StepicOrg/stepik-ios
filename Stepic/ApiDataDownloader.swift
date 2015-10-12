@@ -146,6 +146,10 @@ class ApiDataDownloader: NSObject {
         getObjectsByIds(requestString: "lessons", ids: ids, deleteObjects: deleteLessons, success: success, failure: failure)
     }
     
+    func getStepsByIds(ids: [Int], deleteSteps : [Step], success : (([Step]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, success: success, failure: failure)
+    }
+    
     private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, ids: [Int], deleteObjects : [T], success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:]

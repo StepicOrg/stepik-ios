@@ -26,6 +26,10 @@
 		0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; settings = {ASSET_TAGS = (); }; };
+		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; settings = {ASSET_TAGS = (); }; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; settings = {ASSET_TAGS = (); }; };
@@ -99,6 +103,10 @@
 		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
+		0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -178,11 +186,14 @@
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */,
+				084156901BCBFFBD006B8C73 /* Block.swift */,
+				084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */,
+				084156921BCBFFBD006B8C73 /* Step.swift */,
 				0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */,
 				0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */,
 				0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */,
 				0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */,
-				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
 				0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */,
 				0828FF6D1BC5D177000AFEA7 /* Section.swift */,
 				08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */,
@@ -234,6 +245,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
 				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
@@ -571,6 +583,7 @@
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
+				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
@@ -591,11 +604,14 @@
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
+				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */,
+				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* ImageViewExtension.swift in Sources */,

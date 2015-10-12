@@ -19,6 +19,10 @@ extension Lesson {
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedTitle: String?
 
+    @NSManaged var managedStepsArray : NSObject?
+
+    @NSManaged var managedSteps : NSOrderedSet?
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -60,6 +64,25 @@ extension Lesson {
         }
         get {
             return managedPublic?.boolValue ?? false
+        }
+    }
+    
+    var stepsArray : [Int] {
+        set(value){
+            self.managedStepsArray = value
+        }
+        get {
+            return (self.managedStepsArray as? [Int]) ?? []
+        }
+
+    }
+    
+    var steps : [Step] {
+        get {
+            return (managedSteps?.array as? [Step]) ?? []
+        }
+        set(value) {
+            managedSteps = NSOrderedSet(array: value)
         }
     }
 }
