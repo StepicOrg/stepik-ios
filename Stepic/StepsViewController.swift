@@ -126,9 +126,15 @@ extension StepsViewController : RGPageViewControllerDataSource {
     }
     
     func viewControllerForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIViewController? {
-        let stepController = storyboard?.instantiateViewControllerWithIdentifier("StepContentViewController") as! StepContentViewController
-        stepController.stepId = index
-        return stepController
+        if lesson!.steps[index].block.name == "video" {
+            let stepController = storyboard?.instantiateViewControllerWithIdentifier("VideoStepViewController") as! VideoStepViewController
+            stepController.video = lesson!.steps[index].block.video!
+            return stepController
+        } else {
+            let stepController = storyboard?.instantiateViewControllerWithIdentifier("StepContentViewController") as! StepContentViewController
+            stepController.stepId = index
+            return stepController
+        }
     } 
 }
 

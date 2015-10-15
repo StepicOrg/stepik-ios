@@ -17,7 +17,8 @@ extension Block {
     @NSManaged var managedAnimation: String?
     @NSManaged var managedName: String?
     @NSManaged var managedText: String?
-    @NSManaged var managedVideo: String?
+    
+    @NSManaged var managedVideo: Video?
     
     @NSManaged var managedStep: Step?
 
@@ -47,7 +48,7 @@ extension Block {
         }
     }
     
-    var video : String? {
+    var video : Video? {
         get {
             return managedVideo
         }

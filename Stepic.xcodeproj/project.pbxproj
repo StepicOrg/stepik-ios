@@ -45,6 +45,20 @@
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* StepicAPI.swift */; };
 		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
+		089142361BCE97870000BCB0 /* MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0891422E1BCE97870000BCB0 /* MLInputDodger.m */; settings = {ASSET_TAGS = (); }; };
+		089142371BCE97870000BCB0 /* MLInputDodgerRetractView.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */; settings = {ASSET_TAGS = (); }; };
+		089142381BCE97870000BCB0 /* UIView+MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */; settings = {ASSET_TAGS = (); }; };
+		089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */; settings = {ASSET_TAGS = (); }; };
+		0891423A1BCE97870000BCB0 /* MLInputDodger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 089142351BCE97870000BCB0 /* MLInputDodger.bundle */; settings = {ASSET_TAGS = (); }; };
+		089142411BCEA0280000BCB0 /* MLInputDodger.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */; settings = {ASSET_TAGS = (); }; };
+		089142421BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */; settings = {ASSET_TAGS = (); }; };
+		089142431BCEA0280000BCB0 /* MLInputDodger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */; settings = {ASSET_TAGS = (); }; };
+		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		089142491BCEE4EF0000BCB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; settings = {ASSET_TAGS = (); }; };
+		0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; settings = {ASSET_TAGS = (); }; };
+		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -72,7 +86,7 @@
 		08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
-		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +139,27 @@
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* StepicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicAPI.swift; sourceTree = "<group>"; };
 		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
+		0891422D1BCE97870000BCB0 /* MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInputDodger.h; sourceTree = "<group>"; };
+		0891422E1BCE97870000BCB0 /* MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInputDodger.m; sourceTree = "<group>"; };
+		0891422F1BCE97870000BCB0 /* MLInputDodgerRetractView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInputDodgerRetractView.h; sourceTree = "<group>"; };
+		089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInputDodgerRetractView.m; sourceTree = "<group>"; };
+		089142311BCE97870000BCB0 /* UIView+MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MLInputDodger.h"; sourceTree = "<group>"; };
+		089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MLInputDodger.m"; sourceTree = "<group>"; };
+		089142331BCE97870000BCB0 /* UIScrollView+MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MLInputDodger.h"; sourceTree = "<group>"; };
+		089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MLInputDodger.m"; sourceTree = "<group>"; };
+		089142351BCE97870000BCB0 /* MLInputDodger.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLInputDodger.bundle; sourceTree = "<group>"; };
+		0891423B1BCEA0280000BCB0 /* MLInputDodger.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MLInputDodger.modulemap; sourceTree = "<group>"; };
+		0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MLInputDodger.xcconfig; sourceTree = "<group>"; };
+		0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "MLInputDodger-Private.xcconfig"; sourceTree = "<group>"; };
+		0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLInputDodger-dummy.m"; sourceTree = "<group>"; };
+		0891423F1BCEA0280000BCB0 /* MLInputDodger-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLInputDodger-prefix.pch"; sourceTree = "<group>"; };
+		089142401BCEA0280000BCB0 /* MLInputDodger-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLInputDodger-umbrella.h"; sourceTree = "<group>"; };
+		089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		089142451BCEE4EE0000BCB0 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoURL+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
+		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
+		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
 		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -192,6 +227,10 @@
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */,
+				089142451BCEE4EE0000BCB0 /* Video.swift */,
+				089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */,
+				089142471BCEE4EE0000BCB0 /* VideoURL.swift */,
 				0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */,
 				084156901BCBFFBD006B8C73 /* Block.swift */,
 				084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */,
@@ -242,6 +281,7 @@
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
 				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
 				0841569E1BCC0B31006B8C73 /* StepContentViewController.swift */,
@@ -306,6 +346,37 @@
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 			);
 			name = Courses;
+			sourceTree = "<group>";
+		};
+		089142231BCE96E70000BCB0 /* MLInputDodger */ = {
+			isa = PBXGroup;
+			children = (
+				0891423B1BCEA0280000BCB0 /* MLInputDodger.modulemap */,
+				0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */,
+				0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */,
+				0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */,
+				0891423F1BCEA0280000BCB0 /* MLInputDodger-prefix.pch */,
+				089142401BCEA0280000BCB0 /* MLInputDodger-umbrella.h */,
+				0891422D1BCE97870000BCB0 /* MLInputDodger.h */,
+				0891422E1BCE97870000BCB0 /* MLInputDodger.m */,
+				0891422F1BCE97870000BCB0 /* MLInputDodgerRetractView.h */,
+				089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */,
+				089142311BCE97870000BCB0 /* UIView+MLInputDodger.h */,
+				089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */,
+				089142331BCE97870000BCB0 /* UIScrollView+MLInputDodger.h */,
+				089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */,
+				089142351BCE97870000BCB0 /* MLInputDodger.bundle */,
+			);
+			name = MLInputDodger;
+			sourceTree = "<group>";
+		};
+		0891424C1BCEED6F0000BCB0 /* Step Content Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
+				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
+			);
+			name = "Step Content Controllers";
 			sourceTree = "<group>";
 		};
 		08B361061BB2E3C100090843 /* User Preferences */ = {
@@ -420,6 +491,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				089142231BCE96E70000BCB0 /* MLInputDodger */,
 				013481E40EB75169773E2F21 /* Pods.framework */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 			);
@@ -522,10 +594,13 @@
 			files = (
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
+				089142421BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
+				0891423A1BCE97870000BCB0 /* MLInputDodger.bundle in Resources */,
+				089142411BCEA0280000BCB0 /* MLInputDodger.xcconfig in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 			);
@@ -595,8 +670,12 @@
 			files = (
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
+				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
+				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
+				089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
@@ -608,6 +687,7 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
+				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				0841569F1BCC0B31006B8C73 /* StepContentViewController.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
@@ -619,8 +699,10 @@
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				089142361BCE97870000BCB0 /* MLInputDodger.m in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
+				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
@@ -630,6 +712,7 @@
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
+				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
@@ -637,12 +720,15 @@
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
+				089142431BCEA0280000BCB0 /* MLInputDodger-dummy.m in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
+				089142381BCE97870000BCB0 /* UIView+MLInputDodger.m in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
+				089142371BCE97870000BCB0 /* MLInputDodgerRetractView.m in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
 				08CA59E21BBD25B4008DC44D /* GeneralInfoTableViewCell.swift in Sources */,

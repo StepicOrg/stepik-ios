@@ -20,7 +20,18 @@ class SignInViewController: UIViewController {
         
         errorLabel.hidden = true
         // Do any additional setup after loading the view.
+        
+        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+        self.view.addGestureRecognizer(tapG)
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.view.shiftHeightAsDodgeViewForMLInputDodger = 80.0;
+        self.view.registerAsDodgeViewForMLInputDodger()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +68,9 @@ class SignInViewController: UIViewController {
         }
     }
     
-
+    func tap() {
+        self.view.endEditing(true)
+    }
     
     /*
     // MARK: - Navigation

@@ -4,8 +4,8 @@
         <attribute name="managedAnimation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedText" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="managedVideo" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedBlock" inverseEntity="Step" syncable="YES"/>
+        <relationship name="managedVideo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Video" inverseName="managedBlock" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName=".Course" syncable="YES">
         <attribute name="managedAudience" optional="YES" attributeType="String" syncable="YES"/>
@@ -79,6 +79,18 @@
         <attribute name="managedProfile" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
     </entity>
+    <entity name="Video" representedClassName=".Video" syncable="YES">
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="managedVideo" inverseEntity="Block" syncable="YES"/>
+        <relationship name="managedURLs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="VideoURL" inverseName="managedVideo" inverseEntity="VideoURL" syncable="YES"/>
+    </entity>
+    <entity name="VideoURL" representedClassName=".VideoURL" syncable="YES">
+        <attribute name="managedQuality" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedVideo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="managedURLs" inverseEntity="Video" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="345"/>
@@ -87,5 +99,7 @@
         <element name="Step" positionX="-45" positionY="135" width="128" height="120"/>
         <element name="Unit" positionX="-45" positionY="144" width="128" height="180"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
+        <element name="Video" positionX="-45" positionY="135" width="128" height="120"/>
+        <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
     </elements>
 </model>

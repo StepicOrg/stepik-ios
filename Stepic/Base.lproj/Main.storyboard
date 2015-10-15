@@ -1040,6 +1040,54 @@
             </objects>
             <point key="canvasLocation" x="4782" y="1260"/>
         </scene>
+        <!--Video Step View Controller-->
+        <scene sceneID="LFg-le-xVl">
+            <objects>
+                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y0P-ZE-fOO"/>
+                        <viewControllerLayoutGuide type="bottom" id="SdS-Qz-hnr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eOu-jp-hBO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qo3-wV-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4155" y="1930"/>
+        </scene>
+        <!--Web Step View Controller-->
+        <scene sceneID="Iip-iO-Bhn">
+            <objects>
+                <viewController id="MzH-NU-yyp" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f9i-ks-CuU"/>
+                        <viewControllerLayoutGuide type="bottom" id="cls-Jl-RZZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0uX-EE-d78">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh8-ur-IoY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="stepWebView" destination="Bh8-ur-IoY" id="h8L-HI-MzB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fh1-8B-1lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4155" y="2607"/>
+        </scene>
         <!--Step Content View Controller-->
         <scene sceneID="b5F-gH-z2n">
             <objects>
@@ -1056,7 +1104,7 @@
                                 <rect key="frame" x="279" y="289" width="42" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
