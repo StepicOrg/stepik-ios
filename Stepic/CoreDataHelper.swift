@@ -47,4 +47,20 @@ class CoreDataHelper: NSObject {
             print("SAVING ERROR")
         }
     }
+    
+    private var objectsToDelete : [NSManagedObject] = []
+    
+    func deleteBeforeAppFinish(object: NSManagedObject) {
+        if !objectsToDelete.contains(object) {
+            objectsToDelete += [object]
+        }
+    }
+    
+    func deleteAllPending() {
+        for obj in objectsToDelete {
+            CoreDataHelper.instance.context.deleteObject(obj)
+        }
+        CoreDataHelper.instance.save()
+    }
+    
 }

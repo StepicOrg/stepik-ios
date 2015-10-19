@@ -71,6 +71,7 @@ extension Lesson {
         set(value){
             self.managedStepsArray = value
         }
+        
         get {
             return (self.managedStepsArray as? [Int]) ?? []
         }
@@ -81,6 +82,7 @@ extension Lesson {
         get {
             return (managedSteps?.array as? [Step]) ?? []
         }
+        
         set(value) {
             managedSteps = NSOrderedSet(array: value)
         }

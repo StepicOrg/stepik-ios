@@ -66,7 +66,7 @@ class ApiDataDownloader: NSObject {
             var courses : [Course] = []
             
             
-            //NOT AN OOP THING, FIX IT SOMEHOW IN THE FUTURE
+            //TODO: NOT AN OOP THING, FIX IT SOMEHOW IN THE FUTURE
             if meta.page == 1 {
                 Course.deleteAll(tabNumber)
             }
@@ -176,9 +176,8 @@ class ApiDataDownloader: NSObject {
             }
             
             for object in deleteObjects {
-                CoreDataHelper.instance.context.deleteObject(object as! NSManagedObject)
+                CoreDataHelper.instance.deleteBeforeAppFinish(object as! NSManagedObject)
             }
-            CoreDataHelper.instance.save()
             
             var newObjects : [T] = []
             for objectJSON in json[requestString].arrayValue {

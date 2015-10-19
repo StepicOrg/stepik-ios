@@ -113,8 +113,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
     
     func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
         let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        iv.setImageWithColor(image: lesson?.steps[index].block.image ?? Constants.sharedConstants.placeholderImage, color: UIColor.whiteColor())
-//        iv.image = lesson?.steps[index].block.image//Constants.sharedConstants.placeholderImage
+        iv.setImageWithColor(image: lesson?.steps[index].block.image ?? Constants.placeholderImage, color: UIColor.whiteColor())
+//        iv.image = lesson?.steps[index].block.image//Constants.placeholderImage
         iv.contentMode = UIViewContentMode.ScaleAspectFit
 //        let tabView = UILabel()
 //        

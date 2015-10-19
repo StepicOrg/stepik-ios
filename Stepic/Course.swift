@@ -17,17 +17,21 @@ class Course: NSManagedObject, JSONInitializable {
     
     convenience required init(json: JSON) {
         self.init()
+        initialize(json)
+    }
+
+    func initialize(json: JSON) {
         id = json["id"].intValue
         title = json["title"].stringValue
         courseDescription = json["description"].stringValue
-        coverURLString = Constants.sharedConstants.stepicURLString + json["cover"].stringValue
+        coverURLString = Constants.stepicURLString + json["cover"].stringValue
         
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
         
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
-                
+        
         summary = json["summary"].stringValue
         workload = json["workload"].stringValue
         introURL = json["intro"].stringValue
@@ -39,7 +43,6 @@ class Course: NSManagedObject, JSONInitializable {
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
     }
-
     
     convenience init(json: JSON, tabNumber: Int) {
         self.init(json: json)
@@ -109,9 +112,8 @@ class Course: NSManagedObject, JSONInitializable {
         do {
             let c = try getCourses(tabNumber: tabNumber)
             for course in c {
-                CoreDataHelper.instance.context.deleteObject(course)
+                CoreDataHelper.instance.deleteBeforeAppFinish(course)
             }
-            CoreDataHelper.instance.save()
         }
         catch {
             print("Error while deleting course objects")

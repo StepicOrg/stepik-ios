@@ -58,7 +58,7 @@ class CourseTableViewCell: UITableViewCell {
         deadlinesLabel.text = getTextFromDates(course)
         
         
-        courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!, placeholderImage: Constants.sharedConstants.placeholderImage)
+        courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!, placeholderImage: Constants.placeholderImage)
         
     }
 }

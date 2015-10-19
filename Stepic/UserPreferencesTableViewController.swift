@@ -38,7 +38,7 @@ class UserPreferencesTableViewController: UITableViewController {
     }
 
     private func initWithUser(user : User) {
-        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.sharedConstants.placeholderImage)
+        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
     }
     

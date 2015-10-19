@@ -78,7 +78,7 @@ class Section: NSManagedObject, JSONInitializable {
             lessons in
             for i in 0 ..< self.units.count {
                 if let delLesson = self.units[i].lesson {
-                    CoreDataHelper.instance.context.deleteObject(delLesson)
+                    CoreDataHelper.instance.deleteBeforeAppFinish(delLesson)
                 }
                 self.units[i].lesson = lessons[i]
             }

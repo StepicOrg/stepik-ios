@@ -17,7 +17,7 @@ extension UIButton {
     }
     
     func setDisabledJoined() {
-        let attributedTitle = NSAttributedString(string: Constants.sharedConstants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.grayColor()])
+        let attributedTitle = NSAttributedString(string: Constants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.grayColor()])
         setAttributedTitle(attributedTitle, forState: .Normal )
         enabled = false
         layer.borderColor = UIColor.grayColor().CGColor

@@ -21,12 +21,12 @@ class TeacherCollectionViewCell: UICollectionViewCell {
 
     func initWithUser(user: User) {
     
-        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.sharedConstants.placeholderImage, completed: {
+        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, completed: {
             _, _, _, _ in
             self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.whiteColor())
 
         })
-//        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.sharedConstants.placeholderImage)
+//        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage)
 //        avatarImageView.setRoundedBounds(width: 1, color: UIColor.whiteColor())
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         infoLabel.text = user.bio

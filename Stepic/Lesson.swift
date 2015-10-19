@@ -26,7 +26,6 @@ class Lesson: NSManagedObject, JSONInitializable {
         isPublic = json["is_public"].boolValue
         
         stepsArray = json["steps"].arrayObject as! [Int]
-
     }
     
     func loadSteps(completion completion: (Void -> Void)) {

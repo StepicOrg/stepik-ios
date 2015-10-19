@@ -17,6 +17,10 @@ class User: NSManagedObject, JSONInitializable {
     
     convenience required init(json: JSON) {
         self.init()
+        initialize(json)
+    }
+    
+    func initialize(json: JSON) {
         id = json["id"].intValue
         profile = json["profile"].intValue
         isPrivate = json["is_private"].boolValue
