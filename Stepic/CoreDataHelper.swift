@@ -51,9 +51,11 @@ class CoreDataHelper: NSObject {
     private var objectsToDelete : [NSManagedObject] = []
     
     func deleteBeforeAppFinish(object: NSManagedObject) {
-        if !objectsToDelete.contains(object) {
-            objectsToDelete += [object]
-        }
+        context.deleteObject(object)
+        save()
+//        if !objectsToDelete.contains(object) {
+//            objectsToDelete += [object]
+//        }
     }
     
     func deleteAllPending() {

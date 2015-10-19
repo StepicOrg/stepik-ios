@@ -7,3 +7,4 @@ pod 'Alamofire', '2.0.2'
 pod 'SwiftyJSON'
 pod 'SDWebImage'
 pod 'TextFieldEffects'
+pod "DownloadButton"

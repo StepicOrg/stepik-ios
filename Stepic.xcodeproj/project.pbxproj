@@ -59,6 +59,7 @@
 		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; settings = {ASSET_TAGS = (); }; };
 		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -160,6 +161,7 @@
 		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
+		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
 		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
 				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
 				08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */,
+				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
+				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				0841569F1BCC0B31006B8C73 /* StepContentViewController.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,

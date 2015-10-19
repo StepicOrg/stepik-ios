@@ -20,6 +20,8 @@ class FindCoursesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.tableFooterView = UIView()
+
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -160,6 +162,7 @@ extension FindCoursesViewController : UITableViewDelegate {
         } else {
             self.performSegueWithIdentifier("showCourse", sender: indexPath)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 

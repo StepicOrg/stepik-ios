@@ -17,6 +17,8 @@ class UnitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.tableFooterView = UIView()
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -53,8 +55,14 @@ class UnitsViewController: UIViewController {
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showSteps", sender: indexPath.row)
+        performSegueWithIdentifier("showSteps", sender: indexPath.row)        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
 }
 
 extension UnitsViewController : UITableViewDataSource {

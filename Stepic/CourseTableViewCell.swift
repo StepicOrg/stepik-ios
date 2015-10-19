@@ -30,24 +30,19 @@ class CourseTableViewCell: UITableViewCell {
     
     private func getTextFromDates(course: Course) -> String {
         
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeZone = .None
-        
-        
         if course.beginDate == nil && course.endDate == nil {
             return ""
         }
         
         if course.beginDate == nil && course.endDate != nil {
-            return "до \(formatter.stringFromDate(course.endDate!))"
+            return "до \(course.endDate!.getStepicFormatString())"
         }
         
         if course.beginDate != nil && course.endDate == nil {
-            return "с \(formatter.stringFromDate(course.beginDate!))"
+            return "с \(course.beginDate!.getStepicFormatString())"
         }
         
-        return "\(formatter.stringFromDate(course.beginDate!)) - \(formatter.stringFromDate(course.endDate!))"
+        return "\(course.beginDate!.getStepicFormatString()) - \(course.endDate!.getStepicFormatString())"
     }
     
     func initWithCourse(course: Course) {

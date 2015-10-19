@@ -17,6 +17,8 @@ class SectionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
+
         course.loadAllSections(success: {
             self.tableView.reloadData()
         })
@@ -61,8 +63,16 @@ class SectionsViewController: UIViewController {
 extension SectionsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("showUnits", sender: indexPath.row)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 130
+    }
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return course.sections[indexPath.row].isActive
+    }
     
 }
 
