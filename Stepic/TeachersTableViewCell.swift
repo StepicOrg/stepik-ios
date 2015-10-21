@@ -33,7 +33,7 @@ class TeachersTableViewCell: UITableViewCell {
 //        instructors = course.instructors
         course.loadAllInstructors(success: {
             self.instructors = course.instructors
-            print("instructors count -> \(self.instructors.count)")
+//            print("instructors count -> \(self.instructors.count)")
             self.collectionView.reloadData()
         })
 //        collectionView.reloadData()

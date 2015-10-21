@@ -22,7 +22,7 @@ class CoursePreviewViewController: UIViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         
-        print("course enrollment status -> \(course?.enrolled)")
+//        print("course enrollment status -> \(course?.enrolled)")
         // Do any additional setup after loading the view.
     }
 
@@ -53,7 +53,7 @@ class CoursePreviewViewController: UIViewController {
     }
     
     @IBAction func joinButtonPressed(sender: UIButton) {
-        print("join pressed")
+//        print("join pressed")
         if let c = course {
             AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
                 sender.setDisabledJoined()

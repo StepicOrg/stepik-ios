@@ -16,6 +16,46 @@ class ApiDataDownloader: NSObject {
     static let sharedDownloader = ApiDataDownloader()
     private override init() {}
     
+    
+    func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, tabNumber: Int, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) {
+        let headers : [String : String] = [:] 
+        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        
+        var params : [String : NSObject] = [:]
+        if let f = featured {
+            params["is_featured"] = f ? "true" : "false"
+        } 
+        
+        if let e = enrolled {
+            params["enrolled"] = e ? "true" : "false"
+        }
+        
+        if let p = page {
+            params["page"] = p
+        }
+
+        params["access_token"] = StepicAPI.shared.token?.accessToken
+        
+        Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+            (_, _, json, error) in
+            
+            
+            if let e = error {
+                failure(error: e)
+                return
+            }
+            
+            let meta = Meta(json: json["meta"])
+            var res : [Int] = []
+            
+            for objectJSON in json["courses"].arrayValue {
+                res += [objectJSON["id"].intValue]
+            }
+            success(res, meta)
+        })
+    }
+    
+    
     func getCoursesWithFeatured(featured: Bool?, enrolled: Bool?, page: Int?, tabNumber: Int, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:] 
@@ -61,7 +101,7 @@ class ApiDataDownloader: NSObject {
             // print(json)
             
             let meta = Meta(json: json["meta"])
-            print("--------------------------")
+//            print("--------------------------")
 //            print(json["courses"])
             var courses : [Course] = []
             
@@ -126,8 +166,6 @@ class ApiDataDownloader: NSObject {
         }
         return result
     }
-    
-        
 
     
     func getUsersByIds(ids: [Int], deleteUsers : [User], refreshMode: RefreshMode, success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) {
@@ -148,6 +186,10 @@ class ApiDataDownloader: NSObject {
     
     func getStepsByIds(ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : (error : ErrorType) -> Void) {
         getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, refreshMode: refreshMode, success: success, failure: failure)
+    }
+    
+    func getCoursesByIds(ids: [Int], deleteCourses : [Course], refreshMode: RefreshMode, success : (([Course]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "courses", ids: ids, deleteObjects: deleteCourses, refreshMode: refreshMode, success: success, failure: failure)
     }
     
     private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {

@@ -30,6 +30,15 @@ class UnitTableViewCell: UITableViewCell {
     func initWithUnit(unit: Unit, delegate : PKDownloadButtonDelegate) {
         let defaultTitle = "Ooops, something got wrong"
         titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
+        
+        if let c = unit.lesson?.isCached {
+            if c { 
+                downloadButton.state = .Downloaded 
+            } else { 
+                downloadButton.state = .StartDownload 
+            }
+        } 
+        
         downloadButton.tag = unit.position - 1
         downloadButton.delegate = delegate
         

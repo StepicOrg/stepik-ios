@@ -79,7 +79,7 @@ class Course: NSManagedObject, JSONInitializable {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
                 users in
-                print("instructors count inside Course class -> \(users.count)")
+//                print("instructors count inside Course class -> \(users.count)")
                 self.instructors = users
                 CoreDataHelper.instance.save()
                 success()  

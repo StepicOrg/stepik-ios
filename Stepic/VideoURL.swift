@@ -20,7 +20,7 @@ class VideoURL: NSManagedObject {
     
     func initialize(json: JSON) {
         quality = json["quality"].stringValue
+//        print(quality)
         url = json["url"].stringValue        
     }
-    
 }

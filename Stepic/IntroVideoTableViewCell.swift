@@ -24,7 +24,7 @@ class IntroVideoTableViewCell: UITableViewCell {
     }
 
     func initWithCourse(course: Course) {
-        print(course.introURL)
+//        print(course.introURL)
         videoWebView.loadRequest(NSURLRequest(URL: NSURL(string: course.introURL)!))
     }
     

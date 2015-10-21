@@ -16,16 +16,19 @@ class Block: NSManagedObject {
     convenience required init(json: JSON){
         self.init()
         initialize(json)
+        video = Video(json: json["video"])
     }
     
     func initialize(json: JSON) {
         name = json["name"].stringValue
         text = json["text"].string
-        video = Video(json: json["video"])
         animation = json["animation"].string
     }
     
     func update(json json: JSON) {
         initialize(json)
+        if let v = video {
+            v.update(json: json["video"])
+        }
     }
 }

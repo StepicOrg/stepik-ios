@@ -57,4 +57,82 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
         return res
     }
+    
+    func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
+        
+        var videoCount : Int = 0
+        var totalProgress : Float = 0
+        var completedVideos : Int = 0
+        
+        for step in steps {
+            if step.block.name == "video" {
+                if let _ = step.block.video {
+                    videoCount++
+                }
+            }
+        }
+            
+        for step in steps {
+            if step.block.name == "video" {
+                if let vid = step.block.video {
+                    var videoProgress : Float = 0.0
+                    vid.store(.Low, progress: {
+                    prog in
+                        totalProgress = totalProgress - videoProgress + prog
+                        videoProgress = prog
+//                        print("lesson progress is \(Int(totalProgress*100))%")
+                        progress(id, totalProgress/Float(videoCount))
+                    }, completion : {
+                        completedVideos++
+                        if completedVideos == videoCount {
+                            self.isCached = true
+                            completion(id)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func cancelVideoStore(completion completion : Void -> Void) {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            for step in self.steps {
+                if step.block.name == "video" {
+                    if let vid = step.block.video {
+                        if !vid.isCached { 
+                            vid.cancelStore()
+                        } else {
+                            vid.removeFromStore()
+                        }
+                    }
+                }
+            }
+            self.isCached = false
+            completion()
+        }
+    }
+    
+    func removeFromStore(completion completion: Void -> Void) {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            for step in self.steps {
+                if step.block.name == "video" {
+                    if let vid = step.block.video {
+                        if !vid.isCached { 
+                            print("not cached video can not be removed!")
+                            vid.cancelStore()
+                        } else {
+                            vid.removeFromStore()
+                        }
+                    }
+                }
+            }
+            self.isCached = false
+            completion()
+        }
+    }
+    
+    
+    
 }

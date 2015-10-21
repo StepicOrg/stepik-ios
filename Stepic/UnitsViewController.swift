@@ -85,19 +85,61 @@ extension UnitsViewController : UITableViewDataSource {
 }
 
 extension UnitsViewController : PKDownloadButtonDelegate {
+    
+    private func askForRemove(okHandler ok: Void->Void, cancelHandler cancel: Void->Void) {
+        let alert = UIAlertController(title: "Remove lesson", message: "Are you sure you want to remove lesson from local store?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            action in
+            ok()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            action in
+            cancel()
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             downloadButton.state = PKDownloadButtonState.Downloading
-            VideoDownloader.sharedDownloader.downloadVideoWithURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
+            
+            section.units[downloadButton.tag].lesson?.storeVideos(downloadButton.tag, progress: {
+                id, progress in
+                downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+            }, completion: {
+                id in
+                downloadButton.state = PKDownloadButtonState.Downloaded
+            })
+            
         case PKDownloadButtonState.Downloading :
-            downloadButton.state = PKDownloadButtonState.StartDownload
-            VideoDownloader.sharedDownloader.cancelVideoDownloadWithURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
+            section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
+                downloadButton.pendingView?.stopSpin()
+                downloadButton.state = PKDownloadButtonState.StartDownload
+            })
+            
         case PKDownloadButtonState.Downloaded :
-            downloadButton.state = PKDownloadButtonState.StartDownload
-            VideoDownloader.sharedDownloader.deleteVideosViewURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
-        default:
-            print("unsupported download button state")
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
+
+            askForRemove(okHandler: {
+                section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
+                    downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.StartDownload
+                })
+            }, cancelHandler: {
+                downloadButton.pendingView?.stopSpin()
+                downloadButton.state = PKDownloadButtonState.Downloaded
+            })
+            
+            
+        case PKDownloadButtonState.Pending: 
+            break
         }
     }
 }

@@ -23,6 +23,7 @@ extension Lesson {
 
     @NSManaged var managedSteps : NSOrderedSet?
     
+    @NSManaged var managedIsCached : NSNumber?
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -38,6 +39,16 @@ extension Lesson {
         }
         get {
             return managedId?.integerValue ?? -1
+        }
+    }
+    
+    var isCached : Bool {
+        set(value){
+            self.managedIsCached = value
+            CoreDataHelper.instance.save()
+        }
+        get {
+            return managedIsCached?.boolValue ?? false
         }
     }
     
