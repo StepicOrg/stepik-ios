@@ -77,10 +77,16 @@ extension Block {
         var resultName = "ic_theory"
         switch (name) {
         case "text" : resultName = "ic_theory"
+        case "schulte" : resultName = "ic_table"
         default: resultName = "ic_\(name)"
         }
         
-        return UIImage(named: resultName)!
+        if let img = UIImage(named: resultName) {
+            return img
+        } else {
+            print("Unknown image name -> \(resultName)")
+            return UIImage(named: "ic_theory")!
+        }
     }
 }
 

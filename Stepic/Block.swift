@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Block: NSManagedObject, JSONInitializable {
+class Block: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     convenience required init(json: JSON){
@@ -25,4 +25,7 @@ class Block: NSManagedObject, JSONInitializable {
         animation = json["animation"].string
     }
     
+    func update(json json: JSON) {
+        initialize(json)
+    }
 }

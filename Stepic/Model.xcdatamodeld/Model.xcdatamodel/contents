@@ -80,6 +80,7 @@
         <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="Video" representedClassName=".Video" syncable="YES">
+        <attribute name="managedCachedPath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -99,7 +100,7 @@
         <element name="Step" positionX="-45" positionY="135" width="128" height="120"/>
         <element name="Unit" positionX="-45" positionY="144" width="128" height="180"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
-        <element name="Video" positionX="-45" positionY="135" width="128" height="120"/>
+        <element name="Video" positionX="-45" positionY="135" width="128" height="135"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
     </elements>
 </model>

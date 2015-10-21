@@ -9,6 +9,9 @@
 import UIKit
 import SwiftyJSON
 
+
 protocol JSONInitializable {
     init(json: JSON)
+    func update(json json: JSON)
+    var id : Int {get set}
 }

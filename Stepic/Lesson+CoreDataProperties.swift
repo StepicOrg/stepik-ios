@@ -23,6 +23,7 @@ extension Lesson {
 
     @NSManaged var managedSteps : NSOrderedSet?
     
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataHelper.instance.context)!
     }

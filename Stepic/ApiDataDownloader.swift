@@ -130,27 +130,27 @@ class ApiDataDownloader: NSObject {
         
 
     
-    func getUsersByIds(ids: [Int], deleteUsers : [User], success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) {
-        getObjectsByIds(requestString: "users", ids: ids, deleteObjects: deleteUsers, success: success, failure: failure)
+    func getUsersByIds(ids: [Int], deleteUsers : [User], refreshMode: RefreshMode, success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "users", ids: ids, deleteObjects: deleteUsers, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getSectionsByIds(ids: [Int], existingSections : [Section], success : (([Section]) -> Void)?, failure : (error : ErrorType) -> Void) {
-        getObjectsByIds(requestString: "sections", ids: ids, deleteObjects: existingSections, success: success, failure: failure)
+    func getSectionsByIds(ids: [Int], existingSections : [Section], refreshMode: RefreshMode, success : (([Section]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "sections", ids: ids, deleteObjects: existingSections, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getUnitsByIds(ids: [Int], deleteUnits : [Unit], success : (([Unit]) -> Void)?, failure : (error : ErrorType) -> Void) {
-        getObjectsByIds(requestString: "units", ids: ids, deleteObjects: deleteUnits, success: success, failure: failure)
+    func getUnitsByIds(ids: [Int], deleteUnits : [Unit], refreshMode: RefreshMode, success : (([Unit]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "units", ids: ids, deleteObjects: deleteUnits, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getLessonsByIds(ids: [Int], deleteLessons : [Lesson], success : (([Lesson]) -> Void)?, failure : (error : ErrorType) -> Void) {
-        getObjectsByIds(requestString: "lessons", ids: ids, deleteObjects: deleteLessons, success: success, failure: failure)
+    func getLessonsByIds(ids: [Int], deleteLessons : [Lesson], refreshMode: RefreshMode, success : (([Lesson]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "lessons", ids: ids, deleteObjects: deleteLessons, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getStepsByIds(ids: [Int], deleteSteps : [Step], success : (([Step]) -> Void)?, failure : (error : ErrorType) -> Void) {
-        getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, success: success, failure: failure)
+    func getStepsByIds(ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
+    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
@@ -175,17 +175,46 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            for object in deleteObjects {
-                CoreDataHelper.instance.deleteBeforeAppFinish(object as! NSManagedObject)
-            }
-            
             var newObjects : [T] = []
-            for objectJSON in json[requestString].arrayValue {
-                newObjects += [T(json: objectJSON)]
-            }
             
-            success?(newObjects) 
+            switch refreshMode {
+                
+            case .Delete:
+                
+                for object in deleteObjects {
+                    CoreDataHelper.instance.deleteBeforeAppFinish(object as! NSManagedObject)
+                }
+                
+                for objectJSON in json[requestString].arrayValue {
+                    newObjects += [T(json: objectJSON)]
+                }
+                
+                
+            case .Update:
+                
+                for objectJSON in json[requestString].arrayValue {
+                    let existing = deleteObjects.filter({$0.id == objectJSON["id"].intValue})
+                    
+                    switch existing.count {
+                    case 0: 
+                        newObjects += [T(json: objectJSON)]
+                    case 1: 
+                        let obj = existing[0] 
+                        obj.update(json: objectJSON)
+                        newObjects += [obj]
+                    default:
+                        print("More than 1 object with the same id!")
+                    }
+                }
+            }
+
+            success?(newObjects)
+             
         })
     }
     
+}
+
+enum RefreshMode {
+    case Delete, Update
 }

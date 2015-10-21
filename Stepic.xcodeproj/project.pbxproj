@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080ACF4D1BD6771400329F2B /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4C1BD6771400329F2B /* VideoDownloader.swift */; settings = {ASSET_TAGS = (); }; };
+		080ACF501BD79D5500329F2B /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* ImageConstants.swift */; settings = {ASSET_TAGS = (); }; };
+		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; settings = {ASSET_TAGS = (); }; };
+		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; settings = {ASSET_TAGS = (); }; };
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
@@ -102,6 +106,10 @@
 
 /* Begin PBXFileReference section */
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		080ACF4C1BD6771400329F2B /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
+		080ACF4F1BD79D5500329F2B /* ImageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
+		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
+		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +234,24 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		080ACF4E1BD79D4600329F2B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0885F8511BA9D64300F2A188 /* Constants.swift */,
+				080ACF4F1BD79D5500329F2B /* ImageConstants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		080ACF591BD7DCCD00329F2B /* TCBlobDownload */ = {
+			isa = PBXGroup;
+			children = (
+				080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */,
+				080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */,
+			);
+			name = TCBlobDownload;
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +336,7 @@
 				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
 				0885F84B1BA8376D00F2A188 /* Network */,
 				0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */,
+				080ACF4C1BD6771400329F2B /* VideoDownloader.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -446,7 +473,7 @@
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08DE94141B8C58AC00D278AB /* Supporting Files */,
 				08F204931BB0157F00D080C0 /* Extensions */,
-				0885F8511BA9D64300F2A188 /* Constants.swift */,
+				080ACF4E1BD79D4600329F2B /* Constants */,
 				087387D91BB9B768003CFAD1 /* ErrorEnums.swift */,
 				08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */,
 			);
@@ -494,6 +521,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
 				089142231BCE96E70000BCB0 /* MLInputDodger */,
 				013481E40EB75169773E2F21 /* Pods.framework */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
@@ -678,6 +706,7 @@
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
+				080ACF501BD79D5500329F2B /* ImageConstants.swift in Sources */,
 				089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
@@ -686,6 +715,7 @@
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
+				080ACF4D1BD6771400329F2B /* VideoDownloader.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
@@ -713,6 +743,7 @@
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
+				080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
@@ -723,6 +754,7 @@
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
+				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				089142431BCEA0280000BCB0 /* MLInputDodger-dummy.m in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,

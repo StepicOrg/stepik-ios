@@ -28,9 +28,13 @@ class Lesson: NSManagedObject, JSONInitializable {
         stepsArray = json["steps"].arrayObject as! [Int]
     }
     
+    func update(json json: JSON) {
+        initialize(json)
+    }
+    
     func loadSteps(completion completion: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, success: {
+            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
                 newSteps in 
                 self.steps = newSteps
                 CoreDataHelper.instance.save()
@@ -40,5 +44,17 @@ class Lesson: NSManagedObject, JSONInitializable {
                     print("Error while downloading units")
             })
         }) 
+    }
+    
+    func getVideoURLs() -> [String] {
+        var res : [String] = []
+        for step in steps {
+            if step.block.name == "video" {
+                if let vid = step.block.video {
+                    res += [vid.urls[0].url]
+                }
+            }
+        }
+        return res
     }
 }

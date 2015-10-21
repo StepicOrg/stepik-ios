@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class VideoURL: NSManagedObject, JSONInitializable {
+class VideoURL: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     convenience required init(json: JSON){

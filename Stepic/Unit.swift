@@ -29,6 +29,8 @@ class Unit: NSManagedObject, JSONInitializable {
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
     }
     
-    
+    func update(json json: JSON) {
+        initialize(json)
+    }
     
 }

@@ -44,6 +44,32 @@ class Course: NSManagedObject, JSONInitializable {
         instructorsArray = json["instructors"].arrayObject as! [Int]
     }
     
+    
+    func update(json json: JSON) {
+        id = json["id"].intValue
+        title = json["title"].stringValue
+        courseDescription = json["description"].stringValue
+        coverURLString = Constants.stepicURLString + json["cover"].stringValue
+        
+        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
+        endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
+        
+        enrolled = json["enrollment"].int != nil
+        featured = json["is_featured"].boolValue
+        
+        summary = json["summary"].stringValue
+        workload = json["workload"].stringValue
+        introURL = json["intro"].stringValue
+        format = json["course_format"].stringValue
+        audience = json["target_audience"].stringValue
+        certificate = json["certificate"].stringValue
+        requirements = json["requirements"].stringValue
+        
+        sectionsArray = json["sections"].arrayObject as! [Int]
+        instructorsArray = json["instructors"].arrayObject as! [Int]
+    }
+    
+    
     convenience init(json: JSON, tabNumber: Int) {
         self.init(json: json)
         self.tabNumber = tabNumber
@@ -51,7 +77,7 @@ class Course: NSManagedObject, JSONInitializable {
         
     func loadAllInstructors(success success: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, success: {
+            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
                 users in
                 print("instructors count inside Course class -> \(users.count)")
                 self.instructors = users
@@ -66,7 +92,7 @@ class Course: NSManagedObject, JSONInitializable {
     
     func loadAllSections(success success: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, success: {
+            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
                     secs in
                     self.sections = secs
                     CoreDataHelper.instance.save()

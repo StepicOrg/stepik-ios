@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DownloadButton
 
 class UnitsViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class UnitsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-        
+                
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -77,10 +78,26 @@ extension UnitsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UnitTableViewCell", forIndexPath: indexPath) as! UnitTableViewCell
         
-        cell.initWithUnit(self.section.units[indexPath.row])
+        cell.initWithUnit(self.section.units[indexPath.row], delegate: self)
         
         return cell
     }
-    
-    
+}
+
+extension UnitsViewController : PKDownloadButtonDelegate {
+    func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        switch (state) {
+        case PKDownloadButtonState.StartDownload : 
+            downloadButton.state = PKDownloadButtonState.Downloading
+            VideoDownloader.sharedDownloader.downloadVideoWithURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
+        case PKDownloadButtonState.Downloading :
+            downloadButton.state = PKDownloadButtonState.StartDownload
+            VideoDownloader.sharedDownloader.cancelVideoDownloadWithURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
+        case PKDownloadButtonState.Downloaded :
+            downloadButton.state = PKDownloadButtonState.StartDownload
+            VideoDownloader.sharedDownloader.deleteVideosViewURLs(section.units[downloadButton.tag].lesson?.getVideoURLs())
+        default:
+            print("unsupported download button state")
+        }
+    }
 }

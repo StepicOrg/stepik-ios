@@ -964,7 +964,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Syllabus" id="1al-js-zDv">
-                        <barButtonItem key="rightBarButtonItem" title="Overview" id="eJg-m5-c03">
+                        <barButtonItem key="rightBarButtonItem" image="Info" id="eJg-m5-c03">
                             <connections>
                                 <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="Ymm-um-wgY"/>
                             </connections>
@@ -1411,6 +1411,7 @@
         <image name="Delete Sign-100" width="100" height="100"/>
         <image name="Elective" width="25" height="25"/>
         <image name="Elective Filled" width="25" height="25"/>
+        <image name="Info" width="25" height="25"/>
         <image name="Star" width="25" height="25"/>
         <image name="Star Filled" width="25" height="25"/>
         <image name="btn_signin_active" width="250" height="44"/>

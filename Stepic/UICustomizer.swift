@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DownloadButton
 
 class UICustomizer: NSObject {
     static var sharedCustomizer = UICustomizer()
@@ -26,5 +27,15 @@ class UICustomizer: NSObject {
             bar.tintColor = UIColor.stepicGreenColor()
             bar.translucent = false
         }
+    }
+    
+    func setCustomDownloadButton(button: PKDownloadButton) {
+        button.startDownloadButton?.cleanDefaultAppearance()
+        button.startDownloadButton?.setBackgroundImage(Images.downloadFromCloud, forState: .Normal)
+        
+        //button.stopDownloadButton is default!
+        
+        button.downloadedButton?.cleanDefaultAppearance()
+        button.downloadedButton?.setBackgroundImage(Images.delete, forState: .Normal)
     }
 }

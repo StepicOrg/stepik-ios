@@ -30,4 +30,8 @@ class Video: NSManagedObject, JSONInitializable {
         }
         urls = videoURLs
     }
+    
+    func update(json json: JSON) {
+        initialize(json)
+    }
 }

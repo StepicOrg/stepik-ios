@@ -32,4 +32,8 @@ class User: NSManagedObject, JSONInitializable {
         level = json["level"].intValue
     }
     
+    func update(json json: JSON) {
+        initialize(json)
+    }
+    
 }

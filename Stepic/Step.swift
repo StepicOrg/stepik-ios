@@ -17,13 +17,18 @@ class Step: NSManagedObject, JSONInitializable {
     convenience required init(json: JSON){
         self.init()
         initialize(json)
+        block = Block(json: json["block"])
     }
     
     func initialize(json: JSON) {
         id = json["id"].intValue
         position = json["position"].intValue
         status = json["status"].stringValue
-        block = Block(json: json["block"])
+    }
+    
+    func update(json json: JSON) {
+        initialize(json)
+        block.update(json: json["block"])
     }
     
 }

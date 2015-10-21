@@ -20,7 +20,7 @@ extension Step {
     
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
-
+        
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Step", inManagedObjectContext: CoreDataHelper.instance.context)!
     }

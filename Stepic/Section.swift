@@ -33,6 +33,10 @@ class Section: NSManagedObject, JSONInitializable {
         unitsArray = json["units"].arrayObject as! [Int]
     }
     
+    func update(json json: JSON) {
+        initialize(json)
+    }
+    
     class func getSections(id: Int) throws -> [Section] {
         let request = NSFetchRequest(entityName: "Section")
         
@@ -57,7 +61,7 @@ class Section: NSManagedObject, JSONInitializable {
     
     func loadUnits(completion completion: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, success: {
+            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
                 newUnits in 
                 self.units = newUnits
                 self.loadLessonsForUnits(completion: completion)
@@ -70,21 +74,22 @@ class Section: NSManagedObject, JSONInitializable {
 
     func loadLessonsForUnits(completion completion: (Void -> Void)) {
         var lessonIds : [Int] = []
+        var lessons : [Lesson] = []
         for unit in units {
             lessonIds += [unit.lessonId]
+            if let lesson = unit.lesson {
+                lessons += [lesson]
+            }
         }
         
-        ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: [], success: {
+        ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .Update, success: {
             lessons in
             for i in 0 ..< self.units.count {
-                if let delLesson = self.units[i].lesson {
-                    CoreDataHelper.instance.deleteBeforeAppFinish(delLesson)
-                }
                 self.units[i].lesson = lessons[i]
             }
             
             CoreDataHelper.instance.save()
-    
+            
             completion()
         }, failure: {
             error in

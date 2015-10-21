@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import DownloadButton
 
 class UnitTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var downloadButton: PKDownloadButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -23,8 +27,15 @@ class UnitTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func initWithUnit(unit: Unit) {
-        let defaultTitle = "Ooops, somethig got wrong"
+    func initWithUnit(unit: Unit, delegate : PKDownloadButtonDelegate) {
+        let defaultTitle = "Ooops, something got wrong"
         titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
+        downloadButton.tag = unit.position - 1
+        downloadButton.delegate = delegate
+        
+        if !unit.isActive {
+            titleLabel.enabled = false
+            downloadButton.hidden = true
+        }
     }
 }
