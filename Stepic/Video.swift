@@ -10,25 +10,6 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-enum VideoQuality : Int {
-    case Low = 270, Medium = 360, High = 720, VeryHigh = 1080
-    init(quality: Int) {
-        if quality > High.rawValue {
-            self = .VeryHigh
-            return
-        } 
-        if quality > Medium.rawValue {
-            self = .High
-            return
-        }
-        if quality > Low.rawValue {
-            self = .Medium
-            return
-        }
-        self = .Low
-    }
-}
-
 class Video: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass

@@ -14,7 +14,9 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    
+    let heightForRows = [[131], [40, 40], [40, 40, 40]]
+    let selectionForRows = [[false], [false, true], [false, false, false]]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,12 +50,18 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0: return 131
-        default: return 40
-        }
+        return CGFloat(heightForRows[indexPath.section][indexPath.row])
+
     }
 
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return selectionForRows[indexPath.section][indexPath.row]
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     @IBAction func closeButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

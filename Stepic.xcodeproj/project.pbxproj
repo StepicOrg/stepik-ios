@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		080ACF4D1BD6771400329F2B /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4C1BD6771400329F2B /* VideoDownloader.swift */; settings = {ASSET_TAGS = (); }; };
 		080ACF501BD79D5500329F2B /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* ImageConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; settings = {ASSET_TAGS = (); }; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; settings = {ASSET_TAGS = (); }; };
@@ -15,6 +14,9 @@
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; settings = {ASSET_TAGS = (); }; };
+		080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; settings = {ASSET_TAGS = (); }; };
+		080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		080F74681BD928F30064AAEA /* VideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74671BD928F30064AAEA /* VideoQuality.swift */; settings = {ASSET_TAGS = (); }; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
@@ -107,7 +109,6 @@
 
 /* Begin PBXFileReference section */
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		080ACF4C1BD6771400329F2B /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
 		080ACF4F1BD79D5500329F2B /* ImageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
@@ -115,6 +116,9 @@
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
+		080F74631BD9213D0064AAEA /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
+		080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQualityTableViewController.swift; sourceTree = "<group>"; };
+		080F74671BD928F30064AAEA /* VideoQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQuality.swift; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
@@ -254,6 +258,15 @@
 			name = TCBlobDownload;
 			sourceTree = "<group>";
 		};
+		080F74621BD921130064AAEA /* Stepic */ = {
+			isa = PBXGroup;
+			children = (
+				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
+				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
+			);
+			name = Stepic;
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,12 +347,12 @@
 				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
-				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
-				0885F8571BAAD43300F2A188 /* StepicAPI.swift */,
+				080F74621BD921130064AAEA /* Stepic */,
 				0885F84B1BA8376D00F2A188 /* Network */,
 				0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */,
-				080ACF4C1BD6771400329F2B /* VideoDownloader.swift */,
 				080F74601BD8159F0064AAEA /* TabsInfo.swift */,
+				080F74631BD9213D0064AAEA /* VideosInfo.swift */,
+				080F74671BD928F30064AAEA /* VideoQuality.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -415,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
+				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
 			);
 			name = "User Preferences";
 			sourceTree = "<group>";
@@ -703,6 +717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
+				080F74681BD928F30064AAEA /* VideoQuality.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
@@ -718,7 +733,6 @@
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
-				080ACF4D1BD6771400329F2B /* VideoDownloader.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
@@ -738,9 +752,11 @@
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				089142361BCE97870000BCB0 /* MLInputDodger.m in Sources */,
+				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
+				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
