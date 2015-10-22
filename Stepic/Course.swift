@@ -69,11 +69,6 @@ class Course: NSManagedObject, JSONInitializable {
         instructorsArray = json["instructors"].arrayObject as! [Int]
     }
     
-    
-    convenience init(json: JSON, tabNumber: Int) {
-        self.init(json: json)
-        self.tabNumber = tabNumber
-    }
         
     func loadAllInstructors(success success: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
@@ -104,14 +99,14 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    class func getCourses(featured: Bool? = nil, enrolled: Bool? = nil, tabNumber: Int) throws -> [Course] {
+    class func getCourses(ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
         let request = NSFetchRequest(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         var predicate = NSPredicate(value: true)
-        
-        let p = NSPredicate(format: "managedTabNumber == %@", tabNumber as NSNumber)
-        predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p]) 
-        
+        for id in ids {
+            let p = NSPredicate(format: "managedId == %@", id as NSNumber)
+            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [predicate, p])
+        }
         if let f = featured {
             let p = NSPredicate(format: "managedFeatured == %@", f as NSNumber)
             predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
@@ -134,16 +129,19 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
     
-    class func deleteAll(tabNumber: Int) {
+    class func getAllCourses() -> [Course] {
+        let request = NSFetchRequest(entityName: "Course")
+        let predicate = NSPredicate(value: true)
+        request.predicate = predicate
         do {
-            let c = try getCourses(tabNumber: tabNumber)
-            for course in c {
-                CoreDataHelper.instance.deleteBeforeAppFinish(course)
-            }
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            return results as! [Course]
         }
         catch {
-            print("Error while deleting course objects")
-        }    
+            print("Error while getting courses")
+            return []
+//            throw FetchError.RequestExecution
+        }
     }
 }
 

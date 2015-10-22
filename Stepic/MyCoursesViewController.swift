@@ -10,8 +10,9 @@ import UIKit
 
 class MyCoursesViewController: UIViewController {
     
-    let TAB_NUMBER = 2
+    //    let TAB_NUMBER = 1
     let LOAD_ENROLLED : Bool? = true
+    let LOAD_FEATURED : Bool? = nil
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,70 +22,84 @@ class MyCoursesViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
+        
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
         
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
-        getCachedCourses()
-        
         refreshControl.beginRefreshing()
-        refreshCourses()
+        getCachedCourses(completion: {
+            self.refreshCourses()
+        })
+        
         // Do any additional setup after loading the view.
     }
     
-    //    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    //        return UIStatusBarStyle.LightContent
-    //    }
-    //    
-    
-    private func getCachedCourses() {
+    private func getCachedCourses(completion completion: (Void -> Void)?) {
+        isRefreshing = true
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             do {
-                self.courses = try Course.getCourses(tabNumber: self.TAB_NUMBER)
+                let cachedIds = TabsInfo.myCoursesIds 
+                self.courses = try Course.getCourses(cachedIds)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
-                }            
+                }       
+                completion?()
             }
             catch {
-                print("error while getting courses")
-                self.courses = []
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
+                print("Error while fetching data from store")
             }
-            
         }
     }
+    
+    
+    private func refreshCourses() {
+        isRefreshing = true
+        AuthentificationManager.sharedManager.autoRefreshToken { 
+            () -> Void in
+            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.LOAD_FEATURED, enrolled: self.LOAD_ENROLLED, page: 1, success: { 
+                (ids, meta) -> Void in
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                    (newCourses) -> Void in
+                    
+                    self.courses = newCourses
+                    self.meta = meta
+                    self.currentPage = 1
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshControl.endRefreshing()
+                        self.tableView.reloadData()
+                    }
+                    self.isRefreshing = false
+                    }, failure: { 
+                        (error) -> Void in
+                        print("failed downloading courses data in refresh")
+                        self.isRefreshing = false
+                })
+                
+                }, failure: { 
+                    (error) -> Void in
+                    print("failed refreshing course ids in refresh")
+                    self.isRefreshing = false
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshControl.endRefreshing()
+                    }
+                    
+            })
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func refreshCourses() {
-        isRefreshing = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: 1, tabNumber: TAB_NUMBER, success: {
-            (courses, meta) in
-            self.courses = courses
-            CoreDataHelper.instance.save()
-            self.meta = meta
-            self.tableView.reloadData()
-            self.isRefreshing = false
-            self.currentPage = 1
-            self.refreshControl.endRefreshing()
-            }, failure: {
-                error in 
-                print("Failed refreshing courses")
-                self.isRefreshing = false
-                self.refreshControl.endRefreshing()
-        })
     }
     
     /*
@@ -118,19 +133,41 @@ class MyCoursesViewController: UIViewController {
         }
         
         isLoadingMore = true
-        ApiDataDownloader.sharedDownloader.getCoursesWithFeatured(true, enrolled: self.LOAD_ENROLLED, page: currentPage + 1, tabNumber: TAB_NUMBER, success: {
-            (courses, meta) in
-            self.currentPage += 1
-            self.courses += courses
-            self.meta = meta
-            self.tableView.reloadData()
-            self.isLoadingMore = false
-            
-            }, failure: {
-                error in 
-                print("Next courses not loaded")
-                self.isLoadingMore = false
-        })
+        //TODO : Check if it should be executed in another thread
+        AuthentificationManager.sharedManager.autoRefreshToken { 
+            () -> Void in
+            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.LOAD_FEATURED, enrolled: self.LOAD_ENROLLED, page: self.currentPage + 1, success: { 
+                (ids, meta) -> Void in
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                    (newCourses) -> Void in
+                    
+                    self.currentPage += 1
+                    self.courses += newCourses
+                    self.meta = meta
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshControl.endRefreshing()
+                        self.tableView.reloadData()
+                    }
+                    
+                    self.isLoadingMore = false
+                    }, failure: { 
+                        (error) -> Void in
+                        print("failed downloading courses data in Next")
+                        self.isLoadingMore = false
+                })
+                
+                }, failure: { 
+                    (error) -> Void in
+                    print("failed refreshing course ids in Next")
+                    self.isLoadingMore = false
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.refreshControl.endRefreshing()
+                    }
+                    
+            })
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -162,6 +199,7 @@ extension MyCoursesViewController : UITableViewDelegate {
         } else {
             self.performSegueWithIdentifier("showCourse", sender: indexPath)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 

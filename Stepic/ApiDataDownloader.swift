@@ -17,7 +17,7 @@ class ApiDataDownloader: NSObject {
     private override init() {}
     
     
-    func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, tabNumber: Int, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) {
+    func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) {
         let headers : [String : String] = [:] 
         // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
         
@@ -55,70 +55,6 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    
-    func getCoursesWithFeatured(featured: Bool?, enrolled: Bool?, page: Int?, tabNumber: Int, success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
-        
-        let headers : [String : String] = [:] 
-        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
-        
-        var params : [String : NSObject] = [:]
-        if let f = featured {
-            params["is_featured"] = f ? "true" : "false"
-        } 
-        
-        if let e = enrolled {
-            params["enrolled"] = e ? "true" : "false"
-        }
-        
-        if let p = page {
-            params["page"] = p
-        }
-        
-        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
-            (t) in
-            StepicAPI.shared.token = t
-            params["access_token"] = t.accessToken
-//            print("token -> \(t.accessToken)")
-            self.getCoursesApiCall(tabNumber, params: params, headers: headers, success: success, failure: failure)
-            }, failure: {
-                _ in
-                print("error while refreshing the token")
-        })
-        
-        
-    }
-    
-    private func getCoursesApiCall(tabNumber: Int, params: [String : NSObject], headers : [String : String], success : ([Course], Meta) -> Void, failure : (error : ErrorType) -> Void) {
-        
-        Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
-            
-            if let e = error {
-                failure(error: e)
-                return
-            }
-            
-            // print(json)
-            
-            let meta = Meta(json: json["meta"])
-//            print("--------------------------")
-//            print(json["courses"])
-            var courses : [Course] = []
-            
-            
-            //TODO: NOT AN OOP THING, FIX IT SOMEHOW IN THE FUTURE
-            if meta.page == 1 {
-                Course.deleteAll(tabNumber)
-            }
-            
-            
-            for courseJSON in json["courses"].arrayValue {
-                courses += [Course(json: courseJSON, tabNumber: tabNumber)]
-            }
-            success(courses, meta)
-        })
-    }
-    
     func getCurrentUser(success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:] 
@@ -148,9 +84,9 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            // print(json)
-            
+//            print(json)
 //            print(json["users"])
+            
             let user : User = User(json: json["users"].arrayValue[0])
             success(user)
         })
@@ -224,14 +160,13 @@ class ApiDataDownloader: NSObject {
             case .Delete:
                 
                 for object in deleteObjects {
-                    CoreDataHelper.instance.deleteBeforeAppFinish(object as! NSManagedObject)
+                    CoreDataHelper.instance.deleteFromStore(object as! NSManagedObject, save: false)
                 }
                 
                 for objectJSON in json[requestString].arrayValue {
                     newObjects += [T(json: objectJSON)]
                 }
-                
-                
+                                
             case .Update:
                 
                 for objectJSON in json[requestString].arrayValue {
@@ -249,7 +184,8 @@ class ApiDataDownloader: NSObject {
                     }
                 }
             }
-
+            
+            CoreDataHelper.instance.save()
             success?(newObjects)
              
         })

@@ -48,21 +48,27 @@ class CoreDataHelper: NSObject {
         }
     }
     
-    private var objectsToDelete : [NSManagedObject] = []
+//    private var objectsToDelete : [NSManagedObject] = []
     
-    func deleteBeforeAppFinish(object: NSManagedObject) {
+    func deleteFromStore(object: NSManagedObject, save s: Bool = true) {
         context.deleteObject(object)
-        save()
-//        if !objectsToDelete.contains(object) {
-//            objectsToDelete += [object]
-//        }
+        if s == true {
+            save()
+        }
     }
     
-    func deleteAllPending() {
-        for obj in objectsToDelete {
-            CoreDataHelper.instance.context.deleteObject(obj)
+    func deleteFromStore(objects objects: [NSManagedObject]) {
+        for obj in objects {
+            context.deleteObject(obj)
         }
-        CoreDataHelper.instance.save()
+        save()
     }
+    
+//    func deleteAllPending() {
+//        for obj in objectsToDelete {
+//            CoreDataHelper.instance.context.deleteObject(obj)
+//        }
+//        CoreDataHelper.instance.save()
+//    }
     
 }

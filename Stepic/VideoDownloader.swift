@@ -23,8 +23,6 @@ class VideoDownloader: NSObject {
                 }
             }
         }
-        
-        
     }
     
     func cancelVideoDownloadWithURLs(urls: [String]?) {

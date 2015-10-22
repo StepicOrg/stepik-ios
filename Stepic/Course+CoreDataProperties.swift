@@ -14,7 +14,6 @@ import CoreData
 
 extension Course {
 
-    @NSManaged var managedTabNumber: NSNumber?
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedBeginDate: NSDate?
     @NSManaged var managedCourseDescription: String?
@@ -53,15 +52,6 @@ extension Course {
         }
         get {
             return managedId?.integerValue ?? -1
-        }
-    }
-    
-    var tabNumber : Int {
-        set(value){
-            self.managedTabNumber = value
-        }
-        get{
-            return managedTabNumber?.integerValue ?? 0
         }
     }
     
