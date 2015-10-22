@@ -59,7 +59,7 @@ class FindCoursesViewController: UIViewController {
     }
     
     
-    private func refreshCourses() {
+    func refreshCourses() {
         isRefreshing = true
         AuthentificationManager.sharedManager.autoRefreshToken { 
             () -> Void in
