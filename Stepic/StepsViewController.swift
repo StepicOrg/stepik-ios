@@ -89,9 +89,6 @@ class StepsViewController: RGPageViewController {
         }
     }
     
-    
-    
-
     /*
     // MARK: - Navigation
 
@@ -131,8 +128,9 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.video = lesson!.steps[index].block.video!
             return stepController
         } else {
-            let stepController = storyboard?.instantiateViewControllerWithIdentifier("StepContentViewController") as! StepContentViewController
-            stepController.stepId = index
+            let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
+            stepController.step = lesson!.steps[index]
+//            stepController.stepId = index
             return stepController
         }
     } 

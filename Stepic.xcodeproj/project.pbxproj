@@ -93,6 +93,10 @@
 		08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */; };
 		08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
+		08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
+		08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
+		08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
+		08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
 		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; };
@@ -208,6 +212,10 @@
 		08DE94361B8E3A5300D278AB /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		08DF1D8B1BDA77A200BA35EA /* PathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
+		08DF1D911BDAB93900BA35EA /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		08DF1D931BDADB2D00BA35EA /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
+		08DF1D951BDADB7A00BA35EA /* Scripts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scripts.plist; sourceTree = "<group>"; };
+		08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLBuilder.swift; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 		8860CAAA0935A0F996492A1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -356,6 +364,9 @@
 				080F74631BD9213D0064AAEA /* VideosInfo.swift */,
 				080F74671BD928F30064AAEA /* VideoQuality.swift */,
 				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
+				08DF1D931BDADB2D00BA35EA /* Scripts.swift */,
+				08DF1D951BDADB7A00BA35EA /* Scripts.plist */,
+				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -534,6 +545,7 @@
 				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
 				08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */,
 				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
+				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -650,6 +662,7 @@
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
+				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				0891423A1BCE97870000BCB0 /* MLInputDodger.bundle in Resources */,
 				089142411BCEA0280000BCB0 /* MLInputDodger.xcconfig in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
@@ -731,11 +744,14 @@
 				089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
+				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
+				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
 				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
+				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,

@@ -12,12 +12,19 @@ import Alamofire
 class WebStepViewController: UIViewController {
 
     @IBOutlet weak var stepWebView: UIWebView!
+    var step : Step!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         stepWebView.delegate = self
         
+        if let htmlText = step.block.text {
+            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText)
+            print(html)
+            stepWebView.loadHTMLString(HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText), baseURL: nil)
+//            stepWebView.scalesPageToFit = true
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -40,7 +47,10 @@ class WebStepViewController: UIViewController {
 
 extension WebStepViewController : UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print("loading page")
         return true
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        
     }
 }
