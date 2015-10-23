@@ -36,44 +36,51 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     private func getUrlForQuality(quality: VideoQuality) -> NSURL {
-        //TODO : Now it's just the first url
-        return NSURL(string: urls[0].url)!
-    }
-    
-    private func getFilePath() -> NSURL {
-        let fileManager = NSFileManager.defaultManager()
-        let paths = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-//        if let path = paths.first {
-//            let videosPath = path.URLByAppendingPathComponent("Videos", isDirectory: true)
-//            return videosPath
-            return paths.first!
-//        }
-//        return nil
+        var urlToReturn : VideoURL? = nil
+        var minDifference = 10000
+        for url in urls {
+            if abs(Int(url.quality)! - quality.rawValue) <  minDifference {
+                minDifference = abs(Int(url.quality)! - quality.rawValue)
+                urlToReturn = url
+            }
+        }
+        
+        if let url = urlToReturn {
+            return NSURL(string: url.url)!
+        } else {
+            return NSURL(string: urls[0].url)!
+        }
     }
     
     var download : TCBlobDownload? = nil
     
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Void->Void)) {
         let url = getUrlForQuality(quality)
-        let path = getFilePath()
-//        print(path)
-        let ext = url.pathExtension!
-        let filePath = path.URLByAppendingPathComponent("\(id).\(ext)", isDirectory: false)
-//        var isDir : ObjCBool = false
-//        
-////        if !NSFileManager.defaultManager().fileExistsAtPath("\(path!)", isDirectory: &isDir) {
-////            do { 
-////                try NSFileManager.defaultManager().createDirectoryAtPath("\(path!)", withIntermediateDirectories: true, attributes: nil)
-////            } 
-////            catch {
-////                print("unable to create a directory")
-////            }
-////        }
+                
+        do {
+            if let ext = url.pathExtension {
+                try PathManager.sharedManager.createVideoWith(id: id, andExtension: ext)
+            } else {
+                print("Something went wrong in store function, no file extension in url")
+            }
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+        }
         
-        NSFileManager.defaultManager().createFileAtPath("\(filePath)", contents: nil, attributes: nil)
-        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: path, withName: "\(id).\(ext)", progression: {
+        var videoURL = NSURL()
+        
+        do {
+            videoURL = try PathManager.sharedManager.getVideoDirectoryURL()
+        }
+        catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        let ext = url.pathExtension!
+        
+        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
             prog, bytesWritten, bytesExpectedToWrite in
-//                print("progress is \(Int(prog*100))%")
                 progress(prog)
             }, completion: 
             {
@@ -86,8 +93,7 @@ class Video: NSManagedObject, JSONInitializable {
                 
                 print("download completed")
                 if let fileURL = location {
-                    self.managedCachedPath = "\(fileURL)"
-                    print("\(fileURL)")
+                    self.managedCachedPath = fileURL.lastPathComponent!
                     CoreDataHelper.instance.save()
                 }
                 completion()
@@ -103,14 +109,17 @@ class Video: NSManagedObject, JSONInitializable {
     func removeFromStore() -> Bool {
         if isCached {
             do {
-                print(cachedPath!)
-                try NSFileManager.defaultManager().removeItemAtPath(cachedPath!)
+                print("\nremoving file at \(cachedPath!)\n")
+                try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
                 print("file successfully removed")
                 self.managedCachedPath = nil
+                CoreDataHelper.instance.save()
                 return true
             }
-            catch {
-                print("error while deleting")
+            catch let error as NSError {
+                print(error.localizedFailureReason)
+                print(error.code)
+                print(error.localizedDescription)
                 return false
             }
         } else {

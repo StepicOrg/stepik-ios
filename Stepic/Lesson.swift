@@ -76,7 +76,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             if step.block.name == "video" {
                 if let vid = step.block.video {
                     var videoProgress : Float = 0.0
-                    vid.store(.Low, progress: {
+                    vid.store(VideosInfo.videoQuality, progress: {
                     prog in
                         totalProgress = totalProgress - videoProgress + prog
                         videoProgress = prog

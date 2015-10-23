@@ -11,7 +11,7 @@ import UIKit
 class StepsViewController: RGPageViewController {
 
     var lesson : Lesson?
-    
+//    var controllers : [UIViewController?]
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -9,6 +9,8 @@
 import UIKit
 import DownloadButton
 
+//TODO : Wait till refresh ends
+
 class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -89,7 +91,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     private func askForRemove(okHandler ok: Void->Void, cancelHandler cancel: Void->Void) {
         let alert = UIAlertController(title: "Remove lesson", message: "Are you sure you want to remove lesson from local store?", preferredStyle: UIAlertControllerStyle.Alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+        alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.Destructive, handler: {
             action in
             ok()
         }))
@@ -102,24 +104,35 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    private func storeLesson(lesson: Lesson?, downloadButton: PKDownloadButton!) {
+        lesson?.storeVideos(downloadButton.tag, progress: {
+            id, progress in
+            downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+            }, completion: {
+                id in
+                downloadButton.state = PKDownloadButtonState.Downloaded
+        })
+    }
+    
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             downloadButton.state = PKDownloadButtonState.Downloading
             
-            section.units[downloadButton.tag].lesson?.storeVideos(downloadButton.tag, progress: {
-                id, progress in
-                downloadButton.stopDownloadButton?.progress = CGFloat(progress)
-            }, completion: {
-                id in
-                downloadButton.state = PKDownloadButtonState.Downloaded
-            })
+            if section.units[downloadButton.tag].lesson?.steps.count != 0 {
+                storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
+            } else {
+                section.units[downloadButton.tag].lesson?.loadSteps(completion: {
+                    self.storeLesson(self.section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
+                })
+            }
             
         case PKDownloadButtonState.Downloading :
             downloadButton.state = PKDownloadButtonState.Pending
             downloadButton.pendingView?.startSpin()
+            
             section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
-                downloadButton.pendingView?.stopSpin()
+//                downloadButton.pendingView?.stopSpin()
                 downloadButton.state = PKDownloadButtonState.StartDownload
             })
             
@@ -128,12 +141,12 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             downloadButton.pendingView?.startSpin()
 
             askForRemove(okHandler: {
-                section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
-                    downloadButton.pendingView?.stopSpin()
+                self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
+//                    downloadButton.pendingView?.stopSpin()
                     downloadButton.state = PKDownloadButtonState.StartDownload
                 })
             }, cancelHandler: {
-                downloadButton.pendingView?.stopSpin()
+//                downloadButton.pendingView?.stopSpin()
                 downloadButton.state = PKDownloadButtonState.Downloaded
             })
             
