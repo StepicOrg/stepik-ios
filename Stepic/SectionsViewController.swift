@@ -12,26 +12,36 @@ class SectionsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let refreshControl = UIRefreshControl()
+    
     var course : Course! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.tableFooterView = UIView()
-
-        course.loadAllSections(success: {
-            self.tableView.reloadData()
-        })
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
+        refreshControl.addTarget(self, action: "refreshSections", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         
+        refreshControl.beginRefreshing()
+        refreshSections()
+
         // Do any additional setup after loading the view.
     }
 
+    func refreshSections() {
+        course.loadAllSections(success: {
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+        })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

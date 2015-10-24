@@ -45,6 +45,11 @@ class SectionTableViewCell: UITableViewCell {
             beginDateLabel.enabled = false
             softDeadlineLabel.enabled = false
             hardDeadlineLabel.enabled = false
+        } else {
+            titleLabel.enabled = true
+            beginDateLabel.enabled = true
+            softDeadlineLabel.enabled = true
+            hardDeadlineLabel.enabled = true
         }
 //        if let cr = section.beginDate?.compare(NSDate()) {
 //            if cr = NSComparisonResult.OrderedDescending {
