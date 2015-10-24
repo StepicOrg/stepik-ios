@@ -23,7 +23,7 @@ class WebStepViewController: UIViewController {
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText)
             print(html)
             stepWebView.loadHTMLString(HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText), baseURL: nil)
-//            stepWebView.scalesPageToFit = true
+            //stepWebView.scalesPageToFit = true
         }
         // Do any additional setup after loading the view.
     }
@@ -47,6 +47,7 @@ class WebStepViewController: UIViewController {
 
 extension WebStepViewController : UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        print(request.URLString)
         return true
     }
     
