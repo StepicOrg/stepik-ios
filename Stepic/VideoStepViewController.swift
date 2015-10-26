@@ -30,7 +30,7 @@ class VideoStepViewController: UIViewController {
         if self.moviePlayer == nil {
             self.moviePlayer = MPMoviePlayerController(contentURL: url)
             if let player = self.moviePlayer {
-                player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 156)
+                player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
                 player.view.sizeToFit()
                 player.scalingMode = MPMovieScalingMode.AspectFit
                 //            player.scalingMode = MPMovieScalingMode.Fill
