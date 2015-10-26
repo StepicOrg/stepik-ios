@@ -76,6 +76,12 @@ class UserPreferencesTableViewController: UITableViewController {
         print(documentsPath)
     }
     
+    @IBAction func allow3GChanged(sender: UISwitch) {
+        ConnectionHelper.shared.reachableOnWWAN = sender.on
+    }
+    
+    
+    
     @IBAction func signOutButtonPressed(sender: UIButton) {
         StepicAPI.shared.token = nil
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)

@@ -143,8 +143,17 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             return
         }
         
+
+        
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
+            
+            if !ConnectionHelper.shared.isReachable {
+                //TODO : Add alert
+                print("Not reachable to download")
+                return
+            }
+            
             downloadButton.state = PKDownloadButtonState.Downloading
             
             if section.units[downloadButton.tag].lesson?.steps.count != 0 {
@@ -154,6 +163,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                     self.storeLesson(self.section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
                 })
             }
+            break
             
         case PKDownloadButtonState.Downloading :
             downloadButton.state = PKDownloadButtonState.Pending
@@ -163,6 +173,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 //                downloadButton.pendingView?.stopSpin()
                 downloadButton.state = PKDownloadButtonState.StartDownload
             })
+            break
             
         case PKDownloadButtonState.Downloaded :
             downloadButton.state = PKDownloadButtonState.Pending
@@ -177,8 +188,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 //                downloadButton.pendingView?.stopSpin()
                 downloadButton.state = PKDownloadButtonState.Downloaded
             })
-            
-            
+            break
+
         case PKDownloadButtonState.Pending: 
             break
         }

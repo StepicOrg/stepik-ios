@@ -13,30 +13,65 @@ class ConnectionHelper : NSObject {
     private override init() {
         super.init()
         reachability = Reachability.reachabilityForInternetConnection()
-        reachability.reachableOnWWAN = defaults.objectForKey(reachableOnWWANKey) as! Bool
+        reachability.reachableOnWWAN = reachableOnWWAN
         
-        reachability.reachableBlock = {
-            reach in 
-            
-        }
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: kReachabilityChangedNotification, object: nil)
-//        reachability.startNotifier()
+//        reachability.reachableOnWWAN = defaults.objectForKey(reachableOnWWANKey) as? Bool ?? false
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: kReachabilityChangedNotification, object: nil)
+        reachability.startNotifier()
     }
     
-    var reachabilityChanged : [(Bool -> Void)] = []
+    private var reachabilityChangedHandlers : [(Bool -> Void)] = []
+    
+    func instantiate() {}
+    
+    func addReachabilityChangedHandler(handler handler : Bool->Void) {
+        reachabilityChangedHandlers += [handler]
+    }
+    
+    private func callReachabilityhandlers(result: Bool) {
+        for handler in reachabilityChangedHandlers {
+            handler(result)
+        }
+    }
+    
+    var isReachable : Bool {
+        return self.reachability.isReachableViaWiFi() || (self.reachability.isReachableViaWWAN() && self.reachability.reachableOnWWAN) 
+    }
+    
+    var reachableOnWWAN : Bool {
+        get {
+            if let r = defaults.objectForKey(reachableOnWWANKey) as? Bool {
+                return r
+            } else {
+                self.reachableOnWWAN = false
+                return false
+            }
+        }
+        
+        set(value) {
+            defaults.setObject(value, forKey: reachableOnWWANKey)
+            defaults.synchronize()
+            reachability.reachableOnWWAN = value
+        }
+    }
+    
+    
     
     func reachabilityChanged(notification: NSNotification) {
-        if self.reachability.isReachableViaWiFi() || self.reachability.isReachableViaWWAN() {
+        if isReachable {
             print("Service avalaible!!!")
+            callReachabilityhandlers(true)
         } else {
-            print("No service avalaible!!!")
+            callReachabilityhandlers(false)
+            print("Service unavaliable!!!")
         }
     }
     
     static let shared = ConnectionHelper()
     
-    var reachability : Reachability!
+    private var reachability : Reachability!
     
     private let defaults = NSUserDefaults.standardUserDefaults()
-    private let reachableOnWWANKey = "rreachableOnWWAN" 
+    private let reachableOnWWANKey = "reachableOnWWAN" 
 }
