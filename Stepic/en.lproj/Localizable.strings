@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Stepic
+
+  Created by Alexander Karpov on 26.10.15.
+  Copyright © 2015 Alex Karpov. All rights reserved.
+*/
+
+SignedIn = "Signed in!";
+FailedToSignIn = "Failed to sign in";
+RemoveVideoTitle = "Remove cached videos";
+RemoveVideoBody = "Are you sure you want to remove cached videos?";
+Cancel = "Cancel";
+Remove = "Remove";

@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Stepic
+
+  Created by Alexander Karpov on 26.10.15.
+  Copyright © 2015 Alex Karpov. All rights reserved.
+*/
+
+SignedIn = "Успешно!";
+FailedToSignIn = "Не удалось авторизоваться";
+RemoveVideoTitle = "Удаление видео из урока";
+RemoveVideoBody = "Вы уверены, что хотите удалить сохраненное видео из этого урока?";
+Cancel = "Отмена";
+Remove = "Удалить";

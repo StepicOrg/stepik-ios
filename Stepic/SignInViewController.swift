@@ -44,17 +44,15 @@ class SignInViewController: UIViewController {
         SVProgressHUD.show()
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             
-            success: {
+        success: {
             t in
             StepicAPI.shared.token = t
-            SVProgressHUD.showSuccessWithStatus("Signed in!")
+            SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
             self.performSegueWithIdentifier("signedInSegue", sender: self)
-            }, 
-            
-            failure: {
+        }, failure: {
             e in
             self.errorLabel.hidden = false
-            SVProgressHUD.showErrorWithStatus("Failed to sign in")
+            SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
         })
 
     }

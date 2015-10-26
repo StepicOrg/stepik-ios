@@ -1,0 +1,138 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0c8-jf-22J"; */
+"0c8-jf-22J.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Syllabus"; ObjectID = "1al-js-zDv"; */
+"1al-js-zDv.title" = "Syllabus";
+
+/* Class = "UIButton"; normalTitle = "Don't have an account? Sign up!"; ObjectID = "4ln-w4-e92"; */
+"4ln-w4-e92.normalTitle" = "Don't have an account? Sign up!";
+
+/* Class = "UILabel"; text = "Incorrect username or password!"; ObjectID = "5ss-uq-4Dy"; */
+"5ss-uq-4Dy.text" = "Incorrect username or password!";
+
+/* Class = "UILabel"; text = "Load videos with 3G"; ObjectID = "5ty-cw-1qL"; */
+"5ty-cw-1qL.text" = "Load videos with 3G";
+
+/* Class = "UITableViewSection"; headerTitle = "Actions"; ObjectID = "6bM-2c-3U9"; */
+"6bM-2c-3U9.headerTitle" = "Actions";
+
+/* Class = "UILabel"; text = "Course name"; ObjectID = "8q0-dk-g4x"; */
+"8q0-dk-g4x.text" = "Course name";
+
+/* Class = "UINavigationItem"; title = "Courses"; ObjectID = "Ai7-bS-YO0"; */
+"Ai7-bS-YO0.title" = "Courses";
+
+/* Class = "UITextField"; placeholder = "Second name"; ObjectID = "CKB-fc-HPJ"; */
+"CKB-fc-HPJ.placeholder" = "Second name";
+
+/* Class = "UILabel"; text = "High (720p)"; ObjectID = "CZc-YT-fnT"; */
+"CZc-YT-fnT.text" = "High (720p)";
+
+/* Class = "UITabBarItem"; title = "All Courses"; ObjectID = "D6B-Zy-xmi"; */
+"D6B-Zy-xmi.title" = "All Courses";
+
+/* Class = "UILabel"; text = "Loading video quality"; ObjectID = "EXC-VF-8ez"; */
+"EXC-VF-8ez.text" = "Loading video quality";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "Fk1-Ad-oby"; */
+"Fk1-Ad-oby.normalTitle" = "Sign in";
+
+/* Class = "UITabBarItem"; title = "My courses"; ObjectID = "I8C-zf-fZb"; */
+"I8C-zf-fZb.title" = "My courses";
+
+/* Class = "UILabel"; text = "Medium (360p)"; ObjectID = "IEf-kx-jQ6"; */
+"IEf-kx-jQ6.text" = "Medium (360p)";
+
+/* Class = "UIButton"; normalTitle = "Print documents path"; ObjectID = "KiJ-LS-Pgk"; */
+"KiJ-LS-Pgk.normalTitle" = "Print documents path";
+
+/* Class = "UIButton"; normalTitle = "Join the course"; ObjectID = "MZy-dW-Bj2"; */
+"MZy-dW-Bj2.normalTitle" = "Join the course";
+
+/* Class = "UINavigationItem"; title = "Units"; ObjectID = "Mxn-oD-Gai"; */
+"Mxn-oD-Gai.title" = "Units";
+
+/* Class = "UITextField"; placeholder = "First name"; ObjectID = "NM5-KZ-Gds"; */
+"NM5-KZ-Gds.placeholder" = "First name";
+
+/* Class = "UITabBarItem"; title = "Best lessons"; ObjectID = "Nrw-xt-FGQ"; */
+"Nrw-xt-FGQ.title" = "Best lessons";
+
+/* Class = "UILabel"; text = "Very high (1080p)"; ObjectID = "OW7-XU-kNz"; */
+"OW7-XU-kNz.text" = "Very high (1080p)";
+
+/* Class = "UINavigationItem"; title = "Video quality"; ObjectID = "SpQ-u4-OIw"; */
+"SpQ-u4-OIw.title" = "Video quality";
+
+/* Class = "UINavigationItem"; title = "Lesson"; ObjectID = "SvS-aT-zHS"; */
+"SvS-aT-zHS.title" = "Lesson";
+
+/* Class = "UILabel"; text = "Registration"; ObjectID = "TkU-tI-SSn"; */
+"TkU-tI-SSn.text" = "Registration";
+
+/* Class = "UITextField"; placeholder = "E-mail"; ObjectID = "UW2-m4-1uM"; */
+"UW2-m4-1uM.placeholder" = "E-mail";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "UoZ-CZ-ikS"; */
+"UoZ-CZ-ikS.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Low (270p)"; ObjectID = "WD1-p6-4ZZ"; */
+"WD1-p6-4ZZ.text" = "Low (270p)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Wmo-uV-nkK"; */
+"Wmo-uV-nkK.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Best lessons"; ObjectID = "a0x-Ee-d5v"; */
+"a0x-Ee-d5v.title" = "Best lessons";
+
+/* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "bkx-mv-8DI"; */
+"bkx-mv-8DI.title" = "Preferences";
+
+/* Class = "UITableViewSection"; headerTitle = "User info"; ObjectID = "dKt-Jb-OtY"; */
+"dKt-Jb-OtY.headerTitle" = "User info";
+
+/* Class = "UITableViewSection"; headerTitle = "Video preferences"; ObjectID = "dRl-3b-IkP"; */
+"dRl-3b-IkP.headerTitle" = "Video preferences";
+
+/* Class = "UIButton"; normalTitle = "Print token"; ObjectID = "etH-ds-Ww5"; */
+"etH-ds-Ww5.normalTitle" = "Print token";
+
+/* Class = "UINavigationItem"; title = "My courses"; ObjectID = "g7g-TI-yPj"; */
+"g7g-TI-yPj.title" = "My courses";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "iIb-Ou-ABM"; */
+"iIb-Ou-ABM.placeholder" = "Email";
+
+/* Class = "UIButton"; normalTitle = "Sign up"; ObjectID = "mbI-3x-eYW"; */
+"mbI-3x-eYW.normalTitle" = "Sign up";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nMT-0R-3xe"; */
+"nMT-0R-3xe.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "terms of service"; ObjectID = "pCI-N9-PAy"; */
+"pCI-N9-PAy.normalTitle" = "terms of service";
+
+/* Class = "UINavigationItem"; title = "Course"; ObjectID = "pUr-jb-6t6"; */
+"pUr-jb-6t6.title" = "Course";
+
+/* Class = "UIButton"; normalTitle = "Sign out"; ObjectID = "tbx-hn-Gcp"; */
+"tbx-hn-Gcp.normalTitle" = "Sign out";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "tn1-Ez-VfM"; */
+"tn1-Ez-VfM.placeholder" = "Password";
+
+/* Class = "UISegmentedControl"; uiF-lQ-kcC.segmentTitles[0] = "Overview"; ObjectID = "uiF-lQ-kcC"; */
+"uiF-lQ-kcC.segmentTitles[0]" = "Overview";
+
+/* Class = "UISegmentedControl"; uiF-lQ-kcC.segmentTitles[1] = "Detailed"; ObjectID = "uiF-lQ-kcC"; */
+"uiF-lQ-kcC.segmentTitles[1]" = "Detailed";
+
+/* Class = "UILabel"; text = "Summary"; ObjectID = "ve6-hT-0vt"; */
+"ve6-hT-0vt.text" = "Summary";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "y9y-0V-gfH"; */
+"y9y-0V-gfH.text" = "Description";
+
+/* Class = "UILabel"; text = "Workload"; ObjectID = "yfF-dt-vak"; */
+"yfF-dt-vak.text" = "Workload";

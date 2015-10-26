@@ -111,14 +111,14 @@ extension UnitsViewController : UITableViewDataSource {
 extension UnitsViewController : PKDownloadButtonDelegate {
     
     private func askForRemove(okHandler ok: Void->Void, cancelHandler cancel: Void->Void) {
-        let alert = UIAlertController(title: "Remove lesson", message: "Are you sure you want to remove lesson from local store?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: NSLocalizedString("RemoveVideoTitle", comment: ""), message: NSLocalizedString("RemoveVideoBody", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         
-        alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.Destructive, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.Destructive, handler: {
             action in
             ok()
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
             action in
             cancel()
         }))
