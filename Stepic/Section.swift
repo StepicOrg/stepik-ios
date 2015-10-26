@@ -59,7 +59,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func loadUnits(completion completion: (Void -> Void)) {
+    func loadUnits(completion completion: (Void -> Void), error errorHandler: (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
                 newUnits in 
@@ -68,6 +68,7 @@ class Section: NSManagedObject, JSONInitializable {
                 }, failure: {
                     error in
                     print("Error while downloading units")
+                    errorHandler()
             })
         }) 
     }

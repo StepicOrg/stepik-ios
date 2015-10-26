@@ -39,6 +39,9 @@ class SectionsViewController: UIViewController {
         course.loadAllSections(success: {
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
+        }, error: {
+            //TODO : Add alert
+            self.refreshControl.endRefreshing()
         })
     }
     

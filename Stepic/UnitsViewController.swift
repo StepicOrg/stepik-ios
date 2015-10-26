@@ -16,7 +16,9 @@ class UnitsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var section : Section!
-    
+    var didRefresh = false
+    let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,12 +30,31 @@ class UnitsViewController: UIViewController {
         
         tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
-        section.loadUnits(completion: {
-            self.tableView.reloadData()
-        })
+        
+        refreshControl.addTarget(self, action: "refreshUnits", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
+        
+        refreshControl.beginRefreshing()
+        refreshUnits()
+
+        
         // Do any additional setup after loading the view.
     }
 
+    
+    func refreshUnits() {
+        didRefresh = false
+        section.loadUnits(completion: {
+            //TODO : Possibly should do this in another thread(UI-thread?)
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+            self.didRefresh = true
+        }, error: {
+            self.refreshControl.endRefreshing()
+            self.didRefresh = true
+        })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,6 +68,7 @@ class UnitsViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showSteps" {
             let dvc = segue.destinationViewController as! StepsViewController
+            dvc.hidesBottomBarWhenPushed = true
             dvc.lesson = section.units[sender as! Int].lesson
         }
         // Get the new view controller using segue.destinationViewController.
@@ -115,6 +137,12 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     }
     
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        if !didRefresh {
+            //TODO : Add alert
+            print("wait until the lesson is refreshed")
+            return
+        }
+        
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             downloadButton.state = PKDownloadButtonState.Downloading
