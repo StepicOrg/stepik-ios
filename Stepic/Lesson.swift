@@ -36,7 +36,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
                 newSteps in 
-                self.steps = newSteps
+                self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
                 CoreDataHelper.instance.save()
                 completion()
                 }, failure: {

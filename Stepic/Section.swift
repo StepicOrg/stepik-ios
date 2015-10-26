@@ -63,7 +63,7 @@ class Section: NSManagedObject, JSONInitializable {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
                 newUnits in 
-                self.units = newUnits
+                self.units = Sorter.sort(newUnits, byIds: self.unitsArray)
                 self.loadLessonsForUnits(completion: completion)
                 }, failure: {
                     error in
@@ -84,7 +84,9 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .Update, success: {
-            lessons in
+            newLessons in
+            lessons = Sorter.sort(newLessons, byIds: lessonIds)
+            
             for i in 0 ..< self.units.count {
                 self.units[i].lesson = lessons[i]
             }

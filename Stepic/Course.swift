@@ -75,7 +75,7 @@ class Course: NSManagedObject, JSONInitializable {
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
                 users in
 //                print("instructors count inside Course class -> \(users.count)")
-                self.instructors = users
+                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
                 CoreDataHelper.instance.save()
                 success()  
                 }, failure : {
@@ -90,7 +90,7 @@ class Course: NSManagedObject, JSONInitializable {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
                     secs in
-                    self.sections = secs
+                    self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
                     CoreDataHelper.instance.save()
                     success()  
                 }, failure : {
