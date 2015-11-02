@@ -222,7 +222,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="82m-MV-RC3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="82m-MV-RC3">
                                 <rect key="frame" x="195" y="44" width="210" height="210"/>
                                 <animations/>
                                 <constraints>
@@ -231,8 +231,11 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ln-w4-e92">
-                                <rect key="frame" x="197" y="381" width="208" height="29"/>
+                                <rect key="frame" x="197" y="398" width="208" height="29"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="aF9-rJ-oGC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Don't have an account? Sign up!">
                                     <color key="titleColor" red="0.48627450979999998" green="0.76862745099999996" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -244,7 +247,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fk1-Ad-oby">
-                                <rect key="frame" x="175" y="329" width="250" height="44"/>
+                                <rect key="frame" x="175" y="346" width="250" height="44"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="TJF-S7-4HG"/>
@@ -260,8 +263,11 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UoZ-CZ-ikS">
-                                <rect key="frame" x="20" y="291" width="560" height="30"/>
+                                <rect key="frame" x="20" y="308" width="560" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2vU-X7-rja"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
@@ -269,8 +275,11 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-Ou-ABM">
-                                <rect key="frame" x="20" y="253" width="560" height="30"/>
+                                <rect key="frame" x="20" y="270" width="560" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Eh8-lb-mAb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
@@ -278,7 +287,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect username or password!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ss-uq-4Dy">
-                                <rect key="frame" x="20" y="230" width="560" height="15"/>
+                                <rect key="frame" x="20" y="230" width="560" height="32"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.90196079015731812" green="0.18431372940540314" blue="0.21176470816135406" alpha="1" colorSpace="calibratedRGB"/>
@@ -293,7 +302,9 @@
                             <constraint firstAttribute="centerX" secondItem="Fk1-Ad-oby" secondAttribute="centerX" id="GLU-Ev-igz"/>
                             <constraint firstItem="iIb-Ou-ABM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="K5W-VX-ezD"/>
                             <constraint firstItem="4ln-w4-e92" firstAttribute="top" secondItem="Fk1-Ad-oby" secondAttribute="bottom" constant="8" id="NN4-27-tIb"/>
+                            <constraint firstItem="iIb-Ou-ABM" firstAttribute="top" secondItem="82m-MV-RC3" secondAttribute="bottom" constant="16" id="Ppb-Ke-5lG"/>
                             <constraint firstItem="UoZ-CZ-ikS" firstAttribute="top" secondItem="iIb-Ou-ABM" secondAttribute="bottom" constant="8" id="Qe6-Q1-ggQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4ln-w4-e92" secondAttribute="bottom" constant="8" id="Sij-j4-pms"/>
                             <constraint firstItem="82m-MV-RC3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="Xfa-d4-Son"/>
                             <constraint firstItem="5ss-uq-4Dy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Y3f-2e-edi"/>
                             <constraint firstItem="5ss-uq-4Dy" firstAttribute="top" secondItem="82m-MV-RC3" secondAttribute="bottom" constant="-24" id="ZrQ-Zf-D7o"/>
@@ -671,7 +682,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="" id="N9y-uJ-pUb">
                                 <cells>
@@ -807,7 +818,7 @@
                                 <rect key="frame" x="279" y="289" width="42" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

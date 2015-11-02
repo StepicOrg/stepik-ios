@@ -52,14 +52,6 @@
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* StepicAPI.swift */; };
 		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
-		089142361BCE97870000BCB0 /* MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0891422E1BCE97870000BCB0 /* MLInputDodger.m */; };
-		089142371BCE97870000BCB0 /* MLInputDodgerRetractView.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */; };
-		089142381BCE97870000BCB0 /* UIView+MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */; };
-		089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */ = {isa = PBXBuildFile; fileRef = 089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */; };
-		0891423A1BCE97870000BCB0 /* MLInputDodger.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 089142351BCE97870000BCB0 /* MLInputDodger.bundle */; };
-		089142411BCEA0280000BCB0 /* MLInputDodger.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */; };
-		089142421BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */; };
-		089142431BCEA0280000BCB0 /* MLInputDodger-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */; };
 		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
 		089142491BCEE4EF0000BCB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
@@ -164,21 +156,6 @@
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* StepicAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicAPI.swift; sourceTree = "<group>"; };
 		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
-		0891422D1BCE97870000BCB0 /* MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInputDodger.h; sourceTree = "<group>"; };
-		0891422E1BCE97870000BCB0 /* MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInputDodger.m; sourceTree = "<group>"; };
-		0891422F1BCE97870000BCB0 /* MLInputDodgerRetractView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLInputDodgerRetractView.h; sourceTree = "<group>"; };
-		089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLInputDodgerRetractView.m; sourceTree = "<group>"; };
-		089142311BCE97870000BCB0 /* UIView+MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MLInputDodger.h"; sourceTree = "<group>"; };
-		089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MLInputDodger.m"; sourceTree = "<group>"; };
-		089142331BCE97870000BCB0 /* UIScrollView+MLInputDodger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MLInputDodger.h"; sourceTree = "<group>"; };
-		089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MLInputDodger.m"; sourceTree = "<group>"; };
-		089142351BCE97870000BCB0 /* MLInputDodger.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLInputDodger.bundle; sourceTree = "<group>"; };
-		0891423B1BCEA0280000BCB0 /* MLInputDodger.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MLInputDodger.modulemap; sourceTree = "<group>"; };
-		0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MLInputDodger.xcconfig; sourceTree = "<group>"; };
-		0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "MLInputDodger-Private.xcconfig"; sourceTree = "<group>"; };
-		0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLInputDodger-dummy.m"; sourceTree = "<group>"; };
-		0891423F1BCEA0280000BCB0 /* MLInputDodger-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLInputDodger-prefix.pch"; sourceTree = "<group>"; };
-		089142401BCEA0280000BCB0 /* MLInputDodger-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLInputDodger-umbrella.h"; sourceTree = "<group>"; };
 		089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		089142451BCEE4EE0000BCB0 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoURL+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -423,28 +400,6 @@
 			name = Courses;
 			sourceTree = "<group>";
 		};
-		089142231BCE96E70000BCB0 /* MLInputDodger */ = {
-			isa = PBXGroup;
-			children = (
-				0891423B1BCEA0280000BCB0 /* MLInputDodger.modulemap */,
-				0891423C1BCEA0280000BCB0 /* MLInputDodger.xcconfig */,
-				0891423D1BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig */,
-				0891423E1BCEA0280000BCB0 /* MLInputDodger-dummy.m */,
-				0891423F1BCEA0280000BCB0 /* MLInputDodger-prefix.pch */,
-				089142401BCEA0280000BCB0 /* MLInputDodger-umbrella.h */,
-				0891422D1BCE97870000BCB0 /* MLInputDodger.h */,
-				0891422E1BCE97870000BCB0 /* MLInputDodger.m */,
-				0891422F1BCE97870000BCB0 /* MLInputDodgerRetractView.h */,
-				089142301BCE97870000BCB0 /* MLInputDodgerRetractView.m */,
-				089142311BCE97870000BCB0 /* UIView+MLInputDodger.h */,
-				089142321BCE97870000BCB0 /* UIView+MLInputDodger.m */,
-				089142331BCE97870000BCB0 /* UIScrollView+MLInputDodger.h */,
-				089142341BCE97870000BCB0 /* UIScrollView+MLInputDodger.m */,
-				089142351BCE97870000BCB0 /* MLInputDodger.bundle */,
-			);
-			name = MLInputDodger;
-			sourceTree = "<group>";
-		};
 		0891424C1BCEED6F0000BCB0 /* Step Content Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,7 +537,6 @@
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
 				08E16F201BDBA495004822E1 /* Reachability */,
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
-				089142231BCE96E70000BCB0 /* MLInputDodger */,
 				013481E40EB75169773E2F21 /* Pods.framework */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 			);
@@ -685,15 +639,12 @@
 			files = (
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
-				089142421BCEA0280000BCB0 /* MLInputDodger-Private.xcconfig in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
-				0891423A1BCE97870000BCB0 /* MLInputDodger.bundle in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
-				089142411BCEA0280000BCB0 /* MLInputDodger.xcconfig in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 			);
@@ -771,7 +722,6 @@
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				080ACF501BD79D5500329F2B /* ImageConstants.swift in Sources */,
-				089142391BCE97870000BCB0 /* UIScrollView+MLInputDodger.m in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
@@ -801,7 +751,6 @@
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
-				089142361BCE97870000BCB0 /* MLInputDodger.m in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
@@ -826,16 +775,13 @@
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
-				089142431BCEA0280000BCB0 /* MLInputDodger-dummy.m in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
-				089142381BCE97870000BCB0 /* UIView+MLInputDodger.m in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
-				089142371BCE97870000BCB0 /* MLInputDodgerRetractView.m in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,

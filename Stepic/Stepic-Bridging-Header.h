@@ -3,9 +3,7 @@
 //
 
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "MLInputDodger.h"
-#import "UIView+MLInputDodger.h"
-#import "UIScrollView+MLInputDodger.h"
+#import <MLInputDodger/MLInputDodger.h>
 #import <DownloadButton/PKDownloadButton.h>
 #import "Reachability.h"
 //#import "RequestUtils.h"
