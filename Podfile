@@ -9,4 +9,5 @@ pod 'SwiftyJSON'
 pod 'SDWebImage'
 pod 'TextFieldEffects'
 pod "DownloadButton"
+pod 'SVProgressHUD'
 #pod 'TCBlobDownloadSwift'
