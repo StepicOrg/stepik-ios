@@ -92,7 +92,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    private func constructIdsString(array arr: [Int]) -> String {
+    private func constructIdsString<TID>(array arr: [TID]) -> String {
         var result = ""
         for element in arr {
             result += "ids[]=\(element)&"
@@ -128,7 +128,11 @@ class ApiDataDownloader: NSObject {
         getObjectsByIds(requestString: "courses", ids: ids, deleteObjects: deleteCourses, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
+    func getProgressesByIds(ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "progresses", printOutput: true, ids: ids, deleteObjects: deleteProgresses, refreshMode: refreshMode, success: success, failure: failure)
+    }
+    
+    private func getObjectsByIds<T : JSONInitializable, TID>(requestString requestString: String, printOutput: Bool = false, ids: [TID], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
@@ -170,7 +174,7 @@ class ApiDataDownloader: NSObject {
             case .Update:
                 
                 for objectJSON in json[requestString].arrayValue {
-                    let existing = deleteObjects.filter({$0.id == objectJSON["id"].intValue})
+                    let existing = deleteObjects.filter({obj in "\(obj.id)" == objectJSON["id"].stringValue})
                     
                     switch existing.count {
                     case 0: 

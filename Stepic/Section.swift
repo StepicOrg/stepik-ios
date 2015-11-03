@@ -26,6 +26,8 @@ class Section: NSManagedObject, JSONInitializable {
         title = json["title"].stringValue
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
+        progressId = json["progress"].stringValue
+
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
@@ -64,7 +66,9 @@ class Section: NSManagedObject, JSONInitializable {
             ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
                 newUnits in 
                 self.units = Sorter.sort(newUnits, byIds: self.unitsArray)
-                self.loadLessonsForUnits(completion: completion)
+                self.loadProgressesForUnits({
+                    self.loadLessonsForUnits(completion: completion)
+                })
                 }, failure: {
                     error in
                     print("Error while downloading units")
@@ -73,6 +77,34 @@ class Section: NSManagedObject, JSONInitializable {
         }) 
     }
 
+    func loadProgressesForUnits(completion: (Void->Void)) {
+        var progressIds : [String] = []
+        var progresses : [Progress] = []
+        for unit in units {
+            if let progressId = unit.progressId {
+                progressIds += [progressId]
+            }
+            if let progress = unit.progress {
+                progresses += [progress]
+            }
+        }
+        
+        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            (newProgresses) -> Void in
+            progresses = Sorter.sort(newProgresses, byIds: progressIds)
+            for i in 0 ..< min(self.units.count, progresses.count) {
+                self.units[i].progress = progresses[i]
+            }
+            
+            CoreDataHelper.instance.save()
+            
+            completion()
+            }, failure: { 
+            (error) -> Void in
+            print("Error while dowloading progresses")
+        })
+    }
+    
     func loadLessonsForUnits(completion completion: (Void -> Void)) {
         var lessonIds : [Int] = []
         var lessons : [Lesson] = []

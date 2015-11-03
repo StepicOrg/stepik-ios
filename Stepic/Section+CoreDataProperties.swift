@@ -21,12 +21,13 @@ extension Section {
     @NSManaged var managedSoftDeadline: NSDate?
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
-    
+    @NSManaged var managedProgressId : String?
+
     @NSManaged var managedUnitsArray : NSObject?
 
     @NSManaged var managedUnits : NSOrderedSet?
     @NSManaged var managedCourse : Course?
-
+    @NSManaged var managedProgress : Progress?
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Section", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -45,6 +46,15 @@ extension Section {
         }
     }
 
+    var progressId : String? {
+        get {
+            return managedProgressId
+        }
+        set(value) {
+            managedProgressId = progressId
+        }
+    }
+    
     var position : Int {
         set(value){
             self.managedPosition = value
@@ -101,6 +111,15 @@ extension Section {
         
     var course : Course? {
         return managedCourse
+    }
+    
+    var progress : Progress? {
+        get {
+            return managedProgress
+        }
+        set(value) {
+            managedProgress = value
+        }
     }
     
     var units : [Unit] {

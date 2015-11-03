@@ -46,7 +46,8 @@ class FindCoursesViewController: UIViewController {
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             do {
                 let cachedIds = TabsInfo.allCoursesIds 
-                self.courses = try Course.getCourses(cachedIds)
+                let c = try Course.getCourses(cachedIds)
+                self.courses = Sorter.sort(c, byIds: cachedIds)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }       
@@ -68,7 +69,7 @@ class FindCoursesViewController: UIViewController {
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
                     (newCourses) -> Void in
                     
-                    self.courses = newCourses
+                    self.courses = Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     self.currentPage = 1
                     dispatch_async(dispatch_get_main_queue()) {
@@ -141,7 +142,7 @@ class FindCoursesViewController: UIViewController {
                     (newCourses) -> Void in
                     
                     self.currentPage += 1
-                    self.courses += newCourses
+                    self.courses += Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     
                     dispatch_async(dispatch_get_main_queue()) {

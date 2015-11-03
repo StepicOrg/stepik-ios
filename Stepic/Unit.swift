@@ -24,6 +24,8 @@ class Unit: NSManagedObject, JSONInitializable {
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
         lessonId = json["lesson"].intValue
+        progressId = json["progress"].stringValue
+
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])

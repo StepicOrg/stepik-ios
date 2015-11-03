@@ -92,13 +92,43 @@ class Course: NSManagedObject, JSONInitializable {
                     secs in
                     self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
                     CoreDataHelper.instance.save()
-                    success()  
+                    self.loadProgressesForSections(success)
+                    //success()  
                 }, failure : {
                         error in
                         print("error while loading section")
                         errorHandler()
                 })
         })        
+    }
+    
+    func loadProgressesForSections(completion: (Void->Void)) {
+        var progressIds : [String] = []
+        var progresses : [Progress] = []
+        for section in sections {
+            if let progressId = section.progressId {
+                progressIds += [progressId]
+            }
+
+            if let progress = section.progress {
+                progresses += [progress]
+            }
+        }
+        
+        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            (newProgresses) -> Void in
+            progresses = Sorter.sort(newProgresses, byIds: progressIds)
+            for i in 0 ..< min(self.sections.count, progresses.count) {
+                self.sections[i].progress = progresses[i]
+            }
+            
+            CoreDataHelper.instance.save()
+            
+            completion()
+            }, failure: { 
+                (error) -> Void in
+                print("Error while dowloading progresses")
+        })
     }
     
     class func getCourses(ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {

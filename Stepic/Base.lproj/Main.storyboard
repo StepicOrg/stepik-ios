@@ -704,7 +704,7 @@
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="WD1-p6-4ZZ" secondAttribute="trailing" id="V47-I5-0xg"/>
-                                                <constraint firstItem="WD1-p6-4ZZ" firstAttribute="leading" secondItem="8oX-hA-v3G" secondAttribute="leadingMargin" constant="6" id="mDq-W1-Q1D"/>
+                                                <constraint firstItem="WD1-p6-4ZZ" firstAttribute="leading" secondItem="8oX-hA-v3G" secondAttribute="leadingMargin" constant="8" id="mDq-W1-Q1D"/>
                                                 <constraint firstItem="WD1-p6-4ZZ" firstAttribute="centerY" secondItem="8oX-hA-v3G" secondAttribute="centerY" id="z0m-TI-U3Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -728,7 +728,7 @@
                                             <animations/>
                                             <constraints>
                                                 <constraint firstItem="IEf-kx-jQ6" firstAttribute="centerY" secondItem="Jpn-Bm-UOk" secondAttribute="centerY" id="74U-mj-hEx"/>
-                                                <constraint firstItem="IEf-kx-jQ6" firstAttribute="leading" secondItem="Jpn-Bm-UOk" secondAttribute="leadingMargin" constant="6" id="paT-DR-WP8"/>
+                                                <constraint firstItem="IEf-kx-jQ6" firstAttribute="leading" secondItem="Jpn-Bm-UOk" secondAttribute="leadingMargin" constant="8" id="paT-DR-WP8"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="IEf-kx-jQ6" secondAttribute="trailing" id="xrK-fM-CPB"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -753,7 +753,7 @@
                                             <constraints>
                                                 <constraint firstItem="CZc-YT-fnT" firstAttribute="centerY" secondItem="fOd-wO-RLa" secondAttribute="centerY" id="1JY-pN-y8Q"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="CZc-YT-fnT" secondAttribute="trailing" id="fUZ-SV-lVW"/>
-                                                <constraint firstItem="CZc-YT-fnT" firstAttribute="leading" secondItem="fOd-wO-RLa" secondAttribute="leadingMargin" constant="6" id="hcM-ji-bob"/>
+                                                <constraint firstItem="CZc-YT-fnT" firstAttribute="leading" secondItem="fOd-wO-RLa" secondAttribute="leadingMargin" constant="8" id="hcM-ji-bob"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
@@ -777,7 +777,7 @@
                                             <constraints>
                                                 <constraint firstItem="OW7-XU-kNz" firstAttribute="centerY" secondItem="6Rv-e9-AN9" secondAttribute="centerY" id="5SE-AB-8kC"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="OW7-XU-kNz" secondAttribute="trailing" id="KBa-3a-Uy0"/>
-                                                <constraint firstItem="OW7-XU-kNz" firstAttribute="leading" secondItem="6Rv-e9-AN9" secondAttribute="leadingMargin" constant="6" id="qCw-LR-CGr"/>
+                                                <constraint firstItem="OW7-XU-kNz" firstAttribute="leading" secondItem="6Rv-e9-AN9" secondAttribute="leadingMargin" constant="8" id="qCw-LR-CGr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>

@@ -21,10 +21,12 @@ extension Unit {
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedLessonId: NSNumber?
-
+    @NSManaged var managedProgressId : String?
+    
     @NSManaged var managedSection: Section?
-    @NSManaged var managedLesson: NSManagedObject?
-
+    @NSManaged var managedLesson: Lesson?
+    @NSManaged var managedProgress: Progress?
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Unit", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -39,6 +41,15 @@ extension Unit {
         }
         get {
             return managedId?.integerValue ?? -1
+        }
+    }
+    
+    var progressId : String? {
+        get {
+            return managedProgressId
+        }
+        set(value) {
+            managedProgressId = progressId
         }
     }
     
@@ -101,9 +112,18 @@ extension Unit {
         return managedSection!
     }
     
+    var progress : Progress? {
+        get {
+            return managedProgress
+        }
+        set(value) {
+            managedProgress = value
+        }
+    }
+    
     var lesson : Lesson? {
         get {
-            return managedLesson as? Lesson
+            return managedLesson
         }
         set(value) {
             self.managedLesson = value

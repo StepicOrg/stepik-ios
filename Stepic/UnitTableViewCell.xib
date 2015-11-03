@@ -34,23 +34,34 @@
                         </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-CU-R8q">
-                        <rect key="frame" x="8" y="11" width="262" height="21"/>
+                        <rect key="frame" x="16" y="11" width="254" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4dV-wS-tGY">
+                        <rect key="frame" x="0.0" y="0.0" width="4" height="43"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="4" id="EQe-9b-kRb"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="5CS-SD-YfT"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="QxI-CU-R8q" secondAttribute="trailing" constant="8" id="8Qk-D4-OeH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-8" id="IQo-Pq-Z2G"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="266" id="KmZ-wv-OGe"/>
                     <constraint firstItem="QxI-CU-R8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="PPv-1d-2OG"/>
                     <constraint firstAttribute="trailingMargin" secondItem="QKu-BZ-2u6" secondAttribute="trailing" constant="8" id="UWd-IU-jKN"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="ZlV-IZ-voL"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="QxI-CU-R8q" secondAttribute="leading" constant="-8" id="bpT-Ru-hxL"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="iSE-nL-0j7"/>
                     <constraint firstAttribute="bottomMargin" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="3" id="pt8-nV-YLB"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sHy-nY-VVe"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="QxI-CU-R8q" secondAttribute="leading" id="uVG-FD-anJ"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -62,6 +73,7 @@
             <animations/>
             <connections>
                 <outlet property="downloadButton" destination="QKu-BZ-2u6" id="zbU-sn-Hkv"/>
+                <outlet property="progressView" destination="4dV-wS-tGY" id="j2w-FA-WDu"/>
                 <outlet property="titleLabel" destination="QxI-CU-R8q" id="USk-bL-RUG"/>
             </connections>
             <point key="canvasLocation" x="87" y="399"/>

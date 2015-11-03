@@ -28,6 +28,6 @@ class SummaryTableViewCell: UITableViewCell {
     }
     
     class func heightForCourse(course: Course) -> CGFloat {
-        return 32 + UILabel.heightForLabelWithText(course.summary, lines: 0, standardFontOfSize: 12, width: UIScreen.mainScreen().bounds.width - 16, html: true)
+        return 32 + UILabel.heightForLabelWithText(course.summary, lines: 0, standardFontOfSize: 12, width: UIScreen.mainScreen().bounds.width - 32, html: true)
     }
 }
