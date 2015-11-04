@@ -20,14 +20,16 @@ class WebStepViewController: UIViewController {
         stepWebView.delegate = self
         
         if let htmlText = step.block.text {
-            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText)
-            print(html)
-            stepWebView.loadHTMLString(HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText), baseURL: nil)
+            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
+            stepWebView.loadHTMLString(html, baseURL: nil)
             //stepWebView.scalesPageToFit = true
         }
+
         // Do any additional setup after loading the view.
     }
 
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

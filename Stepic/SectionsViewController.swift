@@ -80,7 +80,7 @@ extension SectionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 130
+        return SectionTableViewCell.heightForCellInSection(course.sections[indexPath.row])
     }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -65,6 +65,7 @@
                 </variation>
             </tableViewCellContentView>
             <animations/>
+            <inset key="separatorInset" minX="77" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="courseDescriptionLabel" destination="F48-nf-4UJ" id="8PV-UJ-362"/>
                 <outlet property="courseImageView" destination="RLA-4o-65X" id="NAB-pB-pRy"/>

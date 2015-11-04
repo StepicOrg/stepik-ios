@@ -85,7 +85,7 @@ extension UnitsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UnitTableViewCell.sizeForCellWithUnit(self.section.units[indexPath.row])
+        return UnitTableViewCell.heightForCellWithUnit(self.section.units[indexPath.row])
     }
     
 }

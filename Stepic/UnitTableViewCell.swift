@@ -28,7 +28,7 @@ class UnitTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    class func sizeForCellWithUnit(unit: Unit) -> CGFloat {
+    class func heightForCellWithUnit(unit: Unit) -> CGFloat {
         let defaultTitle = "Ooops, something got wrong"
         let text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
         return 32 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 80)

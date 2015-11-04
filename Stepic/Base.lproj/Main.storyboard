@@ -1289,7 +1289,7 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Bh8-ur-IoY" secondAttribute="trailing" constant="-20" id="DQB-ff-dYk"/>
                             <constraint firstItem="cls-Jl-RZZ" firstAttribute="top" secondItem="Bh8-ur-IoY" secondAttribute="bottom" id="THj-Sy-Xce"/>
-                            <constraint firstItem="Bh8-ur-IoY" firstAttribute="top" secondItem="0uX-EE-d78" secondAttribute="topMargin" constant="45" id="drm-Xi-Vse"/>
+                            <constraint firstItem="Bh8-ur-IoY" firstAttribute="top" secondItem="0uX-EE-d78" secondAttribute="topMargin" constant="43" id="drm-Xi-Vse"/>
                             <constraint firstItem="Bh8-ur-IoY" firstAttribute="leading" secondItem="0uX-EE-d78" secondAttribute="leadingMargin" constant="-20" id="hst-Gk-pTy"/>
                         </constraints>
                     </view>
