@@ -38,7 +38,7 @@ struct TabsInfo {
             }
         }
         set(value) {
-            defaults.setObject(value, forKey: allCoursesKey)
+            defaults.setObject(value, forKey: myCoursesKey)
             defaults.synchronize()
         }
     }

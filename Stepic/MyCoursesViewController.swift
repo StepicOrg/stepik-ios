@@ -75,6 +75,8 @@ class MyCoursesViewController: UIViewController {
 //                    self.courses = newCourses
                     self.meta = meta
                     self.currentPage = 1
+                    TabsInfo.myCoursesIds = ids
+
                     dispatch_async(dispatch_get_main_queue()) {
                         self.refreshControl.endRefreshing()
                         self.tableView.reloadData()
@@ -147,7 +149,8 @@ class MyCoursesViewController: UIViewController {
                     self.currentPage += 1
                     self.courses += Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
-                    
+                    TabsInfo.myCoursesIds += ids
+
                     dispatch_async(dispatch_get_main_queue()) {
                         self.refreshControl.endRefreshing()
                         self.tableView.reloadData()
