@@ -19,6 +19,7 @@ class UnitTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
+        progressView.setRoundedBounds(width: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -30,7 +31,7 @@ class UnitTableViewCell: UITableViewCell {
     class func sizeForCellWithUnit(unit: Unit) -> CGFloat {
         let defaultTitle = "Ooops, something got wrong"
         let text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
-        return 32 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 66)
+        return 32 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 80)
         
     }
     
@@ -49,6 +50,7 @@ class UnitTableViewCell: UITableViewCell {
         downloadButton.tag = unit.position - 1
         downloadButton.delegate = delegate
         
+        progressView.backgroundColor = UIColor.grayColor()
         if let passed = unit.progress?.isPassed {
             if passed {
                 progressView.backgroundColor = UIColor.stepicGreenColor()

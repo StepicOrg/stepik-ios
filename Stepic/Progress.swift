@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Progress: NSManagedObject, JSONInitializable {
+class Progress: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

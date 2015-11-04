@@ -115,6 +115,8 @@ class Course: NSManagedObject, JSONInitializable {
             }
         }
         
+        print("progress ids array -> \(progressIds)")
+        
         ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)

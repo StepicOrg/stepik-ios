@@ -60,6 +60,7 @@
 		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
 		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
+		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
@@ -166,6 +167,7 @@
 		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
+		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		08A1256E1BDE8E460066B2B2 /* Sorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorter.swift; sourceTree = "<group>"; };
 		08A125781BDEBCBB0066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		08A1257A1BDEBCC90066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */,
 				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
 				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
+				089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
+				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,

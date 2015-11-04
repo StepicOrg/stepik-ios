@@ -9,14 +9,6 @@
 import Foundation
 
 extension UIImageView {
-    func setRoundedBounds(width width: CGFloat, color: UIColor) {
-        self.layer.cornerRadius = self.bounds.width / 2
-        self.layer.borderWidth = width
-        self.layer.borderColor = color.CGColor
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
-    }
-    
     func setImageWithColor(image i: UIImage, color: UIColor) {
         self.image = i
 //        self.image = i.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

@@ -49,7 +49,7 @@ extension Unit {
             return managedProgressId
         }
         set(value) {
-            managedProgressId = progressId
+            managedProgressId = value
         }
     }
     

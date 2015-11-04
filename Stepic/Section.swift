@@ -26,8 +26,8 @@ class Section: NSManagedObject, JSONInitializable {
         title = json["title"].stringValue
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
-        progressId = json["progress"].stringValue
-
+        progressId = json["progress"].string
+//        print("initialized section \(id) with progress id -> \(progressId)")
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])

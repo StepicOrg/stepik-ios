@@ -11,10 +11,9 @@ import SwiftyJSON
 
 
 protocol JSONInitializable {
-    typealias IdType
     
     init(json: JSON)
     func update(json json: JSON)
     
-    var id : IdType {get set}
+    var id : Int {get set}
 }

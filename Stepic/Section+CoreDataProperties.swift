@@ -51,7 +51,7 @@ extension Section {
             return managedProgressId
         }
         set(value) {
-            managedProgressId = progressId
+            managedProgressId = value
         }
     }
     
