@@ -13,7 +13,7 @@ import SwiftyJSON
 class Video: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
-    
+        
     convenience required init(json: JSON){
         self.init()
         initialize(json)
@@ -52,7 +52,7 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
-    var download : TCBlobDownload? = nil
+    var download : VideoDownload? = nil
     
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Void->Void)) {
         let url = getUrlForQuality(quality)
@@ -79,7 +79,7 @@ class Video: NSManagedObject, JSONInitializable {
         
         let ext = url.pathExtension!
         
-        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
+        let download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 progress(prog)
             }, completion: 
@@ -98,11 +98,13 @@ class Video: NSManagedObject, JSONInitializable {
                 }
                 completion()
         })
+        self.download = VideoDownload(download: download, videoId: id)
     }
     
     func cancelStore() {
-        if let d = download {
+        if let d = download?.download {
             d.downloadTask.cancel()
+            download = nil
         }
     }
     
@@ -114,6 +116,7 @@ class Video: NSManagedObject, JSONInitializable {
                 print("file successfully removed")
                 self.managedCachedPath = nil
                 CoreDataHelper.instance.save()
+                download = nil
                 return true
             }
             catch let error as NSError {

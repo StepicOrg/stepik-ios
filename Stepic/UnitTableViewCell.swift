@@ -42,8 +42,24 @@ class UnitTableViewCell: UITableViewCell {
         if let c = unit.lesson?.isCached {
             if c { 
                 downloadButton.state = .Downloaded 
-            } else { 
-                downloadButton.state = .StartDownload 
+            } else if unit.lesson!.isDownloading { 
+                
+                downloadButton.state = .Downloading
+                downloadButton.stopDownloadButton?.progress = CGFloat(unit.lesson!.totalProgress)
+                
+                unit.lesson?.storeProgress = {
+                    id, prog in
+                    self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
+                }
+                
+                unit.lesson?.storeCompletion = {
+                    id in
+                    self.downloadButton.state = .Downloaded
+                }
+                
+                
+            } else {
+                downloadButton.state = .StartDownload
             }
         } 
         

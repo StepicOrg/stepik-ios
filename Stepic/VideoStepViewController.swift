@@ -13,12 +13,20 @@ class VideoStepViewController: UIViewController {
 
     var moviePlayer : MPMoviePlayerController? = nil
     var video : Video!
+
+    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //TODO : Find out the reasons of such behavior!
-
+        
+        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL))
+        
         var url : NSURL!
         if video.isCached {
             url = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
@@ -38,25 +46,36 @@ class VideoStepViewController: UIViewController {
 //                player.controlStyle = MPMovieControlStyle.Embedded
                 player.movieSourceType = MPMovieSourceType.File
                 player.repeatMode = MPMovieRepeatMode.One
-                player.play()
+//                player.play()
+                
                 self.view.addSubview(player.view)
+                self.moviePlayer?.view.hidden = true
             }
         }
         
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func playButtonPressed(sender: UIButton) {
+        self.moviePlayer?.view.hidden = false
+        self.thumbnailImageView.hidden = true
+        self.playButton.hidden = true
+        self.moviePlayer?.play()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(animated: Bool) {
-        if let player = self.moviePlayer {
-            if player.playbackState != MPMoviePlaybackState.Playing {
-                player.play()
-            }
-        }
+//        thumbnailImageView.hidden = false
+//        moviePlayer?.view.hidden = true
+//        if let player = self.moviePlayer {
+//            if player.playbackState != MPMoviePlaybackState.Playing {
+//                player.play()
+//            }
+//        }
     }
     
     override func viewDidDisappear(animated: Bool) {

@@ -1225,6 +1225,90 @@
             </objects>
             <point key="canvasLocation" x="4782" y="1260"/>
         </scene>
+        <!--Web Step View Controller-->
+        <scene sceneID="AI2-zS-omt">
+            <objects>
+                <viewController storyboardIdentifier="WebStepViewController2" id="UeN-Pc-t7N" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D2Z-ck-bZT"/>
+                        <viewControllerLayoutGuide type="bottom" id="NgJ-VI-VSF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DFb-XC-n0J">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlZ-CK-l8S">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXQ-5T-1GI" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cd1-3k-hgl">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
+                                                <animations/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="247" placeholder="YES" id="LEg-cC-55G"/>
+                                                </constraints>
+                                            </webView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pm4-LI-ezg">
+                                                <rect key="frame" x="0.0" y="257" width="600" height="335"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="335" placeholder="YES" id="DZc-zc-SsG"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="jDc-qk-YHF" kind="embed" identifier="onlineAttemptSegue" id="gHE-a5-huL"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Cd1-3k-hgl" firstAttribute="top" secondItem="ZXQ-5T-1GI" secondAttribute="top" id="4jY-4U-2Xa"/>
+                                            <constraint firstItem="pm4-LI-ezg" firstAttribute="leading" secondItem="ZXQ-5T-1GI" secondAttribute="leading" id="CiR-Na-HbG"/>
+                                            <constraint firstAttribute="trailing" secondItem="pm4-LI-ezg" secondAttribute="trailing" id="JF8-X8-F9n"/>
+                                            <constraint firstItem="pm4-LI-ezg" firstAttribute="top" secondItem="Cd1-3k-hgl" secondAttribute="bottom" constant="8" id="Mv5-YS-mXy"/>
+                                            <constraint firstItem="Cd1-3k-hgl" firstAttribute="leading" secondItem="ZXQ-5T-1GI" secondAttribute="leading" id="PVi-Ib-ch8"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cd1-3k-hgl" secondAttribute="trailing" id="Sbo-am-DVh"/>
+                                            <constraint firstAttribute="bottom" secondItem="pm4-LI-ezg" secondAttribute="bottom" constant="8" id="ZVh-SJ-Q1n"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZXQ-5T-1GI" secondAttribute="bottom" id="ICy-yn-EpB"/>
+                                    <constraint firstItem="ZXQ-5T-1GI" firstAttribute="top" secondItem="wlZ-CK-l8S" secondAttribute="top" id="ImV-ve-4N9"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZXQ-5T-1GI" secondAttribute="trailing" id="dR7-Xd-ZYT"/>
+                                    <constraint firstItem="ZXQ-5T-1GI" firstAttribute="leading" secondItem="wlZ-CK-l8S" secondAttribute="leading" id="j45-9x-aof"/>
+                                    <constraint firstItem="ZXQ-5T-1GI" firstAttribute="leading" secondItem="wlZ-CK-l8S" secondAttribute="leading" id="pZW-Y3-iJY"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZXQ-5T-1GI" secondAttribute="bottom" id="vI0-ki-QIt"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZXQ-5T-1GI" secondAttribute="trailing" id="w7y-Sa-FSQ"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ICy-yn-EpB"/>
+                                        <exclude reference="j45-9x-aof"/>
+                                        <exclude reference="w7y-Sa-FSQ"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="wlZ-CK-l8S" secondAttribute="trailing" constant="-20" id="9RN-3c-2Sv"/>
+                            <constraint firstItem="wlZ-CK-l8S" firstAttribute="top" secondItem="D2Z-ck-bZT" secondAttribute="bottom" constant="-20" id="CP7-z9-dqc"/>
+                            <constraint firstItem="NgJ-VI-VSF" firstAttribute="top" secondItem="wlZ-CK-l8S" secondAttribute="bottom" id="HgG-wE-tUS"/>
+                            <constraint firstItem="wlZ-CK-l8S" firstAttribute="leading" secondItem="DFb-XC-n0J" secondAttribute="leadingMargin" constant="-20" id="T3C-zH-scD"/>
+                            <constraint firstItem="ZXQ-5T-1GI" firstAttribute="width" secondItem="DFb-XC-n0J" secondAttribute="width" id="cOC-jQ-6De"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gw8-gH-Itc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3348" y="2691"/>
+        </scene>
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
             <objects>
@@ -1236,9 +1320,41 @@
                     <view key="view" contentMode="scaleToFill" id="eOu-jp-hBO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pKw-C7-Y9N">
+                                <rect key="frame" x="0.0" y="131" width="600" height="338"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pKw-C7-Y9N" secondAttribute="height" multiplier="16:9" id="Vyc-yQ-fpJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC4-nY-c6L">
+                                <rect key="frame" x="275" y="275" width="50" height="50"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5LT-2m-88H"/>
+                                    <constraint firstAttribute="width" constant="50" id="Pvt-Ch-E4a"/>
+                                </constraints>
+                                <state key="normal" image="stepic_play"/>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="kVm-QE-2Cq"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mC4-nY-c6L" firstAttribute="centerX" secondItem="pKw-C7-Y9N" secondAttribute="centerX" id="6dR-Rr-VEP"/>
+                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="eOu-jp-hBO" secondAttribute="centerY" id="GBF-9u-zUN"/>
+                            <constraint firstItem="mC4-nY-c6L" firstAttribute="centerY" secondItem="pKw-C7-Y9N" secondAttribute="centerY" id="ML7-NF-DQL"/>
+                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="leading" secondItem="eOu-jp-hBO" secondAttribute="leadingMargin" constant="-20" id="mWm-l6-zSJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pKw-C7-Y9N" secondAttribute="trailing" constant="-20" id="pP8-h4-HdZ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="playButton" destination="mC4-nY-c6L" id="PYp-XO-Z93"/>
+                        <outlet property="thumbnailImageView" destination="pKw-C7-Y9N" id="2b7-YI-pg3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qo3-wV-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1382,6 +1498,34 @@
             </objects>
             <point key="canvasLocation" x="1041" y="722"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Vsj-mX-beg">
+            <objects>
+                <viewController id="jDc-qk-YHF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S7n-je-Xbw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="335"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xme-D1-qs8">
+                                <rect key="frame" x="196" y="151" width="208" height="33"/>
+                                <animations/>
+                                <state key="normal" title="Press to solve on the website">
+                                    <color key="titleColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xme-D1-qs8" firstAttribute="centerY" secondItem="S7n-je-Xbw" secondAttribute="centerY" id="KPT-6A-lU3"/>
+                            <constraint firstItem="xme-D1-qs8" firstAttribute="centerX" secondItem="S7n-je-Xbw" secondAttribute="centerX" id="MJ8-DL-3hI"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4R9-dU-AV9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3348" y="3367.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Circled User Male" width="25" height="25"/>
@@ -1393,6 +1537,7 @@
         <image name="Info" width="25" height="25"/>
         <image name="btn_signin_active" width="250" height="44"/>
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
+        <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LaP-cg-j2K"/>

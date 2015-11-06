@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DownloadButton
 
 class SectionTableViewCell: UITableViewCell {
 
@@ -14,12 +15,16 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var datesLabel: UILabel!
     @IBOutlet weak var progressView: UIView!
         
+    @IBOutlet weak var downloadButton: PKDownloadButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
         // Initialization code
     }
 
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         progressView.setRoundedBounds(width: 0)
@@ -44,10 +49,10 @@ class SectionTableViewCell: UITableViewCell {
     class func heightForCellInSection(section: Section) -> CGFloat {
         let titleText = "\(section.position). \(section.title)"
         let datesText = SectionTableViewCell.getTextFromSection(section)
-        return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 73) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 73))
+        return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117))
     }
     
-    func initWithSection(section: Section) {
+    func initWithSection(section: Section, delegate : PKDownloadButtonDelegate) {
         titleLabel.text = "\(section.position). \(section.title)"
         
         datesLabel.text = SectionTableViewCell.getTextFromSection(section)
@@ -58,13 +63,24 @@ class SectionTableViewCell: UITableViewCell {
                 progressView.backgroundColor = UIColor.stepicGreenColor()
             }
         }
+    
+        if section.isCached { 
+            downloadButton.state = .Downloaded 
+        } else { 
+            downloadButton.state = .StartDownload 
+        }
+        
+        downloadButton.tag = section.position - 1
+        downloadButton.delegate = delegate
         
         if !section.isActive {
             titleLabel.enabled = false
             datesLabel.enabled = false
+            downloadButton.hidden = true
         } else {
             titleLabel.enabled = true
             datesLabel.enabled = true
+            downloadButton.hidden = false
         }
 //        if let cr = section.beginDate?.compare(NSDate()) {
 //            if cr = NSComparisonResult.OrderedDescending {

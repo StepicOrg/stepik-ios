@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import DownloadButton
 
 class SectionsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
-    
+    var didRefresh = false
     var course : Course! 
     
     override func viewDidLoad() {
@@ -36,12 +37,15 @@ class SectionsViewController: UIViewController {
     }
 
     func refreshSections() {
+        didRefresh = false
         course.loadAllSections(success: {
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
+            self.didRefresh = true
         }, error: {
             //TODO : Add alert
             self.refreshControl.endRefreshing()
+            self.didRefresh = true
         })
     }
     
@@ -102,8 +106,97 @@ extension SectionsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SectionTableViewCell", forIndexPath: indexPath) as! SectionTableViewCell
         
-        cell.initWithSection(course.sections[indexPath.row])
+        cell.initWithSection(course.sections[indexPath.row], delegate: self)
         
         return cell
     }
+}
+
+extension SectionsViewController : PKDownloadButtonDelegate {
+    
+    private func askForRemove(okHandler ok: Void->Void, cancelHandler cancel: Void->Void) {
+        let alert = UIAlertController(title: NSLocalizedString("RemoveVideoTitle", comment: ""), message: NSLocalizedString("RemoveVideoBody", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.Destructive, handler: {
+            action in
+            ok()
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
+            action in
+            cancel()
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    private func storeSection(section: Section, downloadButton: PKDownloadButton!) {
+        section.storeVideos(downloadButton.tag, progress: {
+            id, progress in
+            downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+            }, completion: {
+                id in
+                downloadButton.state = PKDownloadButtonState.Downloaded
+        })
+    }
+    
+    func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        if !didRefresh {
+            //TODO : Add alert
+            print("wait until the section is refreshed")
+            return
+        }
+        
+        switch (state) {
+        case PKDownloadButtonState.StartDownload : 
+            
+            if !ConnectionHelper.shared.isReachable {
+                //TODO : Add alert
+                print("Not reachable to download")
+                return
+            }
+            
+            downloadButton.state = PKDownloadButtonState.Downloading
+            
+            if course.sections[downloadButton.tag].units.count != 0 {
+                storeSection(course.sections[downloadButton.tag], downloadButton: downloadButton)
+            } else {
+                course.sections[downloadButton.tag].loadUnits(completion: { 
+                    self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
+                }, error: {
+                    print("Error while downloading section's units")
+                })
+            }
+            break
+            
+        case PKDownloadButtonState.Downloading :
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
+            
+            course.sections[downloadButton.tag].cancelVideoStore(completion: {
+                //                downloadButton.pendingView?.stopSpin()
+                downloadButton.state = PKDownloadButtonState.StartDownload
+            })
+            break
+            
+        case PKDownloadButtonState.Downloaded :
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
+            
+            askForRemove(okHandler: {
+                self.course.sections[downloadButton.tag].removeFromStore(completion: {
+                    //                    downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.StartDownload
+                })
+                }, cancelHandler: {
+                    //                downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.Downloaded
+            })
+            break
+            
+        case PKDownloadButtonState.Pending: 
+            break
+        }
+    }
+    
 }

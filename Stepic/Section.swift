@@ -132,6 +132,82 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
+    
+    func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
+        
+        var totalProgress : Float = 0
+        var completedUnits : Int = 0
+        
+        for id in 0..<units.count {
+            var unitProgress : Float = 0.0
+            units[id].lesson?.storeVideos(id, progress: { 
+                (unitId, prog) -> Void in
+                totalProgress = totalProgress - unitProgress + prog
+                unitProgress = prog
+                progress(id, totalProgress/Float(self.units.count))
+            }, completion: { 
+                (unitId) -> Void in
+                completedUnits++
+                if completedUnits == self.units.count {
+                    self.isCached = true
+                    completion(id)
+                }
+            })
+        }
+    }
+    
+    func cancelVideoStore(completion completion : Void -> Void) {
+        var completedUnits : Int = 0
+        for unit in units {
+            if let lesson = unit.lesson {
+                if !lesson.isCached {
+                    lesson.cancelVideoStore(completion: {
+                        completedUnits++
+                        if completedUnits == self.units.count {
+                            self.isCached = false
+                            completion()
+                        }
+                    })
+                } else {
+                    lesson.removeFromStore(completion: {
+                        completedUnits++
+                        if completedUnits == self.units.count {
+                            self.isCached = false
+                            completion()
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func removeFromStore(completion completion: Void -> Void) {
+        var completedUnits : Int = 0
+        for unit in units {
+            if let lesson = unit.lesson {
+                if !lesson.isCached {
+                    print("not cached lesson can not be removed!!!")
+                    lesson.cancelVideoStore(completion: {
+                        completedUnits++
+                        if completedUnits == self.units.count {
+                            self.isCached = false
+                            completion()
+                        }
+                    })
+                } else {
+                    lesson.removeFromStore(completion: {
+                        completedUnits++
+                        if completedUnits == self.units.count {
+                            self.isCached = false
+                            completion()
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    
 //    func loadIfNotLoaded(success success : (Void -> Void)) {
 //        if !loaded {
 //            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {

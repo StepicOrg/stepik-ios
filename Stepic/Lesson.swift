@@ -58,10 +58,23 @@ class Lesson: NSManagedObject, JSONInitializable {
         return res
     }
     
+    var downloads = [Int : VideoDownload]()
+    
+    var totalProgress : Float = 0
+    var isDownloading : Bool = false
+    
+    var storeProgress : ((Int, Float) -> Void)?
+    var storeCompletion : (Int -> Void)?
+    
+    
     func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
         
+        storeProgress = progress
+        storeCompletion = completion
+
+        isDownloading = true
         var videoCount : Int = 0
-        var totalProgress : Float = 0
+        totalProgress = 0
         var completedVideos : Int = 0
         
         for step in steps {
@@ -72,23 +85,34 @@ class Lesson: NSManagedObject, JSONInitializable {
             }
         }
             
+        if videoCount == 0 {
+            isDownloading = false
+            progress(id, 1)
+            completion(id)
+            return
+        }
+        
         for step in steps {
             if step.block.name == "video" {
                 if let vid = step.block.video {
                     var videoProgress : Float = 0.0
                     vid.store(VideosInfo.videoQuality, progress: {
                     prog in
-                        totalProgress = totalProgress - videoProgress + prog
+                        self.totalProgress = self.totalProgress - videoProgress + prog
                         videoProgress = prog
 //                        print("lesson progress is \(Int(totalProgress*100))%")
-                        progress(id, totalProgress/Float(videoCount))
+                        self.storeProgress?(id, self.totalProgress/Float(videoCount))
                     }, completion : {
                         completedVideos++
                         if completedVideos == videoCount {
                             self.isCached = true
-                            completion(id)
+                            self.isDownloading = false
+                            self.storeCompletion?(id)
                         }
                     })
+                    if let d = vid.download {
+                        downloads[vid.id] = d
+                    }
                 }
             }
         }
@@ -105,10 +129,13 @@ class Lesson: NSManagedObject, JSONInitializable {
                         } else {
                             vid.removeFromStore()
                         }
+                        self.downloads[vid.id] = nil
                     }
                 }
             }
+            self.isDownloading = false
             self.isCached = false
+            self.totalProgress = 0
             completion()
         }
     }
@@ -125,10 +152,13 @@ class Lesson: NSManagedObject, JSONInitializable {
                         } else {
                             vid.removeFromStore()
                         }
+                        self.downloads[vid.id] = nil
                     }
                 }
             }
+            self.isDownloading = false
             self.isCached = false
+            self.totalProgress = 0
             completion()
         }
     }

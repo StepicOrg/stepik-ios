@@ -21,6 +21,7 @@ extension Section {
     @NSManaged var managedSoftDeadline: NSDate?
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
+    @NSManaged var managedIsCached: NSNumber?
     @NSManaged var managedProgressId : String?
 
     @NSManaged var managedUnitsArray : NSObject?
@@ -109,6 +110,16 @@ extension Section {
         }
     }
         
+    var isCached : Bool {
+        get {
+            return managedIsCached?.boolValue ?? false
+        }
+        set(value) {
+            self.managedIsCached = value
+            CoreDataHelper.instance.save()
+        }
+    }
+    
     var course : Course? {
         return managedCourse
     }
