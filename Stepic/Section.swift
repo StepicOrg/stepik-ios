@@ -132,36 +132,39 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-//    func countProgress(units : [(Unit, Int)]) -> Float {
-//        var totalProgress : Float = 0
-//        for o in units {
-//            totalProgress += o.0.lesson!.totalProgress 
-//        }
-//        
-//    }
+    func countProgress(lessons : [(Lesson, Int)]) -> Float {
+        var totalProgress : Float = 0
+        for o in lessons {
+            totalProgress += o.0.totalProgress 
+        }
+        return totalProgress / Float(lessons.count)
+    }
+    
+    func isCompleted(lessons : [(Lesson, Int)]) -> Bool {
+        for l in lessons {
+            if l.0.isDownloading == true {
+                return false
+            }
+        }
+        return true
+    }
     
     var storeProgress : ((Int, Float) -> Void)? {
         didSet {
             print("section store progress handler changed")
-            for id in 0 ..< units.count {
-                var unitProgress : Float = 0.0
-                if let lesson = units[id].lesson {
-                    if !lesson.isCached { 
-                        lesson.storeProgress = {
-                            (unitId, prog) -> Void in
-                            
-                            self.goodProgress = self.totalProgress/Float(self.unitsCount)
-                            print(self.k)
-                            self.storeProgress?(id, self.goodProgress)
-                        }
-                        
-                        lesson.storeCompletion = {
-                            (unitId) -> Void in
-                            for unit in self.units {
-                                if unit.lesson?.isDownloading == true {
-                                    return
-                                }
-                            }
+            for l in loadingLessons {
+                let lesson = l.0
+                let id = l.1
+                if !lesson.isCached { 
+                    lesson.storeProgress = {
+                        (unitId, prog) -> Void in
+                        self.goodProgress = self.countProgress(self.loadingLessons)
+                        self.storeProgress?(id, self.goodProgress)
+                    }
+                    
+                    lesson.storeCompletion = {
+                        (unitId) -> Void in
+                        if self.isCompleted(self.loadingLessons) {
                             self.storeCompletion?(id)
                         }
                     }
@@ -169,7 +172,7 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
     }
-    var k = "not changed"
+//    var k = "not changed"
     var storeCompletion : (Int -> Void)? {
         didSet {
             print("section store completion handler changed")
@@ -192,67 +195,49 @@ class Section: NSManagedObject, JSONInitializable {
         return true
     }
     
-    var completedUnits : Int = 0
-    var unitsCount : Int = 0
-    var totalProgress : Float = 0
+    var loadingLessons : [(Lesson, Int)] = []
     
     func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
         
         storeProgress = progress
         storeCompletion = completion
-        
-        completedUnits = 0
-        unitsCount = 0
-        totalProgress = 0
+
         goodProgress = 0
         
-//        var loadingLessons : [(Lesson, Int)] = []
-//        
-//        for id in 0 ..< units.count { 
-//            if let lesson = units[id].lesson {
-//                if !lesson.isCached && lesson.isDownloading {
-//                    loadingLessons += [(lesson, id)]
-//                }
-//            }
-//        }
+        loadingLessons = []
         
-        for unit in units {
-            if let lesson = unit.lesson {
-                if !lesson.isCached {
-                    unitsCount++
+        for id in 0 ..< units.count { 
+            if let lesson = units[id].lesson {
+                if !lesson.isCached && !lesson.isDownloading {
+                    loadingLessons += [(lesson, id)]
                 }
             }
         }
-        
-        for id in 0 ..< units.count {
-            var unitProgress : Float = 0.0
-            if let lesson = units[id].lesson {
-                if !lesson.isCached { 
-                    let loadblock = {
-                        lesson.storeVideos(id, progress: { 
-                        (unitId, prog) -> Void in
-                        print("load block")
-                        self.totalProgress = self.totalProgress - unitProgress + prog
-                        unitProgress = prog
-                        self.goodProgress = self.totalProgress/Float(self.unitsCount)
-                        print(self.k)
-                        self.storeProgress?(id, self.goodProgress)
-                        }, completion: { 
-                            (unitId) -> Void in
-                            self.completedUnits++
-                            if self.completedUnits == self.unitsCount {
-                                self.storeCompletion?(id)
-                            }
-                    })}
-                    if lesson.steps.count != 0 {
-                        loadblock()
-                    } else {
-                        lesson.loadSteps(completion: {
-                            loadblock()
-                        }, refresh: false)
-                    }
 
-                }
+        
+        for ll in loadingLessons { 
+            
+            let lesson = ll.0
+            let id = ll.1
+            
+            let loadblock = {
+                lesson.storeVideos(id, progress: { 
+                (unitId, prog) -> Void in
+                    self.goodProgress = self.countProgress(self.loadingLessons)
+                    self.storeProgress?(id, self.goodProgress)
+                }, completion: { 
+                    (unitId) -> Void in
+                    if self.isCompleted(self.loadingLessons) {
+                        self.storeCompletion?(id)
+                    }
+                })
+            }
+            if lesson.steps.count != 0 {
+                loadblock()
+            } else {
+                lesson.loadSteps(completion: {
+                    loadblock()
+                }, refresh: false)
             }
         }
     }

@@ -57,15 +57,14 @@ class SectionTableViewCell: UITableViewCell {
             downloadButton.state = .Downloaded 
         } else if section.isDownloading { 
             
-            print("update download button while downloading")
+//            print("update download button while downloading")
             downloadButton.state = .Downloading
             downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
             
-            section.k = "changed"
             section.storeProgress = {
                 id, prog in
                 self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
-                print("set progress = \(prog)")
+//                print("set progress = \(prog)")
             }
             
             section.storeCompletion = {
