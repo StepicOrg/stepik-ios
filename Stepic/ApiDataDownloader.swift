@@ -207,7 +207,7 @@ class ApiDataDownloader: NSObject {
         Alamofire.request(.GET, "https://stepic.org/api/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
-            print(json)
+//            print(json)
             
             if let e = error {
                 failure(error: e)

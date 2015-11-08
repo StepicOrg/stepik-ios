@@ -20,6 +20,7 @@ class SectionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        progressView.setRoundedBounds(width: 0)
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
         // Initialization code
     }
@@ -27,7 +28,6 @@ class SectionTableViewCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        progressView.setRoundedBounds(width: 0)
 
         // Configure the view for the selected state
     }
@@ -52,6 +52,32 @@ class SectionTableViewCell: UITableViewCell {
         return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117))
     }
     
+    func updateDownloadButton(section: Section) {
+        if section.isCached { 
+            downloadButton.state = .Downloaded 
+        } else if section.isDownloading { 
+            
+            print("update download button while downloading")
+            downloadButton.state = .Downloading
+            downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
+            
+            section.k = "changed"
+            section.storeProgress = {
+                id, prog in
+                self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
+                print("set progress = \(prog)")
+            }
+            
+            section.storeCompletion = {
+                id in
+                self.downloadButton.state = .Downloaded
+            }
+            
+        } else {
+            downloadButton.state = .StartDownload
+        }
+    }
+    
     func initWithSection(section: Section, delegate : PKDownloadButtonDelegate) {
         titleLabel.text = "\(section.position). \(section.title)"
         
@@ -63,12 +89,8 @@ class SectionTableViewCell: UITableViewCell {
                 progressView.backgroundColor = UIColor.stepicGreenColor()
             }
         }
-    
-        if section.isCached { 
-            downloadButton.state = .Downloaded 
-        } else { 
-            downloadButton.state = .StartDownload 
-        }
+                
+        updateDownloadButton(section)
         
         downloadButton.tag = section.position - 1
         downloadButton.delegate = delegate

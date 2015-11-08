@@ -32,18 +32,23 @@ class Lesson: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func loadSteps(completion completion: (Void -> Void)) {
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
-            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
-                newSteps in 
-                self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-                CoreDataHelper.instance.save()
-                completion()
-                }, failure: {
-                    error in
-                    print("Error while downloading units")
+    func loadSteps(completion completion: (Void -> Void), refresh : Bool = true) {
+        let getStepsBlock = {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
+            newSteps in 
+            self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
+            CoreDataHelper.instance.save()
+            completion()
+            }, failure: {
+                error in
+                print("Error while downloading units")
+        })}
+        if refresh {
+            AuthentificationManager.sharedManager.autoRefreshToken(success: {
+                getStepsBlock()
             })
-        }) 
+        } else {
+            getStepsBlock()
+        }
     }
     
     func getVideoURLs() -> [String] {
@@ -63,9 +68,12 @@ class Lesson: NSManagedObject, JSONInitializable {
     var totalProgress : Float = 0
     var isDownloading : Bool = false
     
-    var storeProgress : ((Int, Float) -> Void)?
+    var storeProgress : ((Int, Float) -> Void)? {
+        didSet {
+            print("lesson store progress handler did change")
+        }
+    }
     var storeCompletion : (Int -> Void)?
-    
     
     func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
         
@@ -87,6 +95,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             
         if videoCount == 0 {
             isDownloading = false
+            isCached = true
             progress(id, 1)
             completion(id)
             return

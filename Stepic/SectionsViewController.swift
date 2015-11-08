@@ -35,7 +35,12 @@ class SectionsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    
     func refreshSections() {
         didRefresh = false
         course.loadAllSections(success: {
@@ -162,7 +167,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
                 storeSection(course.sections[downloadButton.tag], downloadButton: downloadButton)
             } else {
                 course.sections[downloadButton.tag].loadUnits(completion: { 
-                    self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
+                self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
                 }, error: {
                     print("Error while downloading section's units")
                 })

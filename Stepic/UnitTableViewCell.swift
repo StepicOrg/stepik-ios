@@ -50,6 +50,7 @@ class UnitTableViewCell: UITableViewCell {
                 unit.lesson?.storeProgress = {
                     id, prog in
                     self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
+//                    print("lesson store progress")
                 }
                 
                 unit.lesson?.storeCompletion = {
