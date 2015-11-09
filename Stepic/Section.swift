@@ -135,7 +135,7 @@ class Section: NSManagedObject, JSONInitializable {
     func countProgress(lessons : [(Lesson, Int)]) -> Float {
         var totalProgress : Float = 0
         for o in lessons {
-            totalProgress += o.0.totalProgress 
+            totalProgress += o.0.goodProgress 
         }
         return totalProgress / Float(lessons.count)
     }

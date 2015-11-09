@@ -71,6 +71,8 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func registerPressed(sender: UIButton) {
+        let registerUrl = "https://stepic.org/accounts/signup/?next=/"
+        UIApplication.sharedApplication().openURL(NSURL(string: registerUrl)!)
     }
     
     @IBAction func textFieldDidBeginEditing(sender: UITextField) {

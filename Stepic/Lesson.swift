@@ -67,6 +67,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     var downloads = [Int : VideoDownload]()
     
     var totalProgress : Float = 0
+    var goodProgress : Float = 0
     var isDownloading : Bool = false
     
     var storeProgress : ((Int, Float) -> Void)? 
@@ -93,6 +94,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         if videoCount == 0 {
             isDownloading = false
             isCached = true
+            self.goodProgress = 1
             progress(id, 1)
             completion(id)
             return
@@ -107,6 +109,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                         self.totalProgress = self.totalProgress - videoProgress + prog
                         videoProgress = prog
 //                        print("lesson progress is \(Int(totalProgress*100))%")
+                        self.goodProgress = self.totalProgress/Float(videoCount)
                         self.storeProgress?(id, self.totalProgress/Float(videoCount))
                     }, completion : {
                         completedVideos++

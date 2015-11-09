@@ -53,6 +53,7 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     var download : VideoDownload? = nil
+    var totalProgress : Float = 0
     
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Void->Void)) {
         let url = getUrlForQuality(quality)
@@ -81,6 +82,7 @@ class Video: NSManagedObject, JSONInitializable {
         
         let download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
             prog, bytesWritten, bytesExpectedToWrite in
+                self.totalProgress = prog
                 progress(prog)
             }, completion: 
             {

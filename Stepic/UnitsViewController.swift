@@ -166,23 +166,20 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloading :
-            downloadButton.state = PKDownloadButtonState.Pending
-            downloadButton.pendingView?.startSpin()
-            
+//            downloadButton.state = PKDownloadButtonState.Pending
+//            downloadButton.pendingView?.startSpin()
+            downloadButton.state = PKDownloadButtonState.StartDownload
+
             section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
 //                downloadButton.pendingView?.stopSpin()
-                downloadButton.state = PKDownloadButtonState.StartDownload
             })
             break
             
         case PKDownloadButtonState.Downloaded :
-            downloadButton.state = PKDownloadButtonState.Pending
-            downloadButton.pendingView?.startSpin()
-
             askForRemove(okHandler: {
+                downloadButton.state = PKDownloadButtonState.StartDownload
                 self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
 //                    downloadButton.pendingView?.stopSpin()
-                    downloadButton.state = PKDownloadButtonState.StartDownload
                 })
             }, cancelHandler: {
 //                downloadButton.pendingView?.stopSpin()
