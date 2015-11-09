@@ -74,7 +74,9 @@ class Section: NSManagedObject, JSONInitializable {
                     print("Error while downloading units")
                     errorHandler()
             })
-        }) 
+            }, failure:  {
+                errorHandler()
+            })
     }
 
     func loadProgressesForUnits(completion: (Void->Void)) {

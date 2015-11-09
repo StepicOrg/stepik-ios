@@ -1,8 +1,8 @@
 EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Alamofire.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DownloadButton.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FLKAutoLayout.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MLInputDodger.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SDWebImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SVProgressHUD.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SwiftyJSON.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/TextFieldEffects.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "DownloadButton" -framework "FLKAutoLayout" -framework "MLInputDodger" -framework "SDWebImage" -framework "SVProgressHUD" -framework "SwiftyJSON" -framework "TextFieldEffects"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Alamofire.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DownloadButton.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FLKAutoLayout.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/HexColors.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MLInputDodger.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SDWebImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SVProgressHUD.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SwiftyJSON.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/TSMessages.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/TextFieldEffects.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "DownloadButton" -framework "FLKAutoLayout" -framework "HexColors" -framework "MLInputDodger" -framework "SDWebImage" -framework "SVProgressHUD" -framework "SwiftyJSON" -framework "TSMessages" -framework "TextFieldEffects"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods
 PODS_ROOT = ${SRCROOT}/Pods

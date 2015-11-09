@@ -41,6 +41,15 @@ class UnitsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if(self.refreshControl.refreshing) {
+            let offset = self.tableView.contentOffset
+            self.refreshControl.endRefreshing()
+            self.refreshControl.beginRefreshing()
+            self.tableView.contentOffset = offset
+        }
+    }
     
     func refreshUnits() {
         didRefresh = false

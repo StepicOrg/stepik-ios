@@ -12,4 +12,5 @@ pod "DownloadButton"
 pod 'SVProgressHUD'
 pod 'MLInputDodger'
 pod 'FLKAutoLayout'
+pod "TSMessages"
 #pod 'TCBlobDownloadSwift'

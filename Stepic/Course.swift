@@ -99,6 +99,8 @@ class Course: NSManagedObject, JSONInitializable {
                         print("error while loading section")
                         errorHandler()
                 })
+            }, failure:  {
+                errorHandler()
         })        
     }
     

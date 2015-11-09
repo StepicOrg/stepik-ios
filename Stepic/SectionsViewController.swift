@@ -37,9 +37,15 @@ class SectionsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.reloadData()
+        if(self.refreshControl.refreshing) {
+            let offset = self.tableView.contentOffset
+            self.refreshControl.endRefreshing()
+            self.refreshControl.beginRefreshing()
+            self.tableView.contentOffset = offset
+        }
     }
-    
     
     func refreshSections() {
         didRefresh = false
