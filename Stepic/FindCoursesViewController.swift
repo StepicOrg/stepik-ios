@@ -40,6 +40,16 @@ class FindCoursesViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if(self.refreshControl.refreshing) {
+            let offset = self.tableView.contentOffset
+            self.refreshControl.endRefreshing()
+            self.refreshControl.beginRefreshing()
+            self.tableView.contentOffset = offset
+        }
+    }
+    
     private func getCachedCourses(completion completion: (Void -> Void)?) {
         isRefreshing = true
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -62,7 +72,7 @@ class FindCoursesViewController: UIViewController {
     
     func refreshCourses() {
         isRefreshing = true
-        AuthentificationManager.sharedManager.autoRefreshToken { 
+        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.LOAD_FEATURED, enrolled: self.LOAD_ENROLLED, page: 1, success: { 
                 (ids, meta) -> Void in
@@ -94,7 +104,12 @@ class FindCoursesViewController: UIViewController {
                 }
                 
             })
-        }
+        }, failure:  {
+            self.isRefreshing = false
+            dispatch_async(dispatch_get_main_queue()) {
+                self.refreshControl.endRefreshing()
+            }
+        })
     }
 
     
@@ -120,6 +135,14 @@ class FindCoursesViewController: UIViewController {
     private var isRefreshing = false
     private var currentPage = 1
     
+    private var failedLoadingMore = false {
+        didSet {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+            }        
+        }
+    }
+    
     func needRefresh() -> Bool {
         if let m = meta {
             return m.hasNext
@@ -135,7 +158,7 @@ class FindCoursesViewController: UIViewController {
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthentificationManager.sharedManager.autoRefreshToken { 
+        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.LOAD_FEATURED, enrolled: self.LOAD_ENROLLED, page: self.currentPage + 1, success: { 
                 (ids, meta) -> Void in
@@ -148,28 +171,34 @@ class FindCoursesViewController: UIViewController {
                     TabsInfo.allCoursesIds += ids
 
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.refreshControl.endRefreshing()
+//                        self.refreshControl.endRefreshing()
                         self.tableView.reloadData()
                     }
                     
                     self.isLoadingMore = false
+                    self.failedLoadingMore = false
                     }, failure: { 
                         (error) -> Void in
                         print("failed downloading courses data in Next")
                         self.isLoadingMore = false
+                        self.failedLoadingMore = true
                 })
                 
                 }, failure: { 
                     (error) -> Void in
                     print("failed refreshing course ids in Next")
                     self.isLoadingMore = false
-                    
+                    self.failedLoadingMore = true
+
                     dispatch_async(dispatch_get_main_queue()) {
                         self.refreshControl.endRefreshing()
                     }
                     
             })
-        }
+        }, failure:  {
+            self.isLoadingMore = false                        
+            self.failedLoadingMore = true
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -219,9 +248,9 @@ extension FindCoursesViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == courses.count && needRefresh() {
             let cell = tableView.dequeueReusableCellWithIdentifier("RefreshTableViewCell", forIndexPath: indexPath) as! RefreshTableViewCell
-            cell.initWithMessage("Loading new courses...")
+            cell.initWithMessage("Loading new courses...", isRefreshing: !self.failedLoadingMore, refreshAction: { self.loadNextPage() })
             
-            loadNextPage()
+//            loadNextPage()
             
             return cell
         }
