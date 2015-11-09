@@ -84,11 +84,11 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBAction func signOutButtonPressed(sender: UIButton) {
         StepicAPI.shared.token = nil
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
-        self.presentViewController(vc, animated: true, completion: {
-//            self.dismissViewControllerAnimated(false, completion: nil)
-        })
+//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
+//        self.presentViewController(vc, animated: true, completion: {
+////            self.dismissViewControllerAnimated(false, completion: nil)
+//        })
         
     }
     

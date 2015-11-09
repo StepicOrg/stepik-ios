@@ -130,7 +130,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
             stepController.step = lesson!.steps[index]
-//            stepController.stepId = index
+            stepController.lesson = lesson
+            stepController.stepId = index + 1
             return stepController
         }
     } 

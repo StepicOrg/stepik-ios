@@ -23,6 +23,17 @@ class StepicAPI: NSObject {
             defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
             defaults.setValue(newToken?.tokenType, forKey: "token_type")
             defaults.synchronize()
+            if newToken == nil || newToken?.accessToken == ""  {
+                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
+                var topVC = UIApplication.sharedApplication().keyWindow?.rootViewController
+                while((topVC!.presentedViewController) != nil){
+                    topVC = topVC!.presentedViewController
+                }
+                topVC?.presentViewController(vc, animated: true, completion: {
+                    //            self.dismissViewControllerAnimated(false, completion: nil)
+                })
+            }
         }
         
         get {

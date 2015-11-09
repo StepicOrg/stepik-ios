@@ -18,6 +18,7 @@ extension Lesson {
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedTitle: String?
+    @NSManaged var managedSlug: String?
 
     @NSManaged var managedStepsArray : NSObject?
 
@@ -58,6 +59,15 @@ extension Lesson {
         }
         get {
             return managedTitle ?? "No title"
+        }
+    }
+    
+    var slug : String {
+        set(value){
+            self.managedSlug = value
+        }
+        get {
+            return managedSlug ?? ""
         }
     }
     

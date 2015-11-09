@@ -11,4 +11,5 @@ pod 'TextFieldEffects'
 pod "DownloadButton"
 pod 'SVProgressHUD'
 pod 'MLInputDodger'
+pod 'FLKAutoLayout'
 #pod 'TCBlobDownloadSwift'

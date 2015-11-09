@@ -24,6 +24,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         title = json["title"].stringValue
         isFeatured = json["is_featured"].boolValue
         isPublic = json["is_public"].boolValue
+        slug = json["slug"].stringValue
         
         stepsArray = json["steps"].arrayObject as! [Int]
     }
