@@ -40,21 +40,26 @@ class CoreDataHelper: NSObject {
     }
     
     func save() {
-        do {
-            try context.save()
-        }
-        catch {
-            print("SAVING ERROR")
-        }
+        self.context.performBlock({
+            do {
+                try self.context.save()
+            }
+            catch {
+                print("SAVING ERROR")
+            }
+        })
     }
     
 //    private var objectsToDelete : [NSManagedObject] = []
     
     func deleteFromStore(object: NSManagedObject, save s: Bool = true) {
-        context.deleteObject(object)
-        if s == true {
-            save()
-        }
+        self.context.performBlock({
+            self.context.deleteObject(object)
+            if s == true {
+                self.save()
+            }
+        })
+        
     }
     
     func deleteFromStore(objects objects: [NSManagedObject]) {

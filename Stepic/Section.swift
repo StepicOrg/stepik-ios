@@ -151,7 +151,6 @@ class Section: NSManagedObject, JSONInitializable {
     
     var storeProgress : ((Int, Float) -> Void)? {
         didSet {
-            print("section store progress handler changed")
             for l in loadingLessons {
                 let lesson = l.0
                 let id = l.1
@@ -173,11 +172,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
 //    var k = "not changed"
-    var storeCompletion : (Int -> Void)? {
-        didSet {
-            print("section store completion handler changed")
-        }
-    }
+    var storeCompletion : (Int -> Void)? 
     
     var goodProgress : Float = 0
     
@@ -255,13 +250,13 @@ class Section: NSManagedObject, JSONInitializable {
                         }
                     })
                 } else {
-                    lesson.removeFromStore(completion: {
-                        completedUnits++
-                        if completedUnits == self.units.count {
-                            self.goodProgress = 0
-                            completion()
-                        }
-                    })
+//                    lesson.removeFromStore(completion: {
+//                        completedUnits++
+//                        if completedUnits == self.units.count {
+//                            self.goodProgress = 0
+//                            completion()
+//                        }
+//                    })
                 }
             }
         }

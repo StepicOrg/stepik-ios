@@ -68,11 +68,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     var totalProgress : Float = 0
     var isDownloading : Bool = false
     
-    var storeProgress : ((Int, Float) -> Void)? {
-        didSet {
-            print("lesson store progress handler did change")
-        }
-    }
+    var storeProgress : ((Int, Float) -> Void)? 
     var storeCompletion : (Int -> Void)?
     
     func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
@@ -128,6 +124,10 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     func cancelVideoStore(completion completion : Void -> Void) {
+        if self.isCached {
+            completion()
+            return
+        }
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             for step in self.steps {
@@ -135,10 +135,10 @@ class Lesson: NSManagedObject, JSONInitializable {
                     if let vid = step.block.video {
                         if !vid.isCached { 
                             vid.cancelStore()
+                            self.downloads[vid.id] = nil
                         } else {
                             vid.removeFromStore()
                         }
-                        self.downloads[vid.id] = nil
                     }
                 }
             }
@@ -150,6 +150,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     func removeFromStore(completion completion: Void -> Void) {
+        print("entered lesson removeFromStore")
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             for step in self.steps {
@@ -168,10 +169,9 @@ class Lesson: NSManagedObject, JSONInitializable {
             self.isDownloading = false
             self.isCached = false
             self.totalProgress = 0
+            
             completion()
         }
     }
-    
-    
     
 }

@@ -102,21 +102,27 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     func cancelStore() {
+        print("Entered video cancelStore")
         if let d = download?.download {
             d.downloadTask.cancel()
             download = nil
+            print("Finished video cancelStore")
         }
     }
     
-    func removeFromStore() -> Bool {
+    func removeFromStore(save save: Bool = true) -> Bool {
+        print("Entered video removeFromStore")
         if isCached {
             do {
                 print("\nremoving file at \(cachedPath!)\n")
                 try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
                 print("file successfully removed")
                 self.managedCachedPath = nil
-                CoreDataHelper.instance.save()
+                if save {
+                    CoreDataHelper.instance.save()
+                }
                 download = nil
+                print("Finished video removeFromStore")
                 return true
             }
             catch let error as NSError {

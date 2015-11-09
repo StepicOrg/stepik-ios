@@ -56,6 +56,7 @@ class UnitTableViewCell: UITableViewCell {
                 unit.lesson?.storeCompletion = {
                     id in
                     self.downloadButton.state = .Downloaded
+                    CoreDataHelper.instance.save()
                 }
                 
                 
