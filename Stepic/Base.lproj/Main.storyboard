@@ -818,8 +818,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgq-Q2-Hep">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgq-Q2-Hep">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="086-sc-YZR">
@@ -1124,11 +1124,11 @@
                         <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="z7c-c8-8wj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1171,11 +1171,11 @@
                         <viewControllerLayoutGuide type="bottom" id="dbc-fW-0PT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eEo-OZ-NVq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1212,7 +1212,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1596,8 +1596,8 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ste-Lr-Bip"/>
-        <segue reference="qb1-8x-83E"/>
+        <segue reference="LaP-cg-j2K"/>
         <segue reference="Had-eU-CRB"/>
+        <segue reference="qb1-8x-83E"/>
     </inferredMetricsTieBreakers>
 </document>

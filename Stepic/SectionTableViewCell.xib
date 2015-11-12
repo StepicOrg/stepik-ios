@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5V-Tq-xKT">
-                        <rect key="frame" x="32" y="13" width="213" height="17"/>
+                        <rect key="frame" x="32" y="13" width="197" height="17"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Deadlines" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg0-TZ-sQv">
-                        <rect key="frame" x="32" y="38" width="213" height="17"/>
+                        <rect key="frame" x="32" y="38" width="197" height="17"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,12 +38,12 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hP-2C-G0O" customClass="PKDownloadButton">
-                        <rect key="frame" x="253" y="24" width="26" height="26"/>
+                        <rect key="frame" x="237" y="16" width="42" height="42"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="26" id="xj4-ho-Thq"/>
-                            <constraint firstAttribute="height" constant="26" id="zZ2-eQ-8NL"/>
+                            <constraint firstAttribute="width" constant="42" id="xj4-ho-Thq"/>
+                            <constraint firstAttribute="height" constant="42" id="zZ2-eQ-8NL"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="QKu-BZ-2u6" customClass="PKDownloadButton">
-                        <rect key="frame" x="278" y="8" width="26" height="26"/>
+                        <rect key="frame" x="262" y="0.0" width="42" height="42"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="81" id="Mte-X5-gQA"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="26" id="Nrv-pU-jDd"/>
-                            <constraint firstAttribute="width" constant="26" id="kwf-3s-PQo"/>
-                            <constraint firstAttribute="height" constant="26" id="n5C-Nl-Wes"/>
+                            <constraint firstAttribute="width" constant="42" id="kwf-3s-PQo"/>
+                            <constraint firstAttribute="height" constant="42" id="n5C-Nl-Wes"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="wEb-tZ-uEn"/>
                         </constraints>
                         <variation key="default">
@@ -34,7 +34,7 @@
                         </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-CU-R8q">
-                        <rect key="frame" x="32" y="11" width="238" height="21"/>
+                        <rect key="frame" x="32" y="11" width="222" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
