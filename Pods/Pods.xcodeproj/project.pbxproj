@@ -16,7 +16,6 @@
 		0C05C9F03818C9F7F395EE68E92B90A2 /* UIView+MLInputDodger.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B5AEC1915A8E9F2A7831195FC0F7B5B /* UIView+MLInputDodger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D3FF902AB94E284CDDF66F41269ADA6 /* PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDD7486EF738EE67EDF271A367667AE /* PKDownloadButton.m */; };
 		0EFD1FF643346FF85C83679F659672CA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735A5D12E9E4252964F80D00E5F1B24A /* Stream.swift */; };
-		0F09B9486ECFAFED088754AF63EBDA9E /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EF703B80CB57CBF040695A2082AB026 /* HexColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0FE558FD098A0BE292D804FCBBBC2B4F /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D519165221609BBD0AB2ACC99DF46 /* AkiraTextField.swift */; };
 		109FBD9302B4FB3DEC18FB292D75377C /* UIImage+PKDownloadButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 75CAA6775872527B2F4035C707C3E636 /* UIImage+PKDownloadButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		10E64FB4EDB4DA238EEC0CAD20B34E29 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78A0478B24F4F8BC12C37A101BDCB3F4 /* NotificationButtonBackground@2x.png */; };
@@ -52,6 +51,7 @@
 		4761D1BED8DEB75572C8455F1B87E1DB /* NSLayoutConstraint+FLKAutoLayoutDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E15FD11405D035BF46FB28BDCFA1B26 /* NSLayoutConstraint+FLKAutoLayoutDebug.m */; };
 		48DE4E4BEF10AE10933E81FE76C76032 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 22128828E73FFB9D14E18653EE74F339 /* SDWebImagePrefetcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4D163A93C671363D15016685C232DBCD /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = ED26F1F53E82EA3204062C3374B4462B /* NotificationBackgroundError.png */; };
+		4E5B4EEA50BEF0B4D0FE2394D3EB119A /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C724C144533516CB9E56EE7E3DEA5 /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4E7DD7D81DF5F467DFA74B59D95B2251 /* UIView+FLKAutoLayoutDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = B1897EBFAA67CFF40D96706A53C2B96A /* UIView+FLKAutoLayoutDebug.m */; };
 		50C474B590A9889FAD7520EA9B6A547D /* UIView+FLKAutoLayoutDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 58EC38198D7E5A6C58F3D82157C9A476 /* UIView+FLKAutoLayoutDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		521E7F289E442DB44A149862D191BBDC /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F86FFFB742D79BD6010389D2D2E4A711 /* TSMessage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -62,6 +62,7 @@
 		57CD049ACC2AA532C2EB5BC02E84C24D /* NotificationBackgroundSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AC67495D65F3651A0F2BF7E0D1B5FC5E /* NotificationBackgroundSuccess@2x.png */; };
 		58E29DC4D7C7E7DD654C5FC034F8EB82 /* UIScrollView+MLInputDodger.h in Headers */ = {isa = PBXBuildFile; fileRef = F3F005CB838BB49AA05589AB4B959D9C /* UIScrollView+MLInputDodger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58E5CD7685DC767CF7E557E073A43999 /* PKCircleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 793A27B98B7962AAF4E669FF81F53EC7 /* PKCircleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		596758BBEC68789E6C8928ECE3FC341C /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 71245913F5DC7AAA4B0C4F20E7F6DF56 /* HexColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AA4BC3C302D183905FE6A120C6E7D28 /* UIView+FLKAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C0BCE38C89DC468750CE6F53907EC3 /* UIView+FLKAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B2DFA7C3AC0677E885EA3266E623140 /* TSMessages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D707AA73556DCC1D78FDCE75D0C01B2B /* TSMessages-dummy.m */; };
 		5CC67C7D704C33B7A8C76053515777BF /* UIButton+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C148100ED8C57ED3D8D2ED9C3752A262 /* UIButton+WebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,7 +92,7 @@
 		848CEFBFC69DEBAF0E18885F3269F439 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6465D12FCA2D69025ED4754E1C027E9C /* ResponseSerialization.swift */; };
 		84D46DBFFF2584712C3393531EA4E0A5 /* PKCircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = B9F06D6A6341864F03618FE3E4DCEB23 /* PKCircleProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89338DBC09FDAEE9AABF9DB3786E6081 /* NSLayoutConstraint+PKDownloadButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 499DEB2C1F2501725EA0A58AA1F07F33 /* NSLayoutConstraint+PKDownloadButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C91BF53C3EF19AD26723EA56AD4B184 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B06746B2ABB415DC43286E9221B464 /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DCF5C0EE6AC7543935C51AA756864C0 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA323190CCD4BEC6F6EB0F2E3CBB6821 /* HexColors-dummy.m */; };
 		8EF3FCE724E5E13D4A64597ADB3E772D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D427E64110F35ACC9DF77FC375FED08 /* ImageIO.framework */; };
 		8FCE04C7936855626D9C81BA7AAD045B /* NSLayoutConstraint+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D982C08F7D07E3CD64010323872F47DF /* NSLayoutConstraint+PKDownloadButton.m */; };
 		901DCA8DC94D7702FD64EB097F8629BD /* TextFieldsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97B884B3C3A6D230BE6691F33C5D1C7 /* TextFieldsEffects.swift */; };
@@ -132,8 +133,8 @@
 		CAA01B65E5BF9E3CC9CC29EBB614705F /* NotificationBackgroundSuccessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 72865D557748746BC5F7F60A948DA255 /* NotificationBackgroundSuccessIcon.png */; };
 		CAFC22F7B74367BE3C28B17348C64C3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AC97C1B271BD67034FE09FADF57C1C /* Foundation.framework */; };
 		CB4B605648F778B2B529FEE258E03E61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AC97C1B271BD67034FE09FADF57C1C /* Foundation.framework */; };
-		CE984CB467CBD3D2E2F6F06CBB4E408C /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D759945C9DBA4A542BDE0DD8D97933C /* HexColors-dummy.m */; };
 		D192C5430105B46B21C9429FBAF64716 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AC97C1B271BD67034FE09FADF57C1C /* Foundation.framework */; };
+		D1E92AEC9F093E10C69F2B89A14F49F5 /* HexColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB38803692DC99DE2732884ABA0B1320 /* HexColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2DFA416977AE5D477997D9806084CE0 /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 374B2FF1BC7D6A75ED60AD5F9A4E058A /* TSBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D39B20327B1DAF6D8753ED5685DDE6DC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F35D62DE3E319679FA17EBC58310D6 /* MultipartFormData.swift */; };
 		D4C439628CE9B8F5D6A7902D7DF09435 /* UIButton+PKDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65869D2E71E268915F4A79D50EA98DD7 /* UIButton+PKDownloadButton.m */; };
@@ -164,7 +165,6 @@
 		F3ABBA0ADDAC3C16B3C235FA05C036EF /* NotificationBackgroundMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = C9ABDB384969D2A0970873BC25F380F7 /* NotificationBackgroundMessage.png */; };
 		F612F08081DDC1FCFBB8EF739413C74B /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BCC458FDD5F692BBB2BFC64BB5701FC /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F85BE416443B58EA9CE12A6882015D34 /* TSMessages-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DEA403D3908DFBC23CCC7EA14AEE770B /* TSMessages-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FBDCA85F7CFBC3DFA5134DB59A680242 /* HexColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DC9CB098CCA2B28302A8E90484784439 /* HexColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FDC3AAAD4C966C989F672449EC743924 /* NSData+ImageContentType.h in Headers */ = {isa = PBXBuildFile; fileRef = C58A67A3B295D803125C647763CCC144 /* NSData+ImageContentType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FE1F95F519342B9266EB69B23B4336CF /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3676A886027FB68EB1E9BA69A9DCE2B /* Error.swift */; };
 		FE75B12CE42647C92EB5EE62A3D46237 /* PKPendingView.h in Headers */ = {isa = PBXBuildFile; fileRef = A1746597C3F3FA9004333351F02683B3 /* PKPendingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -259,6 +259,7 @@
 
 /* Begin PBXFileReference section */
 		023E6E4FA19175E2C164ED18445B6949 /* YokoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YokoTextField.swift; path = TextFieldEffects/TextFieldEffects/YokoTextField.swift; sourceTree = "<group>"; };
+		032F3D4033E3679520F5426FEC24515D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0337E31F2330654FFFE150BD3403BFBA /* SDWebImage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SDWebImage.modulemap; sourceTree = "<group>"; };
 		03E9DA335840076E74CD036ECB9360BE /* PKStopDownloadButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKStopDownloadButton.m; path = Pod/Classes/PKStopDownloadButton.m; sourceTree = "<group>"; };
 		0700A0EDB7D49B2B23151F1233C4180F /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
@@ -268,9 +269,7 @@
 		0B1E193A573F3FBB59ACFE9BC105A31D /* SDWebImageDecoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDecoder.h; path = SDWebImage/SDWebImageDecoder.h; sourceTree = "<group>"; };
 		0B643E067A203F6BF9F2F2F1A5E4AEFA /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloaderOperation.m; path = SDWebImage/SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
 		0C39A26830BC879F8C80F8A9BAEC3DC7 /* Download.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Download.swift; path = Source/Download.swift; sourceTree = "<group>"; };
-		0EF703B80CB57CBF040695A2082AB026 /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
 		10E266DAB6052EF53E99FD0248EB442A /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
-		10EB344DF67627E76A9B0BA70A4D0E75 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 		11D26292330F83AE5330EEC549070FCE /* TSMessages.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TSMessages.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		124DCD65FE1D983D97751B2C446C7811 /* SDWebImageCompat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCompat.m; path = SDWebImage/SDWebImageCompat.m; sourceTree = "<group>"; };
 		15C1FF6DD19953553039C4041FAA6685 /* MLInputDodger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MLInputDodger.h; path = Classes/MLInputDodger.h; sourceTree = "<group>"; };
@@ -280,7 +279,6 @@
 		22128828E73FFB9D14E18653EE74F339 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImagePrefetcher.m; path = SDWebImage/SDWebImagePrefetcher.m; sourceTree = "<group>"; };
 		2260120402B1A6954EF023FEB171F0E7 /* MLInputDodgerRetractView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MLInputDodgerRetractView.h; path = Classes/MLInputDodgerRetractView.h; sourceTree = "<group>"; };
 		242F8C07E406F1BBC767C5B470EAD362 /* MadokaTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MadokaTextField.swift; path = TextFieldEffects/TextFieldEffects/MadokaTextField.swift; sourceTree = "<group>"; };
-		246F79C03127A6660B82A4256CB8EE0C /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
 		24B5E16F50C7F45C72AA14B4985C9E08 /* MLInputDodger-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MLInputDodger-dummy.m"; sourceTree = "<group>"; };
 		25D43B322A029D448E834B3143A08C82 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		25D6262BD27BB9517D2F108427519D4D /* DownloadButton.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = DownloadButton.modulemap; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		2C090F5FF994A5C771F8503E7E2A244E /* NSData+ImageContentType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+ImageContentType.m"; path = "SDWebImage/NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		2C28CFFE791CD3C36C8C76197235FB1F /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVIndefiniteAnimatedView.h; path = SVProgressHUD/SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		2C5813C9781356BA9B1B54AB833F74E2 /* MLInputDodger.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = MLInputDodger.bundle; path = Classes/MLInputDodger.bundle; sourceTree = "<group>"; };
-		2D759945C9DBA4A542BDE0DD8D97933C /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
 		2D804442172AD1F8388A11343E786B23 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31134FABB4D545DD821199EAA9D19034 /* MLInputDodger.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MLInputDodger.xcconfig; sourceTree = "<group>"; };
 		31D38AAC91EF78447A601061E71F4C2E /* HexColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HexColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -328,12 +325,12 @@
 		6731739D267F22CDECFE06E788345401 /* UIColor+PKDownloadButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+PKDownloadButton.m"; path = "Pod/Classes/UIColor+PKDownloadButton.m"; sourceTree = "<group>"; };
 		6863B739EF64E58ABACAAB4E5C6A34D6 /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
 		691D05FB719C5E3304974352C310258A /* TSMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSMessageView.m; path = Pod/Classes/TSMessageView.m; sourceTree = "<group>"; };
-		6DF8C7B6705E8250E5D02023A579E30F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E1B84AD20A2C1F6E22232703E20ACF2 /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
+		71245913F5DC7AAA4B0C4F20E7F6DF56 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
 		71E19EB2B349EF22EED8FA43B859152F /* FLKAutoLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLKAutoLayout-umbrella.h"; sourceTree = "<group>"; };
 		720CA23B750A9757233336D5E7A813EF /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		72865D557748746BC5F7F60A948DA255 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccessIcon.png; path = Pod/Assets/NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
 		735A5D12E9E4252964F80D00E5F1B24A /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Source/Stream.swift; sourceTree = "<group>"; };
-		74B06746B2ABB415DC43286E9221B464 /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
 		75807707F1F39975F589BB192DB73577 /* FLKAutoLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLKAutoLayout-prefix.pch"; sourceTree = "<group>"; };
 		75CAA6775872527B2F4035C707C3E636 /* UIImage+PKDownloadButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+PKDownloadButton.h"; path = "Pod/Classes/UIImage+PKDownloadButton.h"; sourceTree = "<group>"; };
 		762F88B7AC0D240AE98B10957780DC64 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
@@ -346,6 +343,7 @@
 		7E15FD11405D035BF46FB28BDCFA1B26 /* NSLayoutConstraint+FLKAutoLayoutDebug.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+FLKAutoLayoutDebug.m"; path = "FLKAutoLayout/NSLayoutConstraint+FLKAutoLayoutDebug.m"; sourceTree = "<group>"; };
 		81C5F7EB1628EAC3D75C2E96BB581A85 /* SDWebImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SDWebImage.xcconfig; sourceTree = "<group>"; };
 		81E83575E077590989F969D61729ADE6 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		840C724C144533516CB9E56EE7E3DEA5 /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
 		840EC348AAC86F9F290CA8106D08622F /* MLInputDodger.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MLInputDodger.modulemap; sourceTree = "<group>"; };
 		8573546F527C96539F270636B39F010D /* UIImage+PKDownloadButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+PKDownloadButton.m"; path = "Pod/Classes/UIImage+PKDownloadButton.m"; sourceTree = "<group>"; };
 		873E1CCF311D3D2E103D6CDA28A0B3D0 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarningIcon.png; path = Pod/Assets/NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
@@ -384,6 +382,7 @@
 		A535480DB1B0DF1B90AD0DE72A63E3AF /* PKDownloadButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PKDownloadButton.h; path = Pod/Classes/PKDownloadButton.h; sourceTree = "<group>"; };
 		A54ED2FC7616813B0D5EE18CE3D4884D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		A97B884B3C3A6D230BE6691F33C5D1C7 /* TextFieldsEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldsEffects.swift; path = TextFieldEffects/TextFieldEffects/TextFieldsEffects.swift; sourceTree = "<group>"; };
+		AAC97F34178E00D732B5EFA982AE0D10 /* HexColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HexColors.modulemap; sourceTree = "<group>"; };
 		AAD13EE23F66AEC96A83A139EF4BA845 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloader.h; path = SDWebImage/SDWebImageDownloader.h; sourceTree = "<group>"; };
 		AB0805B26DB1BAF2E74C92727033438C /* TSMessages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-prefix.pch"; sourceTree = "<group>"; };
 		AB6F2DAF27A3EC2184169FE717DDAE68 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
@@ -417,6 +416,7 @@
 		C7B70B1199481617E2B89478F6BF6E94 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		C9ABDB384969D2A0970873BC25F380F7 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundMessage.png; path = Pod/Assets/NotificationBackgroundMessage.png; sourceTree = "<group>"; };
 		CA1B0167AEC1B034EEEF18033389E7EA /* TSMessages.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TSMessages.xcconfig; sourceTree = "<group>"; };
+		CA323190CCD4BEC6F6EB0F2E3CBB6821 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
 		CA884CF3FC3C6D7EE1D29B1D2C764F06 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		CBAC998F8F4EBA45DA80993ED8F2E58D /* JiroTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JiroTextField.swift; path = TextFieldEffects/TextFieldEffects/JiroTextField.swift; sourceTree = "<group>"; };
 		CBC0F7C552B739C909B650A0F42F7F38 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
@@ -440,17 +440,16 @@
 		DB2B54A11B86D42B05F2D84EE4E7C3A9 /* CALayer+PKDownloadButtonAnimations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+PKDownloadButtonAnimations.h"; path = "Pod/Classes/CALayer+PKDownloadButtonAnimations.h"; sourceTree = "<group>"; };
 		DB9DABC0576FCCE290AE8B81F283B9AA /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		DC538AFC92504123D6A69E6150C658BB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC9CB098CCA2B28302A8E90484784439 /* HexColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-umbrella.h"; sourceTree = "<group>"; };
 		DCB711FA5440E60C948BC29093482981 /* TextFieldEffects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextFieldEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD13B112F9B0CB14A9DB2B1FE5E743A2 /* FLKAutoLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = FLKAutoLayout.modulemap; sourceTree = "<group>"; };
 		DEA403D3908DFBC23CCC7EA14AEE770B /* TSMessages-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-umbrella.h"; sourceTree = "<group>"; };
 		DEAFC495E58A7AAE6755001B0B1E93AB /* YoshikoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
 		E025BF8C28BDD6FCFB42606AD4F412C7 /* DownloadButton.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DownloadButton.xcconfig; sourceTree = "<group>"; };
-		E4BDAF0FC435DEF08C5FD572CD4D53A3 /* HexColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HexColors.modulemap; sourceTree = "<group>"; };
 		E72F215E86F5F0D246775C05A1D26274 /* DownloadButton.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DownloadButton.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F21354943D9F42A70697D5A5EF72E9 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		E8446514FBAD26C0E18F24A5715AEF67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD31D74E85EB50CD4621BACF7FB72C2 /* MLInputDodger-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MLInputDodger-umbrella.h"; sourceTree = "<group>"; };
+		EB38803692DC99DE2732884ABA0B1320 /* HexColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-umbrella.h"; sourceTree = "<group>"; };
 		ED26F1F53E82EA3204062C3374B4462B /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundError.png; path = Pod/Assets/NotificationBackgroundError.png; sourceTree = "<group>"; };
 		F04F1A13060260AE066A04FCAA28FE45 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		F11148917BA808954E912D56776E0C8C /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
@@ -469,6 +468,7 @@
 		FA6BE2555FFF4A7660549F994B9E1CE3 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
 		FBDD8734725E899A782AD574F7BD6D56 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundError@2x.png"; path = "Pod/Assets/NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
 		FCDD7486EF738EE67EDF271A367667AE /* PKDownloadButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PKDownloadButton.m; path = Pod/Classes/PKDownloadButton.m; sourceTree = "<group>"; };
+		FEFF410BB23C09253826109A33E31BF7 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,16 +653,6 @@
 			path = FLKAutoLayout;
 			sourceTree = "<group>";
 		};
-		41C889D8502499A50509ABCA970C2F47 /* HexColors */ = {
-			isa = PBXGroup;
-			children = (
-				0EF703B80CB57CBF040695A2082AB026 /* HexColor.h */,
-				74B06746B2ABB415DC43286E9221B464 /* HexColor.m */,
-				5DBF069700F2DADD74922DA83D14E376 /* Support Files */,
-			);
-			path = HexColors;
-			sourceTree = "<group>";
-		};
 		4337A31600F65D997059B1F47BA0FA0C /* DownloadButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -729,18 +719,14 @@
 			path = "../Target Support Files/SVProgressHUD";
 			sourceTree = "<group>";
 		};
-		5DBF069700F2DADD74922DA83D14E376 /* Support Files */ = {
+		62D51E14D17A9EC0A1E91F82BFC3585D /* HexColors */ = {
 			isa = PBXGroup;
 			children = (
-				E4BDAF0FC435DEF08C5FD572CD4D53A3 /* HexColors.modulemap */,
-				10EB344DF67627E76A9B0BA70A4D0E75 /* HexColors.xcconfig */,
-				2D759945C9DBA4A542BDE0DD8D97933C /* HexColors-dummy.m */,
-				246F79C03127A6660B82A4256CB8EE0C /* HexColors-prefix.pch */,
-				DC9CB098CCA2B28302A8E90484784439 /* HexColors-umbrella.h */,
-				6DF8C7B6705E8250E5D02023A579E30F /* Info.plist */,
+				71245913F5DC7AAA4B0C4F20E7F6DF56 /* HexColors.h */,
+				840C724C144533516CB9E56EE7E3DEA5 /* HexColors.m */,
+				EC73C9379D58C6B97F69CF7C6AF7286B /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/HexColors";
+			path = HexColors;
 			sourceTree = "<group>";
 		};
 		6A472B562E220631618E332927C9E82F /* SVProgressHUD */ = {
@@ -1014,7 +1000,7 @@
 				B9A2DFD9D8489D551EF60F49D2000DCB /* Alamofire */,
 				4337A31600F65D997059B1F47BA0FA0C /* DownloadButton */,
 				3664B343AA5EAF1C66F2C78A96C47A99 /* FLKAutoLayout */,
-				41C889D8502499A50509ABCA970C2F47 /* HexColors */,
+				62D51E14D17A9EC0A1E91F82BFC3585D /* HexColors */,
 				F443F30D509A612F4F4D770964DCE569 /* MLInputDodger */,
 				BB2AD583FC990BF2E81B0AC48E3646E4 /* SDWebImage */,
 				6A472B562E220631618E332927C9E82F /* SVProgressHUD */,
@@ -1023,6 +1009,20 @@
 				BBCE69060284025A6247BD15E720E491 /* TSMessages */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EC73C9379D58C6B97F69CF7C6AF7286B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAC97F34178E00D732B5EFA982AE0D10 /* HexColors.modulemap */,
+				FEFF410BB23C09253826109A33E31BF7 /* HexColors.xcconfig */,
+				CA323190CCD4BEC6F6EB0F2E3CBB6821 /* HexColors-dummy.m */,
+				6E1B84AD20A2C1F6E22232703E20ACF2 /* HexColors-prefix.pch */,
+				EB38803692DC99DE2732884ABA0B1320 /* HexColors-umbrella.h */,
+				032F3D4033E3679520F5426FEC24515D /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HexColors";
 			sourceTree = "<group>";
 		};
 		F443F30D509A612F4F4D770964DCE569 /* MLInputDodger */ = {
@@ -1060,15 +1060,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F612F08081DDC1FCFBB8EF739413C74B /* Pods-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		25BBFC5180BA4CD0F4067A4E1058A01F /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F09B9486ECFAFED088754AF63EBDA9E /* HexColor.h in Headers */,
-				FBDCA85F7CFBC3DFA5134DB59A680242 /* HexColors-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,6 +1143,15 @@
 				23B9D684C9450D7BD4DBC1CB8CF0E230 /* MLInputDodgerRetractView.h in Headers */,
 				58E29DC4D7C7E7DD654C5FC034F8EB82 /* UIScrollView+MLInputDodger.h in Headers */,
 				0C05C9F03818C9F7F395EE68E92B90A2 /* UIView+MLInputDodger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D17BEB90EB4C27B46F1BB2CD8FF0C542 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1E92AEC9F093E10C69F2B89A14F49F5 /* HexColors-umbrella.h in Headers */,
+				596758BBEC68789E6C8928ECE3FC341C /* HexColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,9 +1321,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 120D0B17EB9DEF64F2E1BC979F24A556 /* Build configuration list for PBXNativeTarget "HexColors" */;
 			buildPhases = (
-				525846ACE59F44A9D0EB6B9BA8391444 /* Sources */,
+				67EF9044B76E629170DD09EE2E94E76D /* Sources */,
 				4BA155DC3466C96A26E2FED0479F99BA /* Frameworks */,
-				25BBFC5180BA4CD0F4067A4E1058A01F /* Headers */,
+				D17BEB90EB4C27B46F1BB2CD8FF0C542 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1547,15 +1547,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		525846ACE59F44A9D0EB6B9BA8391444 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C91BF53C3EF19AD26723EA56AD4B184 /* HexColor.m in Sources */,
-				CE984CB467CBD3D2E2F6F06CBB4E408C /* HexColors-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		57BCFF774AC6F9C76E272064E2F8364B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1608,6 +1599,15 @@
 				0EFD1FF643346FF85C83679F659672CA /* Stream.swift in Sources */,
 				E7B226D8BB16471AD63665A794036E44 /* Upload.swift in Sources */,
 				3E9392CB5BD9C0CC47B04EDB40639558 /* Validation.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67EF9044B76E629170DD09EE2E94E76D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DCF5C0EE6AC7543935C51AA756864C0 /* HexColors-dummy.m in Sources */,
+				4E5B4EEA50BEF0B4D0FE2394D3EB119A /* HexColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1785,7 +1785,7 @@
 		};
 		1721A073E7763C1231F99B7B183E3471 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10EB344DF67627E76A9B0BA70A4D0E75 /* HexColors.xcconfig */;
+			baseConfigurationReference = FEFF410BB23C09253826109A33E31BF7 /* HexColors.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1839,7 +1839,7 @@
 		};
 		2CE686FF7383A8EE787CEB6EC93A8573 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10EB344DF67627E76A9B0BA70A4D0E75 /* HexColors.xcconfig */;
+			baseConfigurationReference = FEFF410BB23C09253826109A33E31BF7 /* HexColors.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;

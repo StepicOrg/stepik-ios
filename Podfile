@@ -12,5 +12,5 @@ pod "DownloadButton"
 pod 'SVProgressHUD'
 pod 'MLInputDodger'
 pod 'FLKAutoLayout'
-pod "TSMessages"
+pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
 #pod 'TCBlobDownloadSwift'

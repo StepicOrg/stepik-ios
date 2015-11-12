@@ -91,27 +91,33 @@ class FindCoursesViewController: UIViewController {
                 }, failure: { 
                     (error) -> Void in
                     print("failed downloading courses data in refresh")
-                    self.isRefreshing = false
+                    self.handleRefreshError()
                 })
                 
             }, failure: { 
                 (error) -> Void in
                 print("failed refreshing course ids in refresh")
-                self.isRefreshing = false
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.refreshControl.endRefreshing()
-                }
+                self.handleRefreshError()
                 
             })
         }, failure:  {
-            self.isRefreshing = false
-            dispatch_async(dispatch_get_main_queue()) {
-                self.refreshControl.endRefreshing()
-            }
+            self.handleRefreshError()
         })
     }
-
+    
+    func handleRefreshError() {
+        self.isRefreshing = false
+        Messages.sharedManager.showConnectionErrorMessage()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func handleLoadMoreError() {
+        self.isLoadingMore = false                        
+        self.failedLoadingMore = true
+//        Messages.sharedManager.showConnectionErrorMessage()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -180,24 +186,17 @@ class FindCoursesViewController: UIViewController {
                     }, failure: { 
                         (error) -> Void in
                         print("failed downloading courses data in Next")
-                        self.isLoadingMore = false
-                        self.failedLoadingMore = true
+                        self.handleLoadMoreError()
                 })
                 
                 }, failure: { 
                     (error) -> Void in
                     print("failed refreshing course ids in Next")
-                    self.isLoadingMore = false
-                    self.failedLoadingMore = true
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.refreshControl.endRefreshing()
-                    }
+                    self.handleLoadMoreError()
                     
             })
         }, failure:  {
-            self.isLoadingMore = false                        
-            self.failedLoadingMore = true
+            self.handleLoadMoreError()
         })
     }
     
