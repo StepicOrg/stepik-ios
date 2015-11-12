@@ -39,34 +39,32 @@ class CoreDataHelper: NSObject {
         super.init()
     }
     
+    let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
+
     func save() {
-        self.context.performBlock({
-            do {
-                try self.context.save()
-            }
-            catch {
-                print("SAVING ERROR")
-            }
-        })
+        dispatch_sync(lockQueue) {
+            self.context.performBlock({
+                do {
+                    try self.context.save()
+                }
+                catch {
+                    print("SAVING ERROR")
+                }
+            })
+        }
     }
     
 //    private var objectsToDelete : [NSManagedObject] = []
     
     func deleteFromStore(object: NSManagedObject, save s: Bool = true) {
-        self.context.performBlock({
-            self.context.deleteObject(object)
-            if s == true {
-                self.save()
-            }
-        })
-        
-    }
-    
-    func deleteFromStore(objects objects: [NSManagedObject]) {
-        for obj in objects {
-            context.deleteObject(obj)
+        dispatch_sync(lockQueue) {
+            self.context.performBlock({
+                self.context.deleteObject(object)
+                if s == true {
+                    self.save()
+                }
+            })
         }
-        save()
     }
     
 //    func deleteAllPending() {

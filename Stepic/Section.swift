@@ -151,21 +151,36 @@ class Section: NSManagedObject, JSONInitializable {
         return true
     }
     
+    func initLoadingLessonsWithDownloading() {
+        loadingLessons = []
+        for id in 0 ..< units.count { 
+            if let lesson = units[id].lesson {
+                if lesson.isDownloading {
+                    loadingLessons! += [(lesson, id)]
+                }
+            }
+        }
+    }
+    
     var storeProgress : ((Int, Float) -> Void)? {
         didSet {
-            for l in loadingLessons {
+            if loadingLessons == nil { 
+                initLoadingLessonsWithDownloading()
+            }
+            
+            for l in loadingLessons! {
                 let lesson = l.0
                 let id = l.1
                 if !lesson.isCached { 
                     lesson.storeProgress = {
                         (unitId, prog) -> Void in
-                        self.goodProgress = self.countProgress(self.loadingLessons)
+                        self.goodProgress = self.countProgress(self.loadingLessons!)
                         self.storeProgress?(id, self.goodProgress)
                     }
                     
                     lesson.storeCompletion = {
                         (unitId) -> Void in
-                        if self.isCompleted(self.loadingLessons) {
+                        if self.isCompleted(self.loadingLessons!) {
                             self.storeCompletion?(id)
                         }
                     }
@@ -192,7 +207,7 @@ class Section: NSManagedObject, JSONInitializable {
         return true
     }
     
-    var loadingLessons : [(Lesson, Int)] = []
+    var loadingLessons : [(Lesson, Int)]?
     
     func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
         
@@ -206,13 +221,13 @@ class Section: NSManagedObject, JSONInitializable {
         for id in 0 ..< units.count { 
             if let lesson = units[id].lesson {
                 if !lesson.isCached && !lesson.isDownloading {
-                    loadingLessons += [(lesson, id)]
+                    loadingLessons! += [(lesson, id)]
                 }
             }
         }
 
         
-        for ll in loadingLessons { 
+        for ll in loadingLessons! { 
             
             let lesson = ll.0
             let id = ll.1
@@ -220,11 +235,11 @@ class Section: NSManagedObject, JSONInitializable {
             let loadblock = {
                 lesson.storeVideos(id, progress: { 
                 (unitId, prog) -> Void in
-                    self.goodProgress = self.countProgress(self.loadingLessons)
+                    self.goodProgress = self.countProgress(self.loadingLessons!)
                     self.storeProgress?(id, self.goodProgress)
                 }, completion: { 
                     (unitId) -> Void in
-                    if self.isCompleted(self.loadingLessons) {
+                    if self.isCompleted(self.loadingLessons!) {
                         self.storeCompletion?(id)
                     }
                 })

@@ -181,27 +181,25 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloading :
-            downloadButton.state = PKDownloadButtonState.Pending
-            downloadButton.pendingView?.startSpin()
             
+            downloadButton.state = PKDownloadButtonState.StartDownload
+
             course.sections[downloadButton.tag].cancelVideoStore(completion: {
                 //                downloadButton.pendingView?.stopSpin()
-                downloadButton.state = PKDownloadButtonState.StartDownload
             })
             break
             
         case PKDownloadButtonState.Downloaded :
-            downloadButton.state = PKDownloadButtonState.Pending
-            downloadButton.pendingView?.startSpin()
-            
+            downloadButton.state = PKDownloadButtonState.StartDownload
+
             askForRemove(okHandler: {
                 self.course.sections[downloadButton.tag].removeFromStore(completion: {
                     //                    downloadButton.pendingView?.stopSpin()
-                    downloadButton.state = PKDownloadButtonState.StartDownload
+//                    downloadButton.state = PKDownloadButtonState.StartDownload
                 })
                 }, cancelHandler: {
                     //                downloadButton.pendingView?.stopSpin()
-                    downloadButton.state = PKDownloadButtonState.Downloaded
+//                    downloadButton.state = PKDownloadButtonState.Downloaded
             })
             break
             

@@ -192,7 +192,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                 })
             }, cancelHandler: {
 //                downloadButton.pendingView?.stopSpin()
-                downloadButton.state = PKDownloadButtonState.Downloaded
+//                downloadButton.state = PKDownloadButtonState.Downloaded
             })
             break
 
