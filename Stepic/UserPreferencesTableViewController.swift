@@ -42,6 +42,7 @@ class UserPreferencesTableViewController: UITableViewController {
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
+        avatarImageView.setRoundedBounds(width: 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,7 +52,6 @@ class UserPreferencesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(heightForRows[indexPath.section][indexPath.row])
-
     }
 
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
