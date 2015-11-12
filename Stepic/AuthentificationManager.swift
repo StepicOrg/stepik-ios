@@ -81,10 +81,16 @@ class AuthentificationManager : NSObject {
     }
     
     func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) {
+        
+        if StepicAPI.shared.didRefresh {
+            success?()
+            return
+        }
+        
         refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
                 (t) in
                 StepicAPI.shared.token = t
-                if success != nil { success!() }
+                success?()
             }, failure : {
             error in
             print("error while auto refresh token")

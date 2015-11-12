@@ -33,6 +33,8 @@ class StepicAPI: NSObject {
                 topVC?.presentViewController(vc, animated: true, completion: {
                     //            self.dismissViewControllerAnimated(false, completion: nil)
                 })
+            } else {
+                didRefresh = true
             }
         }
         
@@ -54,4 +56,6 @@ class StepicAPI: NSObject {
     var isAuthorized : Bool {
         return token != nil
     }
+    
+    var didRefresh : Bool = false
 }
