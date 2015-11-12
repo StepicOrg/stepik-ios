@@ -17,19 +17,29 @@ class Messages: NSObject {
         TSMessage.addCustomDesignFromFileWithName("CustomMessagesDesign.json")
     }
     
-    func showConnectionErrorMessage() {
-        TSMessage.showNotificationWithTitle("Connection error", subtitle: "Enable internet connection and retry", type: TSMessageNotificationType.Error)
+    func showConnectionErrorMessage(inController vc: UIViewController) {
+        TSMessage.showNotificationInViewController(vc, 
+            title: "Connection error", 
+            subtitle: "Enable internet connection and retry", 
+            image: UIImage(named: "Online-white")!, 
+            type: .Error, 
+            duration: 3, 
+            callback: nil, 
+            buttonTitle: nil, 
+            buttonCallback: nil, 
+            atPosition: TSMessageNotificationPosition.NavBarOverlay, 
+            canBeDismissedByUser: true)        
     }
     
-    func show3GDownloadErrorMessage() {
+    func show3GDownloadErrorMessage(inController vc: UIViewController) {
         TSMessage.showNotificationWithTitle("Only Wi-Fi download enabled", type: .Error)
     }
     
-    func showSomethingGotWrong() {
+    func showSomethingGotWrong(inController vc: UIViewController) {
         TSMessage.showNotificationWithTitle("Oops", subtitle: "Something just got wrong", type: .Error)
     }
     
-    func showReloginPlease() {
+    func showReloginPlease(inController vc: UIViewController) {
         TSMessage.showNotificationWithTitle("Authorization problems", subtitle: "Log in, please.", type: .Error)
     }
 }

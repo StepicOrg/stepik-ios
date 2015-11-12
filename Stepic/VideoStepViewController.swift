@@ -82,8 +82,12 @@ class VideoStepViewController: UIViewController {
         if let player = self.moviePlayer {
             if player.playbackState != MPMoviePlaybackState.Paused && player.fullscreen == false {
                 player.pause()
+                self.thumbnailImageView.hidden = false
+                self.playButton.hidden = false
+                self.moviePlayer?.view.hidden = true
             }
         }
+        
     }
 
     /*

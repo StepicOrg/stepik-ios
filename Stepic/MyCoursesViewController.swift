@@ -108,8 +108,8 @@ class MyCoursesViewController: UIViewController {
     
     func handleRefreshError() {
         self.isRefreshing = false
-        Messages.sharedManager.showConnectionErrorMessage()
         dispatch_async(dispatch_get_main_queue()) {
+            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
             self.refreshControl.endRefreshing()
         }
     }

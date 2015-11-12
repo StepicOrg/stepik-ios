@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class StepsViewController: RGPageViewController {
 
@@ -14,7 +15,7 @@ class StepsViewController: RGPageViewController {
 //    var controllers : [UIViewController?]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         datasource = self
         delegate = self
         

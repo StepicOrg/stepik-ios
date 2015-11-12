@@ -54,8 +54,12 @@ class Video: NSManagedObject, JSONInitializable {
     
     var download : VideoDownload? = nil
     var totalProgress : Float = 0
+    var isDownloading : Bool {
+        return (totalProgress > 0 && totalProgress < 1)
+    }
     
-    func store(quality: VideoQuality, progress: (Float -> Void), completion: (Void->Void)) {
+    func store(quality: VideoQuality, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
+        
         let url = getUrlForQuality(quality)
                 
         do {
@@ -63,10 +67,15 @@ class Video: NSManagedObject, JSONInitializable {
                 try PathManager.sharedManager.createVideoWith(id: id, andExtension: ext)
             } else {
                 print("Something went wrong in store function, no file extension in url")
+                errorHandler(nil)
+                return
             }
         }
+            
         catch let error as NSError {
             print(error.localizedDescription)
+            errorHandler(error)
+            return
         }
         
         var videoURL = NSURL()
@@ -76,6 +85,8 @@ class Video: NSManagedObject, JSONInitializable {
         }
         catch let error as NSError {
             print(error.localizedDescription)
+            errorHandler(error)
+            return
         }
         
         let ext = url.pathExtension!
@@ -84,36 +95,44 @@ class Video: NSManagedObject, JSONInitializable {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.totalProgress = prog
                 progress(prog)
-            }, completion: 
-            {
+            }, completion: {
                 error, location in
                 if error != nil {
-                    print(error!.localizedDescription)
-                    print("error while downloading")
+                    if error!.code == -999 {
+                        completion(false)
+                    } else {
+                        errorHandler(error)
+                    }
                     return
                 } 
                 
-                print("download completed")
+                print("video download completed")
                 if let fileURL = location {
                     self.managedCachedPath = fileURL.lastPathComponent!
                     CoreDataHelper.instance.save()
+                } else {
+                    errorHandler(nil)
+                    return
                 }
-                completion()
+                completion(true)
         })
         self.download = VideoDownload(download: download, videoId: id)
     }
     
-    func cancelStore() {
+    func cancelStore() -> Bool {
         print("Entered video cancelStore")
         if let d = download?.download {
             d.downloadTask.cancel()
             download = nil
+            totalProgress = 0
             print("Finished video cancelStore")
+            return true
+        } else {
+            return false
         }
     }
     
     func removeFromStore(save save: Bool = true) -> Bool {
-        print("Entered video removeFromStore")
         if isCached {
             do {
                 print("\nremoving file at \(cachedPath!)\n")
@@ -124,7 +143,6 @@ class Video: NSManagedObject, JSONInitializable {
                     CoreDataHelper.instance.save()
                 }
                 download = nil
-                print("Finished video removeFromStore")
                 return true
             }
             catch let error as NSError {
@@ -137,4 +155,5 @@ class Video: NSManagedObject, JSONInitializable {
             return false
         }
     }
+    
 }

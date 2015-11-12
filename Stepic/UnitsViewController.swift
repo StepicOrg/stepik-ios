@@ -54,12 +54,15 @@ class UnitsViewController: UIViewController {
     func refreshUnits() {
         didRefresh = false
         section.loadUnits(completion: {
-            //TODO : Possibly should do this in another thread(UI-thread?)
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            })
             self.didRefresh = true
         }, error: {
-            self.refreshControl.endRefreshing()
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+            })
             self.didRefresh = true
         })
     }
@@ -89,8 +92,12 @@ class UnitsViewController: UIViewController {
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showSteps", sender: indexPath.row)        
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if !didRefresh {
+            
+        } else {
+            performSegueWithIdentifier("showSteps", sender: indexPath.row)        
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -136,12 +143,19 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     }
     
     private func storeLesson(lesson: Lesson?, downloadButton: PKDownloadButton!) {
-        lesson?.storeVideos(downloadButton.tag, progress: {
-            id, progress in
-            downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+        lesson?.storeVideos(progress: {
+            progress in
+            UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
             }, completion: {
-                id in
-                downloadButton.state = PKDownloadButtonState.Downloaded
+                downloaded, cancelled in 
+                if cancelled == 0 { 
+                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloaded})
+                } else {
+                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})
+                }
+            }, error:  {
+                error in
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})
         })
     }
     
@@ -175,24 +189,33 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloading :
-//            downloadButton.state = PKDownloadButtonState.Pending
-//            downloadButton.pendingView?.startSpin()
-            downloadButton.state = PKDownloadButtonState.StartDownload
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
 
             section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
-//                downloadButton.pendingView?.stopSpin()
+                dispatch_async(dispatch_get_main_queue(), {
+                    downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.StartDownload
+                })
             })
             break
             
         case PKDownloadButtonState.Downloaded :
+            
+            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {
-                downloadButton.state = PKDownloadButtonState.StartDownload
                 self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
-//                    downloadButton.pendingView?.stopSpin()
+                    dispatch_async(dispatch_get_main_queue(), {
+                        downloadButton.pendingView?.stopSpin()
+                        downloadButton.state = PKDownloadButtonState.StartDownload
+                    })
                 })
             }, cancelHandler: {
-//                downloadButton.pendingView?.stopSpin()
-//                downloadButton.state = PKDownloadButtonState.Downloaded
+                dispatch_async(dispatch_get_main_queue(), {
+                    downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.Downloaded
+                })
             })
             break
 

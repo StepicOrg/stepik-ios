@@ -54,26 +54,29 @@ class SectionTableViewCell: UITableViewCell {
     
     func updateDownloadButton(section: Section) {
         if section.isCached { 
-            downloadButton.state = .Downloaded 
+            self.downloadButton.state = .Downloaded
         } else if section.isDownloading { 
             
 //            print("update download button while downloading")
-            downloadButton.state = .Downloading
-            downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
+            self.downloadButton.state = .Downloading
+            self.downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
+        
             
             section.storeProgress = {
-                id, prog in
-                self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
-//                print("set progress = \(prog)")
+                prog in
+                UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
             }
             
             section.storeCompletion = {
-                id in
-                self.downloadButton.state = .Downloaded
+                if section.isCached {
+                    UIThread.performUI({self.downloadButton.state = .Downloaded})
+                } else {
+                    UIThread.performUI({self.downloadButton.state = .StartDownload})
+                }
             }
             
         } else {
-            downloadButton.state = .StartDownload
+            self.downloadButton.state = .StartDownload
         }
     }
     

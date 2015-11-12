@@ -64,67 +64,104 @@ class Lesson: NSManagedObject, JSONInitializable {
         return res
     }
     
-    var downloads = [Int : VideoDownload]()
+//    var downloads = [Int : VideoDownload]()
     
-    var totalProgress : Float = 0
-    var goodProgress : Float = 0
+    var stepVideos : [Video] {
+        var res : [Video] = []
+        for step in steps {
+            if step.block.name == "video" {
+                if let video = step.block.video {
+                    res += [video]
+                }
+            }
+        }
+        return res
+    }
+    
+    var summaryProgress : Float = 0
+    
+    var goodProgress : Float  {
+        if stepVideos.count == 0 { 
+            return 1 
+        } else {
+            return self.summaryProgress / Float(stepVideos.count)
+        }
+    }
+    
     var isDownloading : Bool = false
     
-    var storeProgress : ((Int, Float) -> Void)? 
-    var storeCompletion : (Int -> Void)?
+    var storeProgress : ((Float) -> Void)? 
+    var storeCompletion : ((Int, Int) -> Void)?
     
-    func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
+    //returns completed & cancelled videos
+    func storeVideos(progress progress : (Float) -> Void, completion : (Int, Int) -> Void, error errorHandler: NSError? -> Void) {
         
         storeProgress = progress
         storeCompletion = completion
 
         isDownloading = true
-        var videoCount : Int = 0
-        totalProgress = 0
+        
+        summaryProgress = 0
+        
+        for vid in stepVideos {
+            if vid.isDownloading {
+                summaryProgress += 1
+            }
+        }
+        
         var completedVideos : Int = 0
+        var cancelledVideos : Int = 0
         
-        for step in steps {
-            if step.block.name == "video" {
-                if let _ = step.block.video {
-                    videoCount++
-                }
-            }
-        }
-            
-        if videoCount == 0 {
+        if stepVideos.count == 0 {
             isDownloading = false
-            isCached = true
-            self.goodProgress = 1
-            progress(id, 1)
-            completion(id)
-            return
+            progress(1)
+            completion(completedVideos, cancelledVideos)
+            return 
         }
         
-        for step in steps {
-            if step.block.name == "video" {
-                if let vid = step.block.video {
-                    var videoProgress : Float = 0.0
-                    vid.store(VideosInfo.videoQuality, progress: {
-                    prog in
-                        self.totalProgress = self.totalProgress - videoProgress + prog
-                        videoProgress = prog
-//                        print("lesson progress is \(Int(totalProgress*100))%")
-                        self.goodProgress = self.totalProgress/Float(videoCount)
-                        self.storeProgress?(id, self.totalProgress/Float(videoCount))
-                    }, completion : {
-                        completedVideos++
-                        if completedVideos == videoCount {
-                            self.isCached = true
-                            self.isDownloading = false
-                            self.storeCompletion?(id)
-                        }
-                    })
-                    if let d = vid.download {
-                        downloads[vid.id] = d
-                    }
+        for vid in stepVideos {
+            var videoProgress : Float = 0.0
+            vid.store(VideosInfo.videoQuality, progress: {
+                prog in
+                self.summaryProgress = self.summaryProgress - videoProgress + prog
+                videoProgress = prog
+                self.storeProgress?(self.goodProgress)
+            }, completion : {
+                completed in
+                if completed {
+                    completedVideos++
+                } else {
+                    cancelledVideos++
                 }
+                if completedVideos + cancelledVideos == self.stepVideos.count {
+                    self.isDownloading = false
+                    print("Completed lesson store with \(completedVideos) completed videos & \(cancelledVideos) cancelled videos")
+                    self.storeCompletion?(completedVideos, cancelledVideos)
+                }
+            }, error: {
+                error in
+                
+                self.isDownloading = false
+                self.storeCompletion?(completedVideos, cancelledVideos)
+                
+                print("Video download error in lesson")
+                self.summaryProgress = 0
+                errorHandler(error)
+            })                
+        }
+    }
+    
+    var isCached : Bool {
+        if steps.count == 0 {
+            return false
+        }
+        
+        for vid in stepVideos{
+            if !vid.isCached { 
+                return false
             }
         }
+        return true
     }
     
     func cancelVideoStore(completion completion : Void -> Void) {
@@ -132,23 +169,20 @@ class Lesson: NSManagedObject, JSONInitializable {
             completion()
             return
         }
+        
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            for step in self.steps {
-                if step.block.name == "video" {
-                    if let vid = step.block.video {
-                        if !vid.isCached { 
-                            vid.cancelStore()
-                            self.downloads[vid.id] = nil
-                        } else {
-                            vid.removeFromStore()
-                        }
-                    }
+            for vid in self.stepVideos {
+                if !vid.isCached { 
+                    vid.cancelStore()
+                } else {
+//                    vid.removeFromStore()
                 }
             }
+            
             self.isDownloading = false
-            self.isCached = false
-            self.totalProgress = 0
+            self.summaryProgress = 0
+            
             completion()
         }
     }
@@ -157,22 +191,17 @@ class Lesson: NSManagedObject, JSONInitializable {
         print("entered lesson removeFromStore")
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            for step in self.steps {
-                if step.block.name == "video" {
-                    if let vid = step.block.video {
-                        if !vid.isCached { 
-                            print("not cached video can not be removed!")
-                            vid.cancelStore()
-                        } else {
-                            vid.removeFromStore()
-                        }
-                        self.downloads[vid.id] = nil
-                    }
+            for vid in self.stepVideos {
+                if !vid.isCached { 
+                    print("not cached video can not be removed!")
+                    vid.cancelStore()
+                } else {
+                    vid.removeFromStore()
                 }
             }
+            
             self.isDownloading = false
-            self.isCached = false
-            self.totalProgress = 0
+            self.summaryProgress = 0
             
             completion()
         }

@@ -45,17 +45,21 @@ class UnitTableViewCell: UITableViewCell {
             } else if unit.lesson!.isDownloading { 
                 
                 downloadButton.state = .Downloading
-                downloadButton.stopDownloadButton?.progress = CGFloat(unit.lesson!.totalProgress)
+                downloadButton.stopDownloadButton?.progress = CGFloat(unit.lesson!.goodProgress)
                 
                 unit.lesson?.storeProgress = {
-                    id, prog in
-                    self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)
+                    prog in
+                    UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
 //                    print("lesson store progress")
                 }
                 
                 unit.lesson?.storeCompletion = {
-                    id in
-                    self.downloadButton.state = .Downloaded
+                    downloaded, cancelled in
+                    if cancelled == 0 {
+                        UIThread.performUI({self.downloadButton.state = .Downloaded})
+                    } else {
+                        UIThread.performUI({self.downloadButton.state = .StartDownload})
+                    }
                     CoreDataHelper.instance.save()
                 }
                 

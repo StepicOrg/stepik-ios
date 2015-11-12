@@ -50,12 +50,16 @@ class SectionsViewController: UIViewController {
     func refreshSections() {
         didRefresh = false
         course.loadAllSections(success: {
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+            })
             self.didRefresh = true
         }, error: {
             //TODO : Add alert
-            self.refreshControl.endRefreshing()
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+            })
             self.didRefresh = true
         })
     }
@@ -142,12 +146,14 @@ extension SectionsViewController : PKDownloadButtonDelegate {
     }
     
     private func storeSection(section: Section, downloadButton: PKDownloadButton!) {
-        section.storeVideos(downloadButton.tag, progress: {
-            id, progress in
-            downloadButton.stopDownloadButton?.progress = CGFloat(progress)
+        section.storeVideos(progress: {
+            progress in
+            UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
             }, completion: {
-                id in
-                downloadButton.state = PKDownloadButtonState.Downloaded
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloaded})
+            }, error: {
+                error in
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})
         })
     }
     
@@ -182,24 +188,33 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             
         case PKDownloadButtonState.Downloading :
             
-            downloadButton.state = PKDownloadButtonState.StartDownload
+            downloadButton.state = PKDownloadButtonState.Pending
 
             course.sections[downloadButton.tag].cancelVideoStore(completion: {
-                //                downloadButton.pendingView?.stopSpin()
+                dispatch_async(dispatch_get_main_queue(), {
+                    downloadButton.pendingView?.stopSpin()
+                    downloadButton.state = PKDownloadButtonState.StartDownload
+                })    
             })
             break
             
         case PKDownloadButtonState.Downloaded :
-            downloadButton.state = PKDownloadButtonState.StartDownload
 
             askForRemove(okHandler: {
+                
+                downloadButton.state = PKDownloadButtonState.Pending
+                
                 self.course.sections[downloadButton.tag].removeFromStore(completion: {
-                    //                    downloadButton.pendingView?.stopSpin()
-//                    downloadButton.state = PKDownloadButtonState.StartDownload
+                    dispatch_async(dispatch_get_main_queue(), {
+                        downloadButton.pendingView?.stopSpin()
+                        downloadButton.state = PKDownloadButtonState.StartDownload
+                    })   
                 })
                 }, cancelHandler: {
-                    //                downloadButton.pendingView?.stopSpin()
-//                    downloadButton.state = PKDownloadButtonState.Downloaded
+                    dispatch_async(dispatch_get_main_queue(), {
+                        downloadButton.pendingView?.stopSpin()
+                        downloadButton.state = PKDownloadButtonState.Downloaded
+                    })   
             })
             break
             

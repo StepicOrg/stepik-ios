@@ -107,9 +107,9 @@ class FindCoursesViewController: UIViewController {
     
     func handleRefreshError() {
         self.isRefreshing = false
-        Messages.sharedManager.showConnectionErrorMessage()
         dispatch_async(dispatch_get_main_queue()) {
             self.refreshControl.endRefreshing()
+            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
         }
     }
     

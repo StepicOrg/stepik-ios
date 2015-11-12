@@ -134,17 +134,17 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-    func countProgress(lessons : [(Lesson, Int)]) -> Float {
+    func countProgress(lessons : [Lesson]) -> Float {
         var totalProgress : Float = 0
-        for o in lessons {
-            totalProgress += o.0.goodProgress 
+        for lesson in lessons {
+            totalProgress += lesson.goodProgress 
         }
         return totalProgress / Float(lessons.count)
     }
     
-    func isCompleted(lessons : [(Lesson, Int)]) -> Bool {
-        for l in lessons {
-            if l.0.isDownloading == true {
+    func isCompleted(lessons : [Lesson]) -> Bool {
+        for lesson in lessons {
+            if lesson.isDownloading == true {
                 return false
             }
         }
@@ -156,32 +156,31 @@ class Section: NSManagedObject, JSONInitializable {
         for id in 0 ..< units.count { 
             if let lesson = units[id].lesson {
                 if lesson.isDownloading {
-                    loadingLessons! += [(lesson, id)]
+                    loadingLessons! += [lesson]
                 }
             }
         }
     }
     
-    var storeProgress : ((Int, Float) -> Void)? {
+    var storeProgress : (Float -> Void)? {
         didSet {
             if loadingLessons == nil { 
                 initLoadingLessonsWithDownloading()
             }
             
-            for l in loadingLessons! {
-                let lesson = l.0
-                let id = l.1
+            for lesson in loadingLessons! {
+
                 if !lesson.isCached { 
                     lesson.storeProgress = {
-                        (unitId, prog) -> Void in
+                        prog in
                         self.goodProgress = self.countProgress(self.loadingLessons!)
-                        self.storeProgress?(id, self.goodProgress)
+                        self.storeProgress?(self.goodProgress)
                     }
                     
                     lesson.storeCompletion = {
-                        (unitId) -> Void in
+                        allDownloaded, allCancelled in
                         if self.isCompleted(self.loadingLessons!) {
-                            self.storeCompletion?(id)
+                            self.storeCompletion?()
                         }
                     }
                 }
@@ -189,7 +188,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
 //    var k = "not changed"
-    var storeCompletion : (Int -> Void)? 
+    var storeCompletion : (Void -> Void)? 
     
     var goodProgress : Float = 0
     
@@ -207,9 +206,9 @@ class Section: NSManagedObject, JSONInitializable {
         return true
     }
     
-    var loadingLessons : [(Lesson, Int)]?
+    var loadingLessons : [Lesson]?
     
-    func storeVideos(id: Int, progress : (Int, Float) -> Void, completion : Int -> Void) {
+    func storeVideos(progress progress : Float -> Void, completion : () -> Void, error errorHandler: NSError? -> Void) {
         
         storeProgress = progress
         storeCompletion = completion
@@ -221,27 +220,34 @@ class Section: NSManagedObject, JSONInitializable {
         for id in 0 ..< units.count { 
             if let lesson = units[id].lesson {
                 if !lesson.isCached && !lesson.isDownloading {
-                    loadingLessons! += [(lesson, id)]
+                    loadingLessons! += [lesson]
                 }
             }
         }
 
+        var allDownloaded : Int = 0
+        var allCancelled : Int = 0
         
-        for ll in loadingLessons! { 
-            
-            let lesson = ll.0
-            let id = ll.1
+        for lesson in loadingLessons! { 
             
             let loadblock = {
-                lesson.storeVideos(id, progress: { 
-                (unitId, prog) -> Void in
+                lesson.storeVideos(progress: { 
+                prog in
                     self.goodProgress = self.countProgress(self.loadingLessons!)
-                    self.storeProgress?(id, self.goodProgress)
-                }, completion: { 
-                    (unitId) -> Void in
+                    self.storeProgress?(self.goodProgress)
+                }, completion: {
+                    downloaded, cancelled in
+                    
+                    allDownloaded += downloaded
+                    allCancelled += cancelled
+                    
                     if self.isCompleted(self.loadingLessons!) {
-                        self.storeCompletion?(id)
+                        self.storeCompletion?()
                     }
+                    
+                }, error:  {
+                    error in
+                    errorHandler(error)
                 })
             }
             if lesson.steps.count != 0 {
