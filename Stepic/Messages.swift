@@ -19,8 +19,8 @@ class Messages: NSObject {
     
     func showConnectionErrorMessage(inController vc: UIViewController) {
         TSMessage.showNotificationInViewController(vc, 
-            title: "Connection error", 
-            subtitle: "Enable internet connection and retry", 
+            title: NSLocalizedString("ConnectionErrorTitle", comment: ""), 
+            subtitle: NSLocalizedString("ConnectionErrorSubtitle", comment: ""), 
             image: UIImage(named: "Online-white")!, 
             type: .Error, 
             duration: 3, 
@@ -32,15 +32,15 @@ class Messages: NSObject {
     }
     
     func show3GDownloadErrorMessage(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle("Only Wi-Fi download enabled", type: .Error)
+        TSMessage.showNotificationWithTitle(NSLocalizedString("DownloadReachabilityErrorTitle", comment: ""), type: .Error)
     }
     
     func showSomethingGotWrong(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle("Oops", subtitle: "Something just got wrong", type: .Error)
+        TSMessage.showNotificationWithTitle(NSLocalizedString("SomethingWrongTitle", comment: ""), subtitle: NSLocalizedString("SomethingWrongSubtitle", comment: ""), type: .Error)
     }
     
     func showReloginPlease(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle("Authorization problems", subtitle: "Log in, please.", type: .Error)
+        TSMessage.showNotificationWithTitle(NSLocalizedString("ReloginTitle", comment: ""), subtitle: NSLocalizedString("ReloginSubtitle", comment: ""), type: .Error)
     }
 }
 

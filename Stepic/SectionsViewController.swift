@@ -56,7 +56,7 @@ class SectionsViewController: UIViewController {
             })
             self.didRefresh = true
         }, error: {
-            //TODO : Add alert
+            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
             })
@@ -168,7 +168,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.StartDownload : 
             
             if !ConnectionHelper.shared.isReachable {
-                //TODO : Add alert
+                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
                 return
             }

@@ -85,7 +85,6 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    //TODO : Add failure
     func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void)) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {

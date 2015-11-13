@@ -9,8 +9,6 @@
 import UIKit
 import DownloadButton
 
-//TODO : Wait till refresh ends
-
 class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -63,6 +61,7 @@ class UnitsViewController: UIViewController {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
             })
+            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
             self.didRefresh = true
         })
     }
@@ -160,6 +159,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
     }
     
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        
         if !didRefresh {
             //TODO : Add alert
             print("wait until the lesson is refreshed")
@@ -172,7 +172,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.StartDownload : 
             
             if !ConnectionHelper.shared.isReachable {
-                //TODO : Add alert
+                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
                 return
             }
