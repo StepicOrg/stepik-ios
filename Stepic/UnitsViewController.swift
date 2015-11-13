@@ -41,6 +41,7 @@ class UnitsViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         if(self.refreshControl.refreshing) {
             let offset = self.tableView.contentOffset
             self.refreshControl.endRefreshing()

@@ -10,5 +10,9 @@ import Foundation
 
 struct Images {
     static let downloadFromCloud = UIImage(named: "Download From Cloud Bounded")!
+    static let downloadFromCloudWhite = UIImage(named: "Download From Cloud Bounded White")!
+
     static let delete = UIImage(named: "Delete Bounded")!
+    static let deleteWhite = UIImage(named: "Delete Bounded White")!
+
 }

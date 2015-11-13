@@ -20,6 +20,7 @@ extension Video {
     @NSManaged var managedURLs: NSOrderedSet?
     @NSManaged var managedBlock: Block?
     @NSManaged var managedCachedPath: String?
+    @NSManaged var managedCachedQuality : NSNumber?
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Video", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -64,6 +65,20 @@ extension Video {
             managedURLs = NSOrderedSet(array: value)
         }
     }
+    
+    var cachedQuality : VideoQuality? {
+        get {
+            if let cached = managedCachedQuality {
+                return VideoQuality(rawValue: cached.integerValue)
+            } else {
+                return nil
+            }
+        }
+        set(value) {
+            managedCachedQuality = value?.rawValue ?? nil
+        }
+    }
+    
     
     var cachedPath : String? {
         get {

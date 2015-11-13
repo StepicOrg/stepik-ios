@@ -144,7 +144,7 @@ class Section: NSManagedObject, JSONInitializable {
     
     func isCompleted(lessons : [Lesson]) -> Bool {
         for lesson in lessons {
-            if lesson.isDownloading == true {
+            if lesson.isDownloading {
                 return false
             }
         }

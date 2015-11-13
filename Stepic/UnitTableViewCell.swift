@@ -35,10 +35,7 @@ class UnitTableViewCell: UITableViewCell {
         
     }
     
-    func initWithUnit(unit: Unit, delegate : PKDownloadButtonDelegate) {
-        let defaultTitle = "Ooops, something got wrong"
-        titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
-        
+    func updateDownloadButton(unit: Unit) {
         if let c = unit.lesson?.isCached {
             if c { 
                 downloadButton.state = .Downloaded 
@@ -50,7 +47,7 @@ class UnitTableViewCell: UITableViewCell {
                 unit.lesson?.storeProgress = {
                     prog in
                     UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
-//                    print("lesson store progress")
+                    //                    print("lesson store progress")
                 }
                 
                 unit.lesson?.storeCompletion = {
@@ -68,6 +65,13 @@ class UnitTableViewCell: UITableViewCell {
                 downloadButton.state = .StartDownload
             }
         } 
+    }
+    
+    func initWithUnit(unit: Unit, delegate : PKDownloadButtonDelegate) {
+        let defaultTitle = "Ooops, something got wrong"
+        titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
+        
+        updateDownloadButton(unit)
         
         downloadButton.tag = unit.position - 1
         downloadButton.delegate = delegate

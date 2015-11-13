@@ -58,7 +58,13 @@ class Video: NSManagedObject, JSONInitializable {
         return (totalProgress > 0 && totalProgress < 1)
     }
     
+    var storedProgress : (Float->Void)?
+    var storedCompletion : (Bool->Void)?
+
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
+
+        storedProgress = progress
+        storedCompletion = completion
         
         let url = getUrlForQuality(quality)
                 
@@ -94,12 +100,12 @@ class Video: NSManagedObject, JSONInitializable {
         let download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.totalProgress = prog
-                progress(prog)
+                self.storedProgress?(prog)
             }, completion: {
                 error, location in
                 if error != nil {
                     if error!.code == -999 {
-                        completion(false)
+                        self.storedCompletion?(false)
                     } else {
                         errorHandler(error)
                     }
@@ -109,22 +115,28 @@ class Video: NSManagedObject, JSONInitializable {
                 print("video download completed")
                 if let fileURL = location {
                     self.managedCachedPath = fileURL.lastPathComponent!
+                    self.cachedQuality = quality
                     CoreDataHelper.instance.save()
                 } else {
                     errorHandler(nil)
                     return
                 }
-                completion(true)
+                self.storedCompletion?(true)
         })
         self.download = VideoDownload(download: download, videoId: id)
     }
     
-    func cancelStore() -> Bool {
+    func cancelStore(save save: Bool = true) -> Bool {
         print("Entered video cancelStore")
         if let d = download?.download {
             d.downloadTask.cancel()
             download = nil
             totalProgress = 0
+            self.managedCachedPath = nil
+            self.cachedQuality = nil
+            if save {
+                CoreDataHelper.instance.save()
+            }
             print("Finished video cancelStore")
             return true
         } else {

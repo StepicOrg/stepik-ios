@@ -19,6 +19,8 @@ class WebStepViewController: UIViewController {
     
     @IBOutlet weak var solveButtonHeight: NSLayoutConstraint!
     
+    var nItem : UINavigationItem!
+
 //    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
     var step : Step!
@@ -62,6 +64,7 @@ class WebStepViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        nItem.rightBarButtonItem = nil
         SVProgressHUD.dismiss()
     }
     

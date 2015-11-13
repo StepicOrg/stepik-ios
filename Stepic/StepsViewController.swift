@@ -127,12 +127,15 @@ extension StepsViewController : RGPageViewControllerDataSource {
         if lesson!.steps[index].block.name == "video" {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("VideoStepViewController") as! VideoStepViewController
             stepController.video = lesson!.steps[index].block.video!
+            stepController.nItem = self.navigationItem
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
             stepController.step = lesson!.steps[index]
             stepController.lesson = lesson
             stepController.stepId = index + 1
+            stepController.nItem = self.navigationItem
+//            stepController.navigationVC = self.navigationController!
             return stepController
         }
     } 

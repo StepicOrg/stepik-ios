@@ -9,17 +9,16 @@
 import UIKit
 import MediaPlayer
 import SVProgressHUD
+import DownloadButton
 
 class VideoStepViewController: UIViewController {
 
     var moviePlayer : MPMoviePlayerController? = nil
     var video : Video!
-
+    var nItem : UINavigationItem!
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,7 @@ class VideoStepViewController: UIViewController {
         //TODO : Find out the reasons of such behavior!
         
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL))
-        
+                
         var url : NSURL!
         if video.isCached {
             url = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
@@ -66,6 +65,9 @@ class VideoStepViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), quality: video.cachedQuality ?? VideosInfo.videoQuality, video: video, delegate: self)
+        nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
+
         SVProgressHUD.dismiss()
     }
     
@@ -106,4 +108,40 @@ class VideoStepViewController: UIViewController {
     }
     */
 
+}
+
+extension VideoStepViewController : PKDownloadButtonDelegate {
+    func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        switch downloadButton.state {
+        case .StartDownload: 
+            downloadButton.state = .Downloading
+            video.store(video.cachedQuality ?? VideosInfo.videoQuality, progress: {
+                prog in
+                UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
+                }, completion: {
+                    completed in
+                    if completed {
+                        UIThread.performUI({downloadButton.state = .Downloaded})
+                    } else {
+                        UIThread.performUI({downloadButton.state = .StartDownload})
+                    }
+                }, error: {
+                    error in
+                    print("Error while downloading video!!!")
+            })
+            break
+        case .Downloaded:
+            if video.removeFromStore() {
+                downloadButton.state = .StartDownload
+            } 
+            break
+        case .Downloading:
+            if video.cancelStore() {
+                downloadButton.state = .StartDownload
+            }
+            break
+        case .Pending:
+            break
+        }
+    }
 }
