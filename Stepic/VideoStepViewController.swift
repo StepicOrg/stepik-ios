@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import SVProgressHUD
 
 class VideoStepViewController: UIViewController {
 
@@ -61,6 +62,11 @@ class VideoStepViewController: UIViewController {
         self.thumbnailImageView.hidden = true
         self.playButton.hidden = true
         self.moviePlayer?.play()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        SVProgressHUD.dismiss()
     }
     
     override func didReceiveMemoryWarning() {

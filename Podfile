@@ -13,4 +13,7 @@ pod 'SVProgressHUD'
 pod 'MLInputDodger'
 pod 'FLKAutoLayout'
 pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
+pod 'Fabric'
+pod 'Crashlytics'
+
 #pod 'TCBlobDownloadSwift'

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import FLKAutoLayout
+import SVProgressHUD
 
 class WebStepViewController: UIViewController {
 
@@ -59,7 +60,11 @@ class WebStepViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        SVProgressHUD.dismiss()
+    }
+    
     @IBAction func solveOnTheWebsitePressed(sender: UIButton) {
 //        print(stepUrl)
 //        print(NSURL(string: stepUrl))
