@@ -16,6 +16,6 @@ struct Constants {
     
     static let placeholderImage = UIImage(named: "stepic_logo_black_and_white")!
     
-    static let joinCourseButtonText = "Join the course"
-    static let alreadyJoinedCourseButtonText = "Studying"
+    static let joinCourseButtonText = NSLocalizedString("JoinCourse", comment: "")
+    static let alreadyJoinedCourseButtonText = NSLocalizedString("Studying", comment: "")
 }
