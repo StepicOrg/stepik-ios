@@ -144,7 +144,7 @@ class Section: NSManagedObject, JSONInitializable {
     
     func isCompleted(lessons : [Lesson]) -> Bool {
         for lesson in lessons {
-            if lesson.isDownloading {
+            if !lesson.isCached {
                 return false
             }
         }
@@ -224,9 +224,6 @@ class Section: NSManagedObject, JSONInitializable {
                 }
             }
         }
-
-        var allDownloaded : Int = 0
-        var allCancelled : Int = 0
         
         for lesson in loadingLessons! { 
             
@@ -237,10 +234,6 @@ class Section: NSManagedObject, JSONInitializable {
                     self.storeProgress?(self.goodProgress)
                 }, completion: {
                     downloaded, cancelled in
-                    
-                    allDownloaded += downloaded
-                    allCancelled += cancelled
-                    
                     if self.isCompleted(self.loadingLessons!) {
                         self.storeCompletion?()
                     }

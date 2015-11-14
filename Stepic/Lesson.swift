@@ -120,12 +120,15 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     var isDownloading : Bool {
+        if steps.count == 0 {
+            return false
+        }
         for vid in stepVideos {
-            if vid.isDownloading {
-                return true
+            if !vid.isCached && !vid.isDownloading {
+                return false
             }
         }
-        return false
+        return true
     }
     
     var storeProgress : ((Float) -> Void)? {
@@ -246,7 +249,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             for vid in self.stepVideos {
                 if !vid.isCached { 
-                    vid.cancelStore(save: false)
+                    vid.cancelStore()
                 } else {
 //                    vid.removeFromStore()
                 }
@@ -254,7 +257,6 @@ class Lesson: NSManagedObject, JSONInitializable {
             
             self.completedVideos = 0
             self.cancelledVideos = 0
-            CoreDataHelper.instance.save()
             completion()
         }
     }

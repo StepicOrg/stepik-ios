@@ -36,9 +36,11 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     private func getUrlForQuality(quality: VideoQuality) -> NSURL {
+//        print("needed quality \(quality.rawString)")
         var urlToReturn : VideoURL? = nil
         var minDifference = 10000
         for url in urls {
+//            print("has quality \(url.quality)")
             if abs(Int(url.quality)! - quality.rawValue) <  minDifference {
                 minDifference = abs(Int(url.quality)! - quality.rawValue)
                 urlToReturn = url
@@ -46,6 +48,7 @@ class Video: NSManagedObject, JSONInitializable {
         }
         
         if let url = urlToReturn {
+//            print("chose \(url.quality)")
             return NSURL(string: url.url)!
         } else {
             return NSURL(string: urls[0].url)!
@@ -104,6 +107,7 @@ class Video: NSManagedObject, JSONInitializable {
             }, completion: {
                 error, location in
                 if error != nil {
+                    self.totalProgress = 0
                     if error!.code == -999 {
                         self.storedCompletion?(false)
                     } else {
@@ -118,6 +122,7 @@ class Video: NSManagedObject, JSONInitializable {
                     self.cachedQuality = quality
                     CoreDataHelper.instance.save()
                 } else {
+                    self.totalProgress = 0
                     errorHandler(nil)
                     return
                 }
@@ -126,17 +131,15 @@ class Video: NSManagedObject, JSONInitializable {
         self.download = VideoDownload(download: download, videoId: id)
     }
     
-    func cancelStore(save save: Bool = true) -> Bool {
+    func cancelStore() -> Bool {
         print("Entered video cancelStore")
         if let d = download?.download {
             d.downloadTask.cancel()
             download = nil
-            totalProgress = 0
             self.managedCachedPath = nil
             self.cachedQuality = nil
-            if save {
-                CoreDataHelper.instance.save()
-            }
+            self.totalProgress = 0
+            CoreDataHelper.instance.save()
             print("Finished video cancelStore")
             return true
         } else {
@@ -144,24 +147,28 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
-    func removeFromStore(save save: Bool = true) -> Bool {
+    func removeFromStore() -> Bool {
         if isCached {
             do {
                 print("\nremoving file at \(cachedPath!)\n")
                 try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
                 print("file successfully removed")
                 self.managedCachedPath = nil
-                if save {
-                    CoreDataHelper.instance.save()
-                }
+                CoreDataHelper.instance.save()
                 download = nil
+                self.totalProgress = 0
                 return true
             }
             catch let error as NSError {
                 print(error.localizedFailureReason)
                 print(error.code)
                 print(error.localizedDescription)
-                return false
+                if error.code == 4 {
+                    self.totalProgress = 0
+                    return true
+                } else {
+                    return false
+                }
             }
         } else {
             return false
