@@ -25,7 +25,7 @@ class VideoStepViewController: UIViewController {
 
         //TODO : Find out the reasons of such behavior!
         
-        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL))
+        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
                 
         var url : NSURL!
         if video.isCached {
@@ -34,38 +34,64 @@ class VideoStepViewController: UIViewController {
             url = NSURL(string: video.urls[0].url)
         }
         
-//        print("URL scheme of the movie -> \(url.scheme)")
-        if self.moviePlayer == nil {
-            self.moviePlayer = MPMoviePlayerController(contentURL: url)
-            if let player = self.moviePlayer {
-                player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
-                player.view.sizeToFit()
-                player.scalingMode = MPMovieScalingMode.AspectFit
-                //            player.scalingMode = MPMovieScalingMode.Fill
-                player.fullscreen = false
-//                player.controlStyle = MPMovieControlStyle.Embedded
-                player.movieSourceType = MPMovieSourceType.File
-                player.repeatMode = MPMovieRepeatMode.One
-//                player.play()
-                
-                self.view.addSubview(player.view)
-                self.moviePlayer?.view.hidden = true
-            }
+        //        print("URL scheme of the movie -> \(url.scheme)")
+        self.moviePlayer = MPMoviePlayerController(contentURL: url)
+        if let player = self.moviePlayer {
+            player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
+            player.view.sizeToFit()
+            player.scalingMode = MPMovieScalingMode.AspectFit
+            //            player.scalingMode = MPMovieScalingMode.Fill
+            player.fullscreen = false
+            //               player.controlStyle = MPMovieControlStyle.Embedded
+            player.movieSourceType = MPMovieSourceType.File
+            player.repeatMode = MPMovieRepeatMode.One
+            //               player.play()
+            
+            self.view.addSubview(player.view)
+            self.moviePlayer?.view.hidden = true
         }
+
         
         // Do any additional setup after loading the view.
     }
 
+    func reload(reloadViews rv: Bool) {
+        
+        var url : NSURL!
+        if video.isCached {
+            url = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
+        } else {
+            url = NSURL(string: video.urls[0].url)
+        }
+
+        self.moviePlayer?.movieSourceType = MPMovieSourceType.File
+        self.moviePlayer?.contentURL = url
+        
+        if rv {
+            setControls(playing: false)
+        }
+    }
+    
+    var isShowingPlayer : Bool {
+        return !(self.moviePlayer?.view.hidden ?? true)
+    }
+    
+    func setControls(playing p : Bool) {
+        self.moviePlayer?.view.hidden = !p
+        self.thumbnailImageView.hidden = p
+        self.playButton.hidden = p
+    }
+    
     @IBAction func playButtonPressed(sender: UIButton) {
-        self.moviePlayer?.view.hidden = false
-        self.thumbnailImageView.hidden = true
-        self.playButton.hidden = true
+        setControls(playing: true)
         self.moviePlayer?.play()
     }
     
+    var itemView : VideoDownloadView!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, delegate: self)
+        itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
 
         SVProgressHUD.dismiss()
@@ -90,12 +116,9 @@ class VideoStepViewController: UIViewController {
         if let player = self.moviePlayer {
             if player.playbackState != MPMoviePlaybackState.Paused && player.fullscreen == false {
                 player.pause()
-                self.thumbnailImageView.hidden = false
-                self.playButton.hidden = false
-                self.moviePlayer?.view.hidden = true
+                setControls(playing: false)
             }
         }
-        
     }
 
     /*
@@ -107,7 +130,6 @@ class VideoStepViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension VideoStepViewController : PKDownloadButtonDelegate {
@@ -133,6 +155,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
         case .Downloaded:
             if video.removeFromStore() {
                 downloadButton.state = .StartDownload
+                reload(reloadViews: true)
             } 
             break
         case .Downloading:
@@ -143,5 +166,31 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
         case .Pending:
             break
         }
+        itemView.updateButton()
+    }
+}
+
+extension VideoStepViewController : VideoDownloadDelegate {
+    
+    private func askForReload() {
+        //TODO: Add localized title
+        let alert = UIAlertController(title: "Video Downloaded", message: "Reload video player?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
+            action in
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reload", comment: ""), style: UIAlertActionStyle.Default, handler: {
+            action in
+            self.moviePlayer?.pause()
+            self.reload(reloadViews: true)
+//            self.moviePlayer?.play()
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func didDownload() {
+        askForReload()
     }
 }

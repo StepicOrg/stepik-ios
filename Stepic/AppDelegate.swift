@@ -47,17 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-        
-        
-        if let c = window?.rootViewController?.presentedViewController?.classForCoder  {
-            if c != UITabBarController.classForCoder() && c != SignInViewController.classForCoder() && c != UIAlertController.classForCoder() {
-                print("class -> \(c)")
-                return UIInterfaceOrientationMask.Landscape
-            }
-        }
-        return UIInterfaceOrientationMask.Portrait
-    }
+//    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+//        
+//        
+//        if let c = window?.rootViewController?.presentedViewController?.classForCoder  {
+//            if c != UITabBarController.classForCoder() && c != SignInViewController.classForCoder() && c != UIAlertController.classForCoder() {
+//                print("class -> \(c)")
+//                return UIInterfaceOrientationMask.Landscape
+//            }
+//        }
+//        return UIInterfaceOrientationMask.Portrait
+//    }
     
     private func setRootController() {
         if StepicAPI.shared.isAuthorized {

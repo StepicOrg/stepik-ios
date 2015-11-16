@@ -51,7 +51,10 @@ class VideoDownloadView: UIView {
         setup()
     } 
     
-    convenience init(frame: CGRect, video: Video, delegate downloadDelegate: PKDownloadButtonDelegate) {
+    
+    var downloadDelegate : VideoDownloadDelegate?
+    
+    convenience init(frame: CGRect, video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {
         self.init(frame: frame)
                 
         self.video = video
@@ -59,8 +62,8 @@ class VideoDownloadView: UIView {
         qualityLabel.text = "\(quality.rawString)p"
 
         print("quality -> \(quality)")
-        downloadButton.delegate = downloadDelegate
-        
+        downloadButton.delegate = buttonDelegate
+        self.downloadDelegate = downloadDelegate
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: true)
         updateButton()
     }
@@ -85,6 +88,7 @@ class VideoDownloadView: UIView {
                 completed in
                 if completed {
                     UIThread.performUI({self.downloadButton.state = .Downloaded})
+                    self.downloadDelegate?.didDownload()
                 } else {
                     UIThread.performUI({self.downloadButton.state = .StartDownload})
                 }

@@ -14,5 +14,6 @@ struct Images {
 
     static let delete = UIImage(named: "Delete Bounded")!
     static let deleteWhite = UIImage(named: "Delete Bounded White")!
-
+    
+    static let videoPlaceholder = UIImage(named: "video_placeholder")!
 }

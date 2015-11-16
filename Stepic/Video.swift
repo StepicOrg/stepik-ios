@@ -136,7 +136,7 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     func cancelStore() -> Bool {
-        print("Entered video cancelStore")
+//        print("Entered video cancelStore")
         if let d = download?.download {
             d.downloadTask.cancel()
             download = nil
@@ -144,7 +144,7 @@ class Video: NSManagedObject, JSONInitializable {
             self.cachedQuality = nil
             self.totalProgress = 0
             CoreDataHelper.instance.save()
-            print("Finished video cancelStore")
+//            print("Finished video cancelStore")
             self.isDownloading = false
             return true
         } else {
@@ -156,9 +156,9 @@ class Video: NSManagedObject, JSONInitializable {
         self.isDownloading = false
         if isCached {
             do {
-                print("\nremoving file at \(cachedPath!)\n")
+//                print("\nremoving file at \(cachedPath!)\n")
                 try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
-                print("file successfully removed")
+//                print("file successfully removed")
                 self.managedCachedPath = nil
                 CoreDataHelper.instance.save()
                 download = nil
@@ -178,6 +178,21 @@ class Video: NSManagedObject, JSONInitializable {
             }
         } else {
             return false
+        }
+    }
+    
+    class func getAllVideos() -> [Video] {
+        let request = NSFetchRequest(entityName: "Video")
+        let predicate = NSPredicate(value: true)
+        request.predicate = predicate
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            return results as! [Video]
+        }
+        catch {
+            print("Error while getting courses")
+            return []
+            //            throw FetchError.RequestExecution
         }
     }
     

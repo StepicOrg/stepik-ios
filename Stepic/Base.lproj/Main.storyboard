@@ -551,34 +551,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Actions" id="6bM-2c-3U9">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cRg-Ly-qxg">
-                                        <rect key="frame" x="0.0" y="429" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cRg-Ly-qxg" id="vGy-u1-iqP">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etH-ds-Ww5">
-                                                    <rect key="frame" x="8" y="7" width="584" height="30"/>
-                                                    <animations/>
-                                                    <state key="normal" title="Print token"/>
-                                                    <connections>
-                                                        <action selector="printTokenButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="3qU-Gq-v3i"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="leadingMargin" secondItem="etH-ds-Ww5" secondAttribute="leading" id="1cj-fd-dpg"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="etH-ds-Ww5" secondAttribute="bottom" constant="-2" id="HOY-Ut-6PS"/>
-                                                <constraint firstItem="etH-ds-Ww5" firstAttribute="top" secondItem="vGy-u1-iqP" secondAttribute="topMargin" constant="-1" id="Nlb-1p-ukh"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="etH-ds-Ww5" secondAttribute="trailing" id="pZ0-9D-U72"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UY9-3D-ayN">
-                                        <rect key="frame" x="0.0" y="473" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="429" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UY9-3D-ayN" id="Lmr-S2-7uJ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -587,9 +561,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-LS-Pgk">
                                                     <rect key="frame" x="8" y="7" width="584" height="30"/>
                                                     <animations/>
-                                                    <state key="normal" title="Print documents path"/>
+                                                    <state key="normal" title="Clear video cache"/>
                                                     <connections>
-                                                        <action selector="printDocumentsPathButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="IMb-bS-ihV"/>
+                                                        <action selector="clearCacheButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="5Pn-td-lmZ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -604,7 +578,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q5a-34-gyg">
-                                        <rect key="frame" x="0.0" y="517" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="473" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5a-34-gyg" id="Ml2-Hy-6ad">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
