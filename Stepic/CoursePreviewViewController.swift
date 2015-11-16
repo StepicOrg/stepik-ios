@@ -159,7 +159,10 @@ extension CoursePreviewViewController : UITableViewDataSource {
 extension CoursePreviewViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0  { 
+        if indexPath.section == 0  {
+            if course?.introURL == "" {
+                return 0
+            }
             let w = UIScreen.mainScreen().bounds.width
             return w * (9/16)
         } else {

@@ -142,7 +142,8 @@ extension Course {
         }
         get {
             //YOU ARE GETTING RICK ROLLED HERE
-            return (managedIntroURL != nil && managedIntroURL != "") ? managedIntroURL! : "https://player.vimeo.com/video/2619976"
+//            return (managedIntroURL != nil && managedIntroURL != "") ? managedIntroURL! : "https://player.vimeo.com/video/2619976"
+            return (managedIntroURL != nil && managedIntroURL != "") ? managedIntroURL! : ""
         }
     }
     
