@@ -14,6 +14,9 @@ class IntroVideoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        videoWebView.scrollView.scrollEnabled = false
+        videoWebView.scrollView.bouncesZoom = false
         // Initialization code
     }
 
@@ -25,7 +28,9 @@ class IntroVideoTableViewCell: UITableViewCell {
 
     func initWithCourse(course: Course) {
 //        print(course.introURL)
-        videoWebView.loadRequest(NSURLRequest(URL: NSURL(string: course.introURL)!))
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            self.videoWebView.loadRequest(NSURLRequest(URL: NSURL(string: course.introURL)!))
+        }
     }
     
 }

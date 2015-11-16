@@ -1087,7 +1087,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cds-4V-qU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3319" y="834"/>
+            <point key="canvasLocation" x="3285" y="290"/>
         </scene>
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
@@ -1186,7 +1186,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1570,8 +1570,8 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LaP-cg-j2K"/>
-        <segue reference="Had-eU-CRB"/>
         <segue reference="qb1-8x-83E"/>
+        <segue reference="LaP-cg-j2K"/>
+        <segue reference="Ymm-um-wgY"/>
     </inferredMetricsTieBreakers>
 </document>

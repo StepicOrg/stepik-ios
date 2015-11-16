@@ -160,6 +160,7 @@ class Video: NSManagedObject, JSONInitializable {
                 try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
 //                print("file successfully removed")
                 self.managedCachedPath = nil
+                self.cachedQuality = nil
                 CoreDataHelper.instance.save()
                 download = nil
                 self.totalProgress = 0
@@ -170,6 +171,9 @@ class Video: NSManagedObject, JSONInitializable {
                 print(error.code)
                 print(error.localizedDescription)
                 if error.code == 4 {
+                    self.managedCachedPath = nil
+                    self.cachedQuality = nil
+                    CoreDataHelper.instance.save()
                     self.totalProgress = 0
                     return true
                 } else {
