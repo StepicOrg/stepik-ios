@@ -35,7 +35,7 @@ class Video: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    private func getUrlForQuality(quality: VideoQuality) -> NSURL {
+    func getUrlForQuality(quality: VideoQuality) -> NSURL {
 //        print("needed quality \(quality.rawString)")
         var urlToReturn : VideoURL? = nil
         var minDifference = 10000

@@ -27,15 +27,8 @@ class VideoStepViewController: UIViewController {
         
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
                 
-        var url : NSURL!
-        if video.isCached {
-            url = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
-        } else {
-            url = NSURL(string: video.urls[0].url)
-        }
-        
         //        print("URL scheme of the movie -> \(url.scheme)")
-        self.moviePlayer = MPMoviePlayerController(contentURL: url)
+        self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
         if let player = self.moviePlayer {
             player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
             player.view.sizeToFit()
@@ -54,18 +47,19 @@ class VideoStepViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-
-    func reload(reloadViews rv: Bool) {
-        
-        var url : NSURL!
+    
+    var videoURL : NSURL {
         if video.isCached {
-            url = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
+            return try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.cachedPath!))
         } else {
-            url = NSURL(string: video.urls[0].url)
+            return video.getUrlForQuality(VideosInfo.videoQuality)
         }
+    }
+    
+    func reload(reloadViews rv: Bool) {
 
         self.moviePlayer?.movieSourceType = MPMovieSourceType.File
-        self.moviePlayer?.contentURL = url
+        self.moviePlayer?.contentURL = videoURL
         
         if rv {
             setControls(playing: false)
