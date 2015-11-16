@@ -21,8 +21,13 @@ struct VideosInfo {
                 return VideoQuality(quality: quality)
             } else {
                 print("No videoQuality key in defaults")
-                self.videoQuality = VideoQuality.Low
-                return VideoQuality.Low
+                if DeviceInfo.isIPad() {
+                    self.videoQuality = .Medium
+                    return .Medium
+                } else {
+                    self.videoQuality = .Low
+                    return .Low
+                }
             }
         }
         

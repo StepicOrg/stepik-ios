@@ -87,6 +87,7 @@
 		08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
 		08CA59F21BBFD65E008DC44D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
 		08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
+		08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
@@ -207,6 +208,7 @@
 		08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08CA59F01BBFD65E008DC44D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				08C0A4331BF1276C0010F049 /* Messages.swift */,
 				08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */,
 				089B370E1BFA210F003DC593 /* CacheManager.swift */,
+				08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
+				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
