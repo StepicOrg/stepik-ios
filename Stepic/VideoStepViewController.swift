@@ -65,7 +65,7 @@ class VideoStepViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), quality: video.cachedQuality ?? VideosInfo.videoQuality, video: video, delegate: self)
+        let itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, delegate: self)
         nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
 
         SVProgressHUD.dismiss()

@@ -15,7 +15,7 @@ class VideoDownloadView: UIView {
     @IBOutlet weak var downloadButton: PKDownloadButton!
     
     var video : Video!
-    var quality : VideoQuality!
+    var quality : VideoQuality! 
     
     var view: UIView!
     
@@ -51,18 +51,17 @@ class VideoDownloadView: UIView {
         setup()
     } 
     
-    convenience init(frame: CGRect, quality: VideoQuality, video: Video, delegate downloadDelegate: PKDownloadButtonDelegate) {
+    convenience init(frame: CGRect, video: Video, delegate downloadDelegate: PKDownloadButtonDelegate) {
         self.init(frame: frame)
-        
-        print("frame -> \(self.view.frame)")
-        
+                
         self.video = video
-        self.quality = quality
-        
+        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
+        qualityLabel.text = "\(quality.rawString)p"
+
+        print("quality -> \(quality)")
         downloadButton.delegate = downloadDelegate
         
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: true)
-        qualityLabel.text = "\(quality.rawString)p"
         updateButton()
     }
     
@@ -70,11 +69,14 @@ class VideoDownloadView: UIView {
     func updateButton() {
         if video.isCached {
             downloadButton.state = .Downloaded
+            self.quality = video.cachedQuality ?? VideosInfo.videoQuality
+            qualityLabel.text = "\(quality.rawString)p"
             return
         }
         
         if video.isDownloading {
             downloadButton.state = .Downloading
+            UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             video.storedProgress = {
                 prog in
                 UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
@@ -86,12 +88,18 @@ class VideoDownloadView: UIView {
                 } else {
                     UIThread.performUI({self.downloadButton.state = .StartDownload})
                 }
+                UIThread.performUI({
+                    self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
+                    self.qualityLabel.text = "\(self.quality.rawString)p"
+                })
             }
             return
         }
         
         if !video.isCached && !video.isDownloading {
             downloadButton.state = .StartDownload
+            self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
+            qualityLabel.text = "\(quality.rawString)p"
             return
         }
         

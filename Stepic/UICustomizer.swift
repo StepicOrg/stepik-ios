@@ -32,8 +32,10 @@ class UICustomizer: NSObject {
     func setCustomDownloadButton(button: PKDownloadButton, white : Bool = false) {
         button.startDownloadButton?.cleanDefaultAppearance()
         button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, forState: .Normal)
-        
-        //button.stopDownloadButton is default!
+                
+        if white {
+            button.stopDownloadButton?.tintColor = UIColor.whiteColor()
+        }
         
         button.downloadedButton?.cleanDefaultAppearance()
         button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, forState: .Normal)

@@ -17,6 +17,7 @@ struct VideosInfo {
     static var videoQuality : VideoQuality {
         get {
             if let quality = defaults.valueForKey(videoQualityKey) as? String {
+                print("VideosInfo did get quality \(VideoQuality(quality: quality))")
                 return VideoQuality(quality: quality)
             } else {
                 print("No videoQuality key in defaults")

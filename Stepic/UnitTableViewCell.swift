@@ -36,11 +36,11 @@ class UnitTableViewCell: UITableViewCell {
     }
     
     func updateDownloadButton(unit: Unit) {
-        if let c = unit.lesson?.isCached {
-            if c { 
+        if let lesson = unit.lesson {
+            if lesson.isCached { 
                 downloadButton.state = .Downloaded 
-            } else if unit.lesson!.isDownloading { 
-                
+            } else if lesson.isDownloading { 
+                print("entered is downloading")
                 downloadButton.state = .Downloading
                 downloadButton.stopDownloadButton?.progress = CGFloat(unit.lesson!.goodProgress)
                 
@@ -59,8 +59,6 @@ class UnitTableViewCell: UITableViewCell {
                     }
                     CoreDataHelper.instance.save()
                 }
-                
-                
             } else {
                 downloadButton.state = .StartDownload
             }
