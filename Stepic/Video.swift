@@ -112,8 +112,14 @@ class Video: NSManagedObject, JSONInitializable {
                 if error != nil {
                     self.totalProgress = 0
                     if error!.code == -999 {
+                        self.managedCachedPath = nil
+                        self.cachedQuality = nil                    
+                        CoreDataHelper.instance.save()
                         self.storedCompletion?(false)
                     } else {
+                        self.managedCachedPath = nil
+                        self.cachedQuality = nil
+                        CoreDataHelper.instance.save()
                         errorHandler(error)
                     }
                     return
@@ -126,6 +132,9 @@ class Video: NSManagedObject, JSONInitializable {
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
+                    self.managedCachedPath = nil
+                    self.cachedQuality = nil
+                    CoreDataHelper.instance.save()
                     self.totalProgress = 0
                     errorHandler(nil)
                     return
@@ -166,17 +175,20 @@ class Video: NSManagedObject, JSONInitializable {
                 self.totalProgress = 0
                 return true
             }
+                
             catch let error as NSError {
-                print(error.localizedFailureReason)
-                print(error.code)
-                print(error.localizedDescription)
                 if error.code == 4 {
+                    print("Video not found")
                     self.managedCachedPath = nil
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
                     return true
                 } else {
+                    print("strange error deleting videos!")
+                    print(error.localizedFailureReason)
+                    print(error.code)
+                    print(error.localizedDescription)
                     return false
                 }
             }
@@ -194,7 +206,7 @@ class Video: NSManagedObject, JSONInitializable {
             return results as! [Video]
         }
         catch {
-            print("Error while getting courses")
+            print("Error while getting videos")
             return []
             //            throw FetchError.RequestExecution
         }

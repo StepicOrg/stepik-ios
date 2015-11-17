@@ -10,6 +10,7 @@ import UIKit
 import MediaPlayer
 import SVProgressHUD
 import DownloadButton
+import FLKAutoLayout
 
 class VideoStepViewController: UIViewController {
 
@@ -30,8 +31,8 @@ class VideoStepViewController: UIViewController {
         //        print("URL scheme of the movie -> \(url.scheme)")
         self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
         if let player = self.moviePlayer {
-            player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
-            player.view.sizeToFit()
+//            player.view.frame = CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: self.view.frame.size.height - 107)
+//            player.view.sizeToFit()
             player.scalingMode = MPMovieScalingMode.AspectFit
             //            player.scalingMode = MPMovieScalingMode.Fill
             player.fullscreen = false
@@ -39,13 +40,30 @@ class VideoStepViewController: UIViewController {
             player.movieSourceType = MPMovieSourceType.File
             player.repeatMode = MPMovieRepeatMode.One
             //               player.play()
-            
             self.view.addSubview(player.view)
+//            [[NSNotificationCenter defaultCenter] addObserver:self 
+//                selector:@selector(playbackStateChanged) 
+//            name:MPMoviePlayerPlaybackStateDidChangeNotification object:nil];
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "willExitFullscreen", name: MPMoviePlayerWillExitFullscreenNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "didExitFullscreen", name: MPMoviePlayerDidExitFullscreenNotification, object: nil)
+
+            self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.view)
+            self.moviePlayer?.view.alignTop("44", bottom: "0", toView: self.view)
             self.moviePlayer?.view.hidden = true
         }
-
-        
         // Do any additional setup after loading the view.
+    }
+    
+    
+    var fullScreenWasPlaying : Bool = false
+    func didExitFullscreen() {
+        if fullScreenWasPlaying {
+            self.moviePlayer?.play()
+        }
+    }
+    
+    func willExitFullscreen() {
+        fullScreenWasPlaying = self.moviePlayer?.playbackState == MPMoviePlaybackState.Playing
     }
     
     var videoURL : NSURL {
@@ -87,6 +105,7 @@ class VideoStepViewController: UIViewController {
         super.viewWillAppear(animated)
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
+        print(self.moviePlayer?.view.frame)
 
         SVProgressHUD.dismiss()
     }
