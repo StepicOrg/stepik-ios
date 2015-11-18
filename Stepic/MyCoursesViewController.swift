@@ -274,8 +274,7 @@ extension MyCoursesViewController : DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
-        //TODO: Localize this one
-        let text = "You are not enrolled to any course"
+        let text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
@@ -286,8 +285,7 @@ extension MyCoursesViewController : DZNEmptyDataSetSource {
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
-        //TODO: Localize this one
-        let text = "Go to \"All courses\" tab to see the list of avaliable courses,choose some of them to enroll and have some fun!";
+        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping

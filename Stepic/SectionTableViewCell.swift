@@ -35,13 +35,13 @@ class SectionTableViewCell: UITableViewCell {
     private class func getTextFromSection(section: Section) -> String {
         var text = ""
         if section.beginDate != nil { 
-            text = "\nBegin date: \(section.beginDate!.getStepicFormatString())"
+            text = "\n\(NSLocalizedString("BeginDate", comment: "")): \(section.beginDate!.getStepicFormatString())"
         }
         if section.softDeadline != nil {
-            text = "\(text)\nSoft deadline: \(section.softDeadline!.getStepicFormatString())"
+            text = "\(text)\n\(NSLocalizedString("SoftDeadline", comment: "")): \(section.softDeadline!.getStepicFormatString())"
         }
         if section.hardDeadline != nil {
-            text = "\(text)\nHard Deadline: \(section.hardDeadline!.getStepicFormatString())"
+            text = "\(text)\n\(NSLocalizedString("HardDeadline", comment: "")): \(section.hardDeadline!.getStepicFormatString())"
         }
         return text
     }

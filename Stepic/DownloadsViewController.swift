@@ -82,8 +82,7 @@ class DownloadsViewController: UIViewController {
     
     
     func askForClearCache(remove remove: (Void->Void)) {
-        //TODO: Add localized title
-        let alert = UIAlertController(title: "Clear cache", message: "Remove all videos stored in the memory of the iPhone?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.Destructive, handler: {
             action in
@@ -103,11 +102,10 @@ class DownloadsViewController: UIViewController {
             SVProgressHUD.show()
             CacheManager.sharedManager.clearCache(completion: {
                 completed, errors in 
-                //TODO: Add localized statuses
                 if errors != 0 {
-                    UIThread.performUI({SVProgressHUD.showErrorWithStatus("Failed to clear \(errors)/\(completed+errors) videos")})
+                    UIThread.performUI({SVProgressHUD.showErrorWithStatus(String(format: NSLocalizedString("FailedToRemoveMessage", comment: ""), errors, completed + errors))})
                 } else {
-                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus("Cleared all videos!")})
+                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus(String(format: NSLocalizedString("RemovedAllMessage", comment: ""), completed))})
                 }
                 UIThread.performUI({self.fetchVideos()})
             })
@@ -137,11 +135,10 @@ extension DownloadsViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //TODO: Localize
         if isSectionDownloading(section) {
-            return "Downloading"
+            return NSLocalizedString("Downloading", comment: "")
         } else {
-            return "Completed"
+            return NSLocalizedString("Completed", comment: "")
         }
     }
     
@@ -263,8 +260,7 @@ extension DownloadsViewController : DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
-        //TODO: Localize this one
-        let text = "No downloading or downloaded videos"
+        let text = NSLocalizedString("EmptyDownloadsTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
@@ -275,8 +271,7 @@ extension DownloadsViewController : DZNEmptyDataSetSource {
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         
-        //TODO: Localize this one
-        let text = "You can only download videos from the courses, which you are assigned to. Please, go to one of the courses' tabs and try to download videos.";
+        let text = NSLocalizedString("EmptyDownloadsDescription", comment: "")
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping

@@ -187,7 +187,7 @@ extension VideoStepViewController : VideoDownloadDelegate {
     
     private func askForReload() {
         //TODO: Add localized title
-        let alert = UIAlertController(title: "Video Downloaded", message: "Reload video player?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: NSLocalizedString("ReloadPlayerTitle", comment: ""), message: NSLocalizedString("ReloadPlayerMessage", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
             action in

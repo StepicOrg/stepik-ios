@@ -38,8 +38,7 @@ class DownloadTableViewCell: UITableViewCell {
     func initWith( video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {        
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         nameLabel.text = "\(video.id).mp4"
-        //TODO: Localize
-        lessonNameLabel.text = "Lesson: \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "unknown")\""
+        lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
         self.video = video
         self.quality = video.cachedQuality ?? VideosInfo.videoQuality
 //        qualityLabel.text = "\(quality.rawString)p"
