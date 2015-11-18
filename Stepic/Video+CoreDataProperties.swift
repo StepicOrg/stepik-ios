@@ -19,7 +19,7 @@ extension Video {
     @NSManaged var managedStatus: String?
     @NSManaged var managedURLs: NSOrderedSet?
     @NSManaged var managedBlock: Block?
-    @NSManaged var managedCachedPath: String?
+//    @NSManaged var managedCachedPath: String?
     @NSManaged var managedCachedQuality : NSNumber?
     
     class var entity : NSEntityDescription {
@@ -80,14 +80,14 @@ extension Video {
     }
     
     
-    var cachedPath : String? {
-        get {
-            return managedCachedPath
-        }
-    }
+//    var cachedPath : String? {
+//        get {
+//            return managedCachedPath
+//        }
+//    }
     
     var isCached : Bool {
-        return cachedPath != nil
+        return PathManager.sharedManager.doesExistVideoWith(id: id) && !isDownloading
     }
     
 }

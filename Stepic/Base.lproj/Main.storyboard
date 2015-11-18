@@ -445,7 +445,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-2w-A1S">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-2w-A1S">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -470,7 +470,11 @@
                                 <segue destination="5ay-8c-nL7" kind="show" id="hTT-Az-p53"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Clear cache" id="WWT-xn-H4f"/>
+                        <barButtonItem key="rightBarButtonItem" title="Clear cache" id="WWT-xn-H4f">
+                            <connections>
+                                <action selector="clearCachePressed:" destination="g7w-5Y-f4V" id="2ET-gg-F9K"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="jdI-2w-A1S" id="M2W-YW-0ok"/>
@@ -598,34 +602,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Actions" id="6bM-2c-3U9">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UY9-3D-ayN">
-                                        <rect key="frame" x="0.0" y="429" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UY9-3D-ayN" id="Lmr-S2-7uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-LS-Pgk">
-                                                    <rect key="frame" x="8" y="7" width="584" height="30"/>
-                                                    <animations/>
-                                                    <state key="normal" title="Clear video cache"/>
-                                                    <connections>
-                                                        <action selector="clearCacheButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="5Pn-td-lmZ"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstItem="KiJ-LS-Pgk" firstAttribute="top" secondItem="Lmr-S2-7uJ" secondAttribute="topMargin" constant="-1" id="VaY-56-czK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="KiJ-LS-Pgk" secondAttribute="trailing" id="ZD0-wk-zn9"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="KiJ-LS-Pgk" secondAttribute="bottom" constant="-2" id="mZM-yd-SFI"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="KiJ-LS-Pgk" secondAttribute="leading" id="xGg-bv-rF7"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q5a-34-gyg">
-                                        <rect key="frame" x="0.0" y="473" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="429" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5a-34-gyg" id="Ml2-Hy-6ad">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>

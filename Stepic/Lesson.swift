@@ -218,6 +218,10 @@ class Lesson: NSManagedObject, JSONInitializable {
                 self.storeCompletion?(self.completedVideos, self.cancelledVideos)
                 
                 print("Video download error in lesson")
+                print(error?.localizedFailureReason)
+                print(error?.code)
+                print(error?.localizedDescription)
+                
                 self.completedVideos = 0
                 self.cancelledVideos = 0
 

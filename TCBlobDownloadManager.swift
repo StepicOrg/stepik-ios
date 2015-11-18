@@ -50,6 +50,7 @@ public class TCBlobDownloadManager {
     */
     public convenience init() {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        config.timeoutIntervalForRequest = 10000
         //config.HTTPMaximumConnectionsPerHost = 1
         self.init(config: config)
     }

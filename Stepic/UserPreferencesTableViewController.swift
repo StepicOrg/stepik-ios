@@ -77,35 +77,8 @@ class UserPreferencesTableViewController: UITableViewController {
         print(documentsPath)
     }
     
-    func askForClearCache(remove remove: (Void->Void)) {
-        //TODO: Add localized title
-        let alert = UIAlertController(title: "Clear cache", message: "Remove all videos stored in the memory of the iPhone?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.Destructive, handler: {
-            action in
-            remove()
-        }))
-        
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
-            action in
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
     
     @IBAction func clearCacheButtonPressed(sender: UIButton) {
-        askForClearCache(remove: {
-            SVProgressHUD.show()
-            CacheManager.sharedManager.clearCache(completion: {
-                completed, errors in 
-                //TODO: Add localized statuses
-                if errors != 0 {
-                    UIThread.performUI({SVProgressHUD.showErrorWithStatus("Failed to clear \(errors)/\(completed+errors) videos")})
-                } else {
-                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus("Cleared \(completed) videos")})
-                }
-                })
-        })
     }
     
     @IBAction func allow3GChanged(sender: UISwitch) {

@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         setRootController()
         ConnectionHelper.shared.instantiate()
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        print(documentsPath)
+        
         return true
     }
 

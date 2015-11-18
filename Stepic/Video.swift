@@ -61,11 +61,12 @@ class Video: NSManagedObject, JSONInitializable {
     
     var storedProgress : (Float->Void)?
     var storedCompletion : (Bool->Void)?
-
+    var storedErrorHandler : (NSError? -> Void)?
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
 
         storedProgress = progress
         storedCompletion = completion
+        storedErrorHandler = errorHandler
         isDownloading = true
         
         let url = getUrlForQuality(quality)
@@ -102,7 +103,7 @@ class Video: NSManagedObject, JSONInitializable {
         
         let ext = url.pathExtension!
         
-        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
+        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.totalProgress = prog
                 self.storedProgress?(prog)
@@ -110,29 +111,41 @@ class Video: NSManagedObject, JSONInitializable {
                 error, location in
                 self.isDownloading = false
                 if error != nil {
+                    do {
+                        try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(self.name))
+                    }
+                    catch let error as NSError {
+                        if error.code != 4 {
+                            print("strange error deleting videos!")
+                            print(error.localizedFailureReason)
+                            print(error.code)
+                            print(error.localizedDescription)
+                        }
+                    }
+
                     self.totalProgress = 0
                     if error!.code == -999 {
-                        self.managedCachedPath = nil
+//                        self.managedCachedPath = nil
                         self.cachedQuality = nil                    
                         CoreDataHelper.instance.save()
                         self.storedCompletion?(false)
                     } else {
-                        self.managedCachedPath = nil
+//                        self.managedCachedPath = nil
                         self.cachedQuality = nil
                         CoreDataHelper.instance.save()
-                        errorHandler(error)
+                        self.storedErrorHandler?(error)
                     }
                     return
                 } 
                 
                 print("video download completed with quality -> \(quality.rawString)")
                 if let fileURL = location {
-                    self.managedCachedPath = fileURL.lastPathComponent!
+//                    self.managedCachedPath = fileURL.lastPathComponent!
                     self.cachedQuality = quality
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
-                    self.managedCachedPath = nil
+//                    self.managedCachedPath = nil
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
@@ -149,7 +162,27 @@ class Video: NSManagedObject, JSONInitializable {
         if let d = download {
             d.downloadTask.cancel()
             download = nil
-            self.managedCachedPath = nil
+            do {
+                try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(name))
+            }
+            catch let error as NSError {
+                if error.code == 4 {
+                    print("Video not found")
+//                    self.managedCachedPath = nil
+                    self.cachedQuality = nil
+                    CoreDataHelper.instance.save()
+                    self.totalProgress = 0
+                    return true
+                } else {
+                    print("strange error deleting videos!")
+                    print(error.localizedFailureReason)
+                    print(error.code)
+                    print(error.localizedDescription)
+                    return false
+                }
+            }
+
+//            self.managedCachedPath = nil
             self.cachedQuality = nil
             self.totalProgress = 0
             CoreDataHelper.instance.save()
@@ -161,14 +194,18 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
+    var name : String {
+        return "\(id).mp4"
+    }
+    
     func removeFromStore() -> Bool {
         self.isDownloading = false
         if isCached {
             do {
 //                print("\nremoving file at \(cachedPath!)\n")
-                try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(cachedPath!))
+                try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(name))
 //                print("file successfully removed")
-                self.managedCachedPath = nil
+//                self.managedCachedPath = nil
                 self.cachedQuality = nil
                 CoreDataHelper.instance.save()
                 download = nil
@@ -179,7 +216,7 @@ class Video: NSManagedObject, JSONInitializable {
             catch let error as NSError {
                 if error.code == 4 {
                     print("Video not found")
-                    self.managedCachedPath = nil
+//                    self.managedCachedPath = nil
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0

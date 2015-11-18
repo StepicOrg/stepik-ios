@@ -51,6 +51,16 @@ class PathManager: NSObject {
         }
     }
     
+    func doesExistVideoWith(id id: Int) -> Bool {
+        do {
+            let filePath = try getPathForVideoWithId(id: id, andExtension: "mp4")
+            return try NSFileManager.defaultManager().fileExistsAtPath(filePath)
+        }
+        catch let error as NSError{
+            return false
+        }
+    }
+    
     func getPathForVideoWithId(id id: Int, andExtension ext: String) throws -> String {
         let fileName = "\(id).\(ext)"
         do {
