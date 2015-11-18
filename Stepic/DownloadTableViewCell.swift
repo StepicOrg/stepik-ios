@@ -18,7 +18,11 @@ class DownloadTableViewCell: UITableViewCell {
     
     var video : Video!
     var quality : VideoQuality!
-    var downloadDelegate : VideoDownloadDelegate?
+//    var downloadDelegate : VideoDownloadDelegate? {
+//        didSet {
+//            video.downloadDelegate = downloadDelegate
+//        }
+//    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,13 +46,14 @@ class DownloadTableViewCell: UITableViewCell {
         
 //        print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
-        self.downloadDelegate = downloadDelegate
+//        self.downloadDelegate = downloadDelegate
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
     }
     
     
     func updateButton() {
+//        video.downloadDelegate = self.downloadDelegate
         if video.isCached {
             downloadButton.state = .Downloaded
             self.quality = video.cachedQuality ?? VideosInfo.videoQuality
@@ -67,7 +72,7 @@ class DownloadTableViewCell: UITableViewCell {
             video.storedCompletion = {
                 completed in
                 if completed {
-                    self.downloadDelegate?.didDownload(self.video, downloadButton: self.downloadButton)
+//                    self.downloadDelegate?.didDownload(self.video)
                 } else {
                 }
                 UIThread.performUI({

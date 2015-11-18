@@ -88,7 +88,7 @@ class VideoDownloadView: UIView {
                 completed in
                 if completed {
                     UIThread.performUI({self.downloadButton.state = .Downloaded})
-                    self.downloadDelegate?.didDownload(self.video, downloadButton: self.downloadButton)
+                    self.downloadDelegate?.didDownload(self.video)
                 } else {
                     UIThread.performUI({self.downloadButton.state = .StartDownload})
                 }

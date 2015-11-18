@@ -15,10 +15,10 @@ extension UIImage {
         let image = self
         
         let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(scale, scale))
-        let hasAlpha = false
-        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        let hasAlpha = true
+//        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
-        UIGraphicsBeginImageContextWithOptions(size, !hasAlpha, scale)
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
         image.drawInRect(CGRect(origin: CGPointZero, size: size))
         
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()

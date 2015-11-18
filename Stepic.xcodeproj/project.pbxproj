@@ -397,6 +397,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */,
 				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
 				0885F8551BA9F18900F2A188 /* Parser.swift */,
@@ -465,7 +466,6 @@
 			children = (
 				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
 				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
-				089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */,
 			);
 			name = "Step Content Controllers";
 			sourceTree = "<group>";

@@ -9,6 +9,8 @@
 import UIKit
 import DownloadButton
 import SVProgressHUD
+import DZNEmptyDataSet
+
 class DownloadsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +27,12 @@ class DownloadsViewController: UIViewController {
         
         tableView.registerNib(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
         
+        self.tableView.emptyDataSetDelegate = self 
+        self.tableView.emptyDataSetSource = self
+        
+        // A little trick for removing the cell separators
+        self.tableView.tableFooterView = UIView()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -40,6 +48,7 @@ class DownloadsViewController: UIViewController {
         for video in videos {
             if video.isDownloading {
                 downloading += [video]
+                video.downloadDelegate = self
             }
             if video.isCached {
                 stored += [video]
@@ -166,6 +175,7 @@ extension DownloadsViewController : VideoDownloadDelegate {
                 tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
             }
             self.tableView.endUpdates()
+            self.tableView.reloadEmptyDataSet()
         }
     }
     
@@ -191,12 +201,14 @@ extension DownloadsViewController : VideoDownloadDelegate {
                 tableView.deleteSections(NSIndexSet(index: (isSectionDownloading(0) ? 1 : 0)), withRowAnimation: .Automatic)
             }
             self.tableView.endUpdates()
+            self.tableView.reloadEmptyDataSet()
         }
     }
     
-    func didDownload(video: Video, downloadButton: PKDownloadButton) {
+    func didDownload(video: Video) {
         removeFromDownloading(video)
         addToStored(video)
+        video.downloadDelegate = nil
     }
 }
 
@@ -237,4 +249,43 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
             break
         }
     }
+}
+
+extension DownloadsViewController : DZNEmptyDataSetSource {
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return Images.emptyDownloadsPlaceholder
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        //TODO: Localize this one
+        let text = "No downloading or downloaded videos"
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        //TODO: Localize this one
+        let text = "You can only download videos from the courses, which you are assigned to. Please, go to one of the courses' tabs and try to download videos.";
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+}
+
+extension DownloadsViewController : DZNEmptyDataSetDelegate {
+    
 }

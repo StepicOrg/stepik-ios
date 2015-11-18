@@ -10,5 +10,5 @@ import Foundation
 import DownloadButton
 
 protocol VideoDownloadDelegate {
-    func didDownload(video: Video, downloadButton: PKDownloadButton)
+    func didDownload(video: Video)
 }

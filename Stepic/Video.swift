@@ -58,6 +58,8 @@ class Video: NSManagedObject, JSONInitializable {
     var download : TCBlobDownload? = nil
     var totalProgress : Float = 0
     var isDownloading = false
+    var downloadDelegate : VideoDownloadDelegate? = nil
+    
     
     var storedProgress : (Float->Void)?
     var storedCompletion : (Bool->Void)?
@@ -153,6 +155,7 @@ class Video: NSManagedObject, JSONInitializable {
                     return
                 }
                 self.storedCompletion?(true)
+                self.downloadDelegate?.didDownload(self)
         })
 //        self.download = VideoDownload(download: download, videoId: id)
     }
