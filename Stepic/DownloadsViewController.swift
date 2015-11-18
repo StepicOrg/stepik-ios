@@ -34,6 +34,8 @@ class DownloadsViewController: UIViewController {
     }
     
     func fetchVideos() {
+        stored = []
+        downloading = []
         let videos = Video.getAllVideos()
         for video in videos {
             if video.isDownloading {
@@ -131,12 +133,16 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch downloadButton.state {
         case .Downloaded:
-            stored.removeAtIndex(downloadButton.tag)
-            tableView.reloadData()
+            if stored[downloadButton.tag].removeFromStore() {
+                stored.removeAtIndex(downloadButton.tag)
+                tableView.reloadData()
+            } else {
+                print("error while deleting from the store")
+            }
             break
         case .Downloading:
-            if stored[downloadButton.tag].cancelStore() {
-                stored.removeAtIndex(downloadButton.tag)
+            if downloading[downloadButton.tag].cancelStore() {
+                downloading.removeAtIndex(downloadButton.tag)
                 tableView.reloadData()
             } else {
                 print("error while cancelling the store")

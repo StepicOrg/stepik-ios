@@ -55,7 +55,7 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
-    var download : VideoDownload? = nil
+    var download : TCBlobDownload? = nil
     var totalProgress : Float = 0
     var isDownloading = false
     
@@ -102,7 +102,7 @@ class Video: NSManagedObject, JSONInitializable {
         
         let ext = url.pathExtension!
         
-        let download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
+        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: "\(id).\(ext)", progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.totalProgress = prog
                 self.storedProgress?(prog)
@@ -141,12 +141,12 @@ class Video: NSManagedObject, JSONInitializable {
                 }
                 self.storedCompletion?(true)
         })
-        self.download = VideoDownload(download: download, videoId: id)
+//        self.download = VideoDownload(download: download, videoId: id)
     }
     
     func cancelStore() -> Bool {
 //        print("Entered video cancelStore")
-        if let d = download?.download {
+        if let d = download {
             d.downloadTask.cancel()
             download = nil
             self.managedCachedPath = nil
