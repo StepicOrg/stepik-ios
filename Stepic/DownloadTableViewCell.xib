@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DownloadTableViewCell" id="KGk-i7-Jjw" customClass="DownloadTableViewCell" customModule="Stepic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QGR-PV-bUe">
+                        <rect key="frame" x="8" y="4" width="62" height="35"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="QGR-PV-bUe" secondAttribute="height" multiplier="16:9" id="e8H-BZ-2Fh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVf-Im-PMn">
+                        <rect key="frame" x="78" y="4" width="191" height="16"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lesson &quot;lesson name blabla&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjo-4U-ajy">
+                        <rect key="frame" x="78" y="23" width="191" height="16"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suv-pk-oNx" customClass="PKDownloadButton">
+                        <rect key="frame" x="277" y="0.0" width="43" height="43"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="suv-pk-oNx" secondAttribute="height" multiplier="1:1" id="ydr-my-nQn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="PVf-Im-PMn" firstAttribute="leading" secondItem="QGR-PV-bUe" secondAttribute="trailing" constant="8" id="21N-tI-6p4"/>
+                    <constraint firstItem="suv-pk-oNx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="3b4-ok-SvV"/>
+                    <constraint firstItem="Sjo-4U-ajy" firstAttribute="leading" secondItem="QGR-PV-bUe" secondAttribute="trailing" constant="8" id="7Rt-mm-7ch"/>
+                    <constraint firstItem="PVf-Im-PMn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="CHm-dL-Bh0"/>
+                    <constraint firstItem="suv-pk-oNx" firstAttribute="leading" secondItem="PVf-Im-PMn" secondAttribute="trailing" constant="8" id="JXp-yf-Lwo"/>
+                    <constraint firstItem="QGR-PV-bUe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="M03-5x-OXK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="suv-pk-oNx" secondAttribute="bottom" constant="-8" id="ZD1-hM-nbv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="suv-pk-oNx" secondAttribute="trailing" constant="-8" id="Zav-OW-q4G"/>
+                    <constraint firstItem="suv-pk-oNx" firstAttribute="leading" secondItem="Sjo-4U-ajy" secondAttribute="trailing" constant="8" id="acp-O1-OTt"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Sjo-4U-ajy" secondAttribute="bottom" constant="-4" id="gLB-rQ-zjw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="QGR-PV-bUe" secondAttribute="bottom" constant="-4" id="qYK-UO-b5w"/>
+                    <constraint firstItem="QGR-PV-bUe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="uEs-D8-JwQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <inset key="separatorInset" minX="78" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="downloadButton" destination="suv-pk-oNx" id="g2x-La-vky"/>
+                <outlet property="lessonNameLabel" destination="Sjo-4U-ajy" id="MfV-oV-Ejm"/>
+                <outlet property="nameLabel" destination="PVf-Im-PMn" id="s56-UF-cRA"/>
+                <outlet property="thumbnailImageView" destination="QGR-PV-bUe" id="QUb-6H-C6C"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
