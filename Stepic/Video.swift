@@ -136,6 +136,7 @@ class Video: NSManagedObject, JSONInitializable {
                         self.cachedQuality = nil
                         CoreDataHelper.instance.save()
                         self.storedErrorHandler?(error)
+                        self.downloadDelegate?.didGetError(self)
                     }
                     return
                 } 
@@ -151,6 +152,7 @@ class Video: NSManagedObject, JSONInitializable {
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
+                    self.downloadDelegate?.didGetError(self)
                     errorHandler(nil)
                     return
                 }

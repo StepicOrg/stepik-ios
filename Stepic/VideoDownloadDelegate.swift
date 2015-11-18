@@ -11,4 +11,5 @@ import DownloadButton
 
 protocol VideoDownloadDelegate {
     func didDownload(video: Video)
+    func didGetError(video: Video)
 }

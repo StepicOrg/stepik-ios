@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class MyCoursesViewController: UIViewController {
     
@@ -22,6 +23,9 @@ class MyCoursesViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        
+        self.tableView.emptyDataSetDelegate = self 
+        self.tableView.emptyDataSetSource = self
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
@@ -261,4 +265,42 @@ extension MyCoursesViewController : UITableViewDataSource {
         
         return cell
     }
+}
+
+extension MyCoursesViewController : DZNEmptyDataSetSource {
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return Images.emptyDownloadsPlaceholder
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        //TODO: Localize this one
+        let text = "You are not enrolled to any course"
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        //TODO: Localize this one
+        let text = "Go to \"All courses\" tab to see the list of avaliable courses,choose some of them to enroll and have some fun!";
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+}
+
+extension MyCoursesViewController : DZNEmptyDataSetDelegate {
+    
 }

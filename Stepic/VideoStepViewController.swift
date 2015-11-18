@@ -206,4 +206,8 @@ extension VideoStepViewController : VideoDownloadDelegate {
     func didDownload(video: Video) {
         askForReload()
     }
+    
+    func didGetError(video: Video) {
+        itemView.updateButton()
+    }
 }

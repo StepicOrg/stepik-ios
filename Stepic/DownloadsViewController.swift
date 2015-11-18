@@ -30,7 +30,6 @@ class DownloadsViewController: UIViewController {
         self.tableView.emptyDataSetDelegate = self 
         self.tableView.emptyDataSetSource = self
         
-        // A little trick for removing the cell separators
         self.tableView.tableFooterView = UIView()
         
         // Do any additional setup after loading the view.
@@ -210,6 +209,11 @@ extension DownloadsViewController : VideoDownloadDelegate {
         addToStored(video)
         video.downloadDelegate = nil
     }
+    
+    func didGetError(video: Video) {
+        removeFromDownloading(video)
+        video.downloadDelegate = nil
+    }
 }
 
 extension DownloadsViewController : PKDownloadButtonDelegate {
@@ -217,7 +221,7 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
     func getVideoById(array: [Video], id: Int) -> Video? {
         let filtered = array.filter({return $0.id == id})
         if filtered.count != 1 {
-            print("strange error occured")
+            print("strange error occured, filtered count -> \(filtered.count) for video with id -> \(id)")
         } else {
             return filtered[0]
         }

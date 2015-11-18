@@ -67,7 +67,7 @@ class DownloadTableViewCell: UITableViewCell {
             
             video.storedProgress = {
                 prog in
-                UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
+                UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             }
             video.storedCompletion = {
                 completed in
