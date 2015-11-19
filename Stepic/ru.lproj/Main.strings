@@ -78,7 +78,7 @@
 "WD1-p6-4ZZ.text" = "Низкое (270p)";
 
 /* Class = "UIBarButtonItem"; title = "Clear cache"; ObjectID = "WWT-xn-H4f"; */
-"WWT-xn-H4f.title" = "Очистить кэш";
+"WWT-xn-H4f.title" = "Очистить";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Wmo-uV-nkK"; */
 "Wmo-uV-nkK.text" = "Label";

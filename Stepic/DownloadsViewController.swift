@@ -63,15 +63,19 @@ class DownloadsViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showPreferences" {
+            let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+            dvc.hidesBottomBarWhenPushed = true
+        }
     }
-    */
+    
 
     func isSectionDownloading(section: Int) -> Bool {
         if downloading != [] && stored != [] {
@@ -105,7 +109,7 @@ class DownloadsViewController: UIViewController {
                 if errors != 0 {
                     UIThread.performUI({SVProgressHUD.showErrorWithStatus(String(format: NSLocalizedString("FailedToRemoveMessage", comment: ""), errors, completed + errors))})
                 } else {
-                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus(String(format: NSLocalizedString("RemovedAllMessage", comment: ""), completed))})
+                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus("\(NSLocalizedString("RemovedAllMessage", comment: "")) \(completed) \(NSLocalizedString((completed%10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
                 }
                 UIThread.performUI({self.fetchVideos()})
             })
@@ -267,7 +271,9 @@ extension DownloadsViewController : DZNEmptyDataSetSource {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.whiteColor()
+    }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         

@@ -69,7 +69,7 @@ extension Course {
             self.managedCourseDescription = description
         }
         get {
-            return managedCourseDescription ?? "No description"
+            return managedCourseDescription ?? ""
         }
     }
     
@@ -78,7 +78,7 @@ extension Course {
             self.managedTitle = title
         }
         get {
-            return managedTitle ?? "No title" 
+            return managedTitle ?? "" 
         }
     }
     
@@ -123,7 +123,7 @@ extension Course {
             self.managedSummary = value
         }
         get {
-            return managedSummary ?? "No summary"
+            return managedSummary ?? ""
         }
     }
     
@@ -132,7 +132,7 @@ extension Course {
             self.managedWorkload = value
         }
         get {
-            return managedWorkload ?? "No workload"
+            return managedWorkload ?? ""
         }
     }
     
@@ -152,7 +152,7 @@ extension Course {
             self.managedFormat = value
         }
         get {
-            return managedFormat ?? "No format"
+            return managedFormat ?? ""
         }
     }
     
@@ -161,7 +161,7 @@ extension Course {
             self.managedAudience = value
         }
         get {
-            return managedAudience ?? "No audience"
+            return managedAudience ?? ""
         }
     }
     
@@ -170,7 +170,7 @@ extension Course {
             self.managedCertificate = value
         }
         get {
-            return managedCertificate ?? "No certificate"
+            return managedCertificate ?? ""
         }
     }
     
@@ -179,7 +179,7 @@ extension Course {
             self.managedRequirements = value
         }
         get {
-            return managedRequirements ?? "No requirements"
+            return managedRequirements ?? ""
         }
     }
     

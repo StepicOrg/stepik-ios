@@ -12,16 +12,47 @@ class CoursePreviewViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
         
-    var course : Course? = nil
+    var course : Course? = nil {
+        didSet {
+            if let c = course {                
+                textData[0] += [("", "")]
+                if c.summary != "" {
+                    textData[0] += [(NSLocalizedString("Summary", comment: ""), c.summary)]
+                }
+                if c.courseDescription != "" {
+                    textData[1] += [(NSLocalizedString("Description", comment: ""), c.courseDescription)]
+                }
+                if c.workload != "" {
+                    textData[1] += [(NSLocalizedString("Workload", comment: ""), c.workload)]
+                }
+                if c.certificate != "" {
+                    textData[1] += [(NSLocalizedString("Certificate", comment: ""), c.certificate)]
+                }
+                if c.audience != "" {
+                    textData[1] += [(NSLocalizedString("Audience", comment: ""), c.audience)]
+                }
+                if c.format != "" {
+                    textData[1] += [(NSLocalizedString("Format", comment: ""), c.format)]
+                }
+                if c.requirements != "" {
+                    textData[1] += [(NSLocalizedString("Requirements", comment: ""), c.requirements)]
+                }
+            } 
+        }
+    }
     
     var displayingInfoType : DisplayingInfoType = .Overview 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.registerNib(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
+        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         
+        tableView.tableFooterView = UIView()
 //        print("course enrollment status -> \(course?.enrolled)")
         // Do any additional setup after loading the view.
     }
@@ -31,7 +62,12 @@ class CoursePreviewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    private var textData : [[(String, String)]] = [
+        //Overview
+        [],
+        //Detailed
+        []
+    ]
     
     // MARK: - Navigation
 
@@ -67,7 +103,7 @@ class CoursePreviewViewController: UIViewController {
     
     func reloadTableView() {
         var changingIndexPaths : [NSIndexPath] = []
-        for i in 0..<2 {
+        for i in 0 ..< max(textData[0].count, textData[1].count) {
             changingIndexPaths += [NSIndexPath(forRow: i, inSection: 1)]
         }
         tableView.reloadRowsAtIndexPaths(changingIndexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -84,7 +120,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 2
+            return max(textData[0].count, textData[1].count)
         default: 
             return 0
         }
@@ -99,41 +135,52 @@ extension CoursePreviewViewController : UITableViewDataSource {
             cell.initWithCourse(course!)
             return cell
         } else {
-            
-            if displayingInfoType == .Overview {
-                switch indexPath.row {
-                case 0:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
-                    cell.initWithCourse(course!)
-                    return cell
-                
-                case 1:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("SummaryTableViewCell", forIndexPath: indexPath) as! SummaryTableViewCell
-                    cell.initWithCourse(course!)
-                    return cell
-                default:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
-                    return cell
-                }
-            } else {
-                switch indexPath.row {
-                case 0:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("DescriptionTableViewCell", forIndexPath: indexPath) as! DescriptionTableViewCell
-                    cell.initWithCourse(course!)
-                    return cell
-                case 1:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("DateInfoTableViewCell", forIndexPath: indexPath) as! DateInfoTableViewCell
-                    cell.initWithCourse(course!)
-                    return cell
-                default:
-                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
-                    return cell
-
-                }
+            if indexPath.row >= textData[displayingInfoType.rawValue].count {
+                let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+                return cell
             }
-        }
+            if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
+                let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
+                cell.initWithCourse(course!)
+                return cell
+            }
+
+            let cell = tableView.dequeueReusableCellWithIdentifier("TitleTextTableViewCell", forIndexPath: indexPath) as! TitleTextTableViewCell
+            cell.initWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
+            return cell
             
-        
+//            if displayingInfoType == .Overview {
+//                switch indexPath.row {
+//                case 0:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
+//                    cell.initWithCourse(course!)
+//                    return cell
+//                
+//                case 1:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("SummaryTableViewCell", forIndexPath: indexPath) as! SummaryTableViewCell
+//                    cell.initWithCourse(course!)
+//                    return cell
+//                default:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+//                    return cell
+//                }
+//            } else {
+//                switch indexPath.row {
+//                case 0:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("DescriptionTableViewCell", forIndexPath: indexPath) as! DescriptionTableViewCell
+//                    cell.initWithCourse(course!)
+//                    return cell
+//                case 1:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("DateInfoTableViewCell", forIndexPath: indexPath) as! DateInfoTableViewCell
+//                    cell.initWithCourse(course!)
+//                    return cell
+//                default:
+//                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+//                    return cell
+//
+//                }
+//            }
+        }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -167,28 +214,35 @@ extension CoursePreviewViewController : UITableViewDelegate {
             return w * (9/16)
         } else {
             
-            if displayingInfoType == .Overview {
-                switch indexPath.row {
-                case 0:
-                    return 137
-                    
-                case 1:
-                    return SummaryTableViewCell.heightForCourse(course!)
-                default:
-                    return 0
-                }
-                
-            } else {
-                switch indexPath.row {
-                case 0:
-                    return DescriptionTableViewCell.heightForCourse(course!)
-                    
-                case 1:
-                    return 67
-                default:
-                    return 0
-                }
+            if indexPath.row >= textData[displayingInfoType.rawValue].count {
+                return 0
             }
+            if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
+                return 137
+            }
+            return TitleTextTableViewCell.heightForCellWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
+//            if displayingInfoType == .Overview {
+//                switch indexPath.row {
+//                case 0:
+//                    return 137
+//                    
+//                case 1:
+//                    return SummaryTableViewCell.heightForCourse(course!)
+//                default:
+//                    return 0
+//                }
+//                
+//            } else {
+//                switch indexPath.row {
+//                case 0:
+//                    return DescriptionTableViewCell.heightForCourse(course!)
+//                    
+//                case 1:
+//                    return 67
+//                default:
+//                    return 0
+//                }
+//            }
         }
     }
     

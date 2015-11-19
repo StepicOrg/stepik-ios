@@ -164,9 +164,15 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
     
-    class func getAllCourses() -> [Course] {
+    class func getAllCourses(enrolled enrolled : Bool? = nil) -> [Course] {
         let request = NSFetchRequest(entityName: "Course")
-        let predicate = NSPredicate(value: true)
+        var predicate = NSPredicate(value: true)
+
+        if let e = enrolled {
+            let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
+            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+        }
+        
         request.predicate = predicate
         do {
             let results = try CoreDataHelper.instance.context.executeFetchRequest(request)

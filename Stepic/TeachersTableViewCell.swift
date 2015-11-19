@@ -34,7 +34,7 @@ class TeachersTableViewCell: UITableViewCell {
         course.loadAllInstructors(success: {
             self.instructors = course.instructors
 //            print("instructors count -> \(self.instructors.count)")
-            self.collectionView.reloadData()
+            UIThread.performUI({self.collectionView.reloadData()})
         })
 //        collectionView.reloadData()
     }

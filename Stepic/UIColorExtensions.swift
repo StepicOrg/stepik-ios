@@ -29,4 +29,8 @@ extension UIColor {
     class func stepicGreenColor() -> UIColor {
         return UIColor(hex: 0x66CC66)
     }
+    
+    class func backgroundColor() -> UIColor {
+        return UIColor(white: 0.9, alpha: 1)
+    }
 }

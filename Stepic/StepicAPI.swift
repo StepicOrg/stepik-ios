@@ -24,6 +24,14 @@ class StepicAPI: NSObject {
             defaults.setValue(newToken?.tokenType, forKey: "token_type")
             defaults.synchronize()
             if newToken == nil || newToken?.accessToken == ""  {
+                //Delete enrolled information
+                TabsInfo.myCoursesIds = []
+                let c = Course.getAllCourses(enrolled: true)
+                for course in c {
+                    course.enrolled = false
+                }
+                
+                //Show sign in controller
                 let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
                 var topVC = UIApplication.sharedApplication().keyWindow?.rootViewController

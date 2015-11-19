@@ -210,6 +210,11 @@ class FindCoursesViewController: UIViewController {
             let dvc = segue.destinationViewController as! SectionsViewController
             dvc.course = courses[(sender as! NSIndexPath).row]
         }
+        
+        if segue.identifier == "showPreferences" {
+            let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+            dvc.hidesBottomBarWhenPushed = true
+        }
     }
 }
 

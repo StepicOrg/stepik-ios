@@ -13,6 +13,8 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     
+    @IBOutlet weak var videoQualityLabel: UILabel!
+    
     @IBOutlet weak var userNameLabel: UILabel!
     
     let heightForRows = [[131], [40, 40], [40, 40]]
@@ -32,7 +34,7 @@ class UserPreferencesTableViewController: UITableViewController {
             error in
             print("Error while getting current user profile")
             })
-        
+        videoQualityLabel.text = "\(VideosInfo.videoQuality.rawString)p"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

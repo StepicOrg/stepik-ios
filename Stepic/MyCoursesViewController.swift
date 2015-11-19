@@ -21,21 +21,20 @@ class MyCoursesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.tableFooterView = UIView()
-        
-        self.tableView.emptyDataSetDelegate = self 
-        self.tableView.emptyDataSetSource = self
-        
+
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+        self.automaticallyAdjustsScrollViewInsets = false
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
         
         refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        self.tableView.emptyDataSetDelegate = self 
+        self.tableView.emptyDataSetSource = self
+        tableView.tableFooterView = UIView()
         
         refreshControl.beginRefreshing()
         getCachedCourses(completion: {
@@ -215,6 +214,11 @@ class MyCoursesViewController: UIViewController {
             let dvc = segue.destinationViewController as! SectionsViewController
             dvc.course = courses[(sender as! NSIndexPath).row]
         }
+
+        if segue.identifier == "showPreferences" {
+            let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+            dvc.hidesBottomBarWhenPushed = true
+        }
     }
 }
 
@@ -297,8 +301,19 @@ extension MyCoursesViewController : DZNEmptyDataSetSource {
         
         return NSAttributedString(string: text, attributes: attributes)
     }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.whiteColor()
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+//        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
+        return 44
+    }
 }
 
 extension MyCoursesViewController : DZNEmptyDataSetDelegate {
-    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
 }

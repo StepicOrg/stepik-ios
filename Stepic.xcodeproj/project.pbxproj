@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
+		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
+		08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		080ACF501BD79D5500329F2B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
@@ -80,12 +83,8 @@
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
 		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
 		08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */; };
-		08CA59E21BBD25B4008DC44D /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */; };
-		08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */; };
 		08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
-		08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */; };
 		08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
-		08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */; };
 		08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
 		08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
 		08CA59F21BBFD65E008DC44D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
@@ -127,8 +126,11 @@
 
 /* Begin PBXFileReference section */
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		08047E691BFD448A0071C875 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		08047E6B1BFD44920071C875 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextTableViewCell.swift; sourceTree = "<group>"; };
+		08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
 		080ACF4F1BD79D5500329F2B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
@@ -204,12 +206,8 @@
 		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
 		08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherCollectionViewCell.xib; sourceTree = "<group>"; };
 		08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVideoTableViewCell.swift; sourceTree = "<group>"; };
-		08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
-		08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersTableViewCell.swift; sourceTree = "<group>"; };
-		08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInfoTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59E91BBD3D55008DC44D /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
-		08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08CA59F01BBFD65E008DC44D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -493,12 +491,11 @@
 		08CA59DE1BBD2563008DC44D /* Cell classes */ = {
 			isa = PBXGroup;
 			children = (
+				0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */,
 				08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */,
-				08CA59E11BBD25B4008DC44D /* GeneralInfoTableViewCell.swift */,
-				08CA59E31BBD25C4008DC44D /* SummaryTableViewCell.swift */,
 				08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */,
-				08CA59E71BBD25F5008DC44D /* DateInfoTableViewCell.swift */,
-				08CA59EB1BBDA0EC008DC44D /* DescriptionTableViewCell.swift */,
+				08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */,
+				08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */,
 			);
 			name = "Cell classes";
 			sourceTree = "<group>";
@@ -705,6 +702,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
+				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
@@ -814,7 +812,6 @@
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08DE94371B8E3A5300D278AB /* RegistrationViewController.swift in Sources */,
-				08CA59E41BBD25C4008DC44D /* SummaryTableViewCell.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
@@ -850,6 +847,7 @@
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
@@ -860,7 +858,6 @@
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
-				08CA59E81BBD25F5008DC44D /* DateInfoTableViewCell.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
@@ -873,7 +870,6 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
-				08CA59EC1BBDA0ED008DC44D /* DescriptionTableViewCell.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
@@ -881,7 +877,7 @@
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
-				08CA59E21BBD25B4008DC44D /* GeneralInfoTableViewCell.swift in Sources */,
+				08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
