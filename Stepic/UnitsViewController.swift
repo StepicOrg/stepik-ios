@@ -81,6 +81,8 @@ class UnitsViewController: UIViewController {
         if segue.identifier == "showSteps" {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
+            
+            //TODO : pass unit here!
             dvc.lesson = section.units[sender as! Int].lesson
         }
         // Get the new view controller using segue.destinationViewController.

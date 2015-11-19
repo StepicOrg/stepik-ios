@@ -128,6 +128,10 @@ class ApiDataDownloader: NSObject {
         getObjectsByIds(requestString: "courses", ids: ids, deleteObjects: deleteCourses, refreshMode: refreshMode, success: success, failure: failure)
     }
     
+    func getAssignmentsByIds(ids: [Int], deleteAssignments : [Assignment], refreshMode: RefreshMode, success : (([Assignment]) -> Void)?, failure : (error : ErrorType) -> Void) {
+        getObjectsByIds(requestString: "assignments", ids: ids, deleteObjects: deleteAssignments, refreshMode: refreshMode, success: success, failure: failure)
+    }
+    
     private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:]
@@ -251,6 +255,36 @@ class ApiDataDownloader: NSObject {
             
         })
     }
+    
+    func didVisitStepWith(id id: Int, assignment: Int, success: Void->Void) {
+        let headers : [String : String] = [
+            "Content-Type" : "application/json",
+            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+        ]
+        
+        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
+        
+        let params : [String : AnyObject] = [
+            "view" : [
+                "step" : "\(id)", 
+                "assignment" : "\(assignment)"
+            ]
+        ]
+        
+        //        params["access_token"] = StepicAPI.shared.token!.accessToken
+        
+        Alamofire.request(.POST, "https://stepic.org/api/views", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            (_, _, json, error) in
+            
+            if let _ = error {
+                return
+            }
+            
+            print(json)
+            success()
+        })
+    }
+    
 }
 
 

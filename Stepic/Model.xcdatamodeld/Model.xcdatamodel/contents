@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="Assignment" representedClassName=".Assignment" syncable="YES">
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedStepId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedUnitId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedAssignments" inverseEntity="Unit" syncable="YES"/>
+    </entity>
     <entity name="Block" representedClassName=".Block" syncable="YES">
         <attribute name="managedAnimation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedName" optional="YES" attributeType="String" syncable="YES"/>
@@ -36,6 +42,7 @@
         <attribute name="managedStepsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedSteps" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Step" inverseName="managedLesson" inverseEntity="Step" syncable="YES"/>
+        <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedLesson" inverseEntity="Unit" syncable="YES"/>
     </entity>
     <entity name="Progress" representedClassName=".Progress" syncable="YES">
         <attribute name="managedCost" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -69,6 +76,7 @@
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedAssignmentsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="managedHardDeadline" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -76,7 +84,8 @@
         <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" syncable="YES"/>
+        <relationship name="managedAssignments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Assignment" inverseName="managedUnit" inverseEntity="Assignment" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedUnit" inverseEntity="Lesson" syncable="YES"/>
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Progress" syncable="YES"/>
         <relationship name="managedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="managedUnits" inverseEntity="Section" syncable="YES"/>
     </entity>
@@ -109,13 +118,14 @@
     <elements>
         <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="330"/>
-        <element name="Lesson" positionX="-36" positionY="153" width="128" height="150"/>
+        <element name="Lesson" positionX="-36" positionY="153" width="128" height="165"/>
         <element name="Progress" positionX="-45" positionY="135" width="128" height="135"/>
         <element name="Section" positionX="-54" positionY="126" width="128" height="240"/>
         <element name="Step" positionX="-45" positionY="135" width="128" height="120"/>
-        <element name="Unit" positionX="-45" positionY="144" width="128" height="210"/>
+        <element name="Unit" positionX="-45" positionY="144" width="128" height="240"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="150"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
+        <element name="Assignment" positionX="-45" positionY="135" width="128" height="105"/>
     </elements>
 </model>

@@ -17,6 +17,8 @@ class VideoStepViewController: UIViewController {
     var moviePlayer : MPMoviePlayerController? = nil
     var video : Video!
     var nItem : UINavigationItem!
+    var step: Step!
+    var assignment : Assignment?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -51,7 +53,11 @@ class VideoStepViewController: UIViewController {
             self.moviePlayer?.view.alignTop("44", bottom: "0", toView: self.view)
             self.moviePlayer?.view.hidden = true
         }
-        // Do any additional setup after loading the view.
+        
+        if let a = assignment {
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+        }
+                // Do any additional setup after loading the view.
     }
     
     

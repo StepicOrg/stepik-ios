@@ -26,7 +26,7 @@ class WebStepViewController: UIViewController {
     var step : Step!
     var stepId : Int!
     var lesson : Lesson!
-
+    var assignment : Assignment?
     
     var stepUrl : String {
         return "https://stepic.org/lesson/\(lesson.slug)/step/\(stepId)"
@@ -59,6 +59,9 @@ class WebStepViewController: UIViewController {
 //            stepWebView.constrainBottomSpaceToView(solveButton, predicate: "0")
 //        }
         
+        if let a = assignment {
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+        }        
         // Do any additional setup after loading the view.
     }
 

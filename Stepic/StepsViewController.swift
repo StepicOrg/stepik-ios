@@ -11,7 +11,9 @@ import SVProgressHUD
 
 class StepsViewController: RGPageViewController {
 
+    //TODO: really need optionals here?
     var lesson : Lesson?
+    
 //    var controllers : [UIViewController?]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +130,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("VideoStepViewController") as! VideoStepViewController
             stepController.video = lesson!.steps[index].block.video!
             stepController.nItem = self.navigationItem
+            stepController.step = lesson!.steps[index]
+            stepController.assignment = lesson!.unit?.assignments[index]
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
@@ -135,6 +139,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.lesson = lesson
             stepController.stepId = index + 1
             stepController.nItem = self.navigationItem
+            stepController.assignment = lesson!.unit?.assignments[index]
 //            stepController.navigationVC = self.navigationController!
             return stepController
         }

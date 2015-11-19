@@ -24,6 +24,7 @@ extension Lesson {
 
     @NSManaged var managedSteps : NSOrderedSet?
     
+    @NSManaged var managedUnit : Unit?
 //    @NSManaged var managedIsCached : NSNumber?
     
     class var entity : NSEntityDescription {
@@ -108,5 +109,9 @@ extension Lesson {
         set(value) {
             managedSteps = NSOrderedSet(array: value)
         }
+    }
+    
+    var unit: Unit? {
+        return managedUnit
     }
 }

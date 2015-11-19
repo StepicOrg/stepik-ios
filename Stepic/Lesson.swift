@@ -34,11 +34,21 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     func loadSteps(completion completion: (Void -> Void), refresh : Bool = true) {
-        let getStepsBlock = {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
+        let getStepsBlock = 
+        {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
             newSteps in 
             self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
+            if let u = self.unit {
+                ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
+                    newAssignments in 
+                    u.assignments = Sorter.sort(newAssignments,steps: self.steps)
+                    completion()
+                    }, failure: {
+                        error in
+                        print("Error while downloading assignments")
+                })
+            }
             CoreDataHelper.instance.save()
-            completion()
             }, failure: {
                 error in
                 print("Error while downloading units")

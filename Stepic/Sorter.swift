@@ -40,4 +40,21 @@ struct Sorter {
         
         return res
     }
+    
+    static func sort(assignments : [Assignment], steps : [Step]) -> [Assignment] {
+        
+        var res : [Assignment] = []
+
+        for step in steps {
+            let elements = assignments.filter({return $0.stepId == step.id})
+            if elements.count == 1 {
+                res += [elements[0]]
+            } else {
+                //TODO : Maybe should throw exception here
+                print("Something went wrong")
+            }
+        }
+        
+        return res
+    }
 }

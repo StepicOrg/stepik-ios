@@ -23,9 +23,16 @@ extension Unit {
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedProgressId : String?
     
+    @NSManaged var managedAssignmentsArray : NSObject?
+
+    
     @NSManaged var managedSection: Section?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
+    
+    @NSManaged var managedAssignments : NSOrderedSet?
+    
+    
     
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Unit", inManagedObjectContext: CoreDataHelper.instance.context)!
@@ -127,6 +134,27 @@ extension Unit {
         }
         set(value) {
             self.managedLesson = value
+        }
+    }
+    
+    var assignmentsArray : [Int] {
+        set(value){
+            self.managedAssignmentsArray = value
+        }
+        
+        get {
+            return (self.managedAssignmentsArray as? [Int]) ?? []
+        }
+        
+    }
+    
+    var assignments : [Assignment] {
+        get {
+            return (managedAssignments?.array as? [Assignment]) ?? []
+        }
+        
+        set(value) {
+            managedAssignments = NSOrderedSet(array: value)
         }
     }
     

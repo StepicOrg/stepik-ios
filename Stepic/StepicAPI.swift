@@ -42,6 +42,7 @@ class StepicAPI: NSObject {
                     //            self.dismissViewControllerAnimated(false, completion: nil)
                 })
             } else {
+                print("\ndid set new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
             }
         }

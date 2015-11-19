@@ -26,6 +26,8 @@ class Unit: NSManagedObject, JSONInitializable {
         lessonId = json["lesson"].intValue
         progressId = json["progress"].stringValue
 
+        assignmentsArray = json["assignments"].arrayObject as! [Int]
+        
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
@@ -33,6 +35,22 @@ class Unit: NSManagedObject, JSONInitializable {
     
     func update(json json: JSON) {
         initialize(json)
+    }
+    
+    func loadAssignments(completion: (Void->Void), errorHandler: (Void->Void)) {
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .Update, success: {
+                newAssignments in 
+                self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
+                completion()
+                }, failure: {
+                    error in
+                    print("Error while downloading assignments")
+                    errorHandler()
+            })
+            }, failure:  {
+                errorHandler()
+        })
     }
     
 }
