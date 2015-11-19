@@ -53,7 +53,7 @@ class DownloadsViewController: UIViewController {
                 stored += [video]
             }
         }
-        print("downloading \(downloading.count), stored \(stored.count)")
+//        print("downloading \(downloading.count), stored \(stored.count)")
         tableView.reloadData()
     }
 

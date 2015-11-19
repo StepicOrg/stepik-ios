@@ -262,7 +262,7 @@ class ApiDataDownloader: NSObject {
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
         ]
         
-        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
+//        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
         
         let params : [String : AnyObject] = [
             "view" : [
@@ -280,7 +280,7 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            print(json)
+//            print(json)
             success()
         })
     }
