@@ -20,6 +20,9 @@
 /* Class = "UILabel"; text = "Course name"; ObjectID = "8q0-dk-g4x"; */
 "8q0-dk-g4x.text" = "Course name";
 
+/* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "9Ja-ap-5iY"; */
+"9Ja-ap-5iY.title" = "Downloads";
+
 /* Class = "UINavigationItem"; title = "Courses"; ObjectID = "Ai7-bS-YO0"; */
 "Ai7-bS-YO0.title" = "Courses";
 
@@ -43,9 +46,6 @@
 
 /* Class = "UILabel"; text = "Medium (360p)"; ObjectID = "IEf-kx-jQ6"; */
 "IEf-kx-jQ6.text" = "Medium (360p)";
-
-/* Class = "UIButton"; normalTitle = "Print documents path"; ObjectID = "KiJ-LS-Pgk"; */
-"KiJ-LS-Pgk.normalTitle" = "Print documents path";
 
 /* Class = "UIButton"; normalTitle = "Join the course"; ObjectID = "MZy-dW-Bj2"; */
 "MZy-dW-Bj2.normalTitle" = "Join course";
@@ -77,6 +77,9 @@
 /* Class = "UILabel"; text = "Low (270p)"; ObjectID = "WD1-p6-4ZZ"; */
 "WD1-p6-4ZZ.text" = "Low (270p)";
 
+/* Class = "UIBarButtonItem"; title = "Clear cache"; ObjectID = "WWT-xn-H4f"; */
+"WWT-xn-H4f.title" = "Clear cache";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "Wmo-uV-nkK"; */
 "Wmo-uV-nkK.text" = "Label";
 
@@ -94,9 +97,6 @@
 
 /* Class = "UITableViewSection"; headerTitle = "Video preferences"; ObjectID = "dRl-3b-IkP"; */
 "dRl-3b-IkP.headerTitle" = "Video preferences";
-
-/* Class = "UIButton"; normalTitle = "Print token"; ObjectID = "etH-ds-Ww5"; */
-"etH-ds-Ww5.normalTitle" = "Print token";
 
 /* Class = "UINavigationItem"; title = "My courses"; ObjectID = "g7g-TI-yPj"; */
 "g7g-TI-yPj.title" = "My courses";
