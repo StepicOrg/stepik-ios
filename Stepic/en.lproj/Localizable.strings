@@ -48,3 +48,5 @@ Format = "Format";
 Requirements = "Requirements";
 Video = "video";
 Videos = "videos";
+ConnectionLost = "Connection lost";
+CancelledDownload = "Cancelled downloading";

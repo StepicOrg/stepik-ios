@@ -273,7 +273,7 @@ extension MyCoursesViewController : UITableViewDataSource {
 
 extension MyCoursesViewController : DZNEmptyDataSetSource {
     func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return Images.emptyDownloadsPlaceholder
+        return Images.emptyCoursesPlaceholder
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {

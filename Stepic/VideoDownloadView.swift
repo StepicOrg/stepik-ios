@@ -88,9 +88,10 @@ class VideoDownloadView: UIView {
                 completed in
                 if completed {
                     UIThread.performUI({self.downloadButton.state = .Downloaded})
-                    self.downloadDelegate?.didDownload(self.video)
+                    self.downloadDelegate?.didDownload(self.video, cancelled: false)
                 } else {
                     UIThread.performUI({self.downloadButton.state = .StartDownload})
+                    self.downloadDelegate?.didDownload(self.video, cancelled: true)
                 }
                 UIThread.performUI({
                     self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 

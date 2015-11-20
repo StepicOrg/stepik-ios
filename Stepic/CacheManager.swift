@@ -37,4 +37,28 @@ class CacheManager: NSObject {
             completion(completed, errors)
         })
     }
+    
+    var connectionCancelled : [Video] = []
+    
+    func cancelAll(completion completion: (Int, Int)->Void) {
+        var completed = 0
+        var errors = 0
+        if connectionCancelled != [] {
+            completed += connectionCancelled.count 
+        }
+        connectionCancelled = []
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            let videos = Video.getAllVideos()
+            for video in videos {
+                if video.isDownloading {
+                    if video.cancelStore() {
+                        completed++
+                    } else {
+                        errors++
+                    }
+                }
+            }
+            completion(completed, errors)
+        })
+    }
 }

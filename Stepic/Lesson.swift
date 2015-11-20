@@ -221,7 +221,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                 if self.completedVideos + self.cancelledVideos == self.loadingVideos!.count {
                     print("Completed lesson store with \(self.completedVideos) completed videos & \(self.cancelledVideos) cancelled videos")
                     self.storeCompletion?(self.completedVideos, self.cancelledVideos)
-                }
+                } 
             }, error: {
                 error in
                 

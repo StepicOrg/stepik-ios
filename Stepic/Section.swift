@@ -208,6 +208,7 @@ class Section: NSManagedObject, JSONInitializable {
     
     var loadingLessons : [Lesson]?
     
+    //TODO: Add cancelled to completion
     func storeVideos(progress progress : Float -> Void, completion : () -> Void, error errorHandler: NSError? -> Void) {
         
         storeProgress = progress

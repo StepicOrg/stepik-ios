@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CoursePreviewViewController: UIViewController {
 
@@ -90,12 +91,17 @@ class CoursePreviewViewController: UIViewController {
     
     @IBAction func joinButtonPressed(sender: UIButton) {
 //        print("join pressed")
+        //TODO : Add statuses
         if let c = course {
+            SVProgressHUD.show()
             AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
+                SVProgressHUD.showWithStatus("")
                 sender.setDisabledJoined()
                 self.course?.enrolled = true
                 CoreDataHelper.instance.save()
                 self.performSegueWithIdentifier("showSections", sender: nil)
+                }, error:  {
+                    SVProgressHUD.showErrorWithStatus("")
             }) 
         }
     }

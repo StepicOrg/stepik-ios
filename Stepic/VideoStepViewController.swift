@@ -209,7 +209,7 @@ extension VideoStepViewController : VideoDownloadDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func didDownload(video: Video) {
+    func didDownload(video: Video, cancelled: Bool) {
         askForReload()
     }
     

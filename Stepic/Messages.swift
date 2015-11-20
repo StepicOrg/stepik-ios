@@ -42,6 +42,10 @@ class Messages: NSObject {
     func showReloginPlease(inController vc: UIViewController) {
         TSMessage.showNotificationWithTitle(NSLocalizedString("ReloginTitle", comment: ""), subtitle: NSLocalizedString("ReloginSubtitle", comment: ""), type: .Error)
     }
+    
+    func showCancelledDownloadMessage(count count : Int) {
+        TSMessage.showNotificationWithTitle(NSLocalizedString("ConnectionLost", comment: ""), subtitle: "\(NSLocalizedString("CancelledDownload", comment: "")) \(count) \(NSLocalizedString((count%10 == 1 && count != 11) ? "Video" : "Videos", comment: ""))", type: .Error)
+    }
 }
 
 extension Messages : TSMessageViewProtocol {

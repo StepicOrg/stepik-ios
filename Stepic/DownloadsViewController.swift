@@ -205,9 +205,11 @@ extension DownloadsViewController : VideoDownloadDelegate {
         }
     }
     
-    func didDownload(video: Video) {
+    func didDownload(video: Video, cancelled : Bool) {
         removeFromDownloading(video)
-        addToStored(video)
+        if !cancelled {
+            addToStored(video)
+        }
         video.downloadDelegate = nil
     }
     
@@ -292,5 +294,11 @@ extension DownloadsViewController : DZNEmptyDataSetSource {
 }
 
 extension DownloadsViewController : DZNEmptyDataSetDelegate {
+    func emptyDataSetWillAppear(scrollView: UIScrollView!) {
+        self.navigationItem.rightBarButtonItem?.enabled = false
+    }
     
+    func emptyDataSetWillDisappear(scrollView: UIScrollView!) {
+        self.navigationItem.rightBarButtonItem?.enabled = true
+    }
 }

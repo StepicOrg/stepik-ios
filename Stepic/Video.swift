@@ -126,13 +126,22 @@ class Video: NSManagedObject, JSONInitializable {
                     }
 
                     self.totalProgress = 0
-                    if error!.code == -999 {
-//                        self.managedCachedPath = nil
+                    
+                    switch error!.code {
+                    case -999: 
                         self.cachedQuality = nil                    
                         CoreDataHelper.instance.save()
+                        self.downloadDelegate?.didDownload(self, cancelled: true)
                         self.storedCompletion?(false)
-                    } else {
-//                        self.managedCachedPath = nil
+                        break
+                    case -1009, -1005:
+                        self.cachedQuality = nil                    
+                        CoreDataHelper.instance.save()
+                        CacheManager.sharedManager.connectionCancelled += [self]
+                        self.storedCompletion?(false)
+                        self.downloadDelegate?.didDownload(self, cancelled: true)
+                        break
+                    default:
                         self.cachedQuality = nil
                         CoreDataHelper.instance.save()
                         self.storedErrorHandler?(error)
@@ -157,7 +166,7 @@ class Video: NSManagedObject, JSONInitializable {
                     return
                 }
                 self.storedCompletion?(true)
-                self.downloadDelegate?.didDownload(self)
+                self.downloadDelegate?.didDownload(self, cancelled: false)
         })
 //        self.download = VideoDownload(download: download, videoId: id)
     }
