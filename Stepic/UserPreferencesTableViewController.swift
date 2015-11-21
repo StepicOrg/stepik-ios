@@ -26,15 +26,24 @@ class UserPreferencesTableViewController: UITableViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         
+        avatarImageView.setRoundedBounds(width: 0)
+
+        if let apiUser = StepicAPI.shared.user {
+            initWithUser(apiUser)
+        } else {
+            avatarImageView.image = Constants.placeholderImage
+        }
+        
+        
         ApiDataDownloader.sharedDownloader.getCurrentUser({
             user in
-            self.initWithUser(user)
+            StepicAPI.shared.user = user
+            UIThread.performUI({self.initWithUser(user)})
             }
             , failure: {
             error in
             print("Error while getting current user profile")
             })
-        videoQualityLabel.text = "\(VideosInfo.videoQuality.rawString)p"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -45,7 +54,11 @@ class UserPreferencesTableViewController: UITableViewController {
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
-        avatarImageView.setRoundedBounds(width: 0)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        videoQualityLabel.text = "\(VideosInfo.videoQuality.rawString)p"
     }
     
     override func didReceiveMemoryWarning() {

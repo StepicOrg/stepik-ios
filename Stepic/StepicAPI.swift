@@ -30,7 +30,7 @@ class StepicAPI: NSObject {
                 for course in c {
                     course.enrolled = false
                 }
-                
+                StepicAPI.shared.user = nil
                 //Show sign in controller
                 let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
@@ -67,4 +67,7 @@ class StepicAPI: NSObject {
     }
     
     var didRefresh : Bool = false
+    
+    
+    var user : User?
 }

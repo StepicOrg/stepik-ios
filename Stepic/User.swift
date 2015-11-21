@@ -36,4 +36,5 @@ class User: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
+    
 }
