@@ -50,3 +50,6 @@ Video = "video";
 Videos = "videos";
 ConnectionLost = "Connection lost";
 CancelledDownload = "Cancelled downloading";
+UnenrollAlertTitle = "Stop studying";
+UnenrollAlertMessage = "Don't you want to study on this course?";
+Unenroll = "Stop studying";

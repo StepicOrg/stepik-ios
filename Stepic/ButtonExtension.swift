@@ -19,8 +19,21 @@ extension UIButton {
     func setDisabledJoined() {
         let attributedTitle = NSAttributedString(string: Constants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.grayColor()])
         setAttributedTitle(attributedTitle, forState: .Normal )
-        enabled = false
+        //enabled = false
         layer.borderColor = UIColor.grayColor().CGColor
         self.titleLabel?.textColor = UIColor.grayColor()
     }
+    
+    func setEnabledJoined() {
+        let attributedTitle = NSAttributedString(string: Constants.joinCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.stepicGreenColor()])
+        setAttributedTitle(attributedTitle, forState: .Normal )
+        //enabled = false
+        layer.borderColor = UIColor.stepicGreenColor().CGColor
+        self.titleLabel?.textColor = UIColor.stepicGreenColor()
+    }
+    
+    var isEnabledToJoin : Bool {
+        return self.attributedTitleForState(.Normal)?.string != Constants.alreadyJoinedCourseButtonText
+    }
+    
 }

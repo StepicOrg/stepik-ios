@@ -124,7 +124,7 @@ class AuthentificationManager : NSObject {
         })
     }
     
-    func joinCourseWithId(courseId: Int, success : (Void -> Void), error errorHandler: (Void->Void), delete: Bool = false) {
+    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (Void->Void)) {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"

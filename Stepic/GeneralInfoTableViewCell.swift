@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum DisplayingInfoType {
-    case Overview, Detailed
+enum DisplayingInfoType : Int {
+    case Overview = 0, Detailed = 1
 }
 
 class GeneralInfoTableViewCell: UITableViewCell {
@@ -37,6 +37,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
         courseNameLabel.text = course.title
         if course.enrolled {
             joinButton.setDisabledJoined()
+        } else {
+            joinButton.setEnabledJoined()
         }
     }
     

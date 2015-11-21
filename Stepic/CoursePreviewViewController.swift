@@ -93,19 +93,44 @@ class CoursePreviewViewController: UIViewController {
 //        print("join pressed")
         //TODO : Add statuses
         if let c = course {
-            SVProgressHUD.show()
-            AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
-                SVProgressHUD.showWithStatus("")
-                sender.setDisabledJoined()
-                self.course?.enrolled = true
-                CoreDataHelper.instance.save()
-                self.performSegueWithIdentifier("showSections", sender: nil)
+            if sender.isEnabledToJoin {
+                SVProgressHUD.show()
+                AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
+                    SVProgressHUD.showSuccessWithStatus("")
+                    sender.setDisabledJoined()
+                    self.course?.enrolled = true
+                    CoreDataHelper.instance.save()
+                    self.performSegueWithIdentifier("showSections", sender: nil)
                 }, error:  {
                     SVProgressHUD.showErrorWithStatus("")
-            }) 
+                }) 
+            } else {
+                askForUnenroll(unenroll: {
+                    AuthentificationManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
+                        SVProgressHUD.showSuccessWithStatus("")
+                        sender.setEnabledJoined()
+                        self.course?.enrolled = false
+                        CoreDataHelper.instance.save()
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        }, error:  {
+                            SVProgressHUD.showErrorWithStatus("")
+                    })
+                })
+            }
         }
     }
     
+    func askForUnenroll(unenroll unenroll: Void->Void) {
+        let alert = UIAlertController(title: NSLocalizedString("UnenrollAlertTitle", comment: "") , message: NSLocalizedString("UnenrollAlertMessage", comment: ""), preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Unenroll", comment: "") , style: .Destructive, handler: {
+            action in
+            unenroll()
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     func reloadTableView() {
         var changingIndexPaths : [NSIndexPath] = []

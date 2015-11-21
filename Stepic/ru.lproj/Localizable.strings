@@ -50,3 +50,6 @@ Video = "видео";
 Videos = "видео";
 ConnectionLost = "Соединение потеряно";
 CancelledDownload = "Прекращена загрузка";
+UnenrollAlertTitle = "Прекратить обучение";
+UnenrollAlertMessage = "Вы действительно хотите перестать учиться на этом курсе?";
+Unenroll = "Прекратить обучение";
