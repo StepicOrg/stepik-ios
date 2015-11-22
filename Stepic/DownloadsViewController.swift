@@ -45,11 +45,11 @@ class DownloadsViewController: UIViewController {
         downloading = []
         let videos = Video.getAllVideos()
         for video in videos {
-            if video.isDownloading {
+            if video.state == VideoState.Downloading {
                 downloading += [video]
                 video.downloadDelegate = self
             }
-            if video.isCached {
+            if video.state == VideoState.Cached {
                 stored += [video]
             }
         }

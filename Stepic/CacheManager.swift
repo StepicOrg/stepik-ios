@@ -19,14 +19,14 @@ class CacheManager: NSObject {
             var completed = 0
             var errors = 0
             for video in videos {
-                if video.isCached {
+                if video.state == VideoState.Cached {
                     if video.removeFromStore() {
                         completed++
                     } else {
                         errors++
                     }
                 }
-                if video.isDownloading {
+                if video.state == VideoState.Downloading {
                     if video.cancelStore() {
                         completed++
                     } else {
@@ -50,7 +50,7 @@ class CacheManager: NSObject {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let videos = Video.getAllVideos()
             for video in videos {
-                if video.isDownloading {
+                if video.state == VideoState.Downloading {
                     if video.cancelStore() {
                         completed++
                     } else {
@@ -61,4 +61,5 @@ class CacheManager: NSObject {
             completion(completed, errors)
         })
     }
+    
 }

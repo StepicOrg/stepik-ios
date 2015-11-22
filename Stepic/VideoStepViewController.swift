@@ -73,7 +73,7 @@ class VideoStepViewController: UIViewController {
     }
     
     var videoURL : NSURL {
-        if video.isCached {
+        if video.state == VideoState.Cached {
             return try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.name))
         } else {
             return video.getUrlForQuality(VideosInfo.videoQuality)

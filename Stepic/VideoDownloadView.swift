@@ -15,7 +15,11 @@ class VideoDownloadView: UIView {
     @IBOutlet weak var downloadButton: PKDownloadButton!
     
     var video : Video!
-    var quality : VideoQuality! 
+    var quality : VideoQuality! {
+        didSet {
+            qualityLabel.text = "\(quality.rawString)p"
+        }
+    }
     
     var view: UIView!
     
@@ -58,8 +62,7 @@ class VideoDownloadView: UIView {
         self.init(frame: frame)
                 
         self.video = video
-        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
-        qualityLabel.text = "\(quality.rawString)p"
+//        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
 
         print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
@@ -70,15 +73,15 @@ class VideoDownloadView: UIView {
     
     
     func updateButton() {
-        if video.isCached {
+        if video.state == VideoState.Cached {
             downloadButton.state = .Downloaded
-            self.quality = video.cachedQuality ?? VideosInfo.videoQuality
-            qualityLabel.text = "\(quality.rawString)p"
+            self.quality = video.cachedQuality
             return
         }
         
-        if video.isDownloading {
+        if video.state == VideoState.Downloading {
             downloadButton.state = .Downloading
+            self.quality = self.video.loadingQuality! 
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             video.storedProgress = {
                 prog in
@@ -93,18 +96,13 @@ class VideoDownloadView: UIView {
                     UIThread.performUI({self.downloadButton.state = .StartDownload})
                     self.downloadDelegate?.didDownload(self.video, cancelled: true)
                 }
-                UIThread.performUI({
-                    self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
-                    self.qualityLabel.text = "\(self.quality.rawString)p"
-                })
             }
             return
         }
         
-        if !video.isCached && !video.isDownloading {
+        if video.state == .Online {
             downloadButton.state = .StartDownload
-            self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
-            qualityLabel.text = "\(quality.rawString)p"
+            self.quality = VideosInfo.videoQuality 
             return
         }
         

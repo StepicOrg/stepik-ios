@@ -12,12 +12,18 @@ import DownloadButton
 class DownloadTableViewCell: UITableViewCell {
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lessonNameLabel: UILabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
+    @IBOutlet weak var qualityLabel: UILabel!
+    @IBOutlet weak var sizeLabel: UILabel!
     
     var video : Video!
-    var quality : VideoQuality!
+    var quality : VideoQuality! {
+        didSet {
+            qualityLabel.text = "\(quality.rawString)p"
+        }
+    }
+    
 //    var downloadDelegate : VideoDownloadDelegate? {
 //        didSet {
 //            video.downloadDelegate = downloadDelegate
@@ -37,15 +43,20 @@ class DownloadTableViewCell: UITableViewCell {
     
     func initWith( video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {        
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
-        nameLabel.text = "\(video.id).mp4"
+//        nameLabel.text = "\(video.id).mp4"
         lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
         self.video = video
-        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
+//        self.quality = video.cachedQuality ?? (video.loadingQuality ?? VideosInfo.videoQuality)
 //        qualityLabel.text = "\(quality.rawString)p"
         
 //        print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
 //        self.downloadDelegate = downloadDelegate
+        
+        video.getSize({
+            size in
+            self.sizeLabel.text = "\(size/1024/1024) \(NSLocalizedString("Mb", comment: ""))"
+        })
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
     }
@@ -53,15 +64,17 @@ class DownloadTableViewCell: UITableViewCell {
     
     func updateButton() {
 //        video.downloadDelegate = self.downloadDelegate
-        if video.isCached {
+        if video.state ==  VideoState.Cached {
             downloadButton.state = .Downloaded
-            self.quality = video.cachedQuality ?? VideosInfo.videoQuality
-//            qualityLabel.text = "\(quality.rawString)p"
+            self.quality = video.cachedQuality
             return
         }
         
-        if video.isDownloading {
+        if video.state == VideoState.Downloading {
             downloadButton.state = .Downloading
+            
+            self.quality = self.video.loadingQuality! 
+
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             
             video.storedProgress = {
@@ -82,8 +95,8 @@ class DownloadTableViewCell: UITableViewCell {
             return
         }
         
-        if !video.isCached && !video.isDownloading {
-            print("this video should not be here, it can't have the .StartDownload state! ")
+        if video.state == .Online {
+            print("this video should not be here, it can't have the .Online state! ")
         }
         
         downloadButton.state = .Pending

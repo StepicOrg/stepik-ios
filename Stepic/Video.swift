@@ -9,6 +9,12 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import Alamofire
+import SwiftyJSON
+
+enum VideoState {
+    case Online, Downloading, Cached
+}
 
 class Video: NSManagedObject, JSONInitializable {
 
@@ -55,21 +61,42 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
+    var _state : VideoState?
+    
+    var state : VideoState! {
+        get {
+            if let s = _state {
+                return s
+            } else {
+                if PathManager.sharedManager.doesExistVideoWith(id: id) {
+                    _state = .Cached
+                } else {
+                    _state = .Online
+                }
+                return _state!
+            }
+        }
+        set(value) {
+            _state = value
+        }
+    }
+    
     var download : TCBlobDownload? = nil
     var totalProgress : Float = 0
-    var isDownloading = false
-    var downloadDelegate : VideoDownloadDelegate? = nil
     
+    var downloadDelegate : VideoDownloadDelegate? = nil
+    var loadingQuality : VideoQuality?
     
     var storedProgress : (Float->Void)?
     var storedCompletion : (Bool->Void)?
     var storedErrorHandler : (NSError? -> Void)?
     func store(quality: VideoQuality, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
 
+        loadingQuality = quality
         storedProgress = progress
         storedCompletion = completion
         storedErrorHandler = errorHandler
-        isDownloading = true
+        state = .Downloading
         
         let url = getUrlForQuality(quality)
                 
@@ -78,7 +105,7 @@ class Video: NSManagedObject, JSONInitializable {
                 try PathManager.sharedManager.createVideoWith(id: id, andExtension: ext)
             } else {
                 print("Something went wrong in store function, no file extension in url")
-                isDownloading = false
+                state = .Online
                 errorHandler(nil)
                 return
             }
@@ -86,7 +113,7 @@ class Video: NSManagedObject, JSONInitializable {
             
         catch let error as NSError {
             print(error.localizedDescription)
-            isDownloading = false
+            state = .Online
             errorHandler(error)
             return
         }
@@ -98,7 +125,7 @@ class Video: NSManagedObject, JSONInitializable {
         }
         catch let error as NSError {
             print(error.localizedDescription)
-            isDownloading = false
+            state = .Online
             errorHandler(error)
             return
         }
@@ -107,12 +134,13 @@ class Video: NSManagedObject, JSONInitializable {
         
         download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
+                self.downloadingSize = bytesExpectedToWrite
                 self.totalProgress = prog
                 self.storedProgress?(prog)
             }, completion: {
                 error, location in
-                self.isDownloading = false
                 if error != nil {
+                    self.state = .Online
                     do {
                         try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(self.name))
                     }
@@ -153,11 +181,13 @@ class Video: NSManagedObject, JSONInitializable {
                 print("video download completed with quality -> \(quality.rawString)")
                 if let fileURL = location {
 //                    self.managedCachedPath = fileURL.lastPathComponent!
+                    self.state = .Cached
                     self.cachedQuality = quality
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
 //                    self.managedCachedPath = nil
+                    self.state = .Online
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
@@ -201,7 +231,7 @@ class Video: NSManagedObject, JSONInitializable {
             self.totalProgress = 0
             CoreDataHelper.instance.save()
 //            print("Finished video cancelStore")
-            self.isDownloading = false
+            self.state = .Online
             return true
         } else {
             return false
@@ -213,8 +243,7 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     func removeFromStore() -> Bool {
-        self.isDownloading = false
-        if isCached {
+        if self.state == .Cached {
             do {
 //                print("\nremoving file at \(cachedPath!)\n")
                 try PathManager.sharedManager.deleteVideoFileAtPath(PathManager.sharedManager.getPathForStoredVideoWithName(name))
@@ -224,6 +253,7 @@ class Video: NSManagedObject, JSONInitializable {
                 CoreDataHelper.instance.save()
                 download = nil
                 self.totalProgress = 0
+                self.state = .Online
                 return true
             }
                 
@@ -234,6 +264,7 @@ class Video: NSManagedObject, JSONInitializable {
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
+                    self.state = .Online
                     return true
                 } else {
                     print("strange error deleting videos!")
@@ -260,6 +291,64 @@ class Video: NSManagedObject, JSONInitializable {
             print("Error while getting videos")
             return []
             //            throw FetchError.RequestExecution
+        }
+    }
+    
+    var downloadingSize : Int64?
+    
+    private func getOnlineSizeForCurrentState(completion: (Int64 -> Void)) {
+        var quality : VideoQuality!
+        if state == .Online {
+            quality = VideosInfo.videoQuality
+        } else {
+            quality = loadingQuality!
+        }
+        let url = getUrlForQuality(quality)
+        
+        Alamofire.request(.HEAD, url).responseSwiftyJSON(completionHandler: {
+            _, _, json, error in 
+            print("size json")
+            print(json)
+        })
+    }
+    
+    private func getStoredSize(completion: (Int64->Void)) {        
+        do {
+            let filePath = try PathManager.sharedManager.getPathForStoredVideoWithName(name)
+
+            let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+            
+            if let _attr = attr {
+                completion(Int64(_attr.fileSize()));
+            }
+        } catch {
+            //nothing
+        }
+    }
+    
+    func getSize(completion: (Int64 -> Void)) {
+        if state == .Online {
+            getOnlineSizeForCurrentState({
+                size in
+                completion(size)
+            })
+        }
+        if state == .Downloading {
+            if let size = downloadingSize {
+                completion(size)
+            } else {
+                getOnlineSizeForCurrentState({
+                    size in
+                    completion(size)
+                })
+            }
+        }
+        
+        if state == .Cached {
+            getStoredSize({
+                size in
+                completion(size)
+            })
         }
     }
     

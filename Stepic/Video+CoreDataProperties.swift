@@ -76,6 +76,7 @@ extension Video {
         }
         set(value) {
             managedCachedQuality = value?.rawValue ?? nil
+            loadingQuality = value
         }
     }
     
@@ -86,8 +87,11 @@ extension Video {
 //        }
 //    }
     
-    var isCached : Bool {
-        return PathManager.sharedManager.doesExistVideoWith(id: id) && !isDownloading
-    }
-    
+//    var isCached : Bool {
+//        return self.state == VideoState.Cached
+//    }
+//    
+//    var isDownloading : Bool {
+//        return self.state == VideoState.Downloading
+//    }
 }

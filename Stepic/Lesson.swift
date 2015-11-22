@@ -83,7 +83,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         for step in steps {
             if step.block.name == "video" {
                 if let video = step.block.video {
-                    if video.isDownloading {
+                    if video.state == VideoState.Downloading {
                         loadingVideos! += [video]
                     }
                 }
@@ -120,21 +120,21 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
     }
     
-    func isCompleted(videos: [Video]) -> Bool {
-        for video in videos {
-            if video.isDownloading {
-                return false
-            }
-        }
-        return true
-    }
+//    func isCompleted(videos: [Video]) -> Bool {
+//        for video in videos {
+//            if video.state == .Downloading {
+//                return false
+//            }
+//        }
+//        return true
+//    }
     
     var isDownloading : Bool {
         if steps.count == 0 {
             return false
         }
         for vid in stepVideos {
-            if !vid.isCached && !vid.isDownloading {
+            if vid.state == VideoState.Online {
                 return false
             }
         }
@@ -149,7 +149,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             
             for video in loadingVideos! {
                 
-                if !video.isCached { 
+                if video.state != VideoState.Cached { 
                     video.storedProgress = {
                         prog in
                         self.storeProgress?(self.goodProgress)
@@ -176,6 +176,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     var completedVideos : Int = 0
     var cancelledVideos : Int = 0
     //returns completed & cancelled videos
+    
     func storeVideos(progress progress : (Float) -> Void, completion : (Int, Int) -> Void, error errorHandler: NSError? -> Void) {
         
         storeProgress = progress
@@ -185,7 +186,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         for step in steps {
             if step.block.name == "video" {
                 if let video = step.block.video {
-                    if !video.isCached {
+                    if video.state == VideoState.Downloading || video.state == VideoState.Online {
                         loadingVideos! += [video]
                     }
                 }
@@ -246,7 +247,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
         
         for vid in stepVideos {
-            if !vid.isCached { 
+            if vid.state != VideoState.Cached { 
                 return false
             }
         }
@@ -262,7 +263,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             for vid in self.stepVideos {
-                if !vid.isCached { 
+                if vid.state != VideoState.Cached { 
                     vid.cancelStore()
                 } else {
 //                    vid.removeFromStore()
@@ -280,7 +281,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             for vid in self.stepVideos {
-                if !vid.isCached { 
+                if vid.state != VideoState.Cached { 
                     print("not cached video can not be removed!")
                     vid.cancelStore()
                 } else {
