@@ -146,11 +146,16 @@ extension SectionsViewController : PKDownloadButtonDelegate {
     }
     
     private func storeSection(section: Section, downloadButton: PKDownloadButton!) {
-        section.storeVideos(progress: {
+        section.storeVideos(
+            progress: {
             progress in
             UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
             }, completion: {
-                UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloaded})
+                if section.isCached {
+                    UIThread.performUI({downloadButton.state = .Downloaded})
+                } else {
+                    UIThread.performUI({downloadButton.state = .StartDownload})
+                }            
             }, error: {
                 error in
                 UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})

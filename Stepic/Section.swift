@@ -179,6 +179,9 @@ class Section: NSManagedObject, JSONInitializable {
                     
                     lesson.storeCompletion = {
                         allDownloaded, allCancelled in
+                        if allCancelled != 0 {
+                            self.storeCompletion?()
+                        }
                         if self.isCompleted(self.loadingLessons!) {
                             self.storeCompletion?()
                         }
@@ -235,6 +238,9 @@ class Section: NSManagedObject, JSONInitializable {
                     self.storeProgress?(self.goodProgress)
                 }, completion: {
                     downloaded, cancelled in
+                    if cancelled != 0 {
+                        self.storeCompletion?()
+                    }
                     if self.isCompleted(self.loadingLessons!) {
                         self.storeCompletion?()
                     }
