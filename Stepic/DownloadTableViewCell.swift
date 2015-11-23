@@ -43,8 +43,10 @@ class DownloadTableViewCell: UITableViewCell {
     
     func initWith( video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {        
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
-//        nameLabel.text = "\(video.id).mp4"
-        lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
+//        lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
+        
+        lessonNameLabel.text = "\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")"
+
         self.video = video
 //        self.quality = video.cachedQuality ?? (video.loadingQuality ?? VideosInfo.videoQuality)
 //        qualityLabel.text = "\(quality.rawString)p"

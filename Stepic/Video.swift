@@ -294,7 +294,16 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
-    var downloadingSize : Int64?
+    var downloadingSize : Int64? {
+        didSet {
+            if let s = downloadingSize {
+                if let handler = sizeHandler {
+                    handler(s)
+                    sizeHandler = nil
+                }
+            }
+        }
+    }
     
     private func getOnlineSizeForCurrentState(completion: (Int64 -> Void)) {
         var quality : VideoQuality!
@@ -326,6 +335,8 @@ class Video: NSManagedObject, JSONInitializable {
         }
     }
     
+    var sizeHandler : (Int64 -> Void)?
+    
     func getSize(completion: (Int64 -> Void)) {
         if state == .Online {
             getOnlineSizeForCurrentState({
@@ -337,10 +348,7 @@ class Video: NSManagedObject, JSONInitializable {
             if let size = downloadingSize {
                 completion(size)
             } else {
-                getOnlineSizeForCurrentState({
-                    size in
-                    completion(size)
-                })
+                sizeHandler = completion
             }
         }
         
