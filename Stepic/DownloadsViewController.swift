@@ -74,6 +74,16 @@ class DownloadsViewController: UIViewController {
             let dvc = segue.destinationViewController as! UserPreferencesTableViewController
             dvc.hidesBottomBarWhenPushed = true
         }
+        
+        if segue.identifier == "showSteps" {
+            let dvc = segue.destinationViewController as! StepsViewController
+            dvc.hidesBottomBarWhenPushed = true
+            
+            let step = sender as! Step
+            //TODO : pass unit here!
+            dvc.lesson = step.managedLesson
+            dvc.startStepId = step.managedLesson?.steps.indexOf(step)
+        }
     }
     
 
@@ -116,6 +126,40 @@ class DownloadsViewController: UIViewController {
         })
     }
     
+}
+
+extension DownloadsViewController : UITableViewDelegate {
+    
+    func showLessonControllerWith(step step: Step) {
+        self.performSegueWithIdentifier("showSteps", sender: step)
+    }
+    
+    func showNotAbleToOpenLessonAlert(lesson lesson: Lesson) {
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedVideo : Video!
+        if isSectionDownloading(indexPath.section) {
+            selectedVideo = downloading[indexPath.row]
+        } else {
+            selectedVideo = stored[indexPath.row]
+        }
+        
+        if let enrolled = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse?.enrolled {
+            if enrolled {
+                showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+            } else {
+                if selectedVideo.managedBlock!.managedStep!.managedLesson!.isPublic {
+                    showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+                } else {
+                    showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!)
+                }
+            }
+        }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }
 
 extension DownloadsViewController : UITableViewDataSource {

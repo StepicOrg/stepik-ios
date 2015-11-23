@@ -13,6 +13,7 @@ class StepsViewController: RGPageViewController {
 
     //TODO: really need optionals here?
     var lesson : Lesson?
+    var startStepId : Int?
     
 //    var controllers : [UIViewController?]
     override func viewDidLoad() {
@@ -32,6 +33,16 @@ class StepsViewController: RGPageViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let l = lesson, id = startStepId {
+            if l.steps.count != 0 {
+                print("id -> \(id)")
+                self.selectTabAtIndex(id, updatePage: true)
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
