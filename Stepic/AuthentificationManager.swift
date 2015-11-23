@@ -138,17 +138,38 @@ class AuthentificationManager : NSObject {
         
 //        params["access_token"] = StepicAPI.shared.token!.accessToken
         
-        Alamofire.request(delete ? .DELETE : .POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            (_, _, json, error) in
+        if !delete {
+            Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+                (_, response, json, error) in
             
-            if let _ = error {
-                errorHandler()
-                return
-            }
+                if let _ = error {
+                    errorHandler()
+                    return
+                }
             
-//            print(json)
-            success()
-        })
+                if let r = response {
+                    if r.statusCode == 204 {
+                        success()
+                    } else {
+                        errorHandler()
+                    }
+                }
+            })
+        } else {
+            Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
+                (_, response, json, error) in
+                
+                if let r = response {
+                    if r.statusCode == 204 {
+                        success()
+                    } else {
+                        errorHandler()
+                    }
+                }
+            })
+
+        }
+        
     }
     
 }

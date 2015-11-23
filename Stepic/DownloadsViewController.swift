@@ -134,8 +134,15 @@ extension DownloadsViewController : UITableViewDelegate {
         self.performSegueWithIdentifier("showSteps", sender: step)
     }
     
-    func showNotAbleToOpenLessonAlert(lesson lesson: Lesson) {
+    func showNotAbleToOpenLessonAlert(lesson lesson: Lesson, enroll: (Void->Void)) {
+        let alert = UIAlertController(title: "No access", message: "You are not enrolled to the course \(lesson.managedUnit!.managedSection!.managedCourse!.title). Enroll?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Enroll", style: .Default, handler: {
+            action in
+            enroll()
+        }))
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -146,16 +153,27 @@ extension DownloadsViewController : UITableViewDelegate {
             selectedVideo = stored[indexPath.row]
         }
         
-        if let enrolled = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse?.enrolled {
-            if enrolled {
+        if let course = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse {
+            if course.enrolled {
                 showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
             } else {
                 if selectedVideo.managedBlock!.managedStep!.managedLesson!.isPublic {
                     showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                 } else {
-                    showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!)
+                    showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
+                        UIThread.performUI({SVProgressHUD.show()})
+                        AuthentificationManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
+                            UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
+                            self.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+                            }, error: { 
+                                UIThread.performUI({SVProgressHUD.showErrorWithStatus("")})
+                                UIThread.performUI({Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)})
+                        })
+                    })
                 }
             }
+        } else {
+            print("Something bad happened")
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
