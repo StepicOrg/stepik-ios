@@ -54,3 +54,8 @@ UnenrollAlertTitle = "Stop studying";
 UnenrollAlertMessage = "Don't you want to study on this course?";
 Unenroll = "Stop studying";
 Mb = "Mb";
+NoAccess = "No access";
+NotEnrolledToCourseMessage = "You are not enrolled to the course";
+from = "from";
+until = "until";
+

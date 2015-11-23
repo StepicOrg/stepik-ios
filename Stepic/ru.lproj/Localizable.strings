@@ -54,3 +54,7 @@ UnenrollAlertTitle = "Прекратить обучение";
 UnenrollAlertMessage = "Вы действительно хотите перестать учиться на этом курсе?";
 Unenroll = "Прекратить обучение";
 Mb = "Мб";
+NoAccess = "Нет доступа";
+NotEnrolledToCourseMessage = "Вы не обучаетесь на курсе";
+from = "с";
+until = "до";

@@ -480,13 +480,21 @@
 			name = "User Preferences";
 			sourceTree = "<group>";
 		};
+		08B80E501C03856000483AAA /* TeachersTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */,
+				08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */,
+				08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */,
+			);
+			name = TeachersTableViewCell;
+			sourceTree = "<group>";
+		};
 		08CA59D71BBC0067008DC44D /* Course preview */ = {
 			isa = PBXGroup;
 			children = (
 				08CA59DE1BBD2563008DC44D /* Cell classes */,
 				08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */,
-				08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */,
-				08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */,
 			);
 			name = "Course preview";
 			sourceTree = "<group>";
@@ -496,7 +504,7 @@
 			children = (
 				0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */,
 				08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */,
-				08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */,
+				08B80E501C03856000483AAA /* TeachersTableViewCell */,
 				08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */,
 				08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */,
 			);

@@ -35,11 +35,11 @@ class CourseTableViewCell: UITableViewCell {
         }
         
         if course.beginDate == nil && course.endDate != nil {
-            return "до \(course.endDate!.getStepicFormatString())"
+            return "\(NSLocalizedString("until", comment: "")) \(course.endDate!.getStepicFormatString())"
         }
         
         if course.beginDate != nil && course.endDate == nil {
-            return "с \(course.beginDate!.getStepicFormatString())"
+            return "\(NSLocalizedString("from", comment: "")) \(course.beginDate!.getStepicFormatString())"
         }
         
         return "\(course.beginDate!.getStepicFormatString()) - \(course.endDate!.getStepicFormatString())"

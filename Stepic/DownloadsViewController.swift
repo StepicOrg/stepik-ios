@@ -135,13 +135,13 @@ extension DownloadsViewController : UITableViewDelegate {
     }
     
     func showNotAbleToOpenLessonAlert(lesson lesson: Lesson, enroll: (Void->Void)) {
-        let alert = UIAlertController(title: "No access", message: "You are not enrolled to the course \(lesson.managedUnit!.managedSection!.managedCourse!.title). Enroll?", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Enroll", style: .Default, handler: {
+        let alert = UIAlertController(title: NSLocalizedString("NoAccess", comment: ""), message: "\(NSLocalizedString("NotEnrolledToCourseMessage", comment: "")) \"\(lesson.managedUnit!.managedSection!.managedCourse!.title)\". \(NSLocalizedString("JoinCourse", comment: ""))?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("JoinCourse", comment: ""), style: .Default, handler: {
             action in
             enroll()
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
