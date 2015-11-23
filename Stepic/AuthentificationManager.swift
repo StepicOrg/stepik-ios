@@ -140,19 +140,11 @@ class AuthentificationManager : NSObject {
         
         if !delete {
             Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-                (_, response, json, error) in
+                (_, _, json, error) in
             
                 if let _ = error {
                     errorHandler()
                     return
-                }
-            
-                if let r = response {
-                    if r.statusCode == 204 {
-                        success()
-                    } else {
-                        errorHandler()
-                    }
                 }
             })
         } else {
