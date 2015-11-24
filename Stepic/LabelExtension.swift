@@ -10,6 +10,7 @@ import UIKit
 
 extension UILabel {
     func setTextWithHTMLString(htmlText: String) {
+//        Time.tick(htmlText)
         let descData = htmlText.dataUsingEncoding(NSUnicodeStringEncoding) ?? NSData()
         
         
@@ -20,6 +21,7 @@ extension UILabel {
         
         let attributedDescription = try? NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) 
         self.text = attributedDescription!.string
+//        Time.tock(htmlText)
     }
     
     class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false) -> CGFloat {

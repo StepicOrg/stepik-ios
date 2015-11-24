@@ -146,6 +146,7 @@ class AuthentificationManager : NSObject {
                     errorHandler()
                     return
                 }
+                success()
             })
         } else {
             Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {

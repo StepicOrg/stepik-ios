@@ -17,36 +17,44 @@ class CoursePreviewViewController: UIViewController {
         didSet {
             if let c = course {                
                 textData[0] += [("", "")]
+                heights[0] += [0]
                 if c.summary != "" {
                     textData[0] += [(NSLocalizedString("Summary", comment: ""), c.summary)]
+                    heights[0] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Summary", comment: ""), text: c.summary)]
                 }
                 if c.courseDescription != "" {
                     textData[1] += [(NSLocalizedString("Description", comment: ""), c.courseDescription)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Description", comment: ""), text: c.courseDescription)]
                 }
                 if c.workload != "" {
                     textData[1] += [(NSLocalizedString("Workload", comment: ""), c.workload)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Workload", comment: ""), text: c.workload)]
                 }
                 if c.certificate != "" {
                     textData[1] += [(NSLocalizedString("Certificate", comment: ""), c.certificate)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Certificate", comment: ""), text: c.certificate)]
                 }
                 if c.audience != "" {
                     textData[1] += [(NSLocalizedString("Audience", comment: ""), c.audience)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Audience", comment: ""), text: c.audience)]
                 }
                 if c.format != "" {
                     textData[1] += [(NSLocalizedString("Format", comment: ""), c.format)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Format", comment: ""), text: c.format)]
                 }
                 if c.requirements != "" {
                     textData[1] += [(NSLocalizedString("Requirements", comment: ""), c.requirements)]
+                    heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Requirements", comment: ""), text: c.requirements)]
                 }
             } 
         }
+        
     }
     
     var displayingInfoType : DisplayingInfoType = .Overview 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.registerNib(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -54,6 +62,7 @@ class CoursePreviewViewController: UIViewController {
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         
         tableView.tableFooterView = UIView()
+
 //        print("course enrollment status -> \(course?.enrolled)")
         // Do any additional setup after loading the view.
     }
@@ -64,6 +73,13 @@ class CoursePreviewViewController: UIViewController {
     }
     
     private var textData : [[(String, String)]] = [
+        //Overview
+        [],
+        //Detailed
+        []
+    ]
+    
+    private var heights : [[CGFloat]] = [
         //Overview
         [],
         //Detailed
@@ -159,58 +175,30 @@ extension CoursePreviewViewController : UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+//        Time.tick(indexPath)
         if indexPath.section == 0  { 
             let cell = tableView.dequeueReusableCellWithIdentifier("IntroVideoTableViewCell", forIndexPath: indexPath) as! IntroVideoTableViewCell
             
             cell.initWithCourse(course!)
+//            Time.tock(indexPath)
             return cell
         } else {
             if indexPath.row >= textData[displayingInfoType.rawValue].count {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+//                Time.tock(indexPath)
                 return cell
             }
             if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
                 let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
                 cell.initWithCourse(course!)
+//                Time.tock(indexPath)
                 return cell
             }
 
             let cell = tableView.dequeueReusableCellWithIdentifier("TitleTextTableViewCell", forIndexPath: indexPath) as! TitleTextTableViewCell
             cell.initWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
+//            Time.tock(indexPath)
             return cell
-            
-//            if displayingInfoType == .Overview {
-//                switch indexPath.row {
-//                case 0:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
-//                    cell.initWithCourse(course!)
-//                    return cell
-//                
-//                case 1:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("SummaryTableViewCell", forIndexPath: indexPath) as! SummaryTableViewCell
-//                    cell.initWithCourse(course!)
-//                    return cell
-//                default:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
-//                    return cell
-//                }
-//            } else {
-//                switch indexPath.row {
-//                case 0:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("DescriptionTableViewCell", forIndexPath: indexPath) as! DescriptionTableViewCell
-//                    cell.initWithCourse(course!)
-//                    return cell
-//                case 1:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("DateInfoTableViewCell", forIndexPath: indexPath) as! DateInfoTableViewCell
-//                    cell.initWithCourse(course!)
-//                    return cell
-//                default:
-//                    let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
-//                    return cell
-//
-//                }
-//            }
         }
     }
     
@@ -251,7 +239,7 @@ extension CoursePreviewViewController : UITableViewDelegate {
             if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
                 return 137
             }
-            return TitleTextTableViewCell.heightForCellWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
+            return heights[displayingInfoType.rawValue][indexPath.row]
 //            if displayingInfoType == .Overview {
 //                switch indexPath.row {
 //                case 0:

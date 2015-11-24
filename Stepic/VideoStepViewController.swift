@@ -192,7 +192,6 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
 extension VideoStepViewController : VideoDownloadDelegate {
     
     private func askForReload() {
-        //TODO: Add localized title
         let alert = UIAlertController(title: NSLocalizedString("ReloadPlayerTitle", comment: ""), message: NSLocalizedString("ReloadPlayerMessage", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
@@ -210,7 +209,9 @@ extension VideoStepViewController : VideoDownloadDelegate {
     }
     
     func didDownload(video: Video, cancelled: Bool) {
-        askForReload()
+        if !cancelled { 
+            askForReload()
+        }
     }
     
     func didGetError(video: Video) {

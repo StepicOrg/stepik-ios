@@ -94,6 +94,7 @@
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
 		08D1EF741BB5636700BE84E6 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
+		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
@@ -218,6 +219,7 @@
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D1EF721BB5636700BE84E6 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		08D2AE451C04BA6100BD8C3D /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */,
 				089B370E1BFA210F003DC593 /* CacheManager.swift */,
 				08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */,
+				08D2AE451C04BA6100BD8C3D /* Time.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
+				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
