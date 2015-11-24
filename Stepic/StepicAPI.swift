@@ -41,6 +41,7 @@ class StepicAPI: NSObject {
                 topVC?.presentViewController(vc, animated: true, completion: {
                     //            self.dismissViewControllerAnimated(false, completion: nil)
                 })
+                AnalyticsHelper.sharedHelper.changeSignIn()
             } else {
                 print("\ndid set new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
@@ -68,6 +69,23 @@ class StepicAPI: NSObject {
     
     var didRefresh : Bool = false
     
+    var userId : Int? {
+        set(id) {
+            defaults.setValue(id, forKey: "user_id")
+            defaults.synchronize()
+        }
+        get {
+            if let id = defaults.valueForKey("user_id") as? Int {
+                return id
+            } else {
+                return nil
+            }
+        }
+    }
     
-    var user : User?
+    var user : User? {
+        didSet {
+            userId = user?.id
+        }
+    }
 }

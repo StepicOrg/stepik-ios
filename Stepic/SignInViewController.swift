@@ -60,8 +60,19 @@ class SignInViewController: UIViewController {
         success: {
             t in
             StepicAPI.shared.token = t
-            SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-            self.performSegueWithIdentifier("signedInSegue", sender: self)
+            ApiDataDownloader.sharedDownloader.getCurrentUser({
+                user in
+                StepicAPI.shared.user = user
+                SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                self.performSegueWithIdentifier("signedInSegue", sender: self)
+                AnalyticsHelper.sharedHelper.changeSignIn()
+                AnalyticsHelper.sharedHelper.sendSignedIn()
+                }, failure: {
+                    e in
+                    print("successfully signed in, but could not get user")
+                    SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                    self.performSegueWithIdentifier("signedInSegue", sender: self)
+            })
         }, failure: {
             e in
             self.errorLabel.hidden = false
