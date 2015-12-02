@@ -58,3 +58,6 @@ NoAccess = "Нет доступа";
 NotEnrolledToCourseMessage = "Вы не обучаетесь на курсе";
 from = "с";
 until = "до";
+Link = "Ссылка";
+OpenInBrowser = "Открыть ссылку в браузере?";
+Open = "Открыть";

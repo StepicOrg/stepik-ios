@@ -20,7 +20,7 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var solveButtonHeight: NSLayoutConstraint!
     
     var nItem : UINavigationItem!
-
+    var didStartLoadingFirstRequest = false
 //    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
     var step : Step!
@@ -96,9 +96,29 @@ class WebStepViewController: UIViewController {
 }
 
 extension WebStepViewController : UIWebViewDelegate {
+    
+    func openInBrowserAlert(url: NSURL) {
+        let alert = UIAlertController(title: NSLocalizedString("Link", comment: ""), message: NSLocalizedString("OpenInBrowser", comment: ""), preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .Default, handler: { 
+            (action) -> Void in
+            UIApplication.sharedApplication().openURL(url)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.URLString)
-        return true
+        if didStartLoadingFirstRequest {
+            if let url = request.URL { 
+                openInBrowserAlert(url) 
+            }
+            return false
+        } else {
+            didStartLoadingFirstRequest = true
+            return true
+        }
     }
     
     func getContentHeight(webView : UIWebView) -> Int {

@@ -17,8 +17,8 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    let heightForRows = [[131], [40, 40], [40, 40]]
-    let selectionForRows = [[false], [false, true], [false, false]]
+    let heightForRows = [[131], [40, 40], [40]]
+    let selectionForRows = [[false], [false, true], [true]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,9 @@ class UserPreferencesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 2 && indexPath.row == 0 {
+            signOut()
+        }
     }
     
     @IBAction func closeButtonPressed(sender: UIButton) {
@@ -100,10 +103,12 @@ class UserPreferencesTableViewController: UITableViewController {
         ConnectionHelper.shared.reachableOnWWAN = sender.on
     }
     
-    
+    func signOut() {
+        StepicAPI.shared.token = nil
+    }
     
     @IBAction func signOutButtonPressed(sender: UIButton) {
-        StepicAPI.shared.token = nil
+        signOut()
 //        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
 //        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
 //        self.presentViewController(vc, animated: true, completion: {

@@ -58,4 +58,7 @@ NoAccess = "No access";
 NotEnrolledToCourseMessage = "You are not enrolled to the course";
 from = "from";
 until = "until";
+Link = "Link";
+OpenInBrowser = "Open the link in browser?";
+Open = "Open";
 
