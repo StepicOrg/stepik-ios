@@ -118,7 +118,8 @@ class CoursePreviewViewController: UIViewController {
                     CoreDataHelper.instance.save()
                     self.performSegueWithIdentifier("showSections", sender: nil)
                 }, error:  {
-                    SVProgressHUD.showErrorWithStatus("")
+                    status in
+                    SVProgressHUD.showErrorWithStatus(status)
                 }) 
             } else {
                 askForUnenroll(unenroll: {
@@ -129,7 +130,8 @@ class CoursePreviewViewController: UIViewController {
                         CoreDataHelper.instance.save()
                         self.navigationController?.popToRootViewControllerAnimated(true)
                         }, error:  {
-                            SVProgressHUD.showErrorWithStatus("")
+                            status in
+                            SVProgressHUD.showErrorWithStatus(status)
                     })
                 })
             }

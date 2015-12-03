@@ -20,6 +20,8 @@ class SectionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = course.title
+        
         tableView.tableFooterView = UIView()
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent

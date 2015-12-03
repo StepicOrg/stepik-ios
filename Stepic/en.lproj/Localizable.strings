@@ -61,4 +61,6 @@ until = "until";
 Link = "Link";
 OpenInBrowser = "Open the link in browser?";
 Open = "Open";
+TryJoinFromWeb = "Try to join course in web version!";
+Error = "Error";
 

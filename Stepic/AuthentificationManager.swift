@@ -124,7 +124,7 @@ class AuthentificationManager : NSObject {
         })
     }
     
-    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (Void->Void)) {
+    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
@@ -140,29 +140,51 @@ class AuthentificationManager : NSObject {
         
         if !delete {
             Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-                (_, _, json, error) in
-            
-                if let _ = error {
-                    errorHandler()
-                    return
+                (_, response, json, error) in
+                
+                if let r = response {
+                    if r.statusCode.isSuccess() {
+                        success()
+                    } else {
+                        let s = NSLocalizedString("TryJoinFromWeb", comment: "")
+                        errorHandler(s)
+                    }
+                } else {
+                    let s = NSLocalizedString("Error", comment: "")
+                    errorHandler(s)
                 }
-                success()
+                
+//                print("response -> \(response?.statusCode)")
+//                print(json)
+                
+//                if let _ = error {
+//                    errorHandler()
+//                    return
+//                }
+//                success()
             })
         } else {
             Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
-                    if r.statusCode == 204 {
+                    if r.statusCode.isSuccess() {
                         success()
-                    } else {
-                        errorHandler()
+                        return
                     }
                 }
+                
+                let s = NSLocalizedString("Error", comment: "")
+                errorHandler(s)
             })
 
         }
         
     }
-    
+}
+
+extension Int {
+    func isSuccess() -> Bool {
+        return "\(self)".characters.first == "2"
+    }
 }

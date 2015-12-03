@@ -19,6 +19,8 @@ class StepsViewController: RGPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = lesson?.title
+
         datasource = self
         delegate = self
         SVProgressHUD.show()

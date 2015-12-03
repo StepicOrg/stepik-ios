@@ -20,6 +20,8 @@ class UnitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = section.title
+        
         tableView.tableFooterView = UIView()
                 
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent

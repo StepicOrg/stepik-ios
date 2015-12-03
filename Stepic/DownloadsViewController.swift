@@ -166,7 +166,8 @@ extension DownloadsViewController : UITableViewDelegate {
                             UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
                             self.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                             }, error: { 
-                                UIThread.performUI({SVProgressHUD.showErrorWithStatus("")})
+                                status in
+                                UIThread.performUI({SVProgressHUD.showErrorWithStatus(status)})
                                 UIThread.performUI({Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)})
                         })
                     })
