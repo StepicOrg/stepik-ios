@@ -12,7 +12,7 @@
 "5ss-uq-4Dy.text" = "Incorrect username or password!";
 
 /* Class = "UILabel"; text = "Load videos with 3G"; ObjectID = "5ty-cw-1qL"; */
-"5ty-cw-1qL.text" = "Load videos with 3G";
+"5ty-cw-1qL.text" = "Load videos only by Wi-Fi";
 
 /* Class = "UITableViewSection"; headerTitle = "Actions"; ObjectID = "6bM-2c-3U9"; */
 "6bM-2c-3U9.headerTitle" = "Actions";

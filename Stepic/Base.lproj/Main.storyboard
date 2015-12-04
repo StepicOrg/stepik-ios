@@ -238,7 +238,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Don't have an account? Sign up!">
-                                    <color key="titleColor" red="0.48627450979999998" green="0.76862745099999996" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -248,14 +248,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fk1-Ad-oby">
                                 <rect key="frame" x="175" y="346" width="250" height="44"/>
                                 <animations/>
+                                <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="TJF-S7-4HG"/>
                                     <constraint firstAttribute="height" constant="44" id="XRP-ym-RHc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Sign in" backgroundImage="btn_signin_active">
+                                <state key="normal" title="Sign in">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="signInPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="leH-c2-JMk"/>
@@ -319,6 +319,7 @@
                         <outlet property="emailTextField" destination="iIb-Ou-ABM" id="CGz-4j-WZw"/>
                         <outlet property="errorLabel" destination="5ss-uq-4Dy" id="1ai-H3-1Tf"/>
                         <outlet property="passwordTextField" destination="UoZ-CZ-ikS" id="E0r-0x-50J"/>
+                        <outlet property="signInButton" destination="Fk1-Ad-oby" id="8Ab-o7-tgZ"/>
                         <segue destination="0uJ-IX-W04" kind="show" identifier="signedInSegue" id="l4B-KA-g0S"/>
                     </connections>
                 </viewController>
@@ -543,7 +544,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Load videos with 3G" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ty-cw-1qL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Load videos only by Wi-Fi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ty-cw-1qL">
                                                     <rect key="frame" x="16" y="12" width="519" height="17"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -655,6 +656,7 @@
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
                         <outlet property="avatarImageView" destination="J5k-lf-s7P" id="tfH-d2-UBy"/>
+                        <outlet property="onlyWiFiSwitch" destination="pUi-kz-aZf" id="0Op-qn-b45"/>
                         <outlet property="userNameLabel" destination="iwD-Yk-nPZ" id="T2U-4i-zwm"/>
                         <outlet property="videoQualityLabel" destination="1rQ-YY-ig7" id="sFd-Gw-Kkp"/>
                     </connections>

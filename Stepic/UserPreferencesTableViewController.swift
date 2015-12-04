@@ -11,6 +11,8 @@ import SVProgressHUD
 
 class UserPreferencesTableViewController: UITableViewController {
     
+    @IBOutlet weak var onlyWiFiSwitch: UISwitch!
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var videoQualityLabel: UILabel!
@@ -33,6 +35,9 @@ class UserPreferencesTableViewController: UITableViewController {
         } else {
             avatarImageView.image = Constants.placeholderImage
         }
+        
+        onlyWiFiSwitch.on = !ConnectionHelper.shared.reachableOnWWAN
+
         
         
         ApiDataDownloader.sharedDownloader.getCurrentUser({
@@ -100,7 +105,7 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     @IBAction func allow3GChanged(sender: UISwitch) {
-        ConnectionHelper.shared.reachableOnWWAN = sender.on
+        ConnectionHelper.shared.reachableOnWWAN = !sender.on
     }
     
     func signOut() {

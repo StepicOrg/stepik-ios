@@ -14,12 +14,15 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var signInButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         errorLabel.hidden = true
         // Do any additional setup after loading the view.
+        
+        self.signInButton.setRoundedCorners(cornerRadius: 9, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
         let tapG = UITapGestureRecognizer(target: self, action: "tap")
         self.view.addGestureRecognizer(tapG)

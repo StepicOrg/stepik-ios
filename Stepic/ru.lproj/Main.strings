@@ -12,7 +12,7 @@
 "5ss-uq-4Dy.text" = "Неверное имя пользователя или пароль!";
 
 /* Class = "UILabel"; text = "Load videos with 3G"; ObjectID = "5ty-cw-1qL"; */
-"5ty-cw-1qL.text" = "Загружать видео по 3G";
+"5ty-cw-1qL.text" = "Загружать видео только по Wi-Fi";
 
 /* Class = "UITableViewSection"; headerTitle = "Actions"; ObjectID = "6bM-2c-3U9"; */
 "6bM-2c-3U9.headerTitle" = "Действия";
