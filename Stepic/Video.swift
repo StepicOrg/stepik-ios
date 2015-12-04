@@ -198,11 +198,12 @@ class Video: NSManagedObject, JSONInitializable {
                 self.storedCompletion?(true)
                 self.downloadDelegate?.didDownload(self, cancelled: false)
         })
+        print("started download of \(name)")
 //        self.download = VideoDownload(download: download, videoId: id)
     }
     
     func cancelStore() -> Bool {
-//        print("Entered video cancelStore")
+        print("Entered video cancelStore of \(name)")
         if let d = download {
             d.downloadTask.cancel()
             download = nil
