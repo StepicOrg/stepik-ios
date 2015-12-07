@@ -180,13 +180,14 @@ extension SectionsViewController : PKDownloadButtonDelegate {
                 return
             }
             
-            downloadButton.state = PKDownloadButtonState.Downloading
-            
             if course.sections[downloadButton.tag].units.count != 0 {
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloading})
                 storeSection(course.sections[downloadButton.tag], downloadButton: downloadButton)
             } else {
-                course.sections[downloadButton.tag].loadUnits(completion: { 
-                self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.Pending})
+                course.sections[downloadButton.tag].loadUnits(completion: {
+                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloading})
+                    self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
                 }, error: {
                     print("Error while downloading section's units")
                 })
