@@ -27,7 +27,7 @@ class StepsViewController: RGPageViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+
         lesson?.loadSteps(completion: {
             self.reloadData()
         })
@@ -37,6 +37,7 @@ class StepsViewController: RGPageViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson, id = startStepId {
             if l.steps.count != 0 {
                 print("id -> \(id)")

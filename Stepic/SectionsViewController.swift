@@ -21,9 +21,8 @@ class SectionsViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.title = course.title
-        
         tableView.tableFooterView = UIView()
-        
+        self.navigationItem.backBarButtonItem?.title = " "
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -40,6 +39,7 @@ class SectionsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.backBarButtonItem?.title = " "
         tableView.reloadData()
         if(self.refreshControl.refreshing) {
             let offset = self.tableView.contentOffset

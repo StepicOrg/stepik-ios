@@ -21,13 +21,14 @@ class UnitsViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = section.title
-        
+        self.navigationItem.backBarButtonItem?.title = " "
+
         tableView.tableFooterView = UIView()
                 
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+
         tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
         
@@ -43,6 +44,7 @@ class UnitsViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationItem.backBarButtonItem?.title = " "
         tableView.reloadData()
         if(self.refreshControl.refreshing) {
             let offset = self.tableView.contentOffset

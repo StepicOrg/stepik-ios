@@ -60,7 +60,8 @@ class CoursePreviewViewController: UIViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+        self.navigationItem.backBarButtonItem?.title = ""
+
         tableView.tableFooterView = UIView()
 
 //        print("course enrollment status -> \(course?.enrolled)")
