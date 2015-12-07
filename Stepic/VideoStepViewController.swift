@@ -40,7 +40,7 @@ class VideoStepViewController: UIViewController {
             player.fullscreen = false
             //               player.controlStyle = MPMovieControlStyle.Embedded
             player.movieSourceType = MPMovieSourceType.File
-            player.repeatMode = MPMovieRepeatMode.One
+            player.repeatMode = MPMovieRepeatMode.None
             //               player.play()
             self.view.addSubview(player.view)
 //            [[NSNotificationCenter defaultCenter] addObserver:self 
