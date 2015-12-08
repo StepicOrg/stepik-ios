@@ -55,6 +55,12 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBAction func socialPressed(sender: UIButton) {
+        let urlString = "https://stepic.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(ClientIDs.socialClientId)%26response_type%3Dcode"
+        UIApplication.sharedApplication().openURL(NSURL(string: urlString)!)
+    }
+    
     @IBAction func signInPressed(sender: UIButton) {
         
         SVProgressHUD.show()

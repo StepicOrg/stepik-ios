@@ -59,9 +59,6 @@ class WebStepViewController: UIViewController {
 //            stepWebView.constrainBottomSpaceToView(solveButton, predicate: "0")
 //        }
         
-        if let a = assignment {
-            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
-        }        
         // Do any additional setup after loading the view.
     }
 
@@ -69,6 +66,13 @@ class WebStepViewController: UIViewController {
         super.viewWillAppear(animated)
         nItem.rightBarButtonItem = nil
         SVProgressHUD.dismiss()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let a = assignment {
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+        }
     }
     
     @IBAction func solveOnTheWebsitePressed(sender: UIButton) {

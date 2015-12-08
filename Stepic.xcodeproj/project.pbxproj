@@ -40,6 +40,12 @@
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
+		083D649C1C172015003222F0 /* ClientIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* ClientIDs.swift */; };
+		083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
+		083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
+		083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
+		083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
+		083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
 		084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
 		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
@@ -164,6 +170,12 @@
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		083D649B1C172015003222F0 /* ClientIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientIDs.swift; sourceTree = "<group>"; };
+		083D649D1C174E61003222F0 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		083D649F1C175119003222F0 /* SignInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewController.swift; sourceTree = "<group>"; };
+		083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworkCollectionViewCell.swift; sourceTree = "<group>"; };
+		083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialNetworkCollectionViewCell.xib; sourceTree = "<group>"; };
+		083D64A81C175498003222F0 /* SocialNetworks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworks.swift; sourceTree = "<group>"; };
 		0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -293,6 +305,7 @@
 				08DF1D951BDADB7A00BA35EA /* Scripts.plist */,
 				0885F8511BA9D64300F2A188 /* Constants.swift */,
 				080ACF4F1BD79D5500329F2B /* Images.swift */,
+				083D649B1C172015003222F0 /* ClientIDs.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -357,7 +370,10 @@
 		0828FF841BC81EA9000AFEA7 /* Registration & Sign in */ = {
 			isa = PBXGroup;
 			children = (
+				083D64A71C175463003222F0 /* Social networks */,
 				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
+				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
+				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -370,6 +386,24 @@
 				0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */,
 			);
 			name = Units;
+			sourceTree = "<group>";
+		};
+		083D64A11C17523E003222F0 /* Social network cell */ = {
+			isa = PBXGroup;
+			children = (
+				083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */,
+				083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */,
+			);
+			name = "Social network cell";
+			sourceTree = "<group>";
+		};
+		083D64A71C175463003222F0 /* Social networks */ = {
+			isa = PBXGroup;
+			children = (
+				083D64A11C17523E003222F0 /* Social network cell */,
+				083D64A81C175498003222F0 /* SocialNetworks.swift */,
+			);
+			name = "Social networks";
 			sourceTree = "<group>";
 		};
 		084156981BCC08F9006B8C73 /* Steps */ = {
@@ -724,6 +758,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
@@ -834,6 +869,7 @@
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
+				083D649C1C172015003222F0 /* ClientIDs.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
@@ -843,6 +879,7 @@
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
+				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
@@ -865,6 +902,8 @@
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */,
+				083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
@@ -872,6 +911,7 @@
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
+				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,

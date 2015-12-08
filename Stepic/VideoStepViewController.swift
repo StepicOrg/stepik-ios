@@ -53,13 +53,9 @@ class VideoStepViewController: UIViewController {
             self.moviePlayer?.view.alignTop("44", bottom: "0", toView: self.view)
             self.moviePlayer?.view.hidden = true
         }
-        
-        if let a = assignment {
-            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
-        }
+    
                 // Do any additional setup after loading the view.
     }
-    
     
     var fullScreenWasPlaying : Bool = false
     func didExitFullscreen() {
@@ -122,6 +118,9 @@ class VideoStepViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        if let a = assignment {
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+        }
 //        thumbnailImageView.hidden = false
 //        moviePlayer?.view.hidden = true
 //        if let player = self.moviePlayer {

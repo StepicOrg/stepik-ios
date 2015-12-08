@@ -124,6 +124,7 @@ class AuthentificationManager : NSObject {
         })
     }
     
+    
     func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
