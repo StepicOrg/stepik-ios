@@ -9,7 +9,7 @@
 import UIKit
 
 class TeachersTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     var instructors : [User] = []
@@ -21,6 +21,8 @@ class TeachersTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didRotate", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -37,6 +39,10 @@ class TeachersTableViewCell: UITableViewCell {
             UIThread.performUI({self.collectionView.reloadData()})
         })
 //        collectionView.reloadData()
+    }
+    
+    func didRotate() {
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
@@ -56,8 +62,17 @@ extension TeachersTableViewCell : UICollectionViewDataSource {
         return cell
     }
     
-    
 }
+
+extension TeachersTableViewCell : UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        let usedWidth : CGFloat = CGFloat(instructors.count) * 120 + CGFloat(instructors.count - 1) * 10
+        let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
+        
+        return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+    }
+}
+
 
 extension TeachersTableViewCell : UICollectionViewDelegate {
     

@@ -1716,10 +1716,10 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ste-Lr-Bip"/>
-        <segue reference="b5T-ta-Pf4"/>
-        <segue reference="hTT-Az-p53"/>
+        <segue reference="LaP-cg-j2K"/>
         <segue reference="Ymm-um-wgY"/>
         <segue reference="oyz-px-1HN"/>
+        <segue reference="b5T-ta-Pf4"/>
+        <segue reference="hTT-Az-p53"/>
     </inferredMetricsTieBreakers>
 </document>

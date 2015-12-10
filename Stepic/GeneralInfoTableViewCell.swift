@@ -24,6 +24,9 @@ class GeneralInfoTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
+        
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didRotate", name: UIDeviceOrientationDidChangeNotification, object: nil)
 
     }
 
@@ -31,6 +34,11 @@ class GeneralInfoTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func didRotate() {
+        print("did rotate in general info")
+        layoutSubviews()
     }
     
     func initWithCourse(course: Course) {
