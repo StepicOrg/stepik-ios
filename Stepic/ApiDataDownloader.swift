@@ -39,8 +39,9 @@ class ApiDataDownloader: NSObject {
         Alamofire.request(.GET, "https://stepic.org/api/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
-            
+            //TODO: Remove from here 
             if let e = error {
+                print(e)
                 failure(error: e)
                 return
             }
@@ -79,12 +80,13 @@ class ApiDataDownloader: NSObject {
         Alamofire.request(.GET, "https://stepic.org/api/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
+            //TODO: Delete from here
             if let e = error {
+                print(e)
                 failure(error: e)
                 return
             }
             
-//            print(json)
 //            print(json["users"])
             
             let user : User = User(json: json["users"].arrayValue[0])

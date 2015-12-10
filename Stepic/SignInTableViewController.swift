@@ -14,26 +14,24 @@ class SignInTableViewController: UITableViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
-    
-    @IBOutlet weak var socialNetworksCollectionView: UICollectionView!
-
-    let socialNetworks : [SocialNetwork] = []
-        
+            
     override func viewDidLoad() {
         super.viewDidLoad()
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-        
-        socialNetworksCollectionView.delegate = self
-        socialNetworksCollectionView.dataSource = self
-        
-        socialNetworksCollectionView.registerNib(UINib(nibName: "SocialNetworkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialNetworkCollectionViewCell")
         
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.clearColor()
         
         let tapG = UITapGestureRecognizer(target: self, action: "tap")
         self.view.addGestureRecognizer(tapG)
+        
+        tableView.panGestureRecognizer.cancelsTouchesInView = false
+        tableView.delaysContentTouches = false
+
+        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetAuthentificationCode:", name: "ReceivedAuthorizationCodeNotification", object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -41,6 +39,11 @@ class SignInTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    func didGetAuthentificationCode(notification: NSNotification) {
+        print("entered didGetAuthentificationCode")
+        authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+    }
+    
     func tap() {
         self.view.endEditing(true)
     }
@@ -62,10 +65,34 @@ class SignInTableViewController: UITableViewController {
         return 1
     }
 
+    func authentificateWithCode(code: String) {
+        SVProgressHUD.show()
+        AuthentificationManager.sharedManager.logInWithCode(code, 
+            success: {
+                t in
+                StepicAPI.shared.token = t
+                ApiDataDownloader.sharedDownloader.getCurrentUser({
+                    user in
+                    StepicAPI.shared.user = user
+                    SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                    self.performSegueWithIdentifier("signedInSegue", sender: self)
+                    AnalyticsHelper.sharedHelper.changeSignIn()
+                    AnalyticsHelper.sharedHelper.sendSignedIn()
+                    }, failure: {
+                        e in
+                        print("successfully signed in, but could not get user")
+                        SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                        self.performSegueWithIdentifier("signedInSegue", sender: self)
+                })
+            }, failure: {
+                e in
+                SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
+        })
+    }
+    
     @IBAction func signInPressed(sender: UIButton) {
         SVProgressHUD.show()
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
-            
             success: {
                 t in
                 StepicAPI.shared.token = t
@@ -137,40 +164,17 @@ class SignInTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReceivedAuthorizationCodeNotification", object: nil)
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
 
-extension SignInTableViewController : UICollectionViewDelegate {
-    func getSocialNetworkByIndexPath(indexPath: NSIndexPath) -> SocialNetwork {
-        return socialNetworks[indexPath.item]
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)
-    }
-}
 
-extension SignInTableViewController : UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return socialNetworks.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SocialNetworkCollectionViewCell", forIndexPath: indexPath) as! SocialNetworkCollectionViewCell
-        cell.imageView.image = socialNetworks[indexPath.item].image
-        return cell
-    }
-}

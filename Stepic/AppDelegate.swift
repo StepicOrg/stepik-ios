@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Optional: configure GAI options.
         let gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
+        gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
 
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -39,6 +39,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        print("opened app via url \(url.absoluteString)")
+        let codeOpt = Parser.sharedParser.codeFromURL(url)
+        if let code = codeOpt {
+            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])
+//            let launchController = ControllerHelper.showLaunchController(true)
+//            
+//            print(self.window?.rootViewController?.classForCoder)
+//            launchController.performSegueWithIdentifier("signInSegue", sender: nil)
+//            launchController.signInController!.authentificateWithCode(code)
+            
+        } else {
+            print("error while authentificating")
+        }
+        return true
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

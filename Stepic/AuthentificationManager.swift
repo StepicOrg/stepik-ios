@@ -16,12 +16,48 @@ class AuthentificationManager : NSObject {
     private override init() {}
     
     
+    func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
+        let headers = [
+            "Content-Type" : "application/x-www-form-urlencoded",
+            "Authorization" : "Basic \(StepicApplicationsInfo.social.credentials)"
+        ]
+        
+        let params = [
+            "grant_type" : "authorization_code",
+            "code" : code,
+            "redirect_uri" : StepicApplicationsInfo.social.redirectUri
+        ]
+        
+        Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+            (_,_, json, error) in
+            
+            if let e = error {
+                failure(error: e)
+                return
+            }
+            
+            if json["error"] != nil {
+                let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
+                failure(error: e)
+                return
+            }
+            
+            print(json)
+            //            print("no error")
+            let token : StepicToken = StepicToken(json: json)
+            //            print(token.accessToken)
+            StepicAPI.shared.authorizationType = AuthorizationType.Code
+            success(token: token)
+        })
+    
+    }
+    
     func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
         
         // Specifying the Headers we need
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic MXIxNVJneXhQdmI5MUtTU0RHd0RabEZXekVYbGVnRDl1ejUyTU40TzpwbEtyc0NFUmhRSkc5ajgzTHZYMmtHWk9HajFGNEdJenZnYXpyejFXMEppOG5ReHZuZHJiaUlwbXgxdE11RDFjaWlOMzJScDNmYjRjZTVKRnBmTDNacTBTM0xxREFuSGphREI2d0xUdG53QjI1VmxuZ1NPNThjREJMVnFrN2RHQQ=="
+            "Authorization" : "Basic \(StepicApplicationsInfo.password.credentials)"
         ]
         
         let params = [
@@ -49,15 +85,27 @@ class AuthentificationManager : NSObject {
 //            print("no error")
             let token : StepicToken = StepicToken(json: json)
 //            print(token.accessToken)
+            StepicAPI.shared.authorizationType = AuthorizationType.Password
             success(token: token)
         })
     }
     
     func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
         
+        var credentials = ""
+        switch StepicAPI.shared.authorizationType {
+        case .None:
+            failure(error: ConnectionError.TokenRefreshError)
+            return
+        case .Code:
+            credentials = StepicApplicationsInfo.social.credentials
+        case .Password:
+            credentials = StepicApplicationsInfo.password.credentials
+        }
+        
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic MXIxNVJneXhQdmI5MUtTU0RHd0RabEZXekVYbGVnRDl1ejUyTU40TzpwbEtyc0NFUmhRSkc5ajgzTHZYMmtHWk9HajFGNEdJenZnYXpyejFXMEppOG5ReHZuZHJiaUlwbXgxdE11RDFjaWlOMzJScDNmYjRjZTVKRnBmTDNacTBTM0xxREFuSGphREI2d0xUdG53QjI1VmxuZ1NPNThjREJMVnFrN2RHQQ=="
+            "Authorization" : "Basic \(credentials)"
         ]
         
         let params = [
@@ -102,7 +150,7 @@ class AuthentificationManager : NSObject {
     func registerWithFirstName(firstName: String, secondName: String, email: String, password: String) {
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic MXIxNVJneXhQdmI5MUtTU0RHd0RabEZXekVYbGVnRDl1ejUyTU40TzpwbEtyc0NFUmhRSkc5ajgzTHZYMmtHWk9HajFGNEdJenZnYXpyejFXMEppOG5ReHZuZHJiaUlwbXgxdE11RDFjaWlOMzJScDNmYjRjZTVKRnBmTDNacTBTM0xxREFuSGphREI2d0xUdG53QjI1VmxuZ1NPNThjREJMVnFrN2RHQQ=="
+            "Authorization" : "Basic \(StepicApplicationsInfo.password.credentials)"
         ]
         
         let params = [

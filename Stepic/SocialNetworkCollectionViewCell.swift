@@ -14,7 +14,7 @@ class SocialNetworkCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageView.setRoundedBounds(width: 0, color: UIColor.blackColor())
+//        imageView.setRoundedBounds(width: 0, color: UIColor.blackColor())
         // Initialization code
     }
 

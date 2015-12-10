@@ -32,15 +32,7 @@ class StepicAPI: NSObject {
                 }
                 StepicAPI.shared.user = nil
                 //Show sign in controller
-                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
-                var topVC = UIApplication.sharedApplication().keyWindow?.rootViewController
-                while((topVC!.presentedViewController) != nil){
-                    topVC = topVC!.presentedViewController
-                }
-                topVC?.presentViewController(vc, animated: true, completion: {
-                    //            self.dismissViewControllerAnimated(false, completion: nil)
-                })
+                ControllerHelper.showLaunchController(true)
                 AnalyticsHelper.sharedHelper.changeSignIn()
             } else {
                 print("\ndid set new token -> \(newToken!.accessToken)\n")
@@ -67,6 +59,21 @@ class StepicAPI: NSObject {
         return token != nil
     }
     
+    var authorizationType : AuthorizationType {
+        get {
+            if let typeRaw = defaults.valueForKey("authorization_type") as? Int {
+                return AuthorizationType(rawValue: typeRaw)!
+            } else {
+                return AuthorizationType.None
+            }
+        }
+        
+        set(type) {
+            defaults.setValue(type.rawValue, forKey: "authorization_type")
+            defaults.synchronize()
+        }
+    }
+    
     var didRefresh : Bool = false
     
     var userId : Int? {
@@ -88,4 +95,8 @@ class StepicAPI: NSObject {
             userId = user?.id
         }
     }
+}
+
+enum AuthorizationType: Int {
+    case None = 0, Password, Code
 }

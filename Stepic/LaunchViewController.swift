@@ -13,6 +13,8 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    var signInController : SignInTableViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,14 +33,18 @@ class LaunchViewController: UIViewController {
         UIApplication.sharedApplication().openURL(NSURL(string: registerUrl)!)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "signInSegue" {
+            let dvc = segue.destinationViewController as! SignInTableViewController
+            signInController = dvc
+        }
     }
-    */
+    
 
 }
