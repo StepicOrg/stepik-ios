@@ -35,6 +35,7 @@ class SignInTableViewController: UITableViewController {
         
         setupLocalizations()
         passwordTextField.secureTextEntry = true
+        emailTextField.keyboardType = .EmailAddress
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())

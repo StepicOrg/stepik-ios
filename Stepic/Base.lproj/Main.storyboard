@@ -352,11 +352,11 @@
                         <sections>
                             <tableViewSection id="2aU-sf-Ajy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="616" id="dlj-Eh-t9E">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="616"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="578" id="dlj-Eh-t9E">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dlj-Eh-t9E" id="mOy-7B-iah">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="615"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="577"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbQ-Ex-spk">
