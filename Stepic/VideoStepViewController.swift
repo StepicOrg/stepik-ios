@@ -154,6 +154,13 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
     func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch downloadButton.state {
         case .StartDownload: 
+            
+            if !ConnectionHelper.shared.isReachable {
+                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
+                print("Not reachable to download")
+                return
+            }
+            
             downloadButton.state = .Downloading
             video.store(video.cachedQuality ?? VideosInfo.videoQuality, progress: {
                 prog in
