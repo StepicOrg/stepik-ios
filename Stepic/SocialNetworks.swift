@@ -16,7 +16,7 @@ enum SocialNetworks : Int {
         switch self {
         case VK: 
             return SocialNetwork(image: UIImage(named: "vk_filled")!, 
-                registerURL: NSURL(string: "https://stepic.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social.clientId)%26response_type%3Dcode")!)
+                registerURL: NSURL(string: "https://stepic.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social.clientId)%26response_type%3Dcode")!)
         case Google: 
             return SocialNetwork(image: UIImage(named: "google_filled")!, 
                 registerURL: NSURL(string: "https://stepic.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social.clientId)%26response_type%3Dcode")!)

@@ -63,3 +63,11 @@ OpenInBrowser = "Открыть ссылку в браузере?";
 Open = "Открыть";
 TryJoinFromWeb = "Попробуйте записаться на курс в веб версии!";
 Error = "Ошибка";
+Email = "Эл. почта";
+Password = "Пароль";
+SignIn = "Войти";
+SignUp = "Регистрация";
+SocialSignIn = "Войти с помощью соц. сетей";
+DontHaveAccountQuestion = "Нет аккаунта?";
+ForgotPassword = "Забыли пароль?";
+

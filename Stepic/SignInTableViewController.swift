@@ -8,15 +8,34 @@
 
 import UIKit
 import SVProgressHUD
+import TextFieldEffects
 
 class SignInTableViewController: UITableViewController {
-    
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+
+    @IBOutlet weak var emailTextField: HoshiTextField!
     @IBOutlet weak var signInButton: UIButton!
-            
+    @IBOutlet weak var passwordTextField: HoshiTextField!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    @IBOutlet weak var socialLabel: UILabel!
+    
+    func setupLocalizations() {
+        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
+        socialLabel.text = NSLocalizedString("SocialSignIn", comment: "")
+        forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), forState: .Normal)
+    }
+    
+    @IBAction func backButtonPressed(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupLocalizations()
+        passwordTextField.secureTextEntry = true
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         

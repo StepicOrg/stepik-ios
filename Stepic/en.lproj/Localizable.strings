@@ -63,4 +63,11 @@ OpenInBrowser = "Open the link in browser?";
 Open = "Open";
 TryJoinFromWeb = "Try to join course in web version!";
 Error = "Error";
+Email = "E-mail";
+Password = "Password";
+SignIn = "Sign in";
+SignUp = "Sign up";
+SocialSignIn = "Sign in with social networks";
+DontHaveAccountQuestion = "Don't have an account?";
+ForgotPassword = "Forgot password?";
 

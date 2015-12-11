@@ -27,7 +27,6 @@ class GeneralInfoTableViewCell: UITableViewCell {
         
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didRotate", name: UIDeviceOrientationDidChangeNotification, object: nil)
-
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

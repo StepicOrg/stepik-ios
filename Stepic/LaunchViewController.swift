@@ -12,11 +12,21 @@ class LaunchViewController: UIViewController {
 
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var dontHaveAccountLabel: UILabel!
     
     var signInController : SignInTableViewController?
     
+    func setupLocalizations() {
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
+        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), forState: .Normal)
+        dontHaveAccountLabel.text = NSLocalizedString("DontHaveAccountQuestion", comment: "")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupLocalizations()
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
@@ -45,6 +55,4 @@ class LaunchViewController: UIViewController {
             signInController = dvc
         }
     }
-    
-
 }
