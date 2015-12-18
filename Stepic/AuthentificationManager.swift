@@ -49,7 +49,7 @@ class AuthentificationManager : NSObject {
             StepicAPI.shared.authorizationType = AuthorizationType.Code
             success(token: token)
         })
-    
+        
     }
     
     func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
@@ -82,9 +82,9 @@ class AuthentificationManager : NSObject {
             }
             
             print(json)
-//            print("no error")
+            //            print("no error")
             let token : StepicToken = StepicToken(json: json)
-//            print(token.accessToken)
+            //            print(token.accessToken)
             StepicAPI.shared.authorizationType = AuthorizationType.Password
             success(token: token)
         })
@@ -119,10 +119,10 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-//            print(json)
-//            print("no error")
+            //            print(json)
+            //            print("no error")
             let token : StepicToken = StepicToken(json: json)
-//            print(token.accessToken)
+            //            print(token.accessToken)
             success(token: token)
         })
         
@@ -136,42 +136,15 @@ class AuthentificationManager : NSObject {
         }
         
         refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
-                (t) in
-                StepicAPI.shared.token = t
-                success?()
+            (t) in
+            StepicAPI.shared.token = t
+            success?()
             }, failure : {
-            error in
-            print("error while auto refresh token")
-            failure?()
-          })
-    }
-    
-    
-    func registerWithFirstName(firstName: String, secondName: String, email: String, password: String) {
-        let headers = [
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(StepicApplicationsInfo.password.credentials)"
-        ]
-        
-        let params = [
-            "first_name" : firstName,
-            "second_name" : secondName,
-            "email" : email,
-            "password" : password
-        ]
-        
-        Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params,  headers: headers).responseSwiftyJSON({
-            (_, _, json, error) in
-            
-            if let _ = error {
-                return
-            }
-            
-//            print(json)
-            
+                error in
+                print("error while auto refresh token")
+                failure?()
         })
     }
-    
     
     func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) {
         let headers : [String : String] = [
@@ -185,7 +158,7 @@ class AuthentificationManager : NSObject {
             ]
         ]
         
-//        params["access_token"] = StepicAPI.shared.token!.accessToken
+        //        params["access_token"] = StepicAPI.shared.token!.accessToken
         
         if !delete {
             Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
@@ -203,14 +176,14 @@ class AuthentificationManager : NSObject {
                     errorHandler(s)
                 }
                 
-//                print("response -> \(response?.statusCode)")
-//                print(json)
+                //                print("response -> \(response?.statusCode)")
+                //                print(json)
                 
-//                if let _ = error {
-//                    errorHandler()
-//                    return
-//                }
-//                success()
+                //                if let _ = error {
+                //                    errorHandler()
+                //                    return
+                //                }
+                //                success()
             })
         } else {
             Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
@@ -226,9 +199,79 @@ class AuthentificationManager : NSObject {
                 let s = NSLocalizedString("Error", comment: "")
                 errorHandler(s)
             })
-
+            
         }
         
+    }
+    
+    func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: (String -> Void)) {
+        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+        Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL, headers: d).response { 
+            (request, response, _, error) -> Void in
+            
+            if let e = error {
+                errorHandler((e as NSError).localizedDescription)
+            }
+            
+            
+            let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
+            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+            
+            for cookie in cookies {
+                if cookie.name == "csrftoken" {
+                    self.createUserWith(cookie.value, firstname: firstname, lastname: lastname, email: email, password: password, success: success, error: errorHandler)
+                    return
+                }
+            }
+            
+            for cookie in NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL) ?? [] {
+                if cookie.name == "csrftoken" {
+                    self.createUserWith(cookie.value, firstname: firstname, lastname: lastname, email: email, password: password, success: success, error: errorHandler)
+                    return
+                }
+            }
+            errorHandler("No cookie for csrftoken")
+        }
+    }
+    
+    func createUserWith(csrftoken: String, firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: (String -> Void)) {
+        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+        var headers : [String : String] = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+        
+        headers["Referer"] = "https://stepic.org/"
+        headers["X-CSRFToken"] = csrftoken
+        
+        print(headers)
+        
+        let params : [String:String] = [
+            "first_name" : firstname,
+            "last_name" : lastname,
+            "email" : email,
+            "password" : password,
+        ]
+        
+        Alamofire.request(.POST, "https://stepic.org/api/users/", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
+            { 
+                (request, response, json, error) -> Void in
+                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
+                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+                
+                if let e = (error as? NSError) {
+                    let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
+                    
+                    errorHandler(errormsg)
+                    return
+                }
+                
+                if let r = response {
+                    if r.statusCode.isSuccess() {
+                        success()
+                    } else {
+                        errorHandler(NSHTTPURLResponse.localizedStringForStatusCode(r.statusCode))
+                    }
+                }
+        })
     }
 }
 

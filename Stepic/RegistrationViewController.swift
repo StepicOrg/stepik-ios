@@ -2,8 +2,8 @@
 //  RegistrationViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 26.08.15.
-//  Copyright (c) 2015 Alex Karpov. All rights reserved.
+//  Created by Alexander Karpov on 18.12.15.
+//  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
 import UIKit
@@ -11,12 +11,6 @@ import TextFieldEffects
 
 class RegistrationViewController: UIViewController {
 
-    @IBOutlet weak var firstNameTextField: HoshiTextField!
-    @IBOutlet weak var secondNameTextField: HoshiTextField!
-    @IBOutlet weak var emailTextField: HoshiTextField!
-    @IBOutlet weak var passwordTextField: HoshiTextField!
-    @IBOutlet weak var secondPasswordTextField: HoshiTextField!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,16 +21,18 @@ class RegistrationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func showTermsOfServicePressed(sender: UIButton) {
+    @IBAction func signUpPressed(sender: AnyObject) {
+        signUpToStepic()
     }
-    
-    @IBAction func signUpPressed(sender: UIButton) {
+
+    func signUpToStepic() {
+        AuthentificationManager.sharedManager.signUpWith("123", lastname: "123", email: "qwe@cfdw.ru", password: "12332!", success: {
+                print("sucess!")
+            }, error: {
+            errormsg in
+            print("registration error -> \(errormsg)")
+        })
     }
-    
-    @IBAction func closePressed(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     
     /*
     // MARK: - Navigation
@@ -48,30 +44,4 @@ class RegistrationViewController: UIViewController {
     }
     */
     
-    @IBAction func secondPasswordEditingChanged(sender: HoshiTextField) {
-        if secondPasswordTextField.text != passwordTextField.text {
-            secondPasswordTextField.borderActiveColor = UIColor.errorRedColor()
-            secondPasswordTextField.becomeFirstResponder()
-        } else {
-            secondPasswordTextField.borderActiveColor =
-            UIColor.stepicGreenColor()
-            secondPasswordTextField.becomeFirstResponder()
-        }
-    }
-
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
-    }
-    
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-}
-
-extension RegistrationViewController : UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }

@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import TextFieldEffects
+import SafariServices
 
 class SignInTableViewController: UITableViewController {
 
@@ -61,7 +62,17 @@ class SignInTableViewController: UITableViewController {
 
     func didGetAuthentificationCode(notification: NSNotification) {
         print("entered didGetAuthentificationCode")
-        authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+
+        if #available(iOS 9.0, *) {
+            
+            let topVC = ControllerHelper.getTopViewController()
+            print(topVC?.classForCoder)
+            topVC?.dismissViewControllerAnimated(true, completion: {
+                self.authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+            })
+        }  else {
+            authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+        }
     }
     
     func tap() {
@@ -95,14 +106,14 @@ class SignInTableViewController: UITableViewController {
                     user in
                     StepicAPI.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    self.performSegueWithIdentifier("signedInSegue", sender: self)
+                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        self.performSegueWithIdentifier("signedInSegue", sender: self)
+                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                 })
             }, failure: {
                 e in
@@ -120,23 +131,31 @@ class SignInTableViewController: UITableViewController {
                     user in
                     StepicAPI.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    self.performSegueWithIdentifier("signedInSegue", sender: self)
+                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        self.performSegueWithIdentifier("signedInSegue", sender: self)
+                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                 })
             }, failure: {
                 e in
                 SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
-    
+        
     @IBAction func forgotPasswordPressed(sender: UIButton) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
+        if #available(iOS 9.0, *) {
+            let svc = SFSafariViewController(URL: NSURL(string: "https://stepic.org/accounts/password/reset/")!)
+            svc.delegate = self
+            self.presentViewController(svc, animated: true, completion: nil)
+        } else {
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
+            // Fallback on earlier versions
+        }
+//        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
     }
     
     /*
@@ -197,4 +216,11 @@ class SignInTableViewController: UITableViewController {
 
 }
 
+extension SignInTableViewController : SFSafariViewControllerDelegate {
+    
+    @available(iOS 9.0, *)
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
 

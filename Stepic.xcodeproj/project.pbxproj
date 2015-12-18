@@ -84,6 +84,7 @@
 		08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
 		08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */; };
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
@@ -217,6 +218,7 @@
 		08A1257A1BDEBCC90066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
+		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
 				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
 				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
+				08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
+				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,

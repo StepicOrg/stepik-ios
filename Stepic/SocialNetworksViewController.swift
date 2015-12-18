@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SocialNetworksViewController: UIViewController {
 
@@ -58,7 +59,13 @@ class SocialNetworksViewController: UIViewController {
         if let indexPath = indexPathOptional {
             //Код здесь
             print("touched network")
-            UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)
+            if #available(iOS 9.0, *) {
+                let svc = SFSafariViewController(URL: getSocialNetworkByIndexPath(indexPath).registerURL)
+                svc.delegate = self
+                self.presentViewController(svc, animated: true, completion: nil)
+            } else {
+                UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)            
+            }
         }
     }
 
@@ -104,3 +111,9 @@ extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension SocialNetworksViewController : SFSafariViewControllerDelegate {
+    @available(iOS 9.0, *)
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+}

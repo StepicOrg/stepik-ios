@@ -11,7 +11,7 @@
         <!--Registration View Controller-->
         <scene sceneID="dur-gF-YOg">
             <objects>
-                <viewController id="klz-Jh-ced" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" id="klz-Jh-ced" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aBf-vQ-MAY"/>
                         <viewControllerLayoutGuide type="bottom" id="zHE-Cf-SjA"/>
@@ -29,9 +29,6 @@
                                 <state key="normal" image="Delete Sign-100">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="closePressed:" destination="klz-Jh-ced" eventType="touchUpInside" id="i0s-fg-nWd"/>
-                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmb-MP-k2r">
                                 <rect key="frame" x="0.0" y="55" width="600" height="545"/>
@@ -121,9 +118,6 @@
                                                 <state key="normal" title="terms of service">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="showTermsOfServicePressed:" destination="klz-Jh-ced" eventType="touchUpInside" id="7z9-wu-Ipq"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mbI-3x-eYW">
                                                 <rect key="frame" x="175" y="240" width="250" height="50"/>
@@ -137,7 +131,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signUpPressed:" destination="klz-Jh-ced" eventType="touchUpInside" id="8EK-Cn-1t1"/>
+                                                    <action selector="signUpPressed:" destination="klz-Jh-ced" eventType="touchUpInside" id="980-Aw-P4k"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -170,8 +164,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Vvx-fu-jFx" secondAttribute="bottom" id="aYv-Ol-OlM"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkU-tI-SSn">
-                                <rect key="frame" x="250" y="28" width="102" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkU-tI-SSn">
+                                <rect key="frame" x="268" y="28" width="65" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -190,16 +184,10 @@
                             <constraint firstAttribute="centerX" secondItem="TkU-tI-SSn" secondAttribute="centerX" constant="-0.5" id="ocF-o3-WYg"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="emailTextField" destination="UW2-m4-1uM" id="0gw-Dh-xYF"/>
-                        <outlet property="firstNameTextField" destination="NM5-KZ-Gds" id="TBg-Lg-IOz"/>
-                        <outlet property="passwordTextField" destination="tn1-Ez-VfM" id="d7q-Co-bLH"/>
-                        <outlet property="secondNameTextField" destination="CKB-fc-HPJ" id="PVz-t4-Zc4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WkF-gi-R3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="32"/>
+            <point key="canvasLocation" x="-1159" y="258"/>
         </scene>
         <!--Launch View Controller-->
         <scene sceneID="Rui-7K-R2s">
@@ -335,11 +323,12 @@
                         <outlet property="dontHaveAccountLabel" destination="c8l-Jv-O2f" id="Cb9-EV-dYq"/>
                         <outlet property="signInButton" destination="g0f-cX-YmD" id="IiC-wJ-anl"/>
                         <outlet property="signUpButton" destination="nRl-q3-n3c" id="G4W-UX-BYe"/>
+                        <segue destination="klz-Jh-ced" kind="presentation" identifier="registrationSegue" id="pPe-RV-rEl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDn-j0-P3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1133" y="-402"/>
+            <point key="canvasLocation" x="-1159" y="-459"/>
         </scene>
         <!--Sign In Table View Controller-->
         <scene sceneID="yRA-d9-sHo">

@@ -39,8 +39,9 @@ class LaunchViewController: UIViewController {
     }
     
     @IBAction func signUpPressed(sender: UIButton) {
-        let registerUrl = "https://stepic.org/accounts/signup/?next=/"
-        UIApplication.sharedApplication().openURL(NSURL(string: registerUrl)!)
+        self.performSegueWithIdentifier("registrationSegue", sender: self)
+//        let registerUrl = "https://stepic.org/accounts/signup/?next=/"
+//        UIApplication.sharedApplication().openURL(NSURL(string: registerUrl)!)
     }
 
     
