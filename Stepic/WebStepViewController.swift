@@ -79,7 +79,9 @@ class WebStepViewController: UIViewController {
 //        print(stepUrl)
 //        print(NSURL(string: stepUrl))
         
-        UIApplication.sharedApplication().openURL(NSURL(string: stepUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!)
+        let url = NSURL(string: stepUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,7 +108,9 @@ extension WebStepViewController : UIWebViewDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .Default, handler: { 
             (action) -> Void in
-            UIApplication.sharedApplication().openURL(url)
+            UIThread.performUI{
+                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+            }
         }))
         
         self.presentViewController(alert, animated: true, completion: nil)

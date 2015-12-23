@@ -23,4 +23,6 @@ struct Images {
     static let backBarButtonItemImage = UIImage(named: "Back-1")!
     static let crossBarButtonItemImage = UIImage(named: "Cross")!
 
+    static let visibleImage = UIImage(named: "visible")!
+    static let visibleFilledImage = UIImage(named: "visible_filled")!
 }
