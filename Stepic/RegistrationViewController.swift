@@ -11,9 +11,12 @@ import TextFieldEffects
 
 class RegistrationViewController: UIViewController {
 
+    @IBOutlet weak var closeBarButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        closeBarButtonItem.tintColor = UIColor.stepicGreenColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +29,7 @@ class RegistrationViewController: UIViewController {
     }
 
     func signUpToStepic() {
-        AuthentificationManager.sharedManager.signUpWith("1223", lastname: "123", email: "qwewrqwer", password: "12332!", success: {
+        AuthentificationManager.sharedManager.signUpWith("1223", lastname: "123", email: "qwewrqwer@mqwer.org", password: "123", success: {
                 print("sucess!")
             }, error: {
             errormsg in

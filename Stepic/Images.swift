@@ -19,4 +19,8 @@ struct Images {
     static let emptyDownloadsPlaceholder = UIImage(named: "nodownloads250")!
     static let emptyCoursesPlaceholder = UIImage(named: "nocourses250")!
 
+    static let safariBarButtonItemImage = UIImage(named: "Safari")!
+    static let backBarButtonItemImage = UIImage(named: "Back-1")!
+    static let crossBarButtonItemImage = UIImage(named: "Cross")!
+
 }

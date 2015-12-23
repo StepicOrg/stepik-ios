@@ -58,8 +58,7 @@ class SocialNetworksViewController: UIViewController {
         let indexPathOptional = socialNetworksCollectionView.indexPathForItemAtPoint(locationInCollection)
         if let indexPath = indexPathOptional {
             WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, 
-                withKey: "social auth")  
-        
+                withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.Close)
         }
     }
 

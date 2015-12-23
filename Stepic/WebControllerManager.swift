@@ -8,8 +8,9 @@
 
 import UIKit
 import SafariServices
-import JSQWebViewController
-import DZNWebViewController
+//import JSQWebViewController
+//import DZNWebViewController
+import WebKit
 
 class WebControllerManager: NSObject {
     private override init() { super.init() }
@@ -39,14 +40,15 @@ class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
     
-    private func presentJSQWebController(url: NSURL, inController c: UIViewController) {
+    private func presentJSQWebController(url: NSURL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle) {
         let controller = WebViewController(url: url)
+        controller.allowsToOpenInSafari = false
+        controller.backButtonStyle = backButtonStyle
         let nav = UINavigationController(rootViewController: controller)
         self.currentWebController = nav
 //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
         c.presentViewController(nav, animated: true, completion: nil)
         controller.webView.navigationDelegate = self
-
     }
     
     func webControllerDonePressed() {
@@ -55,37 +57,49 @@ class WebControllerManager: NSObject {
         currentWebControllerKey = nil
     }
     
-//    private func presentDZNWebController(url: NSURL, inController c: UIViewController) {
-//        let controller = DZNWebViewController(URL: url)
-//        let nav = UINavigationController(rootViewController: controller)
-//        controller.supportedWebNavigationTools = .StopReload
-//        controller.supportedWebActions = .DZNWebActionNone
-//        controller.allowHistory = false
-//        controller.showLoadingProgress = true
-//        controller.hideBarsWithGestures = false
-//        
-//        self.currentWebController = nav
-//        c.presentViewController(nav, animated: true, completion: nil)
-//    }
-    
-    func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String) {
+    func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
         self.currentWebControllerKey = key
         if #available(iOS 9.0, *) {
             let svc = SFSafariViewController(URL: url)
             self.currentWebController = svc
             c.presentViewController(svc, animated: true, completion: nil)
         } else {
-            presentJSQWebController(url, inController: c)
-//            UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
-            // Fallback on earlier versions
+            presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle)
         }
     }
     
-    func presentWebControllerWithURLString(urlString: String, inController c: UIViewController, withKey key: String) {
+    func presentWebControllerWithURLString(urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
         if let url = NSURL(string: urlString) {
-            presentWebControllerWithURL(url, inController: c, withKey: key)
+            presentWebControllerWithURL(url, 
+                inController: c, 
+                withKey: key, 
+                allowsSafari: allowsSafari, 
+                backButtonStyle: backButtonStyle)
+            
         } else {
             print("Invalid url")
+        }
+    }
+}
+
+enum BackButtonStyle {
+    case Close, Back, Done
+    
+    //Do NOT forget to reset target and selector!!!
+    var barButtonItem : UIBarButtonItem {
+        switch self {
+        case .Close:
+            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .Plain, target: nil, action: "")
+            item.tintColor = UIColor.stepicGreenColor()
+            return item
+        case .Back:
+            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .Plain, target: nil, action: "")
+            item.tintColor = UIColor.stepicGreenColor()
+            return item
+        case .Done:
+            let item = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: "")
+            item.tintColor = UIColor.stepicGreenColor()
+            return item
         }
     }
 }

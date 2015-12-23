@@ -204,19 +204,34 @@ class AuthentificationManager : NSObject {
         
     }
     
+    private func deleteStepicCookiesForSignup() {
+//        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in storage.cookies ?? [] {
+            if cookie.domain.rangeOfString("stepic") != nil {
+                print("Deleting cookie with name: \(cookie.name), value: \(cookie.value)\n")
+                storage.deleteCookie(cookie)
+            }
+        }
+    }
+    
     func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: (String -> Void)) {
         let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
-        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-        Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL, headers: d).response { 
+        deleteStepicCookiesForSignup()
+//        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+        Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL).response { 
             (request, response, _, error) -> Void in
             
             if let e = error {
                 errorHandler((e as NSError).localizedDescription)
             }
             
-            
             let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
             NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+            
+            for cookie in cookies {
+                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
+            }
             
             for cookie in cookies {
                 if cookie.name == "csrftoken" {
@@ -225,12 +240,6 @@ class AuthentificationManager : NSObject {
                 }
             }
             
-            for cookie in NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL) ?? [] {
-                if cookie.name == "csrftoken" {
-                    self.createUserWith(cookie.value, firstname: firstname, lastname: lastname, email: email, password: password, success: success, error: errorHandler)
-                    return
-                }
-            }
             errorHandler("No cookie for csrftoken")
         }
     }
@@ -244,14 +253,18 @@ class AuthentificationManager : NSObject {
         
 //        print(headers)
         
-        let params : [String:String] = [
-            "first_name" : firstname,
-            "last_name" : lastname,
-            "email" : email,
-            "password" : password,
+        let params : [String : AnyObject] = 
+        ["user" :
+            [
+                "first_name" : firstname,
+                "last_name" : lastname,
+                "email" : email,
+                "password" : password,
+            ]
         ]
         
-        Alamofire.request(.POST, "https://stepic.org/api/users/", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
+        print("sending request with headers:\n\(headers)\nparams:\n\(params)")
+        Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
             { 
                 (request, response, json, error) -> Void in
                 let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
