@@ -26,7 +26,7 @@ class RegistrationViewController: UIViewController {
     }
 
     func signUpToStepic() {
-        AuthentificationManager.sharedManager.signUpWith("123", lastname: "123", email: "qwe@cfdw.ru", password: "12332!", success: {
+        AuthentificationManager.sharedManager.signUpWith("1223", lastname: "123", email: "qwewrqwer", password: "12332!", success: {
                 print("sucess!")
             }, error: {
             errormsg in

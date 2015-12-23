@@ -242,7 +242,7 @@ class AuthentificationManager : NSObject {
         headers["Referer"] = "https://stepic.org/"
         headers["X-CSRFToken"] = csrftoken
         
-        print(headers)
+//        print(headers)
         
         let params : [String:String] = [
             "first_name" : firstname,
@@ -263,8 +263,9 @@ class AuthentificationManager : NSObject {
                     errorHandler(errormsg)
                     return
                 }
-                
+                print(json)
                 if let r = response {
+                    print(r.statusCode)
                     if r.statusCode.isSuccess() {
                         success()
                     } else {

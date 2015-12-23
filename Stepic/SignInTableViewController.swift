@@ -50,7 +50,7 @@ class SignInTableViewController: UITableViewController {
         tableView.panGestureRecognizer.cancelsTouchesInView = false
         tableView.delaysContentTouches = false
 
-        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
+//        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetAuthentificationCode:", name: "ReceivedAuthorizationCodeNotification", object: nil)
         // Uncomment the following line to preserve selection between presentations
@@ -63,16 +63,14 @@ class SignInTableViewController: UITableViewController {
     func didGetAuthentificationCode(notification: NSNotification) {
         print("entered didGetAuthentificationCode")
 
-        if #available(iOS 9.0, *) {
-            
-            let topVC = ControllerHelper.getTopViewController()
-            print(topVC?.classForCoder)
-            topVC?.dismissViewControllerAnimated(true, completion: {
-                self.authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
-            })
-        }  else {
-            authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
-        }
+        //TODO: Implement WebControllerManager
+        
+        WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
+            self.authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+        }, error: {
+            errorMessage in
+            print(errorMessage)
+        })        
     }
     
     func tap() {
@@ -147,14 +145,8 @@ class SignInTableViewController: UITableViewController {
     }
         
     @IBAction func forgotPasswordPressed(sender: UIButton) {
-        if #available(iOS 9.0, *) {
-            let svc = SFSafariViewController(URL: NSURL(string: "https://stepic.org/accounts/password/reset/")!)
-            svc.delegate = self
-            self.presentViewController(svc, animated: true, completion: nil)
-        } else {
-            UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
-            // Fallback on earlier versions
-        }
+        WebControllerManager.sharedManager.presentWebControllerWithURLString("https://stepic.org/accounts/password/reset/", inController: self, 
+            withKey: "reset password")        
 //        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
     }
     
@@ -214,13 +206,5 @@ class SignInTableViewController: UITableViewController {
     }
     
 
-}
-
-extension SignInTableViewController : SFSafariViewControllerDelegate {
-    
-    @available(iOS 9.0, *)
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
-    }
 }
 

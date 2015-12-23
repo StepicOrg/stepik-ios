@@ -89,6 +89,7 @@
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
+		08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */; };
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
 		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
@@ -223,6 +224,7 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
+		08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerManager.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
 		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				08D2AE451C04BA6100BD8C3D /* Time.swift */,
 				08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */,
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
+				08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -378,10 +381,10 @@
 			isa = PBXGroup;
 			children = (
 				083D64A71C175463003222F0 /* Social networks */,
-				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
 				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
 				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
 				08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */,
+				083B164B1C2AD79700250B37 /* Old */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -394,6 +397,14 @@
 				0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */,
 			);
 			name = Units;
+			sourceTree = "<group>";
+		};
+		083B164B1C2AD79700250B37 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				080F31DE1BA71CE900F356A0 /* SignInViewController.swift */,
+			);
+			name = Old;
 			sourceTree = "<group>";
 		};
 		083D64A11C17523E003222F0 /* Social network cell */ = {
@@ -896,6 +907,7 @@
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
+				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,

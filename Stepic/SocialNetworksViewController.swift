@@ -24,7 +24,7 @@ class SocialNetworksViewController: UIViewController {
     
         socialNetworksCollectionView.registerNib(UINib(nibName: "SocialNetworkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialNetworkCollectionViewCell")
         
-        print("collection view cancels touches -> \(socialNetworksCollectionView.panGestureRecognizer.cancelsTouchesInView)")
+//        print("collection view cancels touches -> \(socialNetworksCollectionView.panGestureRecognizer.cancelsTouchesInView)")
         initializeTapRecognizer()
         // Do any additional setup after loading the view.
     }
@@ -57,15 +57,9 @@ class SocialNetworksViewController: UIViewController {
         let locationInCollection = CGPointMake(location.x, location.y)
         let indexPathOptional = socialNetworksCollectionView.indexPathForItemAtPoint(locationInCollection)
         if let indexPath = indexPathOptional {
-            //Код здесь
-            print("touched network")
-            if #available(iOS 9.0, *) {
-                let svc = SFSafariViewController(URL: getSocialNetworkByIndexPath(indexPath).registerURL)
-                svc.delegate = self
-                self.presentViewController(svc, animated: true, completion: nil)
-            } else {
-                UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)            
-            }
+            WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, 
+                withKey: "social auth")  
+        
         }
     }
 
@@ -108,12 +102,5 @@ extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
         
         return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets);
 
-    }
-}
-
-extension SocialNetworksViewController : SFSafariViewControllerDelegate {
-    @available(iOS 9.0, *)
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
