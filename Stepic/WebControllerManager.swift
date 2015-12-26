@@ -59,13 +59,13 @@ class WebControllerManager: NSObject {
     
     func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
         self.currentWebControllerKey = key
-        if #available(iOS 9.0, *) {
-            let svc = SFSafariViewController(URL: url)
-            self.currentWebController = svc
-            c.presentViewController(svc, animated: true, completion: nil)
-        } else {
+//        if #available(iOS 9.0, *) {
+//            let svc = SFSafariViewController(URL: url)
+//            self.currentWebController = svc
+//            c.presentViewController(svc, animated: true, completion: nil)
+//        } else {
             presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle)
-        }
+//        }
     }
     
     func presentWebControllerWithURLString(urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {

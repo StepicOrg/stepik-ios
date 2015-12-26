@@ -25,6 +25,15 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var visiblePasswordButton: UIButton!
     
+    @IBOutlet weak var firstNameErrorViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var lastNameErrorViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var emailErrorViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var passwordErrorViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var firstNameErrorLabel: UILabel!
+    @IBOutlet weak var lastNameErrorLabel: UILabel!
+    @IBOutlet weak var emailErrorLabel: UILabel!
+    @IBOutlet weak var passwordErrorLabel: UILabel!
+    
     var passwordSecure = false {
         didSet {
             visiblePasswordButton.setImage(passwordSecure ? Images.visibleImage : Images.visibleFilledImage, forState: UIControlState.Normal)
@@ -81,9 +90,45 @@ class RegistrationViewController: UIViewController {
                     SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
             })
             }, error: {
-                errormsg in
-                UIThread.performUI{SVProgressHUD.showErrorWithStatus(errormsg)}
+                errormsg, registrationErrorInfo in
+                //TODO: Add localized data
+                UIThread.performUI{SVProgressHUD.showErrorWithStatus(errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
+                if let info = registrationErrorInfo {
+                        self.showEmailErrorWith(message: info.email)
+                        self.showPasswordErrorWith(message: info.password)                    
+                        self.showFirstNameErrorWith(message: info.firstName)
+                        self.showLastNameErrorWith(message: info.lastName)
+                }
         })
+    }
+    
+    func showEmailErrorWith(message msg: String?) {
+        changeHeightConstraint(emailErrorViewHeight, label: emailErrorLabel, text: msg)
+    }
+    func showPasswordErrorWith(message msg: String?) {
+        changeHeightConstraint(passwordErrorViewHeight, label: passwordErrorLabel, text: msg)
+    }
+    func showFirstNameErrorWith(message msg: String?) {
+        changeHeightConstraint(firstNameErrorViewHeight, label: firstNameErrorLabel, text: msg)
+    }
+    func showLastNameErrorWith(message msg: String?) {
+        changeHeightConstraint(lastNameErrorViewHeight, label: lastNameErrorLabel, text: msg)
+    }
+    
+    func changeHeightConstraint(constraint: NSLayoutConstraint, label: UILabel, text: String?) {
+        if let msg = text {
+            let height = UILabel.heightForLabelWithText(msg, lines: 0, standardFontOfSize: 12, width: UIScreen.mainScreen().bounds.width - 32)
+            label.text = msg
+            animateConstraintChange(constraint, value: height)
+        } else {
+            animateConstraintChange(constraint, value: 0)
+        }
+    }
+    func animateConstraintChange(constraint: NSLayoutConstraint, value: CGFloat) {
+        constraint.constant = value
+        UIView.animateWithDuration(0.5) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     @IBAction func visiblePasswordButtonPressed(sender: AnyObject) {

@@ -158,6 +158,7 @@ class WebViewController: UIViewController {
                 style: UIBarButtonItemStyle.Plain, 
                 target: self, 
                 action: Selector("didTapSafariButton:"))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.stepicGreenColor()
         }
         
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(

@@ -205,7 +205,7 @@ class AuthentificationManager : NSObject {
     }
     
     private func deleteStepicCookiesForSignup() {
-//        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+        //        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         for cookie in storage.cookies ?? [] {
             if cookie.domain.rangeOfString("stepic") != nil {
@@ -215,10 +215,10 @@ class AuthentificationManager : NSObject {
         }
     }
     
-    func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: (String -> Void)) {
+    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)){
         let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
         deleteStepicCookiesForSignup()
-//        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+        //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
         Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL).response { 
             (request, response, _, error) -> Void in
             
@@ -229,62 +229,68 @@ class AuthentificationManager : NSObject {
             let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
             NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
             
-            for cookie in cookies {
-                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
-            }
+            //            for cookie in cookies {
+            //                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
+            //            }
             
             for cookie in cookies {
                 if cookie.name == "csrftoken" {
-                    self.createUserWith(cookie.value, firstname: firstname, lastname: lastname, email: email, password: password, success: success, error: errorHandler)
+                    completion(cookie.value)
                     return
                 }
             }
             
             errorHandler("No cookie for csrftoken")
         }
+        
     }
     
-    func createUserWith(csrftoken: String, firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: (String -> Void)) {
-        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
-        var headers : [String : String] = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-        
-        headers["Referer"] = "https://stepic.org/"
-        headers["X-CSRFToken"] = csrftoken
-        
-//        print(headers)
-        
-        let params : [String : AnyObject] = 
-        ["user" :
-            [
-                "first_name" : firstname,
-                "last_name" : lastname,
-                "email" : email,
-                "password" : password,
+    func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
+        refreshSignUpCookies(completion: {
+            csrftoken in
+            let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+            var headers : [String : String] = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+            
+            headers["Referer"] = "https://stepic.org/"
+            headers["X-CSRFToken"] = csrftoken
+            
+            //        print(headers)
+            
+            let params : [String : AnyObject] = 
+            ["user" :
+                [
+                    "first_name" : firstname,
+                    "last_name" : lastname,
+                    "email" : email,
+                    "password" : password,
+                ]
             ]
-        ]
-        
-        print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-        Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
-            { 
-                (request, response, json, error) -> Void in
-                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
-                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
-                
-                if let e = (error as? NSError) {
-                    let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
+            
+            print("sending request with headers:\n\(headers)\nparams:\n\(params)")
+            Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
+                { 
+                    (request, response, json, error) -> Void in
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
                     
-                    errorHandler(errormsg)
-                    return
-                }
-                print(json)
-                if let r = response {
-                    print(r.statusCode)
-                    if r.statusCode.isSuccess() {
-                        success()
-                    } else {
-                        errorHandler(NSHTTPURLResponse.localizedStringForStatusCode(r.statusCode))
+                    if let e = (error as? NSError) {
+                        let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
+                        
+                        errorHandler(errormsg, nil)
+                        return
                     }
-                }
+                    
+                    if let r = response {
+                        print(r.statusCode)
+                        if r.statusCode.isSuccess() {
+                            success()
+                        } else if r.statusCode == 400 {
+                            errorHandler(nil, RegistrationErrorInfo(json: json))
+                        }
+                    }
+            })},error:  { 
+                errorMsg in
+                errorHandler("error while refreshing csrf token", nil)
         })
     }
 }
