@@ -23,7 +23,7 @@ class StepsViewController: RGPageViewController {
 
         datasource = self
         delegate = self
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)

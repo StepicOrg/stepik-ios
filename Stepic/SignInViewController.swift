@@ -63,7 +63,7 @@ class SignInViewController: UIViewController {
     
     @IBAction func signInPressed(sender: UIButton) {
         
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             
         success: {

@@ -95,7 +95,7 @@ class SignInTableViewController: UITableViewController {
     }
 
     func authentificateWithCode(code: String) {
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         AuthentificationManager.sharedManager.logInWithCode(code, 
             success: {
                 t in
@@ -120,7 +120,7 @@ class SignInTableViewController: UITableViewController {
     }
     
     @IBAction func signInPressed(sender: UIButton) {
-        SVProgressHUD.show()
+        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             success: {
                 t in

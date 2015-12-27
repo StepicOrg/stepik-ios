@@ -113,7 +113,7 @@ class DownloadsViewController: UIViewController {
     
     @IBAction func clearCachePressed(sender: UIBarButtonItem) {
         askForClearCache(remove: {
-            SVProgressHUD.show()
+            SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
             CacheManager.sharedManager.clearCache(completion: {
                 completed, errors in 
                 if errors != 0 {
@@ -161,7 +161,7 @@ extension DownloadsViewController : UITableViewDelegate {
                     showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                 } else {
                     showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
-                        UIThread.performUI({SVProgressHUD.show()})
+                        UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
                         AuthentificationManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
                             UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
                             self.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
