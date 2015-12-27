@@ -42,7 +42,7 @@ class WebControllerManager: NSObject {
     
     private func presentJSQWebController(url: NSURL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle) {
         let controller = WebViewController(url: url)
-        controller.allowsToOpenInSafari = false
+        controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
         let nav = UINavigationController(rootViewController: controller)
         self.currentWebController = nav
