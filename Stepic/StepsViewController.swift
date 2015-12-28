@@ -9,11 +9,18 @@
 import UIKit
 import SVProgressHUD
 
+enum StepsControllerPresentationContext {
+    case Lesson, Unit
+}
+
 class StepsViewController: RGPageViewController {
 
     //TODO: really need optionals here?
     var lesson : Lesson?
     var startStepId : Int?
+    
+    //By default presentation context is unit
+    var context : StepsControllerPresentationContext = .Unit
     
 //    var controllers : [UIViewController?]
     override func viewDidLoad() {
@@ -29,8 +36,9 @@ class StepsViewController: RGPageViewController {
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
 
         lesson?.loadSteps(completion: {
-            self.reloadData()
-        })
+            print("did reload data")
+            UIThread.performUI{self.reloadData()}
+        }, onlyLesson: context == .Lesson)
         
         // Do any additional setup after loading the view.
     }
@@ -145,7 +153,9 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.video = lesson!.steps[index].block.video!
             stepController.nItem = self.navigationItem
             stepController.step = lesson!.steps[index]
-            stepController.assignment = lesson!.unit?.assignments[index]
+            if context == .Unit {
+                stepController.assignment = lesson!.unit?.assignments[index]
+            }
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
@@ -153,8 +163,10 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.lesson = lesson
             stepController.stepId = index + 1
             stepController.nItem = self.navigationItem
-            stepController.assignment = lesson!.unit?.assignments[index]
-//            stepController.navigationVC = self.navigationController!
+            if context == .Unit {
+                stepController.assignment = lesson!.unit?.assignments[index]
+            }
+            //            stepController.navigationVC = self.navigationController!
             return stepController
         }
     } 

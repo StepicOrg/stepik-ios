@@ -11,8 +11,8 @@ import CoreData
 import SwiftyJSON
 
 class Lesson: NSManagedObject, JSONInitializable {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     
     convenience required init(json: JSON){
         self.init()
@@ -33,21 +33,22 @@ class Lesson: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func loadSteps(completion completion: (Void -> Void), refresh : Bool = true) {
+    func loadSteps(completion completion: (Void -> Void), refresh : Bool = true, onlyLesson: Bool = false) {
         let getStepsBlock = 
         {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
             newSteps in 
             self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-            if let u = self.unit {
-                ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
-                    newAssignments in 
-                    u.assignments = Sorter.sort(newAssignments,steps: self.steps)
-                    completion()
-                    }, failure: {
-                        error in
-                        print("Error while downloading assignments")
-                })
-            }
+            if !onlyLesson {
+                if let u = self.unit {
+                    ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
+                        newAssignments in 
+                        u.assignments = Sorter.sort(newAssignments,steps: self.steps)
+                        completion()
+                        }, failure: {
+                            error in
+                            print("Error while downloading assignments")
+                    })
+                }}
             CoreDataHelper.instance.save()
             }, failure: {
                 error in
@@ -74,10 +75,10 @@ class Lesson: NSManagedObject, JSONInitializable {
         return res
     }
     
-//    var downloads = [Int : VideoDownload]()
+    //    var downloads = [Int : VideoDownload]()
     
     var loadingVideos : [Video]?
-        
+    
     func initLoadingVideosWithDownloading() {
         loadingVideos = []
         for step in steps {
@@ -100,7 +101,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                 }
             }
         }
-
+        
         return res
     }
     
@@ -120,14 +121,14 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
     }
     
-//    func isCompleted(videos: [Video]) -> Bool {
-//        for video in videos {
-//            if video.state == .Downloading {
-//                return false
-//            }
-//        }
-//        return true
-//    }
+    //    func isCompleted(videos: [Video]) -> Bool {
+    //        for video in videos {
+    //            if video.state == .Downloading {
+    //                return false
+    //            }
+    //        }
+    //        return true
+    //    }
     
     var isDownloading : Bool {
         if steps.count == 0 {
@@ -181,7 +182,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         
         storeProgress = progress
         storeCompletion = completion
-                
+        
         loadingVideos = []
         for step in steps {
             if step.block.name == "video" {
@@ -193,11 +194,11 @@ class Lesson: NSManagedObject, JSONInitializable {
             }
         }
         
-//        for vid in stepVideos! {
-//            if vid.isCached {
-//                summaryProgress += 1
-//            }
-//        }
+        //        for vid in stepVideos! {
+        //            if vid.isCached {
+        //                summaryProgress += 1
+        //            }
+        //        }
         
         completedVideos = 0
         cancelledVideos = 0
@@ -212,31 +213,31 @@ class Lesson: NSManagedObject, JSONInitializable {
             vid.store(VideosInfo.videoQuality, progress: {
                 prog in
                 self.storeProgress?(self.goodProgress)
-            }, completion : {
-                completed in
-                if completed {
-                    self.completedVideos++
-                } else {
-                    self.cancelledVideos++
-                }
-                if self.completedVideos + self.cancelledVideos == self.loadingVideos!.count {
-                    print("Completed lesson store with \(self.completedVideos) completed videos & \(self.cancelledVideos) cancelled videos")
+                }, completion : {
+                    completed in
+                    if completed {
+                        self.completedVideos++
+                    } else {
+                        self.cancelledVideos++
+                    }
+                    if self.completedVideos + self.cancelledVideos == self.loadingVideos!.count {
+                        print("Completed lesson store with \(self.completedVideos) completed videos & \(self.cancelledVideos) cancelled videos")
+                        self.storeCompletion?(self.completedVideos, self.cancelledVideos)
+                    } 
+                }, error: {
+                    error in
+                    
                     self.storeCompletion?(self.completedVideos, self.cancelledVideos)
-                } 
-            }, error: {
-                error in
-                
-                self.storeCompletion?(self.completedVideos, self.cancelledVideos)
-                
-                print("Video download error in lesson")
-                print(error?.localizedFailureReason)
-                print(error?.code)
-                print(error?.localizedDescription)
-                
-                self.completedVideos = 0
-                self.cancelledVideos = 0
-
-                errorHandler(error)
+                    
+                    print("Video download error in lesson")
+                    print(error?.localizedFailureReason)
+                    print(error?.code)
+                    print(error?.localizedDescription)
+                    
+                    self.completedVideos = 0
+                    self.cancelledVideos = 0
+                    
+                    errorHandler(error)
             })                
         }
     }
@@ -266,7 +267,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                 if vid.state != VideoState.Cached { 
                     vid.cancelStore()
                 } else {
-//                    vid.removeFromStore()
+                    //                    vid.removeFromStore()
                 }
             }
             

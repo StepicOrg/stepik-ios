@@ -64,7 +64,7 @@ class VideoDownloadView: UIView {
         self.video = video
 //        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
 
-        print("quality -> \(quality)")
+//        print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
         self.downloadDelegate = downloadDelegate
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: true)
@@ -75,13 +75,13 @@ class VideoDownloadView: UIView {
     func updateButton() {
         if video.state == VideoState.Cached {
             downloadButton.state = .Downloaded
-            self.quality = video.cachedQuality
+            self.quality = video.cachedQuality ?? VideosInfo.videoQuality 
             return
         }
         
         if video.state == VideoState.Downloading {
             downloadButton.state = .Downloading
-            self.quality = self.video.loadingQuality! 
+            self.quality = self.video.loadingQuality ?? VideosInfo.videoQuality
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             video.storedProgress = {
                 prog in

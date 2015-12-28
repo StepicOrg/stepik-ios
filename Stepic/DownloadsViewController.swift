@@ -81,6 +81,7 @@ class DownloadsViewController: UIViewController {
             
             let step = sender as! Step
             //TODO : pass unit here!
+            dvc.context = .Lesson
             dvc.lesson = step.managedLesson
             dvc.startStepId = step.managedLesson?.steps.indexOf(step)
         }
