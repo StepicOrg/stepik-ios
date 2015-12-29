@@ -1014,8 +1014,41 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="41" id="akA-Rm-Has">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="X3F-sQ-EyG">
                                         <rect key="frame" x="0.0" y="337" width="600" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X3F-sQ-EyG" id="kJq-eJ-XdL">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ignore mute switch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nly-Qt-bId">
+                                                    <rect key="frame" x="16" y="12" width="519" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S1d-5m-xeb">
+                                                    <rect key="frame" x="543" y="4" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="vJb-pd-rNj"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="allow3GChanged:" destination="5ay-8c-nL7" eventType="valueChanged" id="Hqc-av-BCg"/>
+                                                        <action selector="ignoreMuteSwitchChanged:" destination="5ay-8c-nL7" eventType="valueChanged" id="T6A-6Y-gpT"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="S1d-5m-xeb" firstAttribute="centerY" secondItem="kJq-eJ-XdL" secondAttribute="centerY" id="ROD-hY-yIV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="S1d-5m-xeb" secondAttribute="trailing" id="ZGt-L6-uZz"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="Nly-Qt-bId" secondAttribute="leading" constant="-8" id="b9t-qE-rW9"/>
+                                                <constraint firstItem="Nly-Qt-bId" firstAttribute="centerY" secondItem="kJq-eJ-XdL" secondAttribute="centerY" id="g3S-ja-ipi"/>
+                                                <constraint firstItem="S1d-5m-xeb" firstAttribute="leading" secondItem="Nly-Qt-bId" secondAttribute="trailing" constant="8" id="uBN-vi-bYC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="41" id="akA-Rm-Has">
+                                        <rect key="frame" x="0.0" y="378" width="600" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="akA-Rm-Has" id="LH7-ZQ-xdd">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="40"/>
@@ -1054,7 +1087,7 @@
                             <tableViewSection headerTitle="Actions" id="6bM-2c-3U9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q5a-34-gyg">
-                                        <rect key="frame" x="0.0" y="429" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="470" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5a-34-gyg" id="Ml2-Hy-6ad">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1090,6 +1123,8 @@
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
                         <outlet property="avatarImageView" destination="J5k-lf-s7P" id="tfH-d2-UBy"/>
+                        <outlet property="ignoreMuteSwitchLabel" destination="Nly-Qt-bId" id="NXs-0T-aCG"/>
+                        <outlet property="ignoreMuteSwitchSwitch" destination="S1d-5m-xeb" id="wtK-5K-ieX"/>
                         <outlet property="onlyWiFiSwitch" destination="pUi-kz-aZf" id="0Op-qn-b45"/>
                         <outlet property="userNameLabel" destination="iwD-Yk-nPZ" id="T2U-4i-zwm"/>
                         <outlet property="videoQualityLabel" destination="1rQ-YY-ig7" id="sFd-Gw-Kkp"/>

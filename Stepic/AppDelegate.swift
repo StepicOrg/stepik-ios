@@ -20,8 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
+        
         setRootController()
         ConnectionHelper.shared.instantiate()
+        if !AudioManager.sharedManager.initAudioSession() {
+            print("Could not initialize audio session")
+        }
         
         // Configure tracker from GoogleService-Info.plist.
         var configureError:NSError?
@@ -34,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
 
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        print(documentsPath)
+//        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+//        print(documentsPath)
         return true
     }
 

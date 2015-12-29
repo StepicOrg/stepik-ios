@@ -19,8 +19,12 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    let heightForRows = [[131], [40, 40], [40]]
-    let selectionForRows = [[false], [false, true], [true]]
+    @IBOutlet weak var ignoreMuteSwitchLabel: UILabel!
+    @IBOutlet weak var ignoreMuteSwitchSwitch: UISwitch!
+    
+    
+    let heightForRows = [[131], [40, 40, 40], [40]]
+    let selectionForRows = [[false], [false, false, true], [true]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,8 @@ class UserPreferencesTableViewController: UITableViewController {
         
         avatarImageView.setRoundedBounds(width: 0)
 
+        ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
+        
         if let apiUser = StepicAPI.shared.user {
             initWithUser(apiUser)
         } else {
@@ -37,8 +43,7 @@ class UserPreferencesTableViewController: UITableViewController {
         }
         
         onlyWiFiSwitch.on = !ConnectionHelper.shared.reachableOnWWAN
-
-        
+        ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
         
         ApiDataDownloader.sharedDownloader.getCurrentUser({
             user in
@@ -107,6 +112,11 @@ class UserPreferencesTableViewController: UITableViewController {
     @IBAction func allow3GChanged(sender: UISwitch) {
         ConnectionHelper.shared.reachableOnWWAN = !sender.on
     }
+    
+    @IBAction func ignoreMuteSwitchChanged(sender: UISwitch) {
+        AudioManager.sharedManager.ignoreMuteSwitch = sender.on
+    }
+    
     
     func signOut() {
         StepicAPI.shared.token = nil

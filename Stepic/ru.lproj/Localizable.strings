@@ -71,4 +71,5 @@ SocialSignIn = "Войти с помощью соц. сетей";
 DontHaveAccountQuestion = "Нет аккаунта?";
 ForgotPassword = "Забыли пароль?";
 WrongFields = "Неправильно введены данные!";
+IgnoreMuteSwitch = "Игнорировать беззвучный режим";
 

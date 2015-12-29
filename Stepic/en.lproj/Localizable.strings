@@ -71,4 +71,6 @@ SocialSignIn = "Sign in with social networks";
 DontHaveAccountQuestion = "Don't have an account?";
 ForgotPassword = "Forgot password?";
 WrongFields = "Incorrect fields data!";
+IgnoreMuteSwitch = "Ignore mute switch";
+
 

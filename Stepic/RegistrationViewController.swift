@@ -135,7 +135,7 @@ class RegistrationViewController: UIViewController {
     }
     func animateConstraintChange(constraint: NSLayoutConstraint, value: CGFloat) {
         constraint.constant = value
-        UIView.animateWithDuration(0.5) {
+        UIView.animateWithDuration(0.25) {
             self.view.layoutIfNeeded()
         }
     }
