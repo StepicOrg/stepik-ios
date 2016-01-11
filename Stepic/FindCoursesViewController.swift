@@ -9,8 +9,6 @@
 import UIKit
 
 class FindCoursesViewController: CoursesViewController {
-
-//    let TAB_NUMBER = 1
     
     override func viewDidLoad() {
         loadEnrolled = nil
