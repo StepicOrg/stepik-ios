@@ -798,6 +798,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xJl-BW-RIC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="taR-j4-5Jv" id="e2v-ou-feq"/>
                                     <outlet property="delegate" destination="taR-j4-5Jv" id="QOE-WB-IbD"/>
@@ -834,6 +835,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="xJl-BW-RIC" id="f6Q-fZ-qqB"/>
+                        <outlet property="tableViewTopConstraint" destination="PQW-xq-6nl" id="6qP-lA-pMb"/>
                         <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="Had-eU-CRB"/>
                         <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="ste-Lr-Bip"/>
                     </connections>

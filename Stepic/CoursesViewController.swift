@@ -27,7 +27,7 @@ class CoursesViewController: UIViewController {
         }
     }
     
-    let refreshControl = UIRefreshControl()
+    var refreshControl : UIRefreshControl? = UIRefreshControl()
 
     override func viewDidLoad() {        
         super.viewDidLoad()
@@ -43,15 +43,15 @@ class CoursesViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
         
-        refreshControl.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
+        refreshControl?.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl ?? UIView())
         
 //        self.tableView.emptyDataSetDelegate = self 
 //        self.tableView.emptyDataSetSource = self
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        refreshControl.beginRefreshing()
+        refreshControl?.beginRefreshing()
         getCachedCourses(completion: {
             self.refreshCourses()
         })
@@ -64,10 +64,10 @@ class CoursesViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print(tableView.frame)
-        if(self.refreshControl.refreshing) {
+        if(self.refreshControl?.refreshing ?? false) {
             let offset = self.tableView.contentOffset
-            self.refreshControl.endRefreshing()
-            self.refreshControl.beginRefreshing()
+            self.refreshControl?.endRefreshing()
+            self.refreshControl?.beginRefreshing()
             self.tableView.contentOffset = offset
         }
     }
@@ -106,7 +106,7 @@ class CoursesViewController: UIViewController {
                     self.currentPage = 1
                     self.tabIds = ids
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.refreshControl.endRefreshing()
+                        self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
                     }
                     self.isRefreshing = false
@@ -131,7 +131,7 @@ class CoursesViewController: UIViewController {
         self.isRefreshing = false
         dispatch_async(dispatch_get_main_queue()) {
             Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
-            self.refreshControl.endRefreshing()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -159,11 +159,11 @@ class CoursesViewController: UIViewController {
     var courses : [Course] = []
     var meta : Meta?
     
-    private var isLoadingMore = false
-    private var isRefreshing = false
-    private var currentPage = 1
+    var isLoadingMore = false
+    var isRefreshing = false
+    var currentPage = 1
     
-    private var failedLoadingMore = false {
+    var failedLoadingMore = false {
         didSet {
             UIThread.performUI {
                 self.tableView.reloadData()
