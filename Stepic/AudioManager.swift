@@ -21,6 +21,8 @@ class AudioManager: NSObject {
         
         set(ignore) {
             do {
+                print("setting ignore status to \(ignore)")
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
                 try AVAudioSession.sharedInstance().setActive(!ignore)
             }
             catch {

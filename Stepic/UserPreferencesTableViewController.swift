@@ -23,7 +23,7 @@ class UserPreferencesTableViewController: UITableViewController {
     @IBOutlet weak var ignoreMuteSwitchSwitch: UISwitch!
     
     
-    let heightForRows = [[131], [40, 40, 40], [40]]
+    let heightForRows = [[131], [40, 0, 40], [40]]
     let selectionForRows = [[false], [false, false, true], [true]]
 
     override func viewDidLoad() {

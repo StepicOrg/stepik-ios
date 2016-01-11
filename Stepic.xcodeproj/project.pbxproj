@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
@@ -142,6 +143,7 @@
 
 /* Begin PBXFileReference section */
 		013481E40EB75169773E2F21 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		08047E691BFD448A0071C875 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		08047E6B1BFD44920071C875 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -298,6 +300,9 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
+				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
+				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				08E16F281BDBA731004822E1 /* ConnectionHelper.swift */,
@@ -473,10 +478,7 @@
 				080F74601BD8159F0064AAEA /* TabsInfo.swift */,
 				080F74631BD9213D0064AAEA /* VideosInfo.swift */,
 				080F74671BD928F30064AAEA /* VideoQuality.swift */,
-				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
-				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				0857AA201BECDA640044B505 /* VideoDownload.swift */,
-				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -515,6 +517,7 @@
 				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
 				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
+				0801BE1B1C37123900E4F046 /* CoursesViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
+				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
