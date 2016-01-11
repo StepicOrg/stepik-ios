@@ -16,7 +16,17 @@ class CoursesViewController: UIViewController {
     
     var loadEnrolled : Bool? = nil
     var loadFeatured : Bool? = nil
+    
+    //need to override in subclass
+    var tabIds : [Int] {
+        get {
+            return []
+        }
         
+        set(value) {
+        }
+    }
+    
     let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {        
@@ -67,7 +77,7 @@ class CoursesViewController: UIViewController {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             do {
-                let cachedIds = TabsInfo.myCoursesIds 
+                let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)
                 self.courses = Sorter.sort(c, byIds: cachedIds)
                 dispatch_async(dispatch_get_main_queue()) {
@@ -94,7 +104,7 @@ class CoursesViewController: UIViewController {
                     self.courses = Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     self.currentPage = 1
-                    TabsInfo.myCoursesIds = ids
+                    self.tabIds = ids
                     dispatch_async(dispatch_get_main_queue()) {
                         self.refreshControl.endRefreshing()
                         self.tableView.reloadData()
@@ -186,7 +196,7 @@ class CoursesViewController: UIViewController {
                     self.currentPage += 1
                     self.courses += Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
-                    TabsInfo.myCoursesIds += ids
+                    self.tabIds += ids
                     //                        self.refreshControl.endRefreshing()
                     UIThread.performUI{self.tableView.reloadData()}
                     
@@ -276,50 +286,3 @@ extension CoursesViewController : UITableViewDataSource {
         return cell
     }
 }
-
-//extension CoursesViewController : DZNEmptyDataSetSource {
-//    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-//        return Images.emptyCoursesPlaceholder
-//    }
-//    
-//    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-//        
-//        let text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
-//        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-//            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-//        
-//        return NSAttributedString(string: text, attributes: attributes)
-//    }
-//    
-//    
-//    
-//    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-//        
-//        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-//        
-//        let paragraph = NSMutableParagraphStyle()
-//        paragraph.lineBreakMode = .ByWordWrapping
-//        paragraph.alignment = .Center
-//        
-//        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-//            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-//            NSParagraphStyleAttributeName: paragraph]
-//        
-//        return NSAttributedString(string: text, attributes: attributes)
-//    }
-//    
-//    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-//        return UIColor.whiteColor()
-//    }
-//    
-//    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
-//        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
-//        return 44
-//    }
-//}
-//
-//extension CoursesViewController : DZNEmptyDataSetDelegate {
-//    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
-//        return true
-//    }
-//}
