@@ -15,6 +15,8 @@
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
+		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
+		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
@@ -153,6 +155,8 @@
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
+		080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCoursesViewController.swift; sourceTree = "<group>"; };
+		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				080F74631BD9213D0064AAEA /* VideosInfo.swift */,
 				080F74671BD928F30064AAEA /* VideoQuality.swift */,
 				0857AA201BECDA640044B505 /* VideoDownload.swift */,
+				080DCF161C4518BC00DE3E2E /* SearchResult.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 				0801BE1B1C37123900E4F046 /* CoursesViewController.swift */,
+				080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -874,6 +880,7 @@
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
+				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
@@ -906,6 +913,7 @@
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */,
 				083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */,

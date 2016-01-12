@@ -10,10 +10,22 @@ import UIKit
 import FLKAutoLayout
 class FindCoursesViewController: CoursesViewController {
     
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchResultsVC : SearchResultsCoursesViewController! 
+    var searchController : UISearchController!
+    
     var filteredCourses = [Course]()
     
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    
+    override var tabIds :  [Int] {
+        get {
+            return TabsInfo.allCoursesIds
+        }
+        
+        set(value) {
+            TabsInfo.allCoursesIds = tabIds
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         if searchController.active {
@@ -25,10 +37,15 @@ class FindCoursesViewController: CoursesViewController {
         print(refreshControl)
     }
     
+    
     override func viewDidLoad() {
+        
         loadEnrolled = nil
         loadFeatured = true
         //        self.extendedLayoutIncludesOpaqueBars = true
+        
+        searchResultsVC = ControllerHelper.instantiateViewController(identifier: "SearchResultsCoursesViewController") as! SearchResultsCoursesViewController
+        searchController = UISearchController(searchResultsController: searchResultsVC)
         
         searchController.searchBar.searchBarStyle = UISearchBarStyle.Default
         searchController.searchResultsUpdater = self
@@ -57,110 +74,110 @@ class FindCoursesViewController: CoursesViewController {
         
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
-            return filteredCourses.count
-        } 
-        return courses.count + (needRefresh() ? 1 : 0)
-        
-    } 
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if searchController.active && searchController.searchBar.text != "" {
-            let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
-            
-            cell.initWithCourse(filteredCourses[indexPath.row])
-            
-            return cell
-        } 
-        if indexPath.row == courses.count && needRefresh() {
-            let cell = tableView.dequeueReusableCellWithIdentifier("RefreshTableViewCell", forIndexPath: indexPath) as! RefreshTableViewCell
-            cell.initWithMessage("Loading new courses...", isRefreshing: !failedLoadingMore, refreshAction: { self.loadNextPage() })
-            
-            //            loadNextPage()
-            
-            return cell
-        }
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
-        
-        cell.initWithCourse(courses[indexPath.row])
-        
-        return cell
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if searchController.active && searchController.searchBar.text != "" {
-            return 100
-        } 
-        if indexPath.row == courses.count && needRefresh() {
-            return 60
-        } else {
-            return 100
-        }
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if searchController.active && searchController.searchBar.text != "" {
-            if filteredCourses[indexPath.row].enrolled {
-                self.performSegueWithIdentifier("showSections", sender: indexPath)
-            } else {
-                self.performSegueWithIdentifier("showCourse", sender: indexPath)
-            }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        } else {
-            
-            if courses[indexPath.row].enrolled {
-                self.performSegueWithIdentifier("showSections", sender: indexPath)
-            } else {
-                self.performSegueWithIdentifier("showCourse", sender: indexPath)
-            }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-    }
-    
-    func filterContentForSearchText(searchText: String) {
-        filteredCourses = courses.filter({( course : Course) -> Bool in
-            return course.title.lowercaseString.containsString(searchText.lowercaseString)
-        })
-        tableView.reloadData()
-    } 
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if searchController.active && searchController.searchBar.text != "" {
-            if segue.identifier == "showCourse" {
-                let dvc = segue.destinationViewController as! CoursePreviewViewController
-                dvc.course = filteredCourses[(sender as! NSIndexPath).row]
-            }
-            
-            if segue.identifier == "showSections" {
-                let dvc = segue.destinationViewController as! SectionsViewController
-                dvc.course = filteredCourses[(sender as! NSIndexPath).row]
-            }
-            
-            if segue.identifier == "showPreferences" {
-                let dvc = segue.destinationViewController as! UserPreferencesTableViewController
-                dvc.hidesBottomBarWhenPushed = true
-            }
-        } else {
-            if segue.identifier == "showCourse" {
-                let dvc = segue.destinationViewController as! CoursePreviewViewController
-                dvc.course = courses[(sender as! NSIndexPath).row]
-            }
-            
-            if segue.identifier == "showSections" {
-                let dvc = segue.destinationViewController as! SectionsViewController
-                dvc.course = courses[(sender as! NSIndexPath).row]
-            }
-            
-            if segue.identifier == "showPreferences" {
-                let dvc = segue.destinationViewController as! UserPreferencesTableViewController
-                dvc.hidesBottomBarWhenPushed = true
-            }
-        }
-    }
+//////    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//////        if searchController.active && searchController.searchBar.text != "" {
+//////            return filteredCourses.count
+//////        } 
+//////        return courses.count + (needRefresh() ? 1 : 0)
+//////        
+//////    } 
+//////    
+//////    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//////        if searchController.active && searchController.searchBar.text != "" {
+//////            let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
+//////            
+//////            cell.initWithCourse(filteredCourses[indexPath.row])
+//////            
+//////            return cell
+//////        } 
+//////        if indexPath.row == courses.count && needRefresh() {
+//////            let cell = tableView.dequeueReusableCellWithIdentifier("RefreshTableViewCell", forIndexPath: indexPath) as! RefreshTableViewCell
+//////            cell.initWithMessage("Loading new courses...", isRefreshing: !failedLoadingMore, refreshAction: { self.loadNextPage() })
+//////            
+//////            //            loadNextPage()
+//////            
+//////            return cell
+//////        }
+//////        
+//////        let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
+//////        
+//////        cell.initWithCourse(courses[indexPath.row])
+//////        
+//////        return cell
+//////    }
+//////    
+//////    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//////        if searchController.active && searchController.searchBar.text != "" {
+//////            return 100
+//////        } 
+//////        if indexPath.row == courses.count && needRefresh() {
+//////            return 60
+//////        } else {
+//////            return 100
+//////        }
+//////    }
+//////    
+//////    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//////        
+//////        if searchController.active && searchController.searchBar.text != "" {
+//////            if filteredCourses[indexPath.row].enrolled {
+//////                self.performSegueWithIdentifier("showSections", sender: indexPath)
+//////            } else {
+//////                self.performSegueWithIdentifier("showCourse", sender: indexPath)
+//////            }
+//////            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//////        } else {
+//////            
+//////            if courses[indexPath.row].enrolled {
+//////                self.performSegueWithIdentifier("showSections", sender: indexPath)
+//////            } else {
+//////                self.performSegueWithIdentifier("showCourse", sender: indexPath)
+//////            }
+//////            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//////        }
+//////    }
+////    
+////    func filterContentForSearchText(searchText: String) {
+////        filteredCourses = courses.filter({( course : Course) -> Bool in
+////            return course.title.lowercaseString.containsString(searchText.lowercaseString)
+////        })
+////        tableView.reloadData()
+////    } 
+//    
+//    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if searchController.active && searchController.searchBar.text != "" {
+//            if segue.identifier == "showCourse" {
+//                let dvc = segue.destinationViewController as! CoursePreviewViewController
+//                dvc.course = filteredCourses[(sender as! NSIndexPath).row]
+//            }
+//            
+//            if segue.identifier == "showSections" {
+//                let dvc = segue.destinationViewController as! SectionsViewController
+//                dvc.course = filteredCourses[(sender as! NSIndexPath).row]
+//            }
+//            
+//            if segue.identifier == "showPreferences" {
+//                let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+//                dvc.hidesBottomBarWhenPushed = true
+//            }
+//        } else {
+//            if segue.identifier == "showCourse" {
+//                let dvc = segue.destinationViewController as! CoursePreviewViewController
+//                dvc.course = courses[(sender as! NSIndexPath).row]
+//            }
+//            
+//            if segue.identifier == "showSections" {
+//                let dvc = segue.destinationViewController as! SectionsViewController
+//                dvc.course = courses[(sender as! NSIndexPath).row]
+//            }
+//            
+//            if segue.identifier == "showPreferences" {
+//                let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+//                dvc.hidesBottomBarWhenPushed = true
+//            }
+//        }
+//    }
     
     override func viewDidLayoutSubviews() {
 //        print("\n\ndid layout subviews\n\n")
@@ -181,13 +198,13 @@ class FindCoursesViewController: CoursesViewController {
     //        searchStatusBarHeight = self.searchStatusBarView.constrainHeight("0")[0] as! NSLayoutConstraint
     //    }
     
-    var newRefresh: UIRefreshControl {
-        get {
-            let rc = UIRefreshControl()
-            rc.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
-            return rc
-        }
-    }
+//    var newRefresh: UIRefreshControl {
+//        get {
+//            let rc = UIRefreshControl()
+//            rc.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
+//            return rc
+//        }
+//    }
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
@@ -240,6 +257,8 @@ extension FindCoursesViewController : UISearchBarDelegate {
 
 extension FindCoursesViewController : UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+        print("updated search results")
+        let results = searchController.searchResultsController as? SearchResultsCoursesViewController
+        results?.query = searchController.searchBar.text!
     }
 }

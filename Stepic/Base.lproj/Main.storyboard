@@ -783,6 +783,36 @@
             </objects>
             <point key="canvasLocation" x="-1187" y="1019"/>
         </scene>
+        <!--Search Results Courses View Controller-->
+        <scene sceneID="hZW-z6-kvK">
+            <objects>
+                <viewController storyboardIdentifier="SearchResultsCoursesViewController" id="TeQ-C0-k1P" customClass="SearchResultsCoursesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h7K-bd-Bih"/>
+                        <viewControllerLayoutGuide type="bottom" id="E0Q-Xw-4UH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="njc-UD-cQ2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yRu-xR-eAK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yRu-xR-eAK" firstAttribute="bottom" secondItem="E0Q-Xw-4UH" secondAttribute="top" id="EmQ-dw-Da5"/>
+                            <constraint firstItem="yRu-xR-eAK" firstAttribute="top" secondItem="njc-UD-cQ2" secondAttribute="top" id="vKe-Yd-QUb"/>
+                            <constraint firstAttribute="trailing" secondItem="yRu-xR-eAK" secondAttribute="trailing" id="yJR-SN-j8c"/>
+                            <constraint firstItem="yRu-xR-eAK" firstAttribute="leading" secondItem="njc-UD-cQ2" secondAttribute="leading" id="zmR-eS-AbR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BHb-DO-MSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="3"/>
+        </scene>
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
             <objects>
@@ -842,7 +872,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2543" y="734"/>
+            <point key="canvasLocation" x="1687" y="708"/>
         </scene>
         <!--All Courses-->
         <scene sceneID="Xcs-LO-Ogd">
@@ -865,7 +895,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Un-RL-Hrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853" y="722"/>
+            <point key="canvasLocation" x="917" y="708"/>
         </scene>
         <!--My courses-->
         <scene sceneID="Eot-ep-83N">

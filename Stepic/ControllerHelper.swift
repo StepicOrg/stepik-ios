@@ -26,4 +26,9 @@ struct ControllerHelper {
         }
         return topVC
     }
+    
+    static func instantiateViewController(identifier id: String) -> UIViewController {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        return storyboard.instantiateViewControllerWithIdentifier(id) 
+    }
 }

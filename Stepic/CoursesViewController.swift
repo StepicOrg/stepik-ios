@@ -11,11 +11,12 @@ import FLKAutoLayout
 import DZNEmptyDataSet
 
 class CoursesViewController: UIViewController {
-
+    
     var tableView = UITableView()
     
     var loadEnrolled : Bool? = nil
     var loadFeatured : Bool? = nil
+    var refreshEnabled : Bool = true
     
     //need to override in subclass
     var tabIds : [Int] {
@@ -28,10 +29,10 @@ class CoursesViewController: UIViewController {
     }
     
     var refreshControl : UIRefreshControl? = UIRefreshControl()
-
+    
     override func viewDidLoad() {        
         super.viewDidLoad()
-
+        
         self.view.addSubview(tableView)
         self.tableView.alignLeading("0", trailing: "0", toView: self.view)
         self.tableView.alignTop("0", bottom: "0", toView: self.view)
@@ -43,28 +44,29 @@ class CoursesViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
         
-        refreshControl?.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl ?? UIView())
-        
-//        self.tableView.emptyDataSetDelegate = self 
-//        self.tableView.emptyDataSetSource = self
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        refreshControl?.beginRefreshing()
-        getCachedCourses(completion: {
-            self.refreshCourses()
-        })
+        
+        if refreshEnabled {
+            refreshControl?.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
+            tableView.addSubview(refreshControl ?? UIView())
+            refreshControl?.beginRefreshing()
+            getCachedCourses(completion: {
+                self.refreshCourses()
+            })
+        }
+        
         // Do any additional setup after loading the view.
         print("loadFeatured = \(loadFeatured)")
         print("loadEnrolled = \(loadEnrolled)")
-//        loadFeatured = true
+        //        loadFeatured = true
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print(tableView.frame)
-        if(self.refreshControl?.refreshing ?? false) {
+//        print(tableView.frame)
+        if refreshEnabled && (self.refreshControl?.refreshing ?? false) {
             let offset = self.tableView.contentOffset
             self.refreshControl?.endRefreshing()
             self.refreshControl?.beginRefreshing()

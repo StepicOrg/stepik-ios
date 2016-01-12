@@ -287,6 +287,42 @@ class ApiDataDownloader: NSObject {
         })
     }
     
+    func search(query query: String, type: String?, page: Int?, success: ([SearchResult], Meta) -> Void, error errorHandler: String->Void) {
+        let headers : [String : String] = [:]
+        var params : [String : NSObject] = [:]
+        
+        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["query"] = query
+        
+        if let p = page { 
+            params["page"] = p 
+        }
+        if let t = type {
+            params["type"] = t
+        }
+        
+        Alamofire.request(.GET, "https://stepic.org/api/search-results", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
+            _, _, json, error in
+            
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            print("search results for query -> \(query)\n\(json)")
+            
+            let meta = Meta(json: json["meta"])
+            var results = [SearchResult]() 
+            for resultJson in json["search-results"].arrayValue {
+                results += [SearchResult(json: resultJson)]
+            }
+            
+            success(results, meta)
+        })
+    }
+    
 }
 
 
