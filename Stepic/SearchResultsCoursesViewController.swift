@@ -11,9 +11,7 @@ import UIKit
 class SearchResultsCoursesViewController: CoursesViewController {
 
     var parentVC : UIViewController?
-    
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    
+        
     var query : String = "" {
         didSet {
             self.isLoadingMore = false
@@ -25,7 +23,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         refreshEnabled = false
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.        
     }
     
     func printInfo() {
@@ -44,12 +42,15 @@ class SearchResultsCoursesViewController: CoursesViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("\n\(self.topLayoutGuide.length)\n")
+//        print("\n\(self.topLayoutGuide.length)\n")
+        
+        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
+
+//        print("\n willAppear searchResults: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
 
         
 //        print(tableView.convertRect(tableView.bounds, toView: nil))
 //
-//        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
 //        
 //        print("\nsearchResults: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
 //        tableViewTopConstraint.constant = 0 - tableViewDistance
@@ -59,6 +60,18 @@ class SearchResultsCoursesViewController: CoursesViewController {
 //            tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
 //            tableView.layoutIfNeeded()
 //        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let constraintDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
+        let totalDistance = constraintDistance + tableView.contentInset.top
+        if totalDistance != 64 {
+            tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
+//            print("searchResults insets changed")
+            view.layoutIfNeeded()
+        }
+//        print("\n didLayoutSubviews searchResults: tableViewDistance -> \(constraintDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), frame -> \(tableView.frame)\n")
     }
     
     override func refreshCourses() {
