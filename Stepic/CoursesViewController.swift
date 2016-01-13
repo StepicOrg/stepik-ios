@@ -225,12 +225,12 @@ class CoursesViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showCourse" {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
-            dvc.course = courses[(sender as! NSIndexPath).row]
+            dvc.course = sender as? Course
         }
         
         if segue.identifier == "showSections" {
             let dvc = segue.destinationViewController as! SectionsViewController
-            dvc.course = courses[(sender as! NSIndexPath).row]
+            dvc.course = sender as? Course
         }
         
         if segue.identifier == "showPreferences" {
@@ -252,9 +252,9 @@ extension CoursesViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if courses[indexPath.row].enrolled {
-            self.performSegueWithIdentifier("showSections", sender: indexPath)
+            self.performSegueWithIdentifier("showSections", sender: courses[indexPath.row])
         } else {
-            self.performSegueWithIdentifier("showCourse", sender: indexPath)
+            self.performSegueWithIdentifier("showCourse", sender: courses[indexPath.row])
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

@@ -311,7 +311,7 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            print("search results for query -> \(query)\n\(json)")
+//            print("search results for query -> \(query)\n\(json)")
             
             let meta = Meta(json: json["meta"])
             var results = [SearchResult]() 

@@ -10,6 +10,10 @@ import UIKit
 
 class SearchResultsCoursesViewController: CoursesViewController {
 
+    var parentVC : UIViewController?
+    
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    
     var query : String = "" {
         didSet {
             self.isLoadingMore = false
@@ -20,9 +24,43 @@ class SearchResultsCoursesViewController: CoursesViewController {
     override func viewDidLoad() {
         refreshEnabled = false
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
     }
+    
+    func printInfo() {
+        print("\n------------------")
+        print("tableView frame resultsController active -> \(tableView.convertRect(tableView.bounds, toView: nil))")
+        print("before change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
+        if tableView.contentInset.top != 60 {
+            tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
+            tableView.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
+            tableView.layoutIfNeeded()
+        }
+        
+        print("after change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("\n\(self.topLayoutGuide.length)\n")
 
+        
+//        print(tableView.convertRect(tableView.bounds, toView: nil))
+//
+//        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
+//        
+//        print("\nsearchResults: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
+//        tableViewTopConstraint.constant = 0 - tableViewDistance
+//        view.layoutIfNeeded()
+        
+//        if tableView.contentInset.top != 60 {
+//            tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
+//            tableView.layoutIfNeeded()
+//        }
+    }
+    
     override func refreshCourses() {
         isRefreshing = true
         AuthentificationManager.sharedManager.autoRefreshToken(success: { 
@@ -113,6 +151,15 @@ class SearchResultsCoursesViewController: CoursesViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
+        if identifier == "showCourse" || identifier == "showSections" { 
+            parentVC?.performSegueWithIdentifier(identifier, sender: sender)
+        } else {
+            super.performSegueWithIdentifier(identifier, sender: sender)
+        }
+    }
+    
+
 
     /*
     // MARK: - Navigation

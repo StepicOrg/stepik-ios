@@ -802,16 +802,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yRu-xR-eAK" firstAttribute="bottom" secondItem="E0Q-Xw-4UH" secondAttribute="top" id="EmQ-dw-Da5"/>
-                            <constraint firstItem="yRu-xR-eAK" firstAttribute="top" secondItem="njc-UD-cQ2" secondAttribute="top" id="vKe-Yd-QUb"/>
-                            <constraint firstAttribute="trailing" secondItem="yRu-xR-eAK" secondAttribute="trailing" id="yJR-SN-j8c"/>
-                            <constraint firstItem="yRu-xR-eAK" firstAttribute="leading" secondItem="njc-UD-cQ2" secondAttribute="leading" id="zmR-eS-AbR"/>
+                            <constraint firstAttribute="trailing" secondItem="yRu-xR-eAK" secondAttribute="trailing" id="6dM-zk-vMX"/>
+                            <constraint firstItem="yRu-xR-eAK" firstAttribute="top" secondItem="njc-UD-cQ2" secondAttribute="top" id="Him-Dw-Dvt"/>
+                            <constraint firstItem="E0Q-Xw-4UH" firstAttribute="top" secondItem="yRu-xR-eAK" secondAttribute="bottom" id="Jaw-Gm-v3q"/>
+                            <constraint firstItem="yRu-xR-eAK" firstAttribute="leading" secondItem="njc-UD-cQ2" secondAttribute="leading" id="dZO-Ll-emU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="YFn-cD-YdC"/>
+                        <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="oKL-DN-H7f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BHb-DO-MSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687" y="3"/>
+            <point key="canvasLocation" x="2489" y="662"/>
         </scene>
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
@@ -837,23 +841,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xJl-BW-RIC" firstAttribute="leading" secondItem="vWn-UK-8hb" secondAttribute="leading" id="3iG-Pj-Gwl"/>
-                            <constraint firstAttribute="trailing" secondItem="xJl-BW-RIC" secondAttribute="trailing" id="5Lb-Ru-iFV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xJl-BW-RIC" secondAttribute="trailing" constant="-16" id="N5A-5o-ABE"/>
-                            <constraint firstItem="xJl-BW-RIC" firstAttribute="top" secondItem="vWn-UK-8hb" secondAttribute="top" id="PQW-xq-6nl"/>
-                            <constraint firstItem="lea-1q-JQL" firstAttribute="top" secondItem="xJl-BW-RIC" secondAttribute="bottom" id="PTG-3v-6DQ"/>
-                            <constraint firstItem="xJl-BW-RIC" firstAttribute="leading" secondItem="vWn-UK-8hb" secondAttribute="leadingMargin" constant="-16" id="nN9-kq-hQy"/>
-                            <constraint firstItem="xJl-BW-RIC" firstAttribute="top" secondItem="CHk-No-T5F" secondAttribute="bottom" constant="-64" id="yMY-06-nER"/>
-                            <constraint firstItem="lea-1q-JQL" firstAttribute="top" secondItem="xJl-BW-RIC" secondAttribute="bottom" id="zpE-cd-4Aj"/>
+                            <constraint firstItem="lea-1q-JQL" firstAttribute="top" secondItem="xJl-BW-RIC" secondAttribute="bottom" id="RdS-BN-RWb"/>
+                            <constraint firstItem="xJl-BW-RIC" firstAttribute="leading" secondItem="vWn-UK-8hb" secondAttribute="leading" id="ajz-Sz-RO8"/>
+                            <constraint firstAttribute="trailing" secondItem="xJl-BW-RIC" secondAttribute="trailing" id="jfG-vh-dn6"/>
+                            <constraint firstItem="xJl-BW-RIC" firstAttribute="top" secondItem="vWn-UK-8hb" secondAttribute="top" id="kyD-v1-4dv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="N5A-5o-ABE"/>
-                                <exclude reference="nN9-kq-hQy"/>
-                                <exclude reference="yMY-06-nER"/>
-                                <exclude reference="zpE-cd-4Aj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0">
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="845-TM-ZHx">
@@ -865,7 +857,6 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="xJl-BW-RIC" id="f6Q-fZ-qqB"/>
-                        <outlet property="tableViewTopConstraint" destination="PQW-xq-6nl" id="6qP-lA-pMb"/>
                         <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="Had-eU-CRB"/>
                         <segue destination="Zo1-Oj-Hsk" kind="show" identifier="showSections" id="ste-Lr-Bip"/>
                     </connections>
@@ -1838,9 +1829,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ihX-2a-oaI"/>
-        <segue reference="Had-eU-CRB"/>
         <segue reference="ste-Lr-Bip"/>
         <segue reference="qb1-8x-83E"/>
+        <segue reference="Had-eU-CRB"/>
         <segue reference="oyz-px-1HN"/>
     </inferredMetricsTieBreakers>
 </document>

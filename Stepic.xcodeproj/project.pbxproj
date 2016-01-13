@@ -17,6 +17,7 @@
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DE1BA71CE900F356A0 /* SignInViewController.swift */; };
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
@@ -157,6 +158,8 @@
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
 		080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCoursesViewController.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
+		080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F31DE1BA71CE900F356A0 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
@@ -677,6 +680,8 @@
 				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
 				089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */,
 				08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */,
+				080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */,
+				080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
+				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
 				080F74681BD928F30064AAEA /* VideoQuality.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
