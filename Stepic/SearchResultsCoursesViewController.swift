@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+import FLKAutoLayout
 
 class SearchResultsCoursesViewController: CoursesViewController {
 
@@ -19,8 +21,51 @@ class SearchResultsCoursesViewController: CoursesViewController {
         }
     }
     
+    override func refreshingChangedTo(refreshing: Bool) {
+        if refreshing {
+            doesPresentActivityIndicatorView = true
+            print(activityView.frame)
+        } else {
+            doesPresentActivityIndicatorView = false
+        }
+    }
+    
+    lazy var activityView : UIView = self.initActivityView()
+    
+    func initActivityView() -> UIView {
+        let v = UIView()
+        let ai = UIActivityIndicatorView()
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.constrainWidth("50", height: "50")
+        ai.color = UIColor.stepicGreenColor()
+        v.backgroundColor = UIColor.whiteColor()
+        v.addSubview(ai)
+        ai.alignCenterWithView(v)
+        ai.startAnimating()
+        self.view.insertSubview(v, aboveSubview: tableView)
+        v.alignToView(self.view)
+        v.hidden = false
+        return v
+    }
+    
+    var doesPresentActivityIndicatorView : Bool = false {
+        didSet {
+            if doesPresentActivityIndicatorView {
+                print("present activity indicator view")
+                UIThread.performUI{self.activityView.hidden = false}
+            } else {
+                print("dismiss activity indicator view")
+                UIThread.performUI{self.activityView.hidden = true}
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         refreshEnabled = false
+        
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.        
@@ -190,5 +235,50 @@ extension SearchResultsCoursesViewController {
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         let pvc = parentVC as? FindCoursesViewController
         pvc?.hideKeyboardIfNeeded()
+    }
+}
+
+extension SearchResultsCoursesViewController : DZNEmptyDataSetSource {
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return Images.emptyCoursesPlaceholder
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = NSLocalizedString("NoSearchResultsTitle", comment: "")
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+//    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+//        
+//        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+//        
+//        let paragraph = NSMutableParagraphStyle()
+//        paragraph.lineBreakMode = .ByWordWrapping
+//        paragraph.alignment = .Center
+//        
+//        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+//            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+//            NSParagraphStyleAttributeName: paragraph]
+//        
+//        return NSAttributedString(string: text, attributes: attributes)
+//    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.whiteColor()
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
+        return 0
+    }
+}
+
+extension SearchResultsCoursesViewController : DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return false
     }
 }

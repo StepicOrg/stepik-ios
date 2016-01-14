@@ -162,7 +162,15 @@ class CoursesViewController: UIViewController {
     var meta : Meta?
     
     var isLoadingMore = false
-    var isRefreshing = false
+    var isRefreshing = false {
+        didSet{
+            self.refreshingChangedTo(isRefreshing)
+        }
+    }
+    
+    func refreshingChangedTo(refreshing: Bool) {
+    }
+    
     var currentPage = 1
     
     var failedLoadingMore = false {
