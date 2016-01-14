@@ -185,3 +185,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
     */
 
 }
+
+extension SearchResultsCoursesViewController {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        let pvc = parentVC as? FindCoursesViewController
+        pvc?.hideKeyboardIfNeeded()
+    }
+}

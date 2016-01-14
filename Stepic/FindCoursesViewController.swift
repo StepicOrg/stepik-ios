@@ -56,32 +56,6 @@ class FindCoursesViewController: CoursesViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
-
-//        print("\n willAppear findCourses: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
-//        print(tableView.convertRect(tableView.bounds, toView: nil))
-//        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
-//        
-//        print("\nfindCourses: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), navigationBar -> \(navigationController?.navigationBar.hidden)\n")
-//        tableViewTopConstraint.constant = 0 - tableViewDistance
-//        view.layoutIfNeeded()
-//        
-//        if searchController.active {
-//            if tableView.contentInset.top != 60 {
-//                tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
-//                tableView.layoutIfNeeded()
-//            }
-//        } else {            
-//            //            tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0, bottom: 0, right: 0)
-//            tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-//            tableView.layoutIfNeeded()
-//        }
-        //        print(refreshControl)
-    }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -104,7 +78,6 @@ class FindCoursesViewController: CoursesViewController {
         
         loadEnrolled = nil
         loadFeatured = true
-        //        self.extendedLayoutIncludesOpaqueBars = true
         
         searchResultsVC = ControllerHelper.instantiateViewController(identifier: "SearchResultsCoursesViewController") as! SearchResultsCoursesViewController
         searchResultsVC.parentVC = self
@@ -115,6 +88,7 @@ class FindCoursesViewController: CoursesViewController {
         searchController.searchBar.delegate = self
         searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.showsCancelButton = false
         searchController.searchBar.barTintColor = UIColor.stepicGreenColor()
         searchController.searchBar.tintColor = UIColor.whiteColor()
         UITextField.appearanceWhenContainedWithin([UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlueColor()
@@ -144,70 +118,20 @@ class FindCoursesViewController: CoursesViewController {
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
-    func willPresentSearchController(searchController: UISearchController) {
-        print("will present")
-        
-        //        searchStatusBarHeight.constant = 27
-        
-        //        UIView.animateWithDuration(0.2, animations: {
-        //            self.view.layoutIfNeeded()
-        //        })
-        
-//        refreshControl?.removeFromSuperview()
-//        refreshControl = nil
-        ////        tableViewTopConstraint.constant = -20
-        ////        self.view.layoutIfNeeded()
-        //        self.tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        //        tableView.setContentOffset(CGPointMake(0, -20), animated: true)
-        //        self.tableView.setContentOffset(CGPointMake(0, -20), animated:true)
-    }
-    
-    func willDismissSearchController(searchController: UISearchController) {
-        //        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        //        UIView.animateWithDuration(0.2, animations: {
-        //            self.tableView.layoutIfNeeded()
-        //        })
-        
-        //        searchStatusBarHeight.constant = 0
-        //        UIView.animateWithDuration(0.4, animations: {
-        //            self.view.layoutIfNeeded()
-        //        })       
-    }
-    
-    func didDismissSearchController(searchController: UISearchController) {
-//        print(refreshControl)
-//        refreshControl = newRefresh
-//        tableView.addSubview(refreshControl ?? UIView())
-        print("did dismiss")
-        //        tableView.setContentOffset(CGPointMake(0, 0), animated: true)
-        
-        //        self.tableView.setContentOffset(CGPointMake(0, 0), animated:true)
-        //        tableViewTopConstraint.constant = 0
-        //        self.view.layoutIfNeeded()
-    }
 }
 
 extension FindCoursesViewController : UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchText == "" {
-//            self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-//            tableView.layoutIfNeeded()
-//        }
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        print("\ndid begin editing\n")
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        print("\ndid end editing\n")
-    }
 }
 
 extension FindCoursesViewController : UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-//        print("updated search results")
         let results = searchController.searchResultsController as? SearchResultsCoursesViewController
         results?.query = searchController.searchBar.text!
+    }
+}
+
+extension FindCoursesViewController {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        hideKeyboardIfNeeded()
     }
 }
