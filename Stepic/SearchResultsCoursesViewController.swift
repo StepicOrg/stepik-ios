@@ -16,8 +16,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
         
     var query : String = "" {
         didSet {
-            self.isLoadingMore = false
-            refreshCourses()
+            if self.query != oldValue {
+                self.isLoadingMore = false
+                refreshCourses()
+            }
         }
     }
     
@@ -86,25 +88,6 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        print("\n\(self.topLayoutGuide.length)\n")
-        
-        let tableViewDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
-
-//        print("\n willAppear searchResults: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
-
-        
-//        print(tableView.convertRect(tableView.bounds, toView: nil))
-//
-//        
-//        print("\nsearchResults: tableViewDistance -> \(tableViewDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)\n")
-//        tableViewTopConstraint.constant = 0 - tableViewDistance
-//        view.layoutIfNeeded()
-        
-//        if tableView.contentInset.top != 60 {
-//            tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
-//            tableView.layoutIfNeeded()
-//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -202,6 +185,12 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     override func handleRefreshError() {
         self.isRefreshing = false
+        courses = []
+        UIThread.performUI{ self.tableView.reloadData() }
+        if let vc = parentVC { 
+            UIThread.performUI{ Messages.sharedManager.showConnectionErrorMessage(inController: vc.navigationController!) }
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -216,8 +205,6 @@ class SearchResultsCoursesViewController: CoursesViewController {
             super.performSegueWithIdentifier(identifier, sender: sender)
         }
     }
-    
-
 
     /*
     // MARK: - Navigation
