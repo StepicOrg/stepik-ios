@@ -17,7 +17,7 @@ class MyCoursesViewController: CoursesViewController {
         }
         
         set(value) {
-            TabsInfo.myCoursesIds = tabIds
+            TabsInfo.myCoursesIds = value
         }
     }
     

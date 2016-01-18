@@ -80,6 +80,7 @@ class CoursesViewController: UIViewController {
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             do {
                 let cachedIds = self.tabIds 
+                print("got cachedIds -> \(cachedIds)")
                 let c = try Course.getCourses(cachedIds)
                 self.courses = Sorter.sort(c, byIds: cachedIds)
                 dispatch_async(dispatch_get_main_queue()) {
@@ -106,6 +107,7 @@ class CoursesViewController: UIViewController {
                     self.courses = Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     self.currentPage = 1
+                    print("ids -> \(ids)")
                     self.tabIds = ids
                     dispatch_async(dispatch_get_main_queue()) {
                         self.refreshControl?.endRefreshing()

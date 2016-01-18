@@ -21,7 +21,7 @@ class FindCoursesViewController: CoursesViewController {
         }
         
         set(value) {
-            TabsInfo.allCoursesIds = tabIds
+            TabsInfo.allCoursesIds = value
         }
     }
     
@@ -29,47 +29,16 @@ class FindCoursesViewController: CoursesViewController {
         self.searchController.searchBar.resignFirstResponder()
     }
     
-    func printInfo() {
-        print("\n------------------")
-        if searchController.active {
-            print("tableView frame empty resultsController searchController active -> \(tableView.convertRect(tableView.bounds, toView: nil))")
-            print("before change empty resultsController searchController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-            if tableView.contentInset.top != 60 {
-                tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
-                tableView.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
-                tableView.layoutIfNeeded()
-            }
-            
-            print("after change empty resultsController searchController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-            
-        } else {
-            print("tableView frame searchController inactive -> \(tableView.convertRect(tableView.bounds, toView: nil))")
-            
-            print("before change searchController inactive content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-            
-            
-            //            tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0, bottom: 0, right: 0)
-            tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            tableView.layoutIfNeeded()
-            
-            print("after change searchController inactive content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-        }
-    }
-    
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let constraintDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
         let totalDistance = constraintDistance + tableView.contentInset.top
         let oldInset = tableView.contentInset.top
         if totalDistance != 64 && totalDistance != 124 {
-//            print("changing findCourses inset programmatically. Constraint distance -> \(constraintDistance), totalDistance -> \(totalDistance), new inset -> \(64.0 - totalDistance)")
             tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
             tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y + (oldInset - tableView.contentInset.top)), animated: true)
-//            print("findCourses insets changed")
             view.layoutIfNeeded()
         }
-//        print("\n didLayoutSubviews findCourses: tableViewDistance -> \(constraintDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), frame -> \(tableView.frame)\n")
     }
     
     var topConstraint : NSLayoutConstraint?
@@ -92,26 +61,19 @@ class FindCoursesViewController: CoursesViewController {
         searchController.searchBar.barTintColor = UIColor.stepicGreenColor()
         searchController.searchBar.tintColor = UIColor.whiteColor()
         UITextField.appearanceWhenContainedWithin([UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlueColor()
-//        UITextField.appearanceWhenContainedIn([UISearchBar.self], nil)
-//        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.lightGrayColor()
 
         self.automaticallyAdjustsScrollViewInsets = false
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         
-        // Setup the Scope Bar
         searchController.searchBar.scopeButtonTitles = []
-        //        tableView.tableHeaderView = searchController.searchBar
-        //        searchController.searchBar.clipsToBounds = true
         
-//        topConstraint = tableView.constrainTopSpaceToView(view, predicate: "0")[0] as! NSLayoutConstraint
         
         super.viewDidLoad()
-        //        self.tableView.setContentOffset(CGPointMake(0, -self.refreshControl.frame.size.height), animated:true)
+
         self.tableView.backgroundView = UIView()
         self.tableView.backgroundColor = UIColor.lightTextColor()
-        //        initStatusBarView()
-        //        self.navigationController?.navigationBar.translucent = false
+
         self.navigationItem.titleView = self.searchController.searchBar
     }
     

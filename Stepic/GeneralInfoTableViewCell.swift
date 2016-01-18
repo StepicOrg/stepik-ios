@@ -37,7 +37,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
     
     func didRotate() {
         print("did rotate in general info")
-        layoutSubviews()
+        setNeedsLayout()
+        layoutIfNeeded()
     }
     
     func initWithCourse(course: Course) {
