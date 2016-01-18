@@ -268,4 +268,9 @@ extension SearchResultsCoursesViewController : DZNEmptyDataSetDelegate {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return false
     }
+    
+    func emptyDataSetDidTapView(scrollView: UIScrollView!) {
+        let pvc = parentVC as? FindCoursesViewController
+        pvc?.hideKeyboardIfNeeded()
+    }
 }
