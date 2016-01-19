@@ -73,4 +73,7 @@ ForgotPassword = "Забыли пароль?";
 WrongFields = "Неправильно введены данные!";
 IgnoreMuteSwitch = "Игнорировать беззвучный режим";
 NoSearchResultsTitle = "Ничего не найдено";
+Alert = "Внимание";
+Confirm = "Подтвердите действие";
+Prompt = "Введите данные";
 

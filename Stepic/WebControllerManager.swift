@@ -49,6 +49,7 @@ class WebControllerManager: NSObject {
 //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
         c.presentViewController(nav, animated: true, completion: nil)
         controller.webView.navigationDelegate = self
+        controller.webView.UIDelegate = self
     }
     
     func webControllerDonePressed() {
@@ -108,7 +109,7 @@ extension WebControllerManager : WKNavigationDelegate {
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.targetFrame != nil) {
             let rurl = navigationAction.request.URL
-            print(rurl)
+//            print(rurl)
             if let url = rurl {
                 if url.scheme == "stepic" {
                     UIApplication.sharedApplication().openURL(url)
@@ -116,5 +117,26 @@ extension WebControllerManager : WKNavigationDelegate {
             }
         }
         decisionHandler(WKNavigationActionPolicy.Allow)
+    }
+}
+
+extension WebControllerManager : WKUIDelegate {
+    
+    func webView(webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void) {
+        if let currentVC = currentWebController {
+            WKWebViewPanelManager.presentAlertOnController(currentVC, title: NSLocalizedString("Alert", comment: ""), message: message, handler: completionHandler)
+        }
+    }
+    
+    func webView(webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void) {
+        if let currentVC = currentWebController {
+            WKWebViewPanelManager.presentConfirmOnController(currentVC, title: NSLocalizedString("Confirm", comment: ""), message: message, handler: completionHandler)
+        }
+    }
+    
+    func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void) {
+        if let currentVC = currentWebController {
+            WKWebViewPanelManager.presentPromptOnController(currentVC, title: NSLocalizedString("Prompt", comment: ""), message: prompt, defaultText: defaultText, handler: completionHandler)
+        }
     }
 }

@@ -107,6 +107,7 @@
 		08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
 		08CA59F21BBFD65E008DC44D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
 		08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
+		08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */; };
 		08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
 		08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
@@ -251,6 +252,8 @@
 		08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08CA59F01BBFD65E008DC44D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		08CB4ABC1C4D3DCE00D7F918 /* WKWebViewPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewPanelManager.h; sourceTree = "<group>"; };
+		08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewPanelManager.m; sourceTree = "<group>"; };
 		08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -307,6 +310,7 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */,
 				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
 				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
@@ -588,6 +592,15 @@
 				08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */,
 			);
 			name = "Cell classes";
+			sourceTree = "<group>";
+		};
+		08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */ = {
+			isa = PBXGroup;
+			children = (
+				08CB4ABC1C4D3DCE00D7F918 /* WKWebViewPanelManager.h */,
+				08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */,
+			);
+			name = WKWebViewPanelManager;
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -929,6 +942,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
+				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
 				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,

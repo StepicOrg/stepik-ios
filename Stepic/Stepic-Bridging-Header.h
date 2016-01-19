@@ -22,3 +22,5 @@
 #import <Google/Analytics.h>
 
 #import "UIAppearance+Swift.h"
+
+#import "WKWebViewPanelManager.h"

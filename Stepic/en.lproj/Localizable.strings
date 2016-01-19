@@ -73,5 +73,8 @@ ForgotPassword = "Forgot password?";
 WrongFields = "Incorrect fields data!";
 IgnoreMuteSwitch = "Ignore mute switch";
 NoSearchResultsTitle = "Nothing found";
+Alert = "Alert";
+Confirm = "Confirm action";
+Prompt = "Enter data";
 
 
