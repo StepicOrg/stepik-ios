@@ -98,7 +98,7 @@ class VideoStepViewController: UIViewController {
     }
     
     @IBAction func playButtonPressed(sender: UIButton) {
-        if ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN() {
+        if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             setControls(playing: true)
             self.moviePlayer?.play()
         } else {
