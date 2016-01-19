@@ -153,6 +153,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.video = lesson!.steps[index].block.video!
             stepController.nItem = self.navigationItem
             stepController.step = lesson!.steps[index]
+            stepController.parentNavigationController = self.navigationController
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
             }
