@@ -10,12 +10,22 @@ import Foundation
 
 struct Scripts {
     
-    static var texScript : String {
+    private static func loadScriptWithKey(key: String) -> String {
         let path = NSBundle.mainBundle().bundlePath
         let scriptsPlistPath = "\(path)/Scripts.plist"
         let plistData = NSDictionary(contentsOfFile: scriptsPlistPath)!
-        return plistData[texScriptKey] as! String
+        return plistData[key] as! String
     }
+    
+    static var texScript : String {
+        return loadScriptWithKey(texScriptKey)
+    }
+    
+    static var sizeReportScript : String {
+        return loadScriptWithKey(sizeReportScriptKey)
+    }
+    
+    private static var sizeReportScriptKey : String = "SizeReportScript"
     
     private static var texScriptKey : String = "TexScript"
 }

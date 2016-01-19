@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1633,7 +1633,7 @@
         <!--Web Step View Controller-->
         <scene sceneID="Iip-iO-Bhn">
             <objects>
-                <viewController storyboardIdentifier="WebStepViewController" id="MzH-NU-yyp" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebStepViewController2" id="MzH-NU-yyp" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f9i-ks-CuU"/>
                         <viewControllerLayoutGuide type="bottom" id="cls-Jl-RZZ"/>
@@ -1686,6 +1686,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fh1-8B-1lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4967" y="2607"/>
+        </scene>
+        <!--Web Step View Controller-->
+        <scene sceneID="bJt-5m-7H3">
+            <objects>
+                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oaa-Og-jEd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dnu-MQ-f7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gz8-wq-89z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ku3-eq-MnF">
+                                <rect key="frame" x="0.0" y="41" width="600" height="559"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pp4-VH-jhD">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="57"/>
+                                        <subviews>
+                                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emi-b6-GHx">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="vIx-sL-U1Q"/>
+                                                </constraints>
+                                            </webView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYy-f7-DXy">
+                                                <rect key="frame" x="8" y="9" width="584" height="40"/>
+                                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="3O0-4U-ofG"/>
+                                                </constraints>
+                                                <state key="normal" title="Solve on the website">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="solveOnTheWebsitePressed:" destination="OsI-th-C1R" eventType="touchUpInside" id="dWa-Ua-d0c"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="KYy-f7-DXy" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" constant="8" id="ArJ-6d-ZtE"/>
+                                            <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
+                                            <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="SVq-w0-3Vg"/>
+                                            <constraint firstItem="KYy-f7-DXy" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="8" id="dgY-CX-y5m"/>
+                                            <constraint firstAttribute="trailing" secondItem="KYy-f7-DXy" secondAttribute="trailing" constant="8" id="fX2-7c-vGe"/>
+                                            <constraint firstAttribute="trailing" secondItem="emi-b6-GHx" secondAttribute="trailing" id="qPs-uE-8iy"/>
+                                            <constraint firstAttribute="bottom" secondItem="KYy-f7-DXy" secondAttribute="bottom" constant="8" id="trm-x9-ICL"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pp4-VH-jhD" firstAttribute="leading" secondItem="Ku3-eq-MnF" secondAttribute="leading" id="Ltg-uK-uBx"/>
+                                    <constraint firstAttribute="bottom" secondItem="pp4-VH-jhD" secondAttribute="bottom" id="oWG-mu-8WO"/>
+                                    <constraint firstItem="pp4-VH-jhD" firstAttribute="top" secondItem="Ku3-eq-MnF" secondAttribute="top" id="qf2-rI-L7N"/>
+                                    <constraint firstAttribute="trailing" secondItem="pp4-VH-jhD" secondAttribute="trailing" id="wDF-VT-bo4"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pp4-VH-jhD" firstAttribute="width" secondItem="Gz8-wq-89z" secondAttribute="width" id="AsK-HD-FDN"/>
+                            <constraint firstItem="Ku3-eq-MnF" firstAttribute="top" secondItem="oaa-Og-jEd" secondAttribute="bottom" constant="21" id="GbV-6e-U2P"/>
+                            <constraint firstItem="Ku3-eq-MnF" firstAttribute="bottom" secondItem="Dnu-MQ-f7B" secondAttribute="top" id="nHe-R5-gMr"/>
+                            <constraint firstItem="Ku3-eq-MnF" firstAttribute="leading" secondItem="Gz8-wq-89z" secondAttribute="leading" id="nhG-6L-V5h"/>
+                            <constraint firstAttribute="trailing" secondItem="Ku3-eq-MnF" secondAttribute="trailing" id="sJY-0J-0n8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="pp4-VH-jhD" id="S4R-3z-hDS"/>
+                        <outlet property="solveButton" destination="KYy-f7-DXy" id="na5-t8-mrl"/>
+                        <outlet property="solveButtonHeight" destination="3O0-4U-ofG" id="m6A-13-sl0"/>
+                        <outlet property="stepWebView" destination="emi-b6-GHx" id="YHK-7Z-rBj"/>
+                        <outlet property="stepWebViewHeight" destination="vIx-sL-U1Q" id="UJJ-me-Eyb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RLq-xB-Eqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5606" y="2609"/>
         </scene>
         <!--My courses-->
         <scene sceneID="Qyk-4b-RfK">

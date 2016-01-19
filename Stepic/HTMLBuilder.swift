@@ -20,6 +20,7 @@ class HTMLBuilder: NSObject {
         res += "\nh2{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
         res += "\nh3{font-size: 18pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
         res += "\nimg { max-width: 100%; }"
+        
 //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 //        res += "\npre { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 
@@ -32,7 +33,8 @@ class HTMLBuilder: NSObject {
         
         res += "<head>\n\(stepicStyleString + head)\n</head>\n"
 //        print(body)
-        res += "<body style=\"width:\(width))px\">\n\(body)\n</body>\n"
+        res += "<body style=\"width:\(width))px;\">\n\(body)\n</body>\n"
+        
         res += "</html>"
         return res
     }

@@ -18,6 +18,7 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var solveButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -37,21 +38,11 @@ class WebStepViewController: UIViewController {
 
         stepWebView.delegate = self
         
-//        stepWebView.scrollView.scrollEnabled = false
-//        stepWebView.scrollView.bounces = false
-        
-        if let htmlText = step.block.text {
-            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: Scripts.texScript, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
-            html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            stepWebView.loadHTMLString(html, baseURL: nil)
-            //stepWebView.scalesPageToFit = true
-        }
-        
-        if step.block.name == "text" {
-            solveButtonHeight.constant = 0
-            solveButton.hidden = true
-        }
-        
+//        stepWebView.scrollView.scrollEnabled = true
+//        stepWebView.scrollView.bounces = true
+        stepWebView.scrollView.delegate = self
+        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+  
 //        if step.block.name == "text" {
 //            solveButton.hidden = true
 //            stepWebView.constrainBottomSpaceToView(contentView, predicate: "8")
@@ -65,6 +56,21 @@ class WebStepViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         nItem.rightBarButtonItem = nil
+        
+        if let htmlText = step.block.text {
+//            let scriptsString = "\(Scripts.texScript)\n\(Scripts.sizeReportScript)"
+            let scriptsString = "\(Scripts.texScript)"
+            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
+            html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            stepWebView.loadHTMLString(html, baseURL: nil)
+            //stepWebView.scalesPageToFit = true
+        }
+        
+        if step.block.name == "text" {
+            solveButtonHeight.constant = 0
+            solveButton.hidden = true
+        }
+
         SVProgressHUD.dismiss()
     }
     
@@ -89,7 +95,11 @@ class WebStepViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        print("did layout subviews")
+    }
     /*
     // MARK: - Navigation
 
@@ -99,6 +109,16 @@ class WebStepViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func resetWebViewHeight(height: Float) {
+
+//        let height = getContentHeight(webView)
+//        print("resetWebViewHeight called, step id -> \(stepId) height -> \(height)")
+        ////        webViewHeight.constant = CGFloat(height + 32)
+        //        webView.constrainHeight("\(height + 32)")
+        stepWebViewHeight.constant = CGFloat(height)
+        self.view.layoutIfNeeded()
+    }
 }
 
 extension WebStepViewController : UIWebViewDelegate {
@@ -117,10 +137,17 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print(request.URLString)
+//        print(request.URLString)
         if didStartLoadingFirstRequest {
             if let url = request.URL { 
-                openInBrowserAlert(url) 
+                if url.absoluteString != "about:blank" {
+//                if url.scheme == "ready" {
+//                    resetWebViewHeight(Float(url.host!)!)
+//                } else {
+                    print("trying to open in browser url -> \(url)")
+                    openInBrowserAlert(url) 
+                }
+//                }
             }
             return false
         } else {
@@ -130,17 +157,30 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func getContentHeight(webView : UIWebView) -> Int {
-        return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight;") ?? "0") ?? 0
+        return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.scrollHeight;") ?? "0") ?? 0
 //        return Int(webView.scrollView.contentSize.height)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
+        print("did finish load called, step id -> \(stepId) height -> \(getContentHeight(webView))")
+        resetWebViewHeight(Float(getContentHeight(webView)))
 //        let height = getContentHeight(webView)
 //        print("step id -> \(stepId) height -> \(height)")
-////        webViewHeight.constant = CGFloat(height + 32)
-//        webView.constrainHeight("\(height + 32)")
-        
-//        webView.frame.size = CGSize(width: Int(webView.frame.width), height: Int(stringHeight) ?? 0)
+//////        webViewHeight.constant = CGFloat(height + 32)
+////        webView.constrainHeight("\(height + 32)")
+//        stepWebViewHeight.constant = CGFloat(height)
+//        self.view.layoutIfNeeded()
+////        webView.frame.size = CGSize(width: Int(webView.frame.width), height: Int(stringHeight) ?? 0)
+    }
+}
+
+extension WebStepViewController : UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y != 0) {
+            var offset = scrollView.contentOffset;
+            offset.y = 0
+            scrollView.contentOffset = offset;
+        }
     }
 }
