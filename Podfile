@@ -20,6 +20,8 @@ pod 'AFImageHelper'
 pod 'Google/Analytics'
 pod 'Google/SignIn'
 pod 'AAShareBubbles'
+pod 'BEMCheckBox'
+
 #pod 'JSQWebViewController'
 #pod 'DZNWebViewController'
 #pod 'TCBlobDownloadSwift'

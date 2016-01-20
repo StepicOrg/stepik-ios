@@ -117,13 +117,22 @@ class WebStepViewController: UIViewController {
         case "text":
             stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
-        default:
-            let quizController = ControllerHelper.instantiateViewController(identifier: "UnknownTypeQuizViewController", storyboardName: "QuizControllers") as! UnknownTypeQuizViewController
+        case "choice":
+            let quizController = ControllerHelper.instantiateViewController(identifier: "ChoiceQuizViewController", storyboardName: "QuizControllers") as! ChoiceQuizViewController
+            quizController.delegate = self
+            quizController.step = self.step
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
             quizController.view.alignToView(quizPlaceholderView)
+            self.view.layoutIfNeeded()
+            break
+        default:
+            let quizController = ControllerHelper.instantiateViewController(identifier: "UnknownTypeQuizViewController", storyboardName: "QuizControllers") as! UnknownTypeQuizViewController
             quizController.stepUrl = self.stepUrl
             quizController.delegate = self
+            self.addChildViewController(quizController)
+            quizPlaceholderView.addSubview(quizController.view)
+            quizController.view.alignToView(quizPlaceholderView)
             self.view.layoutIfNeeded()
         }
     }
