@@ -330,7 +330,7 @@ class ApiDataDownloader: NSObject {
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
         ]
         
-        var params : [String : NSObject] = [
+        let params : [String : NSObject] = [
             "attempt": [
             "step" : "\(stepId)"
                 ]
@@ -433,6 +433,40 @@ class ApiDataDownloader: NSObject {
     
     func getSubmissionsWith(stepName stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
         getSubmissionsWithObjectID(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, success: success, error: errorHandler)
+    }
+    
+    func createSubmissionFor(stepName stepName: String, attemptId: Int, reply: Reply, success: Submission->Void, error errorHandler: String->Void) {
+        let headers : [String : String] = [
+            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+        ]
+        
+        let params = [
+            "submission": [
+                "attempt" : "\(attemptId)",
+                "reply" : reply.dictValue
+            ]
+        ]
+        
+        Alamofire.request(.POST, "https://stepic.org/api/submissions", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 201 {
+                //                print(json)
+                let submission = Submission(json: json["submissions"].arrayValue[0], stepName: stepName) 
+                success(submission)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+            
+        })
     }
     
 }

@@ -38,18 +38,60 @@ class WebStepViewController: UIViewController {
 
         stepWebView.delegate = self
         
-//        stepWebView.scrollView.scrollEnabled = true
-//        stepWebView.scrollView.bounces = true
         stepWebView.scrollView.delegate = self
         solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-  
-//        if step.block.name == "text" {
-//            solveButton.hidden = true
-//            stepWebView.constrainBottomSpaceToView(contentView, predicate: "8")
-//        } else {
-//            stepWebView.constrainBottomSpaceToView(solveButton, predicate: "0")
-//        }
-        
+
+        ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: step.block.name, stepId: step.id, success: {
+            attempts, meta in
+            if attempts.count == 0 || attempts[0].status != "active" {
+                //Create attempt
+                ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
+                    attempt in
+                    //Display attempt using dataset
+                }, error: {
+                     errorText in   
+                })
+            } else {
+                //Get submission for attempt
+                let currentAttempt = attempts[0]
+                ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: self.step.block.name, attemptId: currentAttempt.id!, success: {
+                    submissions, meta in
+                    if submissions.count == 0 {
+                        //There are no current submissions for attempt.
+                        //For testing - create the submission
+                        if let dataset = currentAttempt.dataset as? ChoiceDataset {
+                    
+                            var arr = [Bool](count: dataset.options.count, repeatedValue: false)
+                            arr[0] = true
+                            let r = ChoiceReply(choices: arr)
+                        
+                            ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: self.step.block.name, attemptId: attempts[0].id!, reply: r, success: {
+                                submission in
+                            
+                            }, error: {
+                                errorText in
+                                    
+                            })
+                        }
+                    } else {
+                        //Displaying the last submission
+                        
+                    }
+                }, error: {
+                    errorText in
+                    
+                })
+            }
+        }, error: {
+            errorText in
+        })
+//        ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: step.block.name, stepId: step.id, success: { 
+//            attempt in
+//            
+//        }, error: {
+//            errorText in
+//                
+//        })
         // Do any additional setup after loading the view.
     }
 

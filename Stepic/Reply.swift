@@ -12,4 +12,7 @@ import SwiftyJSON
 
 protocol Reply {
     init(json: JSON)
+    var dictValue : [String : NSObject] {
+        get
+    }
 }
