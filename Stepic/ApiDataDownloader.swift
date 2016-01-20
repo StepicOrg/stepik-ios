@@ -414,7 +414,6 @@ class ApiDataDownloader: NSObject {
             }
             
             if response?.statusCode == 200 {
-                print(json)
                 let meta = Meta(json: json["meta"])
                 let submissions = json["submissions"].arrayValue.map({return Submission(json: $0, stepName: stepName)})
                 success(submissions, meta)
@@ -457,7 +456,6 @@ class ApiDataDownloader: NSObject {
             }
             
             if response?.statusCode == 201 {
-                //                print(json)
                 let submission = Submission(json: json["submissions"].arrayValue[0], stepName: stepName) 
                 success(submission)
                 return
@@ -467,11 +465,8 @@ class ApiDataDownloader: NSObject {
             }
             
         })
-    }
-    
+    }    
 }
-
-
 
 enum RefreshMode {
     case Delete, Update
