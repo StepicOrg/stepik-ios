@@ -33,9 +33,10 @@ class Attempt: NSObject {
         dataset = getDatasetFromJSON(json["dataset"], stepName: stepName)
     }
     
-    func getDatasetFromJSON(json: JSON, stepName: String) -> Dataset? {
+    private func getDatasetFromJSON(json: JSON, stepName: String) -> Dataset? {
         switch stepName {
         case "choice" : return ChoiceDataset(json: json)
+        case "free_answer": return String(json: json)
         default: return nil
         }
     }
