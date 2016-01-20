@@ -1703,7 +1703,7 @@
                                 <rect key="frame" x="0.0" y="41" width="600" height="559"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pp4-VH-jhD">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="57"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="32"/>
                                         <subviews>
                                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emi-b6-GHx">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -1712,29 +1712,23 @@
                                                     <constraint firstAttribute="height" constant="1" id="vIx-sL-U1Q"/>
                                                 </constraints>
                                             </webView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYy-f7-DXy">
-                                                <rect key="frame" x="8" y="9" width="584" height="40"/>
-                                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY6-uB-D81" userLabel="QuizPlaceholderView">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="32"/>
+                                                <color key="backgroundColor" red="0.0" green="0.92549026010000002" blue="0.77254909279999995" alpha="1" colorSpace="deviceRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="3O0-4U-ofG"/>
+                                                    <constraint firstAttribute="height" constant="32" id="ueV-JT-B19"/>
                                                 </constraints>
-                                                <state key="normal" title="Solve on the website">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="solveOnTheWebsitePressed:" destination="OsI-th-C1R" eventType="touchUpInside" id="dWa-Ua-d0c"/>
-                                                </connections>
-                                            </button>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="KYy-f7-DXy" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" constant="8" id="ArJ-6d-ZtE"/>
+                                            <constraint firstItem="cY6-uB-D81" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="AeC-BX-EOx"/>
+                                            <constraint firstAttribute="trailing" secondItem="cY6-uB-D81" secondAttribute="trailing" id="Axr-l8-xiu"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="SVq-w0-3Vg"/>
-                                            <constraint firstItem="KYy-f7-DXy" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="8" id="dgY-CX-y5m"/>
-                                            <constraint firstAttribute="trailing" secondItem="KYy-f7-DXy" secondAttribute="trailing" constant="8" id="fX2-7c-vGe"/>
+                                            <constraint firstItem="cY6-uB-D81" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="-1" id="bdv-dr-x54"/>
                                             <constraint firstAttribute="trailing" secondItem="emi-b6-GHx" secondAttribute="trailing" id="qPs-uE-8iy"/>
-                                            <constraint firstAttribute="bottom" secondItem="KYy-f7-DXy" secondAttribute="bottom" constant="8" id="trm-x9-ICL"/>
+                                            <constraint firstAttribute="bottom" secondItem="cY6-uB-D81" secondAttribute="bottom" id="wFd-A5-e28"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1756,9 +1750,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentView" destination="pp4-VH-jhD" id="S4R-3z-hDS"/>
-                        <outlet property="solveButton" destination="KYy-f7-DXy" id="na5-t8-mrl"/>
-                        <outlet property="solveButtonHeight" destination="3O0-4U-ofG" id="m6A-13-sl0"/>
+                        <outlet property="contentView" destination="pp4-VH-jhD" id="pPT-Gh-1iK"/>
+                        <outlet property="quizPlaceholderView" destination="cY6-uB-D81" id="2LX-s0-szN"/>
+                        <outlet property="quizPlaceholderViewHeight" destination="ueV-JT-B19" id="Kth-3d-a0i"/>
                         <outlet property="stepWebView" destination="emi-b6-GHx" id="YHK-7Z-rBj"/>
                         <outlet property="stepWebViewHeight" destination="vIx-sL-U1Q" id="UJJ-me-Eyb"/>
                     </connections>

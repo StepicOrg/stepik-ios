@@ -138,6 +138,9 @@
 		08F555581C4FAF5300C877E8 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
 		08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
 		08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
+		08F555601C4FE1C400C877E8 /* QuizControllers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08F5555F1C4FE1C400C877E8 /* QuizControllers.storyboard */; };
+		08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
+		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
 		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -296,6 +299,9 @@
 		08F555571C4FAF5200C877E8 /* Submission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
 		08F555591C4FB0A300C877E8 /* Reply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reply.swift; sourceTree = "<group>"; };
 		08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceReply.swift; sourceTree = "<group>"; };
+		08F5555F1C4FE1C400C877E8 /* QuizControllers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuizControllers.storyboard; sourceTree = "<group>"; };
+		08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTypeQuizViewController.swift; sourceTree = "<group>"; };
+		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 		2F898335524A3B65B5B270E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6DE7E5DFAD0AB0FC2F079A91 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -465,6 +471,7 @@
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				08F555611C4FE2D200C877E8 /* Quizzes */,
 				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
 				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
@@ -744,6 +751,16 @@
 			name = Datasets;
 			sourceTree = "<group>";
 		};
+		08F555611C4FE2D200C877E8 /* Quizzes */ = {
+			isa = PBXGroup;
+			children = (
+				08F5555F1C4FE1C400C877E8 /* QuizControllers.storyboard */,
+				08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */,
+				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
+			);
+			name = Quizzes;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,6 +877,7 @@
 				083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
+				08F555601C4FE1C400C877E8 /* QuizControllers.storyboard in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
@@ -945,6 +963,7 @@
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
+				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
@@ -987,6 +1006,7 @@
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
+				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,

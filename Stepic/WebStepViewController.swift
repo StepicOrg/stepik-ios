@@ -14,11 +14,15 @@ import SVProgressHUD
 class WebStepViewController: UIViewController {
 
     @IBOutlet weak var stepWebView: UIWebView!
-    @IBOutlet weak var solveButton: UIButton!
+//    @IBOutlet weak var solveButton: UIButton!
     @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var solveButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var quizPlaceholderView: UIView!
+//    @IBOutlet weak var solveButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
+
+    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
+    
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -39,10 +43,10 @@ class WebStepViewController: UIViewController {
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
-        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-
         
-        // Do any additional setup after loading the view.
+        handleQuizType()
+//        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+
     }
 
     func testAPI() {
@@ -104,13 +108,28 @@ class WebStepViewController: UIViewController {
             stepWebView.loadHTMLString(html, baseURL: nil)
             //stepWebView.scalesPageToFit = true
         }
-        
-        if step.block.name == "text" {
-            solveButtonHeight.constant = 0
-            solveButton.hidden = true
-        }
 
         SVProgressHUD.dismiss()
+    }
+    
+    func handleQuizType() {
+        switch step.block.name {
+        case "text":
+            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
+            break
+        default:
+            let quizController = ControllerHelper.instantiateViewController(identifier: "UnknownTypeQuizViewController", storyboardName: "QuizControllers") as! UnknownTypeQuizViewController
+            self.addChildViewController(quizController)
+            quizPlaceholderView.addSubview(quizController.view)
+            quizController.view.alignToView(quizPlaceholderView)
+            quizController.stepUrl = self.stepUrl
+            quizController.delegate = self
+//            quizController.view.constrainWidthToView(quizPlaceholderView, predicate: "")
+//            quizController.view.alignToView(quizPlaceholderView)
+//            quizController.view.constrainTopSpaceToView(quizPlaceholderView, predicate: "0")
+//            quizController.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: quizPlaceholderView)
+            self.view.layoutIfNeeded()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -138,25 +157,14 @@ class WebStepViewController: UIViewController {
         super.viewDidLayoutSubviews()
 //        print("did layout subviews")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     func resetWebViewHeight(height: Float) {
-
-//        let height = getContentHeight(webView)
-//        print("resetWebViewHeight called, step id -> \(stepId) height -> \(height)")
-        ////        webViewHeight.constant = CGFloat(height + 32)
-        //        webView.constrainHeight("\(height + 32)")
         stepWebViewHeight.constant = CGFloat(height)
         self.view.layoutIfNeeded()
     }
+    
+    
 }
 
 extension WebStepViewController : UIWebViewDelegate {
@@ -220,5 +228,11 @@ extension WebStepViewController : UIScrollViewDelegate {
             offset.y = 0
             scrollView.contentOffset = offset;
         }
+    }
+}
+
+extension WebStepViewController : QuizControllerDelegate {
+    func needsHeightUpdate(newHeight: CGFloat) {
+        quizPlaceholderViewHeight.constant = 56
     }
 }
