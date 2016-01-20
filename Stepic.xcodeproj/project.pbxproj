@@ -131,6 +131,10 @@
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
+		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
+		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
+		08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
+		08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
 		0A068D6AAC40D4C225A0ECF6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013481E40EB75169773E2F21 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -282,6 +286,10 @@
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
+		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
+		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
+		08F555531C4F97C100C877E8 /* ChoiceDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDataset.swift; sourceTree = "<group>"; };
+		08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringDatasetExtension.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 		2F898335524A3B65B5B270E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6DE7E5DFAD0AB0FC2F079A91 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -479,6 +487,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */,
 				089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */,
 				08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
@@ -699,6 +708,17 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */ = {
+			isa = PBXGroup;
+			children = (
+				08F5554D1C4F924000C877E8 /* Attempt.swift */,
+				08F5554F1C4F93B700C877E8 /* Dataset.swift */,
+				08F555531C4F97C100C877E8 /* ChoiceDataset.swift */,
+				08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */,
+			);
+			name = "Attempts&Sumbissions";
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,6 +900,7 @@
 				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
 				080F74681BD928F30064AAEA /* VideoQuality.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
@@ -903,6 +924,7 @@
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
+				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
@@ -941,6 +963,7 @@
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
+				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
@@ -973,6 +996,7 @@
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
+				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
