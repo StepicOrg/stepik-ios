@@ -323,6 +323,43 @@ class ApiDataDownloader: NSObject {
         })
     }
     
+    func getSubmissionsWith(stepName stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
+        let headers : [String : String] = [:]
+        var params : [String : NSObject] = [:]
+        
+        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["step"] = stepId
+        if let desc = isDescending {
+            params["order"] = desc ? "desc" : "asc"
+        }
+        if let p = page {
+            params["page"] = p
+        }
+        if let user = userId {
+            params["user"] = user
+        }
+        
+        Alamofire.request(.GET, "https://stepic.org/api/submissions", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 200 {
+                print(json)
+                let meta = Meta(json: json["meta"])
+                let submissions = json["submissions"].arrayValue.map({return Submission(json: $0, stepName: stepName)})
+                success(submissions, meta)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+        })
+    }
 }
 
 
