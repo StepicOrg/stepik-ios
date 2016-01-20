@@ -323,12 +323,77 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func getSubmissionsWith(stepName stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
+    
+    func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) {
+        
+        let headers : [String : String] = [
+            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+        ]
+        
+        var params : [String : NSObject] = [
+            "attempt": [
+            "step" : "\(stepId)"
+                ]
+            ]
+        
+        Alamofire.request(.POST, "https://stepic.org/api/attempts", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 201 {
+//                print(json)
+                let attempt = Attempt(json: json["attempts"].arrayValue[0], stepName: stepName) 
+                success(attempt)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+            
+        })
+    }
+    
+    func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) {
+        let headers : [String : String] = [:]
+        var params : [String : NSObject] = [:]
+        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["step"] = stepId
+
+        Alamofire.request(.GET, "https://stepic.org/api/attempts", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 200 {
+//                print(json)
+                let meta = Meta(json: json["meta"])
+                let attempts = json["attempts"].arrayValue.map({return Attempt(json: $0, stepName: stepName)})
+                success(attempts, meta)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+
+        })
+    }
+    
+    private func getSubmissionsWithObjectID(stepName stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
+        
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
         params["access_token"] = StepicAPI.shared.token?.accessToken
-        params["step"] = stepId
+        params[objectName] = objectId
         if let desc = isDescending {
             params["order"] = desc ? "desc" : "asc"
         }
@@ -359,70 +424,17 @@ class ApiDataDownloader: NSObject {
                 return
             }
         })
+        
     }
     
-    func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) {
-        
-        let headers : [String : String] = [
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
-        ]
-        
-        var params : [String : NSObject] = [
-            "attempt": [
-            "step" : "\(stepId)"
-                ]
-            ]
-        
-        Alamofire.request(.POST, "https://stepic.org/api/attempts", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            _, response, json, error in
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-            
-            if response?.statusCode == 201 {
-                print(json)
-                let attempt = Attempt(json: json["attempts"].arrayValue[0], stepName: stepName) 
-                success(attempt)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
-                return
-            }
-            
-        })
+    func getSubmissionsWith(stepName stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
+        getSubmissionsWithObjectID(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, success: success, error: errorHandler)
     }
     
-    func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) {
-        let headers : [String : String] = [:]
-        var params : [String : NSObject] = [:]
-        params["access_token"] = StepicAPI.shared.token?.accessToken
-        params["step"] = stepId
-
-        Alamofire.request(.GET, "https://stepic.org/api/attempts", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
-            _, response, json, error in
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-            
-            if response?.statusCode == 200 {
-                print(json)
-                let meta = Meta(json: json["meta"])
-                let attempts = json["attempts"].arrayValue.map({return Attempt(json: $0, stepName: stepName)})
-                success(attempts, meta)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
-                return
-            }
-
-        })
+    func getSubmissionsWith(stepName stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) {
+        getSubmissionsWithObjectID(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, success: success, error: errorHandler)
     }
+    
 }
 
 
