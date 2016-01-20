@@ -360,6 +360,40 @@ class ApiDataDownloader: NSObject {
             }
         })
     }
+    
+    func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) {
+        
+        let headers : [String : String] = [
+            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+        ]
+        
+        var params : [String : NSObject] = [
+            "attempt": [
+            "step" : "\(stepId)"
+                ]
+            ]
+        
+        Alamofire.request(.POST, "https://stepic.org/api/attempts", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 201 {
+                print(json)
+                let attempt = Attempt(json: json["attempts"].arrayValue[0], stepName: stepName) 
+                success(attempt)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+            
+        })
+    }
 }
 
 
