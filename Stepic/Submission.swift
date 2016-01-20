@@ -21,7 +21,7 @@ class Submission: NSObject {
         attempt = json["attempt"].int
         reply = nil
         super.init()
-        reply = getReplyFromJSON(json["dataset"], stepName: stepName)
+        reply = getReplyFromJSON(json["reply"], stepName: stepName)
     }
     
     private func getReplyFromJSON(json: JSON, stepName: String) -> Reply? {
