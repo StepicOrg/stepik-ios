@@ -124,10 +124,6 @@ class WebStepViewController: UIViewController {
             quizController.view.alignToView(quizPlaceholderView)
             quizController.stepUrl = self.stepUrl
             quizController.delegate = self
-//            quizController.view.constrainWidthToView(quizPlaceholderView, predicate: "")
-//            quizController.view.alignToView(quizPlaceholderView)
-//            quizController.view.constrainTopSpaceToView(quizPlaceholderView, predicate: "0")
-//            quizController.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: quizPlaceholderView)
             self.view.layoutIfNeeded()
         }
     }
@@ -233,6 +229,8 @@ extension WebStepViewController : UIScrollViewDelegate {
 
 extension WebStepViewController : QuizControllerDelegate {
     func needsHeightUpdate(newHeight: CGFloat) {
-        quizPlaceholderViewHeight.constant = 56
+        quizPlaceholderViewHeight.constant = newHeight
+        view.layoutIfNeeded()
+        quizPlaceholderView.layoutIfNeeded()
     }
 }

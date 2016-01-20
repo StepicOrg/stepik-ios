@@ -12,7 +12,6 @@ class UnknownTypeQuizViewController: UIViewController {
 
     var stepUrl : String!
     var delegate : QuizControllerDelegate?
-    var placeholderView : UIView!
     
     @IBOutlet weak var solveOnTheWebsiteButton: UIButton!
     
@@ -28,6 +27,11 @@ class UnknownTypeQuizViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidLayoutSubviews() {
+        delegate?.needsHeightUpdate(56)
+        view.layoutIfNeeded()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
