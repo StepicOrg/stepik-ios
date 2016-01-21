@@ -23,6 +23,7 @@ class WebStepViewController: UIViewController {
 
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     
+    var pager : RGPageViewController!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -43,10 +44,14 @@ class WebStepViewController: UIViewController {
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
-        
+//        stepWebView.scrollView.directionalLockEnabled = true
+        stepWebView.scrollView.bounces = true
+        stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
+//        stepWebView.scrollView.panGestureRecognizer.delegate = self
         handleQuizType()
+//        stepWebView.scrollView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
 //        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-
+        stepWebView.scrollView.showsVerticalScrollIndicator = false
     }
 
     func testAPI() {
@@ -169,7 +174,8 @@ class WebStepViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    
+    var additionalOffsetXValue : CGFloat = 0.0
+
 }
 
 extension WebStepViewController : UIWebViewDelegate {
@@ -212,6 +218,11 @@ extension WebStepViewController : UIWebViewDelegate {
 //        return Int(webView.scrollView.contentSize.height)
     }
     
+    func getContentWidth(webView: UIWebView) -> CGFloat {
+        return webView.scrollView.contentSize.width
+//        return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.width;") ?? "0") ?? 0
+    }
+    
     func webViewDidFinishLoad(webView: UIWebView) {
         
         print("did finish load called, step id -> \(stepId) height -> \(getContentHeight(webView))")
@@ -227,12 +238,63 @@ extension WebStepViewController : UIWebViewDelegate {
 }
 
 extension WebStepViewController : UIScrollViewDelegate {
+    
+    var rightLimitOffsetX : CGFloat {
+        return max(0, getContentWidth(stepWebView) - UIScreen.mainScreen().bounds.width)
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        print("\n\nwill begin dragging\n\n")
+    }
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y != 0) {
+        if scrollView.contentOffset.y != 0 {
             var offset = scrollView.contentOffset;
             offset.y = 0
             scrollView.contentOffset = offset;
         }
+        
+        print("did scroll offset \(scrollView.contentOffset)")
+//        pager.pagerScrollView.contentOffset = CGPoint(x: 500, y: pager.pagerScrollView.contentOffset.y)
+
+        if scrollView.contentOffset.x >= rightLimitOffsetX  {
+            scrollView.scrollEnabled = false
+        }
+        if scrollView.contentOffset.x <= 0 {
+            scrollView.scrollEnabled = false
+        }
+
+        
+//        print("did scroll offset\(scrollView.contentOffset), content size width -> \(CGFloat(getContentWidth(stepWebView))), general width displayed -> \(scrollView.contentOffset.x + UIScreen.mainScreen().bounds.width)")
+//        if scrollView.contentOffset.x > rightLimitOffsetX && !scrollView.decelerating {
+//            let newPagerOffsetX = pager.pagerScrollView.contentOffset.x - additionalOffsetXValue + (scrollView.contentOffset.x - rightLimitOffsetX)
+//            additionalOffsetXValue = scrollView.contentOffset.x - rightLimitOffsetX
+//            pager.pagerScrollView.contentOffset = CGPoint(x: newPagerOffsetX, y: pager.pagerScrollView.contentOffset.y)
+////            scrollView.contentOffset = CGPoint(x: rightLimitOffsetX, y: scrollView.contentOffset.y)
+//            return
+//        }
+//        
+//        if scrollView.contentOffset.x < 0 && !scrollView.decelerating {
+//            let newPagerOffsetX = pager.pagerScrollView.contentOffset.x - additionalOffsetXValue + scrollView.contentOffset.x
+//            additionalOffsetXValue = scrollView.contentOffset.x
+//            pager.pagerScrollView.contentOffset = CGPoint(x: newPagerOffsetX, y: pager.pagerScrollView.contentOffset.y)
+////            scrollView.contentOffset = CGPoint(x: 0, y: scrollView.contentOffset.y)
+//            return
+//        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("did end dragging")
+        scrollView.scrollEnabled = true
+    }
+    
+    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+//        scrollView.setContentOffset(scrollView.contentOffset, animated: true)
+        print("will begin decelerating offset\(scrollView.contentOffset)")
+        
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        print("did end decelerating offset\(scrollView.contentOffset)")
     }
 }
 
@@ -241,5 +303,14 @@ extension WebStepViewController : QuizControllerDelegate {
         quizPlaceholderViewHeight.constant = newHeight
         view.layoutIfNeeded()
         quizPlaceholderView.layoutIfNeeded()
+    }
+}
+
+extension WebStepViewController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if (gestureRecognizer == stepWebView.scrollView.panGestureRecognizer && otherGestureRecognizer == pager.pagerScrollView.panGestureRecognizer) || (otherGestureRecognizer == stepWebView.scrollView.panGestureRecognizer && gestureRecognizer == pager.pagerScrollView.panGestureRecognizer) {
+            return true
+        }
+        return false
     }
 }

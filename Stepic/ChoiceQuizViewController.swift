@@ -63,6 +63,8 @@ class ChoiceQuizViewController: UIViewController {
         tableView.dataSource = self
         
         refreshAttempt(step.id)
+        tableView.tableFooterView = UIView()
+        tableView.scrollEnabled = false
         // Do any additional setup after loading the view.
     }
 
@@ -126,6 +128,15 @@ class ChoiceQuizViewController: UIViewController {
 
 extension ChoiceQuizViewController : UITableViewDelegate {
 
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let a = attempt {
+            if let dataset = a.dataset as? ChoiceDataset {
+                return max(27, UILabel.heightForLabelWithText(dataset.options[indexPath.row], lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 52)) + 17
+//                dataset.options[indexPath.row]
+            }
+        }
+        return 0
+    }
 }
 
 extension ChoiceQuizViewController : UITableViewDataSource {

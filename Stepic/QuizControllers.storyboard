@@ -59,7 +59,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCH-Qi-Y2d">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCH-Qi-Y2d">
                                                     <rect key="frame" x="44" y="8" width="548" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,8 +105,8 @@
                                             <constraint firstAttribute="height" constant="30" id="Xrv-JQ-X6b"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6m-ao-eBz">
-                                        <rect key="frame" x="46" y="8" width="546" height="34"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6m-ao-eBz">
+                                        <rect key="frame" x="46" y="-6" width="546" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -114,13 +114,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="L6m-ao-eBz" firstAttribute="top" secondItem="bF4-Yd-jTH" secondAttribute="top" constant="6" id="6kU-8R-EoO"/>
+                                    <constraint firstItem="L6m-ao-eBz" firstAttribute="top" secondItem="bF4-Yd-jTH" secondAttribute="top" priority="750" constant="6" id="6kU-8R-EoO"/>
                                     <constraint firstItem="1FH-k7-zU7" firstAttribute="leading" secondItem="bF4-Yd-jTH" secondAttribute="leading" constant="8" id="VC0-Qo-7xD"/>
                                     <constraint firstItem="1FH-k7-zU7" firstAttribute="centerY" secondItem="bF4-Yd-jTH" secondAttribute="centerY" id="Ypb-od-FdW"/>
                                     <constraint firstAttribute="trailing" secondItem="L6m-ao-eBz" secondAttribute="trailing" constant="8" id="d3W-Eg-BV9"/>
                                     <constraint firstItem="L6m-ao-eBz" firstAttribute="leading" secondItem="1FH-k7-zU7" secondAttribute="trailing" constant="8" id="h2v-kU-cdp"/>
                                     <constraint firstAttribute="height" id="lpz-ez-MpE"/>
-                                    <constraint firstAttribute="bottom" secondItem="L6m-ao-eBz" secondAttribute="bottom" constant="6" id="q5J-gW-JJH"/>
+                                    <constraint firstAttribute="bottom" secondItem="L6m-ao-eBz" secondAttribute="bottom" priority="750" constant="6" id="q5J-gW-JJH"/>
                                 </constraints>
                             </view>
                         </subviews>
