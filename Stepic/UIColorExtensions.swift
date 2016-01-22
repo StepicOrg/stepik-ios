@@ -33,4 +33,12 @@ extension UIColor {
     class func backgroundColor() -> UIColor {
         return UIColor(white: 0.9, alpha: 1)
     }
+    
+    class func correctQuizBackgroundColor() -> UIColor {
+        return UIColor(hex: 0xE9F9E9)
+    }
+    
+    class func wrongQuizBackgroundColor() -> UIColor {
+        return UIColor(hex: 0xF5EBF2)
+    }
 }

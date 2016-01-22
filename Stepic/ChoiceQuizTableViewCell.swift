@@ -18,6 +18,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         super.awakeFromNib()
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
+        contentView.backgroundColor = UIColor.clearColor()
         // Initialization code
     }
 

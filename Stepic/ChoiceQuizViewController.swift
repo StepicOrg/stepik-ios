@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BEMCheckBox
 
 class ChoiceQuizViewController: UIViewController {
 
@@ -18,10 +19,17 @@ class ChoiceQuizViewController: UIViewController {
     @IBOutlet weak var statusImageView: UIImageView!
     
     var delegate : QuizControllerDelegate?
+    var choices : [Bool]! = []
+    
     
     var attempt : Attempt? {
         didSet {
+            if attempt == nil {
+                print("ATTEMPT SHOULD NEVER BE SET TO NIL")
+                return
+            }
             UIThread.performUI {
+                self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
                 print("did set attempt id \(self.attempt?.id)")
                 self.tableView.reloadData()
                 if self.submission != nil {
@@ -34,21 +42,64 @@ class ChoiceQuizViewController: UIViewController {
         }
     }
     
+    var buttonStateSubmit : Bool = true {
+        didSet {
+            if buttonStateSubmit {
+                self.sendButton.setStepicGreenStyle()
+            } else {
+                self.sendButton.setStepicWhiteStyle()
+            }
+        }
+    }
+    
     var submission : Submission? {
         didSet {
             UIThread.performUI {
-                print("did set submission id \(self.submission?.id), reply count -> \((self.submission?.reply as! ChoiceReply).choices.count)")
+//                print("did set submission id \(self.submission?.id), reply count -> \((self.submission?.reply as! ChoiceReply).choices.count)")
                 self.tableView.reloadData()
+                
                 if self.submission == nil {
+                    print("did set submission to nil")
+                    self.statusImageView.image = nil
+                    self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+                    self.tableView.reloadData()
+                    self.buttonStateSubmit = true
+                    self.view.backgroundColor = UIColor.whiteColor()
+                    //TODO: Localize
+                    self.sendButton.setTitle("Submit", forState: .Normal)
                     self.statusViewHeight.constant = 0
-                    self.sendButton.enabled = true
                     self.delegate?.needsHeightUpdate(72 + self.tableView.contentSize.height)
+                    
                 } else {
+                    
+                    print("did set submission id \(self.submission?.id)")
+
+                    self.buttonStateSubmit = false
+                    switch self.submission!.status! {
+                    case "correct":
+                        self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
+                        self.statusImageView.image = Images.correctQuizImage
+                        break
+                    case "wrong":
+                        self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
+                        self.statusImageView.image = Images.wrongQuizImage
+                        break
+                    case "evaluation":
+                        //TODO: Show some activity indicators here
+                        break
+                    default: 
+                        break
+                    }
+                    
+                    //TODO: Localize
+                    self.sendButton.setTitle("Try Again", forState: .Normal)
+                    
                     self.statusLabel.text = self.submission?.status
                     self.statusViewHeight.constant = 48
-                    self.sendButton.enabled = false
                     self.delegate?.needsHeightUpdate(120 + self.tableView.contentSize.height)
+                    
                 }
+                
                 self.view.layoutIfNeeded()
             }
         }
@@ -73,13 +124,7 @@ class ChoiceQuizViewController: UIViewController {
             attempts, meta in
             if attempts.count == 0 || attempts[0].status != "active" {
                 //Create attempt
-                ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
-                    attempt in
-                    //Display attempt using dataset
-                    }, error: {
-                        errorText in   
-                        //TODO: Handle attempt creation error
-                })
+                self.createNewAttempt()
             } else {
                 //Get submission for attempt
                 let currentAttempt = attempts[0]
@@ -87,6 +132,7 @@ class ChoiceQuizViewController: UIViewController {
                 ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: self.step.block.name, attemptId: currentAttempt.id!, success: {
                     submissions, meta in
                     if submissions.count == 0 {
+                        self.submission = nil
                         //There are no current submissions for attempt
                     } else {
                         //Displaying the last submission
@@ -108,10 +154,72 @@ class ChoiceQuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func createNewAttempt(completion completion: (Void->Void)? = nil) {
+        ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
+            attempt in
+            self.attempt = attempt
+            self.submission = nil
+            completion?()
+            //Display attempt using dataset
+            }, error: {
+                errorText in   
+                //TODO: Handle attempt creation error
+        })
+    }
     
+    
+    //Measured in seconds
+    private let checkTimeStandardInterval = 0.5
+    
+    private func checkSubmission(id: Int, time: Int, completion: (Void->Void)? = nil) {
+        delay(checkTimeStandardInterval * Double(time), closure: {
+            ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: self.step.block.name, submissionId: id, success: {
+                submission in
+                print("did get submission id \(id), with status \(submission.status)")
+                if submission.status == "evaluation" {
+                    self.checkSubmission(id, time: time + 1, completion: completion)
+                } else {
+                    self.submission = submission
+                    completion?()
+                }
+            }, error: { 
+                errorText in
+                //TODO: handle submission check error
+            })
+        })
+        
+//        ApiDataDownloader.sharedDownloader.
+    }
+    
+    private func submitChoices(completion completion: (Void->Void)? = nil) {
+        print("sending choices \(self.choices)")
+        let r = ChoiceReply(choices: self.choices)
+        
+        ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: self.step.block.name, attemptId: attempt!.id!, reply: r, success: {
+            submission in
+            self.submission = submission
+            self.checkSubmission(submission.id!, time: 0, completion: completion)
+            }, error: {
+                errorText in
+                //TODO: Handle choices submission error
+        })
+    }
     
     @IBAction func sendButtonPressed(sender: UIButton) {
-        
+        sendButton.enabled = false
+        if buttonStateSubmit {
+            submitChoices(completion: {
+                UIThread.performUI{
+                    self.sendButton.enabled = true
+                }
+            })
+        } else  {
+            createNewAttempt(completion: {
+                UIThread.performUI{
+                    self.sendButton.enabled = true
+                }
+            })
+        }
     }
     
     /*
@@ -136,6 +244,18 @@ extension ChoiceQuizViewController : UITableViewDelegate {
             }
         }
         return 0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChoiceQuizTableViewCell
+        choices[indexPath.row] = !cell.checkBox.on
+        cell.checkBox.setOn(!cell.checkBox.on, animated: true)
+    }
+}
+
+extension ChoiceQuizViewController : BEMCheckBoxDelegate {
+    func didTapCheckBox(checkBox: BEMCheckBox) {
+        choices[checkBox.tag] = checkBox.on
     }
 }
 
@@ -169,11 +289,15 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 } else {
                     cell.checkBox.boxType = .Circle
                 }
+                cell.checkBox.tag = indexPath.row
+                cell.checkBox.delegate = self
                 
                 if let s = submission {
                     if let reply = s.reply as? ChoiceReply {
                         cell.checkBox.on = reply.choices[indexPath.row]
                     }
+                } else {
+                    cell.checkBox.on = false
                 }
             }
         }

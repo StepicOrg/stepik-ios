@@ -466,6 +466,35 @@ class ApiDataDownloader: NSObject {
             
         })
     }    
+    
+    func getSubmissionFor(stepName stepName: String, submissionId: Int, success: Submission->Void, error errorHandler: String->Void){
+        
+        let headers : [String : String] = [:]
+        var params : [String : NSObject] = [:]
+        
+        params["access_token"] = StepicAPI.shared.token?.accessToken
+        
+        Alamofire.request(.GET, "https://stepic.org/api/submissions/\(submissionId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
+            _, response, json, error in
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+            
+            if response?.statusCode == 200 {
+                let submission = Submission(json: json["submissions"][0], stepName: stepName)
+                success(submission)
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                return
+            }
+        })
+
+        
+    }
 }
 
 enum RefreshMode {

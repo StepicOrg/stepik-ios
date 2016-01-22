@@ -20,7 +20,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yxo-Fg-hGI">
                                 <rect key="frame" x="0.0" y="8" width="600" height="228"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChoiceQuizTableViewCell" id="X3i-96-H5F" customClass="ChoiceQuizTableViewCell" customModule="Stepic" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
@@ -66,6 +66,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fCH-Qi-Y2d" secondAttribute="trailing" id="36E-WA-RiI"/>
                                                 <constraint firstItem="ceE-AX-HML" firstAttribute="centerY" secondItem="1iS-lV-DWh" secondAttribute="centerY" id="B5f-cZ-PNV"/>
@@ -75,6 +76,7 @@
                                                 <constraint firstAttribute="topMargin" secondItem="fCH-Qi-Y2d" secondAttribute="top" id="vH9-EN-M9s"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="checkBox" destination="ceE-AX-HML" id="g3E-0H-7g2"/>
                                             <outlet property="choiceLabel" destination="fCH-Qi-Y2d" id="xnX-jP-0CF"/>
@@ -112,7 +114,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="L6m-ao-eBz" firstAttribute="top" secondItem="bF4-Yd-jTH" secondAttribute="top" priority="750" constant="6" id="6kU-8R-EoO"/>
                                     <constraint firstItem="1FH-k7-zU7" firstAttribute="leading" secondItem="bF4-Yd-jTH" secondAttribute="leading" constant="8" id="VC0-Qo-7xD"/>

@@ -32,6 +32,18 @@ extension UIButton {
         self.titleLabel?.textColor = UIColor.stepicGreenColor()
     }
     
+    func setStepicGreenStyle() {
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.stepicGreenColor())
+        self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.backgroundColor = UIColor.stepicGreenColor()
+    }
+    
+    func setStepicWhiteStyle() {
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.stepicGreenColor())
+        self.setTitleColor(UIColor.stepicGreenColor(), forState: .Normal)
+        self.backgroundColor = UIColor.whiteColor()
+    }
+    
     var isEnabledToJoin : Bool {
         return self.attributedTitleForState(.Normal)?.string != Constants.alreadyJoinedCourseButtonText
     }
