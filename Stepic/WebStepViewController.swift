@@ -23,7 +23,7 @@ class WebStepViewController: UIViewController {
 
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     
-    var pager : RGPageViewController!
+    var parent : StepsViewController!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -37,6 +37,8 @@ class WebStepViewController: UIViewController {
     var stepUrl : String {
         return "https://stepic.org/lesson/\(lesson.slug)/step/\(stepId)"
     }
+    
+    private var panG : UIPanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,91 @@ class WebStepViewController: UIViewController {
 //        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         stepWebView.scrollView.showsVerticalScrollIndicator = false
     }
+    
+    private var panStartedInside : Bool?
+    private var memOffsetX : CGFloat?
+    private var offsetForPager : CGFloat = 0
+    private var didBeginPagerDragging : Bool = false
+    
+    var rightLimitOffsetX : CGFloat {
+        return max(0, getContentWidth(stepWebView) - UIScreen.mainScreen().bounds.width)
+    }
+    
+    func refreshRecognizer() {
+        panStartedInside = nil
+        memOffsetX = nil
+        offsetForPager = 0
+        stepWebView.scrollView.scrollEnabled = true
+        didBeginPagerDragging = false
+    }
 
+    func didPan(sender: UIPanGestureRecognizer) {
+        if sender.state == .Began {
+            refreshRecognizer()
+            let locationInView = sender.locationInView(stepWebView)
+            if CGRectContainsPoint(stepWebView.bounds, locationInView)  {
+                panStartedInside = true
+                memOffsetX = stepWebView.scrollView.contentOffset.x
+                offsetForPager = 0
+                didBeginPagerDragging = false
+            }
+            print("began")
+        }
+        
+        if panStartedInside == true {
+            if let memOffset = memOffsetX {
+                
+                let panInScrollView = sender.translationInView(stepWebView.scrollView)
+                
+                let panOffsetInScrollView = memOffset - panInScrollView.x
+                
+                print("pan in scrollview value -> \(panInScrollView), panOffsetInScrollView -> \(panOffsetInScrollView) rightLimitOffset -> \(rightLimitOffsetX), scrollView contentOffset -> \(stepWebView.scrollView.contentOffset)")
+
+                if panOffsetInScrollView < 0 || panOffsetInScrollView > rightLimitOffsetX {
+                    
+//                    if !didBeginPagerDragging {
+//                        pager.pagerScrollView.delegate?.scrollViewWillBeginDragging?(pager.pagerScrollView)
+//                        didBeginPagerDragging = true
+//                    }
+                    
+                    let velocity = sender.velocityInView(stepWebView.scrollView).x
+                    stepWebView.scrollView.scrollEnabled = false
+                    print("velocity -> \(sender.velocityInView(stepWebView.scrollView))")
+                    if abs(sender.velocityInView(stepWebView.scrollView).x) > 1000 {
+                        
+                        let pageIndex = (stepId - 1) + (velocity > 0 ? -1 : 1)
+                        if pageIndex < 0 || pageIndex > parent.numberOfPagesForViewController(parent) {
+                            
+                        } else {
+                        
+                            parent.selectTabAtIndex((stepId - 1) + (velocity > 0 ? -1 : 1), updatePage: true)
+                            self.view.removeGestureRecognizer(panG)
+                            //refreshRecognizer()
+                        }
+                    }
+//                    let changeValue = panOffsetInScrollView > rightLimitOffsetX ? panOffsetInScrollView - rightLimitOffsetX : panOffsetInScrollView
+//                    pager.pagerScrollView.contentOffset = CGPoint(x: pager.pagerScrollView.contentOffset.x - offsetForPager + changeValue, y: pager.pagerScrollView.contentOffset.y)
+//                    pager.pagerScrollView.delegate?.scrollViewDidScroll?(pager.pagerScrollView)
+//                    offsetForPager = changeValue
+                }
+            }
+        }
+
+        
+        if sender.state == .Ended {
+            refreshRecognizer()
+//            pager.pagerScrollView.delegate?.scrollViewDidEndDragging?(pager.pagerScrollView, willDecelerate: true)
+            print("ended")
+        }
+        
+        //        let panInPaginationView = sender.translationInView(pager.pagerScrollView)
+//        print("pan translation to webview -> \(panInScrollView), locationInView -> \(locationInView)")
+        
+
+        
+
+    }
+    
     func testAPI() {
         ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: step.block.name, stepId: step.id, success: {
             attempts, meta in
@@ -103,6 +189,11 @@ class WebStepViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+                
+//        panG = UIPanGestureRecognizer(target: self, action: "didPan:")
+//        panG.delegate = self
+//        self.view.addGestureRecognizer(panG)
+        
         nItem.rightBarButtonItem = nil
         
         if let htmlText = step.block.text {
@@ -113,7 +204,7 @@ class WebStepViewController: UIViewController {
             stepWebView.loadHTMLString(html, baseURL: nil)
             //stepWebView.scalesPageToFit = true
         }
-
+                
         SVProgressHUD.dismiss()
     }
     
@@ -239,12 +330,8 @@ extension WebStepViewController : UIWebViewDelegate {
 
 extension WebStepViewController : UIScrollViewDelegate {
     
-    var rightLimitOffsetX : CGFloat {
-        return max(0, getContentWidth(stepWebView) - UIScreen.mainScreen().bounds.width)
-    }
-    
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        print("\n\nwill begin dragging\n\n")
+//        print("\n\nwill begin dragging\n\n")
     }
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y != 0 {
@@ -253,15 +340,10 @@ extension WebStepViewController : UIScrollViewDelegate {
             scrollView.contentOffset = offset;
         }
         
-        print("did scroll offset \(scrollView.contentOffset)")
+//        print("did scroll offset \(scrollView.contentOffset)")
 //        pager.pagerScrollView.contentOffset = CGPoint(x: 500, y: pager.pagerScrollView.contentOffset.y)
 
-        if scrollView.contentOffset.x >= rightLimitOffsetX  {
-            scrollView.scrollEnabled = false
-        }
-        if scrollView.contentOffset.x <= 0 {
-            scrollView.scrollEnabled = false
-        }
+
 
         
 //        print("did scroll offset\(scrollView.contentOffset), content size width -> \(CGFloat(getContentWidth(stepWebView))), general width displayed -> \(scrollView.contentOffset.x + UIScreen.mainScreen().bounds.width)")
@@ -283,18 +365,18 @@ extension WebStepViewController : UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("did end dragging")
-        scrollView.scrollEnabled = true
+//        print("did end dragging")
+//        scrollView.scrollEnabled = true
     }
     
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
 //        scrollView.setContentOffset(scrollView.contentOffset, animated: true)
-        print("will begin decelerating offset\(scrollView.contentOffset)")
+//        print("will begin decelerating offset\(scrollView.contentOffset)")
         
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print("did end decelerating offset\(scrollView.contentOffset)")
+//        print("did end decelerating offset\(scrollView.contentOffset)")
     }
 }
 
@@ -308,9 +390,17 @@ extension WebStepViewController : QuizControllerDelegate {
 
 extension WebStepViewController : UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if (gestureRecognizer == stepWebView.scrollView.panGestureRecognizer && otherGestureRecognizer == pager.pagerScrollView.panGestureRecognizer) || (otherGestureRecognizer == stepWebView.scrollView.panGestureRecognizer && gestureRecognizer == pager.pagerScrollView.panGestureRecognizer) {
+        
+        if (otherGestureRecognizer == stepWebView.scrollView.panGestureRecognizer) {
+            print("did ask for simultaneous recognition with webview")
             return true
         }
+        
+        if (otherGestureRecognizer == parent.pagerScrollView.panGestureRecognizer) {
+            print("did ask for simultaneous recognition with pagination")
+            return true
+        }
+        
         return false
     }
 }
