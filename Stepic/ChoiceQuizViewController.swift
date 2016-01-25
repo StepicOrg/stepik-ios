@@ -21,6 +21,10 @@ class ChoiceQuizViewController: UIViewController {
     var delegate : QuizControllerDelegate?
     var choices : [Bool]! = []
     
+    let submitTitle = "Submit"
+    let againTitle = "Try again"
+    let correctTitle = "Correct"
+    let wrongTitle = "Wrong"
     
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
@@ -98,6 +102,7 @@ class ChoiceQuizViewController: UIViewController {
                     self.tableView.reloadData()
                     self.buttonStateSubmit = true
                     self.view.backgroundColor = UIColor.whiteColor()
+                    
                     //TODO: Localize
                     self.sendButton.setTitle("Submit", forState: .Normal)
                     self.statusViewHeight.constant = 0
@@ -293,10 +298,27 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         return 0
     }
     
+    func setAllCellsOff() {
+        let indexPaths = (0..<self.tableView.numberOfRowsInSection(0)).map({return NSIndexPath(forRow: $0, inSection: 0)})
+        for indexPath in indexPaths {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChoiceQuizTableViewCell
+            cell.checkBox.on = false
+        }
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChoiceQuizTableViewCell
-        choices[indexPath.row] = !cell.checkBox.on
-        cell.checkBox.setOn(!cell.checkBox.on, animated: true)
+        if let dataset = attempt?.dataset as? ChoiceDataset {
+            if dataset.isMultipleChoice {
+                choices[indexPath.row] = !cell.checkBox.on
+                cell.checkBox.setOn(!cell.checkBox.on, animated: true)
+            } else {
+                setAllCellsOff()
+                choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+                choices[indexPath.row] = !cell.checkBox.on
+                cell.checkBox.setOn(!cell.checkBox.on, animated: true)
+            }
+        }
     }
 }
 
@@ -338,7 +360,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 }
                 cell.checkBox.tag = indexPath.row
                 cell.checkBox.delegate = self
-                
+                cell.checkBox.userInteractionEnabled = false
                 if let s = submission {
                     if let reply = s.reply as? ChoiceReply {
                         cell.checkBox.on = reply.choices[indexPath.row]
