@@ -255,13 +255,16 @@ class WebStepViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        print("entered web view did layout subviews")
         super.viewDidLayoutSubviews()
 //        print("did layout subviews")
     }
     
     
     func resetWebViewHeight(height: Float) {
+        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
+        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
