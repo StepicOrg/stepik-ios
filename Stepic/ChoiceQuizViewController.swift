@@ -22,7 +22,7 @@ class ChoiceQuizViewController: UIViewController {
     var choices : [Bool]! = []
     
     let submitTitle = "Submit"
-    let againTitle = "Try again"
+    let tryAgainTitle = "Try again"
     let correctTitle = "Correct"
     let wrongTitle = "Wrong"
     
@@ -104,7 +104,7 @@ class ChoiceQuizViewController: UIViewController {
                     self.view.backgroundColor = UIColor.whiteColor()
                     
                     //TODO: Localize
-                    self.sendButton.setTitle("Submit", forState: .Normal)
+                    self.sendButton.setTitle(self.submitTitle, forState: .Normal)
                     self.statusViewHeight.constant = 0
                     self.delegate?.needsHeightUpdate(72 + self.tableView.contentSize.height)
                     
@@ -118,24 +118,26 @@ class ChoiceQuizViewController: UIViewController {
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
+                        self.statusLabel.text = self.correctTitle
                         break
                     case "wrong":
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
+                        self.statusLabel.text = self.wrongTitle
                         break
                     case "evaluation":
                         self.doesPresentActivityIndicatorView = true
-                        //TODO: Show some activity indicators here
+                        self.statusLabel.text = ""
                         break
                     default: 
                         break
                     }
                     
                     //TODO: Localize
-                    self.sendButton.setTitle("Try Again", forState: .Normal)
+                    self.sendButton.setTitle(self.tryAgainTitle, forState: .Normal)
                     
-                    self.statusLabel.text = self.submission?.status
+                    
                     self.statusViewHeight.constant = 48
                     self.delegate?.needsHeightUpdate(120 + self.tableView.contentSize.height)
                     
@@ -209,7 +211,6 @@ class ChoiceQuizViewController: UIViewController {
             self.attempt = attempt
             self.submission = nil
             completion?()
-            //Display attempt using dataset
             }, error: {
                 errorText in   
                 //TODO: Handle attempt creation error
