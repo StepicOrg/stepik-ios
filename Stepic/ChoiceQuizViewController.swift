@@ -22,6 +22,38 @@ class ChoiceQuizViewController: UIViewController {
     var choices : [Bool]! = []
     
     
+    //Activity view here
+    lazy var activityView : UIView = self.initActivityView()
+    
+    func initActivityView() -> UIView {
+        let v = UIView()
+        let ai = UIActivityIndicatorView()
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.constrainWidth("50", height: "50")
+        ai.color = UIColor.stepicGreenColor()
+        v.backgroundColor = UIColor.whiteColor()
+        v.addSubview(ai)
+        ai.alignCenterWithView(v)
+        ai.startAnimating()
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.alignToView(self.view)
+        v.hidden = false
+        return v
+    }
+    
+    var doesPresentActivityIndicatorView : Bool = false {
+        didSet {
+            if doesPresentActivityIndicatorView {
+                print("present activity indicator view")
+                UIThread.performUI{self.activityView.hidden = false}
+            } else {
+                print("dismiss activity indicator view")
+                UIThread.performUI{self.activityView.hidden = true}
+            }
+        }
+    }
+    
+
     var attempt : Attempt? {
         didSet {
             if attempt == nil {
@@ -59,6 +91,7 @@ class ChoiceQuizViewController: UIViewController {
                 self.tableView.reloadData()
                 
                 if self.submission == nil {
+                    self.tableView.userInteractionEnabled = true
                     print("did set submission to nil")
                     self.statusImageView.image = nil
                     self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
@@ -73,18 +106,21 @@ class ChoiceQuizViewController: UIViewController {
                 } else {
                     
                     print("did set submission id \(self.submission?.id)")
-
+                    self.tableView.userInteractionEnabled = false
                     self.buttonStateSubmit = false
                     switch self.submission!.status! {
                     case "correct":
+                        self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
                         break
                     case "wrong":
+                        self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
                         break
                     case "evaluation":
+                        self.doesPresentActivityIndicatorView = true
                         //TODO: Show some activity indicators here
                         break
                     default: 
@@ -120,11 +156,16 @@ class ChoiceQuizViewController: UIViewController {
     }
 
     func refreshAttempt(stepId: Int) {
+        self.doesPresentActivityIndicatorView = true
         ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: "choice", stepId: stepId, success: { 
             attempts, meta in
             if attempts.count == 0 || attempts[0].status != "active" {
                 //Create attempt
-                self.createNewAttempt()
+                self.createNewAttempt(completion: {
+                    UIThread.performUI {
+                        self.doesPresentActivityIndicatorView = false
+                    }
+                })
             } else {
                 //Get submission for attempt
                 let currentAttempt = attempts[0]
@@ -137,6 +178,9 @@ class ChoiceQuizViewController: UIViewController {
                     } else {
                         //Displaying the last submission
                         self.submission = submissions[0]
+                    }
+                    UIThread.performUI {
+                        self.doesPresentActivityIndicatorView = false
                     }
                 }, error: {
                     errorText in
@@ -207,16 +251,19 @@ class ChoiceQuizViewController: UIViewController {
     
     @IBAction func sendButtonPressed(sender: UIButton) {
         sendButton.enabled = false
+        doesPresentActivityIndicatorView = true
         if buttonStateSubmit {
             submitChoices(completion: {
                 UIThread.performUI{
                     self.sendButton.enabled = true
+                    self.doesPresentActivityIndicatorView = false
                 }
             })
         } else  {
             createNewAttempt(completion: {
                 UIThread.performUI{
                     self.sendButton.enabled = true
+                    self.doesPresentActivityIndicatorView = false
                 }
             })
         }
