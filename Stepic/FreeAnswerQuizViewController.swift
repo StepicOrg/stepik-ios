@@ -40,7 +40,9 @@ class FreeAnswerQuizViewController: QuizViewController {
         if submission?.status == "correct" {
             if let r = submission?.reply as? FreeAnswerReply {
                 let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
-                textView.attributedText = attributed
+                let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
+                mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: NSMakeRange(0, mutableAttributed.string.characters.count))
+                textView.attributedText = mutableAttributed
             }
             
             textView.editable = false
