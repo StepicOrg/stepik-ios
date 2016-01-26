@@ -55,6 +55,14 @@ class WebStepViewController: UIViewController {
 //        solveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         stepWebView.scrollView.showsVerticalScrollIndicator = false
     }
+//        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+//        tapG.delegate = self
+//        self.view.addGestureRecognizer(tapG)
+//    }
+//    
+//    func tap() {
+//        self.view.endEditing(true)
+//    }
     
     private var panStartedInside : Bool?
     private var memOffsetX : CGFloat?
@@ -278,6 +286,11 @@ class WebStepViewController: UIViewController {
     
     
     func resetWebViewHeight(height: Float) {
+        if height == 0.0 {
+            print("Reloading web view after height set to 0.0")
+            stepWebView.reload()
+            return
+        }
         print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
         self.view.setNeedsLayout()
@@ -345,6 +358,10 @@ extension WebStepViewController : UIWebViewDelegate {
 //        self.view.layoutIfNeeded()
 ////        webView.frame.size = CGSize(width: Int(webView.frame.width), height: Int(stringHeight) ?? 0)
     }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        stepWebView.reload()
+    }
 }
 
 extension WebStepViewController : UIScrollViewDelegate {
@@ -409,7 +426,6 @@ extension WebStepViewController : QuizControllerDelegate {
 
 extension WebStepViewController : UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        
         if (otherGestureRecognizer == stepWebView.scrollView.panGestureRecognizer) {
             print("did ask for simultaneous recognition with webview")
             return true
@@ -419,7 +435,8 @@ extension WebStepViewController : UIGestureRecognizerDelegate {
             print("did ask for simultaneous recognition with pagination")
             return true
         }
-        
+//        return true
+
         return false
     }
 }

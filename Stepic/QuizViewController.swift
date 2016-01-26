@@ -146,9 +146,7 @@ class QuizViewController: UIViewController {
                     } else {
                         self.updateQuizAfterSubmissionUpdate()
                     }
-                    
                 } else {
-                    
                     print("did set submission id \(self.submission?.id)")
                     self.buttonStateSubmit = false
                     switch self.submission!.status! {
@@ -181,7 +179,6 @@ class QuizViewController: UIViewController {
                         break
                     }
                     
-                    
                     self.updateQuizAfterSubmissionUpdate()                    
                 }
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight)
@@ -191,7 +188,6 @@ class QuizViewController: UIViewController {
     }
     
     func handleErrorWhileGettingSubmission() {
-        
     }
     
     var step : Step!
@@ -322,7 +318,10 @@ class QuizViewController: UIViewController {
                         self.doesPresentActivityIndicatorView = false
                     }
                 })
-            } 
+            } else {
+                doesPresentActivityIndicatorView = false
+                sendButton.enabled = true
+            }
         } else  {
             createNewAttempt(completion: {
                 UIThread.performUI{

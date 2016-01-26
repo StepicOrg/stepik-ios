@@ -18,9 +18,15 @@ class StringQuizViewController: QuizViewController {
         self.containerView.addSubview(textField)
         textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
         textField.borderStyle = UITextBorderStyle.RoundedRect
-        // Do any additional setup after loading the view.
-    }
 
+        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+        self.view.addGestureRecognizer(tapG)
+    }
+    
+    func tap() {
+        self.view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
