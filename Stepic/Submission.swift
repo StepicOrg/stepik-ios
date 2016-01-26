@@ -30,6 +30,7 @@ class Submission: NSObject {
         case "string" : return TextReply(json: json)
         case "number": return NumberReply(json: json)
         case "free-answer": return FreeAnswerReply(json: json)
+        case "math": return MathReply(json: json)
         default: return nil
         }
     }

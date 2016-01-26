@@ -1,5 +1,5 @@
 //
-//  FreeAnswerQuizViewController.swift
+//  MathQuizViewController.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 26.01.16.
@@ -8,18 +8,24 @@
 
 import UIKit
 
-class FreeAnswerQuizViewController: QuizViewController {
+class MathQuizViewController: QuizViewController {
 
+    var textField = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
-        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1, borderColor: UIColor.grayColor())
-        // Do any additional setup after loading the view.
+        
+        self.containerView.addSubview(textField)
+        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
+        textField.borderStyle = UITextBorderStyle.RoundedRect
+        
+        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+        self.view.addGestureRecognizer(tapG)
     }
-
-    var textView = UITextView()
+    
+    func tap() {
+        self.view.endEditing(true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,21 +38,18 @@ class FreeAnswerQuizViewController: QuizViewController {
     
     //Override this in subclass
     override func updateQuizAfterAttemptUpdate() {
-        textView.text = ""
+        textField.text = ""
     }
     
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
-        if let r = submission?.reply as? FreeAnswerReply {
-            let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
-            let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: NSMakeRange(0, mutableAttributed.string.characters.count))
-            textView.attributedText = mutableAttributed
+        if let r = submission?.reply as? MathReply {
+            textField.text = r.formula
         }
-        if submission?.status == "correct" {
-            textView.editable = false
+        if submission?.status == "correct" {            
+            textField.enabled = false
         } else {
-            textView.editable = true
+            textField.enabled = true
         }
         //        if reload {
         //            textField.text = ""
@@ -55,14 +58,15 @@ class FreeAnswerQuizViewController: QuizViewController {
     
     //Override this in subclass
     override var expectedQuizHeight : CGFloat {
-        return 80
+        return 38
     }
     
     //Override this in the subclass
     override func getReply() -> Reply {
-        return FreeAnswerReply(text: textView.text ?? "")
+        return MathReply(formula: textField.text ?? "")
     }
     
+
     /*
     // MARK: - Navigation
 

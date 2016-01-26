@@ -45,11 +45,10 @@ class NumberQuizViewController: QuizViewController {
     
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+        if let r = submission?.reply as? NumberReply {
+            textField.text = r.number
+        }
         if submission?.status == "correct" {
-            if let r = submission?.reply as? NumberReply {
-                textField.text = r.number
-            }
-            
             textField.enabled = false
         } else {
             textField.enabled = true

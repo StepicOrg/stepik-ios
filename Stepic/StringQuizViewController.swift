@@ -43,11 +43,10 @@ class StringQuizViewController: QuizViewController {
     
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+        if let r = submission?.reply as? TextReply {
+            textField.text = r.text
+        }
         if submission?.status == "correct" {
-            if let r = submission?.reply as? TextReply {
-                textField.text = r.text
-            }
-            
             textField.enabled = false
         } else {
             textField.enabled = true
