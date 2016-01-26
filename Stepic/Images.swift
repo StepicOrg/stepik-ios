@@ -28,4 +28,6 @@ struct Images {
     
     static let correctQuizImage = UIImage(named: "ic_correct")!
     static let wrongQuizImage = UIImage(named: "ic_error")!
+    
+    static let warningImage = UIImage(named: "nocourses250_small")!
 }

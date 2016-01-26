@@ -35,9 +35,11 @@ class ChoiceQuizViewController: QuizViewController {
         self.view.layoutIfNeeded()
     }
     
-    override func updateQuizAfterSubmissionUpdate() {
+    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if self.submission == nil {
-            self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+            if reload {
+                self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false) 
+            }
             self.tableView.userInteractionEnabled = true
         } else {
             self.tableView.userInteractionEnabled = false

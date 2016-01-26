@@ -23,8 +23,19 @@ class QuizViewController: UIViewController {
     let correctTitle = "Correct"
     let wrongTitle = "Wrong"
     
+    let warningViewTitle = "Could not connect to the internet"
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
+    
+    lazy var warningView : UIView = self.initWarningView()
+    
+    func initWarningView() -> UIView {
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.alignToView(self.view)
+//        v.hidden = false
+        return v
+    }
     
     func initActivityView() -> UIView {
         let v = UIView()
@@ -45,11 +56,19 @@ class QuizViewController: UIViewController {
     var doesPresentActivityIndicatorView : Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                print("present activity indicator view")
                 UIThread.performUI{self.activityView.hidden = false}
             } else {
-                print("dismiss activity indicator view")
                 UIThread.performUI{self.activityView.hidden = true}
+            }
+        }
+    }
+    
+    var doesPresentWarningView : Bool = false {
+        didSet {
+            if doesPresentWarningView {
+                UIThread.performUI{self.warningView.hidden = false}
+            } else {
+                UIThread.performUI{self.warningView.hidden = true}
             }
         }
     }
@@ -80,8 +99,10 @@ class QuizViewController: UIViewController {
         didSet {
             if buttonStateSubmit {
                 self.sendButton.setStepicGreenStyle()
+                self.sendButton.setTitle(self.submitTitle, forState: .Normal)
             } else {
                 self.sendButton.setStepicWhiteStyle()
+                self.sendButton.setTitle(self.tryAgainTitle, forState: .Normal)
             }
         }
     }
@@ -91,13 +112,15 @@ class QuizViewController: UIViewController {
     }
     
     //Override this in subclass
-    func updateQuizAfterSubmissionUpdate() {
+    func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
     }
     
     //Override this in subclass
     var expectedQuizHeight : CGFloat {
         return 0
     }
+    
+    private var didGetErrorWhileSendingSubmission = false
     
     var submission : Submission? {
         didSet {
@@ -111,25 +134,36 @@ class QuizViewController: UIViewController {
                     //TODO: Localize
                     self.sendButton.setTitle(self.submitTitle, forState: .Normal)
                     self.statusViewHeight.constant = 0
-                    self.updateQuizAfterSubmissionUpdate()                    
+                    if self.didGetErrorWhileSendingSubmission {
+                        self.updateQuizAfterSubmissionUpdate(reload: false)   
+                        self.didGetErrorWhileSendingSubmission = false
+                    } else {
+                        self.updateQuizAfterSubmissionUpdate()
+                    }
+                    
                 } else {
                     
                     print("did set submission id \(self.submission?.id)")
                     self.buttonStateSubmit = false
                     switch self.submission!.status! {
                     case "correct":
+                        self.buttonStateSubmit = false
+                        self.statusViewHeight.constant = 48
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
                         self.statusLabel.text = self.correctTitle
                         break
                     case "wrong":
+                        self.buttonStateSubmit = false
+                        self.statusViewHeight.constant = 48
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
                         self.statusLabel.text = self.wrongTitle
                         break
                     case "evaluation":
+                        self.statusViewHeight.constant = 0
                         self.doesPresentActivityIndicatorView = true
                         self.statusLabel.text = ""
                         break
@@ -137,15 +171,17 @@ class QuizViewController: UIViewController {
                         break
                     }
                     
-                    self.sendButton.setTitle(self.tryAgainTitle, forState: .Normal)
                     
-                    self.statusViewHeight.constant = 48
                     self.updateQuizAfterSubmissionUpdate()                    
                 }
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight)
                 self.view.layoutIfNeeded()
             }
         }
+    }
+    
+    func handleErrorWhileGettingSubmission() {
+        
     }
     
     var step : Step!
@@ -163,9 +199,10 @@ class QuizViewController: UIViewController {
             if attempts.count == 0 || attempts[0].status != "active" {
                 //Create attempt
                 self.createNewAttempt(completion: {
-                    UIThread.performUI {
                         self.doesPresentActivityIndicatorView = false
-                    }
+                    }, error:  {
+                        self.doesPresentActivityIndicatorView = false
+                        self.doesPresentWarningView = true
                 })
             } else {
                 //Get submission for attempt
@@ -180,17 +217,19 @@ class QuizViewController: UIViewController {
                         //Displaying the last submission
                         self.submission = submissions[0]
                     }
-                    UIThread.performUI {
-                        self.doesPresentActivityIndicatorView = false
-                    }
+                    self.doesPresentActivityIndicatorView = false
                     }, error: {
                         errorText in
-                        //TODO: Handle get submissions error
+                        self.doesPresentActivityIndicatorView = false
+                        print("failed to get submissions")
+                        //TODO: Test this
                 })
             }
             }, error: {
                 errorText in
-                //TODO: Handle get attempts error
+                self.doesPresentActivityIndicatorView = false
+                self.doesPresentWarningView = true
+                //TODO: Test this
         })
     }
     
@@ -199,7 +238,7 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func createNewAttempt(completion completion: (Void->Void)? = nil) {
+    private func createNewAttempt(completion completion: (Void->Void)? = nil, error: (Void->Void)? = nil) {
         ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
             attempt in
             self.attempt = attempt
@@ -207,7 +246,9 @@ class QuizViewController: UIViewController {
             completion?()
             }, error: {
                 errorText in   
-                //TODO: Handle attempt creation error
+                print(errorText)
+                error?()
+                //TODO: Test this
         })
     }
     
@@ -228,7 +269,10 @@ class QuizViewController: UIViewController {
                 }
                 }, error: { 
                     errorText in
-                    //TODO: handle submission check error
+                    self.didGetErrorWhileSendingSubmission = true
+                    self.submission = nil
+                    completion?()
+                    //TODO: test this
             })
         })        
     }
@@ -242,7 +286,8 @@ class QuizViewController: UIViewController {
             self.checkSubmission(submission.id!, time: 0, completion: completion)
             }, error: {
                 errorText in
-                //TODO: Handle choices submission error
+                completion?()
+                //TODO: test this
         })
     }
     
@@ -269,5 +314,12 @@ class QuizViewController: UIViewController {
                 }
             })
         }
+    }
+}
+
+extension QuizViewController : WarningViewDelegate {
+    func didPressButton() {
+        self.doesPresentWarningView = false
+        self.refreshAttempt(step.id)
     }
 }
