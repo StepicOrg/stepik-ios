@@ -142,6 +142,8 @@
 		08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859B1C5786DE000165AA /* StringQuizViewController.swift */; };
 		08F485A01C579319000165AA /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
 		08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A11C57987B000165AA /* NumberQuizViewController.swift */; };
+		08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
+		08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */; };
 		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
@@ -316,6 +318,8 @@
 		08F4859B1C5786DE000165AA /* StringQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringQuizViewController.swift; sourceTree = "<group>"; };
 		08F4859F1C579318000165AA /* NumberReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberReply.swift; sourceTree = "<group>"; };
 		08F485A11C57987B000165AA /* NumberQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberQuizViewController.swift; sourceTree = "<group>"; };
+		08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerReply.swift; sourceTree = "<group>"; };
+		08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerQuizViewController.swift; sourceTree = "<group>"; };
 		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		08F555531C4F97C100C877E8 /* ChoiceDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDataset.swift; sourceTree = "<group>"; };
@@ -792,6 +796,14 @@
 			name = NumberQuizViewController;
 			sourceTree = "<group>";
 		};
+		08F485A81C57B029000165AA /* FreeResponseQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */,
+			);
+			name = FreeResponseQuizViewController;
+			sourceTree = "<group>";
+		};
 		08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +822,7 @@
 				08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */,
 				08F485991C57868E000165AA /* TextReply.swift */,
 				08F4859F1C579318000165AA /* NumberReply.swift */,
+				08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */,
 			);
 			name = Replies;
 			sourceTree = "<group>";
@@ -834,6 +847,7 @@
 				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				08F4859D1C5786E6000165AA /* StringQuizViewController */,
 				08F485A31C57988D000165AA /* NumberQuizViewController */,
+				08F485A81C57B029000165AA /* FreeResponseQuizViewController */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -1083,7 +1097,9 @@
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
+				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
+				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,

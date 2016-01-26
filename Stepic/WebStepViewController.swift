@@ -234,6 +234,10 @@ class WebStepViewController: UIViewController {
             let quizController = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
+        case "free-answer":
+            let quizController = FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl

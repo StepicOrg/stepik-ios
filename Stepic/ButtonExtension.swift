@@ -9,7 +9,7 @@
 import Foundation
 
 extension UIButton {
-    func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
+    override func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
         self.layer.cornerRadius = radius
         self.layer.borderWidth = borderWidth 
         self.layer.borderColor = borderColor.CGColor;
