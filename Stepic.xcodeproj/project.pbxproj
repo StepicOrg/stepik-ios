@@ -138,6 +138,10 @@
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
+		08F4859A1C57868E000165AA /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
+		08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859B1C5786DE000165AA /* StringQuizViewController.swift */; };
+		08F485A01C579319000165AA /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
+		08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A11C57987B000165AA /* NumberQuizViewController.swift */; };
 		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
@@ -308,6 +312,10 @@
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		08F485971C5752D0000165AA /* UIViewLoadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewLoadExtension.swift; sourceTree = "<group>"; };
+		08F485991C57868E000165AA /* TextReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextReply.swift; sourceTree = "<group>"; };
+		08F4859B1C5786DE000165AA /* StringQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringQuizViewController.swift; sourceTree = "<group>"; };
+		08F4859F1C579318000165AA /* NumberReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberReply.swift; sourceTree = "<group>"; };
+		08F485A11C57987B000165AA /* NumberQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberQuizViewController.swift; sourceTree = "<group>"; };
 		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		08F555531C4F97C100C877E8 /* ChoiceDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDataset.swift; sourceTree = "<group>"; };
@@ -768,6 +776,22 @@
 			name = WarningView;
 			sourceTree = "<group>";
 		};
+		08F4859D1C5786E6000165AA /* StringQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08F4859B1C5786DE000165AA /* StringQuizViewController.swift */,
+			);
+			name = StringQuizViewController;
+			sourceTree = "<group>";
+		};
+		08F485A31C57988D000165AA /* NumberQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08F485A11C57987B000165AA /* NumberQuizViewController.swift */,
+			);
+			name = NumberQuizViewController;
+			sourceTree = "<group>";
+		};
 		08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -784,6 +808,8 @@
 			children = (
 				08F555591C4FB0A300C877E8 /* Reply.swift */,
 				08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */,
+				08F485991C57868E000165AA /* TextReply.swift */,
+				08F4859F1C579318000165AA /* NumberReply.swift */,
 			);
 			name = Replies;
 			sourceTree = "<group>";
@@ -801,11 +827,13 @@
 		08F555611C4FE2D200C877E8 /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
-				08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */,
 				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
-				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				081A7DA81C56625F00583728 /* QuizViewController.swift */,
 				081A7DF21C56A09300583728 /* QuizViewController.xib */,
+				08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */,
+				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
+				08F4859D1C5786E6000165AA /* StringQuizViewController */,
+				08F485A31C57988D000165AA /* NumberQuizViewController */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -1050,9 +1078,11 @@
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				080F31DF1BA71CE900F356A0 /* SignInViewController.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
+				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
+				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
@@ -1083,6 +1113,7 @@
 				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
+				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
@@ -1100,6 +1131,7 @@
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* StepicAPI.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
+				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,

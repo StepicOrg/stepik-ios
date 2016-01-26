@@ -24,6 +24,7 @@ class QuizViewController: UIViewController {
     let wrongTitle = "Wrong"
     
     let warningViewTitle = "Could not connect to the internet"
+    
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
     
@@ -107,6 +108,11 @@ class QuizViewController: UIViewController {
         }
     }
     
+    //Override this in subclass if needed
+    var needsToRefreshAttemptWhenWrong : Bool{
+        return true
+    }
+    
     //Override this in subclass
     func updateQuizAfterAttemptUpdate() {
     }
@@ -155,7 +161,11 @@ class QuizViewController: UIViewController {
                         self.statusLabel.text = self.correctTitle
                         break
                     case "wrong":
-                        self.buttonStateSubmit = false
+                        if self.needsToRefreshAttemptWhenWrong {
+                            self.buttonStateSubmit = false
+                        } else {
+                            self.buttonStateSubmit = true
+                        }
                         self.statusViewHeight.constant = 48
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
@@ -296,16 +306,23 @@ class QuizViewController: UIViewController {
         return ChoiceReply(choices: [])
     }
     
+    //Override this in the subclass if needed
+    func checkReplyReady() -> Bool {
+        return true
+    }
+    
     @IBAction func sendButtonPressed(sender: UIButton) {
         sendButton.enabled = false
         doesPresentActivityIndicatorView = true
         if buttonStateSubmit {
-            submitReply(completion: {
-                UIThread.performUI{
-                    self.sendButton.enabled = true
-                    self.doesPresentActivityIndicatorView = false
-                }
-            })
+            if checkReplyReady() {
+                submitReply(completion: {
+                    UIThread.performUI{
+                        self.sendButton.enabled = true
+                        self.doesPresentActivityIndicatorView = false
+                    }
+                })
+            } 
         } else  {
             createNewAttempt(completion: {
                 UIThread.performUI{

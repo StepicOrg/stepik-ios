@@ -27,6 +27,8 @@ class Submission: NSObject {
     private func getReplyFromJSON(json: JSON, stepName: String) -> Reply? {
         switch stepName {
         case "choice" : return ChoiceReply(json: json)
+        case "string" : return TextReply(json: json)
+        case "number": return NumberReply(json: json)
 //        case "free_answer": return String(json: json)
         default: return nil
         }

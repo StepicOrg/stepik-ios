@@ -72,6 +72,8 @@ class WarningView: UIView {
         textLabel.constrainTopSpaceToView(centerView, predicate: "4")
         let height = UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: fontSize, width: width - 16) + 14
         textLabel.constrainHeight("\(height)")
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     @IBAction func didPressButton(sender: AnyObject) {

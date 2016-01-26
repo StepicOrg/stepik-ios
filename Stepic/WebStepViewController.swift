@@ -208,6 +208,15 @@ class WebStepViewController: UIViewController {
         SVProgressHUD.dismiss()
     }
     
+    func initQuizController(quizController : QuizViewController) {
+        quizController.delegate = self
+        quizController.step = self.step
+        self.addChildViewController(quizController)
+        quizPlaceholderView.addSubview(quizController.view)
+        quizController.view.alignToView(quizPlaceholderView)
+        self.view.layoutIfNeeded()
+    }
+    
     func handleQuizType() {
         switch step.block.name {
         case "text":
@@ -215,12 +224,15 @@ class WebStepViewController: UIViewController {
             break
         case "choice":
             let quizController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-            quizController.delegate = self
-            quizController.step = self.step
-            self.addChildViewController(quizController)
-            quizPlaceholderView.addSubview(quizController.view)
-            quizController.view.alignToView(quizPlaceholderView)
-            self.view.layoutIfNeeded()
+            initQuizController(quizController)
+            break
+        case "string":
+            let quizController = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
+        case "number":
+            let quizController = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
             break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
