@@ -220,7 +220,7 @@ class QuizViewController: UIViewController {
     
     func refreshAttempt(stepId: Int) {
         self.doesPresentActivityIndicatorView = true
-        ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: "choice", stepId: stepId, success: { 
+        ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: self.step.block.name, stepId: stepId, success: { 
             attempts, meta in
             if attempts.count == 0 || attempts[0].status != "active" {
                 //Create attempt
@@ -265,6 +265,7 @@ class QuizViewController: UIViewController {
     }
     
     private func createNewAttempt(completion completion: (Void->Void)? = nil, error: (Void->Void)? = nil) {
+        print("creating attempt for step id -> \(self.step.id) name -> \(self.step.block.name)")
         ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
             attempt in
             self.attempt = attempt
