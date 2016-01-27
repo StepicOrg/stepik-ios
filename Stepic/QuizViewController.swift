@@ -15,6 +15,9 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var hintHeight: NSLayoutConstraint!
+    @IBOutlet weak var hintLabel: UILabel!
+    @IBOutlet weak var hintView: UIView!
     
     var delegate : QuizControllerDelegate?
     
@@ -93,7 +96,7 @@ class QuizViewController: UIViewController {
     }
     
     var heightWithoutQuiz : CGFloat {
-        return 72 + statusViewHeight.constant
+        return 80 + statusViewHeight.constant + hintHeight.constant
     }
     
     var buttonStateSubmit : Bool = true {
@@ -140,6 +143,7 @@ class QuizViewController: UIViewController {
                     //TODO: Localize
                     self.sendButton.setTitle(self.submitTitle, forState: .Normal)
                     self.statusViewHeight.constant = 0
+                    self.hintHeight.constant = 0
                     if self.didGetErrorWhileSendingSubmission {
                         self.updateQuizAfterSubmissionUpdate(reload: false)   
                         self.didGetErrorWhileSendingSubmission = false
@@ -149,6 +153,22 @@ class QuizViewController: UIViewController {
                 } else {
                     print("did set submission id \(self.submission?.id)")
                     self.buttonStateSubmit = false
+                    
+                    if let hint = self.submission?.hint {
+                        if hint != "" {
+                            let height = UILabel.heightForLabelWithText(hint, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 32)
+                            self.hintHeight.constant = height + 16
+                            self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
+                            self.hintLabel.textColor = UIColor.whiteColor()
+                            self.hintView.backgroundColor = UIColor.blackColor()
+                            self.hintLabel.text = hint
+                        } else {
+                            self.hintHeight.constant = 0
+                        }
+                    } else {
+                        self.hintHeight.constant = 0
+                    }
+                    
                     switch self.submission!.status! {
                     case "correct":
                         self.buttonStateSubmit = false

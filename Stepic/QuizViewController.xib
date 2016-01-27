@@ -9,6 +9,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizViewController" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="HO0-Wd-0kw" id="BZi-zt-KtT"/>
+                <outlet property="hintHeight" destination="AhP-8s-ofa" id="2bJ-6X-Sgt"/>
+                <outlet property="hintLabel" destination="CA3-do-lxu" id="XAj-cy-Vug"/>
+                <outlet property="hintView" destination="GmL-q5-y6Z" id="mEf-oh-hyb"/>
                 <outlet property="sendButton" destination="yPX-01-eq5" id="V3v-9d-GUi"/>
                 <outlet property="statusImageView" destination="kBi-W4-vlY" id="TNt-3y-ooZ"/>
                 <outlet property="statusLabel" destination="hqL-ha-NG2" id="MJb-Y4-DeC"/>
@@ -18,11 +21,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="637-LV-Ael">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="355"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="392"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3R-Pc-iTV">
-                    <rect key="frame" x="-12" y="299" width="624" height="0.0"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3R-Pc-iTV" userLabel="Status View">
+                    <rect key="frame" x="-12" y="328" width="624" height="0.0"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kBi-W4-vlY">
                             <rect key="frame" x="16" y="-10" width="20" height="20"/>
@@ -50,11 +53,11 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO0-Wd-0kw" userLabel="container view">
-                    <rect key="frame" x="-12" y="0.0" width="624" height="291"/>
+                    <rect key="frame" x="-12" y="0.0" width="624" height="320"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-01-eq5">
-                    <rect key="frame" x="8" y="307" width="584" height="40"/>
+                    <rect key="frame" x="8" y="344" width="584" height="40"/>
                     <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Pts-9U-YKn"/>
@@ -66,6 +69,25 @@
                         <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="VdX-f1-y2x"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
+                    <rect key="frame" x="8" y="336" width="584" height="0.0"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CA3-do-lxu">
+                            <rect key="frame" x="8" y="8" width="568" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="CA3-do-lxu" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="top" constant="8" id="3Qk-TT-gB7"/>
+                        <constraint firstAttribute="height" id="AhP-8s-ofa"/>
+                        <constraint firstAttribute="trailing" secondItem="CA3-do-lxu" secondAttribute="trailing" constant="8" id="GpH-f0-EWV"/>
+                        <constraint firstAttribute="bottom" secondItem="CA3-do-lxu" secondAttribute="bottom" constant="8" id="IrN-u2-93a"/>
+                        <constraint firstItem="CA3-do-lxu" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="wFX-sa-OLr"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -73,16 +95,19 @@
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="top" secondItem="637-LV-Ael" secondAttribute="top" id="60n-bJ-YYh"/>
                 <constraint firstAttribute="trailingMargin" secondItem="I3R-Pc-iTV" secondAttribute="trailing" constant="-20" id="91e-vo-OtM"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leadingMargin" constant="-20" id="Gli-iz-mgq"/>
+                <constraint firstAttribute="trailing" secondItem="GmL-q5-y6Z" secondAttribute="trailing" constant="8" id="NR7-N6-Zku"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" constant="8" id="SeL-c6-Aw2"/>
                 <constraint firstAttribute="trailingMargin" secondItem="yPX-01-eq5" secondAttribute="trailing" id="SyG-E5-BxU"/>
                 <constraint firstAttribute="leadingMargin" secondItem="yPX-01-eq5" secondAttribute="leading" id="YbC-Ag-TK4"/>
+                <constraint firstItem="GmL-q5-y6Z" firstAttribute="top" secondItem="I3R-Pc-iTV" secondAttribute="bottom" constant="8" id="Z66-S5-1VR"/>
                 <constraint firstAttribute="trailingMargin" secondItem="HO0-Wd-0kw" secondAttribute="trailing" constant="-20" id="dgt-gf-5BW"/>
-                <constraint firstItem="yPX-01-eq5" firstAttribute="top" secondItem="I3R-Pc-iTV" secondAttribute="bottom" constant="8" id="gu1-58-epv"/>
+                <constraint firstItem="yPX-01-eq5" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="bottom" constant="8" id="lRJ-4a-dUb"/>
+                <constraint firstItem="GmL-q5-y6Z" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" constant="8" id="oDA-3f-YMY"/>
                 <constraint firstAttribute="bottom" secondItem="yPX-01-eq5" secondAttribute="bottom" constant="8" id="xye-9J-7EX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="282" y="-176.5"/>
+            <point key="canvasLocation" x="284" y="-143"/>
         </view>
     </objects>
 </document>

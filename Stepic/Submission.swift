@@ -14,11 +14,13 @@ class Submission: NSObject {
     var status : String?
     var reply : Reply?
     var attempt : Int?
+    var hint : String?
     
     init(json: JSON, stepName: String) {
         id = json["id"].int
         status = json["status"].string
         attempt = json["attempt"].int
+        hint = json["hint"].string
         reply = nil
         super.init()
         reply = getReplyFromJSON(json["reply"], stepName: stepName)
