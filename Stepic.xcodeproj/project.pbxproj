@@ -146,6 +146,11 @@
 		08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */; };
 		08F485AA1C580D61000165AA /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
 		08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AB1C580DB3000165AA /* MathQuizViewController.swift */; };
+		08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
+		08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
+		08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
+		08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
+		08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
 		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
@@ -324,6 +329,11 @@
 		08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerQuizViewController.swift; sourceTree = "<group>"; };
 		08F485A91C580D61000165AA /* MathReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathReply.swift; sourceTree = "<group>"; };
 		08F485AB1C580DB3000165AA /* MathQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathQuizViewController.swift; sourceTree = "<group>"; };
+		08F485AE1C58E946000165AA /* SortingDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingDataset.swift; sourceTree = "<group>"; };
+		08F485B01C58EB0D000165AA /* SortingReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingReply.swift; sourceTree = "<group>"; };
+		08F485B21C58EC33000165AA /* SortingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizViewController.swift; sourceTree = "<group>"; };
+		08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizTableViewCell.swift; sourceTree = "<group>"; };
+		08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortingQuizTableViewCell.xib; sourceTree = "<group>"; };
 		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		08F555531C4F97C100C877E8 /* ChoiceDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDataset.swift; sourceTree = "<group>"; };
@@ -816,6 +826,16 @@
 			name = MathQuizViewController;
 			sourceTree = "<group>";
 		};
+		08F485B51C58EC45000165AA /* SortingQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08F485B21C58EC33000165AA /* SortingQuizViewController.swift */,
+				08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */,
+				08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */,
+			);
+			name = SortingQuizViewController;
+			sourceTree = "<group>";
+		};
 		08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +856,7 @@
 				08F4859F1C579318000165AA /* NumberReply.swift */,
 				08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */,
 				08F485A91C580D61000165AA /* MathReply.swift */,
+				08F485B01C58EB0D000165AA /* SortingReply.swift */,
 			);
 			name = Replies;
 			sourceTree = "<group>";
@@ -846,6 +867,7 @@
 				08F5554F1C4F93B700C877E8 /* Dataset.swift */,
 				08F555531C4F97C100C877E8 /* ChoiceDataset.swift */,
 				08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */,
+				08F485AE1C58E946000165AA /* SortingDataset.swift */,
 			);
 			name = Datasets;
 			sourceTree = "<group>";
@@ -862,6 +884,7 @@
 				08F485A31C57988D000165AA /* NumberQuizViewController */,
 				08F485A81C57B029000165AA /* FreeResponseQuizViewController */,
 				08F485AD1C580DB8000165AA /* MathQuizViewController */,
+				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -1009,6 +1032,7 @@
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
+				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1109,7 @@
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
+				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
@@ -1097,6 +1122,7 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
+				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
@@ -1115,6 +1141,7 @@
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
+				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
@@ -1155,6 +1182,7 @@
 				080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
+				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,

@@ -119,6 +119,11 @@ class WebStepViewController: UIViewController {
             let quizController = MathQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
+        case "sorting":
+            let quizController = SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
+
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl
@@ -152,7 +157,7 @@ class WebStepViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("entered web view did layout subviews")
+//        print("entered web view did layout subviews")
         super.viewDidLayoutSubviews()
 //        print("did layout subviews")
     }
@@ -160,11 +165,11 @@ class WebStepViewController: UIViewController {
     
     func resetWebViewHeight(height: Float) {
         if height == 0.0 {
-            print("Reloading web view after height set to 0.0")
+            print("\n__________________\nReloading web view after height set to 0.0\n_________________________\n")
             stepWebView.reload()
             return
         }
-        print("entered resetWebViewHeight")
+//        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
