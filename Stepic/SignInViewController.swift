@@ -33,22 +33,8 @@ class SignInViewController: UIViewController {
         super.viewWillAppear(animated)
         
 //        self.automaticallyAdjustsScrollViewInsets = false
-        self.view.registerAsDodgeViewForMLInputDodger()
-//        self.emailTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-//        self.passwordTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-        self.view.shiftHeightAsDodgeViewForMLInputDodger = 180.0;
-
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//        self.automaticallyAdjustsScrollViewInsets = false
-//        self.view.registerAsDodgeViewForMLInputDodger()
-//        self.emailTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-//        self.passwordTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-////        self.view.shiftHeightAsDodgeViewForMLInputDodger = 80.0;
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
