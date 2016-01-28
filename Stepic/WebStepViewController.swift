@@ -44,10 +44,41 @@ class WebStepViewController: UIViewController {
         
         stepWebView.scrollView.delegate = self
         stepWebView.scrollView.bounces = false
-//        stepWebView.scrollView.scrollEnabled = false
+        stepWebView.scrollView.scrollEnabled = false
         stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
         handleQuizType()
         stepWebView.scrollView.showsVerticalScrollIndicator = false
+        
+        panG = UIPanGestureRecognizer(target: self, action: "didPan:")
+        panG.delegate = self
+        self.view.addGestureRecognizer(panG)
+    }
+    
+    private var shouldTranslateOffsetChange = false
+    private var offsetChange : CGFloat = 0
+    private var startOffset : CGFloat = 0
+    func didPan(sender: UIPanGestureRecognizer) {
+        
+        
+        if sender.state == UIGestureRecognizerState.Began {
+//            print("pan started for step \(stepId)")
+            offsetChange = 0
+            startOffset = stepWebView.scrollView.contentOffset.x
+        }
+        
+        if shouldTranslateOffsetChange {
+//            print("offsetChange was \(offsetChange)")
+            var cleanOffset = stepWebView.scrollView.contentOffset.x + offsetChange
+//            print("cleanOffset calculated \(cleanOffset)")
+            cleanOffset -= sender.translationInView(stepWebView).x
+//            print("cleanOffset with current pan offset \(cleanOffset)")
+            cleanOffset = max(0, cleanOffset)
+            cleanOffset = min(cleanOffset, rightLimitOffsetX)
+//            print("normed cleanOffset \(cleanOffset)")
+            offsetChange = -cleanOffset + startOffset
+//            print("new offsetChange \(offsetChange)")
+            stepWebView.scrollView.contentOffset = CGPoint(x: cleanOffset, y: stepWebView.scrollView.contentOffset.y)
+        }
     }
     
     private var panStartedInside : Bool?
@@ -158,18 +189,18 @@ class WebStepViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-//        print("entered web view did layout subviews")
         super.viewDidLayoutSubviews()
-//        print("did layout subviews")
     }
     
     
     func resetWebViewHeight(height: Float) {
         if height == 0.0 {
-            print("\n__________________\nReloading web view after height set to 0.0\n_________________________\n")
+            print("\n__________________\nReloading web view \(stepId) after height set to 0.0\n_________________________\n")
             stepWebView.reload()
             return
         }
+        print("\n__________________\n web view \(stepId)  height set to \(height)\n_________________________\n")
+
 //        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
         self.view.setNeedsLayout()
@@ -236,14 +267,6 @@ extension WebStepViewController : UIWebViewDelegate {
 }
 
 extension WebStepViewController : UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if scrollView.contentOffset.y != 0 {
-//            print("tried to scroll top or bottom")
-//            var offset = scrollView.contentOffset;
-//            offset.y = 0
-//            scrollView.contentOffset = offset;
-//        }
-    }
 }
 
 extension WebStepViewController : QuizControllerDelegate {
@@ -256,14 +279,30 @@ extension WebStepViewController : QuizControllerDelegate {
 
 extension WebStepViewController : UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if (otherGestureRecognizer == stepWebView.scrollView.panGestureRecognizer) {
-            print("did ask for simultaneous recognition with webview")
-            return true
-        }
-        
+
         if (otherGestureRecognizer == parent.pagerScrollView.panGestureRecognizer) {
-            print("did ask for simultaneous recognition with pagination")
-            return true
+//            print("did ask \(stepId) for simultaneous recognition with pagination")
+
+            let sender = gestureRecognizer as! UIPanGestureRecognizer
+            let locationInView = sender.locationInView(stepWebView)
+            if CGRectContainsPoint(stepWebView.bounds, locationInView)  {
+//                print("pan \(stepId) located inside webview")
+                let vel = sender.velocityInView(self.view)
+                let draggedRight = vel.x > 0
+//                print("webview content offset -> \(stepWebView.scrollView.contentOffset.x), draggedRight: \(draggedRight)")
+                if (stepWebView.scrollView.contentOffset.x == 0 && draggedRight) ||
+                    (stepWebView.scrollView.contentOffset.x == rightLimitOffsetX && !draggedRight){
+//                        print("offset is an edge one, dragged right state \(draggedRight)")
+                        shouldTranslateOffsetChange = false
+                        return true
+                } else {
+                    shouldTranslateOffsetChange = true
+                    return false
+                }
+            } else {
+                shouldTranslateOffsetChange = false
+                return true
+            }
         }
         
         return false
