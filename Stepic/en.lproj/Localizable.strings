@@ -24,7 +24,7 @@ ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
 ClearCacheTitle = "Clear cache";
-ClearCacheMessage = "Remove all videos stored in the memory?";
+ClearCacheMessage = "Remove all videos stored in the memory of your device?";
 FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
@@ -76,4 +76,10 @@ NoSearchResultsTitle = "Nothing found";
 Alert = "Alert";
 Confirm = "Confirm action";
 Prompt = "Enter data";
+Submit = "Submit";
+TryAgain = "Try again";
+Correct = "Correct!";
+Wrong = "Wrong. Please, try again.";
+CorrectFreeResponse = "Your answer was saved.";
+
 

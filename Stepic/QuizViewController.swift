@@ -21,10 +21,21 @@ class QuizViewController: UIViewController {
     
     var delegate : QuizControllerDelegate?
     
-    let submitTitle = "Submit"
-    let tryAgainTitle = "Try again"
-    let correctTitle = "Correct"
-    let wrongTitle = "Wrong"
+    var submitTitle : String {
+        return NSLocalizedString("Submit", comment: "")
+    }
+    
+    var tryAgainTitle : String {
+        return NSLocalizedString("TryAgain", comment: "")
+    }
+    
+    var correctTitle : String {
+        return NSLocalizedString("Correct", comment: "")
+    }
+    
+    var wrongTitle : String {
+        return NSLocalizedString("Wrong", comment: "")
+    }
     
     let warningViewTitle = "Could not connect to the internet"
     
