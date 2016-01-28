@@ -24,7 +24,7 @@ ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
 ClearCacheTitle = "Clear cache";
-ClearCacheMessage = "Remove all videos stored in the memory of the iPhone?";
+ClearCacheMessage = "Remove all videos stored in the memory?";
 FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
@@ -76,5 +76,4 @@ NoSearchResultsTitle = "Nothing found";
 Alert = "Alert";
 Confirm = "Confirm action";
 Prompt = "Enter data";
-
 
