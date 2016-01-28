@@ -14,7 +14,6 @@ class SortingDataset: NSObject, Dataset {
     
     required init(json: JSON) {
         options = json["options"].arrayValue.map({return $0.stringValue})
-        print(json)
         super.init()
     }
 }

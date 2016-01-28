@@ -23,25 +23,15 @@ class SortingQuizViewController: QuizViewController {
         tableView.backgroundColor = UIColor.clearColor()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerNib(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         tableView.editing = true
     }
     
+    
+    private var transparentCells = false
     private var orderedOptions : [String] = []
     private var positionForOptionInAttempt : [String : Int] = [:]
-//    var ordering : [Int] = [] {
-//        didSet {
-//            //TODO: Test if this works after += statement or index changing
-//            print("did set called")
-//            if let dataset = attempt?.dataset as? SortingDataset {
-//                for (index, option) in dataset.options.enumerate() {
-//                    optionForOrder[index] = option
-//                }
-//            }
-//        }
-//    }
+
     
     override func updateQuizAfterAttemptUpdate() {
 //        self.ordering = (0..<(self.attempt?.dataset as! SortingDataset).options.count).map({return $0})
@@ -65,12 +55,24 @@ class SortingQuizViewController: QuizViewController {
     
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if self.submission == nil {
+            transparentCells = false
             if reload {
                 resetOptionsToAttempt()
             }
             self.tableView.userInteractionEnabled = true
             tableView.editing = true
         } else {
+            transparentCells = true
+            if let dataset = attempt?.dataset as? SortingDataset {
+                var o = [String](count: dataset.options.count, repeatedValue: "")
+                if let r = submission?.reply as? SortingReply {
+                    print("attempt dataset -> \(dataset.options), \nsubmission ordering -> \(r.ordering)")
+                    for (index, order) in r.ordering.enumerate() {
+                        o[index] = dataset.options[order]
+                    }
+                }
+                orderedOptions = o
+            }
             self.tableView.userInteractionEnabled = false
             tableView.editing = false
         }
@@ -101,6 +103,11 @@ class SortingQuizViewController: QuizViewController {
 }
 
 extension SortingQuizViewController : UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return max(27, UILabel.heightForLabelWithText(orderedOptions[indexPath.row], lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 32)) + 17
+    }
+    
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -130,7 +137,11 @@ extension SortingQuizViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SortingQuizTableViewCell", forIndexPath: indexPath) as! SortingQuizTableViewCell
         
+        
+        print("initializing cell transparent -> \(transparentCells)")
         cell.optionLabel?.text = orderedOptions[indexPath.row]
+        cell.contentView.backgroundColor = transparentCells ? UIColor.clearColor() : UIColor.whiteColor()
+        cell.backgroundColor = transparentCells ? UIColor.clearColor() : UIColor.whiteColor()
         
         return cell
     }
