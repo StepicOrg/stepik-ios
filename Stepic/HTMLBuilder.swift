@@ -15,6 +15,7 @@ class HTMLBuilder: NSObject {
     private var stepicStyleString : String {        
         var res : String = ""
         res += "<style>"
+        res += "\nhtml{-webkit-text-size-adjust: 100%;}"
         res += "\nbody{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
         res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
         res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"

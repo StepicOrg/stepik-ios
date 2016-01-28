@@ -43,7 +43,8 @@ class WebStepViewController: UIViewController {
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
-        stepWebView.scrollView.bounces = true
+        stepWebView.scrollView.bounces = false
+//        stepWebView.scrollView.scrollEnabled = false
         stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
         handleQuizType()
         stepWebView.scrollView.showsVerticalScrollIndicator = false
@@ -236,11 +237,12 @@ extension WebStepViewController : UIWebViewDelegate {
 
 extension WebStepViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y != 0 {
-            var offset = scrollView.contentOffset;
-            offset.y = 0
-            scrollView.contentOffset = offset;
-        }
+//        if scrollView.contentOffset.y != 0 {
+//            print("tried to scroll top or bottom")
+//            var offset = scrollView.contentOffset;
+//            offset.y = 0
+//            scrollView.contentOffset = offset;
+//        }
     }
 }
 
