@@ -51,6 +51,7 @@ class WebStepViewController: UIViewController {
         
         panG = UIPanGestureRecognizer(target: self, action: "didPan:")
         panG.delegate = self
+        panG.cancelsTouchesInView = false
         self.view.addGestureRecognizer(panG)
     }
     
@@ -58,7 +59,6 @@ class WebStepViewController: UIViewController {
     private var offsetChange : CGFloat = 0
     private var startOffset : CGFloat = 0
     func didPan(sender: UIPanGestureRecognizer) {
-        
         
         if sender.state == UIGestureRecognizerState.Began {
 //            print("pan started for step \(stepId)")
@@ -123,6 +123,7 @@ class WebStepViewController: UIViewController {
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.alignToView(quizPlaceholderView)
+        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
