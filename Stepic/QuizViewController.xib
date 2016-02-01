@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizViewController" customModule="Stepic" customModuleProvider="target">
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3R-Pc-iTV" userLabel="Status View">
-                    <rect key="frame" x="-12" y="328" width="624" height="0.0"/>
+                    <rect key="frame" x="0.0" y="328" width="600" height="0.0"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kBi-W4-vlY">
                             <rect key="frame" x="16" y="-10" width="20" height="20"/>
@@ -53,22 +52,9 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO0-Wd-0kw" userLabel="container view">
-                    <rect key="frame" x="-12" y="0.0" width="624" height="320"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="320"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-01-eq5">
-                    <rect key="frame" x="8" y="344" width="584" height="40"/>
-                    <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Pts-9U-YKn"/>
-                    </constraints>
-                    <state key="normal" title="Send">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="VdX-f1-y2x"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
                     <rect key="frame" x="8" y="336" width="584" height="0.0"/>
                     <subviews>
@@ -88,19 +74,32 @@
                         <constraint firstItem="CA3-do-lxu" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="wFX-sa-OLr"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-01-eq5">
+                    <rect key="frame" x="8" y="344" width="584" height="40"/>
+                    <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Pts-9U-YKn"/>
+                    </constraints>
+                    <state key="normal" title="Send">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="VdX-f1-y2x"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="HO0-Wd-0kw" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leadingMargin" constant="-20" id="12n-C3-YYg"/>
+                <constraint firstItem="HO0-Wd-0kw" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" id="12n-C3-YYg"/>
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="top" secondItem="637-LV-Ael" secondAttribute="top" id="60n-bJ-YYh"/>
-                <constraint firstAttribute="trailingMargin" secondItem="I3R-Pc-iTV" secondAttribute="trailing" constant="-20" id="91e-vo-OtM"/>
-                <constraint firstItem="I3R-Pc-iTV" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leadingMargin" constant="-20" id="Gli-iz-mgq"/>
+                <constraint firstAttribute="trailing" secondItem="I3R-Pc-iTV" secondAttribute="trailing" id="91e-vo-OtM"/>
+                <constraint firstItem="I3R-Pc-iTV" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" id="Gli-iz-mgq"/>
                 <constraint firstAttribute="trailing" secondItem="GmL-q5-y6Z" secondAttribute="trailing" constant="8" id="NR7-N6-Zku"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" constant="8" id="SeL-c6-Aw2"/>
-                <constraint firstAttribute="trailingMargin" secondItem="yPX-01-eq5" secondAttribute="trailing" id="SyG-E5-BxU"/>
-                <constraint firstAttribute="leadingMargin" secondItem="yPX-01-eq5" secondAttribute="leading" id="YbC-Ag-TK4"/>
+                <constraint firstAttribute="trailing" secondItem="yPX-01-eq5" secondAttribute="trailing" constant="8" id="SyG-E5-BxU"/>
+                <constraint firstAttribute="leading" secondItem="yPX-01-eq5" secondAttribute="leading" constant="-8" id="YbC-Ag-TK4"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="top" secondItem="I3R-Pc-iTV" secondAttribute="bottom" constant="8" id="Z66-S5-1VR"/>
-                <constraint firstAttribute="trailingMargin" secondItem="HO0-Wd-0kw" secondAttribute="trailing" constant="-20" id="dgt-gf-5BW"/>
+                <constraint firstAttribute="trailing" secondItem="HO0-Wd-0kw" secondAttribute="trailing" id="dgt-gf-5BW"/>
                 <constraint firstItem="yPX-01-eq5" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="bottom" constant="8" id="lRJ-4a-dUb"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" constant="8" id="oDA-3f-YMY"/>
                 <constraint firstAttribute="bottom" secondItem="yPX-01-eq5" secondAttribute="bottom" constant="8" id="xye-9J-7EX"/>

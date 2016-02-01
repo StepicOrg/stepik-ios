@@ -27,6 +27,12 @@ class ChoiceQuizViewController: QuizViewController {
         tableView.registerNib(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
+    
     var choices : [Bool] = []
     
     override func updateQuizAfterAttemptUpdate() {

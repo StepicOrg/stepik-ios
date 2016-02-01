@@ -170,6 +170,8 @@ class WebStepViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
         if let a = assignment {
             ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
         }
@@ -189,8 +191,13 @@ class WebStepViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        print("did layout subviews in web step \(stepId)")
     }
     
     
@@ -273,6 +280,7 @@ extension WebStepViewController : UIScrollViewDelegate {
 extension WebStepViewController : QuizControllerDelegate {
     func needsHeightUpdate(newHeight: CGFloat) {
         quizPlaceholderViewHeight.constant = newHeight
+        view.setNeedsLayout()
         view.layoutIfNeeded()
         quizPlaceholderView.layoutIfNeeded()
     }

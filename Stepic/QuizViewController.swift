@@ -110,6 +110,14 @@ class QuizViewController: UIViewController {
         return 80 + statusViewHeight.constant + hintHeight.constant
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     var buttonStateSubmit : Bool = true {
         didSet {
             if buttonStateSubmit {
@@ -222,6 +230,12 @@ class QuizViewController: UIViewController {
     }
     
     var step : Step!
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

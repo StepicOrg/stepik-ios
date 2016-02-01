@@ -25,10 +25,11 @@ class SortingQuizViewController: QuizViewController {
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         tableView.editing = true
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
     
     
-    private var transparentCells = false
     private var orderedOptions : [String] = []
     private var positionForOptionInAttempt : [String : Int] = [:]
 
@@ -37,7 +38,7 @@ class SortingQuizViewController: QuizViewController {
 //        self.ordering = (0..<(self.attempt?.dataset as! SortingDataset).options.count).map({return $0})
         
         resetOptionsToAttempt()
-
+        
         self.tableView.reloadData()
         self.view.layoutIfNeeded()
     }
@@ -55,14 +56,11 @@ class SortingQuizViewController: QuizViewController {
     
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if self.submission == nil {
-            transparentCells = false
             if reload {
                 resetOptionsToAttempt()
             }
             self.tableView.userInteractionEnabled = true
-            tableView.editing = true
         } else {
-            transparentCells = true
             if let dataset = attempt?.dataset as? SortingDataset {
                 var o = [String](count: dataset.options.count, repeatedValue: "")
                 if let r = submission?.reply as? SortingReply {
@@ -74,9 +72,9 @@ class SortingQuizViewController: QuizViewController {
                 orderedOptions = o
             }
             self.tableView.userInteractionEnabled = false
-            tableView.editing = false
         }
         self.tableView.reloadData()
+        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
@@ -137,23 +135,14 @@ extension SortingQuizViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SortingQuizTableViewCell", forIndexPath: indexPath) as! SortingQuizTableViewCell
         
-        
-        print("initializing cell transparent -> \(transparentCells)")
         cell.optionLabel?.text = orderedOptions[indexPath.row]
-        cell.contentView.backgroundColor = transparentCells ? UIColor.clearColor() : UIColor.whiteColor()
-        cell.backgroundColor = transparentCells ? UIColor.clearColor() : UIColor.whiteColor()
         
         return cell
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         let movingOption = orderedOptions[sourceIndexPath.row]
-//        if sourceIndexPath.row < destinationIndexPath.row {
-            orderedOptions.removeAtIndex(sourceIndexPath.row)
-            orderedOptions.insert(movingOption, atIndex: destinationIndexPath.row)
-//        } else {
-//            orderedOptions.insert(movingOption, atIndex: destinationIndexPath.row)
-//            orderedOptions.removeAtIndex(sourceIndexPath.row)
-//        }
+        orderedOptions.removeAtIndex(sourceIndexPath.row)
+        orderedOptions.insert(movingOption, atIndex: destinationIndexPath.row)
     }
 }

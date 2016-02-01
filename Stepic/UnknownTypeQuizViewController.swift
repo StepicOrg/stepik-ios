@@ -24,6 +24,7 @@ class UnknownTypeQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         solveOnTheWebsiteButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+        solveOnTheWebsiteButton.setTitle(NSLocalizedString("SolveOnTheWebsite", comment: ""), forState: .Normal)
         // Do any additional setup after loading the view.
     }
 
