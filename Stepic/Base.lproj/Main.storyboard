@@ -1617,8 +1617,8 @@
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerX" secondItem="pKw-C7-Y9N" secondAttribute="centerX" id="6dR-Rr-VEP"/>
                             <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="eOu-jp-hBO" secondAttribute="centerY" id="GBF-9u-zUN"/>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerY" secondItem="pKw-C7-Y9N" secondAttribute="centerY" id="ML7-NF-DQL"/>
-                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="leading" secondItem="eOu-jp-hBO" secondAttribute="leadingMargin" constant="-20" id="mWm-l6-zSJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pKw-C7-Y9N" secondAttribute="trailing" constant="-20" id="pP8-h4-HdZ"/>
+                            <constraint firstItem="pKw-C7-Y9N" firstAttribute="leading" secondItem="eOu-jp-hBO" secondAttribute="leading" id="mWm-l6-zSJ"/>
+                            <constraint firstAttribute="trailing" secondItem="pKw-C7-Y9N" secondAttribute="trailing" id="pP8-h4-HdZ"/>
                         </constraints>
                     </view>
                     <connections>
