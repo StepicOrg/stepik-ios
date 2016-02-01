@@ -41,7 +41,7 @@ class StepsViewController: RGPageViewController {
         lesson?.loadSteps(completion: {
             print("did reload data")
             UIThread.performUI{
-                self.view.userInteractionEnabled = false
+                self.view.userInteractionEnabled = true
                 self.reloadData()
             }
         }, onlyLesson: context == .Lesson)
