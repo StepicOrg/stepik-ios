@@ -30,14 +30,20 @@ class StepsViewController: RGPageViewController {
 
         datasource = self
         delegate = self
-        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
 
+        if numberOfPagesForViewController(self) == 0 {
+            self.view.userInteractionEnabled = false
+        }
+        
         lesson?.loadSteps(completion: {
             print("did reload data")
-            UIThread.performUI{self.reloadData()}
+            UIThread.performUI{
+                self.view.userInteractionEnabled = false
+                self.reloadData()
+            }
         }, onlyLesson: context == .Lesson)
         
         // Do any additional setup after loading the view.

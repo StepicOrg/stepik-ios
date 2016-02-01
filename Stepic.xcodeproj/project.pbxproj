@@ -516,7 +516,6 @@
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
-				08F555611C4FE2D200C877E8 /* Quizzes */,
 				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
 				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
@@ -616,8 +615,8 @@
 		0891424C1BCEED6F0000BCB0 /* Step Content Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
-				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
+				08D565C81C5F7CE800DE2B6A /* Theory */,
+				08D565C91C5F7CF000DE2B6A /* Practice */,
 			);
 			name = "Step Content Controllers";
 			sourceTree = "<group>";
@@ -669,6 +668,23 @@
 				08CB4ABD1C4D3DCE00D7F918 /* WKWebViewPanelManager.m */,
 			);
 			name = WKWebViewPanelManager;
+			sourceTree = "<group>";
+		};
+		08D565C81C5F7CE800DE2B6A /* Theory */ = {
+			isa = PBXGroup;
+			children = (
+				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
+			);
+			name = Theory;
+			sourceTree = "<group>";
+		};
+		08D565C91C5F7CF000DE2B6A /* Practice */ = {
+			isa = PBXGroup;
+			children = (
+				08F555611C4FE2D200C877E8 /* Quizzes */,
+				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
+			);
+			name = Practice;
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {

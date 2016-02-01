@@ -581,7 +581,7 @@ class RGPageViewController: UIViewController, UIPageViewControllerDataSource, UI
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         var index: Int = indexForViewController(viewController)
         
-        if index == 0 {
+        if index <= 0 {
             return nil
         }
         
@@ -593,7 +593,7 @@ class RGPageViewController: UIViewController, UIPageViewControllerDataSource, UI
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         var index: Int = indexForViewController(viewController)
         
-        if index == pageCount - 1 {
+        if index >= pageCount - 1 {
             return nil
         }
         

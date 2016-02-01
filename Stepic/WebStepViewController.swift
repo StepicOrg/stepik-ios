@@ -104,8 +104,6 @@ class WebStepViewController: UIViewController {
         nItem.rightBarButtonItem = nil
         
         loadStepHTML()
-                
-        SVProgressHUD.dismiss()
     }
     
     private func loadStepHTML() {
