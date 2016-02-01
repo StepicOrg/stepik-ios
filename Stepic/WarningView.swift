@@ -57,21 +57,38 @@ class WarningView: UIView {
     
     var delegate : WarningViewDelegate?
     
+    private func localize() {
+        tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), forState: .Normal)
+    }
+    
+    private func getAttributedDescription(text: String) -> NSAttributedString {
+        let text = text
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
     convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14) {
         self.init(frame: frame)
-        //TODO: Localize try again button
+        localize()
         self.delegate = delegate
         self.imageView.image = image
         textLabel = UILabel()
         self.view.insertSubview(textLabel, belowSubview: tryAgainButton)
-        textLabel.text = text
         textLabel.textAlignment = NSTextAlignment.Center
         textLabel.numberOfLines = 0
         textLabel.font = UIFont.systemFontOfSize(14)
-        textLabel.alignLeading("8", trailing: "8", toView: view)
+        textLabel.alignLeading("8", trailing: "-8", toView: view)
         textLabel.constrainTopSpaceToView(centerView, predicate: "4")
-        let height = UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: fontSize, width: width - 16) + 14
-        textLabel.constrainHeight("\(height)")
+        textLabel.attributedText = getAttributedDescription(text)
+        tryAgainButton.constrainTopSpaceToView(textLabel, predicate: "8")
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }

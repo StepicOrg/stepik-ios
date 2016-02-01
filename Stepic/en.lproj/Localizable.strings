@@ -82,4 +82,5 @@ Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
 SolveOnTheWebsite = "Solve on stepic.org";
+ConnectionErrorText = "Could not connect to the internet";
 

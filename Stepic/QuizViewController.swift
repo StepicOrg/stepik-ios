@@ -37,7 +37,7 @@ class QuizViewController: UIViewController {
         return NSLocalizedString("Wrong", comment: "")
     }
     
-    let warningViewTitle = "Could not connect to the internet"
+    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
@@ -45,10 +45,10 @@ class QuizViewController: UIViewController {
     lazy var warningView : UIView = self.initWarningView()
     
     func initWarningView() -> UIView {
+        //TODO: change warning image!
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
         self.view.insertSubview(v, aboveSubview: self.view)
         v.alignToView(self.view)
-//        v.hidden = false
         return v
     }
     
@@ -72,6 +72,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentActivityIndicatorView {
                 UIThread.performUI{self.activityView.hidden = false}
+                self.delegate?.needsHeightUpdate(150)
             } else {
                 UIThread.performUI{self.activityView.hidden = true}
             }
@@ -82,6 +83,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentWarningView {
                 UIThread.performUI{self.warningView.hidden = false}
+                self.delegate?.needsHeightUpdate(300)
             } else {
                 UIThread.performUI{self.warningView.hidden = true}
             }

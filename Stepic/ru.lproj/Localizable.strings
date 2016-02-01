@@ -82,3 +82,4 @@ Correct = "Верно!";
 Wrong = "Неправильно. Пожалуйста, попробуйте еще раз.";
 CorrectFreeResponse = "Ваше решение сохранено.";
 SolveOnTheWebsite = "Решить на stepic.org";
+ConnectionErrorText = "Не удалось подключиться к сети";
