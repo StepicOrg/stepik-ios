@@ -201,6 +201,11 @@ class ApiDataDownloader: NSObject {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
+        if ids.filter({$0 != ""}).count == 0 {
+            failure(error: NSError(domain: NSCocoaErrorDomain, code: 500, userInfo: nil))
+            return nil
+        }
+        
         params["access_token"] = StepicAPI.shared.token?.accessToken
         
         let idString = constructIdsString(array: ids)
