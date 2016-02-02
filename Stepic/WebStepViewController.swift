@@ -102,7 +102,7 @@ class WebStepViewController: UIViewController {
         super.viewWillAppear(animated)
                         
         nItem.rightBarButtonItem = nil
-        
+        resetWebViewHeight(Float(getContentHeight(stepWebView)))
         loadStepHTML()
     }
     
@@ -268,7 +268,7 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        stepWebView.reload()
+        resetWebViewHeight(Float(getContentHeight(stepWebView)))
     }
 }
 
