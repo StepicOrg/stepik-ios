@@ -41,4 +41,8 @@ extension UIColor {
     class func wrongQuizBackgroundColor() -> UIColor {
         return UIColor(hex: 0xF5EBF2)
     }
+    
+    class func peerReviewYellowColor() -> UIColor {
+        return UIColor(hex: 0xFFFAE9)
+    }
 }

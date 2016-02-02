@@ -118,6 +118,9 @@ class WebStepViewController: UIViewController {
     func initQuizController(quizController : QuizViewController) {
         quizController.delegate = self
         quizController.step = self.step
+        if self.step.hasReview {
+            quizController.stepUrl = self.stepUrl
+        }
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.alignToView(quizPlaceholderView)

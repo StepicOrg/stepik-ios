@@ -83,3 +83,4 @@ Wrong = "Неправильно. Пожалуйста, попробуйте ещ
 CorrectFreeResponse = "Ваше решение сохранено.";
 SolveOnTheWebsite = "Решить на stepic.org";
 ConnectionErrorText = "Не удалось подключиться к сети";
+PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";

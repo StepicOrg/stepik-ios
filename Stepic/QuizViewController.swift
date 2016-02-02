@@ -19,6 +19,9 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var hintView: UIView!
     
+    @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
+    @IBOutlet weak var peerReviewButton: UIButton!
+    
     var delegate : QuizControllerDelegate?
     
     var submitTitle : String {
@@ -37,20 +40,24 @@ class QuizViewController: UIViewController {
         return NSLocalizedString("Wrong", comment: "")
     }
     
+    var peerReviewText : String {
+        return NSLocalizedString("PeerReviewText", comment: "")
+    }
+    
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
     
-    lazy var warningView : UIView = self.initWarningView()
-    
-    func initWarningView() -> UIView {
-        //TODO: change warning image!
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
-        self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignToView(self.view)
-        return v
-    }
+//    lazy var warningView : UIView = self.initWarningView()
+//    
+//    func initWarningView() -> UIView {
+//        //TODO: change warning image!
+//        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
+//        self.view.insertSubview(v, aboveSubview: self.view)
+//        v.alignToView(self.view)
+//        return v
+//    }
     
     func initActivityView() -> UIView {
         let v = UIView()
@@ -79,16 +86,16 @@ class QuizViewController: UIViewController {
         }
     }
     
-    var doesPresentWarningView : Bool = false {
-        didSet {
-            if doesPresentWarningView {
-                UIThread.performUI{self.warningView.hidden = false}
-                self.delegate?.needsHeightUpdate(300)
-            } else {
-                UIThread.performUI{self.warningView.hidden = true}
-            }
-        }
-    }
+//    var doesPresentWarningView : Bool = false {
+//        didSet {
+//            if doesPresentWarningView {
+//                UIThread.performUI{self.warningView.hidden = false}
+//                self.delegate?.needsHeightUpdate(300)
+//            } else {
+//                UIThread.performUI{self.warningView.hidden = true}
+//            }
+//        }
+//    }
     
     
     var attempt : Attempt? {
@@ -109,7 +116,7 @@ class QuizViewController: UIViewController {
     }
     
     var heightWithoutQuiz : CGFloat {
-        return 80 + statusViewHeight.constant + hintHeight.constant
+        return 80 + statusViewHeight.constant + hintHeight.constant + peerReviewHeight.constant
     }
     
     override func viewDidLayoutSubviews() {
@@ -150,6 +157,12 @@ class QuizViewController: UIViewController {
         return 0
     }
     
+    var needPeerReview : Bool {
+        return stepUrl != nil
+    }
+    
+    var stepUrl : String? 
+    
     private var didGetErrorWhileSendingSubmission = false
     
     var submission : Submission? {
@@ -165,6 +178,9 @@ class QuizViewController: UIViewController {
                     self.sendButton.setTitle(self.submitTitle, forState: .Normal)
                     self.statusViewHeight.constant = 0
                     self.hintHeight.constant = 0
+                    self.peerReviewHeight.constant = 0
+                    self.peerReviewButton.hidden = true
+                    
                     if self.didGetErrorWhileSendingSubmission {
                         self.updateQuizAfterSubmissionUpdate(reload: false)   
                         self.didGetErrorWhileSendingSubmission = false
@@ -179,9 +195,6 @@ class QuizViewController: UIViewController {
                         if hint != "" {
                             let height = UILabel.heightForLabelWithText(hint, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 32)
                             self.hintHeight.constant = height + 16
-                            self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
-                            self.hintLabel.textColor = UIColor.whiteColor()
-                            self.hintView.backgroundColor = UIColor.blackColor()
                             self.hintLabel.text = hint
                         } else {
                             self.hintHeight.constant = 0
@@ -198,7 +211,14 @@ class QuizViewController: UIViewController {
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
                         self.statusLabel.text = self.correctTitle
+                        
+                        if self.needPeerReview {
+                            self.peerReviewHeight.constant = 40
+                            self.peerReviewButton.hidden = false
+                        }
+                        
                         break
+                        
                     case "wrong":
                         if self.needsToRefreshAttemptWhenWrong {
                             self.buttonStateSubmit = false
@@ -206,16 +226,22 @@ class QuizViewController: UIViewController {
                             self.buttonStateSubmit = true
                         }
                         self.statusViewHeight.constant = 48
+                        self.peerReviewHeight.constant = 0
+                        self.peerReviewButton.hidden = true
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
                         self.statusLabel.text = self.wrongTitle
                         break
+                        
                     case "evaluation":
                         self.statusViewHeight.constant = 0
+                        self.peerReviewHeight.constant = 0
+                        self.peerReviewButton.hidden = true
                         self.doesPresentActivityIndicatorView = true
                         self.statusLabel.text = ""
                         break
+                        
                     default: 
                         break
                     }
@@ -242,7 +268,24 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
+        self.hintLabel.textColor = UIColor.whiteColor()
+        self.hintView.backgroundColor = UIColor.blackColor()
+
+        self.peerReviewButton.setTitle(peerReviewText, forState: .Normal)
+        self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
+        self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.peerReviewButton.hidden = true
         refreshAttempt(step.id)
+    }
+    
+    @IBAction func peerReviewButtonPressed(sender: AnyObject) {
+        if let stepurl = stepUrl {
+            let url = NSURL(string: stepurl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        
+            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+        }
     }
     
     func refreshAttempt(stepId: Int) {
@@ -255,7 +298,7 @@ class QuizViewController: UIViewController {
                         self.doesPresentActivityIndicatorView = false
                     }, error:  {
                         self.doesPresentActivityIndicatorView = false
-                        self.doesPresentWarningView = true
+//                        self.doesPresentWarningView = true
                 })
             } else {
                 //Get submission for attempt
@@ -281,7 +324,7 @@ class QuizViewController: UIViewController {
             }, error: {
                 errorText in
                 self.doesPresentActivityIndicatorView = false
-                self.doesPresentWarningView = true
+//                self.doesPresentWarningView = true
                 //TODO: Test this
         })
     }
@@ -383,7 +426,7 @@ class QuizViewController: UIViewController {
 
 extension QuizViewController : WarningViewDelegate {
     func didPressButton() {
-        self.doesPresentWarningView = false
+//        self.doesPresentWarningView = false
         self.refreshAttempt(step.id)
     }
 }

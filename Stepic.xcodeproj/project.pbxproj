@@ -826,12 +826,12 @@
 			name = NumberQuizViewController;
 			sourceTree = "<group>";
 		};
-		08F485A81C57B029000165AA /* FreeResponseQuizViewController */ = {
+		08F485A81C57B029000165AA /* FreeAnswerQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
 				08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */,
 			);
-			name = FreeResponseQuizViewController;
+			name = FreeAnswerQuizViewController;
 			sourceTree = "<group>";
 		};
 		08F485AD1C580DB8000165AA /* MathQuizViewController */ = {
@@ -898,7 +898,7 @@
 				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				08F4859D1C5786E6000165AA /* StringQuizViewController */,
 				08F485A31C57988D000165AA /* NumberQuizViewController */,
-				08F485A81C57B029000165AA /* FreeResponseQuizViewController */,
+				08F485A81C57B029000165AA /* FreeAnswerQuizViewController */,
 				08F485AD1C580DB8000165AA /* MathQuizViewController */,
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 			);
