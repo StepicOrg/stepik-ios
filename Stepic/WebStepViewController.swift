@@ -178,6 +178,24 @@ class WebStepViewController: UIViewController {
         }
     }
     
+    
+    //Measured in seconds
+    let reloadTimeStandardInterval = 0.5
+    let reloadTimeout = 10.0
+    
+    private func reloadWithCount(count: Int) {
+        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
+            return
+        }
+        
+        delay(reloadTimeStandardInterval * Double(count), closure: {
+            UIThread.performUI{
+                self.resetWebViewHeight(Float(self.getContentHeight(self.stepWebView)))
+            }
+            self.reloadWithCount(count + 1)
+        })  
+    }
+    
     @IBAction func solveOnTheWebsitePressed(sender: UIButton) {
 //        print(stepUrl)
 //        print(NSURL(string: stepUrl))
@@ -203,16 +221,18 @@ class WebStepViewController: UIViewController {
     
     
     func resetWebViewHeight(height: Float) {
+//        print("web view \(stepId) resetWebViewHeight loading status: \(stepWebView.loading)")
         if height == 0.0 {
-            print("\n__________________\nReloading web view \(stepId) after height set to 0.0\n_________________________\n")
+//            print("\n__________________\nReloading web view \(stepId) after height set to 0.0\n_________________________\n")
             stepWebView.reload()
             return
         }
-        print("\n__________________\n web view \(stepId)  height set to \(height)\n_________________________\n")
+//        print("__________________\n web view \(stepId)  height set to \(height), loading status: \(stepWebView.loading)\n_________________________\n")
+        
 
 //        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
-        self.view.setNeedsLayout()
+//        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
@@ -236,17 +256,19 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-//        print(request.URLString)
+        print(request.URLString)
         if didStartLoadingFirstRequest {
             if let url = request.URL { 
+                
                 if url.absoluteString != "about:blank" {
-//                if url.scheme == "ready" {
-//                    resetWebViewHeight(Float(url.host!)!)
-//                } else {
-                    print("trying to open in browser url -> \(url)")
-                    openInBrowserAlert(url) 
+                    if url.scheme == "ready" {
+                        print("scheme ready reported")
+                        resetWebViewHeight(Float(getContentHeight(webView)))
+                    } else {
+                        print("trying to open in browser url -> \(url)")
+                        openInBrowserAlert(url) 
+                    }
                 }
-//                }
             }
             return false
         } else {
@@ -265,9 +287,10 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        
+
         print("did finish load called, step id -> \(stepId) height -> \(getContentHeight(webView))")
         resetWebViewHeight(Float(getContentHeight(webView)))
+        self.reloadWithCount(0)
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
