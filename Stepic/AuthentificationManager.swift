@@ -254,9 +254,7 @@ class AuthentificationManager : NSObject {
             
             headers["Referer"] = "https://stepic.org/"
             headers["X-CSRFToken"] = csrftoken
-            
-            //        print(headers)
-            
+                        
             let params : [String : AnyObject] = 
             ["user" :
                 [

@@ -49,15 +49,15 @@ class QuizViewController: UIViewController {
     //Activity view here
     lazy var activityView : UIView = self.initActivityView()
     
-//    lazy var warningView : UIView = self.initWarningView()
-//    
-//    func initWarningView() -> UIView {
-//        //TODO: change warning image!
-//        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
-//        self.view.insertSubview(v, aboveSubview: self.view)
-//        v.alignToView(self.view)
-//        return v
-//    }
+    lazy var warningView : UIView = self.initWarningView()
+    
+    func initWarningView() -> UIView {
+        //TODO: change warning image!
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.alignToView(self.view)
+        return v
+    }
     
     func initActivityView() -> UIView {
         let v = UIView()
@@ -86,16 +86,16 @@ class QuizViewController: UIViewController {
         }
     }
     
-//    var doesPresentWarningView : Bool = false {
-//        didSet {
-//            if doesPresentWarningView {
-//                UIThread.performUI{self.warningView.hidden = false}
-//                self.delegate?.needsHeightUpdate(300)
-//            } else {
-//                UIThread.performUI{self.warningView.hidden = true}
-//            }
-//        }
-//    }
+    var doesPresentWarningView : Bool = false {
+        didSet {
+            if doesPresentWarningView {
+                UIThread.performUI{self.warningView.hidden = false}
+                self.delegate?.needsHeightUpdate(300)
+            } else {
+                UIThread.performUI{self.warningView.hidden = true}
+            }
+        }
+    }
     
     
     var attempt : Attempt? {
@@ -298,7 +298,7 @@ class QuizViewController: UIViewController {
                         self.doesPresentActivityIndicatorView = false
                     }, error:  {
                         self.doesPresentActivityIndicatorView = false
-//                        self.doesPresentWarningView = true
+                        self.doesPresentWarningView = true
                 })
             } else {
                 //Get submission for attempt
@@ -324,7 +324,7 @@ class QuizViewController: UIViewController {
             }, error: {
                 errorText in
                 self.doesPresentActivityIndicatorView = false
-//                self.doesPresentWarningView = true
+                self.doesPresentWarningView = true
                 //TODO: Test this
         })
     }
@@ -426,7 +426,7 @@ class QuizViewController: UIViewController {
 
 extension QuizViewController : WarningViewDelegate {
     func didPressButton() {
-//        self.doesPresentWarningView = false
+        self.doesPresentWarningView = false
         self.refreshAttempt(step.id)
     }
 }

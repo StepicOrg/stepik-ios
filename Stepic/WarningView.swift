@@ -75,11 +75,12 @@ class WarningView: UIView {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14) {
+    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14, contentMode : UIViewContentMode = UIViewContentMode.ScaleAspectFit) {
         self.init(frame: frame)
         localize()
         self.delegate = delegate
         self.imageView.image = image
+        self.imageView.contentMode = contentMode
         textLabel = UILabel()
         self.view.insertSubview(textLabel, belowSubview: tryAgainButton)
         textLabel.textAlignment = NSTextAlignment.Center
