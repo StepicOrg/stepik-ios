@@ -22,6 +22,58 @@ class StepsViewController: RGPageViewController {
     //By default presentation context is unit
     var context : StepsControllerPresentationContext = .Unit
     
+    
+    lazy var activityView : UIView = self.initActivityView()
+    
+    lazy var warningView : UIView = self.initWarningView()
+    
+    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
+    
+    func initWarningView() -> UIView {
+        //TODO: change warning image!
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+//        v.alignToView(self.view)
+        return v
+    }
+    
+    func initActivityView() -> UIView {
+        let v = UIView()
+        let ai = UIActivityIndicatorView()
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.constrainWidth("50", height: "50")
+        ai.color = UIColor.stepicGreenColor()
+        v.backgroundColor = UIColor.whiteColor()
+        v.addSubview(ai)
+        ai.alignCenterWithView(v)
+        ai.startAnimating()
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+        v.hidden = false
+        return v
+    }
+    
+    var doesPresentActivityIndicatorView : Bool = false {
+        didSet {
+            if doesPresentActivityIndicatorView {
+                UIThread.performUI{self.activityView.hidden = false}
+            } else {
+                UIThread.performUI{self.activityView.hidden = true}
+            }
+        }
+    }
+    
+    var doesPresentWarningView : Bool = false {
+        didSet {
+            if doesPresentWarningView {
+                UIThread.performUI{self.warningView.hidden = false}
+            } else {
+                UIThread.performUI{self.warningView.hidden = true}
+            }
+        }
+    }
+    
 //    var controllers : [UIViewController?]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,19 +82,45 @@ class StepsViewController: RGPageViewController {
 
         datasource = self
         delegate = self
-        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
 
-        lesson?.loadSteps(completion: {
-            print("did reload data")
-            UIThread.performUI{self.reloadData()}
-        }, onlyLesson: context == .Lesson)
+        if numberOfPagesForViewController(self) == 0 {
+            self.view.userInteractionEnabled = false
+        }
         
+        refreshSteps()
         // Do any additional setup after loading the view.
     }
-
+    
+    private func refreshSteps() {
+        if numberOfPagesForViewController(self) == 0 {
+            self.view.userInteractionEnabled = false
+            self.doesPresentWarningView = false
+            self.doesPresentActivityIndicatorView = true
+        }
+        lesson?.loadSteps(completion: {
+            print("did reload data")
+            UIThread.performUI{
+                self.view.userInteractionEnabled = true
+                self.reloadData()
+                self.doesPresentWarningView = false
+                self.doesPresentActivityIndicatorView = false
+            }
+            }, error: {
+                errorText in
+                print("error while loading steps in stepsviewcontroller")
+                UIThread.performUI{
+                    self.view.userInteractionEnabled = true
+                    self.doesPresentActivityIndicatorView = false
+                    if self.numberOfPagesForViewController(self) == 0 {
+                        self.doesPresentWarningView = true
+                    }
+                }
+            }, onlyLesson: context == .Lesson)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
@@ -153,12 +231,14 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.video = lesson!.steps[index].block.video!
             stepController.nItem = self.navigationItem
             stepController.step = lesson!.steps[index]
+            stepController.parentNavigationController = self.navigationController
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
             }
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
+            stepController.parent = self
             stepController.step = lesson!.steps[index]
             stepController.lesson = lesson
             stepController.stepId = index + 1
@@ -185,5 +265,11 @@ extension StepsViewController : RGPageViewControllerDelegate {
 //            return size.width + 32
 //        }
 //        return 150
+    }
+}
+
+extension StepsViewController : WarningViewDelegate {
+    func didPressButton() {
+        refreshSteps()
     }
 }

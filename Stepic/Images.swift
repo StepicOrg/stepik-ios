@@ -25,4 +25,9 @@ struct Images {
 
     static let visibleImage = UIImage(named: "visible")!
     static let visibleFilledImage = UIImage(named: "visible_filled")!
+    
+    static let correctQuizImage = UIImage(named: "ic_correct")!
+    static let wrongQuizImage = UIImage(named: "ic_error")!
+    
+    static let warningImage = UIImage(named: "nowifi_dark")!
 }

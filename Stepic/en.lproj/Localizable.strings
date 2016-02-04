@@ -24,7 +24,7 @@ ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
 ClearCacheTitle = "Clear cache";
-ClearCacheMessage = "Remove all videos stored in the memory of the iPhone?";
+ClearCacheMessage = "Remove all videos stored in the memory of your device?";
 FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
@@ -76,5 +76,12 @@ NoSearchResultsTitle = "Nothing found";
 Alert = "Alert";
 Confirm = "Confirm action";
 Prompt = "Enter data";
-
+Submit = "Submit";
+TryAgain = "Try again";
+Correct = "Correct!";
+Wrong = "Wrong. Please, try again.";
+CorrectFreeResponse = "Your answer was saved.";
+SolveOnTheWebsite = "Solve on stepic.org";
+ConnectionErrorText = "Could not connect to the internet";
+PeerReviewText = "This is a task with peer review. Tap to open in web to get points.";
 

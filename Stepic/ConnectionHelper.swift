@@ -78,7 +78,7 @@ class ConnectionHelper : NSObject {
     
     static let shared = ConnectionHelper()
     
-    private var reachability : Reachability!
+    var reachability : Reachability!
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     private let reachableOnWWANKey = "reachableOnWWAN" 

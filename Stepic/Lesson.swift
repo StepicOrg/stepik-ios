@@ -33,7 +33,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func loadSteps(completion completion: (Void -> Void), refresh : Bool = true, onlyLesson: Bool = false) {
+    func loadSteps(completion completion: (Void -> Void), error errorHandler: (String -> Void)? = nil, refresh : Bool = true, onlyLesson: Bool = false) {
         let getStepsBlock = 
         {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
             newSteps in 
@@ -47,16 +47,20 @@ class Lesson: NSManagedObject, JSONInitializable {
                         }, failure: {
                             error in
                             print("Error while downloading assignments")
+                            errorHandler?("Error while downloading assignments")
                     })
                 }}
             CoreDataHelper.instance.save()
             }, failure: {
                 error in
                 print("Error while downloading units")
+                errorHandler?("Error while downloading units")
         })}
         if refresh {
             AuthentificationManager.sharedManager.autoRefreshToken(success: {
                 getStepsBlock()
+                }, failure: {
+                    errorHandler?("failed to refresh token")
             })
         } else {
             getStepsBlock()

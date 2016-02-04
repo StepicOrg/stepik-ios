@@ -16,7 +16,7 @@ class AuthentificationManager : NSObject {
     private override init() {}
     
     
-    func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
+    func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
             "Authorization" : "Basic \(StepicApplicationsInfo.social.credentials)"
@@ -28,7 +28,7 @@ class AuthentificationManager : NSObject {
             "redirect_uri" : StepicApplicationsInfo.social.redirectUri
         ]
         
-        Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -52,7 +52,7 @@ class AuthentificationManager : NSObject {
         
     }
     
-    func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
+    func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         // Specifying the Headers we need
         let headers = [
@@ -67,7 +67,7 @@ class AuthentificationManager : NSObject {
         ]
         
         
-        Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -90,13 +90,13 @@ class AuthentificationManager : NSObject {
         })
     }
     
-    func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) {
+    func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         var credentials = ""
         switch StepicAPI.shared.authorizationType {
         case .None:
             failure(error: ConnectionError.TokenRefreshError)
-            return
+            return nil
         case .Code:
             credentials = StepicApplicationsInfo.social.credentials
         case .Password:
@@ -112,7 +112,7 @@ class AuthentificationManager : NSObject {
             "grant_type" : "refresh_token",
             "refresh_token" : refresh_token]
         
-        Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -128,14 +128,14 @@ class AuthentificationManager : NSObject {
         
     }
     
-    func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) {
+    func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) -> Request? {
         
         if StepicAPI.shared.didRefresh {
             success?()
-            return
+            return nil
         }
         
-        refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+        return refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
             (t) in
             StepicAPI.shared.token = t
             success?()
@@ -146,7 +146,7 @@ class AuthentificationManager : NSObject {
         })
     }
     
-    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) {
+    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
@@ -161,7 +161,7 @@ class AuthentificationManager : NSObject {
         //        params["access_token"] = StepicAPI.shared.token!.accessToken
         
         if !delete {
-            Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -186,7 +186,7 @@ class AuthentificationManager : NSObject {
                 //                success()
             })
         } else {
-            Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -215,11 +215,11 @@ class AuthentificationManager : NSObject {
         }
     }
     
-    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)){
+    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)) -> Request? {
         let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
         deleteStepicCookiesForSignup()
         //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-        Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL).response { 
+        return Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL).response { 
             (request, response, _, error) -> Void in
             
             if let e = error {
@@ -245,6 +245,7 @@ class AuthentificationManager : NSObject {
         
     }
     
+    //TODO: When refactoring code think about this function
     func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
         refreshSignUpCookies(completion: {
             csrftoken in
@@ -253,9 +254,7 @@ class AuthentificationManager : NSObject {
             
             headers["Referer"] = "https://stepic.org/"
             headers["X-CSRFToken"] = csrftoken
-            
-            //        print(headers)
-            
+                        
             let params : [String : AnyObject] = 
             ["user" :
                 [

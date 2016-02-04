@@ -19,6 +19,7 @@ class VideoStepViewController: UIViewController {
     var nItem : UINavigationItem!
     var step: Step!
     var assignment : Assignment?
+    var parentNavigationController : UINavigationController?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -97,8 +98,15 @@ class VideoStepViewController: UIViewController {
     }
     
     @IBAction func playButtonPressed(sender: UIButton) {
-        setControls(playing: true)
-        self.moviePlayer?.play()
+        if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
+            setControls(playing: true)
+            self.moviePlayer?.play()
+        } else {
+            if let vc = self.parentNavigationController {
+                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+            }
+        }
+        
     }
     
     var itemView : VideoDownloadView!
@@ -108,8 +116,6 @@ class VideoStepViewController: UIViewController {
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
         print(self.moviePlayer?.view.frame)
-
-        SVProgressHUD.dismiss()
     }
     
     override func didReceiveMemoryWarning() {

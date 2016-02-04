@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SizeReportScript</key>
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;
+   window.onload = function() { 
+      window.location.href = &quot;ready://&quot; + document.body.scrollHeight;
+   }
+&lt;/script&gt;</string>
 	<key>TexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({tex2jax: {inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});

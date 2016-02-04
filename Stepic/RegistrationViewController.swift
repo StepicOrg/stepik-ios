@@ -47,15 +47,6 @@ class RegistrationViewController: UIViewController {
         closeBarButtonItem.tintColor = UIColor.stepicGreenColor()
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
-//        self.firstNameTextField.registerAsDodgeViewForMLInputDodger()
-//        self.lastNameTextField.registerAsDodgeViewForMLInputDodger()
-//        self.emailTextField.registerAsDodgeViewForMLInputDodger()
-//        self.passwordTextField.registerAsDodgeViewForMLInputDodger()
-        self.view.registerAsDodgeViewForMLInputDodger()
-        //        self.emailTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-        //        self.passwordTextField.shiftHeightAsFirstResponderForMLInputDodger = 180.0
-        self.view.shiftHeightAsDodgeViewForMLInputDodger = 240.0;
-        
         passwordTextField.delegate = self
         visiblePasswordButton.hidden = true
     }
