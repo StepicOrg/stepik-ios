@@ -92,6 +92,8 @@
 		08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
 		08970ED21C6A326900846119 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
 		08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
+		08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */; };
+		08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
@@ -125,7 +127,6 @@
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
-		08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94181B8C58AC00D278AB /* ViewController.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */; };
@@ -272,6 +273,8 @@
 		08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
 		08970ECD1C6A326900846119 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderStyleExtensions.swift; sourceTree = "<group>"; };
+		08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTestViewController.swift; sourceTree = "<group>"; };
+		08970ED61C6A36E500846119 /* PlaceholderView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaceholderView.storyboard; sourceTree = "<group>"; };
 		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadDelegate.swift; sourceTree = "<group>"; };
 		089B370E1BFA210F003DC593 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -310,7 +313,6 @@
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		08DE94181B8C58AC00D278AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		08DE941B1B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08DE941D1B8C58AC00D278AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		08DE94201B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 		08970EC91C6A325600846119 /* PlaceholderView */ = {
 			isa = PBXGroup;
 			children = (
+				08970ED41C6A369200846119 /* PlaceholderViewTesting */,
 				08970ECA1C6A326900846119 /* PlaceholderView.swift */,
 				08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */,
 				08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */,
@@ -642,6 +645,15 @@
 				08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */,
 			);
 			name = PlaceholderView;
+			sourceTree = "<group>";
+		};
+		08970ED41C6A369200846119 /* PlaceholderViewTesting */ = {
+			isa = PBXGroup;
+			children = (
+				08970ED51C6A36E500846119 /* PlaceholderTestViewController.swift */,
+				08970ED61C6A36E500846119 /* PlaceholderView.storyboard */,
+			);
+			name = PlaceholderViewTesting;
 			sourceTree = "<group>";
 		};
 		08B361061BB2E3C100090843 /* User Preferences */ = {
@@ -738,7 +750,6 @@
 				0885F8491BA8374000F2A188 /* Model */,
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				08DE94161B8C58AC00D278AB /* AppDelegate.swift */,
-				08DE94181B8C58AC00D278AB /* ViewController.swift */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
 				08DE941D1B8C58AC00D278AB /* Images.xcassets */,
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
@@ -1068,6 +1079,7 @@
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
@@ -1159,7 +1171,6 @@
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
-				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
@@ -1208,6 +1219,7 @@
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
+				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,

@@ -31,7 +31,7 @@ struct PlaceholderStyle {
 
 var stepicPlaceholderStyle : PlaceholderStyle {
     var style = PlaceholderStyle()
-    style.title.font = UIFont.systemFontOfSize(17, weight: UIFontWeightBold)
+    style.title.font = UIFont.boldSystemFontOfSize(17)
     style.button.borderType = .None
     style.button.borderColor = UIColor.stepicGreenColor()
     style.button.backgroundColor = UIColor.whiteColor()
