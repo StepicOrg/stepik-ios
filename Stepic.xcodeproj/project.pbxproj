@@ -87,6 +87,11 @@
 		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
 		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
+		08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
+		08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
+		08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
+		08970ED21C6A326900846119 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
+		08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */; };
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
@@ -262,6 +267,11 @@
 		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
+		08970ECA1C6A326900846119 /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDataSource.swift; sourceTree = "<group>"; };
+		08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
+		08970ECD1C6A326900846119 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderStyleExtensions.swift; sourceTree = "<group>"; };
 		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadDelegate.swift; sourceTree = "<group>"; };
 		089B370E1BFA210F003DC593 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -535,6 +545,7 @@
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08970EC91C6A325600846119 /* PlaceholderView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
@@ -619,6 +630,18 @@
 				08D565C91C5F7CF000DE2B6A /* Practice */,
 			);
 			name = "Step Content Controllers";
+			sourceTree = "<group>";
+		};
+		08970EC91C6A325600846119 /* PlaceholderView */ = {
+			isa = PBXGroup;
+			children = (
+				08970ECA1C6A326900846119 /* PlaceholderView.swift */,
+				08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */,
+				08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */,
+				08970ECD1C6A326900846119 /* Styles.swift */,
+				08970ECE1C6A326900846119 /* PlaceholderStyleExtensions.swift */,
+			);
+			name = PlaceholderView;
 			sourceTree = "<group>";
 		};
 		08B361061BB2E3C100090843 /* User Preferences */ = {
@@ -1105,7 +1128,9 @@
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
+				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
+				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
@@ -1131,6 +1156,7 @@
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
+				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
 				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				08DE94191B8C58AC00D278AB /* ViewController.swift in Sources */,
@@ -1138,6 +1164,7 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
+				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
@@ -1217,6 +1244,7 @@
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				08F555671C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
