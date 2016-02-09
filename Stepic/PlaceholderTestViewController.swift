@@ -51,7 +51,7 @@ extension PlaceholderTestViewController : PlaceholderViewDataSource {
     }
     
     func placeholderImage() -> UIImage? {
-        return UIImage(named: "nowifi_dark")!
+        return nil
     }
     
     func placeholderTitle() -> String? {

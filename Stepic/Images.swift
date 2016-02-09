@@ -30,7 +30,7 @@ struct Images {
     static let wrongQuizImage = UIImage(named: "ic_error")!
     
     struct noWifiImage {
-        static let size250x250 = UIImage(named: "nowifi_dark")!
-        static let size100x100 = UIImage(named: "nowifi_dark")!
+        static let size250x250 = UIImage(named: "nowifi_dark_250")!
+        static let size100x100 = UIImage(named: "nowifi_dark_100")!
     }    
 }
