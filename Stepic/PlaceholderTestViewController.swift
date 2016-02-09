@@ -28,8 +28,6 @@ class PlaceholderTestViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
-
 }
 
 extension PlaceholderTestViewController : PlaceholderViewDelegate {
@@ -40,7 +38,8 @@ extension PlaceholderTestViewController : PlaceholderViewDelegate {
 
 extension PlaceholderTestViewController : PlaceholderViewDataSource {
     func placeholderButtonTitle() -> String? {
-        return "Try again"
+        return nil
+//        return "Try again"
     }
     
     func placeholderStyle() -> PlaceholderStyle {

@@ -31,7 +31,7 @@ class StepsViewController: RGPageViewController {
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
         v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
 //        v.alignToView(self.view)

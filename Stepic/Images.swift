@@ -29,5 +29,8 @@ struct Images {
     static let correctQuizImage = UIImage(named: "ic_correct")!
     static let wrongQuizImage = UIImage(named: "ic_error")!
     
-    static let warningImage = UIImage(named: "nowifi_dark")!
+    struct noWifiImage {
+        static let size250x250 = UIImage(named: "nowifi_dark")!
+        static let size100x100 = UIImage(named: "nowifi_dark")!
+    }    
 }
