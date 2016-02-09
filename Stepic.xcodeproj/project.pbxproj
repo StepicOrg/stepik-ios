@@ -140,6 +140,7 @@
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
+		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
@@ -329,6 +330,7 @@
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
+		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
 				08E16F201BDBA495004822E1 /* Reachability */,
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
@@ -1067,6 +1070,7 @@
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
+				08E542011C6A76E100DEC38E /* MathJax in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,

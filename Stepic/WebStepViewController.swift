@@ -108,10 +108,11 @@ class WebStepViewController: UIViewController {
     
     private func loadStepHTML() {
         if let htmlText = step.block.text {
-            let scriptsString = "\(Scripts.texScript)"
+            let scriptsString = "\(Scripts.localTexScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
             html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            stepWebView.loadHTMLString(html, baseURL: nil)
+            print("\(NSBundle.mainBundle().bundlePath)")
+            stepWebView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
         }
     }
     
