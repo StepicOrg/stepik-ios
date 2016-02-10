@@ -366,7 +366,11 @@ class ApiDataDownloader: NSObject {
         var params : [String : NSObject] = [:]
         params["access_token"] = StepicAPI.shared.token?.accessToken
         params["step"] = stepId
-
+        if let userid = StepicAPI.shared.userId {
+            params["user"] = userid
+        } else {
+            print("no user id!")
+        }
         return Alamofire.request(.GET, "https://stepic.org/api/attempts", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
             _, response, json, error in
             if let e = error {
