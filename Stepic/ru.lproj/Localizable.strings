@@ -84,3 +84,6 @@ CorrectFreeResponse = "Ваше решение сохранено.";
 SolveOnTheWebsite = "Решить на stepic.org";
 ConnectionErrorText = "Не удалось подключиться к сети";
 PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";
+ConnectionErrorPullToRefresh = "Включите соединение и потяните вниз";
+EmptyFindCoursesTitle = "Обновите курсы";
+EmptyFindCoursesDescription = "Потяните вниз, чтобы обновить список доступных курсов";

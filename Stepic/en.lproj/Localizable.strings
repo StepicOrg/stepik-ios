@@ -33,7 +33,7 @@ EmptyDownloadsTitle = "No downloading or downloaded videos";
 EmptyDownloadsDescription = "You can only download videos from the courses, which you are assigned to. Please, go to one of the courses' tabs and try to download videos.";
 Lesson = "Lesson";
 EmptyMyCoursesTitle = "You are not enrolled to any course";
-EmptyMyCoursesDescription = "Go to \"All courses\" tab to see the list of avaliable courses, choose some of them to enroll, it's fun!";
+EmptyMyCoursesDescription = "Go to \"All courses\" tab to see the list of available courses, choose some of them to enroll, it's fun!";
 ReloadPlayerTitle = "Video download finished";
 ReloadPlayerMessage = "Reload video player?";
 BeginDate = "Begin date";
@@ -84,4 +84,7 @@ CorrectFreeResponse = "Your answer was saved.";
 SolveOnTheWebsite = "Solve on stepic.org";
 ConnectionErrorText = "Could not connect to the internet";
 PeerReviewText = "This is a task with peer review. Tap to open in web to get points.";
+ConnectionErrorPullToRefresh = "Enable connection and pull to refresh";
+EmptyFindCoursesTitle = "Refresh courses";
+EmptyFindCoursesDescription = "Pull to refresh available courses";
 

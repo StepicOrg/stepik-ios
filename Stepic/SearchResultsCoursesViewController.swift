@@ -225,7 +225,7 @@ extension SearchResultsCoursesViewController {
     }
 }
 
-extension SearchResultsCoursesViewController : DZNEmptyDataSetSource {
+extension SearchResultsCoursesViewController {
     func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
         return Images.emptyCoursesPlaceholder
     }
@@ -264,7 +264,7 @@ extension SearchResultsCoursesViewController : DZNEmptyDataSetSource {
     }
 }
 
-extension SearchResultsCoursesViewController : DZNEmptyDataSetDelegate {
+extension SearchResultsCoursesViewController {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return false
     }

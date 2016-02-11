@@ -10,7 +10,7 @@ import UIKit
 import FLKAutoLayout
 import DZNEmptyDataSet
 
-class CoursesViewController: UIViewController {
+class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var tableView = UITableView()
     
@@ -55,17 +55,16 @@ class CoursesViewController: UIViewController {
             getCachedCourses(completion: {
                 self.refreshCourses()
             })
+            
         }
         
-        // Do any additional setup after loading the view.
-        print("loadFeatured = \(loadFeatured)")
-        print("loadEnrolled = \(loadEnrolled)")
-        //        loadFeatured = true
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        print(tableView.frame)
         if refreshEnabled && (self.refreshControl?.refreshing ?? false) {
             let offset = self.tableView.contentOffset
             self.refreshControl?.endRefreshing()
@@ -108,6 +107,7 @@ class CoursesViewController: UIViewController {
                     self.currentPage = 1
                     self.tabIds = ids
                     dispatch_async(dispatch_get_main_queue()) {
+                        self.emptyDatasetState = .Empty
                         self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
                     }
@@ -129,10 +129,19 @@ class CoursesViewController: UIViewController {
         })
     }
     
+    var emptyDatasetState : EmptyDatasetState = .Empty {
+        didSet {
+            UIThread.performUI{
+                self.tableView.reloadEmptyDataSet()
+            }
+        }
+    }
+    
     func handleRefreshError() {
         self.isRefreshing = false
         dispatch_async(dispatch_get_main_queue()) {
-            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
+            //TODO: Handle refresh error here - just add some kind of message or smth
+            self.emptyDatasetState = EmptyDatasetState.ConnectionError
             self.refreshControl?.endRefreshing()
         }
     }

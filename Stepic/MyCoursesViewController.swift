@@ -24,33 +24,50 @@ class MyCoursesViewController: CoursesViewController {
     override func viewDidLoad() {
         loadEnrolled = true
         loadFeatured = nil
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
         
         super.viewDidLoad()
     }
 }
 
-extension MyCoursesViewController : DZNEmptyDataSetSource {
+extension MyCoursesViewController {
     func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return Images.emptyCoursesPlaceholder
+        switch emptyDatasetState {
+        case .Empty:
+            return Images.emptyCoursesPlaceholder
+        case .ConnectionError:
+            return Images.noWifiImage.size250x250
+        }
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        }
         
-        let text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    
-    
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
         
-        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-        
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
+            break
+        }
+                
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
@@ -72,7 +89,7 @@ extension MyCoursesViewController : DZNEmptyDataSetSource {
     }
 }
 
-extension MyCoursesViewController : DZNEmptyDataSetDelegate {
+extension MyCoursesViewController  {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
     }
