@@ -261,7 +261,7 @@ extension WebStepViewController : UIWebViewDelegate {
         if didStartLoadingFirstRequest {
             if let url = request.URL { 
                 
-                if url.absoluteString != "about:blank" {
+                if url.scheme != "file" {
                     if url.scheme == "ready" {
                         print("scheme ready reported")
                         resetWebViewHeight(Float(getContentHeight(webView)))
@@ -269,7 +269,7 @@ extension WebStepViewController : UIWebViewDelegate {
                         print("trying to open in browser url -> \(url)")
                         openInBrowserAlert(url) 
                     }
-                }
+                } 
             }
             return false
         } else {
