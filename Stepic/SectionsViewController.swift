@@ -280,7 +280,7 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
             break
         case .ConnectionError:
-            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
+            text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
             break
         }
         

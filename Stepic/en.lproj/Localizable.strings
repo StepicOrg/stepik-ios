@@ -89,5 +89,6 @@ EmptyFindCoursesTitle = "Refresh courses";
 EmptyFindCoursesDescription = "Pull to refresh available courses";
 PullToRefreshSectionsTitle = "Refresh sections";
 PullToRefreshSectionsDescription = "Pull to refresh sections";
-
+PullToRefreshUnitsTitle = "Refresh lessons";
+PullToRefreshUnitsDescription = "Pull to refresh lessons";
 
