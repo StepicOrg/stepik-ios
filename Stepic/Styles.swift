@@ -10,7 +10,7 @@ import UIKit
 
 struct PlaceholderStyle {
     struct LabelStyle {
-        var font : UIFont = UIFont.systemFontOfSize(15)
+        var font : UIFont = UIFont.systemFontOfSize(14)
         var textColor : UIColor = UIColor.lightGrayColor()
         var textAlignment : NSTextAlignment = NSTextAlignment.Center
         var lineBreakMode : NSLineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -31,7 +31,7 @@ struct PlaceholderStyle {
 
 var stepicPlaceholderStyle : PlaceholderStyle {
     var style = PlaceholderStyle()
-    style.title.font = UIFont.boldSystemFontOfSize(17)
+    style.title.font = UIFont.boldSystemFontOfSize(18)
     style.button.borderType = .None
     style.button.borderColor = UIColor.stepicGreenColor()
     style.button.backgroundColor = UIColor.whiteColor()
