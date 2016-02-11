@@ -87,4 +87,7 @@ PeerReviewText = "This is a task with peer review. Tap to open in web to get poi
 ConnectionErrorPullToRefresh = "Enable connection and pull to refresh";
 EmptyFindCoursesTitle = "Refresh courses";
 EmptyFindCoursesDescription = "Pull to refresh available courses";
+PullToRefreshSectionsTitle = "Refresh sections";
+PullToRefreshSectionsDescription = "Pull to refresh sections";
+
 

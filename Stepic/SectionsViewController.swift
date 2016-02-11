@@ -8,6 +8,7 @@
 
 import UIKit
 import DownloadButton
+import DZNEmptyDataSet
 
 class SectionsViewController: UIViewController {
 
@@ -34,6 +35,8 @@ class SectionsViewController: UIViewController {
         refreshControl.beginRefreshing()
         refreshSections()
 
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -49,18 +52,27 @@ class SectionsViewController: UIViewController {
         }
     }
     
+    var emptyDatasetState : EmptyDatasetState = .Empty {
+        didSet {
+            UIThread.performUI{
+                self.tableView.reloadEmptyDataSet()
+            }
+        }
+    }
+    
     func refreshSections() {
         didRefresh = false
         course.loadAllSections(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
+                self.emptyDatasetState = EmptyDatasetState.Empty
             })
             self.didRefresh = true
         }, error: {
-            Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
+                self.emptyDatasetState = EmptyDatasetState.ConnectionError
             })
             self.didRefresh = true
         })
@@ -230,5 +242,71 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             break
         }
     }
+}
+
+extension SectionsViewController : DZNEmptyDataSetSource {
     
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        switch emptyDatasetState {
+        case .Empty:
+            return Images.emptyCoursesPlaceholder
+        case .ConnectionError:
+            return Images.noWifiImage.size250x250
+        }
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("PullToRefreshSectionsTitle", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        }
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
+        
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
+            break
+        }
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.whiteColor()
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
+        return 44
+    }
+}
+
+extension SectionsViewController : DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
 }
