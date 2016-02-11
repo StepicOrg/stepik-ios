@@ -20,7 +20,7 @@ extension UILabel {
         //        attributes.merge([NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType])
         
         let attributedDescription = try? NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) 
-        self.text = attributedDescription!.string
+        self.text = attributedDescription?.string ?? ""
 //        Time.tock(htmlText)
     }
     
