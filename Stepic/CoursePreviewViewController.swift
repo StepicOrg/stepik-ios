@@ -125,6 +125,7 @@ class CoursePreviewViewController: UIViewController {
                 }) 
             } else {
                 askForUnenroll(unenroll: {
+                    SVProgressHUD.show()
                     AuthentificationManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
                         SVProgressHUD.showSuccessWithStatus("")
                         sender.setEnabledJoined()
