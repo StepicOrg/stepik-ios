@@ -142,6 +142,7 @@
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
+		08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
@@ -333,6 +334,7 @@
 		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
+		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
@@ -390,22 +392,17 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */,
 				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
-				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
-				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
 				08E16F281BDBA731004822E1 /* ConnectionHelper.swift */,
 				08A1256E1BDE8E460066B2B2 /* Sorter.swift */,
 				08C0A4331BF1276C0010F049 /* Messages.swift */,
 				08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */,
-				089B370E1BFA210F003DC593 /* CacheManager.swift */,
 				08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */,
 				08D2AE451C04BA6100BD8C3D /* Time.swift */,
 				08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */,
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
-				08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */,
 				08F5556B1C5267A600C877E8 /* GCDThings.swift */,
 			);
 			name = Helpers;
@@ -752,6 +749,7 @@
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
 				0885F8491BA8374000F2A188 /* Model */,
+				08E542071C6CD59A00DEC38E /* Managers */,
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08F204931BB0157F00D080C0 /* Extensions */,
@@ -810,6 +808,19 @@
 				08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */,
 			);
 			name = Enums;
+			sourceTree = "<group>";
+		};
+		08E542071C6CD59A00DEC38E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
+				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
+				08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */,
+				089B370E1BFA210F003DC593 /* CacheManager.swift */,
+				08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */,
+				08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		08F204931BB0157F00D080C0 /* Extensions */ = {
@@ -1177,6 +1188,7 @@
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
+				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,

@@ -117,6 +117,7 @@ class CoursePreviewViewController: UIViewController {
                     sender.setDisabledJoined()
                     self.course?.enrolled = true
                     CoreDataHelper.instance.save()
+                    CoursesJoinManager.sharedManager.addedCourses += [c]
                     self.performSegueWithIdentifier("showSections", sender: nil)
                 }, error:  {
                     status in
@@ -129,6 +130,7 @@ class CoursePreviewViewController: UIViewController {
                         sender.setEnabledJoined()
                         self.course?.enrolled = false
                         CoreDataHelper.instance.save()
+                        CoursesJoinManager.sharedManager.deletedCourses += [c]
                         self.navigationController?.popToRootViewControllerAnimated(true)
                         }, error:  {
                             status in

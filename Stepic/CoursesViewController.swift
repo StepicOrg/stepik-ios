@@ -208,9 +208,16 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         AuthentificationManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
-                (ids, meta) -> Void in
+                (var ids, meta) -> Void in
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
-                    (newCourses) -> Void in
+                    (var newCourses) -> Void in
+                    
+                    newCourses = self.getNonExistingCourses(newCourses)
+                    
+                    ids = ids.flatMap{
+                        id in
+                        return newCourses.indexOf{$0.id == id}
+                    }
                     
                     self.currentPage += 1
                     self.courses += Sorter.sort(newCourses, byIds: ids)
@@ -253,6 +260,17 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         if segue.identifier == "showPreferences" {
             let dvc = segue.destinationViewController as! UserPreferencesTableViewController
             dvc.hidesBottomBarWhenPushed = true
+        }
+    }
+    
+    func getNonExistingCourses(newCourses: [Course]) -> [Course] {
+        return newCourses.flatMap{
+            newCourse in
+            if let _ = courses.indexOf({$0 == newCourse}) {
+                return nil
+            } else {
+                return newCourse
+            }
         }
     }
 }
