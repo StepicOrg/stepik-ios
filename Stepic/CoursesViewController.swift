@@ -211,12 +211,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 (var ids, meta) -> Void in
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
                     (var newCourses) -> Void in
-                    
                     newCourses = self.getNonExistingCourses(newCourses)
-                    
                     ids = ids.flatMap{
                         id in
-                        return newCourses.indexOf{$0.id == id}
+                        return newCourses.indexOf{$0.id == id} != nil ? id : nil
                     }
                     
                     self.currentPage += 1
