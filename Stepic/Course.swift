@@ -80,7 +80,7 @@ class Course: NSManagedObject, JSONInitializable {
                     secs in
                     self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
                     CoreDataHelper.instance.save()
-                    self.loadProgressesForSections(success)
+                    self.loadProgressesForSections(success, error: errorHandler)
                     //success()  
                 }, failure : {
                         error in
@@ -92,7 +92,7 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    func loadProgressesForSections(completion: (Void->Void)) {
+    func loadProgressesForSections(completion: (Void->Void), error errorHandler : (Void->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for section in sections {
@@ -119,7 +119,8 @@ class Course: NSManagedObject, JSONInitializable {
             completion()
             }, failure: { 
                 (error) -> Void in
-                print("Error while dowloading progresses")
+                print("Error while downloading progresses")
+                errorHandler()
         })
     }
     
