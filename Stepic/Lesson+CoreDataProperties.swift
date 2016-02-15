@@ -75,7 +75,7 @@ extension Lesson {
     
     var coverURL : String? {
         set(value) {
-            managedCoverURL = coverURL
+            managedCoverURL = value
         }
         get {
             return managedCoverURL
