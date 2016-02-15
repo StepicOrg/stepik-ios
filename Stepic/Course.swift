@@ -42,31 +42,20 @@ class Course: NSManagedObject, JSONInitializable {
         
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
+        
+        if let _ = json["intro_video"].null {
+            introVideo = nil
+        } else {
+            introVideo = Video(json: json["intro_video"])
+        }
+        
+        
+        print("introVideo -> \(introVideo)")
     }
     
     
     func update(json json: JSON) {
-        id = json["id"].intValue
-        title = json["title"].stringValue
-        courseDescription = json["description"].stringValue
-        coverURLString = Constants.stepicURLString + json["cover"].stringValue
-        
-        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
-        endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
-        
-        enrolled = json["enrollment"].int != nil
-        featured = json["is_featured"].boolValue
-        
-        summary = json["summary"].stringValue
-        workload = json["workload"].stringValue
-        introURL = json["intro"].stringValue
-        format = json["course_format"].stringValue
-        audience = json["target_audience"].stringValue
-        certificate = json["certificate"].stringValue
-        requirements = json["requirements"].stringValue
-        
-        sectionsArray = json["sections"].arrayObject as! [Int]
-        instructorsArray = json["instructors"].arrayObject as! [Int]
+        initialize(json)
     }
     
         
