@@ -110,7 +110,6 @@
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
 		08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */; };
 		08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
 		08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
@@ -296,7 +295,6 @@
 		08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherCollectionViewCell.swift; sourceTree = "<group>"; };
 		08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherCollectionViewCell.xib; sourceTree = "<group>"; };
-		08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVideoTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeachersTableViewCell.swift; sourceTree = "<group>"; };
 		08CA59E91BBD3D55008DC44D /* LabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
 		08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
@@ -679,7 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */,
-				08CA59DF1BBD2584008DC44D /* IntroVideoTableViewCell.swift */,
 				08B80E501C03856000483AAA /* TeachersTableViewCell */,
 				08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */,
 				08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */,
@@ -1186,7 +1183,6 @@
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
-				08CA59E01BBD2584008DC44D /* IntroVideoTableViewCell.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
