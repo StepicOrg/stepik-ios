@@ -4,7 +4,7 @@
 <dict>
 	<key>LocalTexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  MathJax.Hub.Config({tex2jax: {inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});
+  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});
 &lt;/script&gt;</string>
 	<key>SizeReportScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
