@@ -24,7 +24,7 @@ extension UILabel {
 //        Time.tock(htmlText)
     }
     
-    class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false) -> CGFloat {
+    class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.Natural) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
         
         label.numberOfLines = lines
@@ -38,6 +38,7 @@ extension UILabel {
         label.font = UIFont.systemFontOfSize(size)
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         label.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
+        label.textAlignment = alignment
         label.sizeToFit()
         
 //        print(label.bounds.height)

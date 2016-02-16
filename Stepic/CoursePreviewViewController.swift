@@ -218,7 +218,12 @@ extension CoursePreviewViewController : UITableViewDataSource {
         cell.initWithCourse(course!)
         
         cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType == .Overview ? 0 : 1
-        let cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: cell.frame.height)
+        var cFrame : CGRect
+        if let c = course {
+            cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: GeneralInfoTableViewCell.heightForCellWith(c))
+        } else {
+            cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 0)
+        }
         cell.frame = cFrame
         let cv = UIView()
         cv.addSubview(cell)
@@ -246,28 +251,6 @@ extension CoursePreviewViewController : UITableViewDelegate {
                 return 137
             }
             return heights[displayingInfoType.rawValue][indexPath.row]
-//            if displayingInfoType == .Overview {
-//                switch indexPath.row {
-//                case 0:
-//                    return 137
-//                    
-//                case 1:
-//                    return SummaryTableViewCell.heightForCourse(course!)
-//                default:
-//                    return 0
-//                }
-//                
-//            } else {
-//                switch indexPath.row {
-//                case 0:
-//                    return DescriptionTableViewCell.heightForCourse(course!)
-//                    
-//                case 1:
-//                    return 67
-//                default:
-//                    return 0
-//                }
-//            }
         }
     }
     
@@ -275,7 +258,11 @@ extension CoursePreviewViewController : UITableViewDelegate {
         if section == 0 {
             return 0
         } else {
-            return 120
+            if let c = course {
+                return GeneralInfoTableViewCell.heightForCellWith(c)
+            } else {
+                return 0
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1348,13 +1348,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="118"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8q0-dk-g4x">
-                                                    <rect key="frame" x="8" y="8" width="584" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Course name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8q0-dk-g4x">
+                                                    <rect key="frame" x="8" y="8" width="584" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uiF-lQ-kcC">
-                                                    <rect key="frame" x="8" y="83" width="584" height="28"/>
+                                                    <rect key="frame" x="8" y="90" width="584" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="iIs-Kj-1Bm"/>
                                                     </constraints>
@@ -1368,7 +1368,7 @@
                                                     </connections>
                                                 </segmentedControl>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZy-dW-Bj2">
-                                                    <rect key="frame" x="8" y="35" width="584" height="40"/>
+                                                    <rect key="frame" x="8" y="42" width="584" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="b8c-PG-IWL"/>
                                                     </constraints>
@@ -1387,7 +1387,7 @@
                                                 <constraint firstAttribute="topMargin" secondItem="8q0-dk-g4x" secondAttribute="top" id="BUt-VP-oXW"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="uiF-lQ-kcC" secondAttribute="leading" id="KGN-n4-ltb"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="8q0-dk-g4x" secondAttribute="leading" id="abM-dY-0k1"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="uiF-lQ-kcC" secondAttribute="bottom" id="gLo-vI-gHi"/>
+                                                <constraint firstAttribute="bottom" secondItem="uiF-lQ-kcC" secondAttribute="bottom" constant="1" id="gLo-vI-gHi"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="uiF-lQ-kcC" secondAttribute="trailing" id="ifI-Sb-95W"/>
                                                 <constraint firstItem="MZy-dW-Bj2" firstAttribute="top" secondItem="8q0-dk-g4x" secondAttribute="bottom" constant="8" id="kCb-4j-BMr"/>
                                                 <constraint firstItem="uiF-lQ-kcC" firstAttribute="top" secondItem="MZy-dW-Bj2" secondAttribute="bottom" constant="8" id="uL3-8e-eES"/>
@@ -1488,11 +1488,11 @@
                         <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="z7c-c8-8wj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Zo1-Oj-Hsk" id="zBn-9O-FKh"/>
@@ -1533,11 +1533,11 @@
                         <viewControllerLayoutGuide type="bottom" id="dbc-fW-0PT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eEo-OZ-NVq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="8ik-tt-HOc" id="d6o-oi-Nnu"/>
@@ -1572,7 +1572,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1903,9 +1903,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ihX-2a-oaI"/>
-        <segue reference="WuO-Je-0sX"/>
         <segue reference="RJf-bv-ine"/>
         <segue reference="nf5-of-tUO"/>
+        <segue reference="LaP-cg-j2K"/>
         <segue reference="oyz-px-1HN"/>
     </inferredMetricsTieBreakers>
 </document>
