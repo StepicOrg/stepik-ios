@@ -85,13 +85,17 @@ class UnitTableViewCell: UITableViewCell {
             }
         }
         
-        if let score = unit.progress?.score, 
-            let cost = unit.progress?.cost {
-            scoreProgressView.progress = Float(score) / Float(cost)
-            scoreLabel.text = "\(score)/\(cost)"
+        if let progress = unit.progress {
+                if progress.cost == 0 {
+                    scoreProgressView.hidden = true
+                    scoreLabel.hidden = true
+                } else {
+                    scoreProgressView.progress = Float(progress.score) / Float(progress.cost)
+                    scoreLabel.text = "\(progress.score)/\(progress.cost)"
+                }
         }
         
-        coverImageView.sd_setImageWithURL(NSURL(string: unit.lesson?.coverURL ?? "")!, placeholderImage: Constants.placeholderImage)
+        coverImageView.sd_setImageWithURL(NSURL(string: unit.lesson?.coverURL ?? "")!, placeholderImage: Images.lessonPlaceholderImage.size50x50)
         
         if !unit.isActive {
             titleLabel.enabled = false
