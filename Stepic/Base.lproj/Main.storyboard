@@ -1328,16 +1328,38 @@
                                                         <constraint firstAttribute="width" secondItem="FoH-qg-Irx" secondAttribute="height" multiplier="16:9" id="KsN-Kd-EMV"/>
                                                     </constraints>
                                                 </webView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fIR-s6-Lfa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRz-eG-veh">
+                                                    <rect key="frame" x="275" y="144" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="51R-ZH-jqi"/>
+                                                        <constraint firstAttribute="height" constant="50" id="hFR-74-B7S"/>
+                                                    </constraints>
+                                                    <state key="normal" image="stepic_play"/>
+                                                    <connections>
+                                                        <action selector="playButtonPressed:" destination="F7g-3J-LJM" eventType="touchUpInside" id="wCA-8p-01T"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FoH-qg-Irx" secondAttribute="trailing" constant="-8" id="9a4-aT-ibn"/>
+                                                <constraint firstItem="cRz-eG-veh" firstAttribute="centerX" secondItem="jaQ-AQ-6ho" secondAttribute="centerX" id="M8C-tj-7gr"/>
                                                 <constraint firstItem="FoH-qg-Irx" firstAttribute="width" secondItem="jaQ-AQ-6ho" secondAttribute="width" id="P7k-U6-7VR"/>
                                                 <constraint firstItem="FoH-qg-Irx" firstAttribute="leading" secondItem="jaQ-AQ-6ho" secondAttribute="leadingMargin" constant="-8" id="T7p-6f-98M"/>
+                                                <constraint firstItem="fIR-s6-Lfa" firstAttribute="top" secondItem="jaQ-AQ-6ho" secondAttribute="topMargin" constant="-8" id="gdo-br-xRQ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fIR-s6-Lfa" secondAttribute="bottom" constant="-8" id="h2Y-Pp-vvd"/>
+                                                <constraint firstItem="cRz-eG-veh" firstAttribute="centerY" secondItem="jaQ-AQ-6ho" secondAttribute="centerY" id="i07-91-MoD"/>
                                                 <constraint firstItem="FoH-qg-Irx" firstAttribute="top" secondItem="jaQ-AQ-6ho" secondAttribute="topMargin" constant="-8" id="i9e-Ut-6cX"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FoH-qg-Irx" secondAttribute="bottom" constant="-8" id="ldU-ik-HZh"/>
+                                                <constraint firstItem="fIR-s6-Lfa" firstAttribute="leading" secondItem="jaQ-AQ-6ho" secondAttribute="leadingMargin" constant="-8" id="pgw-Vo-xzh"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fIR-s6-Lfa" secondAttribute="trailing" constant="-8" id="ykj-0b-Ffe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="playButton" destination="cRz-eG-veh" id="pi0-fw-MQh"/>
+                                            <outlet property="thumbnailImageView" destination="fIR-s6-Lfa" id="UxJ-Db-NP4"/>
                                             <outlet property="videoWebView" destination="FoH-qg-Irx" id="yLt-PW-9ec"/>
                                         </connections>
                                     </tableViewCell>
