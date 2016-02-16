@@ -65,14 +65,16 @@ class SectionsViewController: UIViewController {
         course.loadAllSections(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.tableView.reloadData()
                 self.emptyDatasetState = EmptyDatasetState.Empty
+                self.tableView.reloadData()
             })
             self.didRefresh = true
         }, error: {
+            //TODO: Handle error type in section downloading
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.emptyDatasetState = EmptyDatasetState.ConnectionError
+                self.tableView.reloadData()
             })
             self.didRefresh = true
         })
