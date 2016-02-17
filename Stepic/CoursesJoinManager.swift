@@ -13,8 +13,32 @@ class CoursesJoinManager: NSObject {
     static let sharedManager = CoursesJoinManager()
     private override init() {}
     
-    var deletedCourses = [Course]()
-    var addedCourses = [Course]()
+    private var dCourses = [Course]()
+    private var aCourses = [Course]()
+    
+    var deletedCourses : [Course] {
+        get {
+            return dCourses
+        }
+        
+        set(value) {
+            var v = value
+            removeIntersectedElements(&v, &aCourses)
+            dCourses = v
+        }
+    }
+    
+    var addedCourses : [Course] {
+        get {
+            return aCourses
+        }
+        
+        set(value) {
+            var v = value
+            removeIntersectedElements(&v, &dCourses)
+            aCourses = v
+        }
+    }    
     
     var hasUpdates : Bool {
         return (deletedCourses.count + addedCourses.count) > 0

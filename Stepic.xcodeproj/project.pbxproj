@@ -65,6 +65,7 @@
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
+		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
@@ -248,6 +249,7 @@
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
+		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */,
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
 				08F5556B1C5267A600C877E8 /* GCDThings.swift */,
+				086A9D611C74AF90003611DC /* GlobalFunctions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1147,6 +1150,7 @@
 			files = (
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
+				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				080F74681BD928F30064AAEA /* VideoQuality.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
