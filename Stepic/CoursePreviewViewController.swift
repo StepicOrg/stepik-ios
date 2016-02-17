@@ -13,9 +13,7 @@ import MediaPlayer
 class CoursePreviewViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-        
-    @IBOutlet weak var playerViewHeight: NSLayoutConstraint!
-    
+            
     @IBOutlet weak var contentView: UIView!
 
     @IBOutlet weak var videoWebView: UIWebView!
@@ -80,6 +78,7 @@ class CoursePreviewViewController: UIViewController {
         videoWebView.scrollView.bouncesZoom = false
         
         if let c = course {
+            tableView.reloadData()
             resetHeightConstraints()
             if let introVideo = c.introVideo {
                 setIntroMode(fromVideo: true)
@@ -92,9 +91,16 @@ class CoursePreviewViewController: UIViewController {
     }
     
     private func resetHeightConstraints() {
-        playerViewHeight.constant = getPlayerHeight()
-//        tableView.contentInset = UIEdgeInsetsMake(playerViewHeight.constant, 0, 0, 0)
-        tableView.reloadData()
+        let v = self.tableView.tableHeaderView
+        var headerframe = v?.frame
+        headerframe?.size.height = getPlayerHeight()
+        v?.frame = headerframe ?? CGRectZero
+        tableView.tableHeaderView = v
+        
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        tableView.setNeedsUpdateConstraints()
+        tableView.updateConstraintsIfNeeded()
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }

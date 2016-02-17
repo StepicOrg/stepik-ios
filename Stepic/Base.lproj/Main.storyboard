@@ -1223,7 +1223,6 @@
                                         <constraint firstItem="Lsh-zW-Eq4" firstAttribute="top" secondItem="zgu-O5-Qtl" secondAttribute="top" id="Sfl-5M-PzO"/>
                                         <constraint firstAttribute="trailing" secondItem="8HY-E2-4Lf" secondAttribute="trailing" id="YCL-RJ-53O"/>
                                         <constraint firstItem="Lsh-zW-Eq4" firstAttribute="leading" secondItem="zgu-O5-Qtl" secondAttribute="leading" id="ZNS-wK-bff"/>
-                                        <constraint firstAttribute="height" constant="185" id="btg-1z-xAz"/>
                                         <constraint firstItem="8HY-E2-4Lf" firstAttribute="top" secondItem="zgu-O5-Qtl" secondAttribute="top" id="diW-1t-I8T"/>
                                         <constraint firstAttribute="bottom" secondItem="8HY-E2-4Lf" secondAttribute="bottom" id="kxR-wq-Dxz"/>
                                         <constraint firstAttribute="bottom" secondItem="Lsh-zW-Eq4" secondAttribute="bottom" id="n3a-Pd-yic"/>
@@ -1353,7 +1352,6 @@
                     <connections>
                         <outlet property="contentView" destination="zgu-O5-Qtl" id="LIG-ix-PGX"/>
                         <outlet property="playButton" destination="lmZ-xX-a7U" id="KGW-0X-i7q"/>
-                        <outlet property="playerViewHeight" destination="btg-1z-xAz" id="4tJ-LB-p6N"/>
                         <outlet property="tableView" destination="mgq-Q2-Hep" id="8cY-TB-KvR"/>
                         <outlet property="thumbnailImageView" destination="Lsh-zW-Eq4" id="tva-p5-pMV"/>
                         <outlet property="videoWebView" destination="8HY-E2-4Lf" id="jO6-4W-sqX"/>
