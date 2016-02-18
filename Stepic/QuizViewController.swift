@@ -93,7 +93,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentWarningView {
                 UIThread.performUI{self.warningView.hidden = false}
-                self.delegate?.needsHeightUpdate(300)
+                self.delegate?.needsHeightUpdate(200)
             } else {
                 UIThread.performUI{self.warningView.hidden = true}
             }
@@ -433,7 +433,7 @@ extension QuizViewController : PlaceholderViewDataSource {
     }
     
     func placeholderButtonTitle() -> String? {
-        return nil
+        return NSLocalizedString("TryAgain", comment: "")
     }
     
     func placeholderDescription() -> String? {
@@ -450,5 +450,9 @@ extension QuizViewController : PlaceholderViewDataSource {
 }
 
 extension QuizViewController : PlaceholderViewDelegate {
+    func placeholderButtonDidPress() {
+        self.doesPresentWarningView = false
+        self.refreshAttempt(step.id)
+    }
 }
 

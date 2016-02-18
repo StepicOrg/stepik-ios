@@ -48,9 +48,6 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
-        
-        
-        print("introVideo -> \(introVideo)")
     }
     
     
