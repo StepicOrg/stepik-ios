@@ -42,7 +42,7 @@ class FreeAnswerQuizViewController: QuizViewController {
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if let r = submission?.reply as? FreeAnswerReply {
-            let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+            let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
             let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
             mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: NSMakeRange(0, mutableAttributed.string.characters.count))
             textView.attributedText = mutableAttributed

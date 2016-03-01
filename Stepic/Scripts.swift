@@ -28,4 +28,20 @@ struct Scripts {
     private static var sizeReportScriptKey : String = "SizeReportScript"
     
     private static var texScriptKey : String = "TexScript"
+    
+    private static var localTexScriptKey : String = "LocalTexScript"
+
+    static var localTexScript : String {
+        return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
+    }
+    
+    private static var mathJaxLocalPathScript : String {
+        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
+        
+        let scriptBeginning = "<script type=\"text/javascript\" src=\"MathJax/MathJax.js"
+        let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>" //
+        let script = "\(scriptBeginning)\(scriptEnding)"//\(path)
+        print(script)
+        return script
+    }
 }

@@ -8,18 +8,22 @@
 
 import UIKit
 import DownloadButton
+import SDWebImage
 
 class UnitTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
     @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var scoreProgressView: UIProgressView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var coverImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
-        progressView.setRoundedBounds(width: 0)
+//        progressView.setRoundedBounds(width: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -31,7 +35,7 @@ class UnitTableViewCell: UITableViewCell {
     class func heightForCellWithUnit(unit: Unit) -> CGFloat {
         let defaultTitle = "Ooops, something got wrong"
         let text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
-        return 32 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 80)
+        return 50 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 129)
         
     }
     
@@ -74,16 +78,30 @@ class UnitTableViewCell: UITableViewCell {
         downloadButton.tag = unit.position - 1
         downloadButton.delegate = delegate
         
-        progressView.backgroundColor = UIColor.grayColor()
+        progressView.backgroundColor = UIColor.whiteColor()
         if let passed = unit.progress?.isPassed {
             if passed {
                 progressView.backgroundColor = UIColor.stepicGreenColor()
             }
         }
         
+        if let progress = unit.progress {
+                if progress.cost == 0 {
+                    scoreProgressView.hidden = true
+                    scoreLabel.hidden = true
+                } else {
+                    scoreProgressView.progress = Float(progress.score) / Float(progress.cost)
+                    scoreLabel.text = "\(progress.score)/\(progress.cost)"
+                }
+        }
+        
+        coverImageView.sd_setImageWithURL(NSURL(string: unit.lesson?.coverURL ?? "")!, placeholderImage: Images.lessonPlaceholderImage.size50x50)
+        
         if !unit.isActive {
             titleLabel.enabled = false
             downloadButton.hidden = true
+            scoreProgressView.hidden = true
+            scoreLabel.hidden = true
         }
     }
 }

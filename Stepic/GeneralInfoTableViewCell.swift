@@ -19,6 +19,12 @@ class GeneralInfoTableViewCell: UITableViewCell {
   
     @IBOutlet weak var joinButton: UIButton!
 
+    class func heightForCellWith(course: Course) -> CGFloat {
+        let constrainHeight: CGFloat = 108
+        let width = UIScreen.mainScreen().bounds.width - 16
+        let titleHeight = UILabel.heightForLabelWithText(course.title, lines: 0, standardFontOfSize: 17, width: width, alignment : NSTextAlignment.Center)
+        return constrainHeight + titleHeight 
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

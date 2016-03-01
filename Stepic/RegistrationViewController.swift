@@ -47,6 +47,12 @@ class RegistrationViewController: UIViewController {
         closeBarButtonItem.tintColor = UIColor.stepicGreenColor()
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
+        firstNameTextField.autocapitalizationType = .Words
+        lastNameTextField.autocapitalizationType = .Words
+        
+        emailTextField.autocapitalizationType = .None
+        emailTextField.autocorrectionType = .No
+        
         passwordTextField.delegate = self
         visiblePasswordButton.hidden = true
     }

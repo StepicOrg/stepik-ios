@@ -21,6 +21,7 @@ pod 'Google/SignIn'
 pod 'AAShareBubbles'
 pod 'BEMCheckBox'
 pod 'IQKeyboardManagerSwift'
+pod 'MagicalRecord'
 
 #pod 'JSQWebViewController'
 #pod 'DZNWebViewController'

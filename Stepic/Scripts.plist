@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LocalTexScript</key>
+	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});
+&lt;/script&gt;</string>
 	<key>SizeReportScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
    window.onload = function() { 

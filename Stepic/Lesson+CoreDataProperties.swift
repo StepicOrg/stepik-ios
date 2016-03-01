@@ -19,6 +19,7 @@ extension Lesson {
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedTitle: String?
     @NSManaged var managedSlug: String?
+    @NSManaged var managedCoverURL: String?
 
     @NSManaged var managedStepsArray : NSObject?
 
@@ -69,6 +70,15 @@ extension Lesson {
         }
         get {
             return managedSlug ?? ""
+        }
+    }
+    
+    var coverURL : String? {
+        set(value) {
+            managedCoverURL = value
+        }
+        get {
+            return managedCoverURL
         }
     }
     

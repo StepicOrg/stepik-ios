@@ -24,33 +24,93 @@ class MyCoursesViewController: CoursesViewController {
     override func viewDidLoad() {
         loadEnrolled = true
         loadFeatured = nil
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
         
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        handleCourseUpdates()
+    }
+    
+    private func getExistingIndexPathsFromCourses(newCourses: [Course]) -> [NSIndexPath] {
+        return newCourses.flatMap{ 
+            newCourse in
+            return courses.indexOf{$0 == newCourse}
+            }.map{
+                return NSIndexPath(forRow: $0, inSection: 0)
+        }
+    }
+    
+    
+    func handleCourseUpdates() {
+        if CoursesJoinManager.sharedManager.hasUpdates {
+            print("deleting courses -> \(CoursesJoinManager.sharedManager.deletedCourses.count)")
+            print("adding courses -> \(CoursesJoinManager.sharedManager.addedCourses.count)")
+            
+            self.tableView.beginUpdates()
+            
+            let deletingIndexPaths = getExistingIndexPathsFromCourses(CoursesJoinManager.sharedManager.deletedCourses)
+            tableView.deleteRowsAtIndexPaths(deletingIndexPaths, withRowAnimation: .Automatic)
+            for index in deletingIndexPaths.sort({$0.row > $1.row}) {
+                courses.removeAtIndex(index.row)
+                tabIds.removeAtIndex(index.row)
+            }
+            
+            let addedCourses = getNonExistingCourses(CoursesJoinManager.sharedManager.addedCourses)
+            if addedCourses.count != 0 { 
+                courses = addedCourses + courses
+                tabIds = tabIds + courses.map{return $0.id}
+                tableView.insertRowsAtIndexPaths((0..<addedCourses.count).map({return NSIndexPath(forRow: $0, inSection: 0)}), withRowAnimation: .Automatic)
+            }
+            
+            self.tableView.endUpdates()
+            
+            CoursesJoinManager.sharedManager.clean()
+        }
+    }
+    
 }
 
-extension MyCoursesViewController : DZNEmptyDataSetSource {
+extension MyCoursesViewController {
     func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return Images.emptyCoursesPlaceholder
+        switch emptyDatasetState {
+        case .Empty:
+            return Images.emptyCoursesPlaceholder
+        case .ConnectionError:
+            return Images.noWifiImage.size250x250
+        }
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        }
         
-        let text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    
-    
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text : String = ""
         
-        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-        
+        switch emptyDatasetState {
+        case .Empty:
+            text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            break
+        case .ConnectionError:
+            text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
+            break
+        }
+                
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
@@ -72,7 +132,7 @@ extension MyCoursesViewController : DZNEmptyDataSetSource {
     }
 }
 
-extension MyCoursesViewController : DZNEmptyDataSetDelegate {
+extension MyCoursesViewController  {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
     }

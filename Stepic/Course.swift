@@ -42,31 +42,17 @@ class Course: NSManagedObject, JSONInitializable {
         
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
+        
+        if let _ = json["intro_video"].null {
+            introVideo = nil
+        } else {
+            introVideo = Video(json: json["intro_video"])
+        }
     }
     
     
     func update(json json: JSON) {
-        id = json["id"].intValue
-        title = json["title"].stringValue
-        courseDescription = json["description"].stringValue
-        coverURLString = Constants.stepicURLString + json["cover"].stringValue
-        
-        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
-        endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
-        
-        enrolled = json["enrollment"].int != nil
-        featured = json["is_featured"].boolValue
-        
-        summary = json["summary"].stringValue
-        workload = json["workload"].stringValue
-        introURL = json["intro"].stringValue
-        format = json["course_format"].stringValue
-        audience = json["target_audience"].stringValue
-        certificate = json["certificate"].stringValue
-        requirements = json["requirements"].stringValue
-        
-        sectionsArray = json["sections"].arrayObject as! [Int]
-        instructorsArray = json["instructors"].arrayObject as! [Int]
+        initialize(json)
     }
     
         
@@ -91,7 +77,7 @@ class Course: NSManagedObject, JSONInitializable {
                     secs in
                     self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
                     CoreDataHelper.instance.save()
-                    self.loadProgressesForSections(success)
+                    self.loadProgressesForSections(success, error: errorHandler)
                     //success()  
                 }, failure : {
                         error in
@@ -103,7 +89,7 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    func loadProgressesForSections(completion: (Void->Void)) {
+    func loadProgressesForSections(completion: (Void->Void), error errorHandler : (Void->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for section in sections {
@@ -130,7 +116,8 @@ class Course: NSManagedObject, JSONInitializable {
             completion()
             }, failure: { 
                 (error) -> Void in
-                print("Error while dowloading progresses")
+                print("Error while downloading progresses")
+                errorHandler()
         })
     }
     

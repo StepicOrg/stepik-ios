@@ -36,6 +36,8 @@ extension Course {
     
     @NSManaged var managedSectionsArray : NSObject?
     @NSManaged var managedInstructorsArray : NSObject?
+    
+    @NSManaged var managedIntroVideo : Video?
 
     
     class var entity : NSEntityDescription {
@@ -226,6 +228,14 @@ extension Course {
         }
     }
     
+    var introVideo : Video? {
+        get {
+            return managedIntroVideo
+        }
+        set(value) {
+            managedIntroVideo = value
+        }
+    }
     
     func addSection(section: Section) {
         let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet

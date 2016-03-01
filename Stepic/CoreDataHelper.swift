@@ -26,7 +26,8 @@ class CoreDataHelper: NSObject {
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         
         do {
-            _ = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+            _ = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true,
+                NSInferMappingModelAutomaticallyOption: true])
         }
         catch {
             print("STORE IS NIL")

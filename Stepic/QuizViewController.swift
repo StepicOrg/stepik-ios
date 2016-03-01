@@ -53,9 +53,12 @@ class QuizViewController: UIViewController {
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.warningImage, width: UIScreen.mainScreen().bounds.width - 16)
+        let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.alignToView(self.view)
+        v.delegate = self
+        v.datasource = self
+        v.backgroundColor = UIColor.whiteColor()
         return v
     }
     
@@ -90,7 +93,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentWarningView {
                 UIThread.performUI{self.warningView.hidden = false}
-                self.delegate?.needsHeightUpdate(300)
+                self.delegate?.needsHeightUpdate(200)
             } else {
                 UIThread.performUI{self.warningView.hidden = true}
             }
@@ -424,9 +427,32 @@ class QuizViewController: UIViewController {
     }
 }
 
-extension QuizViewController : WarningViewDelegate {
-    func didPressButton() {
+extension QuizViewController : PlaceholderViewDataSource {
+    func placeholderImage() -> UIImage? {
+        return Images.noWifiImage.size100x100
+    }
+    
+    func placeholderButtonTitle() -> String? {
+        return NSLocalizedString("TryAgain", comment: "")
+    }
+    
+    func placeholderDescription() -> String? {
+        return nil
+    }
+    
+    func placeholderStyle() -> PlaceholderStyle {
+        return stepicPlaceholderStyle
+    }
+    
+    func placeholderTitle() -> String? {
+        return warningViewTitle
+    }
+}
+
+extension QuizViewController : PlaceholderViewDelegate {
+    func placeholderButtonDidPress() {
         self.doesPresentWarningView = false
         self.refreshAttempt(step.id)
     }
 }
+
