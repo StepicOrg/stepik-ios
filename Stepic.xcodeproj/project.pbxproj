@@ -142,6 +142,9 @@
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
+		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
+		08EF9A091C91D0F800433E4A /* StepicVideoPlayerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A061C91D0F800433E4A /* StepicVideoPlayerViewControllerDelegate.swift */; };
+		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
@@ -334,6 +337,9 @@
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
 		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
+		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		08EF9A061C91D0F800433E4A /* StepicVideoPlayerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewControllerDelegate.swift; sourceTree = "<group>"; };
+		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
@@ -736,6 +742,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				08EF9A0B1C91D12700433E4A /* Video Player */,
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
 				0885F8491BA8374000F2A188 /* Model */,
@@ -811,6 +818,16 @@
 				08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		08EF9A0B1C91D12700433E4A /* Video Player */ = {
+			isa = PBXGroup;
+			children = (
+				08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */,
+				08EF9A061C91D0F800433E4A /* StepicVideoPlayerViewControllerDelegate.swift */,
+				08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */,
+			);
+			name = "Video Player";
 			sourceTree = "<group>";
 		};
 		08F204931BB0157F00D080C0 /* Extensions */ = {
@@ -1100,6 +1117,7 @@
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
+				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1254,7 @@
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
+				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
@@ -1247,6 +1266,7 @@
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
+				08EF9A091C91D0F800433E4A /* StepicVideoPlayerViewControllerDelegate.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
