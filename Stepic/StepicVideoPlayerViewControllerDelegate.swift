@@ -10,5 +10,10 @@ import Foundation
 import AVFoundation 
 
 protocol StepicVideoPlayerViewControllerDelegate {
-    func videoPlayerStatusDidChangeTo(newStatus: AVPlayerItemStatus)
+    func playerReady(player: StepicVideoPlayerViewController)
+    func playerPlaybackStateDidChange(player: StepicVideoPlayerViewController)
+    func playerBufferingStateDidChange(player: StepicVideoPlayerViewController)
+    
+    func playerPlaybackWillStartFromBeginning(player: StepicVideoPlayerViewController)
+    func playerPlaybackDidEnd(player: StepicVideoPlayerViewController)
 }

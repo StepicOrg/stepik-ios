@@ -11,6 +11,49 @@ import AVKit
 import AVFoundation
 import FLKAutoLayout
 
+public enum PlaybackState: Int, CustomStringConvertible {
+    case Stopped = 0
+    case Playing
+    case Paused
+    case Failed
+    
+    public var description: String {
+        get {
+            switch self {
+            case Stopped:
+                return "Stopped"
+            case Playing:
+                return "Playing"
+            case Failed:
+                return "Failed"
+            case Paused:
+                return "Paused"
+            }
+        }
+    }
+}
+
+public enum BufferingState: Int, CustomStringConvertible {
+    case Unknown = 0
+    case Ready
+    case Delayed
+    
+    public var description: String {
+        get {
+            switch self {
+            case Unknown:
+                return "Unknown"
+            case Ready:
+                return "Ready"
+            case Delayed:
+                return "Delayed"
+            }
+        }
+    }
+}
+
+
+
 class StepicVideoPlayerViewController: UIViewController {
 
     var delegate : StepicVideoPlayerViewControllerDelegate?
