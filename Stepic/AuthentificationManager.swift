@@ -17,18 +17,24 @@ class AuthentificationManager : NSObject {
     
     
     func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
+        
+        if StepicApplicationsInfo.social == nil {
+            failure(error: NSError.noAppWithCredentials as! ErrorType)
+            return nil 
+        }
+        
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(StepicApplicationsInfo.social.credentials)"
+            "Authorization" : "Basic \(StepicApplicationsInfo.social!.credentials)"
         ]
         
         let params = [
             "grant_type" : "authorization_code",
             "code" : code,
-            "redirect_uri" : StepicApplicationsInfo.social.redirectUri
+            "redirect_uri" : StepicApplicationsInfo.social!.redirectUri
         ]
         
-        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -54,10 +60,15 @@ class AuthentificationManager : NSObject {
     
     func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
+        if StepicApplicationsInfo.password == nil {
+            failure(error: NSError.noAppWithCredentials as! ErrorType)
+            return nil 
+        }
+        
         // Specifying the Headers we need
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(StepicApplicationsInfo.password.credentials)"
+            "Authorization" : "Basic \(StepicApplicationsInfo.password!.credentials)"
         ]
         
         let params = [
@@ -67,7 +78,7 @@ class AuthentificationManager : NSObject {
         ]
         
         
-        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -98,9 +109,17 @@ class AuthentificationManager : NSObject {
             failure(error: ConnectionError.TokenRefreshError)
             return nil
         case .Code:
-            credentials = StepicApplicationsInfo.social.credentials
+            if StepicApplicationsInfo.social == nil {
+                failure(error: NSError.noAppWithCredentials as! ErrorType)
+                return nil 
+            }
+            credentials = StepicApplicationsInfo.social!.credentials
         case .Password:
-            credentials = StepicApplicationsInfo.password.credentials
+            if StepicApplicationsInfo.password == nil {
+                failure(error: NSError.noAppWithCredentials as! ErrorType)
+                return nil 
+            }
+            credentials = StepicApplicationsInfo.password!.credentials
         }
         
         let headers = [
@@ -112,7 +131,7 @@ class AuthentificationManager : NSObject {
             "grant_type" : "refresh_token",
             "refresh_token" : refresh_token]
         
-        return Alamofire.request(.POST, "https://stepic.org/oauth2/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
@@ -161,7 +180,7 @@ class AuthentificationManager : NSObject {
         //        params["access_token"] = StepicAPI.shared.token!.accessToken
         
         if !delete {
-            return Alamofire.request(.POST, "https://stepic.org/api/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -186,7 +205,7 @@ class AuthentificationManager : NSObject {
                 //                success()
             })
         } else {
-            return Alamofire.request(.DELETE, "https://stepic.org/api/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -266,7 +285,7 @@ class AuthentificationManager : NSObject {
             ]
             
             print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-            Alamofire.request(.POST, "https://stepic.org/api/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
+            Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
                 { 
                     (request, response, json, error) -> Void in
                     let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
@@ -291,6 +310,12 @@ class AuthentificationManager : NSObject {
                 errorMsg in
                 errorHandler("error while refreshing csrf token", nil)
         })
+    }
+}
+
+extension NSError {
+    static var noAppWithCredentials : NSError {
+        return NSError(domain: "APIErrorDomain", code: 1488, userInfo:  [NSLocalizedDescriptionKey : "Not registered application with given credential type"])
     }
 }
 

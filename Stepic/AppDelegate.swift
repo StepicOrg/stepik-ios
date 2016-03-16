@@ -52,13 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
-            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])
-//            let launchController = ControllerHelper.showLaunchController(true)
-//            
-//            print(self.window?.rootViewController?.classForCoder)
-//            launchController.performSegueWithIdentifier("signInSegue", sender: nil)
-//            launchController.signInController!.authentificateWithCode(code)
-            
+            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])            
         } else {
             print("error while authentificating")
         }
