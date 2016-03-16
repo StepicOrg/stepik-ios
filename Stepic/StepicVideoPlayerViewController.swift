@@ -11,61 +11,14 @@ import AVKit
 import AVFoundation
 import FLKAutoLayout
 
-public enum PlaybackState: Int, CustomStringConvertible {
-    case Stopped = 0
-    case Playing
-    case Paused
-    case Failed
-    
-    public var description: String {
-        get {
-            switch self {
-            case Stopped:
-                return "Stopped"
-            case Playing:
-                return "Playing"
-            case Failed:
-                return "Failed"
-            case Paused:
-                return "Paused"
-            }
-        }
-    }
-}
-
-public enum BufferingState: Int, CustomStringConvertible {
-    case Unknown = 0
-    case Ready
-    case Delayed
-    
-    public var description: String {
-        get {
-            switch self {
-            case Unknown:
-                return "Unknown"
-            case Ready:
-                return "Ready"
-            case Delayed:
-                return "Delayed"
-            }
-        }
-    }
-}
-
-
-
 class StepicVideoPlayerViewController: UIViewController {
-
-    var delegate : StepicVideoPlayerViewControllerDelegate?
     
-    var video : Video!
-    
+    var delegate: PlayerDelegate?
     
     //Control views
     @IBOutlet weak var topFullscreenControlsView: UIView!
     @IBOutlet weak var bottomFullscreenControlsView: UIView!
-    @IBOutlet weak var bottomEmbeddedControlsView: UIView!
-        
+    
     //Top fullscreen controls
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var currentTimeTopLabel: UILabel!
@@ -79,16 +32,6 @@ class StepicVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
-    @IBOutlet weak var volumeSlider: UISlider!
-    
-    //Bottom embedded controls
-    @IBOutlet weak var embeddedPlayButton: UIButton!
-    @IBOutlet weak var currentTimeEmbeddedLabel: UILabel!
-    @IBOutlet weak var fullTimeEmbeddedLabel: UILabel!
-    @IBOutlet weak var fullscreenButton: UIButton!
-    @IBOutlet weak var embeddedTimeProgressView: UIProgressView!
-    @IBOutlet weak var embeddedTimeSlider: UISlider!
-    
     
     //Seek events
     
@@ -99,9 +42,7 @@ class StepicVideoPlayerViewController: UIViewController {
     @IBAction func topTimeSliderValueChanged(sender: UISlider) {
         //TODO: Connect with a time here with seekToTime() implementation
     }
-    @IBAction func embeddedTimeSliderValueChanged(sender: UISlider) {
-        //TODO: Connect with a time here with seekToTime() implementation
-    }
+
     @IBAction func seekForwardPressed(sender: UIButton) {
         //TODO: Add implementation
     }
@@ -113,14 +54,8 @@ class StepicVideoPlayerViewController: UIViewController {
     //TODO: Make this method respond to events
     func bufferingChangedToPercentage(percentage: Float) {
         topTimeProgressView.progress = percentage
-        embeddedTimeProgressView.progress = percentage
     }
     
-    //Fullscreen mode handling
-    @IBAction func fullscreenPressed(sender: UIButton) {
-        //TODO: Add implementation here
-        //Hints: Use UIWindow 
-    }
     @IBAction func backPressed(sender: UIButton) {
         //TODO: Add implementation here
         //Hints: Remove UIWindow with fullscreen controller
@@ -128,7 +63,6 @@ class StepicVideoPlayerViewController: UIViewController {
     private func makeFullscreenControlsVisible(visible: Bool) {
         topFullscreenControlsView.hidden = !visible
         bottomFullscreenControlsView.hidden = !visible
-        bottomEmbeddedControlsView.hidden = visible
     }
     
     //Controlling the rate
@@ -141,91 +75,67 @@ class StepicVideoPlayerViewController: UIViewController {
         //TODO: Handle player's quality change
     }
     
-    //Controlling the volume
-    @IBAction func volumeSliderValueChanged(sender: UISlider) {
-        //TODO: Handle content's volume
-    }
-    
     //Controlling the playback state
     @IBAction func playPressed(sender: UIButton) {
         //TODO: Change content's playbackk state
-    }
+    }    
     
+    private var player: Player!
+    
+    let videoUrl = NSURL(string: "https://v.cdn.vine.co/r/videos/AA3C120C521177175800441692160_38f2cbd1ffb.1.5.13763579289575020226.mp4")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPlayer()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        print(playerController.view.frame)
-        print(playerController.videoBounds)
-    }
-    
-    var status : AVPlayerItemStatus {
-        return playerItem?.status ?? .Unknown
-    }
-    
-    private var playerController : AVPlayerViewController!
-    
-    private var player : AVPlayer? {
-        return playerController.player
-    }
-    
-    private var playerItem : AVPlayerItem? {
-        return player?.currentItem
-    }
-    
-    private func setupPlayer() {
-        let p = AVPlayer(URL: video.getUrlForQuality(VideoQuality.Low))
-        playerController.player = p
-        playerController.showsPlaybackControls = true
-        view.addSubview(playerController.view)
-        playerController.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self.view)
-        player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.New, context: nil)
-        playerController?.addObserver(self, forKeyPath: "readyForDisplay", options: NSKeyValueObservingOptions.New, context: nil)
-    }
-    
-    func play() {
-        player?.play()
-    }
-    
-    func pause() {
-        player?.pause()
-    }
-    
-    var isPlaying : Bool {
-        return player?.rate != 0
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if (object as? AVPlayer == player) && (keyPath == "status") {
-            if let status = playerItem?.status {
-                print("player status changed to \(status)")
-//                delegate?.videoPlayerStatusDidChangeTo(status)
-            }
-        }
         
-        if (object as? AVPlayerViewController == playerController) && (keyPath == "readyForDisplay") {
-            print("player controller readyForDisplay value became \(playerController.readyForDisplay)")
-            play()
-        }
+        self.player = Player()
+        self.player.delegate = self
+//        self.player.view.frame = self.view.bounds
+        
+        self.addChildViewController(self.player)
+        self.view.addSubview(self.player.view)
+        self.player.view.alignTop("60", leading: "0", bottom: "-40", trailing: "0", toView: self.view)
+        self.player.didMoveToParentViewController(self)
+        
+        self.player.setUrl(videoUrl)
+        
+        self.player.playbackLoops = true
+        
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        self.player.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: UIGestureRecognizer
+    
+    func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+        switch (self.player.playbackState.rawValue) {
+        case PlaybackState.Stopped.rawValue:
+            self.player.playFromBeginning()
+        case PlaybackState.Paused.rawValue:
+            self.player.playFromCurrentTime()
+        case PlaybackState.Playing.rawValue:
+            self.player.pause()
+        case PlaybackState.Failed.rawValue:
+            self.player.pause()
+        default:
+            self.player.pause()
+        }
     }
-    */
+}
 
+extension StepicVideoPlayerViewController : PlayerDelegate {
+    func playerReady(player: Player) {
+    }
+    
+    func playerPlaybackStateDidChange(player: Player) {
+    }
+    
+    func playerBufferingStateDidChange(player: Player) {
+    }
+    
+    func playerPlaybackWillStartFromBeginning(player: Player) {
+    }
+    
+    func playerPlaybackDidEnd(player: Player) {
+    }
 }

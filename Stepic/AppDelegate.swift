@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         
-        setRootController()
+        setVideoTestRootController()
+        //setRootController()
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
@@ -105,6 +106,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if self.window != nil {
                 self.window!.rootViewController = rootController
             }
+        }
+    }
+    
+    private func setVideoTestRootController() {
+        let rootController = ControllerHelper.instantiateViewController(identifier: "PlayerTestViewController", storyboardName: "PlayerTestStoryboard")
+        if self.window != nil {
+            self.window!.rootViewController = rootController
         }
     }
     
