@@ -15,9 +15,12 @@ class StepicVideoPlayerViewController: UIViewController {
     
     var delegate: PlayerDelegate?
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     //Control views
     @IBOutlet weak var topFullscreenControlsView: UIView!
     @IBOutlet weak var bottomFullscreenControlsView: UIView!
+    @IBOutlet weak var topContainerView: UIView!
     
     //Top fullscreen controls
     @IBOutlet weak var backButton: UIButton!
@@ -61,7 +64,7 @@ class StepicVideoPlayerViewController: UIViewController {
         //Hints: Remove UIWindow with fullscreen controller
     }
     private func makeFullscreenControlsVisible(visible: Bool) {
-        topFullscreenControlsView.hidden = !visible
+        topContainerView.hidden = !visible
         bottomFullscreenControlsView.hidden = !visible
     }
     
@@ -116,8 +119,11 @@ class StepicVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
+        makeFullscreenControlsVisible(false)
+        activityIndicator.hidden = false
+        activityIndicator.startAnimating()
         
+        rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
         
         self.player = Player()
         self.player.delegate = self
@@ -158,6 +164,8 @@ class StepicVideoPlayerViewController: UIViewController {
 extension StepicVideoPlayerViewController : PlayerDelegate {
     func playerReady(player: Player) {
         print("player is ready to display")
+        activityIndicator.hidden = true
+        makeFullscreenControlsVisible(true)
     }
     
     func playerPlaybackStateDidChange(player: Player) {

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepicVideoPlayerViewController" customModule="SberbankUniversity" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="vAT-94-je7" id="9tO-6K-esf"/>
                 <outlet property="back10SecButton" destination="knc-c5-olR" id="BQr-pU-6yX"/>
                 <outlet property="backButton" destination="ga3-EW-ngM" id="4cU-A5-l4k"/>
                 <outlet property="bottomFullscreenControlsView" destination="fyR-gR-ToD" id="XcU-lf-8VI"/>
@@ -16,6 +17,7 @@
                 <outlet property="fullscreenPlayButton" destination="um1-Jr-FFH" id="b7q-ye-mc8"/>
                 <outlet property="qualityButton" destination="toN-Q6-jzn" id="tPW-y7-IaL"/>
                 <outlet property="rateButton" destination="jpo-wy-Esq" id="Qbr-7a-Nx8"/>
+                <outlet property="topContainerView" destination="9gx-PI-4Wv" id="UrU-3z-rIa"/>
                 <outlet property="topFullscreenControlsView" destination="k6z-ye-53l" id="ete-Fr-kZA"/>
                 <outlet property="topTimeProgressView" destination="9YA-SS-S7q" id="cZL-wX-K8V"/>
                 <outlet property="topTimeSlider" destination="yp8-ke-m95" id="5Is-KK-bAX"/>
@@ -151,13 +153,19 @@
                         <constraint firstItem="k6z-ye-53l" firstAttribute="leading" secondItem="9gx-PI-4Wv" secondAttribute="leading" id="rzX-rH-5tW"/>
                     </constraints>
                 </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vAT-94-je7">
+                    <rect key="frame" x="282" y="184" width="37" height="37"/>
+                    <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9gx-PI-4Wv" secondAttribute="trailing" id="0vd-3N-vXb"/>
                 <constraint firstItem="fyR-gR-ToD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="C5f-0W-G0K"/>
                 <constraint firstItem="9gx-PI-4Wv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DRP-ZP-1xY"/>
+                <constraint firstItem="vAT-94-je7" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IPd-ja-LAS"/>
                 <constraint firstAttribute="trailing" secondItem="fyR-gR-ToD" secondAttribute="trailing" id="NKw-4z-bkM"/>
+                <constraint firstItem="vAT-94-je7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WG0-yV-2Gx"/>
                 <constraint firstAttribute="bottom" secondItem="fyR-gR-ToD" secondAttribute="bottom" id="isw-Pb-dnG"/>
                 <constraint firstItem="9gx-PI-4Wv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="saB-MX-5cP"/>
             </constraints>
