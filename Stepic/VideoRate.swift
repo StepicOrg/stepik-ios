@@ -19,15 +19,7 @@ enum VideoRate: Float {
     
     static var allValues : [VideoRate] {
         get {
-            var values : [VideoRate] = []
-            var i : Float = 0.0
-            while i <= 3.0 {
-                if let rate = VideoRate(rawValue: i) {
-                    values += [rate]
-                }
-                i += 0.05
-            }
-            return values
+            return [VerySlow, Slow, Normal, SlightlyFast, Fast, VeryFast, DoubleFast]
         }
     }
     
@@ -35,20 +27,19 @@ enum VideoRate: Float {
     //If the value is a maximal rate, it cyclically gets the lowest one
     var nextValue : VideoRate {
         get {
-            var i : Float = self.rawValue
-            while i <= 3.0 {
-                if let rate = VideoRate(rawValue: i) {
-                    return rate
+            if let index = VideoRate.allValues.indexOf(self) {
+                if index < VideoRate.allValues.count - 1 {
+                    return VideoRate.allValues[index + 1]
+                } else {
+                    return VideoRate.allValues[index]
                 }
-                i += 0.05
             }
-            while i < self.rawValue {
-                if let rate = VideoRate(rawValue: i) {
-                    return rate
-                }
-                i += 0.05
-            }
+            //Should never come here
             return self
         }
+    }
+    
+    var description : String {
+        return "\(self.rawValue)"
     }
 }

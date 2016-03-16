@@ -242,6 +242,7 @@ public class Player: UIViewController {
         self.playbackState = .Playing
         self.delegate?.playerPlaybackStateDidChange(self)
         self.player.play()
+        self.player.rate = rate
     }
     
     public func pause() {
@@ -263,6 +264,18 @@ public class Player: UIViewController {
         self.playbackState = .Stopped
         self.delegate?.playerPlaybackStateDidChange(self)
         self.delegate?.playerPlaybackDidEnd(self)
+    }
+    
+    var rate : Float = 1 {
+        didSet {
+            self.player.rate = rate
+        }
+    }
+    
+    public func seekToTime(time: CMTime) {
+        if let playerItem = self.playerItem {
+            return playerItem.seekToTime(time)
+        }
     }
     
     // MARK: private setup
@@ -478,7 +491,6 @@ internal class PlayerView: UIView {
     }
     
     override init(frame: CGRect) {
-        print("playerview init frame -> \(frame)")
         super.init(frame: frame)
         self.playerLayer.backgroundColor = UIColor.blackColor().CGColor
     }

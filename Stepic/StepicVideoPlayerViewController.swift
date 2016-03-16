@@ -68,7 +68,36 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the rate
     @IBAction func changeRatePressed(sender: UIButton) {
         //TODO: Handle player's rate change
+        displayRateChangeAlert()
+        
+        
     }
+    
+    private func displayRateChangeAlert() {
+        let alertController = UIAlertController(title: "Change rate", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        for rate in VideoRate.allValues {
+            let action = UIAlertAction(title: rate.description, style: .Default, handler: { 
+                action in
+                self.currentRate = rate
+            })
+            alertController.addAction(action)
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private var currentRate : VideoRate = .Normal {
+        didSet {
+            adjustToCurrentRate()
+        }
+    }
+    
+    private func adjustToCurrentRate() {
+        self.player.rate = currentRate.rawValue
+        rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
+    }
+    
+    
     
     //Controlling the quality
     @IBAction func changeQualityPressed(sender: UIButton) {
@@ -82,10 +111,13 @@ class StepicVideoPlayerViewController: UIViewController {
     
     private var player: Player!
     
-    let videoUrl = NSURL(string: "https://v.cdn.vine.co/r/videos/AA3C120C521177175800441692160_38f2cbd1ffb.1.5.13763579289575020226.mp4")!
+    let videoUrl = NSURL(string: "https://player.vimeo.com/external/111972892.sd.mp4?s=e25198c6ff128983b1c622477e2089a2&profile_id=112&oauth2_token_id=3605157")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
+        
         
         self.player = Player()
         self.player.delegate = self
@@ -98,7 +130,7 @@ class StepicVideoPlayerViewController: UIViewController {
         
         self.player.setUrl(videoUrl)
         
-        self.player.playbackLoops = true
+        self.player.playbackLoops = false
         
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
         tapGestureRecognizer.numberOfTapsRequired = 1
@@ -125,6 +157,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
 extension StepicVideoPlayerViewController : PlayerDelegate {
     func playerReady(player: Player) {
+        print("player is ready to display")
     }
     
     func playerPlaybackStateDidChange(player: Player) {
