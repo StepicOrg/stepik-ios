@@ -109,7 +109,10 @@ class StepicVideoPlayerViewController: UIViewController {
     
     //Controlling the playback state
     @IBAction func playPressed(sender: UIButton) {
-        //TODO: Change content's playbackk state
+        
+        handlePlay()
+        
+        //TODO: Change content's playback state
     }    
     
     private var player: Player!
@@ -145,7 +148,7 @@ class StepicVideoPlayerViewController: UIViewController {
     
     // MARK: UIGestureRecognizer
     
-    func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+    private func handlePlay() {
         switch (self.player.playbackState.rawValue) {
         case PlaybackState.Stopped.rawValue:
             self.player.playFromBeginning()
@@ -158,6 +161,25 @@ class StepicVideoPlayerViewController: UIViewController {
         default:
             self.player.pause()
         }
+        
+        if player.playbackState == PlaybackState.Playing {
+            fullscreenPlayButton.setTitle("Pause", forState: .Normal)
+        } else {
+            fullscreenPlayButton.setTitle("Play", forState: .Normal)
+        }
+    }
+    
+    func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
+        handlePlay()
+    }
+    
+    private func setTimeParametersAfterPlayerIsReady() {
+        fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
+        player.setPeriodicTimeObserver { 
+            time in
+            self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(CMTimeGetSeconds(time))
+            self.topTimeSlider.value = Float(CMTimeGetSeconds(time)/Double(self.player.maximumDuration))
+        }
     }
 }
 
@@ -166,6 +188,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
         print("player is ready to display")
         activityIndicator.hidden = true
         makeFullscreenControlsVisible(true)
+        setTimeParametersAfterPlayerIsReady()
     }
     
     func playerPlaybackStateDidChange(player: Player) {

@@ -173,6 +173,13 @@ public class Player: UIViewController {
             }
         }
     }
+   
+    private var periodicTimeObserver : AnyObject?
+    public func setPeriodicTimeObserver(block: (CMTime)->Void) {
+        let interval = CMTimeMakeWithSeconds(1, 10)
+//        let interval = CMTimeMakeWithSeconds(period, Int32(NSEC_PER_SEC))
+        periodicTimeObserver = self.player.addPeriodicTimeObserverForInterval(interval, queue: nil, usingBlock: block)
+    }
     
     private var asset: AVAsset!
     private var playerItem: AVPlayerItem?
@@ -195,6 +202,10 @@ public class Player: UIViewController {
     }
     
     deinit {
+        if let obs = periodicTimeObserver {
+            self.player.removeTimeObserver(obs)
+        }
+        
         self.playerView?.player = nil
         self.delegate = nil
         
