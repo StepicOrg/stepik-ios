@@ -40,10 +40,15 @@ class StepicVideoPlayerViewController: UIViewController {
     
     func seekToTime(time: NSTimeInterval) {
         //TODO: Add implementation here
+        
+        self.player.seekToTime(CMTime(seconds: Double(time), preferredTimescale: 1))
     }
     
     @IBAction func topTimeSliderValueChanged(sender: UISlider) {
         //TODO: Connect with a time here with seekToTime() implementation
+        
+        let time = NSTimeInterval(sender.value) * self.player.maximumDuration
+        seekToTime(time)
     }
 
     @IBAction func seekForwardPressed(sender: UIButton) {
@@ -70,10 +75,7 @@ class StepicVideoPlayerViewController: UIViewController {
     
     //Controlling the rate
     @IBAction func changeRatePressed(sender: UIButton) {
-        //TODO: Handle player's rate change
         displayRateChangeAlert()
-        
-        
     }
     
     private func displayRateChangeAlert() {
@@ -107,12 +109,10 @@ class StepicVideoPlayerViewController: UIViewController {
         //TODO: Handle player's quality change
     }
     
+    
     //Controlling the playback state
     @IBAction func playPressed(sender: UIButton) {
-        
         handlePlay()
-        
-        //TODO: Change content's playback state
     }    
     
     private var player: Player!
@@ -144,6 +144,28 @@ class StepicVideoPlayerViewController: UIViewController {
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpOutside)
+        topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpInside)
+        topTimeSlider.addTarget(self, action: "startedSeeking", forControlEvents: UIControlEvents.TouchDown)
+    }
+    
+    private var wasPlayingBeforeSeeking : Bool = false
+    func startedSeeking() {
+        print("started seeking")
+        if self.player.playbackState == .Playing {
+            wasPlayingBeforeSeeking = true
+            self.player.pause()
+        } else {
+            wasPlayingBeforeSeeking = false
+        }
+    }
+    
+    func finishedSeeking() {
+        print("finished seeking")
+        if wasPlayingBeforeSeeking {
+            self.player.playFromCurrentTime()
+        }
     }
     
     // MARK: UIGestureRecognizer
