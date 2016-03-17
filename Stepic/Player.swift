@@ -279,7 +279,9 @@ public class Player: UIViewController {
     
     var rate : Float = 1 {
         didSet {
-            self.player.rate = rate
+            if self.player.rate != 0 {
+                self.player.rate = rate
+            }
         }
     }
     

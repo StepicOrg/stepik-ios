@@ -39,23 +39,28 @@ class StepicVideoPlayerViewController: UIViewController {
     //Seek events
     
     func seekToTime(time: NSTimeInterval) {
-        //TODO: Add implementation here
-        
-        self.player.seekToTime(CMTime(seconds: Double(time), preferredTimescale: 1))
+        self.player.seekToTime(CMTime(seconds: Double(time), preferredTimescale: 1000))
     }
     
-    @IBAction func topTimeSliderValueChanged(sender: UISlider) {
-        //TODO: Connect with a time here with seekToTime() implementation
-        
+    @IBAction func topTimeSliderValueChanged(sender: UISlider) {        
         let time = NSTimeInterval(sender.value) * self.player.maximumDuration
         seekToTime(time)
     }
 
     @IBAction func seekForwardPressed(sender: UIButton) {
         //TODO: Add implementation
+        
+        let neededTime = self.player.currentTime + 10
+        
+        seekToTime(min(neededTime, player.maximumDuration))
+        
     }
+    
     @IBAction func seekBackPressed(sender: UIButton) {
         //TODO: Add implementation
+        
+        let neededTime = self.player.currentTime - 10
+        seekToTime(max(neededTime, self.player.maximumDuration))
     }
     
     //Buffering 
@@ -66,8 +71,8 @@ class StepicVideoPlayerViewController: UIViewController {
     
     @IBAction func backPressed(sender: UIButton) {
         //TODO: Add implementation here
-        //Hints: Remove UIWindow with fullscreen controller
     }
+    
     private func makeFullscreenControlsVisible(visible: Bool) {
         topContainerView.hidden = !visible
         bottomFullscreenControlsView.hidden = !visible
@@ -223,5 +228,6 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
     }
     
     func playerPlaybackDidEnd(player: Player) {
+        fullscreenPlayButton.setTitle("Play", forState: .Normal)
     }
 }
