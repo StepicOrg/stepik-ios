@@ -122,7 +122,7 @@ class StepicVideoPlayerViewController: UIViewController {
     
     private var player: Player!
     
-    let videoUrl = NSURL(string: "https://player.vimeo.com/external/111972892.sd.mp4?s=e25198c6ff128983b1c622477e2089a2&profile_id=112&oauth2_token_id=3605157")!
+    let videoUrl = NSURL(string: "https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/2388/4/111940744/307875806.mp4?token=56eb418c_0x9886893baca5fa67991354cae03ac8c8ed705e1d")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,9 +203,12 @@ class StepicVideoPlayerViewController: UIViewController {
     private func setTimeParametersAfterPlayerIsReady() {
         fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
         player.setPeriodicTimeObserver { 
-            time in
-            self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(CMTimeGetSeconds(time))
-            self.topTimeSlider.value = Float(CMTimeGetSeconds(time)/Double(self.player.maximumDuration))
+            time, bufferedTime in
+            self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
+            self.topTimeSlider.value = Float(time/Double(self.player.maximumDuration))
+            if let bTime = bufferedTime {
+                self.topTimeProgressView.progress = Float(bTime/Double(self.player.maximumDuration))
+            }
         }
     }
 }

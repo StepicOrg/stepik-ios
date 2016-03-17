@@ -175,10 +175,32 @@ public class Player: UIViewController {
     }
    
     private var periodicTimeObserver : AnyObject?
-    public func setPeriodicTimeObserver(block: (CMTime)->Void) {
+    
+    private func getTimeFromBufferSize() {
+        
+    }
+    
+    //block's parameters are current current time + current buffered value 
+    public func setPeriodicTimeObserver(block: (NSTimeInterval, NSTimeInterval?)->Void) {
         let interval = CMTimeMakeWithSeconds(1, 10)
 //        let interval = CMTimeMakeWithSeconds(period, Int32(NSEC_PER_SEC))
-        periodicTimeObserver = self.player.addPeriodicTimeObserverForInterval(interval, queue: nil, usingBlock: block)
+        periodicTimeObserver = self.player.addPeriodicTimeObserverForInterval(interval, queue: nil, usingBlock: {
+            time in
+            let nTime = CMTimeGetSeconds(time)
+            if let item = self.playerItem {
+                if item.loadedTimeRanges.count > 0 {
+                    let aTimeRange = item.loadedTimeRanges[0].CMTimeRangeValue
+                    let startTime = CMTimeGetSeconds(aTimeRange.start)
+                    let loadedDuration = CMTimeGetSeconds(aTimeRange.duration)
+                    block(nTime, startTime + loadedDuration)
+                } else {
+                    print("ALERT loadedTimeTanges count < 0")
+                    block(nTime, nil)
+                }
+                
+            }
+            
+        })
     }
     
     private var asset: AVAsset!
