@@ -112,17 +112,20 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the quality
     @IBAction func changeQualityPressed(sender: UIButton) {
         //TODO: Handle player's quality change
+        playerStartTime = player.currentTime
+        player.setUrl(secondVideoUrl)
     }
-    
     
     //Controlling the playback state
     @IBAction func playPressed(sender: UIButton) {
         handlePlay()
     }    
     
+    private var playerStartTime : NSTimeInterval = 0.0
     private var player: Player!
     
-    let videoUrl = NSURL(string: "https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/2388/4/111940744/307875806.mp4?token=56eb418c_0x9886893baca5fa67991354cae03ac8c8ed705e1d")!
+    let videoUrl = NSURL(string: "https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/2388/4/111940744/307875803.mp4?token=56ec00dd_0xb1c3e8343b29aa54c3efad523c6dfa3c197323c3")!
+    let secondVideoUrl = NSURL(string: "https://05-lvl3-pdl.vimeocdn.com/01/2388/4/111941028/307876578.mp4?expires=1458308656&token=032f0f4b82cc44407706f")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,9 +222,16 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
         activityIndicator.hidden = true
         makeFullscreenControlsVisible(true)
         setTimeParametersAfterPlayerIsReady()
+        player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
+        player.playFromCurrentTime()
     }
     
     func playerPlaybackStateDidChange(player: Player) {
+        if player.playbackState == .Failed {
+            print("failed, retry")
+            player.setUrl(videoUrl)
+        }
+        print("player playback state changed to \(player.playbackState)")
     }
     
     func playerBufferingStateDidChange(player: Player) {
