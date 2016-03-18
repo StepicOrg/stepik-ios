@@ -46,7 +46,7 @@ class StepicVideoPlayerViewController: UIViewController {
         let time = NSTimeInterval(sender.value) * self.player.maximumDuration
         seekToTime(time)
     }
-
+    
     @IBAction func seekForwardPressed(sender: UIButton) {
         //TODO: Add implementation
         
@@ -71,6 +71,7 @@ class StepicVideoPlayerViewController: UIViewController {
     
     @IBAction func backPressed(sender: UIButton) {
         //TODO: Add implementation here
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     private func makeFullscreenControlsVisible(visible: Bool) {
@@ -112,8 +113,45 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the quality
     @IBAction func changeQualityPressed(sender: UIButton) {
         //TODO: Handle player's quality change
-        playerStartTime = player.currentTime
-        player.setUrl(secondVideoUrl)
+        displayQualityChangeAlert()
+    }
+    
+    var currentQualityURL : NSURL! {
+        didSet {
+            playerStartTime = player.currentTime
+            player.setUrl(currentQualityURL)
+        }
+    }
+    
+    var currentQuality : String! {
+        didSet {
+            qualityButton.setTitle("\(currentQuality)p", forState: .Normal)
+        }
+    }
+    
+    private func displayQualityChangeAlert() {
+        let alertController = UIAlertController(title: "Change quality", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        for url in video.urls {
+            let action = UIAlertAction(title: url.quality, style: .Default, handler: { 
+                action in
+                self.currentQuality = url.quality
+                self.currentQualityURL = NSURL(string: url.url)!
+            })
+            alertController.addAction(action)
+        }
+        if video.state == VideoState.Cached {
+            if let cachedQuality = video.cachedQuality?.rawString  {
+                alertController.addAction(UIAlertAction(title: "Downloaded(\(cachedQuality))",
+                    style: .Default, 
+                    handler: {
+                        action in
+                        self.currentQuality = cachedQuality
+                        self.currentQualityURL = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(self.video.name))
+                }))
+            }
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //Controlling the playback state
@@ -123,9 +161,8 @@ class StepicVideoPlayerViewController: UIViewController {
     
     private var playerStartTime : NSTimeInterval = 0.0
     private var player: Player!
-    
-    let videoUrl = NSURL(string: "https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/2388/4/111940744/307875803.mp4?token=56ec00dd_0xb1c3e8343b29aa54c3efad523c6dfa3c197323c3")!
-    let secondVideoUrl = NSURL(string: "https://05-lvl3-pdl.vimeocdn.com/01/2388/4/111941028/307876578.mp4?expires=1458308656&token=032f0f4b82cc44407706f")!
+
+    var video : Video!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,15 +175,15 @@ class StepicVideoPlayerViewController: UIViewController {
         
         self.player = Player()
         self.player.delegate = self
-//        self.player.view.frame = self.view.bounds
+        //        self.player.view.frame = self.view.bounds
         
         self.addChildViewController(self.player)
         self.view.addSubview(self.player.view)
         self.player.view.alignTop("60", leading: "0", bottom: "-40", trailing: "0", toView: self.view)
         self.player.didMoveToParentViewController(self)
-        
-        self.player.setUrl(videoUrl)
-        
+                
+        currentQualityURL = getInitialURL()
+        currentQuality = getInitialQuality()
         self.player.playbackLoops = false
         
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
@@ -156,6 +193,22 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpOutside)
         topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpInside)
         topTimeSlider.addTarget(self, action: "startedSeeking", forControlEvents: UIControlEvents.TouchDown)
+    }
+    
+    private func getInitialURL() -> NSURL! {
+        if video.state == VideoState.Cached {
+            return try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.name))
+        } else {
+            return video.getUrlForQuality(VideosInfo.videoQuality)
+        }
+    }
+    
+    private func getInitialQuality() -> String {
+        if video.state == VideoState.Cached {
+            return video.cachedQuality?.rawString ?? VideosInfo.videoQuality.rawString
+        } else {
+            return VideosInfo.videoQuality.rawString
+        }
     }
     
     private var wasPlayingBeforeSeeking : Bool = false
@@ -229,7 +282,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
     func playerPlaybackStateDidChange(player: Player) {
         if player.playbackState == .Failed {
             print("failed, retry")
-            player.setUrl(videoUrl)
+            player.setUrl(currentQualityURL)
         }
         print("player playback state changed to \(player.playbackState)")
     }
