@@ -22,7 +22,6 @@ def all_pods
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'MagicalRecord'
 end
 
 target 'Stepic' do
