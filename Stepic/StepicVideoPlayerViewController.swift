@@ -140,7 +140,7 @@ class StepicVideoPlayerViewController: UIViewController {
             alertController.addAction(action)
         }
         if video.state == VideoState.Cached {
-            if let cachedQuality = video.cachedQuality?.rawString  {
+            if let cachedQuality = video.cachedQuality  {
                 alertController.addAction(UIAlertAction(title: "Downloaded(\(cachedQuality))",
                     style: .Default, 
                     handler: {
@@ -205,9 +205,9 @@ class StepicVideoPlayerViewController: UIViewController {
     
     private func getInitialQuality() -> String {
         if video.state == VideoState.Cached {
-            return video.cachedQuality?.rawString ?? VideosInfo.videoQuality.rawString
+            return video.cachedQuality ?? VideosInfo.videoQuality
         } else {
-            return VideosInfo.videoQuality.rawString
+            return video.getNearestQualityToDefault(VideosInfo.videoQuality)
         }
     }
     

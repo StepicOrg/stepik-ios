@@ -14,23 +14,22 @@ struct VideosInfo {
     
     private static let defaults = NSUserDefaults.standardUserDefaults()
 
-    static var videoQuality : VideoQuality {
+    static var videoQuality : String {
         get {
             if let quality = defaults.valueForKey(videoQualityKey) as? String {
-                return VideoQuality(quality: quality)
+                return quality
             } else {
                 if DeviceInfo.isIPad() {
-                    self.videoQuality = .Medium
-                    return .Medium
+                    return "720"
                 } else {
-                    self.videoQuality = .Low
-                    return .Low
+                    return "360"
                 }
             }
         }
         
         set(value) {
-            defaults.setObject(value.rawString, forKey: videoQualityKey)
+            print("setting \(value)")
+            defaults.setObject(value, forKey: videoQualityKey)
             defaults.synchronize()
         }
     }

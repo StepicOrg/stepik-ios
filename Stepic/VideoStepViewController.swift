@@ -89,7 +89,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
             }
             
             downloadButton.state = .Downloading
-            video.store(video.cachedQuality ?? VideosInfo.videoQuality, progress: {
+            video.store(VideosInfo.videoQuality, progress: {
                 prog in
                 UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
                 }, completion: {

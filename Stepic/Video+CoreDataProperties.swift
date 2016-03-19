@@ -66,16 +66,20 @@ extension Video {
         }
     }
     
-    var cachedQuality : VideoQuality? {
+    var cachedQuality : String? {
         get {
-            if let cached = managedCachedQuality {
-                return VideoQuality(rawValue: cached.integerValue)
+            if let cq = managedCachedQuality {
+                return String(cq)
             } else {
                 return nil
             }
         }
         set(value) {
-            managedCachedQuality = value?.rawValue ?? nil
+            if let v = value {
+                managedCachedQuality = Int(v)
+            } else {
+                managedCachedQuality = nil
+            }
             loadingQuality = value
         }
     }

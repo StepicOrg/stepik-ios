@@ -68,7 +68,7 @@ class UserPreferencesTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        videoQualityLabel.text = "\(VideosInfo.videoQuality.rawString)p"
+        videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
     }
     
     override func didReceiveMemoryWarning() {
