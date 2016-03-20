@@ -30,57 +30,73 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyR-gR-ToD" userLabel="Bottom FullScreen Controls">
-                    <rect key="frame" x="0.0" y="366" width="600" height="40"/>
+                    <rect key="frame" x="0.0" y="346" width="600" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="um1-Jr-FFH">
-                            <rect key="frame" x="285" y="8" width="30" height="30"/>
-                            <state key="normal" title="Play"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="um1-Jr-FFH">
+                            <rect key="frame" x="276" y="6" width="48" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="48" id="HQg-DJ-s4W"/>
+                                <constraint firstAttribute="height" constant="48" id="hJa-Qj-xfD"/>
+                            </constraints>
+                            <state key="normal" image="ic_play_arrow_48pt"/>
                             <connections>
                                 <action selector="playPressed:" destination="-1" eventType="touchUpInside" id="QHH-1T-Pcw"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-ve-4BS">
-                            <rect key="frame" x="323" y="8" width="54" height="30"/>
-                            <state key="normal" title="+10 sec"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-ve-4BS">
+                            <rect key="frame" x="332" y="15" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="tVL-Dp-TN2"/>
+                                <constraint firstAttribute="height" constant="30" id="wZk-Yo-OEn"/>
+                            </constraints>
+                            <state key="normal" image="ic_forward_10_48pt"/>
                             <connections>
                                 <action selector="seekForwardPressed:" destination="-1" eventType="touchUpInside" id="3Lm-9j-ZPq"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knc-c5-olR">
-                            <rect key="frame" x="226" y="8" width="51" height="30"/>
-                            <state key="normal" title="-10 sec"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knc-c5-olR">
+                            <rect key="frame" x="238" y="15" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="DMK-n1-UpU"/>
+                                <constraint firstAttribute="width" constant="30" id="n5t-wt-pm2"/>
+                            </constraints>
+                            <state key="normal" image="ic_replay_10_48pt"/>
                             <connections>
                                 <action selector="seekBackPressed:" destination="-1" eventType="touchUpInside" id="DYa-XZ-3sb"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toN-Q6-jzn">
-                            <rect key="frame" x="547" y="8" width="44" height="30"/>
-                            <state key="normal" title="1080p"/>
+                            <rect key="frame" x="547" y="15" width="44" height="30"/>
+                            <state key="normal" title="1080p">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
                                 <action selector="changeQualityPressed:" destination="-1" eventType="touchUpInside" id="hEr-wd-5kf"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-wy-Esq">
-                            <rect key="frame" x="8" y="8" width="30" height="30"/>
-                            <state key="normal" title="1.5x"/>
+                            <rect key="frame" x="8" y="15" width="30" height="30"/>
+                            <state key="normal" title="1.5x">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
                                 <action selector="changeRatePressed:" destination="-1" eventType="touchUpInside" id="gGv-Gn-ahs"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.97953344666946585" green="0.97829060216019625" blue="1" alpha="0.61394108952702697" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="jpo-wy-Esq" firstAttribute="top" secondItem="fyR-gR-ToD" secondAttribute="top" constant="8" id="9OH-sC-gGA"/>
+                        <constraint firstItem="knc-c5-olR" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="7ZO-ur-Sfh"/>
+                        <constraint firstItem="MoB-ve-4BS" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="I1e-2N-aae"/>
                         <constraint firstAttribute="trailing" secondItem="toN-Q6-jzn" secondAttribute="trailing" constant="9" id="SWq-FR-Q39"/>
-                        <constraint firstItem="MoB-ve-4BS" firstAttribute="top" secondItem="fyR-gR-ToD" secondAttribute="top" constant="8" id="VSW-zC-fWH"/>
                         <constraint firstItem="MoB-ve-4BS" firstAttribute="leading" secondItem="um1-Jr-FFH" secondAttribute="trailing" constant="8" id="VvC-b6-Uyy"/>
-                        <constraint firstItem="toN-Q6-jzn" firstAttribute="top" secondItem="fyR-gR-ToD" secondAttribute="top" constant="8" id="eiU-5z-BCX"/>
-                        <constraint firstItem="um1-Jr-FFH" firstAttribute="top" secondItem="fyR-gR-ToD" secondAttribute="top" constant="8" id="fwT-5O-y4g"/>
-                        <constraint firstAttribute="height" constant="40" id="igX-Zj-N0W"/>
+                        <constraint firstItem="jpo-wy-Esq" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="e96-UG-koQ"/>
+                        <constraint firstAttribute="height" constant="60" id="igX-Zj-N0W"/>
                         <constraint firstItem="um1-Jr-FFH" firstAttribute="centerX" secondItem="fyR-gR-ToD" secondAttribute="centerX" id="j2a-8M-cBZ"/>
-                        <constraint firstItem="knc-c5-olR" firstAttribute="top" secondItem="fyR-gR-ToD" secondAttribute="top" constant="8" id="nh9-EE-WGv"/>
                         <constraint firstItem="um1-Jr-FFH" firstAttribute="leading" secondItem="knc-c5-olR" secondAttribute="trailing" constant="8" id="pMg-pD-6wl"/>
+                        <constraint firstItem="um1-Jr-FFH" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="sus-vd-Mx6"/>
                         <constraint firstItem="jpo-wy-Esq" firstAttribute="leading" secondItem="fyR-gR-ToD" secondAttribute="leading" constant="8" id="tvt-q5-fQw"/>
+                        <constraint firstItem="toN-Q6-jzn" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="w29-8I-pJO"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gx-PI-4Wv" userLabel="Top Container">
@@ -89,13 +105,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6z-ye-53l" userLabel="Top FullScreen Controls">
                             <rect key="frame" x="0.0" y="20" width="600" height="40"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ga3-EW-ngM">
-                                    <rect key="frame" x="8" y="5" width="34" height="30"/>
-                                    <state key="normal" title="Back"/>
-                                    <connections>
-                                        <action selector="backPressed:" destination="-1" eventType="touchUpInside" id="mp1-yg-A6W"/>
-                                    </connections>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcT-UJ-DfH">
                                     <rect key="frame" x="50" y="12" width="60" height="15"/>
                                     <constraints>
@@ -116,7 +125,7 @@
                                 </label>
                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9YA-SS-S7q">
                                     <rect key="frame" x="118" y="20" width="406" height="2"/>
-                                    <color key="progressTintColor" red="0.0" green="0.92549026010000002" blue="0.77254909279999995" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="progressTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </progressView>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yp8-ke-m95">
                                     <rect key="frame" x="116" y="5" width="410" height="31"/>
@@ -125,8 +134,17 @@
                                         <action selector="topTimeSliderValueChanged:" destination="-1" eventType="valueChanged" id="BtX-EL-OCW"/>
                                     </connections>
                                 </slider>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ga3-EW-ngM">
+                                    <rect key="frame" x="8" y="5" width="34" height="30"/>
+                                    <state key="normal" title="Back">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="backPressed:" destination="-1" eventType="touchUpInside" id="mp1-yg-A6W"/>
+                                    </connections>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="9YA-SS-S7q" firstAttribute="width" secondItem="yp8-ke-m95" secondAttribute="width" id="7wA-xr-Cx3"/>
                                 <constraint firstItem="ZZw-HW-dZ9" firstAttribute="leading" secondItem="9YA-SS-S7q" secondAttribute="trailing" constant="8" id="Fkd-mG-kHv"/>
@@ -145,7 +163,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" red="0.97953344669999998" green="0.97829060219999997" blue="1" alpha="0.61394108950000004" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="k6z-ye-53l" secondAttribute="bottom" id="2Xo-ag-C4x"/>
                         <constraint firstAttribute="trailing" secondItem="k6z-ye-53l" secondAttribute="trailing" id="Nrg-1F-FAf"/>
@@ -174,4 +192,9 @@
             <point key="canvasLocation" x="320" y="231"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_forward_10_48pt" width="48" height="48"/>
+        <image name="ic_play_arrow_48pt" width="48" height="48"/>
+        <image name="ic_replay_10_48pt" width="48" height="48"/>
+    </resources>
 </document>

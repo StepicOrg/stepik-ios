@@ -157,7 +157,12 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the playback state
     @IBAction func playPressed(sender: UIButton) {
         handlePlay()
-    }    
+    }   
+    
+    private func setButtonPlaying(isPlaying: Bool) {
+        fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, forState: .Normal)
+    }
+    
     
     private var playerStartTime : NSTimeInterval = 0.0
     private var player: Player!
@@ -179,7 +184,7 @@ class StepicVideoPlayerViewController: UIViewController {
         
         self.addChildViewController(self.player)
         self.view.addSubview(self.player.view)
-        self.player.view.alignTop("60", leading: "0", bottom: "-40", trailing: "0", toView: self.view)
+        self.player.view.alignTop("60", leading: "0", bottom: "-60", trailing: "0", toView: self.view)
         self.player.didMoveToParentViewController(self)
                 
         currentQualityURL = getInitialURL()
@@ -246,9 +251,9 @@ class StepicVideoPlayerViewController: UIViewController {
         }
         
         if player.playbackState == PlaybackState.Playing {
-            fullscreenPlayButton.setTitle("Pause", forState: .Normal)
+            setButtonPlaying(false)
         } else {
-            fullscreenPlayButton.setTitle("Play", forState: .Normal)
+            setButtonPlaying(true)
         }
     }
     
@@ -277,6 +282,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
         setTimeParametersAfterPlayerIsReady()
         player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
+        setButtonPlaying(false)
     }
     
     func playerPlaybackStateDidChange(player: Player) {
@@ -294,6 +300,6 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
     }
     
     func playerPlaybackDidEnd(player: Player) {
-        fullscreenPlayButton.setTitle("Play", forState: .Normal)
+        setButtonPlaying(true)
     }
 }
