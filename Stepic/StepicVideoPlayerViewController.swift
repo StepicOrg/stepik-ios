@@ -172,7 +172,6 @@ class StepicVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        makeFullscreenControlsVisible(false)
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
         
@@ -258,8 +257,24 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
-        handlePlay()
+        handleControlsVisibility()
     }
+    
+    var controlsCurrentlyVisible = true
+    
+    private func handleControlsVisibility() {
+        animateBars(!controlsCurrentlyVisible)
+        controlsCurrentlyVisible = !controlsCurrentlyVisible
+    }
+    
+    private func animateBars(visible: Bool) {
+        let targetAlpha : CGFloat = visible ? 1.0 : 0.0
+        UIView.animateWithDuration(0.5, animations: {
+            self.topContainerView.alpha = targetAlpha
+            self.bottomFullscreenControlsView.alpha = targetAlpha
+        })
+    }
+    
     
     private func setTimeParametersAfterPlayerIsReady() {
         fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
@@ -278,7 +293,6 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
     func playerReady(player: Player) {
         print("player is ready to display")
         activityIndicator.hidden = true
-        makeFullscreenControlsVisible(true)
         setTimeParametersAfterPlayerIsReady()
         player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
