@@ -182,8 +182,9 @@ class StepicVideoPlayerViewController: UIViewController {
         //        self.player.view.frame = self.view.bounds
         
         self.addChildViewController(self.player)
-        self.view.addSubview(self.player.view)
-        self.player.view.alignTop("60", leading: "0", bottom: "-60", trailing: "0", toView: self.view)
+        self.view.insertSubview(self.player.view, atIndex: 0)
+//        self.view.addSubview(self.player.view)
+        self.player.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self.view)
         self.player.didMoveToParentViewController(self)
                 
         currentQualityURL = getInitialURL()
