@@ -60,7 +60,7 @@ class StepicVideoPlayerViewController: UIViewController {
         //TODO: Add implementation
         
         let neededTime = self.player.currentTime - 10
-        seekToTime(max(neededTime, self.player.maximumDuration))
+        seekToTime(max(neededTime, 0))
     }
     
     //Buffering 
