@@ -94,6 +94,12 @@ class StepicVideoPlayerViewController: UIViewController {
             alertController.addAction(action)
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = rateButton
+            popoverController.sourceRect = rateButton.bounds
+        }
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -151,6 +157,12 @@ class StepicVideoPlayerViewController: UIViewController {
             }
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = qualityButton
+            popoverController.sourceRect = qualityButton.bounds
+        }
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
