@@ -90,15 +90,15 @@ enum BackButtonStyle {
     var barButtonItem : UIBarButtonItem {
         switch self {
         case .Close:
-            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .Plain, target: nil, action: "")
+            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .Plain, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         case .Back:
-            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .Plain, target: nil, action: "")
+            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .Plain, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         case .Done:
-            let item = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: "")
+            let item = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         }

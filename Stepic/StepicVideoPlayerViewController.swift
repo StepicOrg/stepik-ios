@@ -191,13 +191,13 @@ class StepicVideoPlayerViewController: UIViewController {
         currentQuality = getInitialQuality()
         self.player.playbackLoops = false
         
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer:")
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepicVideoPlayerViewController.handleTapGestureRecognizer(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
         
-        topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpOutside)
-        topTimeSlider.addTarget(self, action: "finishedSeeking", forControlEvents: UIControlEvents.TouchUpInside)
-        topTimeSlider.addTarget(self, action: "startedSeeking", forControlEvents: UIControlEvents.TouchDown)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), forControlEvents: UIControlEvents.TouchUpOutside)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), forControlEvents: UIControlEvents.TouchUpInside)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), forControlEvents: UIControlEvents.TouchDown)
     }
     
     private func getInitialURL() -> NSURL! {

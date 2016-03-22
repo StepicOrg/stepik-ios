@@ -15,7 +15,6 @@ extension UIImage {
         let image = self
         
         let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(scale, scale))
-        let hasAlpha = true
 //        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
         UIGraphicsBeginImageContextWithOptions(size, true, scale)

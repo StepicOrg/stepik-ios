@@ -136,8 +136,8 @@ class CoursePreviewViewController: UIViewController {
             player.movieSourceType = MPMovieSourceType.File
             player.repeatMode = MPMovieRepeatMode.None
             self.contentView.addSubview(player.view)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "willExitFullscreen", name: MPMoviePlayerWillExitFullscreenNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "didExitFullscreen", name: MPMoviePlayerDidExitFullscreenNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: MPMoviePlayerWillExitFullscreenNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: MPMoviePlayerDidExitFullscreenNotification, object: nil)
             
             self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.contentView)
             self.moviePlayer?.view.alignTop("0", bottom: "0", toView: self.contentView)

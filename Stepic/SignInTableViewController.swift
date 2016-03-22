@@ -48,7 +48,7 @@ class SignInTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.clearColor()
         
-        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(SignInTableViewController.tap))
         self.view.addGestureRecognizer(tapG)
         
         tableView.panGestureRecognizer.cancelsTouchesInView = false
@@ -56,7 +56,7 @@ class SignInTableViewController: UITableViewController {
 
 //        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetAuthentificationCode:", name: "ReceivedAuthorizationCodeNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInTableViewController.didGetAuthentificationCode(_:)), name: "ReceivedAuthorizationCodeNotification", object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

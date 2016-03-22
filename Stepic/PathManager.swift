@@ -56,7 +56,7 @@ class PathManager: NSObject {
             let filePath = try getPathForVideoWithId(id: id, andExtension: "mp4")
             return try NSFileManager.defaultManager().fileExistsAtPath(filePath)
         }
-        catch let error as NSError{
+        catch _ as NSError{
             return false
         }
     }

@@ -19,7 +19,7 @@ class AuthentificationManager : NSObject {
     func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
-            failure(error: NSError.noAppWithCredentials as! ErrorType)
+            failure(error: NSError.noAppWithCredentials as ErrorType)
             return nil 
         }
         
@@ -61,7 +61,7 @@ class AuthentificationManager : NSObject {
     func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
-            failure(error: NSError.noAppWithCredentials as! ErrorType)
+            failure(error: NSError.noAppWithCredentials as ErrorType)
             return nil 
         }
         
@@ -110,13 +110,13 @@ class AuthentificationManager : NSObject {
             return nil
         case .Code:
             if StepicApplicationsInfo.social == nil {
-                failure(error: NSError.noAppWithCredentials as! ErrorType)
+                failure(error: NSError.noAppWithCredentials as ErrorType)
                 return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .Password:
             if StepicApplicationsInfo.password == nil {
-                failure(error: NSError.noAppWithCredentials as! ErrorType)
+                failure(error: NSError.noAppWithCredentials as ErrorType)
                 return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials

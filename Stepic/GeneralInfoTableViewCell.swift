@@ -32,7 +32,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
         
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didRotate", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
