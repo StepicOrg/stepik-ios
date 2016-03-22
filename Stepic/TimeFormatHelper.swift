@@ -17,7 +17,8 @@ class TimeFormatHelper: NSObject {
     
     func getTimeStringFrom(time: NSTimeInterval) -> String {
         let dateComponentsFormatter = NSDateComponentsFormatter()
-        let additionalFormat = time >= 60 ? "" : time < 10 ? "0:0" : "0:"
-        return "\(additionalFormat)\(dateComponentsFormatter.stringFromTimeInterval(time)!)" ?? "--:--:--"
+//        print("formatting time -> \(dateComponentsFormatter.stringFromTimeInterval(time))")
+        let additionalFormat = time >= 60 ? "" : (time < 10 ? "0:0" : "0:")
+        return "\(additionalFormat)\(time >= 60 ? dateComponentsFormatter.stringFromTimeInterval(time)! : "\(Int(time))" )" ?? "--:--:--"
     }
 }
