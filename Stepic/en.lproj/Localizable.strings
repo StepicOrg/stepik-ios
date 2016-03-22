@@ -91,4 +91,6 @@ PullToRefreshSectionsTitle = "Refresh sections";
 PullToRefreshSectionsDescription = "Pull to refresh sections";
 PullToRefreshUnitsTitle = "Refresh lessons";
 PullToRefreshUnitsDescription = "Pull to refresh lessons";
+RegistrationError = "Registration error";
+
 

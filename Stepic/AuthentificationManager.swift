@@ -245,21 +245,25 @@ class AuthentificationManager : NSObject {
                 errorHandler((e as NSError).localizedDescription)
             }
             
-            let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
-            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+            if let r = response {
+                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
+                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
             
             //            for cookie in cookies {
             //                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
             //            }
             
-            for cookie in cookies {
-                if cookie.name == "csrftoken" {
-                    completion(cookie.value)
-                    return
+                for cookie in cookies {
+                    if cookie.name == "csrftoken" {
+                        completion(cookie.value)
+                        return
+                    }
                 }
-            }
             
-            errorHandler("No cookie for csrftoken")
+                errorHandler("No cookie for csrftoken")
+            } else {
+                errorHandler("No response")
+            }
         }
         
     }
@@ -308,7 +312,7 @@ class AuthentificationManager : NSObject {
                     }
             })},error:  { 
                 errorMsg in
-                errorHandler("error while refreshing csrf token", nil)
+                errorHandler(NSLocalizedString("RegistrationError", comment: ""), nil)
         })
     }
 }
