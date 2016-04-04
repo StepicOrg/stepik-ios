@@ -30,7 +30,7 @@ class Section: NSManagedObject, JSONInitializable {
 //        print("initialized section \(id) with progress id -> \(progressId)")
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
         
         unitsArray = json["units"].arrayObject as! [Int]
     }
