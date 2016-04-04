@@ -184,6 +184,8 @@ class StepicVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, forState: .Normal)
+        
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
         
