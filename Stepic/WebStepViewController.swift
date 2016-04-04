@@ -32,7 +32,7 @@ class WebStepViewController: UIViewController {
     var assignment : Assignment?
     
     var stepUrl : String {
-        return "https://stepic.org/lesson/\(lesson.slug)/step/\(stepId)"
+        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)"
     }
     
     private var panG : UIPanGestureRecognizer!
