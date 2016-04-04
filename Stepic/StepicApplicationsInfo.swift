@@ -25,5 +25,7 @@ struct StepicApplicationsInfo {
 
     static let apiURL = "https://stepic.org/api"    
     static let oauthURL = "https://stepic.org/oauth2"
-
+    static let stepicURL = "https://stepic.org"
+    
+    static let doesAllowCourseUnenrollment = true
 }

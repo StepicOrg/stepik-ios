@@ -222,6 +222,10 @@ class CoursePreviewViewController: UIViewController {
     }
     
     @IBAction func joinButtonPressed(sender: UIButton) {
+        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
+            return
+        }
+        
         //TODO : Add statuses
         if let c = course {
             if sender.isEnabledToJoin {
