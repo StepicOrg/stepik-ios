@@ -16,7 +16,8 @@ extension Video {
 
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedThumbnailURL: String?
-    @NSManaged var managedStatus: String?
+    @NSManaged var managedStatus: String?    
+    @NSManaged var managedPlayTime: NSNumber?
     @NSManaged var managedURLs: NSOrderedSet?
     @NSManaged var managedBlock: Block?
 //    @NSManaged var managedCachedPath: String?
@@ -84,6 +85,19 @@ extension Video {
         }
     }
     
+    var playTime: NSTimeInterval {
+        get {
+            if let time = managedPlayTime {
+                return time.doubleValue
+            } else {
+                return 0.0
+            }
+        }
+        
+        set(time) {
+            managedPlayTime = time
+        }
+    }
     
 //    var cachedPath : String? {
 //        get {

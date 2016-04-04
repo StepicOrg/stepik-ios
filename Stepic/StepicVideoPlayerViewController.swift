@@ -13,7 +13,6 @@ import FLKAutoLayout
 
 class StepicVideoPlayerViewController: UIViewController {
     
-    var delegate: PlayerDelegate?
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -47,30 +46,25 @@ class StepicVideoPlayerViewController: UIViewController {
         seekToTime(time)
     }
     
-    @IBAction func seekForwardPressed(sender: UIButton) {
-        //TODO: Add implementation
-        
+    @IBAction func seekForwardPressed(sender: UIButton) {        
         let neededTime = self.player.currentTime + 10
         
         seekToTime(min(neededTime, player.maximumDuration))
         
     }
     
-    @IBAction func seekBackPressed(sender: UIButton) {
-        //TODO: Add implementation
-        
+    @IBAction func seekBackPressed(sender: UIButton) {        
         let neededTime = self.player.currentTime - 10
         seekToTime(max(neededTime, 0))
     }
     
     //Buffering 
-    //TODO: Make this method respond to events
     func bufferingChangedToPercentage(percentage: Float) {
         topTimeProgressView.progress = percentage
     }
     
     @IBAction func backPressed(sender: UIButton) {
-        //TODO: Add implementation here
+        saveCurrentPlayerTime()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -118,7 +112,6 @@ class StepicVideoPlayerViewController: UIViewController {
     
     //Controlling the quality
     @IBAction func changeQualityPressed(sender: UIButton) {
-        //TODO: Handle player's quality change
         displayQualityChangeAlert()
     }
     
@@ -193,16 +186,19 @@ class StepicVideoPlayerViewController: UIViewController {
         
         self.player = Player()
         self.player.delegate = self
-        //        self.player.view.frame = self.view.bounds
         
         self.addChildViewController(self.player)
         self.view.insertSubview(self.player.view, atIndex: 0)
-//        self.view.addSubview(self.player.view)
         self.player.view.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: self.view)
         self.player.didMoveToParentViewController(self)
                 
+        
+        //Player Start Time should be set AFTER the currentQualityURL
+        //TODO: Change this in the future
         currentQualityURL = getInitialURL()
         currentQuality = getInitialQuality()
+        playerStartTime = video.playTime
+
         self.player.playbackLoops = false
         
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepicVideoPlayerViewController.handleTapGestureRecognizer(_:)))
@@ -212,6 +208,16 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), forControlEvents: UIControlEvents.TouchUpOutside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), forControlEvents: UIControlEvents.TouchUpInside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), forControlEvents: UIControlEvents.TouchDown)
+    }
+    
+    func saveCurrentPlayerTime() {
+        let time = self.player.currentTime != self.player.maximumDuration ? self.player.currentTime : 0.0
+        video.playTime = time
+        CoreDataHelper.instance.save()
+    }
+    
+    deinit{
+        saveCurrentPlayerTime()
     }
     
     private func getInitialURL() -> NSURL! {
