@@ -11,7 +11,6 @@ import Foundation
 struct VideosInfo {
     
     private static let videoQualityKey = "VideoQuality"
-    
     private static let defaults = NSUserDefaults.standardUserDefaults()
 
     static var videoQuality : String {
@@ -33,4 +32,24 @@ struct VideosInfo {
             defaults.synchronize()
         }
     }
+    
+    
+    private static let videoRateKey = "VideoRate"
+    
+    static var videoRate: Float {
+        get {
+            if let rate = defaults.valueForKey(videoRateKey) as? Float {
+                return rate
+            } else {
+                return 1
+            }
+        }
+        
+        set(value) {
+            print("setting \(value)")
+            defaults.setObject(value, forKey: videoRateKey)
+            defaults.synchronize()
+        }
+    }
+    
 }

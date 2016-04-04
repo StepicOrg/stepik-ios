@@ -97,9 +97,10 @@ class StepicVideoPlayerViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private var currentRate : VideoRate = .Normal {
+    private var currentRate : VideoRate = VideoRate(rawValue: VideosInfo.videoRate)! {
         didSet {
             adjustToCurrentRate()
+            VideosInfo.videoRate = currentRate.rawValue
         }
     }
     
@@ -107,8 +108,6 @@ class StepicVideoPlayerViewController: UIViewController {
         self.player.rate = currentRate.rawValue
         rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
     }
-    
-    
     
     //Controlling the quality
     @IBAction func changeQualityPressed(sender: UIButton) {
@@ -181,6 +180,7 @@ class StepicVideoPlayerViewController: UIViewController {
         
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
+        
         
         rateButton.setTitle("\(currentRate.rawValue)x", forState: .Normal)
         
@@ -317,6 +317,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
         setTimeParametersAfterPlayerIsReady()
         player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
+        player.rate = currentRate.rawValue
         setButtonPlaying(false)
     }
     
