@@ -9,6 +9,7 @@
 import UIKit
 import BEMCheckBox
 import FLKAutoLayout
+import Foundation 
 
 class ChoiceQuizViewController: QuizViewController {
 
@@ -37,8 +38,54 @@ class ChoiceQuizViewController: QuizViewController {
     
     override func updateQuizAfterAttemptUpdate() {
         self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+        self.cellHeights = [Int](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: 0)
+        initHeightUpdateBlocks()
         self.tableView.reloadData()
+        performHeightUpdates()
         self.view.layoutIfNeeded()
+    }
+    
+    private func initHeightUpdateBlocks() {
+        cellHeightUpdateBlocks = []
+        for _ in 0..<(self.attempt?.dataset as! ChoiceDataset).options.count {
+            cellHeightUpdateBlocks += [{
+                return 0
+            }]
+        }
+    }
+    
+    //Measured in seconds
+    let reloadTimeStandardInterval = 0.5
+    let reloadTimeout = 5.0
+    
+    private func reloadWithCount(count: Int) {
+        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
+            return
+        }
+        
+        delay(reloadTimeStandardInterval * Double(count), closure: {
+            self.countHeights()
+            UIThread.performUI{
+                self.tableView.reloadData() 
+            }
+            self.reloadWithCount(count + 1)
+        })  
+    }    
+    
+    private func performHeightUpdates() {
+        self.reloadWithCount(0)
+    }
+    
+    private func countHeights() {
+        var index = 0
+        for updateBlock in cellHeightUpdateBlocks {
+            let h = updateBlock()
+            if abs(cellHeights[index] - h) > 1 { 
+                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
+                cellHeights[index] = h
+            }
+            index += 1
+        }
     }
     
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
@@ -71,6 +118,8 @@ class ChoiceQuizViewController: QuizViewController {
     }
     */
 
+    var cellHeightUpdateBlocks : [(Void->Int)] = []
+    var cellHeights : [Int] = []
 }
 
 extension ChoiceQuizViewController : UITableViewDelegate {
@@ -78,7 +127,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
-                return max(27, UILabel.heightForLabelWithText(dataset.options[indexPath.row], lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 52)) + 17
+                return CGFloat(cellHeights[indexPath.row])
 //                dataset.options[indexPath.row]
             }
         }
@@ -139,7 +188,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
-                cell.choiceLabel.text = dataset.options[indexPath.row]
+                cellHeightUpdateBlocks[indexPath.row] = cell.setTextWithTeX(dataset.options[indexPath.row])
                 if dataset.isMultipleChoice {
                     cell.checkBox.boxType = .Square
                 } else {
