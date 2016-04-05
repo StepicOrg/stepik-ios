@@ -337,6 +337,10 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
             print("failed, retry")
             player.setUrl(currentQualityURL)
         }
+        if player.playbackState == .Paused {
+            saveCurrentPlayerTime()
+            playerStartTime = player.currentTime
+        }
         print("player playback state changed to \(player.playbackState)")
     }
     

@@ -185,10 +185,10 @@ public class Player: UIViewController {
         let interval = CMTimeMakeWithSeconds(1, 10)
 //        let interval = CMTimeMakeWithSeconds(period, Int32(NSEC_PER_SEC))
         periodicTimeObserver = self.player.addPeriodicTimeObserverForInterval(interval, queue: nil, usingBlock: {
-            [unowned self]
+            [weak self]
             time in
             let nTime = CMTimeGetSeconds(time)
-            if let item = self.playerItem {
+            if let item = self?.playerItem {
                 if item.loadedTimeRanges.count > 0 {
                     let aTimeRange = item.loadedTimeRanges[0].CMTimeRangeValue
                     let startTime = CMTimeGetSeconds(aTimeRange.start)
@@ -225,7 +225,6 @@ public class Player: UIViewController {
     }
     
     deinit {
-        print("player is being deinitialized")
         if let obs = periodicTimeObserver {
             self.player.removeTimeObserver(obs)
         }
@@ -242,6 +241,7 @@ public class Player: UIViewController {
         self.player.pause()
         
         self.setupPlayerItem(nil)
+        print("player is deinitialized")
     }
     
     // MARK: view lifecycle
