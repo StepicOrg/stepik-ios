@@ -63,9 +63,14 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeProgressView.progress = percentage
     }
     
-    @IBAction func backPressed(sender: UIButton) {
+    
+    private func dismissPlayer() {
         saveCurrentPlayerTime()
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func backPressed(sender: UIButton) {
+        dismissPlayer()
     }
     
     private func makeFullscreenControlsVisible(visible: Bool) {
@@ -337,5 +342,6 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
     
     func playerPlaybackDidEnd(player: Player) {
         setButtonPlaying(true)
+        dismissPlayer()
     }
 }
