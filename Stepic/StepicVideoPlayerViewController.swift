@@ -86,7 +86,8 @@ class StepicVideoPlayerViewController: UIViewController {
     private func displayRateChangeAlert() {
         let alertController = UIAlertController(title: "Change rate", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         for rate in VideoRate.allValues {
-            let action = UIAlertAction(title: rate.description, style: .Default, handler: { 
+            let action = UIAlertAction(title: rate.description, style: .Default, handler: {
+                [unowned self]
                 action in
                 self.currentRate = rate
             })
@@ -136,6 +137,7 @@ class StepicVideoPlayerViewController: UIViewController {
         let alertController = UIAlertController(title: "Change quality", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         for url in video.urls {
             let action = UIAlertAction(title: url.quality, style: .Default, handler: { 
+                [unowned self]
                 action in
                 self.currentQuality = url.quality
                 self.currentQualityURL = NSURL(string: url.url)!
@@ -147,6 +149,7 @@ class StepicVideoPlayerViewController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "Downloaded(\(cachedQuality))",
                     style: .Default, 
                     handler: {
+                        [unowned self]
                         action in
                         self.currentQuality = cachedQuality
                         self.currentQualityURL = try! NSURL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(self.video.name))
@@ -222,6 +225,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     deinit{
+        print("did deinit")
         saveCurrentPlayerTime()
     }
     
@@ -242,6 +246,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     private var wasPlayingBeforeSeeking : Bool = false
+    
     func startedSeeking() {
         print("started seeking")
         if self.player.playbackState == .Playing {
@@ -305,6 +310,7 @@ class StepicVideoPlayerViewController: UIViewController {
     private func setTimeParametersAfterPlayerIsReady() {
         fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
         player.setPeriodicTimeObserver { 
+            [unowned self]
             time, bufferedTime in
             self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
             self.topTimeSlider.value = Float(time/Double(self.player.maximumDuration))
