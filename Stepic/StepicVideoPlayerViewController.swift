@@ -175,6 +175,14 @@ class StepicVideoPlayerViewController: UIViewController {
         fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, forState: .Normal)
     }
     
+    func audioRouteChanged(notification: NSNotification) {
+        if let routeChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey]?.integerValue {
+            if (UInt(routeChangeReason) == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue) {
+                self.player.pause()
+            }
+        }
+    }
+    
     
     private var playerStartTime : NSTimeInterval = 0.0
     private var player: Player!
@@ -183,6 +191,9 @@ class StepicVideoPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: AVAudioSessionRouteChangeNotification, object: nil)
         
         topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, forState: .Normal)
         
