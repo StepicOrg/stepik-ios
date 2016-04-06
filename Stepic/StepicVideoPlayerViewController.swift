@@ -306,7 +306,6 @@ class StepicVideoPlayerViewController: UIViewController {
         })
     }
     
-    
     private func setTimeParametersAfterPlayerIsReady() {
         fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
         player.setPeriodicTimeObserver { 
@@ -338,6 +337,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
             player.setUrl(currentQualityURL)
         }
         if player.playbackState == .Paused {
+            setButtonPlaying(true)
             saveCurrentPlayerTime()
             playerStartTime = player.currentTime
         }
