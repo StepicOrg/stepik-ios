@@ -41,6 +41,6 @@ struct Images {
     struct playerControls {
         static let play = UIImage(named: "ic_play_arrow_48pt")!
         static let pause = UIImage(named: "ic_pause_48pt")!
-        static let timeSliderThumb = UIImage(named: "UISliderThumb33x33")!
+        static let timeSliderThumb = UIImage(named: "thumb_image_15")!
     }
 }
