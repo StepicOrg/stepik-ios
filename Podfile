@@ -18,7 +18,7 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'AFImageHelper'
     pod 'Google/Analytics'
-    pod 'Google/SignIn'
+    pod 'Google/CloudMessaging'
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
