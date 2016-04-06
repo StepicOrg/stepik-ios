@@ -291,11 +291,11 @@ class StepicVideoPlayerViewController: UIViewController {
             self.player.pause()
         }
         
-        if player.playbackState == PlaybackState.Playing {
-            setButtonPlaying(false)
-        } else {
-            setButtonPlaying(true)
-        }
+//        if player.playbackState == PlaybackState.Playing {
+//            setButtonPlaying(false)
+//        } else {
+//            setButtonPlaying(true)
+//        }
     }
     
     func handleTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
@@ -339,7 +339,7 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
         player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
         player.rate = currentRate.rawValue
-        setButtonPlaying(false)
+//        setButtonPlaying(false)
     }
     
     func playerPlaybackStateDidChange(player: Player) {
@@ -351,6 +351,9 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
             setButtonPlaying(true)
             saveCurrentPlayerTime()
             playerStartTime = player.currentTime
+        }
+        if player.playbackState == .Playing {
+            setButtonPlaying(false)
         }
         print("player playback state changed to \(player.playbackState)")
     }
