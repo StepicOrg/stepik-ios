@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>TRACKING_ID</key>
-	<string>UA-76077624-1</string>
-	<key>GCM_SENDER_ID</key>
-	<string>808829787351</string>
+	<string>UA-70652804-1</string>
+	<key>CLIENT_ID</key>
+	<string>241959001878-q4otn5j1rtanappjeh76h0a9kvfvbrss.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.241959001878-q4otn5j1rtanappjeh76h0a9kvfvbrss</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
@@ -17,12 +19,10 @@
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
-	<key>IS_SIGNIN_ENABLED</key>
 	<false/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:808829787351:ios:f74c1334bacaeb5b</string>
-	<key>PROJECT_ID</key>
-	<string>stepic-bc291</string>
+	<string>1:241959001878:ios:f74c1334bacaeb5b</string>
 </dict>
 </plist>
