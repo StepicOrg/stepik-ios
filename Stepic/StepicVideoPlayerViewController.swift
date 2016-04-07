@@ -197,6 +197,8 @@ class StepicVideoPlayerViewController: UIViewController {
         
         topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, forState: .Normal)
         
+        backButton.setTitle(NSLocalizedString("Back", comment: ""), forState: .Normal)
+        
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
         
