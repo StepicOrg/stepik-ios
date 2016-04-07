@@ -12,7 +12,8 @@ import Fabric
 import Crashlytics
 import Google 
 import IQKeyboardManagerSwift
-
+import SVProgressHUD
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
+        
+        SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
         setRootController()
