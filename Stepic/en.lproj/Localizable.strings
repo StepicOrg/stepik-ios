@@ -93,5 +93,6 @@ PullToRefreshUnitsTitle = "Refresh lessons";
 PullToRefreshUnitsDescription = "Pull to refresh lessons";
 RegistrationError = "Registration error";
 Back = "Back";
+Done = "Done";
 
 

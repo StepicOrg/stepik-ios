@@ -93,4 +93,5 @@ PullToRefreshUnitsTitle = "Обновите уроки";
 PullToRefreshUnitsDescription = "Потяните вниз, чтобы обновить список уроков";
 RegistrationError = "Ошибка при регистрации";
 Back = "Назад";
+Done = "Готово";
 
