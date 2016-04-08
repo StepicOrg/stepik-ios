@@ -49,7 +49,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         tableView.dataSource = self
         
         if refreshEnabled {
-            refreshControl?.addTarget(self, action: "refreshCourses", forControlEvents: .ValueChanged)
+            refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), forControlEvents: .ValueChanged)
             tableView.addSubview(refreshControl ?? UIView())
             refreshControl?.beginRefreshing()
             getCachedCourses(completion: {
@@ -208,9 +208,11 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         AuthentificationManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
-                (var ids, meta) -> Void in
+                (idsImmutable, meta) -> Void in
+                var ids = idsImmutable
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
-                    (var newCourses) -> Void in
+                    (newCoursesImmutable) -> Void in
+                    var newCourses = newCoursesImmutable
                     newCourses = self.getNonExistingCourses(newCourses)
                     ids = ids.flatMap{
                         id in

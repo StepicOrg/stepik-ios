@@ -29,7 +29,7 @@ class SectionsViewController: UIViewController {
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
-        refreshControl.addTarget(self, action: "refreshSections", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(SectionsViewController.refreshSections), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
         refreshControl.beginRefreshing()

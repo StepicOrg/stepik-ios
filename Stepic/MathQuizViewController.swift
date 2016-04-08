@@ -19,7 +19,7 @@ class MathQuizViewController: QuizViewController {
         textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
         textField.borderStyle = UITextBorderStyle.RoundedRect
         
-        let tapG = UITapGestureRecognizer(target: self, action: "tap")
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
     }
     

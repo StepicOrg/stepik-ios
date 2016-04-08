@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x8g-cA-VCI">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -11,7 +11,7 @@
         <!--Title-->
         <scene sceneID="dur-gF-YOg">
             <objects>
-                <viewController storyboardIdentifier="RegistrationViewController" id="klz-Jh-ced" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" id="klz-Jh-ced" customClass="RegistrationViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aBf-vQ-MAY"/>
                         <viewControllerLayoutGuide type="bottom" id="zHE-Cf-SjA"/>
@@ -313,7 +313,7 @@
         <!--Launch View Controller-->
         <scene sceneID="Rui-7K-R2s">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="x8g-cA-VCI" customClass="LaunchViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchViewController" id="x8g-cA-VCI" customClass="LaunchViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kDJ-D6-Sdt"/>
                         <viewControllerLayoutGuide type="bottom" id="bUs-XI-BUy"/>
@@ -421,13 +421,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bcM-eo-5rU" firstAttribute="bottom" secondItem="bUs-XI-BUy" secondAttribute="top" id="6JK-L3-8jv"/>
                             <constraint firstItem="g0f-cX-YmD" firstAttribute="width" secondItem="bcM-eo-5rU" secondAttribute="width" multiplier="0.5" priority="999" id="85h-xZ-VwZ"/>
                             <constraint firstItem="bcM-eo-5rU" firstAttribute="top" secondItem="M5c-0W-9S6" secondAttribute="top" id="K96-bW-5iZ"/>
                             <constraint firstItem="nRl-q3-n3c" firstAttribute="top" secondItem="idU-8Q-uCu" secondAttribute="bottom" constant="8" id="QTV-up-aJP"/>
                             <constraint firstItem="nRl-q3-n3c" firstAttribute="width" secondItem="bcM-eo-5rU" secondAttribute="width" multiplier="0.5" priority="999" id="Qc7-Pu-SI6"/>
                             <constraint firstItem="nRl-q3-n3c" firstAttribute="centerX" secondItem="M5c-0W-9S6" secondAttribute="centerX" id="TFQ-jX-YGS"/>
                             <constraint firstItem="idU-8Q-uCu" firstAttribute="top" secondItem="g0f-cX-YmD" secondAttribute="bottom" constant="8" id="TkL-RO-aob"/>
-                            <constraint firstItem="pSK-OV-Hig" firstAttribute="top" secondItem="kDJ-D6-Sdt" secondAttribute="bottom" constant="24" id="V2G-to-f3b"/>
                             <constraint firstItem="bcM-eo-5rU" firstAttribute="centerX" secondItem="pSK-OV-Hig" secondAttribute="centerX" id="Wip-gH-GKu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pSK-OV-Hig" secondAttribute="trailing" constant="-12" id="YAy-fW-1ky"/>
                             <constraint firstItem="idU-8Q-uCu" firstAttribute="leading" secondItem="pSK-OV-Hig" secondAttribute="leading" id="Yvf-mI-pC6"/>
@@ -436,7 +436,7 @@
                             <constraint firstItem="pSK-OV-Hig" firstAttribute="leading" secondItem="M5c-0W-9S6" secondAttribute="leadingMargin" constant="-12" id="dx3-Nx-cm3"/>
                             <constraint firstItem="idU-8Q-uCu" firstAttribute="centerX" secondItem="M5c-0W-9S6" secondAttribute="centerX" id="ksT-Ra-1Jy"/>
                             <constraint firstItem="bcM-eo-5rU" firstAttribute="leading" secondItem="M5c-0W-9S6" secondAttribute="leading" id="q7z-Me-8TJ"/>
-                            <constraint firstItem="bcM-eo-5rU" firstAttribute="bottom" secondItem="bUs-XI-BUy" secondAttribute="top" id="s4Z-eO-r6e"/>
+                            <constraint firstItem="pSK-OV-Hig" firstAttribute="top" secondItem="kDJ-D6-Sdt" secondAttribute="bottom" constant="24" id="vCv-PY-5hE"/>
                             <constraint firstItem="g0f-cX-YmD" firstAttribute="centerX" secondItem="M5c-0W-9S6" secondAttribute="centerX" id="zcv-oG-qH2"/>
                         </constraints>
                     </view>
@@ -454,7 +454,7 @@
         <!--Sign In Table View Controller-->
         <scene sceneID="yRA-d9-sHo">
             <objects>
-                <tableViewController storyboardIdentifier="SignInTableViewController" id="xM1-we-3DT" customClass="SignInTableViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SignInTableViewController" id="xM1-we-3DT" customClass="SignInTableViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nS8-iD-R9h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -665,7 +665,7 @@
         <!--Search Results Courses View Controller-->
         <scene sceneID="hZW-z6-kvK">
             <objects>
-                <viewController storyboardIdentifier="SearchResultsCoursesViewController" id="TeQ-C0-k1P" customClass="SearchResultsCoursesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultsCoursesViewController" id="TeQ-C0-k1P" customClass="SearchResultsCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h7K-bd-Bih"/>
                         <viewControllerLayoutGuide type="bottom" id="E0Q-Xw-4UH"/>
@@ -699,7 +699,7 @@
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="taR-j4-5Jv" customClass="FindCoursesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="taR-j4-5Jv" customClass="FindCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CHk-No-T5F"/>
                         <viewControllerLayoutGuide type="bottom" id="lea-1q-JQL"/>
@@ -791,7 +791,7 @@
         <!--Downloads-->
         <scene sceneID="B6E-0I-IzT">
             <objects>
-                <viewController id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Trn-kM-JDC"/>
                         <viewControllerLayoutGuide type="bottom" id="MtY-Xf-AK1"/>
@@ -841,7 +841,7 @@
         <!--Preferences-->
         <scene sceneID="nPr-nK-TwN">
             <objects>
-                <tableViewController id="5ay-8c-nL7" customClass="UserPreferencesTableViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5ay-8c-nL7" customClass="UserPreferencesTableViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="HpV-RX-ZGv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1039,7 +1039,7 @@
         <!--Video quality-->
         <scene sceneID="Cfp-YU-Kun">
             <objects>
-                <tableViewController id="oOn-LT-rBa" customClass="VideoQualityTableViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oOn-LT-rBa" customClass="VideoQualityTableViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IDO-Br-jyj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1180,7 +1180,7 @@
         <!--Course-->
         <scene sceneID="wHU-ZO-zC9">
             <objects>
-                <viewController id="D75-Zh-Yxy" customClass="CoursePreviewViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="D75-Zh-Yxy" customClass="CoursePreviewViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Obs-4e-zpG"/>
                         <viewControllerLayoutGuide type="bottom" id="fnF-gK-n8t"/>
@@ -1231,7 +1231,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralInfoTableViewCell" rowHeight="119" id="b6J-rC-ibi" customClass="GeneralInfoTableViewCell" customModule="Stepic" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralInfoTableViewCell" rowHeight="119" id="b6J-rC-ibi" customClass="GeneralInfoTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="213" width="600" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6J-rC-ibi" id="oqz-ov-022">
@@ -1289,7 +1289,7 @@
                                             <outlet property="typeSegmentedControl" destination="uiF-lQ-kcC" id="dDW-dO-eRK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeachersTableViewCell" rowHeight="137" id="abo-eS-oYO" customClass="TeachersTableViewCell" customModule="Stepic" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeachersTableViewCell" rowHeight="137" id="abo-eS-oYO" customClass="TeachersTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="332" width="600" height="137"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="abo-eS-oYO" id="XH4-7K-rzd">
@@ -1365,7 +1365,7 @@
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
             <objects>
-                <viewController id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0cz-24-l3w"/>
                         <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
@@ -1410,7 +1410,7 @@
         <!--Units-->
         <scene sceneID="fwV-16-Q11">
             <objects>
-                <viewController id="8ik-tt-HOc" customClass="UnitsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8ik-tt-HOc" customClass="UnitsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R3Q-gr-8aW"/>
                         <viewControllerLayoutGuide type="bottom" id="dbc-fW-0PT"/>
@@ -1449,7 +1449,7 @@
         <!--Lesson-->
         <scene sceneID="LMh-2U-yNH">
             <objects>
-                <viewController id="7LO-Mv-R4f" customClass="StepsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7LO-Mv-R4f" customClass="StepsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HYg-fo-je8"/>
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
@@ -1468,7 +1468,7 @@
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
             <objects>
-                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y0P-ZE-fOO"/>
                         <viewControllerLayoutGuide type="bottom" id="SdS-Qz-hnr"/>
@@ -1516,7 +1516,7 @@
         <!--Web Step View Controller-->
         <scene sceneID="Iip-iO-Bhn">
             <objects>
-                <viewController storyboardIdentifier="WebStepViewController2" id="MzH-NU-yyp" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebStepViewController2" id="MzH-NU-yyp" customClass="WebStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f9i-ks-CuU"/>
                         <viewControllerLayoutGuide type="bottom" id="cls-Jl-RZZ"/>
@@ -1573,7 +1573,7 @@
         <!--Web Step View Controller-->
         <scene sceneID="bJt-5m-7H3">
             <objects>
-                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oaa-Og-jEd"/>
                         <viewControllerLayoutGuide type="bottom" id="Dnu-MQ-f7B"/>
@@ -1647,7 +1647,7 @@
         <!--My courses-->
         <scene sceneID="Qyk-4b-RfK">
             <objects>
-                <viewController id="wRW-Xr-pb6" customClass="MyCoursesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wRW-Xr-pb6" customClass="MyCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fg2-eF-38F"/>
                         <viewControllerLayoutGuide type="bottom" id="tY7-f0-H8c"/>
@@ -1732,7 +1732,7 @@
         <!--Social Networks View Controller-->
         <scene sceneID="WFT-KK-ygM">
             <objects>
-                <viewController id="arB-ze-Au2" customClass="SocialNetworksViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="arB-ze-Au2" customClass="SocialNetworksViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mMn-b0-jrb"/>
                         <viewControllerLayoutGuide type="bottom" id="ZWX-RV-Bgf"/>

@@ -163,9 +163,9 @@ class Lesson: NSManagedObject, JSONInitializable {
                     video.storedCompletion = {
                         completed in
                         if completed {
-                            self.completedVideos++
+                            self.completedVideos += 1
                         } else {
-                            self.cancelledVideos++
+                            self.cancelledVideos += 1
                         }
                         if self.completedVideos + self.cancelledVideos == self.loadingVideos!.count {
                             print("Completed lesson store with \(self.completedVideos) completed videos & \(self.cancelledVideos) cancelled videos")
@@ -220,9 +220,9 @@ class Lesson: NSManagedObject, JSONInitializable {
                 }, completion : {
                     completed in
                     if completed {
-                        self.completedVideos++
+                        self.completedVideos += 1
                     } else {
-                        self.cancelledVideos++
+                        self.cancelledVideos += 1
                     }
                     if self.completedVideos + self.cancelledVideos == self.loadingVideos!.count {
                         print("Completed lesson store with \(self.completedVideos) completed videos & \(self.cancelledVideos) cancelled videos")

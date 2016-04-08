@@ -30,7 +30,7 @@ class Section: NSManagedObject, JSONInitializable {
 //        print("initialized section \(id) with progress id -> \(progressId)")
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
         
         unitsArray = json["units"].arrayObject as! [Int]
     }
@@ -266,7 +266,7 @@ class Section: NSManagedObject, JSONInitializable {
             if let lesson = unit.lesson {
                 if !lesson.isCached {
                     lesson.cancelVideoStore(completion: {
-                        completedUnits++
+                        completedUnits += 1
                         if completedUnits == self.units.count {
                             self.goodProgress = 0
                             completion()
@@ -292,7 +292,7 @@ class Section: NSManagedObject, JSONInitializable {
                 if !lesson.isCached {
                     print("not cached lesson can not be removed!!!")
                     lesson.cancelVideoStore(completion: {
-                        completedUnits++
+                        completedUnits += 1
                         if completedUnits == self.units.count {
                             self.goodProgress = 0
                             completion()
@@ -300,7 +300,7 @@ class Section: NSManagedObject, JSONInitializable {
                     })
                 } else {
                     lesson.removeFromStore(completion: {
-                        completedUnits++
+                        completedUnits += 1
                         if completedUnits == self.units.count {
                             self.goodProgress = 0
                             completion()

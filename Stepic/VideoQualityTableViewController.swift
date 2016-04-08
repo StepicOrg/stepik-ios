@@ -12,6 +12,8 @@ class VideoQualityTableViewController: UITableViewController {
 
     @IBOutlet var qualityCells: [UITableViewCell]!
     
+    let defaultQualities = ["270", "360", "720", "1080"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +31,7 @@ class VideoQualityTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        setCheckmarkTo(VideosInfo.videoQuality.preferencesTag)
+        setCheckmarkTo(defaultQualities.indexOf(VideosInfo.videoQuality) ?? 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +58,7 @@ extension VideoQualityTableViewController {
         case 0: 
             print("error! selected a video quality cell without a tag!")
         case 1:
-            VideosInfo.videoQuality = VideoQuality(preferencesTag: filtered[0].tag)
+            VideosInfo.videoQuality = defaultQualities[filtered[0].tag]
             setCheckmarkTo(filtered[0].tag)
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         default:

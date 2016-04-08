@@ -18,9 +18,9 @@ class DownloadTableViewCell: UITableViewCell {
     @IBOutlet weak var sizeLabel: UILabel!
     
     var video : Video!
-    var quality : VideoQuality! {
+    var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality.rawString)p"
+            qualityLabel.text = "\(quality)p"
         }
     }
     

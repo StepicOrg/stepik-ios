@@ -17,7 +17,7 @@ class ConnectionHelper : NSObject {
         
 //        reachability.reachableOnWWAN = defaults.objectForKey(reachableOnWWANKey) as? Bool ?? false
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: kReachabilityChangedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConnectionHelper.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
         reachability.startNotifier()
     }
     

@@ -46,7 +46,7 @@ class SocialNetworksViewController: UIViewController {
     */
     
     func initializeTapRecognizer() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SocialNetworksViewController.handleTap(_:)))
         tapGesture.numberOfTapsRequired = 1
         tapGesture.cancelsTouchesInView = true
         socialNetworksCollectionView.addGestureRecognizer(tapGesture)

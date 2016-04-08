@@ -32,7 +32,7 @@ class WebStepViewController: UIViewController {
     var assignment : Assignment?
     
     var stepUrl : String {
-        return "https://stepic.org/lesson/\(lesson.slug)/step/\(stepId)"
+        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)"
     }
     
     private var panG : UIPanGestureRecognizer!
@@ -49,7 +49,7 @@ class WebStepViewController: UIViewController {
         handleQuizType()
         stepWebView.scrollView.showsVerticalScrollIndicator = false
         
-        panG = UIPanGestureRecognizer(target: self, action: "didPan:")
+        panG = UIPanGestureRecognizer(target: self, action: #selector(WebStepViewController.didPan(_:)))
         panG.delegate = self
         panG.cancelsTouchesInView = false
         self.view.addGestureRecognizer(panG)

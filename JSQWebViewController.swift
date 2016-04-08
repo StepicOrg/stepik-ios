@@ -144,7 +144,7 @@ class WebViewController: UIViewController {
         if presentingViewController?.presentedViewController != nil {
             let doneItem = backButtonStyle.barButtonItem
             doneItem.target = self
-            doneItem.action = Selector("didTapDoneButton:")
+            doneItem.action = #selector(WebViewController.didTapDoneButton(_:))
             navigationItem.leftBarButtonItem = doneItem
 //            navigationItem.leftBarButtonItem = UIBarButtonItem(
 //                barButtonSystemItem: .Done,
@@ -157,7 +157,7 @@ class WebViewController: UIViewController {
                 image: Images.safariBarButtonItemImage, 
                 style: UIBarButtonItemStyle.Plain, 
                 target: self, 
-                action: Selector("didTapSafariButton:"))
+                action: #selector(WebViewController.didTapSafariButton(_:)))
             navigationItem.rightBarButtonItem?.tintColor = UIColor.stepicGreenColor()
         }
         

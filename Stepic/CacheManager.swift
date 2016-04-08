@@ -21,16 +21,16 @@ class CacheManager: NSObject {
             for video in videos {
                 if video.state == VideoState.Cached {
                     if video.removeFromStore() {
-                        completed++
+                        completed += 1
                     } else {
-                        errors++
+                        errors += 1
                     }
                 }
                 if video.state == VideoState.Downloading {
                     if video.cancelStore() {
-                        completed++
+                        completed += 1
                     } else {
-                        errors++
+                        errors += 1
                     }
                 }
             }
@@ -52,9 +52,9 @@ class CacheManager: NSObject {
             for video in videos {
                 if video.state == VideoState.Downloading {
                     if video.cancelStore() {
-                        completed++
+                        completed += 1
                     } else {
-                        errors++
+                        errors += 1
                     }
                 }
             }

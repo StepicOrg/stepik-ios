@@ -12,7 +12,8 @@ import Fabric
 import Crashlytics
 import Google 
 import IQKeyboardManagerSwift
-
+import SVProgressHUD
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -22,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         
+        SVProgressHUD.setMinimumDismissTimeInterval(0.5)
+        
+//        setVideoTestRootController()
         setRootController()
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
@@ -52,13 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
-            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])
-//            let launchController = ControllerHelper.showLaunchController(true)
-//            
-//            print(self.window?.rootViewController?.classForCoder)
-//            launchController.performSegueWithIdentifier("signInSegue", sender: nil)
-//            launchController.signInController!.authentificateWithCode(code)
-            
+            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])            
         } else {
             print("error while authentificating")
         }
@@ -111,6 +109,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if self.window != nil {
                 self.window!.rootViewController = rootController
             }
+        }
+    }
+    
+    private func setVideoTestRootController() {
+        let rootController = ControllerHelper.instantiateViewController(identifier: "PlayerTestViewController", storyboardName: "PlayerTestStoryboard")
+        if self.window != nil {
+            self.window!.rootViewController = rootController
         }
     }
     

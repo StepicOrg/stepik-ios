@@ -119,7 +119,7 @@ class PlaceholderView: UIView {
         button = UIButton(type: .System)
         button?.frame = CGRectZero
         button?.setTitle(buttonTitle, forState: .Normal)
-        button?.addTarget(self, action: "didPressButton", forControlEvents: UIControlEvents.TouchUpInside)
+        button?.addTarget(self, action: #selector(PlaceholderView.didPressButton), forControlEvents: UIControlEvents.TouchUpInside)
         
         if let style = datasource?.placeholderStyle() {
             if style.button.borderType != .None {

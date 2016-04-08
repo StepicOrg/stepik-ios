@@ -24,7 +24,7 @@ class Course: NSManagedObject, JSONInitializable {
         id = json["id"].intValue
         title = json["title"].stringValue
         courseDescription = json["description"].stringValue
-        coverURLString = Constants.stepicURLString + json["cover"].stringValue
+        coverURLString = "https://stepic.org/" + json["cover"].stringValue
         
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])

@@ -33,7 +33,7 @@ class UnitsViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
         
-        refreshControl.addTarget(self, action: "refreshUnits", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
         tableView.emptyDataSetDelegate = self

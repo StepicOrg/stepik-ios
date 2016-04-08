@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xeH-0q-HGy">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Player Test View Controller-->
+        <scene sceneID="ZCa-a5-Brf">
+            <objects>
+                <viewController storyboardIdentifier="PlayerTestViewController" id="xeH-0q-HGy" customClass="PlayerTestViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ps-BL-E8a"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZsV-XJ-I0E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pss-kY-dCi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdb-G8-ZZd">
+                                <rect key="frame" x="259" y="285" width="82" height="30"/>
+                                <state key="normal" title="show player"/>
+                                <connections>
+                                    <action selector="showPlayerPressed:" destination="xeH-0q-HGy" eventType="touchUpInside" id="vP7-Ja-oGM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pdb-G8-ZZd" firstAttribute="centerY" secondItem="pss-kY-dCi" secondAttribute="centerY" id="AKe-0o-xGD"/>
+                            <constraint firstItem="Pdb-G8-ZZd" firstAttribute="centerX" secondItem="pss-kY-dCi" secondAttribute="centerX" id="zVw-bL-HA5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yrw-nK-9Xb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740" y="449"/>
+        </scene>
+    </scenes>
+</document>

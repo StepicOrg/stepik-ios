@@ -15,9 +15,10 @@ class VideoDownloadView: UIView {
     @IBOutlet weak var downloadButton: PKDownloadButton!
     
     var video : Video!
-    var quality : VideoQuality! {
+    
+    var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality.rawString)p"
+            qualityLabel.text = "\(quality)p"
         }
     }
     
@@ -102,7 +103,7 @@ class VideoDownloadView: UIView {
         
         if video.state == .Online {
             downloadButton.state = .StartDownload
-            self.quality = VideosInfo.videoQuality 
+            self.quality = video.getNearestQualityToDefault(VideosInfo.videoQuality)
             return
         }
         

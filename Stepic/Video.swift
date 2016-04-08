@@ -41,14 +41,24 @@ class Video: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func getUrlForQuality(quality: VideoQuality) -> NSURL {
-//        print("needed quality \(quality.rawString)")
+    func getNearestQualityToDefault(quality: String) -> String {
+        var minDifference = 10000
+        var res : String = "270"
+        for url in urls {
+            if abs(Int(url.quality)! - Int(quality)!) <  minDifference {
+                minDifference = abs(Int(url.quality)! - Int(quality)!)
+                res = url.quality
+            }
+        }
+        return res
+    }
+    
+    func getUrlForQuality(quality: String) -> NSURL {
         var urlToReturn : VideoURL? = nil
         var minDifference = 10000
         for url in urls {
-//            print("has quality \(url.quality)")
-            if abs(Int(url.quality)! - quality.rawValue) <  minDifference {
-                minDifference = abs(Int(url.quality)! - quality.rawValue)
+            if abs(Int(url.quality)! - Int(quality)!) <  minDifference {
+                minDifference = abs(Int(url.quality)! - Int(quality)!)
                 urlToReturn = url
             }
         }
@@ -85,14 +95,15 @@ class Video: NSManagedObject, JSONInitializable {
     var totalProgress : Float = 0
     
     var downloadDelegate : VideoDownloadDelegate? = nil
-    var loadingQuality : VideoQuality?
+    var loadingQuality : String?
     
     var storedProgress : (Float->Void)?
     var storedCompletion : (Bool->Void)?
     var storedErrorHandler : (NSError? -> Void)?
-    func store(quality: VideoQuality, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
+    func store(quality: String, progress: (Float -> Void), completion: (Bool -> Void), error errorHandler: (NSError? -> Void)) {
 
-        loadingQuality = quality
+        print("storing video with quality \(quality)")
+        loadingQuality = getNearestQualityToDefault(quality)
         storedProgress = progress
         storedCompletion = completion
         storedErrorHandler = errorHandler
@@ -178,11 +189,11 @@ class Video: NSManagedObject, JSONInitializable {
                     return
                 } 
                 
-                print("video download completed with quality -> \(quality.rawString)")
+                print("video download completed with quality -> \(quality)")
                 if let fileURL = location {
 //                    self.managedCachedPath = fileURL.lastPathComponent!
                     self.state = .Cached
-                    self.cachedQuality = quality
+                    self.cachedQuality = self.loadingQuality
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
@@ -307,7 +318,7 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     private func getOnlineSizeForCurrentState(completion: (Int64 -> Void)) {
-        var quality : VideoQuality!
+        var quality : String
         if state == .Online {
             quality = VideosInfo.videoQuality
         } else {
