@@ -42,16 +42,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
+        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+        
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
     }
 
+    func updateNotificationRegistrationStatus(notification: NSNotification) {
+        if let info = notification.userInfo as? [String:String] {
+            if let error = info["error"] {
+                print("Error registering with GCM: \(error)")
+            } else if let _ = info["registrationToken"] {
+                print("Token registration successful!")
+            }
+        }
+    }
+    
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
@@ -61,6 +74,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("error while authentificating")
         }
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("error while registering to remote notifications")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("didReceiveRemoteNotification with userInfo: \(userInfo)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print("didReceiveRemoteNotification: fetchCompletionHandler with userInfo: \(userInfo)")
+        
+        let notification = UILocalNotification()
+        notification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        notification.alertBody = "YO! NOTIFICATION HERE BRO!"
+        notification.timeZone = NSTimeZone.defaultTimeZone()
+        notification.soundName = UILocalNotificationDefaultSoundName
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
+        completionHandler(UIBackgroundFetchResult.NoData)
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -119,6 +158,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+    }
 
 }
 

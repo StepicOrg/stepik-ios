@@ -500,6 +500,8 @@ class ApiDataDownloader: NSObject {
             }
         })
     }
+    
+    static let devices : DevicesAPI = DevicesAPI()
 }
 
 enum RefreshMode {
