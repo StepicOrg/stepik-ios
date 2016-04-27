@@ -99,6 +99,7 @@
 		08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		08901E721CD1173200D94613 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
 		08901E731CD1173200D94613 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
+		08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
 		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
 		089142491BCEE4EF0000BCB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
@@ -1620,6 +1621,7 @@
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
+				08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				08901E6B1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08D1208C1C937B2200A54ABC /* HTMLBuilder.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,

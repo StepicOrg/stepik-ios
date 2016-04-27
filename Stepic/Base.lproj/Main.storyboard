@@ -986,10 +986,72 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Updates" id="Ss4-Rd-3mQ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="eOs-4d-63U">
+                                        <rect key="frame" x="0.0" y="470" width="600" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eOs-4d-63U" id="LL6-43-5Ri">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatically check for updates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOS-ca-IWl">
+                                                    <rect key="frame" x="16" y="12" width="519" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Abp-7g-ix0">
+                                                    <rect key="frame" x="543" y="4" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="wnz-Jd-NDl"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="allow3GChanged:" destination="5ay-8c-nL7" eventType="valueChanged" id="hiC-qm-hRz"/>
+                                                        <action selector="allowAutoUpdateChanged:" destination="5ay-8c-nL7" eventType="valueChanged" id="7XH-0N-PdH"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Abp-7g-ix0" firstAttribute="centerY" secondItem="LL6-43-5Ri" secondAttribute="centerY" id="IJT-Xx-4oI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Abp-7g-ix0" secondAttribute="trailing" id="Jjc-lB-rCf"/>
+                                                <constraint firstItem="YOS-ca-IWl" firstAttribute="centerY" secondItem="LL6-43-5Ri" secondAttribute="centerY" id="XmA-i6-V9S"/>
+                                                <constraint firstItem="Abp-7g-ix0" firstAttribute="leading" secondItem="YOS-ca-IWl" secondAttribute="trailing" constant="8" id="gue-ZF-urm"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="YOS-ca-IWl" secondAttribute="leading" constant="-8" id="uFd-Ed-YaM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xEz-XF-PfD">
+                                        <rect key="frame" x="0.0" y="511" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xEz-XF-PfD" id="5Rb-i6-geT">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RN5-qu-VHa">
+                                                    <rect key="frame" x="237" y="7" width="127" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="Check for updates">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="checkForUpdatesButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="cIN-XZ-LA2"/>
+                                                        <action selector="signOutButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="j22-1v-kp2"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RN5-qu-VHa" firstAttribute="centerY" secondItem="5Rb-i6-geT" secondAttribute="centerY" id="EBE-WP-TCd"/>
+                                                <constraint firstItem="RN5-qu-VHa" firstAttribute="centerX" secondItem="5Rb-i6-geT" secondAttribute="centerX" id="K3G-ML-XVW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Actions" id="6bM-2c-3U9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q5a-34-gyg">
-                                        <rect key="frame" x="0.0" y="470" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="606" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5a-34-gyg" id="Ml2-Hy-6ad">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1024,7 +1086,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
+                        <outlet property="autoCheckForUpdatesLabel" destination="YOS-ca-IWl" id="hlG-35-Ovf"/>
+                        <outlet property="autoCheckForUpdatesSwitch" destination="Abp-7g-ix0" id="CGV-px-cNf"/>
                         <outlet property="avatarImageView" destination="J5k-lf-s7P" id="tfH-d2-UBy"/>
+                        <outlet property="checkForUpdatesButton" destination="RN5-qu-VHa" id="dbs-TO-ztM"/>
                         <outlet property="ignoreMuteSwitchLabel" destination="Nly-Qt-bId" id="NXs-0T-aCG"/>
                         <outlet property="ignoreMuteSwitchSwitch" destination="S1d-5m-xeb" id="wtK-5K-ieX"/>
                         <outlet property="onlyWiFiSwitch" destination="pUi-kz-aZf" id="0Op-qn-b45"/>

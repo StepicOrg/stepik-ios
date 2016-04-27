@@ -26,7 +26,6 @@ class RemoteVersionManager: NSObject {
         getRemoteVersion(
             success: {
                 remote, url in
-                print("remote: \(remote)\nlocal: \(local)")
                 if self.isVersion(remote, olderThan: local) {
                     if let correctUrl = NSURL(string: url) {
                         update(Version(version: remote, url: correctUrl))

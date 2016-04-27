@@ -60,9 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 newVersion in
                 if let version = newVersion {
                     let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
-                    dispatch_async(dispatch_get_main_queue(), {
+                    UIThread.performUI{
                         self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
-                    })
+                    }
                 }
             }, error: {
                 error in
