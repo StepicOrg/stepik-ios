@@ -47,11 +47,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
+        checkForUpdates()
+        
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
     }
 
+    func checkForUpdates() {
+        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded(
+            {
+                newVersion in
+                if let version = newVersion {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    })
+                }
+            }, error: {
+                error in
+                print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+        })
+    }
+    
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
