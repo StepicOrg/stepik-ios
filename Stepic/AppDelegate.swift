@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+
+        checkForUpdates()
+        
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
@@ -63,6 +66,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Token registration successful!")
             }
         }
+    }
+
+    func checkForUpdates() {
+        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded(
+            {
+                newVersion in
+                if let version = newVersion {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
+                    UIThread.performUI{
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+            }, error: {
+                error in
+                print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+        })
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {

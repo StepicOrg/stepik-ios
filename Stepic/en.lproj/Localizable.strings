@@ -94,5 +94,16 @@ PullToRefreshUnitsDescription = "Pull to refresh lessons";
 RegistrationError = "Registration error";
 Back = "Back";
 Done = "Done";
-
-
+UserInfo = "User";
+Updates = "Updates";
+VideoPreferences = "Video preferences";
+Actions = "Actions";
+AutoCheckForUpdates = "Automatically check for updates";
+CheckForUpdates = "Check for updates";
+UpdateAvailable = "Update available";
+AppUpdateMessage = "Update an application to the new version?";
+Update = "Update";
+Later = "Later";
+NeverAsk = "Never ask";
+NoUpdateAvailable = "No update available";
+NoAppUpdateMessage = "No app update is currently available";
