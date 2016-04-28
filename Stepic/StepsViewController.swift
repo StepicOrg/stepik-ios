@@ -34,7 +34,6 @@ class StepsViewController: RGPageViewController {
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
         v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
-//        v.alignToView(self.view)
         return v
     }
     
@@ -74,7 +73,6 @@ class StepsViewController: RGPageViewController {
         }
     }
     
-//    var controllers : [UIViewController?]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,7 +89,6 @@ class StepsViewController: RGPageViewController {
         }
         
         refreshSteps()
-        // Do any additional setup after loading the view.
     }
     
     private func refreshSteps() {
@@ -191,17 +188,6 @@ class StepsViewController: RGPageViewController {
             return 8.0
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -212,17 +198,12 @@ extension StepsViewController : RGPageViewControllerDataSource {
     }
     
     func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
-        let iv = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        iv.setImageWithColor(image: lesson?.steps[index].block.image ?? Constants.placeholderImage, color: UIColor.whiteColor())
-//        iv.image = lesson?.steps[index].block.image//Constants.placeholderImage
-        iv.contentMode = UIViewContentMode.ScaleAspectFit
-//        let tabView = UILabel()
-//        
-//        tabView.font = UIFont.systemFontOfSize(17)
-//        tabView.text = lesson?.steps[index].block.name
-//        tabView.textColor = UIColor.whiteColor()
-//        tabView.sizeToFit()
-        return iv
+        if let step = lesson?.steps[index] {
+            let tabView = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id)
+            return tabView
+        } else {
+            return UIView()
+        }
     }
     
     func viewControllerForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIViewController? {
@@ -246,7 +227,6 @@ extension StepsViewController : RGPageViewControllerDataSource {
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
             }
-            //            stepController.navigationVC = self.navigationController!
             return stepController
         }
     } 
@@ -260,11 +240,6 @@ extension StepsViewController : RGPageViewControllerDelegate {
     // use this to set a custom width for a tab
     func widthForTabAtIndex(index: Int) -> CGFloat {
         return 44.0
-//        let tabSize = lesson?.steps[index].block.name.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(17)])
-//        if let size = tabSize {
-//            return size.width + 32
-//        }
-//        return 150
     }
 }
 

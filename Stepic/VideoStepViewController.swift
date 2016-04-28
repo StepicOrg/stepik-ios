@@ -33,7 +33,6 @@ class VideoStepViewController: UIViewController {
         
     @IBAction func playButtonPressed(sender: UIButton) {
         if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
-            //TODO: Present video player controller here!
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
             self.presentViewController(player, animated: true, completion: {
@@ -62,7 +61,10 @@ class VideoStepViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         if let a = assignment {
-            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+            let stepId = step.id
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {
+                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : stepId])
+            }) 
         }
     }
 

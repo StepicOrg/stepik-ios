@@ -46,6 +46,10 @@
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
+		083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
+		083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
+		083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
+		083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
@@ -426,6 +430,9 @@
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegistrator.swift; sourceTree = "<group>"; };
+		083622D71CD1FA4800CD8915 /* StepTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabView.swift; sourceTree = "<group>"; };
+		083622DB1CD1FA6700CD8915 /* StepTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepTabView.xib; sourceTree = "<group>"; };
+		083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v4.xcdatamodel; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		083B164C1C2AF27700250B37 /* JSQWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQWebViewController.swift; sourceTree = "<group>"; };
@@ -746,6 +753,15 @@
 			name = Notifications;
 			sourceTree = "<group>";
 		};
+		083622DA1CD1FA4F00CD8915 /* StepTabView */ = {
+			isa = PBXGroup;
+			children = (
+				083622D71CD1FA4800CD8915 /* StepTabView.swift */,
+				083622DB1CD1FA6700CD8915 /* StepTabView.xib */,
+			);
+			name = StepTabView;
+			sourceTree = "<group>";
+		};
 		083D64A11C17523E003222F0 /* Social network cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +816,7 @@
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
+				083622DA1CD1FA4F00CD8915 /* StepTabView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1442,6 +1459,7 @@
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
 				08D121181C937B2200A54ABC /* Localizable.strings in Resources */,
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
+				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
@@ -1472,6 +1490,7 @@
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
@@ -1727,6 +1746,7 @@
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
 				08D120DD1C937B2200A54ABC /* TCBlobDownload.swift in Sources */,
 				08D120DE1C937B2200A54ABC /* User+CoreDataProperties.swift in Sources */,
+				083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
 				08D120E01C937B2200A54ABC /* CoursePreviewViewController.swift in Sources */,
 				08D120E11C937B2200A54ABC /* SortingReply.swift in Sources */,
@@ -1928,6 +1948,7 @@
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
+				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2224,6 +2245,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */,
 				083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */,
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
