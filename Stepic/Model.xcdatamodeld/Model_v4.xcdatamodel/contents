@@ -72,9 +72,11 @@
     <entity name="Step" representedClassName=".Step" syncable="YES">
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="managedBlock" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Block" inverseName="managedStep" inverseEntity="Block" syncable="YES"/>
         <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSteps" inverseEntity="Lesson" syncable="YES"/>
+        <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" syncable="YES"/>
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
         <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -125,7 +127,7 @@
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Progress" positionX="-45" positionY="135" width="128" height="135"/>
         <element name="Section" positionX="-54" positionY="126" width="128" height="240"/>
-        <element name="Step" positionX="-45" positionY="135" width="128" height="120"/>
+        <element name="Step" positionX="-45" positionY="135" width="128" height="150"/>
         <element name="Unit" positionX="-45" positionY="144" width="128" height="240"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>

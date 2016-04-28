@@ -2250,7 +2250,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */;
+			currentVersion = 083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

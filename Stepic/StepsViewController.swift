@@ -91,6 +91,8 @@ class StepsViewController: RGPageViewController {
         refreshSteps()
     }
     
+    private var tabViewsForStepId = [Int: UIView]()
+    
     private func refreshSteps() {
         if numberOfPagesForViewController(self) == 0 {
             self.view.userInteractionEnabled = false
@@ -190,8 +192,6 @@ class StepsViewController: RGPageViewController {
     }
 }
 
-
-
 extension StepsViewController : RGPageViewControllerDataSource {
     func numberOfPagesForViewController(pageViewController: RGPageViewController) -> Int {
         return lesson?.steps.count ?? 0
@@ -199,8 +199,11 @@ extension StepsViewController : RGPageViewControllerDataSource {
     
     func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
         if let step = lesson?.steps[index] {
-            let tabView = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id)
-            return tabView
+//            if tabViewsForStepId[step.id] == nil {
+                tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
+//            }
+            
+            return tabViewsForStepId[step.id]!
         } else {
             return UIView()
         }

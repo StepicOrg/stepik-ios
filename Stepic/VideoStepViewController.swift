@@ -61,9 +61,13 @@ class VideoStepViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         if let a = assignment {
-            let stepId = step.id
+            let cstep = step
             ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {
-                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : stepId])
+                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                UIThread.performUI{
+                    cstep.progress?.isPassed = true
+                    CoreDataHelper.instance.save()
+                }
             }) 
         }
     }

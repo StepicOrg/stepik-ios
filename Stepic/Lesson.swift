@@ -43,7 +43,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                     ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
                         newAssignments in 
                         u.assignments = Sorter.sort(newAssignments,steps: self.steps)
-                        completion()
+                        self.loadProgressesForSteps(completion)
                         }, failure: {
                             error in
                             print("Error while downloading assignments")
@@ -66,6 +66,38 @@ class Lesson: NSManagedObject, JSONInitializable {
             getStepsBlock()
         }
     }
+    
+    
+    
+    func loadProgressesForSteps(completion: (Void->Void)) {
+        var progressIds : [String] = []
+        var progresses : [Progress] = []
+        for step in steps {
+            if let progressId = step.progressId {
+                progressIds += [progressId]
+            }
+            if let progress = step.progress {
+                progresses += [progress]
+            }
+        }
+        
+        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            (newProgresses) -> Void in
+            progresses = Sorter.sort(newProgresses, byIds: progressIds)
+            for i in 0 ..< min(self.steps.count, progresses.count) {
+                self.steps[i].progress = progresses[i]
+            }
+            
+            CoreDataHelper.instance.save()
+            
+            completion()
+            }, failure: { 
+                (error) -> Void in
+                print("Error while dowloading progresses")
+        })
+    }
+    
+    
     
     func getVideoURLs() -> [String] {
         var res : [String] = []

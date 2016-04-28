@@ -18,7 +18,7 @@ class StepTabView: UIView {
     @IBOutlet weak var solvedImageWidth: NSLayoutConstraint!
     @IBOutlet weak var solvedImageHeight: NSLayoutConstraint!
     
-    let solvedViewHeight : CGFloat = 10
+    let solvedViewHeight : CGFloat = 15
     
     func setup() {
         view = loadViewFromNib()
@@ -55,20 +55,27 @@ class StepTabView: UIView {
     
     var stepId: Int?
     
-    convenience init(frame: CGRect, image: UIImage, stepId: Int) {
+    convenience init(frame: CGRect, image: UIImage, stepId: Int, passed: Bool) {
         self.init(frame: frame)
         stepIconImageView.image = image
         self.stepId = stepId
+        if passed {
+            setTab(selected: passed, animated: false)
+        }
     }
     
-    func setTab(selected isSelected: Bool) {
+    func setTab(selected isSelected: Bool, animated: Bool) {
         let targetSize : CGFloat = isSelected ? solvedViewHeight : 0
         solvedImageHeight.constant = targetSize
         solvedImageWidth.constant = targetSize
         view.setNeedsLayout()
-        UIView.animateWithDuration(0.1, animations: {
+        if animated {
+            UIView.animateWithDuration(0.25, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
             self.view.layoutIfNeeded()
-        })
+        }
         
     }
     
@@ -76,7 +83,7 @@ class StepTabView: UIView {
         if let notificationStepId = notification.userInfo?["id"] as? Int,
             let stepId = self.stepId {
             if notificationStepId == stepId {
-                setTab(selected: true)
+                setTab(selected: true, animated: true)
             }
         }
     }

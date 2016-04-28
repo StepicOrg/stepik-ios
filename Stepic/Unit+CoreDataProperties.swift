@@ -32,8 +32,6 @@ extension Unit {
     
     @NSManaged var managedAssignments : NSOrderedSet?
     
-    
-    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Unit", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
