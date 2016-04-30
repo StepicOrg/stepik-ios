@@ -1020,8 +1020,8 @@
 		08D565C91C5F7CF000DE2B6A /* Practice */ = {
 			isa = PBXGroup;
 			children = (
-				08F555611C4FE2D200C877E8 /* Quizzes */,
 				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
+				08F555611C4FE2D200C877E8 /* Quizzes */,
 			);
 			name = Practice;
 			sourceTree = "<group>";
