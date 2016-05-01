@@ -35,4 +35,25 @@ class DevicesAPI: NSObject {
             return
         })
     }
+    
+    func delete(deviceId: Int, success: (Void->Void), error errorHandler: (String->Void)) -> Request {
+        let headers = APIDefaults.headers.create
+        return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
+            _, response, json, error in
+            
+            if let e = error as? NSError {
+                errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+            }
+            
+            if response?.statusCode != 204 {
+                errorHandler("DESTROY device: bad response status code \(response?.statusCode)")
+                return
+            }
+            
+            success()
+            
+            return
+        })
+
+    }
 }

@@ -107,20 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didReceiveRemoteNotification with userInfo: \(userInfo)")
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print("didReceiveRemoteNotification: fetchCompletionHandler with userInfo: \(userInfo)")
-        
-        let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 1)
-        notification.alertBody = "YO! NOTIFICATION HERE BRO!"
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.soundName = UILocalNotificationDefaultSoundName
-        
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        
-        completionHandler(UIBackgroundFetchResult.NoData)
-    }
-    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

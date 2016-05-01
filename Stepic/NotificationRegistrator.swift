@@ -50,7 +50,7 @@ class NotificationRegistrator: NSObject {
                 print("created device: \(device.getJSON())")
             }, error : {
                 error in 
-                print("error! :(")
+                print("device creation error")
             })
             
 //            let userInfo = ["registrationToken": registrationToken]
