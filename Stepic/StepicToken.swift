@@ -25,4 +25,13 @@ class StepicToken: NSObject {
         self.refreshToken = refreshToken
         self.tokenType = tokenType
     }
+    
+    func getDictionary() -> [String: AnyObject] {
+        var res = [String: AnyObject]()
+        res["access_token"] = accessToken
+        res["refresh_token"] = refreshToken
+        res["token_type"] = tokenType
+        
+        return res
+    }
 }
