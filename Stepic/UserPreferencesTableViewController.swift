@@ -155,6 +155,11 @@ class UserPreferencesTableViewController: UITableViewController {
                     UIThread.performUI{
                         self?.presentViewController(alert, animated: true, completion: nil)
                     }
+                } else {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getNoUpdateAvailableAlertController()
+                    UIThread.performUI{
+                        self?.presentViewController(alert, animated: true, completion: nil)
+                    }
                 }
             }, error: {
                 error in
