@@ -27,7 +27,7 @@ class UserPreferencesTableViewController: UITableViewController {
     @IBOutlet weak var ignoreMuteSwitchSwitch: UISwitch!
     
     
-    let heightForRows = [[131], [40, 0, 40], [40, 40], [40]]
+    var heightForRows = [[131], [40, 0, 40], [40, 40], [40]]
     let selectionForRows = [[false], [false, false, true], [false, true], [true]]
     let sectionTitles = [
     NSLocalizedString("UserInfo", comment: ""),
@@ -37,6 +37,10 @@ class UserPreferencesTableViewController: UITableViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !StepicApplicationsInfo.inAppUpdatesAvailable {
+            heightForRows[2] = [0, 0]
+        }
         
         localize() 
         
@@ -112,8 +116,29 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return nil 
+        } else {
+            return sectionTitles[section]
+        }
     }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForFooterInSection: section)
+        }
+    }
+    
     
     @IBAction func closeButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)

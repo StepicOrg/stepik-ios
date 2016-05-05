@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
-        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+//        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
 
-        checkForUpdates()
+        if StepicApplicationsInfo.inAppUpdatesAvailable {
+            checkForUpdates()
+        }
         
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)

@@ -29,4 +29,5 @@ struct StepicApplicationsInfo {
     static let versionInfoURL = "https://stepic.org/media/attachments/lesson/26869/version.json"
     
     static let doesAllowCourseUnenrollment = true
+    static let inAppUpdatesAvailable = false
 }
