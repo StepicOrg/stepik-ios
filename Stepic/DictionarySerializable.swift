@@ -9,9 +9,9 @@
 import Foundation
 
 /*
- DictionarySerializer protocol, which defines serialization methods
+ DictionarySerializable protocol, which defines dictionary serialization methods
  */
-protocol DictionarySerializer {
-    func serialize(object: AnyObject) -> [String: AnyObject]?
-    func deserialize(dictionary dict: [String: AnyObject]) -> AnyObject?
+protocol DictionarySerializable {
+    func serializeToDictionary() -> [String: AnyObject]
+    init?(dictionary: [String: AnyObject])
 }

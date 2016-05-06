@@ -32,13 +32,11 @@ class PersistentTaskRecoveryManager {
     func loadTaskWithName(name: String) -> Executable? {
         let object = loadTaskObjectWithName(name)
         let typeStringOrNil = object["type"] as? String
-        let taskObjectOrNil = object["task"] as? [String: AnyObject]
-        if let type = ExecutableTaskType(rawValue: typeStringOrNil ?? ""),
-            taskObject = taskObjectOrNil {
+        if let type = ExecutableTaskType(rawValue: typeStringOrNil ?? "") {
             
             switch type {
             case .DeleteDevice: 
-                return DeleteDeviceExecutableTaskSerializer().deserialize(dictionary: taskObject) as? Executable
+                return  DeleteDeviceExecutableTask(dictionary: object)
             }
             
         } else {
@@ -46,9 +44,9 @@ class PersistentTaskRecoveryManager {
         }
     }
     
-    func writeTaskWithName(name: String, taskObject: [String: AnyObject], type: ExecutableTaskType) {
+    func writeTaskWithName(name: String, object: DictionarySerializable) {
         let plistData = NSDictionary(contentsOfFile: plistPath)!
-        plistData.setValue(taskObject, forKey: name)
+        plistData.setValue(object.serializeToDictionary(), forKey: name)
         plistData.writeToFile(plistPath, atomically: true)
     }
 }
