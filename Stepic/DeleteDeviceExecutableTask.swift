@@ -79,6 +79,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                         {
                             token in
                             print("successfully refreshed token")
+                            recoveryManager.writeStepicToken(token, userId: user)
                             ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
                                 {
                                     print("user \(user) successfully deleted device with id \(device) after refreshing the token")
