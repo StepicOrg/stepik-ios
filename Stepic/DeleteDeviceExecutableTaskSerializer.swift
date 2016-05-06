@@ -13,13 +13,26 @@ import SwiftyJSON
  Serializes DeleteDeviceExecutableTask object
  */
 class DeleteDeviceExecutableTaskSerializer {
-    func deserialize(dictionary dict: [String: AnyObject]) -> DeleteDeviceExecutableTask {
+    private init() {}
+    static let sharedSerializer = DeleteDeviceExecutableTaskSerializer()
+    
+    func deserialize(dictionary dict: [String: AnyObject]) -> DeleteDeviceExecutableTask? {
         //TODO: Remove this with a good value
-        return DeleteDeviceExecutableTask(userId: 1, deviceId: 1)
+        let userId = dict["user"] as? Int
+        let deviceId = dict["device"] as? Int
+        if let user = userId,
+            device = deviceId {
+            let task = DeleteDeviceExecutableTask(userId: user, deviceId: device)
+            return task
+        } else {
+            return nil
+        }
     }
     
     func serialize(task task: DeleteDeviceExecutableTask) -> [String: AnyObject] {
         var res = [String: AnyObject]()
+        res["user"] = task.userId
+        res["device"] = task.deviceId
         return res
     }
 }

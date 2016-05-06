@@ -12,5 +12,8 @@ import Foundation
  Contains all ExecutionQueues
  */
 class ExecutionQueues {
-    var signInExecutionQueue = ExecutionQueue()
+    private init() {}
+    static let sharedQueues = ExecutionQueues()
+    
+    var connectionAvailableExecutionQueue = ExecutionQueue()
 }

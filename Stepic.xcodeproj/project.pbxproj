@@ -44,6 +44,10 @@
 		0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
+		083267A31CDCE5CF002F7B5A /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 083267A21CDCE5CF002F7B5A /* Tasks.plist */; };
+		083267A41CDCE5D0002F7B5A /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 083267A21CDCE5CF002F7B5A /* Tasks.plist */; };
+		083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
+		083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
@@ -447,6 +451,8 @@
 		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
+		083267A21CDCE5CF002F7B5A /* Tasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
+		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
 		083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegistrator.swift; sourceTree = "<group>"; };
 		083622D71CD1FA4800CD8915 /* StepTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabView.swift; sourceTree = "<group>"; };
 		083622DB1CD1FA6700CD8915 /* StepTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepTabView.xib; sourceTree = "<group>"; };
@@ -1008,7 +1014,6 @@
 			isa = PBXGroup;
 			children = (
 				08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */,
-				08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */,
 			);
 			name = "Task Managers";
 			sourceTree = "<group>";
@@ -1016,6 +1021,8 @@
 		08BC47121CDA3C09009A1D25 /* Tasks & Serializers */ = {
 			isa = PBXGroup;
 			children = (
+				083267A21CDCE5CF002F7B5A /* Tasks.plist */,
+				083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */,
 				08BC47161CDA3F79009A1D25 /* Delete Device */,
 				08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */,
 			);
@@ -1025,6 +1032,7 @@
 		08BC47161CDA3F79009A1D25 /* Delete Device */ = {
 			isa = PBXGroup;
 			children = (
+				08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */,
 				08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */,
 				08BC47171CDA3F95009A1D25 /* DeleteDeviceExecutableTaskSerializer.swift */,
 			);
@@ -1521,6 +1529,7 @@
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
+				083267A41CDCE5D0002F7B5A /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
@@ -1553,6 +1562,7 @@
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
+				083267A31CDCE5CF002F7B5A /* Tasks.plist in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
@@ -1857,6 +1867,7 @@
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
+				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
@@ -1896,6 +1907,7 @@
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
+				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,

@@ -12,7 +12,7 @@ import Foundation
  Strategy class for an appropriate executable task recovery from persistent store
  */
 class ExecutableTaskPersistentManager : PersistentTaskManagerProtocol {
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let taskDefaults = NSUserDefaults.standardUserDefaults()
     
     func recoverTaskWithName(name: String) -> Executable {
         //TODO: Remove this with good value
