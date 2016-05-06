@@ -15,4 +15,12 @@ class PersistentUserTokenRecoveryManager : PersistentRecoveryManager {
     override func recoverObjectFromDictionary(dictionary: [String : AnyObject]) -> DictionarySerializable? {
         return StepicToken(dictionary: dictionary)
     }
+    
+    func recoverStepicToken(userId userId: String) -> StepicToken?  {
+        return recoverObjectWithKey(userId) as? StepicToken
+    }
+    
+    func writeStepicToken(token: StepicToken, userId: String) {
+        writeObjectWithKey(userId, object: token)
+    }
 }
