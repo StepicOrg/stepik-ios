@@ -16,11 +16,11 @@ class PersistentUserTokenRecoveryManager : PersistentRecoveryManager {
         return StepicToken(dictionary: dictionary)
     }
     
-    func recoverStepicToken(userId userId: String) -> StepicToken?  {
-        return recoverObjectWithKey(userId) as? StepicToken
+    func recoverStepicToken(userId userId: Int) -> StepicToken?  {
+        return recoverObjectWithKey("\(userId)") as? StepicToken
     }
     
-    func writeStepicToken(token: StepicToken, userId: String) {
-        writeObjectWithKey(userId, object: token)
+    func writeStepicToken(token: StepicToken, userId: Int) {
+        writeObjectWithKey("\(userId)", object: token)
     }
 }
