@@ -14,5 +14,12 @@ struct APIDefaults {
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
         ]
+        
+        static func bearer(accessToken: String) -> [String : String] {
+            return [
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer \(accessToken)"
+            ]
+        }
     }
 }
