@@ -79,6 +79,9 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                         {
                             token in
                             print("successfully refreshed token")
+                            if StepicAPI.shared.userId == user {
+                                StepicAPI.shared.token = token
+                            }
                             recoveryManager.writeStepicToken(token, userId: user)
                             ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
                                 {
