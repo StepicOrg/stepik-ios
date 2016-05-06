@@ -144,6 +144,8 @@
 		08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC213B1CDD35DF00FBB9CD /* Users.plist */; };
 		08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
 		08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
+		08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */; };
+		08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */; };
 		08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */; };
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
@@ -535,6 +537,7 @@
 		08AC21381CDD34C300FBB9CD /* Tasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		08AC213B1CDD35DF00FBB9CD /* Users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Users.plist; sourceTree = "<group>"; };
 		08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRecoveryManager.swift; sourceTree = "<group>"; };
+		08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentUserTokenRecoveryManager.swift; sourceTree = "<group>"; };
 		08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationErrorInfo.swift; sourceTree = "<group>"; };
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -995,6 +998,7 @@
 			isa = PBXGroup;
 			children = (
 				08AC213B1CDD35DF00FBB9CD /* Users.plist */,
+				08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */,
 			);
 			name = "Users data";
 			sourceTree = "<group>";
@@ -1038,13 +1042,13 @@
 		08BC47121CDA3C09009A1D25 /* Tasks & Serializers */ = {
 			isa = PBXGroup;
 			children = (
+				08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */,
 				08AC21371CDD32E100FBB9CD /* Users data */,
 				08BC47161CDA3F79009A1D25 /* Delete Device */,
 				08AC21381CDD34C300FBB9CD /* Tasks.plist */,
 				083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */,
 				08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */,
 				083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */,
-				08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */,
 			);
 			name = "Tasks & Serializers";
 			sourceTree = "<group>";
@@ -1799,6 +1803,7 @@
 				08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */,
 				08D120AE1C937B2200A54ABC /* Unit.swift in Sources */,
 				08D120AF1C937B2200A54ABC /* VideoDownload.swift in Sources */,
+				08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08D120B01C937B2200A54ABC /* StringQuizViewController.swift in Sources */,
 				08D120B11C937B2200A54ABC /* FreeAnswerReply.swift in Sources */,
 				08D120B21C937B2200A54ABC /* QuizViewController.swift in Sources */,
@@ -1944,6 +1949,7 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
+				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,

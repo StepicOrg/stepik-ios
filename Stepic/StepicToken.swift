@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class StepicToken: NSObject {
+class StepicToken: DictionarySerializable {
     let accessToken : String!
     let refreshToken : String!
     let tokenType : String!
@@ -24,6 +24,20 @@ class StepicToken: NSObject {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.tokenType = tokenType
+    }
+    
+    required convenience init?(dictionary: [String : AnyObject]) {
+        if let aToken = dictionary["access_token"] as? String,
+            rToken = dictionary["refresh_token"] as? String, 
+            tType = dictionary["token_type"] as? String {
+            self.init(accessToken: aToken, refreshToken: rToken, tokenType: tType)
+        } else {
+            return nil
+        }
+    }
+    
+    func serializeToDictionary() -> [String : AnyObject] {
+        return getDictionary()
     }
     
     func getDictionary() -> [String: AnyObject] {
