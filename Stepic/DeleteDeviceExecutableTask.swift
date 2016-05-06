@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 /*
  ExecutableTask for deleting device on the server 
@@ -62,6 +64,40 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
     }
     
     func execute(success success: (Void -> Void), failure: (Void -> Void)) {
-        
+        let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+        if let token = recoveryManager.recoverStepicToken(userId: userId) {
+            let device = deviceId
+            let user = userId
+            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
+                {
+                    print("user \(user) successfully deleted device with id \(device)")
+                    success()
+                }, error: {
+                    error in
+                    print("error \(error) while removing device, trying to refresh token and retry")
+                    AuthentificationManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
+                        {
+                            token in
+                            print("successfully refreshed token")
+                            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
+                                {
+                                    print("user \(user) successfully deleted device with id \(device) after refreshing the token")
+                                    success()
+                                }, error: {
+                                    error in
+                                    print("error while deleting device with refreshed token")
+                                    failure()
+                                }
+                            )
+                        }, failure: {
+                            error in
+                            print("error while refreshing the token :(")
+                            failure()
+                            //TODO: check the type of an error and check if should remove from queue
+                        }
+                    )
+                }
+            )
+        }
     }
 }
