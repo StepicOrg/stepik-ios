@@ -12,16 +12,20 @@ import SwiftyJSON
 /*
  Serializes DeleteDeviceExecutableTask object
  */
-class DeleteDeviceExecutableTaskSerializer {
-    private init() {}
-    static let sharedSerializer = DeleteDeviceExecutableTaskSerializer()
+class DeleteDeviceExecutableTaskSerializer : DictionarySerializer {
     
-    func deserialize(dictionary dict: [String: AnyObject]) -> DeleteDeviceExecutableTask? {
-        //TODO: Remove this with a good value
-        let userId = dict["user"] as? Int
-        let deviceId = dict["device"] as? Int
+    func deserialize(dictionary dict: [String : AnyObject]) -> AnyObject? {
+        let taskDict = dict["task"] as? [String: AnyObject]
+        let typeString = dict["type"] as? String
+        let userId = taskDict?["user"] as? Int
+        let deviceId = taskDict?["device"] as? Int
         if let user = userId,
-            device = deviceId {
+            device = deviceId,
+            typeS = typeString
+        {
+            if ExecutableTaskType(rawValue: typeS) != ExecutableTaskType.DeleteDevice {
+                return nil
+            }
             let task = DeleteDeviceExecutableTask(userId: user, deviceId: device)
             return task
         } else {
@@ -29,10 +33,25 @@ class DeleteDeviceExecutableTaskSerializer {
         }
     }
     
-    func serialize(task task: DeleteDeviceExecutableTask) -> [String: AnyObject] {
-        var res = [String: AnyObject]()
-        res["user"] = task.userId
-        res["device"] = task.deviceId
-        return res
+    func serialize(object: AnyObject) -> [String : AnyObject]? {
+        if let task = object as? DeleteDeviceExecutableTask {
+            
+            if task.type != ExecutableTaskType.DeleteDevice {
+                return nil
+            }
+            
+            let res : [String: AnyObject] = 
+            [
+                "type" : task.type.rawValue, 
+                "task": [
+                    "user" : task.userId,
+                    "device" : task.deviceId
+                ]
+            ]
+            
+            return res
+        } else {
+            return nil
+        }
     }
 }

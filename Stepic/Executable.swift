@@ -14,4 +14,5 @@ import Foundation
  */
 protocol Executable {
     func execute(success success: (Void->Void), failure: (Void->Void))
+    var type : ExecutableTaskType { get }
 }

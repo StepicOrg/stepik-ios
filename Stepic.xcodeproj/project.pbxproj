@@ -48,6 +48,8 @@
 		083267A41CDCE5D0002F7B5A /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 083267A21CDCE5CF002F7B5A /* Tasks.plist */; };
 		083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
+		083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
+		083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
 		083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */; };
 		083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
@@ -149,8 +151,6 @@
 		08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
-		08BC470F1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */; };
-		08BC47101CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */; };
 		08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08BC47181CDA3F95009A1D25 /* DeleteDeviceExecutableTaskSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47171CDA3F95009A1D25 /* DeleteDeviceExecutableTaskSerializer.swift */; };
@@ -453,6 +453,7 @@
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		083267A21CDCE5CF002F7B5A /* Tasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
+		083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySerializable.swift; sourceTree = "<group>"; };
 		083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRegistrator.swift; sourceTree = "<group>"; };
 		083622D71CD1FA4800CD8915 /* StepTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabView.swift; sourceTree = "<group>"; };
 		083622DB1CD1FA6700CD8915 /* StepTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepTabView.xib; sourceTree = "<group>"; };
@@ -539,7 +540,6 @@
 		08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
-		08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentDeleteDeviceTaskManager.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
 		08BC47171CDA3F95009A1D25 /* DeleteDeviceExecutableTaskSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDeviceExecutableTaskSerializer.swift; sourceTree = "<group>"; };
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
@@ -982,6 +982,13 @@
 			name = PlaceholderViewTesting;
 			sourceTree = "<group>";
 		};
+		08AC21371CDD32E100FBB9CD /* Users data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Users data";
+			sourceTree = "<group>";
+		};
 		08B361061BB2E3C100090843 /* User Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,10 +1028,12 @@
 		08BC47121CDA3C09009A1D25 /* Tasks & Serializers */ = {
 			isa = PBXGroup;
 			children = (
+				08AC21371CDD32E100FBB9CD /* Users data */,
+				08BC47161CDA3F79009A1D25 /* Delete Device */,
 				083267A21CDCE5CF002F7B5A /* Tasks.plist */,
 				083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */,
-				08BC47161CDA3F79009A1D25 /* Delete Device */,
 				08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */,
+				083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */,
 			);
 			name = "Tasks & Serializers";
 			sourceTree = "<group>";
@@ -1032,7 +1041,6 @@
 		08BC47161CDA3F79009A1D25 /* Delete Device */ = {
 			isa = PBXGroup;
 			children = (
-				08BC470E1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift */,
 				08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */,
 				08BC47171CDA3F95009A1D25 /* DeleteDeviceExecutableTaskSerializer.swift */,
 			);
@@ -1829,6 +1837,7 @@
 				08D120D81C937B2200A54ABC /* Block.swift in Sources */,
 				08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				08D120DA1C937B2200A54ABC /* CourseTableViewCell.swift in Sources */,
+				083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				08D120DB1C937B2200A54ABC /* JSQWebViewController.swift in Sources */,
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
 				08D120DD1C937B2200A54ABC /* TCBlobDownload.swift in Sources */,
@@ -1849,7 +1858,6 @@
 				08D120E91C937B2200A54ABC /* VideoDownloadDelegate.swift in Sources */,
 				08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */,
 				08D120EB1C937B2200A54ABC /* JSONInitializable.swift in Sources */,
-				08BC47101CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift in Sources */,
 				08D120EC1C937B2200A54ABC /* UIImageViewExtension.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
@@ -1970,10 +1978,10 @@
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
-				08BC470F1CD9FEFE009A1D25 /* PersistentDeleteDeviceTaskManager.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
+				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */,
 				083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,

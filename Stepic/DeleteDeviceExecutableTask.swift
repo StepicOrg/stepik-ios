@@ -13,7 +13,9 @@ import Foundation
  */
 class DeleteDeviceExecutableTask : Executable {
     
-    let type = ExecutableTaskType.DeleteDevice
+    var type : ExecutableTaskType {
+        return .DeleteDevice
+    }
     
     var userId : Int
     var deviceId : Int

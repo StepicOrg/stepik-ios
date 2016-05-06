@@ -9,16 +9,19 @@
 import Foundation
 
 /*
- Strategy class for recovering the task from store
+ Strategy class for recovering the correct task from store
  */
 class PersistentTaskRecoveryManager {
     private init() {}
     static let sharedManager = PersistentTaskRecoveryManager()
     
-    private func loadTaskObjectWithName(name: String) -> [String: AnyObject] {
+    var plistPath : String {
         let path = NSBundle.mainBundle().bundlePath
-        let scriptsPlistPath = "\(path)/Tasks.plist"
-        let plistData = NSDictionary(contentsOfFile: scriptsPlistPath)!
+        return "\(path)/Tasks.plist"
+    }
+    
+    private func loadTaskObjectWithName(name: String) -> [String: AnyObject] {
+        let plistData = NSDictionary(contentsOfFile: plistPath)!
         return plistData[name] as! [String: AnyObject]
     }
     
@@ -31,11 +34,17 @@ class PersistentTaskRecoveryManager {
             
             switch type {
             case .DeleteDevice: 
-                return DeleteDeviceExecutableTaskSerializer.sharedSerializer.deserialize(dictionary: taskObject)
+                return DeleteDeviceExecutableTaskSerializer().deserialize(dictionary: taskObject) as? Executable
             }
             
         } else {
             return nil
         }
+    }
+    
+    func writeTaskWithName(name: String, taskObject: [String: AnyObject], type: ExecutableTaskType) {
+        let plistData = NSDictionary(contentsOfFile: plistPath)!
+        plistData.setValue(taskObject, forKey: name)
+        plistData.writeToFile(plistPath, atomically: true)
     }
 }
