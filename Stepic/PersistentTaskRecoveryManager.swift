@@ -16,8 +16,12 @@ class PersistentTaskRecoveryManager {
     static let sharedManager = PersistentTaskRecoveryManager()
     
     var plistPath : String {
-        let path = NSBundle.mainBundle().bundlePath
-        return "\(path)/Tasks.plist"
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let path = "\(documentsPath)/Tasks.plist"
+        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
+            try! NSFileManager.defaultManager().copyItemAtPath("\(NSBundle.mainBundle().bundlePath)/Tasks.plist", toPath: path)
+        }
+        return path
     }
     
     private func loadTaskObjectWithName(name: String) -> [String: AnyObject] {
