@@ -142,6 +142,8 @@
 		08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC21381CDD34C300FBB9CD /* Tasks.plist */; };
 		08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC213B1CDD35DF00FBB9CD /* Users.plist */; };
 		08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC213B1CDD35DF00FBB9CD /* Users.plist */; };
+		08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
+		08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
 		08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */; };
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
@@ -532,6 +534,7 @@
 		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		08AC21381CDD34C300FBB9CD /* Tasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		08AC213B1CDD35DF00FBB9CD /* Users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Users.plist; sourceTree = "<group>"; };
+		08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRecoveryManager.swift; sourceTree = "<group>"; };
 		08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationErrorInfo.swift; sourceTree = "<group>"; };
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -1041,6 +1044,7 @@
 				083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */,
 				08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */,
 				083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */,
+				08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */,
 			);
 			name = "Tasks & Serializers";
 			sourceTree = "<group>";
@@ -1877,6 +1881,7 @@
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
+				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
@@ -1963,6 +1968,7 @@
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
+				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,

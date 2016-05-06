@@ -57,8 +57,8 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
     var userId : Int
     var deviceId : Int
     
-    var description = {
-        return "\(1)"
+    var description: String {
+        return "\(type.rawValue) \(userId) \(deviceId)"
     }
     
     func execute(success success: (Void -> Void), failure: (Void -> Void)) {
