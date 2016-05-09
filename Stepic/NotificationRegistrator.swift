@@ -47,6 +47,7 @@ class NotificationRegistrator: NSObject {
             let device = Device(registrationId: registrationToken, deviceDescription: "ios test device sample description")
             ApiDataDownloader.devices.create(device, success: {
                 device in
+                
                 print("created device: \(device.getJSON())")
             }, error : {
                 error in 
@@ -63,6 +64,30 @@ class NotificationRegistrator: NSObject {
         }
     }    
     
+    
+    // Should be executed first before any actions were performed, contains abort()
+    //TODO: remove abort, add failure completion handler 
+    func unregisterFromNotifications() {
+        UIApplication.sharedApplication().unregisterForRemoteNotifications()
+        if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
+            ApiDataDownloader.devices.delete(deviceId, success: 
+                {
+                    print("successfully deleted device with id \(deviceId) when unregistering from notifications")
+                }, error:
+                {
+                    errorMessage in 
+                    print(errorMessage)
+                    if let userId =  StepicAPI.shared.userId {
+                        let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                        ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+                    } else {
+                        print("Could not get current user ID to delete device, aborting now")
+                        abort()
+                    }
+                }
+            )
+        }
+    }
     
 }
 

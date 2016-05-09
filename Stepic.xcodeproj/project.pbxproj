@@ -146,6 +146,8 @@
 		08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */; };
 		08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */; };
 		08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */; };
+		08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
+		08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */; };
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
@@ -538,6 +540,7 @@
 		08AC213B1CDD35DF00FBB9CD /* Users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Users.plist; sourceTree = "<group>"; };
 		08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRecoveryManager.swift; sourceTree = "<group>"; };
 		08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentUserTokenRecoveryManager.swift; sourceTree = "<group>"; };
+		08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDefaults.swift; sourceTree = "<group>"; };
 		08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationErrorInfo.swift; sourceTree = "<group>"; };
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -789,6 +792,7 @@
 			children = (
 				083554271CC8FD2D004C4E85 /* NotificationRegistrator.swift */,
 				0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */,
+				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -1885,6 +1889,7 @@
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
+				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
@@ -2071,6 +2076,7 @@
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
+				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

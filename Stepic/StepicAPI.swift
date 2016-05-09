@@ -24,6 +24,9 @@ class StepicAPI: NSObject {
             defaults.setValue(newToken?.tokenType, forKey: "token_type")
             defaults.synchronize()
             if newToken == nil || newToken?.accessToken == ""  {
+                //Unregister from notifications
+                NotificationRegistrator.sharedInstance.unregisterFromNotifications()
+                
                 //Delete enrolled information
                 TabsInfo.myCoursesIds = []
                 let c = Course.getAllCourses(enrolled: true)
