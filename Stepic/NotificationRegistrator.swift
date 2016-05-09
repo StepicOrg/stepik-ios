@@ -47,7 +47,7 @@ class NotificationRegistrator: NSObject {
             let device = Device(registrationId: registrationToken, deviceDescription: "ios test device sample description")
             ApiDataDownloader.devices.create(device, success: {
                 device in
-                
+                DeviceDefaults.sharedDefaults.deviceId = device.id
                 print("created device: \(device.getJSON())")
             }, error : {
                 error in 
