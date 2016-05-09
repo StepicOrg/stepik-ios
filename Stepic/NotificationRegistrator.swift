@@ -80,6 +80,7 @@ class NotificationRegistrator: NSObject {
                     if let userId =  StepicAPI.shared.userId {
                         let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                         ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+                        DeviceDefaults.sharedDefaults.deviceId = nil
                     } else {
                         print("Could not get current user ID to delete device, aborting now")
                         abort()
