@@ -16,4 +16,22 @@ class ExecutionQueues {
     static let sharedQueues = ExecutionQueues()
     
     var connectionAvailableExecutionQueue = ExecutionQueue()
+    
+    func setUpQueues() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+    }
+    
+    @objc func reachabilityChanged(notification: NSNotification) {
+        if Reachability.reachabilityForInternetConnection().isReachable() {
+            executeConnectionAvailableQueue()
+        }
+    }
+    
+    func executeConnectionAvailableQueue() {
+        connectionAvailableExecutionQueue.executeAll { 
+            newQueue in 
+            self.connectionAvailableExecutionQueue = newQueue
+        }
+    }
+    
 }
