@@ -16,6 +16,8 @@ class ExecutionQueues {
     static let sharedQueues = ExecutionQueues()
     
     var connectionAvailableExecutionQueue = ExecutionQueue()
+    var connectionAvailableExecutionQueueKey = "connectionAvailableExecutionQueueKey"
+    
     
     func setUpQueues() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
@@ -31,6 +33,15 @@ class ExecutionQueues {
         connectionAvailableExecutionQueue.executeAll { 
             newQueue in 
             self.connectionAvailableExecutionQueue = newQueue
+        }
+    }
+    
+    func recoverQueuesFromPersistentStore() {
+        let queueRecoveryManager = PersistentQueueRecoveryManager(baseName: "Queues")
+        if let recoveredConnectionAvailableExecutionQueue = queueRecoveryManager.recoverQueue(connectionAvailableExecutionQueueKey) {
+            connectionAvailableExecutionQueue = recoveredConnectionAvailableExecutionQueue
+        } else {
+            print("failed to recover connection available queue from persistent store")
         }
     }
     
