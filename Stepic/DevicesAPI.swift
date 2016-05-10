@@ -19,6 +19,8 @@ class DevicesAPI: NSObject {
         return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
+            print(json)
+            
             if let e = error as? NSError {
                 errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
             }
@@ -36,11 +38,13 @@ class DevicesAPI: NSObject {
     }
     
     func delete(deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: (Void->Void), error errorHandler: (String->Void)) -> Request {
+        
         return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
             if let e = error as? NSError {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                
             }
             
             if response?.statusCode != 204 {

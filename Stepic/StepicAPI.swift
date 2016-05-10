@@ -19,36 +19,42 @@ class StepicAPI: NSObject {
     
     var token : StepicToken? {
         set(newToken) {
+            if newToken == nil || newToken?.accessToken == ""  {
+                print("\nsetting new token to nil\n")
+                
+                //Unregister from notifications
+                NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
+                    UIThread.performUI{
+                        //Delete enrolled information
+                        TabsInfo.myCoursesIds = []
+                        let c = Course.getAllCourses(enrolled: true)
+                        for course in c {
+                            course.enrolled = false
+                        }
+                        StepicAPI.shared.user = nil
+                        //Show sign in controller
+                        ControllerHelper.showLaunchController(true)
+                        AnalyticsHelper.sharedHelper.changeSignIn()
+                    }
+                })
+                
+                
+            } else {
+                print("\nsetting new token -> \(newToken!.accessToken)\n")
+                didRefresh = true
+            }
             defaults.setValue(newToken?.accessToken, forKey: "access_token")
             defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
             defaults.setValue(newToken?.tokenType, forKey: "token_type")
             defaults.synchronize()
-            if newToken == nil || newToken?.accessToken == ""  {
-                //Unregister from notifications
-                NotificationRegistrator.sharedInstance.unregisterFromNotifications()
-                
-                //Delete enrolled information
-                TabsInfo.myCoursesIds = []
-                let c = Course.getAllCourses(enrolled: true)
-                for course in c {
-                    course.enrolled = false
-                }
-                StepicAPI.shared.user = nil
-                //Show sign in controller
-                ControllerHelper.showLaunchController(true)
-                AnalyticsHelper.sharedHelper.changeSignIn()
-            } else {
-                print("\ndid set new token -> \(newToken!.accessToken)\n")
-                didRefresh = true
-            }
         }
         
         get {
             if _token == nil {
-                if let accessToken = defaults.valueForKey("access_token"),
-                let refreshToken = defaults.valueForKey("refresh_token"),
-                let tokenType = defaults.valueForKey("token_type") {
-                    return StepicToken(accessToken: accessToken as! String, refreshToken: refreshToken as! String, tokenType: tokenType as! String)
+                if let accessToken = defaults.valueForKey("access_token") as? String,
+                let refreshToken = defaults.valueForKey("refresh_token") as? String,
+                let tokenType = defaults.valueForKey("token_type") as? String {
+                    return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType)
                 } else {
                     return nil
                 }

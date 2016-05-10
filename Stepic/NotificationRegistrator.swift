@@ -67,12 +67,14 @@ class NotificationRegistrator: NSObject {
     
     // Should be executed first before any actions were performed, contains abort()
     //TODO: remove abort, add failure completion handler 
-    func unregisterFromNotifications() {
+    func unregisterFromNotifications(completion completion: (Void->Void)) {
+        print(StepicAPI.shared.token?.accessToken)
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
         if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
             ApiDataDownloader.devices.delete(deviceId, success: 
                 {
                     print("successfully deleted device with id \(deviceId) when unregistering from notifications")
+                    completion()
                 }, error:
                 {
                     errorMessage in 
@@ -81,13 +83,18 @@ class NotificationRegistrator: NSObject {
                         let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                         ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
                         DeviceDefaults.sharedDefaults.deviceId = nil
+                        completion()
                     } else {
-                        print("Could not get current user ID to delete device, aborting now")
-                        abort()
+                        print("Could not get current user ID to delete device")
+                        completion()
+//                        abort()
                     }
                 }
                 
             )
+        } else {
+            print("no deviceId found")
+            completion()
         }
     }
     
