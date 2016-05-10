@@ -15,6 +15,12 @@ import SwiftyJSON
  */
 class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
     
+    var id : String {
+        get {
+            return description
+        }
+    }
+    
     init(userId: Int, deviceId: Int) {
         self.userId = userId
         self.deviceId = deviceId
