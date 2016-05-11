@@ -79,13 +79,27 @@ class NotificationRegistrator: NSObject {
                 {
                     errorMessage in 
                     print(errorMessage)
-                    if let userId =  StepicAPI.shared.userId {
+                    print("initializing delete device task")
+                    print("user id \(StepicAPI.shared.userId) , token \(StepicAPI.shared.token)")
+                    if let userId =  StepicAPI.shared.userId,
+                        token = StepicAPI.shared.token {
+                        
                         let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                         ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+                        
+                        let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                        userPersistencyManager.writeStepicToken(token, userId: userId)
+                        
+                        let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                        taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+                        
+                        let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues") 
+                        queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)                        
+                        
                         DeviceDefaults.sharedDefaults.deviceId = nil
                         completion()
                     } else {
-                        print("Could not get current user ID to delete device")
+                        print("Could not get current user ID or token to delete device")
                         completion()
 //                        abort()
                     }
