@@ -28,9 +28,9 @@ class PersistentRecoveryManager {
         self.plistName = baseName
     }
     
-    private func loadObjectDictionaryFromKey(key: String) -> [String: AnyObject] {
+    private func loadObjectDictionaryFromKey(key: String) -> [String: AnyObject]? {
         let plistData = NSDictionary(contentsOfFile: plistPath)!
-        return plistData[key] as! [String: AnyObject]
+        return plistData[key] as? [String: AnyObject] 
     }
     
     //Override this method in a subclass!
@@ -39,13 +39,16 @@ class PersistentRecoveryManager {
     }
     
     func recoverObjectWithKey(key: String) -> DictionarySerializable? {
-        let objectDictionary = loadObjectDictionaryFromKey(key)
-        return recoverObjectFromDictionary(objectDictionary)
+        if let objectDictionary = loadObjectDictionaryFromKey(key) {
+            return recoverObjectFromDictionary(objectDictionary)
+        } else {
+            return nil
+        }
     }
     
     func writeObjectWithKey(key: String, object: DictionarySerializable) {
-        let plistData = NSDictionary(contentsOfFile: plistPath)!
-        plistData.setValue(object.serializeToDictionary(), forKey: key)
+        let plistData = NSMutableDictionary(contentsOfFile: plistPath)!
+        plistData[key] = object.serializeToDictionary()
         plistData.writeToFile(plistPath, atomically: true)
     }
     
