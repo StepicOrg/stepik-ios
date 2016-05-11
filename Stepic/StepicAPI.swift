@@ -17,6 +17,14 @@ class StepicAPI: NSObject {
     
     var _token : StepicToken?
     
+    private func setTokenValue(newToken: StepicToken?) {
+        defaults.setValue(newToken?.accessToken, forKey: "access_token")
+        defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
+        defaults.setValue(newToken?.tokenType, forKey: "token_type")
+        defaults.synchronize()
+
+    }
+    
     var token : StepicToken? {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == ""  {
@@ -35,6 +43,7 @@ class StepicAPI: NSObject {
                         //Show sign in controller
                         ControllerHelper.showLaunchController(true)
                         AnalyticsHelper.sharedHelper.changeSignIn()
+                        self.setTokenValue(newToken)
                     }
                 })
                 
@@ -42,11 +51,8 @@ class StepicAPI: NSObject {
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
+                setTokenValue(newToken)
             }
-            defaults.setValue(newToken?.accessToken, forKey: "access_token")
-            defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
-            defaults.setValue(newToken?.tokenType, forKey: "token_type")
-            defaults.synchronize()
         }
         
         get {
