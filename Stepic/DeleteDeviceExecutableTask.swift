@@ -53,7 +53,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                     "device" : deviceId
                 ]
             ]
-            
+        print(res)
         return res
     }
 
