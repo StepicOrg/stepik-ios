@@ -19,7 +19,7 @@ class ExecutionQueues {
     var connectionAvailableExecutionQueueKey = "connectionAvailableExecutionQueueKey"
     
     
-    func setUpQueues() {
+    func setUpQueueObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
     }
     
@@ -32,6 +32,7 @@ class ExecutionQueues {
     func executeConnectionAvailableQueue() {
         connectionAvailableExecutionQueue.executeAll { 
             newQueue in 
+            print("could not execute \(newQueue.count) tasks, rewriting the queue")
             self.connectionAvailableExecutionQueue = newQueue
         }
     }
