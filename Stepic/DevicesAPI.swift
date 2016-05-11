@@ -48,7 +48,7 @@ class DevicesAPI: NSObject {
                 return
             }
             
-            if response?.statusCode != 204 {
+            if response?.statusCode != 204 && response?.statusCode != 404 {
                 errorHandler("DESTROY device: bad response status code \(response?.statusCode)")
                 return
             }
