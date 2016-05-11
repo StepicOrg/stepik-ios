@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
+        ExecutionQueues.sharedQueues.setUpQueueObservers()
+        ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
         ExecutionQueues.sharedQueues.executeConnectionAvailableQueue()
         
         IQKeyboardManager.sharedManager().enable = true
