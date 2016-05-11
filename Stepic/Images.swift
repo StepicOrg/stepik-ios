@@ -43,4 +43,9 @@ struct Images {
         static let pause = UIImage(named: "ic_pause_48pt")!
         static let timeSliderThumb = UIImage(named: "thumb_image_15")!
     }
+    
+    struct solvedTask {
+        static let green = UIImage(named: "ic_solved_task")!
+        static let white = UIImage(named: "ic_solved_task_white")!
+    }
 }

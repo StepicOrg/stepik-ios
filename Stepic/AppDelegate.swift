@@ -42,16 +42,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
+//        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+        
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+
+        if StepicApplicationsInfo.inAppUpdatesAvailable {
+            checkForUpdates()
+        }
+        
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
     }
 
+    func updateNotificationRegistrationStatus(notification: NSNotification) {
+        if let info = notification.userInfo as? [String:String] {
+            if let error = info["error"] {
+                print("Error registering with GCM: \(error)")
+            } else if let _ = info["registrationToken"] {
+                print("Token registration successful!")
+            }
+        }
+    }
+
+    func checkForUpdates() {
+        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded(
+            {
+                newVersion in
+                if let version = newVersion {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
+                    UIThread.performUI{
+                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+            }, error: {
+                error in
+                print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+        })
+    }
+    
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
@@ -61,6 +95,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("error while authentificating")
         }
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("error while registering to remote notifications")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("didReceiveRemoteNotification with userInfo: \(userInfo)")
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -119,6 +165,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+    }
 
 }
 

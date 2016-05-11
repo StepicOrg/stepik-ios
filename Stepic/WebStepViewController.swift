@@ -32,7 +32,7 @@ class WebStepViewController: UIViewController {
     var assignment : Assignment?
     
     var stepUrl : String {
-        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)"
+        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)?from_mobile_app=true"
     }
     
     private var panG : UIPanGestureRecognizer!
@@ -175,7 +175,18 @@ class WebStepViewController: UIViewController {
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
         if let a = assignment {
-            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {}) 
+            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {
+                [weak self] in
+                if let cstep = self?.step {
+                    if cstep.block.name == "text" {
+                        NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                        UIThread.performUI{
+                            cstep.progress?.isPassed = true
+                            CoreDataHelper.instance.save()
+                        }                    
+                    }
+                }
+            })
         }
     }
     

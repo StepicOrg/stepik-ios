@@ -19,22 +19,35 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
+    @IBOutlet weak var autoCheckForUpdatesLabel: UILabel!
+    @IBOutlet weak var checkForUpdatesButton: UIButton!
+    
+    @IBOutlet weak var autoCheckForUpdatesSwitch: UISwitch!
     @IBOutlet weak var ignoreMuteSwitchLabel: UILabel!
     @IBOutlet weak var ignoreMuteSwitchSwitch: UISwitch!
     
     
-    let heightForRows = [[131], [40, 0, 40], [40]]
-    let selectionForRows = [[false], [false, false, true], [true]]
-
+    var heightForRows = [[131], [40, 0, 40], [40, 40], [40]]
+    let selectionForRows = [[false], [false, false, true], [false, true], [true]]
+    let sectionTitles = [
+    NSLocalizedString("UserInfo", comment: ""),
+    NSLocalizedString("Video", comment: ""),
+    NSLocalizedString("Updates", comment: ""),
+    NSLocalizedString("Actions", comment: "")
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !StepicApplicationsInfo.inAppUpdatesAvailable {
+            heightForRows[2] = [0, 0]
+        }
+        
+        localize() 
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         
         avatarImageView.setRoundedBounds(width: 0)
-
-        ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
         
         if let apiUser = StepicAPI.shared.user {
             initWithUser(apiUser)
@@ -44,6 +57,7 @@ class UserPreferencesTableViewController: UITableViewController {
         
         onlyWiFiSwitch.on = !ConnectionHelper.shared.reachableOnWWAN
         ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
+        autoCheckForUpdatesSwitch.on = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
         
         ApiDataDownloader.sharedDownloader.getCurrentUser({
             user in
@@ -61,6 +75,13 @@ class UserPreferencesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    private func localize() {
+        ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
+
+        autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
+    checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), forState: .Normal)
+    }
+    
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
@@ -86,10 +107,38 @@ class UserPreferencesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             signOut()
         }
+        if indexPath.section  == 2 && indexPath.row == 1 {
+            checkForUpdates()
+        }
     }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return nil 
+        } else {
+            return sectionTitles[section]
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+            return 0.1
+        } else {
+            return super.tableView(tableView, heightForFooterInSection: section)
+        }
+    }
+    
     
     @IBAction func closeButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -117,6 +166,35 @@ class UserPreferencesTableViewController: UITableViewController {
         AudioManager.sharedManager.ignoreMuteSwitch = sender.on
     }
     
+    @IBAction func allowAutoUpdateChanged(sender: UISwitch) {
+        UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = sender.on
+    }
+    
+    func checkForUpdates() {
+        RemoteVersionManager.sharedManager.checkRemoteVersionChange(needUpdateHandler:
+            {
+                [weak self]
+                newVersion in
+                if let version = newVersion {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: false)
+                    UIThread.performUI{
+                        self?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getNoUpdateAvailableAlertController()
+                    UIThread.performUI{
+                        self?.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
+            }, error: {
+                error in
+                print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+        })
+    }
+    
+    @IBAction func checkForUpdatesButtonPressed(sender: UIButton) {
+        checkForUpdates()
+    }
     
     func signOut() {
         StepicAPI.shared.token = nil
@@ -124,68 +202,5 @@ class UserPreferencesTableViewController: UITableViewController {
     
     @IBAction func signOutButtonPressed(sender: UIButton) {
         signOut()
-//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
-//        self.presentViewController(vc, animated: true, completion: {
-////            self.dismissViewControllerAnimated(false, completion: nil)
-//        })
-        
     }
-    
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

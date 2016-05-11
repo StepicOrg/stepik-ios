@@ -218,6 +218,13 @@ class QuizViewController: UIViewController {
                         if self.needPeerReview {
                             self.peerReviewHeight.constant = 40
                             self.peerReviewButton.hidden = false
+                        } else {
+                            //TODO: Refactor this!!!!! 
+                            NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : self.step.id])
+                            UIThread.performUI{
+                                self.step.progress?.isPassed = true
+                                CoreDataHelper.instance.save()
+                            }
                         }
                         
                         break

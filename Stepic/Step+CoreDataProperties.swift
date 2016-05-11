@@ -17,10 +17,12 @@ extension Step {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedStatus: String?
+    @NSManaged var managedProgressId: String?
     
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
-        
+    @NSManaged var managedProgress: Progress?
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Step", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -65,5 +67,24 @@ extension Step {
             managedBlock = value
         }
     }
+    
+    var progressId: String? {
+        get {
+            return managedProgressId
+        }
+        set(value) {
+            managedProgressId = value
+        }
+    }
+    
+    var progress : Progress? {
+        get {
+            return managedProgress
+        }
+        set(value) {
+            managedProgress = value
+        }
+    }
+    
     
 }

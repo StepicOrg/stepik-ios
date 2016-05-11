@@ -24,6 +24,7 @@ class Step: NSManagedObject, JSONInitializable {
         id = json["id"].intValue
         position = json["position"].intValue
         status = json["status"].stringValue
+        progressId = json["progress"].stringValue
         if let doesReview = json["actions"]["do_review"].string {
             hasReview = (doesReview != "")
         } else {
@@ -35,6 +36,8 @@ class Step: NSManagedObject, JSONInitializable {
         initialize(json)
         block.update(json: json["block"])
     }
+    
+    
     
     var hasReview : Bool = false
 }
