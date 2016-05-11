@@ -23,6 +23,7 @@ class DevicesAPI: NSObject {
             
             if let e = error as? NSError {
                 errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                return
             }
             
             if response?.statusCode != 201 {
@@ -44,6 +45,7 @@ class DevicesAPI: NSObject {
             
             if let e = error as? NSError {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                return
             }
             
             if response?.statusCode != 204 {
@@ -63,6 +65,7 @@ class DevicesAPI: NSObject {
             
             if let e = error as? NSError {
                 errorHandler("RETRIEVE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                return
             }
             
             if response?.statusCode != 200 {
