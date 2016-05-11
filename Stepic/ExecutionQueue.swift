@@ -23,6 +23,7 @@ class ExecutionQueue : DictionarySerializable {
     }
     
     func executeAll(completion : (ExecutionQueue -> Void)) {
+        print("executing all count -> \(count)")
         var notCompletedExecutionQueue = ExecutionQueue()
         var executedCount = 0
 
@@ -67,8 +68,11 @@ class ExecutionQueue : DictionarySerializable {
         for executable in queue {
             ids += [executable.id]
         }
-        return ["task_ids" : ids]
+        let res : [String: AnyObject] = ["task_ids" : ids]
+        
+        print(res)
+        
+        return res
     }
-    
     
 }
