@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
-        setRootController()
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
@@ -51,6 +50,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
+        setRootController()
+
+        let notificationOptional = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] 
+        if let notification = notificationOptional as? [NSObject: AnyObject] {
+            NotificationReactionHandler().handleNotificationWithUserInfo(notification, delegate: self)
+        } 
+        
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
 
         checkForUpdates()
