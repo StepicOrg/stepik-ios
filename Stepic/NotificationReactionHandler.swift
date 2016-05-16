@@ -8,6 +8,9 @@
 
 import Foundation
 
+/*
+ Chooses the appropriate reaction to the notification click
+ */
 class NotificationReactionHandler {
     func handleNotificationWithUserInfo(userInfo: [NSObject: AnyObject], delegate: AppDelegate) {
         print("handler")
@@ -17,5 +20,7 @@ class NotificationReactionHandler {
         alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
         
     }
+    
+    
     
 }

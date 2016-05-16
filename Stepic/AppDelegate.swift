@@ -57,6 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationReactionHandler().handleNotificationWithUserInfo(notification, delegate: self)
         } 
         
+        let notificationText = "\n\n\n\n\n  В курсе \n  <a href=\"/course/Web-%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8-154/\">Web технологии</a>\n\n менее чем через 36 часов наступит крайний срок сдачи заданий по модулю \n  <a href=\"/course/Web-%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8-154/syllabus?module=1\">Статический сайт</a>\n\n\n\n\n"
+        let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "", body: notificationText)
+        
+        let parser = NotificationHTMLParser(htmlText: html)
+        parser.getLink(index: 0)
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
 
         checkForUpdates()
