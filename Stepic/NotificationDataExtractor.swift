@@ -38,4 +38,16 @@ class NotificationDataExtractor {
             return nil
         }
     }
+    
+    //gets the comments URL if it is available for the given notification type
+    func getCommentsURL() -> NSURL? {
+        if notification.type != .Comments {
+            return nil
+        } else {
+            if let commentsLink = parser.getLink(index: 2) {
+                return NSURL(string: "\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
+            }
+            return nil
+        }
+    }
 }
