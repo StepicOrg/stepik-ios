@@ -13,14 +13,36 @@ import Foundation
  */
 class NotificationReactionHandler {
     func handleNotificationWithUserInfo(userInfo: [NSObject: AnyObject], delegate: AppDelegate) {
-        print("handler")
-        print(userInfo)
         
-        let alert = UIAlertController(title: "handler", message: "\(userInfo)", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
+        if !StepicAPI.shared.isAuthorized {
+            return
+        }
         
+        let notificationObject : [String: AnyObject] = userInfo["object"] as! [String: AnyObject]
+        if let notification = Notification(dictionary: notificationObject) {
+            switch notification.type {
+            case NotificationType.Learn:
+                handleLearnNotification(notification)
+            case NotificationType.Comments:
+                handleCommentsNotification(notification)
+            default:
+                return
+            }
+        }
     }
     
+    private func handleLearnNotification(notification: Notification) {
+        let extractor = NotificationDataExtractor(notification: notification)
+        if let courseId = extractor.getCourseId() {
+            //TODO: Add implementation here
+        }
+    }
     
+    private func handleCommentsNotification(notification: Notification) {
+        let extractor = NotificationDataExtractor(notification: notification)
+        if let commentsURL = extractor.getCommentsURL() {
+            //TODO: Add implementation here
+        }
+    }
     
 }
