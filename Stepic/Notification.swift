@@ -30,7 +30,13 @@ class Notification : DictionarySerializable {
         }
     }
     
+    init(type: NotificationType, htmlText: String) {
+        self.type = type
+        self.htmlText = htmlText
+    }
+    
     func serializeToDictionary() -> [String : AnyObject] {
         return [String: AnyObject]()
     }
+    
 }
