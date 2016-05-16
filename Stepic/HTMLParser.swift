@@ -22,7 +22,7 @@ class HTMLParser {
     func getLink(index index: Int) -> String? {
         if let doc = Kanna.HTML(html: htmlText, encoding: NSUTF8StringEncoding) {
             if index < doc.xpath("//a").count {
-                return doc.xpath("//a")[10]["href"]
+                return doc.xpath("//a")[index]["href"]
             } else {
                 return nil
             }

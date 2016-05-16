@@ -40,14 +40,14 @@ class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
     
-    private func presentJSQWebController(url: NSURL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle) {
+    private func presentJSQWebController(url: NSURL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         let controller = WebViewController(url: url)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
         let nav = UINavigationController(rootViewController: controller)
         self.currentWebController = nav
 //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
-        c.presentViewController(nav, animated: true, completion: nil)
+        c.presentViewController(nav, animated: animated, completion: nil)
         controller.webView.navigationDelegate = self
         controller.webView.UIDelegate = self
     }
@@ -58,14 +58,14 @@ class WebControllerManager: NSObject {
         currentWebControllerKey = nil
     }
     
-    func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
+    func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         self.currentWebControllerKey = key
 //        if #available(iOS 9.0, *) {
 //            let svc = SFSafariViewController(URL: url)
 //            self.currentWebController = svc
 //            c.presentViewController(svc, animated: true, completion: nil)
 //        } else {
-            presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle)
+        presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
 //        }
     }
     

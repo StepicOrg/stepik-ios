@@ -26,4 +26,19 @@ class NotificationAlertConstructor {
         
         return alert
     }
+    
+    func getOpenCommentNotificationViaSafariAlertController(success: (Void->Void)) -> UIAlertController {
+        let alert = UIAlertController(title: NSLocalizedString("NewCommentAlertTitle", comment: ""), message: NSLocalizedString("NewCommentAlertMessage", comment: ""), preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .Default, handler: {
+            action in
+            success()
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: {
+            action in
+        }))
+        
+        return alert
+    }
 }
