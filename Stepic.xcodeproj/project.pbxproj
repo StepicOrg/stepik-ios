@@ -108,8 +108,8 @@
 		087039311CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
 		087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
-		087F6B961CE9E2C8002649AB /* NotificationHTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* NotificationHTMLParser.swift */; };
-		087F6B971CE9E2C8002649AB /* NotificationHTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* NotificationHTMLParser.swift */; };
+		087F6B961CE9E2C8002649AB /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParser.swift */; };
+		087F6B971CE9E2C8002649AB /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParser.swift */; };
 		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
@@ -518,7 +518,7 @@
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
-		087F6B951CE9E2C8002649AB /* NotificationHTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHTMLParser.swift; sourceTree = "<group>"; };
+		087F6B951CE9E2C8002649AB /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiDataDownloader.swift; sourceTree = "<group>"; };
@@ -816,7 +816,7 @@
 				083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */,
 				083540631CE5FBA100BDFEA5 /* NotificationType.swift */,
 				083540661CE5FC0E00BDFEA5 /* Notification.swift */,
-				087F6B951CE9E2C8002649AB /* NotificationHTMLParser.swift */,
+				087F6B951CE9E2C8002649AB /* HTMLParser.swift */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -1775,7 +1775,7 @@
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
-				087F6B971CE9E2C8002649AB /* NotificationHTMLParser.swift in Sources */,
+				087F6B971CE9E2C8002649AB /* HTMLParser.swift in Sources */,
 				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
 				08CB6B451C98776400E8BA50 /* SbEntranceViewController.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
@@ -2091,7 +2091,7 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
-				087F6B961CE9E2C8002649AB /* NotificationHTMLParser.swift in Sources */,
+				087F6B961CE9E2C8002649AB /* HTMLParser.swift in Sources */,
 				08F555671C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
