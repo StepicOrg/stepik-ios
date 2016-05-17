@@ -23,6 +23,7 @@ def all_pods
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna'
+    pod 'CRToast'
 end
 
 target 'Stepic' do
