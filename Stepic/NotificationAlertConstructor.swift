@@ -7,6 +7,7 @@
 //
 
 import UIKit 
+import CRToast
 
 class NotificationAlertConstructor {
     private init() {}
@@ -40,5 +41,40 @@ class NotificationAlertConstructor {
         }))
         
         return alert
+    }
+    
+    
+    func presentNotificationFake(text: String, success: (Void -> Void)) {
+        
+        let responder = CRToastInteractionResponder(interactionType: CRToastInteractionType.Tap, automaticallyDismiss: true, block: 
+            {
+                interactionType in
+                success()
+            }
+        )
+        
+        let toastOptions : [NSObject: AnyObject] = [
+            kCRToastImageKey : Images.boundedStepicIcon,
+            kCRToastTextKey : text,
+            kCRToastNotificationTypeKey : CRToastType.NavigationBar.rawValue,
+            kCRToastNotificationPresentationTypeKey : CRToastPresentationType.Cover.rawValue,
+            kCRToastUnderStatusBarKey : true,
+            kCRToastAnimationInTypeKey : CRToastAnimationType.Gravity.rawValue,
+            kCRToastAnimationOutTypeKey : CRToastAnimationType.Gravity.rawValue,
+            kCRToastAnimationInDirectionKey : CRToastAnimationDirection.Top.rawValue,
+            kCRToastAnimationOutDirectionKey : CRToastAnimationDirection.Top.rawValue,
+            kCRToastAnimationInTimeIntervalKey : 0.3,
+            kCRToastTimeIntervalKey : 5.0,
+            kCRToastAnimationOutTimeIntervalKey : 0.3,
+            kCRToastTextMaxNumberOfLinesKey : 2,
+            kCRToastImageContentModeKey : UIViewContentMode.ScaleAspectFit.rawValue,
+            kCRToastBackgroundColorKey: UIColor.blackColor(),
+            kCRToastInteractionRespondersKey : [responder]
+        ]
+        
+        CRToastManager.showNotificationWithOptions(toastOptions) { 
+            print("show notificatoin completed!")
+        }
+        
     }
 }
