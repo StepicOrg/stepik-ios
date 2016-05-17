@@ -52,45 +52,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setRootController()
 
-//        let notificationOptional = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] 
-//        if let notification = notificationOptional as? [NSObject: AnyObject] {
-//            NotificationReactionHandler().handleNotificationWithUserInfo(notification)
-//        } 
-        
-        let learnNotificationText = "\n\n\n\n\n  В курсе \n  <a href=\"/course/Web-%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8-154/\">Web технологии</a>\n\n менее чем через 36 часов наступит крайний срок сдачи заданий по модулю \n  <a href=\"/course/Web-%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8-154/syllabus?module=1\">Статический сайт</a>\n\n\n\n\n"
-        let learnNotificationFake : [NSString : AnyObject] = [
-            "object" : [
-                "html_text" : learnNotificationText,
-                "type" : "learn"
-            ]
-        ]
-        
-        let commentsNotificationText = "\n\n\n\n  <a href=\"/users/17197269\">test test</a>\n\n прокомментировал(а) \n  <a href=\"/lesson/Test-lesson-26869/\">Test lesson</a>\n\n \n  <a href=\"/lesson/Test-lesson-26869/step/1\">T1</a>\n\n: <i class=\"icon-comment\"></i>\n<a href=\"/lesson/Test-lesson-26869/step/1?discussion=210534\">йц</a>\n\n"
-        
-        let commentsNotificationFake : [NSString : AnyObject] = [
-            "object" : [
-                "html_text" : commentsNotificationText,
-                "type" : "comments"
-            ]
-        ]
-                
-        if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(learnNotificationFake), 
-            rootController = ((self.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
-            reaction(rootController)
-        }
-        
-//        let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "", body: notificationText)
-//        parser.getLink(index: 0)
-        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
 
-        checkForUpdates()
+        if StepicAPI.shared.isAuthorized {
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+        }
+//        checkForUpdates()
         
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
     }
 
+    private func handleNotification(notificationDict: [NSString: AnyObject]) {
+        if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict), 
+            rootController = ((self.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
+            reaction(rootController)
+        }
+    }
+    
     func updateNotificationRegistrationStatus(notification: NSNotification) {
         if let info = notification.userInfo as? [String:String] {
             if let error = info["error"] {
@@ -137,6 +116,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        if let notificationDict = userInfo as? [NSString: AnyObject] {
+            if let text = ((notificationDict["aps"] as? [NSObject: AnyObject])?["alert"] as? [NSObject: AnyObject])?["body"] as? String {
+                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: 
+                    {
+                        self.handleNotification(notificationDict)
+                    }
+                )
+            }
+        }
         print("didReceiveRemoteNotification with userInfo: \(userInfo)")
     }
     

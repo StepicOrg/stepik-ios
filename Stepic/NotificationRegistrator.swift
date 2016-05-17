@@ -18,6 +18,19 @@ class NotificationRegistrator: NSObject {
         super.init()
     }
     
+//    private var defaults = NSUserDefaults.standardUserDefaults()
+//    
+//    var didAskForRemoteNotifications : Bool {
+//        get {
+//            return (defaults.valueForKey("didAskForRemoteNotifications") as? Bool) ?? false
+//        }
+//        
+//        set(value) {
+//            defaults.setValue(value, forKey: "didAskForRemoteNotifications")
+//            defaults.synchronize()
+//        }
+//    }
+    
     func registerForRemoteNotifications(application: UIApplication) {
         let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)

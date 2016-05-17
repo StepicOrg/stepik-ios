@@ -13,19 +13,35 @@ import Foundation
  */
 class NotificationReactionHandler {
     
+    private func deserializeObject(from userInfo:[NSObject: AnyObject]) -> [String: AnyObject]? {
+        let jsonString = userInfo["object"] as? NSString
+        if let data = jsonString?.dataUsingEncoding(NSUTF8StringEncoding) {
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+                return json as? [String : AnyObject]
+            }
+            catch {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
     func handleNotificationWithUserInfo(userInfo: [NSObject: AnyObject]) -> (UIViewController -> Void)? {
         
         if !StepicAPI.shared.isAuthorized {
             return nil
         }
         
-        let notificationObject : [String: AnyObject] = userInfo["object"] as! [String: AnyObject]
-        if let notification = Notification(dictionary: notificationObject) {
-            switch notification.type {
-            case NotificationType.Learn:
-                return handleLearnNotification(notification)
-            case NotificationType.Comments:
-                return handleCommentsNotification(notification)
+        if let notificationObject : [String: AnyObject] = deserializeObject(from: userInfo) {
+            if let notification = Notification(dictionary: notificationObject) {
+                switch notification.type {
+                case NotificationType.Learn:
+                    return handleLearnNotification(notification)
+                case NotificationType.Comments:
+                    return handleCommentsNotification(notification)
+                }
             }
         }
         return nil
