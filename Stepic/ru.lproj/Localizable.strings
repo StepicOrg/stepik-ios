@@ -107,3 +107,5 @@ Later = "Позже";
 NeverAsk = "Никогда не спрашивать";
 NoUpdateAvailable = "Обновлений нет";
 NoAppUpdateMessage = "В данный момент нет доступных обновлений";
+NewCommentAlertTitle = "Новый комментарий";
+NewCommentAlertMessage = "Прочитать комментарий в браузере?";

@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
-        setRootController()
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
@@ -42,17 +41,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = GAILogLevel.None  // remove before app release
         
-//        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
+        ExecutionQueues.sharedQueues.setUpQueueObservers()
+        ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
+        ExecutionQueues.sharedQueues.executeConnectionAvailableQueue()
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.updateNotificationRegistrationStatus(_:)), name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+        setRootController()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
+        }
+        if StepicAPI.shared.isAuthorized {
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
         
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -60,6 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    private func handleNotification(notificationDict: [NSString: AnyObject]) {
+        if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict), 
+            rootController = ((self.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
+            reaction(rootController)
+        }
+    }
+    
     func updateNotificationRegistrationStatus(notification: NSNotification) {
         if let info = notification.userInfo as? [String:String] {
             if let error = info["error"] {
@@ -106,6 +117,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        if let notificationDict = userInfo as? [NSString: AnyObject] {
+            if let text = ((notificationDict["aps"] as? [NSObject: AnyObject])?["alert"] as? [NSObject: AnyObject])?["body"] as? String {
+                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: 
+                    {
+                        self.handleNotification(notificationDict)
+                    }
+                )
+            }
+        }
         print("didReceiveRemoteNotification with userInfo: \(userInfo)")
     }
     

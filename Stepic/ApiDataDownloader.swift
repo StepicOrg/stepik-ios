@@ -63,10 +63,8 @@ class ApiDataDownloader: NSObject {
         
         var params : [String : NSObject] = [:]
                
-        AuthentificationManager.sharedManager.refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
-            (t) in
-            StepicAPI.shared.token = t
-            params["access_token"] = t.accessToken
+        AuthentificationManager.sharedManager.autoRefreshToken( success: {
+            params["access_token"] = StepicAPI.shared.token?.accessToken ?? ""
 //            print(t.accessToken)
             self.getCurrentUserProfileApiCall(params, headers: headers, success: success, failure: failure)
             }, failure: {

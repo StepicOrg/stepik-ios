@@ -18,6 +18,19 @@ class NotificationRegistrator: NSObject {
         super.init()
     }
     
+//    private var defaults = NSUserDefaults.standardUserDefaults()
+//    
+//    var didAskForRemoteNotifications : Bool {
+//        get {
+//            return (defaults.valueForKey("didAskForRemoteNotifications") as? Bool) ?? false
+//        }
+//        
+//        set(value) {
+//            defaults.setValue(value, forKey: "didAskForRemoteNotifications")
+//            defaults.synchronize()
+//        }
+//    }
+    
     func registerForRemoteNotifications(application: UIApplication) {
         let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
@@ -47,6 +60,7 @@ class NotificationRegistrator: NSObject {
             let device = Device(registrationId: registrationToken, deviceDescription: "ios test device sample description")
             ApiDataDownloader.devices.create(device, success: {
                 device in
+                DeviceDefaults.sharedDefaults.deviceId = device.id
                 print("created device: \(device.getJSON())")
             }, error : {
                 error in 
@@ -63,6 +77,53 @@ class NotificationRegistrator: NSObject {
         }
     }    
     
+    
+    // Should be executed first before any actions were performed, contains abort()
+    //TODO: remove abort, add failure completion handler 
+    func unregisterFromNotifications(completion completion: (Void->Void)) {
+        print(StepicAPI.shared.token?.accessToken)
+        UIApplication.sharedApplication().unregisterForRemoteNotifications()
+        if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
+            ApiDataDownloader.devices.delete(deviceId, success: 
+                {
+                    print("successfully deleted device with id \(deviceId) when unregistering from notifications")
+                    completion()
+                }, error:
+                {
+                    errorMessage in 
+                    print(errorMessage)
+                    print("initializing delete device task")
+                    print("user id \(StepicAPI.shared.userId) , token \(StepicAPI.shared.token)")
+                    if let userId =  StepicAPI.shared.userId,
+                        token = StepicAPI.shared.token {
+                        
+                        let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                        ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+                        
+                        let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                        userPersistencyManager.writeStepicToken(token, userId: userId)
+                        
+                        let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                        taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+                        
+                        let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues") 
+                        queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)                        
+                        
+                        DeviceDefaults.sharedDefaults.deviceId = nil
+                        completion()
+                    } else {
+                        print("Could not get current user ID or token to delete device")
+                        completion()
+//                        abort()
+                    }
+                }
+                
+            )
+        } else {
+            print("no deviceId found")
+            completion()
+        }
+    }
     
 }
 

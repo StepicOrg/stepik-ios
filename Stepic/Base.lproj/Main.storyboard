@@ -1430,7 +1430,7 @@
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
             <objects>
-                <viewController id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SectionsViewController" id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0cz-24-l3w"/>
                         <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
@@ -1520,7 +1520,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="64" width="600" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1852,8 +1852,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="ihX-2a-oaI"/>
         <segue reference="qb1-8x-83E"/>
-        <segue reference="YFn-cD-YdC"/>
         <segue reference="LaP-cg-j2K"/>
+        <segue reference="Ymm-um-wgY"/>
         <segue reference="oyz-px-1HN"/>
     </inferredMetricsTieBreakers>
 </document>
