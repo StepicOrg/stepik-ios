@@ -25,4 +25,20 @@ extension String {
         }
         return res
     }
+    
+    func indexOf(target: String) -> Int? {
+        if let range = self.rangeOfString(target) {
+            return startIndex.distanceTo(range.startIndex)
+        } else {
+            return nil
+        }
+    }
+    
+    func lastIndexOf(target: String) -> Int? {
+        if let range = self.rangeOfString(target, options: .BackwardsSearch) {
+            return startIndex.distanceTo(range.startIndex)
+        } else {
+            return nil
+        }
+    }
 }

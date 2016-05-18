@@ -78,6 +78,7 @@ class RegistrationViewController: UIViewController {
                 success: {
                     t in
                     StepicAPI.shared.token = t
+                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                     ApiDataDownloader.sharedDownloader.getCurrentUser({
                         user in
                         StepicAPI.shared.user = user

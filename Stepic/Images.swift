@@ -48,4 +48,10 @@ struct Images {
         static let green = UIImage(named: "ic_solved_task")!
         static let white = UIImage(named: "ic_solved_task_white")!
     }
+    
+    struct appIcon {
+        static let size40x40 = UIImage(named: "AppIcon40x40")!
+    }
+    
+    static let boundedStepicIcon = UIImage(named: "boundedStepicIcon")!
 }

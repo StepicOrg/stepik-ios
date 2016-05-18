@@ -10,9 +10,16 @@ import Foundation
 
 struct APIDefaults {
     struct headers {
-        static let create : [String : String] = [
+        static let bearer : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
         ]
+        
+        static func bearer(accessToken: String) -> [String : String] {
+            return [
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer \(accessToken)"
+            ]
+        }
     }
 }

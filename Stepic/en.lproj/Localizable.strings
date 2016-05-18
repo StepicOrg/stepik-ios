@@ -107,3 +107,5 @@ Later = "Later";
 NeverAsk = "Never ask";
 NoUpdateAvailable = "No update available";
 NoAppUpdateMessage = "No app update is currently available";
+NewCommentAlertTitle = "New comment";
+NewCommentAlertMessage = "Show comment in web?";

@@ -39,4 +39,15 @@ class HTMLBuilder: NSObject {
         res += "</html>"
         return res
     }
+    
+    func buildHTMLStringWith(head head: String, body: String) -> String {
+        var res = "<html>\n"
+        
+        res += "<head>\n\(head)\n</head>\n"
+        //        print(body)
+        res += "<body>\n\(body)\n</body>\n"
+        
+        res += "</html>"
+        return res
+    }
 }
