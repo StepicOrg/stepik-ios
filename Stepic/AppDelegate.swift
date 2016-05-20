@@ -58,7 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if StepicAPI.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
-        
+        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
+            handleNotification(notificationDict)
+        }
+                
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
