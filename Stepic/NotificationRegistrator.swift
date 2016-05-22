@@ -44,8 +44,10 @@ class NotificationRegistrator: NSObject {
         // Start the GGLInstanceID shared instance with that config and request a registration
         // token to enable reception of notifications
         GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
-        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken,
-                               kGGLInstanceIDAPNSServerTypeSandboxOption:true]
+        registrationOptions = [
+            kGGLInstanceIDRegisterAPNSOption : deviceToken,
+            kGGLInstanceIDAPNSServerTypeSandboxOption : false
+        ]
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(GGLContext.sharedInstance().configuration.gcmSenderID,
                                                                  scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
     }

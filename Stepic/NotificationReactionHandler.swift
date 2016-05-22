@@ -35,6 +35,7 @@ class NotificationReactionHandler {
         }
         
         if let notificationObject : [String: AnyObject] = deserializeObject(from: userInfo) {
+            print(notificationObject)
             if let notification = Notification(dictionary: notificationObject) {
                 switch notification.type {
                 case NotificationType.Learn:
