@@ -64,11 +64,18 @@ class ChoiceQuizViewController: QuizViewController {
         }
         
         delay(reloadTimeStandardInterval * Double(count), closure: {
-            self.countHeights()
+            [weak self] in
+            self?.countHeights()
             UIThread.performUI{
-                self.tableView.reloadData() 
+                self?.tableView.reloadData() 
             }
-            self.reloadWithCount(count + 1)
+            if let expectedHeight = self?.expectedQuizHeight, 
+                let noQuizHeight = self?.heightWithoutQuiz {
+                UIThread.performUI {
+                    self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight) 
+                }
+            }
+            self?.reloadWithCount(count + 1)
         })  
     }    
     

@@ -21,6 +21,9 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
+        choiceWebView.opaque = false
+        choiceWebView.backgroundColor = UIColor.clearColor()
+        choiceWebView.scrollView.backgroundColor = UIColor.clearColor()
         // Initialization code
     }
 
