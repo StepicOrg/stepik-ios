@@ -61,22 +61,16 @@ class WebStepViewController: UIViewController {
     func didPan(sender: UIPanGestureRecognizer) {
         
         if sender.state == UIGestureRecognizerState.Began {
-//            print("pan started for step \(stepId)")
             offsetChange = 0
             startOffset = stepWebView.scrollView.contentOffset.x
         }
         
         if shouldTranslateOffsetChange {
-//            print("offsetChange was \(offsetChange)")
             var cleanOffset = stepWebView.scrollView.contentOffset.x + offsetChange
-//            print("cleanOffset calculated \(cleanOffset)")
             cleanOffset -= sender.translationInView(stepWebView).x
-//            print("cleanOffset with current pan offset \(cleanOffset)")
             cleanOffset = max(0, cleanOffset)
             cleanOffset = min(cleanOffset, rightLimitOffsetX)
-//            print("normed cleanOffset \(cleanOffset)")
             offsetChange = -cleanOffset + startOffset
-//            print("new offsetChange \(offsetChange)")
             stepWebView.scrollView.contentOffset = CGPoint(x: cleanOffset, y: stepWebView.scrollView.contentOffset.y)
         }
     }

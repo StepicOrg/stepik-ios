@@ -17,7 +17,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        choiceWebView.scrollView.scrollEnabled = false
+        choiceWebView.scrollView.scrollEnabled = true
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
