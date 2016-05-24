@@ -38,7 +38,8 @@ class ChoiceQuizViewController: QuizViewController {
     
     override func updateQuizAfterAttemptUpdate() {
         self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
-        self.cellHeights = [Int](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: 0)
+        self.cellHeights = [Int](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: 1)
+        print((self.attempt?.dataset as! ChoiceDataset).options.count)
         initHeightUpdateBlocks()
         self.tableView.reloadData()
         performHeightUpdates()
@@ -49,7 +50,7 @@ class ChoiceQuizViewController: QuizViewController {
         cellHeightUpdateBlocks = []
         for _ in 0..<(self.attempt?.dataset as! ChoiceDataset).options.count {
             cellHeightUpdateBlocks += [{
-                return 0
+                return 1
             }]
         }
     }
@@ -141,6 +142,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
+                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
                 return CGFloat(cellHeights[indexPath.row])
 //                dataset.options[indexPath.row]
             }
@@ -202,7 +204,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChoiceQuizTableViewCell", forIndexPath: indexPath) as! ChoiceQuizTableViewCell
-        
+        print("in cellForRowAtIndexPath : \(indexPath.row)")
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
                 cellHeightUpdateBlocks[indexPath.row] = cell.setTextWithTeX(dataset.options[indexPath.row])
