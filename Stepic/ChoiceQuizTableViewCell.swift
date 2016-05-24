@@ -38,11 +38,13 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         choiceWebView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
         
         return {
-            [unowned self]
-            Void in
-            let h = self.getContentHeight(self.choiceWebView)
-//            self.webViewHeight.constant = CGFloat(h)
-            return h + 17
+            [weak self] in
+            if let cw = self?.choiceWebView {
+                if let h = self?.getContentHeight(cw) {
+                    return h + 17
+                }
+            }
+            return 0
         }
     }
     

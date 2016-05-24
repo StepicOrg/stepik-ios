@@ -82,7 +82,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentActivityIndicatorView {
                 UIThread.performUI{self.activityView.hidden = false}
-                self.delegate?.needsHeightUpdate(150)
+                self.delegate?.needsHeightUpdate(150, animated: true)
             } else {
                 UIThread.performUI{self.activityView.hidden = true}
             }
@@ -93,7 +93,7 @@ class QuizViewController: UIViewController {
         didSet {
             if doesPresentWarningView {
                 UIThread.performUI{self.warningView.hidden = false}
-                self.delegate?.needsHeightUpdate(200)
+                self.delegate?.needsHeightUpdate(200, animated: true)
             } else {
                 UIThread.performUI{self.warningView.hidden = true}
             }
@@ -112,7 +112,7 @@ class QuizViewController: UIViewController {
                 
                 //TODO: Implement in subclass, then it may need a height update
                 self.updateQuizAfterAttemptUpdate()
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight)
+                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
                 self.view.layoutIfNeeded()
             }
         }
@@ -258,7 +258,7 @@ class QuizViewController: UIViewController {
                     
                     self.updateQuizAfterSubmissionUpdate()                    
                 }
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight)
+                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
                 self.view.layoutIfNeeded()
             }
         }

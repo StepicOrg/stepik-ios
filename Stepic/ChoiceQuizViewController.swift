@@ -73,7 +73,7 @@ class ChoiceQuizViewController: QuizViewController {
                     self?.tableView.reloadData() 
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
-                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight) 
+                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
                     }
                 }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)
