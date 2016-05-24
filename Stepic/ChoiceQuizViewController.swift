@@ -57,42 +57,49 @@ class ChoiceQuizViewController: QuizViewController {
     //Measured in seconds
     let reloadTimeStandardInterval = 0.5
     let reloadTimeout = 5.0
+    let noReloadTimeout = 1.0
     
-    private func reloadWithCount(count: Int) {
+    private func reloadWithCount(count: Int, noReloadCount: Int) {
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
             return
         }
-        
+        if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
+            return 
+        }
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
-            self?.countHeights()
-            UIThread.performUI{
-                self?.tableView.reloadData() 
-            }
-            if let expectedHeight = self?.expectedQuizHeight, 
-                let noQuizHeight = self?.heightWithoutQuiz {
-                UIThread.performUI {
-                    self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight) 
+            if self?.countHeights() == true {
+                UIThread.performUI{
+                    self?.tableView.reloadData() 
+                    if let expectedHeight = self?.expectedQuizHeight, 
+                        let noQuizHeight = self?.heightWithoutQuiz {
+                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight) 
+                    }
                 }
+                self?.reloadWithCount(count + 1, noReloadCount: 0)
+            } else {
+                self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
             }
-            self?.reloadWithCount(count + 1)
         })  
     }    
     
     private func performHeightUpdates() {
-        self.reloadWithCount(0)
+        self.reloadWithCount(0, noReloadCount: 0)
     }
     
-    private func countHeights() {
+    private func countHeights() -> Bool {
         var index = 0
+        var didChangeHeight = false
         for updateBlock in cellHeightUpdateBlocks {
             let h = updateBlock()
             if abs(cellHeights[index] - h) > 1 { 
                 print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
                 cellHeights[index] = h
+                didChangeHeight = true
             }
             index += 1
         }
+        return didChangeHeight
     }
     
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
@@ -144,8 +151,11 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     func setAllCellsOff() {
         let indexPaths = (0..<self.tableView.numberOfRowsInSection(0)).map({return NSIndexPath(forRow: $0, inSection: 0)})
         for indexPath in indexPaths {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChoiceQuizTableViewCell
-            cell.checkBox.on = false
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as? ChoiceQuizTableViewCell
+            if cell == nil {
+                print("\nsetAllCellsOff() cell at indexPath(\(indexPath)) is nil!!!\n")
+            }
+            cell?.checkBox.on = false
         }
     }
     
