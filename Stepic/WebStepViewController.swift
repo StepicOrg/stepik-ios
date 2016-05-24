@@ -233,19 +233,17 @@ class WebStepViewController: UIViewController {
     
     
     func resetWebViewHeight(height: Float) {
-//        print("web view \(stepId) resetWebViewHeight loading status: \(stepWebView.loading)")
         if height == 0.0 {
-//            print("\n__________________\nReloading web view \(stepId) after height set to 0.0\n_________________________\n")
             stepWebView.reload()
             return
         }
-//        print("__________________\n web view \(stepId)  height set to \(height), loading status: \(stepWebView.loading)\n_________________________\n")
         
 
-//        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
-//        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        UIView.animateWithDuration(0.2, animations: { 
+            [weak self] in
+            self?.view.layoutIfNeeded() 
+        })
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
