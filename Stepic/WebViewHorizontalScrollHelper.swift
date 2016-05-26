@@ -81,18 +81,18 @@ extension WebViewHorizontalScrollHelper : UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if (otherGestureRecognizer == pagerPanRecognizer) {
-                        print("did ask for simultaneous recognition with pagination")
+//            print("did ask for simultaneous recognition with pagination")
             
             let sender = gestureRecognizer as! UIPanGestureRecognizer
             let locationInView = sender.locationInView(webView)
             if CGRectContainsPoint(webView.bounds, locationInView)  {
-                print("pan located inside webview")
+//                print("pan located inside webview")
                 let vel = sender.velocityInView(underlyingView)
                 let draggedRight = vel.x > 0
-                print("webview content offset -> \(webView.scrollView.contentOffset.x), draggedRight: \(draggedRight)")
+//                print("webview content offset -> \(webView.scrollView.contentOffset.x), draggedRight: \(draggedRight)")
                 if (webView.scrollView.contentOffset.x == 0 && draggedRight) ||
                     (webView.scrollView.contentOffset.x == rightLimitOffsetX && !draggedRight){
-                    print("offset is an edge one, dragged right state \(draggedRight)")
+//                    print("offset is an edge one, dragged right state \(draggedRight)")
                     shouldTranslateOffsetChange = false
                     return true
                 } else {

@@ -15,15 +15,18 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var choiceWebView: UIWebView!
     @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
+    weak var horizontalScrollHelper : WebViewHorizontalScrollHelper!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        choiceWebView.scrollView.scrollEnabled = true
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
         choiceWebView.opaque = false
         choiceWebView.backgroundColor = UIColor.clearColor()
         choiceWebView.scrollView.backgroundColor = UIColor.clearColor()
+        choiceWebView.scrollView.delegate = self
+        choiceWebView.scrollView.showsVerticalScrollIndicator = false
         // Initialization code
     }
 
@@ -58,4 +61,14 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         print("did deinit cell")
     }
     
+}
+
+extension ChoiceQuizTableViewCell : UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y != 0) {
+            var offset = scrollView.contentOffset;
+            offset.y = 0
+            scrollView.contentOffset = offset;
+        }
+    }
 }
