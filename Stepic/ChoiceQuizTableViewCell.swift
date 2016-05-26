@@ -17,6 +17,8 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     
     weak var horizontalScrollHelper : WebViewHorizontalScrollHelper!
     
+    var tapRecognizer : UITapGestureRecognizer!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         checkBox.onAnimationType = .Fill
@@ -28,7 +30,12 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         choiceWebView.scrollView.delegate = self
         choiceWebView.scrollView.showsVerticalScrollIndicator = false
         choiceWebView.scrollView.canCancelContentTouches = false
-        // Initialization code
+        
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChoiceQuizTableViewCell.didTap(_:)))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.delegate = self
+        
+        choiceWebView.addGestureRecognizer(tapRecognizer)
     }
 
     private func getContentHeight(webView : UIWebView) -> Int {
@@ -52,6 +59,12 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         }
     }
     
+    var tapHandler : (Void->Void)?
+    
+    func didTap(sender: UITapGestureRecognizer) {
+        tapHandler?()
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -70,6 +83,16 @@ extension ChoiceQuizTableViewCell : UIScrollViewDelegate {
             var offset = scrollView.contentOffset;
             offset.y = 0
             scrollView.contentOffset = offset;
+        }
+    }
+}
+
+extension ChoiceQuizTableViewCell {
+    override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == tapRecognizer { 
+            return true 
+        } else {
+            return false
         }
     }
 }

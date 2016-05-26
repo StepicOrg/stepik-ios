@@ -162,6 +162,10 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        reactOnSelection(tableView, didSelectRowAtIndexPath: indexPath)
+    }
+    
+    private func reactOnSelection(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! ChoiceQuizTableViewCell
         if let dataset = attempt?.dataset as? ChoiceDataset {
             if dataset.isMultipleChoice {
@@ -216,6 +220,11 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 cell.checkBox.tag = indexPath.row
                 cell.checkBox.delegate = self
                 cell.checkBox.userInteractionEnabled = false
+                cell.tapHandler = {
+                    [weak self] in
+                    self?.reactOnSelection(tableView, didSelectRowAtIndexPath: indexPath)
+
+                }
                 if let s = submission {
                     if let reply = s.reply as? ChoiceReply {
                         cell.checkBox.on = reply.choices[indexPath.row]
