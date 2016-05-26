@@ -27,6 +27,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         choiceWebView.scrollView.backgroundColor = UIColor.clearColor()
         choiceWebView.scrollView.delegate = self
         choiceWebView.scrollView.showsVerticalScrollIndicator = false
+        choiceWebView.scrollView.canCancelContentTouches = false
         // Initialization code
     }
 
