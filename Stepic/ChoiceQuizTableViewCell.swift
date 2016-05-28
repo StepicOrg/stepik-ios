@@ -15,9 +15,6 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var choiceWebView: UIWebView!
     @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
-    weak var horizontalScrollHelper : WebViewHorizontalScrollHelper!
-    
-    var tapRecognizer : UITapGestureRecognizer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,16 +23,11 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.clearColor()
         choiceWebView.opaque = false
         choiceWebView.backgroundColor = UIColor.clearColor()
+        choiceWebView.userInteractionEnabled = false
         choiceWebView.scrollView.backgroundColor = UIColor.clearColor()
-        choiceWebView.scrollView.delegate = self
         choiceWebView.scrollView.showsVerticalScrollIndicator = false
         choiceWebView.scrollView.canCancelContentTouches = false
         
-        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChoiceQuizTableViewCell.didTap(_:)))
-        tapRecognizer.numberOfTapsRequired = 1
-        tapRecognizer.delegate = self
-        
-        choiceWebView.addGestureRecognizer(tapRecognizer)
     }
 
     private func getContentHeight(webView : UIWebView) -> Int {
@@ -58,13 +50,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
             return 0
         }
     }
-    
-    var tapHandler : (Void->Void)?
-    
-    func didTap(sender: UITapGestureRecognizer) {
-        tapHandler?()
-    }
-    
+        
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -83,16 +69,6 @@ extension ChoiceQuizTableViewCell : UIScrollViewDelegate {
             var offset = scrollView.contentOffset;
             offset.y = 0
             scrollView.contentOffset = offset;
-        }
-    }
-}
-
-extension ChoiceQuizTableViewCell {
-    override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer == tapRecognizer { 
-            return true 
-        } else {
-            return false
         }
     }
 }
