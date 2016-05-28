@@ -100,7 +100,7 @@ class ChoiceQuizViewController: QuizViewController {
         for updateBlock in cellHeightUpdateBlocks {
             let h = updateBlock()
             if abs(cellHeights[index] - h) > 1 { 
-                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
+//                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
                 cellHeights[index] = h
                 didChangeHeight = true
             }
@@ -128,26 +128,13 @@ class ChoiceQuizViewController: QuizViewController {
     override func getReply() -> Reply {
         return ChoiceReply(choices: self.choices)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     var cellHeightUpdateBlocks : [(Void->Int)] = []
     var cellHeights : [Int] = []
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        
-        let orientation = UIDevice.currentDevice().orientation
-        print("will rotate to \(orientation.isPortrait ? "Portrait" : "Landscape") orientation")
-        
+                
         initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
             if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
@@ -155,32 +142,6 @@ class ChoiceQuizViewController: QuizViewController {
             }
         }
         updateChoicesHeights()
-//        delay(0.2, closure: {
-//            var didChangeHeight = false
-//        
-//            for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
-//                if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
-//                    if let h = cell.heightUpdateBlock?() {
-//                        if abs(self.cellHeights[row] - h) > 1 { 
-//                            print("changed height of cell \(row) from \(self.cellHeights[row]) to \(h)")
-//                            self.cellHeights[row] = h
-//                            didChangeHeight = true
-//                        }
-//                    }
-//                }
-//            }
-//        
-//            if didChangeHeight {
-//                UIThread.performUI{
-//                    [weak self] in
-//                    self?.tableView.reloadData() 
-//                    if let expectedHeight = self?.expectedQuizHeight, 
-//                    let noQuizHeight = self?.heightWithoutQuiz {
-//                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
-//                    }
-//                }
-//            }
-//        })
     }
     
 }
@@ -190,7 +151,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
-                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
+//                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
                 return CGFloat(cellHeights[indexPath.row])
 //                dataset.options[indexPath.row]
             }
@@ -203,7 +164,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         for indexPath in indexPaths {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as? ChoiceQuizTableViewCell
             if cell == nil {
-                print("\nsetAllCellsOff() cell at indexPath(\(indexPath)) is nil!!!\n")
+//                print("\nsetAllCellsOff() cell at indexPath(\(indexPath)) is nil!!!\n")
             }
             cell?.checkBox.on = false
         }
@@ -256,7 +217,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChoiceQuizTableViewCell", forIndexPath: indexPath) as! ChoiceQuizTableViewCell
-        print("in cellForRowAtIndexPath : \(indexPath.row)")
+//        print("in cellForRowAtIndexPath : \(indexPath.row)")
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
                 cellHeightUpdateBlocks[indexPath.row] = cell.setTextWithTeX(dataset.options[indexPath.row])
