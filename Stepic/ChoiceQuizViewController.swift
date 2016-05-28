@@ -38,8 +38,14 @@ class ChoiceQuizViewController: QuizViewController {
     
     override func updateQuizAfterAttemptUpdate() {
         self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+        initChoicesHeights()
+        updateChoicesHeights()
+    }
+    
+    private func initChoicesHeights() {
         self.cellHeights = [Int](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: 1)
-        print((self.attempt?.dataset as! ChoiceDataset).options.count)
+    }
+    private func updateChoicesHeights() {
         initHeightUpdateBlocks()
         self.tableView.reloadData()
         performHeightUpdates()
@@ -135,6 +141,48 @@ class ChoiceQuizViewController: QuizViewController {
 
     var cellHeightUpdateBlocks : [(Void->Int)] = []
     var cellHeights : [Int] = []
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        let orientation = UIDevice.currentDevice().orientation
+        print("will rotate to \(orientation.isPortrait ? "Portrait" : "Landscape") orientation")
+        
+        initChoicesHeights()
+        for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
+                cell.choiceWebView.reload()
+            }
+        }
+        updateChoicesHeights()
+//        delay(0.2, closure: {
+//            var didChangeHeight = false
+//        
+//            for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
+//                if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
+//                    if let h = cell.heightUpdateBlock?() {
+//                        if abs(self.cellHeights[row] - h) > 1 { 
+//                            print("changed height of cell \(row) from \(self.cellHeights[row]) to \(h)")
+//                            self.cellHeights[row] = h
+//                            didChangeHeight = true
+//                        }
+//                    }
+//                }
+//            }
+//        
+//            if didChangeHeight {
+//                UIThread.performUI{
+//                    [weak self] in
+//                    self?.tableView.reloadData() 
+//                    if let expectedHeight = self?.expectedQuizHeight, 
+//                    let noQuizHeight = self?.heightWithoutQuiz {
+//                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
+//                    }
+//                }
+//            }
+//        })
+    }
+    
 }
 
 extension ChoiceQuizViewController : UITableViewDelegate {
@@ -225,7 +273,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                         cell.checkBox.on = reply.choices[indexPath.row]
                     }
                 } else {
-                    cell.checkBox.on = false
+                    cell.checkBox.on = self.choices[indexPath.row]
                 }
             }
         }

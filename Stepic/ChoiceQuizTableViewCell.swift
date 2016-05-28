@@ -34,13 +34,15 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.scrollHeight;") ?? "0") ?? 0
     }
     
+    var heightUpdateBlock : (Void -> Int)?
+    
     //Method sets text and returns the method which returns current cell height according to the 
     func setTextWithTeX(text: String) -> (Void->Int) {
         let scriptsString = "\(Scripts.localTexScript)"
         let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, width: Int(UIScreen.mainScreen().bounds.width) - 52)
         choiceWebView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
         
-        return {
+        self.heightUpdateBlock = {
             [weak self] in
             if let cw = self?.choiceWebView {
                 if let h = self?.getContentHeight(cw) {
@@ -49,6 +51,8 @@ class ChoiceQuizTableViewCell: UITableViewCell {
             }
             return 0
         }
+        
+        return self.heightUpdateBlock!
     }
         
     override func setSelected(selected: Bool, animated: Bool) {
