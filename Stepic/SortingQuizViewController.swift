@@ -13,6 +13,8 @@ class SortingQuizViewController: QuizViewController {
 
     var tableView = UITableView()
     
+    var webViewHelper : ControllerQuizWebViewHelper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,19 +27,41 @@ class SortingQuizViewController: QuizViewController {
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         tableView.editing = true
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        
+        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
+            , countClosure: 
+            {
+                [weak self] in
+                return self?.optionsCount ?? 0
+            }, expectedQuizHeightClosure: {
+                [weak self] in
+                return self?.expectedQuizHeight ?? 0
+            }, noQuizHeightClosure: {
+                [weak self] in
+                return self?.heightWithoutQuiz ?? 0
+            }, delegate: delegate
+        )
+
+        
+//        self.view.setNeedsLayout()
+//        self.view.layoutIfNeeded()
     }
     
     
     private var orderedOptions : [String] = []
     private var positionForOptionInAttempt : [String : Int] = [:]
 
+    var optionsCount: Int {
+        return (self.attempt?.dataset as? SortingDataset)?.options.count ?? 0
+    }
     
     override func updateQuizAfterAttemptUpdate() {
 //        self.ordering = (0..<(self.attempt?.dataset as! SortingDataset).options.count).map({return $0})
         
         resetOptionsToAttempt()
+
+        webViewHelper.initChoicesHeights()
+        webViewHelper.updateChoicesHeights()
         
         self.tableView.reloadData()
         self.view.layoutIfNeeded()
@@ -55,6 +79,7 @@ class SortingQuizViewController: QuizViewController {
     }
     
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+//        webViewHelper.initChoicesHeights()
         if self.submission == nil {
             if reload {
                 resetOptionsToAttempt()
@@ -74,8 +99,18 @@ class SortingQuizViewController: QuizViewController {
             self.tableView.userInteractionEnabled = false
         }
         self.tableView.reloadData()
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        
+        webViewHelper.initChoicesHeights()
+        for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? SortingQuizTableViewCell {
+                cell.optionWebView.reload()
+            }
+        }
+        webViewHelper.updateChoicesHeights()
+        
+//        webViewHelper.updateChoicesHeights()
+//        self.view.setNeedsLayout()
+//        self.view.layoutIfNeeded()
     }
     
     override var expectedQuizHeight : CGFloat {
@@ -88,6 +123,19 @@ class SortingQuizViewController: QuizViewController {
         return r
     }
 
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        webViewHelper.initChoicesHeights()
+        for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? SortingQuizTableViewCell {
+                cell.optionWebView.reload()
+            }
+        }
+        webViewHelper.updateChoicesHeights()
+    }
+
+    
     /*
     // MARK: - Navigation
 
@@ -103,7 +151,14 @@ class SortingQuizViewController: QuizViewController {
 extension SortingQuizViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return max(27, UILabel.heightForLabelWithText(orderedOptions[indexPath.row], lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 32)) + 17
+        if let a = attempt {
+            if let dataset = a.dataset as? SortingDataset {
+                //                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
+                return CGFloat(webViewHelper.cellHeights[indexPath.row])
+                //                dataset.options[indexPath.row]
+            }
+        }
+        return 0
     }
     
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -135,7 +190,9 @@ extension SortingQuizViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SortingQuizTableViewCell", forIndexPath: indexPath) as! SortingQuizTableViewCell
         
-        cell.optionLabel?.text = orderedOptions[indexPath.row]
+        if let dataset = attempt?.dataset as? SortingDataset {
+            webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.webViewHelper.setTextWithTeX(orderedOptions[indexPath.row])
+        }
         
         return cell
     }
