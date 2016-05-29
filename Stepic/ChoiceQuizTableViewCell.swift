@@ -15,46 +15,16 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var choiceWebView: UIWebView!
     @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
+    var webViewHelper : CellWebViewHelper!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
-        choiceWebView.opaque = false
-        choiceWebView.backgroundColor = UIColor.clearColor()
-        choiceWebView.userInteractionEnabled = false
-        choiceWebView.scrollView.backgroundColor = UIColor.clearColor()
-        choiceWebView.scrollView.showsVerticalScrollIndicator = false
-        choiceWebView.scrollView.canCancelContentTouches = false
-        
+        webViewHelper = CellWebViewHelper(webView: choiceWebView, heightWithoutWebView: 17)
     }
 
-    private func getContentHeight(webView : UIWebView) -> Int {
-        return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.scrollHeight;") ?? "0") ?? 0
-    }
-    
-    var heightUpdateBlock : (Void -> Int)?
-    
-    //Method sets text and returns the method which returns current cell height according to the 
-    func setTextWithTeX(text: String) -> (Void->Int) {
-        let scriptsString = "\(Scripts.localTexScript)"
-        let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, width: Int(UIScreen.mainScreen().bounds.width) - 52)
-        choiceWebView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
-        
-        self.heightUpdateBlock = {
-            [weak self] in
-            if let cw = self?.choiceWebView {
-                if let h = self?.getContentHeight(cw) {
-                    return h + 17
-                }
-            }
-            return 0
-        }
-        
-        return self.heightUpdateBlock!
-    }
-        
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -65,14 +35,4 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         print("did deinit cell")
     }
     
-}
-
-extension ChoiceQuizTableViewCell : UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y != 0) {
-            var offset = scrollView.contentOffset;
-            offset.y = 0
-            scrollView.contentOffset = offset;
-        }
-    }
 }

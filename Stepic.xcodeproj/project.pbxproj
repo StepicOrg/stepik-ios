@@ -79,6 +79,8 @@
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
+		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
+		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
@@ -505,6 +507,7 @@
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
 		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerTestStoryboard.storyboard; sourceTree = "<group>"; };
 		085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTestViewController.swift; sourceTree = "<group>"; };
@@ -868,6 +871,14 @@
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
 			);
 			name = Steps;
+			sourceTree = "<group>";
+		};
+		085514E91CFB09170080CB88 /* CellWebViewHelper */ = {
+			isa = PBXGroup;
+			children = (
+				085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */,
+			);
+			name = CellWebViewHelper;
 			sourceTree = "<group>";
 		};
 		085DF8D11C99A8D8006809D9 /* Test */ = {
@@ -1403,6 +1414,7 @@
 		08F555611C4FE2D200C877E8 /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
+				085514E91CFB09170080CB88 /* CellWebViewHelper */,
 				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
 				081A7DA81C56625F00583728 /* QuizViewController.swift */,
 				081A7DF21C56A09300583728 /* QuizViewController.xib */,
@@ -1946,6 +1958,7 @@
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
+				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
@@ -2128,6 +2141,7 @@
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
+				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,

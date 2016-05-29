@@ -220,7 +220,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
 //        print("in cellForRowAtIndexPath : \(indexPath.row)")
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
-                cellHeightUpdateBlocks[indexPath.row] = cell.setTextWithTeX(dataset.options[indexPath.row])
+                cellHeightUpdateBlocks[indexPath.row] = cell.webViewHelper.setTextWithTeX(dataset.options[indexPath.row])
                 if dataset.isMultipleChoice {
                     cell.checkBox.boxType = .Square
                 } else {
