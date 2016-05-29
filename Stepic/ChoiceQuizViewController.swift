@@ -15,6 +15,8 @@ class ChoiceQuizViewController: QuizViewController {
 
     var tableView = UITableView()
     
+    var webViewHelper : ControllerQuizWebViewHelper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +28,19 @@ class ChoiceQuizViewController: QuizViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
+        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
+            , countClosure: 
+            {
+                [weak self] in
+                return self?.optionsCount ?? 0
+            }, expectedQuizHeightClosure: {
+                [weak self] in
+                return self?.expectedQuizHeight ?? 0
+            }, noQuizHeightClosure: {
+                [weak self] in
+                return self?.heightWithoutQuiz ?? 0
+            }, delegate: delegate
+        )
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,83 +51,21 @@ class ChoiceQuizViewController: QuizViewController {
     
     var choices : [Bool] = []
     
+    var optionsCount: Int {
+        return (self.attempt?.dataset as? ChoiceDataset)?.options.count ?? 0
+    }
+    
     override func updateQuizAfterAttemptUpdate() {
-        self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
-        initChoicesHeights()
-        updateChoicesHeights()
+        self.choices = [Bool](count: optionsCount, repeatedValue: false)
+        webViewHelper.initChoicesHeights()
+        webViewHelper.updateChoicesHeights()
     }
     
-    private func initChoicesHeights() {
-        self.cellHeights = [Int](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: 1)
-    }
-    private func updateChoicesHeights() {
-        initHeightUpdateBlocks()
-        self.tableView.reloadData()
-        performHeightUpdates()
-        self.view.layoutIfNeeded()
-    }
-    
-    private func initHeightUpdateBlocks() {
-        cellHeightUpdateBlocks = []
-        for _ in 0..<(self.attempt?.dataset as! ChoiceDataset).options.count {
-            cellHeightUpdateBlocks += [{
-                return 1
-            }]
-        }
-    }
-    
-    //Measured in seconds
-    let reloadTimeStandardInterval = 0.5
-    let reloadTimeout = 5.0
-    let noReloadTimeout = 1.0
-    
-    private func reloadWithCount(count: Int, noReloadCount: Int) {
-        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
-            return
-        }
-        if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
-            return 
-        }
-        delay(reloadTimeStandardInterval * Double(count), closure: {
-            [weak self] in
-            if self?.countHeights() == true {
-                UIThread.performUI{
-                    self?.tableView.reloadData() 
-                    if let expectedHeight = self?.expectedQuizHeight, 
-                        let noQuizHeight = self?.heightWithoutQuiz {
-                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
-                    }
-                }
-                self?.reloadWithCount(count + 1, noReloadCount: 0)
-            } else {
-                self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
-            }
-        })  
-    }    
-    
-    private func performHeightUpdates() {
-        self.reloadWithCount(0, noReloadCount: 0)
-    }
-    
-    private func countHeights() -> Bool {
-        var index = 0
-        var didChangeHeight = false
-        for updateBlock in cellHeightUpdateBlocks {
-            let h = updateBlock()
-            if abs(cellHeights[index] - h) > 1 { 
-//                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
-                cellHeights[index] = h
-                didChangeHeight = true
-            }
-            index += 1
-        }
-        return didChangeHeight
-    }
-    
+        
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if self.submission == nil {
             if reload {
-                self.choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false) 
+                self.choices = [Bool](count: optionsCount, repeatedValue: false) 
             }
             self.tableView.userInteractionEnabled = true
         } else {
@@ -128,20 +81,17 @@ class ChoiceQuizViewController: QuizViewController {
     override func getReply() -> Reply {
         return ChoiceReply(choices: self.choices)
     }
-
-    var cellHeightUpdateBlocks : [(Void->Int)] = []
-    var cellHeights : [Int] = []
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
                 
-        initChoicesHeights()
+        webViewHelper.initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
             if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
                 cell.choiceWebView.reload()
             }
         }
-        updateChoicesHeights()
+        webViewHelper.updateChoicesHeights()
     }
     
 }
@@ -152,7 +102,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
 //                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
-                return CGFloat(cellHeights[indexPath.row])
+                return CGFloat(webViewHelper.cellHeights[indexPath.row])
 //                dataset.options[indexPath.row]
             }
         }
@@ -182,7 +132,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
                 cell.checkBox.setOn(!cell.checkBox.on, animated: true)
             } else {
                 setAllCellsOff()
-                choices = [Bool](count: (self.attempt?.dataset as! ChoiceDataset).options.count, repeatedValue: false)
+                choices = [Bool](count: optionsCount, repeatedValue: false)
                 choices[indexPath.row] = !cell.checkBox.on
                 cell.checkBox.setOn(!cell.checkBox.on, animated: true)
             }
@@ -220,7 +170,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
 //        print("in cellForRowAtIndexPath : \(indexPath.row)")
         if let a = attempt {
             if let dataset = a.dataset as? ChoiceDataset {
-                cellHeightUpdateBlocks[indexPath.row] = cell.webViewHelper.setTextWithTeX(dataset.options[indexPath.row])
+                webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.webViewHelper.setTextWithTeX(dataset.options[indexPath.row])
                 if dataset.isMultipleChoice {
                     cell.checkBox.boxType = .Square
                 } else {
