@@ -40,10 +40,14 @@ class HTMLBuilder: NSObject {
         return res
     }
     
-    func buildHTMLStringWith(head head: String, body: String) -> String {
+    func buildHTMLStringWith(head head: String, body: String, addStyle: Bool = false) -> String {
         var res = "<html>\n"
         
-        res += "<head>\n\(head)\n</head>\n"
+        if addStyle {
+            res += "<head>\n\(stepicStyleString + head)\n</head>\n"
+        } else {
+            res += "<head>\n\(head)\n</head>\n"
+        }
         //        print(body)
         res += "<body>\n\(body)\n</body>\n"
         
