@@ -40,7 +40,7 @@ class HTMLBuilder: NSObject {
         return res
     }
     
-    func buildHTMLStringWith(head head: String, body: String, addStyle: Bool = false) -> String {
+    func buildHTMLStringWith(head head: String, body: String, addStyle: Bool = false, textColorHex: String = "#000000") -> String {
         var res = "<html>\n"
         
         if addStyle {
@@ -49,7 +49,8 @@ class HTMLBuilder: NSObject {
             res += "<head>\n\(head)\n</head>\n"
         }
         //        print(body)
-        res += "<body>\n\(body)\n</body>\n"
+        let bodyOpenTag = "<body text=\"\(textColorHex)\">"
+        res += "\(bodyOpenTag)\n\(body)\n</body>\n"
         
         res += "</html>"
         return res

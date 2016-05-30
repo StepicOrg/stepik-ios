@@ -16,8 +16,8 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var hintHeight: NSLayoutConstraint!
-    @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var hintView: UIView!
+    @IBOutlet weak var hintWebView: UIWebView!
     
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
@@ -168,6 +168,8 @@ class QuizViewController: UIViewController {
     
     private var didGetErrorWhileSendingSubmission = false
     
+    private var hintHeightUpdateBlock : (Void -> Int)?
+    
     var submission : Submission? {
         didSet {
             UIThread.performUI {                
@@ -196,9 +198,8 @@ class QuizViewController: UIViewController {
                     
                     if let hint = self.submission?.hint {
                         if hint != "" {
-                            let height = UILabel.heightForLabelWithText(hint, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 32)
-                            self.hintHeight.constant = height + 16
-                            self.hintLabel.text = hint
+                            self.hintHeightUpdateBlock = self.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
+                            self.performHeightUpdates()
                         } else {
                             self.hintHeight.constant = 0
                         }
@@ -275,11 +276,59 @@ class QuizViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    //Measured in seconds
+    let reloadTimeStandardInterval = 0.5
+    let reloadTimeout = 5.0
+    let noReloadTimeout = 1.0
+    
+    private func reloadWithCount(count: Int, noReloadCount: Int) {
+        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
+            return
+        }
+        if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
+            return 
+        }
+        delay(reloadTimeStandardInterval * Double(count), closure: {
+            [weak self] in
+            if self?.countHeight() == true {
+                UIThread.performUI{
+                    if let expectedHeight = self?.expectedQuizHeight, 
+                        let noQuizHeight = self?.heightWithoutQuiz {
+                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
+                    }
+                }
+                self?.reloadWithCount(count + 1, noReloadCount: 0)
+            } else {
+                self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
+            }
+            })  
+    }    
+    
+    private func countHeight() -> Bool {
+        var index = 0
+        var didChangeHeight = false
+        if let h = hintHeightUpdateBlock?() {
+            if abs(hintHeight.constant - CGFloat(h)) > 1 { 
+                //                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
+                hintHeight.constant = CGFloat(h)
+                didChangeHeight = true
+            }
+            index += 1
+        }
+        return didChangeHeight
+    }
+    
+    private func performHeightUpdates() {
+        self.reloadWithCount(0, noReloadCount: 0)
+    }
+    
+    var hintHeightWebViewHelper : CellWebViewHelper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
-        self.hintLabel.textColor = UIColor.whiteColor()
+        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
         self.hintView.backgroundColor = UIColor.blackColor()
 
         self.peerReviewButton.setTitle(peerReviewText, forState: .Normal)
