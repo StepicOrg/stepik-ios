@@ -1590,10 +1590,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bh8-ur-IoY">
-                                <rect key="frame" x="0.0" y="43" width="600" height="511"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCA-ca-prT">
                                 <rect key="frame" x="0.0" y="554" width="600" height="46"/>
                                 <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -1607,6 +1603,10 @@
                                     <action selector="solveOnTheWebsitePressed:" destination="MzH-NU-yyp" eventType="touchUpInside" id="Aty-Rj-NOm"/>
                                 </connections>
                             </button>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bh8-ur-IoY">
+                                <rect key="frame" x="0.0" y="44" width="600" height="511"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1662,7 +1662,6 @@
                                             </webView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY6-uB-D81" userLabel="QuizPlaceholderView">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="32"/>
-                                                <color key="backgroundColor" red="0.0" green="0.92549026010000002" blue="0.77254909279999995" alpha="1" colorSpace="deviceRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="fD4-kU-l4I"/>
                                                 </constraints>
