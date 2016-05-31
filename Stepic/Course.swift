@@ -124,26 +124,28 @@ class Course: NSManagedObject, JSONInitializable {
     class func getCourses(ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
         let request = NSFetchRequest(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
-        var predicate = NSPredicate(value: true)
-        for id in ids {
-            let p = NSPredicate(format: "managedId == %@", id as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [predicate, p])
+        
+        let idPredicates = ids.map{
+            return NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: idPredicates)
+
+        var nonIdPredicates = [NSPredicate]()
         if let f = featured {
-            let p = NSPredicate(format: "managedFeatured == %@", f as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+            nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
         }
         
         if let e = enrolled {
-            let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+            nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
         }
+        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: nonIdPredicates)
         
+        let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
             return results as! [Course]
         }
         catch {
