@@ -59,7 +59,7 @@ class NotificationRegistrator: NSObject {
     private func registrationHandler(registrationToken: String!, error: NSError!) {
         if (registrationToken != nil) {
             print("Registration Token: \(registrationToken)")
-            let device = Device(registrationId: registrationToken, deviceDescription: "ios test device sample description")
+            let device = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.deviceInfoString)
             ApiDataDownloader.devices.create(device, success: {
                 device in
                 DeviceDefaults.sharedDefaults.deviceId = device.id
