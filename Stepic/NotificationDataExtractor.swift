@@ -14,11 +14,9 @@ import Foundation
 class NotificationDataExtractor {
     var notification : Notification
     
-    private var parser : HTMLParser
     
     init(notification : Notification) {
         self.notification = notification
-        self.parser = HTMLParser(htmlText: notification.htmlText)
     }
     
     
@@ -27,7 +25,7 @@ class NotificationDataExtractor {
         if notification.type != .Learn {
             return nil
         } else {
-            if let courseLink = parser.getLink(index: 0) {
+            if let courseLink = HTMLParsingUtil.getLink(notification.htmlText, index: 0) {
                 if let courseIdStartIndex = courseLink.lastIndexOf("-") {
                     let start = courseLink.startIndex.advancedBy(courseIdStartIndex + 1)
                     let end = courseLink.startIndex.advancedBy(courseLink.characters.count - 1)
@@ -44,7 +42,7 @@ class NotificationDataExtractor {
         if notification.type != .Comments {
             return nil
         } else {
-            if let commentsLink = parser.getLink(index: 2) {
+            if let commentsLink = HTMLParsingUtil.getLink(notification.htmlText, index: 2) {
                 return NSURL(string: "\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
             }
             return nil
