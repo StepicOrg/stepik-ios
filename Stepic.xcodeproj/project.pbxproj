@@ -79,6 +79,10 @@
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
+		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
+		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
+		085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
+		085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
@@ -172,6 +176,8 @@
 		08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
 		08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */; };
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
+		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
+		08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B899611C983FC3003BED43 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
@@ -406,6 +412,8 @@
 		08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
 		08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
 		08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
+		08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
+		08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
@@ -503,6 +511,8 @@
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
 		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
+		085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerQuizWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerTestStoryboard.storyboard; sourceTree = "<group>"; };
 		085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTestViewController.swift; sourceTree = "<group>"; };
@@ -573,6 +583,7 @@
 		08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDefaults.swift; sourceTree = "<group>"; };
 		08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
+		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
@@ -651,6 +662,7 @@
 		08F485B21C58EC33000165AA /* SortingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizViewController.swift; sourceTree = "<group>"; };
 		08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizTableViewCell.swift; sourceTree = "<group>"; };
 		08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortingQuizTableViewCell.xib; sourceTree = "<group>"; };
+		08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewHorizontalScrollHelper.swift; sourceTree = "<group>"; };
 		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		08F555531C4F97C100C877E8 /* ChoiceDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceDataset.swift; sourceTree = "<group>"; };
@@ -718,6 +730,8 @@
 				08F5556B1C5267A600C877E8 /* GCDThings.swift */,
 				086A9D611C74AF90003611DC /* GlobalFunctions.swift */,
 				085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */,
+				08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */,
+				08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -866,6 +880,15 @@
 			name = Steps;
 			sourceTree = "<group>";
 		};
+		085514E91CFB09170080CB88 /* WebViewHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */,
+				085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */,
+			);
+			name = WebViewHelpers;
+			sourceTree = "<group>";
+		};
 		085DF8D11C99A8D8006809D9 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,7 +937,6 @@
 			isa = PBXGroup;
 			children = (
 				080ACF4E1BD79D4600329F2B /* Constants */,
-				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				08E542071C6CD59A00DEC38E /* Managers */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
 				083554261CC8FD0B004C4E85 /* Notifications */,
@@ -1187,6 +1209,7 @@
 			children = (
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
+				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				0885F8491BA8374000F2A188 /* Model */,
 				08F204931BB0157F00D080C0 /* Extensions */,
 				08E542041C6C760C00DEC38E /* Enums */,
@@ -1399,6 +1422,7 @@
 		08F555611C4FE2D200C877E8 /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
+				085514E91CFB09170080CB88 /* WebViewHelpers */,
 				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
 				081A7DA81C56625F00583728 /* QuizViewController.swift */,
 				081A7DF21C56A09300583728 /* QuizViewController.xib */,
@@ -1799,6 +1823,7 @@
 				08D120881C937B2200A54ABC /* RegistrationErrorInfo.swift in Sources */,
 				08D120891C937B2200A54ABC /* StandardsExtensions.swift in Sources */,
 				0861E6731CD80A9600B45652 /* Executable.swift in Sources */,
+				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
@@ -1835,6 +1860,7 @@
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
 				08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */,
+				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				083540651CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
@@ -1941,6 +1967,8 @@
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
+				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
+				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
@@ -1980,6 +2008,7 @@
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
+				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
@@ -2016,6 +2045,7 @@
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
+				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
@@ -2122,6 +2152,8 @@
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
+				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
+				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,

@@ -117,8 +117,16 @@ class CoursePreviewViewController: UIViewController {
         thumbnailImageView.hidden = !fromVideo
     }
     
+    var imageTapHelper : ImageTapHelper!
+    
     private func setupPlayerWithVideo(video: Video) {
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
+        
+        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: {
+            [weak self]
+            recognizer in
+            self?.playVideo()
+        })
         
         self.video = video
         
@@ -181,11 +189,15 @@ class CoursePreviewViewController: UIViewController {
         self.playButton.hidden = p
     }
     
-    @IBAction func playButtonPressed(sender: UIButton) {
+    func playVideo() {
         if ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN() {
             setControls(playing: true)
             self.moviePlayer?.play()
-        }         
+        }   
+    }
+    
+    @IBAction func playButtonPressed(sender: UIButton) {
+        playVideo()
     }
     
     override func didReceiveMemoryWarning() {

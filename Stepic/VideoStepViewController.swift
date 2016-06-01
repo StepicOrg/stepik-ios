@@ -24,14 +24,23 @@ class VideoStepViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
+    
+    var imageTapHelper : ImageTapHelper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
+        
+        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
+            [weak self]
+            recognizer in
+            self?.playVideo()
+        })
     }
     
-        
-    @IBAction func playButtonPressed(sender: UIButton) {
+    
+    private func playVideo() {
         if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
@@ -43,7 +52,10 @@ class VideoStepViewController: UIViewController {
                 Messages.sharedManager.showConnectionErrorMessage(inController: vc)
             }
         }
-        
+    }
+    
+    @IBAction func playButtonPressed(sender: UIButton) {
+        playVideo()
     }
     
     var itemView : VideoDownloadView!

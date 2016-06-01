@@ -34,68 +34,19 @@ class WebStepViewController: UIViewController {
     var stepUrl : String {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)?from_mobile_app=true"
     }
-    
-    private var panG : UIPanGestureRecognizer!
-    
+        
+    var scrollHelper : WebViewHorizontalScrollHelper!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
-        stepWebView.scrollView.bounces = false
-        stepWebView.scrollView.scrollEnabled = false
         stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
+        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
+        print(self.view.gestureRecognizers)
         handleQuizType()
-        stepWebView.scrollView.showsVerticalScrollIndicator = false
-        
-        panG = UIPanGestureRecognizer(target: self, action: #selector(WebStepViewController.didPan(_:)))
-        panG.delegate = self
-        panG.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(panG)
-    }
-    
-    private var shouldTranslateOffsetChange = false
-    private var offsetChange : CGFloat = 0
-    private var startOffset : CGFloat = 0
-    func didPan(sender: UIPanGestureRecognizer) {
-        
-        if sender.state == UIGestureRecognizerState.Began {
-//            print("pan started for step \(stepId)")
-            offsetChange = 0
-            startOffset = stepWebView.scrollView.contentOffset.x
-        }
-        
-        if shouldTranslateOffsetChange {
-//            print("offsetChange was \(offsetChange)")
-            var cleanOffset = stepWebView.scrollView.contentOffset.x + offsetChange
-//            print("cleanOffset calculated \(cleanOffset)")
-            cleanOffset -= sender.translationInView(stepWebView).x
-//            print("cleanOffset with current pan offset \(cleanOffset)")
-            cleanOffset = max(0, cleanOffset)
-            cleanOffset = min(cleanOffset, rightLimitOffsetX)
-//            print("normed cleanOffset \(cleanOffset)")
-            offsetChange = -cleanOffset + startOffset
-//            print("new offsetChange \(offsetChange)")
-            stepWebView.scrollView.contentOffset = CGPoint(x: cleanOffset, y: stepWebView.scrollView.contentOffset.y)
-        }
-    }
-    
-    private var panStartedInside : Bool?
-    private var memOffsetX : CGFloat?
-    private var offsetForPager : CGFloat = 0
-    private var didBeginPagerDragging : Bool = false
-    
-    var rightLimitOffsetX : CGFloat {
-        return max(0, getContentWidth(stepWebView) - UIScreen.mainScreen().bounds.width)
-    }
-    
-    func refreshRecognizer() {
-        panStartedInside = nil
-        memOffsetX = nil
-        offsetForPager = 0
-        stepWebView.scrollView.scrollEnabled = true
-        didBeginPagerDragging = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -233,19 +184,17 @@ class WebStepViewController: UIViewController {
     
     
     func resetWebViewHeight(height: Float) {
-//        print("web view \(stepId) resetWebViewHeight loading status: \(stepWebView.loading)")
         if height == 0.0 {
-//            print("\n__________________\nReloading web view \(stepId) after height set to 0.0\n_________________________\n")
             stepWebView.reload()
             return
         }
-//        print("__________________\n web view \(stepId)  height set to \(height), loading status: \(stepWebView.loading)\n_________________________\n")
         
 
-//        print("entered resetWebViewHeight")
         stepWebViewHeight.constant = CGFloat(height)
-//        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+        UIView.animateWithDuration(0.2, animations: { 
+            [weak self] in
+            self?.view.layoutIfNeeded() 
+        })
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
@@ -294,10 +243,6 @@ extension WebStepViewController : UIWebViewDelegate {
 //        return Int(webView.scrollView.contentSize.height)
     }
     
-    func getContentWidth(webView: UIWebView) -> CGFloat {
-        return webView.scrollView.contentSize.width
-    }
-    
     func webViewDidFinishLoad(webView: UIWebView) {
 
         print("did finish load called, step id -> \(stepId) height -> \(getContentHeight(webView))")
@@ -314,42 +259,18 @@ extension WebStepViewController : UIScrollViewDelegate {
 }
 
 extension WebStepViewController : QuizControllerDelegate {
-    func needsHeightUpdate(newHeight: CGFloat) {
+    func needsHeightUpdate(newHeight: CGFloat, animated: Bool) {
         quizPlaceholderViewHeight.constant = newHeight
         view.setNeedsLayout()
-        view.layoutIfNeeded()
-        quizPlaceholderView.layoutIfNeeded()
-    }
-}
-
-extension WebStepViewController : UIGestureRecognizerDelegate {
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-
-        if (otherGestureRecognizer == parent.pagerScrollView.panGestureRecognizer) {
-//            print("did ask \(stepId) for simultaneous recognition with pagination")
-
-            let sender = gestureRecognizer as! UIPanGestureRecognizer
-            let locationInView = sender.locationInView(stepWebView)
-            if CGRectContainsPoint(stepWebView.bounds, locationInView)  {
-//                print("pan \(stepId) located inside webview")
-                let vel = sender.velocityInView(self.view)
-                let draggedRight = vel.x > 0
-//                print("webview content offset -> \(stepWebView.scrollView.contentOffset.x), draggedRight: \(draggedRight)")
-                if (stepWebView.scrollView.contentOffset.x == 0 && draggedRight) ||
-                    (stepWebView.scrollView.contentOffset.x == rightLimitOffsetX && !draggedRight){
-//                        print("offset is an edge one, dragged right state \(draggedRight)")
-                        shouldTranslateOffsetChange = false
-                        return true
-                } else {
-                    shouldTranslateOffsetChange = true
-                    return false
-                }
-            } else {
-                shouldTranslateOffsetChange = false
-                return true
-            }
+        if animated { 
+            UIView.animateWithDuration(0.2, animations: {
+                [weak self] in
+                self?.view.layoutIfNeeded()
+                self?.quizPlaceholderView.layoutIfNeeded()
+            })
+        } else {
+            self.view.layoutIfNeeded()
+            self.quizPlaceholderView.layoutIfNeeded()
         }
-        
-        return false
     }
 }

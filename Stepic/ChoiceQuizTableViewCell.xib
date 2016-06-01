@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" restorationIdentifier="ChoiceQuizTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChoiceQuizTableViewCell" id="ziJ-Tb-SLb" customClass="ChoiceQuizTableViewCell" customModule="Stepic" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" restorationIdentifier="ChoiceQuizTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChoiceQuizTableViewCell" id="ziJ-Tb-SLb" customClass="ChoiceQuizTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ziJ-Tb-SLb" id="xNM-UK-Cbs">
@@ -17,7 +17,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebr-D5-fbe" customClass="BEMCheckBox">
                         <rect key="frame" x="16" y="12" width="20" height="20"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="75b-yQ-mlr"/>
                             <constraint firstAttribute="width" constant="20" id="M2O-N6-Alc"/>
@@ -45,27 +45,29 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wn-NT-Fzo">
+                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hc3-L9-uZd">
                         <rect key="frame" x="44" y="8" width="548" height="27"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="vhk-ig-siA"/>
+                        </constraints>
+                    </webView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="topMargin" secondItem="1Wn-NT-Fzo" secondAttribute="top" id="BQH-4R-pFa"/>
+                    <constraint firstAttribute="topMargin" secondItem="hc3-L9-uZd" secondAttribute="top" id="Dm9-b5-4Ct"/>
                     <constraint firstAttribute="leadingMargin" secondItem="ebr-D5-fbe" secondAttribute="leading" constant="-8" id="KwL-dC-4FY"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="1Wn-NT-Fzo" secondAttribute="trailing" id="T4e-rI-TI1"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="1Wn-NT-Fzo" secondAttribute="bottom" id="frM-U2-taJ"/>
-                    <constraint firstItem="1Wn-NT-Fzo" firstAttribute="leading" secondItem="ebr-D5-fbe" secondAttribute="trailing" constant="8" id="hdP-hX-yli"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hc3-L9-uZd" secondAttribute="bottom" id="mG3-rX-8De"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hc3-L9-uZd" secondAttribute="trailing" id="wab-VR-LHw"/>
                     <constraint firstItem="ebr-D5-fbe" firstAttribute="centerY" secondItem="xNM-UK-Cbs" secondAttribute="centerY" id="wj3-PK-zz1"/>
+                    <constraint firstItem="hc3-L9-uZd" firstAttribute="leading" secondItem="ebr-D5-fbe" secondAttribute="trailing" constant="8" id="zk6-od-pG2"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="checkBox" destination="ebr-D5-fbe" id="bez-TX-qIB"/>
-                <outlet property="choiceLabel" destination="1Wn-NT-Fzo" id="Fv0-eW-J1d"/>
+                <outlet property="choiceWebView" destination="hc3-L9-uZd" id="11E-P0-SKt"/>
+                <outlet property="webViewHeight" destination="vhk-ig-siA" id="2I5-bZ-Oy1"/>
             </connections>
         </tableViewCell>
     </objects>

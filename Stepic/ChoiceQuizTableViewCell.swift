@@ -12,14 +12,17 @@ import BEMCheckBox
 class ChoiceQuizTableViewCell: UITableViewCell {
 
     @IBOutlet weak var checkBox: BEMCheckBox!
-    @IBOutlet weak var choiceLabel: UILabel!
+    @IBOutlet weak var choiceWebView: UIWebView!
+    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
+    
+    var webViewHelper : CellWebViewHelper!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
-        // Initialization code
+        webViewHelper = CellWebViewHelper(webView: choiceWebView, heightWithoutWebView: 17)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -28,4 +31,8 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    deinit{
+        print("did deinit cell")
+    }
+    
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizViewController" customModule="Stepic" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizViewController" customModule="SberbankUniversity" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="HO0-Wd-0kw" id="BZi-zt-KtT"/>
                 <outlet property="hintHeight" destination="AhP-8s-ofa" id="2bJ-6X-Sgt"/>
-                <outlet property="hintLabel" destination="CA3-do-lxu" id="XAj-cy-Vug"/>
                 <outlet property="hintView" destination="GmL-q5-y6Z" id="mEf-oh-hyb"/>
+                <outlet property="hintWebView" destination="Ke4-HJ-ctM" id="OjG-Wo-RAE"/>
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>
                 <outlet property="peerReviewHeight" destination="Zdy-99-nI7" id="5bp-kl-J3t"/>
                 <outlet property="sendButton" destination="yPX-01-eq5" id="V3v-9d-GUi"/>
@@ -60,20 +60,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
                     <rect key="frame" x="8" y="415" width="584" height="0.0"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hint" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CA3-do-lxu">
-                            <rect key="frame" x="8" y="8" width="568" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <webView contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ke4-HJ-ctM">
+                            <rect key="frame" x="8" y="8" width="568" height="48"/>
+                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                        </webView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="CA3-do-lxu" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="top" constant="8" id="3Qk-TT-gB7"/>
+                        <constraint firstItem="Ke4-HJ-ctM" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="top" id="2XH-wc-8kn"/>
+                        <constraint firstItem="Ke4-HJ-ctM" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="6mF-yE-VMC"/>
                         <constraint firstAttribute="height" id="AhP-8s-ofa"/>
-                        <constraint firstAttribute="trailing" secondItem="CA3-do-lxu" secondAttribute="trailing" constant="8" id="GpH-f0-EWV"/>
-                        <constraint firstAttribute="bottom" secondItem="CA3-do-lxu" secondAttribute="bottom" constant="8" id="IrN-u2-93a"/>
-                        <constraint firstItem="CA3-do-lxu" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="wFX-sa-OLr"/>
+                        <constraint firstAttribute="trailing" secondItem="Ke4-HJ-ctM" secondAttribute="trailing" constant="8" id="Bji-lc-863"/>
+                        <constraint firstAttribute="bottom" secondItem="Ke4-HJ-ctM" secondAttribute="bottom" id="uhB-wF-5eG"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPX-01-eq5">
@@ -82,7 +80,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Pts-9U-YKn"/>
                     </constraints>
-                    <state key="normal" title="Send">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
