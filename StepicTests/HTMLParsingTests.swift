@@ -34,9 +34,6 @@ class HTMLParsingTests : XCTestCase {
     
     func testLatexDetection() {
         XCTAssert(TagDetectionUtil.detectLaTeX(HTMLStrings.latex))
-        print()
-        print(TagDetectionUtil.detectLaTeX(HTMLStrings.nonLatex))
-        print()
         XCTAssertFalse(TagDetectionUtil.detectLaTeX(HTMLStrings.nonLatex))
     }
     
@@ -48,8 +45,6 @@ class HTMLParsingTests : XCTestCase {
     
     func testCodeDetection() {
         XCTAssert(TagDetectionUtil.detectCode(HTMLStrings.code))
-        print(HTMLParsingUtil.getCodeStrings(HTMLStrings.code))
-        print(HTMLParsingUtil.getCodeStrings(HTMLStrings.noCode))
         XCTAssertFalse(TagDetectionUtil.detectCode(HTMLStrings.noCode))
     }
 }
