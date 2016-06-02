@@ -17,8 +17,8 @@ class HTMLParsingUtil {
     
     static func getLink(htmlString: String, index: Int) -> String? {
         if let doc = Kanna.HTML(html: htmlString, encoding: NSUTF8StringEncoding) {
-            if index < doc.xpath("//a").count {
-                return doc.xpath("//a")[index]["href"]
+            if index < doc.css("a").count {
+                return doc.css("a")[index]["href"]
             } else {
                 return nil
             }
@@ -28,7 +28,7 @@ class HTMLParsingUtil {
     
     static func getImageSrcLinks(htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: htmlString, encoding: NSUTF8StringEncoding) {
-            let imgNodes = doc.xpath("//img")
+            let imgNodes = doc.css("img")
             return imgNodes.flatMap({return $0["src"]})
         } else {
             return []
@@ -37,7 +37,7 @@ class HTMLParsingUtil {
     
     static func getCodeStrings(htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: htmlString, encoding: NSUTF8StringEncoding) {
-            let codeNodes = doc.xpath("//code")
+            let codeNodes = doc.css("code")
             return codeNodes.flatMap({return $0.text})
         } else {
             return []
