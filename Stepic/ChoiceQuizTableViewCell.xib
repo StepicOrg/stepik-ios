@@ -8,19 +8,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" restorationIdentifier="ChoiceQuizWebViewTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChoiceQuizWebViewTableViewCell" id="ziJ-Tb-SLb" userLabel="ChoiceQuizWebViewTableViewCell" customClass="ChoiceQuizWebViewTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" restorationIdentifier="ChoiceQuizTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChoiceQuizTableViewCell" id="3cf-S5-2s7" userLabel="Choice Quiz Table View Cell" customClass="ChoiceQuizTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="455" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ziJ-Tb-SLb" id="xNM-UK-Cbs">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3cf-S5-2s7" id="0Jf-kI-aYd">
+                <rect key="frame" x="0.0" y="0.0" width="455" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebr-D5-fbe" customClass="BEMCheckBox">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEG-9I-UvH" customClass="BEMCheckBox">
                         <rect key="frame" x="16" y="12" width="20" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="75b-yQ-mlr"/>
-                            <constraint firstAttribute="width" constant="20" id="M2O-N6-Alc"/>
+                            <constraint firstAttribute="height" constant="20" id="MHL-9o-xxw"/>
+                            <constraint firstAttribute="width" constant="20" id="eXa-OZ-ip8"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -45,26 +45,27 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hc3-L9-uZd">
-                        <rect key="frame" x="44" y="8" width="548" height="27"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </webView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCz-bl-FtZ">
+                        <rect key="frame" x="44" y="8" width="403" height="27"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="topMargin" secondItem="hc3-L9-uZd" secondAttribute="top" id="Dm9-b5-4Ct"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="ebr-D5-fbe" secondAttribute="leading" constant="-8" id="KwL-dC-4FY"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="hc3-L9-uZd" secondAttribute="bottom" id="mG3-rX-8De"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="hc3-L9-uZd" secondAttribute="trailing" id="wab-VR-LHw"/>
-                    <constraint firstItem="ebr-D5-fbe" firstAttribute="centerY" secondItem="xNM-UK-Cbs" secondAttribute="centerY" id="wj3-PK-zz1"/>
-                    <constraint firstItem="hc3-L9-uZd" firstAttribute="leading" secondItem="ebr-D5-fbe" secondAttribute="trailing" constant="8" id="zk6-od-pG2"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="eEG-9I-UvH" secondAttribute="leading" constant="-8" id="4Ke-rT-KkW"/>
+                    <constraint firstAttribute="topMargin" secondItem="NCz-bl-FtZ" secondAttribute="top" id="8wY-L8-voO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="NCz-bl-FtZ" secondAttribute="bottom" id="KHp-lu-m9D"/>
+                    <constraint firstItem="NCz-bl-FtZ" firstAttribute="leading" secondItem="eEG-9I-UvH" secondAttribute="trailing" constant="8" id="V8W-dK-GbB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="NCz-bl-FtZ" secondAttribute="trailing" id="WJJ-WE-O2s"/>
+                    <constraint firstItem="eEG-9I-UvH" firstAttribute="centerY" secondItem="0Jf-kI-aYd" secondAttribute="centerY" id="xhc-TI-y7n"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="checkBox" destination="ebr-D5-fbe" id="bez-TX-qIB"/>
-                <outlet property="choiceWebView" destination="hc3-L9-uZd" id="11E-P0-SKt"/>
+                <outlet property="checkBox" destination="eEG-9I-UvH" id="1hu-EW-5Ba"/>
+                <outlet property="textContainerView" destination="NCz-bl-FtZ" id="kHs-8F-QcE"/>
             </connections>
+            <point key="canvasLocation" x="209.5" y="284"/>
         </tableViewCell>
     </objects>
 </document>

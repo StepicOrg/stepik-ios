@@ -27,8 +27,11 @@ class ChoiceQuizViewController: QuizViewController {
         tableView.backgroundColor = UIColor.clearColor()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNib(UINib(nibName: "ChoiceQuizWebViewTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizWebViewTableViewCell")
-        tableView.registerNib(UINib(nibName: "ChoiceQuizLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizLabelTableViewCell")
+        
+        tableView.registerNib(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
+        tableView.registerClass(ChoiceQuizLabelTableViewCell.self, forCellReuseIdentifier: "ChoiceQuizLabelTableViewCell")
+        tableView.registerClass(ChoiceQuizWebViewTableViewCell.self, forCellReuseIdentifier: "ChoiceQuizWebViewTableViewCell")
+
         webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
             , countClosure: 
             {
@@ -192,43 +195,40 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 if TagDetectionUtil.isWebViewSupportNeeded(dataset.options[indexPath.row]) {
                     let cell = tableView.dequeueReusableCellWithIdentifier("ChoiceQuizWebViewTableViewCell", forIndexPath: indexPath) as! ChoiceQuizWebViewTableViewCell
                     webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.webViewHelper.setTextWithTeX(dataset.options[indexPath.row])
-                    if dataset.isMultipleChoice {
-                        cell.checkBox.boxType = .Square
-                    } else {
-                        cell.checkBox.boxType = .Circle
-                    }
-                    cell.checkBox.tag = indexPath.row
-                    cell.checkBox.delegate = self
-                    cell.checkBox.userInteractionEnabled = false
-                    if let s = submission {
-                        if let reply = s.reply as? ChoiceReply {
-                            cell.checkBox.on = reply.choices[indexPath.row]
-                        }
-                    } else {
-                        cell.checkBox.on = self.choices[indexPath.row]
-                    }
+//                    if dataset.isMultipleChoice {
+//                        cell.checkBox.boxType = .Square
+//                    } else {
+//                        cell.checkBox.boxType = .Circle
+//                    }
+//                    cell.checkBox.tag = indexPath.row
+//                    cell.checkBox.delegate = self
+//                    cell.checkBox.userInteractionEnabled = false
+//                    if let s = submission {
+//                        if let reply = s.reply as? ChoiceReply {
+//                            cell.checkBox.on = reply.choices[indexPath.row]
+//                        }
+//                    } else {
+//                        cell.checkBox.on = self.choices[indexPath.row]
+//                    }
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCellWithIdentifier("ChoiceQuizLabelTableViewCell", forIndexPath: indexPath) as! ChoiceQuizLabelTableViewCell
-                    cell.choiceLabel?.text = dataset.options[indexPath.row]
-                    webViewHelper.cellHeightUpdateBlocks[indexPath.row] = {
-                        return ChoiceQuizLabelTableViewCell.heightForCellWithText(dataset.options[indexPath.row])
-                    }
-                    if dataset.isMultipleChoice {
-                        cell.checkBox.boxType = .Square
-                    } else {
-                        cell.checkBox.boxType = .Circle
-                    }
-                    cell.checkBox.tag = indexPath.row
-                    cell.checkBox.delegate = self
-                    cell.checkBox.userInteractionEnabled = false
-                    if let s = submission {
-                        if let reply = s.reply as? ChoiceReply {
-                            cell.checkBox.on = reply.choices[indexPath.row]
-                        }
-                    } else {
-                        cell.checkBox.on = self.choices[indexPath.row]
-                    }
+                    webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.setHTMLText(dataset.options[indexPath.row])
+//                    if dataset.isMultipleChoice {
+//                        cell.checkBox.boxType = .Square
+//                    } else {
+//                        cell.checkBox.boxType = .Circle
+//                    }
+//                    cell.checkBox.tag = indexPath.row
+//                    cell.checkBox.delegate = self
+//                    cell.checkBox.userInteractionEnabled = false
+//                    if let s = submission {
+//                        if let reply = s.reply as? ChoiceReply {
+//                            cell.checkBox.on = reply.choices[indexPath.row]
+//                        }
+//                    } else {
+//                        cell.checkBox.on = self.choices[indexPath.row]
+//                    }
                     return cell
                 }
             }
