@@ -92,8 +92,6 @@
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE31D007F6500092060 /* HTMLParsingTests.swift */; };
-		085D5CE71D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE51D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift */; };
-		085D5CE81D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE51D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift */; };
 		085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
 		085DF8D51C99B9FB006809D9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
@@ -338,7 +336,6 @@
 		08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08D120F11C937B2200A54ABC /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
-		08D120F21C937B2200A54ABC /* ChoiceQuizWebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555661C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift */; };
 		08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		08D120F41C937B2200A54ABC /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
 		08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -431,7 +428,6 @@
 		08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
 		08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
 		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
-		08F555671C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555661C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift */; };
 		08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
@@ -529,7 +525,6 @@
 		085D5CD91D007F2100092060 /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		085D5CDD1D007F2200092060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085D5CE31D007F6500092060 /* HTMLParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingTests.swift; sourceTree = "<group>"; };
-		085D5CE51D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizLabelTableViewCell.swift; sourceTree = "<group>"; };
 		085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerTestStoryboard.storyboard; sourceTree = "<group>"; };
 		085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTestViewController.swift; sourceTree = "<group>"; };
 		085DF8D41C99B9FB006809D9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -685,7 +680,6 @@
 		08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceReply.swift; sourceTree = "<group>"; };
 		08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTypeQuizViewController.swift; sourceTree = "<group>"; };
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
-		08F555661C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizWebViewTableViewCell.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
@@ -1458,8 +1452,6 @@
 		08F5556A1C50009000C877E8 /* ChoiceQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
-				085D5CE51D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift */,
-				08F555661C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift */,
 				08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */,
 				084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */,
 				084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */,
@@ -1922,7 +1914,6 @@
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
-				085D5CE81D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
@@ -2031,7 +2022,6 @@
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
-				08D120F21C937B2200A54ABC /* ChoiceQuizWebViewTableViewCell.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
@@ -2111,7 +2101,6 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
-				085D5CE71D00981E00092060 /* ChoiceQuizLabelTableViewCell.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
@@ -2218,7 +2207,6 @@
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
-				08F555671C4FFFDC00C877E8 /* ChoiceQuizWebViewTableViewCell.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,

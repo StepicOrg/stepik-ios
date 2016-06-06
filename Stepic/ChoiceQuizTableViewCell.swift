@@ -14,12 +14,29 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var checkBox: BEMCheckBox!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
+    var choiceLabel: UILabel! = UILabel()
+    var choiceWebView: UIWebView! = UIWebView()
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    var webViewHelper : CellWebViewHelper!
+
+    
+    func initLabel() {
+        choiceLabel.numberOfLines = 0
+        choiceLabel.font = UIFont(name: "ArialMT", size: 16)
+        choiceLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        choiceLabel.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
+        choiceLabel.textAlignment = NSTextAlignment.Natural
+        choiceLabel.backgroundColor = UIColor.clearColor()
+        textContainerView.addSubview(choiceLabel)
+        choiceLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
+        choiceLabel.hidden = true
+    }
+
+    func initWebView() {
+        textContainerView.addSubview(choiceWebView)
+        choiceWebView.alignToView(textContainerView)
+        webViewHelper = CellWebViewHelper(webView: choiceWebView, heightWithoutWebView: 17)
+        choiceWebView.hidden = true
     }
     
     override func awakeFromNib() {
@@ -27,17 +44,33 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         checkBox.onAnimationType = .Fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clearColor()
+        
+        initLabel()
+        initWebView()
     }
 
+    override func prepareForReuse() {
+        choiceWebView.hidden = true
+        choiceLabel.hidden = true
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 }
 
 extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
+    //All optimization logics is now encapsulated here
     func setHTMLText(text: String) -> (Void -> Int) {
-        return {
-            return 0
+        if TagDetectionUtil.isWebViewSupportNeeded(text) {
+            choiceWebView.hidden = false
+            return webViewHelper.setTextWithTeX(text)
+        } else {
+            choiceLabel.hidden = false
+            choiceLabel.setTextWithHTMLString(text)
+            return {
+                return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - 60))) + 17
+            }
         }
     }
 }
