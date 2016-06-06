@@ -19,7 +19,6 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     
     var webViewHelper : CellWebViewHelper!
 
-    
     func initLabel() {
         choiceLabel.numberOfLines = 0
         choiceLabel.font = UIFont(name: "ArialMT", size: 16)
@@ -50,6 +49,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         choiceWebView.hidden = true
         choiceLabel.hidden = true
     }
@@ -60,6 +60,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 }
 
 extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
+    
     //All optimization logics is now encapsulated here
     func setHTMLText(text: String) -> (Void -> Int) {
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
@@ -68,8 +69,10 @@ extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
         } else {
             choiceLabel.hidden = false
             choiceLabel.setTextWithHTMLString(text)
+            let w = textContainerView.bounds.width 
             return {
-                return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - 60))) + 17
+                return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
+          
             }
         }
     }

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,22 +14,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEo-e3-hnf">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SpX-wY-qFM">
                         <rect key="frame" x="8" y="8" width="304" height="27"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                    </webView>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                <constraints>
-                    <constraint firstAttribute="topMargin" secondItem="PEo-e3-hnf" secondAttribute="top" id="EHd-Qf-vCB"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="PEo-e3-hnf" secondAttribute="bottom" id="FuM-Vh-sTC"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="PEo-e3-hnf" secondAttribute="leading" id="Uyh-yo-2fH"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="PEo-e3-hnf" secondAttribute="trailing" id="cgP-g9-VT5"/>
-                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="optionWebView" destination="PEo-e3-hnf" id="RVh-s9-eLC"/>
+                <outlet property="textContainerView" destination="SpX-wY-qFM" id="w1P-CH-SB5"/>
             </connections>
             <point key="canvasLocation" x="323" y="378"/>
         </tableViewCell>
