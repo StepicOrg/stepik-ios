@@ -30,6 +30,8 @@ class Step: NSManagedObject, JSONInitializable {
         } else {
             hasReview = false
         }
+        discussionsCount = json["discussions_count"].int
+        discussionProxyId = json["discussion_proxy"].string
     }
     
     func update(json json: JSON) {
