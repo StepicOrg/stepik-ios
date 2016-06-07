@@ -23,6 +23,9 @@ extension Step {
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
     
+    @NSManaged var managedDiscussionProxy: String?
+    @NSManaged var managedDiscussionsCount: NSNumber?
+    
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Step", inManagedObjectContext: CoreDataHelper.instance.context)!
     }
@@ -86,5 +89,22 @@ extension Step {
         }
     }
     
+    var discussionProxyId: String? {
+        get {
+            return managedDiscussionProxy
+        }
+        set(value) {
+            managedDiscussionProxy = value
+        }
+    }
+    
+    var discussionsCount : Int? {
+        get {
+            return managedDiscussionsCount?.integerValue
+        }
+        set(value) {
+            managedDiscussionsCount = value
+        }
+    }
     
 }

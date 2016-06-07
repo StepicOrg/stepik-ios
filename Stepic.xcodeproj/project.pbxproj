@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		0800B81B1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		0800B81C1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
 		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
@@ -447,6 +451,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
+		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -724,6 +731,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0800B8161D06D933006C987E /* Discussions */ = {
+			isa = PBXGroup;
+			children = (
+				0800B8171D06D961006C987E /* DiscussionProxy.swift */,
+				0800B81A1D06DC1B006C987E /* Comment.swift */,
+			);
+			name = Discussions;
+			sourceTree = "<group>";
+		};
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +980,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0800B8161D06D933006C987E /* Discussions */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08E542071C6CD59A00DEC38E /* Managers */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
@@ -1909,6 +1926,7 @@
 				08D120911C937B2200A54ABC /* Section.swift in Sources */,
 				08D120921C937B2200A54ABC /* Step+CoreDataProperties.swift in Sources */,
 				08D120931C937B2200A54ABC /* UnknownTypeQuizViewController.swift in Sources */,
+				0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				08D120941C937B2200A54ABC /* CoursesJoinManager.swift in Sources */,
 				08D120951C937B2200A54ABC /* SortingDataset.swift in Sources */,
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
@@ -1939,6 +1957,7 @@
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
+				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
 				08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				08D120AC1C937B2200A54ABC /* NumberReply.swift in Sources */,
 				08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */,
@@ -2096,6 +2115,7 @@
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
+				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
@@ -2126,6 +2146,7 @@
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
+				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
@@ -2521,12 +2542,13 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */,
 				083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */,
 				083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */,
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */;
+			currentVersion = 0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
