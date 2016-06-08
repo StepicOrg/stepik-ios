@@ -11,6 +11,13 @@
 		0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
 		0800B81B1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
 		0800B81C1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8271D070F68006C987E /* DiscussionsAPITests.swift */; };
 		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
@@ -454,6 +461,10 @@
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
 		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
+		0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxiesAPI.swift; sourceTree = "<group>"; };
+		0800B8211D07029B006C987E /* CommentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
+		0800B8241D0704B6006C987E /* ApiUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUtil.swift; sourceTree = "<group>"; };
+		0800B8271D070F68006C987E /* DiscussionsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsAPITests.swift; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -929,6 +940,7 @@
 			children = (
 				085D5CDD1D007F2200092060 /* Info.plist */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
+				0800B8271D070F68006C987E /* DiscussionsAPITests.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -1028,6 +1040,9 @@
 				08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */,
 				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
 				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
+				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
+				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				0800B8241D0704B6006C987E /* ApiUtil.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1876,6 +1891,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1920,6 +1936,7 @@
 				08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				08901E6B1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08D1208C1C937B2200A54ABC /* HTMLBuilder.swift in Sources */,
+				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
 				08D1208E1C937B2200A54ABC /* DeviceInfo.swift in Sources */,
 				08D1208F1C937B2200A54ABC /* UIViewLoadExtension.swift in Sources */,
@@ -1934,6 +1951,7 @@
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
+				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -1971,6 +1989,7 @@
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
 				08D120B51C937B2200A54ABC /* Parser.swift in Sources */,
 				08D120B61C937B2200A54ABC /* DownloadTableViewCell.swift in Sources */,
+				0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08D120B71C937B2200A54ABC /* CacheManager.swift in Sources */,
 				08D120B81C937B2200A54ABC /* Time.swift in Sources */,
 				08D120B91C937B2200A54ABC /* Assignment+CoreDataProperties.swift in Sources */,
@@ -2109,6 +2128,7 @@
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
+				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
@@ -2123,6 +2143,7 @@
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
+				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
@@ -2160,6 +2181,7 @@
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,

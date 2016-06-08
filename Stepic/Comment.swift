@@ -68,3 +68,27 @@ class Comment: JSONInitializable {
         initialize(json)
     }
 }
+
+struct CommentPostable {
+    var parent: Int?
+    var target: Int
+    var text: String
+    
+    init(parent: Int? = nil, target: Int, text: String) {
+        self.parent = parent
+        self.target = target
+        self.text = text
+    }
+    
+    var json: [String: AnyObject] {
+        var dict : [String: AnyObject] = [
+            "target" : target,
+            "text" : text
+        ]
+        if let p = parent {
+            dict["parent"] = p
+        }
+        
+        return dict
+    }
+}
