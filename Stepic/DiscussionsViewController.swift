@@ -130,9 +130,13 @@ class DiscussionsViewController: UIViewController {
         )
     }
     
+    var isReloading: Bool = false
     func reloadDiscussions() {
+        if isReloading {
+            return
+        }
         resetData(false)
-        
+        isReloading = true
         ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
             {
                 [weak self] 
@@ -144,8 +148,9 @@ class DiscussionsViewController: UIViewController {
                         {            
                             [weak self] in
                             UIThread.performUI {
-                                self?.tableView.reloadData()
                                 self?.refreshControl?.endRefreshing()
+                                self?.tableView.reloadData()
+                                self?.isReloading = false
                             }
                         }
                     )
@@ -186,10 +191,15 @@ extension DiscussionsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
         
-        if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
-            if let user = userInfos[comment.userId] {
-                cell.initWithComment(comment, user: user)
+        if discussions.count > indexPath.section && replies.loaded[discussions[indexPath.section].id]?.count > indexPath.row {
+            if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
+                if let user = userInfos[comment.userId] {
+                    cell.initWithComment(comment, user: user)
+                }
             }
+        } else {
+            //TODO: Maybe should handle double refresh somehow
+//            print("that was a double refresh")
         }
         
         return cell
@@ -197,6 +207,10 @@ extension DiscussionsViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell") as! DiscussionTableViewCell
+        
+        if discussions.count <= section  {
+            return nil
+        }
         
         let comment = discussions[section]
         if let user = userInfos[comment.userId] {
