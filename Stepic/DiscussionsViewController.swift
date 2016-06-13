@@ -25,7 +25,9 @@ class DiscussionsViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
+        tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
         
+        //TODO: Do NOT forget to localize this!
         self.title = "Discussions"
         
         refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), forControlEvents: .ValueChanged)
@@ -160,9 +162,20 @@ class DiscussionsViewController: UIViewController {
                 print(errorString)
             }
         )
-        
     }
     
+    func isShowMoreEnabledForSection(section: Int) -> Bool {
+        if discussions.count <= section  {
+            return false
+        }
+        
+        let discussion = discussions[section]
+        return replies.leftToLoad(discussion) > 0 
+    }
+    
+    func isShowMoreDiscussionsEnabled() -> Bool {
+        return discussionIds.leftToLoad > 0
+    }
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -171,7 +184,11 @@ extension DiscussionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.5
+        if isShowMoreEnabledForSection(section) {
+            return 50
+        } else {
+            return 0.5
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -215,9 +232,6 @@ extension DiscussionsViewController : UITableViewDataSource {
         let comment = discussions[section]
         if let user = userInfos[comment.userId] {
             cell.initWithComment(comment, user: user)
-//            let v = UIView(frame: CGRect(x: 15, y: 5, width: tableView.frame.width, height: 60))
-//            v.addSubview(cell)
-//            return v
             return cell
         } else {
             return nil
@@ -225,6 +239,16 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        if isShowMoreEnabledForSection(section) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell") as! LoadMoreTableViewCell
+            cell.tag = section
+            cell.showMorePressedHandler = {
+                section in
+                print("pressed showMore for section id \(section)")
+            }
+            return cell
+        } else {
+            return nil
+        }
     }
 }

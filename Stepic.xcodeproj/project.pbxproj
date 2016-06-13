@@ -417,6 +417,10 @@
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
+		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
+		08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
+		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
+		08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -681,6 +685,8 @@
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
 		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
+		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -884,6 +890,8 @@
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
 				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
+				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
+				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -1697,6 +1705,7 @@
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
 				08D121181C937B2200A54ABC /* Localizable.strings in Resources */,
 				08DB8CBC1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
@@ -1731,6 +1740,7 @@
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
+				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -1976,6 +1986,7 @@
 				08D120951C937B2200A54ABC /* SortingDataset.swift in Sources */,
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
+				08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
@@ -2170,6 +2181,7 @@
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
+				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
