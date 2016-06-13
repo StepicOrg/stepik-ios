@@ -68,12 +68,12 @@ class DiscussionTableViewCell: UITableViewCell {
         commentWebView.hidden = true
     }
     
-    let tapG = UITapGestureRecognizer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.clearColor()
+        contentView.backgroundColor = UIColor.whiteColor()
         
+        let tapG = UITapGestureRecognizer()
         tapG.numberOfTapsRequired = 1
         tapG.addTarget(self, action: #selector(DiscussionTableViewCell.didTap(_:)))
         self.contentView.addGestureRecognizer(tapG)
@@ -111,7 +111,6 @@ extension DiscussionTableViewCell : TextHeightDependentCellProtocol {
             let w = textContainerView.bounds.width 
             return {
                 return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
-                
             }
         }
     }

@@ -20,19 +20,13 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZgO-rU-9E1">
-                        <rect key="frame" x="150" y="14" width="20" height="20"/>
-                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dA3-nu-bnA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lee-iU-g3k"/>
                     <constraint firstItem="dA3-nu-bnA" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="eNF-ko-6jF"/>
-                    <constraint firstItem="ZgO-rU-9E1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="l57-el-uFi"/>
-                    <constraint firstItem="ZgO-rU-9E1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="yOP-Vq-bFI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="showMoreActivityIndicator" destination="ZgO-rU-9E1" id="xVc-Te-ge1"/>
                 <outlet property="showMoreLabel" destination="dA3-nu-bnA" id="85t-Be-Kww"/>
             </connections>
             <point key="canvasLocation" x="425" y="292"/>

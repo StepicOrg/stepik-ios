@@ -82,13 +82,13 @@ class DiscussionsViewController: UIViewController {
         replies = Replies()
         userInfos = [Int: UserInfo]()
         discussions = [Comment]()
-        
+
         if withReload {
             tableView.reloadData()
         }
     }
     
-    let discussionLoadingInterval = 10
+    let discussionLoadingInterval = 20
     let repliesLoadingInterval = 20
     
     func getNextDiscussionIdsToLoad() -> [Int] {
@@ -105,7 +105,7 @@ class DiscussionsViewController: UIViewController {
         return Array(discussion.repliesIds[startIndex ..< startIndex + min(repliesLoadingInterval, replies.leftToLoad(discussion))])
     }
     
-    func loadDiscussions(ids: [Int], success: (Void->Void)? = nil) {
+    func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
         ApiDataDownloader.comments.retrieve(ids, success: 
             {
                 [weak self]
@@ -134,6 +134,8 @@ class DiscussionsViewController: UIViewController {
                     
                     //TODO: Possibly should sort all changed reply values 
                     
+                    s.updateTableFooterView()
+                    
                     success?()
                 }
             }, error: {
@@ -141,6 +143,21 @@ class DiscussionsViewController: UIViewController {
                 print(errorString)
             }
         )
+    }
+    
+    func updateTableFooterView() {
+        if isShowMoreDiscussionsEnabled() {
+            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
+            
+            let v = cell.contentView
+            let tapG = UITapGestureRecognizer()
+            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapTableViewFooter(_:)))
+            v.addGestureRecognizer(tapG)
+            
+            tableView.tableFooterView = v
+        } else {
+            tableView.tableFooterView = nil
+        }
     }
     
     var isReloading: Bool = false
@@ -213,6 +230,7 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfRowsInSection \(section)")
         return replies.loaded[discussions[section].id]?.count ?? 0
     }
     
@@ -243,19 +261,54 @@ extension DiscussionsViewController : UITableViewDataSource {
         let comment = discussions[section]
         if let user = userInfos[comment.userId] {
             cell.initWithComment(comment, user: user)
-            return cell
+            let v = cell.contentView
+            v.tag = section
+            let tapG = UITapGestureRecognizer()
+            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapHeader(_:)))
+            v.addGestureRecognizer(tapG)
+            
+            return v
         } else {
             return nil
+        }
+    }
+    
+    func didTapTableViewFooter(gestureRecognizer: UITapGestureRecognizer) {
+        print("did tap TableView footer")
+        if let v = gestureRecognizer.view {
+            let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
+            update(section: nil, completion: {
+                refreshView.removeFromSuperview()
+            })
+        }
+    }
+    
+    func didTapHeader(gestureRecognizer: UITapGestureRecognizer) {
+        print("did tap section header \(gestureRecognizer.view?.tag)")
+        
+    }
+    
+    func didTapFooter(gestureRecognizer: UITapGestureRecognizer) {
+        print("did tap section footer\(gestureRecognizer.view?.tag)")
+        if let v = gestureRecognizer.view {
+            let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
+            update(section: v.tag, completion: {
+                refreshView.removeFromSuperview()
+            })
         }
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if isShowMoreEnabledForSection(section) {
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
-            cell.tag = section
-            cell.sectionUpdateDelegate = self
-
-            return cell
+            
+            let v = cell.contentView
+            v.tag = section
+            let tapG = UITapGestureRecognizer()
+            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapFooter(_:)))
+            v.addGestureRecognizer(tapG)
+            
+            return v
         } else {
             return nil
         }
@@ -263,17 +316,33 @@ extension DiscussionsViewController : UITableViewDataSource {
 }
 
 extension DiscussionsViewController : DiscussionUpdateDelegate {
-    func update(section section: Int, completion: (Void->Void)?) {
+    func update(section section: Int?, completion: (Void->Void)?) {
         //TODO: Add update section code here
-        let idsToLoad = getNextReplyIdsToLoad(section)
-        loadDiscussions(idsToLoad, success: {
-            [weak self] in
-            UIThread.performUI {
-                self?.tableView.beginUpdates()
-                self?.tableView.reloadSections(NSIndexSet(index: section), withRowAnimation: UITableViewRowAnimation.Bottom)
-                self?.tableView.endUpdates()
-                completion?()
-            }
-        })
+        if let s = section {
+            let idsToLoad = getNextReplyIdsToLoad(s)
+            loadDiscussions(idsToLoad, success: {
+                [weak self] in
+                UIThread.performUI {
+                    self?.tableView.beginUpdates()
+                    self?.tableView.reloadSections(NSIndexSet(index: s), withRowAnimation: UITableViewRowAnimation.Bottom)
+                    self?.tableView.endUpdates()
+                    completion?()
+                }
+            })
+        } else {
+            let idsToLoad = getNextDiscussionIdsToLoad()
+            loadDiscussions(idsToLoad, success: {
+                [weak self] in
+                UIThread.performUI {
+                    if let s = self {
+                        s.tableView.beginUpdates()
+                        let sections = NSIndexSet(indexesInRange: NSMakeRange(s.discussions.count - idsToLoad.count, idsToLoad.count))
+                        s.tableView.insertSections(sections, withRowAnimation: .Bottom)
+                        s.tableView.endUpdates()
+                        completion?()
+                    }
+                }
+            })
+        }
     }
 }
