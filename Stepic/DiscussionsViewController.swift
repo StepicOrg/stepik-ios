@@ -28,16 +28,10 @@ class DiscussionsViewController: UIViewController {
         
         self.title = "Discussions"
         
-        refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), forControlEvents: .ValueChanged)
+        refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl ?? UIView())
         refreshControl?.beginRefreshing()
-        reloadDiscussions {
-            [weak self] in
-            UIThread.performUI {
-                self?.tableView.reloadData()
-            }
-        }
-
+        reloadDiscussions()
     }
 
     struct DiscussionIds {
@@ -132,7 +126,7 @@ class DiscussionsViewController: UIViewController {
         )
     }
     
-    func reloadDiscussions(success: (Void->Void)? = nil) {
+    func reloadDiscussions() {
         resetData(false)
         
         ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
@@ -140,10 +134,15 @@ class DiscussionsViewController: UIViewController {
                 [weak self] 
                 discussionProxy in
                 self?.discussionIds.all = discussionProxy.discussionIds
+                print("retrieved discussionIds -> \(discussionProxy.discussionIds)")
                 if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
                     self?.loadDiscussions(discussionIdsToLoad, success: 
-                        {
-                            success?()
+                        {            
+                            [weak self] in
+                            UIThread.performUI {
+                                self?.tableView.reloadData()
+                                self?.refreshControl?.endRefreshing()
+                            }
                         }
                     )
                 }
@@ -188,8 +187,10 @@ extension DiscussionsViewController : UITableViewDataSource {
         let comment = discussions[section]
         if let user = userInfos[comment.id] {
             cell.initWithComment(comment, user: user)
+            return cell
+        } else {
+            return nil
         }
-        
-        return cell
     }
+    
 }

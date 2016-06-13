@@ -13,7 +13,7 @@ import UIKit
 
 class DiscussionsAPITests : XCTestCase {
     
-    let comments = СommentsAPI()
+    let comments = CommentsAPI()
     let discussionProxies = DiscussionProxiesAPI()
     
     override func setUp() {

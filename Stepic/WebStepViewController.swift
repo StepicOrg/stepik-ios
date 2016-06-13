@@ -199,6 +199,17 @@ class WebStepViewController: UIViewController {
     
     var additionalOffsetXValue : CGFloat = 0.0
 
+    @IBAction func showCommentsPressed(sender: UIButton) {
+        if let discussionProxyId = step.discussionProxyId {
+            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
+            vc.discussionProxyId = discussionProxyId
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            //TODO: Load comments here
+        }
+    }
+    
+    
 }
 
 extension WebStepViewController : UIWebViewDelegate {

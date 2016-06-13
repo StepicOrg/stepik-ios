@@ -1666,9 +1666,12 @@
                                                     <constraint firstAttribute="height" constant="32" id="fD4-kU-l4I"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-ht-kAN">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-ht-kAN">
                                                 <rect key="frame" x="243" y="40" width="114" height="30"/>
                                                 <state key="normal" title="Show comments"/>
+                                                <connections>
+                                                    <action selector="showCommentsPressed:" destination="OsI-th-C1R" eventType="touchUpInside" id="xf3-5v-xvi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1680,6 +1683,7 @@
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="SVq-w0-3Vg"/>
                                             <constraint firstAttribute="trailing" secondItem="cY6-uB-D81" secondAttribute="trailing" id="UZN-cH-TvZ"/>
+                                            <constraint firstItem="Vwu-ht-kAN" firstAttribute="centerX" secondItem="pp4-VH-jhD" secondAttribute="centerX" id="mU9-JQ-44u"/>
                                             <constraint firstAttribute="trailing" secondItem="emi-b6-GHx" secondAttribute="trailing" id="qPs-uE-8iy"/>
                                         </constraints>
                                     </view>
