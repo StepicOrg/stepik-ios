@@ -104,7 +104,11 @@ class DiscussionsViewController: UIViewController {
                 
                     s.discussionIds.loaded += ids
                     s.discussions += superDiscussions
-                
+                    
+                    for (userId, info) in retrievedUserInfos {
+                        s.userInfos[userId] = info
+                    }
+                    
                     //get all replies
                     for reply in retrievedDiscussions.filter({$0.parentId != nil}) {
                         if let parentId = reply.parentId {
@@ -157,7 +161,13 @@ class DiscussionsViewController: UIViewController {
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
+    }
     
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
 }
 
 extension DiscussionsViewController : UITableViewDataSource {
@@ -173,7 +183,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
         
         if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
-            if let user = userInfos[comment.id] {
+            if let user = userInfos[comment.userId] {
                 cell.initWithComment(comment, user: user)
             }
         }
@@ -185,12 +195,18 @@ extension DiscussionsViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell") as! DiscussionTableViewCell
         
         let comment = discussions[section]
-        if let user = userInfos[comment.id] {
+        if let user = userInfos[comment.userId] {
             cell.initWithComment(comment, user: user)
+//            let v = UIView(frame: CGRect(x: 15, y: 5, width: tableView.frame.width, height: 60))
+//            v.addSubview(cell)
+//            return v
             return cell
         } else {
             return nil
         }
     }
     
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
 }

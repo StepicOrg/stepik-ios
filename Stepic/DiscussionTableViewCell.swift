@@ -95,7 +95,7 @@ class DiscussionTableViewCell: UITableViewCell {
     }
     
     func didTap(g: UITapGestureRecognizer) {
-        setHighlighted(true, animated: true)
+        setHighlighted(!self.highlighted, animated: true)
     }
     
     override func prepareForReuse() {
