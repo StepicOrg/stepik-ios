@@ -113,7 +113,7 @@ class DiscussionsViewController: UIViewController {
                 
                 if let s = self {
                     //get superDiscussions (those who have no parents)
-                    let superDiscussions = Sorter.sort(retrievedDiscussions.filter({$0.parentId == nil}), byIds: ids)
+                    let superDiscussions = Sorter.sort(retrievedDiscussions.filter({$0.parentId == nil}), byIds: ids, canMissElements: true)
                 
                     s.discussionIds.loaded += ids
                     s.discussions += superDiscussions
