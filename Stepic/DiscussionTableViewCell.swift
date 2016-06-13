@@ -8,6 +8,7 @@
 
 import UIKit
 import FLKAutoLayout
+import SDWebImage
 
 class DiscussionTableViewCell: UITableViewCell {
 
@@ -39,6 +40,12 @@ class DiscussionTableViewCell: UITableViewCell {
         commentLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
         commentLabel.hidden = true
     }
+    
+    func initWithComment(comment: Comment, user: UserInfo) {
+        userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
+        nameLabel.text = "\(user.firstName) \(user.lastName)"
+    }
+    
     
 //    var selectionView: UIView?
     

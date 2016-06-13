@@ -14,6 +14,9 @@ class DiscussionsViewController: UIViewController {
     var discussionProxyId: String!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var refreshControl : UIRefreshControl? = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +25,19 @@ class DiscussionsViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
+        
+        self.title = "Discussions"
+        
+        refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl ?? UIView())
+        refreshControl?.beginRefreshing()
+        reloadDiscussions {
+            [weak self] in
+            UIThread.performUI {
+                self?.tableView.reloadData()
+            }
+        }
+
     }
 
     struct DiscussionIds {
@@ -116,7 +132,7 @@ class DiscussionsViewController: UIViewController {
         )
     }
     
-    func reloadDiscussions() {
+    func reloadDiscussions(success: (Void->Void)? = nil) {
         resetData(false)
         
         ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
@@ -127,11 +143,7 @@ class DiscussionsViewController: UIViewController {
                 if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
                     self?.loadDiscussions(discussionIdsToLoad, success: 
                         {
-                            [weak self] in
-                            self?.discussionIds.loaded += discussionIdsToLoad
-                            UIThread.performUI {
-                                self?.tableView.reloadData()
-                            }
+                            success?()
                         }
                     )
                 }
@@ -142,7 +154,7 @@ class DiscussionsViewController: UIViewController {
         )
         
     }
-
+    
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -151,7 +163,7 @@ extension DiscussionsViewController : UITableViewDelegate {
 
 extension DiscussionsViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return discussionIds.loaded.count
+        return discussions.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -163,8 +175,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         
         if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
             if let user = userInfos[comment.id] {
-                cell.userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
-                cell.nameLabel.text = "\(user.firstName) \(user.lastName)"
+                cell.initWithComment(comment, user: user)
             }
         }
         
@@ -172,7 +183,13 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell") as! DiscussionTableViewCell
+        
+        let comment = discussions[section]
+        if let user = userInfos[comment.id] {
+            cell.initWithComment(comment, user: user)
+        }
+        
+        return cell
     }
-    
 }
