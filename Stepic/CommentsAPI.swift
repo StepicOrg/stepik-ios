@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class СommentsAPI {
+class CommentsAPI {
     let name = "comments"
     
     func retrieve(ids: [Int], headers: [String: String] = APIDefaults.headers.bearer, success: ([Comment], [Int: UserInfo]) -> Void, error errorHandler: String -> Void) -> Request {

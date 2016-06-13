@@ -9,7 +9,7 @@
 import Foundation
 
 struct Sorter {
-    static func sort<T : JSONInitializable>(array : [T], byIds ids: [Int]) -> [T] {
+    static func sort<T : JSONInitializable>(array : [T], byIds ids: [Int], canMissElements: Bool = false) -> [T] {
         var res : [T] = []
         
         for id in ids {
@@ -18,7 +18,9 @@ struct Sorter {
                 res += [elements[0]]
             } else {
                 //TODO : Maybe should throw exception here
-                print("Something went wrong")
+                if !canMissElements { 
+                    print("Something went wrong") 
+                }
             }
         }
         

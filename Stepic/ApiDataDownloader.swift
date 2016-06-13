@@ -500,6 +500,8 @@ class ApiDataDownloader: NSObject {
     }
     
     static let devices : DevicesAPI = DevicesAPI()
+    static let discussionProxies : DiscussionProxiesAPI = DiscussionProxiesAPI()
+    static let comments : CommentsAPI = CommentsAPI()
 }
 
 enum RefreshMode {

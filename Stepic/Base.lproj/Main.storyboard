@@ -1560,7 +1560,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerX" secondItem="pKw-C7-Y9N" secondAttribute="centerX" id="6dR-Rr-VEP"/>
                             <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="eOu-jp-hBO" secondAttribute="centerY" id="GBF-9u-zUN"/>
@@ -1651,7 +1651,7 @@
                                 <rect key="frame" x="0.0" y="21" width="600" height="579"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pp4-VH-jhD">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="78"/>
                                         <subviews>
                                             <webView contentMode="scaleToFill" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emi-b6-GHx">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -1666,12 +1666,17 @@
                                                     <constraint firstAttribute="height" constant="32" id="fD4-kU-l4I"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-ht-kAN">
+                                                <rect key="frame" x="243" y="40" width="114" height="30"/>
+                                                <state key="normal" title="Show comments"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="3GV-fJ-hPz"/>
-                                            <constraint firstAttribute="bottom" secondItem="cY6-uB-D81" secondAttribute="bottom" id="Ah3-JP-xfs"/>
+                                            <constraint firstAttribute="bottom" secondItem="Vwu-ht-kAN" secondAttribute="bottom" constant="8" id="AAL-7Q-HCI"/>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="-1" id="DvZ-wU-sTq"/>
+                                            <constraint firstItem="Vwu-ht-kAN" firstAttribute="top" secondItem="cY6-uB-D81" secondAttribute="bottom" constant="8" id="GK9-eK-OfD"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="SVq-w0-3Vg"/>
                                             <constraint firstAttribute="trailing" secondItem="cY6-uB-D81" secondAttribute="trailing" id="UZN-cH-TvZ"/>
@@ -1706,7 +1711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLq-xB-Eqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5606" y="2609"/>
+            <point key="canvasLocation" x="5674" y="2607"/>
         </scene>
         <!--My courses-->
         <scene sceneID="Qyk-4b-RfK">
