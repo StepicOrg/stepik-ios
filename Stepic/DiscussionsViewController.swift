@@ -88,26 +88,27 @@ class DiscussionsViewController: UIViewController {
                 [weak self]
                 retrievedDiscussions, retrievedUserInfos in 
                 
-                //get superDiscussions (those who have no parents)
-                let superDiscussions = Sorter.sort(retrievedDiscussions.filter({$0.parentId == nil}), byIds: ids)
+                if let s = self {
+                    //get superDiscussions (those who have no parents)
+                    let superDiscussions = Sorter.sort(retrievedDiscussions.filter({$0.parentId == nil}), byIds: ids)
                 
-                self?.discussionIds.loaded += ids
-                self?.discussions += superDiscussions
+                    s.discussionIds.loaded += ids
+                    s.discussions += superDiscussions
                 
-                //get replies for all retrieved discussions
-                for discussion in superDiscussions {
-                    let repliesForDiscussion = retrievedDiscussions.filter({$0.parentId == discussion.id})
-                    if self?.replies.loaded[discussion.id] == nil {
-                        self?.replies.loaded[discussion.id] = []
+                    //get all replies
+                    for reply in retrievedDiscussions.filter({$0.parentId != nil}) {
+                        if let parentId = reply.parentId {
+                            if s.replies.loaded[parentId] == nil {
+                                s.replies.loaded[parentId] = []
+                            }
+                            s.replies.loaded[parentId]? += [reply]
+                        }
                     }
                     
-                    if let r = self?.replies.loaded[discussion.id] {
-                        self?.replies.loaded[discussion.id] = Sorter.sort(r + repliesForDiscussion, byIds: discussion.repliesIds)
-                    }
+                    //TODO: Possibly should sort all changed reply values 
+                    
+                    success?()
                 }
-                
-                success?()
-                return
             }, error: {
                 errorString in
                 print(errorString)
