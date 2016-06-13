@@ -48,10 +48,15 @@ class DiscussionTableViewCell: UITableViewCell {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         if comment.parentId != nil {
-            ImageLeadingConstraint.constant = -40
-            textContainerLeadingConstraint.constant = -40
+            setLeadingConstraints(-40)
         }
         timeLabel.text = comment.lastTime.getStepicFormatString()
+    }
+    
+    private func setLeadingConstraints(constant: CGFloat) {
+        ImageLeadingConstraint.constant = constant
+        textContainerLeadingConstraint.constant = constant
+
     }
     
     func initWebView() {
@@ -83,6 +88,7 @@ class DiscussionTableViewCell: UITableViewCell {
         super.prepareForReuse()
         commentWebView.hidden = true
         commentLabel.hidden = true
+        setLeadingConstraints(0)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
