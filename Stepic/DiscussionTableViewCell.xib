@@ -72,8 +72,10 @@
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="ImageLeadingConstraint" destination="KPO-cX-FvW" id="fMQ-wI-JdI"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
                 <outlet property="separatorView" destination="pV4-ue-5er" id="ZQA-fC-Y3W"/>
+                <outlet property="textContainerLeadingConstraint" destination="HCo-Zm-Sew" id="Cgu-dX-VWb"/>
                 <outlet property="textContainerView" destination="XqE-VO-duM" id="FJJ-DU-6ya"/>
                 <outlet property="timeLabel" destination="RmE-el-xJX" id="aU3-Xg-wIJ"/>
                 <outlet property="userAvatarImageView" destination="IO2-jl-qQ3" id="FXP-ux-Uch"/>

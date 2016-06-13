@@ -18,6 +18,9 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
+    
     var hasSeparator: Bool = false {
         didSet {
             separatorView?.hidden = !hasSeparator
@@ -44,34 +47,12 @@ class DiscussionTableViewCell: UITableViewCell {
     func initWithComment(comment: Comment, user: UserInfo) {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
+        if comment.parentId != nil {
+            ImageLeadingConstraint.constant = -40
+            textContainerLeadingConstraint.constant = -40
+        }
+        timeLabel.text = comment.lastTime.getStepicFormatString()
     }
-    
-    
-//    var selectionView: UIView?
-    
-    func customSelect(selected: Bool) {
-        setHighlighted(selected, animated: true)
-//        selectionView = UIView()
-//        if let v = selectionView {
-//            if selected {
-//                v.backgroundColor = UIColor.lightGrayColor()
-//                v.alpha = 0
-//                self.contentView.addSubview(v)
-//                v.alignToView(self.contentView)
-//                UIView.animateWithDuration(0.3, animations: {
-//                    v.alpha = 1
-//                })
-//            } else {
-//                UIView.animateWithDuration(0.3, animations: {
-//                    v.alpha = 1
-//                    }, completion: {
-//                        b in
-//                        v.removeFromSuperview()
-//                })
-//            }
-//        }
-    }
-    
     
     func initWebView() {
         textContainerView.addSubview(commentWebView)
