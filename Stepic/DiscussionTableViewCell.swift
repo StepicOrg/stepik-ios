@@ -51,6 +51,8 @@ class DiscussionTableViewCell: UITableViewCell {
             setLeadingConstraints(-40)
         }
         timeLabel.text = comment.lastTime.getStepicFormatString()
+        commentLabel.hidden = false
+        commentLabel.setTextWithHTMLString(comment.text)
     }
     
     private func setLeadingConstraints(constant: CGFloat) {

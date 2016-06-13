@@ -421,6 +421,8 @@
 		08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
+		08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
+		08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -687,6 +689,7 @@
 		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
 		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
+		08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionUpdateDelegate.swift; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -892,6 +895,7 @@
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
 				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
+				08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -2123,6 +2127,7 @@
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
+				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
 				0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */,
@@ -2318,6 +2323,7 @@
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
+				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,

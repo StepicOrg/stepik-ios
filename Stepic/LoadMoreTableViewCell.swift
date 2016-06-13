@@ -15,6 +15,8 @@ class LoadMoreTableViewCell: UITableViewCell {
     
     var tapG : UITapGestureRecognizer!
     
+    weak var sectionUpdateDelegate : DiscussionUpdateDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,17 +24,36 @@ class LoadMoreTableViewCell: UITableViewCell {
         tapG = UITapGestureRecognizer(target: self, action: #selector(LoadMoreTableViewCell.didTap(_:)))
         tapG.numberOfTapsRequired = 1
         self.contentView.addGestureRecognizer(tapG)
+        showMoreActivityIndicator.hidden = true
     }
 
     var showMorePressedHandler : (Int->Void)?
+    var isUpdating: Bool = false {
+        didSet {
+            if isUpdating {
+                showMoreLabel.hidden = true
+                showMoreActivityIndicator.hidden = false
+                showMoreActivityIndicator.startAnimating()
+            } else {
+                showMoreActivityIndicator.stopAnimating()
+                showMoreActivityIndicator.hidden = true
+                showMoreLabel.hidden = false
+            }
+        }
+    }
     
     func didTap(recognizer: UITapGestureRecognizer) {
-        setHighlighted(true, animated: true)
-        showMoreLabel.hidden = true
-        showMoreActivityIndicator.hidden = false
-        showMoreActivityIndicator.startAnimating()
-        showMorePressedHandler?(tag)
-        setHighlighted(false, animated: true)
+        if !isUpdating {
+            setHighlighted(true, animated: true)
+            showMoreLabel.hidden = true
+            showMoreActivityIndicator.hidden = false
+            isUpdating = true
+            sectionUpdateDelegate?.update(section: tag, completion: {
+                [weak self] in
+                self?.isUpdating = false
+            })
+            setHighlighted(false, animated: true)
+        }
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

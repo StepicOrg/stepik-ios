@@ -89,9 +89,20 @@ class DiscussionsViewController: UIViewController {
     }
     
     let discussionLoadingInterval = 10
+    let repliesLoadingInterval = 20
+    
     func getNextDiscussionIdsToLoad() -> [Int] {
         let startIndex = discussionIds.loaded.count
         return Array(discussionIds.all[startIndex ..< startIndex + min(discussionLoadingInterval, discussionIds.leftToLoad)])
+    }
+    
+    func getNextReplyIdsToLoad(section: Int) -> [Int] {
+        if discussions.count <= section  {
+            return []
+        } 
+        let discussion = discussions[section]
+        let startIndex = replies.loaded[discussion.id]?.count ?? 0
+        return Array(discussion.repliesIds[startIndex ..< startIndex + min(repliesLoadingInterval, replies.leftToLoad(discussion))])
     }
     
     func loadDiscussions(ids: [Int], success: (Void->Void)? = nil) {
@@ -240,15 +251,29 @@ extension DiscussionsViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if isShowMoreEnabledForSection(section) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell") as! LoadMoreTableViewCell
+            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             cell.tag = section
-            cell.showMorePressedHandler = {
-                section in
-                print("pressed showMore for section id \(section)")
-            }
+            cell.sectionUpdateDelegate = self
+
             return cell
         } else {
             return nil
         }
+    }
+}
+
+extension DiscussionsViewController : DiscussionUpdateDelegate {
+    func update(section section: Int, completion: (Void->Void)?) {
+        //TODO: Add update section code here
+        let idsToLoad = getNextReplyIdsToLoad(section)
+        loadDiscussions(idsToLoad, success: {
+            [weak self] in
+            UIThread.performUI {
+                self?.tableView.beginUpdates()
+                self?.tableView.reloadSections(NSIndexSet(index: section), withRowAnimation: UITableViewRowAnimation.Bottom)
+                self?.tableView.endUpdates()
+                completion?()
+            }
+        })
     }
 }
