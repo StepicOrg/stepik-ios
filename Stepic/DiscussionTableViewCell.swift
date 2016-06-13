@@ -68,11 +68,10 @@ class DiscussionTableViewCell: UITableViewCell {
         commentWebView.hidden = true
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = UIColor.whiteColor()
-        
+        textContainerView.backgroundColor = UIColor.clearColor()
         let tapG = UITapGestureRecognizer()
         tapG.numberOfTapsRequired = 1
         tapG.addTarget(self, action: #selector(DiscussionTableViewCell.didTap(_:)))

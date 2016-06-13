@@ -285,7 +285,9 @@ extension DiscussionsViewController : UITableViewDataSource {
     
     func didTapHeader(gestureRecognizer: UITapGestureRecognizer) {
         print("did tap section header \(gestureRecognizer.view?.tag)")
-        
+        if let v = gestureRecognizer.view {
+            let deselectBlock = CellOperationsUtil.animateViewSelection(v)
+        }
     }
     
     func didTapFooter(gestureRecognizer: UITapGestureRecognizer) {
