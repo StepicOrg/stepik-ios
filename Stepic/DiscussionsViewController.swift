@@ -385,7 +385,7 @@ extension DiscussionsViewController : DiscussionCellDelegate {
 }
 
 extension DiscussionsViewController : WriteCommentDelegate {
-    func didWriteComment(comment: Comment) {
+    func didWriteComment(comment: Comment, userInfo: UserInfo) {
         print("yay, he wrote the comment mothafucka!")
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-
+import Alamofire
 
 enum WriteCommentViewControllerState {
     case Editing, Sending, OK
@@ -69,7 +69,6 @@ class WriteCommentViewController: UIViewController {
         setupItems()
         
         state = .Editing
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(WriteCommentViewController.sendPressed))
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,31 +76,39 @@ class WriteCommentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var request : Request?
+    
     func sendPressed() {
         print("send pressed")
         state = .Sending
-        delay(1, closure: {
-            [weak self] in
-            UIThread.performUI {
-                self?.state = .OK
-                self?.dismissViewControllerAnimated(true, completion: nil)
-            }
-        })
-        //TODO: Add communication via delegate
+        sendComment()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func sendComment() {
+        let comment = CommentPostable(parent: parent, target: target, text: commentTextView.text)
+        
+        request = ApiDataDownloader.comments.create(comment, success: 
+            {
+                [weak self]
+                comment, userInfo in
+                self?.state = .OK
+                self?.delegate?.didWriteComment(comment, userInfo: userInfo)
+                UIThread.performUI {
+                    self?.delegate?.didWriteComment(comment, userInfo: userInfo)
+                    self?.navigationController?.popViewControllerAnimated(true)
+                }
+            }, error: {
+                [weak self]
+                errorMsg in
+                self?.state = .Editing
+            }
+        )
     }
-    */
+    
 
     deinit {
         print("is deiniting")
+        request?.cancel()
     }
 }
 

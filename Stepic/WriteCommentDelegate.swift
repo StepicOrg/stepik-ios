@@ -9,5 +9,5 @@
 import Foundation
 
 protocol WriteCommentDelegate : class {
-    func didWriteComment(comment: Comment)
+    func didWriteComment(comment: Comment, userInfo: UserInfo)
 }
