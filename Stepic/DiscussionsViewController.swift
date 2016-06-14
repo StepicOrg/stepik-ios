@@ -12,6 +12,7 @@ import SDWebImage
 class DiscussionsViewController: UIViewController {
 
     var discussionProxyId: String!
+    var target: Int!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -30,7 +31,7 @@ class DiscussionsViewController: UIViewController {
         //TODO: Do NOT forget to localize this!
         self.title = "Discussions"
         
-        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "writeCommentPressed")
+        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
         self.navigationItem.rightBarButtonItem = writeCommentItem
         
         refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), forControlEvents: .ValueChanged)
@@ -72,6 +73,7 @@ class DiscussionsViewController: UIViewController {
     
     func writeCommentPressed() {
         print("write comment pressed")
+        presentWriteCommentController(parent: nil)
     }
     
     func resetData(withReload: Bool) {
@@ -205,6 +207,15 @@ class DiscussionsViewController: UIViewController {
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
         print("selected discussion with id: \(comment.id), text: \(comment.text)")
         completion?()
+    }
+    
+    func presentWriteCommentController(parent parent: Int?) {
+        if let writeController = ControllerHelper.instantiateViewController(identifier: "WriteCommentViewController", storyboardName: "DiscussionsStoryboard") as? WriteCommentViewController {
+            writeController.parent = parent
+            writeController.target = target
+            writeController.delegate = self
+            navigationController?.pushViewController(writeController, animated: true)
+        }
     }
     
 }
@@ -370,5 +381,11 @@ extension DiscussionsViewController : DiscussionCellDelegate {
         } else {
             deselectBlock()
         }
+    }
+}
+
+extension DiscussionsViewController : WriteCommentDelegate {
+    func didWriteComment(comment: Comment) {
+        print("yay, he wrote the comment mothafucka!")
     }
 }

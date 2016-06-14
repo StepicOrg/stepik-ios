@@ -54,4 +54,7 @@ struct Images {
     }
     
     static let boundedStepicIcon = UIImage(named: "boundedStepicIcon")!
+    
+    static let sendImage = UIImage(named: "Sent-100")!
+    static let checkMarkImage = UIImage(named: "Checkmark-100")!
 }

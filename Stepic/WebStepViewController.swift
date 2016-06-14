@@ -203,6 +203,7 @@ class WebStepViewController: UIViewController {
         if let discussionProxyId = step.discussionProxyId {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
             vc.discussionProxyId = discussionProxyId
+            vc.target = self.step.id
             navigationController?.pushViewController(vc, animated: true)
         } else {
             //TODO: Load comments here
