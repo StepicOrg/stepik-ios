@@ -204,6 +204,12 @@ class DiscussionsViewController: UIViewController {
     func isShowMoreDiscussionsEnabled() -> Bool {
         return discussionIds.leftToLoad > 0
     }
+    
+    func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
+        print("selected discussion with id: \(comment.id), text: \(comment.text)")
+        completion?()
+    }
+    
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -241,6 +247,8 @@ extension DiscussionsViewController : UITableViewDataSource {
             if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
                 if let user = userInfos[comment.userId] {
                     cell.initWithComment(comment, user: user)
+                    cell.indexPath = indexPath
+                    cell.delegate = self
                 }
             }
         } else {
@@ -286,7 +294,14 @@ extension DiscussionsViewController : UITableViewDataSource {
     func didTapHeader(gestureRecognizer: UITapGestureRecognizer) {
         print("did tap section header \(gestureRecognizer.view?.tag)")
         if let v = gestureRecognizer.view {
+            let section = v.tag
             let deselectBlock = CellOperationsUtil.animateViewSelection(v)
+            if discussions.count > section {
+                let comment = discussions[section]
+                handleSelectDiscussion(comment, completion: deselectBlock)
+            } else {
+                deselectBlock()
+            }
         }
     }
     
@@ -345,6 +360,18 @@ extension DiscussionsViewController : DiscussionUpdateDelegate {
                     }
                 }
             })
+        }
+    }
+}
+
+extension DiscussionsViewController : DiscussionCellDelegate {
+    func didSelect(indexPath: NSIndexPath, deselectBlock: (Void -> Void)) {
+        if discussions.count > indexPath.section && replies.loaded[discussions[indexPath.section].id]?.count > indexPath.row {
+            if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
+                handleSelectDiscussion(comment, completion: deselectBlock)
+            }
+        } else {
+            deselectBlock()
         }
     }
 }

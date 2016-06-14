@@ -31,6 +31,8 @@ class DiscussionTableViewCell: UITableViewCell {
     var commentWebView: UIWebView! = UIWebView()
     
     var webViewHelper : CellWebViewHelper!
+    weak var delegate : DiscussionCellDelegate?
+    var indexPath: NSIndexPath!
     
     func initLabel() {
         commentLabel.numberOfLines = 0
@@ -82,7 +84,11 @@ class DiscussionTableViewCell: UITableViewCell {
     }
     
     func didTap(g: UITapGestureRecognizer) {
-        setHighlighted(!self.highlighted, animated: true)
+        setHighlighted(true, animated: true)
+        delegate?.didSelect(indexPath, deselectBlock: {
+            [weak self] in
+            self?.setHighlighted(false, animated: true)
+        })
     }
     
     override func prepareForReuse() {
