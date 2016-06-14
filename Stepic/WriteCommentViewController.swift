@@ -9,14 +9,54 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class WriteCommentViewController: UIViewController {
 
+enum WriteCommentViewControllerState {
+    case Editing, Sending, OK
+}
+
+class WriteCommentViewController: UIViewController {
+    
     @IBOutlet weak var commentTextView: IQTextView!
     
     weak var delegate : WriteCommentDelegate?
     
+    var state: WriteCommentViewControllerState = .Editing {
+        didSet {
+            UIThread.performUI {
+                [weak self] in
+                if let s = self {
+                    switch s.state {
+                    case .Sending : 
+                        s.navigationItem.rightBarButtonItem = s.sendingItem
+                        break
+                    case .OK:
+                        s.navigationItem.rightBarButtonItem = s.okItem
+                        break
+                    case .Editing: 
+                        s.navigationItem.rightBarButtonItem = s.editingItem
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
     var target: Int!
     var parent: Int?
+    
+    var editingItem: UIBarButtonItem?
+    var sendingItem: UIBarButtonItem?
+    var okItem: UIBarButtonItem?
+    
+    func setupItems() {
+        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(WriteCommentViewController.sendPressed))
+        
+        let v = UIActivityIndicatorView()
+        v.startAnimating()
+        sendingItem = UIBarButtonItem(customView: v)
+        
+        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.Done, target: self, action: Selector())
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +66,10 @@ class WriteCommentViewController: UIViewController {
         //TODO: Do not forget to localize this
         title = "Comment"
         commentTextView.placeholder = "Write a comment..."
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(WriteCommentViewController.sendPressed))
+        setupItems()
+        
+        state = .Editing
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(WriteCommentViewController.sendPressed))
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +79,14 @@ class WriteCommentViewController: UIViewController {
     
     func sendPressed() {
         print("send pressed")
+        state = .Sending
+        delay(1, closure: {
+            [weak self] in
+            UIThread.performUI {
+                self?.state = .OK
+                self?.dismissViewControllerAnimated(true, completion: nil)
+            }
+        })
         //TODO: Add communication via delegate
     }
     
@@ -50,4 +100,8 @@ class WriteCommentViewController: UIViewController {
     }
     */
 
+    deinit {
+        print("is deiniting")
+    }
 }
+
