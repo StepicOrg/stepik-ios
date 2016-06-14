@@ -433,6 +433,8 @@
 		08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
+		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
+		08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -705,6 +707,7 @@
 		08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
 		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
+		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -916,6 +919,7 @@
 				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
 				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
 				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
+				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -1988,6 +1992,7 @@
 				08D120831C937B2200A54ABC /* Video+CoreDataProperties.swift in Sources */,
 				08EB85ED1D100B7400E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08D120841C937B2200A54ABC /* Model.xcdatamodeld in Sources */,
+				08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
@@ -2188,6 +2193,7 @@
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,

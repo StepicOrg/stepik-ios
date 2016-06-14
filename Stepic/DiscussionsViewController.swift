@@ -21,6 +21,8 @@ class DiscussionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("did load")
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -205,8 +207,15 @@ class DiscussionsViewController: UIViewController {
     }
     
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
-        print("selected discussion with id: \(comment.id), text: \(comment.text)")
-        completion?()
+        print("selected discussion with id: \(comment.id), text: \(comment.text) and parent: \(comment.parentId)")
+        let alert = DiscussionAlertConstructor.getReplyAlert({
+            [weak self] in
+            self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+        })
+        
+        self.presentViewController(alert, animated: true, completion: {
+            completion?()
+        })
     }
     
     func presentWriteCommentController(parent parent: Int?) {
@@ -342,7 +351,6 @@ extension DiscussionsViewController : UITableViewDataSource {
 
 extension DiscussionsViewController : DiscussionUpdateDelegate {
     func update(section section: Int?, completion: (Void->Void)?) {
-        //TODO: Add update section code here
         if let s = section {
             let idsToLoad = getNextReplyIdsToLoad(s)
             loadDiscussions(idsToLoad, success: {
@@ -387,5 +395,30 @@ extension DiscussionsViewController : DiscussionCellDelegate {
 extension DiscussionsViewController : WriteCommentDelegate {
     func didWriteComment(comment: Comment, userInfo: UserInfo) {
         print("yay, he wrote the comment mothafucka!")
+        print(comment.parentId)
+        userInfos[userInfo.id] = userInfo
+        if let parentId = comment.parentId {
+            //insert row in an existing section
+            if let section = discussions.indexOf({$0.id == parentId}) {
+                discussions[section].repliesIds += [comment.id]
+                if replies.loaded[parentId] == nil {
+                    replies.loaded[parentId] = []
+                }
+                replies.loaded[parentId]! += [comment]
+                tableView.beginUpdates()
+                let p = NSIndexPath(forRow: replies.loaded[parentId]!.count - 1, inSection: section)
+                tableView.insertRowsAtIndexPaths([p], withRowAnimation: .Automatic)
+                tableView.endUpdates()
+            }
+        } else {
+            //insert section
+            discussionIds.all.insert(comment.id, atIndex: 0)
+            discussionIds.loaded.insert(comment.id, atIndex: 0)
+            discussions.insert(comment, atIndex: 0)
+            tableView.beginUpdates()
+            let index = NSIndexSet(index: 0)
+            tableView.insertSections(index, withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        }
     }
 }

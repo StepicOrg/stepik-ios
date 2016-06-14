@@ -92,7 +92,7 @@ class WriteCommentViewController: UIViewController {
                 [weak self]
                 comment, userInfo in
                 self?.state = .OK
-                self?.delegate?.didWriteComment(comment, userInfo: userInfo)
+                self?.request = nil
                 UIThread.performUI {
                     self?.delegate?.didWriteComment(comment, userInfo: userInfo)
                     self?.navigationController?.popViewControllerAnimated(true)
@@ -101,6 +101,7 @@ class WriteCommentViewController: UIViewController {
                 [weak self]
                 errorMsg in
                 self?.state = .Editing
+                self?.request = nil
             }
         )
     }
