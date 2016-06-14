@@ -30,6 +30,9 @@ class DiscussionsViewController: UIViewController {
         //TODO: Do NOT forget to localize this!
         self.title = "Discussions"
         
+        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "writeCommentPressed")
+        self.navigationItem.rightBarButtonItem = writeCommentItem
+        
         refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl ?? UIView())
         refreshControl?.beginRefreshing()
@@ -67,15 +70,9 @@ class DiscussionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func writeCommentPressed() {
+        print("write comment pressed")
     }
-    */
     
     func resetData(withReload: Bool) {
         discussionIds = DiscussionIds()
