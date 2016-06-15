@@ -46,15 +46,22 @@ class DiscussionTableViewCell: UITableViewCell {
         commentLabel.hidden = true
     }
     
-    func initWithComment(comment: Comment, user: UserInfo) {
+    func initWithComment(comment: Comment, user: UserInfo) -> (Void -> Int)? {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         if comment.parentId != nil {
             setLeadingConstraints(-40)
         }
         timeLabel.text = comment.lastTime.getStepicFormatString()
-        commentLabel.hidden = false
-        commentLabel.setTextWithHTMLString(comment.text)
+        
+        if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+            commentWebView.hidden = false
+            return webViewHelper.setTextWithTeX(comment.text)
+        } else {
+            commentLabel.hidden = false
+            commentLabel.setTextWithHTMLString(comment.text)
+        }
+        return nil
     }
     
     private func setLeadingConstraints(constant: CGFloat) {
@@ -66,7 +73,7 @@ class DiscussionTableViewCell: UITableViewCell {
     func initWebView() {
         textContainerView.addSubview(commentWebView)
         commentWebView.alignToView(textContainerView)
-        webViewHelper = CellWebViewHelper(webView: commentWebView, heightWithoutWebView: 17)
+        webViewHelper = CellWebViewHelper(webView: commentWebView, heightWithoutWebView: 70)
         commentWebView.hidden = true
     }
     
@@ -108,24 +115,24 @@ class DiscussionTableViewCell: UITableViewCell {
             width += 40
         }
         
-        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 70
+        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 75
     }
 }
 
-extension DiscussionTableViewCell : TextHeightDependentCellProtocol {
-    
-    //All optimization logics is now encapsulated here
-    func setHTMLText(text: String) -> (Void -> Int) {
-        if TagDetectionUtil.isWebViewSupportNeeded(text) {
-            commentWebView.hidden = false
-            return webViewHelper.setTextWithTeX(text)
-        } else {
-            commentLabel.hidden = false
-            commentLabel.setTextWithHTMLString(text)
-            let w = textContainerView.bounds.width 
-            return {
-                return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
-            }
-        }
-    }
-}
+//extension DiscussionTableViewCell : TextHeightDependentCellProtocol {
+//    
+//    //All optimization logics is now encapsulated here
+//    func setHTMLText(text: String) -> (Void -> Int) {
+//        if TagDetectionUtil.isWebViewSupportNeeded(text) {
+//            commentWebView.hidden = false
+//            return webViewHelper.setTextWithTeX(text)
+//        } else {
+//            commentLabel.hidden = false
+//            commentLabel.setTextWithHTMLString(text)
+//            let w = textContainerView.bounds.width 
+//            return {
+//                return 0
+//            }
+//        }
+//    }
+//}
