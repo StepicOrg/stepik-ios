@@ -98,12 +98,26 @@ class DiscussionsViewController: UIViewController {
     }
     
     func getNextReplyIdsToLoad(section: Int) -> [Int] {
-        if discussions.count <= section  {
+        if discussions.count <= section {
             return []
         } 
         let discussion = discussions[section]
-        let startIndex = replies.loaded[discussion.id]?.count ?? 0
-        return Array(discussion.repliesIds[startIndex ..< startIndex + min(repliesLoadingInterval, replies.leftToLoad(discussion))])
+//        let startIndex = replies.loaded[discussion.id]?.count ?? 0
+        let loadedIds : [Int] = replies.loaded[discussion.id]?.map({return $0.id}) ?? []
+        let loadedReplies = Set<Int>(loadedIds)
+        var res : [Int] = []
+        
+        for replyId in discussion.repliesIds {
+            if !loadedReplies.contains(replyId) {
+                res += [replyId]
+                if res.count == repliesLoadingInterval {
+                    return res
+                }
+            }
+        }
+        return res
+        
+//        return Array(discussion.repliesIds[startIndex ..< startIndex + min(repliesLoadingInterval, replies.leftToLoad(discussion))])
     }
     
     func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
@@ -123,6 +137,7 @@ class DiscussionsViewController: UIViewController {
                         s.userInfos[userId] = info
                     }
                     
+                    var changedDiscussionIds = Set<Int>()
                     //get all replies
                     for reply in retrievedDiscussions.filter({$0.parentId != nil}) {
                         if let parentId = reply.parentId {
@@ -130,14 +145,22 @@ class DiscussionsViewController: UIViewController {
                                 s.replies.loaded[parentId] = []
                             }
                             s.replies.loaded[parentId]? += [reply]
+                            changedDiscussionIds.insert(parentId)
                         }
                     }
                     
                     //TODO: Possibly should sort all changed reply values 
-                    
-                    s.updateTableFooterView()
-                    
+                    for discussionId in changedDiscussionIds {
+                        if let index = s.discussions.indexOf({$0.id == discussionId}) {
+                            s.replies.loaded[discussionId]! = Sorter.sort(s.replies.loaded[discussionId]!, byIds: s.discussions[index].repliesIds, canMissElements: true)
+                        }
+                    }
+                                        
                     success?()
+                    
+                    UIThread.performUI { 
+                        s.updateTableFooterView() 
+                    }
                 }
             }, error: {
                 errorString in
@@ -357,7 +380,7 @@ extension DiscussionsViewController : DiscussionUpdateDelegate {
                 [weak self] in
                 UIThread.performUI {
                     self?.tableView.beginUpdates()
-                    self?.tableView.reloadSections(NSIndexSet(index: s), withRowAnimation: UITableViewRowAnimation.Bottom)
+                    self?.tableView.reloadSections(NSIndexSet(index: s), withRowAnimation: UITableViewRowAnimation.Automatic)
                     self?.tableView.endUpdates()
                     completion?()
                 }
@@ -370,7 +393,7 @@ extension DiscussionsViewController : DiscussionUpdateDelegate {
                     if let s = self {
                         s.tableView.beginUpdates()
                         let sections = NSIndexSet(indexesInRange: NSMakeRange(s.discussions.count - idsToLoad.count, idsToLoad.count))
-                        s.tableView.insertSections(sections, withRowAnimation: .Bottom)
+                        s.tableView.insertSections(sections, withRowAnimation: .Automatic)
                         s.tableView.endUpdates()
                         completion?()
                     }
