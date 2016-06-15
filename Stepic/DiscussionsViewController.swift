@@ -196,7 +196,6 @@ class DiscussionsViewController: UIViewController {
                 [weak self] 
                 discussionProxy in
                 self?.discussionIds.all = discussionProxy.discussionIds
-                print("retrieved discussionIds -> \(discussionProxy.discussionIds)")
                 if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
                     self?.loadDiscussions(discussionIdsToLoad, success: 
                         {            
@@ -230,7 +229,6 @@ class DiscussionsViewController: UIViewController {
     }
     
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
-        print("selected discussion with id: \(comment.id), text: \(comment.text) and parent: \(comment.parentId)")
         let alert = DiscussionAlertConstructor.getReplyAlert({
             [weak self] in
             self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
@@ -303,7 +301,6 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection \(section)")
         return replies.loaded[discussions[section].id]?.count ?? 0
     }
     
@@ -349,7 +346,6 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func didTapTableViewFooter(gestureRecognizer: UITapGestureRecognizer) {
-        print("did tap TableView footer")
         if let v = gestureRecognizer.view {
             let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
             update(section: nil, completion: {
@@ -359,7 +355,6 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func didTapHeader(gestureRecognizer: UITapGestureRecognizer) {
-        print("did tap section header \(gestureRecognizer.view?.tag)")
         if let v = gestureRecognizer.view {
             let section = v.tag
             let deselectBlock = CellOperationsUtil.animateViewSelection(v)
@@ -373,7 +368,6 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
     
     func didTapFooter(gestureRecognizer: UITapGestureRecognizer) {
-        print("did tap section footer\(gestureRecognizer.view?.tag)")
         if let v = gestureRecognizer.view {
             let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
             update(section: v.tag, completion: {
@@ -444,7 +438,6 @@ extension DiscussionsViewController : DiscussionCellDelegate {
 
 extension DiscussionsViewController : WriteCommentDelegate {
     func didWriteComment(comment: Comment, userInfo: UserInfo) {
-        print("yay, he wrote the comment mothafucka!")
         print(comment.parentId)
         userInfos[userInfo.id] = userInfo
         if let parentId = comment.parentId {
