@@ -250,11 +250,34 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
+    var discussionHeightUpdateBlocks : [NSIndexPath : Int -> Void] = [:]
+    
+    func discussionForSection(section: Int) -> Comment? {
+        if discussions.count > section {
+            return discussions[section]
+        } else {
+            return nil
+        }
+    }
+    
+    func discussionForIndexPath(indexPath: NSIndexPath) -> Comment? {
+        if let superDiscussion = discussionForSection(indexPath.section) {
+            if replies.loaded[superDiscussion.id]?.count > indexPath.row {
+                return replies.loaded[superDiscussion.id]![indexPath.row]
+            }
+        }
+        return nil
+    }
+    
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        if let comment = discussionForSection(section) {
+            return CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
+        } else {
+            return 0.5
+        }
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -266,7 +289,11 @@ extension DiscussionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        if let comment = discussionForIndexPath(indexPath) {
+            return CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
+        } else {
+            return 0.5
+        }
     }
 }
 

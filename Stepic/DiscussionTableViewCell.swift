@@ -101,6 +101,15 @@ class DiscussionTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    class func estimatedHeightForTextWithComment(comment: Comment) -> Int {
+        var width: CGFloat = 16
+        if comment.parentId != nil {
+            width += 40
+        }
+        
+        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 70
+    }
 }
 
 extension DiscussionTableViewCell : TextHeightDependentCellProtocol {
