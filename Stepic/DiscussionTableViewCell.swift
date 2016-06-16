@@ -36,7 +36,7 @@ class DiscussionTableViewCell: UITableViewCell {
     
     func initLabel() {
         commentLabel.numberOfLines = 0
-        commentLabel.font = UIFont(name: "ArialMT", size: 16)
+        commentLabel.font = UIFont(name: "ArialMT", size: 14)
         commentLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         commentLabel.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
         commentLabel.textAlignment = NSTextAlignment.Natural
@@ -115,7 +115,7 @@ class DiscussionTableViewCell: UITableViewCell {
             width += 40
         }
         
-        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 75
+        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 14, width: UIScreen.mainScreen().bounds.width - width))) + 80
     }
 }
 
