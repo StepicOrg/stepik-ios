@@ -269,16 +269,17 @@ class DiscussionsViewController: UIViewController {
     }
     
     func heightForDiscussion(comment: Comment) -> CGFloat {
-        if let countedHeight = countedHeightForDiscussion[comment.id] {
-            return countedHeight
-        } else {
-            if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-                return countingHeightForDiscussion[comment.id] ?? 0.5
-            } else {
-                countedHeightForDiscussion[comment.id] = CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
-                return countedHeightForDiscussion[comment.id] ?? 0.5
-            }
-        }
+        return CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
+//        if let countedHeight = countedHeightForDiscussion[comment.id] {
+//            return countedHeight
+//        } else {
+//            if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+//                return countingHeightForDiscussion[comment.id] ?? 0.5
+//            } else {
+//                countedHeightForDiscussion[comment.id] = CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
+//                return countedHeightForDiscussion[comment.id] ?? 0.5
+//            }
+//        }
     }
     
     //=======HEIGHT UPDATES

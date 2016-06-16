@@ -54,13 +54,13 @@ class DiscussionTableViewCell: UITableViewCell {
         }
         timeLabel.text = comment.lastTime.getStepicFormatString()
         
-        if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-            commentWebView.hidden = false
-            return webViewHelper.setTextWithTeX(comment.text)
-        } else {
+//        if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+//            commentWebView.hidden = false
+//            return webViewHelper.setTextWithTeX(comment.text)
+//        } else {
             commentLabel.hidden = false
             commentLabel.setTextWithHTMLString(comment.text)
-        }
+//        }
         return nil
     }
     
