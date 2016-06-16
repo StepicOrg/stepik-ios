@@ -290,7 +290,7 @@ class DiscussionsViewController: UIViewController {
     
     var isUpdating: Bool = false
 
-    let nonUpdateMaxCount = 6
+    let nonUpdateMaxCount = 3
     let updateInterval = 0.5
     
     func updateHeights() {
@@ -310,7 +310,7 @@ class DiscussionsViewController: UIViewController {
             let updateHeightBlockResult = CGFloat(heightUpdateBlock())
             print("updating height block result \(updateHeightBlockResult)")
             if countingHeightForDiscussion[discussionId] != nil {
-                if updateHeightsNotEqual(updateHeightBlockResult, to: countingHeightForDiscussion[discussionId]!) {
+                if updateHeightsNotEqual(updateHeightBlockResult, to: countingHeightForDiscussion[discussionId]!) && updateHeightBlockResult != 0 {
                     print("updating height from \(countingHeightForDiscussion[discussionId]!) to \(updateHeightBlockResult)")
                     countingHeightForDiscussion[discussionId] = updateHeightBlockResult
                     nonUpdatingCountForDiscussion[discussionId] = 0
@@ -345,8 +345,9 @@ class DiscussionsViewController: UIViewController {
         if didUpdate {
             UIThread.performUI({
                 [weak self] in
-                self?.tableView.beginUpdates()
-                self?.tableView.endUpdates()
+                self?.tableView.reloadData()
+//                self?.tableView.beginUpdates()
+//                self?.tableView.endUpdates()
             })
         }
         

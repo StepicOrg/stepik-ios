@@ -23,7 +23,7 @@ class VideoStepViewController: UIViewController {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    
+    @IBOutlet weak var showCommentsButton: UIButton!
     
     var imageTapHelper : ImageTapHelper!
     
@@ -81,6 +81,17 @@ class VideoStepViewController: UIViewController {
                     CoreDataHelper.instance.save()
                 }
             }) 
+        }
+    }
+    
+    @IBAction func showCommentsPressed(sender: AnyObject) {
+        if let discussionProxyId = step.discussionProxyId {
+            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
+            vc.discussionProxyId = discussionProxyId
+            vc.target = self.step.id
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            //TODO: Load comments here
         }
     }
 

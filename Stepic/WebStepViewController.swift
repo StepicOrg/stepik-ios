@@ -21,6 +21,8 @@ class WebStepViewController: UIViewController {
 
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var showCommentsButton: UIButton!
+    
     var parent : StepsViewController!
     
     var nItem : UINavigationItem!
@@ -83,7 +85,8 @@ class WebStepViewController: UIViewController {
     func handleQuizType() {
         switch step.block.name {
         case "text":
-            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
+            stepWebView.constrainBottomSpaceToView(showCommentsButton, predicate: "8")
+//            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
         case "choice":
             let quizController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
