@@ -370,6 +370,15 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+
+    
     //=====================
     
 }
@@ -387,7 +396,7 @@ extension DiscussionsViewController : UITableViewDelegate {
         if isShowMoreEnabledForSection(section) {
             return 50
         } else {
-            return 0.5
+            return 10
         }
     }
     
