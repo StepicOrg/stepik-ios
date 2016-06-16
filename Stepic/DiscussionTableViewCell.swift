@@ -53,7 +53,7 @@ class DiscussionTableViewCell: UITableViewCell {
             setLeadingConstraints(-40)
         }
         timeLabel.text = comment.lastTime.getStepicFormatString()
-        
+        userAvatarImageView.setRoundedBounds(width: 0)
 //        if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
 //            commentWebView.hidden = false
 //            return webViewHelper.setTextWithTeX(comment.text)
@@ -115,7 +115,7 @@ class DiscussionTableViewCell: UITableViewCell {
             width += 40
         }
         
-        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 14, width: UIScreen.mainScreen().bounds.width - width))) + 80
+        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 75
     }
 }
 
