@@ -114,3 +114,6 @@ ShowComments = "Show discussions";
 Discussions = "Discussions";
 WriteComment = "Write comment...";
 Comment = "Comment";
+RefreshingDiscussions = "Refreshing discussions...";
+NoDiscussionsTitle = "No discussions";
+NoDiscussionDescription = "Start the first one!";

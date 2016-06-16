@@ -32,6 +32,7 @@ struct Images {
     struct noWifiImage {
         static let size250x250 = UIImage(named: "nowifi_dark_250")!
         static let size100x100 = UIImage(named: "nowifi_dark_100")!
+        static let white = UIImage(named: "no-wifi-white")!
     }    
     
     struct lessonPlaceholderImage {
@@ -57,4 +58,10 @@ struct Images {
     
     static let sendImage = UIImage(named: "Sent-100")!
     static let checkMarkImage = UIImage(named: "Checkmark-100")!
+    
+    struct noCommentsWhite {
+        static let size200x200 = UIImage(named: "nocomments-white")!
+    }
+    
+
 }

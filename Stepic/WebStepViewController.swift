@@ -145,7 +145,6 @@ class WebStepViewController: UIViewController {
         }
     }
     
-    
     //Measured in seconds
     let reloadTimeStandardInterval = 0.5
     let reloadTimeout = 10.0
