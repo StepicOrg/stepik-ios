@@ -30,8 +30,7 @@ class DiscussionsViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
         
-        //TODO: Do NOT forget to localize this!
-        self.title = "Discussions"
+        self.title = NSLocalizedString("Discussions", comment: "")
         
         let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
         self.navigationItem.rightBarButtonItem = writeCommentItem
@@ -175,6 +174,7 @@ class DiscussionsViewController: UIViewController {
         if isShowMoreDiscussionsEnabled() {
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             
+            cell.showMoreLabel.text = NSLocalizedString("ShowMoreDiscussions", comment: "")
             let v = cell.contentView
             let tapG = UITapGestureRecognizer()
             tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapTableViewFooter(_:)))
@@ -494,7 +494,7 @@ extension DiscussionsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if isShowMoreEnabledForSection(section) {
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
-            
+            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
             let v = cell.contentView
             v.tag = section
             let tapG = UITapGestureRecognizer()

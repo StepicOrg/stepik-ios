@@ -32,6 +32,8 @@ class VideoStepViewController: UIViewController {
         
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
+        showCommentsButton.setTitle(NSLocalizedString("ShowComments", comment: ""), forState: .Normal)
+
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
             recognizer in

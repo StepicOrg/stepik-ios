@@ -49,6 +49,7 @@ class WebStepViewController: UIViewController {
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
         print(self.view.gestureRecognizers)
         handleQuizType()
+        showCommentsButton.setTitle(NSLocalizedString("ShowComments", comment: ""), forState: .Normal)
     }
     
     override func viewWillAppear(animated: Bool) {

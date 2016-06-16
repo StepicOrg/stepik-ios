@@ -63,9 +63,8 @@ class WriteCommentViewController: UIViewController {
 
         commentTextView.becomeFirstResponder()
         
-        //TODO: Do not forget to localize this
-        title = "Comment"
-        commentTextView.placeholder = "Write a comment..."
+        title = NSLocalizedString("Comment", comment: "")
+        commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
         setupItems()
         
         state = .Editing
