@@ -28,6 +28,10 @@ end
 
 target 'Stepic' do
     all_pods
+    target 'StepicTests' do
+        inherit! :search_paths
+        all_pods
+    end
 end
 
 target 'SberbankUniversity' do 

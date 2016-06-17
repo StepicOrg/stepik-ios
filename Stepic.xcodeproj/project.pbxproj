@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
+		0800B81B1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		0800B81C1D06DC1B006C987E /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81A1D06DC1B006C987E /* Comment.swift */; };
+		0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */; };
+		0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
+		0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
+		0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8271D070F68006C987E /* DiscussionsAPITests.swift */; };
 		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
@@ -25,7 +36,6 @@
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
 		081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
-		081A7DAB1C56637600583728 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DAA1C56637600583728 /* ChoiceQuizTableViewCell.xib */; };
 		081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
@@ -44,6 +54,10 @@
 		0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
+		082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
+		082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
+		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
@@ -79,11 +93,20 @@
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
+		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
+		084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
+		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
+		084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
+		0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */; };
+		0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */; };
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
 		085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
+		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
+		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
+		085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE31D007F6500092060 /* HTMLParsingTests.swift */; };
 		085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
 		085DF8D51C99B9FB006809D9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
@@ -115,8 +138,8 @@
 		08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
-		087F6B961CE9E2C8002649AB /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParser.swift */; };
-		087F6B971CE9E2C8002649AB /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParser.swift */; };
+		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
+		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
 		087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
 		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
@@ -328,7 +351,6 @@
 		08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08D120F11C937B2200A54ABC /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
-		08D120F21C937B2200A54ABC /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555661C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift */; };
 		08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		08D120F41C937B2200A54ABC /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECD1C6A326900846119 /* Styles.swift */; };
 		08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
@@ -347,7 +369,6 @@
 		08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
-		08D121081C937B2200A54ABC /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DAA1C56637600583728 /* ChoiceQuizTableViewCell.xib */; };
 		08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
@@ -376,11 +397,14 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
+		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
+		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
+		08DB8CBC1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94161B8C58AC00D278AB /* AppDelegate.swift */; };
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */; };
-		08DE942D1B8C58AC00D278AB /* StepicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE942C1B8C58AC00D278AB /* StepicTests.swift */; };
 		08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
 		08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
 		08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
@@ -393,6 +417,24 @@
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
+		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
+		08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
+		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
+		08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
+		08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
+		08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
+		08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E81D0F649700E4F345 /* CellOperationsUtil.swift */; };
+		08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E81D0F649700E4F345 /* CellOperationsUtil.swift */; };
+		08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
+		08EB85ED1D100B7400E4F345 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
+		08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
+		08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
+		08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
+		08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
+		08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
+		08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
+		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
+		08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -423,16 +465,16 @@
 		08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
 		08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
 		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
-		08F555671C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555661C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift */; };
 		08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
-		82A116E2B9177049D159C0C2 /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5C969CB6F2AAA7E166FBB6 /* Pods_SberbankUniversity.framework */; };
-		9727D89C06D5C53D6E050A9C /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399990E5380667DAC0F75724 /* Pods_Stepic.framework */; };
+		8111F35DA0F65D8F47573C1A /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7B232D981BE39AF7FF5BD /* Pods_SberbankUniversity.framework */; };
+		9AC915506C96E942A9B07AF6 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5B6908158F1FBBA506EC57 /* Pods_Stepic.framework */; };
+		D0B5307A3E611AB4686AEFE5 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF3B8E6F32A209782930629 /* Pods_StepicTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		08DE94271B8C58AC00D278AB /* PBXContainerItemProxy */ = {
+		085D5CDE1D007F2200092060 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
 			proxyType = 1;
@@ -442,6 +484,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
+		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
+		0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxiesAPI.swift; sourceTree = "<group>"; };
+		0800B8211D07029B006C987E /* CommentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
+		0800B8241D0704B6006C987E /* ApiUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUtil.swift; sourceTree = "<group>"; };
+		0800B8271D070F68006C987E /* DiscussionsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsAPITests.swift; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -464,7 +513,6 @@
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		081A7DA81C56625F00583728 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
-		081A7DAA1C56637600583728 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
@@ -483,6 +531,8 @@
 		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
+		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
+		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
 		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
 		083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySerializable.swift; sourceTree = "<group>"; };
 		083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationReactionHandler.swift; sourceTree = "<group>"; };
@@ -511,9 +561,16 @@
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
 		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
+		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
+		0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHeightDependentCellProtocol.swift; sourceTree = "<group>"; };
 		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
 		085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerQuizWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
+		0858B7081CFF271200459A6A /* TagDetectionUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetectionUtil.swift; sourceTree = "<group>"; };
+		085D5CD91D007F2100092060 /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		085D5CDD1D007F2200092060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		085D5CE31D007F6500092060 /* HTMLParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingTests.swift; sourceTree = "<group>"; };
 		085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlayerTestStoryboard.storyboard; sourceTree = "<group>"; };
 		085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTestViewController.swift; sourceTree = "<group>"; };
 		085DF8D41C99B9FB006809D9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -533,7 +590,7 @@
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
-		087F6B951CE9E2C8002649AB /* HTMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
@@ -621,15 +678,14 @@
 		08D2AE451C04BA6100BD8C3D /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
+		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
+		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DE94151B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DE94161B8C58AC00D278AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08DE941B1B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08DE941D1B8C58AC00D278AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		08DE94201B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		08DE94261B8C58AC00D278AB /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		08DE942B1B8C58AC00D278AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08DE942C1B8C58AC00D278AB /* StepicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicTests.swift; sourceTree = "<group>"; };
 		08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		08DF1D8B1BDA77A200BA35EA /* PathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
 		08DF1D911BDAB93900BA35EA /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -643,6 +699,15 @@
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
 		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
+		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
+		08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionUpdateDelegate.swift; sourceTree = "<group>"; };
+		08EB85E81D0F649700E4F345 /* CellOperationsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellOperationsUtil.swift; sourceTree = "<group>"; };
+		08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionCellDelegate.swift; sourceTree = "<group>"; };
+		08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
+		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
+		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
+		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -672,25 +737,35 @@
 		08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceReply.swift; sourceTree = "<group>"; };
 		08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTypeQuizViewController.swift; sourceTree = "<group>"; };
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
-		08F555661C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
-		166CFFF931D8A5FF17BDD4EB /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		399990E5380667DAC0F75724 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		640BB8CF2D9831C6B7187316 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
-		A6A1EB8C227A9445D64BF278 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
-		D58015E2C06C8E91946109AF /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
-		EF5C969CB6F2AAA7E166FBB6 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		833BC1EF5A6B83FEE3BD533D /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
+		97C7B232D981BE39AF7FF5BD /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BF3B8E6F32A209782930629 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBBD548D08E20600F21606DD /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
+		DE5B6908158F1FBBA506EC57 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEC2908C7D7F104C2865B62C /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		E2082C1E8BB2CA5EB0CCB216 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		E63DFB75455C79E3AFAD4BB5 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FF6D57F290E341E32E47D9AB /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		085D5CD61D007F2100092060 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0B5307A3E611AB4686AEFE5 /* Pods_StepicTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D121031C937B2200A54ABC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */,
-				82A116E2B9177049D159C0C2 /* Pods_SberbankUniversity.framework in Frameworks */,
+				8111F35DA0F65D8F47573C1A /* Pods_SberbankUniversity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,20 +774,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
-				9727D89C06D5C53D6E050A9C /* Pods_Stepic.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08DE94231B8C58AC00D278AB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9AC915506C96E942A9B07AF6 /* Pods_Stepic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0800B8161D06D933006C987E /* Discussions */ = {
+			isa = PBXGroup;
+			children = (
+				0800B8171D06D961006C987E /* DiscussionProxy.swift */,
+				0800B81A1D06DC1B006C987E /* Comment.swift */,
+			);
+			name = Discussions;
+			sourceTree = "<group>";
+		};
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +904,26 @@
 			name = Units;
 			sourceTree = "<group>";
 		};
+		082CB1AD1D088B6900C79A27 /* Discussions */ = {
+			isa = PBXGroup;
+			children = (
+				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
+				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
+				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
+				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
+				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
+				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
+				08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */,
+				08EB85E81D0F649700E4F345 /* CellOperationsUtil.swift */,
+				08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */,
+				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
+				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
+				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
+				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
+			);
+			name = Discussions;
+			sourceTree = "<group>";
+		};
 		083554261CC8FD0B004C4E85 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,7 +933,6 @@
 				083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */,
 				083540631CE5FBA100BDFEA5 /* NotificationType.swift */,
 				083540661CE5FC0E00BDFEA5 /* Notification.swift */,
-				087F6B951CE9E2C8002649AB /* HTMLParser.swift */,
 				087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */,
 			);
 			name = Notifications;
@@ -889,6 +985,25 @@
 			name = WebViewHelpers;
 			sourceTree = "<group>";
 		};
+		0858B7071CFF26F300459A6A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */,
+				0858B7081CFF271200459A6A /* TagDetectionUtil.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		085D5CDA1D007F2100092060 /* StepicTests */ = {
+			isa = PBXGroup;
+			children = (
+				085D5CDD1D007F2200092060 /* Info.plist */,
+				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
+				0800B8271D070F68006C987E /* DiscussionsAPITests.swift */,
+			);
+			path = StepicTests;
+			sourceTree = "<group>";
+		};
 		085DF8D11C99A8D8006809D9 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +1051,7 @@
 		0885F8491BA8374000F2A188 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0800B8161D06D933006C987E /* Discussions */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
 				08E542071C6CD59A00DEC38E /* Managers */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
@@ -983,6 +1099,9 @@
 				08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */,
 				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
 				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
+				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
+				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				0800B8241D0704B6006C987E /* ApiUtil.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1027,6 +1146,7 @@
 			children = (
 				08D565C81C5F7CE800DE2B6A /* Theory */,
 				08D565C91C5F7CF000DE2B6A /* Practice */,
+				082CB1AD1D088B6900C79A27 /* Discussions */,
 			);
 			name = "Step Content Controllers";
 			sourceTree = "<group>";
@@ -1186,11 +1306,11 @@
 			isa = PBXGroup;
 			children = (
 				08DE94131B8C58AC00D278AB /* Stepic */,
-				08DE94291B8C58AC00D278AB /* StepicTests */,
+				085D5CDA1D007F2100092060 /* StepicTests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* SberbankUniversity */,
-				BA1AC98CD177F70BE94A39CA /* Pods */,
+				E332B56462ADB908B0B63C56 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1198,8 +1318,8 @@
 			isa = PBXGroup;
 			children = (
 				08DE94111B8C58AC00D278AB /* Stepic.app */,
-				08DE94261B8C58AC00D278AB /* StepicTests.xctest */,
 				08D121241C937B2200A54ABC /* SberbankUniversity.app */,
+				085D5CD91D007F2100092060 /* StepicTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1210,6 +1330,7 @@
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
+				0858B7071CFF26F300459A6A /* Utils */,
 				0885F8491BA8374000F2A188 /* Model */,
 				08F204931BB0157F00D080C0 /* Extensions */,
 				08E542041C6C760C00DEC38E /* Enums */,
@@ -1231,23 +1352,6 @@
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
 				08DE94151B8C58AC00D278AB /* Info.plist */,
 				08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		08DE94291B8C58AC00D278AB /* StepicTests */ = {
-			isa = PBXGroup;
-			children = (
-				08DE942C1B8C58AC00D278AB /* StepicTests.swift */,
-				08DE942A1B8C58AC00D278AB /* Supporting Files */,
-			);
-			path = StepicTests;
-			sourceTree = "<group>";
-		};
-		08DE942A1B8C58AC00D278AB /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				08DE942B1B8C58AC00D278AB /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1440,9 +1544,10 @@
 		08F5556A1C50009000C877E8 /* ChoiceQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
-				08F555661C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift */,
 				08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */,
-				081A7DAA1C56637600583728 /* ChoiceQuizTableViewCell.xib */,
+				084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */,
+				084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */,
+				0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */,
 			);
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
@@ -1456,19 +1561,22 @@
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				EF5C969CB6F2AAA7E166FBB6 /* Pods_SberbankUniversity.framework */,
-				399990E5380667DAC0F75724 /* Pods_Stepic.framework */,
+				97C7B232D981BE39AF7FF5BD /* Pods_SberbankUniversity.framework */,
+				DE5B6908158F1FBBA506EC57 /* Pods_Stepic.framework */,
+				9BF3B8E6F32A209782930629 /* Pods_StepicTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BA1AC98CD177F70BE94A39CA /* Pods */ = {
+		E332B56462ADB908B0B63C56 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D58015E2C06C8E91946109AF /* Pods-SberbankUniversity.debug.xcconfig */,
-				640BB8CF2D9831C6B7187316 /* Pods-SberbankUniversity.release.xcconfig */,
-				166CFFF931D8A5FF17BDD4EB /* Pods-Stepic.debug.xcconfig */,
-				A6A1EB8C227A9445D64BF278 /* Pods-Stepic.release.xcconfig */,
+				DEC2908C7D7F104C2865B62C /* Pods-SberbankUniversity.debug.xcconfig */,
+				833BC1EF5A6B83FEE3BD533D /* Pods-SberbankUniversity.release.xcconfig */,
+				BBBD548D08E20600F21606DD /* Pods-Stepic.debug.xcconfig */,
+				E2082C1E8BB2CA5EB0CCB216 /* Pods-Stepic.release.xcconfig */,
+				E63DFB75455C79E3AFAD4BB5 /* Pods-StepicTests.debug.xcconfig */,
+				FF6D57F290E341E32E47D9AB /* Pods-StepicTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1476,17 +1584,38 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		085D5CD81D007F2100092060 /* StepicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
+			buildPhases = (
+				D79C6A78BA3FB5E9A7276B64 /* [CP] Check Pods Manifest.lock */,
+				085D5CD51D007F2100092060 /* Sources */,
+				085D5CD61D007F2100092060 /* Frameworks */,
+				085D5CD71D007F2100092060 /* Resources */,
+				B67AA6BE8F1E22C06D116D56 /* [CP] Embed Pods Frameworks */,
+				2989E4AE535EE2E61F2E251A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				085D5CDF1D007F2200092060 /* PBXTargetDependency */,
+			);
+			name = StepicTests;
+			productName = StepicTests;
+			productReference = 085D5CD91D007F2100092060 /* StepicTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		08D120731C937B2200A54ABC /* SberbankUniversity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */;
 			buildPhases = (
-				E8D2F043255596A5715D08DE /* Check Pods Manifest.lock */,
+				1399FCBFB63D4D3D02384E36 /* [CP] Check Pods Manifest.lock */,
 				08D120741C937B2200A54ABC /* Sources */,
 				08D121031C937B2200A54ABC /* Frameworks */,
 				08D121061C937B2200A54ABC /* Resources */,
 				08D1211F1C937B2200A54ABC /* ShellScript */,
-				A06D7A57E81F614EE1F41CB3 /* Embed Pods Frameworks */,
-				DEBA942DD1A9EAE7A623A913 /* Copy Pods Resources */,
+				151C9422BEBCB2CA68CA3F0E /* [CP] Embed Pods Frameworks */,
+				377C3F6064C214B735B61F2F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1501,13 +1630,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
-				A8A2A37D75FB74A64205EE69 /* Check Pods Manifest.lock */,
+				64738AE5D39857327EAD8C8D /* [CP] Check Pods Manifest.lock */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
-				74B68E0174940A20BB14DEE2 /* Embed Pods Frameworks */,
-				EEC9D465FA214093A6F2FDF6 /* Copy Pods Resources */,
+				E6FF14A4B421FBB35B855E9D /* [CP] Embed Pods Frameworks */,
+				FE28AB752F10286B09E81CE0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1518,24 +1647,6 @@
 			productReference = 08DE94111B8C58AC00D278AB /* Stepic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		08DE94251B8C58AC00D278AB /* StepicTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 08DE94331B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "StepicTests" */;
-			buildPhases = (
-				08DE94221B8C58AC00D278AB /* Sources */,
-				08DE94231B8C58AC00D278AB /* Frameworks */,
-				08DE94241B8C58AC00D278AB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				08DE94281B8C58AC00D278AB /* PBXTargetDependency */,
-			);
-			name = StepicTests;
-			productName = StepicTests;
-			productReference = 08DE94261B8C58AC00D278AB /* StepicTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1543,10 +1654,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
+					085D5CD81D007F2100092060 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 08DE94101B8C58AC00D278AB;
+					};
 					08DE94101B8C58AC00D278AB = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 4562ZPB9BG;
@@ -1558,10 +1673,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					08DE94251B8C58AC00D278AB = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 08DE94101B8C58AC00D278AB;
 					};
 				};
 			};
@@ -1580,22 +1691,29 @@
 			projectRoot = "";
 			targets = (
 				08DE94101B8C58AC00D278AB /* Stepic */,
-				08DE94251B8C58AC00D278AB /* StepicTests */,
 				08D120731C937B2200A54ABC /* SberbankUniversity */,
+				085D5CD81D007F2100092060 /* StepicTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		085D5CD71D007F2100092060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D121061C937B2200A54ABC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				08CB6B4A1C98777A00E8BA50 /* SberbankUniversity.xcassets in Resources */,
 				08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */,
-				08D121081C937B2200A54ABC /* ChoiceQuizTableViewCell.xib in Resources */,
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
+				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				08D1210C1C937B2200A54ABC /* MathJax in Resources */,
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
@@ -1605,6 +1723,7 @@
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
+				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
@@ -1614,6 +1733,8 @@
 				08D121161C937B2200A54ABC /* Scripts.plist in Resources */,
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
 				08D121181C937B2200A54ABC /* Localizable.strings in Resources */,
+				08DB8CBC1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
@@ -1621,6 +1742,7 @@
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
+				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1630,8 +1752,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */,
-				081A7DAB1C56637600583728 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
+				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
@@ -1647,7 +1769,10 @@
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
+				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
@@ -1655,17 +1780,11 @@
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
+				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08DE94241B8C58AC00D278AB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,29 +1817,29 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		74B68E0174940A20BB14DEE2 /* Embed Pods Frameworks */ = {
+		1399FCBFB63D4D3D02384E36 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A06D7A57E81F614EE1F41CB3 /* Embed Pods Frameworks */ = {
+		151C9422BEBCB2CA68CA3F0E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1728,29 +1847,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A8A2A37D75FB74A64205EE69 /* Check Pods Manifest.lock */ = {
+		2989E4AE535EE2E61F2E251A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DEBA942DD1A9EAE7A623A913 /* Copy Pods Resources */ = {
+		377C3F6064C214B735B61F2F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1758,14 +1877,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E8D2F043255596A5715D08DE /* Check Pods Manifest.lock */ = {
+		64738AE5D39857327EAD8C8D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1773,14 +1892,59 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		EEC9D465FA214093A6F2FDF6 /* Copy Pods Resources */ = {
+		B67AA6BE8F1E22C06D116D56 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D79C6A78BA3FB5E9A7276B64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E6FF14A4B421FBB35B855E9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE28AB752F10286B09E81CE0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1791,6 +1955,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		085D5CD51D007F2100092060 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */,
+				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08D120741C937B2200A54ABC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1798,13 +1971,14 @@
 				08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */,
 				08D120751C937B2200A54ABC /* Course.swift in Sources */,
 				08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */,
+				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
 				08CB6B491C98777600E8BA50 /* SbSocialNetworks.swift in Sources */,
 				08D120791C937B2200A54ABC /* AuthentificationManager.swift in Sources */,
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
-				087F6B971CE9E2C8002649AB /* HTMLParser.swift in Sources */,
+				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
 				08CB6B451C98776400E8BA50 /* SbEntranceViewController.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
@@ -1816,7 +1990,9 @@
 				08D120821C937B2200A54ABC /* VideoURL+CoreDataProperties.swift in Sources */,
 				08901E731CD1173200D94613 /* Version.swift in Sources */,
 				08D120831C937B2200A54ABC /* Video+CoreDataProperties.swift in Sources */,
+				08EB85ED1D100B7400E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08D120841C937B2200A54ABC /* Model.xcdatamodeld in Sources */,
+				08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
@@ -1826,29 +2002,35 @@
 				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
+				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				08901E6B1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08D1208C1C937B2200A54ABC /* HTMLBuilder.swift in Sources */,
+				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
 				08D1208E1C937B2200A54ABC /* DeviceInfo.swift in Sources */,
 				08D1208F1C937B2200A54ABC /* UIViewLoadExtension.swift in Sources */,
 				08D120911C937B2200A54ABC /* Section.swift in Sources */,
 				08D120921C937B2200A54ABC /* Step+CoreDataProperties.swift in Sources */,
 				08D120931C937B2200A54ABC /* UnknownTypeQuizViewController.swift in Sources */,
+				0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				08D120941C937B2200A54ABC /* CoursesJoinManager.swift in Sources */,
 				08D120951C937B2200A54ABC /* SortingDataset.swift in Sources */,
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
+				08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
+				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
+				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
@@ -1867,6 +2049,7 @@
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
+				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
 				08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				08D120AC1C937B2200A54ABC /* NumberReply.swift in Sources */,
 				08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */,
@@ -1880,6 +2063,7 @@
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
 				08D120B51C937B2200A54ABC /* Parser.swift in Sources */,
 				08D120B61C937B2200A54ABC /* DownloadTableViewCell.swift in Sources */,
+				0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08D120B71C937B2200A54ABC /* CacheManager.swift in Sources */,
 				08D120B81C937B2200A54ABC /* Time.swift in Sources */,
 				08D120B91C937B2200A54ABC /* Assignment+CoreDataProperties.swift in Sources */,
@@ -1887,6 +2071,7 @@
 				08D120BB1C937B2200A54ABC /* Messages.swift in Sources */,
 				08D120BC1C937B2200A54ABC /* WarningView.swift in Sources */,
 				08D120BD1C937B2200A54ABC /* CoreDataHelper.swift in Sources */,
+				0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
@@ -1897,6 +2082,7 @@
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
 				08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */,
+				08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08D120C71C937B2200A54ABC /* QuizControllerDelegate.swift in Sources */,
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
@@ -1917,6 +2103,7 @@
 				08D120D61C937B2200A54ABC /* GCDThings.swift in Sources */,
 				08D120D71C937B2200A54ABC /* StepsViewController.swift in Sources */,
 				08D120D81C937B2200A54ABC /* Block.swift in Sources */,
+				084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				08D120DA1C937B2200A54ABC /* CourseTableViewCell.swift in Sources */,
 				083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
@@ -1948,11 +2135,11 @@
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
-				08D120F21C937B2200A54ABC /* ChoiceQuizTableViewCell.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
 				08D120F61C937B2200A54ABC /* Sorter.swift in Sources */,
+				082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08D120F71C937B2200A54ABC /* RegistrationViewController.swift in Sources */,
 				08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */,
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
@@ -1971,7 +2158,9 @@
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
+				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
+				0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1983,6 +2172,7 @@
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
+				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
@@ -2001,7 +2191,9 @@
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
+				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
@@ -2011,29 +2203,35 @@
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
+				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
+				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
+				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
+				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
+				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
+				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
@@ -2052,6 +2250,7 @@
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
+				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
@@ -2065,6 +2264,7 @@
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
@@ -2072,6 +2272,7 @@
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
+				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
@@ -2082,6 +2283,7 @@
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
+				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
@@ -2102,6 +2304,7 @@
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
+				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
 				0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */,
@@ -2130,14 +2333,14 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
-				087F6B961CE9E2C8002649AB /* HTMLParser.swift in Sources */,
-				08F555671C4FFFDC00C877E8 /* ChoiceQuizTableViewCell.swift in Sources */,
+				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
+				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
@@ -2156,26 +2359,20 @@
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
+				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
+				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		08DE94221B8C58AC00D278AB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08DE942D1B8C58AC00D278AB /* StepicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		08DE94281B8C58AC00D278AB /* PBXTargetDependency */ = {
+		085D5CDF1D007F2200092060 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 08DE94101B8C58AC00D278AB /* Stepic */;
-			targetProxy = 08DE94271B8C58AC00D278AB /* PBXContainerItemProxy */;
+			targetProxy = 085D5CDE1D007F2200092060 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2210,9 +2407,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		085D5CE01D007F2200092060 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E63DFB75455C79E3AFAD4BB5 /* Pods-StepicTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = StepicTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stepic.app/Stepic";
+			};
+			name = Debug;
+		};
+		085D5CE11D007F2200092060 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF6D57F290E341E32E47D9AB /* Pods-StepicTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = StepicTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.StepicTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stepic.app/Stepic";
+			};
+			name = Release;
+		};
 		08D121221C937B2200A54ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D58015E2C06C8E91946109AF /* Pods-SberbankUniversity.debug.xcconfig */;
+			baseConfigurationReference = DEC2908C7D7F104C2865B62C /* Pods-SberbankUniversity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2232,7 +2460,7 @@
 		};
 		08D121231C937B2200A54ABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 640BB8CF2D9831C6B7187316 /* Pods-SberbankUniversity.release.xcconfig */;
+			baseConfigurationReference = 833BC1EF5A6B83FEE3BD533D /* Pods-SberbankUniversity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2320,6 +2548,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2339,7 +2568,7 @@
 		};
 		08DE94311B8C58AC00D278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 166CFFF931D8A5FF17BDD4EB /* Pods-Stepic.debug.xcconfig */;
+			baseConfigurationReference = BBBD548D08E20600F21606DD /* Pods-Stepic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2359,7 +2588,7 @@
 		};
 		08DE94321B8C58AC00D278AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6A1EB8C227A9445D64BF278 /* Pods-Stepic.release.xcconfig */;
+			baseConfigurationReference = E2082C1E8BB2CA5EB0CCB216 /* Pods-Stepic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2376,45 +2605,18 @@
 			};
 			name = Release;
 		};
-		08DE94341B8C58AC00D278AB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StepicTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stepic.app/Stepic";
-			};
-			name = Debug;
-		};
-		08DE94351B8C58AC00D278AB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StepicTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stepic.app/Stepic";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				085D5CE01D007F2200092060 /* Debug */,
+				085D5CE11D007F2200092060 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2442,27 +2644,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		08DE94331B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "StepicTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				08DE94341B8C58AC00D278AB /* Debug */,
-				08DE94351B8C58AC00D278AB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */,
 				083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */,
 				083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */,
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */;
+			currentVersion = 0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

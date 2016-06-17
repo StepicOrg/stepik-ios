@@ -33,7 +33,6 @@ class CellWebViewHelper {
         let scriptsString = "\(Scripts.localTexScript)"
         let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, addStyle: true, textColorHex: textColorHex)
         webView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
-        
         return {
             [weak self] in
             if let cw = self?.webView {
@@ -46,5 +45,8 @@ class CellWebViewHelper {
         }        
     }
 
+    deinit {
+        print("deinit helper")
+    }
     
 }

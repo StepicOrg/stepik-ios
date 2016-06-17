@@ -24,6 +24,30 @@ extension UILabel {
 //        Time.tock(htmlText)
     }
     
+    class func heightForLabelWithText(text: String, lines: Int, fontName: String, fontSize: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.Natural) -> CGFloat {
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
+        
+        label.numberOfLines = lines
+        
+        if html {
+            label.setTextWithHTMLString(text)
+        } else {
+            label.text = text
+        }
+        
+        label.font = UIFont(name: fontName, size: fontSize)
+        label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        label.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
+        label.textAlignment = alignment
+        label.sizeToFit()
+        
+        //        print(label.bounds.height)
+        return label.bounds.height
+
+        
+    }
+    
     class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.Natural) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
         
