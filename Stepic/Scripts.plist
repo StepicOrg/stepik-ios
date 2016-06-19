@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MetaViewport</key>
+	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0&quot; /&gt;</string>
+	<key>MathJaxFinishScript</key>
+	<string>&lt;script&gt;
+MathJax.Hub.Queue(function () {
+alert(&apos;WKWebView JS Call!&apos;)});
+&lt;/script&gt;</string>
 	<key>LocalTexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});

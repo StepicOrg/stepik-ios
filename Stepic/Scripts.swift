@@ -31,12 +31,25 @@ struct Scripts {
     
     private static var localTexScriptKey : String = "LocalTexScript"
 
+    private static var metaViewportKey : String = "MetaViewport"
+    
+    private static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
+    
+    
     static var localTexScript : String {
         return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
     }
     
+    static var metaViewport : String {
+        return "\(loadScriptWithKey(metaViewportKey))"
+    }
+    
+    static var mathJaxFinishedScript: String {
+        return "\(loadScriptWithKey(mathJaxFinishedScriptKey))"
+    }
+    
     private static var mathJaxLocalPathScript : String {
-        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
+//        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
         
         let scriptBeginning = "<script type=\"text/javascript\" src=\"MathJax/MathJax.js"
         let scriptEnding = "?config=TeX-AMS-MML_HTMLorMML\"></script>" //
