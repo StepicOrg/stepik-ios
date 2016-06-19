@@ -88,12 +88,11 @@ class HTMLContentView: UIView {
         self.webView = WKWebView(frame: CGRectZero, configuration: theConfiguration)
 
         webView.scrollView.scrollEnabled = false
-        webView.allowsLinkPreview = true
         webView.backgroundColor = UIColor.clearColor()
         webView.scrollView.backgroundColor = UIColor.clearColor()
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         webView.navigationDelegate = self
-        webViewHeight = webView.constrainHeight("0")
+        webViewHeight = webView.constrainHeight("0")[0] as! NSLayoutConstraint
         webViewHeight.active = false
         
         addSubview(webView)
