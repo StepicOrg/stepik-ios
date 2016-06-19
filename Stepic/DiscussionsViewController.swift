@@ -14,6 +14,24 @@ enum DiscussionsEmptyDataSetState {
     case Error, Empty, None
 }
 
+struct DiscussionsCellInfo {
+    var comment: Comment?
+    var loadRepliesFor: Comment?
+    var loadDiscussions: Bool?
+    
+    init(comment: Comment) {
+        self.comment = comment
+    }
+    
+    init(loadRepliesFor: Comment) {
+        self.loadRepliesFor = loadRepliesFor
+    }
+    
+    init(loadDiscussions: Bool) {
+        self.loadDiscussions = loadDiscussions
+    }
+}
+
 class DiscussionsViewController: UIViewController {
 
     var discussionProxyId: String!
@@ -23,7 +41,7 @@ class DiscussionsViewController: UIViewController {
     
     var refreshControl : UIRefreshControl? = UIRefreshControl()
     
-    var comments = [Comment?]()
+    var cellsInfo = [DiscussionsCellInfo]()
     
     var emptyDatasetState : DiscussionsEmptyDataSetState = .None {
         didSet {
@@ -198,6 +216,23 @@ class DiscussionsViewController: UIViewController {
     
     func reloadTableData() {
         //TODO: Create comments list here, then reload tableView data
+        cellsInfo = []
+        for discussion in discussions {
+            cellsInfo.append(DiscussionsCellInfo(comment: discussion))
+            for reply in replies.loaded[discussion.id] ?? [] {
+                cellsInfo.append(DiscussionsCellInfo(comment: reply))
+            }
+            
+            let left = replies.leftToLoad(discussion)
+            if left > 0 {
+                cellsInfo.append(DiscussionsCellInfo(loadRepliesFor: discussion))
+            }
+        }
+        
+        UIThread.performUI({
+            [weak self] in
+            self?.tableView.reloadData()
+        })
     }
     
     func updateTableFooterView() {
@@ -269,19 +304,19 @@ class DiscussionsViewController: UIViewController {
         return discussionIds.leftToLoad > 0
     }
     
-    func getLoadedReplies(discussion: Comment) -> [(Int, Comment)] {
-        return comments.enumerate().filter({
-            index, comment in
-            comment?.parentId == discussion.id
-        }).flatMap({
-            index, comment in
-            if let c = comment {
-                return (index, c)
-            } else {
-                return nil
-            }
-        })
-    }
+//    func getLoadedReplies(discussion: Comment) -> [(Int, Comment)] {
+//        return comments.enumerate().filter({
+//            index, comment in
+//            comment?.parentId == discussion.id
+//        }).flatMap({
+//            index, comment in
+//            if let c = comment {
+//                return (index, c)
+//            } else {
+//                return nil
+//            }
+//        })
+//    }
     
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
         let alert = DiscussionAlertConstructor.getReplyAlert({
