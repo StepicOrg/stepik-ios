@@ -23,6 +23,7 @@ class DiscussionsViewController: UIViewController {
     
     var refreshControl : UIRefreshControl? = UIRefreshControl()
     
+    var comments = [Comment?]()
     
     var emptyDatasetState : DiscussionsEmptyDataSetState = .None {
         didSet {
@@ -195,6 +196,10 @@ class DiscussionsViewController: UIViewController {
         )
     }
     
+    func reloadTableData() {
+        //TODO: Create comments list here, then reload tableView data
+    }
+    
     func updateTableFooterView() {
         if isShowMoreDiscussionsEnabled() {
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
@@ -262,6 +267,20 @@ class DiscussionsViewController: UIViewController {
     
     func isShowMoreDiscussionsEnabled() -> Bool {
         return discussionIds.leftToLoad > 0
+    }
+    
+    func getLoadedReplies(discussion: Comment) -> [(Int, Comment)] {
+        return comments.enumerate().filter({
+            index, comment in
+            comment?.parentId == discussion.id
+        }).flatMap({
+            index, comment in
+            if let c = comment {
+                return (index, c)
+            } else {
+                return nil
+            }
+        })
     }
     
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
