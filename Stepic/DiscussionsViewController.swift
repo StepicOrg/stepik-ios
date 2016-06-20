@@ -14,13 +14,19 @@ enum DiscussionsEmptyDataSetState {
     case Error, Empty, None
 }
 
+enum SeparatorType {
+    case Small, Big, None
+}
+
 struct DiscussionsCellInfo {
     var comment: Comment?
     var loadRepliesFor: Comment?
     var loadDiscussions: Bool?
+    var separatorType: SeparatorType = .None
     
-    init(comment: Comment) {
+    init(comment: Comment, separatorType: SeparatorType) {
         self.comment = comment
+        self.separatorType = separatorType
     }
     
     init(loadRepliesFor: Comment) {
@@ -197,8 +203,6 @@ class DiscussionsViewController: UIViewController {
                     }
                                         
                     success?()
-                    
-                    self?.emptyDatasetState = .Empty
                 }
             }, error: {
                 [weak self]
@@ -217,19 +221,27 @@ class DiscussionsViewController: UIViewController {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
         for discussion in discussions {
-            cellsInfo.append(DiscussionsCellInfo(comment: discussion))
+            cellsInfo.append(DiscussionsCellInfo(comment: discussion, separatorType: .Small))
             for reply in replies.loaded[discussion.id] ?? [] {
-                cellsInfo.append(DiscussionsCellInfo(comment: reply))
+                cellsInfo.append(DiscussionsCellInfo(comment: reply, separatorType: .Small))
             }
             
             let left = replies.leftToLoad(discussion)
             if left > 0 {
                 cellsInfo.append(DiscussionsCellInfo(loadRepliesFor: discussion))
+            } else {
+                cellsInfo[cellsInfo.count - 1].separatorType = .Big
             }
         }
         
         UIThread.performUI({
             [weak self] in
+            if self?.cellsInfo.count == 0 {                
+                self?.tableView.emptyDataSetSource = self
+                self?.emptyDatasetState = .Empty
+            } else {
+                self?.tableView.emptyDataSetSource = nil
+            }
             self?.tableView.reloadData()
         })
     }
@@ -337,7 +349,7 @@ extension DiscussionsViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("did select row at indexPath \(indexPath)")
-        if let comment = cellsInfo[indexPath.row].comment {
+        if let comment = cellsInfo[indexPath.row].comment {            
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             handleSelectDiscussion(comment, cell: cell, completion: {
                 [weak self] in
@@ -397,12 +409,12 @@ extension DiscussionsViewController : UITableViewDataSource {
                 print("cell is cached")
                 return cell
             }
-
+            
             print("comment cell")
             let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
 
             if let user = userInfos[comment.userId] {
-                cell.initWithComment(comment, user: user) 
+                cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
                 cell.heightUpdateBlock = {
                     [weak self] in
                     dispatch_async(dispatch_get_main_queue(), {

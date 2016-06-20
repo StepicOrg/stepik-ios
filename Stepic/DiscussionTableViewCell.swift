@@ -21,18 +21,38 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var htmlContentView: HTMLContentView!
+    @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
     
     var hasSeparator: Bool = false {
         didSet {
             separatorView?.hidden = !hasSeparator
         }
     }
+    
+    var separatorType: SeparatorType = .None
+    
     var heightUpdateBlock : (Void->Void)?
-
-    func initWithComment(comment: Comment, user: UserInfo)  {
+    func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         userAvatarImageView.setRoundedBounds(width: 0)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
+        self.separatorType = separatorType
+        switch separatorType {
+        case .None:
+            hasSeparator = false
+            separatorHeightConstraint.constant = 0
+            break
+        case .Small:
+            hasSeparator = true
+            separatorHeightConstraint.constant = 0.5
+            break
+        case .Big:
+            hasSeparator = true
+            separatorHeightConstraint.constant = 10
+            separatorLeadingConstraint.constant = -8
+            break
+        }
         if comment.parentId != nil {
             setLeadingConstraints(-40)
         }
@@ -44,6 +64,13 @@ class DiscussionTableViewCell: UITableViewCell {
     private func setLeadingConstraints(constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         textContainerLeadingConstraint.constant = constant
+        switch self.separatorType {
+        case .Small: 
+            separatorLeadingConstraint.constant = -constant + 8
+            break
+        default: 
+            break
+        }
     }
     
     override func awakeFromNib() {

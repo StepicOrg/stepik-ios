@@ -72,7 +72,7 @@ class HTMLContentView: UIView {
     
     private func setUpLabel() {
         addSubview(label)
-        label.alignToView(self)
+        label.alignTop("0", leading: "8", bottom: "0", trailing: "0", toView: self)
         label.numberOfLines = 0
         label.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
         webView.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)

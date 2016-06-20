@@ -40,7 +40,7 @@
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV4-ue-5er">
                         <rect key="frame" x="16" y="92" width="393" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="wgI-Pg-Mbo"/>
                         </constraints>
@@ -70,6 +70,8 @@
                 <outlet property="ImageLeadingConstraint" destination="KPO-cX-FvW" id="fMQ-wI-JdI"/>
                 <outlet property="htmlContentView" destination="XqE-VO-duM" id="Bml-SW-lwn"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
+                <outlet property="separatorHeightConstraint" destination="wgI-Pg-Mbo" id="epW-KA-daK"/>
+                <outlet property="separatorLeadingConstraint" destination="EJ0-8Z-U7Z" id="X2X-wB-q8E"/>
                 <outlet property="separatorView" destination="pV4-ue-5er" id="ZQA-fC-Y3W"/>
                 <outlet property="textContainerLeadingConstraint" destination="HCo-Zm-Sew" id="Cgu-dX-VWb"/>
                 <outlet property="timeLabel" destination="RmE-el-xJX" id="aU3-Xg-wIJ"/>
