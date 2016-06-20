@@ -34,7 +34,7 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-VO-duM">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-VO-duM" customClass="HTMLContentView" customModule="SberbankUniversity" customModuleProvider="target">
                         <rect key="frame" x="8" y="61" width="393" height="24"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -47,6 +47,7 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="XqE-VO-duM" firstAttribute="top" secondItem="RmE-el-xJX" secondAttribute="bottom" priority="750" constant="13" id="6FB-Jo-gcY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6YZ-wn-n05" secondAttribute="trailing" id="7Ao-W6-ffs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pV4-ue-5er" secondAttribute="bottom" constant="-8" id="8Lt-gZ-xDf"/>
                     <constraint firstItem="XqE-VO-duM" firstAttribute="top" secondItem="IO2-jl-qQ3" secondAttribute="bottom" constant="8" id="8ho-hm-uqQ"/>
@@ -57,26 +58,20 @@
                     <constraint firstAttribute="leadingMargin" secondItem="XqE-VO-duM" secondAttribute="leading" id="HCo-Zm-Sew"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IO2-jl-qQ3" secondAttribute="leading" id="KPO-cX-FvW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XqE-VO-duM" secondAttribute="trailing" id="QWu-Xy-FD8"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="IO2-jl-qQ3" secondAttribute="bottom" id="UPS-dg-TgZ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XqE-VO-duM" secondAttribute="bottom" id="YAw-sB-iuY"/>
                     <constraint firstAttribute="topMargin" secondItem="IO2-jl-qQ3" secondAttribute="top" id="csc-39-e8Y"/>
                     <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="fea-h6-AxJ"/>
                     <constraint firstAttribute="topMargin" secondItem="6YZ-wn-n05" secondAttribute="top" id="lV3-UU-zNv"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="top" secondItem="6YZ-wn-n05" secondAttribute="bottom" constant="8" id="qLL-xo-z4O"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="UPS-dg-TgZ"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="ImageLeadingConstraint" destination="KPO-cX-FvW" id="fMQ-wI-JdI"/>
+                <outlet property="htmlContentView" destination="XqE-VO-duM" id="Bml-SW-lwn"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
                 <outlet property="separatorView" destination="pV4-ue-5er" id="ZQA-fC-Y3W"/>
                 <outlet property="textContainerLeadingConstraint" destination="HCo-Zm-Sew" id="Cgu-dX-VWb"/>
-                <outlet property="textContainerView" destination="XqE-VO-duM" id="FJJ-DU-6ya"/>
                 <outlet property="timeLabel" destination="RmE-el-xJX" id="aU3-Xg-wIJ"/>
                 <outlet property="userAvatarImageView" destination="IO2-jl-qQ3" id="FXP-ux-Uch"/>
             </connections>

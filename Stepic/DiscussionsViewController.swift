@@ -60,6 +60,9 @@ class DiscussionsViewController: UIViewController {
         tableView.emptyDataSetDelegate = self
         emptyDatasetState = .None
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        
         tableView.tableFooterView = UIView()
         
         tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
@@ -117,11 +120,8 @@ class DiscussionsViewController: UIViewController {
         userInfos = [Int: UserInfo]()
         discussions = [Comment]()
 
-        heightUpdateBlockForDiscussion = [:]
-        countedHeightForDiscussion = [:]
-
         if withReload {
-            tableView.reloadData()
+            self.reloadTableData()
         }
     }
     
@@ -138,7 +138,11 @@ class DiscussionsViewController: UIViewController {
             return []
         } 
         let discussion = discussions[section]
-//        let startIndex = replies.loaded[discussion.id]?.count ?? 0
+
+        return getNextReplyIdsToLoad(discussion)
+    }
+    
+    func getNextReplyIdsToLoad(discussion: Comment) -> [Int] {
         let loadedIds : [Int] = replies.loaded[discussion.id]?.map({return $0.id}) ?? []
         let loadedReplies = Set<Int>(loadedIds)
         var res : [Int] = []
@@ -152,8 +156,6 @@ class DiscussionsViewController: UIViewController {
             }
         }
         return res
-        
-//        return Array(discussion.repliesIds[startIndex ..< startIndex + min(repliesLoadingInterval, replies.leftToLoad(discussion))])
     }
     
     func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
@@ -196,10 +198,6 @@ class DiscussionsViewController: UIViewController {
                     success?()
                     
                     self?.emptyDatasetState = .Empty
-                    
-                    UIThread.performUI { 
-                        s.updateTableFooterView() 
-                    }
                 }
             }, error: {
                 [weak self]
@@ -217,6 +215,7 @@ class DiscussionsViewController: UIViewController {
     func reloadTableData() {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
+        cellForRow = [:]
         for discussion in discussions {
             cellsInfo.append(DiscussionsCellInfo(comment: discussion))
             for reply in replies.loaded[discussion.id] ?? [] {
@@ -235,23 +234,9 @@ class DiscussionsViewController: UIViewController {
         })
     }
     
-    func updateTableFooterView() {
-        if isShowMoreDiscussionsEnabled() {
-            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
-            
-            cell.showMoreLabel.text = NSLocalizedString("ShowMoreDiscussions", comment: "")
-            let v = cell.contentView
-            let tapG = UITapGestureRecognizer()
-            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapTableViewFooter(_:)))
-            v.addGestureRecognizer(tapG)
-            
-            tableView.tableFooterView = v
-        } else {
-            tableView.tableFooterView = nil
-        }
-    }
     
     var isReloading: Bool = false
+    
     func reloadDiscussions() {
         emptyDatasetState = .None
         if isReloading {
@@ -270,8 +255,7 @@ class DiscussionsViewController: UIViewController {
                             [weak self] in
                             UIThread.performUI {
                                 self?.refreshControl?.endRefreshing()
-                                self?.tableView.reloadData()
-//                                self?.startUpdatingHeights()
+                                self?.reloadTableData()
                                 self?.isReloading = false
                             }
                         }
@@ -303,20 +287,6 @@ class DiscussionsViewController: UIViewController {
     func isShowMoreDiscussionsEnabled() -> Bool {
         return discussionIds.leftToLoad > 0
     }
-    
-//    func getLoadedReplies(discussion: Comment) -> [(Int, Comment)] {
-//        return comments.enumerate().filter({
-//            index, comment in
-//            comment?.parentId == discussion.id
-//        }).flatMap({
-//            index, comment in
-//            if let c = comment {
-//                return (index, c)
-//            } else {
-//                return nil
-//            }
-//        })
-//    }
     
     func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
         let alert = DiscussionAlertConstructor.getReplyAlert({
@@ -355,109 +325,6 @@ class DiscussionsViewController: UIViewController {
         return nil
     }
     
-    func heightForDiscussion(comment: Comment) -> CGFloat {
-        return CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
-//        if let countedHeight = countedHeightForDiscussion[comment.id] {
-//            return countedHeight
-//        } else {
-//            if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-//                return countingHeightForDiscussion[comment.id] ?? 0.5
-//            } else {
-//                countedHeightForDiscussion[comment.id] = CGFloat(DiscussionTableViewCell.estimatedHeightForTextWithComment(comment))
-//                return countedHeightForDiscussion[comment.id] ?? 0.5
-//            }
-//        }
-    }
-    
-    //=======HEIGHT UPDATES
-    
-    var heightUpdateBlockForDiscussion : [Int : Void -> Int] = [:]
-    var countedHeightForDiscussion : [Int: CGFloat] = [:]
-    var countingHeightForDiscussion : [Int : CGFloat] = [:]
-    var nonUpdatingCountForDiscussion: [Int: Int] = [:]
-    
-    var isUpdating: Bool = false
-
-    let nonUpdateMaxCount = 3
-    let updateInterval = 0.5
-    
-    func updateHeights() {
-        
-        func updateHeightsNotEqual(h1: CGFloat, to h2: CGFloat) -> Bool {
-            return abs(h1 - h2) > 1
-        }
-        
-        print("updateHeight called")
-
-        isUpdating = true
-        var discussionIdsToUnsubscribe = [Int]()
-        var didUpdate = false
-        
-        for (discussionId, heightUpdateBlock) in heightUpdateBlockForDiscussion {
-            print("performing updates for discussion id \(discussionId)")
-            let updateHeightBlockResult = CGFloat(heightUpdateBlock())
-            print("updating height block result \(updateHeightBlockResult)")
-            if countingHeightForDiscussion[discussionId] != nil {
-                if updateHeightsNotEqual(updateHeightBlockResult, to: countingHeightForDiscussion[discussionId]!) && updateHeightBlockResult != 0 {
-                    print("updating height from \(countingHeightForDiscussion[discussionId]!) to \(updateHeightBlockResult)")
-                    countingHeightForDiscussion[discussionId] = updateHeightBlockResult
-                    nonUpdatingCountForDiscussion[discussionId] = 0
-                    didUpdate = true
-                } else {
-                    if nonUpdatingCountForDiscussion[discussionId] != nil {
-                        nonUpdatingCountForDiscussion[discussionId]! += 1
-                    } else {
-                        nonUpdatingCountForDiscussion[discussionId] = 1
-                    }
-                    print("did not update height, nonUpdating count \(nonUpdatingCountForDiscussion[discussionId]!)")
-                    if nonUpdatingCountForDiscussion[discussionId]! > nonUpdateMaxCount {
-                        discussionIdsToUnsubscribe += [discussionId]
-                    }
-                }
-            } else {
-                print("setting countingHeight height to \(updateHeightBlockResult)")
-                countingHeightForDiscussion[discussionId] = updateHeightBlockResult
-                nonUpdatingCountForDiscussion[discussionId] = 0
-                didUpdate = true
-            }
-        }
-        
-        for id in discussionIdsToUnsubscribe {
-            print("unsubscribing discussion with id \(id)")
-            nonUpdatingCountForDiscussion[id] = nil
-            heightUpdateBlockForDiscussion[id] = nil
-            countedHeightForDiscussion[id] = countingHeightForDiscussion[id]!
-            countingHeightForDiscussion[id] = nil
-        }
-        
-        if didUpdate {
-            UIThread.performUI({
-                [weak self] in
-                self?.tableView.reloadData()
-//                self?.tableView.beginUpdates()
-//                self?.tableView.endUpdates()
-            })
-        }
-        
-        print("in end of updateHeight, \(heightUpdateBlockForDiscussion.count) left")
-        
-        if heightUpdateBlockForDiscussion.count > 0 {
-            delay(updateInterval, closure: {
-                [weak self] in
-                self?.updateHeights()
-            })
-        } else {
-            isUpdating = false
-        }
-    }
-    
-    func startUpdatingHeights() {
-        if !isUpdating {
-            updateHeights()
-        }
-    }
-    
-    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
@@ -465,159 +332,45 @@ class DiscussionsViewController: UIViewController {
         tableView.endUpdates()
     }
 
-    
-    //=====================
+    //TODO: Think when to reload this value
+    var cellForRow = [Int: UITableViewCell]()
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let comment = discussionForSection(section) {
-            return heightForDiscussion(comment)
-        } else {
-            return 0.5
-        }
+        print("CGFLoat min -> \(CGFloat.min)")
+        return CGFloat.min
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if isShowMoreEnabledForSection(section) {
-            return 50
-        } else {
-            return 10
-        }
+        return CGFloat.min
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if let comment = discussionForIndexPath(indexPath) {
-            return heightForDiscussion(comment)
-        } else {
-            return 0.5
-        }
-    }
-}
-
-extension DiscussionsViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return discussions.count
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return replies.loaded[discussions[section].id]?.count ?? 0
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
-        
-        if discussions.count > indexPath.section && replies.loaded[discussions[indexPath.section].id]?.count > indexPath.row {
-            if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
-                if let user = userInfos[comment.userId] {
-                    cell.indexPath = indexPath
-                    cell.delegate = self
-                    if let heightUpdateBlock = cell.initWithComment(comment, user: user) {
-                        if countedHeightForDiscussion[comment.id] == nil {
-                            heightUpdateBlockForDiscussion[comment.id] = heightUpdateBlock
-                            startUpdatingHeights()
-                        }
-                    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let comment = cellsInfo[indexPath.row].comment {
+            handleSelectDiscussion(comment, completion: {
+                [weak self] in
+                UIThread.performUI { 
+                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true) 
                 }
-            }
-        } else {
-            //TODO: Maybe should handle double refresh somehow
-//            print("that was a double refresh")
-        }
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell") as! DiscussionTableViewCell
-        
-        if discussions.count <= section  {
-            return nil
-        }
-        
-        let comment = discussions[section]
-        if let user = userInfos[comment.userId] {
-            if let heightUpdateBlock = cell.initWithComment(comment, user: user) {
-                if countedHeightForDiscussion[comment.id] == nil {
-                    heightUpdateBlockForDiscussion[comment.id] = heightUpdateBlock
-                    startUpdatingHeights()
-                }
-            }
-            let v = cell.contentView
-            v.tag = section
-            let tapG = UITapGestureRecognizer()
-            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapHeader(_:)))
-            v.addGestureRecognizer(tapG)
-            
-            return v
-        } else {
-            return nil
-        }
-    }
-    
-    func didTapTableViewFooter(gestureRecognizer: UITapGestureRecognizer) {
-        if let v = gestureRecognizer.view {
-            let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
-            update(section: nil, completion: {
-                refreshView.removeFromSuperview()
             })
         }
-    }
-    
-    func didTapHeader(gestureRecognizer: UITapGestureRecognizer) {
-        if let v = gestureRecognizer.view {
-            let section = v.tag
-            let deselectBlock = CellOperationsUtil.animateViewSelection(v)
-            if discussions.count > section {
-                let comment = discussions[section]
-                handleSelectDiscussion(comment, completion: deselectBlock)
-            } else {
-                deselectBlock()
-            }
-        }
-    }
-    
-    func didTapFooter(gestureRecognizer: UITapGestureRecognizer) {
-        if let v = gestureRecognizer.view {
-            let refreshView = CellOperationsUtil.addRefreshView(v, backgroundColor: tableView.backgroundColor!)
-            update(section: v.tag, completion: {
-                refreshView.removeFromSuperview()
-            })
-        }
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if isShowMoreEnabledForSection(section) {
-            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
-            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
-            let v = cell.contentView
-            v.tag = section
-            let tapG = UITapGestureRecognizer()
-            tapG.addTarget(self, action: #selector(DiscussionsViewController.didTapFooter(_:)))
-            v.addGestureRecognizer(tapG)
-            
-            return v
-        } else {
-            return nil
-        }
-    }
-}
-
-extension DiscussionsViewController : DiscussionUpdateDelegate {
-    func update(section section: Int?, completion: (Void->Void)?) {
-        if let s = section {
-            let idsToLoad = getNextReplyIdsToLoad(s)
+        
+        if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+            let idsToLoad = getNextReplyIdsToLoad(loadRepliesFor)
             loadDiscussions(idsToLoad, success: {
                 [weak self] in
                 UIThread.performUI {
                     self?.tableView.beginUpdates()
-                    self?.tableView.reloadSections(NSIndexSet(index: s), withRowAnimation: UITableViewRowAnimation.Automatic)
+                    //TODO: Change to animated reload
+                    self?.reloadTableData()
                     self?.tableView.endUpdates()
-//                    self?.startUpdatingHeights()
-                    completion?()
+                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 }
             })
-        } else {
+
+        }
+        if let shouldLoadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
             let idsToLoad = getNextDiscussionIdsToLoad()
             loadDiscussions(idsToLoad, success: {
                 [weak self] in
@@ -625,10 +378,9 @@ extension DiscussionsViewController : DiscussionUpdateDelegate {
                     if let s = self {
                         s.tableView.beginUpdates()
                         let sections = NSIndexSet(indexesInRange: NSMakeRange(s.discussions.count - idsToLoad.count, idsToLoad.count))
-                        s.tableView.insertSections(sections, withRowAnimation: .Automatic)
+                        self?.reloadTableData()
                         s.tableView.endUpdates()
-//                        self?.startUpdatingHeights()
-                        completion?()
+                        self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                     }
                 }
             })
@@ -636,15 +388,53 @@ extension DiscussionsViewController : DiscussionUpdateDelegate {
     }
 }
 
-extension DiscussionsViewController : DiscussionCellDelegate {
-    func didSelect(indexPath: NSIndexPath, deselectBlock: (Void -> Void)) {
-        if discussions.count > indexPath.section && replies.loaded[discussions[indexPath.section].id]?.count > indexPath.row {
-            if let comment = replies.loaded[discussions[indexPath.section].id]?[indexPath.row] {
-                handleSelectDiscussion(comment, completion: deselectBlock)
-            }
-        } else {
-            deselectBlock()
+extension DiscussionsViewController : UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellsInfo.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if let cell = cellForRow[indexPath.row] {
+            return cell
         }
+        
+        if let comment = cellsInfo[indexPath.row].comment {
+            let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
+        
+            if let user = userInfos[comment.userId] {
+                cell.initWithComment(comment, user: user) 
+                cell.heightUpdateBlock = {
+                    [weak self] in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self?.tableView.beginUpdates()
+                        self?.tableView.endUpdates()
+                    })
+                }
+                cellForRow[indexPath.row] = cell
+            }
+            return cell
+        } 
+        
+        if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
+            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
+            cellForRow[indexPath.row] = cell
+            return cell
+        }
+        
+        if let loadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
+            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
+            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
+            cellForRow[indexPath.row] = cell
+            return cell
+        }
+        
+        return UITableViewCell()
     }
 }
 
