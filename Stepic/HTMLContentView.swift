@@ -9,6 +9,7 @@
 import UIKit
 import FLKAutoLayout
 import WebKit
+//import TTTAttributedLabel
 
 /*
  A UIView subclass, which is responsible for intelligent displaying of HTML content
@@ -25,7 +26,8 @@ class HTMLContentView: UIView {
     
     var textView: UITextView = UITextView()
     var webView: WKWebView = WKWebView()
-    var webViewHeight : NSLayoutConstraint = NSLayoutConstraint()
+    var webViewHeight : NSLayoutConstraint?
+    var label: UILabel = UILabel()
     
     weak var interactionDelegate: HTMLContentViewInteractionDelegate?
     
@@ -54,8 +56,8 @@ class HTMLContentView: UIView {
     }
 
     private func didLoad() {
-        setUpWebView()
-        setUpTextView()
+//        setUpWebView()
+//        setUpLabel()
     }
     
     private func setUpTextView() {
@@ -66,6 +68,15 @@ class HTMLContentView: UIView {
         addSubview(textView)
         textView.alignToView(self)
         textView.hidden = true
+    }
+    
+    private func setUpLabel() {
+        addSubview(label)
+        label.alignToView(self)
+        label.numberOfLines = 0
+        label.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
+        webView.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+        label.hidden = true
     }
     
     private func setUpWebView() {
@@ -92,9 +103,12 @@ class HTMLContentView: UIView {
         webView.scrollView.backgroundColor = UIColor.clearColor()
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         webView.navigationDelegate = self
-        webViewHeight = webView.constrainHeight("0")[0] as! NSLayoutConstraint
-        webViewHeight.active = false
-        
+        if webViewHeight == nil {
+            webViewHeight = webView.constrainHeight("0")[0] as? NSLayoutConstraint
+        }
+        webViewHeight?.active = false
+        webView.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
+        webView.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
         addSubview(webView)
         webView.alignToView(self)
         webView.hidden = true
@@ -102,12 +116,17 @@ class HTMLContentView: UIView {
     
     private func loadHTMLText(htmlString: String, styles: TextStyle? = nil) {
         if TagDetectionUtil.isWebViewSupportNeeded(htmlString) {
-            webViewHeight.active = true
+            setUpWebView()
+            webViewHeight?.active = true
             loadWebView(htmlString)
             webView.hidden = false
         } else {
-            loadTextView(htmlString)
-            textView.hidden = false
+            setUpLabel()
+            loadLabel(htmlString)
+            label.hidden = false
+//            setUpTextView()
+//            loadTextView(htmlString)
+//            textView.hidden = false
         }
     }
     
@@ -121,7 +140,7 @@ class HTMLContentView: UIView {
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         self?.textView.attributedText = attributedString
-//                        self?.interactionDelegate?.shouldUpdateSize()
+                        self?.interactionDelegate?.shouldUpdateSize()
                     })
                 }
                 catch {
@@ -131,6 +150,25 @@ class HTMLContentView: UIView {
         }
     }
     
+    private func loadLabel(htmlString: String) {
+        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
+        if let data = wrapped.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                [weak self] in
+                do {
+                    let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self?.label.attributedText = attributedString
+                        self?.interactionDelegate?.shouldUpdateSize()
+                    })
+                }
+                catch {
+                    //TODO: throw an exception here, or pass an error
+                }
+            })
+        }
+    }
     
     private func loadWebView(htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
@@ -153,7 +191,7 @@ extension HTMLContentView : WKScriptMessageHandler {
         if let height = message.body["height"] as? CGFloat {
             dispatch_async(dispatch_get_main_queue(), {
                 [weak self] in
-                self?.webViewHeight.constant = height
+                self?.webViewHeight?.constant = height
                 self?.setNeedsUpdateConstraints()
                 self?.updateConstraintsIfNeeded()
                 self?.setNeedsLayout()

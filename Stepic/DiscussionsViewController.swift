@@ -126,8 +126,8 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
-    let discussionLoadingInterval = 20
-    let repliesLoadingInterval = 20
+    let discussionLoadingInterval = 10
+    let repliesLoadingInterval = 10
     
     func getNextDiscussionIdsToLoad() -> [Int] {
         let startIndex = discussionIds.loaded.count
@@ -288,11 +288,17 @@ class DiscussionsViewController: UIViewController {
         return discussionIds.leftToLoad > 0
     }
     
-    func handleSelectDiscussion(comment: Comment, completion: (Void->Void)?) {
+    func handleSelectDiscussion(comment: Comment, cell: UITableViewCell? = nil, completion: (Void->Void)?) {
         let alert = DiscussionAlertConstructor.getReplyAlert({
             [weak self] in
             self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
         })
+        
+        if let popoverController = alert.popoverPresentationController, 
+            let c = cell {
+            popoverController.sourceView = c.contentView
+            popoverController.sourceRect = c.contentView.bounds
+        }
         
         self.presentViewController(alert, animated: true, completion: {
             completion?()
@@ -316,7 +322,7 @@ class DiscussionsViewController: UIViewController {
     }
 
     //TODO: Think when to reload this value
-    var cellForDiscussionId = [Int: UITableViewCell]()
+    var cellForDiscussionId = [Int: DiscussionTableViewCell]()
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -332,7 +338,8 @@ extension DiscussionsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("did select row at indexPath \(indexPath)")
         if let comment = cellsInfo[indexPath.row].comment {
-            handleSelectDiscussion(comment, completion: {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            handleSelectDiscussion(comment, cell: cell, completion: {
                 [weak self] in
                 UIThread.performUI { 
                     self?.tableView.deselectRowAtIndexPath(indexPath, animated: true) 
@@ -392,25 +399,19 @@ extension DiscussionsViewController : UITableViewDataSource {
             }
 
             print("comment cell")
-            var cell = DiscussionTableViewCell()
-            
-            if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-                cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
-            } else {
-                cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
-            }
+            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
+
             if let user = userInfos[comment.userId] {
                 cell.initWithComment(comment, user: user) 
                 cell.heightUpdateBlock = {
                     [weak self] in
                     dispatch_async(dispatch_get_main_queue(), {
+                        print("height update block for \(indexPath.row)")
                         self?.tableView.beginUpdates()                            
                         self?.tableView.endUpdates()
                     })
                 }
-                if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-                    cellForDiscussionId[indexPath.row] = cell
-                }
+                cellForDiscussionId[comment.id] = cell
             } 
             return cell
         } 

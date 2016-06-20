@@ -19,12 +19,12 @@ class DiscussionProxiesAPI {
                 _, response, json, error in 
                 
                 if let e = error as? NSError {
-                    errorHandler("RETRIEVE discussion-proxies: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                    errorHandler("RETRIEVE discussion-proxies/\(id): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("RETRIEVE discussion-proxies: bad response status code \(response?.statusCode)")
+                    errorHandler("RETRIEVE discussion-proxies/\(id): bad response status code \(response?.statusCode)")
                     return
                 }
 

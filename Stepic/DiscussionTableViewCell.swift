@@ -31,6 +31,7 @@ class DiscussionTableViewCell: UITableViewCell {
 
     func initWithComment(comment: Comment, user: UserInfo)  {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
+        userAvatarImageView.setRoundedBounds(width: 0)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         if comment.parentId != nil {
             setLeadingConstraints(-40)

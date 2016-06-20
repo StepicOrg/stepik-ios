@@ -24,6 +24,7 @@ def all_pods
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna'
     pod 'CRToast'
+    pod 'TTTAttributedLabel'
 end
 
 target 'Stepic' do

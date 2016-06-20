@@ -35,14 +35,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-VO-duM" customClass="HTMLContentView" customModule="SberbankUniversity" customModuleProvider="target">
-                        <rect key="frame" x="8" y="61" width="393" height="24"/>
+                        <rect key="frame" x="8" y="61" width="393" height="23"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV4-ue-5er">
-                        <rect key="frame" x="16" y="93" width="393" height="0.0"/>
+                        <rect key="frame" x="16" y="92" width="393" height="1"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" id="wgI-Pg-Mbo"/>
+                            <constraint firstAttribute="height" constant="1" id="wgI-Pg-Mbo"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -56,11 +56,11 @@
                     <constraint firstItem="RmE-el-xJX" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="C2l-KH-Nui"/>
                     <constraint firstItem="pV4-ue-5er" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="EJ0-8Z-U7Z"/>
                     <constraint firstAttribute="leadingMargin" secondItem="XqE-VO-duM" secondAttribute="leading" id="HCo-Zm-Sew"/>
+                    <constraint firstItem="pV4-ue-5er" firstAttribute="top" secondItem="XqE-VO-duM" secondAttribute="bottom" constant="8" id="JOc-aj-bFD"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IO2-jl-qQ3" secondAttribute="leading" id="KPO-cX-FvW"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XqE-VO-duM" secondAttribute="trailing" id="QWu-Xy-FD8"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="XqE-VO-duM" secondAttribute="bottom" id="YAw-sB-iuY"/>
                     <constraint firstAttribute="topMargin" secondItem="IO2-jl-qQ3" secondAttribute="top" id="csc-39-e8Y"/>
-                    <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="fea-h6-AxJ"/>
+                    <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" priority="750" constant="8" id="fea-h6-AxJ"/>
                     <constraint firstAttribute="topMargin" secondItem="6YZ-wn-n05" secondAttribute="top" id="lV3-UU-zNv"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="top" secondItem="6YZ-wn-n05" secondAttribute="bottom" constant="8" id="qLL-xo-z4O"/>
                 </constraints>
