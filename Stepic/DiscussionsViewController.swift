@@ -307,23 +307,6 @@ class DiscussionsViewController: UIViewController {
             navigationController?.pushViewController(writeController, animated: true)
         }
     }
-        
-    func discussionForSection(section: Int) -> Comment? {
-        if discussions.count > section {
-            return discussions[section]
-        } else {
-            return nil
-        }
-    }
-    
-    func discussionForIndexPath(indexPath: NSIndexPath) -> Comment? {
-        if let superDiscussion = discussionForSection(indexPath.section) {
-            if replies.loaded[superDiscussion.id]?.count > indexPath.row {
-                return replies.loaded[superDiscussion.id]![indexPath.row]
-            }
-        }
-        return nil
-    }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
@@ -347,6 +330,7 @@ extension DiscussionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("did select row at indexPath \(indexPath)")
         if let comment = cellsInfo[indexPath.row].comment {
             handleSelectDiscussion(comment, completion: {
                 [weak self] in
@@ -398,11 +382,15 @@ extension DiscussionsViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        print("cell for row \(indexPath.row)")
+        
         if let cell = cellForRow[indexPath.row] {
+            print("cell is cached")
             return cell
         }
         
         if let comment = cellsInfo[indexPath.row].comment {
+            print("comment cell")
             let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
         
             if let user = userInfos[comment.userId] {
@@ -420,6 +408,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+            print("load replies cell")
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
             cellForRow[indexPath.row] = cell
@@ -427,6 +416,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         }
         
         if let loadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
+            print("load discussions cell")
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
             cellForRow[indexPath.row] = cell
@@ -450,8 +440,9 @@ extension DiscussionsViewController : WriteCommentDelegate {
                 }
                 replies.loaded[parentId]! += [comment]
                 tableView.beginUpdates()
-                let p = NSIndexPath(forRow: replies.loaded[parentId]!.count - 1, inSection: section)
-                tableView.insertRowsAtIndexPaths([p], withRowAnimation: .Automatic)
+                reloadTableData()
+//                let p = NSIndexPath(forRow: replies.loaded[parentId]!.count - 1, inSection: section)
+//                tableView.insertRowsAtIndexPaths([p], withRowAnimation: .Automatic)
                 tableView.endUpdates()
             }
         } else {
@@ -460,8 +451,9 @@ extension DiscussionsViewController : WriteCommentDelegate {
             discussionIds.loaded.insert(comment.id, atIndex: 0)
             discussions.insert(comment, atIndex: 0)
             tableView.beginUpdates()
-            let index = NSIndexSet(index: 0)
-            tableView.insertSections(index, withRowAnimation: .Automatic)
+            reloadTableData()
+//            let index = NSIndexSet(index: 0)
+//            tableView.insertSections(index, withRowAnimation: .Automatic)
             tableView.endUpdates()
         }
     }
