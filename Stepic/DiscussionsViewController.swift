@@ -345,10 +345,10 @@ extension DiscussionsViewController : UITableViewDelegate {
             loadDiscussions(idsToLoad, success: {
                 [weak self] in
                 UIThread.performUI {
-                    self?.tableView.beginUpdates()
+//                    self?.tableView.beginUpdates()
                     //TODO: Change to animated reload
                     self?.reloadTableData()
-                    self?.tableView.endUpdates()
+//                    self?.tableView.endUpdates()
                     self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 }
             })
@@ -360,9 +360,9 @@ extension DiscussionsViewController : UITableViewDelegate {
                 [weak self] in
                 UIThread.performUI {
                     if let s = self {
-                        s.tableView.beginUpdates()
+//                        s.tableView.beginUpdates()
                         self?.reloadTableData()
-                        s.tableView.endUpdates()
+//                        s.tableView.endUpdates()
                         self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                     }
                 }
@@ -439,22 +439,22 @@ extension DiscussionsViewController : WriteCommentDelegate {
                     replies.loaded[parentId] = []
                 }
                 replies.loaded[parentId]! += [comment]
-                tableView.beginUpdates()
+//                tableView.beginUpdates()
                 reloadTableData()
 //                let p = NSIndexPath(forRow: replies.loaded[parentId]!.count - 1, inSection: section)
 //                tableView.insertRowsAtIndexPaths([p], withRowAnimation: .Automatic)
-                tableView.endUpdates()
+//                tableView.endUpdates()
             }
         } else {
             //insert section
             discussionIds.all.insert(comment.id, atIndex: 0)
             discussionIds.loaded.insert(comment.id, atIndex: 0)
             discussions.insert(comment, atIndex: 0)
-            tableView.beginUpdates()
+//            tableView.beginUpdates()
             reloadTableData()
 //            let index = NSIndexSet(index: 0)
 //            tableView.insertSections(index, withRowAnimation: .Automatic)
-            tableView.endUpdates()
+//            tableView.endUpdates()
         }
     }
 }
