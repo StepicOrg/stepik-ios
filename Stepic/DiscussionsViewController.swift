@@ -391,7 +391,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         
         if let comment = cellsInfo[indexPath.row].comment {
             print("comment cell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
+            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
         
             if let user = userInfos[comment.userId] {
                 cell.initWithComment(comment, user: user) 
