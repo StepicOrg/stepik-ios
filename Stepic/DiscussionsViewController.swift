@@ -119,7 +119,8 @@ class DiscussionsViewController: UIViewController {
         replies = Replies()
         userInfos = [Int: UserInfo]()
         discussions = [Comment]()
-
+        cellForDiscussionId = [:]
+        
         if withReload {
             self.reloadTableData()
         }
@@ -215,7 +216,6 @@ class DiscussionsViewController: UIViewController {
     func reloadTableData() {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
-        cellForRow = [:]
         for discussion in discussions {
             cellsInfo.append(DiscussionsCellInfo(comment: discussion))
             for reply in replies.loaded[discussion.id] ?? [] {
@@ -316,7 +316,7 @@ class DiscussionsViewController: UIViewController {
     }
 
     //TODO: Think when to reload this value
-    var cellForRow = [Int: UITableViewCell]()
+    var cellForDiscussionId = [Int: UITableViewCell]()
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -383,27 +383,35 @@ extension DiscussionsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         print("cell for row \(indexPath.row)")
-        
-        if let cell = cellForRow[indexPath.row] {
-            print("cell is cached")
-            return cell
-        }
-        
+                
         if let comment = cellsInfo[indexPath.row].comment {
+            
+            if let cell = cellForDiscussionId[comment.id] {
+                print("cell is cached")
+                return cell
+            }
+
             print("comment cell")
-            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
-        
+            var cell = DiscussionTableViewCell()
+            
+            if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+                cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
+            } else {
+                cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
+            }
             if let user = userInfos[comment.userId] {
                 cell.initWithComment(comment, user: user) 
                 cell.heightUpdateBlock = {
                     [weak self] in
                     dispatch_async(dispatch_get_main_queue(), {
-                        self?.tableView.beginUpdates()
+                        self?.tableView.beginUpdates()                            
                         self?.tableView.endUpdates()
                     })
                 }
-                cellForRow[indexPath.row] = cell
-            }
+                if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+                    cellForDiscussionId[indexPath.row] = cell
+                }
+            } 
             return cell
         } 
         
@@ -411,7 +419,6 @@ extension DiscussionsViewController : UITableViewDataSource {
             print("load replies cell")
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
-            cellForRow[indexPath.row] = cell
             return cell
         }
         
@@ -419,7 +426,6 @@ extension DiscussionsViewController : UITableViewDataSource {
             print("load discussions cell")
             let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
-            cellForRow[indexPath.row] = cell
             return cell
         }
         
