@@ -377,7 +377,6 @@ extension DiscussionsViewController : UITableViewDelegate {
                 UIThread.performUI {
                     if let s = self {
                         s.tableView.beginUpdates()
-                        let sections = NSIndexSet(indexesInRange: NSMakeRange(s.discussions.count - idsToLoad.count, idsToLoad.count))
                         self?.reloadTableData()
                         s.tableView.endUpdates()
                         self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
