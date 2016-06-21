@@ -66,8 +66,8 @@ class HTMLContentView: UIView {
         addSubview(label!)
         label?.alignTop("0", leading: "8", bottom: "0", trailing: "0", toView: self)
         label?.numberOfLines = 0
-        label?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
-        label?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+//        label?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
+//        label?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
         label?.hidden = true
     }
     

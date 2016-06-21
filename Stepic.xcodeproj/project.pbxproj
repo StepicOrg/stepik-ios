@@ -210,6 +210,8 @@
 		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B899611C983FC3003BED43 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */; };
+		08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
+		08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
@@ -654,6 +656,8 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
+		08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionWebTableViewCell.xib; sourceTree = "<group>"; };
+		08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionWebTableViewCell.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
@@ -1235,10 +1239,28 @@
 		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				08B977081D19D55100FFC52C /* WebView */,
+				08B977071D19D54B00FFC52C /* Label */,
+			);
+			name = DiscussionTableViewCells;
+			sourceTree = "<group>";
+		};
+		08B977071D19D54B00FFC52C /* Label */ = {
+			isa = PBXGroup;
+			children = (
 				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 			);
-			name = DiscussionTableViewCells;
+			name = Label;
+			sourceTree = "<group>";
+		};
+		08B977081D19D55100FFC52C /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */,
+				08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
@@ -1805,6 +1827,7 @@
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
@@ -2271,6 +2294,7 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
+				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,

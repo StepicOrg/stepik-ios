@@ -18,11 +18,15 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var labelLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var htmlContentView: HTMLContentView!
+
     @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var labelContainerView: UIView!
+    var commentLabel: UILabel?
     
     var hasSeparator: Bool = false {
         didSet {
@@ -54,7 +58,7 @@ class DiscussionTableViewCell: UITableViewCell {
     
     var comment: Comment?
     var heightUpdateBlock : (Void->Void)?
-    
+
     func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
@@ -62,12 +66,35 @@ class DiscussionTableViewCell: UITableViewCell {
         self.separatorType = separatorType
         
         timeLabel.text = comment.lastTime.getStepicFormatString()
-        htmlContentView.loadHTMLText(comment.text)
+        loadLabel(comment.text)
+    }
+    
+    private func constructLabel() {
+        commentLabel = UILabel()
+        labelContainerView.addSubview(commentLabel!)
+        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: labelContainerView)
+        commentLabel?.numberOfLines = 0
+    }
+    
+    private func loadLabel(htmlString: String) {
+        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
+        if let data = wrapped.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+            do {
+                let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
+                commentLabel?.attributedText = attributedString
+                layoutSubviews()
+                updateConstraints()
+//                heightUpdateBlock?()
+            }
+            catch {
+                //TODO: throw an exception here, or pass an error
+            }
+        }
     }
     
     private func setLeadingConstraints(constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
-        textContainerLeadingConstraint.constant = constant
+        labelLeadingConstraint.constant = constant - 8
         switch self.separatorType {
         case .Small: 
             separatorLeadingConstraint.constant = -constant + 8
@@ -79,15 +106,14 @@ class DiscussionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        htmlContentView.interactionDelegate = self        
         userAvatarImageView.setRoundedBounds(width: 0)
+        constructLabel()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         comment = nil
         updateConstraints()
-        htmlContentView.prepareForReuse()
     }
     
     override func updateConstraints() {
@@ -99,11 +125,4 @@ class DiscussionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-}
-
-extension DiscussionTableViewCell: HTMLContentViewInteractionDelegate {
-    func shouldUpdateSize() {
-        updateConstraints()
-//        heightUpdateBlock?()
-    }
 }

@@ -73,6 +73,7 @@ class DiscussionsViewController: UIViewController {
         
         tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
+        tableView.registerNib(UINib(nibName: "DiscussionWebTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionWebTableViewCell")
         
         self.title = NSLocalizedString("Discussions", comment: "")
         
@@ -421,33 +422,40 @@ extension DiscussionsViewController : UITableViewDataSource {
                 
         if let comment = cellsInfo[indexPath.row].comment {
             
-//            if let cell = cellForDiscussionId[comment.id] {
-//                print("cell is cached")
-//                if cell.separatorType != cellsInfo[indexPath.row].separatorType {
-//                    cell.separatorType = cellsInfo[indexPath.row].separatorType
-//                    cellForDiscussionId[comment.id] = cell
-//                }
-//                return cell
-//            }
-//            
-//            print("comment cell")
-//            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
+            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
-            if let user = userInfos[comment.userId] {
-                cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-                cell.heightUpdateBlock = {
-                    [weak self] in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        print("height update block for \(indexPath.row)")
-                        self?.tableView.beginUpdates()                            
-                        self?.tableView.endUpdates()
-                    })
-                }
-//                cellForDiscussionId[comment.id] = cell
-            } 
-            return cell
+                if let user = userInfos[comment.userId] {
+                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
+                    cell.heightUpdateBlock = {
+                        [weak self] in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            print("height update block for \(indexPath.row)")
+                            self?.tableView.beginUpdates()                            
+                            self?.tableView.endUpdates()
+                        })
+                    }
+
+                } 
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
+                
+                if let user = userInfos[comment.userId] {
+                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
+                    cell.heightUpdateBlock = {
+                        [weak self] in
+                        dispatch_async(dispatch_get_main_queue(), {
+                            print("height update block for \(indexPath.row)")
+                            self?.tableView.beginUpdates()                            
+                            self?.tableView.endUpdates()
+                        })
+                    }
+                } 
+                return cell
+
+            }
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
