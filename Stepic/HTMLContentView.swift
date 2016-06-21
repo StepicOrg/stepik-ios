@@ -156,7 +156,7 @@ class HTMLContentView: UIView {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 [weak self] in
                 do {
-                    let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil)
+                    let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         self?.label.attributedText = attributedString

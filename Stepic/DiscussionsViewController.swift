@@ -221,9 +221,14 @@ class DiscussionsViewController: UIViewController {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
         for discussion in discussions {
-            cellsInfo.append(DiscussionsCellInfo(comment: discussion, separatorType: .Small))
+            let c = DiscussionsCellInfo(comment: discussion, separatorType: .Small)
+            cellsInfo.append(c)
+            constructDiscussionCell(c)
+            
             for reply in replies.loaded[discussion.id] ?? [] {
-                cellsInfo.append(DiscussionsCellInfo(comment: reply, separatorType: .Small))
+                let c = DiscussionsCellInfo(comment: reply, separatorType: .Small)
+                cellsInfo.append(c)
+                constructDiscussionCell(c)
             }
             
             let left = replies.leftToLoad(discussion)
@@ -340,6 +345,8 @@ class DiscussionsViewController: UIViewController {
 
     //TODO: Think when to reload this value
     var cellForDiscussionId = [Int: DiscussionTableViewCell]()
+    
+    
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -403,6 +410,37 @@ extension DiscussionsViewController : UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellsInfo.count
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        print("will display cell for \(indexPath.row)")
+    }
+    
+    func constructDiscussionCell(cellInfo: DiscussionsCellInfo) {
+        if let comment = cellInfo.comment {
+            if let cell = cellForDiscussionId[comment.id] {
+                print("cell is cached")
+                if cell.separatorType != cellInfo.separatorType {
+                    cell.separatorType = cellInfo.separatorType
+                    cellForDiscussionId[comment.id] = cell
+                }
+            }
+            
+            print("comment cell")
+            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
+            
+            if let user = userInfos[comment.userId] {
+                cell.initWithComment(comment, user: user, separatorType: cellInfo.separatorType) 
+                cell.heightUpdateBlock = {
+                    [weak self] in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self?.tableView.beginUpdates()                            
+                        self?.tableView.endUpdates()
+                    })
+                }
+                cellForDiscussionId[comment.id] = cell
+            } 
+        } 
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -542,7 +580,7 @@ extension DiscussionsViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDele
         let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
                           NSForegroundColorAttributeName: UIColor.lightGrayColor(),
                           NSParagraphStyleAttributeName: paragraph]
-        
+                
         return NSAttributedString(string: text, attributes: attributes)
     }
     

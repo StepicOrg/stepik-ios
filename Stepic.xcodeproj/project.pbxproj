@@ -129,6 +129,8 @@
 		0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
 		0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D71CE3684000F8A6DB /* default_sound.wav */; };
 		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
+		086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
+		086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
@@ -591,6 +593,7 @@
 		0869F6D41CE229C800F8A6DB /* Queues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Queues.plist; sourceTree = "<group>"; };
 		0869F6D71CE3684000F8A6DB /* default_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default_sound.wav; sourceTree = "<group>"; };
 		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
@@ -1434,6 +1437,7 @@
 				08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */,
 				080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */,
 				080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */,
+				086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2173,6 +2177,7 @@
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
+				086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
@@ -2377,6 +2382,7 @@
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
 				08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */,
+				086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
