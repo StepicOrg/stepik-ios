@@ -217,18 +217,18 @@ class DiscussionsViewController: UIViewController {
         )
     }
     
-    func reloadTableData() {
+    func reloadTableData(emptyState: DiscussionsEmptyDataSetState = .Empty) {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
         for discussion in discussions {
             let c = DiscussionsCellInfo(comment: discussion, separatorType: .Small)
             cellsInfo.append(c)
-            constructDiscussionCell(c)
+//            constructDiscussionCell(c)
             
             for reply in replies.loaded[discussion.id] ?? [] {
                 let c = DiscussionsCellInfo(comment: reply, separatorType: .Small)
                 cellsInfo.append(c)
-                constructDiscussionCell(c)
+//                constructDiscussionCell(c)
             }
             
             let left = replies.leftToLoad(discussion)
@@ -247,7 +247,7 @@ class DiscussionsViewController: UIViewController {
             [weak self] in
             if self?.cellsInfo.count == 0 {                
                 self?.tableView.emptyDataSetSource = self
-                self?.emptyDatasetState = .Empty
+                self?.emptyDatasetState = emptyState
             } else {
                 self?.tableView.emptyDataSetSource = nil
             }
@@ -287,8 +287,7 @@ class DiscussionsViewController: UIViewController {
                 errorString in
                 print(errorString)
                 self?.isReloading = false
-                self?.emptyDatasetState = .Error
-                self?.reloadTableData()
+                self?.reloadTableData(.Error)
                 UIThread.performUI {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
@@ -415,51 +414,26 @@ extension DiscussionsViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         print("will display cell for \(indexPath.row)")
     }
-    
-    func constructDiscussionCell(cellInfo: DiscussionsCellInfo) {
-        if let comment = cellInfo.comment {
-            if let cell = cellForDiscussionId[comment.id] {
-                print("cell is cached")
-                if cell.separatorType != cellInfo.separatorType {
-                    cell.separatorType = cellInfo.separatorType
-                    cellForDiscussionId[comment.id] = cell
-                }
-            }
-            
-            print("comment cell")
-            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
-            
-            if let user = userInfos[comment.userId] {
-                cell.initWithComment(comment, user: user, separatorType: cellInfo.separatorType) 
-                cell.heightUpdateBlock = {
-                    [weak self] in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self?.tableView.beginUpdates()                            
-                        self?.tableView.endUpdates()
-                    })
-                }
-                cellForDiscussionId[comment.id] = cell
-            } 
-        } 
-    }
-    
+        
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         print("cell for row \(indexPath.row)")
                 
         if let comment = cellsInfo[indexPath.row].comment {
             
-            if let cell = cellForDiscussionId[comment.id] {
-                print("cell is cached")
-                if cell.separatorType != cellsInfo[indexPath.row].separatorType {
-                    cell.separatorType = cellsInfo[indexPath.row].separatorType
-                    cellForDiscussionId[comment.id] = cell
-                }
-                return cell
-            }
+//            if let cell = cellForDiscussionId[comment.id] {
+//                print("cell is cached")
+//                if cell.separatorType != cellsInfo[indexPath.row].separatorType {
+//                    cell.separatorType = cellsInfo[indexPath.row].separatorType
+//                    cellForDiscussionId[comment.id] = cell
+//                }
+//                return cell
+//            }
+//            
+//            print("comment cell")
+//            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
             
-            print("comment cell")
-            let cell = NSBundle.mainBundle().loadNibNamed("DiscussionTableViewCell", owner: self, options: nil)[0]  as!  DiscussionTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
             if let user = userInfos[comment.userId] {
                 cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
@@ -471,22 +445,23 @@ extension DiscussionsViewController : UITableViewDataSource {
                         self?.tableView.endUpdates()
                     })
                 }
-                cellForDiscussionId[comment.id] = cell
+//                cellForDiscussionId[comment.id] = cell
             } 
             return cell
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
             print("load replies cell")
-            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
+//            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
             return cell
         }
         
         if let loadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
             print("load discussions cell")
-            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
-            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            cell.showMoreLabel.text = NSLocalizedString("ShowMoreDiscussions", comment: "")
             return cell
         }
         

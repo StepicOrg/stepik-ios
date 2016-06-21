@@ -48,25 +48,21 @@ class DiscussionTableViewCell: UITableViewCell {
                 separatorLeadingConstraint.constant = -8
                 break
             }
-            if comment.parentId != nil {
-                setLeadingConstraints(-40)
-            }
+            updateConstraints()
         }
     }
     
-    var comment: Comment!
+    var comment: Comment?
     var heightUpdateBlock : (Void->Void)?
     
     func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
-        userAvatarImageView.setRoundedBounds(width: 0)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         self.comment = comment
         self.separatorType = separatorType
         
         timeLabel.text = comment.lastTime.getStepicFormatString()
-        htmlContentView.interactionDelegate = self        
-        htmlContentView.htmlText = comment.text
+        htmlContentView.loadHTMLText(comment.text)
     }
     
     private func setLeadingConstraints(constant: CGFloat) {
@@ -83,11 +79,20 @@ class DiscussionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        htmlContentView.interactionDelegate = self        
+        userAvatarImageView.setRoundedBounds(width: 0)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        setLeadingConstraints(0)
+        comment = nil
+        updateConstraints()
+        htmlContentView.prepareForReuse()
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -98,10 +103,7 @@ class DiscussionTableViewCell: UITableViewCell {
 
 extension DiscussionTableViewCell: HTMLContentViewInteractionDelegate {
     func shouldUpdateSize() {
-        setNeedsUpdateConstraints()
-        updateConstraintsIfNeeded()
-        setNeedsLayout()
-        layoutIfNeeded()
-        heightUpdateBlock?()
+        updateConstraints()
+//        heightUpdateBlock?()
     }
 }

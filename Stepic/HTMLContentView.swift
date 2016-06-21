@@ -24,22 +24,12 @@ class HTMLContentView: UIView {
     }
     */
     
-    var textView: UITextView = UITextView()
-    var webView: WKWebView = WKWebView()
+    var textView: UITextView? 
+    var webView: WKWebView? 
     var webViewHeight : NSLayoutConstraint?
-    var label: UILabel = UILabel()
-    
+    var label: UILabel?
+        
     weak var interactionDelegate: HTMLContentViewInteractionDelegate?
-    
-    var htmlText : String? = nil {
-        didSet(oldValue) {
-            if oldValue != htmlText {
-                if let t = htmlText {
-                    loadHTMLText(t)
-                }
-            }
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,27 +46,29 @@ class HTMLContentView: UIView {
     }
 
     private func didLoad() {
-//        setUpWebView()
-//        setUpLabel()
+        setUpWebView()
+        setUpLabel()
     }
     
     private func setUpTextView() {
-        textView.scrollEnabled = false
-        textView.delegate = self
-        textView.userInteractionEnabled = false
+        textView = UITextView()
+        textView?.scrollEnabled = false
+        textView?.delegate = self
+        textView?.userInteractionEnabled = false
         
-        addSubview(textView)
-        textView.alignToView(self)
-        textView.hidden = true
+        addSubview(textView!)
+        textView?.alignToView(self)
+        textView?.hidden = true
     }
     
     private func setUpLabel() {
-        addSubview(label)
-        label.alignTop("0", leading: "8", bottom: "0", trailing: "0", toView: self)
-        label.numberOfLines = 0
-        label.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
-        webView.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
-        label.hidden = true
+        label = UILabel()
+        addSubview(label!)
+        label?.alignTop("0", leading: "8", bottom: "0", trailing: "0", toView: self)
+        label?.numberOfLines = 0
+        label?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
+        label?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+        label?.hidden = true
     }
     
     private func setUpWebView() {
@@ -88,45 +80,71 @@ class HTMLContentView: UIView {
             injectionTime: WKUserScriptInjectionTime.AtDocumentStart,
             forMainFrameOnly: false
         ))
-//        contentController.addUserScript(WKUserScript(
-//            source: "MathJax.Hub.Queue(function () { window.webkit.messageHandlers.mathJaxFinishedNotification.postMessage({width: document.width, height: document.height});};", 
-//            injectionTime: WKUserScriptInjectionTime.AtDocumentEnd, 
-//            forMainFrameOnly: true
-//            ))
+
         contentController.addScriptMessageHandler(self, name: "sizeNotification")
-//        contentController.addScriptMessageHandler(self, name: "mathJaxFinishedNotification")
 
-        self.webView = WKWebView(frame: CGRectZero, configuration: theConfiguration)
+        webView = WKWebView(frame: CGRectZero, configuration: theConfiguration)
 
-        webView.scrollView.scrollEnabled = false
-        webView.backgroundColor = UIColor.clearColor()
-        webView.scrollView.backgroundColor = UIColor.clearColor()
-        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        webView.navigationDelegate = self
+        webView?.scrollView.scrollEnabled = false
+        webView?.backgroundColor = UIColor.clearColor()
+        webView?.scrollView.backgroundColor = UIColor.clearColor()
+        webView?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        webView?.navigationDelegate = self
         if webViewHeight == nil {
-            webViewHeight = webView.constrainHeight("0")[0] as? NSLayoutConstraint
+            let heightConstraints = webView?.constrainHeight("0") 
+            print(heightConstraints)
+            webViewHeight = heightConstraints?[0] as? NSLayoutConstraint
         }
+        webViewHeight?.priority = 750
         webViewHeight?.active = false
-        webView.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Horizontal)
-        webView.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
-        addSubview(webView)
-        webView.alignToView(self)
-        webView.hidden = true
+//        webView?.setContentCompressionResistancePriority(UILayoutPriority(500), forAxis: UILayoutConstraintAxis.Horizontal)
+//        webView?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+        addSubview(webView!)
+        webView?.alignToView(self)
+        webView?.hidden = true
     }
     
-    private func loadHTMLText(htmlString: String, styles: TextStyle? = nil) {
+    func activateLabel(htmlString: String) {
+        print("activating label")
+        webView?.hidden = true
+        webViewHeight?.constant = 0
+        webViewHeight?.active = false
+//        webView?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+//        webView?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+//        label?.setContentCompressionResistancePriority(UILayoutPriority(500), forAxis: UILayoutConstraintAxis.Vertical)
+//        label?.setContentHuggingPriority(UILayoutPriority(500), forAxis: UILayoutConstraintAxis.Vertical)
+        loadLabel(htmlString)
+        label?.hidden = false
+        setNeedsUpdateConstraints()
+        updateConstraintsIfNeeded()
+        setNeedsLayout()
+        layoutIfNeeded()
+        print("aсtivated label")
+    }
+    
+    func activateWebView(htmlString: String) {
+        print("activating web view")
+        label?.hidden = true
+//        label?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+//        label?.setContentHuggingPriority(UILayoutPriority(250), forAxis: UILayoutConstraintAxis.Vertical)
+//        webView?.setContentCompressionResistancePriority(UILayoutPriority(500), forAxis: UILayoutConstraintAxis.Vertical)
+//        webView?.setContentHuggingPriority(UILayoutPriority(500), forAxis: UILayoutConstraintAxis.Vertical)
+        webViewHeight?.constant = 0
+        webViewHeight?.active = true
+        loadWebView(htmlString)
+        webView?.hidden = false
+        setNeedsUpdateConstraints()
+        updateConstraintsIfNeeded()
+        setNeedsLayout()
+        layoutIfNeeded()
+        print("activated web view")
+    }
+    
+    func loadHTMLText(htmlString: String, styles: TextStyle? = nil) {
         if TagDetectionUtil.isWebViewSupportNeeded(htmlString) {
-            setUpWebView()
-            webViewHeight?.active = true
-            loadWebView(htmlString)
-            webView.hidden = false
+            activateWebView(htmlString)
         } else {
-            setUpLabel()
-            loadLabel(htmlString)
-            label.hidden = false
-//            setUpTextView()
-//            loadTextView(htmlString)
-//            textView.hidden = false
+            activateLabel(htmlString)
         }
     }
     
@@ -139,7 +157,7 @@ class HTMLContentView: UIView {
                     let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil)
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                        self?.textView.attributedText = attributedString
+                        self?.textView?.attributedText = attributedString
                         self?.interactionDelegate?.shouldUpdateSize()
                     })
                 }
@@ -153,26 +171,22 @@ class HTMLContentView: UIView {
     private func loadLabel(htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
         if let data = wrapped.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                [weak self] in
-                do {
-                    let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self?.label.attributedText = attributedString
-                        self?.interactionDelegate?.shouldUpdateSize()
-                    })
-                }
-                catch {
-                    //TODO: throw an exception here, or pass an error
-                }
-            })
+            do {
+                let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
+                self.label?.attributedText = attributedString
+            }
+            catch {
+                //TODO: throw an exception here, or pass an error
+            }
         }
     }
     
     private func loadWebView(htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
-        webView.loadHTMLString(wrapped, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
+        webView?.loadHTMLString(wrapped, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
+    }
+    
+    func prepareForReuse() {
     }
 }
 
@@ -192,10 +206,6 @@ extension HTMLContentView : WKScriptMessageHandler {
             dispatch_async(dispatch_get_main_queue(), {
                 [weak self] in
                 self?.webViewHeight?.constant = height
-                self?.setNeedsUpdateConstraints()
-                self?.updateConstraintsIfNeeded()
-                self?.setNeedsLayout()
-                self?.layoutIfNeeded()
                 self?.interactionDelegate?.shouldUpdateSize()
             })
         }
