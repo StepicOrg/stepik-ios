@@ -234,6 +234,10 @@ class DiscussionsViewController: UIViewController {
             }
         }
         
+        if discussionIds.leftToLoad > 0 {
+            cellsInfo.append(DiscussionsCellInfo(loadDiscussions: true))
+        }
+        
         UIThread.performUI({
             [weak self] in
             if self?.cellsInfo.count == 0 {                
@@ -279,6 +283,7 @@ class DiscussionsViewController: UIViewController {
                 print(errorString)
                 self?.isReloading = false
                 self?.emptyDatasetState = .Error
+                self?.reloadTableData()
                 UIThread.performUI {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
@@ -373,6 +378,7 @@ extension DiscussionsViewController : UITableViewDelegate {
             })
 
         }
+        
         if let shouldLoadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
             let idsToLoad = getNextDiscussionIdsToLoad()
             loadDiscussions(idsToLoad, success: {
@@ -407,6 +413,10 @@ extension DiscussionsViewController : UITableViewDataSource {
             
             if let cell = cellForDiscussionId[comment.id] {
                 print("cell is cached")
+                if cell.separatorType != cellsInfo[indexPath.row].separatorType {
+                    cell.separatorType = cellsInfo[indexPath.row].separatorType
+                    cellForDiscussionId[comment.id] = cell
+                }
                 return cell
             }
             

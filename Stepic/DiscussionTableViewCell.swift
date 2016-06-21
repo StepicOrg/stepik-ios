@@ -30,32 +30,40 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
     
-    var separatorType: SeparatorType = .None
+    var separatorType: SeparatorType = .None {
+        didSet {
+            switch separatorType {
+            case .None:
+                hasSeparator = false
+                separatorHeightConstraint.constant = 0
+                break
+            case .Small:
+                hasSeparator = true
+                separatorHeightConstraint.constant = 0.5
+                separatorLeadingConstraint.constant = 8
+                break
+            case .Big:
+                hasSeparator = true
+                separatorHeightConstraint.constant = 10
+                separatorLeadingConstraint.constant = -8
+                break
+            }
+            if comment.parentId != nil {
+                setLeadingConstraints(-40)
+            }
+        }
+    }
     
+    var comment: Comment!
     var heightUpdateBlock : (Void->Void)?
+    
     func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
         userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
         userAvatarImageView.setRoundedBounds(width: 0)
         nameLabel.text = "\(user.firstName) \(user.lastName)"
+        self.comment = comment
         self.separatorType = separatorType
-        switch separatorType {
-        case .None:
-            hasSeparator = false
-            separatorHeightConstraint.constant = 0
-            break
-        case .Small:
-            hasSeparator = true
-            separatorHeightConstraint.constant = 0.5
-            break
-        case .Big:
-            hasSeparator = true
-            separatorHeightConstraint.constant = 10
-            separatorLeadingConstraint.constant = -8
-            break
-        }
-        if comment.parentId != nil {
-            setLeadingConstraints(-40)
-        }
+        
         timeLabel.text = comment.lastTime.getStepicFormatString()
         htmlContentView.interactionDelegate = self        
         htmlContentView.htmlText = comment.text
