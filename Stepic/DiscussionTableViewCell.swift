@@ -84,7 +84,6 @@ class DiscussionTableViewCell: UITableViewCell {
                 commentLabel?.attributedText = attributedString
                 layoutSubviews()
                 updateConstraints()
-//                heightUpdateBlock?()
             }
             catch {
                 //TODO: throw an exception here, or pass an error

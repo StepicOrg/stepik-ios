@@ -56,7 +56,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
     
     var comment: Comment?
-    var heightUpdateBlock : (Void->Void)?
+    var heightUpdateBlock : (CGFloat->Void)?
     var commentWebView: WKWebView?
     
     private func constructWebView() {
@@ -76,8 +76,18 @@ class DiscussionWebTableViewCell: UITableViewCell {
         commentWebView?.backgroundColor = UIColor.clearColor()
         commentWebView?.scrollView.backgroundColor = UIColor.clearColor()
         commentWebView?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        
+        commentWebView?.setContentHuggingPriority(UILayoutPriority(200), forAxis: .Vertical)
+        commentWebView?.setContentCompressionResistancePriority(UILayoutPriority(250), forAxis: .Vertical)
+        
         webContainerView.addSubview(commentWebView!)
+//        commentWebView?.constrainHeightToView(webContainerView, predicate: "0")
         commentWebView?.alignToView(webContainerView)
+        webContainerView.translatesAutoresizingMaskIntoConstraints = false
+//        commentWebView?.constrainTopSpaceToView(webContainerView, predicate: "0")
+//        commentWebView?.constrainBottomSpaceToView(webContainerView, predicate: "0")
+//        commentWebView?.constrainLeadingSpaceToView(webContainerView, predicate: "0")
+//        commentWebView?.constrainTrailingSpaceToView(webContainerView, predicate: "0")
     }
     
     func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
@@ -116,8 +126,8 @@ class DiscussionWebTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         comment = nil
-        updateConstraints()
         webContainerViewHeight.constant = 23
+        updateConstraints()
     }
     
     override func updateConstraints() {
@@ -137,8 +147,8 @@ extension DiscussionWebTableViewCell : WKScriptMessageHandler {
             dispatch_async(dispatch_get_main_queue(), {
                 [weak self] in
                 self?.webContainerViewHeight?.constant = height
-                print(height)
                 self?.layoutSubviews()
+                self?.heightUpdateBlock?(height)
             })
         }
     }

@@ -126,7 +126,7 @@ class DiscussionsViewController: UIViewController {
         replies = Replies()
         userInfos = [Int: UserInfo]()
         discussions = [Comment]()
-        cellForDiscussionId = [:]
+        estimatedHeightForDiscussionId = [:]
         
         if withReload {
             self.reloadTableData()
@@ -344,12 +344,19 @@ class DiscussionsViewController: UIViewController {
     }
 
     //TODO: Think when to reload this value
-    var cellForDiscussionId = [Int: DiscussionTableViewCell]()
     
-    
+    var estimatedHeightForDiscussionId = [Int: CGFloat]()
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let comment = cellsInfo[indexPath.row].comment {         
+            if let est = estimatedHeightForDiscussionId[comment.id] {
+                return est
+            }
+        }
+        return 44
+    }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         print("CGFLoat min -> \(CGFloat.min)")
         return CGFloat.min
@@ -422,40 +429,31 @@ extension DiscussionsViewController : UITableViewDataSource {
                 
         if let comment = cellsInfo[indexPath.row].comment {
             
-            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+//            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
                 if let user = userInfos[comment.userId] {
                     cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-                    cell.heightUpdateBlock = {
-                        [weak self] in
-                        dispatch_async(dispatch_get_main_queue(), {
-                            print("height update block for \(indexPath.row)")
-                            self?.tableView.beginUpdates()                            
-                            self?.tableView.endUpdates()
-                        })
-                    }
-
                 } 
                 
                 return cell
-            } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
-                
-                if let user = userInfos[comment.userId] {
-                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-                    cell.heightUpdateBlock = {
-                        [weak self] in
-                        dispatch_async(dispatch_get_main_queue(), {
-                            print("height update block for \(indexPath.row)")
-                            self?.tableView.beginUpdates()                            
-                            self?.tableView.endUpdates()
-                        })
-                    }
-                } 
-                return cell
-
-            }
+//            } else {
+//                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
+//                
+//                if let user = userInfos[comment.userId] {
+//                    cell.heightUpdateBlock = {
+//                        [weak self] 
+//                        height in
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            [weak self] in
+//                            self?.estimatedHeightForDiscussionId[comment.id] = height
+//                        })
+//                    }
+//                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
+//                } 
+//                return cell
+//
+//            }
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
