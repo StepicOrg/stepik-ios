@@ -40,13 +40,6 @@
                             <constraint firstAttribute="height" constant="1" id="wgI-Pg-Mbo"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-6c-VKz">
-                        <rect key="frame" x="8" y="61" width="393" height="23"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" priority="999" constant="23" id="Uqg-uA-nkY"/>
-                        </constraints>
-                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="IO2-jl-qQ3">
                         <rect key="frame" x="8" y="8" width="45" height="45"/>
                         <constraints>
@@ -54,6 +47,13 @@
                             <constraint firstAttribute="height" constant="45" id="VxD-Nk-QYb"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="TRe-6c-VKz">
+                        <rect key="frame" x="8" y="61" width="393" height="23"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="999" constant="23" id="Uqg-uA-nkY"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="0AM-jK-bi1"/>

@@ -83,4 +83,11 @@ struct UserInfo {
         firstName = json["first_name"].stringValue
         lastName = json["last_name"].stringValue
     }
+    
+    init(sample: Bool) {
+        id = 10
+        avatarURL = "http://google.com/"
+        firstName = "Sample"
+        lastName = "User"
+    }
 }

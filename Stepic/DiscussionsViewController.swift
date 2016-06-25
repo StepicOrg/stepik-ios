@@ -166,8 +166,11 @@ class DiscussionsViewController: UIViewController {
         return res
     }
     
+    
+    
     func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
         self.emptyDatasetState = .None
+        
         ApiDataDownloader.comments.retrieve(ids, success: 
             {
                 [weak self]
@@ -266,6 +269,22 @@ class DiscussionsViewController: UIViewController {
         }
         resetData(false)
         isReloading = true
+//        self.discussionIds.all = [0, 1, 2]
+//        self.discussionIds.loaded = [0, 1, 2]
+//        userInfos[10] = UserInfo(sample: true)
+//        
+//        
+//        discussions = []
+//
+//        for i in 0 ..< 3 {
+//            discussions += [Comment(sampleId: i)]
+//        }
+//        
+//        self.refreshControl?.endRefreshing()
+//        self.reloadTableData()
+//        self.isReloading = false
+//        return;
+            
         ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
             {
                 [weak self] 
@@ -346,6 +365,7 @@ class DiscussionsViewController: UIViewController {
     //TODO: Think when to reload this value
     
     var estimatedHeightForDiscussionId = [Int: CGFloat]()
+    var webViewHeightForDiscussionId = [Int: CGFloat]()
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
@@ -429,7 +449,7 @@ extension DiscussionsViewController : UITableViewDataSource {
                 
         if let comment = cellsInfo[indexPath.row].comment {
             
-//            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
                 if let user = userInfos[comment.userId] {
@@ -437,23 +457,35 @@ extension DiscussionsViewController : UITableViewDataSource {
                 } 
                 
                 return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
-//                
-//                if let user = userInfos[comment.userId] {
-//                    cell.heightUpdateBlock = {
-//                        [weak self] 
-//                        height in
-//                        dispatch_async(dispatch_get_main_queue(), {
-//                            [weak self] in
-//                            self?.estimatedHeightForDiscussionId[comment.id] = height
-//                        })
-//                    }
-//                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-//                } 
-//                return cell
-//
-//            }
+            } else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
+                
+                if let user = userInfos[comment.userId] {
+                    if let h = webViewHeightForDiscussionId[comment.id]  {
+                        cell.webContainerViewHeight.constant = h
+                    } else {
+
+                        cell.heightUpdateBlock = {
+                            [weak self] 
+                            height, webViewHeight in
+                            self?.webViewHeightForDiscussionId[comment.id] = webViewHeight
+                            print("height update block for \(indexPath.row) with height \(height)")
+                            dispatch_async(dispatch_get_main_queue(), {
+                                [weak self] in
+                                if self?.estimatedHeightForDiscussionId[comment.id] < height {
+                                    self?.tableView.beginUpdates()
+                                    self?.estimatedHeightForDiscussionId[comment.id] = height
+                                    self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                                    self?.tableView.endUpdates()
+                                }
+                            })
+                        }
+                    }
+                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
+                } 
+                return cell
+
+            }
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {

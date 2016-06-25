@@ -111,12 +111,12 @@ class UnitsViewController: UIViewController {
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if !didRefresh {
+//        if !didRefresh {
             
-        } else {
+//        } else {
             performSegueWithIdentifier("showSteps", sender: indexPath.row)        
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
+//        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

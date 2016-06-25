@@ -67,6 +67,30 @@ class Comment: JSONInitializable {
     func update(json json: JSON) {
         initialize(json)
     }
+    
+    
+    
+    init(sampleId: Int) {
+        id = sampleId
+        parentId = nil
+        userId = 10
+        userRole = .Student
+        time = NSDate()
+        lastTime = NSDate()
+        
+        let latexStrings = [
+            "Here is a simple LaTeX $x^2 + 3*x - 10/(y*z^3)$",
+            "A bit easier $x$ and it became really long long long long looooooong long long long long",
+            "The best string with LaTeX $(x*a*b + 2*x/(z^2))/(200*y^6 + x/z)$",
+        ]
+        
+        text = latexStrings[min(sampleId, 2)]
+        replyCount = 0
+        isDeleted = false
+        targetStepId = 0
+        repliesIds = []
+        isPinned = false
+    }
 }
 
 struct CommentPostable {
