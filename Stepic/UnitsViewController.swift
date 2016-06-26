@@ -56,6 +56,12 @@ class UnitsViewController: UIViewController {
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
+        
+        section.loadProgressesForUnits({
+            UIThread.performUI({
+                self.tableView.reloadData()
+            })
+        })
     }
     
     var emptyDatasetState : EmptyDatasetState = .Empty {
