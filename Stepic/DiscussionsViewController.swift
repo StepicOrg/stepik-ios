@@ -284,25 +284,42 @@ class DiscussionsViewController: UIViewController {
 //        self.reloadTableData()
 //        self.isReloading = false
 //        return;
-            
-        ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
-            {
-                [weak self] 
-                discussionProxy in
-                self?.discussionIds.all = discussionProxy.discussionIds
-                if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
-                    self?.loadDiscussions(discussionIdsToLoad, success: 
-                        {            
-                            [weak self] in
-                            UIThread.performUI {
-                                self?.refreshControl?.endRefreshing()
-                                self?.reloadTableData()
-                                self?.isReloading = false
-                            }
+        
+        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            [weak self] in
+            if let discussionProxyId = self?.discussionProxyId {
+                ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
+                    {
+                        [weak self] 
+                        discussionProxy in
+                        self?.discussionIds.all = discussionProxy.discussionIds
+                        if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
+                            self?.loadDiscussions(discussionIdsToLoad, success: 
+                                {            
+                                    [weak self] in
+                                    UIThread.performUI {
+                                        self?.refreshControl?.endRefreshing()
+                                        self?.reloadTableData()
+                                        self?.isReloading = false
+                                    }
+                                }
+                            )
                         }
-                    )
-                }
-            }, error: {
+                    }, error: {
+                        [weak self]
+                        errorString in
+                        print(errorString)
+                        self?.isReloading = false
+                        self?.reloadTableData(.Error)
+                        UIThread.performUI {
+                            [weak self] in
+                            self?.refreshControl?.endRefreshing()
+                        }
+                    }
+                
+                )
+            }
+        }, failure:  {
                 [weak self]
                 errorString in
                 print(errorString)
@@ -312,8 +329,7 @@ class DiscussionsViewController: UIViewController {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
                 }
-            }
-        )
+        })
     }
     
     func isShowMoreEnabledForSection(section: Int) -> Bool {
@@ -449,7 +465,7 @@ extension DiscussionsViewController : UITableViewDataSource {
                 
         if let comment = cellsInfo[indexPath.row].comment {
             
-            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
+//            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
                 if let user = userInfos[comment.userId] {
@@ -457,35 +473,35 @@ extension DiscussionsViewController : UITableViewDataSource {
                 } 
                 
                 return cell
-            } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
-                
-                if let user = userInfos[comment.userId] {
-                    if let h = webViewHeightForDiscussionId[comment.id]  {
-                        cell.webContainerViewHeight.constant = h
-                    } else {
-
-                        cell.heightUpdateBlock = {
-                            [weak self] 
-                            height, webViewHeight in
-                            self?.webViewHeightForDiscussionId[comment.id] = webViewHeight
-                            print("height update block for \(indexPath.row) with height \(height)")
-                            dispatch_async(dispatch_get_main_queue(), {
-                                [weak self] in
-                                if self?.estimatedHeightForDiscussionId[comment.id] < height {
-                                    self?.tableView.beginUpdates()
-                                    self?.estimatedHeightForDiscussionId[comment.id] = height
-                                    self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                                    self?.tableView.endUpdates()
-                                }
-                            })
-                        }
-                    }
-                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-                } 
-                return cell
-
-            }
+//            } else {
+//                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
+//                
+//                if let user = userInfos[comment.userId] {
+//                    if let h = webViewHeightForDiscussionId[comment.id]  {
+//                        cell.webContainerViewHeight.constant = h
+//                    } else {
+//
+//                        cell.heightUpdateBlock = {
+//                            [weak self] 
+//                            height, webViewHeight in
+//                            self?.webViewHeightForDiscussionId[comment.id] = webViewHeight
+//                            print("height update block for \(indexPath.row) with height \(height)")
+//                            dispatch_async(dispatch_get_main_queue(), {
+//                                [weak self] in
+//                                if self?.estimatedHeightForDiscussionId[comment.id] < height {
+//                                    self?.tableView.beginUpdates()
+//                                    self?.estimatedHeightForDiscussionId[comment.id] = height
+//                                    self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+//                                    self?.tableView.endUpdates()
+//                                }
+//                            })
+//                        }
+//                    }
+//                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
+//                } 
+//                return cell
+//
+//            }
         } 
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
