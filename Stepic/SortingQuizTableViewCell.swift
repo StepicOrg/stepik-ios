@@ -73,7 +73,7 @@ extension SortingQuizTableViewCell : TextHeightDependentCellProtocol {
             return {
                 [weak self] in
                 if let w = self?.textContainerView.bounds.width {
-                    return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
+                    return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 60))) + 17
                 } else {
                     return 0
                 }

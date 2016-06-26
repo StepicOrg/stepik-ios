@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,12 +15,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SpX-wY-qFM">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpX-wY-qFM">
                         <rect key="frame" x="8" y="8" width="304" height="27"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="topMargin" secondItem="SpX-wY-qFM" secondAttribute="top" id="0Gh-YO-NTY"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="SpX-wY-qFM" secondAttribute="bottom" id="3GO-Bg-374"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="SpX-wY-qFM" secondAttribute="leading" id="FdC-cv-Xsh"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="SpX-wY-qFM" secondAttribute="trailing" id="MH9-Oz-5vf"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
