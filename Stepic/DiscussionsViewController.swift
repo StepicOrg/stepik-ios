@@ -109,8 +109,8 @@ class DiscussionsViewController: UIViewController {
     
     var discussionIds = DiscussionIds()
     var replies = Replies()
-    var userInfos = [Int: UserInfo]()
     var discussions = [Comment]()
+    var votes = [String: Vote]()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -124,7 +124,6 @@ class DiscussionsViewController: UIViewController {
     func resetData(withReload: Bool) {
         discussionIds = DiscussionIds()
         replies = Replies()
-        userInfos = [Int: UserInfo]()
         discussions = [Comment]()
         estimatedHeightForDiscussionId = [:]
         
@@ -174,7 +173,7 @@ class DiscussionsViewController: UIViewController {
         ApiDataDownloader.comments.retrieve(ids, success: 
             {
                 [weak self]
-                retrievedDiscussions, retrievedUserInfos in 
+                retrievedDiscussions in 
                 
                 if let s = self {
                     //get superDiscussions (those who have no parents)
@@ -182,10 +181,6 @@ class DiscussionsViewController: UIViewController {
                 
                     s.discussionIds.loaded += ids
                     s.discussions += superDiscussions
-                    
-                    for (userId, info) in retrievedUserInfos {
-                        s.userInfos[userId] = info
-                    }
                     
                     var changedDiscussionIds = Set<Int>()
                     //get all replies
@@ -345,16 +340,100 @@ class DiscussionsViewController: UIViewController {
         return discussionIds.leftToLoad > 0
     }
     
-    func handleSelectDiscussion(comment: Comment, cell: UITableViewCell? = nil, completion: (Void->Void)?) {
-        let alert = DiscussionAlertConstructor.getReplyAlert({
-            [weak self] in
-            self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
-        })
+    func setLiked(comment: Comment, cell: UITableViewCell) {
+        if let c = cell as? DiscussionTableViewCell {
+            if let value = comment.vote.value {
+                let vToSet : VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
+                let v = Vote(id: comment.vote.id, value: vToSet)
+                ApiDataDownloader.votes.create(v, success: 
+                    {
+                        vote in
+                        comment.vote = vote
+                        switch value {
+                        case .Abuse: 
+                            comment.abuseCount -= 1
+                            comment.epicCount += 1
+                            c.setLiked(true, likesCount: comment.epicCount)
+                        case .Epic:
+                            comment.epicCount -= 1
+                            c.setLiked(false, likesCount: comment.epicCount)
+                        }
+                    }, error: {
+                        errorMsg in
+                        print(errorMsg)
+                })
+            } else {
+                let v = Vote(id: comment.vote.id, value: .Epic)
+                ApiDataDownloader.votes.create(v, success: 
+                    {
+                        vote in
+                        comment.vote = vote
+                        comment.epicCount += 1
+                        c.setLiked(true, likesCount: comment.epicCount)
+                    }, error: {
+                        errorMsg in
+                        print(errorMsg)
+                    }
+                )
+                
+            }
+        }
+    }
+    
+    func setAbused(comment: Comment, cell: UITableViewCell) {
+        if let c = cell as? DiscussionTableViewCell {
+            if let value = comment.vote.value {
+                let v = Vote(id: comment.vote.id, value: .Abuse)
+                ApiDataDownloader.votes.create(v, success: 
+                    {
+                        vote in
+                        comment.vote = vote
+                        switch value {
+                        case .Abuse: 
+                            break
+                        case .Epic:
+                            comment.epicCount -= 1
+                            comment.abuseCount += 1
+                            c.setLiked(false, likesCount: comment.epicCount)
+                        }
+                    }, error: {
+                        errorMsg in
+                        print(errorMsg)
+                })
+            } else {
+                let v = Vote(id: comment.vote.id, value: .Abuse)
+                ApiDataDownloader.votes.create(v, success: 
+                    {
+                        vote in
+                        comment.vote = vote
+                        comment.abuseCount += 1
+                    }, error: {
+                        errorMsg in
+                        print(errorMsg)
+                    }
+                )
+                
+            }
+        }
+    }
+    
+    func handleSelectDiscussion(comment: Comment, cell: UITableViewCell, completion: (Void->Void)?) {
+        let alert = DiscussionAlertConstructor.getReplyAlert(
+            {
+                [weak self] in
+                self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+            }, likeBlock: {
+                [weak self] in
+                self?.setLiked(comment, cell: cell)
+            }, abuseBlock:  {
+                [weak self] in
+                self?.setAbused(comment, cell: cell)
+            }
+        )
         
-        if let popoverController = alert.popoverPresentationController, 
-            let c = cell {
-            popoverController.sourceView = c.contentView
-            popoverController.sourceRect = c.contentView.bounds
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = cell.contentView
+            popoverController.sourceRect = cell.contentView.bounds
         }
         
         self.presentViewController(alert, animated: true, completion: {
@@ -406,12 +485,14 @@ extension DiscussionsViewController : UITableViewDelegate {
         print("did select row at indexPath \(indexPath)")
         if let comment = cellsInfo[indexPath.row].comment {            
             let cell = tableView.cellForRowAtIndexPath(indexPath)
-            handleSelectDiscussion(comment, cell: cell, completion: {
-                [weak self] in
-                UIThread.performUI { 
-                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true) 
-                }
-            })
+            if let c = cell {
+                handleSelectDiscussion(comment, cell: c, completion: {
+                    [weak self] in
+                    UIThread.performUI { 
+                        self?.tableView.deselectRowAtIndexPath(indexPath, animated: true) 
+                    }
+                })
+            }
         }
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
@@ -468,9 +549,7 @@ extension DiscussionsViewController : UITableViewDataSource {
 //            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
 
-                if let user = userInfos[comment.userId] {
-                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-                } 
+                cell.initWithComment(comment, separatorType: cellsInfo[indexPath.row].separatorType) 
                 
                 return cell
 //            } else {
@@ -524,9 +603,8 @@ extension DiscussionsViewController : UITableViewDataSource {
 }
 
 extension DiscussionsViewController : WriteCommentDelegate {
-    func didWriteComment(comment: Comment, userInfo: UserInfo) {
+    func didWriteComment(comment: Comment) {
         print(comment.parentId)
-        userInfos[userInfo.id] = userInfo
         if let parentId = comment.parentId {
             //insert row in an existing section
             if let section = discussions.indexOf({$0.id == parentId}) {

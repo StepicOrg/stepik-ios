@@ -13,7 +13,7 @@ import SwiftyJSON
 class CommentsAPI {
     let name = "comments"
     
-    func retrieve(ids: [Int], headers: [String: String] = APIDefaults.headers.bearer, success: ([Comment], [Int: UserInfo]) -> Void, error errorHandler: String -> Void) -> Request {
+    func retrieve(ids: [Int], headers: [String: String] = APIDefaults.headers.bearer, success: ([Comment]) -> Void, error errorHandler: String -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
             {
@@ -40,7 +40,19 @@ class CommentsAPI {
                     usersDict[user.id] = user
                 }
                 
-                success(comments, usersDict)
+                var votesDict : [String: Vote] = [String: Vote]()
+                
+                json["votes"].arrayValue.forEach({
+                    let vote = Vote(json: $0)
+                    votesDict[vote.id] = vote
+                })
+                
+                for comment in comments {
+                    comment.userInfo = usersDict[comment.userId]
+                    comment.vote = votesDict[comment.voteId]
+                }
+                
+                success(comments)
             }
         )
     }

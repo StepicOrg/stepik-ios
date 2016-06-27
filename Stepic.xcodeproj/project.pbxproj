@@ -128,6 +128,10 @@
 		0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
 		0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
 		0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D71CE3684000F8A6DB /* default_sound.wav */; };
+		086A8B251D21434B00F45C45 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		086A8B261D21434B00F45C45 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
+		086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
 		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
 		086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
 		086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
@@ -594,6 +598,8 @@
 		0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentQueueRecoveryManager.swift; sourceTree = "<group>"; };
 		0869F6D41CE229C800F8A6DB /* Queues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Queues.plist; sourceTree = "<group>"; };
 		0869F6D71CE3684000F8A6DB /* default_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default_sound.wav; sourceTree = "<group>"; };
+		086A8B241D21434B00F45C45 /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
+		086A8B271D21796800F45C45 /* VotesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesAPI.swift; sourceTree = "<group>"; };
 		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
@@ -802,6 +808,7 @@
 			children = (
 				0800B8171D06D961006C987E /* DiscussionProxy.swift */,
 				0800B81A1D06DC1B006C987E /* Comment.swift */,
+				086A8B241D21434B00F45C45 /* Vote.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -1118,6 +1125,7 @@
 				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				0800B8241D0704B6006C987E /* ApiUtil.swift */,
+				086A8B271D21796800F45C45 /* VotesAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -2067,6 +2075,7 @@
 				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
+				086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */,
 				08D1208E1C937B2200A54ABC /* DeviceInfo.swift in Sources */,
 				08D1208F1C937B2200A54ABC /* UIViewLoadExtension.swift in Sources */,
 				08D120911C937B2200A54ABC /* Section.swift in Sources */,
@@ -2156,6 +2165,7 @@
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
 				08D120D41C937B2200A54ABC /* GeneralInfoTableViewCell.swift in Sources */,
 				08D120D51C937B2200A54ABC /* NumberQuizViewController.swift in Sources */,
 				08D120D61C937B2200A54ABC /* GCDThings.swift in Sources */,
@@ -2375,6 +2385,7 @@
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
+				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
@@ -2422,6 +2433,7 @@
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
+				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,

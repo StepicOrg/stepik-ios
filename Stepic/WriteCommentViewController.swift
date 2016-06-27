@@ -89,11 +89,11 @@ class WriteCommentViewController: UIViewController {
         request = ApiDataDownloader.comments.create(comment, success: 
             {
                 [weak self]
-                comment, userInfo in
+                comment in
                 self?.state = .OK
                 self?.request = nil
                 UIThread.performUI {
-                    self?.delegate?.didWriteComment(comment, userInfo: userInfo)
+                    self?.delegate?.didWriteComment(comment)
                     self?.navigationController?.popViewControllerAnimated(true)
                 }
             }, error: {

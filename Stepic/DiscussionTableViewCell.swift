@@ -25,6 +25,9 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var likesImageView: UIImageView!
+    
     @IBOutlet weak var labelContainerView: UIView!
     var commentLabel: UILabel?
     
@@ -59,9 +62,9 @@ class DiscussionTableViewCell: UITableViewCell {
     var comment: Comment?
     var heightUpdateBlock : (Void->Void)?
 
-    func initWithComment(comment: Comment, user: UserInfo, separatorType: SeparatorType)  {
-        userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
-        nameLabel.text = "\(user.firstName) \(user.lastName)"
+    func initWithComment(comment: Comment, separatorType: SeparatorType)  {
+        userAvatarImageView.sd_setImageWithURL(NSURL(string: comment.userInfo.avatarURL)!)
+        nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
         
@@ -100,6 +103,15 @@ class DiscussionTableViewCell: UITableViewCell {
             break
         default: 
             break
+        }
+    }
+    
+    func setLiked(liked: Bool, likesCount: Int) {
+        likesLabel.text = "\(likesCount)"
+        if liked {
+            likesImageView.image = Images.thumbsUp.filled
+        } else {
+            likesImageView.image = Images.thumbsUp.normal
         }
     }
     

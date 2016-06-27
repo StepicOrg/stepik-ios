@@ -63,5 +63,10 @@ struct Images {
         static let size200x200 = UIImage(named: "nocomments-white")!
     }
     
+    struct thumbsUp {
+        static let normal = UIImage(named: "Thumb Up")!
+        static let filled = UIImage(named: "Thumb Up Filled")!
+    }
+    
 
 }

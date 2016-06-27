@@ -51,21 +51,38 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" image="Thumb Up" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-K2-Thw">
+                        <rect key="frame" x="341" y="4" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="GUp-J2-ReA"/>
+                            <constraint firstAttribute="width" constant="20" id="ZZk-hE-hig"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qt-gd-xNy">
+                        <rect key="frame" x="365" y="8" width="36" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="pV4-ue-5er" firstAttribute="top" secondItem="rLm-4h-SDt" secondAttribute="bottom" constant="8" id="0tS-Wr-yR8"/>
                     <constraint firstItem="rLm-4h-SDt" firstAttribute="top" secondItem="IO2-jl-qQ3" secondAttribute="bottom" priority="750" constant="8" id="5tA-Lx-aZM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pV4-ue-5er" secondAttribute="bottom" constant="-8" id="8Lt-gZ-xDf"/>
+                    <constraint firstItem="0qt-gd-xNy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="9DJ-HB-yAx"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pV4-ue-5er" secondAttribute="trailing" constant="-8" id="BPc-aI-n4G"/>
+                    <constraint firstItem="eQf-K2-Thw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6YZ-wn-n05" secondAttribute="trailing" constant="8" id="Bov-vn-tCQ"/>
                     <constraint firstAttribute="leadingMargin" secondItem="rLm-4h-SDt" secondAttribute="leading" id="DFi-Wv-pga"/>
                     <constraint firstItem="pV4-ue-5er" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="EJ0-8Z-U7Z"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="top" secondItem="6YZ-wn-n05" secondAttribute="bottom" constant="11" id="KeS-4Q-bkK"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="0qt-gd-xNy" secondAttribute="trailing" id="Vl6-dJ-Adz"/>
                     <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="bau-Ct-hyr"/>
                     <constraint firstAttribute="topMargin" secondItem="IO2-jl-qQ3" secondAttribute="top" id="bda-2u-oSh"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="dGs-LU-819"/>
                     <constraint firstAttribute="topMargin" secondItem="6YZ-wn-n05" secondAttribute="top" id="hGi-hC-5dT"/>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="6YZ-wn-n05" secondAttribute="trailing" id="ivn-lF-o6e"/>
+                    <constraint firstItem="eQf-K2-Thw" firstAttribute="centerY" secondItem="0qt-gd-xNy" secondAttribute="centerY" constant="-2" id="lJN-My-1nv"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RmE-el-xJX" secondAttribute="trailing" id="mnh-Uc-Ujs"/>
+                    <constraint firstItem="0qt-gd-xNy" firstAttribute="leading" secondItem="eQf-K2-Thw" secondAttribute="trailing" constant="4" id="upH-Q9-atC"/>
                     <constraint firstItem="rLm-4h-SDt" firstAttribute="top" secondItem="RmE-el-xJX" secondAttribute="bottom" constant="8" id="w6T-9B-MAY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rLm-4h-SDt" secondAttribute="trailing" id="zKV-I4-aGz"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IO2-jl-qQ3" secondAttribute="leading" id="zeC-Ii-ThB"/>
@@ -76,6 +93,8 @@
                 <outlet property="ImageLeadingConstraint" destination="zeC-Ii-ThB" id="ZcW-0g-gNI"/>
                 <outlet property="labelContainerView" destination="rLm-4h-SDt" id="WE3-nE-oam"/>
                 <outlet property="labelLeadingConstraint" destination="DFi-Wv-pga" id="uwV-FK-lD0"/>
+                <outlet property="likesImageView" destination="eQf-K2-Thw" id="7Hh-xy-3WI"/>
+                <outlet property="likesLabel" destination="0qt-gd-xNy" id="UQw-MR-Wd0"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
                 <outlet property="separatorHeightConstraint" destination="wgI-Pg-Mbo" id="epW-KA-daK"/>
                 <outlet property="separatorLeadingConstraint" destination="EJ0-8Z-U7Z" id="X2X-wB-q8E"/>
@@ -86,4 +105,7 @@
             <point key="canvasLocation" x="184.5" y="443"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Thumb Up" width="33" height="33"/>
+    </resources>
 </document>
