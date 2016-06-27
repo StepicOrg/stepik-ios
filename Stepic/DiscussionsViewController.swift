@@ -345,7 +345,7 @@ class DiscussionsViewController: UIViewController {
             if let value = comment.vote.value {
                 let vToSet : VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
                 let v = Vote(id: comment.vote.id, value: vToSet)
-                ApiDataDownloader.votes.create(v, success: 
+                ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
                         comment.vote = vote
@@ -364,7 +364,7 @@ class DiscussionsViewController: UIViewController {
                 })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Epic)
-                ApiDataDownloader.votes.create(v, success: 
+                ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
                         comment.vote = vote
@@ -384,7 +384,7 @@ class DiscussionsViewController: UIViewController {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
-                ApiDataDownloader.votes.create(v, success: 
+                ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
                         comment.vote = vote
@@ -402,7 +402,7 @@ class DiscussionsViewController: UIViewController {
                 })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
-                ApiDataDownloader.votes.create(v, success: 
+                ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
                         comment.vote = vote

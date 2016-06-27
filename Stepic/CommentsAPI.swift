@@ -57,7 +57,7 @@ class CommentsAPI {
         )
     }
     
-    func create(comment: CommentPostable, headers: [String: String] = APIDefaults.headers.bearer, success: (Comment, UserInfo) -> Void, error errorHandler: String -> Void) -> Request {
+    func create(comment: CommentPostable, headers: [String: String] = APIDefaults.headers.bearer, success: Comment -> Void, error errorHandler: String -> Void) -> Request {
         let params: [String: AnyObject] = [
             "comment" : comment.json
         ]
@@ -77,8 +77,9 @@ class CommentsAPI {
 
                 let comment : Comment = Comment(json: json["comments"].arrayValue[0])
                 let userInfo = UserInfo(json: json["users"].arrayValue[0])
+                comment.userInfo = userInfo
                 
-                success(comment, userInfo)
+                success(comment)
             }
         )
     }
