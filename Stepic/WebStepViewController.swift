@@ -20,8 +20,10 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
 
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
+        
+    @IBOutlet weak var discussionCountView: DiscussionCountView!
+    @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var showCommentsButton: UIButton!
     
     var parent : StepsViewController!
     
@@ -49,7 +51,15 @@ class WebStepViewController: UIViewController {
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
         print(self.view.gestureRecognizers)
         handleQuizType()
-        showCommentsButton.setTitle(NSLocalizedString("ShowComments", comment: ""), forState: .Normal)
+        if let discussionCount = step.discussionsCount {
+            discussionCountView.commentsCount = discussionCount
+            discussionCountView.showCommentsHandler = {
+                [weak self] in
+                self?.showComments()
+            }
+        } else {
+            discussionCountViewHeight.constant = 0
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -86,7 +96,7 @@ class WebStepViewController: UIViewController {
     func handleQuizType() {
         switch step.block.name {
         case "text":
-            stepWebView.constrainBottomSpaceToView(showCommentsButton, predicate: "8")
+            stepWebView.constrainBottomSpaceToView(discussionCountView, predicate: "8")
 //            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
         case "choice":
@@ -201,8 +211,8 @@ class WebStepViewController: UIViewController {
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
-
-    @IBAction func showCommentsPressed(sender: UIButton) {
+    
+    func showComments() {
         if let discussionProxyId = step.discussionProxyId {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
             vc.discussionProxyId = discussionProxyId
