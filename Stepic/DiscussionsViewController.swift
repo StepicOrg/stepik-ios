@@ -132,8 +132,8 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
-    let discussionLoadingInterval = 10
-    let repliesLoadingInterval = 10
+    let discussionLoadingInterval = 20
+    let repliesLoadingInterval = 20
     
     func getNextDiscussionIdsToLoad() -> [Int] {
         let startIndex = discussionIds.loaded.count
@@ -474,7 +474,6 @@ extension DiscussionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("did select row at indexPath \(indexPath)")
         if let comment = cellsInfo[indexPath.row].comment {            
             let cell = tableView.cellForRowAtIndexPath(indexPath)
             if let c = cell {
