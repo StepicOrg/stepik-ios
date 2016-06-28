@@ -423,9 +423,11 @@ class DiscussionsViewController: UIViewController {
         )
         
         if let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = cell.contentView
-            popoverController.sourceRect = cell.contentView.bounds
+            popoverController.sourceView = cell
+            popoverController.sourceRect = cell.bounds
         }
+        
+        alert.view.layoutIfNeeded()
         
         self.presentViewController(alert, animated: true, completion: {
             completion?()
