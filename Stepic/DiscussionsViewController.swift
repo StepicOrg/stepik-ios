@@ -418,8 +418,8 @@ class DiscussionsViewController: UIViewController {
     }
     
     func handleSelectDiscussion(comment: Comment, cell: UITableViewCell, completion: (Void->Void)?) {
-        let alert = DiscussionAlertConstructor.getReplyAlert(
-            {
+        let alert = DiscussionAlertConstructor.getCommentAlert(comment, 
+            replyBlock: {
                 [weak self] in
                 self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
             }, likeBlock: {
@@ -428,6 +428,12 @@ class DiscussionsViewController: UIViewController {
             }, abuseBlock:  {
                 [weak self] in
                 self?.setAbused(comment, cell: cell)
+            }, openURLBlock:  {
+                [weak self] 
+                url in     
+                if let s = self {
+                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+                }
             }
         )
         
