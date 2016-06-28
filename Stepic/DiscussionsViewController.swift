@@ -591,16 +591,15 @@ extension DiscussionsViewController : UITableViewDataSource {
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
             print("load replies cell")
-//            let cell = NSBundle.mainBundle().loadNibNamed("LoadMoreTableViewCell", owner: self, options: nil)[0]  as! LoadMoreTableViewCell
             let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
-            cell.showMoreLabel.text = NSLocalizedString("ShowMoreReplies", comment: "")
+            cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreReplies", comment: ""))(\(replies.leftToLoad(loadRepliesFor)))"
             return cell
         }
         
         if let loadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
             print("load discussions cell")
             let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
-            cell.showMoreLabel.text = NSLocalizedString("ShowMoreDiscussions", comment: "")
+            cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: ""))(\(discussionIds.leftToLoad))"
             return cell
         }
         
