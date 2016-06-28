@@ -13,8 +13,8 @@ import SwiftyJSON
 class VotesAPI {
 
     func update(vote: Vote, headers: [String: String] = APIDefaults.headers.bearer, success: (Vote->Void), error errorHandler: (String->Void)) {
-        let params = [
-            "vote" : vote
+        let params : [String: AnyObject]? = [
+            "vote" : vote.json
         ]
         Alamofire.request(.PUT, "https://stepic.org/api/votes/\(vote.id)", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(
             {

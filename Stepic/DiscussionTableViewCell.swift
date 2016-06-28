@@ -68,7 +68,8 @@ class DiscussionTableViewCell: UITableViewCell {
         self.comment = comment
         self.separatorType = separatorType
         
-        timeLabel.text = comment.lastTime.getStepicFormatString()
+        timeLabel.text = comment.lastTime.getStepicFormatString(withTime: true)
+        setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
         loadLabel(comment.text)
     }
     

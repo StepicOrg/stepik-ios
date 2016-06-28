@@ -24,6 +24,14 @@ class Vote {
         self.id = id
         self.value = value
     }
+    
+    var json: [String: AnyObject] {
+        let dict : [String: AnyObject] = [
+            "id" : id,
+            "value": value?.rawValue ?? NSNull()
+        ]
+        return dict
+    }
 }
 
 enum VoteValue: String {
