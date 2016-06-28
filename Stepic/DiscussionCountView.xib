@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DiscussionCountView" customModule="SberbankUniversity" customModuleProvider="target">
+            <connections>
+                <outlet property="showCommentsLabel" destination="jqm-fS-dY2" id="L5G-St-Qg9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Topic-100" translatesAutoresizingMaskIntoConstraints="NO" id="w00-Pw-zGl">
+                    <rect key="frame" x="8" y="13" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="9td-VS-R3H"/>
+                        <constraint firstAttribute="height" constant="20" id="LRu-OR-bWz"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Показать комментарии(1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqm-fS-dY2">
+                    <rect key="frame" x="36" y="13" width="196" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forward-100" translatesAutoresizingMaskIntoConstraints="NO" id="C5U-NN-EU7">
+                    <rect key="frame" x="572" y="13" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="5Wc-2c-y0W"/>
+                        <constraint firstAttribute="width" constant="20" id="hrK-ZL-9My"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZt-1V-Xtp">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
+                    <connections>
+                        <action selector="showCommentsPressed:" destination="-1" eventType="touchUpInside" id="zoL-b8-tgx"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="w00-Pw-zGl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="0zU-5U-gOx"/>
+                <constraint firstItem="iZt-1V-Xtp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4xL-hU-HC2"/>
+                <constraint firstItem="jqm-fS-dY2" firstAttribute="leading" secondItem="w00-Pw-zGl" secondAttribute="trailing" constant="8" id="8Zu-N8-6dO"/>
+                <constraint firstAttribute="bottom" secondItem="iZt-1V-Xtp" secondAttribute="bottom" id="JpG-Jt-URY"/>
+                <constraint firstItem="w00-Pw-zGl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="O4M-hu-PhH"/>
+                <constraint firstItem="iZt-1V-Xtp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QA8-tj-aJb"/>
+                <constraint firstItem="jqm-fS-dY2" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Sjc-9t-pYM"/>
+                <constraint firstItem="C5U-NN-EU7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="T6i-sp-2u0"/>
+                <constraint firstAttribute="trailing" secondItem="C5U-NN-EU7" secondAttribute="trailing" constant="8" id="ZMp-gP-yso"/>
+                <constraint firstAttribute="trailing" secondItem="iZt-1V-Xtp" secondAttribute="trailing" id="t1C-vB-9sc"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="319" y="141"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Forward-100" width="33" height="33"/>
+        <image name="Topic-100" width="33" height="33"/>
+    </resources>
+</document>
