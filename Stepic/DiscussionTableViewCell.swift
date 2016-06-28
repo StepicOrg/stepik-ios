@@ -97,10 +97,10 @@ class DiscussionTableViewCell: UITableViewCell {
     
     private func setLeadingConstraints(constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
-        labelLeadingConstraint.constant = constant - 8
+        labelLeadingConstraint.constant = constant
         switch self.separatorType {
         case .Small: 
-            separatorLeadingConstraint.constant = -constant + 8
+            separatorLeadingConstraint.constant = -constant
             break
         default: 
             break
