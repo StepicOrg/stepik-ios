@@ -77,7 +77,9 @@ class CommentsAPI {
 
                 let comment : Comment = Comment(json: json["comments"].arrayValue[0])
                 let userInfo = UserInfo(json: json["users"].arrayValue[0])
+                let vote = Vote(json: json["votes"].arrayValue[0])
                 comment.userInfo = userInfo
+                comment.vote = vote
                 
                 success(comment)
             }

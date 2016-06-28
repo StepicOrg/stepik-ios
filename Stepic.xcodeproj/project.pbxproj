@@ -998,6 +998,7 @@
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				082CB1AD1D088B6900C79A27 /* Discussions */,
 				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
 				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
@@ -1187,7 +1188,6 @@
 			children = (
 				08D565C81C5F7CE800DE2B6A /* Theory */,
 				08D565C91C5F7CF000DE2B6A /* Practice */,
-				082CB1AD1D088B6900C79A27 /* Discussions */,
 			);
 			name = "Step Content Controllers";
 			sourceTree = "<group>";
