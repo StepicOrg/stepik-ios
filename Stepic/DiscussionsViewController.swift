@@ -264,21 +264,6 @@ class DiscussionsViewController: UIViewController {
         }
         resetData(false)
         isReloading = true
-//        self.discussionIds.all = [0, 1, 2]
-//        self.discussionIds.loaded = [0, 1, 2]
-//        userInfos[10] = UserInfo(sample: true)
-//        
-//        
-//        discussions = []
-//
-//        for i in 0 ..< 3 {
-//            discussions += [Comment(sampleId: i)]
-//        }
-//        
-//        self.refreshControl?.endRefreshing()
-//        self.reloadTableData()
-//        self.isReloading = false
-//        return;
         
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             [weak self] in
@@ -479,7 +464,6 @@ extension DiscussionsViewController : UITableViewDelegate {
         return 44
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        print("CGFLoat min -> \(CGFloat.min)")
         return CGFloat.min
     }
     
@@ -503,32 +487,37 @@ extension DiscussionsViewController : UITableViewDelegate {
         
         if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
             let idsToLoad = getNextReplyIdsToLoad(loadRepliesFor)
-            loadDiscussions(idsToLoad, success: {
-                [weak self] in
-                UIThread.performUI {
-//                    self?.tableView.beginUpdates()
-                    //TODO: Change to animated reload
-                    self?.reloadTableData()
-//                    self?.tableView.endUpdates()
-                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                }
-            })
+            if let c = tableView.cellForRowAtIndexPath(indexPath) as? LoadMoreTableViewCell {
+                c.isUpdating = true
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                loadDiscussions(idsToLoad, success: 
+                    {
+                        [weak self] in
+                        UIThread.performUI {
+                            //TODO: Change to animated reload
+                            self?.reloadTableData()
+                            c.isUpdating = false
+                        }
+                    })
+            }
 
         }
         
         if let shouldLoadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
             let idsToLoad = getNextDiscussionIdsToLoad()
-            loadDiscussions(idsToLoad, success: {
-                [weak self] in
-                UIThread.performUI {
-                    if let s = self {
-//                        s.tableView.beginUpdates()
-                        self?.reloadTableData()
-//                        s.tableView.endUpdates()
-                        self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                    }
-                }
-            })
+            if let c = tableView.cellForRowAtIndexPath(indexPath) as? LoadMoreTableViewCell {
+                c.isUpdating = true
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                loadDiscussions(idsToLoad, success: 
+                    {
+                        [weak self] in
+                        UIThread.performUI {
+                            //TODO: Change to animated reload
+                            self?.reloadTableData()
+                            c.isUpdating = false
+                        }
+                    })
+            }
         }
     }
 }
