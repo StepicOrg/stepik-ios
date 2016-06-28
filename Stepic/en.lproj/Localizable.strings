@@ -119,3 +119,7 @@ ShowMoreDiscussions = "Показать больше комментариев";
 RefreshingDiscussions = "Refreshing discussions...";
 NoDiscussionsTitle = "No discussions";
 NoDiscussionDescription = "Start the first one!";
+Like = "Like";
+Unlike = "Unlike";
+Abuse = "Abuse";
+Unabuse = "Don't abuse";

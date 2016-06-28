@@ -119,3 +119,7 @@ ShowMoreDiscussions = "Показать больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
 NoDiscussionsTitle = "Обсуждений нет.";
 NoDiscussionsDescription = "Начните первое!";
+Like = "Нравится";
+Unlike = "Больше не нравится";
+Abuse = "Пожаловаться";
+Unabuse = "Не жаловаться";

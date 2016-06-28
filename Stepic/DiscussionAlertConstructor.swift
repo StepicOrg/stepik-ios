@@ -32,14 +32,18 @@ class DiscussionAlertConstructor {
         })
         )
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Like", comment: ""), style: .Default, handler: 
+        let likeTitle: String = (comment.vote.value == VoteValue.Epic) ? NSLocalizedString("Unlike", comment: "") : NSLocalizedString("Like", comment: "")
+        
+        alert.addAction(UIAlertAction(title: likeTitle, style: .Default, handler: 
             {
                 action in
                 likeBlock()
         })
         )
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Abuse", comment: ""), style: .Destructive, handler: 
+        let abuseTitle: String = (comment.vote.value == VoteValue.Abuse) ? NSLocalizedString("Unabuse", comment: "") : NSLocalizedString("Abuse", comment: "")
+        
+        alert.addAction(UIAlertAction(title: abuseTitle, style: .Destructive, handler: 
             {
                 action in
                 abuseBlock()
