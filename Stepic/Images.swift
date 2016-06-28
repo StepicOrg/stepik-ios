@@ -64,8 +64,8 @@ struct Images {
     }
     
     struct thumbsUp {
-        static let normal = UIImage(named: "Thumb Up")!
-        static let filled = UIImage(named: "Thumb Up Filled")!
+        static let normal = UIImage(named: "Thumb Up Gray")!
+        static let filled = UIImage(named: "Thumb Up Green")!
     }
     
 

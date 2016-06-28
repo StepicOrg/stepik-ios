@@ -51,8 +51,8 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" image="Thumb Up" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-K2-Thw">
-                        <rect key="frame" x="377" y="9" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" image="Thumb Up Gray" translatesAutoresizingMaskIntoConstraints="NO" id="eQf-K2-Thw">
+                        <rect key="frame" x="369" y="10" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="GUp-J2-ReA"/>
                             <constraint firstAttribute="width" constant="15" id="ZZk-hE-hig"/>
@@ -77,12 +77,12 @@
                     <constraint firstItem="6YZ-wn-n05" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="bau-Ct-hyr"/>
                     <constraint firstAttribute="topMargin" secondItem="IO2-jl-qQ3" secondAttribute="top" id="bda-2u-oSh"/>
                     <constraint firstItem="RmE-el-xJX" firstAttribute="leading" secondItem="IO2-jl-qQ3" secondAttribute="trailing" constant="8" id="dGs-LU-819"/>
-                    <constraint firstItem="eQf-K2-Thw" firstAttribute="centerY" secondItem="0qt-gd-xNy" secondAttribute="centerY" constant="-1" id="dIA-A3-86d"/>
+                    <constraint firstItem="eQf-K2-Thw" firstAttribute="centerY" secondItem="0qt-gd-xNy" secondAttribute="centerY" id="dIA-A3-86d"/>
                     <constraint firstAttribute="topMargin" secondItem="6YZ-wn-n05" secondAttribute="top" id="hGi-hC-5dT"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0qt-gd-xNy" secondAttribute="trailing" id="hNY-7D-lPM"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RmE-el-xJX" secondAttribute="trailing" id="mnh-Uc-Ujs"/>
                     <constraint firstItem="0qt-gd-xNy" firstAttribute="centerY" secondItem="6YZ-wn-n05" secondAttribute="centerY" id="ubo-f1-C17"/>
-                    <constraint firstItem="0qt-gd-xNy" firstAttribute="leading" secondItem="eQf-K2-Thw" secondAttribute="trailing" id="upH-Q9-atC"/>
+                    <constraint firstItem="0qt-gd-xNy" firstAttribute="leading" secondItem="eQf-K2-Thw" secondAttribute="trailing" constant="8" id="upH-Q9-atC"/>
                     <constraint firstItem="rLm-4h-SDt" firstAttribute="top" secondItem="RmE-el-xJX" secondAttribute="bottom" constant="8" id="w6T-9B-MAY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rLm-4h-SDt" secondAttribute="trailing" id="zKV-I4-aGz"/>
                     <constraint firstAttribute="leadingMargin" secondItem="IO2-jl-qQ3" secondAttribute="leading" id="zeC-Ii-ThB"/>
@@ -106,6 +106,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Thumb Up" width="33" height="33"/>
+        <image name="Thumb Up Gray" width="30" height="30"/>
     </resources>
 </document>
