@@ -32,24 +32,26 @@ class DiscussionAlertConstructor {
         })
         )
         
-        let likeTitle: String = (comment.vote.value == VoteValue.Epic) ? NSLocalizedString("Unlike", comment: "") : NSLocalizedString("Like", comment: "")
+        if comment.userId != StepicAPI.shared.userId {
         
-        alert.addAction(UIAlertAction(title: likeTitle, style: .Default, handler: 
-            {
-                action in
-                likeBlock()
-        })
-        )
-        
-        let abuseTitle: String = (comment.vote.value == VoteValue.Abuse) ? NSLocalizedString("Unabuse", comment: "") : NSLocalizedString("Abuse", comment: "")
-        
-        alert.addAction(UIAlertAction(title: abuseTitle, style: .Destructive, handler: 
-            {
-                action in
-                abuseBlock()
+            let likeTitle: String = (comment.vote.value == VoteValue.Epic) ? NSLocalizedString("Unlike", comment: "") : NSLocalizedString("Like", comment: "")
+            
+            alert.addAction(UIAlertAction(title: likeTitle, style: .Default, handler: 
+                {
+                    action in
+                    likeBlock()
             })
-        )
-        
+            )
+            
+            let abuseTitle: String = (comment.vote.value == VoteValue.Abuse) ? NSLocalizedString("Unabuse", comment: "") : NSLocalizedString("Abuse", comment: "")
+            
+            alert.addAction(UIAlertAction(title: abuseTitle, style: .Destructive, handler: 
+                {
+                    action in
+                    abuseBlock()
+                })
+            )
+        }
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
         
         return alert
