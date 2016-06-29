@@ -23,7 +23,9 @@ class VideoStepViewController: UIViewController {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var showCommentsButton: UIButton!
+    
+    @IBOutlet weak var discussionCountView: DiscussionCountView!
+    @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
     var imageTapHelper : ImageTapHelper!
     
@@ -32,8 +34,16 @@ class VideoStepViewController: UIViewController {
         
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
-        showCommentsButton.setTitle(NSLocalizedString("ShowComments", comment: ""), forState: .Normal)
-
+        if let discussionCount = step.discussionsCount {
+            discussionCountView.commentsCount = discussionCount
+            discussionCountView.showCommentsHandler = {
+                [weak self] in
+                self?.showComments()
+            }
+        } else {
+            discussionCountViewHeight.constant = 0
+        }
+        
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
             recognizer in
@@ -87,6 +97,10 @@ class VideoStepViewController: UIViewController {
     }
     
     @IBAction func showCommentsPressed(sender: AnyObject) {
+        showComments()
+    }
+    
+    func showComments() {
         if let discussionProxyId = step.discussionProxyId {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
             vc.discussionProxyId = discussionProxyId
