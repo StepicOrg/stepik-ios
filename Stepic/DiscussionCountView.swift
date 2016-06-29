@@ -14,7 +14,7 @@ class DiscussionCountView: UIView {
     
     var commentsCount : Int = 0 {
         didSet {
-            showCommentsLabel.text = "\(NSLocalizedString("ShowComments", comment: ""))(\(commentsCount))"
+            showCommentsLabel.text = "\(NSLocalizedString("ShowComments", comment: "")) (\(commentsCount))"
         }
     }
     
