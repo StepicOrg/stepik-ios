@@ -83,8 +83,13 @@ class WriteCommentViewController: UIViewController {
         sendComment()
     }
     
+    var htmlText : String {
+        let t = commentTextView.text
+        return t.stringByReplacingOccurrencesOfString("\n", withString: "<br>")
+    }
+    
     func sendComment() {
-        let comment = CommentPostable(parent: parent, target: target, text: commentTextView.text)
+        let comment = CommentPostable(parent: parent, target: target, text: htmlText)
         
         request = ApiDataDownloader.comments.create(comment, success: 
             {
