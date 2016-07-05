@@ -9,14 +9,17 @@
 import UIKit
 
 extension NSDate {
-    func getStepicFormatString() -> String {
+    func getStepicFormatString(withTime withTime: Bool = false) -> String {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
         formatter.timeZone = .None
-        
+        if withTime {
+            formatter.timeStyle = .ShortStyle
+        }
         
         return formatter.stringFromDate(self)
     }
+    
 }
 
 extension NSTimeInterval {

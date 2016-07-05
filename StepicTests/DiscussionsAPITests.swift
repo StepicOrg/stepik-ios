@@ -34,7 +34,7 @@ class DiscussionsAPITests : XCTestCase {
                 discussionProxy in
                 self.comments.retrieve(discussionProxy.discussionIds, success: 
                     { 
-                        comments, users in
+                        comments in
                         expectation.fulfill()
                     }, error: 
                     {
@@ -63,7 +63,7 @@ class DiscussionsAPITests : XCTestCase {
         let postable = CommentPostable(target: target, text: "testCreateComment comment")
         comments.create(postable, success: 
             {
-                comment, userinfo in
+                comment in
                 self.discussionProxies.retrieve(discussionProxyId, success: 
                     {
                         discussionProxy in
@@ -98,10 +98,10 @@ class DiscussionsAPITests : XCTestCase {
         let postable = CommentPostable(parent: parent, target: target, text: "testCreateReply comment")
         comments.create(postable, success: 
             {
-                comment, userinfo in
+                comment in
                 self.comments.retrieve([parent], success: 
                     {
-                        parentcomment, usersinfo in
+                        parentcomment in
                         if parentcomment[0].repliesIds.indexOf(comment.id) == nil {
                             XCTAssert(false, "Created reply not found")
                         }

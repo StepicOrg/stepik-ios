@@ -14,20 +14,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Показать еще" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dA3-nu-bnA">
-                        <rect key="frame" x="104" y="14" width="112" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Показать еще" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dA3-nu-bnA">
+                        <rect key="frame" x="113" y="16" width="94" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="57d-62-Wp9">
+                        <rect key="frame" x="150" y="15" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="dA3-nu-bnA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lee-iU-g3k"/>
                     <constraint firstItem="dA3-nu-bnA" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="eNF-ko-6jF"/>
+                    <constraint firstItem="57d-62-Wp9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g6t-0C-TwO"/>
+                    <constraint firstItem="57d-62-Wp9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zHT-s8-B3H"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="showMoreActivityIndicator" destination="57d-62-Wp9" id="qBH-uM-uWz"/>
                 <outlet property="showMoreLabel" destination="dA3-nu-bnA" id="85t-Be-Kww"/>
             </connections>
             <point key="canvasLocation" x="425" y="292"/>

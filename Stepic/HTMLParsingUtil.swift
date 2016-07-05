@@ -26,6 +26,41 @@ class HTMLParsingUtil {
         return nil
     }
     
+    static func getAllLinksWithText(htmlString: String, onlyTags: Bool = true) -> [(link: String, text: String)] {
+        var res = [(link: String, text: String)]()
+        if let doc = Kanna.HTML(html: htmlString, encoding: NSUTF8StringEncoding) {
+            res += doc.css("a").flatMap{
+                if let link = $0["href"],
+                    let text = $0.text {
+                    return (link: link, text: text)
+                } else {
+                    return nil
+                }
+            }
+        }
+        
+        if !onlyTags {
+            let types: NSTextCheckingType = .Link
+            let detector = try? NSDataDetector(types: types.rawValue)
+            
+            guard let detect = detector else {
+                return res
+            }
+            
+            let matches = detect.matchesInString(htmlString, options: .ReportCompletion, range: NSMakeRange(0, htmlString.characters.count))
+            
+            for match in matches {
+                if let urlString = match.URL?.absoluteString {
+                    if res.indexOf({$0.link == urlString}) == nil {
+                        res += [(link: urlString, text: urlString)]
+                    }
+                }
+            }
+        }
+        
+        return res
+    }
+    
     static func getImageSrcLinks(htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: htmlString, encoding: NSUTF8StringEncoding) {
             let imgNodes = doc.css("img")

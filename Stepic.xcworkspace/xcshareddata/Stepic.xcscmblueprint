@@ -1,0 +1,23 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A51D520DDDAFE2AD2827B2005A96C11282AFF45B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A51D520DDDAFE2AD2827B2005A96C11282AFF45B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5F5701D5-B529-4E42-8DC0-1E5FBB2D9335",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A51D520DDDAFE2AD2827B2005A96C11282AFF45B" : "stepic-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Stepic",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Stepic.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/StepicOrg\/stepic-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A51D520DDDAFE2AD2827B2005A96C11282AFF45B"
+    }]
+  ]
+}

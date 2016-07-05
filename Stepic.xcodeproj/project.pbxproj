@@ -128,7 +128,13 @@
 		0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
 		0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D41CE229C800F8A6DB /* Queues.plist */; };
 		0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0869F6D71CE3684000F8A6DB /* default_sound.wav */; };
+		086A8B251D21434B00F45C45 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		086A8B261D21434B00F45C45 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B241D21434B00F45C45 /* Vote.swift */; };
+		086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
+		086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A8B271D21796800F45C45 /* VotesAPI.swift */; };
 		086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
+		086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
+		086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
 		086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E965F1BF66A1800AB952D /* VideoDownloadView.swift */; };
 		087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */; };
@@ -153,6 +159,12 @@
 		0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
+		088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA61D175DA00034D86D /* HTMLContentView.swift */; };
+		088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA61D175DA00034D86D /* HTMLContentView.swift */; };
+		088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */; };
+		088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */; };
+		088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */; };
+		088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -179,6 +191,10 @@
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
 		089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
+		089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
+		089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
+		089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
+		089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
 		08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
@@ -202,6 +218,8 @@
 		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B899611C983FC3003BED43 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */; };
+		08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
+		08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
@@ -584,7 +602,10 @@
 		0869F6D11CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentQueueRecoveryManager.swift; sourceTree = "<group>"; };
 		0869F6D41CE229C800F8A6DB /* Queues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Queues.plist; sourceTree = "<group>"; };
 		0869F6D71CE3684000F8A6DB /* default_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = default_sound.wav; sourceTree = "<group>"; };
+		086A8B241D21434B00F45C45 /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
+		086A8B271D21796800F45C45 /* VotesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesAPI.swift; sourceTree = "<group>"; };
 		086A9D611C74AF90003611DC /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		086E965D1BF6683800AB952D /* VideoDownloadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDownloadView.xib; sourceTree = "<group>"; };
 		086E965F1BF66A1800AB952D /* VideoDownloadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
@@ -603,6 +624,9 @@
 		0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
 		0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
+		088AADA61D175DA00034D86D /* HTMLContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLContentView.swift; sourceTree = "<group>"; };
+		088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLStringWrapperUtil.swift; sourceTree = "<group>"; };
+		088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLContentViewInteractionDelegate.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -624,6 +648,8 @@
 		089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadDelegate.swift; sourceTree = "<group>"; };
 		089B370E1BFA210F003DC593 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		089F58841D22BD3C000CD540 /* DiscussionCountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionCountView.swift; sourceTree = "<group>"; };
+		089F58881D22BD59000CD540 /* DiscussionCountView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionCountView.xib; sourceTree = "<group>"; };
 		08A1256E1BDE8E460066B2B2 /* Sorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sorter.swift; sourceTree = "<group>"; };
 		08A1257A1BDEBCC90066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -642,6 +668,8 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
+		08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionWebTableViewCell.xib; sourceTree = "<group>"; };
+		08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionWebTableViewCell.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
@@ -786,6 +814,7 @@
 			children = (
 				0800B8171D06D961006C987E /* DiscussionProxy.swift */,
 				0800B81A1D06DC1B006C987E /* Comment.swift */,
+				086A8B241D21434B00F45C45 /* Vote.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -907,10 +936,10 @@
 		082CB1AD1D088B6900C79A27 /* Discussions */ = {
 			isa = PBXGroup;
 			children = (
+				08B977061D19D29A00FFC52C /* DiscussionTableViewCells */,
+				088AADA51D175C570034D86D /* HTMLContentView */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
-				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
-				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
 				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
 				08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */,
@@ -969,6 +998,7 @@
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
+				082CB1AD1D088B6900C79A27 /* Discussions */,
 				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
 				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
@@ -1044,6 +1074,7 @@
 				08F485961C574DB3000165AA /* WarningView */,
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
 				083622DA1CD1FA4F00CD8915 /* StepTabView */,
+				089F58871D22BD44000CD540 /* DiscussionCountView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1102,6 +1133,7 @@
 				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				0800B8241D0704B6006C987E /* ApiUtil.swift */,
+				086A8B271D21796800F45C45 /* VotesAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1129,6 +1161,16 @@
 			name = Downloads;
 			sourceTree = "<group>";
 		};
+		088AADA51D175C570034D86D /* HTMLContentView */ = {
+			isa = PBXGroup;
+			children = (
+				088AADA61D175DA00034D86D /* HTMLContentView.swift */,
+				088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */,
+				088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */,
+			);
+			name = HTMLContentView;
+			sourceTree = "<group>";
+		};
 		08901E661CD0F94C00D94613 /* In-app version control */ = {
 			isa = PBXGroup;
 			children = (
@@ -1146,7 +1188,6 @@
 			children = (
 				08D565C81C5F7CE800DE2B6A /* Theory */,
 				08D565C91C5F7CF000DE2B6A /* Practice */,
-				082CB1AD1D088B6900C79A27 /* Discussions */,
 			);
 			name = "Step Content Controllers";
 			sourceTree = "<group>";
@@ -1171,6 +1212,15 @@
 				08970ED61C6A36E500846119 /* PlaceholderView.storyboard */,
 			);
 			name = PlaceholderViewTesting;
+			sourceTree = "<group>";
+		};
+		089F58871D22BD44000CD540 /* DiscussionCountView */ = {
+			isa = PBXGroup;
+			children = (
+				089F58841D22BD3C000CD540 /* DiscussionCountView.swift */,
+				089F58881D22BD59000CD540 /* DiscussionCountView.xib */,
+			);
+			name = DiscussionCountView;
 			sourceTree = "<group>";
 		};
 		08AC21371CDD32E100FBB9CD /* Users data */ = {
@@ -1208,6 +1258,33 @@
 				08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */,
 			);
 			name = "Controller Helper";
+			sourceTree = "<group>";
+		};
+		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				08B977081D19D55100FFC52C /* WebView */,
+				08B977071D19D54B00FFC52C /* Label */,
+			);
+			name = DiscussionTableViewCells;
+			sourceTree = "<group>";
+		};
+		08B977071D19D54B00FFC52C /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
+				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
+			);
+			name = Label;
+			sourceTree = "<group>";
+		};
+		08B977081D19D55100FFC52C /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */,
+				08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
@@ -1414,6 +1491,7 @@
 				08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */,
 				080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */,
 				080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */,
+				086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1717,6 +1795,7 @@
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				08D1210C1C937B2200A54ABC /* MathJax in Resources */,
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
+				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				08D1210D1C937B2200A54ABC /* GoogleService-Info.plist in Resources */,
 				08CB6B441C98774200E8BA50 /* SbEntranceViewController.xib in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
@@ -1759,6 +1838,7 @@
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
+				089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
@@ -1773,6 +1853,7 @@
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
@@ -1997,6 +2078,7 @@
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
 				08D120881C937B2200A54ABC /* RegistrationErrorInfo.swift in Sources */,
+				088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				08D120891C937B2200A54ABC /* StandardsExtensions.swift in Sources */,
 				0861E6731CD80A9600B45652 /* Executable.swift in Sources */,
 				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
@@ -2009,7 +2091,9 @@
 				08901E6B1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08D1208C1C937B2200A54ABC /* HTMLBuilder.swift in Sources */,
 				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
+				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
+				086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */,
 				08D1208E1C937B2200A54ABC /* DeviceInfo.swift in Sources */,
 				08D1208F1C937B2200A54ABC /* UIViewLoadExtension.swift in Sources */,
 				08D120911C937B2200A54ABC /* Section.swift in Sources */,
@@ -2038,6 +2122,7 @@
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
+				088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */,
 				08D120A31C937B2200A54ABC /* UIViewExtensions.swift in Sources */,
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
@@ -2045,6 +2130,7 @@
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				083540651CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
+				089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */,
@@ -2098,6 +2184,7 @@
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
 				08D120D41C937B2200A54ABC /* GeneralInfoTableViewCell.swift in Sources */,
 				08D120D51C937B2200A54ABC /* NumberQuizViewController.swift in Sources */,
 				08D120D61C937B2200A54ABC /* GCDThings.swift in Sources */,
@@ -2150,6 +2237,7 @@
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
+				086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
@@ -2198,6 +2286,7 @@
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
+				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
@@ -2210,6 +2299,7 @@
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
+				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
@@ -2233,12 +2323,15 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
+				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
+				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
+				088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
@@ -2312,6 +2405,7 @@
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
+				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
@@ -2351,6 +2445,7 @@
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
 				08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */,
+				086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
@@ -2358,6 +2453,7 @@
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
+				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
@@ -2572,15 +2668,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1a14385f-6596-44bd-ac77-1b7b0904153a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2592,15 +2688,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1a14385f-6596-44bd-ac77-1b7b0904153a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 			};
 			name = Release;

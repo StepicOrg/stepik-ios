@@ -83,17 +83,22 @@ class WriteCommentViewController: UIViewController {
         sendComment()
     }
     
+    var htmlText : String {
+        let t = commentTextView.text
+        return t.stringByReplacingOccurrencesOfString("\n", withString: "<br>")
+    }
+    
     func sendComment() {
-        let comment = CommentPostable(parent: parent, target: target, text: commentTextView.text)
+        let comment = CommentPostable(parent: parent, target: target, text: htmlText)
         
         request = ApiDataDownloader.comments.create(comment, success: 
             {
                 [weak self]
-                comment, userInfo in
+                comment in
                 self?.state = .OK
                 self?.request = nil
                 UIThread.performUI {
-                    self?.delegate?.didWriteComment(comment, userInfo: userInfo)
+                    self?.delegate?.didWriteComment(comment)
                     self?.navigationController?.popViewControllerAnimated(true)
                 }
             }, error: {

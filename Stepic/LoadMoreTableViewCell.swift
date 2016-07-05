@@ -11,53 +11,34 @@ import UIKit
 class LoadMoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var showMoreLabel: UILabel!
+    @IBOutlet weak var showMoreActivityIndicator: UIActivityIndicatorView!
     
     var tapG : UITapGestureRecognizer!
     var section: Int?
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-//        tapG = UITapGestureRecognizer(target: self, action: #selector(LoadMoreTableViewCell.didTap(_:)))
-//        tapG.numberOfTapsRequired = 1
-//        self.contentView.addGestureRecognizer(tapG)
-//        showMoreActivityIndicator.hidden = true
+        showMoreActivityIndicator.hidden = true
     }
-//
-//    var showMorePressedHandler : (Int->Void)?
-//    var isUpdating: Bool = false {
-//        didSet {
-//            if isUpdating {
-//                showMoreLabel.hidden = true
-//                showMoreActivityIndicator.hidden = false
-//                showMoreActivityIndicator.startAnimating()
-//            } else {
-//                showMoreActivityIndicator.stopAnimating()
-//                showMoreActivityIndicator.hidden = true
-//                showMoreLabel.hidden = false
-//            }
-//        }
-//    }
-    
-//    func didTap(recognizer: UITapGestureRecognizer) {
-//        if !isUpdating {
-//            setHighlighted(true, animated: true)
-//            showMoreLabel.hidden = true
-//            showMoreActivityIndicator.hidden = false
-//            isUpdating = true
-//            updateDelegate?.update(section: section, completion: {
-//                [weak self] in
-//                self?.isUpdating = false
-//            })
-//            setHighlighted(false, animated: true)
-//        }
-//    }
+
+    var isUpdating: Bool = false {
+        didSet {
+            if isUpdating {
+                showMoreLabel.hidden = true
+                showMoreActivityIndicator.hidden = false
+                showMoreActivityIndicator.startAnimating()
+            } else {
+                showMoreActivityIndicator.stopAnimating()
+                showMoreActivityIndicator.hidden = true
+                showMoreLabel.hidden = false
+            }
+        }
+    }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     

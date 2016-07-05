@@ -14,12 +14,22 @@ class DiscussionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var textContainerView: UIView!
+
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var labelLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textContainerLeadingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var likesImageView: UIImageView!
+    
+    @IBOutlet weak var labelContainerView: UIView!
+    var commentLabel: UILabel?
     
     var hasSeparator: Bool = false {
         didSet {
@@ -27,112 +37,104 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
     
-    var commentLabel: UILabel! = UILabel()
-    var commentWebView: UIWebView! = UIWebView()
-    
-    var webViewHelper : CellWebViewHelper!
-    weak var delegate : DiscussionCellDelegate?
-    var indexPath: NSIndexPath!
-    
-    func initLabel() {
-        commentLabel.numberOfLines = 0
-        commentLabel.font = UIFont(name: "ArialMT", size: 14)
-        commentLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        commentLabel.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
-        commentLabel.textAlignment = NSTextAlignment.Natural
-        commentLabel.backgroundColor = UIColor.clearColor()
-        textContainerView.addSubview(commentLabel)
-        commentLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
-        commentLabel.hidden = true
+    var separatorType: SeparatorType = .None {
+        didSet {
+            switch separatorType {
+            case .None:
+                hasSeparator = false
+                separatorHeightConstraint.constant = 0
+                break
+            case .Small:
+                hasSeparator = true
+                separatorHeightConstraint.constant = 0.5
+                separatorLeadingConstraint.constant = 8
+                break
+            case .Big:
+                hasSeparator = true
+                separatorHeightConstraint.constant = 10
+                separatorLeadingConstraint.constant = -8
+                break
+            }
+            updateConstraints()
+        }
     }
     
-    func initWithComment(comment: Comment, user: UserInfo) -> (Void -> Int)? {
-        userAvatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!)
-        nameLabel.text = "\(user.firstName) \(user.lastName)"
-        if comment.parentId != nil {
-            setLeadingConstraints(-40)
+    var comment: Comment?
+    var heightUpdateBlock : (Void->Void)?
+
+    func initWithComment(comment: Comment, separatorType: SeparatorType)  {
+        userAvatarImageView.sd_setImageWithURL(NSURL(string: comment.userInfo.avatarURL)!)
+        nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
+        self.comment = comment
+        self.separatorType = separatorType
+        
+        timeLabel.text = comment.lastTime.getStepicFormatString(withTime: true)
+        setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
+        loadLabel(comment.text)
+    }
+    
+    private func constructLabel() {
+        commentLabel = UILabel()
+        labelContainerView.addSubview(commentLabel!)
+        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: labelContainerView)
+        commentLabel?.numberOfLines = 0
+    }
+    
+    private func loadLabel(htmlString: String) {
+        let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
+        if let data = wrapped.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+            do {
+                let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
+                commentLabel?.attributedText = attributedString
+                layoutSubviews()
+                updateConstraints()
+            }
+            catch {
+                //TODO: throw an exception here, or pass an error
+            }
         }
-        timeLabel.text = comment.lastTime.getStepicFormatString()
-        userAvatarImageView.setRoundedBounds(width: 0)
-//        if TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-//            commentWebView.hidden = false
-//            return webViewHelper.setTextWithTeX(comment.text)
-//        } else {
-            commentLabel.hidden = false
-            commentLabel.setTextWithHTMLString(comment.text)
-//        }
-        return nil
     }
     
     private func setLeadingConstraints(constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
-        textContainerLeadingConstraint.constant = constant
-
+        labelLeadingConstraint.constant = constant
+        switch self.separatorType {
+        case .Small: 
+            separatorLeadingConstraint.constant = -constant
+            break
+        default: 
+            break
+        }
     }
     
-    func initWebView() {
-        textContainerView.addSubview(commentWebView)
-        commentWebView.alignToView(textContainerView)
-        webViewHelper = CellWebViewHelper(webView: commentWebView, heightWithoutWebView: 70)
-        commentWebView.hidden = true
+    func setLiked(liked: Bool, likesCount: Int) {
+        likesLabel.text = "\(likesCount)"
+        if liked {
+            likesImageView.image = Images.thumbsUp.filled
+        } else {
+            likesImageView.image = Images.thumbsUp.normal
+        }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = UIColor.whiteColor()
-        textContainerView.backgroundColor = UIColor.clearColor()
-        let tapG = UITapGestureRecognizer()
-        tapG.numberOfTapsRequired = 1
-        tapG.addTarget(self, action: #selector(DiscussionTableViewCell.didTap(_:)))
-        self.contentView.addGestureRecognizer(tapG)
-        
-        initLabel()
-        initWebView()
-    }
-    
-    func didTap(g: UITapGestureRecognizer) {
-        setHighlighted(true, animated: true)
-        delegate?.didSelect(indexPath, deselectBlock: {
-            [weak self] in
-            self?.setHighlighted(false, animated: true)
-        })
+        userAvatarImageView.setRoundedBounds(width: 0)
+        constructLabel()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        commentWebView.hidden = true
-        commentLabel.hidden = true
-        setLeadingConstraints(0)
+        comment = nil
+        updateConstraints()
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    class func estimatedHeightForTextWithComment(comment: Comment) -> Int {
-        var width: CGFloat = 16
-        if comment.parentId != nil {
-            width += 40
-        }
-        
-        return max(27, Int(UILabel.heightForLabelWithText(comment.text, lines: 0, fontName: "ArialMT", fontSize: 16, width: UIScreen.mainScreen().bounds.width - width))) + 75
-    }
 }
-
-//extension DiscussionTableViewCell : TextHeightDependentCellProtocol {
-//    
-//    //All optimization logics is now encapsulated here
-//    func setHTMLText(text: String) -> (Void -> Int) {
-//        if TagDetectionUtil.isWebViewSupportNeeded(text) {
-//            commentWebView.hidden = false
-//            return webViewHelper.setTextWithTeX(text)
-//        } else {
-//            commentLabel.hidden = false
-//            commentLabel.setTextWithHTMLString(text)
-//            let w = textContainerView.bounds.width 
-//            return {
-//                return 0
-//            }
-//        }
-//    }
-//}

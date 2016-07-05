@@ -13,7 +13,7 @@ import SwiftyJSON
 class CommentsAPI {
     let name = "comments"
     
-    func retrieve(ids: [Int], headers: [String: String] = APIDefaults.headers.bearer, success: ([Comment], [Int: UserInfo]) -> Void, error errorHandler: String -> Void) -> Request {
+    func retrieve(ids: [Int], headers: [String: String] = APIDefaults.headers.bearer, success: ([Comment]) -> Void, error errorHandler: String -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
             {
@@ -40,12 +40,24 @@ class CommentsAPI {
                     usersDict[user.id] = user
                 }
                 
-                success(comments, usersDict)
+                var votesDict : [String: Vote] = [String: Vote]()
+                
+                json["votes"].arrayValue.forEach({
+                    let vote = Vote(json: $0)
+                    votesDict[vote.id] = vote
+                })
+                
+                for comment in comments {
+                    comment.userInfo = usersDict[comment.userId]
+                    comment.vote = votesDict[comment.voteId]
+                }
+                
+                success(comments)
             }
         )
     }
     
-    func create(comment: CommentPostable, headers: [String: String] = APIDefaults.headers.bearer, success: (Comment, UserInfo) -> Void, error errorHandler: String -> Void) -> Request {
+    func create(comment: CommentPostable, headers: [String: String] = APIDefaults.headers.bearer, success: Comment -> Void, error errorHandler: String -> Void) -> Request {
         let params: [String: AnyObject] = [
             "comment" : comment.json
         ]
@@ -65,8 +77,11 @@ class CommentsAPI {
 
                 let comment : Comment = Comment(json: json["comments"].arrayValue[0])
                 let userInfo = UserInfo(json: json["users"].arrayValue[0])
+                let vote = Vote(json: json["votes"].arrayValue[0])
+                comment.userInfo = userInfo
+                comment.vote = vote
                 
-                success(comment, userInfo)
+                success(comment)
             }
         )
     }
@@ -82,5 +97,12 @@ struct UserInfo {
         avatarURL = json["avatar"].stringValue
         firstName = json["first_name"].stringValue
         lastName = json["last_name"].stringValue
+    }
+    
+    init(sample: Bool) {
+        id = 10
+        avatarURL = "http://google.com/"
+        firstName = "Sample"
+        lastName = "User"
     }
 }
