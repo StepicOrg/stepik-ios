@@ -43,7 +43,7 @@ class DevicesAPI: NSObject {
         return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).response(completionHandler: {
             _, response, data, error in
             
-            if let e = error as? NSError {
+            if let e = error {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
