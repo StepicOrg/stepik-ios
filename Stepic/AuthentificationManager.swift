@@ -138,10 +138,14 @@ class AuthentificationManager : NSObject {
                 failure(error: e)
                 return
             }
-            //            print(json)
-            //            print("no error")
+
             let token : StepicToken = StepicToken(json: json)
-            //            print(token.accessToken)
+            
+            if token.accessToken == "" {
+                failure(error: NSError.tokenRefreshError)
+                return
+            }
+            
             success(token: token)
         })
         
@@ -156,6 +160,7 @@ class AuthentificationManager : NSObject {
         
         return refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
             (t) in
+            
             StepicAPI.shared.token = t
             success?()
             }, failure : {
@@ -318,6 +323,11 @@ class AuthentificationManager : NSObject {
 }
 
 extension NSError {
+    
+    static var tokenRefreshError: NSError {
+        return NSError(domain: "APIErrorDomain", code: 1337, userInfo:  [NSLocalizedDescriptionKey : "Token refresh error"])
+    }
+    
     static var noAppWithCredentials : NSError {
         return NSError(domain: "APIErrorDomain", code: 1488, userInfo:  [NSLocalizedDescriptionKey : "Not registered application with given credential type"])
     }
