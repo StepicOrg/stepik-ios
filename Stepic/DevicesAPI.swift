@@ -13,10 +13,17 @@ import SwiftyJSON
 class DevicesAPI: NSObject {
     
     let name = "devices"
+    let manager : Alamofire.Manager
+    
+    override init() {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 5
+        manager = Alamofire.Manager(configuration: configuration)
+    }
     
     func create(device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: (Device->Void), error errorHandler: (String->Void)) -> Request {
         let params = ["device": device.getJSON()]
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON({
+        return manager.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
             print(json)
@@ -40,10 +47,10 @@ class DevicesAPI: NSObject {
     
     func delete(deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: (Void->Void), error errorHandler: (String->Void)) -> Request {
         
-        return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).response(completionHandler: {
+        return manager.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).response(completionHandler: {
             _, response, data, error in
             
-            if let e = error as? NSError {
+            if let e = error {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }

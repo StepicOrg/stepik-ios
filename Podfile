@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire', '2.0.2'
+    pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
@@ -22,7 +22,7 @@ def all_pods
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna'
+    pod 'Kanna', '1.0.6'
     pod 'CRToast'
 end
 
