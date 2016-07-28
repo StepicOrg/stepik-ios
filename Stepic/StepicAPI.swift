@@ -14,9 +14,7 @@ class StepicAPI: NSObject {
     private let defaults = NSUserDefaults.standardUserDefaults()
     
     private override init() {}
-    
-    var _token : StepicToken?
-    
+        
     private func setTokenValue(newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
@@ -56,16 +54,13 @@ class StepicAPI: NSObject {
         }
         
         get {
-            if _token == nil {
-                if let accessToken = defaults.valueForKey("access_token") as? String,
-                let refreshToken = defaults.valueForKey("refresh_token") as? String,
-                let tokenType = defaults.valueForKey("token_type") as? String {
-                    return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType)
-                } else {
-                    return nil
-                }
+            if let accessToken = defaults.valueForKey("access_token") as? String,
+            let refreshToken = defaults.valueForKey("refresh_token") as? String,
+            let tokenType = defaults.valueForKey("token_type") as? String {
+                print("got accessToken \(accessToken)")
+                return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType)
             } else {
-                return _token!
+                return nil
             }
         }
     }
