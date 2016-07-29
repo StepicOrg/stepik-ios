@@ -14,8 +14,8 @@ class FreeAnswerQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
-        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1, borderColor: UIColor.grayColor())
+        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
+        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGrayColor())
         // Do any additional setup after loading the view.
     }
 
@@ -44,7 +44,7 @@ class FreeAnswerQuizViewController: QuizViewController {
         if let r = submission?.reply as? FreeAnswerReply {
             let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
             let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: NSMakeRange(0, mutableAttributed.string.characters.count))
+            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
             textView.attributedText = mutableAttributed
         }
         if submission?.status == "correct" {
@@ -59,7 +59,7 @@ class FreeAnswerQuizViewController: QuizViewController {
     
     //Override this in subclass
     override var expectedQuizHeight : CGFloat {
-        return 80
+        return 72
     }
     
     //Override this in the subclass

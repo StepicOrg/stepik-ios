@@ -10,14 +10,16 @@ import UIKit
 
 class StringQuizViewController: QuizViewController {
 
-    var textField = UITextField()
+    var textView = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.containerView.addSubview(textField)
-        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
-        textField.borderStyle = UITextBorderStyle.RoundedRect
+        self.containerView.addSubview(textView)
+        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
+        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGrayColor())
+
+        textView.font = UIFont.systemFontOfSize(16)
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
@@ -38,32 +40,29 @@ class StringQuizViewController: QuizViewController {
     
     //Override this in subclass
     override func updateQuizAfterAttemptUpdate() {
-        textField.text = ""
+        textView.text = ""
     }
     
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
         if let r = submission?.reply as? TextReply {
-            textField.text = r.text
+            textView.text = r.text
         }
         if submission?.status == "correct" {
-            textField.enabled = false
+            textView.editable = false
         } else {
-            textField.enabled = true
+            textView.editable = true
         }
-//        if reload {
-//            textField.text = ""
-//        }
     }
     
     //Override this in subclass
     override var expectedQuizHeight : CGFloat {
-        return 38
+        return 72
     }
 
     //Override this in the subclass
     override func getReply() -> Reply {
-        return TextReply(text: textField.text ?? "")
+        return TextReply(text: textView.text ?? "")
     }
     
     /*
