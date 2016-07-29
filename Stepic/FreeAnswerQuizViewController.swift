@@ -16,6 +16,8 @@ class FreeAnswerQuizViewController: QuizViewController {
         self.containerView.addSubview(textView)
         textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGrayColor())
+        
+        textView.font = UIFont.systemFontOfSize(16)
         // Do any additional setup after loading the view.
     }
 
@@ -39,22 +41,29 @@ class FreeAnswerQuizViewController: QuizViewController {
         textView.text = ""
     }
     
+    var dataset : FreeAnswerDataset? {
+        return attempt?.dataset as? FreeAnswerDataset
+    }
+    
     //Override this in subclass
     override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
-        if let r = submission?.reply as? FreeAnswerReply {
-            let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
-            let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
-            textView.attributedText = mutableAttributed
+        if let r = submission?.reply as? FreeAnswerReply { 
+            if let d = dataset {
+                if d.isHTMLEnabled {
+                    let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+                    let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
+                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
+                    textView.attributedText = mutableAttributed
+                } else {
+                    return textView.text = r.text
+                }
+            }
         }
         if submission?.status == "correct" {
             textView.editable = false
         } else {
             textView.editable = true
         }
-        //        if reload {
-        //            textField.text = ""
-        //        }
     }
     
     //Override this in subclass
@@ -64,7 +73,14 @@ class FreeAnswerQuizViewController: QuizViewController {
     
     //Override this in the subclass
     override func getReply() -> Reply {
-        return FreeAnswerReply(text: textView.text ?? "")
+        if let d = dataset {
+            if d.isHTMLEnabled {
+                return FreeAnswerReply(text: textView.text.stringByReplacingOccurrencesOfString("\n", withString: "<br>"))
+            } else {
+                return FreeAnswerReply(text: textView.text)
+            }
+        } 
+        return FreeAnswerReply(text: textView.text)
     }
     
     /*
