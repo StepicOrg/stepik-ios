@@ -85,6 +85,7 @@ class QuizViewController: UIViewController {
                 self.delegate?.needsHeightUpdate(150, animated: true)
             } else {
                 UIThread.performUI{self.activityView.hidden = true}
+                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
             }
         }
     }
@@ -96,6 +97,7 @@ class QuizViewController: UIViewController {
                 self.delegate?.needsHeightUpdate(200, animated: true)
             } else {
                 UIThread.performUI{self.warningView.hidden = true}
+                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
             }
         }
     }
@@ -478,6 +480,11 @@ class QuizViewController: UIViewController {
                     self.sendButton.enabled = true
                     self.doesPresentActivityIndicatorView = false
                 }
+                }, error: {
+                    UIThread.performUI{
+                        self.sendButton.enabled = true
+                        self.doesPresentActivityIndicatorView = false
+                    }
             })
         }
     }
