@@ -151,6 +151,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            print("\(userActivity.webpageURL?.absoluteString)")
+        }
+        return true
+    }
+    
     func applicationWillTerminate(application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
