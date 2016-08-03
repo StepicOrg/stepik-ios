@@ -183,6 +183,8 @@
 		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
 		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
+		089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
+		089611051D52250500561AC1 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
 		08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
 		08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
@@ -643,6 +645,7 @@
 		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
+		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinkRouter.swift; sourceTree = "<group>"; };
 		08970ECA1C6A326900846119 /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDataSource.swift; sourceTree = "<group>"; };
 		08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
@@ -845,6 +848,7 @@
 				085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */,
 				08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */,
 				08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */,
+				089611031D52250500561AC1 /* DeepLinkRouter.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2097,6 +2101,7 @@
 				08D120881C937B2200A54ABC /* RegistrationErrorInfo.swift in Sources */,
 				088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				08D120891C937B2200A54ABC /* StandardsExtensions.swift in Sources */,
+				089611051D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
 				0861E6731CD80A9600B45652 /* Executable.swift in Sources */,
 				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
@@ -2405,6 +2410,7 @@
 				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
+				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
