@@ -74,10 +74,14 @@ class CoursePreviewViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         
+        tableView.estimatedRowHeight = 44.0
         videoWebView.scrollView.scrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
         
         if let c = course {
+            for section in c.sections {
+                sectionTitles += [section.title]
+            }
             tableView.reloadData()
             resetHeightConstraints()
             if let introVideo = c.introVideo {
@@ -87,8 +91,41 @@ class CoursePreviewViewController: UIViewController {
                 setIntroMode(fromVideo: false)
                 loadVimeoURL(NSURL(string: c.introURL)!)
             }
+            updateSections()
         }
     }
+    
+    private func updateSections() {
+        if let c = course {
+            let successBlock = {
+                [weak self] in
+                for section in c.sections {
+                    self?.sectionTitles += [section.title]
+                }
+                self?.isErrorWhileLoadingSections = false
+                self?.isLoadingSections = false
+                UIThread.performUI{ self?.tableView.reloadData() }
+            }
+        
+            let errorBlock = {
+                [weak self] in
+                self?.isErrorWhileLoadingSections = true
+                self?.isLoadingSections = false
+                UIThread.performUI{ self?.tableView.reloadData() }
+            }
+        
+            isLoadingSections = true
+            if StepicAPI.shared.isAuthorized {
+                c.loadAllSections(success: successBlock, error: errorBlock)
+            } else {
+                c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
+            }
+        }
+    }
+    
+    var sectionTitles = [String]()
+    var isErrorWhileLoadingSections : Bool = false
+    var isLoadingSections: Bool = false
     
     private func resetHeightConstraints() {
         let v = self.tableView.tableHeaderView
@@ -229,7 +266,7 @@ class CoursePreviewViewController: UIViewController {
     }
     
     @IBAction func displayingSegmentedControlValueChanged(sender: UISegmentedControl) {
-        displayingInfoType = sender.selectedSegmentIndex == 0 ? .Overview : .Detailed
+        displayingInfoType = DisplayingInfoType(rawValue: sender.selectedSegmentIndex) ?? .Overview
         reloadTableView()
     }
     
@@ -315,7 +352,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return max(textData[0].count, textData[1].count)
+            return max(textData[0].count, textData[1].count, sectionTitles.count, 1)
         default: 
             return 0
         }
@@ -323,6 +360,19 @@ extension CoursePreviewViewController : UITableViewDataSource {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if displayingInfoType == .Syllabus {
+            if indexPath.row < sectionTitles.count {
+                var cell = tableView.dequeueReusableCellWithIdentifier("SectionTitleTableViewCell") 
+                if cell == nil {
+                    cell = UITableViewCell(style: .Default, reuseIdentifier: "SectionTitleTableViewCell")
+                }
+                cell?.textLabel?.text = "\(indexPath.row + 1). \(sectionTitles[indexPath.row])"
+                cell?.textLabel?.numberOfLines = 0
+                return cell ?? UITableViewCell()
+            } else {
+                return UITableViewCell()
+            }
+        }
         if indexPath.row >= textData[displayingInfoType.rawValue].count {
             let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
             return cell
@@ -361,13 +411,20 @@ extension CoursePreviewViewController : UITableViewDataSource {
 extension CoursePreviewViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            if indexPath.row >= textData[displayingInfoType.rawValue].count {
+        if displayingInfoType == .Syllabus {
+            if indexPath.row < sectionTitles.count {
+                return UITableViewAutomaticDimension
+            } else {
                 return 0
             }
-            if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
-                return 137
-            }
-            return heights[displayingInfoType.rawValue][indexPath.row]
+        }
+        if indexPath.row >= textData[displayingInfoType.rawValue].count {
+            return 0
+        }
+        if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
+            return 137
+        }
+        return heights[displayingInfoType.rawValue][indexPath.row]
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
