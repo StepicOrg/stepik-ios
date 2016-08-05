@@ -275,8 +275,15 @@ class CoursePreviewViewController: UIViewController {
             return
         }
         
+        if !StepicAPI.shared.isAuthorized {
+            let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
+            self.presentViewController(vc, animated: true, completion: nil)
+            return
+        }
+        
         //TODO : Add statuses
         if let c = course {
+            
             if sender.isEnabledToJoin {
                 SVProgressHUD.show()
                 AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {

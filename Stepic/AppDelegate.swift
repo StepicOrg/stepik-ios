@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let deepLink = NSURL(string: "https://stepic.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
-//        handleOpenedFromDeepLink(deepLink)
+        handleOpenedFromDeepLink(deepLink)
         
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
@@ -88,10 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         rootController.navigationController?.pushViewController(vc, animated: true)
                     })
                 } else {
-//                    s.setTabRoot()
-//                    delay(1, closure: {
-//                        rootController.navigationController?.pushViewController(vc, animated: true)
-//                    })
+                    let navigation = UINavigationController(rootViewController: vc) 
+                    navigation.title = NSLocalizedString("Course", comment: "")
+                    self?.setRootController(navigation)
                 }
             } 
         })
@@ -211,9 +210,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func setRootController() {
-        if StepicAPI.shared.isAuthorized {
-            setTabRoot()
+    private func setRootController(controllerToSet: UIViewController? = nil) {
+        if let vc = controllerToSet {
+            let rootController = vc 
+            
+            // Because self.window is an optional you should check it's value first and assign your rootViewController
+            if self.window != nil {
+                self.window!.rootViewController = rootController
+            }
+        } else {
+            if StepicAPI.shared.isAuthorized {
+                setTabRoot()
+            }
         }
     }
     
