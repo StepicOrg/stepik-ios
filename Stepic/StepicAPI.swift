@@ -37,6 +37,7 @@ class StepicAPI: NSObject {
                         for course in c {
                             course.enrolled = false
                         }
+                        CoreDataHelper.instance.save()
                         StepicAPI.shared.user = nil
                         //Show sign in controller
                         ControllerHelper.showLaunchController(true)
