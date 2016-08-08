@@ -22,7 +22,8 @@ extension Section {
     @NSManaged var managedHardDeadline: NSDate?
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedProgressId : String?
-
+    @NSManaged var managedTestSectionAction: String?
+    
     @NSManaged var managedUnitsArray : NSObject?
 
     @NSManaged var managedUnits : NSOrderedSet?
@@ -52,6 +53,15 @@ extension Section {
         }
         set(value) {
             managedProgressId = value
+        }
+    }
+    
+    var testSectionAction : String? {
+        get {
+            return managedTestSectionAction
+        }
+        set(value) {
+            managedTestSectionAction = value
         }
     }
     
