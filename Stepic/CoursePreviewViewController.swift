@@ -79,6 +79,7 @@ class CoursePreviewViewController: UIViewController {
         videoWebView.scrollView.bouncesZoom = false
         
         if let c = course {
+            sectionTitles = []
             for section in c.sections {
                 sectionTitles += [section.title]
             }
@@ -99,6 +100,7 @@ class CoursePreviewViewController: UIViewController {
         if let c = course {
             let successBlock = {
                 [weak self] in
+                self?.sectionTitles = []
                 for section in c.sections {
                     self?.sectionTitles += [section.title]
                 }
