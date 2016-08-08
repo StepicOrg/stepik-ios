@@ -45,8 +45,6 @@ class StepicAPI: NSObject {
                         self.setTokenValue(newToken)
                     }
                 })
-                
-                
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true

@@ -65,6 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let deepLink = NSURL(string: "https://stepic.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
         handleOpenedFromDeepLink(deepLink)
+//        delay(60, closure: {
+//            [weak self] in
+//            self?.handleOpenedFromDeepLink(deepLink)
+//        })
         
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
@@ -83,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [weak self]
             controller in
             if let vc = controller, s = self { 
+//                let v = 
                 if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
                     delay(1, closure: {
                         rootController.navigationController?.pushViewController(vc, animated: true)
@@ -176,7 +181,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(userActivity.webpageURL?.absoluteString)")
-            //TODO: Handle URL here
+            if let url = userActivity.webpageURL {
+                handleOpenedFromDeepLink(url)
+            }
         }
         return true
     }
