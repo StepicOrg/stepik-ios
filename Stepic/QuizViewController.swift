@@ -435,7 +435,7 @@ class QuizViewController: UIViewController {
         })        
     }
     
-    private func submitReply(completion completion: (Void->Void)? = nil) {        
+    private func submitReply(completion completion: (Void->Void), error errorHandler: (String->Void)) {        
         let r = getReply()
         
         ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: self.step.block.name, attemptId: attempt!.id!, reply: r, success: {
@@ -444,7 +444,7 @@ class QuizViewController: UIViewController {
             self.checkSubmission(submission.id!, time: 0, completion: completion)
             }, error: {
                 errorText in
-                completion?()
+                errorHandler(errorText)
                 //TODO: test this
         })
     }
@@ -465,9 +465,20 @@ class QuizViewController: UIViewController {
         if buttonStateSubmit {
             if checkReplyReady() {
                 submitReply(completion: {
+                    [weak self] in
                     UIThread.performUI{
-                        self.sendButton.enabled = true
-                        self.doesPresentActivityIndicatorView = false
+                        self?.sendButton.enabled = true
+                        self?.doesPresentActivityIndicatorView = false
+                    }
+                }, error: {
+                    [weak self]
+                    errorText in
+                    UIThread.performUI{
+                        self?.sendButton.enabled = true
+                        self?.doesPresentActivityIndicatorView = false 
+                        if let vc = self?.navigationController {
+                            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+                        }
                     }
                 })
             } else {
@@ -476,14 +487,19 @@ class QuizViewController: UIViewController {
             }
         } else  {
             createNewAttempt(completion: {
+                [weak self] in
                 UIThread.performUI{
-                    self.sendButton.enabled = true
-                    self.doesPresentActivityIndicatorView = false
+                    self?.sendButton.enabled = true
+                    self?.doesPresentActivityIndicatorView = false
                 }
                 }, error: {
+                    [weak self] in
                     UIThread.performUI{
-                        self.sendButton.enabled = true
-                        self.doesPresentActivityIndicatorView = false
+                        self?.sendButton.enabled = true
+                        self?.doesPresentActivityIndicatorView = false
+                    }
+                    if let vc = self?.navigationController {
+                        Messages.sharedManager.showConnectionErrorMessage(inController: vc)
                     }
             })
         }
