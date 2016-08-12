@@ -10,7 +10,8 @@ import UIKit
 import MediaPlayer
 import Fabric
 import Crashlytics
-import Google 
+import Firebase 
+import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
  
@@ -31,15 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
         
-        // Configure tracker from GoogleService-Info.plist.
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        // Optional: configure GAI options.
-        let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = GAILogLevel.None  // remove before app release
+        FIRApp.configure()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveRegistrationToken:", name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -55,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
         }
+        
         if StepicAPI.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
@@ -87,7 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [weak self]
             controller in
             if let vc = controller, s = self { 
-//                let v = 
                 if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
                     delay(1, closure: {
                         rootController.navigationController?.pushViewController(vc, animated: true)
@@ -125,6 +119,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 error in
                 print("error while checking for updates: \(error.code) \(error.localizedDescription)")
         })
+    }
+    
+    
+    func didReceiveRegistrationToken(notification: NSNotification) {
+        if let token = FIRInstanceID.instanceID().token() {
+            if StepicAPI.shared.isAuthorized { 
+                NotificationRegistrator.sharedInstance.registerDevice(token)
+            }
+        }
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
@@ -240,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kFIRInstanceIDTokenRefreshNotification, object: nil)
     }
 
 }

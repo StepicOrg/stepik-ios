@@ -18,7 +18,6 @@
 #import <TSMessages/TSMessage.h>
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-#import <Google/Analytics.h>
 
 #import "UIAppearance+Swift.h"
 

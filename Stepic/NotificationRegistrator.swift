@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import Google
-
+//import Google
+import FirebaseMessaging
+import Firebase
 
 //Class for registering the remote notifications service
 class NotificationRegistrator: NSObject {
@@ -17,66 +18,38 @@ class NotificationRegistrator: NSObject {
     private override init() {
         super.init()
     }
-    
-//    private var defaults = NSUserDefaults.standardUserDefaults()
-//    
-//    var didAskForRemoteNotifications : Bool {
-//        get {
-//            return (defaults.valueForKey("didAskForRemoteNotifications") as? Bool) ?? false
-//        }
-//        
-//        set(value) {
-//            defaults.setValue(value, forKey: "didAskForRemoteNotifications")
-//            defaults.synchronize()
-//        }
-//    }
-    
+        
     func registerForRemoteNotifications(application: UIApplication) {
         let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
+        if StepicAPI.shared.isAuthorized {
+            if let token = FIRInstanceID.instanceID().token() {
+                registerDevice(token)
+            }
+        }
     }
     
     func getGCMRegistrationToken(deviceToken deviceToken: NSData) {
-        let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
-        instanceIDConfig.delegate = self
-        // Start the GGLInstanceID shared instance with that config and request a registration
-        // token to enable reception of notifications
-        GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
-        registrationOptions = [
-            kGGLInstanceIDRegisterAPNSOption : deviceToken,
-            kGGLInstanceIDAPNSServerTypeSandboxOption : false
-        ]
-        GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(GGLContext.sharedInstance().configuration.gcmSenderID,
-                                                                 scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Unknown)
     }
     
     var registrationOptions = [String: AnyObject]()
     
     let registrationKey = "onRegistrationCompleted"
 
-    private func registrationHandler(registrationToken: String!, error: NSError!) {
-        if (registrationToken != nil) {
-            print("Registration Token: \(registrationToken)")
-            let device = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.deviceInfoString)
-            ApiDataDownloader.devices.create(device, success: {
-                device in
-                DeviceDefaults.sharedDefaults.deviceId = device.id
-                print("created device: \(device.getJSON())")
-            }, error : {
-                error in 
-                print("device creation error")
-            })
-            
-//            let userInfo = ["registrationToken": registrationToken]
-//            NSNotificationCenter.defaultCenter().postNotificationName(self.registrationKey, object: nil, userInfo: userInfo)
-        } else {
-            print("Registration to GCM failed with error: \(error.localizedDescription)")
-            
-//            let userInfo = ["error": error.localizedDescription]
-//            NSNotificationCenter.defaultCenter().postNotificationName(self.registrationKey, object: nil, userInfo: userInfo)
-        }
+    func registerDevice(registrationToken: String!) {
+        print("Registration Token: \(registrationToken)")
+        let device = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.deviceInfoString)
+        ApiDataDownloader.devices.create(device, success: {
+            device in
+            DeviceDefaults.sharedDefaults.deviceId = device.id
+            print("created device: \(device.getJSON())")
+        }, error : {
+            error in 
+            print("device creation error")
+        })
     }    
     
     
@@ -127,12 +100,4 @@ class NotificationRegistrator: NSObject {
         }
     }
     
-}
-
-extension NotificationRegistrator : GGLInstanceIDDelegate {
-    func onTokenRefresh() {
-        print("The GCM registration token needs to be changed.")
-        GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(GGLContext.sharedInstance().configuration.gcmSenderID,
-                                                                 scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
-    }
 }
