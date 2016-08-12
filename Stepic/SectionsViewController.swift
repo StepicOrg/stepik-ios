@@ -119,7 +119,7 @@ extension SectionsViewController : UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return course.sections[indexPath.row].isActive
+        return course.sections[indexPath.row].isActive || (course.sections[indexPath.row].testSectionAction != nil)
     }
     
 }

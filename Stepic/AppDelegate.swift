@@ -61,7 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
             handleNotification(notificationDict)
         }
-                
+        
+        let deepLink = NSURL(string: "https://stepic.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        
+//        handleOpenedFromDeepLink(deepLink)
+//        delay(60, closure: {
+//            [weak self] in
+//            self?.handleOpenedFromDeepLink(deepLink)
+//        })
+        
 //        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
 //        print(documentsPath)
         return true
@@ -72,6 +80,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             rootController = ((self.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
             reaction(rootController)
         }
+    }
+    
+    private func handleOpenedFromDeepLink(url: NSURL) {
+        DeepLinkRouter.routeFromDeepLink(url, completion: {
+            [weak self]
+            controller in
+            if let vc = controller, s = self { 
+//                let v = 
+                if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
+                    delay(1, closure: {
+                        rootController.navigationController?.pushViewController(vc, animated: true)
+                    })
+                } else {
+                    let navigation = UINavigationController(rootViewController: vc) 
+                    navigation.title = NSLocalizedString("Course", comment: "")
+                    self?.setRootController(navigation)
+                }
+            } 
+        })
     }
     
     func updateNotificationRegistrationStatus(notification: NSNotification) {
@@ -151,6 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            print("\(userActivity.webpageURL?.absoluteString)")
+            if let url = userActivity.webpageURL {
+                handleOpenedFromDeepLink(url)
+            }
+        }
+        return true
+    }
+    
     func applicationWillTerminate(application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -168,16 +205,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return UIInterfaceOrientationMask.Portrait
 //    }
     
-    private func setRootController() {
-        if StepicAPI.shared.isAuthorized {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            // instantiate your desired ViewController
-            let rootController = storyboard.instantiateViewControllerWithIdentifier("MainTabBarController") 
+    private func setTabRoot() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        // instantiate your desired ViewController
+        let rootController = storyboard.instantiateViewControllerWithIdentifier("MainTabBarController") 
+        
+        // Because self.window is an optional you should check it's value first and assign your rootViewController
+        if self.window != nil {
+            self.window!.rootViewController = rootController
+        }
+    }
+    
+    private func setRootController(controllerToSet: UIViewController? = nil) {
+        if let vc = controllerToSet {
+            let rootController = vc 
             
             // Because self.window is an optional you should check it's value first and assign your rootViewController
             if self.window != nil {
                 self.window!.rootViewController = rootController
+            }
+        } else {
+            if StepicAPI.shared.isAuthorized {
+                setTabRoot()
             }
         }
     }

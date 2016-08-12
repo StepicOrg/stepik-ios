@@ -32,12 +32,19 @@ class TeachersTableViewCell: UITableViewCell {
     }
 
     func initWithCourse(course: Course) {
+        //TODO: JUST REMOVE THIS AT SOME TIME
 //        instructors = course.instructors
+        if StepicAPI.shared.isAuthorized {
         course.loadAllInstructors(success: {
             self.instructors = course.instructors
-//            print("instructors count -> \(self.instructors.count)")
             UIThread.performUI({self.collectionView.reloadData()})
         })
+        } else {
+            course.loadInstructorsWithoutAuth(success: {
+                self.instructors = course.instructors
+                UIThread.performUI({self.collectionView.reloadData()})
+            })
+        }
 //        collectionView.reloadData()
     }
     

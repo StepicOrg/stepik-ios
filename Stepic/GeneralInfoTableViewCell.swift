@@ -9,7 +9,7 @@
 import UIKit
 
 enum DisplayingInfoType : Int {
-    case Overview = 0, Detailed = 1
+    case Overview = 0, Detailed = 1, Syllabus = 2
 }
 
 class GeneralInfoTableViewCell: UITableViewCell {
@@ -30,6 +30,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
+        
+        typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAtIndex: 2)
         
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: UIDeviceOrientationDidChangeNotification, object: nil)

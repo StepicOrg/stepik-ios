@@ -32,6 +32,8 @@ class Section: NSManagedObject, JSONInitializable {
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
         
+        testSectionAction = json["actions"]["test_section"].string
+        
         unitsArray = json["units"].arrayObject as! [Int]
     }
     

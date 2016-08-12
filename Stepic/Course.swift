@@ -89,6 +89,32 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
+    func loadSectionsWithoutAuth(success success: (Void -> Void), error errorHandler : (Void -> Void)) {
+        ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
+            secs in
+            self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
+            CoreDataHelper.instance.save()
+            success()  
+            }, failure : {
+                error in
+                print("error while loading section")
+                errorHandler()
+        })
+    }
+    
+    func loadInstructorsWithoutAuth(success success: (Void -> Void)) {
+            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
+                users in
+                //                print("instructors count inside Course class -> \(users.count)")
+                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
+                CoreDataHelper.instance.save()
+                success()  
+                }, failure : {
+                    error in
+                    print("error while loading section")
+            })
+    }
+    
     func loadProgressesForSections(completion: (Void->Void), error errorHandler : (Void->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []

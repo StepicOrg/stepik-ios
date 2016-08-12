@@ -97,7 +97,7 @@ class UnitTableViewCell: UITableViewCell {
         
         coverImageView.sd_setImageWithURL(NSURL(string: unit.lesson?.coverURL ?? "")!, placeholderImage: Images.lessonPlaceholderImage.size50x50)
         
-        if !unit.isActive {
+        if !(unit.isActive || unit.section.testSectionAction != nil) {
             titleLabel.enabled = false
             downloadButton.hidden = true
             scoreProgressView.hidden = true
