@@ -18,6 +18,7 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'AFImageHelper'
     pod 'Firebase/Messaging'
+    pod 'Firebase/AppIndexing'
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'

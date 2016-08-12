@@ -33,7 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FIRApp.configure()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveRegistrationToken:", name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
