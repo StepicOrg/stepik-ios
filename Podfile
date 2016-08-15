@@ -19,6 +19,7 @@ def all_pods
     pod 'AFImageHelper'
     pod 'Firebase/Messaging'
     pod 'Firebase/AppIndexing'
+    pod "MagicalRecord"
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
