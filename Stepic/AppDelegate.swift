@@ -14,6 +14,7 @@ import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
+import MagicalRecord
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         
+        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreAtURL(CoreDataHelper.instance.storeURL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
@@ -33,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FIRApp.configure()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveRegistrationToken:", name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -181,6 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    @available(iOS 8.0, *)
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(userActivity.webpageURL?.absoluteString)")
@@ -188,6 +193,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 handleOpenedFromDeepLink(url)
             }
         }
+        return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        handleOpenedFromDeepLink(url)
         return true
     }
     
