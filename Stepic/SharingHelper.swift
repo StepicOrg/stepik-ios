@@ -14,6 +14,7 @@ class SharingHelper {
         let activityItemSource = CyrillicURLActivityItemSource(link: link)
         let objectsToShare = [activityItemSource]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: [TUSafariActivity()])
+        activityVC.excludedActivityTypes = [UIActivityTypeAirDrop]
         return activityVC
     }
 }

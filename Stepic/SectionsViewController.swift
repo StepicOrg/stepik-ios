@@ -49,9 +49,13 @@ class SectionsViewController: UIViewController {
     
     func shareButtonPressed(button: UIBarButtonItem) {
         if let slug = course?.slug {
-            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus")
-            shareVC.popoverPresentationController?.barButtonItem = button
-            self.presentViewController(shareVC, animated: true, completion: nil)
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus")
+                shareVC.popoverPresentationController?.barButtonItem = button
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(shareVC, animated: true, completion: nil)
+                }
+            }
         }
     }
     
