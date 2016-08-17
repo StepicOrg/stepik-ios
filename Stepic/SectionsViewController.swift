@@ -24,6 +24,13 @@ class SectionsViewController: UIViewController {
         self.navigationItem.title = course.title
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
+        
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
+        let infoBtn = UIButton(type: UIButtonType.InfoDark)
+        infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
+        self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -38,6 +45,18 @@ class SectionsViewController: UIViewController {
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    func shareButtonPressed(button: UIBarButtonItem) {
+        if let slug = course?.slug {
+            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus")
+            shareVC.popoverPresentationController?.barButtonItem = button
+            self.presentViewController(shareVC, animated: true, completion: nil)
+        }
+    }
+    
+    func infoButtonPressed(button: UIButton) {
+        self.performSegueWithIdentifier("showCourse", sender: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
