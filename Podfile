@@ -25,6 +25,7 @@ def all_pods
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '1.0.6'
     pod 'CRToast'
+    pod 'TUSafariActivity', '~> 1.0'
 end
 
 target 'Stepic' do

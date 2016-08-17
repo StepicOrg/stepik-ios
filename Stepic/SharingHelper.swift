@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import TUSafariActivity
 
 class SharingHelper {
     static func getSharingController(link: String) -> UIActivityViewController {
-        let objectsToShare = [link]
-        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        let activityItemSource = CyrillicURLActivityItemSource(link: link)
+        let objectsToShare = [activityItemSource]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: [TUSafariActivity()])
         return activityVC
     }
 }
