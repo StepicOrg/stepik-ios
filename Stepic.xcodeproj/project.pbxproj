@@ -87,6 +87,8 @@
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
+		084070801D64847000308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
+		084070811D64847400308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
 		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
@@ -580,6 +582,8 @@
 		083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworksViewController.swift; sourceTree = "<group>"; };
 		083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationInfo.swift; sourceTree = "<group>"; };
+		0840707F1D64847000308FC1 /* SharingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingHelper.swift; sourceTree = "<group>"; };
+		084070821D64883400308FC1 /* Model_v7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v7.xcdatamodel; sourceTree = "<group>"; };
 		0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -850,6 +854,7 @@
 				08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */,
 				08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */,
 				089611031D52250500561AC1 /* DeepLinkRouter.swift */,
+				0840707F1D64847000308FC1 /* SharingHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2267,6 +2272,7 @@
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
 				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
+				084070811D64847400308FC1 /* SharingHelper.swift in Sources */,
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
@@ -2327,6 +2333,7 @@
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
+				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
@@ -2775,6 +2782,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				084070821D64883400308FC1 /* Model_v7.xcdatamodel */,
 				0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */,
 				0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */,
 				083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */,
@@ -2782,7 +2790,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */;
+			currentVersion = 084070821D64883400308FC1 /* Model_v7.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

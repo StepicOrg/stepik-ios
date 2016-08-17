@@ -78,6 +78,9 @@ class CoursePreviewViewController: UIViewController {
         videoWebView.scrollView.scrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
         
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem
+        
         if let c = course {
             sectionTitles = []
             for section in c.sections {
@@ -93,6 +96,14 @@ class CoursePreviewViewController: UIViewController {
                 loadVimeoURL(NSURL(string: c.introURL)!)
             }
             updateSections()
+        }
+    }
+    
+    func shareButtonPressed(button: UIBarButtonItem) {
+        if let slug = course?.slug {
+            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug)
+            shareVC.popoverPresentationController?.barButtonItem = button
+            self.presentViewController(shareVC, animated: true, completion: nil)
         }
     }
     

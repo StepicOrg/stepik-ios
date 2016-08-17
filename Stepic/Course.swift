@@ -39,6 +39,7 @@ class Course: NSManagedObject, JSONInitializable {
         audience = json["target_audience"].stringValue
         certificate = json["certificate"].stringValue
         requirements = json["requirements"].stringValue
+        slug = json["slug"].string
         
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
