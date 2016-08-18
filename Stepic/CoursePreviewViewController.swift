@@ -100,6 +100,9 @@ class CoursePreviewViewController: UIViewController {
     }
     
     func shareButtonPressed(button: UIBarButtonItem) {
+    
+        AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
+        
         if let slug = course?.slug {
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug)
