@@ -43,7 +43,7 @@ struct AnalyticsEvents {
     
     struct Downloads {
         static let clear = "clicked clear cache"
-        static let accepted = "clicked accepted clear cache"
+        static let acceptedClear = "clicked accepted clear cache"
     }
     
     struct CourseOverview {
