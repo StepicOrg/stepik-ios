@@ -48,6 +48,7 @@ class SectionsViewController: UIViewController {
     }
     
     func shareButtonPressed(button: UIBarButtonItem) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         if let slug = course?.slug {
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus")
@@ -211,6 +212,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
+
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
@@ -246,7 +249,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.Downloaded :
 
             askForRemove(okHandler: {
-                
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
+
                 downloadButton.state = PKDownloadButtonState.Pending
                 
                 self.course.sections[downloadButton.tag].removeFromStore(completion: {
