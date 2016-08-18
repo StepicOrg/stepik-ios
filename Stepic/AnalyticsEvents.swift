@@ -10,10 +10,6 @@ import Foundation
 
 struct AnalyticsEvents {
     
-    struct VideoDownloadQuality {
-        static let chosen = "video download quality was chosen"
-    }
-    
     struct Logout {
         static let clicked = "clicked logout"
         static let accepted = "accepted logout"
@@ -35,11 +31,13 @@ struct AnalyticsEvents {
     
     struct Section {
         static let cache = "clicked cache section"
+        static let cancel = "clicked cancel section"
         static let delete = "clicked delete cached section"
     }
     
     struct Unit {
         static let cache = "clicked cache unit"
+        static let cancel = "clicked cancel unit"
         static let delete = "clicked delete cached unit"
     }
     

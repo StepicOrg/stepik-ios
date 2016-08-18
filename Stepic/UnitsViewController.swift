@@ -197,6 +197,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
+            
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
@@ -215,6 +217,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloading :
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
             downloadButton.pendingView?.startSpin()
 
@@ -227,7 +231,10 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloaded :
-            
+        
+        
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {

@@ -236,6 +236,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             
         case PKDownloadButtonState.Downloading :
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
 
             course.sections[downloadButton.tag].cancelVideoStore(completion: {
