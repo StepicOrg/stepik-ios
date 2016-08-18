@@ -26,6 +26,7 @@ struct AnalyticsEvents {
     
     struct SignUp {
         static let onLaunchScreen = "clicked SignUp on launch screen"
+        static let onSignUpScreen = "clicked SignUp on sign up screen"
     }
     
     struct Syllabus {

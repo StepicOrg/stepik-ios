@@ -343,6 +343,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="signInPressed:" destination="x8g-cA-VCI" eventType="touchUpInside" id="Q4p-YH-77p"/>
                                     <segue destination="xM1-we-3DT" kind="presentation" identifier="signInSegue" id="QVJ-1c-ilr"/>
                                 </connections>
                             </button>

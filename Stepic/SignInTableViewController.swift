@@ -125,6 +125,9 @@ class SignInTableViewController: UITableViewController {
     }
     
     @IBAction func signInPressed(sender: UIButton) {
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
+        
         SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             success: {
