@@ -12,7 +12,6 @@ struct AnalyticsEvents {
     
     struct Logout {
         static let clicked = "clicked logout"
-        static let accepted = "accepted logout"
     }
         
     struct SignIn {
