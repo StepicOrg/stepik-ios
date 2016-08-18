@@ -17,8 +17,11 @@ def all_pods
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
     pod 'AFImageHelper'
+    
     pod 'Firebase/Messaging'
     pod 'Firebase/AppIndexing'
+    pod 'Firebase/Core'
+    
     pod "MagicalRecord"
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
