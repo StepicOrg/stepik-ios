@@ -339,9 +339,12 @@ class DiscussionsViewController: UIViewController {
                             comment.abuseCount -= 1
                             comment.epicCount += 1
                             c.setLiked(true, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
+                            
                         case .Epic:
                             comment.epicCount -= 1
                             c.setLiked(false, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked, parameters: nil)
                         }
                     }, error: {
                         errorMsg in
@@ -355,6 +358,7 @@ class DiscussionsViewController: UIViewController {
                         comment.vote = vote
                         comment.epicCount += 1
                         c.setLiked(true, likesCount: comment.epicCount)
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
                     }, error: {
                         errorMsg in
                         print(errorMsg)
@@ -380,6 +384,7 @@ class DiscussionsViewController: UIViewController {
                             comment.epicCount -= 1
                             comment.abuseCount += 1
                             c.setLiked(false, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
                         }
                     }, error: {
                         errorMsg in
@@ -392,6 +397,8 @@ class DiscussionsViewController: UIViewController {
                         vote in
                         comment.vote = vote
                         comment.abuseCount += 1
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
+                        
                     }, error: {
                         errorMsg in
                         print(errorMsg)

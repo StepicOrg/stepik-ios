@@ -65,6 +65,7 @@ struct AnalyticsEvents {
     
     struct Discussion {
         static let liked = "discussion liked"
+        static let unliked = "discussion unliked"
         static let abused = "discussion abused"
     }
     
