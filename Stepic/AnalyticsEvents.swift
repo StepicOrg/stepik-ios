@@ -51,16 +51,16 @@ struct AnalyticsEvents {
     }
     
     struct Step {        
-        struct Video {
-            static let rateChanged = "video rate changed"
-            static let qualityChanged = "video quality changed"
-        }
-        
         struct Submission {
             static let submit = "clicked submit"
             static let newAttempt = "clicked generate new attempt"
             static let solveInWebPressed = "clicked solve in web"
         }
+    }
+    
+    struct VideoPlayer {
+        static let rateChanged = "video rate changed"
+        static let qualityChanged = "video quality changed"
     }
     
     struct Discussion {
