@@ -59,6 +59,7 @@ struct AnalyticsEvents {
         struct Submission {
             static let submit = "clicked submit"
             static let newAttempt = "clicked generate new attempt"
+            static let solveInWebPressed = "clicked solve in web"
         }
     }
     

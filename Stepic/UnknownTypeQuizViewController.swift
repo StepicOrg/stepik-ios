@@ -16,6 +16,7 @@ class UnknownTypeQuizViewController: UIViewController {
     @IBOutlet weak var solveOnTheWebsiteButton: UIButton!
     
     @IBAction func solveOnTheWebsitePressed(sender: UIButton) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed, parameters: nil)
         let url = NSURL(string: stepUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
