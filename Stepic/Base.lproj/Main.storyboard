@@ -1569,29 +1569,62 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="SberbankUniversity" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="554" width="600" height="46"/>
+                                <rect key="frame" x="0.0" y="492" width="600" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="f61-MW-YzU"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBh-Uu-7V4">
+                                <rect key="frame" x="8" y="546" width="107" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="Tec-oH-suA"/>
+                                </constraints>
+                                <state key="normal" title="Previous lesson"/>
+                                <connections>
+                                    <action selector="prevLessonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="spk-wc-UMP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxQ-px-hgG">
+                                <rect key="frame" x="512" y="546" width="80" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="PBc-MK-hnR"/>
+                                </constraints>
+                                <state key="normal" title="Next lesson"/>
+                                <connections>
+                                    <action selector="nextLessonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="7dc-9S-bcY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerX" secondItem="pKw-C7-Y9N" secondAttribute="centerX" id="6dR-Rr-VEP"/>
+                            <constraint firstItem="NxQ-px-hgG" firstAttribute="top" secondItem="68N-yM-TOn" secondAttribute="bottom" constant="8" id="74O-63-muS"/>
+                            <constraint firstItem="JBh-Uu-7V4" firstAttribute="top" secondItem="68N-yM-TOn" secondAttribute="bottom" constant="8" id="BWw-Zl-VfF"/>
                             <constraint firstItem="pKw-C7-Y9N" firstAttribute="centerY" secondItem="eOu-jp-hBO" secondAttribute="centerY" id="GBF-9u-zUN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="68N-yM-TOn" secondAttribute="trailing" constant="-20" id="JD8-OV-XB5"/>
+                            <constraint firstItem="SdS-Qz-hnr" firstAttribute="top" secondItem="NxQ-px-hgG" secondAttribute="bottom" constant="8" id="Kw3-oE-AGg"/>
                             <constraint firstItem="mC4-nY-c6L" firstAttribute="centerY" secondItem="pKw-C7-Y9N" secondAttribute="centerY" id="ML7-NF-DQL"/>
-                            <constraint firstItem="SdS-Qz-hnr" firstAttribute="top" secondItem="68N-yM-TOn" secondAttribute="bottom" id="S77-te-WBv"/>
+                            <constraint firstItem="SdS-Qz-hnr" firstAttribute="top" secondItem="JBh-Uu-7V4" secondAttribute="bottom" constant="8" id="Q2v-ak-4Qb"/>
                             <constraint firstItem="68N-yM-TOn" firstAttribute="leading" secondItem="eOu-jp-hBO" secondAttribute="leadingMargin" constant="-20" id="ZCz-6K-0x8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NxQ-px-hgG" secondAttribute="trailing" constant="-12" id="eLy-0k-7qj"/>
                             <constraint firstItem="pKw-C7-Y9N" firstAttribute="leading" secondItem="eOu-jp-hBO" secondAttribute="leading" id="mWm-l6-zSJ"/>
                             <constraint firstAttribute="trailing" secondItem="pKw-C7-Y9N" secondAttribute="trailing" id="pP8-h4-HdZ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="JBh-Uu-7V4" secondAttribute="leading" constant="12" id="pPl-BI-hhp"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="discussionCountView" destination="68N-yM-TOn" id="pd2-oU-tcF"/>
                         <outlet property="discussionCountViewHeight" destination="f61-MW-YzU" id="0hU-bn-7Vz"/>
+                        <outlet property="discussionToNextDistance" destination="74O-63-muS" id="0qB-tI-fKs"/>
+                        <outlet property="discussionToPrevDistance" destination="BWw-Zl-VfF" id="dVf-YK-FNb"/>
+                        <outlet property="nextLessonButton" destination="NxQ-px-hgG" id="KfI-rT-2Xj"/>
+                        <outlet property="nextLessonButtonHeight" destination="PBc-MK-hnR" id="b3V-sU-lLf"/>
+                        <outlet property="nextToBottomDistance" destination="Kw3-oE-AGg" id="E35-Sm-uhC"/>
                         <outlet property="playButton" destination="mC4-nY-c6L" id="PYp-XO-Z93"/>
+                        <outlet property="prevLessonButton" destination="JBh-Uu-7V4" id="cIG-cU-ZBp"/>
+                        <outlet property="prevLessonButtonHeight" destination="Tec-oH-suA" id="Zwc-Xr-Fmg"/>
+                        <outlet property="prevToBottomDistance" destination="Q2v-ak-4Qb" id="DzQ-k8-xiq"/>
                         <outlet property="thumbnailImageView" destination="pKw-C7-Y9N" id="2b7-YI-pg3"/>
                     </connections>
                 </viewController>

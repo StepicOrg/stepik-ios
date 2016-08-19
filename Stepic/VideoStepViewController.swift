@@ -30,6 +30,15 @@ class VideoStepViewController: UIViewController {
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var prevLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var prevLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
+    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
+    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
+    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
+    
     var imageTapHelper : ImageTapHelper!
     
     override func viewDidLoad() {
@@ -52,6 +61,30 @@ class VideoStepViewController: UIViewController {
             recognizer in
             self?.playVideo()
         })
+        
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+        
+        if nextLessonHandler == nil {
+            nextLessonButton.hidden = true
+        } else {
+            nextLessonButton.setStepicWhiteStyle()
+        }
+        
+        if prevLessonHandler == nil {
+            prevLessonButton.hidden = true
+        } else {
+            prevLessonButton.setStepicWhiteStyle()
+        }
+        
+        if nextLessonHandler == nil && prevLessonHandler == nil {
+            nextLessonButtonHeight.constant = 0
+            prevLessonButtonHeight.constant = 0
+            discussionToNextDistance.constant = 0
+            discussionToPrevDistance.constant = 0
+            prevToBottomDistance.constant = 0
+            nextToBottomDistance.constant = 0
+        }
     }
     
     
@@ -114,6 +147,14 @@ class VideoStepViewController: UIViewController {
         }
     }
 
+    @IBAction func prevLessonPressed(sender: UIButton) {
+        prevLessonHandler?()
+    }
+    
+    @IBAction func nextLessonPressed(sender: UIButton) {
+        nextLessonHandler?()
+    }
+    
     /*
     // MARK: - Navigation
 

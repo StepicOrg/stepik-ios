@@ -127,7 +127,7 @@ class UnitsViewController: UIViewController {
     func clearAllSelection() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
             for indexPath in selectedRows {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
         }
     }
@@ -140,7 +140,7 @@ extension UnitsViewController : SectionNavigationDelegate {
             if uIndex + 1 < section.units.count {
                 clearAllSelection()
                 tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: false)
                 selectUnitAtIndex(uIndex + 1)
             }
         }
@@ -152,7 +152,7 @@ extension UnitsViewController : SectionNavigationDelegate {
             if uIndex - 1 >= 0 {
                 clearAllSelection()
                 tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: false)
                 selectUnitAtIndex(uIndex - 1)
             }
         }        

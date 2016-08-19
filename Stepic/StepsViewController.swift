@@ -226,7 +226,6 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 if index == 0 && shouldNavigateToPrev {
                     stepController.prevLessonHandler = {
                         [weak self] in
-                        self?.navigationController?.popViewControllerAnimated(true)
                         self?.sectionNavigationDelegate?.displayPrev()
                     } 
                 }
@@ -234,7 +233,6 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 if index == lesson!.steps.count - 1 && shouldNavigateToNext {
                     stepController.nextLessonHandler = {
                         [weak self] in
-                        self?.navigationController?.popViewControllerAnimated(true)
                         self?.sectionNavigationDelegate?.displayNext()
                     } 
                 }
