@@ -107,4 +107,13 @@ extension Step {
         }
     }
     
+    var lesson : Lesson? {
+        get {
+            return managedLesson
+        }
+        set(value) {
+            managedLesson = value
+        }
+    }
+    
 }
