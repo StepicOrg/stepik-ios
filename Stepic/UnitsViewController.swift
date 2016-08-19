@@ -104,10 +104,14 @@ class UnitsViewController: UIViewController {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
-            dvc.lesson = section.units[sender as! Int].lesson
-            dvc.sectionNavigationDelegate = self
+            if let index = sender as? Int {
+                dvc.lesson = section.units[index].lesson
+                dvc.sectionNavigationDelegate = self
+                currentlyDisplayingUnitIndex = index
+                dvc.shouldNavigateToPrev = index != 0
+                dvc.shouldNavigateToNext = index < section.units.count - 1
+            }
             
-            currentlyDisplayingUnitIndex = sender as? Int
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

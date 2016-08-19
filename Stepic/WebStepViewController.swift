@@ -73,8 +73,8 @@ class WebStepViewController: UIViewController {
             discussionCountViewHeight.constant = 0
         }
         
-        nextLessonButton.setTitle(" \(NSLocalizedString("NextLesson", comment: "")) ", forState: .Normal)
-        prevLessonButton.setTitle(" \(NSLocalizedString("PrevLesson", comment: "")) ", forState: .Normal)
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
         
         if nextLessonHandler == nil {
             nextLessonButton.hidden = true

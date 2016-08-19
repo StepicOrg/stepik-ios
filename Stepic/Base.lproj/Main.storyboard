@@ -1915,8 +1915,8 @@
         <image name="visible" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qb1-8x-83E"/>
         <segue reference="b5T-ta-Pf4"/>
+        <segue reference="RJf-bv-ine"/>
         <segue reference="Had-eU-CRB"/>
         <segue reference="LaP-cg-j2K"/>
         <segue reference="oyz-px-1HN"/>

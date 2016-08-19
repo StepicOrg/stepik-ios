@@ -30,6 +30,9 @@ class StepsViewController: RGPageViewController {
     
     weak var sectionNavigationDelegate : SectionNavigationDelegate?
     
+    var shouldNavigateToPrev: Bool = false
+    var shouldNavigateToNext: Bool = false
+    
     func initWarningView() -> UIView {
         //TODO: change warning image!
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
@@ -220,7 +223,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
                 
-                if index == 0 {
+                if index == 0 && shouldNavigateToPrev {
                     stepController.prevLessonHandler = {
                         [weak self] in
                         self?.navigationController?.popViewControllerAnimated(true)
@@ -228,7 +231,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                     } 
                 }
                 
-                if index == lesson!.steps.count - 1 {
+                if index == lesson!.steps.count - 1 && shouldNavigateToNext {
                     stepController.nextLessonHandler = {
                         [weak self] in
                         self?.navigationController?.popViewControllerAnimated(true)
@@ -248,14 +251,14 @@ extension StepsViewController : RGPageViewControllerDataSource {
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
                 
-                if index == 0 {
+                if index == 0 && shouldNavigateToPrev {
                     stepController.prevLessonHandler = {
                         [weak self] in
                         self?.sectionNavigationDelegate?.displayPrev()
                     } 
                 }
                 
-                if index == lesson!.steps.count - 1 {
+                if index == lesson!.steps.count - 1 && shouldNavigateToNext {
                     stepController.nextLessonHandler = {
                         [weak self] in
                         self?.sectionNavigationDelegate?.displayNext()
