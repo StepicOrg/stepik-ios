@@ -1672,7 +1672,7 @@
                                 <rect key="frame" x="0.0" y="21" width="600" height="579"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pp4-VH-jhD">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="78"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
                                         <subviews>
                                             <webView contentMode="scaleToFill" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emi-b6-GHx">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -1694,19 +1694,44 @@
                                                     <constraint firstAttribute="height" constant="46" id="eC1-5h-6rM"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6P-J7-5Ea">
+                                                <rect key="frame" x="8" y="86" width="107" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="1JA-3y-zzS"/>
+                                                </constraints>
+                                                <state key="normal" title="Previous lesson"/>
+                                                <connections>
+                                                    <action selector="prevLessonPressed:" destination="OsI-th-C1R" eventType="touchUpInside" id="MpI-JU-JCj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-iN-bQ6">
+                                                <rect key="frame" x="512" y="86" width="80" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="46" id="5Ld-5v-Kfx"/>
+                                                </constraints>
+                                                <state key="normal" title="Next lesson"/>
+                                                <connections>
+                                                    <action selector="nextLessonPressed:" destination="OsI-th-C1R" eventType="touchUpInside" id="hh6-nD-5kZ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="WfD-iN-bQ6" secondAttribute="trailing" constant="8" id="1Ag-uv-sMb"/>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="3GV-fJ-hPz"/>
-                                            <constraint firstAttribute="bottom" secondItem="BE9-jp-jJZ" secondAttribute="bottom" id="4vn-w0-0cU"/>
                                             <constraint firstAttribute="trailing" secondItem="BE9-jp-jJZ" secondAttribute="trailing" id="5IQ-0k-G67"/>
+                                            <constraint firstAttribute="bottom" secondItem="WfD-iN-bQ6" secondAttribute="bottom" constant="8" id="DDw-e1-EIm"/>
                                             <constraint firstItem="cY6-uB-D81" firstAttribute="top" secondItem="emi-b6-GHx" secondAttribute="bottom" constant="-1" id="DvZ-wU-sTq"/>
+                                            <constraint firstItem="P6P-J7-5Ea" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" constant="8" id="IDh-7f-nJx"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="top" secondItem="pp4-VH-jhD" secondAttribute="top" id="LIL-rg-mOB"/>
                                             <constraint firstItem="emi-b6-GHx" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="SVq-w0-3Vg"/>
                                             <constraint firstAttribute="trailing" secondItem="cY6-uB-D81" secondAttribute="trailing" id="UZN-cH-TvZ"/>
+                                            <constraint firstItem="P6P-J7-5Ea" firstAttribute="top" secondItem="BE9-jp-jJZ" secondAttribute="bottom" constant="8" id="fHv-9a-NeK"/>
                                             <constraint firstAttribute="trailing" secondItem="emi-b6-GHx" secondAttribute="trailing" id="qPs-uE-8iy"/>
+                                            <constraint firstAttribute="bottom" secondItem="P6P-J7-5Ea" secondAttribute="bottom" constant="8" id="r28-jl-19e"/>
                                             <constraint firstItem="BE9-jp-jJZ" firstAttribute="leading" secondItem="pp4-VH-jhD" secondAttribute="leading" id="ua9-V6-tZf"/>
                                             <constraint firstItem="BE9-jp-jJZ" firstAttribute="top" secondItem="cY6-uB-D81" secondAttribute="bottom" id="uc0-6g-SZK"/>
+                                            <constraint firstItem="WfD-iN-bQ6" firstAttribute="top" secondItem="BE9-jp-jJZ" secondAttribute="bottom" constant="8" id="z0R-sf-VJ0"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1731,6 +1756,14 @@
                         <outlet property="contentView" destination="pp4-VH-jhD" id="pPT-Gh-1iK"/>
                         <outlet property="discussionCountView" destination="BE9-jp-jJZ" id="xoK-VD-DA4"/>
                         <outlet property="discussionCountViewHeight" destination="eC1-5h-6rM" id="O7w-ag-Lmz"/>
+                        <outlet property="discussionToNextDistance" destination="z0R-sf-VJ0" id="K9o-Tn-a5e"/>
+                        <outlet property="discussionToPrevDistance" destination="fHv-9a-NeK" id="aXJ-NW-J8D"/>
+                        <outlet property="nextLessonButton" destination="WfD-iN-bQ6" id="eAZ-P1-ny8"/>
+                        <outlet property="nextLessonButtonHeight" destination="5Ld-5v-Kfx" id="QwQ-XG-Kck"/>
+                        <outlet property="nextToBottomDistance" destination="DDw-e1-EIm" id="yfL-Ff-rXJ"/>
+                        <outlet property="prevLessonButton" destination="P6P-J7-5Ea" id="Z2I-m0-BQA"/>
+                        <outlet property="prevLessonButtonHeight" destination="1JA-3y-zzS" id="mIU-Fi-KcN"/>
+                        <outlet property="prevToBottomDistance" destination="r28-jl-19e" id="kZI-zU-C8O"/>
                         <outlet property="quizPlaceholderView" destination="cY6-uB-D81" id="2LX-s0-szN"/>
                         <outlet property="quizPlaceholderViewHeight" destination="fD4-kU-l4I" id="Jmx-0a-DZb"/>
                         <outlet property="stepWebView" destination="emi-b6-GHx" id="YHK-7Z-rBj"/>

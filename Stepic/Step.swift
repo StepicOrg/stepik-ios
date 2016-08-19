@@ -40,25 +40,5 @@ class Step: NSManagedObject, JSONInitializable {
     }
     
     var hasReview : Bool = false
-    
-    var nextStep : Step? {
-        if let l = lesson {
-            if let nextIndex = l.steps.indexOf(self)?.successor() {
-                if l.steps.count > nextIndex {
-                    return l.steps[nextIndex]
-                }
-            }
-        }
-        return nil
-    }
-    
-    var previousStep: Step? {
-        if let l = lesson {
-            if let prevIndex = l.steps.indexOf(self)?.predecessor() {
-                return l.steps[prevIndex]
-            }
-        }
-        return nil
-    }
-    
+
 }

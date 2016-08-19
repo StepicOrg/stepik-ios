@@ -125,3 +125,5 @@ Abuse = "Abuse";
 Unabuse = "Don't abuse";
 Syllabus = "Syllabus";
 Course = "Course";
+NextLesson = "Next lesson";
+PrevLesson = "Previous Lesson";

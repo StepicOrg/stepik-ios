@@ -38,7 +38,6 @@ class UnitsViewController: UIViewController {
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-
         refreshControl.beginRefreshing()
         refreshUnits()
 
@@ -105,24 +104,60 @@ class UnitsViewController: UIViewController {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
-            //TODO : pass unit here!
             dvc.lesson = section.units[sender as! Int].lesson
+            dvc.sectionNavigationDelegate = self
+            
+            currentlyDisplayingUnitIndex = sender as? Int
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     
+    var currentlyDisplayingUnitIndex: Int?
+    
+    func selectUnitAtIndex(index: Int) {
+        tableView.deselectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true)
+        performSegueWithIdentifier("showSteps", sender: index)        
+    }
+    
+    func clearAllSelection() {
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            for indexPath in selectedRows {
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
+        }
+    }
+}
 
+extension UnitsViewController : SectionNavigationDelegate {
+    func displayNext() {
+        navigationController?.popViewControllerAnimated(false)
+        if let uIndex = currentlyDisplayingUnitIndex {
+            if uIndex + 1 < section.units.count {
+                clearAllSelection()
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                selectUnitAtIndex(uIndex + 1)
+            }
+        }
+    }
+    
+    func displayPrev() {
+        navigationController?.popViewControllerAnimated(false)
+        if let uIndex = currentlyDisplayingUnitIndex {
+            if uIndex - 1 >= 0 {
+                clearAllSelection()
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
+                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: true)
+                selectUnitAtIndex(uIndex - 1)
+            }
+        }        
+    }
 }
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if !didRefresh {
-            
-//        } else {
-            performSegueWithIdentifier("showSteps", sender: indexPath.row)        
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        }
+        selectUnitAtIndex(indexPath.row)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

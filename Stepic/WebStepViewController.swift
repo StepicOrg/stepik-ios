@@ -25,6 +25,18 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
     
+    @IBOutlet weak var prevLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var prevLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
+    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
+    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
+    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
+    
+    var nextLessonHandler: (Void->Void)?
+    var prevLessonHandler: (Void->Void)?
+
     var parent : StepsViewController!
     
     var nItem : UINavigationItem!
@@ -59,6 +71,30 @@ class WebStepViewController: UIViewController {
             }
         } else {
             discussionCountViewHeight.constant = 0
+        }
+        
+        nextLessonButton.setTitle(" \(NSLocalizedString("NextLesson", comment: "")) ", forState: .Normal)
+        prevLessonButton.setTitle(" \(NSLocalizedString("PrevLesson", comment: "")) ", forState: .Normal)
+        
+        if nextLessonHandler == nil {
+            nextLessonButton.hidden = true
+        } else {
+            nextLessonButton.setStepicWhiteStyle()
+        }
+        
+        if prevLessonHandler == nil {
+            prevLessonButton.hidden = true
+        } else {
+            prevLessonButton.setStepicWhiteStyle()
+        }
+        
+        if nextLessonHandler == nil && prevLessonHandler == nil {
+            nextLessonButtonHeight.constant = 0
+            prevLessonButtonHeight.constant = 0
+            discussionToNextDistance.constant = 0
+            discussionToPrevDistance.constant = 0
+            prevToBottomDistance.constant = 0
+            nextToBottomDistance.constant = 0
         }
     }
     
@@ -202,7 +238,6 @@ class WebStepViewController: UIViewController {
             return
         }
         
-
         stepWebViewHeight.constant = CGFloat(height)
         UIView.animateWithDuration(0.2, animations: { 
             [weak self] in
@@ -223,7 +258,14 @@ class WebStepViewController: UIViewController {
         }
     }
     
+    @IBAction func prevLessonPressed(sender: UIButton) {
+        prevLessonHandler?()
+    }
     
+    @IBAction func nextLessonPressed(sender: UIButton) {
+        nextLessonHandler?()
+    }
+
 }
 
 extension WebStepViewController : UIWebViewDelegate {

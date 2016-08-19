@@ -52,5 +52,4 @@ class Unit: NSManagedObject, JSONInitializable {
                 errorHandler()
         })
     }
-    
 }

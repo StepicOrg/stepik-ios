@@ -21,6 +21,9 @@ class VideoStepViewController: UIViewController {
     var assignment : Assignment?
     var parentNavigationController : UINavigationController?
     
+    var nextLessonHandler: (Void->Void)?
+    var prevLessonHandler: (Void->Void)?
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     

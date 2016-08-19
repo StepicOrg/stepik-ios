@@ -125,4 +125,5 @@ Abuse = "Пожаловаться";
 Unabuse = "Не жаловаться";
 Syllabus = "Модули";
 Course = "Курс";
-
+NextLesson = "Следующий урок";
+PrevLesson = "Предыдущий урок";

@@ -22,12 +22,13 @@ class StepsViewController: RGPageViewController {
     //By default presentation context is unit
     var context : StepsControllerPresentationContext = .Unit
     
-    
     lazy var activityView : UIView = self.initActivityView()
     
     lazy var warningView : UIView = self.initWarningView()
     
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
+    
+    weak var sectionNavigationDelegate : SectionNavigationDelegate?
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
@@ -218,7 +219,24 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.parentNavigationController = self.navigationController
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
+                
+                if index == 0 {
+                    stepController.prevLessonHandler = {
+                        [weak self] in
+                        self?.navigationController?.popViewControllerAnimated(true)
+                        self?.sectionNavigationDelegate?.displayPrev()
+                    } 
+                }
+                
+                if index == lesson!.steps.count - 1 {
+                    stepController.nextLessonHandler = {
+                        [weak self] in
+                        self?.navigationController?.popViewControllerAnimated(true)
+                        self?.sectionNavigationDelegate?.displayNext()
+                    } 
+                }
             }
+            
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
@@ -229,7 +247,22 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.nItem = self.navigationItem
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
+                
+                if index == 0 {
+                    stepController.prevLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayPrev()
+                    } 
+                }
+                
+                if index == lesson!.steps.count - 1 {
+                    stepController.nextLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayNext()
+                    } 
+                }
             }
+            
             return stepController
         }
     } 
