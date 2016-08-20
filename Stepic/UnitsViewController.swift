@@ -98,20 +98,27 @@ class UnitsViewController: UIViewController {
     
     // MARK: - Navigation
 
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showSteps" {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
-            if let index = sender as? Int {
+            if let stepsPresentation = sender as? StepsPresentation {
+                
+                var index = stepsPresentation.index
+                if stepsPresentation.isLastStep {
+                    if let l = section.units[index].lesson {
+                        dvc.startStepId = l.stepsArray.count - 1
+                    }
+                }
                 dvc.lesson = section.units[index].lesson
                 dvc.sectionNavigationDelegate = self
                 currentlyDisplayingUnitIndex = index
                 dvc.shouldNavigateToPrev = index != 0
                 dvc.shouldNavigateToNext = index < section.units.count - 1
             }
-            
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -119,9 +126,9 @@ class UnitsViewController: UIViewController {
     
     var currentlyDisplayingUnitIndex: Int?
     
-    func selectUnitAtIndex(index: Int) {
+    func selectUnitAtIndex(index: Int, isLastStep: Bool = false) {
         tableView.deselectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true)
-        performSegueWithIdentifier("showSteps", sender: index)        
+        performSegueWithIdentifier("showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
     }
     
     func clearAllSelection() {
@@ -130,6 +137,15 @@ class UnitsViewController: UIViewController {
                 tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
         }
+    }
+}
+
+class StepsPresentation {
+    var index: Int
+    var isLastStep: Bool
+    init(index: Int, isLastStep: Bool) {
+        self.index = index
+        self.isLastStep = isLastStep
     }
 }
 
@@ -153,7 +169,7 @@ extension UnitsViewController : SectionNavigationDelegate {
                 clearAllSelection()
                 tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
                 tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: false)
-                selectUnitAtIndex(uIndex - 1)
+                selectUnitAtIndex(uIndex - 1, isLastStep: true)
             }
         }        
     }
