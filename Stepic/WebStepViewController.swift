@@ -47,6 +47,8 @@ class WebStepViewController: UIViewController {
     var lesson : Lesson!
     var assignment : Assignment?
     
+    var stepText = ""
+    
     var stepUrl : String {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)?from_mobile_app=true"
     }
@@ -55,6 +57,8 @@ class WebStepViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
 
         stepWebView.delegate = self
         
@@ -62,6 +66,16 @@ class WebStepViewController: UIViewController {
         stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
         print(self.view.gestureRecognizers)
+
+        
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+
+        initialize()
+    }
+    
+    func initialize() {
+        
         handleQuizType()
         if let discussionCount = step.discussionsCount {
             discussionCountView.commentsCount = discussionCount
@@ -72,10 +86,7 @@ class WebStepViewController: UIViewController {
         } else {
             discussionCountViewHeight.constant = 0
         }
-        
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
-        
+                
         if nextLessonHandler == nil {
             nextLessonButton.hidden = true
         } else {
@@ -106,8 +117,17 @@ class WebStepViewController: UIViewController {
         loadStepHTML()
     }
     
+    func updatedStepNotification(notification: NSNotification) {
+        print("did get update step notification")
+        initialize()
+        loadStepHTML()
+    }
+    
     private func loadStepHTML() {
         if let htmlText = step.block.text {
+            if htmlText == stepText {
+                return
+            }
             let scriptsString = "\(Scripts.localTexScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
             html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
@@ -228,7 +248,6 @@ class WebStepViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("did layout subviews in web step \(stepId)")
     }
     
     
@@ -266,6 +285,9 @@ class WebStepViewController: UIViewController {
         nextLessonHandler?()
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StepsViewController.stepUpdatedNotification, object: nil)
+    }
 }
 
 extension WebStepViewController : UIWebViewDelegate {

@@ -95,19 +95,43 @@ class StepsViewController: RGPageViewController {
         refreshSteps()
     }
     
-    private var tabViewsForStepId = [Int: UIView]()
+    static let stepUpdatedNotification = "StepUpdatedNotification"
     
+    private var tabViewsForStepId = [Int: UIView]()
+    //TODO: Обновлять шаги только тогда, когда это нужно
+    //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     private func refreshSteps() {
+        var prevStepsIds = [Int]()
         if numberOfPagesForViewController(self) == 0 {
             self.view.userInteractionEnabled = false
             self.doesPresentWarningView = false
             self.doesPresentActivityIndicatorView = true
+        } else {
+            if let l = lesson {
+                prevStepsIds = l.stepsArray
+            }
         }
+        
         lesson?.loadSteps(completion: {
-            print("did reload data")
-            UIThread.performUI{
-                self.view.userInteractionEnabled = true
+            
+            let newStepsSet = Set(self.lesson!.stepsArray)
+            let prevStepsSet = Set(prevStepsIds)
+            
+            var reloadBlock : (Void->Void) = {
                 self.reloadData()
+            }
+            
+            if newStepsSet.exclusiveOr(prevStepsSet).count == 0 {
+                //need to reload one by one
+                reloadBlock = {
+                    NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
+                    print("did send step updated notification")
+                }
+            } 
+            
+            UIThread.performUI {
+                self.view.userInteractionEnabled = true
+                reloadBlock()
                 self.doesPresentWarningView = false
                 self.doesPresentActivityIndicatorView = false
             }

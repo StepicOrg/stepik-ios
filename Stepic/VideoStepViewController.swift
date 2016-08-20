@@ -44,6 +44,22 @@ class VideoStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
+    
+                
+        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
+            [weak self]
+            recognizer in
+            self?.playVideo()
+        })
+        
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+        
+        initialize()
+    }
+    
+    func initialize() {
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
         if let discussionCount = step.discussionsCount {
@@ -55,15 +71,6 @@ class VideoStepViewController: UIViewController {
         } else {
             discussionCountViewHeight.constant = 0
         }
-        
-        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
-            [weak self]
-            recognizer in
-            self?.playVideo()
-        })
-        
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
         
         if nextLessonHandler == nil {
             nextLessonButton.hidden = true
@@ -87,6 +94,9 @@ class VideoStepViewController: UIViewController {
         }
     }
     
+    func updatedStepNotification(notification: NSNotification) {
+        initialize()
+    }
     
     private func playVideo() {
         if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
