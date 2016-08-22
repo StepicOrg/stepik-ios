@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
         
-        let deepLink = NSURL(string: "https://stepic.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+//        let deepLink = NSURL(string: "https://stepik.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
 //        handleOpenedFromDeepLink(deepLink)
 //        delay(60, closure: {

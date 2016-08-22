@@ -154,7 +154,7 @@ class SignInTableViewController: UITableViewController {
     }
         
     @IBAction func forgotPasswordPressed(sender: UIButton) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString("https://stepic.org/accounts/password/reset/", inController: self, 
+        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self, 
             withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.Done)        
 //        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
     }
