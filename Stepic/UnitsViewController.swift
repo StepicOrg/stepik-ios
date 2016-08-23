@@ -101,7 +101,7 @@ class UnitsViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showSteps" {
+        if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
@@ -126,9 +126,8 @@ class UnitsViewController: UIViewController {
     
     var currentlyDisplayingUnitIndex: Int?
     
-    func selectUnitAtIndex(index: Int, isLastStep: Bool = false) {
-        tableView.deselectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true)
-        performSegueWithIdentifier("showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
+    func selectUnitAtIndex(index: Int, isLastStep: Bool = false, replace: Bool = false) {
+        performSegueWithIdentifier(replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
     }
     
     func clearAllSelection() {
@@ -138,6 +137,7 @@ class UnitsViewController: UIViewController {
             }
         }
     }
+
 }
 
 class StepsPresentation {
@@ -150,26 +150,18 @@ class StepsPresentation {
 }
 
 extension UnitsViewController : SectionNavigationDelegate {
-    func displayNext() {
-        navigationController?.popViewControllerAnimated(false)
+    func displayNext() {        
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
-                clearAllSelection()
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex + 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: false)
-                selectUnitAtIndex(uIndex + 1)
+                selectUnitAtIndex(uIndex + 1, replace: true)
             }
         }
     }
     
     func displayPrev() {
-        navigationController?.popViewControllerAnimated(false)
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex - 1 >= 0 {
-                clearAllSelection()
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.None)
-                tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: uIndex - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.None, animated: false)
-                selectUnitAtIndex(uIndex - 1, isLastStep: true)
+                selectUnitAtIndex(uIndex - 1, isLastStep: true, replace: true)
             }
         }        
     }
@@ -177,6 +169,7 @@ extension UnitsViewController : SectionNavigationDelegate {
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         selectUnitAtIndex(indexPath.row)
     }
     

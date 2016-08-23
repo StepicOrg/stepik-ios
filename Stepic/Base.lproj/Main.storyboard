@@ -1514,6 +1514,7 @@
                     <connections>
                         <outlet property="tableView" destination="Q7F-3H-ipp" id="hgP-ev-Cu6"/>
                         <segue destination="7LO-Mv-R4f" kind="show" identifier="showSteps" id="oyz-px-1HN"/>
+                        <segue destination="7LO-Mv-R4f" kind="custom" identifier="replaceSteps" customClass="ReplaceLastSegue" customModule="SberbankUniversity" customModuleProvider="target" id="n0y-oT-VBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hEh-qF-PcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1529,7 +1530,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="64" width="600" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1537,7 +1538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sog-TK-f5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4114" y="2285"/>
+            <point key="canvasLocation" x="4883" y="2235"/>
         </scene>
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
@@ -1949,9 +1950,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="b5T-ta-Pf4"/>
-        <segue reference="RJf-bv-ine"/>
         <segue reference="Had-eU-CRB"/>
         <segue reference="LaP-cg-j2K"/>
-        <segue reference="oyz-px-1HN"/>
+        <segue reference="n0y-oT-VBo"/>
+        <segue reference="RJf-bv-ine"/>
     </inferredMetricsTieBreakers>
 </document>
