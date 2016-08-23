@@ -297,9 +297,7 @@ class CoursePreviewViewController: UIViewController {
         
         if !StepicAPI.shared.isAuthorized {
             let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
-            self.presentViewController(vc, animated: true, completion: {
-                self.dismissViewControllerAnimated(false, completion: nil)
-            })
+            self.presentViewController(vc, animated: true, completion: nil)
             return
         }
         
