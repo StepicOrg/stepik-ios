@@ -134,6 +134,12 @@ class StepsViewController: RGPageViewController {
                 reloadBlock()
                 self.doesPresentWarningView = false
                 self.doesPresentActivityIndicatorView = false
+                
+                if let id = self.startStepId {
+                    if !self.didSelectTab {
+                        self.selectTabAtIndex(id, updatePage: true)
+                    }
+                }
             }
             }, error: {
                 errorText in
@@ -148,13 +154,18 @@ class StepsViewController: RGPageViewController {
             }, onlyLesson: context == .Lesson)
     }
     
+    var didSelectTab = true
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson, id = startStepId {
             if l.steps.count != 0 {
                 print("id -> \(id)")
+                didSelectTab = true
                 self.selectTabAtIndex(id, updatePage: true)
+            } else {
+                didSelectTab = false
             }
         }
     }
