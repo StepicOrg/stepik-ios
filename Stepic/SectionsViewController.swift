@@ -51,7 +51,7 @@ class SectionsViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         if let slug = course?.slug {
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus")
+                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/")
                 shareVC.popoverPresentationController?.barButtonItem = button
                 dispatch_async(dispatch_get_main_queue()) {
                     self.presentViewController(shareVC, animated: true, completion: nil)
