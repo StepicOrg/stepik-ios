@@ -28,6 +28,7 @@ class DeepLinkRouter {
         if let components = link.pathComponents {
             //just a check if everything is OK with the link length
             if components.count < 2 {
+                completion(nil)
                 return 
             }
             
@@ -35,12 +36,25 @@ class DeepLinkRouter {
                 if let courseId = getCourseID(components[2]) {
                     if components.count == 3 {
                         routeToCourseWithId(courseId, completion: completion)
+                        return
                     }
                     if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
                         routeToSyllabusWithId(courseId, completion: completion)
+                        return
                     }
-                } 
+                    completion(nil)
+                    return
+                } else {
+                    completion(nil)
+                    return
+                }
+            } else {
+                completion(nil)
+                return
             }
+        } else {
+            completion(nil)
+            return
         }
     }
     

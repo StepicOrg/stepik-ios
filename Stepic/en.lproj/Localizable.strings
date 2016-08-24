@@ -127,3 +127,6 @@ Syllabus = "Syllabus";
 Course = "Course";
 NextLesson = "Next lesson";
 PrevLesson = "Previous Lesson";
+CouldNotOpenLink = "Could not open link";
+OpenInBrowserQuestion = "Open in browser?";
+

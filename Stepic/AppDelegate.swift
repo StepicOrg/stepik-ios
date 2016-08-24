@@ -85,17 +85,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
             controller in
-            if let vc = controller, s = self { 
-                if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
-                    delay(1, closure: {
-                        rootController.navigationController?.pushViewController(vc, animated: true)
-                    })
-                } else {
-                    let navigation = UINavigationController(rootViewController: vc) 
-                    navigation.title = NSLocalizedString("Course", comment: "")
-                    self?.setRootController(navigation)
+            if let vc = controller { 
+                if let s = self {
+                    if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
+                        delay(1, closure: {
+                            rootController.navigationController?.pushViewController(vc, animated: true)
+                        })
+                    } else {
+                        let navigation = UINavigationController(rootViewController: vc) 
+                        navigation.title = NSLocalizedString("Course", comment: "")
+                        self?.setRootController(navigation)
+                    }
                 }
-            } 
+            } else {
+                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: {
+                    action in
+                    UIApplication.sharedApplication().openURL(url)
+                }))
+                
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+                
+                UIThread.performUI {
+                    self?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
         })
     }
     

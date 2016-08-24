@@ -127,3 +127,5 @@ Syllabus = "Модули";
 Course = "Курс";
 NextLesson = "Следующий урок";
 PrevLesson = "Предыдущий урок";
+CouldNotOpenLink = "Could not open link";
+OpenInBrowserQuestion = "Open in browser?";
