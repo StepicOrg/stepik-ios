@@ -420,7 +420,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("GeneralInfoTableViewCell") as! GeneralInfoTableViewCell
         cell.initWithCourse(course!)
         
-        cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType == .Overview ? 0 : 1
+        cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType.rawValue
         var cFrame : CGRect
         if let c = course {
             cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: GeneralInfoTableViewCell.heightForCellWith(c))

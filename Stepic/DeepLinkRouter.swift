@@ -103,7 +103,6 @@ class DeepLinkRouter {
     
     private static func routeToSyllabusWithId(courseId: Int, completion: (UIViewController? -> Void)) {
         if !StepicAPI.shared.isAuthorized {
-            if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
                 do {
                     let courses = try Course.getCourses([courseId])
                     if courses.count == 0 {
@@ -111,8 +110,10 @@ class DeepLinkRouter {
                             loadedCourses in 
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
-                                    vc.course = loadedCourses[0]
-                                    completion(vc)
+                                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                                        vc.course = loadedCourses[0]
+                                        completion(vc)
+                                    }
                                 }
                             } else {
                                 print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
@@ -128,11 +129,16 @@ class DeepLinkRouter {
                         return
                     } 
                     if courses.count == 1 {
-                        vc.course = courses[0]
-                        completion(vc)
+                        UIThread.performUI {
+                            if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                                vc.course = courses[0]
+                                completion(vc)
+                            }
+                        }
                         return
+                    } else {
+                        completion(nil)
                     }
-                    completion(nil)
                     return
                 }
                 catch {
@@ -140,13 +146,7 @@ class DeepLinkRouter {
                     completion(nil)
                     return
                 }
-            }
-            
-            completion(nil)
-            
-            return
-        }
-        if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+        } else {
             do {
                 let courses = try Course.getCourses([courseId])
                 if courses.count == 0 {
@@ -154,8 +154,19 @@ class DeepLinkRouter {
                         loadedCourses in 
                         if loadedCourses.count == 1 {
                             UIThread.performUI {
-                                vc.course = loadedCourses[0]
-                                completion(vc)
+                                let course = loadedCourses[0]
+                                if course.enrolled {
+                                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+                                        vc.course = course
+                                        completion(vc)
+                                    }
+                                } else {
+                                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                                        vc.course = course
+                                        vc.displayingInfoType = DisplayingInfoType.Syllabus
+                                        completion(vc)
+                                    }
+                                }
                             }
                         } else {
                             print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
@@ -171,8 +182,19 @@ class DeepLinkRouter {
                     return
                 } 
                 if courses.count == 1 {
-                    vc.course = courses[0]
-                    completion(vc)
+                    let course = courses[0]
+                    if course.enrolled {
+                        if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+                            vc.course = course
+                            completion(vc)
+                        }
+                    } else {
+                        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                            vc.course = course
+                            vc.displayingInfoType = DisplayingInfoType.Syllabus
+                            completion(vc)
+                        }
+                    }
                     return
                 }
                 completion(nil)
