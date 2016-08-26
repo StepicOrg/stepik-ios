@@ -81,7 +81,7 @@ TryAgain = "Try again";
 Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
-SolveOnTheWebsite = "Solve on stepic.org";
+SolveOnTheWebsite = "Solve on the website";
 ConnectionErrorText = "Could not connect to the internet";
 PeerReviewText = "This is a task with peer review. Tap to open in web to get points.";
 ConnectionErrorPullToRefresh = "Enable connection and pull to refresh";
@@ -125,3 +125,8 @@ Abuse = "Abuse";
 Unabuse = "Don't abuse";
 Syllabus = "Syllabus";
 Course = "Course";
+NextLesson = "Next lesson";
+PrevLesson = "Previous Lesson";
+CouldNotOpenLink = "Could not open link";
+OpenInBrowserQuestion = "Open in browser?";
+

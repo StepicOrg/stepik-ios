@@ -17,4 +17,9 @@ struct DeviceInfo {
         let d = UIDevice.currentDevice()
         return "\(d.model) \(d.name) \(d.systemName) \(d.systemVersion)"
     }
+    
+    static var deviceModelString: String {
+        let d = UIDevice.currentDevice()
+        return "\(d.model)"
+    }
 }

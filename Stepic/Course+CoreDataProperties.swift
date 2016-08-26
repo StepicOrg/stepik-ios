@@ -30,6 +30,7 @@ extension Course {
     @NSManaged var managedAudience: String?
     @NSManaged var managedCertificate: String?
     @NSManaged var managedRequirements: String?
+    @NSManaged var managedSlug: String?
     
     @NSManaged var managedInstructors : NSOrderedSet?
     @NSManaged var managedSections : NSOrderedSet?
@@ -99,6 +100,15 @@ extension Course {
         }
         get{
             return managedImageURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+        }
+    }
+    
+    var slug : String? {
+        set(slug){
+            self.managedSlug = slug
+        }
+        get{
+            return managedSlug
         }
     }
     

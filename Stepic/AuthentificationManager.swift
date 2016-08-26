@@ -232,7 +232,7 @@ class AuthentificationManager : NSObject {
         //        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         for cookie in storage.cookies ?? [] {
-            if cookie.domain.rangeOfString("stepic") != nil {
+            if cookie.domain.rangeOfString("stepic") != nil || cookie.domain.rangeOfString("stepik") != nil {
                 print("Deleting cookie with name: \(cookie.name), value: \(cookie.value)\n")
                 storage.deleteCookie(cookie)
             }
@@ -240,10 +240,11 @@ class AuthentificationManager : NSObject {
     }
     
     func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)) -> Request? {
-        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+        let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
+        let stepicURL = NSURL(string: stepicURLString)!
         deleteStepicCookiesForSignup()
         //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-        return Alamofire.request(.GET, "https://stepic.org/accounts/signup/?next=/", parameters: nil, encoding: .URL).response { 
+        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .URL).response { 
             (request, response, _, error) -> Void in
             
             if let e = error {
@@ -277,10 +278,11 @@ class AuthentificationManager : NSObject {
     func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
         refreshSignUpCookies(completion: {
             csrftoken in
-            let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+            let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
+            let stepicURL = NSURL(string: stepicURLString)!
             var headers : [String : String] = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
             
-            headers["Referer"] = "https://stepic.org/"
+            headers["Referer"] = "\(StepicApplicationsInfo.stepicURL)/"
             headers["X-CSRFToken"] = csrftoken
                         
             let params : [String : AnyObject] = 

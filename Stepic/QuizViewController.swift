@@ -463,6 +463,7 @@ class QuizViewController: UIViewController {
         sendButton.enabled = false
         doesPresentActivityIndicatorView = true
         if buttonStateSubmit {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
             if checkReplyReady() {
                 submitReply(completion: {
                     [weak self] in
@@ -486,6 +487,7 @@ class QuizViewController: UIViewController {
                 sendButton.enabled = true
             }
         } else  {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
             createNewAttempt(completion: {
                 [weak self] in
                 UIThread.performUI{

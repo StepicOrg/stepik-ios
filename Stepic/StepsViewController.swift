@@ -22,12 +22,16 @@ class StepsViewController: RGPageViewController {
     //By default presentation context is unit
     var context : StepsControllerPresentationContext = .Unit
     
-    
     lazy var activityView : UIView = self.initActivityView()
     
     lazy var warningView : UIView = self.initWarningView()
     
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
+    
+    weak var sectionNavigationDelegate : SectionNavigationDelegate?
+    
+    var shouldNavigateToPrev: Bool = false
+    var shouldNavigateToNext: Bool = false
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
@@ -91,21 +95,51 @@ class StepsViewController: RGPageViewController {
         refreshSteps()
     }
     
-    private var tabViewsForStepId = [Int: UIView]()
+    static let stepUpdatedNotification = "StepUpdatedNotification"
     
+    private var tabViewsForStepId = [Int: UIView]()
+    //TODO: Обновлять шаги только тогда, когда это нужно
+    //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     private func refreshSteps() {
+        var prevStepsIds = [Int]()
         if numberOfPagesForViewController(self) == 0 {
             self.view.userInteractionEnabled = false
             self.doesPresentWarningView = false
             self.doesPresentActivityIndicatorView = true
+        } else {
+            if let l = lesson {
+                prevStepsIds = l.stepsArray
+            }
         }
+        
         lesson?.loadSteps(completion: {
-            print("did reload data")
-            UIThread.performUI{
-                self.view.userInteractionEnabled = true
+            
+            let newStepsSet = Set(self.lesson!.stepsArray)
+            let prevStepsSet = Set(prevStepsIds)
+            
+            var reloadBlock : (Void->Void) = {
                 self.reloadData()
+            }
+            
+            if newStepsSet.exclusiveOr(prevStepsSet).count == 0 {
+                //need to reload one by one
+                reloadBlock = {
+                    NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
+                    print("did send step updated notification")
+                }
+            } 
+            
+            UIThread.performUI {
+                self.view.userInteractionEnabled = true
+                reloadBlock()
                 self.doesPresentWarningView = false
                 self.doesPresentActivityIndicatorView = false
+                
+                if let id = self.startStepId {
+                    if !self.didSelectTab {
+                        self.selectTabAtIndex(id, updatePage: true)
+                    }
+                }
             }
             }, error: {
                 errorText in
@@ -120,13 +154,18 @@ class StepsViewController: RGPageViewController {
             }, onlyLesson: context == .Lesson)
     }
     
+    var didSelectTab = true
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson, id = startStepId {
             if l.steps.count != 0 {
                 print("id -> \(id)")
+                didSelectTab = true
                 self.selectTabAtIndex(id, updatePage: true)
+            } else {
+                didSelectTab = false
             }
         }
     }
@@ -218,7 +257,22 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.parentNavigationController = self.navigationController
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
+                
+                if index == 0 && shouldNavigateToPrev {
+                    stepController.prevLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayPrev()
+                    } 
+                }
+                
+                if index == lesson!.steps.count - 1 && shouldNavigateToNext {
+                    stepController.nextLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayNext()
+                    } 
+                }
             }
+            
             return stepController
         } else {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
@@ -229,7 +283,22 @@ extension StepsViewController : RGPageViewControllerDataSource {
             stepController.nItem = self.navigationItem
             if context == .Unit {
                 stepController.assignment = lesson!.unit?.assignments[index]
+                
+                if index == 0 && shouldNavigateToPrev {
+                    stepController.prevLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayPrev()
+                    } 
+                }
+                
+                if index == lesson!.steps.count - 1 && shouldNavigateToNext {
+                    stepController.nextLessonHandler = {
+                        [weak self] in
+                        self?.sectionNavigationDelegate?.displayNext()
+                    } 
+                }
             }
+            
             return stepController
         }
     } 

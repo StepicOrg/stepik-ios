@@ -10,9 +10,11 @@ import UIKit
 import MediaPlayer
 import Fabric
 import Crashlytics
-import Google 
+import Firebase 
+import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
+import MagicalRecord
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         
+        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreAtURL(CoreDataHelper.instance.storeURL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
@@ -31,15 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
         
-        // Configure tracker from GoogleService-Info.plist.
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        FIRApp.configure()
+        FIRAppIndexing.sharedInstance().registerApp(1064581926)
         
-        // Optional: configure GAI options.
-        let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai.logger.logLevel = GAILogLevel.None  // remove before app release
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -55,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
         }
+        
         if StepicAPI.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
@@ -62,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
         
-        let deepLink = NSURL(string: "https://stepic.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+//        let deepLink = NSURL(string: "https://stepik.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
 //        handleOpenedFromDeepLink(deepLink)
 //        delay(60, closure: {
@@ -86,18 +85,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
             controller in
-            if let vc = controller, s = self { 
-//                let v = 
-                if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
-                    delay(1, closure: {
-                        rootController.navigationController?.pushViewController(vc, animated: true)
-                    })
-                } else {
-                    let navigation = UINavigationController(rootViewController: vc) 
-                    navigation.title = NSLocalizedString("Course", comment: "")
-                    self?.setRootController(navigation)
+            if let vc = controller { 
+                if let s = self {
+                    if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
+                        delay(1, closure: {
+                            rootController.navigationController?.pushViewController(vc, animated: true)
+                        })
+                    } else {
+                        let navigation = UINavigationController(rootViewController: vc) 
+                        navigation.title = NSLocalizedString("Course", comment: "")
+                        self?.setRootController(navigation)
+                    }
                 }
-            } 
+            } else {
+                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: {
+                    action in
+                    UIApplication.sharedApplication().openURL(url)
+                }))
+                
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+                
+                UIThread.performUI {
+                    self?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
         })
     }
     
@@ -125,6 +137,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 error in
                 print("error while checking for updates: \(error.code) \(error.localizedDescription)")
         })
+    }
+    
+    
+    func didReceiveRegistrationToken(notification: NSNotification) {
+        if let token = FIRInstanceID.instanceID().token() {
+            if StepicAPI.shared.isAuthorized { 
+                NotificationRegistrator.sharedInstance.registerDevice(token)
+            }
+        }
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
@@ -178,6 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    @available(iOS 8.0, *)
     func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(userActivity.webpageURL?.absoluteString)")
@@ -185,6 +207,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 handleOpenedFromDeepLink(url)
             }
         }
+        return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        handleOpenedFromDeepLink(url)
         return true
     }
     
@@ -240,7 +267,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NotificationRegistrator.sharedInstance.registrationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kFIRInstanceIDTokenRefreshNotification, object: nil)
     }
 
 }

@@ -38,7 +38,6 @@ class UnitsViewController: UIViewController {
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-
         refreshControl.beginRefreshing()
         refreshUnits()
 
@@ -99,30 +98,79 @@ class UnitsViewController: UIViewController {
     
     // MARK: - Navigation
 
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showSteps" {
+        if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destinationViewController as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
-            //TODO : pass unit here!
-            dvc.lesson = section.units[sender as! Int].lesson
+            if let stepsPresentation = sender as? StepsPresentation {
+                
+                var index = stepsPresentation.index
+                if stepsPresentation.isLastStep {
+                    if let l = section.units[index].lesson {
+                        dvc.startStepId = l.stepsArray.count - 1
+                    }
+                }
+                dvc.lesson = section.units[index].lesson
+                dvc.sectionNavigationDelegate = self
+                currentlyDisplayingUnitIndex = index
+                dvc.shouldNavigateToPrev = index != 0
+                dvc.shouldNavigateToNext = index < section.units.count - 1
+            }
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     
+    var currentlyDisplayingUnitIndex: Int?
+    
+    func selectUnitAtIndex(index: Int, isLastStep: Bool = false, replace: Bool = false) {
+        performSegueWithIdentifier(replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
+    }
+    
+    func clearAllSelection() {
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+            for indexPath in selectedRows {
+                tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            }
+        }
+    }
 
+}
+
+class StepsPresentation {
+    var index: Int
+    var isLastStep: Bool
+    init(index: Int, isLastStep: Bool) {
+        self.index = index
+        self.isLastStep = isLastStep
+    }
+}
+
+extension UnitsViewController : SectionNavigationDelegate {
+    func displayNext() {        
+        if let uIndex = currentlyDisplayingUnitIndex {
+            if uIndex + 1 < section.units.count {
+                selectUnitAtIndex(uIndex + 1, replace: true)
+            }
+        }
+    }
+    
+    func displayPrev() {
+        if let uIndex = currentlyDisplayingUnitIndex {
+            if uIndex - 1 >= 0 {
+                selectUnitAtIndex(uIndex - 1, isLastStep: true, replace: true)
+            }
+        }        
+    }
 }
 
 extension UnitsViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if !didRefresh {
-            
-//        } else {
-            performSegueWithIdentifier("showSteps", sender: indexPath.row)        
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        selectUnitAtIndex(indexPath.row)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -197,6 +245,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
+            
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
@@ -215,6 +265,8 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloading :
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
             downloadButton.pendingView?.startSpin()
 
@@ -227,7 +279,10 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             break
             
         case PKDownloadButtonState.Downloaded :
-            
+        
+        
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {

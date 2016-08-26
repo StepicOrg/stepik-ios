@@ -89,6 +89,8 @@ class StepicVideoPlayerViewController: UIViewController {
             let action = UIAlertAction(title: rate.description, style: .Default, handler: {
                 [unowned self]
                 action in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.rateChanged, parameters: 
+                    ["rate" : rate.description])
                 self.currentRate = rate
             })
             alertController.addAction(action)
@@ -139,6 +141,9 @@ class StepicVideoPlayerViewController: UIViewController {
             let action = UIAlertAction(title: url.quality, style: .Default, handler: { 
                 [unowned self]
                 action in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
+                    ["quality" : url.quality, 
+                        "device": DeviceInfo.deviceModelString])
                 self.currentQuality = url.quality
                 self.currentQualityURL = NSURL(string: url.url)!
             })

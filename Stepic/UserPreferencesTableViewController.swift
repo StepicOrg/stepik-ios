@@ -197,6 +197,7 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     func signOut() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
         StepicAPI.shared.token = nil
     }
     

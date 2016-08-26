@@ -81,7 +81,7 @@ TryAgain = "Попробовать снова";
 Correct = "Верно!";
 Wrong = "Неправильно. Пожалуйста, попробуйте еще раз.";
 CorrectFreeResponse = "Ваше решение сохранено.";
-SolveOnTheWebsite = "Решить на stepic.org";
+SolveOnTheWebsite = "Решить на сайте";
 ConnectionErrorText = "Не удалось подключиться к сети";
 PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";
 ConnectionErrorPullToRefresh = "Включите соединение и потяните вниз";
@@ -125,4 +125,7 @@ Abuse = "Пожаловаться";
 Unabuse = "Не жаловаться";
 Syllabus = "Модули";
 Course = "Курс";
-
+NextLesson = "Следующий урок";
+PrevLesson = "Предыдущий урок";
+CouldNotOpenLink = "Could not open link";
+OpenInBrowserQuestion = "Open in browser?";

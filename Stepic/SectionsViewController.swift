@@ -24,6 +24,13 @@ class SectionsViewController: UIViewController {
         self.navigationItem.title = course.title
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
+        
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(SectionsViewController.shareButtonPressed(_:)))
+        let infoBtn = UIButton(type: UIButtonType.InfoDark)
+        infoBtn.addTarget(self, action: #selector(SectionsViewController.infoButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
+        self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
         UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
@@ -38,6 +45,23 @@ class SectionsViewController: UIViewController {
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         // Do any additional setup after loading the view.
+    }
+    
+    func shareButtonPressed(button: UIBarButtonItem) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
+        if let slug = course?.slug {
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/")
+                shareVC.popoverPresentationController?.barButtonItem = button
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(shareVC, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    func infoButtonPressed(button: UIButton) {
+        self.performSegueWithIdentifier("showCourse", sender: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -188,6 +212,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         switch (state) {
         case PKDownloadButtonState.StartDownload : 
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
+
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
                 print("Not reachable to download")
@@ -210,6 +236,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
             
         case PKDownloadButtonState.Downloading :
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
+
             downloadButton.state = PKDownloadButtonState.Pending
 
             course.sections[downloadButton.tag].cancelVideoStore(completion: {
@@ -223,7 +251,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.Downloaded :
 
             askForRemove(okHandler: {
-                
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
+
                 downloadButton.state = PKDownloadButtonState.Pending
                 
                 self.course.sections[downloadButton.tag].removeFromStore(completion: {

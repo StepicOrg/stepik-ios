@@ -39,7 +39,6 @@ class Step: NSManagedObject, JSONInitializable {
         block.update(json: json["block"])
     }
     
-    
-    
     var hasReview : Bool = false
+
 }

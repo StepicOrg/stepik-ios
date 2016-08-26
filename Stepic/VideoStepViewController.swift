@@ -21,17 +21,45 @@ class VideoStepViewController: UIViewController {
     var assignment : Assignment?
     var parentNavigationController : UINavigationController?
     
+    var nextLessonHandler: (Void->Void)?
+    var prevLessonHandler: (Void->Void)?
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var prevLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButton: UIButton!
+    @IBOutlet weak var nextLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var prevLessonButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
+    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
+    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
+    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
+    
     var imageTapHelper : ImageTapHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
+    
+                
+        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
+            [weak self]
+            recognizer in
+            self?.playVideo()
+        })
+        
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+        
+        initialize()
+    }
+    
+    func initialize() {
         thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
         if let discussionCount = step.discussionsCount {
@@ -44,13 +72,31 @@ class VideoStepViewController: UIViewController {
             discussionCountViewHeight.constant = 0
         }
         
-        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
-            [weak self]
-            recognizer in
-            self?.playVideo()
-        })
+        if nextLessonHandler == nil {
+            nextLessonButton.hidden = true
+        } else {
+            nextLessonButton.setStepicWhiteStyle()
+        }
+        
+        if prevLessonHandler == nil {
+            prevLessonButton.hidden = true
+        } else {
+            prevLessonButton.setStepicWhiteStyle()
+        }
+        
+        if nextLessonHandler == nil && prevLessonHandler == nil {
+            nextLessonButtonHeight.constant = 0
+            prevLessonButtonHeight.constant = 0
+            discussionToNextDistance.constant = 0
+            discussionToPrevDistance.constant = 0
+            prevToBottomDistance.constant = 0
+            nextToBottomDistance.constant = 0
+        }
     }
     
+    func updatedStepNotification(notification: NSNotification) {
+        initialize()
+    }
     
     private func playVideo() {
         if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
@@ -111,6 +157,14 @@ class VideoStepViewController: UIViewController {
         }
     }
 
+    @IBAction func prevLessonPressed(sender: UIButton) {
+        prevLessonHandler?()
+    }
+    
+    @IBAction func nextLessonPressed(sender: UIButton) {
+        nextLessonHandler?()
+    }
+    
     /*
     // MARK: - Navigation
 

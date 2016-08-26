@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08DE94251B8C58AC00D278AB"
+               BlueprintIdentifier = "085D5CD81D007F2100092060"
                BuildableName = "StepicTests.xctest"
                BlueprintName = "StepicTests"
                ReferencedContainer = "container:Stepic.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "08DE94251B8C58AC00D278AB"
+               BlueprintIdentifier = "085D5CD81D007F2100092060"
                BuildableName = "StepicTests.xctest"
                BlueprintName = "StepicTests"
                ReferencedContainer = "container:Stepic.xcodeproj">
@@ -87,6 +87,12 @@
             ReferencedContainer = "container:Stepic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsDebugEnabled"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

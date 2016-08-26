@@ -39,6 +39,7 @@ class Course: NSManagedObject, JSONInitializable {
         audience = json["target_audience"].stringValue
         certificate = json["certificate"].stringValue
         requirements = json["requirements"].stringValue
+        slug = json["slug"].string
         
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
@@ -71,14 +72,17 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void)) {
+    func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void), withProgresses: Bool = true) {
         AuthentificationManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
-                    secs in
-                    self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
-                    CoreDataHelper.instance.save()
-                    self.loadProgressesForSections(success, error: errorHandler)
-                    //success()  
+                secs in
+                self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
+                CoreDataHelper.instance.save()
+                if withProgresses { 
+                    self.loadProgressesForSections(success, error: errorHandler) 
+                } else {
+                    success()
+                }
                 }, failure : {
                         error in
                         print("error while loading section")

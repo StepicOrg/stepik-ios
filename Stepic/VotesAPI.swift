@@ -16,7 +16,7 @@ class VotesAPI {
         let params : [String: AnyObject]? = [
             "vote" : vote.json
         ]
-        Alamofire.request(.PUT, "https://stepic.org/api/votes/\(vote.id)", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(
+        Alamofire.request(.PUT, "\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in
                                 

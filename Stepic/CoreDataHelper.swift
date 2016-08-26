@@ -15,13 +15,15 @@ class CoreDataHelper: NSObject {
     let coordinator : NSPersistentStoreCoordinator
     let model : NSManagedObjectModel
     let context : NSManagedObjectContext
+    var storeURL : NSURL
+    
     
     private override init() {
         let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
         model = NSManagedObjectModel(contentsOfURL: modelURL)!
         let fileManager = NSFileManager.defaultManager()
         let docsURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last! as NSURL
-        let storeURL = docsURL.URLByAppendingPathComponent("base.sqlite")
+        storeURL = docsURL.URLByAppendingPathComponent("base.sqlite")
         
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         

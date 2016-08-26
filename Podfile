@@ -17,13 +17,18 @@ def all_pods
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
     pod 'AFImageHelper'
-    pod 'Google/Analytics'
-    pod 'Google/CloudMessaging'
+    
+    pod 'Firebase/Messaging'
+    pod 'Firebase/AppIndexing'
+    pod 'Firebase/Core'
+    
+    pod "MagicalRecord"
     pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '1.0.6'
     pod 'CRToast'
+    pod 'TUSafariActivity', '~> 1.0'
 end
 
 target 'Stepic' do

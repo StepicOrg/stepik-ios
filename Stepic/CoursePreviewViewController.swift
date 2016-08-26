@@ -78,6 +78,9 @@ class CoursePreviewViewController: UIViewController {
         videoWebView.scrollView.scrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
         
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem
+        
         if let c = course {
             sectionTitles = []
             for section in c.sections {
@@ -93,6 +96,21 @@ class CoursePreviewViewController: UIViewController {
                 loadVimeoURL(NSURL(string: c.introURL)!)
             }
             updateSections()
+        }
+    }
+    
+    func shareButtonPressed(button: UIBarButtonItem) {
+    
+        AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
+        
+        if let slug = course?.slug {
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/")
+                shareVC.popoverPresentationController?.barButtonItem = button
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(shareVC, animated: true, completion: nil)
+                }
+            }
         }
     }
     
@@ -118,7 +136,7 @@ class CoursePreviewViewController: UIViewController {
         
             isLoadingSections = true
             if StepicAPI.shared.isAuthorized {
-                c.loadAllSections(success: successBlock, error: errorBlock)
+                c.loadAllSections(success: successBlock, error: errorBlock, withProgresses: false)
             } else {
                 c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
             }
@@ -279,9 +297,7 @@ class CoursePreviewViewController: UIViewController {
         
         if !StepicAPI.shared.isAuthorized {
             let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
-            self.presentViewController(vc, animated: true, completion: {
-                self.dismissViewControllerAnimated(false, completion: nil)
-            })
+            self.presentViewController(vc, animated: true, completion: nil)
             return
         }
         
@@ -404,7 +420,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("GeneralInfoTableViewCell") as! GeneralInfoTableViewCell
         cell.initWithCourse(course!)
         
-        cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType == .Overview ? 0 : 1
+        cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType.rawValue
         var cFrame : CGRect
         if let c = course {
             cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: GeneralInfoTableViewCell.heightForCellWith(c))
