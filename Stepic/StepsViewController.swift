@@ -112,32 +112,38 @@ class StepsViewController: RGPageViewController {
             }
         }
         
+        
         lesson?.loadSteps(completion: {
+            [weak self] in
+            if let s = self {
+                let newStepsSet = Set(s.lesson!.stepsArray)
+                let prevStepsSet = Set(prevStepsIds)
             
-            let newStepsSet = Set(self.lesson!.stepsArray)
-            let prevStepsSet = Set(prevStepsIds)
-            
-            var reloadBlock : (Void->Void) = {
-                self.reloadData()
-            }
-            
-            if newStepsSet.exclusiveOr(prevStepsSet).count == 0 {
-                //need to reload one by one
-                reloadBlock = {
-                    NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
-                    print("did send step updated notification")
+                var reloadBlock : (Void->Void) = {
+                    [weak self] in 
+                    self?.reloadData()
                 }
-            } 
             
-            UIThread.performUI {
-                self.view.userInteractionEnabled = true
-                reloadBlock()
-                self.doesPresentWarningView = false
-                self.doesPresentActivityIndicatorView = false
+                if newStepsSet.exclusiveOr(prevStepsSet).count == 0 {
+                //need to reload one by one
+                    reloadBlock = {
+                        NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
+                        print("did send step updated notification")
+                    }
+                } 
+            
+                UIThread.performUI {
+                    s.view.userInteractionEnabled = true
+                    reloadBlock()
+                    s.doesPresentWarningView = false
+                    s.doesPresentActivityIndicatorView = false
                 
-                if let id = self.startStepId {
-                    if !self.didSelectTab {
-                        self.selectTabAtIndex(id, updatePage: true)
+                    if let id = s.startStepId {
+                        if id < s.lesson!.steps.count {
+                            if !s.didSelectTab {
+                                s.selectTabAtIndex(id, updatePage: true)
+                            }
+                        }
                     }
                 }
             }
@@ -145,10 +151,13 @@ class StepsViewController: RGPageViewController {
                 errorText in
                 print("error while loading steps in stepsviewcontroller")
                 UIThread.performUI{
-                    self.view.userInteractionEnabled = true
-                    self.doesPresentActivityIndicatorView = false
-                    if self.numberOfPagesForViewController(self) == 0 {
-                        self.doesPresentWarningView = true
+                    [weak self] in
+                    if let s = self {
+                        s.view.userInteractionEnabled = true
+                        s.doesPresentActivityIndicatorView = false
+                        if s.numberOfPagesForViewController(s) == 0 {
+                            s.doesPresentWarningView = true
+                        }
                     }
                 }
             }, onlyLesson: context == .Lesson)
@@ -160,7 +169,7 @@ class StepsViewController: RGPageViewController {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson, id = startStepId {
-            if l.steps.count != 0 {
+            if l.steps.count != 0  && id < l.steps.count {
                 print("id -> \(id)")
                 didSelectTab = true
                 self.selectTabAtIndex(id, updatePage: true)
@@ -237,6 +246,12 @@ extension StepsViewController : RGPageViewControllerDataSource {
     }
     
     func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
+        
+        //Just a try to fix a strange bug
+        if index >= lesson!.steps.count {
+            return UIView()
+        }
+
         if let step = lesson?.steps[index] {
 //            if tabViewsForStepId[step.id] == nil {
                 tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
@@ -249,6 +264,12 @@ extension StepsViewController : RGPageViewControllerDataSource {
     }
     
     func viewControllerForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIViewController? {
+        
+        //Just a try to fix a strange bug
+        if index >= lesson!.steps.count {
+            return nil
+        }
+        
         if lesson!.steps[index].block.name == "video" {
             let stepController = storyboard?.instantiateViewControllerWithIdentifier("VideoStepViewController") as! VideoStepViewController
             stepController.video = lesson!.steps[index].block.video!
