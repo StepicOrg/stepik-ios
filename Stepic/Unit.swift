@@ -38,7 +38,7 @@ class Unit: NSManagedObject, JSONInitializable {
     }
     
     func loadAssignments(completion: (Void->Void), errorHandler: (Void->Void)) {
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        AuthManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .Update, success: {
                 newAssignments in 
                 self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)

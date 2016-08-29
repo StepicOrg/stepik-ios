@@ -104,7 +104,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     override func refreshCourses() {
         isRefreshing = true
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
+        AuthManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: 1, success: { 
                 (searchResults, meta) -> Void in
@@ -145,7 +145,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
+        AuthManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
                 (searchResults, meta) -> Void in

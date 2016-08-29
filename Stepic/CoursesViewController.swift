@@ -95,7 +95,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func refreshCourses() {
         isRefreshing = true
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
+        AuthManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: 1, success: { 
                 (ids, meta) -> Void in
@@ -205,7 +205,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
+        AuthManager.sharedManager.autoRefreshToken(success: { 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in

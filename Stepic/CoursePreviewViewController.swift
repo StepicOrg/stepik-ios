@@ -306,7 +306,7 @@ class CoursePreviewViewController: UIViewController {
             
             if sender.isEnabledToJoin {
                 SVProgressHUD.show()
-                AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
+                AuthManager.sharedManager.joinCourseWithId(c.id, success : {
                     SVProgressHUD.showSuccessWithStatus("")
                     sender.setDisabledJoined()
                     self.course?.enrolled = true
@@ -320,7 +320,7 @@ class CoursePreviewViewController: UIViewController {
             } else {
                 askForUnenroll(unenroll: {
                     SVProgressHUD.show()
-                    AuthentificationManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
+                    AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
                         SVProgressHUD.showSuccessWithStatus("")
                         sender.setEnabledJoined()
                         self.course?.enrolled = false

@@ -58,7 +58,7 @@ class Course: NSManagedObject, JSONInitializable {
     
         
     func loadAllInstructors(success success: (Void -> Void)) {
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        AuthManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
                 users in
 //                print("instructors count inside Course class -> \(users.count)")
@@ -73,7 +73,7 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void), withProgresses: Bool = true) {
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        AuthManager.sharedManager.autoRefreshToken(success: {
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
                 secs in
                 self.sections = Sorter.sort(secs, byIds: self.sectionsArray)

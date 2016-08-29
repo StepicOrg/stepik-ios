@@ -274,7 +274,7 @@
 		08D120751C937B2200A54ABC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
 		08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
 		08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
-		08D120791C937B2200A54ABC /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
+		08D120791C937B2200A54ABC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
 		08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
 		08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
@@ -507,7 +507,7 @@
 		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
-		08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */; };
+		08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
 		8111F35DA0F65D8F47573C1A /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C7B232D981BE39AF7FF5BD /* Pods_SberbankUniversity.framework */; };
 		9AC915506C96E942A9B07AF6 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5B6908158F1FBBA506EC57 /* Pods_Stepic.framework */; };
 		D0B5307A3E611AB4686AEFE5 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF3B8E6F32A209782930629 /* Pods_StepicTests.framework */; };
@@ -803,7 +803,7 @@
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
-		08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthentificationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		833BC1EF5A6B83FEE3BD533D /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		97C7B232D981BE39AF7FF5BD /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BF3B8E6F32A209782930629 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1168,7 +1168,7 @@
 			children = (
 				0869530E1D747DC0003857A2 /* RequestChain.swift */,
 				086953111D748303003857A2 /* ApiRequest.swift */,
-				08FCEB631B9ED2AC00FC4F8B /* AuthentificationManager.swift */,
+				08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */,
 				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
 				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
 				08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */,
@@ -2117,7 +2117,7 @@
 				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
 				08CB6B491C98777600E8BA50 /* SbSocialNetworks.swift in Sources */,
-				08D120791C937B2200A54ABC /* AuthentificationManager.swift in Sources */,
+				08D120791C937B2200A54ABC /* AuthManager.swift in Sources */,
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
@@ -2335,7 +2335,7 @@
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
-				08FCEB641B9ED2AC00FC4F8B /* AuthentificationManager.swift in Sources */,
+				08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,

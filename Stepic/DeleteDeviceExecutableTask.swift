@@ -81,7 +81,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                 }, error: {
                     error in
                     print("error \(error) while removing device, trying to refresh token and retry")
-                    AuthentificationManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
+                    AuthManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
                         {
                             token in
                             print("successfully refreshed token")

@@ -1,5 +1,5 @@
 //
-//  AuthentificationManager.swift
+//  AuthManager.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 08.09.15.
@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class AuthentificationManager : NSObject {
-    static var sharedManager = AuthentificationManager()
+class AuthManager : NSObject {
+    static var sharedManager = AuthManager()
     
     private override init() {}
     

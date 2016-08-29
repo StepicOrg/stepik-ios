@@ -165,7 +165,7 @@ extension DownloadsViewController : UITableViewDelegate {
                 } else {
                     showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
                         UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
-                        AuthentificationManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
+                        AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
                             UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
                             self.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                             }, error: { 

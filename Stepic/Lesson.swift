@@ -57,7 +57,7 @@ class Lesson: NSManagedObject, JSONInitializable {
                 errorHandler?("Error while downloading units")
         })}
         if refresh {
-            AuthentificationManager.sharedManager.autoRefreshToken(success: {
+            AuthManager.sharedManager.autoRefreshToken(success: {
                 getStepsBlock()
                 }, failure: {
                     errorHandler?("failed to refresh token")

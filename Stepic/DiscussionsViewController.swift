@@ -265,7 +265,7 @@ class DiscussionsViewController: UIViewController {
         resetData(false)
         isReloading = true
         
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        AuthManager.sharedManager.autoRefreshToken(success: {
             [weak self] in
             if let discussionProxyId = self?.discussionProxyId {
                 ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 

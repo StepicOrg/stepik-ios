@@ -73,8 +73,8 @@ class RegistrationViewController: UIViewController {
         let password = passwordTextField.text ?? ""
         
         SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
-        AuthentificationManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
-            AuthentificationManager.sharedManager.logInWithUsername(email, password: password, 
+        AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
+            AuthManager.sharedManager.logInWithUsername(email, password: password, 
                 success: {
                     t in
                     AuthInfo.shared.token = t
