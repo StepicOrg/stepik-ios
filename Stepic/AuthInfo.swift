@@ -74,12 +74,12 @@ class AuthInfo: NSObject {
         return user != nil
     }
     
-    var needsToRefreshToken: Bool? {
+    var needsToRefreshToken: Bool {
         //TODO: Fix this
         if let token = token {
             return NSDate().compare(token.expireDate) == NSComparisonResult.OrderedDescending
         } else {
-            return nil
+            return false
         }
     }
     

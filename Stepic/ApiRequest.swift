@@ -15,13 +15,25 @@ func performAPIRequest(request: Request?, allSuccess: (Void->Void), oneFailed: (
         
         if !AuthInfo.shared.hasUser {
             //TODO: Add request to stepics/1
+            let stepicsRequest = ApiDataDownloader.stepics.retrieveCurrentUser(success: 
+                {
+                    user in
+                    AuthInfo.shared.user = user
+                }, error: {
+                    errorMsg in
+                }
+            )
+            requests.append(stepicsRequest)
         }
         
         if AuthInfo.shared.needsToRefreshToken {
+//            if let tokenRefreshRequest = AuthManager.sharedManager.refreshTokenWith(<#T##refresh_token: String##String#>, success: <#T##(token: StepicToken) -> Void#>, failure: <#T##(error: ErrorType) -> Void#>) {
+                
+//            }
            //TODO: Add request to refresh token 
         }
         
-        requests.addItem(request)
+        requests.append(request)
         
     }
 }

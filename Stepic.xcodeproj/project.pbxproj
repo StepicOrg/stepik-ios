@@ -215,6 +215,10 @@
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
 		08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
+		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
+		08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
+		08AB82381D74C44100FDEADE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
+		08AB82391D74C44100FDEADE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
 		08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC21381CDD34C300FBB9CD /* Tasks.plist */; };
 		08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC21381CDD34C300FBB9CD /* Tasks.plist */; };
 		08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08AC213B1CDD35DF00FBB9CD /* Users.plist */; };
@@ -687,6 +691,8 @@
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegistrationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
+		08AB82371D74C44100FDEADE /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08AC21381CDD34C300FBB9CD /* Tasks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tasks.plist; sourceTree = "<group>"; };
 		08AC213B1CDD35DF00FBB9CD /* Users.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Users.plist; sourceTree = "<group>"; };
 		08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentRecoveryManager.swift; sourceTree = "<group>"; };
@@ -908,6 +914,7 @@
 			children = (
 				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
 				0885F8571BAAD43300F2A188 /* AuthInfo.swift */,
+				08AB82371D74C44100FDEADE /* Session.swift */,
 			);
 			name = Stepic;
 			sourceTree = "<group>";
@@ -1178,6 +1185,7 @@
 				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				0800B8241D0704B6006C987E /* ApiUtil.swift */,
 				086A8B271D21796800F45C45 /* VotesAPI.swift */,
+				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -2213,6 +2221,7 @@
 				08D120B01C937B2200A54ABC /* StringQuizViewController.swift in Sources */,
 				08D120B11C937B2200A54ABC /* FreeAnswerReply.swift in Sources */,
 				08D120B21C937B2200A54ABC /* QuizViewController.swift in Sources */,
+				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
 				08D120B51C937B2200A54ABC /* Parser.swift in Sources */,
@@ -2280,6 +2289,7 @@
 				08D120E51C937B2200A54ABC /* DownloadsViewController.swift in Sources */,
 				08D120E61C937B2200A54ABC /* Step.swift in Sources */,
 				08D120E71C937B2200A54ABC /* Submission.swift in Sources */,
+				08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08D120E81C937B2200A54ABC /* AuthInfo.swift in Sources */,
 				08D120E91C937B2200A54ABC /* VideoDownloadDelegate.swift in Sources */,
 				08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */,
@@ -2460,6 +2470,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
+				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
@@ -2489,6 +2500,7 @@
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
+				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,

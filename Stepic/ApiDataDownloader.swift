@@ -503,6 +503,7 @@ class ApiDataDownloader: NSObject {
     static let discussionProxies : DiscussionProxiesAPI = DiscussionProxiesAPI()
     static let comments : CommentsAPI = CommentsAPI()
     static let votes: VotesAPI = VotesAPI()
+    static let stepics: StepicsAPI = StepicsAPI()
 }
 
 enum RefreshMode {
