@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             checkForUpdates()
         }
         
-        if StepicAPI.shared.isAuthorized {
+        if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func didReceiveRegistrationToken(notification: NSNotification) {
         if let token = FIRInstanceID.instanceID().token() {
-            if StepicAPI.shared.isAuthorized { 
+            if AuthInfo.shared.isAuthorized { 
                 NotificationRegistrator.sharedInstance.registerDevice(token)
             }
         }
@@ -253,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window!.rootViewController = rootController
             }
         } else {
-            if StepicAPI.shared.isAuthorized {
+            if AuthInfo.shared.isAuthorized {
                 setTabRoot()
             }
         }

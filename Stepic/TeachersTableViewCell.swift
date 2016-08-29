@@ -34,7 +34,7 @@ class TeachersTableViewCell: UITableViewCell {
     func initWithCourse(course: Course) {
         //TODO: JUST REMOVE THIS AT SOME TIME
 //        instructors = course.instructors
-        if StepicAPI.shared.isAuthorized {
+        if AuthInfo.shared.isAuthorized {
         course.loadAllInstructors(success: {
             self.instructors = course.instructors
             UIThread.performUI({self.collectionView.reloadData()})

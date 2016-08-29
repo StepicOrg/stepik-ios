@@ -49,7 +49,7 @@ class UserPreferencesTableViewController: UITableViewController {
         
         avatarImageView.setRoundedBounds(width: 0)
         
-        if let apiUser = StepicAPI.shared.user {
+        if let apiUser = AuthInfo.shared.user {
             initWithUser(apiUser)
         } else {
             avatarImageView.image = Constants.placeholderImage
@@ -61,7 +61,7 @@ class UserPreferencesTableViewController: UITableViewController {
         
         ApiDataDownloader.sharedDownloader.getCurrentUser({
             user in
-            StepicAPI.shared.user = user
+            AuthInfo.shared.user = user
             UIThread.performUI({self.initWithUser(user)})
             }
             , failure: {
@@ -146,7 +146,7 @@ class UserPreferencesTableViewController: UITableViewController {
     
     
     @IBAction func printTokenButtonPressed(sender: UIButton) {
-        print(StepicAPI.shared.token?.accessToken)
+        print(AuthInfo.shared.token?.accessToken)
     }
     
     @IBAction func printDocumentsPathButtonPressed(sender: UIButton) {
@@ -198,7 +198,7 @@ class UserPreferencesTableViewController: UITableViewController {
     
     func signOut() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
-        StepicAPI.shared.token = nil
+        AuthInfo.shared.token = nil
     }
     
     @IBAction func signOutButtonPressed(sender: UIButton) {

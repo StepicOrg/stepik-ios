@@ -77,11 +77,11 @@ class RegistrationViewController: UIViewController {
             AuthentificationManager.sharedManager.logInWithUsername(email, password: password, 
                 success: {
                     t in
-                    StepicAPI.shared.token = t
+                    AuthInfo.shared.token = t
                     NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                     ApiDataDownloader.sharedDownloader.getCurrentUser({
                         user in
-                        StepicAPI.shared.user = user
+                        AuthInfo.shared.user = user
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                         UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                         AnalyticsHelper.sharedHelper.changeSignIn()

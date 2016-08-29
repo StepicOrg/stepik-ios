@@ -15,7 +15,7 @@ class AnalyticsHelper: NSObject {
     
     func changeSignIn() {
 //        let tracker = GAI.sharedInstance().defaultTracker
-//        if let id = StepicAPI.shared.userId {
+//        if let id = AuthInfo.shared.userId {
 //            tracker.set("&uid", value: "\(id)")
 //        } else {
 //            tracker.set("&uid", value: "")

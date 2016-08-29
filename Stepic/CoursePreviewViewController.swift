@@ -135,7 +135,7 @@ class CoursePreviewViewController: UIViewController {
             }
         
             isLoadingSections = true
-            if StepicAPI.shared.isAuthorized {
+            if AuthInfo.shared.isAuthorized {
                 c.loadAllSections(success: successBlock, error: errorBlock, withProgresses: false)
             } else {
                 c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
@@ -295,7 +295,7 @@ class CoursePreviewViewController: UIViewController {
             return
         }
         
-        if !StepicAPI.shared.isAuthorized {
+        if !AuthInfo.shared.isAuthorized {
             let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
             self.presentViewController(vc, animated: true, completion: nil)
             return

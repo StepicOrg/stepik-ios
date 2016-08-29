@@ -19,7 +19,7 @@ class ApiDataDownloader: NSObject {
     
     func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         let headers : [String : String] = [:] 
-        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
         var params : [String : NSObject] = [:]
         if let f = featured {
@@ -34,7 +34,7 @@ class ApiDataDownloader: NSObject {
             params["page"] = p
         }
 
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
@@ -59,12 +59,12 @@ class ApiDataDownloader: NSObject {
     func getCurrentUser(success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         
         let headers : [String : String] = [:] 
-        // = ["Authorization" : "\(StepicAPI.shared.token!.tokenType) \(StepicAPI.shared.token!.accessToken)"]
+        // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
         var params : [String : NSObject] = [:]
                
         AuthentificationManager.sharedManager.autoRefreshToken( success: {
-            params["access_token"] = StepicAPI.shared.token?.accessToken ?? ""
+            params["access_token"] = AuthInfo.shared.token?.accessToken ?? ""
 //            print(t.accessToken)
             self.getCurrentUserProfileApiCall(params, headers: headers, success: success, failure: failure)
             }, failure: {
@@ -137,7 +137,7 @@ class ApiDataDownloader: NSObject {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         
         let idString = constructIdsString(array: ids)
         if idString == "" {
@@ -204,7 +204,7 @@ class ApiDataDownloader: NSObject {
             return nil
         }
         
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         
         let idString = constructIdsString(array: ids)
         if idString == "" {
@@ -262,7 +262,7 @@ class ApiDataDownloader: NSObject {
     func didVisitStepWith(id id: Int, assignment: Int, success: Void->Void) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
 //        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
@@ -274,7 +274,7 @@ class ApiDataDownloader: NSObject {
             ]
         ]
         
-        //        params["access_token"] = StepicAPI.shared.token!.accessToken
+        //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/views", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
             (_, _, json, error) in
@@ -292,7 +292,7 @@ class ApiDataDownloader: NSObject {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         params["query"] = query
         
         if let p = page { 
@@ -328,7 +328,7 @@ class ApiDataDownloader: NSObject {
     func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) -> Request? {
         
         let headers : [String : String] = [
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
         let params : [String : NSObject] = [
@@ -362,9 +362,9 @@ class ApiDataDownloader: NSObject {
     func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) -> Request? {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         params["step"] = stepId
-        if let userid = StepicAPI.shared.userId {
+        if let userid = AuthInfo.shared.userId {
             params["user"] = userid
         } else {
             print("no user id!")
@@ -397,7 +397,7 @@ class ApiDataDownloader: NSObject {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         params[objectName] = objectId
         if let desc = isDescending {
             params["order"] = desc ? "desc" : "asc"
@@ -441,7 +441,7 @@ class ApiDataDownloader: NSObject {
     
     func createSubmissionFor(stepName stepName: String, attemptId: Int, reply: Reply, success: Submission->Void, error errorHandler: String->Void) -> Request? {
         let headers : [String : String] = [
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
         let params = [
@@ -477,7 +477,7 @@ class ApiDataDownloader: NSObject {
         let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
         
-        params["access_token"] = StepicAPI.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken
         
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
             _, response, json, error in

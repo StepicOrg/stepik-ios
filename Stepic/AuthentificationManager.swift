@@ -52,7 +52,7 @@ class AuthentificationManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            StepicAPI.shared.authorizationType = AuthorizationType.Code
+            AuthInfo.shared.authorizationType = AuthorizationType.Code
             success(token: token)
         })
         
@@ -96,7 +96,7 @@ class AuthentificationManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            StepicAPI.shared.authorizationType = AuthorizationType.Password
+            AuthInfo.shared.authorizationType = AuthorizationType.Password
             success(token: token)
         })
     }
@@ -104,7 +104,7 @@ class AuthentificationManager : NSObject {
     func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         var credentials = ""
-        switch StepicAPI.shared.authorizationType {
+        switch AuthInfo.shared.authorizationType {
         case .None:
             failure(error: ConnectionError.TokenRefreshError)
             return nil
@@ -153,15 +153,15 @@ class AuthentificationManager : NSObject {
     
     func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) -> Request? {
         
-        if StepicAPI.shared.didRefresh {
+        if AuthInfo.shared.didRefresh {
             success?()
             return nil
         }
         
-        return refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+        return refreshTokenWith(AuthInfo.shared.token!.refreshToken, success: {
             (t) in
             
-            StepicAPI.shared.token = t
+            AuthInfo.shared.token = t
             success?()
             }, failure : {
                 error in
@@ -173,7 +173,7 @@ class AuthentificationManager : NSObject {
     func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
         let params : [String : AnyObject] = [
@@ -182,7 +182,7 @@ class AuthentificationManager : NSObject {
             ]
         ]
         
-        //        params["access_token"] = StepicAPI.shared.token!.accessToken
+        //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
             return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {

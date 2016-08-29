@@ -1,5 +1,5 @@
 //
-//  StepicAPI.swift
+//  AuthInfo.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 17.09.15.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class StepicAPI: NSObject {
-    static var shared = StepicAPI()
+class AuthInfo: NSObject {
+    static var shared = AuthInfo()
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -19,6 +19,7 @@ class StepicAPI: NSObject {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
         defaults.setValue(newToken?.tokenType, forKey: "token_type")
+        defaults.setValue(newToken?.expireDate.timeIntervalSince1970, forKey: "expire_date")
         defaults.synchronize()
 
     }
@@ -38,7 +39,7 @@ class StepicAPI: NSObject {
                             course.enrolled = false
                         }
                         CoreDataHelper.instance.save()
-                        StepicAPI.shared.user = nil
+                        AuthInfo.shared.user = nil
                         //Show sign in controller
                         ControllerHelper.showLaunchController(true)
                         AnalyticsHelper.sharedHelper.changeSignIn()
@@ -57,7 +58,8 @@ class StepicAPI: NSObject {
             let refreshToken = defaults.valueForKey("refresh_token") as? String,
             let tokenType = defaults.valueForKey("token_type") as? String {
                 print("got accessToken \(accessToken)")
-                return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType)
+                let expireDate = NSDate(timeIntervalSince1970: defaults.valueForKey("expire_date") as? NSTimeInterval ?? 0.0)
+                return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil
             }
@@ -66,6 +68,19 @@ class StepicAPI: NSObject {
     
     var isAuthorized : Bool {
         return token != nil
+    }
+    
+    var hasUser : Bool {
+        return user != nil
+    }
+    
+    var needsToRefreshToken: Bool? {
+        //TODO: Fix this
+        if let token = token {
+            return NSDate().compare(token.expireDate) == NSComparisonResult.OrderedDescending
+        } else {
+            return nil
+        }
     }
     
     var authorizationType : AuthorizationType {

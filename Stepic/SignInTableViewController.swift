@@ -103,11 +103,11 @@ class SignInTableViewController: UITableViewController {
         AuthentificationManager.sharedManager.logInWithCode(code, 
             success: {
                 t in
-                StepicAPI.shared.token = t
+                AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
-                    StepicAPI.shared.user = user
+                    AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                     AnalyticsHelper.sharedHelper.changeSignIn()
@@ -132,11 +132,11 @@ class SignInTableViewController: UITableViewController {
         AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             success: {
                 t in
-                StepicAPI.shared.token = t
+                AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
-                    StepicAPI.shared.user = user
+                    AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
                     AnalyticsHelper.sharedHelper.changeSignIn()

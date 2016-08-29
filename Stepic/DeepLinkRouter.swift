@@ -102,7 +102,7 @@ class DeepLinkRouter {
     }
     
     private static func routeToSyllabusWithId(courseId: Int, completion: (UIViewController? -> Void)) {
-        if !StepicAPI.shared.isAuthorized {
+        if !AuthInfo.shared.isAuthorized {
                 do {
                     let courses = try Course.getCourses([courseId])
                     if courses.count == 0 {
