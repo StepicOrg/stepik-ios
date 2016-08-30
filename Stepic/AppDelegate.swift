@@ -61,16 +61,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
         
-        Session.refresh(completion: {
-            string in 
-            Session.refresh(completion: {
-                _ in
-                }, error: {
-                    _ in
-            })
-            }, error: {
-                _ in
-        })
+//        Session.refresh(completion: {_ in}, error: {_ in})
+        
+//        Session.refresh(completion: {
+//            string in 
+//            Session.refresh(completion: {
+//                _ in
+//                }, error: {
+//                    _ in
+//            })
+//            }, error: {
+//                _ in
+//        })
 //        let deepLink = NSURL(string: "https://stepik.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
         
 //        handleOpenedFromDeepLink(deepLink)

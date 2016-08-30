@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire 
 
+
 class Session {
     
     static func delete() {
@@ -18,11 +19,11 @@ class Session {
                 storage.deleteCookie(cookie)
             }
         }
-        cookies = []
+        cookieDict = [:]
     }
     
-    static func refresh(completion completion: ([NSHTTPCookie] -> Void), error errorHandler: (String -> Void)) -> Request? {
-        let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
+    static func refresh(completion completion: (Void -> Void), error errorHandler: (String -> Void)) -> Request? {
+        let stepicURLString = StepicApplicationsInfo.stepicURL
         let stepicURL = NSURL(string: stepicURLString)!
         delete()
         
@@ -37,27 +38,42 @@ class Session {
                 let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
                 NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
                 
-                Session.cookies = cookies
-                completion(cookies)
+                var cookieDict = [String: String]()
+                for cookie in cookies {
+                    cookieDict[cookie.name] = cookie.value
+                }
                 
-                errorHandler("No cookie for csrftoken")
+                print(cookieDict)
+                
+                Session.cookieDict = cookieDict
+                
+                if let csrftoken = cookieDict["csrftoken"],
+                    sessionId = cookieDict["sessionid"] {
+                    
+                    Session.cookieHeaders = [
+                        "Referer" : "\(StepicApplicationsInfo.stepicURL)/",
+                        "X-CSRFToken" : csrftoken,
+                        "Cookie" : "csrftoken=\(csrftoken); sessionid=\(sessionId)"
+                    ]
+                    print("did set additional headers")
+                    completion()
+                } else {
+                    errorHandler("bad cookies in response")
+                }
+                
+
+                
             } else {
                 errorHandler("No response")
             }
         }
     }
     
+    static var cookieHeaders = [String: String]()
+    
     static var hasCookies : Bool {
-        return cookies.count > 0
+        return cookieDict.count > 0
     }
-    
-    static var cookies = [NSHTTPCookie]()
-    
-    static var cookiesDict : [String: String] {
-        var res = [String: String]()
-        for cookie in cookies {
-            res[cookie.name] = cookie.value
-        }
-        return res
-    }
+        
+    static var cookieDict = [String: String]()
 }

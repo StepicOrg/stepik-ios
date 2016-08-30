@@ -146,7 +146,7 @@ class ApiDataDownloader: NSObject {
         }
         
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
+            (_, response, json, error) in
             
             if printOutput { 
                 print(json)
@@ -156,6 +156,15 @@ class ApiDataDownloader: NSObject {
                 failure(error: e)
                 return
             }
+            
+            if let r = response {
+                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
+                for cookie in cookies {
+                    print("\(cookie.name) : \(cookie.value)")
+                }
+                //                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!, mainDocumentURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
+            }
+            
             
             var newObjects : [T] = []
             
@@ -327,9 +336,16 @@ class ApiDataDownloader: NSObject {
     
     func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) -> Request? {
         
-        let headers : [String : String] = [
-            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
-        ]
+        var headers = [String : String]()
+        if let token = AuthInfo.shared.token {
+            headers = [
+                "Authorization" : "Bearer \(token.accessToken)"
+            ]
+        } else {
+            headers = Session.cookieHeaders
+        }
+        
+        print("headers in createNewAttempt \(headers)")
         
         let params : [String : NSObject] = [
             "attempt": [
@@ -338,13 +354,15 @@ class ApiDataDownloader: NSObject {
             ]
         
         return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/attempts", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            _, response, json, error in
+            request, response, json, error in
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
                 errorHandler(d)
                 return
             }
+            
+            print("request headers: \(request.allHTTPHeaderFields)")
             
             if response?.statusCode == 201 {
 //                print(json)
@@ -360,15 +378,22 @@ class ApiDataDownloader: NSObject {
     }
     
     func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) -> Request? {
-        let headers : [String : String] = [:]
-        var params : [String : NSObject] = [:]
-        params["access_token"] = AuthInfo.shared.token?.accessToken
+
+        var headers = [String : String]()
+        if let token = AuthInfo.shared.token {
+            headers = [
+                "Authorization" : "Bearer \(token.accessToken)"
+            ]
+        }
+        
+        var params : [String : NSObject] = [:]        
         params["step"] = stepId
         if let userid = AuthInfo.shared.userId {
             params["user"] = userid
         } else {
             print("no user id!")
         }
+        
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/attempts", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
             _, response, json, error in
             if let e = error {
@@ -394,10 +419,15 @@ class ApiDataDownloader: NSObject {
     
     private func getSubmissionsWithObjectID(stepName stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) -> Request? {
         
-        let headers : [String : String] = [:]
+        var headers = [String : String]()
+        if let token = AuthInfo.shared.token {
+            headers = [
+                "Authorization" : "Bearer \(token.accessToken)"
+            ]
+        }
+        
         var params : [String : NSObject] = [:]
         
-        params["access_token"] = AuthInfo.shared.token?.accessToken
         params[objectName] = objectId
         if let desc = isDescending {
             params["order"] = desc ? "desc" : "asc"
@@ -440,9 +470,13 @@ class ApiDataDownloader: NSObject {
     }
     
     func createSubmissionFor(stepName stepName: String, attemptId: Int, reply: Reply, success: Submission->Void, error errorHandler: String->Void) -> Request? {
-        let headers : [String : String] = [
-            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
-        ]
+
+        var headers = [String : String]()
+        if let token = AuthInfo.shared.token {
+            headers = [
+                "Authorization" : "Bearer \(token.accessToken)"
+            ]
+        }
         
         let params = [
             "submission": [
@@ -474,10 +508,14 @@ class ApiDataDownloader: NSObject {
     
     func getSubmissionFor(stepName stepName: String, submissionId: Int, success: Submission->Void, error errorHandler: String->Void) -> Request? {
         
-        let headers : [String : String] = [:]
         var params : [String : NSObject] = [:]
+        var headers = [String : String]()
         
-        params["access_token"] = AuthInfo.shared.token?.accessToken
+        if let token = AuthInfo.shared.token {
+            headers = [
+                "Authorization" : "Bearer \(token.accessToken)"
+            ]
+        }
         
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
             _, response, json, error in

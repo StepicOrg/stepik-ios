@@ -11,7 +11,7 @@ import Foundation
 struct APIDefaults {
     struct headers {
         static var bearer : [String : String] { 
-            return bearer(AuthInfo.shared.token!.accessToken)
+            return bearer(AuthInfo.shared.token?.accessToken)
         }
         
         static func bearer(accessToken: String?) -> [String : String] {

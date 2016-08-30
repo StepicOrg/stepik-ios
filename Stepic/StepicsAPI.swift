@@ -23,7 +23,7 @@ class StepicsAPI {
     func retrieveCurrentUser(headers: [String: String] = APIDefaults.headers.bearer, success: User -> Void, error errorHandler: String -> Void) -> Request {
         let params = [String:AnyObject]()
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
+            (_, response, json, error) in
             
             if let e = error as? NSError {
                 print(e.localizedDescription)
@@ -31,7 +31,15 @@ class StepicsAPI {
                 errorHandler(e.localizedDescription)
                 return
             }
-                        
+            
+            if let r = response {
+                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
+                for cookie in cookies {
+                    print("\(cookie.name) : \(cookie.value)")
+                }
+//                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!, mainDocumentURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
+            }
+
             let user : User = User(json: json["users"].arrayValue[0])
             success(user)
         })
