@@ -18,7 +18,7 @@ class ApiDataDownloader: NSObject {
     
     
     func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
-        let headers : [String : String] = [:] 
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
         var params : [String : NSObject] = [:]
@@ -58,7 +58,7 @@ class ApiDataDownloader: NSObject {
     
     func getCurrentUser(success : (User) -> Void, failure : (error : ErrorType) -> Void) {
         
-        let headers : [String : String] = [:] 
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
         var params : [String : NSObject] = [:]
@@ -74,7 +74,7 @@ class ApiDataDownloader: NSObject {
 
     }
     
-    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String], success : (User) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
+    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String] = AuthInfo.shared.initialHTTPHeaders, success : (User) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, _, json, error) in
             
@@ -134,7 +134,7 @@ class ApiDataDownloader: NSObject {
     
     private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
         
-        let headers : [String : String] = [:]
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         var params : [String : NSObject] = [:]
         
         params["access_token"] = AuthInfo.shared.token?.accessToken
@@ -205,7 +205,7 @@ class ApiDataDownloader: NSObject {
     
     func getProgressesByIds(ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
         let requestString = "progresses"
-        let headers : [String : String] = [:]
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         var params : [String : NSObject] = [:]
         
         if ids.filter({$0 != ""}).count == 0 {
@@ -269,10 +269,7 @@ class ApiDataDownloader: NSObject {
     }
     
     func didVisitStepWith(id id: Int, assignment: Int, success: Void->Void) -> Request? {
-        let headers : [String : String] = [
-            "Content-Type" : "application/json",
-            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
-        ]
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         
 //        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
         
@@ -298,7 +295,7 @@ class ApiDataDownloader: NSObject {
     }
     
     func search(query query: String, type: String?, page: Int?, success: ([SearchResult], Meta) -> Void, error errorHandler: String->Void) -> Request? {
-        let headers : [String : String] = [:]
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         var params : [String : NSObject] = [:]
         
         params["access_token"] = AuthInfo.shared.token?.accessToken
@@ -336,16 +333,16 @@ class ApiDataDownloader: NSObject {
     
     func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) -> Request? {
         
-        var headers = [String : String]()
-        if let token = AuthInfo.shared.token {
-            headers = [
-                "Authorization" : "Bearer \(token.accessToken)"
-            ]
-        } else {
-            headers = Session.cookieHeaders
-        }
+        let headers = AuthInfo.shared.initialHTTPHeaders
+//        if let token = AuthInfo.shared.token {
+//            headers = [
+//                "Authorization" : "Bearer \(token.accessToken)"
+//            ]
+//        } else {
+//            headers = Session.cookieHeaders
+//        }
         
-        print("headers in createNewAttempt \(headers)")
+//        print("headers in createNewAttempt \(headers)")
         
         let params : [String : NSObject] = [
             "attempt": [
@@ -379,12 +376,12 @@ class ApiDataDownloader: NSObject {
     
     func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) -> Request? {
 
-        var headers = [String : String]()
-        if let token = AuthInfo.shared.token {
-            headers = [
-                "Authorization" : "Bearer \(token.accessToken)"
-            ]
-        }
+        let headers = AuthInfo.shared.initialHTTPHeaders
+//        if let token = AuthInfo.shared.token {
+//            headers = [
+//                "Authorization" : "Bearer \(token.accessToken)"
+//            ]
+//        }
         
         var params : [String : NSObject] = [:]        
         params["step"] = stepId
@@ -419,12 +416,12 @@ class ApiDataDownloader: NSObject {
     
     private func getSubmissionsWithObjectID(stepName stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) -> Request? {
         
-        var headers = [String : String]()
-        if let token = AuthInfo.shared.token {
-            headers = [
-                "Authorization" : "Bearer \(token.accessToken)"
-            ]
-        }
+        let headers = AuthInfo.shared.initialHTTPHeaders
+//        if let token = AuthInfo.shared.token {
+//            headers = [
+//                "Authorization" : "Bearer \(token.accessToken)"
+//            ]
+//        }
         
         var params : [String : NSObject] = [:]
         
@@ -471,12 +468,12 @@ class ApiDataDownloader: NSObject {
     
     func createSubmissionFor(stepName stepName: String, attemptId: Int, reply: Reply, success: Submission->Void, error errorHandler: String->Void) -> Request? {
 
-        var headers = [String : String]()
-        if let token = AuthInfo.shared.token {
-            headers = [
-                "Authorization" : "Bearer \(token.accessToken)"
-            ]
-        }
+        let headers = AuthInfo.shared.initialHTTPHeaders
+//        if let token = AuthInfo.shared.token {
+//            headers = [
+//                "Authorization" : "Bearer \(token.accessToken)"
+//            ]
+//        }
         
         let params = [
             "submission": [
@@ -509,13 +506,13 @@ class ApiDataDownloader: NSObject {
     func getSubmissionFor(stepName stepName: String, submissionId: Int, success: Submission->Void, error errorHandler: String->Void) -> Request? {
         
         var params : [String : NSObject] = [:]
-        var headers = [String : String]()
+        let headers = AuthInfo.shared.initialHTTPHeaders
         
-        if let token = AuthInfo.shared.token {
-            headers = [
-                "Authorization" : "Bearer \(token.accessToken)"
-            ]
-        }
+//        if let token = AuthInfo.shared.token {
+//            headers = [
+//                "Authorization" : "Bearer \(token.accessToken)"
+//            ]
+//        }
         
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
             _, response, json, error in

@@ -15,7 +15,7 @@ class StepicsAPI {
     
     init() {}
     
-    func retrieveCurrentUser(headers: [String: String] = APIDefaults.headers.bearer, success: User -> Void, error errorHandler: String -> Void) -> Request {
+    func retrieveCurrentUser(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: User -> Void, error errorHandler: String -> Void) -> Request {
         let params = [String:AnyObject]()
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
             (_, response, json, error) in

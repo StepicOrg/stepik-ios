@@ -10,6 +10,10 @@ import Foundation
 import Alamofire 
 
 
+func performRequest(request: (Void->Void), error: (Void->Void)? = nil) {
+    ApiRequestPerformer.performAPIRequest(request, error: error)
+}
+
 class ApiRequestPerformer {
     
     //TODO: Add error type for this

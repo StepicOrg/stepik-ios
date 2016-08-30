@@ -13,7 +13,9 @@ class AuthInfo: NSObject {
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
-    private override init() {}
+    private override init() {
+        //TODO: init user here using userId 
+    }
         
     private func setTokenValue(newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
@@ -118,6 +120,17 @@ class AuthInfo: NSObject {
         didSet {
             userId = user?.id
         }
+    }
+    
+    var initialHTTPHeaders : [String: String] {
+        if let user = user {
+            if user.isGuest {
+                return APIDefaults.headers.bearer
+            } else {
+                return Session.cookieHeaders
+            }
+        }
+        return [String: String]()
     }
 }
 
