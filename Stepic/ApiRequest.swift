@@ -9,31 +9,68 @@
 import Foundation
 import Alamofire 
 
-func performAPIRequest(request: Request?, allSuccess: (Void->Void), oneFailed: (Void->Void)) {
-    if let request = request {
-        var requests = [Request]()
-        
+
+class ApiRequestPerformer {
+    
+    //TODO: Add error type for this
+    static func performAPIRequest(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
         if !AuthInfo.shared.hasUser {
-            //TODO: Add request to stepics/1
-            let stepicsRequest = ApiDataDownloader.stepics.retrieveCurrentUser(success: 
+            ApiDataDownloader.stepics.retrieveCurrentUser(success: 
                 {
                     user in
                     AuthInfo.shared.user = user
+                    performRequestWithAuthorizationCheck(completion, error: errorHandler)
                 }, error: {
                     errorMsg in
+                    errorHandler?()
                 }
             )
-            requests.append(stepicsRequest)
+        } else {
+            performRequestWithAuthorizationCheck(completion, error: errorHandler)
         }
-        
-        if AuthInfo.shared.needsToRefreshToken {
-//            if let tokenRefreshRequest = AuthManager.sharedManager.refreshTokenWith(<#T##refresh_token: String##String#>, success: <#T##(token: StepicToken) -> Void#>, failure: <#T##(error: ErrorType) -> Void#>) {
-                
-//            }
-           //TODO: Add request to refresh token 
-        }
-        
-        requests.append(request)
-        
+         
     }
+    
+    private static func performRequestWithAuthorizationCheck(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
+        
+        if let user = AuthInfo.shared.user {
+            if user.isGuest && Session.needsRefresh {
+                Session.refresh(completion: 
+                    {
+                        completion()
+                    }, error: {
+                        _ in 
+                        errorHandler?()
+                    }
+                )
+                return
+            }
+            
+            if !user.isGuest && AuthInfo.shared.needsToRefreshToken {
+                if let refreshToken = AuthInfo.shared.token?.refreshToken {
+                    AuthManager.sharedManager.refreshTokenWith(refreshToken, success: 
+                        {
+                            t in
+                            AuthInfo.shared.token = t
+                            completion()
+                        }, failure : {
+                            error in
+                            print("error while auto refresh token")
+                            errorHandler?()
+                        }
+                    )
+                    return
+                } else {
+                    //No token to refresh with authorized user
+                    errorHandler?()
+                    return
+                }
+            }
+            
+            completion()
+        } else {
+            errorHandler?()
+        }
+    }
+
 }

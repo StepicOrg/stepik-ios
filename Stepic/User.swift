@@ -36,5 +36,8 @@ class User: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
+    var isGuest : Bool {
+        return level == 0
+    }
     
 }
