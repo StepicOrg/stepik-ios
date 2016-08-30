@@ -12,13 +12,8 @@ import SwiftyJSON
 
 class StepicsAPI {
     
-    let manager : Alamofire.Manager
     
-    init() {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.timeoutIntervalForRequest = 5
-        manager = Alamofire.Manager(configuration: configuration)
-    }
+    init() {}
     
     func retrieveCurrentUser(headers: [String: String] = APIDefaults.headers.bearer, success: User -> Void, error errorHandler: String -> Void) -> Request {
         let params = [String:AnyObject]()
@@ -30,14 +25,6 @@ class StepicsAPI {
                 
                 errorHandler(e.localizedDescription)
                 return
-            }
-            
-            if let r = response {
-                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
-                for cookie in cookies {
-                    print("\(cookie.name) : \(cookie.value)")
-                }
-//                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!, mainDocumentURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
             }
 
             let user : User = User(json: json["users"].arrayValue[0])

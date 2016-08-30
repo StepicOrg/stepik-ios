@@ -55,18 +55,18 @@ class Session {
                         "X-CSRFToken" : csrftoken,
                         "Cookie" : "csrftoken=\(csrftoken); sessionid=\(sessionId)"
                     ]
-                    print("did set additional headers")
                     completion()
                 } else {
                     errorHandler("bad cookies in response")
                 }
-                
-
-                
             } else {
                 errorHandler("No response")
             }
         }
+    }
+    
+    static var needsRefresh : Bool {
+        return cookieHeaders.count > 0
     }
     
     static var cookieHeaders = [String: String]()
