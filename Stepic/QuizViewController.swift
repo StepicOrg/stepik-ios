@@ -9,7 +9,7 @@
 import UIKit
 
 class QuizViewController: UIViewController {
-
+    
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusLabel: UILabel!
@@ -332,7 +332,7 @@ class QuizViewController: UIViewController {
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
         self.hintView.backgroundColor = UIColor.blackColor()
-
+        
         self.peerReviewButton.setTitle(peerReviewText, forState: .Normal)
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.Center
@@ -344,49 +344,51 @@ class QuizViewController: UIViewController {
     @IBAction func peerReviewButtonPressed(sender: AnyObject) {
         if let stepurl = stepUrl {
             let url = NSURL(string: stepurl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
-        
+            
             WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
         }
     }
     
     func refreshAttempt(stepId: Int) {
         self.doesPresentActivityIndicatorView = true
-        ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: self.step.block.name, stepId: stepId, success: { 
-            attempts, meta in
-            if attempts.count == 0 || attempts[0].status != "active" {
-                //Create attempt
-                self.createNewAttempt(completion: {
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: self.step.block.name, stepId: stepId, success: { 
+                attempts, meta in
+                if attempts.count == 0 || attempts[0].status != "active" {
+                    //Create attempt
+                    self.createNewAttempt(completion: {
                         self.doesPresentActivityIndicatorView = false
-                    }, error:  {
+                        }, error:  {
+                            self.doesPresentActivityIndicatorView = false
+                            self.doesPresentWarningView = true
+                    })
+                } else {
+                    //Get submission for attempt
+                    let currentAttempt = attempts[0]
+                    self.attempt = currentAttempt
+                    ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: self.step.block.name, attemptId: currentAttempt.id!, success: {
+                        submissions, meta in
+                        if submissions.count == 0 {
+                            self.submission = nil
+                            //There are no current submissions for attempt
+                        } else {
+                            //Displaying the last submission
+                            self.submission = submissions[0]
+                        }
                         self.doesPresentActivityIndicatorView = false
-                        self.doesPresentWarningView = true
-                })
-            } else {
-                //Get submission for attempt
-                let currentAttempt = attempts[0]
-                self.attempt = currentAttempt
-                ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: self.step.block.name, attemptId: currentAttempt.id!, success: {
-                    submissions, meta in
-                    if submissions.count == 0 {
-                        self.submission = nil
-                        //There are no current submissions for attempt
-                    } else {
-                        //Displaying the last submission
-                        self.submission = submissions[0]
-                    }
+                        }, error: {
+                            errorText in
+                            self.doesPresentActivityIndicatorView = false
+                            print("failed to get submissions")
+                            //TODO: Test this
+                    })
+                }
+                }, error: {
+                    errorText in
                     self.doesPresentActivityIndicatorView = false
-                    }, error: {
-                        errorText in
-                        self.doesPresentActivityIndicatorView = false
-                        print("failed to get submissions")
-                        //TODO: Test this
-                })
-            }
-            }, error: {
-                errorText in
-                self.doesPresentActivityIndicatorView = false
-                self.doesPresentWarningView = true
-                //TODO: Test this
+                    self.doesPresentWarningView = true
+                    //TODO: Test this
+            })
         })
     }
     
@@ -397,16 +399,18 @@ class QuizViewController: UIViewController {
     
     private func createNewAttempt(completion completion: (Void->Void)? = nil, error: (Void->Void)? = nil) {
         print("creating attempt for step id -> \(self.step.id) name -> \(self.step.block.name)")
-        ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
-            attempt in
-            self.attempt = attempt
-            self.submission = nil
-            completion?()
-            }, error: {
-                errorText in   
-                print(errorText)
-                error?()
-                //TODO: Test this
+        performRequest({
+            ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
+                attempt in
+                self.attempt = attempt
+                self.submission = nil
+                completion?()
+                }, error: {
+                    errorText in   
+                    print(errorText)
+                    error?()
+                    //TODO: Test this
+            })
         })
     }
     
@@ -416,36 +420,40 @@ class QuizViewController: UIViewController {
     
     private func checkSubmission(id: Int, time: Int, completion: (Void->Void)? = nil) {
         delay(checkTimeStandardInterval * Double(time), closure: {
-            ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: self.step.block.name, submissionId: id, success: {
-                submission in
-                print("did get submission id \(id), with status \(submission.status)")
-                if submission.status == "evaluation" {
-                    self.checkSubmission(id, time: time + 1, completion: completion)
-                } else {
-                    self.submission = submission
-                    completion?()
-                }
-                }, error: { 
-                    errorText in
-                    self.didGetErrorWhileSendingSubmission = true
-                    self.submission = nil
-                    completion?()
-                    //TODO: test this
+            performRequest({
+                ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: self.step.block.name, submissionId: id, success: {
+                    submission in
+                    print("did get submission id \(id), with status \(submission.status)")
+                    if submission.status == "evaluation" {
+                        self.checkSubmission(id, time: time + 1, completion: completion)
+                    } else {
+                        self.submission = submission
+                        completion?()
+                    }
+                    }, error: { 
+                        errorText in
+                        self.didGetErrorWhileSendingSubmission = true
+                        self.submission = nil
+                        completion?()
+                        //TODO: test this
+                })
             })
         })        
     }
     
     private func submitReply(completion completion: (Void->Void), error errorHandler: (String->Void)) {        
         let r = getReply()
-        
-        ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: self.step.block.name, attemptId: attempt!.id!, reply: r, success: {
-            submission in
-            self.submission = submission
-            self.checkSubmission(submission.id!, time: 0, completion: completion)
-            }, error: {
-                errorText in
-                errorHandler(errorText)
-                //TODO: test this
+        let id = attempt!.id!
+        performRequest({
+            ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: self.step.block.name, attemptId: id, reply: r, success: {
+                submission in
+                self.submission = submission
+                self.checkSubmission(submission.id!, time: 0, completion: completion)
+                }, error: {
+                    errorText in
+                    errorHandler(errorText)
+                    //TODO: test this
+            })
         })
     }
     
@@ -471,17 +479,17 @@ class QuizViewController: UIViewController {
                         self?.sendButton.enabled = true
                         self?.doesPresentActivityIndicatorView = false
                     }
-                }, error: {
-                    [weak self]
-                    errorText in
-                    UIThread.performUI{
-                        self?.sendButton.enabled = true
-                        self?.doesPresentActivityIndicatorView = false 
-                        if let vc = self?.navigationController {
-                            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+                    }, error: {
+                        [weak self]
+                        errorText in
+                        UIThread.performUI{
+                            self?.sendButton.enabled = true
+                            self?.doesPresentActivityIndicatorView = false 
+                            if let vc = self?.navigationController {
+                                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+                            }
                         }
-                    }
-                })
+                    })
             } else {
                 doesPresentActivityIndicatorView = false
                 sendButton.enabled = true
@@ -503,7 +511,7 @@ class QuizViewController: UIViewController {
                     if let vc = self?.navigationController {
                         Messages.sharedManager.showConnectionErrorMessage(inController: vc)
                     }
-            })
+                })
         }
     }
 }

@@ -11,9 +11,9 @@ import DZNEmptyDataSet
 import FLKAutoLayout
 
 class SearchResultsCoursesViewController: CoursesViewController {
-
+    
     var parentVC : UIViewController?
-        
+    
     var query : String = "" {
         didSet {
             if self.query != oldValue {
@@ -67,7 +67,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-
+        
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.        
@@ -96,15 +96,15 @@ class SearchResultsCoursesViewController: CoursesViewController {
         let totalDistance = constraintDistance + tableView.contentInset.top
         if totalDistance != 64 {
             tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
-//            print("searchResults insets changed")
+            //            print("searchResults insets changed")
             view.layoutIfNeeded()
         }
-//        print("\n didLayoutSubviews searchResults: tableViewDistance -> \(constraintDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), frame -> \(tableView.frame)\n")
+        //        print("\n didLayoutSubviews searchResults: tableViewDistance -> \(constraintDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), frame -> \(tableView.frame)\n")
     }
     
     override func refreshCourses() {
         isRefreshing = true
-        AuthManager.sharedManager.autoRefreshToken(success: { 
+        performRequest({ 
             () -> Void in
             ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: 1, success: { 
                 (searchResults, meta) -> Void in
@@ -133,7 +133,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     self.handleRefreshError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleRefreshError()
         })
     }
@@ -145,7 +145,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthManager.sharedManager.autoRefreshToken(success: { 
+        performRequest({ 
             () -> Void in
             ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
                 (searchResults, meta) -> Void in
@@ -178,7 +178,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     self.handleLoadMoreError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleLoadMoreError()
         })
     }
@@ -190,7 +190,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         if let vc = parentVC { 
             UIThread.performUI{ Messages.sharedManager.showConnectionErrorMessage(inController: vc.navigationController!) }
         }
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -205,17 +205,17 @@ class SearchResultsCoursesViewController: CoursesViewController {
             super.performSegueWithIdentifier(identifier, sender: sender)
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension SearchResultsCoursesViewController {
@@ -234,25 +234,25 @@ extension SearchResultsCoursesViewController {
         
         let text = NSLocalizedString("NoSearchResultsTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-//    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-//        
-//        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-//        
-//        let paragraph = NSMutableParagraphStyle()
-//        paragraph.lineBreakMode = .ByWordWrapping
-//        paragraph.alignment = .Center
-//        
-//        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-//            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-//            NSParagraphStyleAttributeName: paragraph]
-//        
-//        return NSAttributedString(string: text, attributes: attributes)
-//    }
+    //    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    //        
+    //        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+    //        
+    //        let paragraph = NSMutableParagraphStyle()
+    //        paragraph.lineBreakMode = .ByWordWrapping
+    //        paragraph.alignment = .Center
+    //        
+    //        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
+    //            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+    //            NSParagraphStyleAttributeName: paragraph]
+    //        
+    //        return NSAttributedString(string: text, attributes: attributes)
+    //    }
     
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return UIColor.whiteColor()

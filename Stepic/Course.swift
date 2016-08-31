@@ -58,7 +58,7 @@ class Course: NSManagedObject, JSONInitializable {
     
         
     func loadAllInstructors(success success: (Void -> Void)) {
-        AuthManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
                 users in
 //                print("instructors count inside Course class -> \(users.count)")
@@ -73,7 +73,7 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void), withProgresses: Bool = true) {
-        AuthManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
                 secs in
                 self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
@@ -88,11 +88,12 @@ class Course: NSManagedObject, JSONInitializable {
                         print("error while loading section")
                         errorHandler()
                 })
-            }, failure:  {
+            }, error:  {
                 errorHandler()
         })        
     }
     
+    //TODO: Remove these methods
     func loadSectionsWithoutAuth(success success: (Void -> Void), error errorHandler : (Void -> Void)) {
         ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
             secs in
@@ -133,21 +134,22 @@ class Course: NSManagedObject, JSONInitializable {
         }
         
 //        print("progress ids array -> \(progressIds)")
-        
-        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
-            (newProgresses) -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(self.sections.count, progresses.count) {
-                self.sections[i].progress = progresses[i]
-            }
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+                (newProgresses) -> Void in
+                progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                for i in 0 ..< min(self.sections.count, progresses.count) {
+                    self.sections[i].progress = progresses[i]
+                }
             
-            CoreDataHelper.instance.save()
+                CoreDataHelper.instance.save()
             
-            completion()
-            }, failure: { 
-                (error) -> Void in
-                print("Error while downloading progresses")
-                errorHandler()
+                completion()
+                }, failure: { 
+                    (error) -> Void in
+                    print("Error while downloading progresses")
+                    errorHandler()
+            })
         })
     }
     

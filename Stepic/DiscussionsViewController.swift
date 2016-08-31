@@ -170,7 +170,8 @@ class DiscussionsViewController: UIViewController {
     func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
         self.emptyDatasetState = .None
         
-        ApiDataDownloader.comments.retrieve(ids, success: 
+        performRequest({
+            ApiDataDownloader.comments.retrieve(ids, success: 
             {
                 [weak self]
                 retrievedDiscussions in 
@@ -213,7 +214,8 @@ class DiscussionsViewController: UIViewController {
                     self?.refreshControl?.endRefreshing()
                 }
             }
-        )
+            )
+        })
     }
     
     func reloadTableData(emptyState: DiscussionsEmptyDataSetState = .Empty) {
@@ -265,7 +267,7 @@ class DiscussionsViewController: UIViewController {
         resetData(false)
         isReloading = true
         
-        AuthManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             [weak self] in
             if let discussionProxyId = self?.discussionProxyId {
                 ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
@@ -299,7 +301,7 @@ class DiscussionsViewController: UIViewController {
                 
                 )
             }
-        }, failure:  {
+        }, error:  {
                 [weak self]
                 errorString in
                 print(errorString)
@@ -330,6 +332,7 @@ class DiscussionsViewController: UIViewController {
             if let value = comment.vote.value {
                 let vToSet : VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
                 let v = Vote(id: comment.vote.id, value: vToSet)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -350,8 +353,10 @@ class DiscussionsViewController: UIViewController {
                         errorMsg in
                         print(errorMsg)
                 })
+                })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Epic)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -364,7 +369,7 @@ class DiscussionsViewController: UIViewController {
                         print(errorMsg)
                     }
                 )
-                
+                })   
             }
         }
     }
@@ -373,6 +378,7 @@ class DiscussionsViewController: UIViewController {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -390,8 +396,10 @@ class DiscussionsViewController: UIViewController {
                         errorMsg in
                         print(errorMsg)
                 })
+                })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -404,7 +412,7 @@ class DiscussionsViewController: UIViewController {
                         print(errorMsg)
                     }
                 )
-                
+                })
             }
         }
     }

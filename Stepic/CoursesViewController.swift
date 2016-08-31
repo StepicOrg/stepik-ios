@@ -95,8 +95,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func refreshCourses() {
         isRefreshing = true
-        AuthManager.sharedManager.autoRefreshToken(success: { 
-            () -> Void in
+        performRequest({
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: 1, success: { 
                 (ids, meta) -> Void in
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
@@ -124,7 +123,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     self.handleRefreshError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleRefreshError()
         })
     }
@@ -205,7 +204,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthManager.sharedManager.autoRefreshToken(success: { 
+        performRequest({ 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
@@ -241,7 +240,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     self.handleLoadMoreError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleLoadMoreError()
         })
     }

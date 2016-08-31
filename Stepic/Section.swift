@@ -12,9 +12,9 @@ import SwiftyJSON
 
 @objc
 class Section: NSManagedObject, JSONInitializable {
-
-// Insert code here to add functionality to your managed object subclass
-
+    
+    // Insert code here to add functionality to your managed object subclass
+    
     
     convenience required init(json: JSON){
         self.init()
@@ -27,7 +27,7 @@ class Section: NSManagedObject, JSONInitializable {
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
         progressId = json["progress"].string
-//        print("initialized section \(id) with progress id -> \(progressId)")
+        //        print("initialized section \(id) with progress id -> \(progressId)")
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
@@ -64,7 +64,7 @@ class Section: NSManagedObject, JSONInitializable {
     }
     
     func loadUnits(completion completion: (Void -> Void), error errorHandler: (Void -> Void)) {
-        AuthManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
                 newUnits in 
                 self.units = Sorter.sort(newUnits, byIds: self.unitsArray)
@@ -76,11 +76,11 @@ class Section: NSManagedObject, JSONInitializable {
                     print("Error while downloading units")
                     errorHandler()
             })
-            }, failure:  {
+            }, error:  {
                 errorHandler()
-            })
+        })
     }
-
+    
     func loadProgressesForUnits(completion: (Void->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
@@ -93,19 +93,21 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
-            (newProgresses) -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(self.units.count, progresses.count) {
-                self.units[i].progress = progresses[i]
-            }
-            
-            CoreDataHelper.instance.save()
-            
-            completion()
-            }, failure: { 
-            (error) -> Void in
-            print("Error while dowloading progresses")
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+                (newProgresses) -> Void in
+                progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                for i in 0 ..< min(self.units.count, progresses.count) {
+                    self.units[i].progress = progresses[i]
+                }
+                
+                CoreDataHelper.instance.save()
+                
+                completion()
+                }, failure: { 
+                    (error) -> Void in
+                    print("Error while dowloading progresses")
+            })
         })
     }
     
@@ -119,20 +121,22 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .Update, success: {
-            newLessons in
-            lessons = Sorter.sort(newLessons, byIds: lessonIds)
-            
-            for i in 0 ..< self.units.count {
-                self.units[i].lesson = lessons[i]
-            }
-            
-            CoreDataHelper.instance.save()
-            
-            completion()
-        }, failure: {
-            error in
-            print("Error while downloading units")
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .Update, success: {
+                newLessons in
+                lessons = Sorter.sort(newLessons, byIds: lessonIds)
+                
+                for i in 0 ..< self.units.count {
+                    self.units[i].lesson = lessons[i]
+                }
+                
+                CoreDataHelper.instance.save()
+                
+                completion()
+                }, failure: {
+                    error in
+                    print("Error while downloading units")
+            })
         })
     }
     
@@ -171,7 +175,7 @@ class Section: NSManagedObject, JSONInitializable {
             }
             
             for lesson in loadingLessons! {
-
+                
                 if !lesson.isCached { 
                     lesson.storeProgress = {
                         prog in
@@ -192,7 +196,7 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
     }
-//    var k = "not changed"
+    //    var k = "not changed"
     var storeCompletion : (Void -> Void)? 
     
     var goodProgress : Float = 0
@@ -218,7 +222,7 @@ class Section: NSManagedObject, JSONInitializable {
         
         storeProgress = progress
         storeCompletion = completion
-
+        
         goodProgress = 0
         
         loadingLessons = []
@@ -235,21 +239,21 @@ class Section: NSManagedObject, JSONInitializable {
             
             let loadblock = {
                 lesson.storeVideos(progress: { 
-                prog in
+                    prog in
                     self.goodProgress = self.countProgress(self.loadingLessons!)
                     self.storeProgress?(self.goodProgress)
-                }, completion: {
-                    downloaded, cancelled in
-                    if cancelled != 0 {
-                        self.storeCompletion?()
-                    }
-                    if self.isCompleted(self.loadingLessons!) {
-                        self.storeCompletion?()
-                    }
-                    
-                }, error:  {
-                    error in
-                    errorHandler(error)
+                    }, completion: {
+                        downloaded, cancelled in
+                        if cancelled != 0 {
+                            self.storeCompletion?()
+                        }
+                        if self.isCompleted(self.loadingLessons!) {
+                            self.storeCompletion?()
+                        }
+                        
+                    }, error:  {
+                        error in
+                        errorHandler(error)
                 })
             }
             if lesson.steps.count != 0 {
@@ -257,7 +261,7 @@ class Section: NSManagedObject, JSONInitializable {
             } else {
                 lesson.loadSteps(completion: {
                     loadblock()
-                }, refresh: false)
+                    }, refresh: false)
             }
         }
     }
@@ -275,13 +279,13 @@ class Section: NSManagedObject, JSONInitializable {
                         }
                     })
                 } else {
-//                    lesson.removeFromStore(completion: {
-//                        completedUnits++
-//                        if completedUnits == self.units.count {
-//                            self.goodProgress = 0
-//                            completion()
-//                        }
-//                    })
+                    //                    lesson.removeFromStore(completion: {
+                    //                        completedUnits++
+                    //                        if completedUnits == self.units.count {
+                    //                            self.goodProgress = 0
+                    //                            completion()
+                    //                        }
+                    //                    })
                 }
             }
         }
@@ -333,19 +337,19 @@ class Section: NSManagedObject, JSONInitializable {
     }
     
     
-//    func loadIfNotLoaded(success success : (Void -> Void)) {
-//        if !loaded {
-//            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
-//                    sec in
-//                    success()
-//                }, failure: {
-//                    error in
-//                    print("failed to load section with id -> \(self.id)")
-//            })
-//        } else {
-//            success()
-//        }
-//    }
+    //    func loadIfNotLoaded(success success : (Void -> Void)) {
+    //        if !loaded {
+    //            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
+    //                    sec in
+    //                    success()
+    //                }, failure: {
+    //                    error in
+    //                    print("failed to load section with id -> \(self.id)")
+    //            })
+    //        } else {
+    //            success()
+    //        }
+    //    }
 }
 
 

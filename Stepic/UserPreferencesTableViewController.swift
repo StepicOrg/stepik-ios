@@ -59,6 +59,7 @@ class UserPreferencesTableViewController: UITableViewController {
         ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
         autoCheckForUpdatesSwitch.on = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
         
+        performRequest({
         ApiDataDownloader.sharedDownloader.getCurrentUser({
             user in
             AuthInfo.shared.user = user
@@ -68,6 +69,7 @@ class UserPreferencesTableViewController: UITableViewController {
             error in
             print("Error while getting current user profile")
             })
+        })
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
