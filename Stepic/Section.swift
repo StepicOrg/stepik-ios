@@ -261,7 +261,7 @@ class Section: NSManagedObject, JSONInitializable {
             } else {
                 lesson.loadSteps(completion: {
                     loadblock()
-                    }, refresh: false)
+                })
             }
         }
     }

@@ -48,7 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
-        setRootController()
+        setTabRoot()
+//        setRootController()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()

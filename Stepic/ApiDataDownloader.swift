@@ -63,13 +63,13 @@ class ApiDataDownloader: NSObject {
         
         var params : [String : NSObject] = [:]
                
-        AuthManager.sharedManager.autoRefreshToken( success: {
+        performRequest({
             params["access_token"] = AuthInfo.shared.token?.accessToken ?? ""
 //            print(t.accessToken)
             self.getCurrentUserProfileApiCall(params, headers: headers, success: success, failure: failure)
-            }, failure: {
+            }, error: {
                 _ in
-                print("error while refreshing the token")
+                print("error while getting current user")
         })
 
     }
