@@ -44,9 +44,6 @@ class UserPreferencesTableViewController: UITableViewController {
         
         localize() 
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        
         avatarImageView.setRoundedBounds(width: 0)
         
         if let apiUser = AuthInfo.shared.user {
@@ -92,6 +89,7 @@ class UserPreferencesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     override func didReceiveMemoryWarning() {

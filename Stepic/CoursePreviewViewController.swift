@@ -99,6 +99,11 @@ class CoursePreviewViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
     func shareButtonPressed(button: UIBarButtonItem) {
     
         AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
