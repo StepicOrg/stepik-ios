@@ -11,6 +11,11 @@ import SVProgressHUD
 
 class UserPreferencesTableViewController: UITableViewController {
     
+    @IBOutlet weak var signInHeight: NSLayoutConstraint!
+    @IBOutlet weak var signInNameDistance: NSLayoutConstraint!
+    
+    @IBOutlet weak var signInButton: UIButton!
+    
     @IBOutlet weak var onlyWiFiSwitch: UISwitch!
     
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -30,11 +35,12 @@ class UserPreferencesTableViewController: UITableViewController {
     var heightForRows = [[131], [40, 0, 40], [40, 40], [40]]
     let selectionForRows = [[false], [false, false, true], [false, true], [true]]
     let sectionTitles = [
-    NSLocalizedString("UserInfo", comment: ""),
-    NSLocalizedString("Video", comment: ""),
-    NSLocalizedString("Updates", comment: ""),
-    NSLocalizedString("Actions", comment: "")
+        NSLocalizedString("UserInfo", comment: ""),
+        NSLocalizedString("Video", comment: ""),
+        NSLocalizedString("Updates", comment: ""),
+        NSLocalizedString("Actions", comment: "")
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,54 +52,68 @@ class UserPreferencesTableViewController: UITableViewController {
         
         avatarImageView.setRoundedBounds(width: 0)
         
-        if let apiUser = AuthInfo.shared.user {
-            initWithUser(apiUser)
-        } else {
-            avatarImageView.image = Constants.placeholderImage
-        }
+//        if let apiUser = AuthInfo.shared.user {
+//            initWithUser(apiUser)
+//        } else {
+//            avatarImageView.image = Constants.placeholderImage
+//        }
         
+        signInButton.hidden = false
         onlyWiFiSwitch.on = !ConnectionHelper.shared.reachableOnWWAN
         ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
         autoCheckForUpdatesSwitch.on = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
         
-        updateUser()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     func updateUser() {
-        performRequest({
-            ApiDataDownloader.sharedDownloader.getCurrentUser({
-                user in
-                AuthInfo.shared.user = user
-                UIThread.performUI({self.initWithUser(user)})
+        if let user = AuthInfo.shared.user {
+            self.initWithUser(user)
+        } else {
+            performRequest({
+                if let user = AuthInfo.shared.user {
+                    self.initWithUser(user)
                 }
-                , failure: {
-                    error in
-                    print("Error while getting current user profile")
             })
-        })
+        }
     }
     
     private func localize() {
         ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
-
+        
         autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
-    checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), forState: .Normal)
+        checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), forState: .Normal)
     }
     
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
+        if user.isGuest {
+            signInHeight.constant = 30
+            signInNameDistance.constant = 8
+            heightForRows[0][0] = 131 + 38
+            heightForRows[3][0] = 0
+            signInButton.hidden = false
+        } else {
+            signInHeight.constant = 0
+            signInNameDistance.constant = 0
+            heightForRows[0][0] = 131
+            heightForRows[3][0] = 40
+            signInButton.hidden = true
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        updateUser()
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,7 +124,7 @@ class UserPreferencesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CGFloat(heightForRows[indexPath.section][indexPath.row])
     }
-
+    
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return selectionForRows[indexPath.section][indexPath.row]
     }
@@ -120,7 +140,7 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
+        if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 2) || (section == 3 && heightForRows[3][0] == 0) {
             return nil 
         } else {
             return sectionTitles[section]
@@ -210,6 +230,20 @@ class UserPreferencesTableViewController: UITableViewController {
             }
             self.presentViewController(vc, animated: true, completion: nil)
         }
+    }
+    
+    func signIn() {
+        if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+            vc.success = {
+                [weak self] in
+                self?.updateUser()
+            }
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func signInButtonPressed(sender: AnyObject) {
+        signIn()
     }
     
     @IBAction func signOutButtonPressed(sender: UIButton) {

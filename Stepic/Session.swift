@@ -66,7 +66,7 @@ class Session {
     }
     
     static var needsRefresh : Bool {
-        return cookieHeaders.count > 0
+        return cookieHeaders.count == 0
     }
     
     static var cookieHeaders = [String: String]()

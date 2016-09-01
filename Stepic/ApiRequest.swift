@@ -23,6 +23,7 @@ class ApiRequestPerformer {
                 {
                     user in
                     AuthInfo.shared.user = user
+                    CoreDataHelper.instance.save()
                     performRequestWithAuthorizationCheck(completion, error: errorHandler)
                 }, error: {
                     errorMsg in

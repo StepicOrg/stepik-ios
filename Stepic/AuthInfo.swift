@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MagicalRecord
 
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
@@ -14,7 +15,39 @@ class AuthInfo: NSObject {
     private let defaults = NSUserDefaults.standardUserDefaults()
     
     private override init() {
+        super.init()
+        
         //TODO: init user here using userId 
+        if let id = userId {
+            if let users = User.MR_findAllWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber)) {
+                if users.count > 1 {
+                    print("users count > 1")
+                }
+                if users.count == 0 {
+                    ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .Update, success: {
+                        [weak self]
+                        users in
+                        if let user = users.first {
+                            self?.user = user
+                            return
+                        }
+                        
+                        CoreDataHelper.instance.save()
+                        
+                        }, failure: {
+                            [weak self]
+                            _ in
+                            print("failed to fetch user")
+                            self?.userId = nil
+                    })
+                }
+                
+                if users.count >= 1 {
+                    user = users.first as? User
+                }
+                
+            }
+        }
     }
         
     private func setTokenValue(newToken: StepicToken?) {
@@ -42,7 +75,6 @@ class AuthInfo: NSObject {
                         }
                         CoreDataHelper.instance.save()
                         AuthInfo.shared.user = nil
-                        //Show sign in controller
                         
                         AnalyticsHelper.sharedHelper.changeSignIn()
                         self.setTokenValue(newToken)
@@ -118,13 +150,14 @@ class AuthInfo: NSObject {
     
     var user : User? {
         didSet {
+            print("\n\ndid set user with id \(user?.id)\n\n")
             userId = user?.id
         }
     }
     
     var initialHTTPHeaders : [String: String] {
         if let user = user {
-            if user.isGuest {
+            if !user.isGuest {
                 print("requested headers with token: \(APIDefaults.headers.bearer)")
                 return APIDefaults.headers.bearer
             } else {

@@ -194,11 +194,11 @@
                         <sections>
                             <tableViewSection headerTitle="User info" id="dKt-Jb-OtY">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="131" id="VNp-zb-3Xd">
-                                        <rect key="frame" x="0.0" y="114" width="600" height="131"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="181" id="VNp-zb-3Xd">
+                                        <rect key="frame" x="0.0" y="114" width="600" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VNp-zb-3Xd" id="p4A-G6-tl3">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J5k-lf-s7P">
@@ -209,20 +209,38 @@
                                                         <constraint firstAttribute="width" secondItem="J5k-lf-s7P" secondAttribute="height" multiplier="1:1" id="x9z-XF-NSM"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwD-Yk-nPZ">
-                                                    <rect key="frame" x="300" y="104" width="0.0" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwD-Yk-nPZ">
+                                                    <rect key="frame" x="273" y="104" width="54" height="68"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnw-sr-ZtE" userLabel="Sign in">
+                                                    <rect key="frame" x="277" y="172" width="47" height="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" id="JSV-Bw-Ky4"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Sign in"/>
+                                                    <connections>
+                                                        <action selector="signInButtonPressed:" destination="5ay-8c-nL7" eventType="touchUpInside" id="VZl-gJ-LS1"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="iwD-Yk-nPZ" secondAttribute="bottom" constant="1" id="1uk-m9-Qi8"/>
                                                 <constraint firstItem="J5k-lf-s7P" firstAttribute="centerX" secondItem="p4A-G6-tl3" secondAttribute="centerX" id="9ch-U9-O1S"/>
                                                 <constraint firstItem="iwD-Yk-nPZ" firstAttribute="centerX" secondItem="p4A-G6-tl3" secondAttribute="centerX" id="ERj-fN-0j4"/>
+                                                <constraint firstItem="qnw-sr-ZtE" firstAttribute="centerX" secondItem="p4A-G6-tl3" secondAttribute="centerX" id="MJs-jK-jTH"/>
+                                                <constraint firstItem="qnw-sr-ZtE" firstAttribute="top" secondItem="iwD-Yk-nPZ" secondAttribute="bottom" id="RHK-NZ-J4q"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qnw-sr-ZtE" secondAttribute="bottom" id="WJG-to-Fna"/>
                                                 <constraint firstItem="iwD-Yk-nPZ" firstAttribute="top" secondItem="J5k-lf-s7P" secondAttribute="bottom" constant="8" id="g4t-Rb-6IN"/>
                                                 <constraint firstItem="J5k-lf-s7P" firstAttribute="top" secondItem="p4A-G6-tl3" secondAttribute="topMargin" constant="8" id="jlI-ZA-BP8"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="1uk-m9-Qi8"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -230,7 +248,7 @@
                             <tableViewSection headerTitle="Video preferences" id="dRl-3b-IkP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="h5T-eE-fUv">
-                                        <rect key="frame" x="0.0" y="296" width="600" height="41"/>
+                                        <rect key="frame" x="0.0" y="346" width="600" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h5T-eE-fUv" id="VvS-Nd-CNY">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
@@ -262,7 +280,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="X3F-sQ-EyG">
-                                        <rect key="frame" x="0.0" y="337" width="600" height="41"/>
+                                        <rect key="frame" x="0.0" y="387" width="600" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X3F-sQ-EyG" id="kJq-eJ-XdL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
@@ -295,7 +313,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="41" id="akA-Rm-Has">
-                                        <rect key="frame" x="0.0" y="378" width="600" height="41"/>
+                                        <rect key="frame" x="0.0" y="428" width="600" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="akA-Rm-Has" id="LH7-ZQ-xdd">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="40"/>
@@ -334,7 +352,7 @@
                             <tableViewSection headerTitle="Updates" id="Ss4-Rd-3mQ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="eOs-4d-63U">
-                                        <rect key="frame" x="0.0" y="470" width="600" height="41"/>
+                                        <rect key="frame" x="0.0" y="520" width="600" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eOs-4d-63U" id="LL6-43-5Ri">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
@@ -367,7 +385,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xEz-XF-PfD">
-                                        <rect key="frame" x="0.0" y="511" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="561" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xEz-XF-PfD" id="5Rb-i6-geT">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -396,7 +414,7 @@
                             <tableViewSection headerTitle="Actions" id="6bM-2c-3U9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q5a-34-gyg">
-                                        <rect key="frame" x="0.0" y="606" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="656" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5a-34-gyg" id="Ml2-Hy-6ad">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -438,6 +456,9 @@
                         <outlet property="ignoreMuteSwitchLabel" destination="Nly-Qt-bId" id="NXs-0T-aCG"/>
                         <outlet property="ignoreMuteSwitchSwitch" destination="S1d-5m-xeb" id="wtK-5K-ieX"/>
                         <outlet property="onlyWiFiSwitch" destination="pUi-kz-aZf" id="0Op-qn-b45"/>
+                        <outlet property="signInButton" destination="qnw-sr-ZtE" id="o7i-2w-Ban"/>
+                        <outlet property="signInHeight" destination="JSV-Bw-Ky4" id="q2l-2M-DJh"/>
+                        <outlet property="signInNameDistance" destination="RHK-NZ-J4q" id="Xh1-cG-6yE"/>
                         <outlet property="userNameLabel" destination="iwD-Yk-nPZ" id="T2U-4i-zwm"/>
                         <outlet property="videoQualityLabel" destination="1rQ-YY-ig7" id="sFd-Gw-Kkp"/>
                     </connections>

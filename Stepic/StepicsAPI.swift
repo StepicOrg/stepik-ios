@@ -15,10 +15,21 @@ class StepicsAPI {
     
     init() {}
     
+    let manager: Manager = {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.requestCachePolicy = .ReloadIgnoringLocalCacheData
+        return Manager(configuration: configuration)
+    }()
+
+    
     func retrieveCurrentUser(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: User -> Void, error errorHandler: String -> Void) -> Request {
         let params = [String:AnyObject]()
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, response, json, error) in
+        NSURLCache.sharedURLCache().removeAllCachedResponses()
+        
+        return manager.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+            (request, response, json, error) in
+            
+            print("headers while retrieving user: \(request.allHTTPHeaderFields)")
             
             if let e = error as? NSError {
                 print(e.localizedDescription)
