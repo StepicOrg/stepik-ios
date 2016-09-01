@@ -295,14 +295,22 @@ class CoursePreviewViewController: UIViewController {
         reloadTableView()
     }
     
+    
     @IBAction func joinButtonPressed(sender: UIButton) {
         if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
             return
         }
         
         if !AuthInfo.shared.isAuthorized {
-            let vc = ControllerHelper.getAuthController()
-            self.presentViewController(vc, animated: true, completion: nil)
+            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                vc.success = {
+                    [weak self] in
+                    if let s = self {
+                        s.joinButtonPressed(sender)
+                    }
+                }
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
             return
         }
         

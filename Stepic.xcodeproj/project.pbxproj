@@ -443,6 +443,7 @@
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
 		08D674911D7880E200B60963 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
+		08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
@@ -751,6 +752,7 @@
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D674901D7880E200B60963 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
@@ -970,6 +972,7 @@
 				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
 				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
 				08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */,
+				08D674921D78B46900B60963 /* AuthNavigationViewController.swift */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -2362,6 +2365,7 @@
 				083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
+				08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */,
 				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,

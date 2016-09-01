@@ -56,17 +56,7 @@ class UserPreferencesTableViewController: UITableViewController {
         ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
         autoCheckForUpdatesSwitch.on = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
         
-        performRequest({
-        ApiDataDownloader.sharedDownloader.getCurrentUser({
-            user in
-            AuthInfo.shared.user = user
-            UIThread.performUI({self.initWithUser(user)})
-            }
-            , failure: {
-            error in
-            print("Error while getting current user profile")
-            })
-        })
+        updateUser()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -74,6 +64,20 @@ class UserPreferencesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    func updateUser() {
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getCurrentUser({
+                user in
+                AuthInfo.shared.user = user
+                UIThread.performUI({self.initWithUser(user)})
+                }
+                , failure: {
+                    error in
+                    print("Error while getting current user profile")
+            })
+        })
+    }
+    
     private func localize() {
         ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
 
@@ -199,6 +203,13 @@ class UserPreferencesTableViewController: UITableViewController {
     func signOut() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
         AuthInfo.shared.token = nil
+        if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+            vc.success = {
+                [weak self] in
+                self?.updateUser()
+            }
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
     }
     
     @IBAction func signOutButtonPressed(sender: UIButton) {

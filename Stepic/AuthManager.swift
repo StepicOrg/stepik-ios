@@ -276,7 +276,7 @@ class AuthManager : NSObject {
     
     //TODO: When refactoring code think about this function
     func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
-            let headers : [String : String] = Session.cookieHeaders
+            let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
                                     
             let params : [String : AnyObject] = 
             ["user" :

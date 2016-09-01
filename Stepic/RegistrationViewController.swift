@@ -65,6 +65,10 @@ class RegistrationViewController: UIViewController {
         signUpToStepic()
     }
     
+    var success : (Void->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.success
+    }
+    
     func signUpToStepic() {
         let email = emailTextField.text ?? ""
         let firstName = firstNameTextField.text ?? ""
@@ -72,43 +76,53 @@ class RegistrationViewController: UIViewController {
         let password = passwordTextField.text ?? ""
         
         SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
-        AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
-            AuthManager.sharedManager.logInWithUsername(email, password: password, 
-                success: {
-                    t in
-                    AuthInfo.shared.token = t
-                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
-                    ApiDataDownloader.sharedDownloader.getCurrentUser({
-                        user in
-                        AuthInfo.shared.user = user
-                        SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI { 
-                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-                        }
-                        AnalyticsHelper.sharedHelper.changeSignIn()
-                        AnalyticsHelper.sharedHelper.sendSignedIn()
-                        }, failure: {
-                            e in
-                            print("successfully signed in, but could not get user")
+        performRequest({        
+            AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
+                AuthManager.sharedManager.logInWithUsername(email, password: password, 
+                    success: {
+                        t in
+                        AuthInfo.shared.token = t
+                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
+                        ApiDataDownloader.sharedDownloader.getCurrentUser({
+                            user in
+                            AuthInfo.shared.user = user
                             SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                             UIThread.performUI { 
-                                self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                                self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                    [weak self] in
+                                    self?.success?()
+                                    })
                             }
-                    })
-                }, failure: {
-                    e in
-                    SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
-            })
-            }, error: {
-                errormsg, registrationErrorInfo in
-                //TODO: Add localized data
-                UIThread.performUI{SVProgressHUD.showErrorWithStatus(errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
-                if let info = registrationErrorInfo {
+                            AnalyticsHelper.sharedHelper.changeSignIn()
+                            AnalyticsHelper.sharedHelper.sendSignedIn()
+                            }, failure: {
+                                e in
+                                print("successfully signed in, but could not get user")
+                                SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                                UIThread.performUI { 
+                                    self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                        [weak self] in
+                                        self?.success?()
+                                        })
+                                }
+                        })
+                    }, failure: {
+                        e in
+                        SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
+                })
+                }, error: {
+                    errormsg, registrationErrorInfo in
+                    //TODO: Add localized data
+                    UIThread.performUI{SVProgressHUD.showErrorWithStatus(errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
+                    if let info = registrationErrorInfo {
                         self.showEmailErrorWith(message: info.email)
                         self.showPasswordErrorWith(message: info.password)                    
                         self.showFirstNameErrorWith(message: info.firstName)
                         self.showLastNameErrorWith(message: info.lastName)
-                }
+                    }
+            })
+            }, error: { 
+                SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: "")) 
         })
     }
     
@@ -146,14 +160,14 @@ class RegistrationViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
 

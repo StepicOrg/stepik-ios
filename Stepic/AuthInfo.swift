@@ -43,9 +43,7 @@ class AuthInfo: NSObject {
                         CoreDataHelper.instance.save()
                         AuthInfo.shared.user = nil
                         //Show sign in controller
-                        let vc = ControllerHelper.getAuthController()
-                        ControllerHelper.getTopViewController()?.presentViewController(vc, animated: true, completion: nil)
-
+                        
                         AnalyticsHelper.sharedHelper.changeSignIn()
                         self.setTokenValue(newToken)
                     }
@@ -127,11 +125,14 @@ class AuthInfo: NSObject {
     var initialHTTPHeaders : [String: String] {
         if let user = user {
             if user.isGuest {
+                print("requested headers with token: \(APIDefaults.headers.bearer)")
                 return APIDefaults.headers.bearer
             } else {
+                print("requested headers with cookies: \(Session.cookieHeaders)")
                 return Session.cookieHeaders
             }
         }
+        print("requested nil headers")
         return [String: String]()
     }
 }

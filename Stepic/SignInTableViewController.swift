@@ -27,6 +27,10 @@ class SignInTableViewController: UITableViewController {
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), forState: .Normal)
     }
     
+    var success : (Void->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.success
+    }
+    
     @IBAction func backButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -110,7 +114,10 @@ class SignInTableViewController: UITableViewController {
                     AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI { 
-                        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            [weak self] in
+                            self?.success?()
+                        })
                     }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
@@ -119,7 +126,10 @@ class SignInTableViewController: UITableViewController {
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                         UIThread.performUI { 
-                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                [weak self] in
+                                self?.success?()
+                            })
                         }
                 })
             }, failure: {
@@ -143,7 +153,10 @@ class SignInTableViewController: UITableViewController {
                     AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI { 
-                        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            [weak self] in
+                            self?.success?()
+                        })
                     }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
@@ -152,7 +165,10 @@ class SignInTableViewController: UITableViewController {
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                         UIThread.performUI{ 
-                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                [weak self] in
+                                self?.success?()
+                            })
                         }
                 })
             }, failure: {
