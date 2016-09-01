@@ -43,7 +43,9 @@ class AuthInfo: NSObject {
                         CoreDataHelper.instance.save()
                         AuthInfo.shared.user = nil
                         //Show sign in controller
-                        ControllerHelper.showLaunchController(true)
+                        let vc = ControllerHelper.getAuthController()
+                        ControllerHelper.getTopViewController()?.presentViewController(vc, animated: true, completion: nil)
+
                         AnalyticsHelper.sharedHelper.changeSignIn()
                         self.setTokenValue(newToken)
                     }

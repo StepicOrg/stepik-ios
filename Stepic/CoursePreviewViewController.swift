@@ -296,7 +296,7 @@ class CoursePreviewViewController: UIViewController {
         }
         
         if !AuthInfo.shared.isAuthorized {
-            let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
+            let vc = ControllerHelper.getAuthController()
             self.presentViewController(vc, animated: true, completion: nil)
             return
         }

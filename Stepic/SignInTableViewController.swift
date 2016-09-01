@@ -109,14 +109,18 @@ class SignInTableViewController: UITableViewController {
                     user in
                     AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                    UIThread.performUI { 
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                    }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                        UIThread.performUI { 
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                        }
                 })
             }, failure: {
                 e in
@@ -138,14 +142,18 @@ class SignInTableViewController: UITableViewController {
                     user in
                     AuthInfo.shared.user = user
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                    UIThread.performUI { 
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                    }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                        UIThread.performUI{ 
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                        }
                 })
             }, failure: {
                 e in

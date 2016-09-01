@@ -44,7 +44,6 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        closeBarButtonItem.tintColor = UIColor.stepicGreenColor()
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
         firstNameTextField.autocapitalizationType = .Words
@@ -83,14 +82,18 @@ class RegistrationViewController: UIViewController {
                         user in
                         AuthInfo.shared.user = user
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                        UIThread.performUI { 
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                        }
                         AnalyticsHelper.sharedHelper.changeSignIn()
                         AnalyticsHelper.sharedHelper.sendSignedIn()
                         }, failure: {
                             e in
                             print("successfully signed in, but could not get user")
                             SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                            UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                            UIThread.performUI { 
+                                self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+                            }
                     })
                 }, failure: {
                     e in
@@ -140,10 +143,6 @@ class RegistrationViewController: UIViewController {
     
     @IBAction func visiblePasswordButtonPressed(sender: AnyObject) {
         passwordSecure = !passwordSecure
-    }
-    
-    @IBAction func closeButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

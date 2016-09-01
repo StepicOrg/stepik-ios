@@ -442,6 +442,7 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		08D674911D7880E200B60963 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
@@ -749,6 +750,7 @@
 		08D2AE451C04BA6100BD8C3D /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08D674901D7880E200B60963 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
@@ -963,6 +965,7 @@
 		0828FF841BC81EA9000AFEA7 /* Registration & Sign in */ = {
 			isa = PBXGroup;
 			children = (
+				08D674901D7880E200B60963 /* Auth.storyboard */,
 				083D64A71C175463003222F0 /* Social networks */,
 				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
 				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
@@ -1933,6 +1936,7 @@
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
+				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,

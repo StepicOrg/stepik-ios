@@ -169,7 +169,7 @@ class StepsViewController: RGPageViewController {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson, id = startStepId {
-            if l.steps.count != 0  && id < pagesCount {
+            if l.steps.count != 0  && id < l.steps.count {
                 print("id -> \(id)")
                 didSelectTab = true
                 self.selectTabAtIndex(id, updatePage: true)
