@@ -84,6 +84,7 @@ class AuthInfo: NSObject {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
                 setTokenValue(newToken)
+                Session.delete()
             }
         }
         

@@ -20,6 +20,7 @@ class Session {
             }
         }
         cookieDict = [:]
+        cookieHeaders = [:]
     }
     
     static func refresh(completion completion: (Void -> Void), error errorHandler: (String -> Void)) -> Request? {
