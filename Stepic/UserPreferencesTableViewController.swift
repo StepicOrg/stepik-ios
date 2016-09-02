@@ -228,6 +228,7 @@ class UserPreferencesTableViewController: UITableViewController {
                 [weak self] in
                 self?.updateUser()
             }
+            vc.cancel = vc.success
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }

@@ -22,6 +22,10 @@ class LaunchViewController: UIViewController {
         dontHaveAccountLabel.text = NSLocalizedString("DontHaveAccountQuestion", comment: "")
     }
     
+    var cancel : (Void->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.cancel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +65,10 @@ class LaunchViewController: UIViewController {
     }
 
     @IBAction func сlosePressed(sender: AnyObject) {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+            [weak self] in
+            self?.cancel?()
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
