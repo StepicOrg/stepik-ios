@@ -104,7 +104,17 @@ extension MyCoursesViewController {
         
         switch emptyDatasetState {
         case .Empty:
-            text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            if let user = AuthInfo.shared.user {  
+                if user.isGuest {
+                    //TODO: Localize
+                    text = NSLocalizedString("SignInToJoin", comment: "")
+                } else {
+                    text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+                }
+            } else {
+                text = NSLocalizedString("SignInToJoin", comment: "")
+            }
+
             break
         case .ConnectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
@@ -122,6 +132,33 @@ extension MyCoursesViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        var text : String = ""
+        switch emptyDatasetState {
+        case .Empty:
+            if let user = AuthInfo.shared.user {  
+                if user.isGuest {
+                    //TODO: Localize
+                    text = NSLocalizedString("SignIn", comment: "")
+                } else {
+                    text = NSLocalizedString("AllCourses", comment: "")
+                }
+            } else {
+                text = NSLocalizedString("SignIn", comment: "")
+            }
+            
+            break
+        case .ConnectionError:
+            text = ""
+            break
+        }
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return UIColor.whiteColor()
     }
@@ -135,5 +172,26 @@ extension MyCoursesViewController {
 extension MyCoursesViewController  {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView!) {
+        switch emptyDatasetState {
+        case .Empty:
+            if let user = AuthInfo.shared.user {  
+                if user.isGuest {
+                    let vc = ControllerHelper.getAuthController()
+                    self.presentViewController(vc, animated: true, completion: nil)
+                } else {
+                    self.tabBarController?.selectedIndex = 1
+                }
+            } else {
+                let vc = ControllerHelper.getAuthController()
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+            
+            break
+        case .ConnectionError:
+            break
+        }
     }
 }

@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Search Results Courses View Controller-->
@@ -92,7 +93,7 @@
         <!--All Courses-->
         <scene sceneID="Xcs-LO-Ogd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Courses" image="Courses" selectedImage="Courses Filled" id="D6B-Zy-xmi">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Courses Filled"/>
@@ -115,7 +116,7 @@
         <!--My courses-->
         <scene sceneID="Eot-ep-83N">
             <objects>
-                <navigationController id="NxB-SA-EGM" sceneMemberID="viewController">
+                <navigationController id="NxB-SA-EGM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My courses" image="Elective" selectedImage="Elective Filled" id="I8C-zf-fZb">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Elective Filled"/>
@@ -215,10 +216,11 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnw-sr-ZtE" userLabel="Sign in">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnw-sr-ZtE" userLabel="Sign in">
                                                     <rect key="frame" x="277" y="172" width="47" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="JSV-Bw-Ky4"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="icr-PN-lbo"/>
                                                     </constraints>
                                                     <state key="normal" title="Sign in"/>
                                                     <connections>
@@ -235,6 +237,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="qnw-sr-ZtE" secondAttribute="bottom" id="WJG-to-Fna"/>
                                                 <constraint firstItem="iwD-Yk-nPZ" firstAttribute="top" secondItem="J5k-lf-s7P" secondAttribute="bottom" constant="8" id="g4t-Rb-6IN"/>
                                                 <constraint firstItem="J5k-lf-s7P" firstAttribute="top" secondItem="p4A-G6-tl3" secondAttribute="topMargin" constant="8" id="jlI-ZA-BP8"/>
+                                                <constraint firstItem="qnw-sr-ZtE" firstAttribute="width" secondItem="p4A-G6-tl3" secondAttribute="width" multiplier="0.5" priority="999" id="qAd-2F-kiv"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -1193,10 +1196,10 @@
             </objects>
             <point key="canvasLocation" x="1687" y="1442"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Styled Tab Bar View Controller-->
         <scene sceneID="h7W-ra-FMl">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="0uJ-IX-W04" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="0uJ-IX-W04" customClass="StyledTabBarViewController" customModule="Stepic" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4cz-m9-gep">
@@ -1213,10 +1216,10 @@
             </objects>
             <point key="canvasLocation" x="-108" y="1442"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Green Navigation View Controller-->
         <scene sceneID="Laj-7g-BZD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">

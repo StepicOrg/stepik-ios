@@ -50,6 +50,8 @@ class UserPreferencesTableViewController: UITableViewController {
         
         localize() 
         
+        signInButton.setStepicWhiteStyle()
+        
         avatarImageView.setRoundedBounds(width: 0)
         
 //        if let apiUser = AuthInfo.shared.user {
@@ -87,15 +89,16 @@ class UserPreferencesTableViewController: UITableViewController {
         
         autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
         checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), forState: .Normal)
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
     }
     
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
         if user.isGuest {
-            signInHeight.constant = 30
+            signInHeight.constant = 40
             signInNameDistance.constant = 8
-            heightForRows[0][0] = 131 + 38
+            heightForRows[0][0] = 131 + 48
             heightForRows[3][0] = 0
             signInButton.hidden = false
         } else {

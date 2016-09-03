@@ -84,9 +84,6 @@ class StepsViewController: RGPageViewController {
         
         datasource = self
         delegate = self
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         
         if numberOfPagesForViewController(self) == 0 {
             self.view.userInteractionEnabled = false

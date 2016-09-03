@@ -127,5 +127,8 @@ Syllabus = "Модули";
 Course = "Курс";
 NextLesson = "Следующий урок";
 PrevLesson = "Предыдущий урок";
-CouldNotOpenLink = "Could not open link";
-OpenInBrowserQuestion = "Open in browser?";
+CouldNotOpenLink = "Невозможно открыть ссылку";
+OpenInBrowserQuestion = "Открыть в браузере?";
+AllCourses = "Все курсы";
+SignInToJoin = "Войдите, чтобы записаться на курсы";
+

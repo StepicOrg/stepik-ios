@@ -33,6 +33,8 @@
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
+		081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */; };
+		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
 		081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
@@ -240,7 +242,6 @@
 		08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
 		08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
-		08B899611C983FC3003BED43 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */; };
 		08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
@@ -557,6 +558,8 @@
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
 		080F74631BD9213D0064AAEA /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
 		080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQualityTableViewController.swift; sourceTree = "<group>"; };
+		081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenNavigationViewController.swift; sourceTree = "<group>"; };
+		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
 		081A7DA81C56625F00583728 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
@@ -710,7 +713,6 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireExtensions.swift; sourceTree = "<group>"; };
-		08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionWebTableViewCell.xib; sourceTree = "<group>"; };
 		08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionWebTableViewCell.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1175,6 +1177,8 @@
 				0885F84C1BA8378B00F2A188 /* Courses */,
 				0828FF731BC5E314000AFEA7 /* Sections */,
 				0828FF871BC81EF2000AFEA7 /* Units */,
+				081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */,
+				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1316,7 +1320,6 @@
 			isa = PBXGroup;
 			children = (
 				083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */,
-				08B899601C983FC3003BED43 /* ControllerHelperLaunchExtension.swift */,
 			);
 			name = "Controller Helper";
 			sourceTree = "<group>";
@@ -2482,6 +2485,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
+				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
@@ -2530,7 +2534,6 @@
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
-				08B899611C983FC3003BED43 /* ControllerHelperLaunchExtension.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -2566,6 +2569,7 @@
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
+				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

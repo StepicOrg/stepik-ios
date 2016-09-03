@@ -20,11 +20,7 @@ class DownloadsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+                
         tableView.registerNib(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
         
         self.tableView.emptyDataSetDelegate = self 

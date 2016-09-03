@@ -67,9 +67,6 @@ class CoursePreviewViewController: UIViewController {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         self.navigationItem.backBarButtonItem?.title = ""
         
         tableView.tableFooterView = UIView()

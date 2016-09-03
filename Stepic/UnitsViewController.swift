@@ -26,10 +26,6 @@ class UnitsViewController: UIViewController {
 
         tableView.tableFooterView = UIView()
                 
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-
         tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
         
