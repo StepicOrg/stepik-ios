@@ -74,8 +74,8 @@ class DeepLinkRouter {
                             } else {
                                 print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
                                 completion(nil)
-                                    return
-                                }
+                                return
+                            }
                             }, failure: {
                                 error in
                                 print("error while downloading course with id \(courseId)")
@@ -104,113 +104,65 @@ class DeepLinkRouter {
     }
     
     private static func routeToSyllabusWithId(courseId: Int, completion: (UIViewController? -> Void)) {
-        if !AuthInfo.shared.isAuthorized {
-                do {
-                    let courses = try Course.getCourses([courseId])
-                    if courses.count == 0 {
-                        performRequest({
-                            ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
-                                loadedCourses in 
-                                if loadedCourses.count == 1 {
-                                    UIThread.performUI {
-                                        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                            vc.course = loadedCourses[0]
-                                            completion(vc)
-                                        }
+        do {
+            let courses = try Course.getCourses([courseId])
+            if courses.count == 0 {
+                performRequest({
+                    ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
+                        loadedCourses in 
+                        if loadedCourses.count == 1 {
+                            UIThread.performUI {
+                                let course = loadedCourses[0]
+                                if course.enrolled {
+                                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+                                        vc.course = course
+                                        completion(vc)
                                     }
                                 } else {
-                                    print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                                    completion(nil)
-                                    return
-                                }
-                                }, failure: {
-                                    error in
-                                    print("error while downloading course with id \(courseId)")
-                                    completion(nil) 
-                                    return
-                            })
-                        })
-                        return
-                    } 
-                    if courses.count == 1 {
-                        UIThread.performUI {
-                            if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                vc.course = courses[0]
-                                completion(vc)
-                            }
-                        }
-                        return
-                    } else {
-                        completion(nil)
-                    }
-                    return
-                }
-                catch {
-                    print("something bad happened")
-                    completion(nil)
-                    return
-                }
-        } else {
-            do {
-                let courses = try Course.getCourses([courseId])
-                if courses.count == 0 {
-                    performRequest({
-                        ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
-                            loadedCourses in 
-                            if loadedCourses.count == 1 {
-                                UIThread.performUI {
-                                    let course = loadedCourses[0]
-                                    if course.enrolled {
-                                        if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
-                                            vc.course = course
-                                            completion(vc)
-                                        }
-                                    } else {
-                                        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                            vc.course = course
-                                            vc.displayingInfoType = DisplayingInfoType.Syllabus
-                                            completion(vc)
-                                        }
+                                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                                        vc.course = course
+                                        vc.displayingInfoType = DisplayingInfoType.Syllabus
+                                        completion(vc)
                                     }
                                 }
-                            } else {
-                                print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                                completion(nil)
-                                return
                             }
-                            }, failure: {
-                                error in
-                                print("error while downloading course with id \(courseId)")
-                                completion(nil) 
-                                return
-                        })
+                        } else {
+                            print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
+                            completion(nil)
+                            return
+                        }
+                        }, failure: {
+                            error in
+                            print("error while downloading course with id \(courseId)")
+                            completion(nil) 
+                            return
                     })
-                    return
-                } 
-                if courses.count == 1 {
-                    let course = courses[0]
-                    if course.enrolled {
-                        if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
-                            vc.course = course
-                            completion(vc)
-                        }
-                    } else {
-                        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                            vc.course = course
-                            vc.displayingInfoType = DisplayingInfoType.Syllabus
-                            completion(vc)
-                        }
+                })
+                return
+            } 
+            if courses.count == 1 {
+                let course = courses[0]
+                if course.enrolled {
+                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+                        vc.course = course
+                        completion(vc)
                     }
-                    return
+                } else {
+                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                        vc.course = course
+                        vc.displayingInfoType = DisplayingInfoType.Syllabus
+                        completion(vc)
+                    }
                 }
-                completion(nil)
                 return
             }
-            catch {
-                print("something bad happened")
-                completion(nil)
-                return
-            }
+            completion(nil)
+            return
+        }
+        catch {
+            print("something bad happened")
+            completion(nil)
+            return
         }
         
         completion(nil)
