@@ -131,4 +131,6 @@ CouldNotOpenLink = "Невозможно открыть ссылку";
 OpenInBrowserQuestion = "Открыть в браузере?";
 AllCourses = "Все курсы";
 SignInToJoin = "Войдите, чтобы записаться на курсы";
-
+FirstName = "Имя";
+LastName = "Фамилия";
+SignUpAction = "Зарегистрироваться";

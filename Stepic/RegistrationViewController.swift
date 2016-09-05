@@ -41,11 +41,22 @@ class RegistrationViewController: UIViewController {
         }
     }
     
+    func setupLocalizations() {
+        title = NSLocalizedString("SignUp", comment: "")
+        firstNameTextField.placeholder = NSLocalizedString("FirstName", comment: "")
+        lastNameTextField.placeholder = NSLocalizedString("LastName", comment: "")
+        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        signUpButton.setTitle(NSLocalizedString("SignUpAction", comment: ""), forState: .Normal)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
+        setupLocalizations()
         firstNameTextField.autocapitalizationType = .Words
         lastNameTextField.autocapitalizationType = .Words
         
