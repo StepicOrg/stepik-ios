@@ -110,10 +110,12 @@ class SectionsViewController: UIViewController {
         if segue.identifier == "showCourse" {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = course
+            dvc.hidesBottomBarWhenPushed = true
         }
         if segue.identifier == "showUnits" {
             let dvc = segue.destinationViewController as! UnitsViewController
             dvc.section = course.sections[sender as! Int]
+            dvc.hidesBottomBarWhenPushed = true
         }
     }
 

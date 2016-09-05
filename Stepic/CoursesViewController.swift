@@ -256,11 +256,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         if segue.identifier == "showCourse" {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = sender as? Course
+            dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showSections" {
             let dvc = segue.destinationViewController as! SectionsViewController
             dvc.course = sender as? Course
+            dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showPreferences" {
