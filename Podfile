@@ -18,9 +18,12 @@ def all_pods
     pod 'DZNEmptyDataSet'
     pod 'AFImageHelper'
     
-    pod 'Firebase/Messaging'
-    pod 'Firebase/AppIndexing'
-    pod 'Firebase/Core'
+    pod 'Firebase', '<= 3.4.0'
+#    pod 'Firebase/Messaging'
+    pod 'FirebaseAppIndexing', '1.0.4'
+    pod 'FirebaseMessaging', '1.1.1'
+    pod 'FirebaseAnalytics', '3.3.0'
+#    pod 'Firebase/Core'
     
     pod "MagicalRecord"
     pod 'AAShareBubbles'

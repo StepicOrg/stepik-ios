@@ -105,7 +105,7 @@ class ApiDataDownloader: NSObject {
 
     
     func getUsersByIds(ids: [Int], deleteUsers : [User], refreshMode: RefreshMode, success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
-        return getObjectsByIds(requestString: "users", ids: ids, deleteObjects: deleteUsers, refreshMode: refreshMode, success: success, failure: failure)
+        return getObjectsByIds(requestString: "users", headers: [String:String](), ids: ids, deleteObjects: deleteUsers, refreshMode: refreshMode, success: success, failure: failure)
     }
     
     func getSectionsByIds(ids: [Int], existingSections : [Section], refreshMode: RefreshMode, success : (([Section]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
@@ -132,13 +132,10 @@ class ApiDataDownloader: NSObject {
         return getObjectsByIds(requestString: "assignments", ids: ids, deleteObjects: deleteAssignments, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
         
-        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-        var params : [String : NSObject] = [:]
-        
-        params["access_token"] = AuthInfo.shared.token?.accessToken
-        
+        let params : [String : NSObject] = [:]
+                
         let idString = constructIdsString(array: ids)
         if idString == "" {
             success?([])

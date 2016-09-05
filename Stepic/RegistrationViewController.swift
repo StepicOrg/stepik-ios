@@ -97,6 +97,7 @@ class RegistrationViewController: UIViewController {
                         ApiDataDownloader.sharedDownloader.getCurrentUser({
                             user in
                             AuthInfo.shared.user = user
+                            User.removeAllExcept(user)
                             SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
                             UIThread.performUI { 
                                 self.navigationController?.dismissViewControllerAnimated(true, completion: {

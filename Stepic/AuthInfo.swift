@@ -17,13 +17,19 @@ class AuthInfo: NSObject {
     private override init() {
         super.init()
         
-        //TODO: init user here using userId 
         if let id = userId {
-            if let users = User.MR_findAllWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber)) {
-                if users.count > 1 {
-                    print("users count > 1")
+            if let users = User.fetchById(id) {
+                var c = users.count
+                if c > 1 {
+                    print("users count > 1, deleting all")
+                    for user in users {
+                        user.MR_deleteEntity()
+                    }
+                    c = 0
+                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                 }
-                if users.count == 0 {
+                
+                if c == 0 {
                     ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .Update, success: {
                         [weak self]
                         users in
@@ -32,8 +38,8 @@ class AuthInfo: NSObject {
                             return
                         }
                         
-                        CoreDataHelper.instance.save()
-                        
+                        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+
                         }, failure: {
                             [weak self]
                             _ in
@@ -42,8 +48,8 @@ class AuthInfo: NSObject {
                     })
                 }
                 
-                if users.count >= 1 {
-                    user = users.first as? User
+                if c == 1 {
+                    user = users.first
                 }
                 
             }
@@ -56,7 +62,6 @@ class AuthInfo: NSObject {
         defaults.setValue(newToken?.tokenType, forKey: "token_type")
         defaults.setValue(newToken?.expireDate.timeIntervalSince1970, forKey: "expire_date")
         defaults.synchronize()
-
     }
     
     var token : StepicToken? {
@@ -159,14 +164,14 @@ class AuthInfo: NSObject {
     var initialHTTPHeaders : [String: String] {
         if let user = user {
             if !user.isGuest {
-                print("requested headers with token: \(APIDefaults.headers.bearer)")
+//                print("requested headers with token: \(APIDefaults.headers.bearer)")
                 return APIDefaults.headers.bearer
             } else {
-                print("requested headers with cookies: \(Session.cookieHeaders)")
+//                print("requested headers with cookies: \(Session.cookieHeaders)")
                 return Session.cookieHeaders
             }
         }
-        print("requested nil headers")
+//        print("requested nil headers")
         return [String: String]()
     }
 }

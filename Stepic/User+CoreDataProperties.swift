@@ -34,9 +34,8 @@ extension User {
         self.init(entity: User.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
     }
     
-    
     var id : Int {
-        set(value){
+        set(value) {
             managedId = value
         }
         get {
