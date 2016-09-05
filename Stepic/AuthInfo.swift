@@ -140,14 +140,25 @@ class AuthInfo: NSObject {
     
     var didRefresh : Bool = false
     
+    var anonymousUserId : Int?
+    
     var userId : Int? {
         set(id) {
+            if let user = user {
+                if user.isGuest {
+                    anonymousUserId = id
+                }
+            }
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()
         }
         get {
-            if let id = defaults.valueForKey("user_id") as? Int {
-                return id
+            if let user = user {
+                if user.isGuest {
+                    return anonymousUserId
+                } else {
+                    return defaults.valueForKey("user_id") as? Int
+                }
             } else {
                 return nil
             }
