@@ -17,6 +17,7 @@ class AuthInfo: NSObject {
     private override init() {
         super.init()
         
+        print("initializing AuthInfo with userId \(userId)")
         if let id = userId {
             if let users = User.fetchById(id) {
                 var c = users.count
@@ -146,21 +147,27 @@ class AuthInfo: NSObject {
         set(id) {
             if let user = user {
                 if user.isGuest {
+                    print("setting anonymous user id \(id)")
                     anonymousUserId = id
+                    return
                 }
             }
+            print("setting user id \(id)")
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()
         }
         get {
             if let user = user {
                 if user.isGuest {
+                    print("returning anonymous user id \(anonymousUserId)")
                     return anonymousUserId
                 } else {
+                    print("returning normal user id \(defaults.valueForKey("user_id") as? Int)")
                     return defaults.valueForKey("user_id") as? Int
                 }
             } else {
-                return nil
+                print("returning normal user id \(defaults.valueForKey("user_id") as? Int)")
+                return defaults.valueForKey("user_id") as? Int
             }
         }
     }

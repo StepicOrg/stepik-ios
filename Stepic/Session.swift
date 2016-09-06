@@ -24,6 +24,7 @@ class Session {
     }
     
     static func refresh(completion completion: (Void -> Void), error errorHandler: (String -> Void)) -> Request? {
+        print("refreshing session")
         let stepicURLString = StepicApplicationsInfo.stepicURL
         let stepicURL = NSURL(string: stepicURLString)!
         delete()

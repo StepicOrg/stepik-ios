@@ -39,6 +39,7 @@ class ApiRequestPerformer {
     private static func performRequestWithAuthorizationCheck(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
         
         if let user = AuthInfo.shared.user {
+            print("performing request with user \(user.id)")
             if user.isGuest && Session.needsRefresh {
                 Session.refresh(completion: 
                     {
