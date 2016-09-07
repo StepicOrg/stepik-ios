@@ -108,8 +108,8 @@ class UserPreferencesTableViewController: UITableViewController {
             heightForRows[3][0] = 40
             signInButton.hidden = true
         }
-        tableView.beginUpdates()
-        tableView.endUpdates()
+        print("beginning updates")
+        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -143,6 +143,7 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print("getting title for header in section \(section)")
         if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 2) || (section == 3 && heightForRows[3][0] == 0) {
             return nil 
         } else {

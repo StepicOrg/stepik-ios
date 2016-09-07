@@ -13,24 +13,25 @@ class AuthInfo: NSObject {
     static var shared = AuthInfo()
     
     private let defaults = NSUserDefaults.standardUserDefaults()
-    
+        
     private override init() {
         super.init()
         
         print("initializing AuthInfo with userId \(userId)")
         if let id = userId {
             if let users = User.fetchById(id) {
-                var c = users.count
-                if c > 1 {
-                    print("users count > 1, deleting all")
-                    for user in users {
-                        user.MR_deleteEntity()
-                    }
-                    c = 0
-                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
-                }
+                let c = users.count
+//                if c > 1 {
+//                    print("users count > 1, deleting all")
+//                    for user in users {
+//                        user.MR_deleteEntity()
+//                    }
+//                    c = 0
+//                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+//                }
                 
                 if c == 0 {
+                    print("No user with such id found, downloading")
                     ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .Update, success: {
                         [weak self]
                         users in
@@ -38,7 +39,7 @@ class AuthInfo: NSObject {
                             self?.user = user
                             return
                         }
-                        
+                        print("downloaded user")
                         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
 
                         }, failure: {
@@ -49,7 +50,7 @@ class AuthInfo: NSObject {
                     })
                 }
                 
-                if c == 1 {
+                if c >= 1 {
                     user = users.first
                 }
                 
@@ -79,7 +80,8 @@ class AuthInfo: NSObject {
                         for course in c {
                             course.enrolled = false
                         }
-                        CoreDataHelper.instance.save()
+                        Progress.MR_truncateAll()
+                        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
                         AuthInfo.shared.user = nil
                         
                         AnalyticsHelper.sharedHelper.changeSignIn()
@@ -181,16 +183,17 @@ class AuthInfo: NSObject {
     
     var initialHTTPHeaders : [String: String] {
         if let user = user {
-            if !user.isGuest {
-//                print("requested headers with token: \(APIDefaults.headers.bearer)")
-                return APIDefaults.headers.bearer
-            } else {
-//                print("requested headers with cookies: \(Session.cookieHeaders)")
+            if user.isGuest {
                 return Session.cookieHeaders
+//                print("requested headers with token: \(APIDefaults.headers.bearer)")
+            } else {
+                return APIDefaults.headers.bearer
+//                print("requested headers with cookies: \(Session.cookieHeaders)")
             }
         }
 //        print("requested nil headers")
-        return [String: String]()
+        return APIDefaults.headers.bearer
+
     }
 }
 

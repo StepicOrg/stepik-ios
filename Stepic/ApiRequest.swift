@@ -18,12 +18,15 @@ class ApiRequestPerformer {
     
     //TODO: Add error type for this
     static func performAPIRequest(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
+        print("performing API request")
         if !AuthInfo.shared.hasUser {
+            print("no user in AuthInfo, retrieving")
             ApiDataDownloader.stepics.retrieveCurrentUser(success: 
                 {
                     user in
                     AuthInfo.shared.user = user
-                    CoreDataHelper.instance.save()
+                    User.removeAllExcept(user)
+                    print("retrieved current user")
                     performRequestWithAuthorizationCheck(completion, error: errorHandler)
                 }, error: {
                     errorMsg in

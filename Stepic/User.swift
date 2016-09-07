@@ -49,7 +49,7 @@ class User: NSManagedObject, JSONInitializable {
     static func removeAllExcept(user: User) {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
-                if fetchedUsers != fetchedUsers {
+                if fetchedUser != user {
                     fetchedUser.MR_deleteEntity()
                 }
             }
