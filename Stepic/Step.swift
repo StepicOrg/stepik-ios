@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
-
+import MagicalRecord
 
 class Step: NSManagedObject, JSONInitializable {
 
@@ -41,4 +41,8 @@ class Step: NSManagedObject, JSONInitializable {
     
     var hasReview : Bool = false
 
+    static func getStepWithId(id: Int) -> Step? {
+        return Step.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
+    }
+    
 }

@@ -60,6 +60,8 @@
 		082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		082EDED31D881562006B51DC /* StepDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */; };
+		082EDED41D881562006B51DC /* StepDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */; };
 		082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
@@ -583,6 +585,8 @@
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
 		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
+		082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepDeepLinkRouter.swift; sourceTree = "<group>"; };
+		082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v9.xcdatamodel; sourceTree = "<group>"; };
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
 		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
 		083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySerializable.swift; sourceTree = "<group>"; };
@@ -1161,6 +1165,7 @@
 				080DCF161C4518BC00DE3E2E /* SearchResult.swift */,
 				08AEC3A41CCA69F300FFF29E /* Device.swift */,
 				084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */,
+				082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2203,6 +2208,7 @@
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
+				082EDED41D881562006B51DC /* StepDeepLinkRouter.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -2459,6 +2465,7 @@
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
+				082EDED31D881562006B51DC /* StepDeepLinkRouter.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
@@ -2861,6 +2868,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */,
 				084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */,
 				084070821D64883400308FC1 /* Model_v7.xcdatamodel */,
 				0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */,
@@ -2870,7 +2878,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */;
+			currentVersion = 082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

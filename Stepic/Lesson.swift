@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import MagicalRecord
 
 class Lesson: NSManagedObject, JSONInitializable {
     
@@ -27,6 +28,10 @@ class Lesson: NSManagedObject, JSONInitializable {
         slug = json["slug"].stringValue
         coverURL = json["cover_url"].string
         stepsArray = json["steps"].arrayObject as! [Int]
+    }
+    
+    static func getLesson(id: Int) -> Lesson? {
+        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
     
     func update(json json: JSON) {
