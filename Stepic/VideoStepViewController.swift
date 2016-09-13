@@ -18,7 +18,15 @@ class VideoStepViewController: UIViewController {
     var video : Video!
     var nItem : UINavigationItem!
     var step: Step!
-    var assignment : Assignment?
+    
+    var assignment : Assignment? {
+        if let assignments = step.lesson?.unit?.assignments {
+            return assignments.filter({ $0.stepId == step.id }).first
+        } else {
+            return nil
+        }
+    }
+    
     var parentNavigationController : UINavigationController?
     
     var nextLessonHandler: (Void->Void)?

@@ -45,7 +45,13 @@ class WebStepViewController: UIViewController {
     var step : Step!
     var stepId : Int!
     var lesson : Lesson!
-    var assignment : Assignment?
+    var assignment : Assignment? {
+        if let assignments = lesson.unit?.assignments {
+            return assignments.filter({ $0.stepId == step.id }).first
+        } else {
+            return nil
+        }
+    }
     
     var stepText = ""
     

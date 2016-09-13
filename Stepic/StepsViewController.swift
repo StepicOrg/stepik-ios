@@ -126,6 +126,15 @@ class StepsViewController: RGPageViewController {
                     reloadBlock = {
                         NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
                         print("did send step updated notification")
+                        //update tab views
+                        for index in 0 ..< s.lesson!.steps.count { 
+                            let tabView = s.tabViewForPageAtIndex(s, index: index) as? StepTabView
+                            if let progress = s.lesson!.steps[index].progress {
+                                if progress.isPassed {
+                                    tabView?.setTab(selected: progress.isPassed, animated: true)
+                                }
+                            }
+                        }
                     }
                 } 
                 
@@ -157,7 +166,7 @@ class StepsViewController: RGPageViewController {
                         }
                     }
                 }
-            }, onlyLesson: context == .Lesson)
+            })
     }
     
     var didSelectTab = true
@@ -278,7 +287,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.step = lesson.steps[index]
                 stepController.parentNavigationController = self.navigationController
                 if context == .Unit {
-                    stepController.assignment = lesson.unit?.assignments[index]
+//                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
@@ -304,7 +313,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.stepId = index + 1
                 stepController.nItem = self.navigationItem
                 if context == .Unit {
-                    stepController.assignment = lesson.unit?.assignments[index]
+//                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
