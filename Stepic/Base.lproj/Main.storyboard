@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0uJ-IX-W04">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0uJ-IX-W04">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -866,13 +866,13 @@
         <!--Lesson-->
         <scene sceneID="LMh-2U-yNH">
             <objects>
-                <viewController id="7LO-Mv-R4f" customClass="StepsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StepsViewController" id="7LO-Mv-R4f" customClass="StepsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HYg-fo-je8"/>
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -880,7 +880,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sog-TK-f5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4883" y="2549"/>
+            <point key="canvasLocation" x="4870" y="2681"/>
         </scene>
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
@@ -1246,7 +1246,7 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n0y-oT-VBo"/>
+        <segue reference="oyz-px-1HN"/>
         <segue reference="LaP-cg-j2K"/>
         <segue reference="YFn-cD-YdC"/>
         <segue reference="hTT-Az-p53"/>

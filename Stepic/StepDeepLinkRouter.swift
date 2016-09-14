@@ -114,7 +114,7 @@ class StepDeepLinkRouter {
                 switch error {
                 case .NoUnits:
                     //Handle the case, when there are no units
-                    getStepsControllerForLessonContext()
+                    getStepsControllerForLessonContext(step, lesson: lesson, success: successHandler, error: errorHandler)
                     break
                 default:
                     errorHandler("Could not retrieve unit")
@@ -124,14 +124,16 @@ class StepDeepLinkRouter {
     }
     
     //Looking for assignments
-    private static func getStepsController(forStep: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    private static func getStepsController(forStep step: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
         
+        //Check, if cached assignments contain nil progresses
+//        unit.assignments.contains({$0.})
         
         ApiDataDownloader.sharedDownloader.getAssignmentsByIds(unit.assignmentsArray, deleteAssignments: unit.assignments, refreshMode: .Update, success: {
             newAssignments in 
             
             if newAssignments.count == 0 {
-                getStepsControllerForLessonContext()
+                getStepsControllerForLessonContext(step, lesson: lesson, success: successHandler, error: errorHandler)
                 return
             }
             unit.assignments = Sorter.sort(newAssignments, byIds: unit.assignmentsArray)
@@ -148,13 +150,38 @@ class StepDeepLinkRouter {
     }
     
     //Define this method's signature later
-    private static func getStepsControllerForLessonContext() {
+    private static func getStepsControllerForLessonContext(step: Step, lesson: Lesson, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
         
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+            errorHandler("Could not instantiate controller")
+            return
+        }
+        
+        vc.hidesBottomBarWhenPushed = true
+        let step = step
+        vc.context = .Lesson
+        vc.lesson = lesson
+        
+        //TODO: Check if it is better to do it using stepsArray
+        vc.startStepId = step.lesson?.steps.indexOf(step)
+        successHandler(vc)
     }
     
     //Define this method's signature later
-    private static func getStepsControllerForUnitContext() {
+    private static func getStepsControllerForUnitContext(step: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+            errorHandler("Could not instantiate controller")
+            return
+        }
         
+        vc.hidesBottomBarWhenPushed = true
+        let step = step
+        vc.context = .Lesson
+        vc.lesson = lesson
+        //TODO: Add assignment here
+        //TODO: Check if it is better to do it using stepsArray
+        vc.startStepId = step.lesson?.steps.indexOf(step)
+        successHandler(vc)
     }
 
 }
