@@ -9,6 +9,8 @@
 import UIKit
 
 class StepDeepLinkRouter {
+    
+    //Getting step here
     static func getStepsController(forStepId id: Int, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
         
         let getForStepBlock : (Step -> Void) = {
@@ -44,11 +46,13 @@ class StepDeepLinkRouter {
         
     }
     
+    //Getting lesson here
     static func getStepsController(forStep step: Step, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
         let getForLessonBlock : (Lesson -> Void) = {
             lesson in 
             getStepsController(forStep: step, lesson: lesson, success: successHandler, error: errorHandler)
         }
+        
         if let lesson = step.lesson {
             getForLessonBlock(lesson)
             return
@@ -58,7 +62,7 @@ class StepDeepLinkRouter {
         //TODO: Test this case. Check if additional downloads for other lesson's steps is needed.
         //Possibly, this should really be done.
         if let lesson = Lesson.getLesson(step.lessonId) {
-            step.lesson = lesson
+            step.lesson = lesson //Maybe it's a bad thing
             getForLessonBlock(lesson)
             return
         }
@@ -67,6 +71,7 @@ class StepDeepLinkRouter {
             {
                 lessons in
                 if let lesson = lessons.first {
+                    step.lesson = lesson //Maybe it's a bad thing
                     getForLessonBlock(lesson)
                 } else {
                     errorHandler("No lesson with id \(step.lessonId)")
@@ -81,7 +86,75 @@ class StepDeepLinkRouter {
         
     }
     
+    //Getting unit here. 
     private static func getStepsController(forStep step: Step, lesson: Lesson, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
         
+        let getForUnitBlock : (Unit -> Void) = {
+            unit in 
+        }
+        
+        
+        //Lesson has unit, everything is OK
+        if let unit = lesson.unit {
+            getForUnitBlock(unit)
+            return
+        }
+        
+        //Check, if there is a unit for this lesson
+        ApiDataDownloader.units.retrieve(lesson: lesson.id, success: 
+            {
+                unit in
+                // there is a unit for lesson
+                unit.lesson = lesson
+                getForUnitBlock(unit)
+                return
+            }, error: 
+            {
+                error in
+                switch error {
+                case .NoUnits:
+                    //Handle the case, when there are no units
+                    getStepsControllerForLessonContext()
+                    break
+                default:
+                    errorHandler("Could not retrieve unit")
+                }
+            }
+        )
     }
+    
+    //Looking for assignments
+    private static func getStepsController(forStep: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+        
+        
+        ApiDataDownloader.sharedDownloader.getAssignmentsByIds(unit.assignmentsArray, deleteAssignments: unit.assignments, refreshMode: .Update, success: {
+            newAssignments in 
+            
+            if newAssignments.count == 0 {
+                getStepsControllerForLessonContext()
+                return
+            }
+            unit.assignments = Sorter.sort(newAssignments, byIds: unit.assignmentsArray)
+            
+            getStepsControllerForUnitContext() 
+            return
+            
+            }, failure: {
+                error in
+                errorHandler("Error while downloading assignments")
+        })
+
+        
+    }
+    
+    //Define this method's signature later
+    private static func getStepsControllerForLessonContext() {
+        
+    }
+    
+    //Define this method's signature later
+    private static func getStepsControllerForUnitContext() {
+        
+    }
+
 }

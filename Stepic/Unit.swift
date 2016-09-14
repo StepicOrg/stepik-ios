@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import MagicalRecord
 
 class Unit: NSManagedObject, JSONInitializable {
     
@@ -51,5 +52,9 @@ class Unit: NSManagedObject, JSONInitializable {
             }, error:  {
                 errorHandler()
         })
+    }
+    
+    func getUnitForLessonId(id: Int) -> Unit? {
+        return Unit.MR_findFirstWithPredicate(NSPredicate(format: "managedLessonId == %@", id as NSNumber))
     }
 }
