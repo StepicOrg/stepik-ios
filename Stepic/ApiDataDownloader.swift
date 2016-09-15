@@ -265,18 +265,28 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func didVisitStepWith(id id: Int, assignment: Int, success: Void->Void) -> Request? {
+    func didVisitStepWith(id id: Int, assignment: Int?, success: Void->Void) -> Request? {
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         
 //        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
+        var params : [String : AnyObject] = [:]
         
-        let params : [String : AnyObject] = [
-            "view" : [
-                "step" : "\(id)", 
-                "assignment" : "\(assignment)"
+        if let assignment = assignment {
+            params = [
+                "view" : [
+                    "step" : "\(id)", 
+                    "assignment" : "\(assignment)"
+                ]
             ]
-        ]
-        
+        } else {
+            params = [
+                "view" : [
+                    "step" : "\(id)", 
+                    "assignment" : NSNull()
+                ]
+            ]
+        }
+                
         //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/views", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {

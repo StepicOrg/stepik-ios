@@ -27,7 +27,7 @@ class AuthInfo: NSObject {
 //                        user.MR_deleteEntity()
 //                    }
 //                    c = 0
-//                    NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+//                    CoreDataHelper.instance.save()
 //                }
                 
                 if c == 0 {
@@ -40,7 +40,7 @@ class AuthInfo: NSObject {
                             return
                         }
                         print("downloaded user")
-                        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                        CoreDataHelper.instance.save()
 
                         }, failure: {
                             [weak self]
@@ -80,8 +80,10 @@ class AuthInfo: NSObject {
                         for course in c {
                             course.enrolled = false
                         }
-                        Progress.MR_truncateAll()
-                        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+                        
+                        Progress.deleteAllStoredProgresses()
+                        CoreDataHelper.instance.save()
+
                         AuthInfo.shared.user = nil
                         
                         AnalyticsHelper.sharedHelper.changeSignIn()

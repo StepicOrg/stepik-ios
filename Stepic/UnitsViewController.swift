@@ -37,7 +37,6 @@ class UnitsViewController: UIViewController {
         refreshControl.beginRefreshing()
         refreshUnits()
 
-        
         // Do any additional setup after loading the view.
     }
 
@@ -91,7 +90,7 @@ class UnitsViewController: UIViewController {
     }
     
 
-    
+
     // MARK: - Navigation
 
     

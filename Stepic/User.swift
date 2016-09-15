@@ -53,7 +53,7 @@ class User: NSManagedObject, JSONInitializable {
                     fetchedUser.MR_deleteEntity()
                 }
             }
-            NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+            CoreDataHelper.instance.save()
         }
     }
 }

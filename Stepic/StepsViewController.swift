@@ -17,7 +17,9 @@ class StepsViewController: RGPageViewController {
     
     //TODO: really need optionals here?
     var lesson : Lesson?
-    var startStepId : Int?
+    var startStepId : Int = 0
+        
+    var canSendViews: Bool = false
     
     //By default presentation context is unit
     var context : StepsControllerPresentationContext = .Unit
@@ -95,6 +97,7 @@ class StepsViewController: RGPageViewController {
     static let stepUpdatedNotification = "StepUpdatedNotification"
     
     private var tabViewsForStepId = [Int: UIView]()
+    
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     private func refreshSteps() {
@@ -130,9 +133,7 @@ class StepsViewController: RGPageViewController {
                         for index in 0 ..< s.lesson!.steps.count { 
                             let tabView = s.tabViewForPageAtIndex(s, index: index) as? StepTabView
                             if let progress = s.lesson!.steps[index].progress {
-                                if progress.isPassed {
-                                    tabView?.setTab(selected: progress.isPassed, animated: true)
-                                }
+                                tabView?.setTab(selected: progress.isPassed, animated: true)
                             }
                         }
                     }
@@ -144,11 +145,9 @@ class StepsViewController: RGPageViewController {
                     s.doesPresentWarningView = false
                     s.doesPresentActivityIndicatorView = false
                     
-                    if let id = s.startStepId {
-                        if id < s.lesson!.steps.count {
-                            if !s.didSelectTab {
-                                s.selectTabAtIndex(id, updatePage: true)
-                            }
+                    if s.startStepId < s.lesson!.steps.count {
+                        if !s.didSelectTab {
+                            s.selectTabAtIndex(s.startStepId, updatePage: true)
                         }
                     }
                 }
@@ -166,7 +165,7 @@ class StepsViewController: RGPageViewController {
                         }
                     }
                 }
-            })
+            }, onlyLesson: context == .Lesson)
     }
     
     var didSelectTab = true
@@ -174,11 +173,11 @@ class StepsViewController: RGPageViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
-        if let l = lesson, id = startStepId {
-            if l.steps.count != 0  && id < l.steps.count {
-                print("id -> \(id)")
+        if let l = lesson {
+            if l.steps.count != 0  && startStepId < l.steps.count {
+                print("id -> \(startStepId)")
                 didSelectTab = true
-                self.selectTabAtIndex(id, updatePage: true)
+                self.selectTabAtIndex(startStepId, updatePage: true)
             } else {
                 didSelectTab = false
             }
@@ -261,7 +260,9 @@ extension StepsViewController : RGPageViewControllerDataSource {
             return UIView()
         }
         
+        
         if let step = lesson?.steps[index] {
+            print("initializing tab view for step id \(step.id), progress is \(step.progress))")
             //            if tabViewsForStepId[step.id] == nil {
             tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
             //            }
@@ -286,6 +287,17 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.nItem = self.navigationItem
                 stepController.step = lesson.steps[index]
                 stepController.parentNavigationController = self.navigationController
+                stepController.startStepId = startStepId
+                stepController.stepId = index + 1
+                stepController.startStepBlock = {
+                    [weak self] in
+                    self?.canSendViews = true
+                }
+                stepController.shouldSendViewsBlock = {
+                    [weak self] in
+                    return self?.canSendViews ?? false
+                }
+                
                 if context == .Unit {
 //                    stepController.assignment = lesson.unit?.assignments[index]
                     
@@ -312,6 +324,16 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.lesson = lesson
                 stepController.stepId = index + 1
                 stepController.nItem = self.navigationItem
+                stepController.startStepId = startStepId
+                stepController.startStepBlock = {
+                    [weak self] in
+                    self?.canSendViews = true
+                }
+                stepController.shouldSendViewsBlock = {
+                    [weak self] in
+                    return self?.canSendViews ?? false
+                }
+                
                 if context == .Unit {
 //                    stepController.assignment = lesson.unit?.assignments[index]
                     

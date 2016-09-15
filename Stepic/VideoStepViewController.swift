@@ -18,14 +18,13 @@ class VideoStepViewController: UIViewController {
     var video : Video!
     var nItem : UINavigationItem!
     var step: Step!
-    
-    var assignment : Assignment? {
-        if let assignments = step.lesson?.unit?.assignments {
-            return assignments.filter({ $0.stepId == step.id }).first
-        } else {
-            return nil
-        }
-    }
+    var stepId : Int!
+
+    var startStepId: Int!
+    var startStepBlock : (Void->Void)!
+    var shouldSendViewsBlock : (Void->Bool)!
+
+    var assignment : Assignment?
     
     var parentNavigationController : UINavigationController?
     
@@ -138,18 +137,22 @@ class VideoStepViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if let a = assignment {
-            let cstep = step
-            let stepid = step.id
+        let cstep = step
+        let stepid = step.id
+        if stepId - 1 == startStepId {
+            startStepBlock()
+        }
+        if shouldSendViewsBlock() {
             performRequest({
-                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: a.id, success: {
+                [weak self] in
+                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
                     NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{
                         cstep.progress?.isPassed = true
                         CoreDataHelper.instance.save()
                     }
                 }) 
-            })
+                })
         }
     }
     

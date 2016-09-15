@@ -43,18 +43,23 @@ class Lesson: NSManagedObject, JSONInitializable {
             ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
                 newSteps in 
                 self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-                if !onlyLesson {
-                    if let u = self.unit {
-                        ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
-                            newAssignments in 
-                            u.assignments = Sorter.sort(newAssignments,steps: self.steps)
-                            self.loadProgressesForSteps(completion)
-                            }, failure: {
-                                error in
-                                print("Error while downloading assignments")
-                                errorHandler?("Error while downloading assignments")
-                        })
-                    }}
+                self.loadProgressesForSteps({
+                    if !onlyLesson {
+                        if let u = self.unit {
+                            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
+                                newAssignments in 
+                                u.assignments = Sorter.sort(newAssignments,steps: self.steps)
+                                completion()
+                                }, failure: {
+                                    error in
+                                    print("Error while downloading assignments")
+                                    errorHandler?("Error while downloading assignments")
+                            })
+                        }
+                    } else {
+                        completion()
+                    }
+                })
                 CoreDataHelper.instance.save()
                 }, failure: {
                     error in

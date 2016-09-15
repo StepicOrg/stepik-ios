@@ -1,5 +1,5 @@
 //
-//  StepDeepLinkRouter.swift
+//  StepsControllerRouter.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 13.09.16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StepDeepLinkRouter {
+class StepsControllerRouter {
     
     //Getting step here
     static func getStepsController(forStepId id: Int, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
@@ -138,7 +138,7 @@ class StepDeepLinkRouter {
             }
             unit.assignments = Sorter.sort(newAssignments, byIds: unit.assignmentsArray)
             
-            getStepsControllerForUnitContext() 
+            getStepsControllerForUnitContext(step, lesson: lesson, unit: unit, success: successHandler, error: errorHandler) 
             return
             
             }, failure: {
@@ -163,7 +163,7 @@ class StepDeepLinkRouter {
         vc.lesson = lesson
         
         //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.indexOf(step)
+        vc.startStepId = step.lesson?.steps.indexOf(step) ?? 0
         successHandler(vc)
     }
     
@@ -176,11 +176,12 @@ class StepDeepLinkRouter {
         
         vc.hidesBottomBarWhenPushed = true
         let step = step
-        vc.context = .Lesson
+        vc.context = .Unit
         vc.lesson = lesson
+//        unit.assignments
         //TODO: Add assignment here
         //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.indexOf(step)
+        vc.startStepId = step.lesson?.steps.indexOf(step) ?? 0
         successHandler(vc)
     }
 

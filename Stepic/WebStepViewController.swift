@@ -24,7 +24,6 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
-    
     @IBOutlet weak var prevLessonButton: UIButton!
     @IBOutlet weak var nextLessonButton: UIButton!
     @IBOutlet weak var nextLessonButtonHeight: NSLayoutConstraint!
@@ -45,13 +44,11 @@ class WebStepViewController: UIViewController {
     var step : Step!
     var stepId : Int!
     var lesson : Lesson!
-    var assignment : Assignment? {
-        if let assignments = lesson.unit?.assignments {
-            return assignments.filter({ $0.stepId == step.id }).first
-        } else {
-            return nil
-        }
-    }
+    var assignment : Assignment?
+    
+    var startStepId: Int!
+    var startStepBlock : (Void->Void)!
+    var shouldSendViewsBlock : (Void->Bool)!
     
     var stepText = ""
     
@@ -201,21 +198,29 @@ class WebStepViewController: UIViewController {
         super.viewDidAppear(animated)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-        if let a = assignment {
-            let stepid = step.id
+        
+        let stepid = step.id
+        print("view did appear for web step with id \(stepid)")
+
+        if stepId - 1 == startStepId {
+            startStepBlock()
+        }
+        
+        if shouldSendViewsBlock() {
             performRequest({
-                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: a.id, success: {
+                [weak self] in
+                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
-                            NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
                             UIThread.performUI{
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
                             }                    
                         }
                     }
-                    })
+                })
             })
         }
     }

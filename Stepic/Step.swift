@@ -32,6 +32,7 @@ class Step: NSManagedObject, JSONInitializable {
         }
         discussionsCount = json["discussions_count"].int
         discussionProxyId = json["discussion_proxy"].string
+        lessonId = json["lesson"].intValue
     }
     
     func update(json json: JSON) {

@@ -79,7 +79,7 @@ class DownloadsViewController: UIViewController {
             //TODO : pass unit here!
             dvc.context = .Lesson
             dvc.lesson = step.managedLesson
-            dvc.startStepId = step.managedLesson?.steps.indexOf(step)
+            dvc.startStepId = step.managedLesson?.steps.indexOf(step) ?? 0
         }
     }
     
@@ -180,25 +180,26 @@ extension DownloadsViewController : UITableViewDelegate {
                 }
 
             }
-            if let user = AuthInfo.shared.user {
-                if user.isGuest {
-                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-                        authVC.success = {
-                            performRequest ({
-                                ApiDataDownloader.sharedDownloader.getCoursesByIds([course.id], deleteCourses: [course], refreshMode: .Update, success: {
-                                    course in 
-                                    enterDownloadBlock()
-                                    }, failure: {
-                                        _ in
-                                })
-                            })
-                        }
-                        self.presentViewController(authVC, animated: true, completion: nil)
-                    }
-                } else {
-                    enterDownloadBlock()
-                }
-            }
+            enterDownloadBlock()
+//            if let user = AuthInfo.shared.user {
+//                if user.isGuest {
+//                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+//                        authVC.success = {
+//                            performRequest ({
+//                                ApiDataDownloader.sharedDownloader.getCoursesByIds([course.id], deleteCourses: [course], refreshMode: .Update, success: {
+//                                    course in 
+//                                    enterDownloadBlock()
+//                                    }, failure: {
+//                                        _ in
+//                                })
+//                            })
+//                        }
+//                        self.presentViewController(authVC, animated: true, completion: nil)
+//                    }
+//                } else {
+//                    enterDownloadBlock()
+//                }
+//            }
         } else {
             print("Something bad happened")
         }
