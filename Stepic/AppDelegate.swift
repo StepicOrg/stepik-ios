@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
         
+//        let deepLink = NSURL(string: "https://stepik.org/lesson/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B8-%D1%82%D1%80%D0%B0%D0%B4%D0%B8%D1%86%D0%B8%D1%8F-477/step/1")!
+//        handleOpenedFromDeepLink(deepLink)
+        
         return true
     }
 
@@ -79,12 +82,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func handleOpenedFromDeepLink(url: NSURL) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
-            controller in
+            controller, push in
             if let vc = controller { 
                 if let s = self {
                     if let topController = s.currentNavigation?.topViewController {
                         delay(0.5, closure: {
-                            topController.navigationController?.pushViewController(vc, animated: true)
+                            if push { 
+                                topController.navigationController?.pushViewController(vc, animated: true) 
+                            } else {
+                                topController.presentViewController(vc, animated: true, completion: nil)
+                            }
                         })
                     } 
                 }

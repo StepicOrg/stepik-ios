@@ -31,7 +31,21 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     static func getLesson(id: Int) -> Lesson? {
-        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
+        let request = NSFetchRequest(entityName: "Lesson")
+        
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
+        
+        request.predicate = predicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            return (results as? [Lesson])?.first
+        }
+        catch {
+            return nil
+        }
+
+//        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
     
     func update(json json: JSON) {

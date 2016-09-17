@@ -17,28 +17,25 @@ class StepsControllerDeepLinkRouter : NSObject {
         if let lesson = Lesson.getLesson(lessonId) {        
             ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [lesson], refreshMode: .Update, success: 
                 {
-                    [weak self] 
                     lessons in
                     if let lesson = lessons.first {
-                        self?.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                        self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
                 
                 }, failure: 
                 {
-                    [weak self]
                     error in 
-                    self?.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                    self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                 }
             )
         } else {
             ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [], refreshMode: .Update, success: 
                 {
-                    [weak self]
                     lessons in
                     if let lesson = lessons.first {
-                        self?.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                        self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
@@ -55,8 +52,6 @@ class StepsControllerDeepLinkRouter : NSObject {
     private func getVCForLesson(lesson: Lesson, stepId: Int, success successHandler : (UIViewController -> Void), error errorHandler : (String -> Void)) {
         let enrolled = lesson.unit?.section.course?.enrolled ?? false
         if lesson.isPublic || enrolled {
-            let navigation : UINavigationController = GreenNavigationViewController()
-            navigation.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
             guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
                 errorHandler("Could not instantiate controller")
                 return
@@ -64,8 +59,14 @@ class StepsControllerDeepLinkRouter : NSObject {
             stepsVC.startStepId = stepId - 1
             stepsVC.lesson = lesson
             stepsVC.context = .Lesson
-            navigation.pushViewController(stepsVC, animated: false)
-            successHandler(navigation)
+            stepsVC.hidesBottomBarWhenPushed = true
+//            let navigation : UINavigationController = GreenNavigationViewController(rootViewController: stepsVC)
+//            navigation.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
+//            navigation.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+
+            successHandler(stepsVC)
+        } else {
+            errorHandler("No access")
         }
     }
     
