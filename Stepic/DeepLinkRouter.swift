@@ -11,51 +11,73 @@ import Foundation
 class DeepLinkRouter {
     
     static func routeFromDeepLink(link: NSURL, completion: (UIViewController? -> Void)) {
-        func getCourseID(string: String) -> Int? {
-            var courseString = ""
-            for character in string.characters.reverse() {
+        
+        func getID(stringId: String, reversed: Bool) -> Int? {
+            var slugString = ""
+            let string = reversed ? "\(stringId.characters.reverse())" : stringId
+            for character in string.characters {
                 if Int("\(character)") != nil {
-                    courseString = "\(character)" + courseString
+                    if reversed {
+                        slugString = "\(character)" + slugString
+                    } else {
+                        slugString = slugString + "\(character)"
+                    }
                 } else {
                     break
                 }
             }
-            let courseId = Int(courseString)
+            let slugId = Int(slugString)
             
-            return courseId
+            return slugId
         }
         
+                
         if let components = link.pathComponents {
             //just a check if everything is OK with the link length
-            if components.count < 2 {
-                completion(nil)
-                return 
-            }
             
-            if components[1].lowercaseString == "course" {
-                if let courseId = getCourseID(components[2]) {
-                    if components.count == 3 {
-                        routeToCourseWithId(courseId, completion: completion)
-                        return
-                    }
-                    if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
-                        routeToSyllabusWithId(courseId, completion: completion)
-                        return
-                    }
-                    completion(nil)
-                    return
-                } else {
+            if components[1].lowercaseString == "course" && components.count >= 3 {
+                guard let courseId = getID(components[2], reversed: true) else {
                     completion(nil)
                     return
                 }
+                
+                if components.count == 3 {
+                    routeToCourseWithId(courseId, completion: completion)
+                    return
+                }
+                if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
+                    routeToSyllabusWithId(courseId, completion: completion)
+                    return
+                }
+                completion(nil)
+                return
+                
             } else {
                 completion(nil)
                 return
             }
-        } else {
-            completion(nil)
-            return
-        }
+            
+            if components[1].lowercaseString == "lesson" && components.count >= 5 {
+                guard let lessonId = getID(components[2], reversed: true) else {
+                    completion(nil)
+                    return
+                }
+                
+                guard components[3].lowercaseString == "step" else {
+                    completion(nil)
+                    return
+                }
+                
+                guard let stepId = getID(components[4], reversed: true) else {
+                    completion(nil)
+                    return
+                }
+                
+                routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
+            }            
+        } 
+        completion(nil)
+        return
     }
     
     private static func routeToCourseWithId(courseId: Int, completion: (UIViewController? -> Void)) {
@@ -163,8 +185,21 @@ class DeepLinkRouter {
             print("something bad happened")
             completion(nil)
             return
-        }
-        
-        completion(nil)
+        }        
+    }
+    
+    static func routeToStepWithId(stepId: Int, lessonId: Int, completion: (UIViewController? -> Void)) {
+        StepsControllerDeepLinkRouter().getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: 
+            {
+                vc in
+                completion(vc)
+            }, error: 
+            {
+                errorMsg in 
+                print(errorMsg)
+                completion(nil)
+            }
+        )
+
     }
 }

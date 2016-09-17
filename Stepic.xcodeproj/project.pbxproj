@@ -60,8 +60,8 @@
 		082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
-		082EDED31D881562006B51DC /* StepDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */; };
-		082EDED41D881562006B51DC /* StepDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */; };
+		082EDED31D881562006B51DC /* StepsControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepsControllerRouter.swift */; };
+		082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepsControllerRouter.swift */; };
 		082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
@@ -118,6 +118,8 @@
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
+		085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */; };
+		085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */; };
 		085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085D5CE31D007F6500092060 /* HTMLParsingTests.swift */; };
 		085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
@@ -587,7 +589,7 @@
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
 		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
-		082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepDeepLinkRouter.swift; sourceTree = "<group>"; };
+		082EDED21D881562006B51DC /* StepsControllerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControllerRouter.swift; sourceTree = "<group>"; };
 		082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v9.xcdatamodel; sourceTree = "<group>"; };
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
 		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		0858B7081CFF271200459A6A /* TagDetectionUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetectionUtil.swift; sourceTree = "<group>"; };
 		085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsAPI.swift; sourceTree = "<group>"; };
+		085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControllerDeepLinkRouter.swift; sourceTree = "<group>"; };
 		085D5CD91D007F2100092060 /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		085D5CDD1D007F2200092060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		085D5CE31D007F6500092060 /* HTMLParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingTests.swift; sourceTree = "<group>"; };
@@ -1168,7 +1171,8 @@
 				080DCF161C4518BC00DE3E2E /* SearchResult.swift */,
 				08AEC3A41CCA69F300FFF29E /* Device.swift */,
 				084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */,
-				082EDED21D881562006B51DC /* StepDeepLinkRouter.swift */,
+				082EDED21D881562006B51DC /* StepsControllerRouter.swift */,
+				085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2212,10 +2216,11 @@
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
-				082EDED41D881562006B51DC /* StepDeepLinkRouter.swift in Sources */,
+				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
+				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
 				08D1209F1C937B2200A54ABC /* LaunchViewController.swift in Sources */,
@@ -2471,7 +2476,7 @@
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
-				082EDED31D881562006B51DC /* StepDeepLinkRouter.swift in Sources */,
+				082EDED31D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
@@ -2584,6 +2589,7 @@
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
+				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
