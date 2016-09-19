@@ -45,7 +45,8 @@ class WebStepViewController: UIViewController {
     var stepId : Int!
     var lesson : Lesson!
     var assignment : Assignment?
-    
+    var lessonSlug: String!
+
     var startStepId: Int!
     var startStepBlock : (Void->Void)!
     var shouldSendViewsBlock : (Void->Bool)!
@@ -70,11 +71,23 @@ class WebStepViewController: UIViewController {
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
         print(self.view.gestureRecognizers)
         
-        
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
         
         initialize()
+    }
+    
+    func sharePressed(item: UIBarButtonItem) {
+        //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
+        let stepid = stepId
+        let slug = lessonSlug
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
+            shareVC.popoverPresentationController?.barButtonItem = item
+            dispatch_async(dispatch_get_main_queue()) {
+                self.presentViewController(shareVC, animated: true, completion: nil)
+            }
+        }
     }
     
     func initialize() {
@@ -115,7 +128,9 @@ class WebStepViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        nItem.rightBarButtonItem = nil
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
+        nItem.rightBarButtonItems = [shareBarButtonItem]
+
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
         loadStepHTML()
     }

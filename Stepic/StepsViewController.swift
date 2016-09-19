@@ -289,6 +289,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.parentNavigationController = self.navigationController
                 stepController.startStepId = startStepId
                 stepController.stepId = index + 1
+                stepController.lessonSlug = lesson.slug
+
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -333,7 +335,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                     [weak self] in
                     return self?.canSendViews ?? false
                 }
-                
+                stepController.lessonSlug = lesson.slug
                 if context == .Unit {
 //                    stepController.assignment = lesson.unit?.assignments[index]
                     

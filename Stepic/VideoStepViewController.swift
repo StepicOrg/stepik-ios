@@ -19,7 +19,8 @@ class VideoStepViewController: UIViewController {
     var nItem : UINavigationItem!
     var step: Step!
     var stepId : Int!
-
+    var lessonSlug: String!
+    
     var startStepId: Int!
     var startStepBlock : (Void->Void)!
     var shouldSendViewsBlock : (Void->Bool)!
@@ -53,7 +54,6 @@ class VideoStepViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
         
-        
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
             recognizer in
@@ -64,6 +64,19 @@ class VideoStepViewController: UIViewController {
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
         
         initialize()
+    }
+    
+    func sharePressed(item: UIBarButtonItem) {
+//        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
+        let stepid = stepId
+        let slug = lessonSlug
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
+            shareVC.popoverPresentationController?.barButtonItem = item
+            dispatch_async(dispatch_get_main_queue()) {
+                self.presentViewController(shareVC, animated: true, completion: nil)
+            }
+        }
     }
     
     func initialize() {
@@ -127,8 +140,10 @@ class VideoStepViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
-        nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
+        nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
     override func didReceiveMemoryWarning() {

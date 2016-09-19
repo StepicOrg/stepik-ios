@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
+        
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
             handleNotification(notificationDict)
         }
