@@ -45,11 +45,13 @@ class DeepLinkRouter {
             }
             
             if components.count == 3 {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId])
                 routeToCourseWithId(courseId, completion: completion)
                 return
             }
     
             if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId])
                 routeToSyllabusWithId(courseId, completion: completion)
                 return
             }
@@ -75,6 +77,7 @@ class DeepLinkRouter {
                 return
             }
             
+            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId, "step": stepId])
             routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
             return
         }            
