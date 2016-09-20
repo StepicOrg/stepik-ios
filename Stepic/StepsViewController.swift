@@ -168,19 +168,17 @@ class StepsViewController: RGPageViewController {
             }, onlyLesson: context == .Lesson)
     }
     
-    var didSelectTab = true
+    var didSelectTab = false
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
-            if l.steps.count != 0  && startStepId < l.steps.count {
-                print("id -> \(startStepId)")
+            if !didSelectTab && l.steps.count != 0  && startStepId < l.steps.count {
+                print("\nselected tab for step with id -> \(startStepId)\n")
                 didSelectTab = true
                 self.selectTabAtIndex(startStepId, updatePage: true)
-            } else {
-                didSelectTab = false
-            }
+            } 
         }
     }
     
