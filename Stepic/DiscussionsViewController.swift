@@ -118,7 +118,19 @@ class DiscussionsViewController: UIViewController {
     }
     
     func writeCommentPressed() {
-        presentWriteCommentController(parent: nil)
+        if !AuthInfo.shared.isAuthorized {
+            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                vc.success = {
+                    [weak self] in
+                    if let s = self {
+                        s.presentWriteCommentController(parent: nil)
+                    }
+                }
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+            return
+        }
+
     }
     
     func resetData(withReload: Bool) {
