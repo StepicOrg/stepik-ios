@@ -31,9 +31,6 @@ class SectionsViewController: UIViewController {
         let infoBarButtonItem = UIBarButtonItem(customView: infoBtn)
         self.navigationItem.rightBarButtonItems = [shareBarButtonItem, infoBarButtonItem]
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         tableView.registerNib(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
         refreshControl.addTarget(self, action: #selector(SectionsViewController.refreshSections), forControlEvents: .ValueChanged)
@@ -113,10 +110,12 @@ class SectionsViewController: UIViewController {
         if segue.identifier == "showCourse" {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = course
+            dvc.hidesBottomBarWhenPushed = true
         }
         if segue.identifier == "showUnits" {
             let dvc = segue.destinationViewController as! UnitsViewController
             dvc.section = course.sections[sender as! Int]
+            dvc.hidesBottomBarWhenPushed = true
         }
     }
 

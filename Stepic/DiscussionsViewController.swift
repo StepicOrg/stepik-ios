@@ -118,7 +118,19 @@ class DiscussionsViewController: UIViewController {
     }
     
     func writeCommentPressed() {
-        presentWriteCommentController(parent: nil)
+        if !AuthInfo.shared.isAuthorized {
+            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                vc.success = {
+                    [weak self] in
+                    if let s = self {
+                        s.presentWriteCommentController(parent: nil)
+                    }
+                }
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+            return
+        }
+
     }
     
     func resetData(withReload: Bool) {
@@ -170,7 +182,8 @@ class DiscussionsViewController: UIViewController {
     func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
         self.emptyDatasetState = .None
         
-        ApiDataDownloader.comments.retrieve(ids, success: 
+        performRequest({
+            ApiDataDownloader.comments.retrieve(ids, success: 
             {
                 [weak self]
                 retrievedDiscussions in 
@@ -213,7 +226,8 @@ class DiscussionsViewController: UIViewController {
                     self?.refreshControl?.endRefreshing()
                 }
             }
-        )
+            )
+        })
     }
     
     func reloadTableData(emptyState: DiscussionsEmptyDataSetState = .Empty) {
@@ -265,7 +279,7 @@ class DiscussionsViewController: UIViewController {
         resetData(false)
         isReloading = true
         
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             [weak self] in
             if let discussionProxyId = self?.discussionProxyId {
                 ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: 
@@ -299,7 +313,7 @@ class DiscussionsViewController: UIViewController {
                 
                 )
             }
-        }, failure:  {
+        }, error:  {
                 [weak self]
                 errorString in
                 print(errorString)
@@ -330,6 +344,7 @@ class DiscussionsViewController: UIViewController {
             if let value = comment.vote.value {
                 let vToSet : VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
                 let v = Vote(id: comment.vote.id, value: vToSet)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -350,8 +365,10 @@ class DiscussionsViewController: UIViewController {
                         errorMsg in
                         print(errorMsg)
                 })
+                })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Epic)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -364,7 +381,7 @@ class DiscussionsViewController: UIViewController {
                         print(errorMsg)
                     }
                 )
-                
+                })   
             }
         }
     }
@@ -373,6 +390,7 @@ class DiscussionsViewController: UIViewController {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -390,8 +408,10 @@ class DiscussionsViewController: UIViewController {
                         errorMsg in
                         print(errorMsg)
                 })
+                })
             } else {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
+                performRequest({
                 ApiDataDownloader.votes.update(v, success: 
                     {
                         vote in
@@ -404,7 +424,7 @@ class DiscussionsViewController: UIViewController {
                         print(errorMsg)
                     }
                 )
-                
+                })
             }
         }
     }
@@ -413,13 +433,43 @@ class DiscussionsViewController: UIViewController {
         let alert = DiscussionAlertConstructor.getCommentAlert(comment, 
             replyBlock: {
                 [weak self] in
-                self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                }
             }, likeBlock: {
                 [weak self] in
-                self?.setLiked(comment, cell: cell)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.setLiked(comment, cell: cell)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.setLiked(comment, cell: cell)
+                }
             }, abuseBlock:  {
                 [weak self] in
-                self?.setAbused(comment, cell: cell)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.setAbused(comment, cell: cell)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.setAbused(comment, cell: cell)
+                }
             }, openURLBlock:  {
                 [weak self] 
                 url in     

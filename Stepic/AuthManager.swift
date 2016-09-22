@@ -1,5 +1,5 @@
 //
-//  AuthentificationManager.swift
+//  AuthManager.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 08.09.15.
@@ -10,8 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class AuthentificationManager : NSObject {
-    static var sharedManager = AuthentificationManager()
+class AuthManager : NSObject {
+    static var sharedManager = AuthManager()
     
     private override init() {}
     
@@ -52,7 +52,7 @@ class AuthentificationManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            StepicAPI.shared.authorizationType = AuthorizationType.Code
+            AuthInfo.shared.authorizationType = AuthorizationType.Code
             success(token: token)
         })
         
@@ -96,7 +96,7 @@ class AuthentificationManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            StepicAPI.shared.authorizationType = AuthorizationType.Password
+            AuthInfo.shared.authorizationType = AuthorizationType.Password
             success(token: token)
         })
     }
@@ -104,7 +104,7 @@ class AuthentificationManager : NSObject {
     func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
         
         var credentials = ""
-        switch StepicAPI.shared.authorizationType {
+        switch AuthInfo.shared.authorizationType {
         case .None:
             failure(error: ConnectionError.TokenRefreshError)
             return nil
@@ -153,15 +153,15 @@ class AuthentificationManager : NSObject {
     
     func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) -> Request? {
         
-        if StepicAPI.shared.didRefresh {
+        if AuthInfo.shared.didRefresh {
             success?()
             return nil
         }
         
-        return refreshTokenWith(StepicAPI.shared.token!.refreshToken, success: {
+        return refreshTokenWith(AuthInfo.shared.token!.refreshToken, success: {
             (t) in
             
-            StepicAPI.shared.token = t
+            AuthInfo.shared.token = t
             success?()
             }, failure : {
                 error in
@@ -173,7 +173,7 @@ class AuthentificationManager : NSObject {
     func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
-            "Authorization" : "Bearer \(StepicAPI.shared.token!.accessToken)"
+            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
         let params : [String : AnyObject] = [
@@ -182,7 +182,7 @@ class AuthentificationManager : NSObject {
             ]
         ]
         
-        //        params["access_token"] = StepicAPI.shared.token!.accessToken
+        //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
             return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
@@ -228,63 +228,56 @@ class AuthentificationManager : NSObject {
         
     }
     
-    private func deleteStepicCookiesForSignup() {
-        //        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        for cookie in storage.cookies ?? [] {
-            if cookie.domain.rangeOfString("stepic") != nil || cookie.domain.rangeOfString("stepik") != nil {
-                print("Deleting cookie with name: \(cookie.name), value: \(cookie.value)\n")
-                storage.deleteCookie(cookie)
-            }
-        }
-    }
+//    private func deleteStepicCookiesForSignup() {
+//        //        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
+//        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//        for cookie in storage.cookies ?? [] {
+//            if cookie.domain.rangeOfString("stepic") != nil || cookie.domain.rangeOfString("stepik") != nil {
+//                print("Deleting cookie with name: \(cookie.name), value: \(cookie.value)\n")
+//                storage.deleteCookie(cookie)
+//            }
+//        }
+//    }
     
-    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)) -> Request? {
-        let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
-        let stepicURL = NSURL(string: stepicURLString)!
-        deleteStepicCookiesForSignup()
-        //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .URL).response { 
-            (request, response, _, error) -> Void in
-            
-            if let e = error {
-                errorHandler((e as NSError).localizedDescription)
-            }
-            
-            if let r = response {
-                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
-                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
-            
-            //            for cookie in cookies {
-            //                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
-            //            }
-            
-                for cookie in cookies {
-                    if cookie.name == "csrftoken" {
-                        completion(cookie.value)
-                        return
-                    }
-                }
-            
-                errorHandler("No cookie for csrftoken")
-            } else {
-                errorHandler("No response")
-            }
-        }
-        
-    }
+//    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)) -> Request? {
+//        let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
+//        let stepicURL = NSURL(string: stepicURLString)!
+//        deleteStepicCookiesForSignup()
+//        //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
+//        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .URL).response { 
+//            (request, response, _, error) -> Void in
+//            
+//            if let e = error {
+//                errorHandler((e as NSError).localizedDescription)
+//            }
+//            
+//            if let r = response {
+//                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
+//                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+//            
+//            //            for cookie in cookies {
+//            //                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
+//            //            }
+//            
+//                for cookie in cookies {
+//                    if cookie.name == "csrftoken" {
+//                        completion(cookie.value)
+//                        return
+//                    }
+//                }
+//            
+//                errorHandler("No cookie for csrftoken")
+//            } else {
+//                errorHandler("No response")
+//            }
+//        }
+//        
+//    }
     
     //TODO: When refactoring code think about this function
     func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
-        refreshSignUpCookies(completion: {
-            csrftoken in
-            let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
-            let stepicURL = NSURL(string: stepicURLString)!
-            var headers : [String : String] = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-            
-            headers["Referer"] = "\(StepicApplicationsInfo.stepicURL)/"
-            headers["X-CSRFToken"] = csrftoken
-                        
+            let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
+                                    
             let params : [String : AnyObject] = 
             ["user" :
                 [
@@ -298,29 +291,22 @@ class AuthentificationManager : NSObject {
             print("sending request with headers:\n\(headers)\nparams:\n\(params)")
             Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
                 { 
-                    (request, response, json, error) -> Void in
-                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response!.allHeaderFields as! [String: String], forURL: stepicURL)
-                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+                    request, response, json, error in
                     
                     if let e = (error as? NSError) {
                         let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
-                        
                         errorHandler(errormsg, nil)
                         return
                     }
                     
                     if let r = response {
-                        print(r.statusCode)
                         if r.statusCode.isSuccess() {
                             success()
                         } else if r.statusCode == 400 {
                             errorHandler(nil, RegistrationErrorInfo(json: json))
                         }
                     }
-            })},error:  { 
-                errorMsg in
-                errorHandler(NSLocalizedString("RegistrationError", comment: ""), nil)
-        })
+            })
     }
 }
 

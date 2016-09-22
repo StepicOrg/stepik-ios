@@ -17,10 +17,6 @@ class VideoQualityTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-
         tableView.tableFooterView = UIView()
         
         // Uncomment the following line to preserve selection between presentations

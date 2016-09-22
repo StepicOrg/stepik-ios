@@ -27,6 +27,10 @@ class SignInTableViewController: UITableViewController {
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), forState: .Normal)
     }
     
+    var success : (Void->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.success
+    }
+    
     @IBAction func backButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -100,23 +104,34 @@ class SignInTableViewController: UITableViewController {
 
     func authentificateWithCode(code: String) {
         SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
-        AuthentificationManager.sharedManager.logInWithCode(code, 
+        AuthManager.sharedManager.logInWithCode(code, 
             success: {
                 t in
-                StepicAPI.shared.token = t
+                AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
-                    StepicAPI.shared.user = user
+                    AuthInfo.shared.user = user
+                    User.removeAllExcept(user)
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                    UIThread.performUI { 
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            [weak self] in
+                            self?.success?()
+                        })
+                    }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                        UIThread.performUI { 
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                [weak self] in
+                                self?.success?()
+                            })
+                        }
                 })
             }, failure: {
                 e in
@@ -129,23 +144,34 @@ class SignInTableViewController: UITableViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
         
         SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
-        AuthentificationManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
+        AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             success: {
                 t in
-                StepicAPI.shared.token = t
+                AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
-                    StepicAPI.shared.user = user
+                    AuthInfo.shared.user = user
+                    User.removeAllExcept(user)
                     SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                    UIThread.performUI { 
+                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            [weak self] in
+                            self?.success?()
+                        })
+                    }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI({self.performSegueWithIdentifier("signedInSegue", sender: self)})
+                        UIThread.performUI{ 
+                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                [weak self] in
+                                self?.success?()
+                            })
+                        }
                 })
             }, failure: {
                 e in

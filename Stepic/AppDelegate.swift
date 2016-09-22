@@ -47,55 +47,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        
-        setRootController()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
             checkForUpdates()
         }
         
-        if StepicAPI.shared.isAuthorized {
+        if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
+        
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
             handleNotification(notificationDict)
         }
         
-//        let deepLink = NSURL(string: "https://stepik.org/course/Политические-процессы-в-современной-России-132/syllabus".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
-        
+//        let deepLink = NSURL(string: "https://stepik.org/lesson/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B8-%D1%82%D1%80%D0%B0%D0%B4%D0%B8%D1%86%D0%B8%D1%8F-477/step/1")!
 //        handleOpenedFromDeepLink(deepLink)
-//        delay(60, closure: {
-//            [weak self] in
-//            self?.handleOpenedFromDeepLink(deepLink)
-//        })
         
-//        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-//        print(documentsPath)
         return true
     }
 
     private func handleNotification(notificationDict: [NSString: AnyObject]) {
         if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict), 
-            rootController = ((self.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
-            reaction(rootController)
+            topController = currentNavigation?.topViewController {
+            reaction(topController)
         }
+    }
+    
+    var currentNavigation : UINavigationController? {
+        if let tabController = window?.rootViewController as? UITabBarController {
+            return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
+        }
+        return nil
     }
     
     private func handleOpenedFromDeepLink(url: NSURL) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
-            controller in
+            controller, push in
             if let vc = controller { 
                 if let s = self {
-                    if let rootController = ((s.window?.rootViewController as? UITabBarController)?.viewControllers?[0] as? UINavigationController)?.topViewController {
-                        delay(1, closure: {
-                            rootController.navigationController?.pushViewController(vc, animated: true)
+                    if let topController = s.currentNavigation?.topViewController {
+                        delay(0.5, closure: {
+                            if push { 
+                                topController.navigationController?.pushViewController(vc, animated: true) 
+                            } else {
+                                topController.presentViewController(vc, animated: true, completion: nil)
+                            }
                         })
-                    } else {
-                        let navigation = UINavigationController(rootViewController: vc) 
-                        navigation.title = NSLocalizedString("Course", comment: "")
-                        self?.setRootController(navigation)
-                    }
+                    } 
                 }
             } else {
                 let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .Alert)
@@ -142,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func didReceiveRegistrationToken(notification: NSNotification) {
         if let token = FIRInstanceID.instanceID().token() {
-            if StepicAPI.shared.isAuthorized { 
+            if AuthInfo.shared.isAuthorized { 
                 NotificationRegistrator.sharedInstance.registerDevice(token)
             }
         }
@@ -231,34 +230,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        return UIInterfaceOrientationMask.Portrait
 //    }
-    
-    private func setTabRoot() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        // instantiate your desired ViewController
-        let rootController = storyboard.instantiateViewControllerWithIdentifier("MainTabBarController") 
-        
-        // Because self.window is an optional you should check it's value first and assign your rootViewController
-        if self.window != nil {
-            self.window!.rootViewController = rootController
-        }
-    }
-    
-    private func setRootController(controllerToSet: UIViewController? = nil) {
-        if let vc = controllerToSet {
-            let rootController = vc 
-            
-            // Because self.window is an optional you should check it's value first and assign your rootViewController
-            if self.window != nil {
-                self.window!.rootViewController = rootController
-            }
-        } else {
-            if StepicAPI.shared.isAuthorized {
-                setTabRoot()
-            }
-        }
-    }
-    
     private func setVideoTestRootController() {
         let rootController = ControllerHelper.instantiateViewController(identifier: "PlayerTestViewController", storyboardName: "PlayerTestStoryboard")
         if self.window != nil {

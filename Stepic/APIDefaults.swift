@@ -11,14 +11,18 @@ import Foundation
 struct APIDefaults {
     struct headers {
         static var bearer : [String : String] { 
-            return bearer(StepicAPI.shared.token!.accessToken)
+            return bearer(AuthInfo.shared.token?.accessToken)
         }
         
-        static func bearer(accessToken: String) -> [String : String] {
-            return [
-                "Content-Type" : "application/json",
-                "Authorization" : "Bearer \(accessToken)"
-            ]
+        static func bearer(accessToken: String?) -> [String : String] {
+            if let token = accessToken {
+                return [
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Bearer \(token)"
+                ]
+            } else {
+                return [String:String]()
+            }
         }
     }
 }

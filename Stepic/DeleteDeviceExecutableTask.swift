@@ -81,12 +81,12 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                 }, error: {
                     error in
                     print("error \(error) while removing device, trying to refresh token and retry")
-                    AuthentificationManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
+                    AuthManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
                         {
                             token in
                             print("successfully refreshed token")
-                            if StepicAPI.shared.userId == user {
-                                StepicAPI.shared.token = token
+                            if AuthInfo.shared.userId == user {
+                                AuthInfo.shared.token = token
                             }
                             recoveryManager.writeStepicToken(token, userId: user)
                             ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 

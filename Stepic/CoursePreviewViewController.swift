@@ -67,9 +67,6 @@ class CoursePreviewViewController: UIViewController {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         self.navigationItem.backBarButtonItem?.title = ""
         
         tableView.tableFooterView = UIView()
@@ -97,6 +94,11 @@ class CoursePreviewViewController: UIViewController {
             }
             updateSections()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     func shareButtonPressed(button: UIBarButtonItem) {
@@ -135,7 +137,7 @@ class CoursePreviewViewController: UIViewController {
             }
         
             isLoadingSections = true
-            if StepicAPI.shared.isAuthorized {
+            if AuthInfo.shared.isAuthorized {
                 c.loadAllSections(success: successBlock, error: errorBlock, withProgresses: false)
             } else {
                 c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
@@ -290,14 +292,22 @@ class CoursePreviewViewController: UIViewController {
         reloadTableView()
     }
     
+    
     @IBAction func joinButtonPressed(sender: UIButton) {
         if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
             return
         }
         
-        if !StepicAPI.shared.isAuthorized {
-            let vc = ControllerHelper.instantiateViewController(identifier: "LaunchViewController")
-            self.presentViewController(vc, animated: true, completion: nil)
+        if !AuthInfo.shared.isAuthorized {
+            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                vc.success = {
+                    [weak self] in
+                    if let s = self {
+                        s.joinButtonPressed(sender)
+                    }
+                }
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
             return
         }
         
@@ -306,7 +316,7 @@ class CoursePreviewViewController: UIViewController {
             
             if sender.isEnabledToJoin {
                 SVProgressHUD.show()
-                AuthentificationManager.sharedManager.joinCourseWithId(c.id, success : {
+                AuthManager.sharedManager.joinCourseWithId(c.id, success : {
                     SVProgressHUD.showSuccessWithStatus("")
                     sender.setDisabledJoined()
                     self.course?.enrolled = true
@@ -320,7 +330,7 @@ class CoursePreviewViewController: UIViewController {
             } else {
                 askForUnenroll(unenroll: {
                     SVProgressHUD.show()
-                    AuthentificationManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
+                    AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
                         SVProgressHUD.showSuccessWithStatus("")
                         sender.setEnabledJoined()
                         self.course?.enrolled = false

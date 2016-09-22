@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class VotesAPI {
 
-    func update(vote: Vote, headers: [String: String] = APIDefaults.headers.bearer, success: (Vote->Void), error errorHandler: (String->Void)) {
+    func update(vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (Vote->Void), error errorHandler: (String->Void)) {
         let params : [String: AnyObject]? = [
             "vote" : vote.json
         ]

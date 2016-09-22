@@ -18,6 +18,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     var loadFeatured : Bool? = nil
     var refreshEnabled : Bool = true
     
+    var lastUser: User?
+    
     //need to override in subclass
     var tabIds : [Int] {
         get {
@@ -37,9 +39,6 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         self.tableView.alignLeading("0", trailing: "0", toView: self.view)
         self.tableView.alignTop("0", bottom: "0", toView: self.view)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
@@ -60,7 +59,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-
+        
+        lastUser = AuthInfo.shared.user
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,6 +70,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             self.refreshControl?.endRefreshing()
             self.refreshControl?.beginRefreshing()
             self.tableView.contentOffset = offset
+        }
+        if lastUser != AuthInfo.shared.user {
+            refreshControl?.beginRefreshing()
+            getCachedCourses(completion: {
+                self.refreshCourses()
+            })
         }
     }
     
@@ -95,8 +101,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func refreshCourses() {
         isRefreshing = true
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
-            () -> Void in
+        performRequest({
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: 1, success: { 
                 (ids, meta) -> Void in
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
@@ -111,6 +116,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
                     }
+                    self.lastUser = AuthInfo.shared.user
                     self.isRefreshing = false
                     }, failure: { 
                         (error) -> Void in
@@ -124,7 +130,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     self.handleRefreshError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleRefreshError()
         })
     }
@@ -205,7 +211,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         isLoadingMore = true
         //TODO : Check if it should be executed in another thread
-        AuthentificationManager.sharedManager.autoRefreshToken(success: { 
+        performRequest({ 
             () -> Void in
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
@@ -241,7 +247,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     self.handleLoadMoreError()
                     
             })
-            }, failure:  {
+            }, error:  {
                 self.handleLoadMoreError()
         })
     }
@@ -250,11 +256,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         if segue.identifier == "showCourse" {
             let dvc = segue.destinationViewController as! CoursePreviewViewController
             dvc.course = sender as? Course
+            dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showSections" {
             let dvc = segue.destinationViewController as! SectionsViewController
             dvc.course = sender as? Course
+            dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showPreferences" {

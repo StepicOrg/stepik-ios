@@ -9,10 +9,11 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import MagicalRecord
 
 class Unit: NSManagedObject, JSONInitializable {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     
     convenience required init(json: JSON){
         self.init()
@@ -25,7 +26,7 @@ class Unit: NSManagedObject, JSONInitializable {
         isActive = json["is_active"].boolValue
         lessonId = json["lesson"].intValue
         progressId = json["progress"].stringValue
-
+        
         assignmentsArray = json["assignments"].arrayObject as! [Int]
         
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
@@ -38,7 +39,7 @@ class Unit: NSManagedObject, JSONInitializable {
     }
     
     func loadAssignments(completion: (Void->Void), errorHandler: (Void->Void)) {
-        AuthentificationManager.sharedManager.autoRefreshToken(success: {
+        performRequest({
             ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .Update, success: {
                 newAssignments in 
                 self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
@@ -48,8 +49,25 @@ class Unit: NSManagedObject, JSONInitializable {
                     print("Error while downloading assignments")
                     errorHandler()
             })
-            }, failure:  {
+            }, error:  {
                 errorHandler()
         })
+    }
+    
+    func getUnitForLessonId(id: Int) -> Unit? {
+        let request = NSFetchRequest(entityName: "Unit")
+        
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
+        
+        request.predicate = predicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            return (results as? [Unit])?.first
+        }
+        catch {
+            return nil
+        }
+//        return Unit.MR_findFirstWithPredicate(NSPredicate(format: "managedLessonId == %@", id as NSNumber))
     }
 }

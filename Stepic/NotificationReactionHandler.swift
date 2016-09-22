@@ -30,7 +30,7 @@ class NotificationReactionHandler {
     
     func handleNotificationWithUserInfo(userInfo: [NSObject: AnyObject]) -> (UIViewController -> Void)? {
         
-        if !StepicAPI.shared.isAuthorized {
+        if !AuthInfo.shared.isAuthorized {
             return nil
         }
         

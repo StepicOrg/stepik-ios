@@ -104,7 +104,12 @@ extension MyCoursesViewController {
         
         switch emptyDatasetState {
         case .Empty:
-            text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            if !AuthInfo.shared.isAuthorized {
+                text = NSLocalizedString("SignInToJoin", comment: "")
+            } else {
+                text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            }
+
             break
         case .ConnectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
@@ -122,6 +127,29 @@ extension MyCoursesViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        var text : String = ""
+        switch emptyDatasetState {
+        case .Empty:
+            if !AuthInfo.shared.isAuthorized {
+                text = NSLocalizedString("SignIn", comment: "")
+            } else {
+                text = NSLocalizedString("AllCourses", comment: "")
+            }
+
+            
+            break
+        case .ConnectionError:
+            text = ""
+            break
+        }
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
     func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
         return UIColor.whiteColor()
     }
@@ -135,5 +163,22 @@ extension MyCoursesViewController {
 extension MyCoursesViewController  {
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView!) {
+        switch emptyDatasetState {
+        case .Empty:
+            if !AuthInfo.shared.isAuthorized {
+                let vc = ControllerHelper.getAuthController()
+                self.presentViewController(vc, animated: true, completion: nil)
+            } else {
+                self.tabBarController?.selectedIndex = 1
+            }
+           
+            
+            break
+        case .ConnectionError:
+            break
+        }
     }
 }

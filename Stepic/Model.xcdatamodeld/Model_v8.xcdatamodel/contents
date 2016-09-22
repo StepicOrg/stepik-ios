@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+    <entity name="Assignment" representedClassName=".Assignment" syncable="YES">
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedStepId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedUnitId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedAssignments" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Block" representedClassName=".Block" syncable="YES">
+        <attribute name="managedAnimation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedBlock" inverseEntity="Step" syncable="YES"/>
+        <relationship name="managedVideo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Video" inverseName="managedBlock" inverseEntity="Video" syncable="YES"/>
+    </entity>
+    <entity name="Course" representedClassName=".Course" syncable="YES">
+        <attribute name="managedAudience" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedCertificate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedCourseDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedEndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedEnrolled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedFeatured" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedFormat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedInstructorsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="managedIntroURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedRequirements" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSectionsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="managedSlug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSummary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedWorkload" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedInstructors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="User" inverseName="managedInstructedCourses" inverseEntity="User" syncable="YES"/>
+        <relationship name="managedIntroVideo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" syncable="YES"/>
+        <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
+    </entity>
+    <entity name="Lesson" representedClassName=".Lesson" syncable="YES">
+        <attribute name="managedCoverURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedFeatured" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPublic" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedSlug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedStepsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedSteps" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Step" inverseName="managedLesson" inverseEntity="Step" syncable="YES"/>
+        <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedLesson" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Progress" representedClassName=".Progress" syncable="YES">
+        <attribute name="managedCost" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedIsPassed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedNumberOfSteps" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedNumberOfStepsPassed" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedScore" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="managedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="managedProgress" inverseEntity="Section" syncable="YES"/>
+        <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedProgress" inverseEntity="Step" syncable="YES"/>
+        <relationship name="managedUnit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="managedProgress" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Section" representedClassName=".Section" syncable="YES">
+        <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedHardDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedIsCached" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedTestSectionAction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedUnitsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedSections" inverseEntity="Course" syncable="YES"/>
+        <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedSection" inverseEntity="Progress" syncable="YES"/>
+        <relationship name="managedUnits" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Unit" inverseName="managedSection" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Step" representedClassName=".Step" syncable="YES">
+        <attribute name="managedDiscussionProxy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedDiscussionsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedBlock" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Block" inverseName="managedStep" inverseEntity="Block" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedSteps" inverseEntity="Lesson" syncable="YES"/>
+        <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedStep" inverseEntity="Progress" syncable="YES"/>
+    </entity>
+    <entity name="Unit" representedClassName=".Unit" syncable="YES">
+        <attribute name="managedActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedAssignmentsArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="managedBeginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedHardDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedLessonId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="managedAssignments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Assignment" inverseName="managedUnit" inverseEntity="Assignment" syncable="YES"/>
+        <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedUnit" inverseEntity="Lesson" syncable="YES"/>
+        <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Progress" inverseName="managedUnit" inverseEntity="Progress" syncable="YES"/>
+        <relationship name="managedSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="managedUnits" inverseEntity="Section" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="managedAvatarURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedBio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedFirstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedLastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedLevel" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPrivate" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="managedProfile" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="managedInstructedCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="managedInstructors" inverseEntity="Course" syncable="YES"/>
+    </entity>
+    <entity name="Video" representedClassName=".Video" syncable="YES">
+        <attribute name="managedCachedPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedCachedQuality" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="managedPlayTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedBlock" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="managedVideo" inverseEntity="Block" syncable="YES"/>
+        <relationship name="managedURLs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="VideoURL" inverseName="managedVideo" inverseEntity="VideoURL" syncable="YES"/>
+    </entity>
+    <entity name="VideoURL" representedClassName=".VideoURL" syncable="YES">
+        <attribute name="managedQuality" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedVideo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="managedURLs" inverseEntity="Video" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Assignment" positionX="-45" positionY="135" width="128" height="105"/>
+        <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="360"/>
+        <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
+        <element name="Progress" positionX="-45" positionY="135" width="128" height="180"/>
+        <element name="Section" positionX="-54" positionY="126" width="128" height="255"/>
+        <element name="Step" positionX="-45" positionY="135" width="128" height="180"/>
+        <element name="Unit" positionX="-45" positionY="144" width="128" height="240"/>
+        <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
+        <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
+        <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
+    </elements>
+</model>

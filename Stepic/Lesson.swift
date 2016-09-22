@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import MagicalRecord
 
 class Lesson: NSManagedObject, JSONInitializable {
     
@@ -29,42 +30,58 @@ class Lesson: NSManagedObject, JSONInitializable {
         stepsArray = json["steps"].arrayObject as! [Int]
     }
     
+    static func getLesson(id: Int) -> Lesson? {
+        let request = NSFetchRequest(entityName: "Lesson")
+        
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
+        
+        request.predicate = predicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            return (results as? [Lesson])?.first
+        }
+        catch {
+            return nil
+        }
+
+//        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
+    }
+    
     func update(json json: JSON) {
         initialize(json)
     }
     
-    func loadSteps(completion completion: (Void -> Void), error errorHandler: (String -> Void)? = nil, refresh : Bool = true, onlyLesson: Bool = false) {
-        let getStepsBlock = 
-        {ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
-            newSteps in 
-            self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
-            if !onlyLesson {
-                if let u = self.unit {
-                    ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
-                        newAssignments in 
-                        u.assignments = Sorter.sort(newAssignments,steps: self.steps)
-                        self.loadProgressesForSteps(completion)
-                        }, failure: {
-                            error in
-                            print("Error while downloading assignments")
-                            errorHandler?("Error while downloading assignments")
-                    })
-                }}
-            CoreDataHelper.instance.save()
-            }, failure: {
-                error in
-                print("Error while downloading units")
-                errorHandler?("Error while downloading units")
-        })}
-        if refresh {
-            AuthentificationManager.sharedManager.autoRefreshToken(success: {
-                getStepsBlock()
+    func loadSteps(completion completion: (Void -> Void), error errorHandler: (String -> Void)? = nil, onlyLesson: Bool = false) {
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
+                newSteps in 
+                self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
+                self.loadProgressesForSteps({
+                    if !onlyLesson {
+                        if let u = self.unit {
+                            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
+                                newAssignments in 
+                                u.assignments = Sorter.sort(newAssignments,steps: self.steps)
+                                completion()
+                                }, failure: {
+                                    error in
+                                    print("Error while downloading assignments")
+                                    errorHandler?("Error while downloading assignments")
+                            })
+                        }
+                    } else {
+                        completion()
+                    }
+                })
+                CoreDataHelper.instance.save()
                 }, failure: {
-                    errorHandler?("failed to refresh token")
+                    error in
+                    print("Error while downloading units")
+                    errorHandler?("Error while downloading units")
             })
-        } else {
-            getStepsBlock()
-        }
+        })
+        
     }
     
     
@@ -81,19 +98,21 @@ class Lesson: NSManagedObject, JSONInitializable {
             }
         }
         
-        ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
-            (newProgresses) -> Void in
-            progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(self.steps.count, progresses.count) {
-                self.steps[i].progress = progresses[i]
-            }
-            
-            CoreDataHelper.instance.save()
-            
-            completion()
-            }, failure: { 
-                (error) -> Void in
-                print("Error while dowloading progresses")
+        performRequest({
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+                (newProgresses) -> Void in
+                progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                for i in 0 ..< min(self.steps.count, progresses.count) {
+                    self.steps[i].progress = progresses[i]
+                }
+                
+                CoreDataHelper.instance.save()
+                
+                completion()
+                }, failure: { 
+                    (error) -> Void in
+                    print("Error while dowloading progresses")
+            }) 
         })
     }
     

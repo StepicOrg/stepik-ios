@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
-
+import MagicalRecord
 
 class Step: NSManagedObject, JSONInitializable {
 
@@ -32,6 +32,7 @@ class Step: NSManagedObject, JSONInitializable {
         }
         discussionsCount = json["discussions_count"].int
         discussionProxyId = json["discussion_proxy"].string
+        lessonId = json["lesson"].intValue
     }
     
     func update(json json: JSON) {
@@ -41,4 +42,21 @@ class Step: NSManagedObject, JSONInitializable {
     
     var hasReview : Bool = false
 
+    static func getStepWithId(id: Int) -> Step? {
+        let request = NSFetchRequest(entityName: "Step")
+        
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
+        
+        request.predicate = predicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            return (results as? [Step])?.first
+        }
+        catch {
+            return nil
+        }
+//        return Step.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
+    }
+    
 }

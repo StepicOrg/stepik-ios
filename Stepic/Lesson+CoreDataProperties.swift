@@ -20,7 +20,7 @@ extension Lesson {
     @NSManaged var managedTitle: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedCoverURL: String?
-
+    
     @NSManaged var managedStepsArray : NSObject?
 
     @NSManaged var managedSteps : NSOrderedSet?
@@ -44,6 +44,7 @@ extension Lesson {
             return managedId?.integerValue ?? -1
         }
     }
+    
     
 //    var isCached : Bool {
 //        set(value){

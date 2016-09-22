@@ -22,16 +22,34 @@ class LaunchViewController: UIViewController {
         dontHaveAccountLabel.text = NSLocalizedString("DontHaveAccountQuestion", comment: "")
     }
     
+    var cancel : (Void->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.cancel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLocalizations()
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
-
+        
+        navigationController?.navigationBar.opaque = true
+        navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)    
+        self.navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBarHidden = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,6 +64,13 @@ class LaunchViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onLaunchScreen, parameters: nil)
     }
 
+    @IBAction func сlosePressed(sender: AnyObject) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+            [weak self] in
+            self?.cancel?()
+        })
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "signInSegue" {
             let dvc = segue.destinationViewController as! SignInTableViewController

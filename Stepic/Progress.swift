@@ -31,4 +31,19 @@ class Progress: NSManagedObject {
     func update(json json: JSON) {
         initialize(json)
     }
+    
+    static func deleteAllStoredProgresses() {
+        let request = NSFetchRequest(entityName: "Progress")
+        
+        do {
+            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) as? [Progress]
+            for obj in results ?? [] {
+                CoreDataHelper.instance.deleteFromStore(obj)
+            }
+        }
+        catch {
+            print("\n\n\nCould nnot delete progresses! \n\n\n")
+        }
+
+    }
 }

@@ -32,7 +32,7 @@ class DiscussionAlertConstructor {
         })
         )
         
-        if comment.userId != StepicAPI.shared.userId {
+        if comment.userId != AuthInfo.shared.userId {
         
             let likeTitle: String = (comment.vote.value == VoteValue.Epic) ? NSLocalizedString("Unlike", comment: "") : NSLocalizedString("Like", comment: "")
             

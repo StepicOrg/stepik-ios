@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import MagicalRecord
 
 @objc
 class User: NSManagedObject, JSONInitializable {
@@ -36,5 +37,23 @@ class User: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
+    var isGuest : Bool {
+        return level == 0
+    }
     
+    static func fetchById(id: Int) -> [User]? {
+        return User.MR_findAllWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber)) as? [User]
+    }
+
+    //synchronous 
+    static func removeAllExcept(user: User) {
+        if let fetchedUsers = fetchById(user.id) {
+            for fetchedUser in fetchedUsers {
+                if fetchedUser != user {
+                    fetchedUser.MR_deleteEntity()
+                }
+            }
+            CoreDataHelper.instance.save()
+        }
+    }
 }

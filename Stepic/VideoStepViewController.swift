@@ -13,12 +13,20 @@ import DownloadButton
 import FLKAutoLayout
 
 class VideoStepViewController: UIViewController {
-
+    
     var moviePlayer : MPMoviePlayerController? = nil
     var video : Video!
     var nItem : UINavigationItem!
     var step: Step!
+    var stepId : Int!
+    var lessonSlug: String!
+    
+    var startStepId: Int!
+    var startStepBlock : (Void->Void)!
+    var shouldSendViewsBlock : (Void->Bool)!
+
     var assignment : Assignment?
+    
     var parentNavigationController : UINavigationController?
     
     var nextLessonHandler: (Void->Void)?
@@ -45,18 +53,30 @@ class VideoStepViewController: UIViewController {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
-    
-                
+        
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
             recognizer in
             self?.playVideo()
-        })
+            })
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
         
         initialize()
+    }
+    
+    func sharePressed(item: UIBarButtonItem) {
+//        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
+        let stepid = stepId
+        let slug = lessonSlug
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
+            shareVC.popoverPresentationController?.barButtonItem = item
+            dispatch_async(dispatch_get_main_queue()) {
+                self.presentViewController(shareVC, animated: true, completion: nil)
+            }
+        }
     }
     
     func initialize() {
@@ -120,8 +140,10 @@ class VideoStepViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
-        nItem.rightBarButtonItem = UIBarButtonItem(customView: itemView)
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
+        nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
     override func didReceiveMemoryWarning() {
@@ -130,15 +152,22 @@ class VideoStepViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if let a = assignment {
-            let cstep = step
-            ApiDataDownloader.sharedDownloader.didVisitStepWith(id: step.id, assignment: a.id, success: {
-                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
-                UIThread.performUI{
-                    cstep.progress?.isPassed = true
-                    CoreDataHelper.instance.save()
-                }
-            }) 
+        let cstep = step
+        let stepid = step.id
+        if stepId - 1 == startStepId {
+            startStepBlock()
+        }
+        if shouldSendViewsBlock() {
+            performRequest({
+                [weak self] in
+                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                    NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                    UIThread.performUI{
+                        cstep.progress?.isPassed = true
+                        CoreDataHelper.instance.save()
+                    }
+                }) 
+                })
         }
     }
     
@@ -156,7 +185,7 @@ class VideoStepViewController: UIViewController {
             //TODO: Load comments here
         }
     }
-
+    
     @IBAction func prevLessonPressed(sender: UIButton) {
         prevLessonHandler?()
     }
@@ -166,14 +195,14 @@ class VideoStepViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
 
 extension VideoStepViewController : PKDownloadButtonDelegate {
@@ -221,7 +250,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
 }
 
 extension VideoStepViewController : VideoDownloadDelegate {
-
+    
     func didDownload(video: Video, cancelled: Bool) {
     }
     

@@ -24,7 +24,7 @@ class NotificationRegistrator: NSObject {
             UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-        if StepicAPI.shared.isAuthorized {
+        if AuthInfo.shared.isAuthorized {
             if let token = FIRInstanceID.instanceID().token() {
                 registerDevice(token)
             }
@@ -56,7 +56,7 @@ class NotificationRegistrator: NSObject {
     // Should be executed first before any actions were performed, contains abort()
     //TODO: remove abort, add failure completion handler 
     func unregisterFromNotifications(completion completion: (Void->Void)) {
-        print(StepicAPI.shared.token?.accessToken)
+        print(AuthInfo.shared.token?.accessToken)
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
         if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
             ApiDataDownloader.devices.delete(deviceId, success: 
@@ -68,9 +68,9 @@ class NotificationRegistrator: NSObject {
                     errorMessage in 
                     print(errorMessage)
                     print("initializing delete device task")
-                    print("user id \(StepicAPI.shared.userId) , token \(StepicAPI.shared.token)")
-                    if let userId =  StepicAPI.shared.userId,
-                        token = StepicAPI.shared.token {
+                    print("user id \(AuthInfo.shared.userId) , token \(AuthInfo.shared.token)")
+                    if let userId =  AuthInfo.shared.userId,
+                        token = AuthInfo.shared.token {
                         
                         let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                         ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)

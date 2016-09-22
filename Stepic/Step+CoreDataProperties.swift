@@ -18,6 +18,7 @@ extension Step {
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedStatus: String?
     @NSManaged var managedProgressId: String?
+    @NSManaged var managedLessonId : NSNumber?
     
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
@@ -40,6 +41,15 @@ extension Step {
         }
         get {
             return managedId?.integerValue ?? -1
+        }
+    }
+    
+    var lessonId : Int {
+        set(newId){
+            self.managedLessonId = newId
+        }
+        get {
+            return managedLessonId?.integerValue ?? -1
         }
     }
     

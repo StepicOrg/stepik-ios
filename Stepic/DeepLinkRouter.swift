@@ -10,146 +10,132 @@ import Foundation
 
 class DeepLinkRouter {
     
-    static func routeFromDeepLink(link: NSURL, completion: (UIViewController? -> Void)) {
-        func getCourseID(string: String) -> Int? {
-            var courseString = ""
-            for character in string.characters.reverse() {
+    static func routeFromDeepLink(link: NSURL, completion: (UIViewController?, Bool) -> Void) {
+        
+        func getID(stringId: String, reversed: Bool) -> Int? {
+            var slugString = ""
+            let string = reversed ? String(stringId.characters.reverse()) : stringId
+            for character in string.characters {
                 if Int("\(character)") != nil {
-                    courseString = "\(character)" + courseString
+                    if reversed {
+                        slugString = "\(character)" + slugString
+                    } else {
+                        slugString = slugString + "\(character)"
+                    }
                 } else {
                     break
                 }
             }
-            let courseId = Int(courseString)
+            let slugId = Int(slugString)
             
-            return courseId
+            return slugId
         }
         
-        if let components = link.pathComponents {
-            //just a check if everything is OK with the link length
-            if components.count < 2 {
-                completion(nil)
-                return 
-            }
-            
-            if components[1].lowercaseString == "course" {
-                if let courseId = getCourseID(components[2]) {
-                    if components.count == 3 {
-                        routeToCourseWithId(courseId, completion: completion)
-                        return
-                    }
-                    if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
-                        routeToSyllabusWithId(courseId, completion: completion)
-                        return
-                    }
-                    completion(nil)
-                    return
-                } else {
-                    completion(nil)
-                    return
-                }
-            } else {
-                completion(nil)
-                return
-            }
-        } else {
-            completion(nil)
+                
+        guard let components = link.pathComponents else {
+            completion(nil, false)
             return
         }
+            //just a check if everything is OK with the link length
+            
+        if components[1].lowercaseString == "course" && components.count >= 3 {
+            guard let courseId = getID(components[2], reversed: true) else {
+                completion(nil, false)
+                return
+            }
+            
+            if components.count == 3 {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId])
+                routeToCourseWithId(courseId, completion: completion)
+                return
+            }
+    
+            if components.count == 4 && components[3].lowercaseString.containsString("syllabus") {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId])
+                routeToSyllabusWithId(courseId, completion: completion)
+                return
+            }
+            
+            completion(nil, false)
+            return
+        }  
+            
+            
+        if components[1].lowercaseString == "lesson" && components.count >= 5 {
+            guard let lessonId = getID(components[2], reversed: true) else {
+                completion(nil, false)
+                return
+            }
+            
+            guard components[3].lowercaseString == "step" else {
+                completion(nil, false)
+                return
+            }
+            
+            guard let stepId = getID(components[4], reversed: false) else {
+                completion(nil, false)
+                return
+            }
+            
+            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId, "step": stepId])
+            routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
+            return
+        }            
+         
+        completion(nil, false)
+        return
     }
     
-    private static func routeToCourseWithId(courseId: Int, completion: (UIViewController? -> Void)) {
+    private static func routeToCourseWithId(courseId: Int, completion: (UIViewController?, Bool) -> Void) {
         if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
             do {
                 let courses = try Course.getCourses([courseId])
                 if courses.count == 0 {
-                    ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
-                        loadedCourses in 
-                        if loadedCourses.count == 1 {
-                            UIThread.performUI {
-                                vc.course = loadedCourses[0]
-                                completion(vc)
-                            }
-                        } else {
-                            print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                            completion(nil)
-                            return
-                        }
-                    }, failure: {
-                            error in
-                            print("error while downloading course with id \(courseId)")
-                            completion(nil) 
-                            return
-                    })
-                    return
-                } 
-                if courses.count == 1 {
-                    vc.course = courses[0]
-                    completion(vc)
-                    return
-                }
-                completion(nil)
-                return
-            }
-            catch {
-                print("something bad happened")
-                completion(nil)
-                return
-            }
-        }
-        
-        completion(nil)
-    }
-    
-    private static func routeToSyllabusWithId(courseId: Int, completion: (UIViewController? -> Void)) {
-        if !StepicAPI.shared.isAuthorized {
-                do {
-                    let courses = try Course.getCourses([courseId])
-                    if courses.count == 0 {
+                    performRequest({
                         ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
                             loadedCourses in 
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
-                                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                        vc.course = loadedCourses[0]
-                                        completion(vc)
-                                    }
+                                    vc.course = loadedCourses[0]
+                                    completion(vc, true)
                                 }
                             } else {
                                 print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                                completion(nil)
+                                completion(nil, false)
                                 return
                             }
                             }, failure: {
                                 error in
                                 print("error while downloading course with id \(courseId)")
-                                completion(nil) 
+                                completion(nil, false) 
                                 return
                         })
-                        return
-                    } 
-                    if courses.count == 1 {
-                        UIThread.performUI {
-                            if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                vc.course = courses[0]
-                                completion(vc)
-                            }
-                        }
-                        return
-                    } else {
-                        completion(nil)
-                    }
+                    })
+                    return
+                } 
+                if courses.count == 1 {
+                    vc.course = courses[0]
+                    completion(vc, true)
                     return
                 }
-                catch {
-                    print("something bad happened")
-                    completion(nil)
-                    return
-                }
-        } else {
-            do {
-                let courses = try Course.getCourses([courseId])
-                if courses.count == 0 {
+                completion(nil, false)
+                return
+            }
+            catch {
+                print("something bad happened")
+                completion(nil, false)
+                return
+            }
+        }
+        
+        completion(nil, false)
+    }
+    
+    private static func routeToSyllabusWithId(courseId: Int, completion: (UIViewController?, Bool) -> Void) {
+        do {
+            let courses = try Course.getCourses([courseId])
+            if courses.count == 0 {
+                performRequest({
                     ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .Delete, success: {
                         loadedCourses in 
                         if loadedCourses.count == 1 {
@@ -158,55 +144,69 @@ class DeepLinkRouter {
                                 if course.enrolled {
                                     if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
                                         vc.course = course
-                                        completion(vc)
+                                        completion(vc, true)
                                     }
                                 } else {
                                     if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
                                         vc.course = course
                                         vc.displayingInfoType = DisplayingInfoType.Syllabus
-                                        completion(vc)
+                                        completion(vc, true)
                                     }
                                 }
                             }
                         } else {
                             print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                            completion(nil)
+                            completion(nil, false)
                             return
                         }
                         }, failure: {
                             error in
                             print("error while downloading course with id \(courseId)")
-                            completion(nil) 
+                            completion(nil, false) 
                             return
                     })
-                    return
-                } 
-                if courses.count == 1 {
-                    let course = courses[0]
-                    if course.enrolled {
-                        if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
-                            vc.course = course
-                            completion(vc)
-                        }
-                    } else {
-                        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                            vc.course = course
-                            vc.displayingInfoType = DisplayingInfoType.Syllabus
-                            completion(vc)
-                        }
+                })
+                return
+            } 
+            if courses.count == 1 {
+                let course = courses[0]
+                if course.enrolled {
+                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
+                        vc.course = course
+                        completion(vc, true)
                     }
-                    return
+                } else {
+                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
+                        vc.course = course
+                        vc.displayingInfoType = DisplayingInfoType.Syllabus
+                        completion(vc, true)
+                    }
                 }
-                completion(nil)
                 return
             }
-            catch {
-                print("something bad happened")
-                completion(nil)
-                return
-            }
+            completion(nil, false)
+            return
         }
-        
-        completion(nil)
+        catch {
+            print("something bad happened")
+            completion(nil, false)
+            return
+        }        
+    }
+    
+    static func routeToStepWithId(stepId: Int, lessonId: Int, completion: (UIViewController?, Bool) -> Void) {
+        let router = StepsControllerDeepLinkRouter()
+        router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: 
+            {
+                vc in
+                completion(vc, true)
+            }, error: 
+            {
+                errorMsg in 
+                print(errorMsg)
+                completion(nil, false)
+            }
+        )
+
     }
 }

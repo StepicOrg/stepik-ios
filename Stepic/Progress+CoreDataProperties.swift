@@ -21,6 +21,10 @@ extension Progress {
     @NSManaged var managedNumberOfStepsPassed: NSNumber?
     @NSManaged var managedCost: NSNumber?
 
+    @NSManaged var managedStep: Step?
+    @NSManaged var managedSection: Section?
+    @NSManaged var managedUnit: Unit?
+
     class var entity : NSEntityDescription {
         return NSEntityDescription.entityForName("Progress", inManagedObjectContext: CoreDataHelper.instance.context)!
     }

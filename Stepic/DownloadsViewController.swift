@@ -20,11 +20,7 @@ class DownloadsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(self.navigationController?.navigationBar)
-        UICustomizer.sharedCustomizer.setStepicTabBar(self.tabBarController?.tabBar)
-        
+                
         tableView.registerNib(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
         
         self.tableView.emptyDataSetDelegate = self 
@@ -83,7 +79,7 @@ class DownloadsViewController: UIViewController {
             //TODO : pass unit here!
             dvc.context = .Lesson
             dvc.lesson = step.managedLesson
-            dvc.startStepId = step.managedLesson?.steps.indexOf(step)
+            dvc.startStepId = step.managedLesson?.steps.indexOf(step) ?? 0
         }
     }
     
@@ -157,25 +153,66 @@ extension DownloadsViewController : UITableViewDelegate {
         }
         
         if let course = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse {
-            if course.enrolled {
-                showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
-            } else {
-                if selectedVideo.managedBlock!.managedStep!.managedLesson!.isPublic {
-                    showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+            let enterDownloadBlock = {
+                [weak self] in
+                if course.enrolled {
+                    self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                 } else {
-                    showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
-                        UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
-                        AuthentificationManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
-                            UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
-                            self.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
-                            }, error: { 
-                                status in
-                                UIThread.performUI({SVProgressHUD.showErrorWithStatus(status)})
-                                UIThread.performUI({Messages.sharedManager.showConnectionErrorMessage(inController: self.navigationController!)})
+                    if selectedVideo.managedBlock!.managedStep!.managedLesson!.isPublic {
+                        self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+                    } else {
+                        self?.showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
+                            let joinBlock : (Void -> Void) = {
+                                [weak self] in
+                                UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
+                                AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
+                                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
+                                    self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+                                    }, error: { 
+                                        status in
+                                        UIThread.performUI({SVProgressHUD.showErrorWithStatus(status)})
+                                        UIThread.performUI({
+                                            if let navigation = self?.navigationController {
+                                                Messages.sharedManager.showConnectionErrorMessage(inController: navigation)
+                                            }
+                                        })
+                                }) 
+                            }
+                            if AuthInfo.shared.isAuthorized {
+                                joinBlock()
+                            } else {
+                                if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                                    vc.success = {
+                                        joinBlock()
+                                    }
+                                    self?.presentViewController(vc, animated: true, completion: nil)
+                                }
+                            }
                         })
-                    })
+                    }
                 }
+
             }
+            enterDownloadBlock()
+//            if let user = AuthInfo.shared.user {
+//                if user.isGuest {
+//                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+//                        authVC.success = {
+//                            performRequest ({
+//                                ApiDataDownloader.sharedDownloader.getCoursesByIds([course.id], deleteCourses: [course], refreshMode: .Update, success: {
+//                                    course in 
+//                                    enterDownloadBlock()
+//                                    }, failure: {
+//                                        _ in
+//                                })
+//                            })
+//                        }
+//                        self.presentViewController(authVC, animated: true, completion: nil)
+//                    }
+//                } else {
+//                    enterDownloadBlock()
+//                }
+//            }
         } else {
             print("Something bad happened")
         }
