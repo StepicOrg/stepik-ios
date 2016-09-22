@@ -162,19 +162,32 @@ extension DownloadsViewController : UITableViewDelegate {
                         self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                     } else {
                         self?.showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
-                            UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
-                            AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
-                                UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
-                                self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
-                                }, error: { 
-                                    status in
-                                    UIThread.performUI({SVProgressHUD.showErrorWithStatus(status)})
-                                    UIThread.performUI({
-                                        if let navigation = self?.navigationController {
-                                            Messages.sharedManager.showConnectionErrorMessage(inController: navigation)
-                                        }
-                                    })
-                            })
+                            let joinBlock : (Void -> Void) = {
+                                [weak self] in
+                                UIThread.performUI({SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)})
+                                AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
+                                    UIThread.performUI({SVProgressHUD.showSuccessWithStatus("")})
+                                    self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
+                                    }, error: { 
+                                        status in
+                                        UIThread.performUI({SVProgressHUD.showErrorWithStatus(status)})
+                                        UIThread.performUI({
+                                            if let navigation = self?.navigationController {
+                                                Messages.sharedManager.showConnectionErrorMessage(inController: navigation)
+                                            }
+                                        })
+                                }) 
+                            }
+                            if AuthInfo.shared.isAuthorized {
+                                joinBlock()
+                            } else {
+                                if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                                    vc.success = {
+                                        joinBlock()
+                                    }
+                                    self?.presentViewController(vc, animated: true, completion: nil)
+                                }
+                            }
                         })
                     }
                 }
