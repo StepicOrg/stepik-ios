@@ -433,13 +433,43 @@ class DiscussionsViewController: UIViewController {
         let alert = DiscussionAlertConstructor.getCommentAlert(comment, 
             replyBlock: {
                 [weak self] in
-                self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
+                }
             }, likeBlock: {
                 [weak self] in
-                self?.setLiked(comment, cell: cell)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.setLiked(comment, cell: cell)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.setLiked(comment, cell: cell)
+                }
             }, abuseBlock:  {
                 [weak self] in
-                self?.setAbused(comment, cell: cell)
+                if !AuthInfo.shared.isAuthorized {
+                    if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+                        vc.success = {
+                            [weak self] in
+                            self?.setAbused(comment, cell: cell)
+                        }
+                        self?.presentViewController(vc, animated: true, completion: nil)
+                    }
+                } else {
+                    self?.setAbused(comment, cell: cell)
+                }
             }, openURLBlock:  {
                 [weak self] 
                 url in     
