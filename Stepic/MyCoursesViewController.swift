@@ -104,15 +104,10 @@ extension MyCoursesViewController {
         
         switch emptyDatasetState {
         case .Empty:
-            if let user = AuthInfo.shared.user {  
-                if user.isGuest {
-                    //TODO: Localize
-                    text = NSLocalizedString("SignInToJoin", comment: "")
-                } else {
-                    text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-                }
-            } else {
+            if !AuthInfo.shared.isAuthorized {
                 text = NSLocalizedString("SignInToJoin", comment: "")
+            } else {
+                text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
             }
 
             break
@@ -136,16 +131,12 @@ extension MyCoursesViewController {
         var text : String = ""
         switch emptyDatasetState {
         case .Empty:
-            if let user = AuthInfo.shared.user {  
-                if user.isGuest {
-                    //TODO: Localize
-                    text = NSLocalizedString("SignIn", comment: "")
-                } else {
-                    text = NSLocalizedString("AllCourses", comment: "")
-                }
-            } else {
+            if !AuthInfo.shared.isAuthorized {
                 text = NSLocalizedString("SignIn", comment: "")
+            } else {
+                text = NSLocalizedString("AllCourses", comment: "")
             }
+
             
             break
         case .ConnectionError:
@@ -177,17 +168,13 @@ extension MyCoursesViewController  {
     func emptyDataSetDidTapButton(scrollView: UIScrollView!) {
         switch emptyDatasetState {
         case .Empty:
-            if let user = AuthInfo.shared.user {  
-                if user.isGuest {
-                    let vc = ControllerHelper.getAuthController()
-                    self.presentViewController(vc, animated: true, completion: nil)
-                } else {
-                    self.tabBarController?.selectedIndex = 1
-                }
-            } else {
+            if !AuthInfo.shared.isAuthorized {
                 let vc = ControllerHelper.getAuthController()
                 self.presentViewController(vc, animated: true, completion: nil)
+            } else {
+                self.tabBarController?.selectedIndex = 1
             }
+           
             
             break
         case .ConnectionError:

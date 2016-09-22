@@ -95,7 +95,7 @@ class UserPreferencesTableViewController: UITableViewController {
     private func initWithUser(user : User) {
         avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
-        if user.isGuest {
+        if !AuthInfo.shared.isAuthorized {
             signInHeight.constant = 40
             signInNameDistance.constant = 8
             heightForRows[0][0] = 131 + 48

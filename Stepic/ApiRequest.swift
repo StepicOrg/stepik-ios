@@ -41,45 +41,42 @@ class ApiRequestPerformer {
     
     private static func performRequestWithAuthorizationCheck(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
         
-        if let user = AuthInfo.shared.user {
-            print("performing request with user \(user.id)")
-            if user.isGuest && Session.needsRefresh {
-                Session.refresh(completion: 
+//        if let user = AuthInfo.shared.user {
+//            print("performing request with user \(user.id)")
+        if !AuthInfo.shared.isAuthorized && Session.needsRefresh {
+            Session.refresh(completion: 
+                {
+                    completion()
+                }, error: {
+                    _ in 
+                    errorHandler?()
+                }
+            )
+            return
+        }
+        
+        if AuthInfo.shared.isAuthorized && AuthInfo.shared.needsToRefreshToken {
+            if let refreshToken = AuthInfo.shared.token?.refreshToken {
+                AuthManager.sharedManager.refreshTokenWith(refreshToken, success: 
                     {
+                        t in
+                        AuthInfo.shared.token = t
                         completion()
-                    }, error: {
-                        _ in 
+                    }, failure : {
+                        error in
+                        print("error while auto refresh token")
                         errorHandler?()
                     }
                 )
                 return
-            }
-            
-            if !user.isGuest && AuthInfo.shared.needsToRefreshToken {
-                if let refreshToken = AuthInfo.shared.token?.refreshToken {
-                    AuthManager.sharedManager.refreshTokenWith(refreshToken, success: 
-                        {
-                            t in
-                            AuthInfo.shared.token = t
-                            completion()
-                        }, failure : {
-                            error in
-                            print("error while auto refresh token")
-                            errorHandler?()
-                        }
-                    )
-                    return
-                } else {
+            } else {
                     //No token to refresh with authorized user
-                    errorHandler?()
-                    return
-                }
+                errorHandler?()
+                return
             }
-            
-            completion()
-        } else {
-            errorHandler?()
         }
+                    
+        completion()
     }
 
 }

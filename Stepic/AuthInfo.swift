@@ -184,18 +184,11 @@ class AuthInfo: NSObject {
     }
     
     var initialHTTPHeaders : [String: String] {
-        if let user = user {
-            if user.isGuest {
-                return Session.cookieHeaders
-//                print("requested headers with token: \(APIDefaults.headers.bearer)")
-            } else {
-                return APIDefaults.headers.bearer
-//                print("requested headers with cookies: \(Session.cookieHeaders)")
-            }
+        if !AuthInfo.shared.isAuthorized {
+            return Session.cookieHeaders
+        } else {
+            return APIDefaults.headers.bearer
         }
-//        print("requested nil headers")
-        return APIDefaults.headers.bearer
-
     }
 }
 
