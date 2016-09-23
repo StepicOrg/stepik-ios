@@ -210,7 +210,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        handleOpenedFromDeepLink(url)
+        print("opened app via url \(url.absoluteString)")
+        let codeOpt = Parser.sharedParser.codeFromURL(url)
+        if let code = codeOpt {
+            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])            
+        } else {
+            handleOpenedFromDeepLink(url)
+        }
         return true
     }
     
