@@ -129,6 +129,8 @@ class DiscussionsViewController: UIViewController {
                 self.presentViewController(vc, animated: true, completion: nil)
             }
             return
+        } else {
+            presentWriteCommentController(parent: nil)
         }
 
     }

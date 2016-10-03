@@ -148,6 +148,7 @@ class StepsViewController: RGPageViewController {
                     if s.startStepId < s.lesson!.steps.count {
                         if !s.didSelectTab {
                             s.selectTabAtIndex(s.startStepId, updatePage: true)
+                            s.didSelectTab = true
                         }
                     }
                 }
