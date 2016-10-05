@@ -112,23 +112,23 @@ class ApiDataDownloader: NSObject {
         return getObjectsByIds(requestString: "sections", ids: ids, deleteObjects: existingSections, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getUnitsByIds(_ ids: [Int], deleteUnits : [Unit], refreshMode: RefreshMode, success : (([Unit]) -> Void)?, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func getUnitsByIds(_ ids: [Int], deleteUnits : [Unit], refreshMode: RefreshMode, success : (([Unit]) -> Void)?, failure : (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "units", ids: ids, deleteObjects: deleteUnits, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getLessonsByIds(_ ids: [Int], deleteLessons : [Lesson], refreshMode: RefreshMode, success : (([Lesson]) -> Void)?, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func getLessonsByIds(_ ids: [Int], deleteLessons : [Lesson], refreshMode: RefreshMode, success : (([Lesson]) -> Void)?, failure : (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "lessons", ids: ids, deleteObjects: deleteLessons, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getStepsByIds(_ ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func getStepsByIds(_ ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getCoursesByIds(_ ids: [Int], deleteCourses : [Course], refreshMode: RefreshMode, success : (([Course]) -> Void)?, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func getCoursesByIds(_ ids: [Int], deleteCourses : [Course], refreshMode: RefreshMode, success : (([Course]) -> Void)?, failure : (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "courses", ids: ids, deleteObjects: deleteCourses, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getAssignmentsByIds(_ ids: [Int], deleteAssignments : [Assignment], refreshMode: RefreshMode, success : (([Assignment]) -> Void)?, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func getAssignmentsByIds(_ ids: [Int], deleteAssignments : [Assignment], refreshMode: RefreshMode, success : (([Assignment]) -> Void)?, failure : (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "assignments", ids: ids, deleteObjects: deleteAssignments, refreshMode: refreshMode, success: success, failure: failure)
     }
     

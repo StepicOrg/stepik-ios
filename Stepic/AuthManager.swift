@@ -16,10 +16,10 @@ class AuthManager : NSObject {
     fileprivate override init() {}
     
     
-    func logInWithCode(_ code: String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func logInWithCode(_ code: String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
-            failure(error: NSError.noAppWithCredentials as ErrorProtocol)
+            failure(error: NSError.noAppWithCredentials as Error)
             return nil 
         }
         
@@ -58,10 +58,10 @@ class AuthManager : NSObject {
         
     }
     
-    func logInWithUsername(_ username : String, password : String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func logInWithUsername(_ username : String, password : String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
-            failure(error: NSError.noAppWithCredentials as ErrorProtocol)
+            failure(error: NSError.noAppWithCredentials as Error)
             return nil 
         }
         
@@ -101,7 +101,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func refreshTokenWith(_ refresh_token : String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
+    func refreshTokenWith(_ refresh_token : String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
         
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
@@ -110,13 +110,13 @@ class AuthManager : NSObject {
             return nil
         case .code:
             if StepicApplicationsInfo.social == nil {
-                failure(error: NSError.noAppWithCredentials as ErrorProtocol)
+                failure(error: NSError.noAppWithCredentials as Error)
                 return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .password:
             if StepicApplicationsInfo.password == nil {
-                failure(error: NSError.noAppWithCredentials as ErrorProtocol)
+                failure(error: NSError.noAppWithCredentials as Error)
                 return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials

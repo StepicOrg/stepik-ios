@@ -22,7 +22,7 @@ extension Request {
      
      :returns: The request.
      */
-    public func responseSwiftyJSON(_ completionHandler: (URLRequest, HTTPURLResponse?, SwiftyJSON.JSON, ErrorProtocol?) -> Void) -> Self {
+    public func responseSwiftyJSON(_ completionHandler: (URLRequest, HTTPURLResponse?, SwiftyJSON.JSON, Error?) -> Void) -> Self {
         return responseSwiftyJSON(nil, options:JSONSerialization.ReadingOptions.allowFragments, completionHandler:completionHandler)
     }
     
@@ -35,7 +35,7 @@ extension Request {
      
      :returns: The request.
      */
-    public func responseSwiftyJSON(_ queue: DispatchQueue? = nil, options: JSONSerialization.ReadingOptions = .allowFragments, completionHandler: (URLRequest, HTTPURLResponse?, JSON, ErrorProtocol?) -> Void) -> Self {
+    public func responseSwiftyJSON(_ queue: DispatchQueue? = nil, options: JSONSerialization.ReadingOptions = .allowFragments, completionHandler: (URLRequest, HTTPURLResponse?, JSON, Error?) -> Void) -> Self {
         
         // With Alamofire 3, completionHandler returns a Response struct instead of request, response, result.
         //For more information about Response struct see: https://github.com/Alamofire/Alamofire/blob/master/Documentation/Alamofire%203.0%20Migration%20Guide.md
