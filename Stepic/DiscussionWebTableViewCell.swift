@@ -29,23 +29,23 @@ class DiscussionWebTableViewCell: UITableViewCell {
     
     var hasSeparator: Bool = false {
         didSet {
-            separatorView?.hidden = !hasSeparator
+            separatorView?.isHidden = !hasSeparator
         }
     }
     
-    var separatorType: SeparatorType = .None {
+    var separatorType: SeparatorType = .none {
         didSet {
             switch separatorType {
-            case .None:
+            case .none:
                 hasSeparator = false
                 separatorHeightConstraint.constant = 0
                 break
-            case .Small:
+            case .small:
                 hasSeparator = true
                 separatorHeightConstraint.constant = 0.5
                 separatorLeadingConstraint.constant = 8
                 break
-            case .Big:
+            case .big:
                 hasSeparator = true
                 separatorHeightConstraint.constant = 10
                 separatorLeadingConstraint.constant = -8
@@ -59,33 +59,33 @@ class DiscussionWebTableViewCell: UITableViewCell {
     var heightUpdateBlock : ((CGFloat, CGFloat)->Void)?
     var commentWebView: WKWebView?
     
-    private func constructWebView() {
+    fileprivate func constructWebView() {
         let theConfiguration = WKWebViewConfiguration()
         let contentController = theConfiguration.userContentController
         contentController.addUserScript( WKUserScript(
             source: "window.onload=function () { window.webkit.messageHandlers.sizeNotification.postMessage({width: document.width, height: document.height});};",
-            injectionTime: WKUserScriptInjectionTime.AtDocumentStart,
+            injectionTime: WKUserScriptInjectionTime.atDocumentStart,
             forMainFrameOnly: false
             ))
         
-        contentController.addScriptMessageHandler(self, name: "sizeNotification")
+        contentController.add(self, name: "sizeNotification")
         
-        commentWebView = WKWebView(frame: CGRectZero, configuration: theConfiguration)
+        commentWebView = WKWebView(frame: CGRect.zero, configuration: theConfiguration)
         
-        commentWebView?.scrollView.scrollEnabled = false
-        commentWebView?.backgroundColor = UIColor.clearColor()
-        commentWebView?.scrollView.backgroundColor = UIColor.clearColor()
-        self.webContainerView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
-        self.commentWebView?.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+        commentWebView?.scrollView.isScrollEnabled = false
+        commentWebView?.backgroundColor = UIColor.clear
+        commentWebView?.scrollView.backgroundColor = UIColor.clear
+        self.webContainerView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        self.commentWebView?.autoresizingMask = UIViewAutoresizing.flexibleHeight
         commentWebView?.translatesAutoresizingMaskIntoConstraints = true
         contentView.translatesAutoresizingMaskIntoConstraints = true
         
         webContainerView.addSubview(commentWebView!)
-        commentWebView?.alignToView(webContainerView)
+        commentWebView?.align(to: webContainerView)
     }
     
-    func initWithComment(comment: Comment, separatorType: SeparatorType)  {
-        userAvatarImageView.sd_setImageWithURL(NSURL(string: comment.userInfo.avatarURL)!)
+    func initWithComment(_ comment: Comment, separatorType: SeparatorType)  {
+        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL)!)
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
@@ -94,16 +94,16 @@ class DiscussionWebTableViewCell: UITableViewCell {
         loadWebView(comment.text)
     }
     
-    private func loadWebView(htmlString: String) {
+    fileprivate func loadWebView(_ htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
-        commentWebView?.loadHTMLString(wrapped, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
+        commentWebView?.loadHTMLString(wrapped, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
     
-    private func setLeadingConstraints(constant: CGFloat) {
+    fileprivate func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         webViewLeadingConstraint.constant = constant
         switch self.separatorType {
-        case .Small: 
+        case .small: 
             separatorLeadingConstraint.constant = -constant + 8
             break
         default: 
@@ -113,7 +113,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+        self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
         contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 999999.0, height: 999999.0)
         userAvatarImageView.setRoundedBounds(width: 0)
         constructWebView()
@@ -131,16 +131,16 @@ class DiscussionWebTableViewCell: UITableViewCell {
         setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
 }
 
 extension DiscussionWebTableViewCell : WKScriptMessageHandler {
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let height = message.body["height"] as? CGFloat {
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 [weak self] in
                 self?.webContainerViewHeight?.constant = height
                 self?.heightUpdateBlock?(height + (self?.separatorHeightConstraint.constant ?? 0) + 69, height)

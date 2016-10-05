@@ -27,7 +27,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testGetDiscussions() {
-        let expectation = expectationWithDescription("testGetDiscussions")
+        let expectation = self.expectation(description: "testGetDiscussions")
         let discussionProxyId = "77-108896"
         discussionProxies.retrieve(discussionProxyId, success: 
             {
@@ -48,7 +48,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")
@@ -57,7 +57,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testCreateComment() {
-        let expectation = expectationWithDescription("testCreateComment")
+        let expectation = self.expectation(description: "testCreateComment")
         let discussionProxyId = "77-108896"
         let target = 108896
         let postable = CommentPostable(target: target, text: "testCreateComment comment")
@@ -83,7 +83,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")
@@ -92,7 +92,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testCreateReply() {
-        let expectation = expectationWithDescription("testCreateReply")
+        let expectation = self.expectation(description: "testCreateReply")
         let target = 108896
         let parent = 226119
         let postable = CommentPostable(parent: parent, target: target, text: "testCreateReply comment")
@@ -118,7 +118,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")

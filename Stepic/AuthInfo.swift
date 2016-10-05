@@ -12,9 +12,9 @@ import MagicalRecord
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
     
-    private let defaults = NSUserDefaults.standardUserDefaults()
+    fileprivate let defaults = UserDefaults.standard
         
-    private override init() {
+    fileprivate override init() {
         super.init()
         
         print("initializing AuthInfo with userId \(userId)")
@@ -32,7 +32,7 @@ class AuthInfo: NSObject {
                 
                 if c == 0 {
                     print("No user with such id found, downloading")
-                    ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .Update, success: {
+                    ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .update, success: {
                         [weak self]
                         users in
                         if let user = users.first {
@@ -58,7 +58,7 @@ class AuthInfo: NSObject {
         }
     }
         
-    private func setTokenValue(newToken: StepicToken?) {
+    fileprivate func setTokenValue(_ newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
         defaults.setValue(newToken?.tokenType, forKey: "token_type")
@@ -99,11 +99,11 @@ class AuthInfo: NSObject {
         }
         
         get {
-            if let accessToken = defaults.valueForKey("access_token") as? String,
-            let refreshToken = defaults.valueForKey("refresh_token") as? String,
-            let tokenType = defaults.valueForKey("token_type") as? String {
+            if let accessToken = defaults.value(forKey: "access_token") as? String,
+            let refreshToken = defaults.value(forKey: "refresh_token") as? String,
+            let tokenType = defaults.value(forKey: "token_type") as? String {
                 print("got accessToken \(accessToken)")
-                let expireDate = NSDate(timeIntervalSince1970: defaults.valueForKey("expire_date") as? NSTimeInterval ?? 0.0)
+                let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
                 return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil
@@ -122,7 +122,7 @@ class AuthInfo: NSObject {
     var needsToRefreshToken: Bool {
         //TODO: Fix this
         if let token = token {
-            return NSDate().compare(token.expireDate) == NSComparisonResult.OrderedDescending
+            return Date().compare(token.expireDate as Date) == ComparisonResult.orderedDescending
         } else {
             return false
         }
@@ -130,10 +130,10 @@ class AuthInfo: NSObject {
     
     var authorizationType : AuthorizationType {
         get {
-            if let typeRaw = defaults.valueForKey("authorization_type") as? Int {
+            if let typeRaw = defaults.value(forKey: "authorization_type") as? Int {
                 return AuthorizationType(rawValue: typeRaw)!
             } else {
-                return AuthorizationType.None
+                return AuthorizationType.none
             }
         }
         
@@ -166,12 +166,12 @@ class AuthInfo: NSObject {
                     print("returning anonymous user id \(anonymousUserId)")
                     return anonymousUserId
                 } else {
-                    print("returning normal user id \(defaults.valueForKey("user_id") as? Int)")
-                    return defaults.valueForKey("user_id") as? Int
+                    print("returning normal user id \(defaults.value(forKey: "user_id") as? Int)")
+                    return defaults.value(forKey: "user_id") as? Int
                 }
             } else {
-                print("returning normal user id \(defaults.valueForKey("user_id") as? Int)")
-                return defaults.valueForKey("user_id") as? Int
+                print("returning normal user id \(defaults.value(forKey: "user_id") as? Int)")
+                return defaults.value(forKey: "user_id") as? Int
             }
         }
     }
@@ -193,5 +193,5 @@ class AuthInfo: NSObject {
 }
 
 enum AuthorizationType: Int {
-    case None = 0, Password, Code
+    case none = 0, password, code
 }

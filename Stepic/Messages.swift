@@ -11,45 +11,45 @@ import TSMessages
 
 class Messages: NSObject {
     static let sharedManager = Messages()
-    private override init() {
+    fileprivate override init() {
         super.init()
         TSMessage.setDelegate(self)
-        TSMessage.addCustomDesignFromFileWithName("CustomMessagesDesign.json")
+        TSMessage.addCustomDesignFromFile(withName: "CustomMessagesDesign.json")
     }
     
     func showConnectionErrorMessage(inController vc: UIViewController) {
-        TSMessage.showNotificationInViewController(vc, 
+        TSMessage.showNotification(in: vc, 
             title: NSLocalizedString("ConnectionErrorTitle", comment: ""), 
             subtitle: NSLocalizedString("ConnectionErrorSubtitle", comment: ""), 
             image: UIImage(named: "Online-white")!, 
-            type: .Error, 
+            type: .error, 
             duration: 3, 
             callback: nil, 
             buttonTitle: nil, 
             buttonCallback: nil, 
-            atPosition: TSMessageNotificationPosition.NavBarOverlay, 
+            at: TSMessageNotificationPosition.navBarOverlay, 
             canBeDismissedByUser: true)        
     }
     
     func show3GDownloadErrorMessage(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle(NSLocalizedString("DownloadReachabilityErrorTitle", comment: ""), type: .Error)
+        TSMessage.showNotification(withTitle: NSLocalizedString("DownloadReachabilityErrorTitle", comment: ""), type: .error)
     }
     
     func showSomethingGotWrong(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle(NSLocalizedString("SomethingWrongTitle", comment: ""), subtitle: NSLocalizedString("SomethingWrongSubtitle", comment: ""), type: .Error)
+        TSMessage.showNotification(withTitle: NSLocalizedString("SomethingWrongTitle", comment: ""), subtitle: NSLocalizedString("SomethingWrongSubtitle", comment: ""), type: .error)
     }
     
     func showReloginPlease(inController vc: UIViewController) {
-        TSMessage.showNotificationWithTitle(NSLocalizedString("ReloginTitle", comment: ""), subtitle: NSLocalizedString("ReloginSubtitle", comment: ""), type: .Error)
+        TSMessage.showNotification(withTitle: NSLocalizedString("ReloginTitle", comment: ""), subtitle: NSLocalizedString("ReloginSubtitle", comment: ""), type: .error)
     }
     
-    func showCancelledDownloadMessage(count count : Int) {
-        TSMessage.showNotificationWithTitle(NSLocalizedString("ConnectionLost", comment: ""), subtitle: "\(NSLocalizedString("CancelledDownload", comment: "")) \(count) \(NSLocalizedString((count%10 == 1 && count != 11) ? "Video" : "Videos", comment: ""))", type: .Error)
+    func showCancelledDownloadMessage(count : Int) {
+        TSMessage.showNotification(withTitle: NSLocalizedString("ConnectionLost", comment: ""), subtitle: "\(NSLocalizedString("CancelledDownload", comment: "")) \(count) \(NSLocalizedString((count%10 == 1 && count != 11) ? "Video" : "Videos", comment: ""))", type: .error)
     }
 }
 
 extension Messages : TSMessageViewProtocol {
-    func customizeMessageView(messageView: TSMessageView!) {
+    func customize(_ messageView: TSMessageView!) {
         messageView.alpha = 0.85
     }
 }

@@ -11,7 +11,7 @@ import IQKeyboardManagerSwift
 import Alamofire
 
 enum WriteCommentViewControllerState {
-    case Editing, Sending, OK
+    case editing, sending, ok
 }
 
 class WriteCommentViewController: UIViewController {
@@ -20,19 +20,19 @@ class WriteCommentViewController: UIViewController {
     
     weak var delegate : WriteCommentDelegate?
     
-    var state: WriteCommentViewControllerState = .Editing {
+    var state: WriteCommentViewControllerState = .editing {
         didSet {
             UIThread.performUI {
                 [weak self] in
                 if let s = self {
                     switch s.state {
-                    case .Sending : 
+                    case .sending : 
                         s.navigationItem.rightBarButtonItem = s.sendingItem
                         break
-                    case .OK:
+                    case .ok:
                         s.navigationItem.rightBarButtonItem = s.okItem
                         break
-                    case .Editing: 
+                    case .editing: 
                         s.navigationItem.rightBarButtonItem = s.editingItem
                         break
                     }
@@ -49,13 +49,13 @@ class WriteCommentViewController: UIViewController {
     var okItem: UIBarButtonItem?
     
     func setupItems() {
-        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.Done, target: self, action: #selector(WriteCommentViewController.sendPressed))
+        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.sendPressed))
         
         let v = UIActivityIndicatorView()
         v.startAnimating()
         sendingItem = UIBarButtonItem(customView: v)
         
-        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.Done, target: self, action: Selector())
+        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: Selector())
     }
     
     override func viewDidLoad() {
@@ -67,7 +67,7 @@ class WriteCommentViewController: UIViewController {
         commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
         setupItems()
         
-        state = .Editing
+        state = .editing
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,13 +79,13 @@ class WriteCommentViewController: UIViewController {
     
     func sendPressed() {
         print("send pressed")
-        state = .Sending
+        state = .sending
         sendComment()
     }
     
     var htmlText : String {
         let t = commentTextView.text
-        return t.stringByReplacingOccurrencesOfString("\n", withString: "<br>")
+        return t.replacingOccurrences(of: "\n", with: "<br>")
     }
     
     func sendComment() {
@@ -95,16 +95,16 @@ class WriteCommentViewController: UIViewController {
             {
                 [weak self]
                 comment in
-                self?.state = .OK
+                self?.state = .ok
                 self?.request = nil
                 UIThread.performUI {
                     self?.delegate?.didWriteComment(comment)
-                    self?.navigationController?.popViewControllerAnimated(true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }, error: {
                 [weak self]
                 errorMsg in
-                self?.state = .Editing
+                self?.state = .editing
                 self?.request = nil
             }
         )

@@ -12,22 +12,22 @@ import Foundation
  Utility class for detecting tags in html string
  */
 class TagDetectionUtil {
-    private init() {}
+    fileprivate init() {}
     
-    static func isWebViewSupportNeeded(htmlString: String) -> Bool {
+    static func isWebViewSupportNeeded(_ htmlString: String) -> Bool {
         return detectLaTeX(htmlString) || detectImage(htmlString) || detectCode(htmlString)
     }
     
     //POSSIBLY detects LaTeX in html string
-    static func detectLaTeX(htmlString: String) -> Bool {
+    static func detectLaTeX(_ htmlString: String) -> Bool {
         return htmlString.characters.filter({$0 == "$"}).count >= 2
     }
     
-    static func detectImage(htmlString: String) -> Bool {
+    static func detectImage(_ htmlString: String) -> Bool {
         return  HTMLParsingUtil.getImageSrcLinks(htmlString).count > 0
     }
     
-    static func detectCode(htmlString: String) -> Bool {
+    static func detectCode(_ htmlString: String) -> Bool {
         return HTMLParsingUtil.getCodeStrings(htmlString).count > 0
     }
 }

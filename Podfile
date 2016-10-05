@@ -5,8 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire'
-    pod 'SwiftyJSON'
+    pod 'Alamofire', :git => 'https://github.com/Homely/Alamofire.git', :branch => 'ios8'
+    pod 'SwiftyJSON', '3.1.0'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -16,7 +16,6 @@ def all_pods
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
-    pod 'AFImageHelper'
     
     pod 'Firebase', '<= 3.4.0'
 #    pod 'Firebase/Messaging'
@@ -26,10 +25,9 @@ def all_pods
 #    pod 'Firebase/Core'
     
     pod "MagicalRecord"
-    pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna', '1.0.6'
+    pod 'Kanna', '~> 2.0.0'
     pod 'CRToast'
     pod 'TUSafariActivity', '~> 1.0'
 end

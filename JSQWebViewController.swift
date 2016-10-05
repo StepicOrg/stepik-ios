@@ -29,7 +29,7 @@ class WebViewController: UIViewController {
     // MARK: Properties
     
     var allowsToOpenInSafari = true
-    var backButtonStyle : BackButtonStyle = .Done
+    var backButtonStyle : BackButtonStyle = .done
     
     /// Returns the web view for the controller.
     final var webView: WKWebView {
@@ -46,9 +46,9 @@ class WebViewController: UIViewController {
     }
     
     /// The URL request for the web view. Upon setting this property, the web view immediately begins loading the request.
-    final var urlRequest: NSURLRequest {
+    final var urlRequest: URLRequest {
         didSet {
-            webView.loadRequest(urlRequest)
+            webView.load(urlRequest)
         }
     }
     
@@ -60,7 +60,7 @@ class WebViewController: UIViewController {
     
     // MARK: Private properties
     
-    private lazy final var _webView: WKWebView = { [unowned self] in
+    fileprivate lazy final var _webView: WKWebView = { [unowned self] in
         // FIXME: prevent Swift bug, lazy property initialized twice from `init(coder:)`
         // return existing webView if webView already added
         let views = self.view.subviews.filter {$0 is WKWebView } as! [WKWebView]
@@ -70,8 +70,8 @@ class WebViewController: UIViewController {
         
         let webView = WKWebView(frame: CGRect.zero, configuration: self.configuration)
         self.view.addSubview(webView)
-        webView.addObserver(self, forKeyPath: TitleKeyPath, options: .New, context: nil)
-        webView.addObserver(self, forKeyPath: EstimatedProgressKeyPath, options: .New, context: nil)
+        webView.addObserver(self, forKeyPath: TitleKeyPath, options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: EstimatedProgressKeyPath, options: .new, context: nil)
         webView.allowsBackForwardNavigationGestures = true
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = true
@@ -79,17 +79,17 @@ class WebViewController: UIViewController {
         return webView
         }()
     
-    private lazy final var _progressBar: UIProgressView = { [unowned self] in
-        let progressBar = UIProgressView(progressViewStyle: .Bar)
-        progressBar.backgroundColor = .clearColor()
-        progressBar.trackTintColor = .clearColor()
+    fileprivate lazy final var _progressBar: UIProgressView = { [unowned self] in
+        let progressBar = UIProgressView(progressViewStyle: .bar)
+        progressBar.backgroundColor = .clear()
+        progressBar.trackTintColor = .clear()
         self.view.addSubview(progressBar)
         return progressBar
         }()
     
-    private final let configuration: WKWebViewConfiguration
+    fileprivate final let configuration: WKWebViewConfiguration
     
-    private final let activities: [UIActivity]?
+    fileprivate final let activities: [UIActivity]?
     
     // MARK: Initialization
     
@@ -102,7 +102,7 @@ class WebViewController: UIViewController {
     
     - returns: A new `WebViewController` instance.
     */
-    init(urlRequest: NSURLRequest, configuration: WKWebViewConfiguration = WKWebViewConfiguration(), activities: [UIActivity]? = nil) {
+    init(urlRequest: URLRequest, configuration: WKWebViewConfiguration = WKWebViewConfiguration(), activities: [UIActivity]? = nil) {
         self.configuration = configuration
         self.urlRequest = urlRequest
         self.activities = activities
@@ -116,14 +116,14 @@ class WebViewController: UIViewController {
      
      - returns: A new `WebViewController` instance.
      */
-    convenience init(url: NSURL) {
-        self.init(urlRequest: NSURLRequest(URL: url))
+    convenience init(url: URL) {
+        self.init(urlRequest: URLRequest(url: url))
     }
     
     /// :nodoc:
     required init?(coder aDecoder: NSCoder) {
         self.configuration = WKWebViewConfiguration()
-        self.urlRequest = NSURLRequest(URL: NSURL(string: "")!)
+        self.urlRequest = URLRequest(url: URL(string: "")!)
         self.activities = nil
         super.init(coder: aDecoder)
     }
@@ -139,7 +139,7 @@ class WebViewController: UIViewController {
     /// :nodoc:
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = urlRequest.URL?.host
+        title = urlRequest.url?.host
         
         if presentingViewController?.presentedViewController != nil {
             let doneItem = backButtonStyle.barButtonItem
@@ -155,7 +155,7 @@ class WebViewController: UIViewController {
         if allowsToOpenInSafari {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: Images.safariBarButtonItemImage, 
-                style: UIBarButtonItemStyle.Plain, 
+                style: UIBarButtonItemStyle.plain, 
                 target: self, 
                 action: #selector(WebViewController.didTapSafariButton(_:)))
             navigationItem.rightBarButtonItem?.tintColor = UIColor.stepicGreenColor()
@@ -166,17 +166,17 @@ class WebViewController: UIViewController {
 //            target: self,
 //            action: Selector("didTapActionButton:"))
         
-        webView.loadRequest(urlRequest)
+        webView.load(urlRequest)
     }
     
     /// :nodoc:
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         assert(navigationController != nil, "\(WebViewController.self) must be presented in a \(UINavigationController.self)")
         super.viewWillAppear(animated)
     }
     
     /// :nodoc:
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         webView.stopLoading()
     }
@@ -190,7 +190,7 @@ class WebViewController: UIViewController {
         webView.scrollView.contentInset = insets
         webView.scrollView.scrollIndicatorInsets = insets
         
-        view.bringSubviewToFront(progressBar)
+        view.bringSubview(toFront: progressBar)
         progressBar.frame = CGRect(
             x: view.frame.minX,
             y: topLayoutGuide.length,
@@ -201,21 +201,21 @@ class WebViewController: UIViewController {
     
     // MARK: Actions
     
-    final func didTapDoneButton(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+    final func didTapDoneButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
     
-    final func didTapSafariButton(sender: UIBarButtonItem) {
-        if let url = webView.URL { 
-            UIApplication.sharedApplication().openURL(url) 
+    final func didTapSafariButton(_ sender: UIBarButtonItem) {
+        if let url = webView.url { 
+            UIApplication.shared.openURL(url) 
         }
     }
     
-    final func didTapActionButton(sender: UIBarButtonItem) {
-        if let url = urlRequest.URL {
+    final func didTapActionButton(_ sender: UIBarButtonItem) {
+        if let url = urlRequest.url {
             let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: activities)
             activityVC.popoverPresentationController?.barButtonItem = sender
-            presentViewController(activityVC, animated: true, completion: nil)
+            present(activityVC, animated: true, completion: nil)
         }
     }
     
@@ -223,9 +223,9 @@ class WebViewController: UIViewController {
     // MARK: KVO
     
     /// :nodoc:
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard let theKeyPath = keyPath where object as? WKWebView == webView else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard let theKeyPath = keyPath , object as? WKWebView == webView else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         
@@ -240,10 +240,10 @@ class WebViewController: UIViewController {
     
     // MARK: Private
     
-    private final func updateProgress() {
+    fileprivate final func updateProgress() {
         let completed = webView.estimatedProgress == 1.0
         progressBar.setProgress(completed ? 0.0 : Float(webView.estimatedProgress), animated: !completed)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = !completed
+        UIApplication.shared.isNetworkActivityIndicatorVisible = !completed
     }
     
 }

@@ -9,16 +9,16 @@
 import UIKit
 
 class TimeFormatHelper: NSObject {
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
     
     static let sharedHelper = TimeFormatHelper()
     
-    func getTimeStringFrom(time: NSTimeInterval) -> String {
-        let dateComponentsFormatter = NSDateComponentsFormatter()
+    func getTimeStringFrom(_ time: TimeInterval) -> String {
+        let dateComponentsFormatter = DateComponentsFormatter()
 //        print("formatting time -> \(dateComponentsFormatter.stringFromTimeInterval(time))")
         let additionalFormat = time >= 60 ? "" : (time < 10 ? "0:0" : "0:")
-        return "\(additionalFormat)\(time >= 60 ? dateComponentsFormatter.stringFromTimeInterval(time)! : "\(Int(time))" )" ?? "--:--:--"
+        return "\(additionalFormat)\(time >= 60 ? dateComponentsFormatter.string(from: time)! : "\(Int(time))" )" ?? "--:--:--"
     }
 }

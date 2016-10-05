@@ -16,18 +16,18 @@ class StepicsAPI {
     init() {}
     
     let manager: Manager = {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.requestCachePolicy = .ReloadIgnoringLocalCacheData
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         return Manager(configuration: configuration)
     }()
 
     
-    func retrieveCurrentUser(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: User -> Void, error errorHandler: String -> Void) -> Request {
+    func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (User) -> Void, error errorHandler: (String) -> Void) -> Request {
         let params = [String:AnyObject]()
         
         print("headers while retrieving user before: \(AuthInfo.shared.initialHTTPHeaders)")
 
-        return manager.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
+        return manager.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .url).responseSwiftyJSON({
             (request, response, json, error) in
             
             print("headers while retrieving user: \(request.allHTTPHeaderFields), retrieved user: \(json)")

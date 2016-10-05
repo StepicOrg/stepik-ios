@@ -13,7 +13,7 @@ import SwiftyJSON
 class DiscussionProxiesAPI {
     let name = "discussion-proxies"
     
-    func retrieve(id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (DiscussionProxy -> Void), error errorHandler: (String -> Void)) -> Request {
+    func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: ((DiscussionProxy) -> Void), error errorHandler: ((String) -> Void)) -> Request {
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in 

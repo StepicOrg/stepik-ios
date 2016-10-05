@@ -9,9 +9,9 @@
 import UIKit
 
 extension UILabel {
-    func setTextWithHTMLString(htmlText: String) {
+    func setTextWithHTMLString(_ htmlText: String) {
 //        Time.tick(htmlText)
-        let descData = htmlText.dataUsingEncoding(NSUnicodeStringEncoding) ?? NSData()
+        let descData = htmlText.data(using: String.Encoding.unicode) ?? Data()
         
         
         //        courseDescriptionLabel.text = "some text"
@@ -24,9 +24,9 @@ extension UILabel {
 //        Time.tock(htmlText)
     }
     
-    class func heightForLabelWithText(text: String, lines: Int, fontName: String, fontSize: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.Natural) -> CGFloat {
+    class func heightForLabelWithText(_ text: String, lines: Int, fontName: String, fontSize: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         
         label.numberOfLines = lines
         
@@ -37,8 +37,8 @@ extension UILabel {
         }
         
         label.font = UIFont(name: fontName, size: fontSize)
-        label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        label.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
+        label.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        label.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         label.textAlignment = alignment
         label.sizeToFit()
         
@@ -48,8 +48,8 @@ extension UILabel {
         
     }
     
-    class func heightForLabelWithText(text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.Natural) -> CGFloat {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
+    class func heightForLabelWithText(_ text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         
         label.numberOfLines = lines
         
@@ -59,9 +59,9 @@ extension UILabel {
             label.text = text
         }
         
-        label.font = UIFont.systemFontOfSize(size)
-        label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        label.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
+        label.font = UIFont.systemFont(ofSize: size)
+        label.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        label.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         label.textAlignment = alignment
         label.sizeToFit()
         

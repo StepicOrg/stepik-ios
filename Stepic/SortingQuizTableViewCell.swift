@@ -19,42 +19,42 @@ class SortingQuizTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        self.selectionStyle = UITableViewCellSelectionStyle.none
         
         initLabel()
         initWebView()
 
-        contentView.backgroundColor = UIColor.clearColor()
+        contentView.backgroundColor = UIColor.clear
         webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
     }
 
     func initLabel() {
         optionLabel.numberOfLines = 0
         optionLabel.font = UIFont(name: "ArialMT", size: 16)
-        optionLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        optionLabel.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
-        optionLabel.textAlignment = NSTextAlignment.Natural
-        optionLabel.backgroundColor = UIColor.clearColor()
+        optionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        optionLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
+        optionLabel.textAlignment = NSTextAlignment.natural
+        optionLabel.backgroundColor = UIColor.clear
         textContainerView.addSubview(optionLabel)
-        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
-        optionLabel.hidden = true
+        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", to: textContainerView)
+        optionLabel.isHidden = true
     }
     
     func initWebView() {
         textContainerView.addSubview(optionWebView)
-        optionWebView.alignToView(textContainerView)
+        optionWebView.align(to: textContainerView)
         webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
-        optionWebView.hidden = true
+        optionWebView.isHidden = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        optionWebView.hidden = true
-        optionLabel.hidden = true
+        optionWebView.isHidden = true
+        optionLabel.isHidden = true
     }
 
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
@@ -63,12 +63,12 @@ class SortingQuizTableViewCell: UITableViewCell {
 extension SortingQuizTableViewCell : TextHeightDependentCellProtocol {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(text: String) -> (Void -> Int) {
+    func setHTMLText(_ text: String) -> ((Void) -> Int) {
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
-            optionWebView.hidden = false
+            optionWebView.isHidden = false
             return webViewHelper.setTextWithTeX(text)
         } else {
-            optionLabel.hidden = false
+            optionLabel.isHidden = false
             optionLabel.setTextWithHTMLString(text)
             return {
                 [weak self] in

@@ -23,6 +23,6 @@ class NumberReply: NSObject, Reply {
     }
     
     var dictValue : [String : NSObject] {
-        return ["number" : number]
+        return ["number" : number as NSObject]
     }
 }

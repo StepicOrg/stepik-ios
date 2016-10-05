@@ -33,23 +33,23 @@ class DiscussionTableViewCell: UITableViewCell {
     
     var hasSeparator: Bool = false {
         didSet {
-            separatorView?.hidden = !hasSeparator
+            separatorView?.isHidden = !hasSeparator
         }
     }
     
-    var separatorType: SeparatorType = .None {
+    var separatorType: SeparatorType = .none {
         didSet {
             switch separatorType {
-            case .None:
+            case .none:
                 hasSeparator = false
                 separatorHeightConstraint.constant = 0
                 break
-            case .Small:
+            case .small:
                 hasSeparator = true
                 separatorHeightConstraint.constant = 0.5
                 separatorLeadingConstraint.constant = 8
                 break
-            case .Big:
+            case .big:
                 hasSeparator = true
                 separatorHeightConstraint.constant = 10
                 separatorLeadingConstraint.constant = -8
@@ -60,10 +60,10 @@ class DiscussionTableViewCell: UITableViewCell {
     }
     
     var comment: Comment?
-    var heightUpdateBlock : (Void->Void)?
+    var heightUpdateBlock : ((Void)->Void)?
 
-    func initWithComment(comment: Comment, separatorType: SeparatorType)  {
-        userAvatarImageView.sd_setImageWithURL(NSURL(string: comment.userInfo.avatarURL)!)
+    func initWithComment(_ comment: Comment, separatorType: SeparatorType)  {
+        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL)!)
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
@@ -73,16 +73,16 @@ class DiscussionTableViewCell: UITableViewCell {
         loadLabel(comment.text)
     }
     
-    private func constructLabel() {
+    fileprivate func constructLabel() {
         commentLabel = UILabel()
         labelContainerView.addSubview(commentLabel!)
-        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", toView: labelContainerView)
+        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
         commentLabel?.numberOfLines = 0
     }
     
-    private func loadLabel(htmlString: String) {
+    fileprivate func loadLabel(_ htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
-        if let data = wrapped.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+        if let data = wrapped.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             do {
                 let attributedString = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType], documentAttributes: nil).attributedStringByTrimmingNewlines()
                 commentLabel?.attributedText = attributedString
@@ -95,11 +95,11 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
     
-    private func setLeadingConstraints(constant: CGFloat) {
+    fileprivate func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         labelLeadingConstraint.constant = constant
         switch self.separatorType {
-        case .Small: 
+        case .small: 
             separatorLeadingConstraint.constant = -constant
             break
         default: 
@@ -107,7 +107,7 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
     
-    func setLiked(liked: Bool, likesCount: Int) {
+    func setLiked(_ liked: Bool, likesCount: Int) {
         likesLabel.text = "\(likesCount)"
         if liked {
             likesImageView.image = Images.thumbsUp.filled
@@ -133,7 +133,7 @@ class DiscussionTableViewCell: UITableViewCell {
         setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     

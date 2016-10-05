@@ -8,29 +8,29 @@
 
 import UIKit
 
-extension NSDate {
-    func getStepicFormatString(withTime withTime: Bool = false) -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeZone = .None
+extension Date {
+    func getStepicFormatString(withTime: Bool = false) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeZone = .none
         if withTime {
-            formatter.timeStyle = .ShortStyle
+            formatter.timeStyle = .short
         }
         
-        return formatter.stringFromDate(self)
+        return formatter.string(from: self)
     }
     
 }
 
-extension NSTimeInterval {
+extension TimeInterval {
     init(timeString: String) {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        if (formatter.dateFromString(timeString)?.timeIntervalSince1970) == nil {
+        if (formatter.date(from: timeString)?.timeIntervalSince1970) == nil {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         } 
-        self = formatter.dateFromString(timeString)!.timeIntervalSince1970
+        self = formatter.date(from: timeString)!.timeIntervalSince1970
     }
 }

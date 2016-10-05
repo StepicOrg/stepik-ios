@@ -12,17 +12,17 @@ import Foundation
  Contains and runs a queue of Executable objects 
  */
 class ExecutionQueue : DictionarySerializable {
-    private var queue : [Executable] = []
+    fileprivate var queue : [Executable] = []
     
     var count : Int {
         return queue.count
     }
     
-    func push(task: Executable) {
+    func push(_ task: Executable) {
         queue += [task]
     }
     
-    func executeAll(completion : (ExecutionQueue -> Void)) {
+    func executeAll(_ completion : @escaping ((ExecutionQueue) -> Void)) {
         print("executing all count -> \(count)")
         var notCompletedExecutionQueue = ExecutionQueue()
         var executedCount = 0
@@ -68,7 +68,7 @@ class ExecutionQueue : DictionarySerializable {
         for executable in queue {
             ids += [executable.id]
         }
-        let res : [String: AnyObject] = ["task_ids" : ids]
+        let res : [String: AnyObject] = ["task_ids" : ids as AnyObject]
         
         print(res)
         

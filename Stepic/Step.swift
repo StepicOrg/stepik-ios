@@ -20,7 +20,7 @@ class Step: NSManagedObject, JSONInitializable {
         block = Block(json: json["block"])
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         position = json["position"].intValue
         status = json["status"].stringValue
@@ -35,14 +35,14 @@ class Step: NSManagedObject, JSONInitializable {
         lessonId = json["lesson"].intValue
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
         block.update(json: json["block"])
     }
     
     var hasReview : Bool = false
 
-    static func getStepWithId(id: Int) -> Step? {
+    static func getStepWithId(_ id: Int) -> Step? {
         let request = NSFetchRequest(entityName: "Step")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
@@ -50,7 +50,7 @@ class Step: NSManagedObject, JSONInitializable {
         request.predicate = predicate
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request) 
             return (results as? [Step])?.first
         }
         catch {

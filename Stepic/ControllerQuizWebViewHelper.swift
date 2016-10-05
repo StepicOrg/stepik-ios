@@ -10,27 +10,27 @@ import Foundation
 
 class ControllerQuizWebViewHelper {
     
-    private var tableView: UITableView
-    private var view: UIView
-    private var countClosure : (Void -> Int)
-    private var expectedQuizHeightClosure : (Void -> CGFloat)
-    private var noQuizHeightClosure : (Void -> CGFloat)
-    private var delegate : QuizControllerDelegate?
+    fileprivate var tableView: UITableView
+    fileprivate var view: UIView
+    fileprivate var countClosure : ((Void) -> Int)
+    fileprivate var expectedQuizHeightClosure : ((Void) -> CGFloat)
+    fileprivate var noQuizHeightClosure : ((Void) -> CGFloat)
+    fileprivate var delegate : QuizControllerDelegate?
     
-    private var optionsCount : Int {
+    fileprivate var optionsCount : Int {
         return countClosure()
     }
     
-    private var expectedQuizHeight : CGFloat {
+    fileprivate var expectedQuizHeight : CGFloat {
         return expectedQuizHeightClosure()
     }
     
-    private var heightWithoutQuiz : CGFloat {
+    fileprivate var heightWithoutQuiz : CGFloat {
         return noQuizHeightClosure()
     }
     
     
-    init(tableView: UITableView, view: UIView, countClosure: (Void -> Int), expectedQuizHeightClosure: (Void -> CGFloat), noQuizHeightClosure: (Void -> CGFloat), delegate: QuizControllerDelegate?) {
+    init(tableView: UITableView, view: UIView, countClosure: @escaping ((Void) -> Int), expectedQuizHeightClosure: @escaping ((Void) -> CGFloat), noQuizHeightClosure: @escaping ((Void) -> CGFloat), delegate: QuizControllerDelegate?) {
         self.tableView = tableView
         self.view = view
         self.countClosure = countClosure
@@ -40,7 +40,7 @@ class ControllerQuizWebViewHelper {
     }
     
     func initChoicesHeights() {
-        self.cellHeights = [Int](count: optionsCount, repeatedValue: 1)
+        self.cellHeights = [Int](repeating: 1, count: optionsCount)
     }
     
     func updateChoicesHeights() {
@@ -50,7 +50,7 @@ class ControllerQuizWebViewHelper {
         self.view.layoutIfNeeded()
     }
     
-    private func initHeightUpdateBlocks() {
+    fileprivate func initHeightUpdateBlocks() {
         cellHeightUpdateBlocks = []
         for _ in 0 ..< optionsCount {
             cellHeightUpdateBlocks += [{
@@ -64,7 +64,7 @@ class ControllerQuizWebViewHelper {
     let reloadTimeout = 5.0
     let noReloadTimeout = 1.0
     
-    private func reloadWithCount(count: Int, noReloadCount: Int) {
+    fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
             return
         }
@@ -88,11 +88,11 @@ class ControllerQuizWebViewHelper {
             })  
     }    
     
-    private func performHeightUpdates() {
+    fileprivate func performHeightUpdates() {
         self.reloadWithCount(0, noReloadCount: 0)
     }
     
-    private func countHeights() -> Bool {
+    fileprivate func countHeights() -> Bool {
         var index = 0
         var didChangeHeight = false
         for updateBlock in cellHeightUpdateBlocks {
@@ -107,6 +107,6 @@ class ControllerQuizWebViewHelper {
         return didChangeHeight
     }
     
-    var cellHeightUpdateBlocks : [(Void->Int)] = []
+    var cellHeightUpdateBlocks : [((Void)->Int)] = []
     var cellHeights : [Int] = []
 }

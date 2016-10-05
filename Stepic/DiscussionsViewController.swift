@@ -11,18 +11,18 @@ import SDWebImage
 import DZNEmptyDataSet
 
 enum DiscussionsEmptyDataSetState {
-    case Error, Empty, None
+    case error, empty, none
 }
 
 enum SeparatorType {
-    case Small, Big, None
+    case small, big, none
 }
 
 struct DiscussionsCellInfo {
     var comment: Comment?
     var loadRepliesFor: Comment?
     var loadDiscussions: Bool?
-    var separatorType: SeparatorType = .None
+    var separatorType: SeparatorType = .none
     
     init(comment: Comment, separatorType: SeparatorType) {
         self.comment = comment
@@ -49,7 +49,7 @@ class DiscussionsViewController: UIViewController {
     
     var cellsInfo = [DiscussionsCellInfo]()
     
-    var emptyDatasetState : DiscussionsEmptyDataSetState = .None {
+    var emptyDatasetState : DiscussionsEmptyDataSetState = .none {
         didSet {
             tableView.reloadEmptyDataSet()
         }
@@ -64,23 +64,23 @@ class DiscussionsViewController: UIViewController {
         tableView.dataSource = self
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
-        emptyDatasetState = .None
+        emptyDatasetState = .none
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
         
         tableView.tableFooterView = UIView()
         
-        tableView.registerNib(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
-        tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
-        tableView.registerNib(UINib(nibName: "DiscussionWebTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionWebTableViewCell")
+        tableView.register(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
+        tableView.register(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
+        tableView.register(UINib(nibName: "DiscussionWebTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionWebTableViewCell")
         
         self.title = NSLocalizedString("Discussions", comment: "")
         
-        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
+        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
         self.navigationItem.rightBarButtonItem = writeCommentItem
         
-        refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), forControlEvents: .ValueChanged)
+        refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), for: .valueChanged)
         tableView.addSubview(refreshControl ?? UIView())
         refreshControl?.beginRefreshing()
         reloadDiscussions()
@@ -98,7 +98,7 @@ class DiscussionsViewController: UIViewController {
     struct Replies {
         var loaded = [Int : [Comment]]()
         
-        func leftToLoad(comment: Comment) -> Int {
+        func leftToLoad(_ comment: Comment) -> Int {
             if let loadedCount = loaded[comment.id]?.count {
                 return comment.repliesIds.count - loadedCount
             } else {
@@ -126,7 +126,7 @@ class DiscussionsViewController: UIViewController {
                         s.presentWriteCommentController(parent: nil)
                     }
                 }
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.present(vc, animated: true, completion: nil)
             }
             return
         } else {
@@ -135,7 +135,7 @@ class DiscussionsViewController: UIViewController {
 
     }
     
-    func resetData(withReload: Bool) {
+    func resetData(_ withReload: Bool) {
         discussionIds = DiscussionIds()
         replies = Replies()
         discussions = [Comment]()
@@ -154,7 +154,7 @@ class DiscussionsViewController: UIViewController {
         return Array(discussionIds.all[startIndex ..< startIndex + min(discussionLoadingInterval, discussionIds.leftToLoad)])
     }
     
-    func getNextReplyIdsToLoad(section: Int) -> [Int] {
+    func getNextReplyIdsToLoad(_ section: Int) -> [Int] {
         if discussions.count <= section {
             return []
         } 
@@ -163,7 +163,7 @@ class DiscussionsViewController: UIViewController {
         return getNextReplyIdsToLoad(discussion)
     }
     
-    func getNextReplyIdsToLoad(discussion: Comment) -> [Int] {
+    func getNextReplyIdsToLoad(_ discussion: Comment) -> [Int] {
         let loadedIds : [Int] = replies.loaded[discussion.id]?.map({return $0.id}) ?? []
         let loadedReplies = Set<Int>(loadedIds)
         var res : [Int] = []
@@ -181,8 +181,8 @@ class DiscussionsViewController: UIViewController {
     
     
     
-    func loadDiscussions(ids: [Int], success: (Void -> Void)? = nil) {
-        self.emptyDatasetState = .None
+    func loadDiscussions(_ ids: [Int], success: ((Void) -> Void)? = nil) {
+        self.emptyDatasetState = .none
         
         performRequest({
             ApiDataDownloader.comments.retrieve(ids, success: 
@@ -211,7 +211,7 @@ class DiscussionsViewController: UIViewController {
                     
                     //TODO: Possibly should sort all changed reply values 
                     for discussionId in changedDiscussionIds {
-                        if let index = s.discussions.indexOf({$0.id == discussionId}) {
+                        if let index = s.discussions.index(where: {$0.id == discussionId}) {
                             s.replies.loaded[discussionId]! = Sorter.sort(s.replies.loaded[discussionId]!, byIds: s.discussions[index].repliesIds, canMissElements: true)
                         }
                     }
@@ -222,7 +222,7 @@ class DiscussionsViewController: UIViewController {
                 [weak self]
                 errorString in
                 print(errorString)
-                self?.emptyDatasetState = .Error
+                self?.emptyDatasetState = .error
                 UIThread.performUI {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
@@ -232,16 +232,16 @@ class DiscussionsViewController: UIViewController {
         })
     }
     
-    func reloadTableData(emptyState: DiscussionsEmptyDataSetState = .Empty) {
+    func reloadTableData(_ emptyState: DiscussionsEmptyDataSetState = .empty) {
         //TODO: Create comments list here, then reload tableView data
         cellsInfo = []
         for discussion in discussions {
-            let c = DiscussionsCellInfo(comment: discussion, separatorType: .Small)
+            let c = DiscussionsCellInfo(comment: discussion, separatorType: .small)
             cellsInfo.append(c)
 //            constructDiscussionCell(c)
             
             for reply in replies.loaded[discussion.id] ?? [] {
-                let c = DiscussionsCellInfo(comment: reply, separatorType: .Small)
+                let c = DiscussionsCellInfo(comment: reply, separatorType: .small)
                 cellsInfo.append(c)
 //                constructDiscussionCell(c)
             }
@@ -250,7 +250,7 @@ class DiscussionsViewController: UIViewController {
             if left > 0 {
                 cellsInfo.append(DiscussionsCellInfo(loadRepliesFor: discussion))
             } else {
-                cellsInfo[cellsInfo.count - 1].separatorType = .Big
+                cellsInfo[cellsInfo.count - 1].separatorType = .big
             }
         }
         
@@ -274,7 +274,7 @@ class DiscussionsViewController: UIViewController {
     var isReloading: Bool = false
     
     func reloadDiscussions() {
-        emptyDatasetState = .None
+        emptyDatasetState = .none
         if isReloading {
             return
         }
@@ -306,7 +306,7 @@ class DiscussionsViewController: UIViewController {
                         errorString in
                         print(errorString)
                         self?.isReloading = false
-                        self?.reloadTableData(.Error)
+                        self?.reloadTableData(.error)
                         UIThread.performUI {
                             [weak self] in
                             self?.refreshControl?.endRefreshing()
@@ -320,7 +320,7 @@ class DiscussionsViewController: UIViewController {
                 errorString in
                 print(errorString)
                 self?.isReloading = false
-                self?.reloadTableData(.Error)
+                self?.reloadTableData(.error)
                 UIThread.performUI {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
@@ -328,7 +328,7 @@ class DiscussionsViewController: UIViewController {
         })
     }
     
-    func isShowMoreEnabledForSection(section: Int) -> Bool {
+    func isShowMoreEnabledForSection(_ section: Int) -> Bool {
         if discussions.count <= section  {
             return false
         }
@@ -341,7 +341,7 @@ class DiscussionsViewController: UIViewController {
         return discussionIds.leftToLoad > 0
     }
     
-    func setLiked(comment: Comment, cell: UITableViewCell) {
+    func setLiked(_ comment: Comment, cell: UITableViewCell) {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
                 let vToSet : VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
@@ -388,7 +388,7 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
-    func setAbused(comment: Comment, cell: UITableViewCell) {
+    func setAbused(_ comment: Comment, cell: UITableViewCell) {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
@@ -431,7 +431,7 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
-    func handleSelectDiscussion(comment: Comment, cell: UITableViewCell, completion: (Void->Void)?) {
+    func handleSelectDiscussion(_ comment: Comment, cell: UITableViewCell, completion: ((Void)->Void)?) {
         let alert = DiscussionAlertConstructor.getCommentAlert(comment, 
             replyBlock: {
                 [weak self] in
@@ -441,7 +441,7 @@ class DiscussionsViewController: UIViewController {
                             [weak self] in
                             self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
                         }
-                        self?.presentViewController(vc, animated: true, completion: nil)
+                        self?.present(vc, animated: true, completion: nil)
                     }
                 } else {
                     self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
@@ -454,7 +454,7 @@ class DiscussionsViewController: UIViewController {
                             [weak self] in
                             self?.setLiked(comment, cell: cell)
                         }
-                        self?.presentViewController(vc, animated: true, completion: nil)
+                        self?.present(vc, animated: true, completion: nil)
                     }
                 } else {
                     self?.setLiked(comment, cell: cell)
@@ -467,7 +467,7 @@ class DiscussionsViewController: UIViewController {
                             [weak self] in
                             self?.setAbused(comment, cell: cell)
                         }
-                        self?.presentViewController(vc, animated: true, completion: nil)
+                        self?.present(vc, animated: true, completion: nil)
                     }
                 } else {
                     self?.setAbused(comment, cell: cell)
@@ -476,7 +476,7 @@ class DiscussionsViewController: UIViewController {
                 [weak self] 
                 url in     
                 if let s = self {
-                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
                 }
             }
         )
@@ -488,12 +488,12 @@ class DiscussionsViewController: UIViewController {
         
 //        alert.view.layoutIfNeeded()
         
-        self.presentViewController(alert, animated: true, completion: {
+        self.present(alert, animated: true, completion: {
             completion?()
         })
     }
     
-    func presentWriteCommentController(parent parent: Int?) {
+    func presentWriteCommentController(parent: Int?) {
         if let writeController = ControllerHelper.instantiateViewController(identifier: "WriteCommentViewController", storyboardName: "DiscussionsStoryboard") as? WriteCommentViewController {
             writeController.parent = parent
             writeController.target = target
@@ -502,8 +502,8 @@ class DiscussionsViewController: UIViewController {
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -516,40 +516,40 @@ class DiscussionsViewController: UIViewController {
 }
 
 extension DiscussionsViewController : UITableViewDelegate {
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if let comment = cellsInfo[indexPath.row].comment {         
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {         
             if let est = estimatedHeightForDiscussionId[comment.id] {
                 return est
             }
         }
         return 44
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.min
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.min
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let comment = cellsInfo[indexPath.row].comment {            
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {            
+            let cell = tableView.cellForRow(at: indexPath)
             if let c = cell {
                 handleSelectDiscussion(comment, cell: c, completion: {
                     [weak self] in
                     UIThread.performUI { 
-                        self?.tableView.deselectRowAtIndexPath(indexPath, animated: true) 
+                        self?.tableView.deselectRow(at: indexPath, animated: true) 
                     }
                 })
             }
         }
         
-        if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+        if let loadRepliesFor = cellsInfo[(indexPath as NSIndexPath).row].loadRepliesFor {
             let idsToLoad = getNextReplyIdsToLoad(loadRepliesFor)
-            if let c = tableView.cellForRowAtIndexPath(indexPath) as? LoadMoreTableViewCell {
+            if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self.tableView.deselectRow(at: indexPath, animated: true)
                 loadDiscussions(idsToLoad, success: 
                     {
                         [weak self] in
@@ -563,11 +563,11 @@ extension DiscussionsViewController : UITableViewDelegate {
 
         }
         
-        if let shouldLoadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
+        if let shouldLoadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
             let idsToLoad = getNextDiscussionIdsToLoad()
-            if let c = tableView.cellForRowAtIndexPath(indexPath) as? LoadMoreTableViewCell {
+            if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self.tableView.deselectRow(at: indexPath, animated: true)
                 loadDiscussions(idsToLoad, success: 
                     {
                         [weak self] in
@@ -583,28 +583,28 @@ extension DiscussionsViewController : UITableViewDelegate {
 }
 
 extension DiscussionsViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellsInfo.count
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        print("will display cell for \(indexPath.row)")
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("will display cell for \((indexPath as NSIndexPath).row)")
     }
         
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("cell for row \(indexPath.row)")
+        print("cell for row \((indexPath as NSIndexPath).row)")
                 
-        if let comment = cellsInfo[indexPath.row].comment {
+        if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {
             
 //            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionTableViewCell", forIndexPath: indexPath) as! DiscussionTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DiscussionTableViewCell", for: indexPath) as! DiscussionTableViewCell
 
-                cell.initWithComment(comment, separatorType: cellsInfo[indexPath.row].separatorType) 
+                cell.initWithComment(comment, separatorType: cellsInfo[(indexPath as NSIndexPath).row].separatorType) 
                 
                 return cell
 //            } else {
@@ -638,16 +638,16 @@ extension DiscussionsViewController : UITableViewDataSource {
 //            }
         } 
         
-        if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+        if let loadRepliesFor = cellsInfo[(indexPath as NSIndexPath).row].loadRepliesFor {
             print("load replies cell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(replies.leftToLoad(loadRepliesFor)))"
             return cell
         }
         
-        if let loadDiscussions = cellsInfo[indexPath.row].loadDiscussions {
+        if let loadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
             print("load discussions cell")
-            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(discussionIds.leftToLoad))"
             return cell
         }
@@ -657,11 +657,11 @@ extension DiscussionsViewController : UITableViewDataSource {
 }
 
 extension DiscussionsViewController : WriteCommentDelegate {
-    func didWriteComment(comment: Comment) {
+    func didWriteComment(_ comment: Comment) {
         print(comment.parentId)
         if let parentId = comment.parentId {
             //insert row in an existing section
-            if let section = discussions.indexOf({$0.id == parentId}) {
+            if let section = discussions.index(where: {$0.id == parentId}) {
                 discussions[section].repliesIds += [comment.id]
                 if replies.loaded[parentId] == nil {
                     replies.loaded[parentId] = []
@@ -675,9 +675,9 @@ extension DiscussionsViewController : WriteCommentDelegate {
             }
         } else {
             //insert section
-            discussionIds.all.insert(comment.id, atIndex: 0)
-            discussionIds.loaded.insert(comment.id, atIndex: 0)
-            discussions.insert(comment, atIndex: 0)
+            discussionIds.all.insert(comment.id, at: 0)
+            discussionIds.loaded.insert(comment.id, at: 0)
+            discussions.insert(comment, at: 0)
 //            tableView.beginUpdates()
             reloadTableData()
 //            let index = NSIndexSet(index: 0)
@@ -688,69 +688,69 @@ extension DiscussionsViewController : WriteCommentDelegate {
 }
 
 extension DiscussionsViewController : DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             return Images.noCommentsWhite.size200x200
-        case .Error:
+        case .error:
             return Images.noWifiImage.white
-        case .None:
+        case .none:
             return Images.noCommentsWhite.size200x200
         }
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("NoDiscussionsTitle", comment: "")
             break
-        case .Error:
+        case .error:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
-        case .None:
+        case .none:
             text = ""
             break
         }
         
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSForegroundColorAttributeName: UIColor.darkGray]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("NoDiscussionsDescription", comment: "")
             break
-        case .Error:
+        case .error:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
             break
-        case .None: 
+        case .none: 
             text = NSLocalizedString("RefreshingDiscussions", comment: "")
             break
         }
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-                          NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+                          NSForegroundColorAttributeName: UIColor.lightGray,
                           NSParagraphStyleAttributeName: paragraph]
                 
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 0
     }
     
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 }

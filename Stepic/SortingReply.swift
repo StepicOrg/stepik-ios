@@ -22,6 +22,6 @@ class SortingReply: NSObject, Reply {
     }
     
     var dictValue : [String : NSObject] {
-        return ["ordering" : ordering]
+        return ["ordering" : ordering as NSObject]
     }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DiscussionUpdateDelegate : class {
-    func update(section section: Int?, completion: (Void->Void)?)
+    func update(section: Int?, completion: ((Void)->Void)?)
 }

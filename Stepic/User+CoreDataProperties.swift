@@ -27,34 +27,34 @@ extension User {
     @NSManaged var managedInstructedCourses : NSSet?
 
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("User", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: User.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: User.entity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(value) {
-            managedId = value
+            managedId = value as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? 0
+            return managedId?.intValue ?? 0
         }
     }
     
     var profile : Int {
         set(value){
-            managedProfile = value
+            managedProfile = value as NSNumber?
         }
         get {
-            return managedProfile?.integerValue ?? 0
+            return managedProfile?.intValue ?? 0
         }
     }
     
     var isPrivate : Bool {
         set(value){
-            managedPrivate = value
+            managedPrivate = value as NSNumber?
         }
         get {
             return managedPrivate?.boolValue ?? true
@@ -108,10 +108,10 @@ extension User {
     
     var level : Int {
         set(value){
-            managedLevel = value
+            managedLevel = value as NSNumber?
         }
         get {
-            return managedLevel?.integerValue ?? 0
+            return managedLevel?.intValue ?? 0
         }
     }
     
@@ -121,7 +121,7 @@ extension User {
         }
     }
     
-    func addInstructedCourse(course : Course) {
+    func addInstructedCourse(_ course : Course) {
         var mutableItems = managedInstructedCourses?.allObjects as! [Course]
         mutableItems += [course]
         managedInstructedCourses = NSSet(array: mutableItems)

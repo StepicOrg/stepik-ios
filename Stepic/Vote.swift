@@ -27,8 +27,8 @@ class Vote {
     
     var json: [String: AnyObject] {
         let dict : [String: AnyObject] = [
-            "id" : id,
-            "value": value?.rawValue ?? NSNull()
+            "id" : id as AnyObject,
+            "value": value?.rawValue as AnyObject? ?? NSNull()
         ]
         return dict
     }

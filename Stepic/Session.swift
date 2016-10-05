@@ -13,9 +13,9 @@ import Alamofire
 class Session {
     
     static func delete() {
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let storage = HTTPCookieStorage.shared
         for cookie in storage.cookies ?? [] {
-            if cookie.domain.rangeOfString("stepic") != nil || cookie.domain.rangeOfString("stepik") != nil {
+            if cookie.domain.range(of: "stepic") != nil || cookie.domain.range(of: "stepik") != nil {
                 storage.deleteCookie(cookie)
             }
         }
@@ -23,13 +23,13 @@ class Session {
         cookieHeaders = [:]
     }
     
-    static func refresh(completion completion: (Void -> Void), error errorHandler: (String -> Void)) -> Request? {
+    static func refresh(completion: ((Void) -> Void), error errorHandler: ((String) -> Void)) -> Request? {
         print("refreshing session")
         let stepicURLString = StepicApplicationsInfo.stepicURL
-        let stepicURL = NSURL(string: stepicURLString)!
+        let stepicURL = URL(string: stepicURLString)!
         delete()
         
-        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .URL).response { 
+        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .url).response { 
             (request, response, _, error) -> Void in
             
             if let e = error {
@@ -37,8 +37,8 @@ class Session {
             }
             
             if let r = response {
-                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
-                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: r.allHeaderFields as! [String: String], for: stepicURL)
+                HTTPCookieStorage.shared.setCookies(cookies, for: stepicURL, mainDocumentURL: nil)
                 
                 var cookieDict = [String: String]()
                 for cookie in cookies {
@@ -50,7 +50,7 @@ class Session {
                 Session.cookieDict = cookieDict
                 
                 if let csrftoken = cookieDict["csrftoken"],
-                    sessionId = cookieDict["sessionid"] {
+                    let sessionId = cookieDict["sessionid"] {
                     
                     Session.cookieHeaders = [
                         "Referer" : "\(StepicApplicationsInfo.stepicURL)/",

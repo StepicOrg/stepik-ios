@@ -18,7 +18,7 @@ class VideoURL: NSManagedObject {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         quality = json["quality"].stringValue
 //        print(quality)
         url = json["url"].stringValue        

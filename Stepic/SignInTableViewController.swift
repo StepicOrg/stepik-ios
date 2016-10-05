@@ -22,35 +22,35 @@ class SignInTableViewController: UITableViewController {
     func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
         socialLabel.text = NSLocalizedString("SocialSignIn", comment: "")
-        forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), forState: .Normal)
+        forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), for: UIControlState())
     }
     
-    var success : (Void->Void)? {
+    var success : ((Void)->Void)? {
         return (navigationController as? AuthNavigationViewController)?.success
     }
     
-    @IBAction func backButtonPressed(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLocalizations()
-        passwordTextField.secureTextEntry = true
+        passwordTextField.isSecureTextEntry = true
         
-        emailTextField.keyboardType = .EmailAddress
-        emailTextField.autocapitalizationType = .None
-        emailTextField.autocorrectionType = .No
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
         tableView.tableFooterView = UIView()
-        tableView.separatorColor = UIColor.clearColor()
+        tableView.separatorColor = UIColor.clear
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(SignInTableViewController.tap))
         self.view.addGestureRecognizer(tapG)
@@ -60,7 +60,7 @@ class SignInTableViewController: UITableViewController {
 
 //        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInTableViewController.didGetAuthentificationCode(_:)), name: "ReceivedAuthorizationCodeNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SignInTableViewController.didGetAuthentificationCode(_:)), name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -68,13 +68,13 @@ class SignInTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    func didGetAuthentificationCode(notification: NSNotification) {
+    func didGetAuthentificationCode(_ notification: Foundation.Notification) {
         print("entered didGetAuthentificationCode")
 
         //TODO: Implement WebControllerManager
         
         WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
-            self.authentificateWithCode(notification.userInfo?["code"] as? String ?? "")
+            self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
         }, error: {
             errorMessage in
             print(errorMessage)
@@ -92,30 +92,30 @@ class SignInTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
     }
 
-    func authentificateWithCode(code: String) {
-        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
+    func authentificateWithCode(_ code: String) {
+        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
         AuthManager.sharedManager.logInWithCode(code, 
             success: {
                 t in
                 AuthInfo.shared.token = t
-                NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
+                NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
-                    SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                    SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI { 
-                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                        self.navigationController?.dismiss(animated: true, completion: {
                             [weak self] in
                             self?.success?()
                         })
@@ -125,9 +125,9 @@ class SignInTableViewController: UITableViewController {
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
-                        SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                        SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                         UIThread.performUI { 
-                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            self.navigationController?.dismiss(animated: true, completion: {
                                 [weak self] in
                                 self?.success?()
                             })
@@ -135,27 +135,27 @@ class SignInTableViewController: UITableViewController {
                 })
             }, failure: {
                 e in
-                SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
+                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
     
-    @IBAction func signInPressed(sender: UIButton) {
+    @IBAction func signInPressed(_ sender: UIButton) {
         
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
         
-        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
+        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
         AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
             success: {
                 t in
                 AuthInfo.shared.token = t
-                NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
+                NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
                 ApiDataDownloader.sharedDownloader.getCurrentUser({
                     user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
-                    SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                    SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                     UIThread.performUI { 
-                        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                        self.navigationController?.dismiss(animated: true, completion: {
                             [weak self] in
                             self?.success?()
                         })
@@ -165,9 +165,9 @@ class SignInTableViewController: UITableViewController {
                     }, failure: {
                         e in
                         print("successfully signed in, but could not get user")
-                        SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                        SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                         UIThread.performUI{ 
-                            self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                            self.navigationController?.dismiss(animated: true, completion: {
                                 [weak self] in
                                 self?.success?()
                             })
@@ -175,13 +175,13 @@ class SignInTableViewController: UITableViewController {
                 })
             }, failure: {
                 e in
-                SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
+                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
         
-    @IBAction func forgotPasswordPressed(sender: UIButton) {
+    @IBAction func forgotPasswordPressed(_ sender: UIButton) {
         WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self, 
-            withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.Done)        
+            withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)        
 //        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
     }
     
@@ -234,8 +234,8 @@ class SignInTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReceivedAuthorizationCodeNotification", object: nil)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

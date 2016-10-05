@@ -20,7 +20,7 @@ class Course: NSManagedObject, JSONInitializable {
         initialize(json)
     }
 
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         title = json["title"].stringValue
         courseDescription = json["description"].stringValue
@@ -52,14 +52,14 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
         
-    func loadAllInstructors(success success: (Void -> Void)) {
+    func loadAllInstructors(success: @escaping ((Void) -> Void)) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
                 users in
 //                print("instructors count inside Course class -> \(users.count)")
                 self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
@@ -72,9 +72,9 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    func loadAllSections(success success: (Void -> Void), error errorHandler : (Void -> Void), withProgresses: Bool = true) {
+    func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
                 secs in
                 self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
                 CoreDataHelper.instance.save()
@@ -94,8 +94,8 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     //TODO: Remove these methods
-    func loadSectionsWithoutAuth(success success: (Void -> Void), error errorHandler : (Void -> Void)) {
-        ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .Update, success: {
+    func loadSectionsWithoutAuth(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
+        ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
             secs in
             self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
             CoreDataHelper.instance.save()
@@ -107,8 +107,8 @@ class Course: NSManagedObject, JSONInitializable {
         })
     }
     
-    func loadInstructorsWithoutAuth(success success: (Void -> Void)) {
-            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .Update, success: {
+    func loadInstructorsWithoutAuth(success: @escaping ((Void) -> Void)) {
+            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
                 users in
                 //                print("instructors count inside Course class -> \(users.count)")
                 self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
@@ -120,7 +120,7 @@ class Course: NSManagedObject, JSONInitializable {
             })
     }
     
-    func loadProgressesForSections(completion: (Void->Void), error errorHandler : (Void->Void)) {
+    func loadProgressesForSections(_ completion: @escaping ((Void)->Void), error errorHandler : @escaping ((Void)->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for section in sections {
@@ -135,7 +135,7 @@ class Course: NSManagedObject, JSONInitializable {
         
 //        print("progress ids array -> \(progressIds)")
         performRequest({
-            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
                 (newProgresses) -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
                 for i in 0 ..< min(self.sections.count, progresses.count) {
@@ -153,14 +153,14 @@ class Course: NSManagedObject, JSONInitializable {
         })
     }
     
-    class func getCourses(ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
-        let request = NSFetchRequest(entityName: "Course")
+    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         
         let idPredicates = ids.map{
             return NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
-        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: idPredicates)
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
 
         var nonIdPredicates = [NSPredicate]()
         if let f = featured {
@@ -170,33 +170,33 @@ class Course: NSManagedObject, JSONInitializable {
         if let e = enrolled {
             nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
         }
-        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: nonIdPredicates)
+        let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
         
-        let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
+        let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request) 
             return results as! [Course]
         }
         catch {
-            throw FetchError.RequestExecution
+            throw FetchError.requestExecution
         }
     }
     
-    class func getAllCourses(enrolled enrolled : Bool? = nil) -> [Course] {
-        let request = NSFetchRequest(entityName: "Course")
+    class func getAllCourses(enrolled : Bool? = nil) -> [Course] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
 
         if let e = enrolled {
             let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p])
+            predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicate, p])
         }
         
         request.predicate = predicate
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Course]
         }
         catch {

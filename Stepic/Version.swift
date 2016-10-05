@@ -13,8 +13,8 @@ import Foundation
  */
 struct Version {
     var version: String
-    var url: NSURL
-    init(version: String, url: NSURL) {
+    var url: URL
+    init(version: String, url: URL) {
         self.version = version
         self.url = url
     }

@@ -10,28 +10,28 @@ import Foundation
 
 
 enum SocialNetworks : Int {
-    case VK = 0, Google, Facebook, Twitter, GitHub, ITMailRu
+    case vk = 0, google, facebook, twitter, gitHub, itMailRu
     
     var object : SocialNetwork {
         switch self {
-        case VK: 
+        case .vk: 
             return SocialNetwork(name: self.name, image: UIImage(named: "vk_filled")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
-        case Google: 
+                registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+        case .google: 
             return SocialNetwork(name: self.name, image: UIImage(named: "google_filled")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
-        case Facebook:
+                registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+        case .facebook:
             return SocialNetwork(name: self.name, image: UIImage(named: "facebook_filled")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
-        case Twitter:
+                registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+        case .twitter:
             return SocialNetwork(name: self.name, image: UIImage(named: "twitter_filled")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/twitter/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
-        case GitHub:
+                registerURL: URL(string: "https://stepik.org/accounts/twitter/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+        case .gitHub:
             return SocialNetwork(name: self.name, image: UIImage(named: "github")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
-        case ITMailRu:
+                registerURL: URL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+        case .itMailRu:
             return SocialNetwork(name: self.name, image: UIImage(named: "itmail")!, 
-                registerURL: NSURL(string: "https://stepik.org/accounts/itmailru/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                registerURL: URL(string: "https://stepik.org/accounts/itmailru/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         }
     }
     
@@ -45,17 +45,17 @@ enum SocialNetworks : Int {
     
     var name: String {
         switch self {
-        case VK: 
+        case .vk: 
             return "VK"
-        case Google: 
+        case .google: 
             return "Google"
-        case Facebook:
+        case .facebook:
             return "Facebook"
-        case Twitter: 
+        case .twitter: 
             return "Twitter"
-        case .GitHub:
+        case .gitHub:
             return "GitHub"
-        case .ITMailRu:
+        case .itMailRu:
             return "ITMailRu"
         }
     }
@@ -63,9 +63,9 @@ enum SocialNetworks : Int {
 
 struct SocialNetwork {
     var image : UIImage!
-    var registerURL : NSURL!
+    var registerURL : URL!
     var name: String!
-    init(name: String, image: UIImage, registerURL: NSURL) {
+    init(name: String, image: UIImage, registerURL: URL) {
         self.name = name
         self.image = image
         self.registerURL = registerURL

@@ -21,14 +21,14 @@ class ChoiceQuizViewController: QuizViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
-        tableView.alignToView(self.containerView)
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.align(to: self.containerView)
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.registerNib(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
+        tableView.register(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
 
         webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
             , countClosure: 
@@ -45,7 +45,7 @@ class ChoiceQuizViewController: QuizViewController {
         )
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -58,20 +58,20 @@ class ChoiceQuizViewController: QuizViewController {
     }
     
     override func updateQuizAfterAttemptUpdate() {
-        self.choices = [Bool](count: optionsCount, repeatedValue: false)
+        self.choices = [Bool](repeating: false, count: optionsCount)
         webViewHelper.initChoicesHeights()
         webViewHelper.updateChoicesHeights()
     }
     
         
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if self.submission == nil {
             if reload {
-                self.choices = [Bool](count: optionsCount, repeatedValue: false) 
+                self.choices = [Bool](repeating: false, count: optionsCount) 
             }
-            self.tableView.userInteractionEnabled = true
+            self.tableView.isUserInteractionEnabled = true
         } else {
-            self.tableView.userInteractionEnabled = false
+            self.tableView.isUserInteractionEnabled = false
         }
         self.tableView.reloadData()
     }
@@ -84,12 +84,12 @@ class ChoiceQuizViewController: QuizViewController {
         return ChoiceReply(choices: self.choices)
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
                 
         webViewHelper.initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
-            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? ChoiceQuizTableViewCell {
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? ChoiceQuizTableViewCell {
                 cell.choiceWebView.reload()
             }
         }
@@ -100,17 +100,17 @@ class ChoiceQuizViewController: QuizViewController {
 
 extension ChoiceQuizViewController : UITableViewDelegate {
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let _ = attempt?.dataset as? ChoiceDataset {
-            return CGFloat(webViewHelper.cellHeights[indexPath.row])
+            return CGFloat(webViewHelper.cellHeights[(indexPath as NSIndexPath).row])
         }
         return 0
     }
     
     func setAllCellsOff() {
-        let indexPaths = (0..<self.tableView.numberOfRowsInSection(0)).map({return NSIndexPath(forRow: $0, inSection: 0)})
+        let indexPaths = (0..<self.tableView.numberOfRows(inSection: 0)).map({return IndexPath(row: $0, section: 0)})
         for indexPath in indexPaths {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as? ChoiceQuizTableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell
             if cell == nil {
 //                print("\nsetAllCellsOff() cell at indexPath(\(indexPath)) is nil!!!\n")
             }
@@ -118,20 +118,20 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         reactOnSelection(tableView, didSelectRowAtIndexPath: indexPath)
     }
     
-    private func reactOnSelection(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ChoiceQuizTableViewCell {
+    fileprivate func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
             if let dataset = attempt?.dataset as? ChoiceDataset {
                 if dataset.isMultipleChoice {
-                    choices[indexPath.row] = !cell.checkBox.on
+                    choices[(indexPath as NSIndexPath).row] = !cell.checkBox.on
                     cell.checkBox.setOn(!cell.checkBox.on, animated: true)
                 } else {
                     setAllCellsOff()
-                    choices = [Bool](count: optionsCount, repeatedValue: false)
-                    choices[indexPath.row] = !cell.checkBox.on
+                    choices = [Bool](repeating: false, count: optionsCount)
+                    choices[(indexPath as NSIndexPath).row] = !cell.checkBox.on
                     cell.checkBox.setOn(!cell.checkBox.on, animated: true)
                 }
             }
@@ -140,42 +140,42 @@ extension ChoiceQuizViewController : UITableViewDelegate {
 }
 
 extension ChoiceQuizViewController : BEMCheckBoxDelegate {
-    func didTapCheckBox(checkBox: BEMCheckBox) {
+    func didTap(_ checkBox: BEMCheckBox) {
         choices[checkBox.tag] = checkBox.on
     }
 }
 
 extension ChoiceQuizViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if let _ = attempt?.dataset as? ChoiceDataset {
             return 1
         }
         return 0
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let dataset = attempt?.dataset as? ChoiceDataset {
             return dataset.options.count
         }
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let dataset = attempt?.dataset as? ChoiceDataset {
-            let cell = tableView.dequeueReusableCellWithIdentifier("ChoiceQuizTableViewCell", forIndexPath:indexPath) as! ChoiceQuizTableViewCell
-            webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.setHTMLText(dataset.options[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
+            webViewHelper.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(dataset.options[(indexPath as NSIndexPath).row])
             if dataset.isMultipleChoice {
-                cell.checkBox.boxType = .Square
+                cell.checkBox.boxType = .square
             } else {
-                cell.checkBox.boxType = .Circle
+                cell.checkBox.boxType = .circle
             }
-            cell.checkBox.tag = indexPath.row
+            cell.checkBox.tag = (indexPath as NSIndexPath).row
             cell.checkBox.delegate = self
-            cell.checkBox.userInteractionEnabled = false                
+            cell.checkBox.isUserInteractionEnabled = false                
             if let reply = submission?.reply as? ChoiceReply {
-                cell.checkBox.on = reply.choices[indexPath.row]
+                cell.checkBox.on = reply.choices[(indexPath as NSIndexPath).row]
             } else {
-                cell.checkBox.on = self.choices[indexPath.row]
+                cell.checkBox.on = self.choices[(indexPath as NSIndexPath).row]
             }
             return cell
         } 

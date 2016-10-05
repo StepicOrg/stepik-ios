@@ -9,17 +9,17 @@
 import UIKit
 
 extension UIButton {
-    func implementStyle(style: PlaceholderStyle.ButtonStyle) {
+    func implementStyle(_ style: PlaceholderStyle.ButtonStyle) {
         self.titleLabel?.font = style.font
-        self.setTitleColor(style.textColor, forState: .Normal)
+        self.setTitleColor(style.textColor, for: UIControlState())
         switch style.borderType {
-        case .Rect :
+        case .rect :
             self.setRoundedCorners(cornerRadius: 0.0, borderWidth: 1.0, borderColor: style.borderColor)
             break
-        case .Rounded:
+        case .rounded:
             self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: style.borderColor)
             break
-        case .None:
+        case .none:
             break
         }
         self.backgroundColor = style.backgroundColor
@@ -27,15 +27,15 @@ extension UIButton {
 }
 
 extension UILabel {
-    func implementStyle(style: PlaceholderStyle.LabelStyle) {
+    func implementStyle(_ style: PlaceholderStyle.LabelStyle) {
         self.font = style.font
         self.textColor = style.textColor
         self.textAlignment = style.textAlignment
         self.lineBreakMode = style.lineBreakMode
     }
     
-    class func heightForLabelWithText(text: String, style: PlaceholderStyle.LabelStyle, width: CGFloat) -> CGFloat {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
+    class func heightForLabelWithText(_ text: String, style: PlaceholderStyle.LabelStyle, width: CGFloat) -> CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         
         label.numberOfLines = 0
         

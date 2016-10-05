@@ -36,8 +36,8 @@ class RegistrationViewController: UIViewController {
     
     var passwordSecure = false {
         didSet {
-            visiblePasswordButton.setImage(passwordSecure ? Images.visibleImage : Images.visibleFilledImage, forState: UIControlState.Normal)
-            passwordTextField.secureTextEntry = passwordSecure
+            visiblePasswordButton.setImage(passwordSecure ? Images.visibleImage : Images.visibleFilledImage, for: UIControlState())
+            passwordTextField.isSecureTextEntry = passwordSecure
         }
     }
     
@@ -47,7 +47,7 @@ class RegistrationViewController: UIViewController {
         lastNameTextField.placeholder = NSLocalizedString("LastName", comment: "")
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
-        signUpButton.setTitle(NSLocalizedString("SignUpAction", comment: ""), forState: .Normal)
+        signUpButton.setTitle(NSLocalizedString("SignUpAction", comment: ""), for: UIControlState())
     }
 
     
@@ -57,14 +57,14 @@ class RegistrationViewController: UIViewController {
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
         setupLocalizations()
-        firstNameTextField.autocapitalizationType = .Words
-        lastNameTextField.autocapitalizationType = .Words
+        firstNameTextField.autocapitalizationType = .words
+        lastNameTextField.autocapitalizationType = .words
         
-        emailTextField.autocapitalizationType = .None
-        emailTextField.autocorrectionType = .No
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         
         passwordTextField.delegate = self
-        visiblePasswordButton.hidden = true
+        visiblePasswordButton.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,11 +72,11 @@ class RegistrationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func signUpPressed(sender: AnyObject) {
+    @IBAction func signUpPressed(_ sender: AnyObject) {
         signUpToStepic()
     }
     
-    var success : (Void->Void)? {
+    var success : ((Void)->Void)? {
         return (navigationController as? AuthNavigationViewController)?.success
     }
     
@@ -86,21 +86,21 @@ class RegistrationViewController: UIViewController {
         let lastName = lastNameTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         
-        SVProgressHUD.showWithStatus("", maskType: SVProgressHUDMaskType.Clear)
+        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
         performRequest({        
             AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
                 AuthManager.sharedManager.logInWithUsername(email, password: password, 
                     success: {
                         t in
                         AuthInfo.shared.token = t
-                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.sharedApplication())
+                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
                         ApiDataDownloader.sharedDownloader.getCurrentUser({
                             user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
-                            SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                             UIThread.performUI { 
-                                self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                self.navigationController?.dismiss(animated: true, completion: {
                                     [weak self] in
                                     self?.success?()
                                     })
@@ -110,9 +110,9 @@ class RegistrationViewController: UIViewController {
                             }, failure: {
                                 e in
                                 print("successfully signed in, but could not get user")
-                                SVProgressHUD.showSuccessWithStatus(NSLocalizedString("SignedIn", comment: ""))
+                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                                 UIThread.performUI { 
-                                    self.navigationController?.dismissViewControllerAnimated(true, completion: {
+                                    self.navigationController?.dismiss(animated: true, completion: {
                                         [weak self] in
                                         self?.success?()
                                         })
@@ -120,12 +120,12 @@ class RegistrationViewController: UIViewController {
                         })
                     }, failure: {
                         e in
-                        SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: ""))
+                        SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                 })
                 }, error: {
                     errormsg, registrationErrorInfo in
                     //TODO: Add localized data
-                    UIThread.performUI{SVProgressHUD.showErrorWithStatus(errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
+                    UIThread.performUI{SVProgressHUD.showError(withStatus: errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
                     if let info = registrationErrorInfo {
                         self.showEmailErrorWith(message: info.email)
                         self.showPasswordErrorWith(message: info.password)                    
@@ -134,7 +134,7 @@ class RegistrationViewController: UIViewController {
                     }
             })
             }, error: { 
-                SVProgressHUD.showErrorWithStatus(NSLocalizedString("FailedToSignIn", comment: "")) 
+                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: "")) 
         })
     }
     
@@ -151,23 +151,23 @@ class RegistrationViewController: UIViewController {
         changeHeightConstraint(lastNameErrorViewHeight, label: lastNameErrorLabel, text: msg)
     }
     
-    func changeHeightConstraint(constraint: NSLayoutConstraint, label: UILabel, text: String?) {
+    func changeHeightConstraint(_ constraint: NSLayoutConstraint, label: UILabel, text: String?) {
         if let msg = text {
-            let height = UILabel.heightForLabelWithText(msg, lines: 0, standardFontOfSize: 12, width: UIScreen.mainScreen().bounds.width - 32)
+            let height = UILabel.heightForLabelWithText(msg, lines: 0, standardFontOfSize: 12, width: UIScreen.main.bounds.width - 32)
             label.text = msg
             animateConstraintChange(constraint, value: height)
         } else {
             animateConstraintChange(constraint, value: 0)
         }
     }
-    func animateConstraintChange(constraint: NSLayoutConstraint, value: CGFloat) {
+    func animateConstraintChange(_ constraint: NSLayoutConstraint, value: CGFloat) {
         constraint.constant = value
-        UIView.animateWithDuration(0.25) {
+        UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
     
-    @IBAction func visiblePasswordButtonPressed(sender: AnyObject) {
+    @IBAction func visiblePasswordButtonPressed(_ sender: AnyObject) {
         passwordSecure = !passwordSecure
     }
     
@@ -184,19 +184,19 @@ class RegistrationViewController: UIViewController {
 }
 
 extension RegistrationViewController : UITextFieldDelegate {
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         print("did begin")
         passwordSecure = true
         if textField == passwordTextField {
-            visiblePasswordButton.hidden = false
+            visiblePasswordButton.isHidden = false
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         print("did end")
         passwordSecure = true
         if textField == passwordTextField && textField.text == "" {
-            visiblePasswordButton.hidden = true
+            visiblePasswordButton.isHidden = true
         }
     }    
 }

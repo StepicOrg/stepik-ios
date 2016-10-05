@@ -12,19 +12,19 @@ import UIKit
  This class checks for updates if needed
  */
 class UpdateChecker: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static let sharedChecker = UpdateChecker()
     
-    private func isCheckNeeded() -> Bool {
+    fileprivate func isCheckNeeded() -> Bool {
         
         let lastUpdate = UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime
         
-        let isMoreThanDayBetweenChecks = (NSDate().timeIntervalSince1970 - lastUpdate) > 86400
+        let isMoreThanDayBetweenChecks = (Date().timeIntervalSince1970 - lastUpdate) > 86400
         
         return UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks && isMoreThanDayBetweenChecks
     }
     
-    func checkForUpdatesIfNeeded(needUpdateHandler: Version? -> Void, error errorHandler: NSError -> Void) {
+    func checkForUpdatesIfNeeded(_ needUpdateHandler: (Version?) -> Void, error errorHandler: (NSError) -> Void) {
         if isCheckNeeded() {
             RemoteVersionManager.sharedManager.checkRemoteVersionChange(needUpdateHandler: needUpdateHandler, error: errorHandler)
         }

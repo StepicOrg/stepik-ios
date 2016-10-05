@@ -16,9 +16,9 @@ class GreenNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         UICustomizer.sharedCustomizer.setStepicNavigationBar(navigationBar)
     }
 

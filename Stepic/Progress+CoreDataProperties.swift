@@ -26,11 +26,11 @@ extension Progress {
     @NSManaged var managedUnit: Unit?
 
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Progress", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Progress.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Progress.entity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : String {
@@ -47,43 +47,43 @@ extension Progress {
             return managedIsPassed?.boolValue ?? false
         }
         set(value) {
-            managedIsPassed = value
+            managedIsPassed = value as NSNumber?
         }
     }
     
     var score : Int {
         get {
-            return managedScore?.integerValue ?? 0
+            return managedScore?.intValue ?? 0
         }
         set(value) {
-            managedScore = value
+            managedScore = value as NSNumber?
         }
     }
     
     var numberOfSteps : Int {
         get {
-            return managedNumberOfSteps?.integerValue ?? 0
+            return managedNumberOfSteps?.intValue ?? 0
         }
         set(value) {
-            managedNumberOfSteps = value
+            managedNumberOfSteps = value as NSNumber?
         }
     }
     
     var numberOfStepsPassed : Int {
         get {
-            return managedNumberOfStepsPassed?.integerValue ?? 0
+            return managedNumberOfStepsPassed?.intValue ?? 0
         }
         set(value) {
-            managedNumberOfStepsPassed = value
+            managedNumberOfStepsPassed = value as NSNumber?
         }
     }
     
     var cost : Int {
         get {
-            return managedCost?.integerValue ?? 0
+            return managedCost?.intValue ?? 0
         }
         set(value) {
-            managedCost = value
+            managedCost = value as NSNumber?
         }
     }
 }

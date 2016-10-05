@@ -16,10 +16,10 @@ class PersistentRecoveryManager {
     var plistName : String
     
     var plistPath : String {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let path = "\(documentsPath)/\(plistName).plist"
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            try! NSFileManager.defaultManager().copyItemAtPath("\(NSBundle.mainBundle().bundlePath)/\(plistName).plist", toPath: path)
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.copyItem(atPath: "\(Bundle.main.bundlePath)/\(plistName).plist", toPath: path)
         }
         return path
     }
@@ -28,17 +28,17 @@ class PersistentRecoveryManager {
         self.plistName = baseName
     }
     
-    private func loadObjectDictionaryFromKey(key: String) -> [String: AnyObject]? {
+    fileprivate func loadObjectDictionaryFromKey(_ key: String) -> [String: AnyObject]? {
         let plistData = NSDictionary(contentsOfFile: plistPath)!
         return plistData[key] as? [String: AnyObject] 
     }
     
     //Override this method in a subclass!
-    func recoverObjectFromDictionary(dictionary: [String: AnyObject]) -> DictionarySerializable? {
+    func recoverObjectFromDictionary(_ dictionary: [String: AnyObject]) -> DictionarySerializable? {
         return nil
     }
     
-    func recoverObjectWithKey(key: String) -> DictionarySerializable? {
+    func recoverObjectWithKey(_ key: String) -> DictionarySerializable? {
         if let objectDictionary = loadObjectDictionaryFromKey(key) {
             return recoverObjectFromDictionary(objectDictionary)
         } else {
@@ -46,10 +46,10 @@ class PersistentRecoveryManager {
         }
     }
     
-    func writeObjectWithKey(key: String, object: DictionarySerializable) {
+    func writeObjectWithKey(_ key: String, object: DictionarySerializable) {
         let plistData = NSMutableDictionary(contentsOfFile: plistPath)!
         plistData[key] = object.serializeToDictionary()
-        plistData.writeToFile(plistPath, atomically: true)
+        plistData.write(toFile: plistPath, atomically: true)
     }
     
 }

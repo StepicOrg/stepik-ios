@@ -10,5 +10,5 @@ import UIKit
 
 
 enum EmptyDatasetState {
-    case Empty, ConnectionError
+    case empty, connectionError
 }

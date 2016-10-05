@@ -22,13 +22,13 @@ class CourseTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    private func getTextFromDates(course: Course) -> String {
+    fileprivate func getTextFromDates(_ course: Course) -> String {
         
         if course.beginDate == nil && course.endDate == nil {
             return ""
@@ -45,7 +45,7 @@ class CourseTableViewCell: UITableViewCell {
         return "\(course.beginDate!.getStepicFormatString()) - \(course.endDate!.getStepicFormatString())"
     }
     
-    func initWithCourse(course: Course) {
+    func initWithCourse(_ course: Course) {
         courseNameLabel.text = course.title
         
         courseDescriptionLabel.setTextWithHTMLString(course.summary)
@@ -53,7 +53,7 @@ class CourseTableViewCell: UITableViewCell {
         deadlinesLabel.text = getTextFromDates(course)
         
         
-        courseImageView.sd_setImageWithURL(NSURL(string: course.coverURLString)!, placeholderImage: Constants.placeholderImage)
+        courseImageView.sd_setImage(with: URL(string: course.coverURLString)!, placeholderImage: Constants.placeholderImage)
         
     }
 }

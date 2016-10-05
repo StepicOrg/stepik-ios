@@ -15,13 +15,13 @@ import Firebase
 class NotificationRegistrator: NSObject {
     static let sharedInstance = NotificationRegistrator()
     
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
         
-    func registerForRemoteNotifications(application: UIApplication) {
+    func registerForRemoteNotifications(_ application: UIApplication) {
         let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         if AuthInfo.shared.isAuthorized {
@@ -31,15 +31,15 @@ class NotificationRegistrator: NSObject {
         }
     }
     
-    func getGCMRegistrationToken(deviceToken deviceToken: NSData) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Unknown)
+    func getGCMRegistrationToken(deviceToken: Data) {
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.unknown)
     }
     
     var registrationOptions = [String: AnyObject]()
     
     let registrationKey = "onRegistrationCompleted"
 
-    func registerDevice(registrationToken: String!) {
+    func registerDevice(_ registrationToken: String!) {
         print("Registration Token: \(registrationToken)")
         let device = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.deviceInfoString)
         ApiDataDownloader.devices.create(device, success: {
@@ -55,9 +55,9 @@ class NotificationRegistrator: NSObject {
     
     // Should be executed first before any actions were performed, contains abort()
     //TODO: remove abort, add failure completion handler 
-    func unregisterFromNotifications(completion completion: (Void->Void)) {
+    func unregisterFromNotifications(completion: @escaping ((Void)->Void)) {
         print(AuthInfo.shared.token?.accessToken)
-        UIApplication.sharedApplication().unregisterForRemoteNotifications()
+        UIApplication.shared.unregisterForRemoteNotifications()
         if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
             ApiDataDownloader.devices.delete(deviceId, success: 
                 {
@@ -70,7 +70,7 @@ class NotificationRegistrator: NSObject {
                     print("initializing delete device task")
                     print("user id \(AuthInfo.shared.userId) , token \(AuthInfo.shared.token)")
                     if let userId =  AuthInfo.shared.userId,
-                        token = AuthInfo.shared.token {
+                        let token = AuthInfo.shared.token {
                         
                         let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                         ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)

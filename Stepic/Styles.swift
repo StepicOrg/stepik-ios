@@ -10,18 +10,18 @@ import UIKit
 
 struct PlaceholderStyle {
     struct LabelStyle {
-        var font : UIFont = UIFont.systemFontOfSize(14)
-        var textColor : UIColor = UIColor.lightGrayColor()
-        var textAlignment : NSTextAlignment = NSTextAlignment.Center
-        var lineBreakMode : NSLineBreakMode = NSLineBreakMode.ByWordWrapping
+        var font : UIFont = UIFont.systemFont(ofSize: 14)
+        var textColor : UIColor = UIColor.lightGray
+        var textAlignment : NSTextAlignment = NSTextAlignment.center
+        var lineBreakMode : NSLineBreakMode = NSLineBreakMode.byWordWrapping
     }
     
     struct ButtonStyle {
-        var font : UIFont = UIFont.systemFontOfSize(17)
-        var borderType : BorderType = .None
-        var borderColor : UIColor = UIColor.clearColor()
-        var backgroundColor : UIColor = UIColor.clearColor()
-        var textColor : UIColor = UIColor.blueColor()
+        var font : UIFont = UIFont.systemFont(ofSize: 17)
+        var borderType : BorderType = .none
+        var borderColor : UIColor = UIColor.clear
+        var backgroundColor : UIColor = UIColor.clear
+        var textColor : UIColor = UIColor.blue
     }
     
     var title = LabelStyle()
@@ -31,14 +31,14 @@ struct PlaceholderStyle {
 
 var stepicPlaceholderStyle : PlaceholderStyle {
     var style = PlaceholderStyle()
-    style.title.font = UIFont.boldSystemFontOfSize(18)
-    style.button.borderType = .None
+    style.title.font = UIFont.boldSystemFont(ofSize: 18)
+    style.button.borderType = .none
     style.button.borderColor = UIColor.stepicGreenColor()
-    style.button.backgroundColor = UIColor.whiteColor()
+    style.button.backgroundColor = UIColor.white
     style.button.textColor = UIColor.stepicGreenColor()
     return style
 }
 
 enum BorderType {
-    case None, Rounded, Rect
+    case none, rounded, rect
 }

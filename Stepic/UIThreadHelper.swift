@@ -9,8 +9,8 @@
 import Foundation
 
 struct UIThread {
-    static func performUI(block: Void->Void) {
-        dispatch_async(dispatch_get_main_queue(), {
+    static func performUI(_ block: @escaping (Void)->Void) {
+        DispatchQueue.main.async(execute: {
             block()
         })
     }

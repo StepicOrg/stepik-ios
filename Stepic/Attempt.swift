@@ -33,7 +33,7 @@ class Attempt: NSObject {
         dataset = getDatasetFromJSON(json["dataset"], stepName: stepName)
     }
     
-    private func getDatasetFromJSON(json: JSON, stepName: String) -> Dataset? {
+    fileprivate func getDatasetFromJSON(_ json: JSON, stepName: String) -> Dataset? {
         switch stepName {
         case "choice" : 
             return ChoiceDataset(json: json)

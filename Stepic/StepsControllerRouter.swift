@@ -11,9 +11,9 @@ import UIKit
 class StepsControllerRouter {
     
     //Getting step here
-    static func getStepsController(forStepId id: Int, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    static func getStepsController(forStepId id: Int, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
-        let getForStepBlock : (Step -> Void) = {
+        let getForStepBlock : ((Step) -> Void) = {
             step in
             getStepsController(forStep: step, success: successHandler, error: errorHandler)
         }
@@ -29,7 +29,7 @@ class StepsControllerRouter {
             }
         } 
         
-        ApiDataDownloader.sharedDownloader.getStepsByIds([id], deleteSteps: [], refreshMode: .Update, success: 
+        ApiDataDownloader.sharedDownloader.getStepsByIds([id], deleteSteps: [], refreshMode: .update, success: 
             { 
                 steps in
                 if let step = steps.first {
@@ -47,8 +47,8 @@ class StepsControllerRouter {
     }
     
     //Getting lesson here
-    static func getStepsController(forStep step: Step, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
-        let getForLessonBlock : (Lesson -> Void) = {
+    static func getStepsController(forStep step: Step, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+        let getForLessonBlock : ((Lesson) -> Void) = {
             lesson in 
             getStepsController(forStep: step, lesson: lesson, success: successHandler, error: errorHandler)
         }
@@ -67,7 +67,7 @@ class StepsControllerRouter {
             return
         }
         
-        ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: [], refreshMode: .Update, success: 
+        ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: [], refreshMode: .update, success: 
             {
                 lessons in
                 if let lesson = lessons.first {
@@ -87,9 +87,9 @@ class StepsControllerRouter {
     }
     
     //Getting unit here. 
-    private static func getStepsController(forStep step: Step, lesson: Lesson, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
-        let getForUnitBlock : (Unit -> Void) = {
+        let getForUnitBlock : ((Unit) -> Void) = {
             unit in 
         }
         
@@ -112,7 +112,7 @@ class StepsControllerRouter {
             {
                 error in
                 switch error {
-                case .NoUnits:
+                case .noUnits:
                     //Handle the case, when there are no units
                     getStepsControllerForLessonContext(step, lesson: lesson, success: successHandler, error: errorHandler)
                     break
@@ -124,12 +124,12 @@ class StepsControllerRouter {
     }
     
     //Looking for assignments
-    private static func getStepsController(forStep step: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, unit: Unit, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
         //Check, if cached assignments contain nil progresses
 //        unit.assignments.contains({$0.})
         
-        ApiDataDownloader.sharedDownloader.getAssignmentsByIds(unit.assignmentsArray, deleteAssignments: unit.assignments, refreshMode: .Update, success: {
+        ApiDataDownloader.sharedDownloader.getAssignmentsByIds(unit.assignmentsArray, deleteAssignments: unit.assignments, refreshMode: .update, success: {
             newAssignments in 
             
             if newAssignments.count == 0 {
@@ -150,7 +150,7 @@ class StepsControllerRouter {
     }
     
     //Define this method's signature later
-    private static func getStepsControllerForLessonContext(step: Step, lesson: Lesson, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    fileprivate static func getStepsControllerForLessonContext(_ step: Step, lesson: Lesson, success successHandler: ((StepsViewController) -> Void), error errorHandler: ((String) -> Void)) {
         
         guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
             errorHandler("Could not instantiate controller")
@@ -159,16 +159,16 @@ class StepsControllerRouter {
         
         vc.hidesBottomBarWhenPushed = true
         let step = step
-        vc.context = .Lesson
+        vc.context = .lesson
         vc.lesson = lesson
         
         //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.indexOf(step) ?? 0
+        vc.startStepId = step.lesson?.steps.index(of: step) ?? 0
         successHandler(vc)
     }
     
     //Define this method's signature later
-    private static func getStepsControllerForUnitContext(step: Step, lesson: Lesson, unit: Unit, success successHandler: (StepsViewController -> Void), error errorHandler: (String -> Void)) {
+    fileprivate static func getStepsControllerForUnitContext(_ step: Step, lesson: Lesson, unit: Unit, success successHandler: ((StepsViewController) -> Void), error errorHandler: ((String) -> Void)) {
         guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
             errorHandler("Could not instantiate controller")
             return
@@ -176,12 +176,12 @@ class StepsControllerRouter {
         
         vc.hidesBottomBarWhenPushed = true
         let step = step
-        vc.context = .Unit
+        vc.context = .unit
         vc.lesson = lesson
 //        unit.assignments
         //TODO: Add assignment here
         //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.indexOf(step) ?? 0
+        vc.startStepId = step.lesson?.steps.index(of: step) ?? 0
         successHandler(vc)
     }
 

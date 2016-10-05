@@ -19,14 +19,14 @@ class SortingQuizViewController: QuizViewController {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
-        tableView.scrollEnabled = false
+        tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
-        tableView.alignToView(self.containerView)
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.align(to: self.containerView)
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerNib(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
-        tableView.editing = true
+        tableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
+        tableView.isEditing = true
         
         webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
             , countClosure: 
@@ -48,8 +48,8 @@ class SortingQuizViewController: QuizViewController {
     }
     
     
-    private var orderedOptions : [String] = []
-    private var positionForOptionInAttempt : [String : Int] = [:]
+    fileprivate var orderedOptions : [String] = []
+    fileprivate var positionForOptionInAttempt : [String : Int] = [:]
 
     var optionsCount: Int {
         return (self.attempt?.dataset as? SortingDataset)?.options.count ?? 0
@@ -67,42 +67,42 @@ class SortingQuizViewController: QuizViewController {
         self.view.layoutIfNeeded()
     }
     
-    private func resetOptionsToAttempt() {
+    fileprivate func resetOptionsToAttempt() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
         if let dataset = attempt?.dataset as? SortingDataset {
             self.orderedOptions = dataset.options
-            for (index, option) in dataset.options.enumerate() {
+            for (index, option) in dataset.options.enumerated() {
                 positionForOptionInAttempt[option] = index
             }
         }
     }
     
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
 //        webViewHelper.initChoicesHeights()
         if self.submission == nil {
             if reload {
                 resetOptionsToAttempt()
             }
-            self.tableView.userInteractionEnabled = true
+            self.tableView.isUserInteractionEnabled = true
         } else {
             if let dataset = attempt?.dataset as? SortingDataset {
-                var o = [String](count: dataset.options.count, repeatedValue: "")
+                var o = [String](repeating: "", count: dataset.options.count)
                 if let r = submission?.reply as? SortingReply {
                     print("attempt dataset -> \(dataset.options), \nsubmission ordering -> \(r.ordering)")
-                    for (index, order) in r.ordering.enumerate() {
+                    for (index, order) in r.ordering.enumerated() {
                         o[index] = dataset.options[order]
                     }
                 }
                 orderedOptions = o
             }
-            self.tableView.userInteractionEnabled = false
+            self.tableView.isUserInteractionEnabled = false
         }
         self.tableView.reloadData()
         
         webViewHelper.initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
-            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? SortingQuizTableViewCell {
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? SortingQuizTableViewCell {
                 cell.optionWebView.reload()
             }
         }
@@ -123,12 +123,12 @@ class SortingQuizViewController: QuizViewController {
         return r
     }
 
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         webViewHelper.initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
-            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as? SortingQuizTableViewCell {
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? SortingQuizTableViewCell {
                 cell.optionWebView.reload()
             }
         }
@@ -150,32 +150,32 @@ class SortingQuizViewController: QuizViewController {
 
 extension SortingQuizViewController : UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let a = attempt {
             if let dataset = a.dataset as? SortingDataset {
                 //                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
-                return CGFloat(webViewHelper.cellHeights[indexPath.row])
+                return CGFloat(webViewHelper.cellHeights[(indexPath as NSIndexPath).row])
                 //                dataset.options[indexPath.row]
             }
         }
         return 0
     }
     
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.None
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.none
     }
     
-    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
 
 extension SortingQuizViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if attempt != nil {
             return 1
         } else {
@@ -183,23 +183,23 @@ extension SortingQuizViewController : UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderedOptions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SortingQuizTableViewCell", forIndexPath: indexPath) as! SortingQuizTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
         
         if let dataset = attempt?.dataset as? SortingDataset {
-            webViewHelper.cellHeightUpdateBlocks[indexPath.row] = cell.setHTMLText(orderedOptions[indexPath.row])
+            webViewHelper.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row])
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        let movingOption = orderedOptions[sourceIndexPath.row]
-        orderedOptions.removeAtIndex(sourceIndexPath.row)
-        orderedOptions.insert(movingOption, atIndex: destinationIndexPath.row)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movingOption = orderedOptions[(sourceIndexPath as NSIndexPath).row]
+        orderedOptions.remove(at: (sourceIndexPath as NSIndexPath).row)
+        orderedOptions.insert(movingOption, at: (destinationIndexPath as NSIndexPath).row)
     }
 }

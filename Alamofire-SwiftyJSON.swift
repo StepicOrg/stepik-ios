@@ -22,8 +22,8 @@ extension Request {
      
      :returns: The request.
      */
-    public func responseSwiftyJSON(completionHandler: (NSURLRequest, NSHTTPURLResponse?, SwiftyJSON.JSON, ErrorType?) -> Void) -> Self {
-        return responseSwiftyJSON(nil, options:NSJSONReadingOptions.AllowFragments, completionHandler:completionHandler)
+    public func responseSwiftyJSON(_ completionHandler: (URLRequest, HTTPURLResponse?, SwiftyJSON.JSON, ErrorProtocol?) -> Void) -> Self {
+        return responseSwiftyJSON(nil, options:JSONSerialization.ReadingOptions.allowFragments, completionHandler:completionHandler)
     }
     
     /**
@@ -35,12 +35,12 @@ extension Request {
      
      :returns: The request.
      */
-    public func responseSwiftyJSON(queue: dispatch_queue_t? = nil, options: NSJSONReadingOptions = .AllowFragments, completionHandler: (NSURLRequest, NSHTTPURLResponse?, JSON, ErrorType?) -> Void) -> Self {
+    public func responseSwiftyJSON(_ queue: DispatchQueue? = nil, options: JSONSerialization.ReadingOptions = .allowFragments, completionHandler: (URLRequest, HTTPURLResponse?, JSON, ErrorProtocol?) -> Void) -> Self {
         
         // With Alamofire 3, completionHandler returns a Response struct instead of request, response, result.
         //For more information about Response struct see: https://github.com/Alamofire/Alamofire/blob/master/Documentation/Alamofire%203.0%20Migration%20Guide.md
         return response(queue: queue, responseSerializer: Request.JSONResponseSerializer(options: options), completionHandler: { (response) -> Void in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
                 var responseJSON: JSON
                 if response.result.isFailure
                 {
@@ -48,7 +48,7 @@ extension Request {
                 } else {
                     responseJSON = SwiftyJSON.JSON(response.result.value!)
                 }
-                dispatch_async(queue ?? dispatch_get_main_queue(), {
+                (queue ?? DispatchQueue.main).async(execute: {
                     completionHandler(response.request!, response.response, responseJSON, response.result.error)
                 })
             })

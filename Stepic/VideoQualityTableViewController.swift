@@ -26,8 +26,8 @@ class VideoQualityTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        setCheckmarkTo(defaultQualities.indexOf(VideosInfo.videoQuality) ?? 0)
+    override func viewWillAppear(_ animated: Bool) {
+        setCheckmarkTo(defaultQualities.index(of: VideosInfo.videoQuality) ?? 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,25 +38,25 @@ class VideoQualityTableViewController: UITableViewController {
 
 extension VideoQualityTableViewController {
     
-    private func setCheckmarkTo(selectedTag: Int) {
+    fileprivate func setCheckmarkTo(_ selectedTag: Int) {
         for cell in qualityCells {
             if cell.tag == selectedTag {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             } else {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let filtered = qualityCells.filter({return $0.tag == indexPath.row}) 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let filtered = qualityCells.filter({return $0.tag == (indexPath as NSIndexPath).row}) 
         switch filtered.count {
         case 0: 
             print("error! selected a video quality cell without a tag!")
         case 1:
             VideosInfo.videoQuality = defaultQualities[filtered[0].tag]
             setCheckmarkTo(filtered[0].tag)
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         default:
             print("something wrong happened during selection in videoQualityTableViewController")
         }

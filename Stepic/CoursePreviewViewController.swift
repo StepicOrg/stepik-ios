@@ -61,21 +61,21 @@ class CoursePreviewViewController: UIViewController {
         
     }
     
-    var displayingInfoType : DisplayingInfoType = .Overview 
+    var displayingInfoType : DisplayingInfoType = .overview 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerNib(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
+        tableView.register(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
         
         self.navigationItem.backBarButtonItem?.title = ""
         
         tableView.tableFooterView = UIView()
         
         tableView.estimatedRowHeight = 44.0
-        videoWebView.scrollView.scrollEnabled = false
+        videoWebView.scrollView.isScrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
         
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem
         
         if let c = course {
@@ -90,33 +90,33 @@ class CoursePreviewViewController: UIViewController {
                 setupPlayerWithVideo(introVideo)
             } else {
                 setIntroMode(fromVideo: false)
-                loadVimeoURL(NSURL(string: c.introURL)!)
+                loadVimeoURL(URL(string: c.introURL)!)
             }
             updateSections()
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
     
-    func shareButtonPressed(button: UIBarButtonItem) {
+    func shareButtonPressed(_ button: UIBarButtonItem) {
     
         AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
         
         if let slug = course?.slug {
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
                 let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/")
                 shareVC.popoverPresentationController?.barButtonItem = button
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.presentViewController(shareVC, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.present(shareVC, animated: true, completion: nil)
                 }
             }
         }
     }
     
-    private func updateSections() {
+    fileprivate func updateSections() {
         if let c = course {
             let successBlock = {
                 [weak self] in
@@ -149,11 +149,11 @@ class CoursePreviewViewController: UIViewController {
     var isErrorWhileLoadingSections : Bool = false
     var isLoadingSections: Bool = false
     
-    private func resetHeightConstraints() {
+    fileprivate func resetHeightConstraints() {
         let v = self.tableView.tableHeaderView
         var headerframe = v?.frame
         headerframe?.size.height = getPlayerHeight()
-        v?.frame = headerframe ?? CGRectZero
+        v?.frame = headerframe ?? CGRect.zero
         tableView.tableHeaderView = v
         
         tableView.setNeedsLayout()
@@ -164,22 +164,22 @@ class CoursePreviewViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
-    private func loadVimeoURL(url: NSURL) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            self.videoWebView.loadRequest(NSURLRequest(URL: url))
+    fileprivate func loadVimeoURL(_ url: URL) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            self.videoWebView.loadRequest(URLRequest(url: url))
         }
     }
     
-    private func setIntroMode(fromVideo fromVideo: Bool) {
-        videoWebView.hidden = fromVideo
-        playButton.hidden = !fromVideo
-        thumbnailImageView.hidden = !fromVideo
+    fileprivate func setIntroMode(fromVideo: Bool) {
+        videoWebView.isHidden = fromVideo
+        playButton.isHidden = !fromVideo
+        thumbnailImageView.isHidden = !fromVideo
     }
     
     var imageTapHelper : ImageTapHelper!
     
-    private func setupPlayerWithVideo(video: Video) {
-        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
+    fileprivate func setupPlayerWithVideo(_ video: Video) {
+        thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: {
             [weak self]
@@ -190,25 +190,25 @@ class CoursePreviewViewController: UIViewController {
         self.video = video
         
         if video.urls.count == 0 {
-            videoWebView.hidden = true
-            playButton.hidden = true
-            thumbnailImageView.hidden = false
+            videoWebView.isHidden = true
+            playButton.isHidden = true
+            thumbnailImageView.isHidden = false
             return
         }
         
         self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
         if let player = self.moviePlayer {
-            player.scalingMode = MPMovieScalingMode.AspectFit
-            player.fullscreen = false
-            player.movieSourceType = MPMovieSourceType.File
-            player.repeatMode = MPMovieRepeatMode.None
+            player.scalingMode = MPMovieScalingMode.aspectFit
+            player.isFullscreen = false
+            player.movieSourceType = MPMovieSourceType.file
+            player.repeatMode = MPMovieRepeatMode.none
             self.contentView.addSubview(player.view)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: MPMoviePlayerWillExitFullscreenNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: MPMoviePlayerDidExitFullscreenNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
             
-            self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.contentView)
-            self.moviePlayer?.view.alignTop("0", bottom: "0", toView: self.contentView)
-            self.moviePlayer?.view.hidden = true
+            self.moviePlayer?.view.alignLeading("0", trailing: "0", to: self.contentView)
+            self.moviePlayer?.view.alignTop("0", bottom: "0", to: self.contentView)
+            self.moviePlayer?.view.isHidden = true
         }
     }
     
@@ -221,16 +221,16 @@ class CoursePreviewViewController: UIViewController {
     }
     
     func willExitFullscreen() {
-        fullScreenWasPlaying = self.moviePlayer?.playbackState == MPMoviePlaybackState.Playing
+        fullScreenWasPlaying = self.moviePlayer?.playbackState == MPMoviePlaybackState.playing
     }
     
-    var videoURL : NSURL {
+    var videoURL : URL {
         return video.getUrlForQuality(VideosInfo.videoQuality)
     }
     
     func reload(reloadViews rv: Bool) {
         
-        self.moviePlayer?.movieSourceType = MPMovieSourceType.File
+        self.moviePlayer?.movieSourceType = MPMovieSourceType.file
         self.moviePlayer?.contentURL = videoURL
         
         if rv {
@@ -239,13 +239,13 @@ class CoursePreviewViewController: UIViewController {
     }
     
     var isShowingPlayer : Bool {
-        return !(self.moviePlayer?.view.hidden ?? true)
+        return !(self.moviePlayer?.view.isHidden ?? true)
     }
     
     func setControls(playing p : Bool) {
-        self.moviePlayer?.view.hidden = !p
-        self.thumbnailImageView.hidden = p
-        self.playButton.hidden = p
+        self.moviePlayer?.view.isHidden = !p
+        self.thumbnailImageView.isHidden = p
+        self.playButton.isHidden = p
     }
     
     func playVideo() {
@@ -255,7 +255,7 @@ class CoursePreviewViewController: UIViewController {
         }   
     }
     
-    @IBAction func playButtonPressed(sender: UIButton) {
+    @IBAction func playButtonPressed(_ sender: UIButton) {
         playVideo()
     }
     
@@ -263,14 +263,14 @@ class CoursePreviewViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    private var textData : [[(String, String)]] = [
+    fileprivate var textData : [[(String, String)]] = [
         //Overview
         [],
         //Detailed
         []
     ]
     
-    private var heights : [[CGFloat]] = [
+    fileprivate var heights : [[CGFloat]] = [
         //Overview
         [],
         //Detailed
@@ -280,20 +280,20 @@ class CoursePreviewViewController: UIViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSections" {
-            let dvc = segue.destinationViewController as! SectionsViewController
+            let dvc = segue.destination as! SectionsViewController
             dvc.course = course
         }
     }
     
-    @IBAction func displayingSegmentedControlValueChanged(sender: UISegmentedControl) {
-        displayingInfoType = DisplayingInfoType(rawValue: sender.selectedSegmentIndex) ?? .Overview
+    @IBAction func displayingSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+        displayingInfoType = DisplayingInfoType(rawValue: sender.selectedSegmentIndex) ?? .overview
         reloadTableView()
     }
     
     
-    @IBAction func joinButtonPressed(sender: UIButton) {
+    @IBAction func joinButtonPressed(_ sender: UIButton) {
         if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
             return
         }
@@ -306,7 +306,7 @@ class CoursePreviewViewController: UIViewController {
                         s.joinButtonPressed(sender)
                     }
                 }
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.present(vc, animated: true, completion: nil)
             }
             return
         }
@@ -317,64 +317,64 @@ class CoursePreviewViewController: UIViewController {
             if sender.isEnabledToJoin {
                 SVProgressHUD.show()
                 AuthManager.sharedManager.joinCourseWithId(c.id, success : {
-                    SVProgressHUD.showSuccessWithStatus("")
+                    SVProgressHUD.showSuccess(withStatus: "")
                     sender.setDisabledJoined()
                     self.course?.enrolled = true
                     CoreDataHelper.instance.save()
                     CoursesJoinManager.sharedManager.addedCourses += [c]
-                    self.performSegueWithIdentifier("showSections", sender: nil)
+                    self.performSegue(withIdentifier: "showSections", sender: nil)
                     }, error:  {
                         status in
-                        SVProgressHUD.showErrorWithStatus(status)
+                        SVProgressHUD.showError(withStatus: status)
                 }) 
             } else {
                 askForUnenroll(unenroll: {
                     SVProgressHUD.show()
                     AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
-                        SVProgressHUD.showSuccessWithStatus("")
+                        SVProgressHUD.showSuccess(withStatus: "")
                         sender.setEnabledJoined()
                         self.course?.enrolled = false
                         CoreDataHelper.instance.save()
                         CoursesJoinManager.sharedManager.deletedCourses += [c]
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.navigationController?.popToRootViewController(animated: true)
                         }, error:  {
                             status in
-                            SVProgressHUD.showErrorWithStatus(status)
+                            SVProgressHUD.showError(withStatus: status)
                     })
                 })
             }
         }
     }
     
-    func askForUnenroll(unenroll unenroll: Void->Void) {
-        let alert = UIAlertController(title: NSLocalizedString("UnenrollAlertTitle", comment: "") , message: NSLocalizedString("UnenrollAlertMessage", comment: ""), preferredStyle: .Alert)
+    func askForUnenroll(unenroll: @escaping (Void)->Void) {
+        let alert = UIAlertController(title: NSLocalizedString("UnenrollAlertTitle", comment: "") , message: NSLocalizedString("UnenrollAlertMessage", comment: ""), preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Unenroll", comment: "") , style: .Destructive, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Unenroll", comment: "") , style: .destructive, handler: {
             action in
             unenroll()
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func reloadTableView() {
-        var changingIndexPaths : [NSIndexPath] = []
+        var changingIndexPaths : [IndexPath] = []
         for i in 0 ..< max(textData[0].count, textData[1].count) {
-            changingIndexPaths += [NSIndexPath(forRow: i, inSection: 0)]
+            changingIndexPaths += [IndexPath(row: i, section: 0)]
         }
-        tableView.reloadRowsAtIndexPaths(changingIndexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.reloadRows(at: changingIndexPaths, with: UITableViewRowAnimation.automatic)
     }
     
-    private func getPlayerHeight() -> CGFloat {
+    fileprivate func getPlayerHeight() -> CGFloat {
         if course?.introURL == "" && course?.introVideo == nil {
             return 0
         }
-        let w = UIScreen.mainScreen().bounds.width
+        let w = UIScreen.main.bounds.width
         return w * (9 / 16)
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         tableView.reloadData()
         resetHeightConstraints()
     }
@@ -382,11 +382,11 @@ class CoursePreviewViewController: UIViewController {
 }
 
 extension CoursePreviewViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return course == nil ? 0 : 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return max(textData[0].count, textData[1].count, sectionTitles.count, 1)
@@ -396,46 +396,46 @@ extension CoursePreviewViewController : UITableViewDataSource {
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if displayingInfoType == .Syllabus {
-            if indexPath.row < sectionTitles.count {
-                var cell = tableView.dequeueReusableCellWithIdentifier("SectionTitleTableViewCell") 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if displayingInfoType == .syllabus {
+            if (indexPath as NSIndexPath).row < sectionTitles.count {
+                var cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell") 
                 if cell == nil {
-                    cell = UITableViewCell(style: .Default, reuseIdentifier: "SectionTitleTableViewCell")
+                    cell = UITableViewCell(style: .default, reuseIdentifier: "SectionTitleTableViewCell")
                 }
-                cell?.textLabel?.text = "\(indexPath.row + 1). \(sectionTitles[indexPath.row])"
+                cell?.textLabel?.text = "\((indexPath as NSIndexPath).row + 1). \(sectionTitles[(indexPath as NSIndexPath).row])"
                 cell?.textLabel?.numberOfLines = 0
                 return cell ?? UITableViewCell()
             } else {
                 return UITableViewCell()
             }
         }
-        if indexPath.row >= textData[displayingInfoType.rawValue].count {
-            let cell = tableView.dequeueReusableCellWithIdentifier("DefaultTableViewCell", forIndexPath: indexPath)
+        if (indexPath as NSIndexPath).row >= textData[displayingInfoType.rawValue].count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultTableViewCell", for: indexPath)
             return cell
         }
         
-        if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TeachersTableViewCell", forIndexPath: indexPath) as! TeachersTableViewCell
+        if textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0 == "" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TeachersTableViewCell", for: indexPath) as! TeachersTableViewCell
             cell.initWithCourse(course!)
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("TitleTextTableViewCell", forIndexPath: indexPath) as! TitleTextTableViewCell
-        cell.initWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTextTableViewCell", for: indexPath) as! TitleTextTableViewCell
+        cell.initWith(title: textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0, text: textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].1)
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("GeneralInfoTableViewCell") as! GeneralInfoTableViewCell
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralInfoTableViewCell") as! GeneralInfoTableViewCell
         cell.initWithCourse(course!)
         
         cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType.rawValue
         var cFrame : CGRect
         if let c = course {
-            cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: GeneralInfoTableViewCell.heightForCellWith(c))
+            cFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: GeneralInfoTableViewCell.heightForCellWith(c))
         } else {
-            cFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 0)
+            cFrame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 0)
         }
         cell.frame = cFrame
         let cv = UIView()
@@ -447,24 +447,24 @@ extension CoursePreviewViewController : UITableViewDataSource {
 
 extension CoursePreviewViewController : UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if displayingInfoType == .Syllabus {
-            if indexPath.row < sectionTitles.count {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if displayingInfoType == .syllabus {
+            if (indexPath as NSIndexPath).row < sectionTitles.count {
                 return UITableViewAutomaticDimension
             } else {
                 return 0
             }
         }
-        if indexPath.row >= textData[displayingInfoType.rawValue].count {
+        if (indexPath as NSIndexPath).row >= textData[displayingInfoType.rawValue].count {
             return 0
         }
-        if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
+        if textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0 == "" {
             return 137
         }
-        return heights[displayingInfoType.rawValue][indexPath.row]
+        return heights[displayingInfoType.rawValue][(indexPath as NSIndexPath).row]
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
             if let c = course {
                 return GeneralInfoTableViewCell.heightForCellWith(c)
@@ -475,10 +475,10 @@ extension CoursePreviewViewController : UITableViewDelegate {
 }
 
 extension CoursePreviewViewController : UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView == self.tableView) {
             if (scrollView.contentOffset.y < 0) {
-                scrollView.contentOffset = CGPointZero
+                scrollView.contentOffset = CGPoint.zero
             }
         }
     }

@@ -10,8 +10,8 @@ import Foundation
 
 struct Scripts {
     
-    private static func loadScriptWithKey(key: String) -> String {
-        let path = NSBundle.mainBundle().bundlePath
+    fileprivate static func loadScriptWithKey(_ key: String) -> String {
+        let path = Bundle.main.bundlePath
         let scriptsPlistPath = "\(path)/Scripts.plist"
         let plistData = NSDictionary(contentsOfFile: scriptsPlistPath)!
         return plistData[key] as! String
@@ -25,15 +25,15 @@ struct Scripts {
         return loadScriptWithKey(sizeReportScriptKey)
     }
     
-    private static var sizeReportScriptKey : String = "SizeReportScript"
+    fileprivate static var sizeReportScriptKey : String = "SizeReportScript"
     
-    private static var texScriptKey : String = "TexScript"
+    fileprivate static var texScriptKey : String = "TexScript"
     
-    private static var localTexScriptKey : String = "LocalTexScript"
+    fileprivate static var localTexScriptKey : String = "LocalTexScript"
 
-    private static var metaViewportKey : String = "MetaViewport"
+    fileprivate static var metaViewportKey : String = "MetaViewport"
     
-    private static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
+    fileprivate static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
     
     
     static var localTexScript : String {
@@ -48,7 +48,7 @@ struct Scripts {
         return "\(loadScriptWithKey(mathJaxFinishedScriptKey))"
     }
     
-    private static var mathJaxLocalPathScript : String {
+    fileprivate static var mathJaxLocalPathScript : String {
 //        let path = NSBundle.mainBundle().pathForResource("MathJax", ofType: "js", inDirectory: "MathJax")!
         
         let scriptBeginning = "<script type=\"text/javascript\" src=\"MathJax/MathJax.js"

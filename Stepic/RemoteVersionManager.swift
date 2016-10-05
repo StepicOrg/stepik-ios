@@ -14,20 +14,20 @@ import SwiftyJSON
  This class manages remote version change
  */
 class RemoteVersionManager: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static let sharedManager = RemoteVersionManager()
     
-    private func isVersion(v1: String, olderThan v2: String) -> Bool {
-        return v1.compare(v2, options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedDescending
+    fileprivate func isVersion(_ v1: String, olderThan v2: String) -> Bool {
+        return v1.compare(v2, options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
     }
     
-    func checkRemoteVersionChange(needUpdateHandler update: Version? -> Void, error errorHandler: NSError -> Void) {
+    func checkRemoteVersionChange(needUpdateHandler update: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
         let local = getLocalVersion()
         getRemoteVersion(
             success: {
                 remote, url in
                 if self.isVersion(remote, olderThan: local) {
-                    if let correctUrl = NSURL(string: url) {
+                    if let correctUrl = URL(string: url) {
                         update(Version(version: remote, url: correctUrl))
                         return
                     }
@@ -41,11 +41,11 @@ class RemoteVersionManager: NSObject {
         })
     }
     
-    private func getLocalVersion() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+    fileprivate func getLocalVersion() -> String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    private func getRemoteVersion(success success: (String, String) -> Void, error errorHandler: NSError -> Void) -> Request {
+    fileprivate func getRemoteVersion(success: (String, String) -> Void, error errorHandler: (NSError) -> Void) -> Request {
         return Alamofire.request(.GET, StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({ 
             _, _, json, error in
             if let e = error as? NSError {

@@ -9,7 +9,7 @@
 import UIKit
 
 enum DisplayingInfoType : Int {
-    case Overview = 0, Detailed = 1, Syllabus = 2
+    case overview = 0, detailed = 1, syllabus = 2
 }
 
 class GeneralInfoTableViewCell: UITableViewCell {
@@ -19,10 +19,10 @@ class GeneralInfoTableViewCell: UITableViewCell {
   
     @IBOutlet weak var joinButton: UIButton!
 
-    class func heightForCellWith(course: Course) -> CGFloat {
+    class func heightForCellWith(_ course: Course) -> CGFloat {
         let constrainHeight: CGFloat = 108
-        let width = UIScreen.mainScreen().bounds.width - 16
-        let titleHeight = UILabel.heightForLabelWithText(course.title, lines: 0, standardFontOfSize: 17, width: width, alignment : NSTextAlignment.Center)
+        let width = UIScreen.main.bounds.width - 16
+        let titleHeight = UILabel.heightForLabelWithText(course.title, lines: 0, standardFontOfSize: 17, width: width, alignment : NSTextAlignment.center)
         return constrainHeight + titleHeight 
     }
     
@@ -31,13 +31,13 @@ class GeneralInfoTableViewCell: UITableViewCell {
         // Initialization code
         joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
         
-        typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAtIndex: 2)
+        typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
         
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -49,7 +49,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         layoutIfNeeded()
     }
     
-    func initWithCourse(course: Course) {
+    func initWithCourse(_ course: Course) {
         courseNameLabel.text = course.title
         if course.enrolled {
             joinButton.setDisabledJoined()

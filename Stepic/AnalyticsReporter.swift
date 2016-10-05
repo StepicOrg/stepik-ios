@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class AnalyticsReporter {
-    static func reportEvent(event: String, parameters: [String: NSObject]?) {
-        FIRAnalytics.logEventWithName(event, parameters: parameters)
+    static func reportEvent(_ event: String, parameters: [String: NSObject]?) {
+        FIRAnalytics.logEvent(withName: event, parameters: parameters)
     }
 }

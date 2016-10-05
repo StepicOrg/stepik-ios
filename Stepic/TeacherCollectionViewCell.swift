@@ -19,11 +19,11 @@ class TeacherCollectionViewCell: UICollectionViewCell {
         // Initialization codex
     }
 
-    func initWithUser(user: User) {
+    func initWithUser(_ user: User) {
     
-        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, completed: {
+        avatarImageView.sd_setImage(with: URL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, completed: {
             _, _, _, _ in
-            self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.whiteColor())
+            self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.white)
 
         })
 //        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage)

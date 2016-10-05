@@ -22,7 +22,7 @@ class MathReply: NSObject, Reply {
     }
     
     var dictValue : [String : NSObject] {
-        return ["formula" : formula]
+        return ["formula" : formula as NSObject]
     }
 
 }

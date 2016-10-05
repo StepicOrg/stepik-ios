@@ -9,7 +9,7 @@
 import Foundation
 
 struct Sorter {
-    static func sort<T : JSONInitializable>(array : [T], byIds ids: [Int], canMissElements: Bool = false) -> [T] {
+    static func sort<T : JSONInitializable>(_ array : [T], byIds ids: [Int], canMissElements: Bool = false) -> [T] {
         var res : [T] = []
         
         for id in ids {
@@ -27,7 +27,7 @@ struct Sorter {
         return res
     }
     
-    static func sort(array: [Progress], byIds ids: [String]) -> [Progress] {
+    static func sort(_ array: [Progress], byIds ids: [String]) -> [Progress] {
         var res : [Progress] = []
         
         for id in ids {
@@ -43,7 +43,7 @@ struct Sorter {
         return res
     }
     
-    static func sort(assignments : [Assignment], steps : [Step]) -> [Assignment] {
+    static func sort(_ assignments : [Assignment], steps : [Step]) -> [Assignment] {
         
         var res : [Assignment] = []
 

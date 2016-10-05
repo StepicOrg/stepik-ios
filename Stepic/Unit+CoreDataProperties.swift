@@ -16,9 +16,9 @@ extension Unit {
 
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
-    @NSManaged var managedBeginDate: NSDate?
-    @NSManaged var managedSoftDeadline: NSDate?
-    @NSManaged var managedHardDeadline: NSDate?
+    @NSManaged var managedBeginDate: Date?
+    @NSManaged var managedSoftDeadline: Date?
+    @NSManaged var managedHardDeadline: Date?
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedProgressId : String?
@@ -33,19 +33,19 @@ extension Unit {
     @NSManaged var managedAssignments : NSOrderedSet?
     
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Unit", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Unit.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Unit.entity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
     
@@ -60,24 +60,24 @@ extension Unit {
     
     var lessonId : Int {
         set(newId){
-            self.managedLessonId = newId
+            self.managedLessonId = newId as NSNumber?
         }
         get {
-            return managedLessonId?.integerValue ?? -1
+            return managedLessonId?.intValue ?? -1
         }
     }
     
     var position : Int {
         set(value){
-            self.managedPosition = value
+            self.managedPosition = value as NSNumber?
         }
         get {
-            return managedPosition?.integerValue ?? -1
+            return managedPosition?.intValue ?? -1
         }
     }
 
     
-    var beginDate : NSDate? {
+    var beginDate : Date? {
         set(date){
             self.managedBeginDate = date
         }
@@ -86,7 +86,7 @@ extension Unit {
         }
     }
     
-    var softDeadline: NSDate? {
+    var softDeadline: Date? {
         set(date){ 
             self.managedSoftDeadline = date
         }
@@ -95,7 +95,7 @@ extension Unit {
         }
     }
     
-    var hardDeadline: NSDate? {
+    var hardDeadline: Date? {
         set(date){ 
             self.managedHardDeadline = date
         }
@@ -106,7 +106,7 @@ extension Unit {
     
     var isActive : Bool {
         set(value){
-            self.managedActive = value
+            self.managedActive = value as NSNumber?
         }
         get {
             return managedActive?.boolValue ?? false
@@ -137,7 +137,7 @@ extension Unit {
     
     var assignmentsArray : [Int] {
         set(value){
-            self.managedAssignmentsArray = value
+            self.managedAssignmentsArray = value as NSObject?
         }
         
         get {

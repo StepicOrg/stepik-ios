@@ -13,24 +13,24 @@ import SafariServices
 import WebKit
 
 class WebControllerManager: NSObject {
-    private override init() { super.init() }
+    fileprivate override init() { super.init() }
     static var sharedManager = WebControllerManager()
     
     var currentWebController : UIViewController? {
         willSet(newValue) {
             if let c = currentWebController {
-                c.dismissViewControllerAnimated(false, completion: nil)
+                c.dismiss(animated: false, completion: nil)
                 print("Web controllers conflict! Dismissed the underlying one.")
             }
         }
     }
     var currentWebControllerKey: String?
     
-    func dismissWebControllerWithKey(key: String, animated: Bool, completion: (()->Void)?, error: (String->Void)?) {
+    func dismissWebControllerWithKey(_ key: String, animated: Bool, completion: (()->Void)?, error: ((String)->Void)?) {
         if let c = currentWebController, 
             let k = currentWebControllerKey {
                 if k == key {
-                    c.dismissViewControllerAnimated(animated, completion: completion)
+                    c.dismiss(animated: animated, completion: completion)
                     currentWebController = nil
                     currentWebControllerKey = nil
                     return
@@ -40,25 +40,25 @@ class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
     
-    private func presentJSQWebController(url: NSURL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+    fileprivate func presentJSQWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         let controller = WebViewController(url: url)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
         let nav = UINavigationController(rootViewController: controller)
         self.currentWebController = nav
 //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
-        c.presentViewController(nav, animated: animated, completion: nil)
+        c.present(nav, animated: animated, completion: nil)
         controller.webView.navigationDelegate = self
-        controller.webView.UIDelegate = self
+        controller.webView.uiDelegate = self
     }
     
     func webControllerDonePressed() {
-        currentWebController?.dismissViewControllerAnimated(true, completion: nil)
+        currentWebController?.dismiss(animated: true, completion: nil)
         currentWebController = nil
         currentWebControllerKey = nil
     }
     
-    func presentWebControllerWithURL(url: NSURL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+    func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         self.currentWebControllerKey = key
 //        if #available(iOS 9.0, *) {
 //            let svc = SFSafariViewController(URL: url)
@@ -69,8 +69,8 @@ class WebControllerManager: NSObject {
 //        }
     }
     
-    func presentWebControllerWithURLString(urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
-        if let url = NSURL(string: urlString) {
+    func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
+        if let url = URL(string: urlString) {
             presentWebControllerWithURL(url, 
                 inController: c, 
                 withKey: key, 
@@ -84,21 +84,21 @@ class WebControllerManager: NSObject {
 }
 
 enum BackButtonStyle {
-    case Close, Back, Done
+    case close, back, done
     
     //Do NOT forget to reset target and selector!!!
     var barButtonItem : UIBarButtonItem {
         switch self {
-        case .Close:
-            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .Plain, target: nil, action: Selector(""))
+        case .close:
+            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
-        case .Back:
-            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .Plain, target: nil, action: Selector(""))
+        case .back:
+            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
-        case .Done:
-            let item = UIBarButtonItem(barButtonSystemItem: .Done, target: nil, action: Selector(""))
+        case .done:
+            let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: Selector(""))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         }
@@ -106,37 +106,37 @@ enum BackButtonStyle {
 }
 
 extension WebControllerManager : WKNavigationDelegate {    
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.targetFrame != nil) {
-            let rurl = navigationAction.request.URL
+            let rurl = navigationAction.request.url
 //            print(rurl)
             if let url = rurl {
                 if url.scheme == "stepic" {
-                    UIApplication.sharedApplication().openURL(url)
+                    UIApplication.shared.openURL(url)
                 }
             }
         }
-        decisionHandler(WKNavigationActionPolicy.Allow)
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 }
 
 extension WebControllerManager : WKUIDelegate {
     
-    func webView(webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentAlertOnController(currentVC, title: NSLocalizedString("Alert", comment: ""), message: message, handler: completionHandler)
+            WKWebViewPanelManager.presentAlert(on: currentVC, title: NSLocalizedString("Alert", comment: ""), message: message, handler: completionHandler)
         }
     }
     
-    func webView(webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentConfirmOnController(currentVC, title: NSLocalizedString("Confirm", comment: ""), message: message, handler: completionHandler)
+            WKWebViewPanelManager.presentConfirm(on: currentVC, title: NSLocalizedString("Confirm", comment: ""), message: message, handler: completionHandler)
         }
     }
     
-    func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         if let currentVC = currentWebController {
-            WKWebViewPanelManager.presentPromptOnController(currentVC, title: NSLocalizedString("Prompt", comment: ""), message: prompt, defaultText: defaultText, handler: completionHandler)
+            WKWebViewPanelManager.presentPrompt(on: currentVC, title: NSLocalizedString("Prompt", comment: ""), message: prompt, defaultText: defaultText, handler: completionHandler)
         }
     }
 }

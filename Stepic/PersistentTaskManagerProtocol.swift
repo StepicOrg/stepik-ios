@@ -9,6 +9,6 @@
 import Foundation
 
 protocol PersistentTaskManagerProtocol {
-    func recoverTaskWithName(name: String) -> Executable
-    func saveTaskWithName(name: String, type: ExecutableTaskType)
+    func recoverTaskWithName(_ name: String) -> Executable
+    func saveTaskWithName(_ name: String, type: ExecutableTaskType)
 }

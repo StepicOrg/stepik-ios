@@ -23,7 +23,7 @@ class TextReply: NSObject, Reply {
     }
     
     var dictValue : [String : NSObject] {
-        return ["text" : text]
+        return ["text" : text as NSObject]
     }
 }
 

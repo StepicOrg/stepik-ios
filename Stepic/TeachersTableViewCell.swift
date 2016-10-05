@@ -17,21 +17,21 @@ class TeachersTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.collectionView?.registerNib(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
+        self.collectionView?.register(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    func initWithCourse(course: Course) {
+    func initWithCourse(_ course: Course) {
         //TODO: JUST REMOVE THIS AT SOME TIME
 //        instructors = course.instructors
         if AuthInfo.shared.isAuthorized {
@@ -55,24 +55,24 @@ class TeachersTableViewCell: UITableViewCell {
 
 extension TeachersTableViewCell : UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return instructors.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TeacherCollectionViewCell", forIndexPath: indexPath) as! TeacherCollectionViewCell
-        cell.initWithUser(instructors[indexPath.item])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeacherCollectionViewCell", for: indexPath) as! TeacherCollectionViewCell
+        cell.initWithUser(instructors[(indexPath as NSIndexPath).item])
         return cell
     }
     
 }
 
 extension TeachersTableViewCell : UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let usedWidth : CGFloat = CGFloat(instructors.count) * 120 + CGFloat(instructors.count - 1) * 10
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
         

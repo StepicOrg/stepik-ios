@@ -15,28 +15,28 @@ import FLKAutoLayout
  */
 class CellOperationsUtil {
     
-    class func addRefreshView(view: UIView, backgroundColor: UIColor = UIColor.whiteColor()) -> UIView {
+    class func addRefreshView(_ view: UIView, backgroundColor: UIColor = UIColor.white) -> UIView {
         let v = UIView()
         v.backgroundColor = backgroundColor
-        let ind = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        let ind = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         v.addSubview(ind)
-        ind.alignCenterWithView(v)
+        ind.alignCenter(with: v)
         ind.startAnimating()
         view.addSubview(v)
-        v.alignToView(view)
+        v.align(to: view)
         return v
     }
     
     //Returns the removeSelection block
-    class func animateViewSelection(view: UIView) -> (Void->Void) {
-        let selectedColor = UIColor(red: 217/255.0, green: 217/255.0, blue: 217/255.0, alpha: 1).CGColor
-        UIView.animateWithDuration(0.5, animations: {
+    class func animateViewSelection(_ view: UIView) -> ((Void)->Void) {
+        let selectedColor = UIColor(red: 217/255.0, green: 217/255.0, blue: 217/255.0, alpha: 1).cgColor
+        UIView.animate(withDuration: 0.5, animations: {
             view.layer.backgroundColor = selectedColor
         })
         
         return {
-            UIView.animateWithDuration(0.5, animations: {
-                view.layer.backgroundColor = UIColor.whiteColor().CGColor
+            UIView.animate(withDuration: 0.5, animations: {
+                view.layer.backgroundColor = UIColor.white.cgColor
             })
         }
     }

@@ -10,11 +10,11 @@ import UIKit
 import TUSafariActivity
 
 class SharingHelper {
-    static func getSharingController(link: String) -> UIActivityViewController {
+    static func getSharingController(_ link: String) -> UIActivityViewController {
         let activityItemSource = CyrillicURLActivityItemSource(link: link)
         let objectsToShare = [activityItemSource]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: [TUSafariActivity()])
-        activityVC.excludedActivityTypes = [UIActivityTypeAirDrop]
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
         return activityVC
     }
 }

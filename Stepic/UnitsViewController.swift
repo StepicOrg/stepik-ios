@@ -26,10 +26,10 @@ class UnitsViewController: UIViewController {
 
         tableView.tableFooterView = UIView()
                 
-        tableView.registerNib(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
+        tableView.register(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
         
-        refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
         tableView.emptyDataSetDelegate = self
@@ -40,11 +40,11 @@ class UnitsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         tableView.reloadData()
-        if(self.refreshControl.refreshing) {
+        if(self.refreshControl.isRefreshing) {
             let offset = self.tableView.contentOffset
             self.refreshControl.endRefreshing()
             self.refreshControl.beginRefreshing()
@@ -58,7 +58,7 @@ class UnitsViewController: UIViewController {
         })
     }
     
-    var emptyDatasetState : EmptyDatasetState = .Empty {
+    var emptyDatasetState : EmptyDatasetState = .empty {
         didSet {
             UIThread.performUI{
                 self.tableView.reloadEmptyDataSet()
@@ -72,13 +72,13 @@ class UnitsViewController: UIViewController {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
-                self.emptyDatasetState = EmptyDatasetState.Empty
+                self.emptyDatasetState = EmptyDatasetState.empty
             })
             self.didRefresh = true
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.ConnectionError
+                self.emptyDatasetState = EmptyDatasetState.connectionError
             })
             self.didRefresh = true
         })
@@ -95,14 +95,14 @@ class UnitsViewController: UIViewController {
 
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
-            let dvc = segue.destinationViewController as! StepsViewController
+            let dvc = segue.destination as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
             
             if let stepsPresentation = sender as? StepsPresentation {
                 
-                var index = stepsPresentation.index
+                let index = stepsPresentation.index
                 if stepsPresentation.isLastStep {
                     if let l = section.units[index].lesson {
                         dvc.startStepId = l.stepsArray.count - 1
@@ -121,14 +121,14 @@ class UnitsViewController: UIViewController {
     
     var currentlyDisplayingUnitIndex: Int?
     
-    func selectUnitAtIndex(index: Int, isLastStep: Bool = false, replace: Bool = false) {
-        performSegueWithIdentifier(replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
+    func selectUnitAtIndex(_ index: Int, isLastStep: Bool = false, replace: Bool = false) {
+        performSegue(withIdentifier: replace ? "replaceSteps" : "showSteps", sender: StepsPresentation(index: index, isLastStep: isLastStep))       
     }
     
     func clearAllSelection() {
         if let selectedRows = tableView.indexPathsForSelectedRows {
             for indexPath in selectedRows {
-                tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                tableView.deselectRow(at: indexPath, animated: false)
             }
         }
     }
@@ -163,30 +163,30 @@ extension UnitsViewController : SectionNavigationDelegate {
 }
 
 extension UnitsViewController : UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        selectUnitAtIndex(indexPath.row)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectUnitAtIndex((indexPath as NSIndexPath).row)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UnitTableViewCell.heightForCellWithUnit(self.section.units[indexPath.row])
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UnitTableViewCell.heightForCellWithUnit(self.section.units[(indexPath as NSIndexPath).row])
     }
     
 }
 
 extension UnitsViewController : UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.section.units.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UnitTableViewCell", forIndexPath: indexPath) as! UnitTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UnitTableViewCell", for: indexPath) as! UnitTableViewCell
         
-        cell.initWithUnit(self.section.units[indexPath.row], delegate: self)
+        cell.initWithUnit(self.section.units[(indexPath as NSIndexPath).row], delegate: self)
         
         return cell
     }
@@ -194,40 +194,40 @@ extension UnitsViewController : UITableViewDataSource {
 
 extension UnitsViewController : PKDownloadButtonDelegate {
     
-    private func askForRemove(okHandler ok: Void->Void, cancelHandler cancel: Void->Void) {
-        let alert = UIAlertController(title: NSLocalizedString("RemoveVideoTitle", comment: ""), message: NSLocalizedString("RemoveVideoBody", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+    fileprivate func askForRemove(okHandler ok: @escaping (Void)->Void, cancelHandler cancel: @escaping (Void)->Void) {
+        let alert = UIAlertController(title: NSLocalizedString("RemoveVideoTitle", comment: ""), message: NSLocalizedString("RemoveVideoBody", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.Destructive, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.destructive, handler: {
             action in
             ok()
         }))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.Cancel, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: {
             action in
             cancel()
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    private func storeLesson(lesson: Lesson?, downloadButton: PKDownloadButton!) {
+    fileprivate func storeLesson(_ lesson: Lesson?, downloadButton: PKDownloadButton!) {
         lesson?.storeVideos(progress: {
             progress in
             UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(progress)})
             }, completion: {
                 downloaded, cancelled in 
                 if cancelled == 0 { 
-                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.Downloaded})
+                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.downloaded})
                 } else {
-                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})
+                    UIThread.performUI({downloadButton.state = PKDownloadButtonState.startDownload})
                 }
             }, error:  {
                 error in
-                UIThread.performUI({downloadButton.state = PKDownloadButtonState.StartDownload})
+                UIThread.performUI({downloadButton.state = PKDownloadButtonState.startDownload})
         })
     }
     
-    func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+    func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         
         if !didRefresh {
             //TODO : Add alert
@@ -238,7 +238,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 
         
         switch (state) {
-        case PKDownloadButtonState.StartDownload : 
+        case PKDownloadButtonState.startDownload : 
             
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
             
@@ -248,7 +248,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                 return
             }
             
-            downloadButton.state = PKDownloadButtonState.Downloading
+            downloadButton.state = PKDownloadButtonState.downloading
             
             if section.units[downloadButton.tag].lesson?.steps.count != 0 {
                 storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
@@ -259,43 +259,43 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             }
             break
             
-        case PKDownloadButtonState.Downloading :
+        case PKDownloadButtonState.downloading :
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
 
-            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
 
             section.units[downloadButton.tag].lesson?.cancelVideoStore(completion: {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     downloadButton.pendingView?.stopSpin()
-                    downloadButton.state = PKDownloadButtonState.StartDownload
+                    downloadButton.state = PKDownloadButtonState.startDownload
                 })
             })
             break
             
-        case PKDownloadButtonState.Downloaded :
+        case PKDownloadButtonState.downloaded :
         
         
             AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
 
-            downloadButton.state = PKDownloadButtonState.Pending
+            downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {
                 self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()
-                        downloadButton.state = PKDownloadButtonState.StartDownload
+                        downloadButton.state = PKDownloadButtonState.startDownload
                     })
                 })
             }, cancelHandler: {
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     downloadButton.pendingView?.stopSpin()
-                    downloadButton.state = PKDownloadButtonState.Downloaded
+                    downloadButton.state = PKDownloadButtonState.downloaded
                 })
             })
             break
 
-        case PKDownloadButtonState.Pending: 
+        case PKDownloadButtonState.pending: 
             break
         }
     }
@@ -303,67 +303,67 @@ extension UnitsViewController : PKDownloadButtonDelegate {
 
 extension UnitsViewController : DZNEmptyDataSetSource {
     
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             return Images.emptyCoursesPlaceholder
-        case .ConnectionError:
+        case .connectionError:
             return Images.noWifiImage.size250x250
         }
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("PullToRefreshUnitsTitle", comment: "")
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
         }
         
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+            NSForegroundColorAttributeName: UIColor.darkGray]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
             break
         }
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSForegroundColorAttributeName: UIColor.lightGray,
             NSParagraphStyleAttributeName: paragraph]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.whiteColor()
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.white
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 44
     }
 }
 
 extension UnitsViewController : DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 }

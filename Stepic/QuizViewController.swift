@@ -55,36 +55,36 @@ class QuizViewController: UIViewController {
         //TODO: change warning image!
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignToView(self.view)
+        v.align(to: self.view)
         v.delegate = self
         v.datasource = self
-        v.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.white
         return v
     }
     
     func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
         ai.color = UIColor.stepicGreenColor()
-        v.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenterWithView(v)
+        ai.alignCenter(with: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignToView(self.view)
-        v.hidden = false
+        v.align(to: self.view)
+        v.isHidden = false
         return v
     }
     
     var doesPresentActivityIndicatorView : Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                UIThread.performUI{self.activityView.hidden = false}
+                UIThread.performUI{self.activityView.isHidden = false}
                 self.delegate?.needsHeightUpdate(150, animated: true)
             } else {
-                UIThread.performUI{self.activityView.hidden = true}
+                UIThread.performUI{self.activityView.isHidden = true}
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
             }
         }
@@ -93,10 +93,10 @@ class QuizViewController: UIViewController {
     var doesPresentWarningView : Bool = false {
         didSet {
             if doesPresentWarningView {
-                UIThread.performUI{self.warningView.hidden = false}
+                UIThread.performUI{self.warningView.isHidden = false}
                 self.delegate?.needsHeightUpdate(200, animated: true)
             } else {
-                UIThread.performUI{self.warningView.hidden = true}
+                UIThread.performUI{self.warningView.isHidden = true}
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
             }
         }
@@ -136,10 +136,10 @@ class QuizViewController: UIViewController {
         didSet {
             if buttonStateSubmit {
                 self.sendButton.setStepicGreenStyle()
-                self.sendButton.setTitle(self.submitTitle, forState: .Normal)
+                self.sendButton.setTitle(self.submitTitle, for: UIControlState())
             } else {
                 self.sendButton.setStepicWhiteStyle()
-                self.sendButton.setTitle(self.tryAgainTitle, forState: .Normal)
+                self.sendButton.setTitle(self.tryAgainTitle, for: UIControlState())
             }
         }
     }
@@ -154,7 +154,7 @@ class QuizViewController: UIViewController {
     }
     
     //Override this in subclass
-    func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
     }
     
     //Override this in subclass
@@ -168,9 +168,9 @@ class QuizViewController: UIViewController {
     
     var stepUrl : String? 
     
-    private var didGetErrorWhileSendingSubmission = false
+    fileprivate var didGetErrorWhileSendingSubmission = false
     
-    private var hintHeightUpdateBlock : (Void -> Int)?
+    fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
     
     var submission : Submission? {
         didSet {
@@ -179,14 +179,14 @@ class QuizViewController: UIViewController {
                     print("did set submission to nil")
                     self.statusImageView.image = nil
                     self.buttonStateSubmit = true
-                    self.view.backgroundColor = UIColor.whiteColor()
+                    self.view.backgroundColor = UIColor.white
                     
                     //TODO: Localize
-                    self.sendButton.setTitle(self.submitTitle, forState: .Normal)
+                    self.sendButton.setTitle(self.submitTitle, for: UIControlState())
                     self.statusViewHeight.constant = 0
                     self.hintHeight.constant = 0
                     self.peerReviewHeight.constant = 0
-                    self.peerReviewButton.hidden = true
+                    self.peerReviewButton.isHidden = true
                     
                     if self.didGetErrorWhileSendingSubmission {
                         self.updateQuizAfterSubmissionUpdate(reload: false)   
@@ -220,10 +220,10 @@ class QuizViewController: UIViewController {
                         
                         if self.needPeerReview {
                             self.peerReviewHeight.constant = 40
-                            self.peerReviewButton.hidden = false
+                            self.peerReviewButton.isHidden = false
                         } else {
                             //TODO: Refactor this!!!!! 
-                            NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : self.step.id])
+                            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : self.step.id])
                             UIThread.performUI{
                                 self.step.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
@@ -240,7 +240,7 @@ class QuizViewController: UIViewController {
                         }
                         self.statusViewHeight.constant = 48
                         self.peerReviewHeight.constant = 0
-                        self.peerReviewButton.hidden = true
+                        self.peerReviewButton.isHidden = true
                         self.doesPresentActivityIndicatorView = false
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
@@ -250,7 +250,7 @@ class QuizViewController: UIViewController {
                     case "evaluation":
                         self.statusViewHeight.constant = 0
                         self.peerReviewHeight.constant = 0
-                        self.peerReviewButton.hidden = true
+                        self.peerReviewButton.isHidden = true
                         self.doesPresentActivityIndicatorView = true
                         self.statusLabel.text = ""
                         break
@@ -272,7 +272,7 @@ class QuizViewController: UIViewController {
     
     var step : Step!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -283,7 +283,7 @@ class QuizViewController: UIViewController {
     let reloadTimeout = 5.0
     let noReloadTimeout = 1.0
     
-    private func reloadWithCount(count: Int, noReloadCount: Int) {
+    fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
             return
         }
@@ -306,7 +306,7 @@ class QuizViewController: UIViewController {
             })  
     }    
     
-    private func countHeight() -> Bool {
+    fileprivate func countHeight() -> Bool {
         var index = 0
         var didChangeHeight = false
         if let h = hintHeightUpdateBlock?() {
@@ -320,7 +320,7 @@ class QuizViewController: UIViewController {
         return didChangeHeight
     }
     
-    private func performHeightUpdates() {
+    fileprivate func performHeightUpdates() {
         self.reloadWithCount(0, noReloadCount: 0)
     }
     
@@ -329,27 +329,27 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blackColor())
+        self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
-        self.hintView.backgroundColor = UIColor.blackColor()
+        self.hintView.backgroundColor = UIColor.black
         
-        self.peerReviewButton.setTitle(peerReviewText, forState: .Normal)
+        self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
-        self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        self.peerReviewButton.hidden = true
+        self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
+        self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        self.peerReviewButton.isHidden = true
         refreshAttempt(step.id)
     }
     
-    @IBAction func peerReviewButtonPressed(sender: AnyObject) {
+    @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
         if let stepurl = stepUrl {
-            let url = NSURL(string: stepurl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+            let url = URL(string: stepurl.addingPercentEscapes(using: String.Encoding.utf8)!)!
             
-            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
         }
     }
     
-    func refreshAttempt(stepId: Int) {
+    func refreshAttempt(_ stepId: Int) {
         self.doesPresentActivityIndicatorView = true
         performRequest({
             ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: self.step.block.name, stepId: stepId, success: { 
@@ -397,7 +397,7 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func createNewAttempt(completion completion: (Void->Void)? = nil, error: (Void->Void)? = nil) {
+    fileprivate func createNewAttempt(completion: ((Void)->Void)? = nil, error: ((Void)->Void)? = nil) {
         print("creating attempt for step id -> \(self.step.id) name -> \(self.step.block.name)")
         performRequest({
             ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: self.step.block.name, stepId: self.step.id, success: {
@@ -416,9 +416,9 @@ class QuizViewController: UIViewController {
     
     
     //Measured in seconds
-    private let checkTimeStandardInterval = 0.5
+    fileprivate let checkTimeStandardInterval = 0.5
     
-    private func checkSubmission(id: Int, time: Int, completion: (Void->Void)? = nil) {
+    fileprivate func checkSubmission(_ id: Int, time: Int, completion: ((Void)->Void)? = nil) {
         delay(checkTimeStandardInterval * Double(time), closure: {
             performRequest({
                 ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: self.step.block.name, submissionId: id, success: {
@@ -441,7 +441,7 @@ class QuizViewController: UIViewController {
         })        
     }
     
-    private func submitReply(completion completion: (Void->Void), error errorHandler: (String->Void)) {        
+    fileprivate func submitReply(completion: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) {        
         let r = getReply()
         let id = attempt!.id!
         performRequest({
@@ -467,8 +467,8 @@ class QuizViewController: UIViewController {
         return true
     }
     
-    @IBAction func sendButtonPressed(sender: UIButton) {
-        sendButton.enabled = false
+    @IBAction func sendButtonPressed(_ sender: UIButton) {
+        sendButton.isEnabled = false
         doesPresentActivityIndicatorView = true
         if buttonStateSubmit {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
@@ -476,14 +476,14 @@ class QuizViewController: UIViewController {
                 submitReply(completion: {
                     [weak self] in
                     UIThread.performUI{
-                        self?.sendButton.enabled = true
+                        self?.sendButton.isEnabled = true
                         self?.doesPresentActivityIndicatorView = false
                     }
                     }, error: {
                         [weak self]
                         errorText in
                         UIThread.performUI{
-                            self?.sendButton.enabled = true
+                            self?.sendButton.isEnabled = true
                             self?.doesPresentActivityIndicatorView = false 
                             if let vc = self?.navigationController {
                                 Messages.sharedManager.showConnectionErrorMessage(inController: vc)
@@ -492,20 +492,20 @@ class QuizViewController: UIViewController {
                     })
             } else {
                 doesPresentActivityIndicatorView = false
-                sendButton.enabled = true
+                sendButton.isEnabled = true
             }
         } else  {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
             createNewAttempt(completion: {
                 [weak self] in
                 UIThread.performUI{
-                    self?.sendButton.enabled = true
+                    self?.sendButton.isEnabled = true
                     self?.doesPresentActivityIndicatorView = false
                 }
                 }, error: {
                     [weak self] in
                     UIThread.performUI{
-                        self?.sendButton.enabled = true
+                        self?.sendButton.isEnabled = true
                         self?.doesPresentActivityIndicatorView = false
                     }
                     if let vc = self?.navigationController {

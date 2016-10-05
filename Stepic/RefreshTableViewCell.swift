@@ -16,19 +16,19 @@ class RefreshTableViewCell: UITableViewCell {
     var isRefreshing : Bool = true {
         didSet(value) {
             if value {
-                activityIndicator.hidden = false
-                refreshButton.hidden = true
+                activityIndicator.isHidden = false
+                refreshButton.isHidden = true
                 activityIndicator.startAnimating()
                 refresh?()
             } else {
-                activityIndicator.hidden = true
-                refreshButton.hidden = false
+                activityIndicator.isHidden = true
+                refreshButton.isHidden = false
                 activityIndicator.stopAnimating()
             }
         }
     }
     
-    @IBAction func refreshPressed(sender: UIButton) {
+    @IBAction func refreshPressed(_ sender: UIButton) {
         isRefreshing = true
     }
     
@@ -37,14 +37,14 @@ class RefreshTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    private var refresh : (Void->Void)?
+    fileprivate var refresh : ((Void)->Void)?
     
-    func initWithMessage(message : String, isRefreshing: Bool, refreshAction : Void->Void) {
+    func initWithMessage(_ message : String, isRefreshing: Bool, refreshAction : @escaping (Void)->Void) {
         refresh = refreshAction
         self.isRefreshing = isRefreshing
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

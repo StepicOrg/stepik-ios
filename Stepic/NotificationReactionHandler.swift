@@ -13,11 +13,11 @@ import Foundation
  */
 class NotificationReactionHandler {
     
-    private func deserializeObject(from userInfo:[NSObject: AnyObject]) -> [String: AnyObject]? {
+    fileprivate func deserializeObject(from userInfo:[AnyHashable: Any]) -> [String: AnyObject]? {
         let jsonString = userInfo["object"] as? NSString
-        if let data = jsonString?.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let data = jsonString?.data(using: String.Encoding.utf8.rawValue) {
             do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+                let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
                 return json as? [String : AnyObject]
             }
             catch {
@@ -28,7 +28,7 @@ class NotificationReactionHandler {
         }
     }
     
-    func handleNotificationWithUserInfo(userInfo: [NSObject: AnyObject]) -> (UIViewController -> Void)? {
+    func handleNotificationWithUserInfo(_ userInfo: [AnyHashable: Any]) -> ((UIViewController) -> Void)? {
         
         if !AuthInfo.shared.isAuthorized {
             return nil
@@ -48,7 +48,7 @@ class NotificationReactionHandler {
         return nil
     }
     
-    private func handleLearnNotification(notification: Notification) -> (UIViewController -> Void)? {
+    fileprivate func handleLearnNotification(_ notification: Notification) -> ((UIViewController) -> Void)? {
         let extractor = NotificationDataExtractor(notification: notification)
         if let courseId = extractor.getCourseId() {
             
@@ -63,10 +63,10 @@ class NotificationReactionHandler {
             let sectionsCOpt = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController
             print(sectionsCOpt)
             if let sectionsController = sectionsCOpt,
-                course = course {
+                let course = course {
                 sectionsController.course = course
                 
-                let res : (UIViewController -> Void) = {
+                let res : ((UIViewController) -> Void) = {
                     controller in
                     print("in res handler -> \(controller)")
                     controller.navigationController?.pushViewController(sectionsController, animated: false)
@@ -78,20 +78,20 @@ class NotificationReactionHandler {
         return nil
     }
     
-    private func handleCommentsNotification(notification: Notification) -> (UIViewController -> Void)? {
+    fileprivate func handleCommentsNotification(_ notification: Notification) -> ((UIViewController) -> Void)? {
         let extractor = NotificationDataExtractor(notification: notification)
         if let commentsURL = extractor.getCommentsURL() {     
             
-            let res : (UIViewController -> Void) = {
+            let res : ((UIViewController) -> Void) = {
                 controller in
                 
                 delay(1, closure: {
                     let alert = NotificationAlertConstructor.sharedConstructor.getOpenCommentNotificationViaSafariAlertController({
                         UIThread.performUI {
-                            WebControllerManager.sharedManager.presentWebControllerWithURL(commentsURL, inController: controller, withKey: "external link", allowsSafari: true, backButtonStyle:    BackButtonStyle.Close, animated: true)
+                            WebControllerManager.sharedManager.presentWebControllerWithURL(commentsURL, inController: controller, withKey: "external link", allowsSafari: true, backButtonStyle:    BackButtonStyle.close, animated: true)
                         }
                     })
-                    controller.presentViewController(alert, animated: true, completion: nil)
+                    controller.present(alert, animated: true, completion: nil)
                 })  
             }
             return res

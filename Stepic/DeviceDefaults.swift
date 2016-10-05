@@ -12,15 +12,15 @@ import Foundation
  Stores and manages information about device defaults
  */
 class DeviceDefaults {
-    private init() {}
+    fileprivate init() {}
     static let sharedDefaults = DeviceDefaults()
     
-    private let defaults = NSUserDefaults.standardUserDefaults()
-    private let deviceIdKey = "nofiticationsDeviceId"
+    fileprivate let defaults = UserDefaults.standard
+    fileprivate let deviceIdKey = "nofiticationsDeviceId"
     
     var deviceId : Int? {
         get {
-            return defaults.valueForKey(deviceIdKey) as? Int 
+            return defaults.value(forKey: deviceIdKey) as? Int 
         }
         set(id) {
             defaults.setValue(id, forKey: deviceIdKey)

@@ -16,14 +16,14 @@ class DevicesAPI: NSObject {
     let manager : Alamofire.Manager
     
     override init() {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5
         manager = Alamofire.Manager(configuration: configuration)
     }
     
-    func create(device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: (Device->Void), error errorHandler: (String->Void)) -> Request {
+    func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: ((Device)->Void), error errorHandler: ((String)->Void)) -> Request {
         let params = ["device": device.getJSON()]
-        return manager.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON({
+        return manager.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
             print(json)
@@ -45,7 +45,7 @@ class DevicesAPI: NSObject {
         })
     }
     
-    func delete(deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: (Void->Void), error errorHandler: (String->Void)) -> Request {
+    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: ((Void)->Void), error errorHandler: ((String)->Void)) -> Request {
         
         return manager.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).response(completionHandler: {
             _, response, data, error in
@@ -66,7 +66,7 @@ class DevicesAPI: NSObject {
         })
     }
     
-    func retrieve(deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: (Device->Void), error errorHandler: (String-> Void)) -> Request {
+    func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: ((Device)->Void), error errorHandler: ((String)-> Void)) -> Request {
         return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
             _, response, json, error in
             

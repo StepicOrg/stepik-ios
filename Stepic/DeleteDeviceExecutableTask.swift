@@ -32,8 +32,8 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         let userId = taskDict?["user"] as? Int
         let deviceId = taskDict?["device"] as? Int
         if let user = userId,
-            device = deviceId,
-            typeS = typeString
+            let device = deviceId,
+            let typeS = typeString
         {
             if ExecutableTaskType(rawValue: typeS) != ExecutableTaskType.DeleteDevice {
                 return nil
@@ -47,7 +47,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
     func serializeToDictionary() -> [String : AnyObject] {
         let res : [String: AnyObject] = 
             [
-                "type" : type.rawValue, 
+                "type" : type.rawValue as AnyObject, 
                 "task": [
                     "user" : userId,
                     "device" : deviceId
@@ -69,7 +69,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         return "\(type.rawValue) \(userId) \(deviceId)"
     }
     
-    func execute(success success: (Void -> Void), failure: (Void -> Void)) {
+    func execute(success: @escaping ((Void) -> Void), failure: @escaping ((Void) -> Void)) {
         let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")
         if let token = recoveryManager.recoverStepicToken(userId: userId) {
             let device = deviceId

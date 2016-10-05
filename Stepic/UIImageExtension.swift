@@ -11,18 +11,18 @@ import ImageIO
 
 
 extension UIImage {
-    func imageScaledTo(scale: CGFloat) -> UIImage {
+    func imageScaledTo(_ scale: CGFloat) -> UIImage {
         let image = self
         
-        let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(scale, scale))
+        let size = image.size.applying(CGAffineTransform(scaleX: scale, y: scale))
 //        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
         UIGraphicsBeginImageContextWithOptions(size, true, scale)
-        image.drawInRect(CGRect(origin: CGPointZero, size: size))
+        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
         
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return scaledImage
+        return scaledImage!
     }
 }

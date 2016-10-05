@@ -9,5 +9,5 @@
 import Foundation
 
 protocol QuizControllerDelegate {
-    func needsHeightUpdate(newHeight: CGFloat, animated: Bool)
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool)
 }

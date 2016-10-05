@@ -17,12 +17,12 @@ class LaunchViewController: UIViewController {
     var signInController : SignInTableViewController?
     
     func setupLocalizations() {
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
-        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), forState: .Normal)
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
+        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: UIControlState())
         dontHaveAccountLabel.text = NSLocalizedString("DontHaveAccountQuestion", comment: "")
     }
     
-    var cancel : (Void->Void)? {
+    var cancel : ((Void)->Void)? {
         return (navigationController as? AuthNavigationViewController)?.cancel
     }
     
@@ -30,24 +30,24 @@ class LaunchViewController: UIViewController {
         super.viewDidLoad()
         
         setupLocalizations()
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
-        navigationController?.navigationBar.opaque = true
+        navigationController?.navigationBar.isOpaque = true
         navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
-        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor.white
         
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)    
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,25 +55,25 @@ class LaunchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func signInPressed(sender: UIButton) {
+    @IBAction func signInPressed(_ sender: UIButton) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onLaunchScreen, parameters: nil)
     }
     
-    @IBAction func signUpPressed(sender: UIButton) {
-        self.performSegueWithIdentifier("registrationSegue", sender: self)
+    @IBAction func signUpPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "registrationSegue", sender: self)
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onLaunchScreen, parameters: nil)
     }
 
-    @IBAction func сlosePressed(sender: AnyObject) {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: {
+    @IBAction func сlosePressed(_ sender: AnyObject) {
+        self.navigationController?.dismiss(animated: true, completion: {
             [weak self] in
             self?.cancel?()
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "signInSegue" {
-            let dvc = segue.destinationViewController as! SignInTableViewController
+            let dvc = segue.destination as! SignInTableViewController
             signInController = dvc
         }
     }

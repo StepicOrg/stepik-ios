@@ -23,15 +23,15 @@ class StepTabView: UIView {
     func setup() {
         view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: StepDoneNotificationKey, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: NSNotification.Name(rawValue: StepDoneNotificationKey), object: nil)
     }
     
     func loadViewFromNib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "StepTabView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
     
@@ -70,7 +70,7 @@ class StepTabView: UIView {
         solvedImageWidth.constant = targetSize
         view.setNeedsLayout()
         if animated {
-            UIView.animateWithDuration(0.25, animations: {
+            UIView.animate(withDuration: 0.25, animations: {
                 self.view.layoutIfNeeded()
             })
         } else {
@@ -79,8 +79,8 @@ class StepTabView: UIView {
         
     }
     
-    func stepDone(notification: NSNotification) {
-        if let notificationStepId = notification.userInfo?["id"] as? Int,
+    func stepDone(_ notification: Foundation.Notification) {
+        if let notificationStepId = (notification as NSNotification).userInfo?["id"] as? Int,
             let stepId = self.stepId {
             if notificationStepId == stepId {
                 setTab(selected: true, animated: true)
@@ -89,6 +89,6 @@ class StepTabView: UIView {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: StepDoneNotificationKey, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepDoneNotificationKey), object: nil)
     }
 }

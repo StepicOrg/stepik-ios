@@ -21,7 +21,7 @@ class User: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         profile = json["profile"].intValue
         isPrivate = json["is_private"].boolValue
@@ -33,7 +33,7 @@ class User: NSManagedObject, JSONInitializable {
         level = json["level"].intValue
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
@@ -41,16 +41,16 @@ class User: NSManagedObject, JSONInitializable {
         return level == 0
     }
     
-    static func fetchById(id: Int) -> [User]? {
-        return User.MR_findAllWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber)) as? [User]
+    static func fetchById(_ id: Int) -> [User]? {
+        return User.mr_findAll(with: NSPredicate(format: "managedId == %@", id as NSNumber)) as? [User]
     }
 
     //synchronous 
-    static func removeAllExcept(user: User) {
+    static func removeAllExcept(_ user: User) {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
                 if fetchedUser != user {
-                    fetchedUser.MR_deleteEntity()
+                    fetchedUser.mr_deleteEntity()
                 }
             }
             CoreDataHelper.instance.save()

@@ -24,19 +24,19 @@ extension Video {
     @NSManaged var managedCachedQuality : NSNumber?
     
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Video", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Video.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Video.entity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
 
@@ -77,7 +77,7 @@ extension Video {
         }
         set(value) {
             if let v = value {
-                managedCachedQuality = Int(v)
+                managedCachedQuality = Int(v) as NSNumber?
             } else {
                 managedCachedQuality = nil
             }
@@ -85,7 +85,7 @@ extension Video {
         }
     }
     
-    var playTime: NSTimeInterval {
+    var playTime: TimeInterval {
         get {
             if let time = managedPlayTime {
                 return time.doubleValue
@@ -95,7 +95,7 @@ extension Video {
         }
         
         set(time) {
-            managedPlayTime = time
+            managedPlayTime = time as NSNumber?
         }
     }
     

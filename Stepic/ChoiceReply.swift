@@ -23,6 +23,6 @@ class ChoiceReply: NSObject, Reply {
     }
     
     var dictValue : [String : NSObject] {
-        return ["choices" : choices]
+        return ["choices" : choices as NSObject]
     }
 }

@@ -11,33 +11,33 @@ import DownloadButton
 
 class UICustomizer: NSObject {
     static var sharedCustomizer = UICustomizer()
-    private override init() {}
+    fileprivate override init() {}
     
-    func setStepicNavigationBar(navigationBar: UINavigationBar?) {
+    func setStepicNavigationBar(_ navigationBar: UINavigationBar?) {
         if let bar = navigationBar {
             bar.barTintColor = UIColor.stepicGreenColor()
-            bar.translucent = false
-            bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-            bar.tintColor = UIColor.whiteColor()
+            bar.isTranslucent = false
+            bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+            bar.tintColor = UIColor.white
         }
     }
     
-    func setStepicTabBar(tabBar: UITabBar?) {
+    func setStepicTabBar(_ tabBar: UITabBar?) {
         if let bar = tabBar {
             bar.tintColor = UIColor.stepicGreenColor()
-            bar.translucent = false
+            bar.isTranslucent = false
         }
     }
     
-    func setCustomDownloadButton(button: PKDownloadButton, white : Bool = false) {
+    func setCustomDownloadButton(_ button: PKDownloadButton, white : Bool = false) {
         button.startDownloadButton?.cleanDefaultAppearance()
-        button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, forState: .Normal)
+        button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, for: UIControlState())
                 
         if white {
-            button.stopDownloadButton?.tintColor = UIColor.whiteColor()
+            button.stopDownloadButton?.tintColor = UIColor.white
         }
         
         button.downloadedButton?.cleanDefaultAppearance()
-        button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, forState: .Normal)
+        button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, for: UIControlState())
     }
 }

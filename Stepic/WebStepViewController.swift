@@ -33,10 +33,10 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
     @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
     
-    var nextLessonHandler: (Void->Void)?
-    var prevLessonHandler: (Void->Void)?
+    var nextLessonHandler: ((Void)->Void)?
+    var prevLessonHandler: ((Void)->Void)?
     
-    var parent : StepsViewController!
+    var stepsVC : StepsViewController!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -48,8 +48,8 @@ class WebStepViewController: UIViewController {
     var lessonSlug: String!
 
     var startStepId: Int!
-    var startStepBlock : (Void->Void)!
-    var shouldSendViewsBlock : (Void->Bool)!
+    var startStepBlock : ((Void)->Void)!
+    var shouldSendViewsBlock : ((Void)->Bool)!
     
     var stepText = ""
     
@@ -62,30 +62,30 @@ class WebStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
         
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
-        stepWebView.scrollView.backgroundColor = UIColor.whiteColor()
-        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: parent.pagerScrollView.panGestureRecognizer)
+        stepWebView.scrollView.backgroundColor = UIColor.white
+        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView.panGestureRecognizer)
         print(self.view.gestureRecognizers)
         
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
         
         initialize()
     }
     
-    func sharePressed(item: UIBarButtonItem) {
+    func sharePressed(_ item: UIBarButtonItem) {
         //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         let stepid = stepId
-        let slug = lessonSlug
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        let slug = lessonSlug!
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
-            dispatch_async(dispatch_get_main_queue()) {
-                self.presentViewController(shareVC, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(shareVC, animated: true, completion: nil)
             }
         }
     }
@@ -104,13 +104,13 @@ class WebStepViewController: UIViewController {
         }
         
         if nextLessonHandler == nil {
-            nextLessonButton.hidden = true
+            nextLessonButton.isHidden = true
         } else {
             nextLessonButton.setStepicWhiteStyle()
         }
         
         if prevLessonHandler == nil {
-            prevLessonButton.hidden = true
+            prevLessonButton.isHidden = true
         } else {
             prevLessonButton.setStepicWhiteStyle()
         }
@@ -125,36 +125,36 @@ class WebStepViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem]
 
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
         loadStepHTML()
     }
     
-    func updatedStepNotification(notification: NSNotification) {
+    func updatedStepNotification(_ notification: Foundation.Notification) {
         print("did get update step notification")
         initialize()
         loadStepHTML()
     }
     
-    private func loadStepHTML() {
+    fileprivate func loadStepHTML() {
         if let htmlText = step.block.text {
             if htmlText == stepText {
                 return
             }
             let scriptsString = "\(Scripts.localTexScript)"
-            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.mainScreen().bounds.width))
-            html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            print("\(NSBundle.mainBundle().bundlePath)")
-            stepWebView.loadHTMLString(html, baseURL: NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath))
+            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
+            html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            print("\(Bundle.main.bundlePath)")
+            stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         }
     }
     
-    func initQuizController(quizController : QuizViewController) {
+    func initQuizController(_ quizController : QuizViewController) {
         quizController.delegate = self
         quizController.step = self.step
         if self.step.hasReview {
@@ -162,7 +162,7 @@ class WebStepViewController: UIViewController {
         }
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
-        quizController.view.alignToView(quizPlaceholderView)
+        quizController.view.align(to: quizPlaceholderView)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
@@ -170,7 +170,7 @@ class WebStepViewController: UIViewController {
     func handleQuizType() {
         switch step.block.name {
         case "text":
-            stepWebView.constrainBottomSpaceToView(discussionCountView, predicate: "8")
+            stepWebView.constrainBottomSpace(to: discussionCountView, predicate: "8")
             //            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
         case "choice":
@@ -204,12 +204,12 @@ class WebStepViewController: UIViewController {
             quizController.delegate = self
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
-            quizController.view.alignToView(quizPlaceholderView)
+            quizController.view.align(to: quizPlaceholderView)
             self.view.layoutIfNeeded()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -228,7 +228,7 @@ class WebStepViewController: UIViewController {
                     [weak self] in
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
-                                NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                             UIThread.performUI{
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
@@ -244,7 +244,7 @@ class WebStepViewController: UIViewController {
     let reloadTimeStandardInterval = 0.5
     let reloadTimeout = 10.0
     
-    private func reloadWithCount(count: Int) {
+    fileprivate func reloadWithCount(_ count: Int) {
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
             return
         }
@@ -257,13 +257,13 @@ class WebStepViewController: UIViewController {
         })  
     }
     
-    @IBAction func solveOnTheWebsitePressed(sender: UIButton) {
+    @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
         //        print(stepUrl)
         //        print(NSURL(string: stepUrl))
         
-        let url = NSURL(string: stepUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        let url = URL(string: stepUrl.addingPercentEscapes(using: String.Encoding.utf8)!)!
         
-        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }
     
     override func didReceiveMemoryWarning() {
@@ -280,14 +280,14 @@ class WebStepViewController: UIViewController {
     }
     
     
-    func resetWebViewHeight(height: Float) {
+    func resetWebViewHeight(_ height: Float) {
         if height == 0.0 {
             stepWebView.reload()
             return
         }
         
         stepWebViewHeight.constant = CGFloat(height)
-        UIView.animateWithDuration(0.2, animations: { 
+        UIView.animate(withDuration: 0.2, animations: { 
             [weak self] in
             self?.view.layoutIfNeeded() 
             })
@@ -306,38 +306,38 @@ class WebStepViewController: UIViewController {
         }
     }
     
-    @IBAction func prevLessonPressed(sender: UIButton) {
+    @IBAction func prevLessonPressed(_ sender: UIButton) {
         prevLessonHandler?()
     }
     
-    @IBAction func nextLessonPressed(sender: UIButton) {
+    @IBAction func nextLessonPressed(_ sender: UIButton) {
         nextLessonHandler?()
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: StepsViewController.stepUpdatedNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
 }
 
 extension WebStepViewController : UIWebViewDelegate {
     
-    func openInBrowserAlert(url: NSURL) {
-        let alert = UIAlertController(title: NSLocalizedString("Link", comment: ""), message: NSLocalizedString("OpenInBrowser", comment: ""), preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .Default, handler: { 
+    func openInBrowserAlert(_ url: URL) {
+        let alert = UIAlertController(title: NSLocalizedString("Link", comment: ""), message: NSLocalizedString("OpenInBrowser", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: { 
             (action) -> Void in
             UIThread.performUI{
-                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
             }
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print(request.URLString)
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//        print(request.URLString)
         if didStartLoadingFirstRequest {
-            if let url = request.URL { 
+            if let url = request.url { 
                 
                 if url.scheme != "file" {
                     if url.scheme == "ready" {
@@ -356,19 +356,19 @@ extension WebStepViewController : UIWebViewDelegate {
         }
     }
     
-    func getContentHeight(webView : UIWebView) -> Int {
-        return Int(webView.stringByEvaluatingJavaScriptFromString("document.body.scrollHeight;") ?? "0") ?? 0
+    func getContentHeight(_ webView : UIWebView) -> Int {
+        return Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
         //        return Int(webView.scrollView.contentSize.height)
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         
         print("did finish load called, step id -> \(stepId) height -> \(getContentHeight(webView))")
         resetWebViewHeight(Float(getContentHeight(webView)))
         self.reloadWithCount(0)
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
     }
 }
@@ -377,11 +377,11 @@ extension WebStepViewController : UIScrollViewDelegate {
 }
 
 extension WebStepViewController : QuizControllerDelegate {
-    func needsHeightUpdate(newHeight: CGFloat, animated: Bool) {
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool) {
         quizPlaceholderViewHeight.constant = newHeight
         view.setNeedsLayout()
         if animated { 
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 [weak self] in
                 self?.view.layoutIfNeeded()
                 self?.quizPlaceholderView.layoutIfNeeded()

@@ -10,26 +10,26 @@ import UIKit
 
 class ConnectionHelper : NSObject {
     
-    private override init() {
+    fileprivate override init() {
         super.init()
-        reachability = Reachability.reachabilityForInternetConnection()
+        reachability = Reachability.forInternetConnection()
         reachability.reachableOnWWAN = reachableOnWWAN
         
 //        reachability.reachableOnWWAN = defaults.objectForKey(reachableOnWWANKey) as? Bool ?? false
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ConnectionHelper.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ConnectionHelper.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
         reachability.startNotifier()
     }
     
-    private var reachabilityChangedHandlers : [(Bool -> Void)] = []
+    fileprivate var reachabilityChangedHandlers : [((Bool) -> Void)] = []
     
     func instantiate() {}
     
-    func addReachabilityChangedHandler(handler handler : Bool->Void) {
+    func addReachabilityChangedHandler(handler : (Bool)->Void) {
         reachabilityChangedHandlers += [handler]
     }
     
-    private func callReachabilityhandlers(result: Bool) {
+    fileprivate func callReachabilityhandlers(_ result: Bool) {
         for handler in reachabilityChangedHandlers {
             handler(result)
         }
@@ -41,7 +41,7 @@ class ConnectionHelper : NSObject {
     
     var reachableOnWWAN : Bool {
         get {
-            if let r = defaults.objectForKey(reachableOnWWANKey) as? Bool {
+            if let r = defaults.object(forKey: reachableOnWWANKey) as? Bool {
                 return r
             } else {
                 self.reachableOnWWAN = false
@@ -50,7 +50,7 @@ class ConnectionHelper : NSObject {
         }
         
         set(value) {
-            defaults.setObject(value, forKey: reachableOnWWANKey)
+            defaults.set(value, forKey: reachableOnWWANKey)
             defaults.synchronize()
             reachability.reachableOnWWAN = value
         }
@@ -58,7 +58,7 @@ class ConnectionHelper : NSObject {
     
     
     
-    func reachabilityChanged(notification: NSNotification) {
+    func reachabilityChanged(_ notification: Foundation.Notification) {
         if isReachable {
             print("Service avalaible!!!")
             callReachabilityhandlers(true)
@@ -80,6 +80,6 @@ class ConnectionHelper : NSObject {
     
     var reachability : Reachability!
     
-    private let defaults = NSUserDefaults.standardUserDefaults()
-    private let reachableOnWWANKey = "reachableOnWWAN" 
+    fileprivate let defaults = UserDefaults.standard
+    fileprivate let reachableOnWWANKey = "reachableOnWWAN" 
 }

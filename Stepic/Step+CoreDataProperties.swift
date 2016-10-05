@@ -28,37 +28,37 @@ extension Step {
     @NSManaged var managedDiscussionsCount: NSNumber?
     
     class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Step", inManagedObjectContext: CoreDataHelper.instance.context)!
+        return NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Step.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Step.entity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
     
     var lessonId : Int {
         set(newId){
-            self.managedLessonId = newId
+            self.managedLessonId = newId as NSNumber?
         }
         get {
-            return managedLessonId?.integerValue ?? -1
+            return managedLessonId?.intValue ?? -1
         }
     }
     
     var position : Int {
         set(value){
-            self.managedPosition = value
+            self.managedPosition = value as NSNumber?
         }
         get {
-            return managedPosition?.integerValue ?? -1
+            return managedPosition?.intValue ?? -1
         }
     }
     
@@ -110,10 +110,10 @@ extension Step {
     
     var discussionsCount : Int? {
         get {
-            return managedDiscussionsCount?.integerValue
+            return managedDiscussionsCount?.intValue
         }
         set(value) {
-            managedDiscussionsCount = value
+            managedDiscussionsCount = value as NSNumber?
         }
     }
     

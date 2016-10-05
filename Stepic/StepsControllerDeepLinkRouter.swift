@@ -11,11 +11,11 @@ import Foundation
 
 //Tip: Inherited from NSObject in order to be able to find a selector
 class StepsControllerDeepLinkRouter : NSObject {
-    func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, success successHandler : (UIViewController -> Void), error errorHandler : (String -> Void)) {
+    func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, success successHandler : @escaping ((UIViewController) -> Void), error errorHandler : @escaping ((String) -> Void)) {
         //Download lesson and pass stepId to StepsViewController
         
         if let lesson = Lesson.getLesson(lessonId) {        
-            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [lesson], refreshMode: .Update, success: 
+            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [lesson], refreshMode: .update, success: 
                 {
                     lessons in
                     if let lesson = lessons.first {
@@ -31,7 +31,7 @@ class StepsControllerDeepLinkRouter : NSObject {
                 }
             )
         } else {
-            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [], refreshMode: .Update, success: 
+            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [], refreshMode: .update, success: 
                 {
                     lessons in
                     if let lesson = lessons.first {
@@ -49,7 +49,7 @@ class StepsControllerDeepLinkRouter : NSObject {
         }
     }
     
-    private func getVCForLesson(lesson: Lesson, stepId: Int, success successHandler : (UIViewController -> Void), error errorHandler : (String -> Void)) {
+    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler : ((UIViewController) -> Void), error errorHandler : ((String) -> Void)) {
         let enrolled = lesson.unit?.section.course?.enrolled ?? false
         if lesson.isPublic || enrolled {
             guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
@@ -58,7 +58,7 @@ class StepsControllerDeepLinkRouter : NSObject {
             }
             stepsVC.startStepId = stepId - 1
             stepsVC.lesson = lesson
-            stepsVC.context = .Lesson
+            stepsVC.context = .lesson
             stepsVC.hidesBottomBarWhenPushed = true
 //            let navigation : UINavigationController = GreenNavigationViewController(rootViewController: stepsVC)
 //            navigation.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
@@ -72,7 +72,7 @@ class StepsControllerDeepLinkRouter : NSObject {
     
     var vc : UIViewController?
     
-    func dismissPressed(item: UIBarButtonItem) {
-        vc?.dismissViewControllerAnimated(true, completion: nil)
+    func dismissPressed(_ item: UIBarButtonItem) {
+        vc?.dismiss(animated: true, completion: nil)
     }
 }

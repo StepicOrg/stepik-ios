@@ -13,13 +13,13 @@ import SwiftyJSON
 class AuthManager : NSObject {
     static var sharedManager = AuthManager()
     
-    private override init() {}
+    fileprivate override init() {}
     
     
-    func logInWithCode(code: String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
+    func logInWithCode(_ code: String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
-            failure(error: NSError.noAppWithCredentials as ErrorType)
+            failure(error: NSError.noAppWithCredentials as ErrorProtocol)
             return nil 
         }
         
@@ -52,16 +52,16 @@ class AuthManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            AuthInfo.shared.authorizationType = AuthorizationType.Code
+            AuthInfo.shared.authorizationType = AuthorizationType.code
             success(token: token)
         })
         
     }
     
-    func logInWithUsername(username : String, password : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
+    func logInWithUsername(_ username : String, password : String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
-            failure(error: NSError.noAppWithCredentials as ErrorType)
+            failure(error: NSError.noAppWithCredentials as ErrorProtocol)
             return nil 
         }
         
@@ -96,27 +96,27 @@ class AuthManager : NSObject {
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
-            AuthInfo.shared.authorizationType = AuthorizationType.Password
+            AuthInfo.shared.authorizationType = AuthorizationType.password
             success(token: token)
         })
     }
     
-    func refreshTokenWith(refresh_token : String, success : (token: StepicToken) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
+    func refreshTokenWith(_ refresh_token : String, success : (_ token: StepicToken) -> Void, failure : (_ error : ErrorProtocol) -> Void) -> Request? {
         
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
-        case .None:
-            failure(error: ConnectionError.TokenRefreshError)
+        case .none:
+            failure(error: ConnectionError.tokenRefreshError)
             return nil
-        case .Code:
+        case .code:
             if StepicApplicationsInfo.social == nil {
-                failure(error: NSError.noAppWithCredentials as ErrorType)
+                failure(error: NSError.noAppWithCredentials as ErrorProtocol)
                 return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
-        case .Password:
+        case .password:
             if StepicApplicationsInfo.password == nil {
-                failure(error: NSError.noAppWithCredentials as ErrorType)
+                failure(error: NSError.noAppWithCredentials as ErrorProtocol)
                 return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials
@@ -151,7 +151,7 @@ class AuthManager : NSObject {
         
     }
     
-    func autoRefreshToken(success success : (Void -> Void)? = nil, failure : (Void -> Void)? = nil) -> Request? {
+    func autoRefreshToken(success : ((Void) -> Void)? = nil, failure : ((Void) -> Void)? = nil) -> Request? {
         
         if AuthInfo.shared.didRefresh {
             success?()
@@ -170,7 +170,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func joinCourseWithId(courseId: Int, delete: Bool = false, success : (Void -> Void), error errorHandler: (String->Void)) -> Request? {
+    func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : ((Void) -> Void), error errorHandler: ((String)->Void)) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
@@ -185,7 +185,7 @@ class AuthManager : NSObject {
         //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
-            return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -210,7 +210,7 @@ class AuthManager : NSObject {
                 //                success()
             })
         } else {
-            return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", parameters: params, encoding: .url, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -275,7 +275,7 @@ class AuthManager : NSObject {
 //    }
     
     //TODO: When refactoring code think about this function
-    func signUpWith(firstname: String, lastname: String, email: String, password: String, success : (Void -> Void), error errorHandler: ((String?, RegistrationErrorInfo?) -> Void)) {
+    func signUpWith(_ firstname: String, lastname: String, email: String, password: String, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String?, RegistrationErrorInfo?) -> Void)) {
             let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
                                     
             let params : [String : AnyObject] = 
@@ -289,7 +289,7 @@ class AuthManager : NSObject {
             ]
             
             print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-            Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/users", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler:  
+            Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/users", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON(completionHandler:  
                 { 
                     request, response, json, error in
                     

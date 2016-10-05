@@ -10,14 +10,14 @@ import Foundation
 import Alamofire 
 
 
-func performRequest(request: (Void->Void), error: (Void->Void)? = nil) {
+func performRequest(_ request: @escaping ((Void)->Void), error: ((Void)->Void)? = nil) {
     ApiRequestPerformer.performAPIRequest(request, error: error)
 }
 
 class ApiRequestPerformer {
     
     //TODO: Add error type for this
-    static func performAPIRequest(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
+    static func performAPIRequest(_ completion: @escaping ((Void)->Void), error errorHandler: ((Void)->Void)? = nil) {
         print("performing API request")
         if !AuthInfo.shared.hasUser {
             print("no user in AuthInfo, retrieving")
@@ -39,7 +39,7 @@ class ApiRequestPerformer {
          
     }
     
-    private static func performRequestWithAuthorizationCheck(completion: (Void->Void), error errorHandler: (Void->Void)? = nil) {
+    fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping ((Void)->Void), error errorHandler: ((Void)->Void)? = nil) {
         
 //        if let user = AuthInfo.shared.user {
 //            print("performing request with user \(user.id)")

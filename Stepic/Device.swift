@@ -36,16 +36,16 @@ class Device: NSObject {
         var res = [String:AnyObject]()
         
         if let id = self.id {
-            res["id"] = id
+            res["id"] = id as AnyObject?
         }
         
-        res["registration_id"] = registrationId
+        res["registration_id"] = registrationId as AnyObject?
         
         if let user = self.user { 
-            res["user"] = user
+            res["user"] = user as AnyObject?
         }
         
-        res["description"] = self.deviceDescription
+        res["description"] = self.deviceDescription as AnyObject?
         
         return res
     }

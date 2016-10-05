@@ -16,20 +16,20 @@ class CoreDataHelper: NSObject {
     let coordinator : NSPersistentStoreCoordinator
     let model : NSManagedObjectModel
     let context : NSManagedObjectContext
-    var storeURL : NSURL
+    var storeURL : URL
     
     
-    private override init() {
-        let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
-        model = NSManagedObjectModel(contentsOfURL: modelURL)!
-        let fileManager = NSFileManager.defaultManager()
-        let docsURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last! as NSURL
-        storeURL = docsURL.URLByAppendingPathComponent("base.sqlite")
+    fileprivate override init() {
+        let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
+        model = NSManagedObjectModel(contentsOf: modelURL)!
+        let fileManager = FileManager.default
+        let docsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
+        storeURL = docsURL.appendingPathComponent("base.sqlite")
         
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         
         do {
-            _ = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true,
+            _ = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true,
                 NSInferMappingModelAutomaticallyOption: true])
         }
         catch {
@@ -38,16 +38,16 @@ class CoreDataHelper: NSObject {
         }
 
         
-        context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
         context.persistentStoreCoordinator = coordinator
         super.init()
     }
     
-    let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
+    let lockQueue = DispatchQueue(label: "com.test.LockQueue", attributes: [])
 
     func save() {
-        dispatch_sync(lockQueue) {
-            self.context.performBlock({
+        lockQueue.sync {
+            self.context.perform({
                 do {
                     try self.context.save()
                 }
@@ -60,10 +60,10 @@ class CoreDataHelper: NSObject {
     
 //    private var objectsToDelete : [NSManagedObject] = []
     
-    func deleteFromStore(object: NSManagedObject, save s: Bool = true) {
-        dispatch_sync(lockQueue) {
-            self.context.performBlock({
-                self.context.deleteObject(object)
+    func deleteFromStore(_ object: NSManagedObject, save s: Bool = true) {
+        lockQueue.sync {
+            self.context.perform({
+                self.context.delete(object)
                 if s == true {
                     self.save()
                 }

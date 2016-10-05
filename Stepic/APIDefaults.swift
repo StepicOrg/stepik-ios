@@ -14,7 +14,7 @@ struct APIDefaults {
             return bearer(AuthInfo.shared.token?.accessToken)
         }
         
-        static func bearer(accessToken: String?) -> [String : String] {
+        static func bearer(_ accessToken: String?) -> [String : String] {
             if let token = accessToken {
                 return [
                     "Content-Type" : "application/json",
