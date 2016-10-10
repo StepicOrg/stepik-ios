@@ -28,12 +28,12 @@ extension Lesson {
     @NSManaged var managedUnit : Unit?
 //    @NSManaged var managedIsCached : NSNumber?
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Lesson.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

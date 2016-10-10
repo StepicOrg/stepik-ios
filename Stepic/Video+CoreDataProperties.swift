@@ -23,12 +23,12 @@ extension Video {
 //    @NSManaged var managedCachedPath: String?
     @NSManaged var managedCachedQuality : NSNumber?
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Video.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Video.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
@@ -70,7 +70,7 @@ extension Video {
     var cachedQuality : String? {
         get {
             if let cq = managedCachedQuality {
-                return String(cq)
+                return String(describing: cq)
             } else {
                 return nil
             }

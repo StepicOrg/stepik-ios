@@ -13,9 +13,9 @@ import SwiftyJSON
 class CommentsAPI {
     let name = "comments"
     
-    func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: ([Comment]) -> Void, error errorHandler: (String) -> Void) -> Request {
+    func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in 
                 
@@ -57,11 +57,11 @@ class CommentsAPI {
         )
     }
     
-    func create(_ comment: CommentPostable, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (Comment) -> Void, error errorHandler: (String) -> Void) -> Request {
-        let params: [String: AnyObject] = [
+    func create(_ comment: CommentPostable, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
+        let params: Parameters = [
             "comment" : comment.json
         ]
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/\(name)", headers: headers, parameters: params, encoding: .json).responseSwiftyJSON(
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in 
                 

@@ -41,12 +41,12 @@ extension Course {
     @NSManaged var managedIntroVideo : Video?
 
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Course.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

@@ -27,12 +27,12 @@ extension Step {
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionsCount: NSNumber?
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Step.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

@@ -42,7 +42,7 @@ class Section: NSManagedObject, JSONInitializable {
     }
     
     class func getSections(_ id: Int) throws -> [Section] {
-        let request = NSFetchRequest(entityName: "Section")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
         
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         var predicate = NSPredicate(value: true)
@@ -266,7 +266,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func cancelVideoStore(completion : (Void) -> Void) {
+    func cancelVideoStore(completion : @escaping (Void) -> Void) {
         var completedUnits : Int = 0
         for unit in units {
             if let lesson = unit.lesson {
@@ -291,7 +291,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func removeFromStore(completion: (Void) -> Void) {
+    func removeFromStore(completion: @escaping (Void) -> Void) {
         var completedUnits : Int = 0
         for unit in units {
             if let lesson = unit.lesson {

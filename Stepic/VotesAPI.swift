@@ -13,10 +13,10 @@ import SwiftyJSON
 class VotesAPI {
 
     func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote)->Void), error errorHandler: @escaping ((String)->Void)) {
-        let params : [String: AnyObject]? = [
+        let params : Parameters? = [
             "vote" : vote.json as AnyObject
         ]
-        Alamofire.request(.PUT, "\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON(
+        Alamofire.request("\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in
                                 

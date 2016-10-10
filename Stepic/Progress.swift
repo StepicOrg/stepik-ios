@@ -33,7 +33,7 @@ class Progress: NSManagedObject {
     }
     
     static func deleteAllStoredProgresses() {
-        let request = NSFetchRequest(entityName: "Progress")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Progress")
         
         do {
             let results = try CoreDataHelper.instance.context.fetch(request) as? [Progress]

@@ -22,12 +22,12 @@ extension Block {
     
     @NSManaged var managedStep: Step?
 
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Block.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var name : String {

@@ -43,7 +43,7 @@ class Step: NSManagedObject, JSONInitializable {
     var hasReview : Bool = false
 
     static func getStepWithId(_ id: Int) -> Step? {
-        let request = NSFetchRequest(entityName: "Step")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
         

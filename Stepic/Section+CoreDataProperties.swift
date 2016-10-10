@@ -30,12 +30,12 @@ extension Section {
     @NSManaged var managedCourse : Course?
     @NSManaged var managedProgress : Progress?
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Section.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

@@ -24,7 +24,7 @@ class UpdateChecker: NSObject {
         return UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks && isMoreThanDayBetweenChecks
     }
     
-    func checkForUpdatesIfNeeded(_ needUpdateHandler: (Version?) -> Void, error errorHandler: (NSError) -> Void) {
+    func checkForUpdatesIfNeeded(_ needUpdateHandler: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
         if isCheckNeeded() {
             RemoteVersionManager.sharedManager.checkRemoteVersionChange(needUpdateHandler: needUpdateHandler, error: errorHandler)
         }

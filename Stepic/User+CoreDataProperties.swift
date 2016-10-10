@@ -26,12 +26,12 @@ extension User {
 
     @NSManaged var managedInstructedCourses : NSSet?
 
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: User.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: User.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

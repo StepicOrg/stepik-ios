@@ -45,8 +45,8 @@ class RemoteVersionManager: NSObject {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    fileprivate func getRemoteVersion(success: (String, String) -> Void, error errorHandler: (NSError) -> Void) -> Request {
-        return Alamofire.request(.GET, StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({ 
+    fileprivate func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
+        return Alamofire.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({ 
             _, _, json, error in
             if let e = error as? NSError {
                 errorHandler(e)

@@ -19,12 +19,12 @@ extension Assignment {
     @NSManaged var managedUnitId: NSNumber?
 
     
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Assignment.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Assignment.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {

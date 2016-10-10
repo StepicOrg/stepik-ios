@@ -13,8 +13,8 @@ import SwiftyJSON
 class UnitsAPI {
     let name = "units"
     
-    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: ((Unit) -> Void), error errorHandler: ((UnitRetrieveError) -> Void)) -> Request {
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
+    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in 
                 

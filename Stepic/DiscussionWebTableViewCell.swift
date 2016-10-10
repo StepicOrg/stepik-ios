@@ -139,7 +139,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
 
 extension DiscussionWebTableViewCell : WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if let height = message.body["height"] as? CGFloat {
+        if let height = (message.body as? NSDictionary)?["height"] as? CGFloat {
             DispatchQueue.main.async(execute: {
                 [weak self] in
                 self?.webContainerViewHeight?.constant = height

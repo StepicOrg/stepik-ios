@@ -57,7 +57,7 @@ class SocialNetworksViewController: UIViewController {
         let locationInCollection = CGPoint(x: location.x, y: location.y)
         let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
         if let indexPath = indexPathOptional {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)"])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)" as NSObject])
             WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, 
                 withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close)
         }

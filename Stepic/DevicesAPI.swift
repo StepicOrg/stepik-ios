@@ -13,17 +13,17 @@ import SwiftyJSON
 class DevicesAPI: NSObject {
     
     let name = "devices"
-    let manager : Alamofire.Manager
+    let manager : Alamofire.SessionManager
     
     override init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5
-        manager = Alamofire.Manager(configuration: configuration)
+        manager = Alamofire.SessionManager(configuration: configuration)
     }
     
-    func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: ((Device)->Void), error errorHandler: ((String)->Void)) -> Request {
+    func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: ((String)->Void)) -> Request {
         let params = ["device": device.getJSON()]
-        return manager.request(.POST, "\(StepicApplicationsInfo.apiURL)/devices", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
             print(json)
@@ -45,29 +45,30 @@ class DevicesAPI: NSObject {
         })
     }
     
-    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: ((Void)->Void), error errorHandler: ((String)->Void)) -> Request {
+    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
         
-        return manager.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).response(completionHandler: {
-            _, response, data, error in
+        return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
+            response in
+//            _, response, data, error in
             
-            if let e = error {
+            if let e = response.error as? NSError {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
             
-            if response?.statusCode != 204 && response?.statusCode != 404 {
-                errorHandler("DESTROY device: bad response status code \(response?.statusCode)")
+            if response.response?.statusCode != 204 && response.response?.statusCode != 404 {
+                errorHandler("DESTROY device: bad response status code \(response.response?.statusCode)")
                 return
             }
             
             success()
             
             return
-        })
+        }
     }
     
     func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: ((Device)->Void), error errorHandler: ((String)-> Void)) -> Request {
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
             _, response, json, error in
             
             if let e = error as? NSError {

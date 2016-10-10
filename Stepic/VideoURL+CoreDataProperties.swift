@@ -18,12 +18,12 @@ extension VideoURL {
     @NSManaged var managedURL: String?
     @NSManaged var managedVideo: Video?
 
-    class var entity : NSEntityDescription {
+    class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "VideoURL", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
-        self.init(entity: VideoURL.entity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: VideoURL.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
     var quality : String {

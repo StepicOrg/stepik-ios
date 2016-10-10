@@ -31,7 +31,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     static func getLesson(_ id: Int) -> Lesson? {
-        let request = NSFetchRequest(entityName: "Lesson")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
         

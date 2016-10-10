@@ -55,7 +55,7 @@ class Unit: NSManagedObject, JSONInitializable {
     }
     
     func getUnitForLessonId(_ id: Int) -> Unit? {
-        let request = NSFetchRequest(entityName: "Unit")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
         

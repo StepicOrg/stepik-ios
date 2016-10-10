@@ -14,7 +14,7 @@ class DiscussionProxiesAPI {
     let name = "discussion-proxies"
     
     func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: ((DiscussionProxy) -> Void), error errorHandler: ((String) -> Void)) -> Request {
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON(
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON(
             {
                 _, response, json, error in 
                 

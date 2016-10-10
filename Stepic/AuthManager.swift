@@ -16,10 +16,10 @@ class AuthManager : NSObject {
     fileprivate override init() {}
     
     
-    func logInWithCode(_ code: String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
+    func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
-            failure(error: NSError.noAppWithCredentials as Error)
+            failure(NSError.noAppWithCredentials as Error)
             return nil 
         }
         
@@ -34,17 +34,17 @@ class AuthManager : NSObject {
             "redirect_uri" : StepicApplicationsInfo.social!.redirectUri
         ]
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
-                failure(error: e)
+                failure(e)
                 return
             }
             
             if json["error"] != nil {
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
-                failure(error: e)
+                failure(e)
                 return
             }
             
@@ -53,15 +53,15 @@ class AuthManager : NSObject {
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
             AuthInfo.shared.authorizationType = AuthorizationType.code
-            success(token: token)
+            success(token)
         })
         
     }
     
-    func logInWithUsername(_ username : String, password : String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
+    func logInWithUsername(_ username : String, password : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
-            failure(error: NSError.noAppWithCredentials as Error)
+            failure(NSError.noAppWithCredentials as Error)
             return nil 
         }
         
@@ -78,17 +78,17 @@ class AuthManager : NSObject {
         ]
         
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
-                failure(error: e)
+                failure(e)
                 return
             }
             
             if json["error"] != nil {
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
-                failure(error: e)
+                failure(e)
                 return
             }
             
@@ -97,26 +97,26 @@ class AuthManager : NSObject {
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)
             AuthInfo.shared.authorizationType = AuthorizationType.password
-            success(token: token)
+            success(token)
         })
     }
     
-    func refreshTokenWith(_ refresh_token : String, success : (_ token: StepicToken) -> Void, failure : (_ error : Error) -> Void) -> Request? {
+    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
         case .none:
-            failure(error: ConnectionError.tokenRefreshError)
+            failure(ConnectionError.tokenRefreshError)
             return nil
         case .code:
             if StepicApplicationsInfo.social == nil {
-                failure(error: NSError.noAppWithCredentials as Error)
+                failure(NSError.noAppWithCredentials as Error)
                 return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .password:
             if StepicApplicationsInfo.password == nil {
-                failure(error: NSError.noAppWithCredentials as Error)
+                failure(NSError.noAppWithCredentials as Error)
                 return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials
@@ -127,26 +127,26 @@ class AuthManager : NSObject {
             "Authorization" : "Basic \(credentials)"
         ]
         
-        let params = [
+        let params : Parameters = [
             "grant_type" : "refresh_token",
             "refresh_token" : refresh_token]
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.oauthURL)/token/", parameters: params, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
             (_,_, json, error) in
             
             if let e = error {
-                failure(error: e)
+                failure(e)
                 return
             }
 
             let token : StepicToken = StepicToken(json: json)
             
             if token.accessToken == "" {
-                failure(error: NSError.tokenRefreshError)
+                failure(NSError.tokenRefreshError)
                 return
             }
             
-            success(token: token)
+            success(token)
         })
         
     }
@@ -170,13 +170,13 @@ class AuthManager : NSObject {
         })
     }
     
-    func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : ((Void) -> Void), error errorHandler: ((String)->Void)) -> Request? {
+    func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
         let headers : [String : String] = [
             "Content-Type" : "application/json",
             "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
         ]
         
-        let params : [String : AnyObject] = [
+        let params : Parameters = [
             "enrollment" : [
                 "course" : "\(courseId)"
             ]
@@ -185,7 +185,7 @@ class AuthManager : NSObject {
         //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
-            return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/enrollments", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -210,7 +210,7 @@ class AuthManager : NSObject {
                 //                success()
             })
         } else {
-            return Alamofire.request(.DELETE, "\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", parameters: params, encoding: .url, headers: headers).responseSwiftyJSON(completionHandler: {
+            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON(completionHandler: {
                 (_, response, json, error) in
                 
                 if let r = response {
@@ -228,57 +228,11 @@ class AuthManager : NSObject {
         
     }
     
-//    private func deleteStepicCookiesForSignup() {
-//        //        let stepicURL = NSURL(string: "https://stepic.org/accounts/signup/?next=/")!
-//        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//        for cookie in storage.cookies ?? [] {
-//            if cookie.domain.rangeOfString("stepic") != nil || cookie.domain.rangeOfString("stepik") != nil {
-//                print("Deleting cookie with name: \(cookie.name), value: \(cookie.value)\n")
-//                storage.deleteCookie(cookie)
-//            }
-//        }
-//    }
-    
-//    func refreshSignUpCookies(completion completion: (String -> Void), error errorHandler: (String -> Void)) -> Request? {
-//        let stepicURLString = "\(StepicApplicationsInfo.stepicURL)/accounts/signup/?next=/"
-//        let stepicURL = NSURL(string: stepicURLString)!
-//        deleteStepicCookiesForSignup()
-//        //        let d = NSHTTPCookie.requestHeaderFieldsWithCookies((NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(stepicURL)!))
-//        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .URL).response { 
-//            (request, response, _, error) -> Void in
-//            
-//            if let e = error {
-//                errorHandler((e as NSError).localizedDescription)
-//            }
-//            
-//            if let r = response {
-//                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: stepicURL)
-//                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: stepicURL, mainDocumentURL: nil)
-//            
-//            //            for cookie in cookies {
-//            //                print("Got new cookie with name: \(cookie.name), value: \(cookie.value)\n")
-//            //            }
-//            
-//                for cookie in cookies {
-//                    if cookie.name == "csrftoken" {
-//                        completion(cookie.value)
-//                        return
-//                    }
-//                }
-//            
-//                errorHandler("No cookie for csrftoken")
-//            } else {
-//                errorHandler("No response")
-//            }
-//        }
-//        
-//    }
-    
     //TODO: When refactoring code think about this function
     func signUpWith(_ firstname: String, lastname: String, email: String, password: String, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String?, RegistrationErrorInfo?) -> Void)) {
             let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
                                     
-            let params : [String : AnyObject] = 
+            let params : Parameters = 
             ["user" :
                 [
                     "first_name" : firstname,
@@ -289,7 +243,7 @@ class AuthManager : NSObject {
             ]
             
             print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-            Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/users", parameters: params, encoding: .json, headers: headers).responseSwiftyJSON(completionHandler:  
+            _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(completionHandler:  
                 { 
                     request, response, json, error in
                     

@@ -292,7 +292,7 @@ class Video: NSManagedObject, JSONInitializable {
     }
     
     class func getAllVideos() -> [Video] {
-        let request = NSFetchRequest(entityName: "Video")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
         let predicate = NSPredicate(value: true)
         request.predicate = predicate
         do {
