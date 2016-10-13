@@ -16,14 +16,19 @@ class HTMLParsingUtil {
     fileprivate init() {}
     
     static func getLink(_ htmlString: String, index: Int) -> String? {
-        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
-            if index < doc.css("a").count {
-                return doc.css("a")[index]["href"]
-            } else {
-                return nil
-            }
+//        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
+//            if index < doc.css("a").count {
+//                return doc.css("a")[index]["href"]
+//            } else {
+//                return nil
+//            }
+//        }
+        let links = getAllLinksWithText(htmlString)
+        if index < links.count {
+            return links[index].link
+        } else {
+            return nil
         }
-        return nil
     }
     
     static func getAllLinksWithText(_ htmlString: String, onlyTags: Bool = true) -> [(link: String, text: String)] {
