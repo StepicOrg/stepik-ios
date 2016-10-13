@@ -26,8 +26,8 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         self.deviceId = deviceId
     }
     
-    convenience required init?(dictionary dict: [String: AnyObject]) {
-        let taskDict = dict["task"] as? [String: AnyObject]
+    convenience required init?(dictionary dict: [String: Any]) {
+        let taskDict = dict["task"] as? [String: Any]
         let typeString = dict["type"] as? String
         let userId = taskDict?["user"] as? Int
         let deviceId = taskDict?["device"] as? Int
@@ -44,10 +44,10 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         }
     }
     
-    func serializeToDictionary() -> [String : AnyObject] {
-        let res : [String: AnyObject] = 
+    func serializeToDictionary() -> [String : Any] {
+        let res : [String: Any] = 
             [
-                "type" : type.rawValue as AnyObject, 
+                "type" : type.rawValue, 
                 "task": [
                     "user" : userId,
                     "device" : deviceId

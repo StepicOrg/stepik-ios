@@ -28,13 +28,13 @@ class PersistentRecoveryManager {
         self.plistName = baseName
     }
     
-    fileprivate func loadObjectDictionaryFromKey(_ key: String) -> [String: AnyObject]? {
+    fileprivate func loadObjectDictionaryFromKey(_ key: String) -> [String: Any]? {
         let plistData = NSDictionary(contentsOfFile: plistPath)!
-        return plistData[key] as? [String: AnyObject] 
+        return plistData[key] as? [String: Any] 
     }
     
     //Override this method in a subclass!
-    func recoverObjectFromDictionary(_ dictionary: [String: AnyObject]) -> DictionarySerializable? {
+    func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? {
         return nil
     }
     

@@ -32,7 +32,7 @@ class StepicToken: DictionarySerializable {
         self.expireDate = expireDate
     }
     
-    required convenience init?(dictionary: [String : AnyObject]) {
+    required convenience init?(dictionary: [String : Any]) {
         if let aToken = dictionary["access_token"] as? String,
             let rToken = dictionary["refresh_token"] as? String, 
             let tType = dictionary["token_type"] as? String {
@@ -42,11 +42,11 @@ class StepicToken: DictionarySerializable {
         }
     }
     
-    func serializeToDictionary() -> [String : AnyObject] {
+    func serializeToDictionary() -> [String : Any] {
         return getDictionary()
     }
     
-    func getDictionary() -> [String: AnyObject] {
+    func getDictionary() -> [String: Any] {
         var res = [String: AnyObject]()
         res["access_token"] = accessToken as AnyObject?
         res["refresh_token"] = refreshToken as AnyObject?

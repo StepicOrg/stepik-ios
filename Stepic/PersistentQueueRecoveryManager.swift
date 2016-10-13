@@ -10,7 +10,7 @@ import Foundation
 
 class PersistentQueueRecoveryManager : PersistentRecoveryManager {
     
-    override func recoverObjectFromDictionary(_ dictionary: [String : AnyObject]) -> DictionarySerializable? {
+    override func recoverObjectFromDictionary(_ dictionary: [String : Any]) -> DictionarySerializable? {
         return ExecutionQueue(dictionary: dictionary)
     }
     

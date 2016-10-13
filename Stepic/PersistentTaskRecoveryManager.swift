@@ -12,7 +12,7 @@ import Foundation
  Strategy class for recovering the correct task from store
  */
 class PersistentTaskRecoveryManager : PersistentRecoveryManager {
-    override func recoverObjectFromDictionary(_ dictionary: [String : AnyObject]) -> DictionarySerializable? {
+    override func recoverObjectFromDictionary(_ dictionary: [String : Any]) -> DictionarySerializable? {
         let typeStringOrNil = dictionary["type"] as? String
         if let type = ExecutableTaskType(rawValue: typeStringOrNil ?? "") {
             

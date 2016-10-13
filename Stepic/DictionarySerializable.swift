@@ -12,6 +12,6 @@ import Foundation
  DictionarySerializable protocol, which defines dictionary serialization methods
  */
 protocol DictionarySerializable {
-    func serializeToDictionary() -> [String: AnyObject]
-    init?(dictionary: [String: AnyObject])
+    func serializeToDictionary() -> [String: Any]
+    init?(dictionary: [String: Any])
 }

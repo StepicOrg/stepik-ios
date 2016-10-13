@@ -52,7 +52,7 @@ class ExecutionQueue : DictionarySerializable {
     
     init() {}
     
-    required init?(dictionary: [String : AnyObject]) {
+    required init?(dictionary: [String : Any]) {
         let taskRecoveryManager = PersistentTaskRecoveryManager(baseName: "Tasks")
         if let ids = dictionary["task_ids"] as? [String] {
             for id in ids {
@@ -63,12 +63,12 @@ class ExecutionQueue : DictionarySerializable {
         }
     }
     
-    func serializeToDictionary() -> [String : AnyObject] {
+    func serializeToDictionary() -> [String : Any] {
         var ids = [String]()
         for executable in queue {
             ids += [executable.id]
         }
-        let res : [String: AnyObject] = ["task_ids" : ids as AnyObject]
+        let res : [String: Any] = ["task_ids" : ids]
         
         print(res)
         
