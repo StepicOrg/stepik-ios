@@ -495,7 +495,7 @@ class DiscussionsViewController: UIViewController {
     
     func presentWriteCommentController(parent: Int?) {
         if let writeController = ControllerHelper.instantiateViewController(identifier: "WriteCommentViewController", storyboardName: "DiscussionsStoryboard") as? WriteCommentViewController {
-            writeController.parent = parent
+            writeController.parentId = parent
             writeController.target = target
             writeController.delegate = self
             navigationController?.pushViewController(writeController, animated: true)
@@ -591,7 +591,7 @@ extension DiscussionsViewController : UITableViewDataSource {
         return cellsInfo.count
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    @objc(tableView:willDisplayCell:forRowAtIndexPath:) func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         print("will display cell for \((indexPath as NSIndexPath).row)")
     }
         

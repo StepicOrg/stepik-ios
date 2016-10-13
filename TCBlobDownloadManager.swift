@@ -148,7 +148,7 @@ open class TCBlobDownloadManager {
 
 class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     var downloads: [Int: TCBlobDownload] = [:]
-    let acceptableStatusCodes: CountableRange<Int> = 200...299
+    let acceptableStatusCodes = 200...299
 
     func validateResponse(_ response: HTTPURLResponse) -> Bool {
         return self.acceptableStatusCodes.contains(response.statusCode)
@@ -176,11 +176,11 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let download = self.downloads[downloadTask.taskIdentifier]!
         var fileError: NSError?
-        var resultingURL: URL?
+        var resultingURL: NSURL?
 
         do {
             try FileManager.default.replaceItem(at: download.destinationURL as URL, withItemAt: location, backupItemName: nil, options: [], resultingItemURL: &resultingURL)
-            download.resultingURL = resultingURL
+            download.resultingURL = resultingURL as? URL
         } catch let error1 as NSError {
             fileError = error1
             download.error = fileError

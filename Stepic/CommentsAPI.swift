@@ -17,10 +17,21 @@ class CommentsAPI {
         let idsString = ApiUtil.constructIdsString(array: ids)
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in 
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
                 
                 if let e = error as? NSError {
-                    errorHandler("RETRIEVE comments: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                    errorHandler("RETRIEVE comments: error \(e.localizedDescription)")
                     return
                 }
                 
@@ -63,7 +74,18 @@ class CommentsAPI {
         ]
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in 
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
                 
                 if let e = error as? NSError {
                     errorHandler("CREATE comments: error \(e.domain) \(e.code): \(e.localizedDescription)")

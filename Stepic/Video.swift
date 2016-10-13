@@ -326,8 +326,20 @@ class Video: NSManagedObject, JSONInitializable {
         }
         let url = getUrlForQuality(quality)
         
-        Alamofire.request(.HEAD, url).responseSwiftyJSON(completionHandler: {
-            _, _, json, error in 
+        Alamofire.request(url, method: .head).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             print("size json")
             print(json)
         })
@@ -337,7 +349,7 @@ class Video: NSManagedObject, JSONInitializable {
         do {
             let filePath = try PathManager.sharedManager.getPathForStoredVideoWithName(name)
 
-            let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: filePath)
+            let attr : NSDictionary = try FileManager.default.attributesOfItem(atPath: filePath)
             
             if let _attr = attr {
                 completion(Int64(_attr.fileSize()));

@@ -10,7 +10,7 @@ import Foundation
 
 class DeepLinkRouter {
     
-    static func routeFromDeepLink(_ link: URL, completion: (UIViewController?, Bool) -> Void) {
+    static func routeFromDeepLink(_ link: URL, completion: @escaping (UIViewController?, Bool) -> Void) {
         
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
@@ -32,10 +32,7 @@ class DeepLinkRouter {
         }
         
                 
-        guard let components = link.pathComponents else {
-            completion(nil, false)
-            return
-        }
+        let components = link.pathComponents 
             //just a check if everything is OK with the link length
             
         if components[1].lowercased() == "course" && components.count >= 3 {
@@ -45,13 +42,13 @@ class DeepLinkRouter {
             }
             
             if components.count == 3 {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId])
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId as NSObject])
                 routeToCourseWithId(courseId, completion: completion)
                 return
             }
     
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId])
+                AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId as NSObject])
                 routeToSyllabusWithId(courseId, completion: completion)
                 return
             }
@@ -77,7 +74,7 @@ class DeepLinkRouter {
                 return
             }
             
-            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId, "step": stepId])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId as NSObject, "step": stepId as NSObject])
             routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
             return
         }            
@@ -194,7 +191,7 @@ class DeepLinkRouter {
         }        
     }
     
-    static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: (UIViewController?, Bool) -> Void) {
+    static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping (UIViewController?, Bool) -> Void) {
         let router = StepsControllerDeepLinkRouter()
         router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: 
             {

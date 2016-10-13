@@ -21,12 +21,12 @@ class ConnectionHelper : NSObject {
         reachability.startNotifier()
     }
     
-    fileprivate var reachabilityChangedHandlers : [((Bool) -> Void)] = []
+    fileprivate var reachabilityChangedHandlers : [(Bool) -> Void] = []
     
     func instantiate() {}
     
-    func addReachabilityChangedHandler(handler : (Bool)->Void) {
-        reachabilityChangedHandlers += [handler]
+    func addReachabilityChangedHandler(handler : @escaping (Bool)->Void) {
+        reachabilityChangedHandlers.append(handler)
     }
     
     fileprivate func callReachabilityhandlers(_ result: Bool) {

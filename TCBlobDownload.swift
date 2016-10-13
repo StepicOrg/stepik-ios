@@ -48,7 +48,7 @@ open class TCBlobDownload {
     open var destinationURL: URL {
         let destinationPath = self.directory ?? URL(fileURLWithPath: NSTemporaryDirectory())
 
-        return NSURL(string: self.fileName!, relativeToURL: destinationPath)!.standardizedFileURL()!
+        return URL(string: self.fileName!, relativeTo: destinationPath)!.standardizedFileURL
     }
 
     /**

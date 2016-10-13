@@ -23,14 +23,18 @@ class Session {
         cookieHeaders = [:]
     }
     
-    static func refresh(completion: ((Void) -> Void), error errorHandler: ((String) -> Void)) -> Request? {
+    static func refresh(completion: @escaping ((Void) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
         print("refreshing session")
         let stepicURLString = StepicApplicationsInfo.stepicURL
         let stepicURL = URL(string: stepicURLString)!
         delete()
         
-        return Alamofire.request(.GET, stepicURLString, parameters: nil, encoding: .url).response { 
-            (request, response, _, error) -> Void in
+        return Alamofire.request(stepicURLString, parameters: nil, encoding: URLEncoding.default).response { 
+            response in
+            
+            var error = response.error
+            let response = response.response
+            
             
             if let e = error {
                 errorHandler((e as NSError).localizedDescription)

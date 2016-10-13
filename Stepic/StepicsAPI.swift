@@ -29,9 +29,22 @@ class StepicsAPI {
         print("headers while retrieving user before: \(AuthInfo.shared.initialHTTPHeaders)")
 
         return manager.request("\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            (request, response, json, error) in
+            response in
             
-            print("headers while retrieving user: \(request.allHTTPHeaderFields), retrieved user: \(json)")
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let request = response.request
+            let response = response.response
+            
+            
+            print("headers while retrieving user: \(request?.allHTTPHeaderFields), retrieved user: \(json)")
             
             if let e = error as? NSError {
                 print(e.localizedDescription)

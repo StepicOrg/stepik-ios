@@ -47,7 +47,20 @@ class RemoteVersionManager: NSObject {
     
     fileprivate func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
         return Alamofire.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({ 
-            _, _, json, error in
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
+            
             if let e = error as? NSError {
                 errorHandler(e)
                 return

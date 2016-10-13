@@ -90,7 +90,7 @@ class StepicVideoPlayerViewController: UIViewController {
                 [unowned self]
                 action in
                 AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.rateChanged, parameters: 
-                    ["rate" : rate.description])
+                    ["rate" : rate.description as NSObject])
                 self.currentRate = rate
             })
             alertController.addAction(action)
@@ -142,8 +142,8 @@ class StepicVideoPlayerViewController: UIViewController {
                 [unowned self]
                 action in
                 AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
-                    ["quality" : url.quality, 
-                        "device": DeviceInfo.deviceModelString])
+                    ["quality" : url.quality as NSObject, 
+                        "device": DeviceInfo.deviceModelString as NSObject])
                 self.currentQuality = url.quality
                 self.currentQualityURL = URL(string: url.url)!
             })
@@ -181,7 +181,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     func audioRouteChanged(_ notification: Foundation.Notification) {
-        if let routeChangeReason = ((notification as NSNotification).userInfo?[AVAudioSessionRouteChangeReasonKey]? as AnyObject).intValue {
+        if let routeChangeReason = ((notification as NSNotification).userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber)?.intValue {
             if (UInt(routeChangeReason) == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue) {
                 self.player.pause()
             }

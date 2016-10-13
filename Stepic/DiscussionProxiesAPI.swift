@@ -13,10 +13,22 @@ import SwiftyJSON
 class DiscussionProxiesAPI {
     let name = "discussion-proxies"
     
-    func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: ((DiscussionProxy) -> Void), error errorHandler: ((String) -> Void)) -> Request {
+    func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((DiscussionProxy) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in 
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
+                
                 
                 if let e = error as? NSError {
                     errorHandler("RETRIEVE discussion-proxies/\(id): error \(e.domain) \(e.code): \(e.localizedDescription)")

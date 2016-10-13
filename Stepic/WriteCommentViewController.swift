@@ -42,7 +42,7 @@ class WriteCommentViewController: UIViewController {
     }
     
     var target: Int!
-    var parent: Int?
+    var parentId: Int?
     
     var editingItem: UIBarButtonItem?
     var sendingItem: UIBarButtonItem?
@@ -55,7 +55,11 @@ class WriteCommentViewController: UIViewController {
         v.startAnimating()
         sendingItem = UIBarButtonItem(customView: v)
         
-        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: Selector())
+        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.okPressed))
+    }
+    
+    func okPressed() {
+        print("should have never been pressed")
     }
     
     override func viewDidLoad() {
@@ -84,12 +88,12 @@ class WriteCommentViewController: UIViewController {
     }
     
     var htmlText : String {
-        let t = commentTextView.text
+        let t = commentTextView.text ?? ""
         return t.replacingOccurrences(of: "\n", with: "<br>")
     }
     
     func sendComment() {
-        let comment = CommentPostable(parent: parent, target: target, text: htmlText)
+        let comment = CommentPostable(parent: parentId, target: target, text: htmlText)
         
         request = ApiDataDownloader.comments.create(comment, success: 
             {

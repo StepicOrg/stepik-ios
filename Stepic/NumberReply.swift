@@ -22,7 +22,7 @@ class NumberReply: NSObject, Reply {
         super.init()
     }
     
-    var dictValue : [String : NSObject] {
-        return ["number" : number as NSObject]
+    var dictValue : [String : Any] {
+        return ["number" : number]
     }
 }

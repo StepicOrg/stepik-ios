@@ -18,7 +18,19 @@ class VotesAPI {
         ]
         Alamofire.request("\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
+                
                                 
                 if let e = error as? NSError {
                     errorHandler("PUT vote: error \(e.domain) \(e.code): \(e.localizedDescription)")

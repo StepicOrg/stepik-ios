@@ -34,8 +34,20 @@ class AuthManager : NSObject {
             "redirect_uri" : StepicApplicationsInfo.social!.redirectUri
         ]
         
-        return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
-            (_,_, json, error) in
+        return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON {
+//            (_,_, json, error) in
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
             
             if let e = error {
                 failure(e)
@@ -54,7 +66,7 @@ class AuthManager : NSObject {
             //            print(token.accessToken)
             AuthInfo.shared.authorizationType = AuthorizationType.code
             success(token)
-        })
+        }
         
     }
     
@@ -79,7 +91,19 @@ class AuthManager : NSObject {
         
         
         return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
-            (_,_, json, error) in
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+
             
             if let e = error {
                 failure(e)
@@ -132,7 +156,19 @@ class AuthManager : NSObject {
             "refresh_token" : refresh_token]
         
         return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON({
-            (_,_, json, error) in
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+
             
             if let e = error {
                 failure(e)
@@ -185,9 +221,20 @@ class AuthManager : NSObject {
         //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
-            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(completionHandler: {
-                (_, response, json, error) in
+            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+                response in
                 
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
+
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -210,9 +257,20 @@ class AuthManager : NSObject {
                 //                success()
             })
         } else {
-            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON(completionHandler: {
-                (_, response, json, error) in
+            return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+                response in
                 
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
+
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -243,10 +301,20 @@ class AuthManager : NSObject {
             ]
             
             print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-            _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(completionHandler:  
-                { 
-                    request, response, json, error in
+            _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(  { 
+                    response in
                     
+                    var error = response.result.error
+                    var json : JSON = [:]
+                    if response.result.value == nil {
+                        if error == nil {
+                            error = NSError()
+                        }
+                    } else {
+                        json = response.result.value!
+                    }
+                    let response = response.response
+                
                     if let e = (error as? NSError) {
                         let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
                         errorHandler(errormsg, nil)

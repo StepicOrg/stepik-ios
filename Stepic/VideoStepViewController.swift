@@ -69,7 +69,9 @@ class VideoStepViewController: UIViewController {
     func sharePressed(_ item: UIBarButtonItem) {
 //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         let stepid = stepId
-        let slug = lessonSlug
+        guard let slug = lessonSlug else {
+            return
+        }
         DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
@@ -152,8 +154,10 @@ class VideoStepViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let cstep = step
-        let stepid = step.id
+        guard let cstep = step else {
+            return
+        }
+        let stepid = step.id         
         if stepId - 1 == startStepId {
             startStepBlock()
         }

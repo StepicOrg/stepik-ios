@@ -81,8 +81,8 @@ class WebViewController: UIViewController {
     
     fileprivate lazy final var _progressBar: UIProgressView = { [unowned self] in
         let progressBar = UIProgressView(progressViewStyle: .bar)
-        progressBar.backgroundColor = .clear()
-        progressBar.trackTintColor = .clear()
+        progressBar.backgroundColor = UIColor.clear
+        progressBar.trackTintColor = UIColor.clear
         self.view.addSubview(progressBar)
         return progressBar
         }()

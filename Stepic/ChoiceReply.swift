@@ -22,7 +22,7 @@ class ChoiceReply: NSObject, Reply {
         super.init()
     }
     
-    var dictValue : [String : NSObject] {
-        return ["choices" : choices as NSObject]
+    var dictValue : [String : Any] {
+        return ["choices" : choices]
     }
 }
