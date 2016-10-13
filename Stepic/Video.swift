@@ -110,18 +110,11 @@ class Video: NSManagedObject, JSONInitializable {
         state = .downloading
         
         let url = getUrlForQuality(quality)
-                
+        let ext = url.pathExtension 
+
         do {
-            if let ext = url.pathExtension {
-                try PathManager.sharedManager.createVideoWith(id: id, andExtension: ext)
-            } else {
-                print("Something went wrong in store function, no file extension in url")
-                state = .online
-                errorHandler(nil)
-                return
-            }
+            try PathManager.sharedManager.createVideoWith(id: id, andExtension: ext)
         }
-            
         catch let error as NSError {
             print(error.localizedDescription)
             state = .online
@@ -129,7 +122,7 @@ class Video: NSManagedObject, JSONInitializable {
             return
         }
         
-        var videoURL = URL()
+        var videoURL : URL = NSURL() as URL
         
         do {
             videoURL = try PathManager.sharedManager.getVideoDirectoryURL()
@@ -140,9 +133,7 @@ class Video: NSManagedObject, JSONInitializable {
             errorHandler(error)
             return
         }
-        
-        let ext = url.pathExtension
-        
+                
         download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.downloadingSize = bytesExpectedToWrite
@@ -349,7 +340,7 @@ class Video: NSManagedObject, JSONInitializable {
         do {
             let filePath = try PathManager.sharedManager.getPathForStoredVideoWithName(name)
 
-            let attr : NSDictionary = try FileManager.default.attributesOfItem(atPath: filePath)
+            let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: filePath) as? NSDictionary
             
             if let _attr = attr {
                 completion(Int64(_attr.fileSize()));
