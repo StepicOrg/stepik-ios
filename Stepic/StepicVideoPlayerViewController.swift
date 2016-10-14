@@ -145,7 +145,7 @@ class StepicVideoPlayerViewController: UIViewController {
                     ["quality" : url.quality as NSObject, 
                         "device": DeviceInfo.deviceModelString as NSObject])
                 self.currentQuality = url.quality
-                self.currentQualityURL = URL(string: url.url)!
+                self.currentQualityURL = NSURL(string: url.url) as! URL
             })
             alertController.addAction(action)
         }

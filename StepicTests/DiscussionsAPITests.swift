@@ -67,7 +67,7 @@ class DiscussionsAPITests : XCTestCase {
                 self.discussionProxies.retrieve(discussionProxyId, success: 
                     {
                         discussionProxy in
-                        if discussionProxy.discussionIds.indexOf(comment.id) == nil {
+                        if discussionProxy.discussionIds.index(of: comment.id) == nil {
                             XCTAssert(false, "Created discussion not found")
                         }
                         expectation.fulfill()
@@ -102,7 +102,7 @@ class DiscussionsAPITests : XCTestCase {
                 self.comments.retrieve([parent], success: 
                     {
                         parentcomment in
-                        if parentcomment[0].repliesIds.indexOf(comment.id) == nil {
+                        if parentcomment[0].repliesIds.index(of: comment.id) == nil {
                             XCTAssert(false, "Created reply not found")
                         }
                         expectation.fulfill()

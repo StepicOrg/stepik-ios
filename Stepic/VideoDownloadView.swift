@@ -18,7 +18,7 @@ class VideoDownloadView: UIView {
     
     var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality)p"
+            qualityLabel.text = "\(quality ?? "0")p"
         }
     }
     

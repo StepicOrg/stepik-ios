@@ -90,7 +90,7 @@ class CoursePreviewViewController: UIViewController {
                 setupPlayerWithVideo(introVideo)
             } else {
                 setIntroMode(fromVideo: false)
-                loadVimeoURL(URL(string: c.introURL)!)
+                loadVimeoURL(NSURL(string: c.introURL) as! URL)
             }
             updateSections()
         }

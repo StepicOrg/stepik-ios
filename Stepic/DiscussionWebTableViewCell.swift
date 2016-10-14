@@ -85,7 +85,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
     
     func initWithComment(_ comment: Comment, separatorType: SeparatorType)  {
-        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL)!)
+        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL))
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType

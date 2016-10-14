@@ -24,7 +24,7 @@ class TeacherCollectionViewCell: UICollectionViewCell {
         
 //        avatarImageView.sd_setImage(with: URL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, completed: )
         
-        avatarImageView.sd_setImage(with: URL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, options: []) {
+        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: []) {
             _, _, _, _ in
             self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.white)
 

@@ -95,13 +95,19 @@ class UnitTableViewCell: UITableViewCell {
                 }
         }
         
-        coverImageView.sd_setImage(with: URL(string: unit.lesson?.coverURL ?? "")!, placeholderImage: Images.lessonPlaceholderImage.size50x50)
-        
+                
         if !(unit.isActive || unit.section.testSectionAction != nil) {
             titleLabel.isEnabled = false
             downloadButton.isHidden = true
             scoreProgressView.isHidden = true
             scoreLabel.isHidden = true
         }
+        
+        if let coverURL = unit.lesson?.coverURL {
+            coverImageView.sd_setImage(with: URL(string: coverURL), placeholderImage: Images.lessonPlaceholderImage.size50x50)
+        } else {
+            coverImageView.image = Images.lessonPlaceholderImage.size50x50
+        }
+
     }
 }

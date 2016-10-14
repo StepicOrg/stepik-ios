@@ -20,7 +20,7 @@ class DownloadTableViewCell: UITableViewCell {
     var video : Video!
     var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality)p"
+            qualityLabel.text = "\(quality ?? "0")p"
         }
     }
     
