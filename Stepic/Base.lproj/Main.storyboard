@@ -99,7 +99,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -121,7 +121,7 @@
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Elective Filled"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nen-ML-6eo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nen-ML-6eo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1164,7 +1164,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="NxB-SA-EGM" kind="relationship" relationship="viewControllers" id="Mdt-J3-Xrw"/>
-                        <segue destination="hRS-2a-8JM" kind="relationship" relationship="viewControllers" id="yjK-nr-rC0"/>
+                        <segue destination="hRS-2a-8JM" kind="relationship" relationship="viewControllers" id="pbO-De-jhh"/>
                         <segue destination="MT9-2h-A7A" kind="relationship" relationship="viewControllers" id="K9p-hw-MVx"/>
                     </connections>
                 </tabBarController>
@@ -1178,7 +1178,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="W60-es-dLX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

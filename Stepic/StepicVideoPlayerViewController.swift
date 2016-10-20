@@ -131,7 +131,7 @@ class StepicVideoPlayerViewController: UIViewController {
     
     var currentQuality : String! {
         didSet {
-            qualityButton.setTitle("\(currentQuality)p", for: UIControlState())
+            qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControlState())
         }
     }
     

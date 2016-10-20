@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Auth Navigation View Controller-->
+        <scene sceneID="hex-w2-pLc">
+            <objects>
+                <navigationController storyboardIdentifier="AuthNavigation" id="IcJ-xw-Trw" customClass="AuthNavigationViewController" customModule="SberbankUniversity" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hmx-a2-u0L">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IIV-B9-Tfx" kind="relationship" relationship="rootViewController" id="KeY-B9-fIt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g3R-4f-aWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4007" y="1094"/>
+        </scene>
+        <!--Sb Entrance View Controller-->
+        <scene sceneID="Kdf-TW-BJl">
+            <objects>
+                <viewController id="IIV-B9-Tfx" customClass="SbEntranceViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z6S-nz-yHc"/>
+                        <viewControllerLayoutGuide type="bottom" id="oxa-f8-Vc1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KFZ-yL-IRu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8P-Sg-zPI">
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="TaY-gz-KrO"/>
+                                    <constraint firstAttribute="width" constant="250" id="Uau-aW-zfs"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="fHS-Qe-CbH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Uau-aW-zfs"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="SignInPressedWithSender:" destination="IIV-B9-Tfx" eventType="touchUpInside" id="bJG-yW-YCC"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SberbankUniversity_transparent" translatesAutoresizingMaskIntoConstraints="NO" id="QCJ-aV-TuS">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="GVS-Xy-KOd"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GVS-Xy-KOd"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4U-G1-020" userLabel="Close button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="8Q1-0e-JZ2"/>
+                                    <constraint firstAttribute="height" constant="40" id="Pm7-Oy-hg4"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="сlosePressed:" destination="IIV-B9-Tfx" eventType="touchUpInside" id="oac-X8-GCX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QCJ-aV-TuS" firstAttribute="leading" secondItem="KFZ-yL-IRu" secondAttribute="leadingMargin" id="1bH-Vd-fxu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QCJ-aV-TuS" secondAttribute="trailing" id="1hy-dd-E5S"/>
+                            <constraint firstItem="s8P-Sg-zPI" firstAttribute="centerX" secondItem="KFZ-yL-IRu" secondAttribute="centerX" id="6Ci-c9-ys8"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="e4U-G1-020" secondAttribute="leading" id="Ezg-ce-pKX"/>
+                            <constraint firstItem="s8P-Sg-zPI" firstAttribute="width" secondItem="KFZ-yL-IRu" secondAttribute="width" multiplier="3:4" priority="999" id="KBF-0s-AIR"/>
+                            <constraint firstItem="s8P-Sg-zPI" firstAttribute="top" secondItem="QCJ-aV-TuS" secondAttribute="bottom" constant="8" id="VeQ-00-12J"/>
+                            <constraint firstItem="s8P-Sg-zPI" firstAttribute="centerY" secondItem="KFZ-yL-IRu" secondAttribute="centerY" priority="999" constant="50" id="c0R-3N-CQT"/>
+                            <constraint firstItem="QCJ-aV-TuS" firstAttribute="top" secondItem="z6S-nz-yHc" secondAttribute="bottom" id="gZZ-lQ-n5j"/>
+                            <constraint firstItem="e4U-G1-020" firstAttribute="top" secondItem="z6S-nz-yHc" secondAttribute="bottom" constant="8" symbolic="YES" id="lpR-XO-PDu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="IpT-p0-dar"/>
+                    <connections>
+                        <outlet property="signInButton" destination="s8P-Sg-zPI" id="D3q-FS-KGo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="USy-AO-yGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3276" y="1093"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Cross" width="25" height="25"/>
+        <image name="SberbankUniversity_transparent" width="2339" height="1992"/>
+    </resources>
+</document>
