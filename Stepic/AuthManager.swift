@@ -169,7 +169,6 @@ class AuthManager : NSObject {
             }
             let response = response.response
 
-            
             if let e = error {
                 failure(e)
                 return
@@ -207,18 +206,14 @@ class AuthManager : NSObject {
     }
     
     func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
-        let headers : [String : String] = [
-            "Content-Type" : "application/json",
-            "Authorization" : "Bearer \(AuthInfo.shared.token!.accessToken)"
-        ]
-        
+
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
+
         let params : Parameters = [
             "enrollment" : [
                 "course" : "\(courseId)"
             ]
         ]
-        
-        //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
         if !delete {
             return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
@@ -246,15 +241,6 @@ class AuthManager : NSObject {
                     let s = NSLocalizedString("Error", comment: "")
                     errorHandler(s)
                 }
-                
-                //                print("response -> \(response?.statusCode)")
-                //                print(json)
-                
-                //                if let _ = error {
-                //                    errorHandler()
-                //                    return
-                //                }
-                //                success()
             })
         } else {
             return Alamofire.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(courseId)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
