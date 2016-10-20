@@ -21,11 +21,4 @@ struct ControllerHelper {
         let storyboard = UIStoryboard.init(name: storyboardName, bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: id) 
     }
-    
-    static func getAuthController() -> UIViewController {
-        let storyboard = UIStoryboard.init(name: "Auth", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AuthNavigation")
-        
-        return vc
-    }
 }

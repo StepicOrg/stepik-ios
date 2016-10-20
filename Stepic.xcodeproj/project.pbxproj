@@ -135,6 +135,7 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0867023F1DB167D5005006AE /* GoogleService-Info.plist */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
@@ -425,7 +426,6 @@
 		08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		08D1210C1C937B2200A54ABC /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
-		08D1210D1C937B2200A54ABC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
@@ -451,6 +451,9 @@
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
 		08D674911D7880E200B60963 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
+		08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DA79021DB77DF0003491C4 /* SbAuth.storyboard */; };
+		08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
@@ -489,6 +492,8 @@
 		08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
+		08ECC4481DB8D3D60005D401 /* GreenNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */; };
+		08ECC4491DB8D56E0005D401 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -646,6 +651,7 @@
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
+		0867023F1DB167D5005006AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SberbankUniversity/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		0869530E1D747DC0003857A2 /* RequestChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestChain.swift; sourceTree = "<group>"; };
@@ -767,6 +773,8 @@
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D674901D7880E200B60963 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
+		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
+		08DA79021DB77DF0003491C4 /* SbAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SbAuth.storyboard; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
@@ -1436,6 +1444,7 @@
 		08D121261C93882400A54ABC /* SberbankUniversity */ = {
 			isa = PBXGroup;
 			children = (
+				0867023F1DB167D5005006AE /* GoogleService-Info.plist */,
 				08CB6B311C98772D00E8BA50 /* SbLaunchScreen.xib */,
 				08CB6B321C98772D00E8BA50 /* SbEntranceViewController.xib */,
 				08CB6B331C98772D00E8BA50 /* SbEntranceViewController.swift */,
@@ -1445,6 +1454,7 @@
 				08CB6B371C98772D00E8BA50 /* SberbankUniversity.xcassets */,
 				08CB6B381C98772D00E8BA50 /* SbStepicApplicationsInfo.swift */,
 				08CB6B391C98772D00E8BA50 /* SbSocialNetworks.swift */,
+				08DA79021DB77DF0003491C4 /* SbAuth.storyboard */,
 			);
 			name = SberbankUniversity;
 			sourceTree = "<group>";
@@ -1505,6 +1515,7 @@
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08DE94141B8C58AC00D278AB /* Supporting Files */,
 				08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */,
+				08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -1891,10 +1902,10 @@
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
+				086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */,
 				08D1210C1C937B2200A54ABC /* MathJax in Resources */,
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
-				08D1210D1C937B2200A54ABC /* GoogleService-Info.plist in Resources */,
 				08CB6B441C98774200E8BA50 /* SbEntranceViewController.xib in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
@@ -1916,6 +1927,7 @@
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
+				08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
@@ -2281,6 +2293,7 @@
 				08D120C71C937B2200A54ABC /* QuizControllerDelegate.swift in Sources */,
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
+				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
 				08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */,
 				08D120CC1C937B2200A54ABC /* PlaceholderTestViewController.swift in Sources */,
@@ -2302,6 +2315,7 @@
 				084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				08D120DA1C937B2200A54ABC /* CourseTableViewCell.swift in Sources */,
+				08ECC4491DB8D56E0005D401 /* StyledTabBarViewController.swift in Sources */,
 				083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				08D120DB1C937B2200A54ABC /* JSQWebViewController.swift in Sources */,
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
@@ -2347,6 +2361,7 @@
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
+				08ECC4481DB8D3D60005D401 /* GreenNavigationViewController.swift in Sources */,
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
@@ -2583,6 +2598,7 @@
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
+				08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
