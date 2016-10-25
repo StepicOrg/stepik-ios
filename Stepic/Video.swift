@@ -122,10 +122,10 @@ class Video: NSManagedObject, JSONInitializable {
             return
         }
         
-        var videoURL : URL = NSURL() as URL
+        var videoURLOptional : URL?
         
         do {
-            videoURL = try PathManager.sharedManager.getVideoDirectoryURL()
+            videoURLOptional = try PathManager.sharedManager.getVideoDirectoryURL()
         }
         catch let error as NSError {
             print(error.localizedDescription)
@@ -133,7 +133,11 @@ class Video: NSManagedObject, JSONInitializable {
             errorHandler(error)
             return
         }
-                
+        
+        guard let videoURL = videoURLOptional else {
+            errorHandler(NSError())
+        }
+        
         download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.downloadingSize = bytesExpectedToWrite
