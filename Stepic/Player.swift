@@ -325,6 +325,7 @@ public class Player: UIViewController {
     public func playFromCurrentTime() {
         self.playbackState = .playing
         self.avplayer.play()
+        self.avplayer.rate = rate
     }
     
     public func pause() {
@@ -348,6 +349,7 @@ public class Player: UIViewController {
     
     var rate : Float = 1 {
         didSet {
+            print("\n\nrate: \(self.avplayer.rate)\n\n, setting to \(rate)")
             if self.avplayer.rate != 0 {
                 self.avplayer.rate = rate
             }
