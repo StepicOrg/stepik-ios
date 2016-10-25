@@ -428,6 +428,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralInfoTableViewCell") as! GeneralInfoTableViewCell
+//        let cell = GeneralInfoTableViewCell(style: .default, reuseIdentifier: "GeneralInfoTableViewCell")
         cell.initWithCourse(course!)
         
         cell.typeSegmentedControl.selectedSegmentIndex = displayingInfoType.rawValue
@@ -440,7 +441,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
         cell.frame = cFrame
         let cv = UIView()
         cv.addSubview(cell)
-        
+        cv.backgroundColor = UIColor.white
         return cv
     }
 }
