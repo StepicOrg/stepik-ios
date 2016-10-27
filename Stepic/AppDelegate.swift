@@ -15,7 +15,8 @@ import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
 import MagicalRecord
- 
+import YandexMobileMetrica
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        
+        YMMYandexMetrica.activate(withApiKey: "102940e8-6518-49b2-8b69-2bdde4011178")
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         

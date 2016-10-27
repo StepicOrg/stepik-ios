@@ -17,6 +17,8 @@ def all_pods
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
     
+    pod 'YandexMobileMetrica/Dynamic', '2.6.2'
+
     pod 'Firebase', '<= 3.4.0'
 #    pod 'Firebase/Messaging'
     pod 'FirebaseAppIndexing', '1.0.4'
