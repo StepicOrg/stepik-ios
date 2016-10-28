@@ -46,11 +46,12 @@ class HTMLBuilder: NSObject {
         return res
     }
 
+    fileprivate var stepicBaseURLString: String = "<base href=\"\(StepicApplicationsInfo.stepicURL)\">"
     
     func buildHTMLStringWith(head: String, body: String, addStepicFont : Bool = true, width: Int) -> String {
         var res = "<html>\n"
         
-        res += "<head>\n\(stepicStyleString + head)\n</head>\n"
+        res += "<head>\n\(stepicStyleString + stepicBaseURLString + head)\n</head>\n"
 //        print(body)
         res += "<body style=\"width:\(width))px;\">\n\(body)\n</body>\n"
         
