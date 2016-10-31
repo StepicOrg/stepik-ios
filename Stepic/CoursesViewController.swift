@@ -266,7 +266,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
         
         if segue.identifier == "showPreferences" {
-            let dvc = segue.destination as! UserPreferencesTableViewController
+            let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
         }
     }

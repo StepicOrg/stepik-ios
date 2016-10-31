@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class UserPreferencesContainerViewController: RGPageViewController {
 
@@ -17,6 +18,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
 
         datasource = self
         delegate = self
+                
         // Do any additional setup after loading the view.
     }
 
@@ -35,6 +37,60 @@ class UserPreferencesContainerViewController: RGPageViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    override var pagerOrientation: UIPageViewControllerNavigationOrientation {
+        get {
+            return .horizontal
+        }
+    }
+    
+    override var tabbarPosition: RGTabbarPosition {
+        get {
+            return .top
+        }
+    }
+    
+    override var tabbarStyle: RGTabbarStyle {
+        get {
+            return RGTabbarStyle.solid
+        }
+    }
+    
+    override var tabIndicatorColor: UIColor {
+        get {
+            return UIColor.white
+        }
+    }
+    
+    override var barTintColor: UIColor? {
+        get {
+            return UIColor.stepicGreenColor()
+        }
+    }
+    
+    override var tabStyle: RGTabStyle {
+        get {
+            return .inactiveFaded
+        }
+    }
+    
+//    override var tabbarWidth: CGFloat {
+//        get {
+//            return 44.0
+//        }
+//    }
+    
+    override var tabbarHeight : CGFloat {
+        get {
+            return 44.0
+        }
+    }
+    
+    override var tabMargin: CGFloat {
+        get {
+            return 8.0
+        }
+    }
 
 }
 
@@ -57,7 +113,8 @@ extension UserPreferencesContainerViewController : RGPageViewControllerDataSourc
     func tabViewForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIView {
         let l = UILabel()
         l.text = tabNames[index]
-        l.textAlignment = NSTextAlignment.center
+        l.textColor = UIColor.white
+        l.sizeToFit()
         return l
     }
     
@@ -69,6 +126,8 @@ extension UserPreferencesContainerViewController : RGPageViewControllerDataSourc
         case 1:
             let vc = ControllerHelper.instantiateViewController(identifier: "Preferences", storyboardName: "UserPreferences")
             return vc
+        default:
+            return nil
         }
     } 
 

@@ -13,6 +13,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         // Do any additional setup after loading the view.
     }
 
