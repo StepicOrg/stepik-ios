@@ -525,6 +525,14 @@
 		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
+		08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
+		08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
+		08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
+		08FB30DE1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
+		08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */; };
+		08FB30E11DC385A900E4684F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */; };
+		08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30E21DC385B400E4684F /* ProfileViewController.swift */; };
+		08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30E21DC385B400E4684F /* ProfileViewController.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
 		A9EE4EC0D170EC60844BB9B3 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7BFD8422F7D483F3A216F6 /* Pods_StepicTests.framework */; };
 		B3A54E2D433F77DF627791A3 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02403B1FF65BAD80252D91AC /* Pods_Stepic.framework */; };
@@ -836,6 +844,10 @@
 		08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizControllerDelegate.swift; sourceTree = "<group>"; };
 		08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		08F5556B1C5267A600C877E8 /* GCDThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDThings.swift; sourceTree = "<group>"; };
+		08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserPreferences.storyboard; sourceTree = "<group>"; };
+		08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferencesContainerViewController.swift; sourceTree = "<group>"; };
+		08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		08FB30E21DC385B400E4684F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		29E69D9B08E2BE75F770D8F8 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		2E7BFD8422F7D483F3A216F6 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1321,8 +1333,12 @@
 		08B361061BB2E3C100090843 /* User Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
+				08FB30D81DC384AD00E4684F /* old */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
+				08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */,
+				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
+				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
+				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 			);
 			name = "User Preferences";
 			sourceTree = "<group>";
@@ -1730,6 +1746,14 @@
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
 		};
+		08FB30D81DC384AD00E4684F /* old */ = {
+			isa = PBXGroup;
+			children = (
+				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1899,6 +1923,7 @@
 				08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
+				08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */,
@@ -1964,6 +1989,7 @@
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
+				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
@@ -2236,6 +2262,7 @@
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
+				08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
@@ -2336,6 +2363,7 @@
 				08D120E71C937B2200A54ABC /* Submission.swift in Sources */,
 				08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08D120E81C937B2200A54ABC /* AuthInfo.swift in Sources */,
+				08FB30E11DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				08D120E91C937B2200A54ABC /* VideoDownloadDelegate.swift in Sources */,
 				08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */,
 				082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
@@ -2377,6 +2405,7 @@
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
 				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
+				08FB30DE1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */,
 			);
@@ -2428,6 +2457,7 @@
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
+				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
@@ -2446,6 +2476,7 @@
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
+				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
@@ -2486,6 +2517,7 @@
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
+				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
