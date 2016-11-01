@@ -19,16 +19,24 @@ class ProfileViewController: UITableViewController {
     
     @IBOutlet weak var signOutButton: UIButton!
     
-    var heightForRows = [[131], [40]]
-    let selectionForRows = [[false], [true]]
+    @IBOutlet weak var currentStreakLabel: UILabel!
+    @IBOutlet weak var longestStreakLabel: UILabel!
+    @IBOutlet weak var streaksActivityIndicator: UIActivityIndicatorView!
+    
+    
+    var heightForRows = [[131], [75], [40]]
+    let selectionForRows = [[false], [false], [true]]
     let sectionTitles = [
         NSLocalizedString("UserInfo", comment: ""),
+        NSLocalizedString("Activity", comment: ""),
         NSLocalizedString("Actions", comment: "")
     ]
 
     fileprivate func localize() {
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
         signOutButton.setTitle(NSLocalizedString("SignOut", comment: ""), for: UIControlState())
+        currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
+        longestStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
     }
 
     override func viewDidLoad() {
@@ -37,13 +45,19 @@ class ProfileViewController: UITableViewController {
         tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
         
         localize() 
-        
+        setStreaks(visible: false)
         signInButton.setStepicWhiteStyle()
         avatarImageView.setRoundedBounds(width: 0)
         signInButton.isHidden = false
         // Do any additional setup after loading the view.
     }
-
+    
+    func setStreaks(visible: Bool) {
+        currentStreakLabel.isHidden = !visible
+        longestStreakLabel.isHidden = !visible
+        streaksActivityIndicator.isHidden = visible
+    }
+    
     func updateUser() {
         if let user = AuthInfo.shared.user {
             self.initWithUser(user)
@@ -64,15 +78,26 @@ class ProfileViewController: UITableViewController {
             signInHeight.constant = 40
             signInNameDistance.constant = 8
             heightForRows[0][0] = 131 + 48
-            heightForRows[1][0] = 0
+            heightForRows[2][0] = 0
             signInButton.isHidden = false
         } else {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
             heightForRows[0][0] = 131
-            heightForRows[1][0] = 40
+            heightForRows[2][0] = 40
             signInButton.isHidden = true
         }
+        
+        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
+            [weak self] 
+            activity in
+            self?.currentStreakLabel.text = "\(NSLocalizedString("CurrentStreak", comment: "")): \(activity.currentStreak)"
+            self?.longestStreakLabel.text = "\(NSLocalizedString("LongestStreak", comment: "")): \(activity.longestStreak)"
+            self?.setStreaks(visible: true)
+        }, error: {
+            error in
+        })
+        
         print("beginning updates")
         tableView.reloadData()
     }
@@ -93,13 +118,13 @@ class ProfileViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 0 {
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 0 {
             signOut()
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == 1 && heightForRows[1][0] == 0) {
+        if (section == 1 && heightForRows[2][0] == 0) {
             return nil 
         } else {
             return sectionTitles[section]

@@ -681,6 +681,7 @@ class ApiDataDownloader: NSObject {
     static let votes = VotesAPI()
     static let stepics = StepicsAPI()
     static let units = UnitsAPI()
+    static let userActivities = UserActivitiesAPI()
 }
 
 enum RefreshMode {

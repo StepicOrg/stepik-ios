@@ -134,7 +134,6 @@ SignInToJoin = "Sign in to join courses";
 FirstName = "First name";
 LastName = "Last name";
 SignUpAction = "Sign up";
-
 Low = "Low";
 High = "High";
 Medium = "Medium";
@@ -144,5 +143,7 @@ LoadingVideoQualityPreference = "Downloading video quality";
 SignOut = "Sign out";
 Profile = "Profile";
 Preferences = "Preferences";
-
+CurrentStreak = "Current streak";
+LongestStreak = "Longest streak";
+Activity = "Activity";
 
