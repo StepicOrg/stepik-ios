@@ -67,7 +67,7 @@ class DownloadsViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "showPreferences" {
-            let dvc = segue.destination as! UserPreferencesTableViewController
+            let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
         }
         

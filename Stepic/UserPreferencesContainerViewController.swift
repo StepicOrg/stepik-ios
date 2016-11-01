@@ -12,6 +12,7 @@ import FLKAutoLayout
 class UserPreferencesContainerViewController: RGPageViewController {
 
     let tabNames = ["Profile", "Preferences"]
+    let numberOfTabs = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +83,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
     
     override var tabbarHeight : CGFloat {
         get {
-            return 44.0
+            return 30
         }
     }
     
@@ -92,22 +93,26 @@ class UserPreferencesContainerViewController: RGPageViewController {
         }
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil, completion: {
+            [weak self] 
+            _ in
+            self?.tabScrollView.reloadData()
+        })
+    }
+    
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDelegate {
-    func heightForTabAtIndex(_ index: Int) -> CGFloat {
-        return 44.0 
+    func widthForTabAtIndex(_ index: Int) -> CGFloat {
+        return (UIScreen.main.bounds.width - 16) / CGFloat(numberOfTabs)
     }
-    
-//    // use this to set a custom width for a tab
-//    func widthForTabAtIndex(_ index: Int) -> CGFloat {
-//        return 44.0
-//    }
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDataSource {
     func numberOfPagesForViewController(_ pageViewController: RGPageViewController) -> Int {
-        return 2
+        return numberOfTabs
     }
     
     func tabViewForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIView {

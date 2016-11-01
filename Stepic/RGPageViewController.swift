@@ -342,7 +342,7 @@ class RGPageViewController: UIViewController, UIPageViewControllerDataSource, UI
         pager.view.frame = pagerFrame
     }
     
-    fileprivate func setupSelf() {
+    func setupSelf() {
         if let theSource = datasource {
             pageCount = theSource.numberOfPagesForViewController(self)
         }
