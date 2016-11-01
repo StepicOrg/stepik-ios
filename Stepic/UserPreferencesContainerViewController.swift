@@ -11,7 +11,10 @@ import FLKAutoLayout
 
 class UserPreferencesContainerViewController: RGPageViewController {
 
-    let tabNames = ["Profile", "Preferences"]
+    let tabNames = [
+        NSLocalizedString("Profile", comment: ""), 
+        NSLocalizedString("Preferences", comment: "")
+    ]
     let numberOfTabs = 2
     
     override func viewDidLoad() {

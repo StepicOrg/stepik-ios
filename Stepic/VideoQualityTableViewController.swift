@@ -12,11 +12,31 @@ class VideoQualityTableViewController: UITableViewController {
 
     @IBOutlet var qualityCells: [UITableViewCell]!
     
+    @IBOutlet weak var lowLabel: UILabel!
+    @IBOutlet weak var mediumLabel: UILabel!
+    @IBOutlet weak var highLabel: UILabel!
+    @IBOutlet weak var veryHighLabel: UILabel!
+    
+    
     let defaultQualities = ["270", "360", "720", "1080"]
+    let qualityStrings = [
+        NSLocalizedString("Low", comment: ""),
+        NSLocalizedString("Medium", comment: ""),
+        NSLocalizedString("High", comment: ""),
+        NSLocalizedString("VeryHigh", comment: "")
+    ]
+    
+    fileprivate func localize() {
+        lowLabel.text = "\(qualityStrings[0]) (\(defaultQualities[0])p)"
+        mediumLabel.text = "\(qualityStrings[1]) (\(defaultQualities[1])p)"
+        highLabel.text = "\(qualityStrings[2]) (\(defaultQualities[2])p)"
+        veryHighLabel.text = "\(qualityStrings[3]) (\(defaultQualities[3])p)"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        localize()
         tableView.tableFooterView = UIView()
         
         // Uncomment the following line to preserve selection between presentations

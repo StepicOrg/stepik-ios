@@ -135,4 +135,14 @@ FirstName = "First name";
 LastName = "Last name";
 SignUpAction = "Sign up";
 
+Low = "Low";
+High = "High";
+Medium = "Medium";
+VeryHigh = "Very High";
+WiFiLoadPreference = "Only Wi-Fi video downloads";
+LoadingVideoQualityPreference = "Downloading video quality";
+SignOut = "Sign out";
+Profile = "Profile";
+Preferences = "Preferences";
+
 

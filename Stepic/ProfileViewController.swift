@@ -16,7 +16,9 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-            
+    
+    @IBOutlet weak var signOutButton: UIButton!
+    
     var heightForRows = [[131], [40]]
     let selectionForRows = [[false], [true]]
     let sectionTitles = [
@@ -26,6 +28,7 @@ class ProfileViewController: UITableViewController {
 
     fileprivate func localize() {
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
+        signOutButton.setTitle(NSLocalizedString("SignOut", comment: ""), for: UIControlState())
     }
 
     override func viewDidLoad() {

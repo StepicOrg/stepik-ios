@@ -13,6 +13,8 @@ class PreferencesViewController: UITableViewController {
     
     @IBOutlet weak var onlyWiFiSwitch: UISwitch!
     @IBOutlet weak var videoQualityLabel: UILabel!
+    @IBOutlet weak var videoQualityTextLabel: UILabel!
+    @IBOutlet weak var wifiLoadLabel: UILabel!
     
     @IBOutlet weak var autoCheckForUpdatesLabel: UILabel!
     @IBOutlet weak var checkForUpdatesButton: UIButton!
@@ -31,9 +33,10 @@ class PreferencesViewController: UITableViewController {
     
     fileprivate func localize() {
         ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
-        
         autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
         checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), for: UIControlState())
+        wifiLoadLabel.text = NSLocalizedString("WiFiLoadPreference", comment: "") 
+        videoQualityTextLabel.text = NSLocalizedString("LoadingVideoQualityPreference", comment: "")
     }
 
     
