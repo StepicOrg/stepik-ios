@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
         
-        YMMYandexMetrica.activate(withApiKey: "102940e8-6518-49b2-8b69-2bdde4011178")
+        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         

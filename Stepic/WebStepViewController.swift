@@ -54,7 +54,7 @@ class WebStepViewController: UIViewController {
     var stepText = ""
     
     var stepUrl : String {
-        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId)?from_mobile_app=true"
+        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(stepId ?? 1)?from_mobile_app=true"
     }
     
     var scrollHelper : WebViewHorizontalScrollHelper!
@@ -79,8 +79,11 @@ class WebStepViewController: UIViewController {
     
     func sharePressed(_ item: UIBarButtonItem) {
         //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        let stepid = stepId
-        let slug = lessonSlug!
+        guard let stepid = stepId, 
+            let slug = lessonSlug else {
+            return
+        }
+//        let slug = lessonSlug!
         DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item

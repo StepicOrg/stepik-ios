@@ -323,6 +323,9 @@ public class Player: UIViewController {
     }
     
     public func playFromCurrentTime() {
+        if self.playbackState == .playing {
+            return
+        }
         self.playbackState = .playing
         self.avplayer.play()
         self.avplayer.rate = rate

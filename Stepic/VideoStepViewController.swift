@@ -68,8 +68,8 @@ class VideoStepViewController: UIViewController {
     
     func sharePressed(_ item: UIBarButtonItem) {
 //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        let stepid = stepId
-        guard let slug = lessonSlug else {
+        
+        guard let slug = lessonSlug, let stepid = stepId else {
             return
         }
         DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {

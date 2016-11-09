@@ -84,7 +84,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     fileprivate func displayRateChangeAlert() {
-        let alertController = UIAlertController(title: "Change rate", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("VideoRate", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         for rate in VideoRate.allValues {
             let action = UIAlertAction(title: rate.description, style: .default, handler: {
                 [unowned self]
@@ -95,7 +95,7 @@ class StepicVideoPlayerViewController: UIViewController {
             })
             alertController.addAction(action)
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         if let popoverController = alertController.popoverPresentationController {
             popoverController.sourceView = rateButton
@@ -136,7 +136,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     fileprivate func displayQualityChangeAlert() {
-        let alertController = UIAlertController(title: "Change quality", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         for url in video.urls {
             let action = UIAlertAction(title: url.quality, style: .default, handler: { 
                 [unowned self]
@@ -151,7 +151,7 @@ class StepicVideoPlayerViewController: UIViewController {
         }
         if video.state == VideoState.cached {
             if let cachedQuality = video.cachedQuality  {
-                alertController.addAction(UIAlertAction(title: "Downloaded(\(cachedQuality))",
+                alertController.addAction(UIAlertAction(title: "\(NSLocalizedString("Downloaded", comment: ""))(\(cachedQuality))",
                     style: .default, 
                     handler: {
                         [unowned self]
@@ -161,7 +161,7 @@ class StepicVideoPlayerViewController: UIViewController {
                 }))
             }
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         if let popoverController = alertController.popoverPresentationController {
             popoverController.sourceView = qualityButton

@@ -146,4 +146,10 @@ Preferences = "Preferences";
 CurrentStreak = "Current streak";
 LongestStreak = "Longest streak";
 Activity = "Activity";
+days1 = "day";
+days234 = "days";
+days567890 = "days";
+VideoRate = "Video rate";
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
 

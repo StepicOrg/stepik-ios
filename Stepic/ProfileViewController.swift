@@ -91,17 +91,28 @@ class ProfileViewController: UITableViewController {
         _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
             [weak self] 
             activity in
-            self?.currentStreakLabel.text = "\(NSLocalizedString("CurrentStreak", comment: "")): \(activity.currentStreak)"
-            self?.longestStreakLabel.text = "\(NSLocalizedString("LongestStreak", comment: "")): \(activity.longestStreak)"
-            self?.setStreaks(visible: true)
+            if let s = self {
+                s.currentStreakLabel.text = "\(NSLocalizedString("CurrentStreak", comment: "")) \(activity.currentStreak) \(s.dayLocalizableFor(daysCnt: activity.currentStreak))"
+                s.longestStreakLabel.text = "\(NSLocalizedString("LongestStreak", comment: "")) \(activity.longestStreak) \(s.dayLocalizableFor(daysCnt: activity.longestStreak))"
+                s.setStreaks(visible: true)
+            }
         }, error: {
             error in
+            //TODO: Display error button
         })
         
         print("beginning updates")
         tableView.reloadData()
     }
 
+    func dayLocalizableFor(daysCnt: Int) -> String {
+        switch (daysCnt % 10) {
+        case 1: return NSLocalizedString("days1", comment: "")
+        case 2, 3, 4: return NSLocalizedString("days234", comment: "")
+        default: return NSLocalizedString("days567890", comment: "")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
