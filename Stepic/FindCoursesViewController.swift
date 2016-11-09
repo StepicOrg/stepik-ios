@@ -31,7 +31,7 @@ class FindCoursesViewController: CoursesViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let constraintDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
+        let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
         let totalDistance = constraintDistance + tableView.contentInset.top
         let oldInset = tableView.contentInset.top
         if totalDistance != 64 && totalDistance != 124 {
@@ -52,15 +52,15 @@ class FindCoursesViewController: CoursesViewController {
         searchResultsVC.parentVC = self
         searchController = UISearchController(searchResultsController: searchResultsVC)
         
-        searchController.searchBar.searchBarStyle = UISearchBarStyle.Default
+        searchController.searchBar.searchBarStyle = UISearchBarStyle.default
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.showsCancelButton = false
         searchController.searchBar.barTintColor = UIColor.stepicGreenColor()
-        searchController.searchBar.tintColor = UIColor.whiteColor()
-        UITextField.appearanceWhenContainedWithin([UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlueColor()
+        searchController.searchBar.tintColor = UIColor.white
+        UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
 
         self.automaticallyAdjustsScrollViewInsets = false
         definesPresentationContext = true
@@ -72,7 +72,7 @@ class FindCoursesViewController: CoursesViewController {
         super.viewDidLoad()
 
         self.tableView.backgroundView = UIView()
-        self.tableView.backgroundColor = UIColor.lightTextColor()
+        self.tableView.backgroundColor = UIColor.lightText
 
         self.navigationItem.titleView = self.searchController.searchBar
     }
@@ -86,81 +86,81 @@ extension FindCoursesViewController : UISearchBarDelegate {
 }
 
 extension FindCoursesViewController : UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let results = searchController.searchResultsController as? SearchResultsCoursesViewController
         results?.query = searchController.searchBar.text!
     }
 }
 
 extension FindCoursesViewController {
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         hideKeyboardIfNeeded()
     }
 }
 
 extension FindCoursesViewController {
     
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             return Images.emptyCoursesPlaceholder
-        case .ConnectionError:
+        case .connectionError:
             return Images.noWifiImage.size250x250
         }
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("EmptyFindCoursesTitle", comment: "")
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
         }
         
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+            NSForegroundColorAttributeName: UIColor.darkGray]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func descriptionForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("EmptyFindCoursesDescription", comment: "")
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
             break
         }
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSForegroundColorAttributeName: UIColor.lightGray,
             NSParagraphStyleAttributeName: paragraph]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.whiteColor()
+    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.white
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 44
     }
 }
 
 extension FindCoursesViewController  {
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 }

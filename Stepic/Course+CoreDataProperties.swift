@@ -15,10 +15,10 @@ import CoreData
 extension Course {
 
     @NSManaged var managedId: NSNumber?
-    @NSManaged var managedBeginDate: NSDate?
+    @NSManaged var managedBeginDate: Date?
     @NSManaged var managedCourseDescription: String?
     @NSManaged var managedTitle: String?
-    @NSManaged var managedEndDate: NSDate?
+    @NSManaged var managedEndDate: Date?
     @NSManaged var managedImageURL: String?
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
@@ -41,24 +41,24 @@ extension Course {
     @NSManaged var managedIntroVideo : Video?
 
     
-    class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Course", inManagedObjectContext: CoreDataHelper.instance.context)!
+    class var oldEntity : NSEntityDescription {
+        return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Course.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
     
-    var beginDate : NSDate? {
+    var beginDate : Date? {
         set(date) {
             self.managedBeginDate = date
         }
@@ -85,7 +85,7 @@ extension Course {
         }
     }
     
-    var endDate: NSDate? {
+    var endDate: Date? {
         set(date){ 
             self.managedEndDate = date
         }
@@ -114,7 +114,7 @@ extension Course {
     
     var enrolled : Bool {
         set(enrolled) {
-            self.managedEnrolled = enrolled
+            self.managedEnrolled = enrolled as NSNumber?
         }
         get {
             return managedEnrolled?.boolValue ?? false
@@ -123,7 +123,7 @@ extension Course {
     
     var featured : Bool {
         set(featured){
-            self.managedFeatured = featured
+            self.managedFeatured = featured as NSNumber?
         }
         get {
             return managedFeatured?.boolValue ?? false
@@ -204,15 +204,15 @@ extension Course {
         }
     }
     
-    func addInstructor(instructor : User) {
+    func addInstructor(_ instructor : User) {
         let mutableItems = managedInstructors?.mutableCopy() as! NSMutableOrderedSet
-        mutableItems.addObject(instructor)
+        mutableItems.add(instructor)
         managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
     
     var sectionsArray: [Int] {
         set(value){
-            self.managedSectionsArray = value
+            self.managedSectionsArray = value as NSObject?
         }
         get {
             return (self.managedSectionsArray as? [Int]) ?? []
@@ -221,7 +221,7 @@ extension Course {
     
     var instructorsArray: [Int] {
         set(value){
-            self.managedInstructorsArray = value
+            self.managedInstructorsArray = value as NSObject?
         }
         get {
             return (self.managedInstructorsArray as? [Int]) ?? []
@@ -247,9 +247,9 @@ extension Course {
         }
     }
     
-    func addSection(section: Section) {
+    func addSection(_ section: Section) {
         let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet
-        mutableItems.addObject(section)
+        mutableItems.add(section)
         managedSections = mutableItems.copy() as? NSOrderedSet
     }
     

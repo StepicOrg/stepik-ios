@@ -16,7 +16,7 @@ class PlaceholderTestViewController: UIViewController {
         let placeholderView = PlaceholderView()
 //        placeholderView.backgroundColor = UIColor.greenColor()
         self.view.addSubview(placeholderView)
-        placeholderView.alignTop("16", leading: "16", bottom: "-16", trailing: "-16", toView: self.view)
+        placeholderView.alignTop("16", leading: "16", bottom: "-16", trailing: "-16", to: self.view)
         placeholderView.delegate = self
         placeholderView.datasource = self
         

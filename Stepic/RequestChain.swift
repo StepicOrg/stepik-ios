@@ -10,32 +10,33 @@ import Foundation
 import Alamofire 
 
 class RequestChain {
-    typealias CompletionHandler = (success: Bool, errorResult: ErrorResult?) -> Void
+    typealias CompletionHandler = (_ success: Bool, _ errorResult: ErrorResult?) -> Void
     
     struct ErrorResult {
-        let request: Request?
-        let error: ErrorType?
+        let request: URLRequest?
+        let error: Error?
     }
     
-    private var requests:[Request] = []
+    fileprivate var requests:[Request] = []
     
     init(requests: [Request]) {
         self.requests = requests
     }
     
-    func start(completionHandler: CompletionHandler) {
+    func start(_ completionHandler: @escaping CompletionHandler) {
         if let request = requests.first {
-            request.response(completionHandler: { (_, _, _, error) in
-                if error != nil {
-                    completionHandler(success: false, errorResult: ErrorResult(request: request, error: error))
+            Alamofire.request(request as! URLRequestConvertible).response { 
+                response in
+                if response.error != nil {
+                    completionHandler(false, ErrorResult(request: response.request, error: response.error))
                     return
                 }
                 self.requests.removeFirst()
                 self.start(completionHandler)
-            })
+            }
             request.resume()
         } else {
-            completionHandler(success: true, errorResult: nil)
+            completionHandler(true, nil)
             return
         }
         

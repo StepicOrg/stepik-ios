@@ -9,10 +9,10 @@
 import Foundation
 
 class HTMLStringWrapperUtil {
-    static func wrap(htmlString: String, style: TextStyle? = nil) -> String {
+    static func wrap(_ htmlString: String, style: TextStyle? = nil) -> String {
         let scriptsString = "\(Scripts.metaViewport)\(Scripts.localTexScript)"
         var html = HTMLBuilder.sharedBuilder.buildCommentHTMLStringWith(head: scriptsString, body: htmlString)
-        html = html.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return html
     }
 }

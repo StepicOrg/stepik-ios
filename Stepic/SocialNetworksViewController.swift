@@ -22,7 +22,7 @@ class SocialNetworksViewController: UIViewController {
         socialNetworksCollectionView.delegate = self
         socialNetworksCollectionView.dataSource = self
     
-        socialNetworksCollectionView.registerNib(UINib(nibName: "SocialNetworkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialNetworkCollectionViewCell")
+        socialNetworksCollectionView.register(UINib(nibName: "SocialNetworkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialNetworkCollectionViewCell")
         
 //        print("collection view cancels touches -> \(socialNetworksCollectionView.panGestureRecognizer.cancelsTouchesInView)")
         initializeTapRecognizer()
@@ -52,26 +52,26 @@ class SocialNetworksViewController: UIViewController {
         socialNetworksCollectionView.addGestureRecognizer(tapGesture)
     }
     
-    func handleTap(sender: UITapGestureRecognizer!) { 
-        let location = sender.locationOfTouch(0, inView: socialNetworksCollectionView)
-        let locationInCollection = CGPointMake(location.x, location.y)
-        let indexPathOptional = socialNetworksCollectionView.indexPathForItemAtPoint(locationInCollection)
+    func handleTap(_ sender: UITapGestureRecognizer!) { 
+        let location = sender.location(ofTouch: 0, in: socialNetworksCollectionView)
+        let locationInCollection = CGPoint(x: location.x, y: location.y)
+        let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
         if let indexPath = indexPathOptional {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)"])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)" as NSObject])
             WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, 
-                withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.Close)
+                withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close)
         }
     }
 
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        super.didRotate(from: fromInterfaceOrientation)
         socialNetworksCollectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
 extension SocialNetworksViewController : UICollectionViewDelegate {
-    func getSocialNetworkByIndexPath(indexPath: NSIndexPath) -> SocialNetwork {
-        return socialNetworks[indexPath.item]
+    func getSocialNetworkByIndexPath(_ indexPath: IndexPath) -> SocialNetwork {
+        return socialNetworks[(indexPath as NSIndexPath).item]
     }
     
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -80,23 +80,23 @@ extension SocialNetworksViewController : UICollectionViewDelegate {
 }
 
 extension SocialNetworksViewController : UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return socialNetworks.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SocialNetworkCollectionViewCell", forIndexPath: indexPath) as! SocialNetworkCollectionViewCell
-        cell.imageView.image = socialNetworks[indexPath.item].image
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialNetworkCollectionViewCell", for: indexPath) as! SocialNetworkCollectionViewCell
+        cell.imageView.image = socialNetworks[(indexPath as NSIndexPath).item].image
         return cell
     }
 }
 
 extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let usedWidth : CGFloat = CGFloat(socialNetworks.count) * 60 + CGFloat(socialNetworks.count - 1) * 10
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
         

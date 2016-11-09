@@ -20,7 +20,7 @@ class Unit: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
@@ -34,13 +34,13 @@ class Unit: NSManagedObject, JSONInitializable {
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
-    func loadAssignments(completion: (Void->Void), errorHandler: (Void->Void)) {
+    func loadAssignments(_ completion: @escaping ((Void)->Void), errorHandler: @escaping ((Void)->Void)) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
                 newAssignments in 
                 self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
                 completion()
@@ -54,15 +54,15 @@ class Unit: NSManagedObject, JSONInitializable {
         })
     }
     
-    func getUnitForLessonId(id: Int) -> Unit? {
-        let request = NSFetchRequest(entityName: "Unit")
+    func getUnitForLessonId(_ id: Int) -> Unit? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
         
         request.predicate = predicate
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request) 
             return (results as? [Unit])?.first
         }
         catch {

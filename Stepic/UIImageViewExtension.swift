@@ -11,7 +11,7 @@ import Foundation
 extension UIImageView {
     func setImageWithColor(image i: UIImage, color: UIColor) {
         self.image = i
-        self.image = i.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        self.image = i.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         self.tintColor = color
     }
 }

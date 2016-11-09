@@ -21,7 +21,7 @@ class Section: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         title = json["title"].stringValue
         position = json["position"].intValue
@@ -37,35 +37,35 @@ class Section: NSManagedObject, JSONInitializable {
         unitsArray = json["units"].arrayObject as! [Int]
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
-    class func getSections(id: Int) throws -> [Section] {
-        let request = NSFetchRequest(entityName: "Section")
+    class func getSections(_ id: Int) throws -> [Section] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
         
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         var predicate = NSPredicate(value: true)
         
         let p = NSPredicate(format: "managedId == %@", id as NSNumber)
-        predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: [predicate, p]) 
+        predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicate, p]) 
         
         
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request)
+            let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Section]
         }
         catch {
-            throw FetchError.RequestExecution
+            throw FetchError.requestExecution
         }
     }
     
-    func loadUnits(completion completion: (Void -> Void), error errorHandler: (Void -> Void)) {
+    func loadUnits(completion: @escaping ((Void) -> Void), error errorHandler: @escaping ((Void) -> Void)) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .update, success: {
                 newUnits in 
                 self.units = Sorter.sort(newUnits, byIds: self.unitsArray)
                 self.loadProgressesForUnits({
@@ -81,7 +81,7 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-    func loadProgressesForUnits(completion: (Void->Void)) {
+    func loadProgressesForUnits(_ completion: @escaping ((Void)->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for unit in units {
@@ -94,7 +94,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         performRequest({
-            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
                 (newProgresses) -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
                 for i in 0 ..< min(self.units.count, progresses.count) {
@@ -111,7 +111,7 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-    func loadLessonsForUnits(completion completion: (Void -> Void)) {
+    func loadLessonsForUnits(completion: @escaping ((Void) -> Void)) {
         var lessonIds : [Int] = []
         var lessons : [Lesson] = []
         for unit in units {
@@ -122,7 +122,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         performRequest({
-            ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
                 newLessons in
                 lessons = Sorter.sort(newLessons, byIds: lessonIds)
                 
@@ -140,7 +140,7 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-    func countProgress(lessons : [Lesson]) -> Float {
+    func countProgress(_ lessons : [Lesson]) -> Float {
         var totalProgress : Float = 0
         for lesson in lessons {
             totalProgress += lesson.goodProgress 
@@ -148,7 +148,7 @@ class Section: NSManagedObject, JSONInitializable {
         return totalProgress / Float(lessons.count)
     }
     
-    func isCompleted(lessons : [Lesson]) -> Bool {
+    func isCompleted(_ lessons : [Lesson]) -> Bool {
         for lesson in lessons {
             if !lesson.isCached {
                 return false
@@ -168,7 +168,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    var storeProgress : (Float -> Void)? {
+    var storeProgress : ((Float) -> Void)? {
         didSet {
             if loadingLessons == nil { 
                 initLoadingLessonsWithDownloading()
@@ -197,7 +197,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     //    var k = "not changed"
-    var storeCompletion : (Void -> Void)? 
+    var storeCompletion : ((Void) -> Void)? 
     
     var goodProgress : Float = 0
     
@@ -218,7 +218,7 @@ class Section: NSManagedObject, JSONInitializable {
     var loadingLessons : [Lesson]?
     
     //TODO: Add cancelled to completion
-    func storeVideos(progress progress : Float -> Void, completion : () -> Void, error errorHandler: NSError? -> Void) {
+    func storeVideos(progress : @escaping (Float) -> Void, completion : @escaping () -> Void, error errorHandler: @escaping (NSError?) -> Void) {
         
         storeProgress = progress
         storeCompletion = completion
@@ -266,7 +266,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func cancelVideoStore(completion completion : Void -> Void) {
+    func cancelVideoStore(completion : @escaping (Void) -> Void) {
         var completedUnits : Int = 0
         for unit in units {
             if let lesson = unit.lesson {
@@ -291,7 +291,7 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func removeFromStore(completion completion: Void -> Void) {
+    func removeFromStore(completion: @escaping (Void) -> Void) {
         var completedUnits : Int = 0
         for unit in units {
             if let lesson = unit.lesson {

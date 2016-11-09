@@ -16,8 +16,8 @@ class MathQuizViewController: QuizViewController {
         super.viewDidLoad()
         
         self.containerView.addSubview(textField)
-        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
-        textField.borderStyle = UITextBorderStyle.RoundedRect
+        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
+        textField.borderStyle = UITextBorderStyle.roundedRect
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
@@ -42,14 +42,14 @@ class MathQuizViewController: QuizViewController {
     }
     
     //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if let r = submission?.reply as? MathReply {
             textField.text = r.formula
         }
         if submission?.status == "correct" {            
-            textField.enabled = false
+            textField.isEnabled = false
         } else {
-            textField.enabled = true
+            textField.isEnabled = true
         }
         //        if reload {
         //            textField.text = ""

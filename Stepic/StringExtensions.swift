@@ -13,12 +13,13 @@ extension String {
         var res : [String : AnyObject] = [:]
         
         var str = ""
-        if let idx = self.characters.indexOf("?") {
-            let pos : Int = self.startIndex.distanceTo(idx)
-            str = self.substringFromIndex(self.startIndex.advancedBy(pos+1))
+        if let idx = self.characters.index(of: "?") {
+            let pos : Int = self.characters.distance(from: self.startIndex, to: idx)
+            str = self.substring(from: self.characters.index(self.startIndex, offsetBy: pos+1))
         }
-        
-        let arr : [AnyObject] = str.characters.split(isSeparator: { $0 == "&" || $0 == "="}).map(String.init)
+        let arr : [String] = str.components(separatedBy: CharacterSet(charactersIn: "&="))
+//        let arr : [AnyObject] = str.characters.split(whereSeparator: {$0 == "&" || $0 == "="})
+//        let arr : [AnyObject] = str.characters.split(whereSeparator: { $0 == "&" || $0 == "="}).map(String.init)
         
         for i in 0..<arr.count/2 {
             res[arr[i*2] as! String] = arr[i*2+1] as AnyObject
@@ -26,17 +27,17 @@ extension String {
         return res
     }
     
-    func indexOf(target: String) -> Int? {
-        if let range = self.rangeOfString(target) {
-            return startIndex.distanceTo(range.startIndex)
+    func indexOf(_ target: String) -> Int? {
+        if let range = self.range(of: target) {
+            return characters.distance(from: startIndex, to: range.lowerBound)
         } else {
             return nil
         }
     }
     
-    func lastIndexOf(target: String) -> Int? {
-        if let range = self.rangeOfString(target, options: .BackwardsSearch) {
-            return startIndex.distanceTo(range.startIndex)
+    func lastIndexOf(_ target: String) -> Int? {
+        if let range = self.range(of: target, options: .backwards) {
+            return characters.distance(from: startIndex, to: range.lowerBound)
         } else {
             return nil
         }

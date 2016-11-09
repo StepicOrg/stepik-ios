@@ -28,17 +28,17 @@ class MyCoursesViewController: CoursesViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         handleCourseUpdates()
     }
     
-    private func getExistingIndexPathsFromCourses(newCourses: [Course]) -> [NSIndexPath] {
+    fileprivate func getExistingIndexPathsFromCourses(_ newCourses: [Course]) -> [IndexPath] {
         return newCourses.flatMap{ 
             newCourse in
-            return courses.indexOf{$0 == newCourse}
+            return courses.index{$0 == newCourse}
             }.map{
-                return NSIndexPath(forRow: $0, inSection: 0)
+                return IndexPath(row: $0, section: 0)
         }
     }
     
@@ -51,17 +51,17 @@ class MyCoursesViewController: CoursesViewController {
             self.tableView.beginUpdates()
             
             let deletingIndexPaths = getExistingIndexPathsFromCourses(CoursesJoinManager.sharedManager.deletedCourses)
-            tableView.deleteRowsAtIndexPaths(deletingIndexPaths, withRowAnimation: .Automatic)
-            for index in deletingIndexPaths.sort({$0.row > $1.row}) {
-                courses.removeAtIndex(index.row)
-                tabIds.removeAtIndex(index.row)
+            tableView.deleteRows(at: deletingIndexPaths, with: .automatic)
+            for index in deletingIndexPaths.sorted(by: {($0 as NSIndexPath).row > ($1 as NSIndexPath).row}) {
+                courses.remove(at: (index as NSIndexPath).row)
+                tabIds.remove(at: (index as NSIndexPath).row)
             }
             
             let addedCourses = getNonExistingCourses(CoursesJoinManager.sharedManager.addedCourses)
             if addedCourses.count != 0 { 
                 courses = addedCourses + courses
                 tabIds = tabIds + courses.map{return $0.id}
-                tableView.insertRowsAtIndexPaths((0..<addedCourses.count).map({return NSIndexPath(forRow: $0, inSection: 0)}), withRowAnimation: .Automatic)
+                tableView.insertRows(at: (0..<addedCourses.count).map({return IndexPath(row: $0, section: 0)}), with: .automatic)
             }
             
             self.tableView.endUpdates()
@@ -73,37 +73,37 @@ class MyCoursesViewController: CoursesViewController {
 }
 
 extension MyCoursesViewController {
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             return Images.emptyCoursesPlaceholder
-        case .ConnectionError:
+        case .connectionError:
             return Images.noWifiImage.size250x250
         }
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
         }
         
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+            NSForegroundColorAttributeName: UIColor.darkGray]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func descriptionForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         var text : String = ""
         
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             if !AuthInfo.shared.isAuthorized {
                 text = NSLocalizedString("SignInToJoin", comment: "")
             } else {
@@ -111,26 +111,26 @@ extension MyCoursesViewController {
             }
 
             break
-        case .ConnectionError:
+        case .connectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
             break
         }
                 
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSForegroundColorAttributeName: UIColor.lightGray,
             NSParagraphStyleAttributeName: paragraph]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+    func buttonTitleForEmptyDataSet(_ scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
         var text : String = ""
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             if !AuthInfo.shared.isAuthorized {
                 text = NSLocalizedString("SignIn", comment: "")
             } else {
@@ -139,45 +139,45 @@ extension MyCoursesViewController {
 
             
             break
-        case .ConnectionError:
+        case .connectionError:
             text = ""
             break
         }
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(16.0),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
                           NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.whiteColor()
+    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.white
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
 //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 44
     }
 }
 
 extension MyCoursesViewController  {
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
     
-    func emptyDataSetDidTapButton(scrollView: UIScrollView!) {
+    func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
         switch emptyDatasetState {
-        case .Empty:
+        case .empty:
             if !AuthInfo.shared.isAuthorized {
                 let vc = ControllerHelper.getAuthController()
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.present(vc, animated: true, completion: nil)
             } else {
                 self.tabBarController?.selectedIndex = 1
             }
            
             
             break
-        case .ConnectionError:
+        case .connectionError:
             break
         }
     }

@@ -9,24 +9,24 @@
 import UIKit
 
 class CacheManager: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static let sharedManager = CacheManager()
     
     //Returns (successful, failed)
-    func clearCache(completion completion: (Int, Int)->Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+    func clearCache(completion: @escaping (Int, Int)->Void) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
             let videos = Video.getAllVideos()
             var completed = 0
             var errors = 0
             for video in videos {
-                if video.state == VideoState.Cached {
+                if video.state == VideoState.cached {
                     if video.removeFromStore() {
                         completed += 1
                     } else {
                         errors += 1
                     }
                 }
-                if video.state == VideoState.Downloading {
+                if video.state == VideoState.downloading {
                     if video.cancelStore() {
                         completed += 1
                     } else {
@@ -40,17 +40,17 @@ class CacheManager: NSObject {
     
     var connectionCancelled : [Video] = []
     
-    func cancelAll(completion completion: (Int, Int)->Void) {
+    func cancelAll(completion: @escaping (Int, Int)->Void) {
         var completed = 0
         var errors = 0
         if connectionCancelled != [] {
             completed += connectionCancelled.count 
         }
         connectionCancelled = []
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
             let videos = Video.getAllVideos()
             for video in videos {
-                if video.state == VideoState.Downloading {
+                if video.state == VideoState.downloading {
                     if video.cancelStore() {
                         completed += 1
                     } else {

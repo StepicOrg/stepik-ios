@@ -12,17 +12,17 @@ import UIKit
  Contains user preferences for version update check
  */
 class UpdatePreferencesContainer: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static let sharedContainer = UpdatePreferencesContainer()
     
-    private let defaults = NSUserDefaults.standardUserDefaults()
+    fileprivate let defaults = UserDefaults.standard
     
-    private let allowUpdateChecksKey = "allowUpdateChecks"
-    private let lastUpdateCheckTimeKey = "lastUpdateCheckTime"
+    fileprivate let allowUpdateChecksKey = "allowUpdateChecks"
+    fileprivate let lastUpdateCheckTimeKey = "lastUpdateCheckTime"
     
     var allowsUpdateChecks: Bool {
         get {
-            if let allow = defaults.valueForKey(allowUpdateChecksKey) as? Bool {
+            if let allow = defaults.value(forKey: allowUpdateChecksKey) as? Bool {
                 return allow
             } else {
                 self.allowsUpdateChecks = true
@@ -31,14 +31,14 @@ class UpdatePreferencesContainer: NSObject {
         }
         
         set(allowChecks) {
-            defaults.setObject(allowChecks, forKey: allowUpdateChecksKey)
+            defaults.set(allowChecks, forKey: allowUpdateChecksKey)
             defaults.synchronize()
         }
     }
     
-    var lastUpdateCheckTime: NSTimeInterval {
+    var lastUpdateCheckTime: TimeInterval {
         get {
-            if let lastUpdate = defaults.valueForKey(lastUpdateCheckTimeKey) as? Double {
+            if let lastUpdate = defaults.value(forKey: lastUpdateCheckTimeKey) as? Double {
                 return lastUpdate
             } else {
                 self.lastUpdateCheckTime = 0.0
@@ -46,7 +46,7 @@ class UpdatePreferencesContainer: NSObject {
             }
         } 
         set(time) {
-            defaults.setObject(time, forKey: lastUpdateCheckTimeKey)
+            defaults.set(time, forKey: lastUpdateCheckTimeKey)
             defaults.synchronize()
         }
     }

@@ -11,19 +11,19 @@ import UIKit
 class PathManager: NSObject {
     
     static let sharedManager = PathManager()
-    private override init() {}
+    fileprivate override init() {}
     
-    private var directoryPath : NSURL {
-        let fileManager = NSFileManager.defaultManager()
-        let paths = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    fileprivate var directoryPath : URL {
+        let fileManager = FileManager.default
+        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return paths.first!
     }
     
-    func getVideoDirectoryURL() throws -> NSURL {
-        let videoURL = directoryPath.URLByAppendingPathComponent("Video", isDirectory: true)
+    func getVideoDirectoryURL() throws -> URL {
+        let videoURL = directoryPath.appendingPathComponent("Video", isDirectory: true)
         
         do { 
-            try NSFileManager.defaultManager().createDirectoryAtURL(videoURL, withIntermediateDirectories: false, attributes: nil)
+            try FileManager.default.createDirectory(at: videoURL, withIntermediateDirectories: false, attributes: nil)
         } catch let error as NSError { 
             //Error, when directory already exists
             if error.code != 516 {
@@ -35,13 +35,13 @@ class PathManager: NSObject {
 
     }
     
-    func createVideoWith(id id: Int, andExtension ext: String) throws {
+    func createVideoWith(id: Int, andExtension ext: String) throws {
         let fileName = "\(id).\(ext)"
         
         do {
-            let fileURL = try getVideoDirectoryURL().URLByAppendingPathComponent(fileName, isDirectory: false)
-            let filePath = fileURL.path!
-            if !NSFileManager.defaultManager().createFileAtPath(filePath, contents: nil, attributes: nil) {
+            let fileURL = try getVideoDirectoryURL().appendingPathComponent(fileName, isDirectory: false)
+            let filePath = fileURL.path
+            if !FileManager.default.createFile(atPath: filePath, contents: nil, attributes: nil) {
                 let error = NSError(domain: NSCocoaErrorDomain, code: NSFileWriteUnknownError, userInfo: [NSLocalizedDescriptionKey : "Error while creating file at path \(filePath)"])
                 throw error
             }
@@ -51,40 +51,40 @@ class PathManager: NSObject {
         }
     }
     
-    func doesExistVideoWith(id id: Int) -> Bool {
+    func doesExistVideoWith(id: Int) -> Bool {
         do {
             let filePath = try getPathForVideoWithId(id: id, andExtension: "mp4")
-            return try NSFileManager.defaultManager().fileExistsAtPath(filePath)
+            return try FileManager.default.fileExists(atPath: filePath)
         }
         catch _ as NSError{
             return false
         }
     }
     
-    func getPathForVideoWithId(id id: Int, andExtension ext: String) throws -> String {
+    func getPathForVideoWithId(id: Int, andExtension ext: String) throws -> String {
         let fileName = "\(id).\(ext)"
         do {
-            let fileURL = try getVideoDirectoryURL().URLByAppendingPathComponent(fileName, isDirectory: false)
-            return fileURL.path!
+            let fileURL = try getVideoDirectoryURL().appendingPathComponent(fileName, isDirectory: false)
+            return fileURL.path
         }
         catch let error as NSError{
             throw error
         }
     }
     
-    func getPathForStoredVideoWithName(fileName: String) throws -> String {
+    func getPathForStoredVideoWithName(_ fileName: String) throws -> String {
         do {
-            let fileURL = try getVideoDirectoryURL().URLByAppendingPathComponent(fileName, isDirectory: false)
-            return fileURL.path!
+            let fileURL = try getVideoDirectoryURL().appendingPathComponent(fileName, isDirectory: false)
+            return fileURL.path
         }
         catch let error as NSError{
             throw error
         }
     }
     
-    func deleteVideoFileAtPath(path: String) throws {
+    func deleteVideoFileAtPath(_ path: String) throws {
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(path)
+            try FileManager.default.removeItem(atPath: path)
         }
         catch let error as NSError {
             throw error

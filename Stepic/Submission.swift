@@ -26,7 +26,7 @@ class Submission: NSObject {
         reply = getReplyFromJSON(json["reply"], stepName: stepName)
     }
     
-    private func getReplyFromJSON(json: JSON, stepName: String) -> Reply? {
+    fileprivate func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
         switch stepName {
         case "choice" : return ChoiceReply(json: json)
         case "string" : return TextReply(json: json)

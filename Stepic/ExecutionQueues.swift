@@ -12,7 +12,7 @@ import Foundation
  Contains all ExecutionQueues
  */
 class ExecutionQueues {
-    private init() {}
+    fileprivate init() {}
     static let sharedQueues = ExecutionQueues()
     
     var connectionAvailableExecutionQueue = ExecutionQueue()
@@ -20,11 +20,11 @@ class ExecutionQueues {
     
     
     func setUpQueueObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
     }
     
-    @objc func reachabilityChanged(notification: NSNotification) {
-        if Reachability.reachabilityForInternetConnection().isReachable() {
+    @objc func reachabilityChanged(_ notification: Foundation.Notification) {
+        if Reachability.forInternetConnection().isReachable() {
             executeConnectionAvailableQueue()
         }
     }

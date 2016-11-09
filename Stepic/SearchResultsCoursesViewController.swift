@@ -23,7 +23,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         }
     }
     
-    override func refreshingChangedTo(refreshing: Bool) {
+    override func refreshingChangedTo(_ refreshing: Bool) {
         if refreshing {
             doesPresentActivityIndicatorView = true
             print(activityView.frame)
@@ -37,16 +37,16 @@ class SearchResultsCoursesViewController: CoursesViewController {
     func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
         ai.color = UIColor.stepicGreenColor()
-        v.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenterWithView(v)
+        ai.alignCenter(with: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: tableView)
-        v.alignToView(self.view)
-        v.hidden = false
+        v.align(to: self.view)
+        v.isHidden = false
         return v
     }
     
@@ -54,10 +54,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
         didSet {
             if doesPresentActivityIndicatorView {
                 print("present activity indicator view")
-                UIThread.performUI{self.activityView.hidden = false}
+                UIThread.performUI{self.activityView.isHidden = false}
             } else {
                 print("dismiss activity indicator view")
-                UIThread.performUI{self.activityView.hidden = true}
+                UIThread.performUI{self.activityView.isHidden = true}
             }
         }
     }
@@ -75,7 +75,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     func printInfo() {
         print("\n------------------")
-        print("tableView frame resultsController active -> \(tableView.convertRect(tableView.bounds, toView: nil))")
+        print("tableView frame resultsController active -> \(tableView.convert(tableView.bounds, to: nil))")
         print("before change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
         if tableView.contentInset.top != 60 {
             tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
@@ -86,13 +86,13 @@ class SearchResultsCoursesViewController: CoursesViewController {
         print("after change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let constraintDistance = tableView.convertRect(tableView.bounds, toView: nil).minY
+        let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
         let totalDistance = constraintDistance + tableView.contentInset.top
         if totalDistance != 64 {
             tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
@@ -110,13 +110,13 @@ class SearchResultsCoursesViewController: CoursesViewController {
                 (searchResults, meta) -> Void in
                 let ids = searchResults.flatMap({return $0.courseId})
                 
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
                     self.courses = Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     self.currentPage = 1
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
                     }
@@ -150,7 +150,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
             ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
                 (searchResults, meta) -> Void in
                 let ids = searchResults.flatMap({return $0.courseId})
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
                     if !self.isLoadingMore {
@@ -198,11 +198,11 @@ class SearchResultsCoursesViewController: CoursesViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
         if identifier == "showCourse" || identifier == "showSections" { 
-            parentVC?.performSegueWithIdentifier(identifier, sender: sender)
+            parentVC?.performSegue(withIdentifier: identifier, sender: sender)
         } else {
-            super.performSegueWithIdentifier(identifier, sender: sender)
+            super.performSegue(withIdentifier: identifier, sender: sender)
         }
     }
     
@@ -219,22 +219,22 @@ class SearchResultsCoursesViewController: CoursesViewController {
 }
 
 extension SearchResultsCoursesViewController {
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let pvc = parentVC as? FindCoursesViewController
         pvc?.hideKeyboardIfNeeded()
     }
 }
 
 extension SearchResultsCoursesViewController {
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return Images.emptyCoursesPlaceholder
     }
     
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
         
         let text = NSLocalizedString("NoSearchResultsTitle", comment: "")
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(18.0),
-                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSForegroundColorAttributeName: UIColor.darkGray]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
@@ -254,22 +254,22 @@ extension SearchResultsCoursesViewController {
     //        return NSAttributedString(string: text, attributes: attributes)
     //    }
     
-    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.whiteColor()
+    func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.white
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 0
     }
 }
 
 extension SearchResultsCoursesViewController {
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return false
     }
     
-    func emptyDataSetDidTapView(scrollView: UIScrollView!) {
+    func emptyDataSetDidTapView(_ scrollView: UIScrollView!) {
         let pvc = parentVC as? FindCoursesViewController
         pvc?.hideKeyboardIfNeeded()
     }

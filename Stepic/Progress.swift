@@ -19,7 +19,7 @@ class Progress: NSManagedObject {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].stringValue
         isPassed = json["is_passed"].boolValue
         score = json["score"].intValue
@@ -28,15 +28,15 @@ class Progress: NSManagedObject {
         numberOfStepsPassed = json["n_steps_passed"].intValue
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
     static func deleteAllStoredProgresses() {
-        let request = NSFetchRequest(entityName: "Progress")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Progress")
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) as? [Progress]
+            let results = try CoreDataHelper.instance.context.fetch(request) as? [Progress]
             for obj in results ?? [] {
                 CoreDataHelper.instance.deleteFromStore(obj)
             }

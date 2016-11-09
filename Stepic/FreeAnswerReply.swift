@@ -22,7 +22,7 @@ class FreeAnswerReply: NSObject, Reply {
         super.init()
     }
     
-    var dictValue : [String : NSObject] {
-        return ["text" : text, "attachments" : []]
+    var dictValue : [String : Any] {
+        return ["text" : text as NSObject, "attachments" : []]
     }
 }

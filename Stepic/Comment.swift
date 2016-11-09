@@ -21,8 +21,8 @@ class Comment: JSONInitializable {
     var parentId: Int?
     var userId: Int
     var userRole: UserRole
-    var time: NSDate
-    var lastTime: NSDate
+    var time: Date
+    var lastTime: Date
     var text: String
     var replyCount: Int
     var isDeleted: Bool
@@ -35,7 +35,7 @@ class Comment: JSONInitializable {
     var userInfo: UserInfo!
     var vote: Vote!
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         parentId = json["parent"].int
         userId = json["user"].intValue
@@ -75,7 +75,7 @@ class Comment: JSONInitializable {
         abuseCount = json["abuse_count"].intValue
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
@@ -117,11 +117,11 @@ struct CommentPostable {
     
     var json: [String: AnyObject] {
         var dict : [String: AnyObject] = [
-            "target" : target,
-            "text" : text
+            "target" : target as AnyObject,
+            "text" : text as AnyObject
         ]
         if let p = parent {
-            dict["parent"] = p
+            dict["parent"] = p as AnyObject?
         }
         
         return dict

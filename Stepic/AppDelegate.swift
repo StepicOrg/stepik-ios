@@ -15,17 +15,18 @@ import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
 import MagicalRecord
- 
+import YandexMobileMetrica
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         
-        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreAtURL(CoreDataHelper.instance.storeURL)
+        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStore(at: CoreDataHelper.instance.storeURL as URL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
 //        setVideoTestRootController()
@@ -37,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -56,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
         
-        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSString: AnyObject] {
+        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [NSString: AnyObject] {
             handleNotification(notificationDict)
         }
         
@@ -66,9 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func handleNotification(notificationDict: [NSString: AnyObject]) {
+    fileprivate func handleNotification(_ notificationDict: [NSString: AnyObject]) {
         if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict), 
-            topController = currentNavigation?.topViewController {
+            let topController = currentNavigation?.topViewController {
             reaction(topController)
         }
     }
@@ -80,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return nil
     }
     
-    private func handleOpenedFromDeepLink(url: NSURL) {
+    fileprivate func handleOpenedFromDeepLink(_ url: URL) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
             controller, push in
@@ -91,29 +94,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             if push { 
                                 topController.navigationController?.pushViewController(vc, animated: true) 
                             } else {
-                                topController.presentViewController(vc, animated: true, completion: nil)
+                                topController.present(vc, animated: true, completion: nil)
                             }
                         })
                     } 
                 }
             } else {
-                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: {
+                let alert = UIAlertController(title: NSLocalizedString("CouldNotOpenLink", comment: ""), message: NSLocalizedString("OpenInBrowserQuestion", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
                     action in
-                    UIApplication.sharedApplication().openURL(url)
+                    UIApplication.shared.openURL(url)
                 }))
                 
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
                 
                 UIThread.performUI {
-                    self?.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                    self?.window?.rootViewController?.present(alert, animated: true, completion: nil)
                 }
             }
         })
     }
     
-    func updateNotificationRegistrationStatus(notification: NSNotification) {
-        if let info = notification.userInfo as? [String:String] {
+    func updateNotificationRegistrationStatus(_ notification: Foundation.Notification) {
+        if let info = (notification as NSNotification).userInfo as? [String:String] {
             if let error = info["error"] {
                 print("Error registering with GCM: \(error)")
             } else if let _ = info["registrationToken"] {
@@ -129,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let version = newVersion {
                     let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
                     UIThread.performUI{
-                        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
                     }
                 }
             }, error: {
@@ -139,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func didReceiveRegistrationToken(notification: NSNotification) {
+    func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
         if let token = FIRInstanceID.instanceID().token() {
             if AuthInfo.shared.isAuthorized { 
                 NotificationRegistrator.sharedInstance.registerDevice(token)
@@ -147,29 +150,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
-            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])            
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
         } else {
             print("error while authentificating")
         }
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("error while registering to remote notifications")
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         
         if let notificationDict = userInfo as? [NSString: AnyObject] {
-            if let text = ((notificationDict["aps"] as? [NSObject: AnyObject])?["alert"] as? [NSObject: AnyObject])?["body"] as? String {
+            if let text = ((notificationDict["aps"] as? [AnyHashable: Any])?["alert"] as? [AnyHashable: Any])?["body"] as? String {
                 NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: 
                     {
                         self.handleNotification(notificationDict)
@@ -180,26 +183,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didReceiveRemoteNotification with userInfo: \(userInfo)")
     }
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     @available(iOS 8.0, *)
-    func application(application: UIApplication, continueUserActivity userActivity: NSUserActivity, restorationHandler: ([AnyObject]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(userActivity.webpageURL?.absoluteString)")
             if let url = userActivity.webpageURL {
@@ -209,18 +212,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
-            NSNotificationCenter.defaultCenter().postNotificationName("ReceivedAuthorizationCodeNotification", object: self, userInfo: ["code": code])            
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
         } else {
             handleOpenedFromDeepLink(url)
         }
         return true
     }
     
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
@@ -237,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return UIInterfaceOrientationMask.Portrait
 //    }
         
-    private func setVideoTestRootController() {
+    fileprivate func setVideoTestRootController() {
         let rootController = ControllerHelper.instantiateViewController(identifier: "PlayerTestViewController", storyboardName: "PlayerTestStoryboard")
         if self.window != nil {
             self.window!.rootViewController = rootController
@@ -245,7 +248,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
     }
 
 }

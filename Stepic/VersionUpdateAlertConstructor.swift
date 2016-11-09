@@ -12,26 +12,26 @@ import UIKit
  Constructs alert controller 
  */
 class VersionUpdateAlertConstructor: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static let sharedConstructor = VersionUpdateAlertConstructor()
     
-    func getUpdateAlertController(updateUrl url: NSURL, addNeverAskAction: Bool) -> UIAlertController {
-        let alert = UIAlertController(title: NSLocalizedString("UpdateAvailable", comment: ""), message: NSLocalizedString("AppUpdateMessage", comment: ""), preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Update", comment: ""), style: .Default, handler: {
+    func getUpdateAlertController(updateUrl url: URL, addNeverAskAction: Bool) -> UIAlertController {
+        let alert = UIAlertController(title: NSLocalizedString("UpdateAvailable", comment: ""), message: NSLocalizedString("AppUpdateMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Update", comment: ""), style: .default, handler: {
             action in
-            UIApplication.sharedApplication().openURL(url)
-            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = NSDate().timeIntervalSince1970
+            UIApplication.shared.openURL(url)
+            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = Date().timeIntervalSince1970
         }))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .Cancel, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Later", comment: ""), style: .cancel, handler: {
             action in
-            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = NSDate().timeIntervalSince1970
+            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = Date().timeIntervalSince1970
         }))
         
         if addNeverAskAction {
-            alert.addAction(UIAlertAction(title: NSLocalizedString("NeverAsk", comment: ""), style: .Destructive, handler: {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("NeverAsk", comment: ""), style: .destructive, handler: {
                 action in
-                UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = NSDate().timeIntervalSince1970
+                UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = Date().timeIntervalSince1970
                 UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = false
             }))
         }
@@ -40,10 +40,10 @@ class VersionUpdateAlertConstructor: NSObject {
     }
     
     func getNoUpdateAvailableAlertController() -> UIAlertController {
-        let alert = UIAlertController(title: NSLocalizedString("NoUpdateAvailable", comment: ""), message: NSLocalizedString("NoAppUpdateMessage", comment: ""), preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: {
+        let alert = UIAlertController(title: NSLocalizedString("NoUpdateAvailable", comment: ""), message: NSLocalizedString("NoAppUpdateMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
             action in
-            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = NSDate().timeIntervalSince1970
+            UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime = Date().timeIntervalSince1970
         }))
                 
         return alert

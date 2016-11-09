@@ -26,13 +26,13 @@ class SectionTableViewCell: UITableViewCell {
     }
 
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    private class func getTextFromSection(section: Section) -> String {
+    fileprivate class func getTextFromSection(_ section: Section) -> String {
         var text = ""
         if section.beginDate != nil { 
             text = "\n\(NSLocalizedString("BeginDate", comment: "")): \(section.beginDate!.getStepicFormatString())"
@@ -46,19 +46,19 @@ class SectionTableViewCell: UITableViewCell {
         return text
     }
     
-    class func heightForCellInSection(section: Section) -> CGFloat {
+    class func heightForCellInSection(_ section: Section) -> CGFloat {
         let titleText = "\(section.position). \(section.title)"
         let datesText = SectionTableViewCell.getTextFromSection(section)
-        return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.mainScreen().bounds.width - 117))
+        return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 117) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 117))
     }
     
-    func updateDownloadButton(section: Section) {
+    func updateDownloadButton(_ section: Section) {
         if section.isCached { 
-            self.downloadButton.state = .Downloaded
+            self.downloadButton.state = .downloaded
         } else if section.isDownloading { 
             
 //            print("update download button while downloading")
-            self.downloadButton.state = .Downloading
+            self.downloadButton.state = .downloading
             self.downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
         
             
@@ -69,23 +69,23 @@ class SectionTableViewCell: UITableViewCell {
             
             section.storeCompletion = {
                 if section.isCached {
-                    UIThread.performUI({self.downloadButton.state = .Downloaded})
+                    UIThread.performUI({self.downloadButton.state = .downloaded})
                 } else {
-                    UIThread.performUI({self.downloadButton.state = .StartDownload})
+                    UIThread.performUI({self.downloadButton.state = .startDownload})
                 }
             }
             
         } else {
-            self.downloadButton.state = .StartDownload
+            self.downloadButton.state = .startDownload
         }
     }
     
-    func initWithSection(section: Section, delegate : PKDownloadButtonDelegate) {
+    func initWithSection(_ section: Section, delegate : PKDownloadButtonDelegate) {
         titleLabel.text = "\(section.position). \(section.title)"
         
         datesLabel.text = SectionTableViewCell.getTextFromSection(section)
         
-        progressView.backgroundColor = UIColor.grayColor()
+        progressView.backgroundColor = UIColor.gray
         if let passed = section.progress?.isPassed {
             if passed {
                 progressView.backgroundColor = UIColor.stepicGreenColor()
@@ -98,13 +98,13 @@ class SectionTableViewCell: UITableViewCell {
         downloadButton.delegate = delegate
         
         if !section.isActive && section.testSectionAction == nil {
-            titleLabel.enabled = false
-            datesLabel.enabled = false
-            downloadButton.hidden = true
+            titleLabel.isEnabled = false
+            datesLabel.isEnabled = false
+            downloadButton.isHidden = true
         } else {
-            titleLabel.enabled = true
-            datesLabel.enabled = true
-            downloadButton.hidden = false
+            titleLabel.isEnabled = true
+            datesLabel.isEnabled = true
+            downloadButton.isHidden = false
         }
 //        if let cr = section.beginDate?.compare(NSDate()) {
 //            if cr = NSComparisonResult.OrderedDescending {

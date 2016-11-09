@@ -17,9 +17,9 @@ class NumberQuizViewController: QuizViewController {
         super.viewDidLoad()
         
         self.containerView.addSubview(textField)
-        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
-        textField.borderStyle = UITextBorderStyle.RoundedRect
-        textField.keyboardType = UIKeyboardType.NumbersAndPunctuation
+        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
+        textField.borderStyle = UITextBorderStyle.roundedRect
+        textField.keyboardType = UIKeyboardType.numbersAndPunctuation
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
@@ -44,14 +44,14 @@ class NumberQuizViewController: QuizViewController {
     }
     
     //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if let r = submission?.reply as? NumberReply {
             textField.text = r.number
         }
         if submission?.status == "correct" {
-            textField.enabled = false
+            textField.isEnabled = false
         } else {
-            textField.enabled = true
+            textField.isEnabled = true
         }
         //        if reload {
         //            textField.text = ""
@@ -68,15 +68,15 @@ class NumberQuizViewController: QuizViewController {
         return NumberReply(number: textField.text ?? "")
     }
     
-    private func presentWrongFormatAlert() {
-        let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertControllerStyle.Alert)
+    fileprivate func presentWrongFormatAlert() {
+        let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
             action in
             
         }))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func checkReplyReady() -> Bool {

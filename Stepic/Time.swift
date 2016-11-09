@@ -9,11 +9,11 @@
 import Foundation
 
 struct Time {
-    private static var d = [NSObject: NSDate]()
-    static func tick(key: NSObject) {
-        d[key] = NSDate()
+    fileprivate static var d = [NSObject: Date]()
+    static func tick(_ key: NSObject) {
+        d[key] = Date()
     }
-    static func tock(key: NSObject) {
+    static func tock(_ key: NSObject) {
         print("Timer value -> \(d[key]?.timeIntervalSinceNow ?? 322) for key -> \(key)")
     }
 }

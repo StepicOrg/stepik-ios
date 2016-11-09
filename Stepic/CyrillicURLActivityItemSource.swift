@@ -12,15 +12,15 @@ import TUSafariActivity
 class CyrillicURLActivityItemSource : NSObject, UIActivityItemSource {
     
     var link: String
-    var url : NSURL? {
-        return NSURL(string: link.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+    var url : URL? {
+        return URL(string: link.addingPercentEscapes(using: String.Encoding.utf8)!)
     }
     
     init(link: String) {
         self.link = link
     }
     
-    func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         if let url = self.url {
             return url
         } else {
@@ -28,9 +28,9 @@ class CyrillicURLActivityItemSource : NSObject, UIActivityItemSource {
         }
     }
     
-    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
         print("\(activityType)")
-        switch activityType {
+        switch activityType.rawValue {
         case "TUSafariActivity" : 
             if let url = self.url {
                 return url

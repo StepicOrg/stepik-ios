@@ -14,14 +14,14 @@ import CoreData
 class ApiDataDownloader: NSObject {
     
     static let sharedDownloader = ApiDataDownloader()
-    private override init() {}
+    fileprivate override init() {}
     
     
-    func getDisplayedCoursesIds(featured featured: Bool?, enrolled: Bool?, page: Int?, success : ([Int], Meta) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
-        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
+    func getDisplayedCoursesIds(featured: Bool?, enrolled: Bool?, page: Int?, success : @escaping ([Int], Meta) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+        let headers : HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
         // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
-        var params : [String : NSObject] = [:]
+        var params = Parameters()
         if let f = featured {
             params["is_featured"] = f ? "true" : "false"
         } 
@@ -34,15 +34,27 @@ class ApiDataDownloader: NSObject {
             params["page"] = p
         }
 
-        params["access_token"] = AuthInfo.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/courses", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/courses", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
             //TODO: Remove from here 
             if let e = error {
                 print(e)
-                failure(error: e)
+                failure(e)
                 return
             }
             
@@ -56,12 +68,12 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func getCurrentUser(success : (User) -> Void, failure : (error : ErrorType) -> Void) {
+    func getCurrentUser(_ success : @escaping (User) -> Void, failure : @escaping (_ error : Error) -> Void) {
         
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
-        var params : [String : NSObject] = [:]
+        var params : Parameters = [:]
                
         performRequest({
             params["access_token"] = AuthInfo.shared.token?.accessToken ?? ""
@@ -74,14 +86,26 @@ class ApiDataDownloader: NSObject {
 
     }
     
-    private func getCurrentUserProfileApiCall(params: [String : NSObject], headers : [String : String] = AuthInfo.shared.initialHTTPHeaders, success : (User) -> Void, failure : (error : ErrorType) -> Void) -> Request? {
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
+    fileprivate func getCurrentUserProfileApiCall(_ params: Parameters, headers : [String : String] = AuthInfo.shared.initialHTTPHeaders, success : @escaping (User) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
             //TODO: Delete from here
             if let e = error {
                 print(e)
-                failure(error: e)
+                failure(e)
                 return
             }
             
@@ -92,49 +116,49 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    private func constructIdsString<TID>(array arr: [TID]) -> String {
+    fileprivate func constructIdsString<TID>(array arr: [TID]) -> String {
         var result = ""
         for element in arr {
             result += "ids[]=\(element)&"
         }
         if result != "" { 
-            result.removeAtIndex(result.endIndex.predecessor()) 
+            result.remove(at: result.characters.index(before: result.endIndex)) 
         }
         return result
     }
 
     
-    func getUsersByIds(ids: [Int], deleteUsers : [User], refreshMode: RefreshMode, success : (([User]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getUsersByIds(_ ids: [Int], deleteUsers : [User], refreshMode: RefreshMode, success : (([User]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "users", headers: [String:String](), ids: ids, deleteObjects: deleteUsers, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getSectionsByIds(ids: [Int], existingSections : [Section], refreshMode: RefreshMode, success : (([Section]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getSectionsByIds(_ ids: [Int], existingSections : [Section], refreshMode: RefreshMode, success : (([Section]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "sections", ids: ids, deleteObjects: existingSections, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getUnitsByIds(ids: [Int], deleteUnits : [Unit], refreshMode: RefreshMode, success : (([Unit]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getUnitsByIds(_ ids: [Int], deleteUnits : [Unit], refreshMode: RefreshMode, success : (([Unit]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "units", ids: ids, deleteObjects: deleteUnits, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getLessonsByIds(ids: [Int], deleteLessons : [Lesson], refreshMode: RefreshMode, success : (([Lesson]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getLessonsByIds(_ ids: [Int], deleteLessons : [Lesson], refreshMode: RefreshMode, success : (([Lesson]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "lessons", ids: ids, deleteObjects: deleteLessons, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getStepsByIds(ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getStepsByIds(_ ids: [Int], deleteSteps : [Step], refreshMode: RefreshMode, success : (([Step]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "steps", ids: ids, deleteObjects: deleteSteps, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getCoursesByIds(ids: [Int], deleteCourses : [Course], refreshMode: RefreshMode, success : (([Course]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getCoursesByIds(_ ids: [Int], deleteCourses : [Course], refreshMode: RefreshMode, success : (([Course]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "courses", ids: ids, deleteObjects: deleteCourses, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    func getAssignmentsByIds(ids: [Int], deleteAssignments : [Assignment], refreshMode: RefreshMode, success : (([Assignment]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getAssignmentsByIds(_ ids: [Int], deleteAssignments : [Assignment], refreshMode: RefreshMode, success : (([Assignment]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         return getObjectsByIds(requestString: "assignments", ids: ids, deleteObjects: deleteAssignments, refreshMode: refreshMode, success: success, failure: failure)
     }
     
-    private func getObjectsByIds<T : JSONInitializable>(requestString requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    fileprivate func getObjectsByIds<T : JSONInitializable>(requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [Int], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
-        let params : [String : NSObject] = [:]
+        let params : Parameters = [:]
                 
         let idString = constructIdsString(array: ids)
         if idString == "" {
@@ -142,20 +166,33 @@ class ApiDataDownloader: NSObject {
             return nil
         }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, response, json, error) in
+//        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: URLEncoding.default).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
             if printOutput { 
                 print(json)
             }
             
             if let e = error {
-                failure(error: e)
+                failure(e)
                 return
             }
             
             if let r = response {
-                let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(r.allHeaderFields as! [String: String], forURL: NSURL(string: StepicApplicationsInfo.stepicURL)!)
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: r.allHeaderFields as! [String: String], for: URL(string: StepicApplicationsInfo.stepicURL)!)
                 for cookie in cookies {
                     print("\(cookie.name) : \(cookie.value)")
                 }
@@ -167,7 +204,7 @@ class ApiDataDownloader: NSObject {
             
             switch refreshMode {
                 
-            case .Delete:
+            case .delete:
                 
                 for object in deleteObjects {
                     CoreDataHelper.instance.deleteFromStore(object as! NSManagedObject, save: false)
@@ -177,7 +214,7 @@ class ApiDataDownloader: NSObject {
                     newObjects += [T(json: objectJSON)]
                 }
                                 
-            case .Update:
+            case .update:
                 
                 for objectJSON in json[requestString].arrayValue {
                     let existing = deleteObjects.filter({obj in obj.id == objectJSON["id"].intValue})
@@ -200,17 +237,17 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func getProgressesByIds(ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : (error : ErrorType) -> Void) -> Request? {
+    func getProgressesByIds(_ ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
         let requestString = "progresses"
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-        var params : [String : NSObject] = [:]
+        var params : Parameters = [:]
         
         if ids.filter({$0 != ""}).count == 0 {
-            failure(error: NSError(domain: NSCocoaErrorDomain, code: 500, userInfo: nil))
+            failure(NSError(domain: NSCocoaErrorDomain, code: 500, userInfo: nil))
             return nil
         }
         
-        params["access_token"] = AuthInfo.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
         
         let idString = constructIdsString(array: ids)
         if idString == "" {
@@ -218,21 +255,33 @@ class ApiDataDownloader: NSObject {
             return nil
         }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: .URL).responseSwiftyJSON({
-            (_, _, json, error) in
+//        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: URLEncoding.default).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
 //            print(json)
             
             if let e = error {
-                failure(error: e)
+                failure(e)
                 return
             }
             
             var newObjects : [Progress] = []
             
             switch refreshMode {
-                
-            case .Delete:
+            case .delete:
                 
                 for object in deleteProgresses {
                     CoreDataHelper.instance.deleteFromStore(object, save: false)
@@ -242,7 +291,7 @@ class ApiDataDownloader: NSObject {
                     newObjects += [Progress(json: objectJSON)]
                 }
                 
-            case .Update:
+            case .update:
                 
                 for objectJSON in json[requestString].arrayValue {
                     let existing = deleteProgresses.filter({obj in obj.id == objectJSON["id"].stringValue})
@@ -265,11 +314,11 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func didVisitStepWith(id id: Int, assignment: Int?, success: Void->Void) -> Request? {
+    func didVisitStepWith(id: Int, assignment: Int?, success: @escaping (Void)->Void) -> Request? {
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         
 //        print("{view:{step:\"\(id)\", assignment:\"\(assignment)\"}}")
-        var params : [String : AnyObject] = [:]
+        var params : Parameters = [:]
         
         if let assignment = assignment {
             params = [
@@ -289,8 +338,20 @@ class ApiDataDownloader: NSObject {
                 
         //        params["access_token"] = AuthInfo.shared.token!.accessToken
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/views", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            (_, _, json, error) in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/views", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
             if let _ = error {
                 return
@@ -301,11 +362,11 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func search(query query: String, type: String?, page: Int?, success: ([SearchResult], Meta) -> Void, error errorHandler: String->Void) -> Request? {
+    func search(query: String, type: String?, page: Int?, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (String)->Void) -> Request? {
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-        var params : [String : NSObject] = [:]
+        var params : Parameters = [:]
         
-        params["access_token"] = AuthInfo.shared.token?.accessToken
+        params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
         params["query"] = query
         
         if let p = page { 
@@ -315,8 +376,20 @@ class ApiDataDownloader: NSObject {
             params["type"] = t
         }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/search-results", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
-            _, _, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({ 
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             
             if let e = error {
                 let d = (e as NSError).localizedDescription
@@ -338,7 +411,7 @@ class ApiDataDownloader: NSObject {
     }
     
     
-    func createNewAttemptWith(stepName stepName: String, stepId: Int, success: Attempt->Void, error errorHandler: String->Void) -> Request? {
+    func createNewAttemptWith(stepName: String, stepId: Int, success: @escaping (Attempt)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         let headers = AuthInfo.shared.initialHTTPHeaders
 //        if let token = AuthInfo.shared.token {
@@ -351,14 +424,27 @@ class ApiDataDownloader: NSObject {
         
 //        print("headers in createNewAttempt \(headers)")
         
-        let params : [String : NSObject] = [
+        let params : Parameters = [
             "attempt": [
             "step" : "\(stepId)"
                 ]
             ]
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/attempts", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            request, response, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/attempts", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let request = response.request
+            let response = response.response
+            
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
@@ -366,7 +452,7 @@ class ApiDataDownloader: NSObject {
                 return
             }
             
-            print("request headers: \(request.allHTTPHeaderFields)")
+            print("request headers: \(request?.allHTTPHeaderFields)")
             
             if response?.statusCode == 201 {
 //                print(json)
@@ -381,7 +467,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    func getAttemptsFor(stepName stepName: String, stepId: Int, success: ([Attempt], Meta)->Void, error errorHandler: String->Void) -> Request? {
+    func getAttemptsFor(stepName: String, stepId: Int, success: @escaping ([Attempt], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
 
         let headers = AuthInfo.shared.initialHTTPHeaders
 //        if let token = AuthInfo.shared.token {
@@ -390,16 +476,28 @@ class ApiDataDownloader: NSObject {
 //            ]
 //        }
         
-        var params : [String : NSObject] = [:]        
+        var params : Parameters = [:]        
         params["step"] = stepId
         if let userid = AuthInfo.shared.userId {
-            params["user"] = userid
+            params["user"] = userid as NSObject?
         } else {
             print("no user id!")
         }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/attempts", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: {
-            _, response, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/attempts", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
@@ -421,7 +519,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    private func getSubmissionsWithObjectID(stepName stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) -> Request? {
+    fileprivate func getSubmissionsWithObjectID(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         let headers = AuthInfo.shared.initialHTTPHeaders
 //        if let token = AuthInfo.shared.token {
@@ -430,7 +528,7 @@ class ApiDataDownloader: NSObject {
 //            ]
 //        }
         
-        var params : [String : NSObject] = [:]
+        var params : Parameters = [:]
         
         params[objectName] = objectId
         if let desc = isDescending {
@@ -443,8 +541,20 @@ class ApiDataDownloader: NSObject {
             params["user"] = user
         }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/submissions", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
-            _, response, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({ 
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
@@ -465,15 +575,15 @@ class ApiDataDownloader: NSObject {
         
     }
     
-    func getSubmissionsWith(stepName stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) -> Request? {
+    func getSubmissionsWith(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         return getSubmissionsWithObjectID(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, success: success, error: errorHandler)
     }
     
-    func getSubmissionsWith(stepName stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: ([Submission], Meta)->Void, error errorHandler: String->Void) -> Request? {
+    func getSubmissionsWith(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         return getSubmissionsWithObjectID(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, success: success, error: errorHandler)
     }
     
-    func createSubmissionFor(stepName stepName: String, attemptId: Int, reply: Reply, success: Submission->Void, error errorHandler: String->Void) -> Request? {
+    func createSubmissionFor(stepName: String, attemptId: Int, reply: Reply, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
 
         let headers = AuthInfo.shared.initialHTTPHeaders
 //        if let token = AuthInfo.shared.token {
@@ -482,15 +592,27 @@ class ApiDataDownloader: NSObject {
 //            ]
 //        }
         
-        let params = [
+        let params : Parameters = [
             "submission": [
                 "attempt" : "\(attemptId)",
                 "reply" : reply.dictValue
             ]
         ]
         
-        return Alamofire.request(.POST, "\(StepicApplicationsInfo.apiURL)/submissions", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(completionHandler: {
-            _, response, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
@@ -510,9 +632,9 @@ class ApiDataDownloader: NSObject {
         })
     }    
     
-    func getSubmissionFor(stepName stepName: String, submissionId: Int, success: Submission->Void, error errorHandler: String->Void) -> Request? {
+    func getSubmissionFor(stepName: String, submissionId: Int, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
-        var params : [String : NSObject] = [:]
+        let params : Parameters = [:]
         let headers = AuthInfo.shared.initialHTTPHeaders
         
 //        if let token = AuthInfo.shared.token {
@@ -521,8 +643,20 @@ class ApiDataDownloader: NSObject {
 //            ]
 //        }
         
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: .URL, headers: headers).responseSwiftyJSON(completionHandler: { 
-            _, response, json, error in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON( { 
+            response in
+            
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
@@ -547,8 +681,9 @@ class ApiDataDownloader: NSObject {
     static let votes = VotesAPI()
     static let stepics = StepicsAPI()
     static let units = UnitsAPI()
+    static let userActivities = UserActivitiesAPI()
 }
 
 enum RefreshMode {
-    case Delete, Update
+    case delete, update
 }

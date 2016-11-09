@@ -9,23 +9,23 @@
 import Foundation
 
 class DiscussionAlertConstructor {
-    static func getCommentAlert(comment: Comment, replyBlock: (Void->Void), likeBlock: (Void->Void), abuseBlock: (Void->Void), openURLBlock: (NSURL->Void)) -> UIAlertController {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+    static func getCommentAlert(_ comment: Comment, replyBlock: @escaping ((Void)->Void), likeBlock: @escaping ((Void)->Void), abuseBlock: @escaping ((Void)->Void), openURLBlock: @escaping ((URL)->Void)) -> UIAlertController {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let links = HTMLParsingUtil.getAllLinksWithText(comment.text)
         
         for link in links {
-            alert.addAction(UIAlertAction(title: link.text, style: .Default, handler: 
+            alert.addAction(UIAlertAction(title: link.text, style: .default, handler: 
                 {
                     action in
-                    if let url = NSURL(string: link.link.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!) {
+                    if let url = URL(string: link.link.addingPercentEscapes(using: String.Encoding.utf8)!) {
                         openURLBlock(url)
                     }
                 })
             )
         }
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Reply", comment: ""), style: .Default, handler: 
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reply", comment: ""), style: .default, handler: 
             {
                 action in
                 replyBlock()
@@ -36,7 +36,7 @@ class DiscussionAlertConstructor {
         
             let likeTitle: String = (comment.vote.value == VoteValue.Epic) ? NSLocalizedString("Unlike", comment: "") : NSLocalizedString("Like", comment: "")
             
-            alert.addAction(UIAlertAction(title: likeTitle, style: .Default, handler: 
+            alert.addAction(UIAlertAction(title: likeTitle, style: .default, handler: 
                 {
                     action in
                     likeBlock()
@@ -45,14 +45,14 @@ class DiscussionAlertConstructor {
             
             let abuseTitle: String = (comment.vote.value == VoteValue.Abuse) ? NSLocalizedString("Unabuse", comment: "") : NSLocalizedString("Abuse", comment: "")
             
-            alert.addAction(UIAlertAction(title: abuseTitle, style: .Destructive, handler: 
+            alert.addAction(UIAlertAction(title: abuseTitle, style: .destructive, handler: 
                 {
                     action in
                     abuseBlock()
                 })
             )
         }
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         
         return alert
     }

@@ -134,5 +134,22 @@ SignInToJoin = "Sign in to join courses";
 FirstName = "First name";
 LastName = "Last name";
 SignUpAction = "Sign up";
-
+Low = "Low";
+High = "High";
+Medium = "Medium";
+VeryHigh = "Very High";
+WiFiLoadPreference = "Only Wi-Fi video downloads";
+LoadingVideoQualityPreference = "Downloading video quality";
+SignOut = "Sign out";
+Profile = "Profile";
+Preferences = "Preferences";
+CurrentStreak = "Current streak";
+LongestStreak = "Longest streak";
+Activity = "Activity";
+days1 = "day";
+days234 = "days";
+days567890 = "days";
+VideoRate = "Video rate";
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
 

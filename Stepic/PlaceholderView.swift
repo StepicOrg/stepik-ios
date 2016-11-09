@@ -20,67 +20,67 @@ class PlaceholderView: UIView {
     */
 
     
-    private var bottomElement : UIView?
+    fileprivate var bottomElement : UIView?
     
-    private var middleView : UIView!
-    private var middleViewHeight : NSLayoutConstraint!
+    fileprivate var middleView : UIView!
+    fileprivate var middleViewHeight : NSLayoutConstraint!
     
-    private var imageView : UIImageView?
-    private var imageViewHeight : NSLayoutConstraint?
-    private var imageViewWidth : NSLayoutConstraint?
+    fileprivate var imageView : UIImageView?
+    fileprivate var imageViewHeight : NSLayoutConstraint?
+    fileprivate var imageViewWidth : NSLayoutConstraint?
     
-    private var titleLabel : UILabel?
-    private var titleLabelHeight : NSLayoutConstraint?
+    fileprivate var titleLabel : UILabel?
+    fileprivate var titleLabelHeight : NSLayoutConstraint?
     
-    private var descriptionLabel: UILabel?
-    private var descriptionLabelHeight : NSLayoutConstraint?
+    fileprivate var descriptionLabel: UILabel?
+    fileprivate var descriptionLabelHeight : NSLayoutConstraint?
     
-    private var button: UIButton?
-    private var buttonHeight : NSLayoutConstraint?
+    fileprivate var button: UIButton?
+    fileprivate var buttonHeight : NSLayoutConstraint?
     
-    private func addMiddleView() {
+    fileprivate func addMiddleView() {
         middleView = UIView()
         self.addSubview(middleView)
-        self.bringSubviewToFront(middleView)
-        middleView.alignLeading("0", trailing: "0", toView: self)
-        middleView.alignCenterYWithView(self, predicate: "0")
+        self.bringSubview(toFront: middleView)
+        middleView.alignLeading("0", trailing: "0", to: self)
+        middleView.alignCenterY(with: self, predicate: "0")
         middleViewHeight = middleView.constrainHeight("0")[0] as! NSLayoutConstraint
-        middleView.setContentCompressionResistancePriority(999, forAxis: .Vertical)
+        middleView.setContentCompressionResistancePriority(999, for: .vertical)
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    private func setUpVerticalConstraints(view: UIView) {
+    fileprivate func setUpVerticalConstraints(_ view: UIView) {
         if let b = bottomElement {
-            view.constrainTopSpaceToView(b, predicate: "16")
+            view.constrainTopSpace(to: b, predicate: "16")
             middleViewHeight.constant += 16
         } else {
-            view.alignTopEdgeWithView(middleView, predicate: "0")
+            view.alignTopEdge(with: middleView, predicate: "0")
         }
         
         bottomElement = view
     }
     
-    private func addImage(image: UIImage) {
-        imageView = UIImageView(frame: CGRectZero)
+    fileprivate func addImage(_ image: UIImage) {
+        imageView = UIImageView(frame: CGRect.zero)
         middleView.addSubview(imageView!)
-        middleView.bringSubviewToFront(imageView!)
+        middleView.bringSubview(toFront: imageView!)
         setUpVerticalConstraints(imageView!)
         imageView?.image = image
         imageViewHeight = imageView!.constrainHeight("\(image.size.height)")[0] as? NSLayoutConstraint
         imageViewWidth = imageView!.constrainWidth("\(image.size.width)")[0] as? NSLayoutConstraint
-        imageView?.alignCenterXWithView(middleView, predicate: "0")
+        imageView?.alignCenterX(with: middleView, predicate: "0")
     }
     
-    private func addTitle(title: String) {
-        titleLabel = UILabel(frame: CGRectZero)
+    fileprivate func addTitle(_ title: String) {
+        titleLabel = UILabel(frame: CGRect.zero)
         titleLabel?.text = title
         titleLabel?.numberOfLines = 0
         
         middleView.addSubview(titleLabel!)
-        middleView.bringSubviewToFront(titleLabel!)
+        middleView.bringSubview(toFront: titleLabel!)
         setUpVerticalConstraints(titleLabel!)
-        titleLabel?.alignLeading("8", trailing: "-8", toView: middleView)
+        titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
 
         if let style = datasource?.placeholderStyle() {
             titleLabel?.implementStyle(style.title)
@@ -92,15 +92,15 @@ class PlaceholderView: UIView {
         //TODO: Add title style implementation here
     }
     
-    private func addDescription(desc: String) {
-        descriptionLabel = UILabel(frame: CGRectZero)
+    fileprivate func addDescription(_ desc: String) {
+        descriptionLabel = UILabel(frame: CGRect.zero)
         descriptionLabel?.text = desc
         descriptionLabel?.numberOfLines = 0
         
         middleView.addSubview(descriptionLabel!)
-        middleView.bringSubviewToFront(descriptionLabel!)
+        middleView.bringSubview(toFront: descriptionLabel!)
         setUpVerticalConstraints(descriptionLabel!)
-        descriptionLabel?.alignLeading("8", trailing: "-8", toView: middleView)
+        descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
         
 
         if let style = datasource?.placeholderStyle() {
@@ -114,24 +114,24 @@ class PlaceholderView: UIView {
         //TODO: Add description style implementation here
     }
         
-    private func addButton(buttonTitle: String) {
+    fileprivate func addButton(_ buttonTitle: String) {
         
-        button = UIButton(type: .System)
-        button?.frame = CGRectZero
-        button?.setTitle(buttonTitle, forState: .Normal)
-        button?.addTarget(self, action: #selector(PlaceholderView.didPressButton), forControlEvents: UIControlEvents.TouchUpInside)
+        button = UIButton(type: .system)
+        button?.frame = CGRect.zero
+        button?.setTitle(buttonTitle, for: UIControlState())
+        button?.addTarget(self, action: #selector(PlaceholderView.didPressButton), for: UIControlEvents.touchUpInside)
         
         if let style = datasource?.placeholderStyle() {
-            if style.button.borderType != .None {
-                button?.setTitle("  \(buttonTitle)  ", forState: .Normal)
+            if style.button.borderType != .none {
+                button?.setTitle("  \(buttonTitle)  ", for: UIControlState())
             }
             button?.implementStyle(style.button)
         }        
         
         middleView.addSubview(button!)
-        middleView.bringSubviewToFront(button!)
+        middleView.bringSubview(toFront: button!)
         setUpVerticalConstraints(button!)
-        button?.alignCenterXWithView(middleView, predicate: "0")
+        button?.alignCenterX(with: middleView, predicate: "0")
         buttonHeight = button?.constrainHeight("30")[0] as? NSLayoutConstraint
     }
     
@@ -139,7 +139,7 @@ class PlaceholderView: UIView {
         delegate?.placeholderButtonDidPress?()
     }
     
-    private func update() {
+    fileprivate func update() {
         subviews.forEach({$0.removeFromSuperview()})
         if subviews.count != 0 {
             print("subviews count != 0")
@@ -195,9 +195,9 @@ class PlaceholderView: UIView {
         print("image view height -> \(imageView?.bounds.height)")
     }
     
-    private func setup() {
+    fileprivate func setup() {
         let middleView = UIView()
-        middleView.backgroundColor = UIColor.blueColor()
+        middleView.backgroundColor = UIColor.blue
         self.addSubview(middleView)
     }
     

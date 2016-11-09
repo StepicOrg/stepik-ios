@@ -14,10 +14,10 @@ class FreeAnswerQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
-        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGrayColor())
+        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
+        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
         
-        textView.font = UIFont.systemFontOfSize(16)
+        textView.font = UIFont.systemFont(ofSize: 16)
         // Do any additional setup after loading the view.
     }
 
@@ -46,13 +46,13 @@ class FreeAnswerQuizViewController: QuizViewController {
     }
     
     //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if let r = submission?.reply as? FreeAnswerReply { 
             if let d = dataset {
                 if d.isHTMLEnabled {
-                    let attributed = try! NSAttributedString(data: (r.text as NSString).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
+                    let attributed = try! NSAttributedString(data: (r.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
                     let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
+                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
                     textView.attributedText = mutableAttributed
                 } else {
                     return textView.text = r.text
@@ -60,9 +60,9 @@ class FreeAnswerQuizViewController: QuizViewController {
             }
         }
         if submission?.status == "correct" {
-            textView.editable = false
+            textView.isEditable = false
         } else {
-            textView.editable = true
+            textView.isEditable = true
         }
     }
     
@@ -75,7 +75,7 @@ class FreeAnswerQuizViewController: QuizViewController {
     override func getReply() -> Reply {
         if let d = dataset {
             if d.isHTMLEnabled {
-                return FreeAnswerReply(text: textView.text.stringByReplacingOccurrencesOfString("\n", withString: "<br>"))
+                return FreeAnswerReply(text: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             } else {
                 return FreeAnswerReply(text: textView.text)
             }

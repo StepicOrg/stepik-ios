@@ -15,7 +15,7 @@ class ApiUtil {
             result += "ids[]=\(element)&"
         }
         if result != "" { 
-            result.removeAtIndex(result.endIndex.predecessor()) 
+            result.remove(at: result.characters.index(before: result.endIndex)) 
         }
         return result
     }

@@ -22,27 +22,27 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     func initLabel() {
         choiceLabel.numberOfLines = 0
         choiceLabel.font = UIFont(name: "ArialMT", size: 16)
-        choiceLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        choiceLabel.baselineAdjustment = UIBaselineAdjustment.AlignBaselines
-        choiceLabel.textAlignment = NSTextAlignment.Natural
-        choiceLabel.backgroundColor = UIColor.clearColor()
+        choiceLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        choiceLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
+        choiceLabel.textAlignment = NSTextAlignment.natural
+        choiceLabel.backgroundColor = UIColor.clear
         textContainerView.addSubview(choiceLabel)
-        choiceLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
-        choiceLabel.hidden = true
+        choiceLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", to: textContainerView)
+        choiceLabel.isHidden = true
     }
 
     func initWebView() {
         textContainerView.addSubview(choiceWebView)
-        choiceWebView.alignToView(textContainerView)
+        choiceWebView.align(to: textContainerView)
         webViewHelper = CellWebViewHelper(webView: choiceWebView, heightWithoutWebView: 17)
-        choiceWebView.hidden = true
+        choiceWebView.isHidden = true
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        checkBox.onAnimationType = .Fill
+        checkBox.onAnimationType = .fill
         checkBox.animationDuration = 0.3
-        contentView.backgroundColor = UIColor.clearColor()
+        contentView.backgroundColor = UIColor.clear
         
         initLabel()
         initWebView()
@@ -50,11 +50,11 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        choiceWebView.hidden = true
-        choiceLabel.hidden = true
+        choiceWebView.isHidden = true
+        choiceLabel.isHidden = true
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 }
@@ -62,12 +62,12 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(text: String) -> (Void -> Int) {
+    func setHTMLText(_ text: String) -> ((Void) -> Int) {
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
-            choiceWebView.hidden = false
+            choiceWebView.isHidden = false
             return webViewHelper.setTextWithTeX(text)
         } else {
-            choiceLabel.hidden = false
+            choiceLabel.isHidden = false
             choiceLabel.text = text
             let w = textContainerView.bounds.width 
             return {

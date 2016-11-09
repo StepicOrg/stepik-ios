@@ -13,27 +13,38 @@ import SwiftyJSON
 class UnitsAPI {
     let name = "units"
     
-    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (Unit -> Void), error errorHandler: (UnitRetrieveError -> Void)) -> Request {
-        return Alamofire.request(.GET, "\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
+    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in 
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
                 
                 if let e = error as? NSError {
                     print("RETRIEVE units?\(lessonId): error \(e.domain) \(e.code): \(e.localizedDescription)")
-                    errorHandler(.ConnectionError)
+                    errorHandler(.connectionError)
                     return
                 }
                 
                 if response?.statusCode != 200 {
                     print("RETRIEVE units?\(lessonId)): bad response status code \(response?.statusCode)")
-                    errorHandler(.BadStatus)
+                    errorHandler(.badStatus)
                     return
                 }
                 
                 let units = json["units"].arrayValue.map({return Unit(json: $0)})
                 
                 guard let unit = units.first else {
-                    errorHandler(.NoUnits)
+                    errorHandler(.noUnits)
                     return
                 }
                 
@@ -47,6 +58,6 @@ class UnitsAPI {
 
 
 //TODO: Add parameters
-enum UnitRetrieveError : ErrorType {
-    case ConnectionError, BadStatus, NoUnits
+enum UnitRetrieveError : Error {
+    case connectionError, badStatus, noUnits
 }

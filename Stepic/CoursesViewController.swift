@@ -36,19 +36,19 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         super.viewDidLoad()
         
         self.view.addSubview(tableView)
-        self.tableView.alignLeading("0", trailing: "0", toView: self.view)
-        self.tableView.alignTop("0", bottom: "0", toView: self.view)
+        self.tableView.alignLeading("0", trailing: "0", to: self.view)
+        self.tableView.alignTop("0", bottom: "0", to: self.view)
         
         self.automaticallyAdjustsScrollViewInsets = false
-        tableView.registerNib(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
-        tableView.registerNib(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
+        tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
+        tableView.register(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
         
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         
         if refreshEnabled {
-            refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), forControlEvents: .ValueChanged)
+            refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), for: .valueChanged)
             tableView.addSubview(refreshControl ?? UIView())
             refreshControl?.beginRefreshing()
             getCachedCourses(completion: {
@@ -63,9 +63,9 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         lastUser = AuthInfo.shared.user
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if refreshEnabled && (self.refreshControl?.refreshing ?? false) {
+        if refreshEnabled && (self.refreshControl?.isRefreshing ?? false) {
             let offset = self.tableView.contentOffset
             self.refreshControl?.endRefreshing()
             self.refreshControl?.beginRefreshing()
@@ -79,15 +79,15 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
     
-    private func getCachedCourses(completion completion: (Void -> Void)?) {
+    fileprivate func getCachedCourses(completion: ((Void) -> Void)?) {
         isRefreshing = true
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        let priority = DispatchQueue.GlobalQueuePriority.default
+        DispatchQueue.global(priority: priority).async {
             do {
                 let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)
                 self.courses = Sorter.sort(c, byIds: cachedIds)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }       
                 completion?()
@@ -104,15 +104,15 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         performRequest({
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: 1, success: { 
                 (ids, meta) -> Void in
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
                     self.courses = Sorter.sort(newCourses, byIds: ids)
                     self.meta = meta
                     self.currentPage = 1
                     self.tabIds = ids
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.emptyDatasetState = .Empty
+                    DispatchQueue.main.async {
+                        self.emptyDatasetState = .empty
                         self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
                     }
@@ -135,7 +135,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         })
     }
     
-    var emptyDatasetState : EmptyDatasetState = .Empty {
+    var emptyDatasetState : EmptyDatasetState = .empty {
         didSet {
             UIThread.performUI{
                 self.tableView.reloadEmptyDataSet()
@@ -145,9 +145,9 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func handleRefreshError() {
         self.isRefreshing = false
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             //TODO: Handle refresh error here - just add some kind of message or smth
-            self.emptyDatasetState = EmptyDatasetState.ConnectionError
+            self.emptyDatasetState = EmptyDatasetState.connectionError
             self.refreshControl?.endRefreshing()
         }
     }
@@ -183,7 +183,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
     
-    func refreshingChangedTo(refreshing: Bool) {
+    func refreshingChangedTo(_ refreshing: Bool) {
     }
     
     var currentPage = 1
@@ -216,13 +216,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
                 var ids = idsImmutable
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .Update, success: { 
+                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCoursesImmutable) -> Void in
                     var newCourses = newCoursesImmutable
                     newCourses = self.getNonExistingCourses(newCourses)
                     ids = ids.flatMap{
                         id in
-                        return newCourses.indexOf{$0.id == id} != nil ? id : nil
+                        return newCourses.index{$0.id == id} != nil ? id : nil
                     }
                     
                     self.currentPage += 1
@@ -252,29 +252,29 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCourse" {
-            let dvc = segue.destinationViewController as! CoursePreviewViewController
+            let dvc = segue.destination as! CoursePreviewViewController
             dvc.course = sender as? Course
             dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showSections" {
-            let dvc = segue.destinationViewController as! SectionsViewController
+            let dvc = segue.destination as! SectionsViewController
             dvc.course = sender as? Course
             dvc.hidesBottomBarWhenPushed = true
         }
         
         if segue.identifier == "showPreferences" {
-            let dvc = segue.destinationViewController as! UserPreferencesTableViewController
+            let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
         }
     }
     
-    func getNonExistingCourses(newCourses: [Course]) -> [Course] {
+    func getNonExistingCourses(_ newCourses: [Course]) -> [Course] {
         return newCourses.flatMap{
             newCourse in
-            if let _ = courses.indexOf({$0 == newCourse}) {
+            if let _ = courses.index(where: {$0 == newCourse}) {
                 return nil
             } else {
                 return newCourse
@@ -285,38 +285,38 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
 
 extension CoursesViewController : UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == courses.count && needRefresh() {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
             return 60
         } else {
             return 100
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if courses[indexPath.row].enrolled {
-            self.performSegueWithIdentifier("showSections", sender: courses[indexPath.row])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if courses[(indexPath as NSIndexPath).row].enrolled {
+            self.performSegue(withIdentifier: "showSections", sender: courses[(indexPath as NSIndexPath).row])
         } else {
-            self.performSegueWithIdentifier("showCourse", sender: courses[indexPath.row])
+            self.performSegue(withIdentifier: "showCourse", sender: courses[(indexPath as NSIndexPath).row])
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension CoursesViewController : UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return courses.count + (needRefresh() ? 1 : 0)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == courses.count && needRefresh() {
-            let cell = tableView.dequeueReusableCellWithIdentifier("RefreshTableViewCell", forIndexPath: indexPath) as! RefreshTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RefreshTableViewCell", for: indexPath) as! RefreshTableViewCell
             cell.initWithMessage("Loading new courses...", isRefreshing: !self.failedLoadingMore, refreshAction: { self.loadNextPage() })
             
             //            loadNextPage()
@@ -324,9 +324,9 @@ extension CoursesViewController : UITableViewDataSource {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CourseTableViewCell", forIndexPath: indexPath) as! CourseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseTableViewCell", for: indexPath) as! CourseTableViewCell
         
-        cell.initWithCourse(courses[indexPath.row])
+        cell.initWithCourse(courses[(indexPath as NSIndexPath).row])
         
         return cell
     }

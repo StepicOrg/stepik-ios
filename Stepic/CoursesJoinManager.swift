@@ -11,10 +11,10 @@ import UIKit
 class CoursesJoinManager: NSObject {
     
     static let sharedManager = CoursesJoinManager()
-    private override init() {}
+    fileprivate override init() {}
     
-    private var dCourses = [Course]()
-    private var aCourses = [Course]()
+    fileprivate var dCourses = [Course]()
+    fileprivate var aCourses = [Course]()
     
     var deletedCourses : [Course] {
         get {

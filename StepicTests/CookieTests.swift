@@ -23,7 +23,7 @@ class CookieTests : XCTestCase {
     }
     
     func testAnonymousAttempt() {
-        let expectation = expectationWithDescription("testAnonymousAttempt")
+        let expectation = self.expectation(description: "testAnonymousAttempt")
 
         Session.refresh(completion: 
             {
@@ -57,7 +57,7 @@ class CookieTests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")

@@ -20,7 +20,7 @@ class DownloadTableViewCell: UITableViewCell {
     var video : Video!
     var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality)p"
+            qualityLabel.text = "\(quality ?? "0")p"
         }
     }
     
@@ -35,14 +35,14 @@ class DownloadTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func initWith( video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {        
-        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
+    func initWith( _ video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {        
+        thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
 //        lessonNameLabel.text = "\(NSLocalizedString("Lesson", comment: "")): \"\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")\""
         
         lessonNameLabel.text = "\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")"
@@ -66,14 +66,14 @@ class DownloadTableViewCell: UITableViewCell {
     
     func updateButton() {
 //        video.downloadDelegate = self.downloadDelegate
-        if video.state ==  VideoState.Cached {
-            downloadButton.state = .Downloaded
+        if video.state ==  VideoState.cached {
+            downloadButton.state = .downloaded
             self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
             return
         }
         
-        if video.state == VideoState.Downloading {
-            downloadButton.state = .Downloading
+        if video.state == VideoState.downloading {
+            downloadButton.state = .downloading
             
             self.quality = self.video.loadingQuality! ?? VideosInfo.videoQuality
 
@@ -97,11 +97,11 @@ class DownloadTableViewCell: UITableViewCell {
             return
         }
         
-        if video.state == .Online {
+        if video.state == .online {
             print("this video should not be here, it can't have the .Online state! ")
         }
         
-        downloadButton.state = .Pending
+        downloadButton.state = .pending
         print("Something got wrong while initializing download button state. Should not be pending")
     }
     

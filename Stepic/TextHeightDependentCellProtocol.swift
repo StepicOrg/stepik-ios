@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TextHeightDependentCellProtocol : class {
-    func setHTMLText(text: String) -> (Void -> Int)
+    func setHTMLText(_ text: String) -> ((Void) -> Int)
 }

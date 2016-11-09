@@ -16,32 +16,32 @@ public let kTCBlobDownloadErrorHTTPStatusKey = "TCBlobDownloadErrorHTTPStatusKey
 public let kTCBlobDownloadErrorFailingURLKey = "TCBlobDownloadFailingURLKey"
 
 public enum TCBlobDownloadError: Int {
-    case TCBlobDownloadHTTPError = 1
+    case tcBlobDownloadHTTPError = 1
 }
 
-public class TCBlobDownloadManager {
+open class TCBlobDownloadManager {
     /**
         A shared instance of `TCBlobDownloadManager`.
     */
-    public static let sharedInstance = TCBlobDownloadManager()
+    open static let sharedInstance = TCBlobDownloadManager()
 
     /// Instance of the underlying class implementing `NSURLSessionDownloadDelegate`.
-    private let delegate: DownloadDelegate
+    fileprivate let delegate: DownloadDelegate
 
     /// If `true`, downloads will start immediatly after being created. `true` by default.
-    public var startImmediatly = true
+    open var startImmediatly = true
 
     /// The underlying `NSURLSession`.
-    public let session: NSURLSession
+    open let session: URLSession
 
     /**
         Custom `NSURLSessionConfiguration` init.
 
         - parameter config: The configuration used to manage the underlying session.
     */
-    public init(config: NSURLSessionConfiguration) {
+    public init(config: URLSessionConfiguration) {
         self.delegate = DownloadDelegate()
-        self.session = NSURLSession(configuration: config, delegate: self.delegate, delegateQueue: nil)
+        self.session = URLSession(configuration: config, delegate: self.delegate, delegateQueue: nil)
         self.session.sessionDescription = "TCBlobDownloadManger session"
     }
 
@@ -49,7 +49,7 @@ public class TCBlobDownloadManager {
         Default `NSURLSessionConfiguration` init.
     */
     public convenience init() {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10000
         //config.HTTPMaximumConnectionsPerHost = 1
         self.init(config: config)
@@ -60,7 +60,7 @@ public class TCBlobDownloadManager {
     
         - parameter download: Download to start.
     */
-    private func downloadWithDownload(download: TCBlobDownload) -> TCBlobDownload {
+    fileprivate func downloadWithDownload(_ download: TCBlobDownload) -> TCBlobDownload {
         self.delegate.downloads[download.downloadTask.taskIdentifier] = download
 
         if self.startImmediatly {
@@ -80,8 +80,8 @@ public class TCBlobDownloadManager {
 
         :return: A `TCBlobDownload` instance.
     */
-    public func downloadFileAtURL(url: NSURL, toDirectory directory: NSURL?, withName name: String?, andDelegate delegate: TCBlobDownloadDelegate?) -> TCBlobDownload {
-        let downloadTask = self.session.downloadTaskWithURL(url)
+    open func downloadFileAtURL(_ url: URL, toDirectory directory: URL?, withName name: String?, andDelegate delegate: TCBlobDownloadDelegate?) -> TCBlobDownload {
+        let downloadTask = self.session.downloadTask(with: url)
         let download = TCBlobDownload(downloadTask: downloadTask, toDirectory: directory, fileName: name, delegate: delegate)
 
         return self.downloadWithDownload(download)
@@ -98,8 +98,8 @@ public class TCBlobDownloadManager {
 
         :return: A `TCBlobDownload` instance.
     */
-    public func downloadFileAtURL(url: NSURL, toDirectory directory: NSURL?, withName name: String?, progression: progressionHandler?, completion: completionHandler?) -> TCBlobDownload {
-        let downloadTask = self.session.downloadTaskWithURL(url)
+    open func downloadFileAtURL(_ url: URL, toDirectory directory: URL?, withName name: String?, progression: progressionHandler?, completion: completionHandler?) -> TCBlobDownload {
+        let downloadTask = self.session.downloadTask(with: url)
         let download = TCBlobDownload(downloadTask: downloadTask, toDirectory: directory, fileName: name, progression: progression, completion: completion)
 
         return self.downloadWithDownload(download)
@@ -117,8 +117,8 @@ public class TCBlobDownloadManager {
     
         :return: A `TCBlobDownload` instance.
     */
-    public func downloadFileWithResumeData(resumeData: NSData, toDirectory directory: NSURL?, withName name: String?, andDelegate delegate: TCBlobDownloadDelegate?) -> TCBlobDownload {
-        let downloadTask = self.session.downloadTaskWithResumeData(resumeData)
+    open func downloadFileWithResumeData(_ resumeData: Data, toDirectory directory: URL?, withName name: String?, andDelegate delegate: TCBlobDownloadDelegate?) -> TCBlobDownload {
+        let downloadTask = self.session.downloadTask(withResumeData: resumeData)
         let download = TCBlobDownload(downloadTask: downloadTask, toDirectory: directory, fileName: name, delegate: delegate)
 
         return self.downloadWithDownload(download)
@@ -131,7 +131,7 @@ public class TCBlobDownloadManager {
         
         :return: An `Array` of all current downloads with the given state.
     */
-    public func currentDownloadsFilteredByState(state: NSURLSessionTaskState?) -> [TCBlobDownload] {
+    open func currentDownloadsFilteredByState(_ state: URLSessionTask.State?) -> [TCBlobDownload] {
         var downloads = [TCBlobDownload]()
 
         // TODO: make functional as soon as Dictionary supports reduce/filter.
@@ -146,70 +146,70 @@ public class TCBlobDownloadManager {
 }
 
 
-class DownloadDelegate: NSObject, NSURLSessionDownloadDelegate {
+class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     var downloads: [Int: TCBlobDownload] = [:]
-    let acceptableStatusCodes: Range<Int> = 200...299
+    let acceptableStatusCodes = 200...299
 
-    func validateResponse(response: NSHTTPURLResponse) -> Bool {
+    func validateResponse(_ response: HTTPURLResponse) -> Bool {
         return self.acceptableStatusCodes.contains(response.statusCode)
     }
 
     // MARK: NSURLSessionDownloadDelegate
 
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
         print("Resume at offset: \(fileOffset) total expected: \(expectedTotalBytes)")
     }
 
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         let download = self.downloads[downloadTask.taskIdentifier]!
         let progress = totalBytesExpectedToWrite == NSURLSessionTransferSizeUnknown ? -1 : Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
 
         download.progress = progress
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             download.delegate?.download(download, didProgress: progress, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
-            download.progression?(progress: progress, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: totalBytesExpectedToWrite)
+            download.progression?(progress, totalBytesWritten, totalBytesExpectedToWrite)
             return
         }
     }
 
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let download = self.downloads[downloadTask.taskIdentifier]!
         var fileError: NSError?
         var resultingURL: NSURL?
 
         do {
-            try NSFileManager.defaultManager().replaceItemAtURL(download.destinationURL, withItemAtURL: location, backupItemName: nil, options: [], resultingItemURL: &resultingURL)
-            download.resultingURL = resultingURL
+            try FileManager.default.replaceItem(at: download.destinationURL as URL, withItemAt: location, backupItemName: nil, options: [], resultingItemURL: &resultingURL)
+            download.resultingURL = resultingURL as? URL
         } catch let error1 as NSError {
             fileError = error1
             download.error = fileError
         }
     }
 
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError sessionError: NSError?) {
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError sessionError: Error?) {
         let download = self.downloads[task.taskIdentifier]!
-        var error: NSError? = sessionError ?? download.error
+        var error: NSError? = sessionError as NSError?? ?? download.error
         // Handle possible HTTP errors
-        if let response = task.response as? NSHTTPURLResponse {
+        if let response = task.response as? HTTPURLResponse {
             // NSURLErrorDomain errors are not supposed to be reported by this delegate
             // according to https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/NSURLSessionConcepts/NSURLSessionConcepts.html
             // so let's ignore them as they sometimes appear there for now. (But WTF?)
             if !validateResponse(response) && (error == nil || error!.domain == NSURLErrorDomain) {
                 error = NSError(domain: kTCBlobDownloadErrorDomain,
-                    code: TCBlobDownloadError.TCBlobDownloadHTTPError.rawValue,
+                    code: TCBlobDownloadError.tcBlobDownloadHTTPError.rawValue,
                     userInfo: [kTCBlobDownloadErrorDescriptionKey: "Erroneous HTTP status code: \(response.statusCode)",
-                               kTCBlobDownloadErrorFailingURLKey: task.originalRequest!.URL!,
+                               kTCBlobDownloadErrorFailingURLKey: task.originalRequest!.url!,
                                kTCBlobDownloadErrorHTTPStatusKey: response.statusCode])
             }
         }
 
         // Remove the reference to the download
-        self.downloads.removeValueForKey(task.taskIdentifier)
+        self.downloads.removeValue(forKey: task.taskIdentifier)
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             download.delegate?.download(download, didFinishWithError: error, atLocation: download.resultingURL)
-            download.completion?(error: error, location: download.resultingURL)
+            download.completion?(error, download.resultingURL)
             return
         }
     }

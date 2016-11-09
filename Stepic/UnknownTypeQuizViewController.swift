@@ -15,17 +15,17 @@ class UnknownTypeQuizViewController: UIViewController {
     
     @IBOutlet weak var solveOnTheWebsiteButton: UIButton!
     
-    @IBAction func solveOnTheWebsitePressed(sender: UIButton) {
+    @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed, parameters: nil)
-        let url = NSURL(string: stepUrl.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)!
+        let url = URL(string: stepUrl.addingPercentEscapes(using: String.Encoding.utf8)!)!
         
-        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.Close)
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         solveOnTheWebsiteButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-        solveOnTheWebsiteButton.setTitle(NSLocalizedString("SolveOnTheWebsite", comment: ""), forState: .Normal)
+        solveOnTheWebsiteButton.setTitle(NSLocalizedString("SolveOnTheWebsite", comment: ""), for: UIControlState())
         // Do any additional setup after loading the view.
     }
 

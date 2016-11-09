@@ -10,6 +10,6 @@ import Foundation
 import DownloadButton
 
 protocol VideoDownloadDelegate {
-    func didDownload(video: Video, cancelled: Bool)
-    func didGetError(video: Video)
+    func didDownload(_ video: Video, cancelled: Bool)
+    func didGetError(_ video: Video)
 }

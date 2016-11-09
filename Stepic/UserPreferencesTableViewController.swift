@@ -60,10 +60,10 @@ class UserPreferencesTableViewController: UITableViewController {
 //            avatarImageView.image = Constants.placeholderImage
 //        }
         
-        signInButton.hidden = false
-        onlyWiFiSwitch.on = !ConnectionHelper.shared.reachableOnWWAN
-        ignoreMuteSwitchSwitch.on = AudioManager.sharedManager.ignoreMuteSwitch
-        autoCheckForUpdatesSwitch.on = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
+        signInButton.isHidden = false
+        onlyWiFiSwitch.isOn = !ConnectionHelper.shared.reachableOnWWAN
+        ignoreMuteSwitchSwitch.isOn = AudioManager.sharedManager.ignoreMuteSwitch
+        autoCheckForUpdatesSwitch.isOn = UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -84,38 +84,38 @@ class UserPreferencesTableViewController: UITableViewController {
         }
     }
     
-    private func localize() {
+    fileprivate func localize() {
         ignoreMuteSwitchLabel.text = NSLocalizedString("IgnoreMuteSwitch", comment: "")
         
         autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
-        checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), forState: .Normal)
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), forState: .Normal)
+        checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), for: UIControlState())
+        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
     }
     
-    private func initWithUser(user : User) {
-        avatarImageView.sd_setImageWithURL(NSURL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
+    fileprivate func initWithUser(_ user : User) {
+        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage)
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
         if !AuthInfo.shared.isAuthorized {
             signInHeight.constant = 40
             signInNameDistance.constant = 8
             heightForRows[0][0] = 131 + 48
             heightForRows[3][0] = 0
-            signInButton.hidden = false
+            signInButton.isHidden = false
         } else {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
             heightForRows[0][0] = 131
             heightForRows[3][0] = 40
-            signInButton.hidden = true
+            signInButton.isHidden = true
         }
         print("beginning updates")
         tableView.reloadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         updateUser()
     }
     
@@ -124,25 +124,25 @@ class UserPreferencesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CGFloat(heightForRows[indexPath.section][indexPath.row])
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(heightForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return selectionForRows[indexPath.section][indexPath.row]
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return selectionForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if indexPath.section == 3 && indexPath.row == 0 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 0 {
             signOut()
         }
-        if indexPath.section  == 2 && indexPath.row == 1 {
+        if (indexPath as NSIndexPath).section  == 2 && (indexPath as NSIndexPath).row == 1 {
             checkForUpdates()
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print("getting title for header in section \(section)")
         if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 2) || (section == 3 && heightForRows[3][0] == 0) {
             return nil 
@@ -151,7 +151,7 @@ class UserPreferencesTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
             return 0.1
         } else {
@@ -159,7 +159,7 @@ class UserPreferencesTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 2 {
             return 0.1
         } else {
@@ -168,34 +168,34 @@ class UserPreferencesTableViewController: UITableViewController {
     }
     
     
-    @IBAction func closeButtonPressed(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func printTokenButtonPressed(sender: UIButton) {
+    @IBAction func printTokenButtonPressed(_ sender: UIButton) {
         print(AuthInfo.shared.token?.accessToken)
     }
     
-    @IBAction func printDocumentsPathButtonPressed(sender: UIButton) {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    @IBAction func printDocumentsPathButtonPressed(_ sender: UIButton) {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print(documentsPath)
     }
     
     
-    @IBAction func clearCacheButtonPressed(sender: UIButton) {
+    @IBAction func clearCacheButtonPressed(_ sender: UIButton) {
     }
     
-    @IBAction func allow3GChanged(sender: UISwitch) {
-        ConnectionHelper.shared.reachableOnWWAN = !sender.on
+    @IBAction func allow3GChanged(_ sender: UISwitch) {
+        ConnectionHelper.shared.reachableOnWWAN = !sender.isOn
     }
     
-    @IBAction func ignoreMuteSwitchChanged(sender: UISwitch) {
-        AudioManager.sharedManager.ignoreMuteSwitch = sender.on
+    @IBAction func ignoreMuteSwitchChanged(_ sender: UISwitch) {
+        AudioManager.sharedManager.ignoreMuteSwitch = sender.isOn
     }
     
-    @IBAction func allowAutoUpdateChanged(sender: UISwitch) {
-        UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = sender.on
+    @IBAction func allowAutoUpdateChanged(_ sender: UISwitch) {
+        UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = sender.isOn
     }
     
     func checkForUpdates() {
@@ -206,12 +206,12 @@ class UserPreferencesTableViewController: UITableViewController {
                 if let version = newVersion {
                     let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: false)
                     UIThread.performUI{
-                        self?.presentViewController(alert, animated: true, completion: nil)
+                        self?.present(alert, animated: true, completion: nil)
                     }
                 } else {
                     let alert = VersionUpdateAlertConstructor.sharedConstructor.getNoUpdateAvailableAlertController()
                     UIThread.performUI{
-                        self?.presentViewController(alert, animated: true, completion: nil)
+                        self?.present(alert, animated: true, completion: nil)
                     }
                 }
             }, error: {
@@ -220,7 +220,7 @@ class UserPreferencesTableViewController: UITableViewController {
         })
     }
     
-    @IBAction func checkForUpdatesButtonPressed(sender: UIButton) {
+    @IBAction func checkForUpdatesButtonPressed(_ sender: UIButton) {
         checkForUpdates()
     }
     
@@ -233,7 +233,7 @@ class UserPreferencesTableViewController: UITableViewController {
                 self?.updateUser()
             }
             vc.cancel = vc.success
-            self.presentViewController(vc, animated: true, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
@@ -243,15 +243,15 @@ class UserPreferencesTableViewController: UITableViewController {
                 [weak self] in
                 self?.updateUser()
             }
-            self.presentViewController(vc, animated: true, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
-    @IBAction func signInButtonPressed(sender: AnyObject) {
+    @IBAction func signInButtonPressed(_ sender: AnyObject) {
         signIn()
     }
     
-    @IBAction func signOutButtonPressed(sender: UIButton) {
+    @IBAction func signOutButtonPressed(_ sender: UIButton) {
         signOut()
     }
 }

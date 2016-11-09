@@ -5,8 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire'
-    pod 'SwiftyJSON'
+    pod 'Alamofire', :git => 'https://github.com/Homely/Alamofire.git', :branch => 'ios8'
+    pod 'SwiftyJSON', '3.1.0'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -16,8 +16,9 @@ def all_pods
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
-    pod 'AFImageHelper'
     
+    pod 'YandexMobileMetrica/Dynamic', '2.6.2'
+
     pod 'Firebase', '<= 3.4.0'
 #    pod 'Firebase/Messaging'
     pod 'FirebaseAppIndexing', '1.0.4'
@@ -26,12 +27,22 @@ def all_pods
 #    pod 'Firebase/Core'
     
     pod "MagicalRecord"
-    pod 'AAShareBubbles'
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
-    pod 'Kanna', '1.0.6'
+    pod 'Kanna', '~> 2.0.0'
     pod 'CRToast'
     pod 'TUSafariActivity', '~> 1.0'
+end
+
+post_install do |installer|
+    appmetricaPlistPath = "Pods/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework/Info.plist"
+    appmetricaVersion = `/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' #{appmetricaPlistPath}`.strip
+    if ['2.6.0', '2.6.1', '2.6.2'].include? appmetricaVersion
+        system("/usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier org.cocoapods.YandexMobileMetrica' #{appmetricaPlistPath}")
+        system("plutil -convert binary1 #{appmetricaPlistPath}")
+        else
+        puts("Please, remove workaround for AppMetrica dynamic framework.")
+    end
 end
 
 target 'Stepic' do

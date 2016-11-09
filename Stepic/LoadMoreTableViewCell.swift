@@ -20,31 +20,31 @@ class LoadMoreTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        showMoreActivityIndicator.hidden = true
+        showMoreActivityIndicator.isHidden = true
     }
 
     var isUpdating: Bool = false {
         didSet {
             if isUpdating {
-                showMoreLabel.hidden = true
-                showMoreActivityIndicator.hidden = false
+                showMoreLabel.isHidden = true
+                showMoreActivityIndicator.isHidden = false
                 showMoreActivityIndicator.startAnimating()
             } else {
                 showMoreActivityIndicator.stopAnimating()
-                showMoreActivityIndicator.hidden = true
-                showMoreLabel.hidden = false
+                showMoreActivityIndicator.isHidden = true
+                showMoreLabel.isHidden = false
             }
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
     
     override func prepareForReuse() {
 //        showMoreActivityIndicator.hidden = true
-        showMoreLabel.hidden = false
+        showMoreLabel.isHidden = false
     }
     
 }

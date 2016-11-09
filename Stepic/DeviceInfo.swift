@@ -10,16 +10,16 @@ import Foundation
 
 struct DeviceInfo {
     static func isIPad() -> Bool {
-        return UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
+        return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
     }
     
     static var deviceInfoString : String {
-        let d = UIDevice.currentDevice()
+        let d = UIDevice.current
         return "\(d.model) \(d.name) \(d.systemName) \(d.systemVersion)"
     }
     
     static var deviceModelString: String {
-        let d = UIDevice.currentDevice()
+        let d = UIDevice.current
         return "\(d.model)"
     }
 }

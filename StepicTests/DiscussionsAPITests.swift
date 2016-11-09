@@ -27,7 +27,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testGetDiscussions() {
-        let expectation = expectationWithDescription("testGetDiscussions")
+        let expectation = self.expectation(description: "testGetDiscussions")
         let discussionProxyId = "77-108896"
         discussionProxies.retrieve(discussionProxyId, success: 
             {
@@ -48,7 +48,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")
@@ -57,7 +57,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testCreateComment() {
-        let expectation = expectationWithDescription("testCreateComment")
+        let expectation = self.expectation(description: "testCreateComment")
         let discussionProxyId = "77-108896"
         let target = 108896
         let postable = CommentPostable(target: target, text: "testCreateComment comment")
@@ -67,7 +67,7 @@ class DiscussionsAPITests : XCTestCase {
                 self.discussionProxies.retrieve(discussionProxyId, success: 
                     {
                         discussionProxy in
-                        if discussionProxy.discussionIds.indexOf(comment.id) == nil {
+                        if discussionProxy.discussionIds.index(of: comment.id) == nil {
                             XCTAssert(false, "Created discussion not found")
                         }
                         expectation.fulfill()
@@ -83,7 +83,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")
@@ -92,7 +92,7 @@ class DiscussionsAPITests : XCTestCase {
     }
     
     func testCreateReply() {
-        let expectation = expectationWithDescription("testCreateReply")
+        let expectation = self.expectation(description: "testCreateReply")
         let target = 108896
         let parent = 226119
         let postable = CommentPostable(parent: parent, target: target, text: "testCreateReply comment")
@@ -102,7 +102,7 @@ class DiscussionsAPITests : XCTestCase {
                 self.comments.retrieve([parent], success: 
                     {
                         parentcomment in
-                        if parentcomment[0].repliesIds.indexOf(comment.id) == nil {
+                        if parentcomment[0].repliesIds.index(of: comment.id) == nil {
                             XCTAssert(false, "Created reply not found")
                         }
                         expectation.fulfill()
@@ -118,7 +118,7 @@ class DiscussionsAPITests : XCTestCase {
             }
         )
         
-        waitForExpectationsWithTimeout(10.0) { 
+        waitForExpectations(timeout: 10.0) { 
             error in
             if error != nil {
                 XCTAssert(false, "Timeout error")

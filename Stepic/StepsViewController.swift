@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 
 enum StepsControllerPresentationContext {
-    case Lesson, Unit
+    case lesson, unit
 }
 
 class StepsViewController: RGPageViewController {
@@ -22,7 +22,7 @@ class StepsViewController: RGPageViewController {
     var canSendViews: Bool = false
     
     //By default presentation context is unit
-    var context : StepsControllerPresentationContext = .Unit
+    var context : StepsControllerPresentationContext = .unit
     
     lazy var activityView : UIView = self.initActivityView()
     
@@ -37,34 +37,34 @@ class StepsViewController: RGPageViewController {
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.mainScreen().bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.Bottom : UIViewContentMode.ScaleAspectFit)
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
         return v
     }
     
     func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
         ai.color = UIColor.stepicGreenColor()
-        v.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenterWithView(v)
+        ai.alignCenter(with: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
-        v.hidden = false
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
+        v.isHidden = false
         return v
     }
     
     var doesPresentActivityIndicatorView : Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                UIThread.performUI{self.activityView.hidden = false}
+                UIThread.performUI{self.activityView.isHidden = false}
             } else {
-                UIThread.performUI{self.activityView.hidden = true}
+                UIThread.performUI{self.activityView.isHidden = true}
             }
         }
     }
@@ -72,9 +72,9 @@ class StepsViewController: RGPageViewController {
     var doesPresentWarningView : Bool = false {
         didSet {
             if doesPresentWarningView {
-                UIThread.performUI{self.warningView.hidden = false}
+                UIThread.performUI{self.warningView.isHidden = false}
             } else {
-                UIThread.performUI{self.warningView.hidden = true}
+                UIThread.performUI{self.warningView.isHidden = true}
             }
         }
     }
@@ -88,7 +88,7 @@ class StepsViewController: RGPageViewController {
         delegate = self
         
         if numberOfPagesForViewController(self) == 0 {
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
         }
         
         refreshSteps()
@@ -96,14 +96,14 @@ class StepsViewController: RGPageViewController {
     
     static let stepUpdatedNotification = "StepUpdatedNotification"
     
-    private var tabViewsForStepId = [Int: UIView]()
+    fileprivate var tabViewsForStepId = [Int: UIView]()
     
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
-    private func refreshSteps() {
+    fileprivate func refreshSteps() {
         var prevStepsIds = [Int]()
         if numberOfPagesForViewController(self) == 0 {
-            self.view.userInteractionEnabled = false
+            self.view.isUserInteractionEnabled = false
             self.doesPresentWarningView = false
             self.doesPresentActivityIndicatorView = true
         } else {
@@ -119,15 +119,15 @@ class StepsViewController: RGPageViewController {
                 let newStepsSet = Set(s.lesson!.stepsArray)
                 let prevStepsSet = Set(prevStepsIds)
                 
-                var reloadBlock : (Void->Void) = {
+                var reloadBlock : ((Void)->Void) = {
                     [weak self] in 
                     self?.reloadData()
                 }
                 
-                if newStepsSet.exclusiveOr(prevStepsSet).count == 0 {
+                if newStepsSet.symmetricDifference(prevStepsSet).count == 0 {
                     //need to reload one by one
                     reloadBlock = {
-                        NSNotificationCenter.defaultCenter().postNotificationName(StepsViewController.stepUpdatedNotification, object: nil)
+                        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
                         print("did send step updated notification")
                         //update tab views
                         for index in 0 ..< s.lesson!.steps.count { 
@@ -140,7 +140,7 @@ class StepsViewController: RGPageViewController {
                 } 
                 
                 UIThread.performUI {
-                    s.view.userInteractionEnabled = true
+                    s.view.isUserInteractionEnabled = true
                     reloadBlock()
                     s.doesPresentWarningView = false
                     s.doesPresentActivityIndicatorView = false
@@ -159,19 +159,19 @@ class StepsViewController: RGPageViewController {
                 UIThread.performUI{
                     [weak self] in
                     if let s = self {
-                        s.view.userInteractionEnabled = true
+                        s.view.isUserInteractionEnabled = true
                         s.doesPresentActivityIndicatorView = false
                         if s.numberOfPagesForViewController(s) == 0 {
                             s.doesPresentWarningView = true
                         }
                     }
                 }
-            }, onlyLesson: context == .Lesson)
+            }, onlyLesson: context == .lesson)
     }
     
     var didSelectTab = false
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
@@ -191,25 +191,25 @@ class StepsViewController: RGPageViewController {
     
     override var pagerOrientation: UIPageViewControllerNavigationOrientation {
         get {
-            return .Horizontal
+            return .horizontal
         }
     }
     
     override var tabbarPosition: RGTabbarPosition {
         get {
-            return .Top
+            return .top
         }
     }
     
     override var tabbarStyle: RGTabbarStyle {
         get {
-            return RGTabbarStyle.Solid
+            return RGTabbarStyle.solid
         }
     }
     
     override var tabIndicatorColor: UIColor {
         get {
-            return UIColor.whiteColor()
+            return UIColor.white
         }
     }
     
@@ -221,7 +221,7 @@ class StepsViewController: RGPageViewController {
     
     override var tabStyle: RGTabStyle {
         get {
-            return .InactiveFaded
+            return .inactiveFaded
         }
     }
     
@@ -247,12 +247,12 @@ class StepsViewController: RGPageViewController {
 }
 
 extension StepsViewController : RGPageViewControllerDataSource {
-    func numberOfPagesForViewController(pageViewController: RGPageViewController) -> Int {
+    func numberOfPagesForViewController(_ pageViewController: RGPageViewController) -> Int {
         pagesCount = lesson?.steps.count ?? 0
         return pagesCount
     }
     
-    func tabViewForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIView {
+    func tabViewForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIView {
         
         //Just a try to fix a strange bug
         if index >= lesson!.steps.count {
@@ -272,7 +272,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
         }
     }
     
-    func viewControllerForPageAtIndex(pageViewController: RGPageViewController, index: Int) -> UIViewController? {
+    func viewControllerForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIViewController? {
         
         if let lesson = lesson {
             //Just a try to fix a strange bug
@@ -281,7 +281,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
             }
             
             if lesson.steps[index].block.name == "video" {
-                let stepController = storyboard?.instantiateViewControllerWithIdentifier("VideoStepViewController") as! VideoStepViewController
+                let stepController = storyboard?.instantiateViewController(withIdentifier: "VideoStepViewController") as! VideoStepViewController
                 stepController.video = lesson.steps[index].block.video!
                 stepController.nItem = self.navigationItem
                 stepController.step = lesson.steps[index]
@@ -299,7 +299,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                     return self?.canSendViews ?? false
                 }
                 
-                if context == .Unit {
+                if context == .unit {
 //                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
@@ -319,8 +319,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 
                 return stepController
             } else {
-                let stepController = storyboard?.instantiateViewControllerWithIdentifier("WebStepViewController") as! WebStepViewController
-                stepController.parent = self
+                let stepController = storyboard?.instantiateViewController(withIdentifier: "WebStepViewController") as! WebStepViewController
+                stepController.stepsVC = self
                 stepController.step = lesson.steps[index]
                 stepController.lesson = lesson
                 stepController.stepId = index + 1
@@ -335,7 +335,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                     return self?.canSendViews ?? false
                 }
                 stepController.lessonSlug = lesson.slug
-                if context == .Unit {
+                if context == .unit {
 //                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
@@ -361,12 +361,12 @@ extension StepsViewController : RGPageViewControllerDataSource {
 }
 
 extension StepsViewController : RGPageViewControllerDelegate {
-    func heightForTabAtIndex(index: Int) -> CGFloat {
+    func heightForTabAtIndex(_ index: Int) -> CGFloat {
         return 44.0 
     }
     
     // use this to set a custom width for a tab
-    func widthForTabAtIndex(index: Int) -> CGFloat {
+    func widthForTabAtIndex(_ index: Int) -> CGFloat {
         return 44.0
     }
 }

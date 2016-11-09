@@ -17,9 +17,9 @@ extension Section {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedTitle: String?
-    @NSManaged var managedBeginDate: NSDate?
-    @NSManaged var managedSoftDeadline: NSDate?
-    @NSManaged var managedHardDeadline: NSDate?
+    @NSManaged var managedBeginDate: Date?
+    @NSManaged var managedSoftDeadline: Date?
+    @NSManaged var managedHardDeadline: Date?
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedProgressId : String?
     @NSManaged var managedTestSectionAction: String?
@@ -30,20 +30,20 @@ extension Section {
     @NSManaged var managedCourse : Course?
     @NSManaged var managedProgress : Progress?
     
-    class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Section", inManagedObjectContext: CoreDataHelper.instance.context)!
+    class var oldEntity : NSEntityDescription {
+        return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Section.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
 
@@ -67,10 +67,10 @@ extension Section {
     
     var position : Int {
         set(value){
-            self.managedPosition = value
+            self.managedPosition = value as NSNumber?
         }
         get {
-            return managedPosition?.integerValue ?? -1
+            return managedPosition?.intValue ?? -1
         }
     }
 
@@ -83,7 +83,7 @@ extension Section {
         }
     }
     
-    var beginDate : NSDate? {
+    var beginDate : Date? {
         set(date){
             self.managedBeginDate = date
         }
@@ -92,7 +92,7 @@ extension Section {
         }
     }
     
-    var softDeadline: NSDate? {
+    var softDeadline: Date? {
         set(date){ 
             self.managedSoftDeadline = date
         }
@@ -101,7 +101,7 @@ extension Section {
         }
     }
     
-    var hardDeadline: NSDate? {
+    var hardDeadline: Date? {
         set(date){ 
             self.managedHardDeadline = date
         }
@@ -112,7 +112,7 @@ extension Section {
 
     var isActive : Bool {
         set(value){
-            self.managedActive = value
+            self.managedActive = value as NSNumber?
         }
         get {
             return managedActive?.boolValue ?? false
@@ -144,7 +144,7 @@ extension Section {
     
     var unitsArray: [Int] {
         set(value){
-            self.managedUnitsArray = value
+            self.managedUnitsArray = value as NSObject?
         }
         get {
             return (self.managedUnitsArray as? [Int]) ?? []

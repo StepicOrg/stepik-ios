@@ -28,20 +28,20 @@ extension Lesson {
     @NSManaged var managedUnit : Unit?
 //    @NSManaged var managedIsCached : NSNumber?
     
-    class var entity : NSEntityDescription {
-        return NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataHelper.instance.context)!
+    class var oldEntity : NSEntityDescription {
+        return NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
     }
     
     convenience init() {
-        self.init(entity: Lesson.entity, insertIntoManagedObjectContext: CoreDataHelper.instance.context)
+        self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
     var id : Int {
         set(newId){
-            self.managedId = newId
+            self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.integerValue ?? -1
+            return managedId?.intValue ?? -1
         }
     }
     
@@ -85,7 +85,7 @@ extension Lesson {
     
     var isFeatured : Bool {
         set(value){
-            self.managedFeatured = value
+            self.managedFeatured = value as NSNumber?
         }
         get {
             return managedFeatured?.boolValue ?? false
@@ -94,7 +94,7 @@ extension Lesson {
     
     var isPublic : Bool {
         set(value){
-            self.managedPublic = value
+            self.managedPublic = value as NSNumber?
         }
         get {
             return managedPublic?.boolValue ?? false
@@ -103,7 +103,7 @@ extension Lesson {
     
     var stepsArray : [Int] {
         set(value){
-            self.managedStepsArray = value
+            self.managedStepsArray = value as NSObject?
         }
         
         get {

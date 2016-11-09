@@ -9,10 +9,10 @@
 import Foundation
 
 extension UIView {
-    func setRoundedBounds(width width: CGFloat, color: UIColor = UIColor.whiteColor()) {
+    func setRoundedBounds(width: CGFloat, color: UIColor = UIColor.white) {
         self.layer.cornerRadius = self.bounds.width / 2
         self.layer.borderWidth = width
-        self.layer.borderColor = color.CGColor
+        self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
@@ -20,7 +20,7 @@ extension UIView {
     func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
         self.layer.cornerRadius = radius
         self.layer.borderWidth = borderWidth 
-        self.layer.borderColor = borderColor.CGColor;
+        self.layer.borderColor = borderColor.cgColor;
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }

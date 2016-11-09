@@ -8,32 +8,52 @@
 
 import UIKit
 import SwiftyJSON
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class Parser: NSObject {
     static var sharedParser = Parser()
     
-    private override init() {}
+    fileprivate override init() {}
     
-    func dateFromTimedateJSON(json: JSON) -> NSDate? {
+    func dateFromTimedateJSON(_ json: JSON) -> Date? {
         if let date = json.string { 
-            return NSDate(timeIntervalSince1970: NSTimeInterval(timeString: date))
+            return Date(timeIntervalSince1970: TimeInterval(timeString: date))
         } else {
             return nil
         }
     }
     
-    func codeFromURL(url: NSURL) -> String? {
+    func codeFromURL(_ url: URL) -> String? {
         return url.getKeyVals()?["code"]
     }
 }
 
-extension NSURL {
+extension URL {
     func getKeyVals() -> Dictionary<String, String>? {
         var results = [String:String]()
-        let keyValues = self.query?.componentsSeparatedByString("&")
+        let keyValues = self.query?.components(separatedBy: "&")
         if keyValues?.count > 0 {
             for pair in keyValues! {
-                let kv = pair.componentsSeparatedByString("=")
+                let kv = pair.components(separatedBy: "=")
                 if kv.count > 1 {
                     results.updateValue(kv[1], forKey: kv[0])
                 }

@@ -12,15 +12,15 @@ import Foundation
  A PersistentRecoveryManager for StepicToken object
  */
 class PersistentUserTokenRecoveryManager : PersistentRecoveryManager {
-    override func recoverObjectFromDictionary(dictionary: [String : AnyObject]) -> DictionarySerializable? {
+    override func recoverObjectFromDictionary(_ dictionary: [String : Any]) -> DictionarySerializable? {
         return StepicToken(dictionary: dictionary)
     }
     
-    func recoverStepicToken(userId userId: Int) -> StepicToken?  {
+    func recoverStepicToken(userId: Int) -> StepicToken?  {
         return recoverObjectWithKey("\(userId)") as? StepicToken
     }
     
-    func writeStepicToken(token: StepicToken, userId: Int) {
+    func writeStepicToken(_ token: StepicToken, userId: Int) {
         writeObjectWithKey("\(userId)", object: token)
     }
 }

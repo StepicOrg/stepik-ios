@@ -12,13 +12,25 @@ import SwiftyJSON
 
 class VotesAPI {
 
-    func update(vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: (Vote->Void), error errorHandler: (String->Void)) {
-        let params : [String: AnyObject]? = [
-            "vote" : vote.json
+    func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote)->Void), error errorHandler: @escaping ((String)->Void)) {
+        let params : Parameters? = [
+            "vote" : vote.json as AnyObject
         ]
-        Alamofire.request(.PUT, "\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", parameters: params, encoding: .JSON, headers: headers).responseSwiftyJSON(
+        Alamofire.request("\(StepicApplicationsInfo.apiURL)/votes/\(vote.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
-                _, response, json, error in
+                response in
+                
+                var error = response.result.error
+                var json : JSON = [:]
+                if response.result.value == nil {
+                    if error == nil {
+                        error = NSError()
+                    }
+                } else {
+                    json = response.result.value!
+                }
+                let response = response.response
+                
                                 
                 if let e = error as? NSError {
                     errorHandler("PUT vote: error \(e.domain) \(e.code): \(e.localizedDescription)")

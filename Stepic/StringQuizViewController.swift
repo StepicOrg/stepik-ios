@@ -16,10 +16,10 @@ class StringQuizViewController: QuizViewController {
         super.viewDidLoad()
         
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
-        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGrayColor())
+        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
+        textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
-        textView.font = UIFont.systemFontOfSize(16)
+        textView.font = UIFont.systemFont(ofSize: 16)
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
@@ -44,14 +44,14 @@ class StringQuizViewController: QuizViewController {
     }
     
     //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload reload: Bool = true) {
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if let r = submission?.reply as? TextReply {
             textView.text = r.text
         }
         if submission?.status == "correct" {
-            textView.editable = false
+            textView.isEditable = false
         } else {
-            textView.editable = true
+            textView.isEditable = true
         }
     }
     

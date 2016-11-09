@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class AudioManager: NSObject {
-    private override init() { super.init() }
+    fileprivate override init() { super.init() }
     static let sharedManager = AudioManager() 
     
     var ignoreMuteSwitch : Bool {
@@ -42,7 +42,7 @@ class AudioManager: NSObject {
     }
     
     
-    private func changeMuteIgnoreStatusTo(ignore ignore: Bool) -> Bool {
+    fileprivate func changeMuteIgnoreStatusTo(ignore: Bool) -> Bool {
         do {
             try AVAudioSession.sharedInstance().setActive(!ignore)
             return true

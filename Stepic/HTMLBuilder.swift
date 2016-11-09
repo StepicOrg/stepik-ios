@@ -9,10 +9,10 @@
 import UIKit
 
 class HTMLBuilder: NSObject {
-    private override init() {}
+    fileprivate override init() {}
     static var sharedBuilder = HTMLBuilder()
     
-    private var stepicStyleString : String {        
+    fileprivate var stepicStyleString : String {        
         var res : String = ""
         res += "<style>"
         res += "\nhtml{-webkit-text-size-adjust: 100%;}"
@@ -29,7 +29,7 @@ class HTMLBuilder: NSObject {
         return res
     }
     
-    private var stepicCommentStyleString : String {        
+    fileprivate var stepicCommentStyleString : String {        
         var res : String = ""
         res += "<style>"
         res += "\nhtml{-webkit-text-size-adjust: 100%;}"
@@ -46,11 +46,12 @@ class HTMLBuilder: NSObject {
         return res
     }
 
+    fileprivate var stepicBaseURLString: String = "<base href=\"\(StepicApplicationsInfo.stepicURL)\">"
     
-    func buildHTMLStringWith(head head: String, body: String, addStepicFont : Bool = true, width: Int) -> String {
+    func buildHTMLStringWith(head: String, body: String, addStepicFont : Bool = true, width: Int) -> String {
         var res = "<html>\n"
         
-        res += "<head>\n\(stepicStyleString + head)\n</head>\n"
+        res += "<head>\n\(stepicStyleString + stepicBaseURLString + head)\n</head>\n"
 //        print(body)
         res += "<body style=\"width:\(width))px;\">\n\(body)\n</body>\n"
         
@@ -58,7 +59,7 @@ class HTMLBuilder: NSObject {
         return res
     }
     
-    func buildCommentHTMLStringWith(head head: String, body: String) -> String {
+    func buildCommentHTMLStringWith(head: String, body: String) -> String {
         var res = "<html>\n"
         
         res += "<head>\n\(stepicCommentStyleString + head)\n</head>\n"
@@ -70,7 +71,7 @@ class HTMLBuilder: NSObject {
         return res
     }
     
-    func buildHTMLStringWith(head head: String, body: String, addStyle: Bool = false, textColorHex: String = "#000000") -> String {
+    func buildHTMLStringWith(head: String, body: String, addStyle: Bool = false, textColorHex: String = "#000000") -> String {
         var res = "<html>\n"
         
         if addStyle {

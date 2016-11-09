@@ -26,14 +26,14 @@ class WarningView: UIView {
     func setup() {
         view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
     }
     
     func loadViewFromNib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "WarningView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
     
@@ -57,25 +57,25 @@ class WarningView: UIView {
     
     var delegate : WarningViewDelegate?
     
-    private func localize() {
-        tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), forState: .Normal)
+    fileprivate func localize() {
+        tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControlState())
     }
     
-    private func getAttributedDescription(text: String) -> NSAttributedString {
+    fileprivate func getAttributedDescription(_ text: String) -> NSAttributedString {
         let text = text
         
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
         
-        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSForegroundColorAttributeName: UIColor.lightGray,
             NSParagraphStyleAttributeName: paragraph]
         
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14, contentMode : UIViewContentMode = UIViewContentMode.ScaleAspectFit) {
+    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14, contentMode : UIViewContentMode = UIViewContentMode.scaleAspectFit) {
         self.init(frame: frame)
         localize()
         self.delegate = delegate
@@ -83,18 +83,18 @@ class WarningView: UIView {
         self.imageView.contentMode = contentMode
         textLabel = UILabel()
         self.view.insertSubview(textLabel, belowSubview: tryAgainButton)
-        textLabel.textAlignment = NSTextAlignment.Center
+        textLabel.textAlignment = NSTextAlignment.center
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont.systemFontOfSize(14)
-        textLabel.alignLeading("8", trailing: "-8", toView: view)
-        textLabel.constrainTopSpaceToView(centerView, predicate: "4")
+        textLabel.font = UIFont.systemFont(ofSize: 14)
+        textLabel.alignLeading("8", trailing: "-8", to: view)
+        textLabel.constrainTopSpace(to: centerView, predicate: "4")
         textLabel.attributedText = getAttributedDescription(text)
-        tryAgainButton.constrainTopSpaceToView(textLabel, predicate: "8")
+        tryAgainButton.constrainTopSpace(to: textLabel, predicate: "8")
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
     
-    @IBAction func didPressButton(sender: AnyObject) {
+    @IBAction func didPressButton(_ sender: AnyObject) {
         delegate?.didPressButton()
     }
 

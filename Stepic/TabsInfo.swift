@@ -10,28 +10,28 @@ import Foundation
 
 struct TabsInfo {
     
-    private static let allCoursesKey = "AllCoursesInfo"
-    private static let myCoursesKey = "MyCoursesInfo"
+    fileprivate static let allCoursesKey = "AllCoursesInfo"
+    fileprivate static let myCoursesKey = "MyCoursesInfo"
 
-    private static let defaults = NSUserDefaults.standardUserDefaults()
+    fileprivate static let defaults = UserDefaults.standard
     
     static var allCoursesIds : [Int] {
         get {
-            if let ids = defaults.objectForKey(allCoursesKey) as? [Int] {
+            if let ids = defaults.object(forKey: allCoursesKey) as? [Int] {
                 return ids
             } else {
                 return []
             }
         }    
         set(value) {
-            defaults.setObject(value, forKey: allCoursesKey)
+            defaults.set(value, forKey: allCoursesKey)
             defaults.synchronize()
         }
     }
     
     static var myCoursesIds : [Int] {
         get {
-            if let ids = defaults.objectForKey(myCoursesKey) as? [Int] {
+            if let ids = defaults.object(forKey: myCoursesKey) as? [Int] {
                 return ids
             } else {
                 return []
@@ -39,7 +39,7 @@ struct TabsInfo {
         }
         
         set(value) {
-            defaults.setObject(value, forKey: myCoursesKey)
+            defaults.set(value, forKey: myCoursesKey)
             defaults.synchronize()
         }
     }

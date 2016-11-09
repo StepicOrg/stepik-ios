@@ -10,8 +10,8 @@ import UIKit
 
 class AuthNavigationViewController: UINavigationController {
 
-    var success: (Void -> Void)?
-    var cancel: (Void -> Void)?
+    var success: ((Void) -> Void)?
+    var cancel: ((Void) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

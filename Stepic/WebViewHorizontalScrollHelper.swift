@@ -18,11 +18,11 @@ import Foundation
  */
 class WebViewHorizontalScrollHelper : NSObject {
     
-    private var panG : UIPanGestureRecognizer!
+    fileprivate var panG : UIPanGestureRecognizer!
 
-    private var webView: UIWebView!
-    private var pagerPanRecognizer: UIPanGestureRecognizer!
-    private var underlyingView : UIView!
+    fileprivate var webView: UIWebView!
+    fileprivate var pagerPanRecognizer: UIPanGestureRecognizer!
+    fileprivate var underlyingView : UIView!
     
     init(webView: UIWebView, onView: UIView, pagerPanRecognizer: UIPanGestureRecognizer) {
         super.init()
@@ -32,7 +32,7 @@ class WebViewHorizontalScrollHelper : NSObject {
         self.underlyingView = onView
         
         webView.scrollView.bounces = false
-        webView.scrollView.scrollEnabled = false
+        webView.scrollView.isScrollEnabled = false
         webView.scrollView.showsVerticalScrollIndicator = false
         
         panG = UIPanGestureRecognizer(target: self, action: #selector(WebViewHorizontalScrollHelper.didPan(_:)))
@@ -41,21 +41,21 @@ class WebViewHorizontalScrollHelper : NSObject {
         onView.addGestureRecognizer(panG)
     }
     
-    private var shouldTranslateOffsetChange = false
-    private var offsetChange : CGFloat = 0
-    private var startOffset : CGFloat = 0
+    fileprivate var shouldTranslateOffsetChange = false
+    fileprivate var offsetChange : CGFloat = 0
+    fileprivate var startOffset : CGFloat = 0
     
     //Magically counts all the offsets and decides whether the gesture should be translated to the pageview 
-    func didPan(sender: UIPanGestureRecognizer) {
+    func didPan(_ sender: UIPanGestureRecognizer) {
         
-        if sender.state == UIGestureRecognizerState.Began {
+        if sender.state == UIGestureRecognizerState.began {
             offsetChange = 0
             startOffset = webView.scrollView.contentOffset.x
         }
         
         if shouldTranslateOffsetChange {
             var cleanOffset = webView.scrollView.contentOffset.x + offsetChange
-            cleanOffset -= sender.translationInView(webView).x
+            cleanOffset -= sender.translation(in: webView).x
             cleanOffset = max(0, cleanOffset)
             cleanOffset = min(cleanOffset, rightLimitOffsetX)
             offsetChange = -cleanOffset + startOffset
@@ -63,11 +63,11 @@ class WebViewHorizontalScrollHelper : NSObject {
         }
     }
 
-    private var rightLimitOffsetX : CGFloat {
+    fileprivate var rightLimitOffsetX : CGFloat {
         return max(0, getContentWidth(webView) - webView.bounds.width)
     }
 
-    private func getContentWidth(webView: UIWebView) -> CGFloat {
+    fileprivate func getContentWidth(_ webView: UIWebView) -> CGFloat {
         return webView.scrollView.contentSize.width
     }
     
@@ -77,16 +77,16 @@ class WebViewHorizontalScrollHelper : NSObject {
 extension WebViewHorizontalScrollHelper : UIGestureRecognizerDelegate {
     
     //Makes decisions about translating gestures to another recognizers using data, counted in didPan()
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if (otherGestureRecognizer == pagerPanRecognizer) {
 //            print("did ask for simultaneous recognition with pagination")
             
             let sender = gestureRecognizer as! UIPanGestureRecognizer
-            let locationInView = sender.locationInView(webView)
-            if CGRectContainsPoint(webView.bounds, locationInView)  {
+            let locationInView = sender.location(in: webView)
+            if webView.bounds.contains(locationInView)  {
 //                print("pan located inside webview")
-                let vel = sender.velocityInView(underlyingView)
+                let vel = sender.velocity(in: underlyingView)
                 let draggedRight = vel.x > 0
 //                print("webview content offset -> \(webView.scrollView.contentOffset.x), draggedRight: \(draggedRight)")
                 if (webView.scrollView.contentOffset.x == 0 && draggedRight) ||

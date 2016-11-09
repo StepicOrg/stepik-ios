@@ -11,7 +11,7 @@ import UIKit
 
 class AnalyticsHelper: NSObject {
     static var sharedHelper = AnalyticsHelper()
-    private override init() {super.init()}
+    fileprivate override init() {super.init()}
     
     func changeSignIn() {
 //        let tracker = GAI.sharedInstance().defaultTracker

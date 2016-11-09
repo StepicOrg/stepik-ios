@@ -12,7 +12,7 @@ class Notification : DictionarySerializable {
     var type : NotificationType
     var htmlText: String
     
-    required init?(dictionary: [String : AnyObject]) {
+    required init?(dictionary: [String : Any]) {
         if let typeString = dictionary["type"] as? String {
             if let type =  NotificationType(rawValue: typeString) {
                 self.type = type
@@ -35,8 +35,8 @@ class Notification : DictionarySerializable {
         self.htmlText = htmlText
     }
     
-    func serializeToDictionary() -> [String : AnyObject] {
-        return [String: AnyObject]()
+    func serializeToDictionary() -> [String : Any] {
+        return [String: Any]()
     }
     
 }

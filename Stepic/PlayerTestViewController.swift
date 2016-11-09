@@ -17,12 +17,12 @@ class PlayerTestViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    let videoUrl = NSURL(string: "https://v.cdn.vine.co/r/videos/AA3C120C521177175800441692160_38f2cbd1ffb.1.5.13763579289575020226.mp4")!
+    let videoUrl = URL(string: "https://v.cdn.vine.co/r/videos/AA3C120C521177175800441692160_38f2cbd1ffb.1.5.13763579289575020226.mp4")!
 
     
-    @IBAction func showPlayerPressed(sender: UIButton) {
+    @IBAction func showPlayerPressed(_ sender: UIButton) {
         let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
-        self.presentViewController(player, animated: true, completion: {
+        self.present(player, animated: true, completion: {
             print("stepic player successfully presented!")
         })
     }

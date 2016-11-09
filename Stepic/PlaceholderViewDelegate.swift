@@ -10,5 +10,5 @@ import UIKit
 
 @objc(PlaceholderViewDelegate)
 protocol PlaceholderViewDelegate {
-    optional func placeholderButtonDidPress() 
+    @objc optional func placeholderButtonDidPress() 
 }

@@ -22,15 +22,15 @@ class VideoStepViewController: UIViewController {
     var lessonSlug: String!
     
     var startStepId: Int!
-    var startStepBlock : (Void->Void)!
-    var shouldSendViewsBlock : (Void->Bool)!
+    var startStepBlock : ((Void)->Void)!
+    var shouldSendViewsBlock : ((Void)->Bool)!
 
     var assignment : Assignment?
     
     var parentNavigationController : UINavigationController?
     
-    var nextLessonHandler: (Void->Void)?
-    var prevLessonHandler: (Void->Void)?
+    var nextLessonHandler: ((Void)->Void)?
+    var prevLessonHandler: ((Void)->Void)?
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -52,7 +52,7 @@ class VideoStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: StepsViewController.stepUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
         
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
@@ -60,27 +60,29 @@ class VideoStepViewController: UIViewController {
             self?.playVideo()
             })
         
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", forState: .Normal)
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", forState: .Normal)
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
         
         initialize()
     }
     
-    func sharePressed(item: UIBarButtonItem) {
+    func sharePressed(_ item: UIBarButtonItem) {
 //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        let stepid = stepId
-        let slug = lessonSlug
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        
+        guard let slug = lessonSlug, let stepid = stepId else {
+            return
+        }
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
-            dispatch_async(dispatch_get_main_queue()) {
-                self.presentViewController(shareVC, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(shareVC, animated: true, completion: nil)
             }
         }
     }
     
     func initialize() {
-        thumbnailImageView.sd_setImageWithURL(NSURL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
+        thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
         
         if let discussionCount = step.discussionsCount {
             discussionCountView.commentsCount = discussionCount
@@ -93,13 +95,13 @@ class VideoStepViewController: UIViewController {
         }
         
         if nextLessonHandler == nil {
-            nextLessonButton.hidden = true
+            nextLessonButton.isHidden = true
         } else {
             nextLessonButton.setStepicWhiteStyle()
         }
         
         if prevLessonHandler == nil {
-            prevLessonButton.hidden = true
+            prevLessonButton.isHidden = true
         } else {
             prevLessonButton.setStepicWhiteStyle()
         }
@@ -114,15 +116,15 @@ class VideoStepViewController: UIViewController {
         }
     }
     
-    func updatedStepNotification(notification: NSNotification) {
+    func updatedStepNotification(_ notification: Foundation.Notification) {
         initialize()
     }
     
-    private func playVideo() {
-        if video.state == VideoState.Cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
+    fileprivate func playVideo() {
+        if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
-            self.presentViewController(player, animated: true, completion: {
+            self.present(player, animated: true, completion: {
                 print("stepic player successfully presented!")
             })
         } else {
@@ -132,17 +134,17 @@ class VideoStepViewController: UIViewController {
         }
     }
     
-    @IBAction func playButtonPressed(sender: UIButton) {
+    @IBAction func playButtonPressed(_ sender: UIButton) {
         playVideo()
     }
     
     var itemView : VideoDownloadView!
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
@@ -151,9 +153,11 @@ class VideoStepViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        let cstep = step
-        let stepid = step.id
+    override func viewDidAppear(_ animated: Bool) {
+        guard let cstep = step else {
+            return
+        }
+        let stepid = step.id         
         if stepId - 1 == startStepId {
             startStepBlock()
         }
@@ -161,7 +165,7 @@ class VideoStepViewController: UIViewController {
             performRequest({
                 [weak self] in
                 ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
-                    NSNotificationCenter.defaultCenter().postNotificationName(StepDoneNotificationKey, object: nil, userInfo: ["id" : cstep.id])
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{
                         cstep.progress?.isPassed = true
                         CoreDataHelper.instance.save()
@@ -171,7 +175,7 @@ class VideoStepViewController: UIViewController {
         }
     }
     
-    @IBAction func showCommentsPressed(sender: AnyObject) {
+    @IBAction func showCommentsPressed(_ sender: AnyObject) {
         showComments()
     }
     
@@ -186,11 +190,11 @@ class VideoStepViewController: UIViewController {
         }
     }
     
-    @IBAction func prevLessonPressed(sender: UIButton) {
+    @IBAction func prevLessonPressed(_ sender: UIButton) {
         prevLessonHandler?()
     }
     
-    @IBAction func nextLessonPressed(sender: UIButton) {
+    @IBAction func nextLessonPressed(_ sender: UIButton) {
         nextLessonHandler?()
     }
     
@@ -206,9 +210,9 @@ class VideoStepViewController: UIViewController {
 }
 
 extension VideoStepViewController : PKDownloadButtonDelegate {
-    func downloadButtonTapped(downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+    func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch downloadButton.state {
-        case .StartDownload: 
+        case .startDownload: 
             
             if !ConnectionHelper.shared.isReachable {
                 Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
@@ -216,33 +220,33 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
                 return
             }
             
-            downloadButton.state = .Downloading
+            downloadButton.state = .downloading
             video.store(VideosInfo.videoQuality, progress: {
                 prog in
                 UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
                 }, completion: {
                     completed in
                     if completed {
-                        UIThread.performUI({downloadButton.state = .Downloaded})
+                        UIThread.performUI({downloadButton.state = .downloaded})
                     } else {
-                        UIThread.performUI({downloadButton.state = .StartDownload})
+                        UIThread.performUI({downloadButton.state = .startDownload})
                     }
                 }, error: {
                     error in
                     print("Error while downloading video!!!")
             })
             break
-        case .Downloaded:
+        case .downloaded:
             if video.removeFromStore() {
-                downloadButton.state = .StartDownload
+                downloadButton.state = .startDownload
             } 
             break
-        case .Downloading:
+        case .downloading:
             if video.cancelStore() {
-                downloadButton.state = .StartDownload
+                downloadButton.state = .startDownload
             }
             break
-        case .Pending:
+        case .pending:
             break
         }
         itemView.updateButton()
@@ -251,10 +255,10 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
 
 extension VideoStepViewController : VideoDownloadDelegate {
     
-    func didDownload(video: Video, cancelled: Bool) {
+    func didDownload(_ video: Video, cancelled: Bool) {
     }
     
-    func didGetError(video: Video) {
+    func didGetError(_ video: Video) {
         itemView.updateButton()
     }
 }

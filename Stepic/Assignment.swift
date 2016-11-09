@@ -18,13 +18,13 @@ class Assignment: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         stepId = json["step"].intValue
         unitId = json["unit"].intValue
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
 

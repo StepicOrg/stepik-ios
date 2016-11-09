@@ -20,7 +20,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func initialize(json: JSON) {
+    func initialize(_ json: JSON) {
         id = json["id"].intValue
         title = json["title"].stringValue
         isFeatured = json["is_featured"].boolValue
@@ -30,15 +30,15 @@ class Lesson: NSManagedObject, JSONInitializable {
         stepsArray = json["steps"].arrayObject as! [Int]
     }
     
-    static func getLesson(id: Int) -> Lesson? {
-        let request = NSFetchRequest(entityName: "Lesson")
+    static func getLesson(_ id: Int) -> Lesson? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
         
         request.predicate = predicate
         
         do {
-            let results = try CoreDataHelper.instance.context.executeFetchRequest(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request) 
             return (results as? [Lesson])?.first
         }
         catch {
@@ -48,19 +48,19 @@ class Lesson: NSManagedObject, JSONInitializable {
 //        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
     
-    func update(json json: JSON) {
+    func update(json: JSON) {
         initialize(json)
     }
     
-    func loadSteps(completion completion: (Void -> Void), error errorHandler: (String -> Void)? = nil, onlyLesson: Bool = false) {
+    func loadSteps(completion: @escaping ((Void) -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .Update, success: {
+            ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .update, success: {
                 newSteps in 
                 self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
                 self.loadProgressesForSteps({
                     if !onlyLesson {
                         if let u = self.unit {
-                            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .Update, success: {
+                            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .update, success: {
                                 newAssignments in 
                                 u.assignments = Sorter.sort(newAssignments,steps: self.steps)
                                 completion()
@@ -86,7 +86,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     
     
-    func loadProgressesForSteps(completion: (Void->Void)) {
+    func loadProgressesForSteps(_ completion: @escaping ((Void)->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for step in steps {
@@ -99,7 +99,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
         
         performRequest({
-            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .Update, success: { 
+            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
                 (newProgresses) -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
                 for i in 0 ..< min(self.steps.count, progresses.count) {
@@ -139,7 +139,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         for step in steps {
             if step.block.name == "video" {
                 if let video = step.block.video {
-                    if video.state == VideoState.Downloading {
+                    if video.state == VideoState.downloading {
                         loadingVideos! += [video]
                     }
                 }
@@ -190,7 +190,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             return false
         }
         for vid in stepVideos {
-            if vid.state == VideoState.Online {
+            if vid.state == VideoState.online {
                 return false
             }
         }
@@ -205,7 +205,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             
             for video in loadingVideos! {
                 
-                if video.state != VideoState.Cached { 
+                if video.state != VideoState.cached { 
                     video.storedProgress = {
                         prog in
                         self.storeProgress?(self.goodProgress)
@@ -233,7 +233,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     var cancelledVideos : Int = 0
     //returns completed & cancelled videos
     
-    func storeVideos(progress progress : (Float) -> Void, completion : (Int, Int) -> Void, error errorHandler: NSError? -> Void) {
+    func storeVideos(progress : @escaping (Float) -> Void, completion : @escaping (Int, Int) -> Void, error errorHandler: @escaping (NSError?) -> Void) {
         
         storeProgress = progress
         storeCompletion = completion
@@ -242,7 +242,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         for step in steps {
             if step.block.name == "video" {
                 if let video = step.block.video {
-                    if video.state == VideoState.Downloading || video.state == VideoState.Online {
+                    if video.state == VideoState.downloading || video.state == VideoState.online {
                         loadingVideos! += [video]
                     }
                 }
@@ -303,23 +303,23 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
         
         for vid in stepVideos {
-            if vid.state != VideoState.Cached { 
+            if vid.state != VideoState.cached { 
                 return false
             }
         }
         return true
     }
     
-    func cancelVideoStore(completion completion : Void -> Void) {
+    func cancelVideoStore(completion : @escaping (Void) -> Void) {
         if self.isCached {
             completion()
             return
         }
         
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        let priority = DispatchQueue.GlobalQueuePriority.default
+        DispatchQueue.global(priority: priority).async {
             for vid in self.stepVideos {
-                if vid.state != VideoState.Cached { 
+                if vid.state != VideoState.cached { 
                     vid.cancelStore()
                 } else {
                     //                    vid.removeFromStore()
@@ -332,12 +332,12 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
     }
     
-    func removeFromStore(completion completion: Void -> Void) {
+    func removeFromStore(completion: @escaping (Void) -> Void) {
         print("entered lesson removeFromStore")
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        let priority = DispatchQueue.GlobalQueuePriority.default
+        DispatchQueue.global(priority: priority).async {
             for vid in self.stepVideos {
-                if vid.state != VideoState.Cached { 
+                if vid.state != VideoState.cached { 
                     print("not cached video can not be removed!")
                     vid.cancelStore()
                 } else {

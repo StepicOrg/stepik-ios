@@ -18,7 +18,7 @@ class VideoDownloadView: UIView {
     
     var quality : String! {
         didSet {
-            qualityLabel.text = "\(quality)p"
+            qualityLabel.text = "\(quality ?? "0")p"
         }
     }
     
@@ -27,14 +27,14 @@ class VideoDownloadView: UIView {
     func setup() {
         view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
     }
 
     func loadViewFromNib() -> UIView {
-        let bundle = NSBundle(forClass: self.dynamicType)
+        let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "VideoDownloadView", bundle: bundle)
-        let view = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
     
@@ -74,14 +74,14 @@ class VideoDownloadView: UIView {
     
     
     func updateButton() {
-        if video.state == VideoState.Cached {
-            downloadButton.state = .Downloaded
+        if video.state == VideoState.cached {
+            downloadButton.state = .downloaded
             self.quality = video.cachedQuality ?? VideosInfo.videoQuality 
             return
         }
         
-        if video.state == VideoState.Downloading {
-            downloadButton.state = .Downloading
+        if video.state == VideoState.downloading {
+            downloadButton.state = .downloading
             self.quality = self.video.loadingQuality ?? VideosInfo.videoQuality
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             video.storedProgress = {
@@ -91,23 +91,23 @@ class VideoDownloadView: UIView {
             video.storedCompletion = {
                 completed in
                 if completed {
-                    UIThread.performUI({self.downloadButton.state = .Downloaded})
+                    UIThread.performUI({self.downloadButton.state = .downloaded})
                     self.downloadDelegate?.didDownload(self.video, cancelled: false)
                 } else {
-                    UIThread.performUI({self.downloadButton.state = .StartDownload})
+                    UIThread.performUI({self.downloadButton.state = .startDownload})
                     self.downloadDelegate?.didDownload(self.video, cancelled: true)
                 }
             }
             return
         }
         
-        if video.state == .Online {
-            downloadButton.state = .StartDownload
+        if video.state == .online {
+            downloadButton.state = .startDownload
             self.quality = video.getNearestQualityToDefault(VideosInfo.videoQuality)
             return
         }
         
-        downloadButton.state = .Pending
+        downloadButton.state = .pending
         print("Something got wrong while initializing download button state. Should not be pending")
     }
 
