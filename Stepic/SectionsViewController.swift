@@ -44,17 +44,23 @@ class SectionsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    var url : String {
+        if let slug = course?.slug {
+            return StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/"
+        } else {
+            return ""
+        }
+    }
+    
     func shareButtonPressed(_ button: UIBarButtonItem) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        if let slug = course?.slug {
-            DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
-                let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/")
-                shareVC.popoverPresentationController?.barButtonItem = button
-                DispatchQueue.main.async {
-                    self.present(shareVC, animated: true, completion: nil)
-                }
+        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+            let shareVC = SharingHelper.getSharingController(self.url)
+            shareVC.popoverPresentationController?.barButtonItem = button
+            DispatchQueue.main.async {
+                self.present(shareVC, animated: true, completion: nil)
             }
-        }
+            }
     }
     
     func infoButtonPressed(_ button: UIButton) {
@@ -129,10 +135,31 @@ class SectionsViewController: UIViewController {
     }
     */
 
+    func showExamAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("ExamTitle", comment: ""), message: NSLocalizedString("ShowExamInWeb", comment: ""), preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: {
+            [weak self]
+            action in
+            if let s = self {
+                WebControllerManager.sharedManager.presentWebControllerWithURLString(s.url, inController: s, withKey: "exam", allowsSafari: true, backButtonStyle: .close)
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = course.sections[indexPath.row] 
+        if section.isExam {
+            showExamAlert()
+            return
+        }
+        
         performSegue(withIdentifier: "showUnits", sender: (indexPath as NSIndexPath).row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
