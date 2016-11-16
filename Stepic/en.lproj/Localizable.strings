@@ -152,4 +152,5 @@ days567890 = "days";
 VideoRate = "Video rate";
 VideoQuality = "Video quality";
 Downloaded = "Downloaded";
-
+ExamTitle = "Exam";
+ShowExamInWeb = "Open exam in web version?";

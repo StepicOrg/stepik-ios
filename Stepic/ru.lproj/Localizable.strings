@@ -152,3 +152,5 @@ days567890 = "дней";
 VideoRate = "Скорость воспроизведения";
 VideoQuality = "Качество видео";
 Downloaded = "Загруженное";
+ExamTitle = "Экзамен";
+ShowExamInWeb = "Открыть экзамен в веб версии?";

@@ -44,7 +44,8 @@ class NotificationDataExtractor {
         } else {
             if let commentsLink = HTMLParsingUtil.getLink(notification.htmlText, index: 2) {
                 print("\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
-                let u = URL(string: "\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
+                let urlString = StepicApplicationsInfo.stepicURL + commentsLink
+                let u = URL(string: urlString)
                 print(u)
                 return u
             } else {
