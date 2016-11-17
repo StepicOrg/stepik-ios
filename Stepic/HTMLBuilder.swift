@@ -46,14 +46,14 @@ class HTMLBuilder: NSObject {
         return res
     }
 
-    fileprivate var stepicBaseURLString: String = "<base href=\"\(StepicApplicationsInfo.stepicURL)\">"
+    fileprivate var stepicBaseURLString: String = ""//"<base href=\"\(StepicApplicationsInfo.stepicURL)\">"
     
     func buildHTMLStringWith(head: String, body: String, addStepicFont : Bool = true, width: Int) -> String {
         var res = "<html>\n"
         
         res += "<head>\n\(stepicStyleString + stepicBaseURLString + head)\n</head>\n"
 //        print(body)
-        res += "<body style=\"width:\(width))px;\">\n\(body)\n</body>\n"
+        res += "<body style=\"width:\(width))px;\">\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
         
         res += "</html>"
         return res
@@ -65,7 +65,7 @@ class HTMLBuilder: NSObject {
         res += "<head>\n\(stepicCommentStyleString + head)\n</head>\n"
         
         let bodyOpenTag = "<body>"
-        res += "\(bodyOpenTag)\n\(body)\n</body>\n"
+        res += "\(bodyOpenTag)\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
         
         res += "</html>"
         return res
@@ -81,9 +81,33 @@ class HTMLBuilder: NSObject {
         }
         //        print(body)
         let bodyOpenTag = "<body text=\"\(textColorHex)\">"
-        res += "\(bodyOpenTag)\n\(body)\n</body>\n"
+        res += "\(bodyOpenTag)\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
         
         res += "</html>"
         return res
+    }
+    
+    func addStepikURLWhereNeeded(body: String) -> String {
+        var links = HTMLParsingUtil.getAllLinksWithText(body).map({return $0.link})
+        links += HTMLParsingUtil.getImageSrcLinks(body)
+        var linkMap = [String:String]()
+        
+        for link in links {
+//            print("found link:")
+            if link.characters.first == Character("/") {
+                linkMap[link] = "\(StepicApplicationsInfo.stepicURL)/\(link)"
+            }
+        }
+        
+        var newBody = body
+        for (key, val) in linkMap {
+            newBody = newBody.replacingOccurrences(of: key, with: val)
+        }
+        
+        print("BODYYYY/n/n")
+        print(body)
+        print(newBody)
+        
+        return newBody
     }
 }

@@ -135,18 +135,21 @@ class SectionsViewController: UIViewController {
     }
     */
 
-    func showExamAlert() {
+    func showExamAlert(cancel cancelAction: @escaping ((Void)->Void)) {
         let alert = UIAlertController(title: NSLocalizedString("ExamTitle", comment: ""), message: NSLocalizedString("ShowExamInWeb", comment: ""), preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: {
             [weak self]
             action in
             if let s = self {
-                WebControllerManager.sharedManager.presentWebControllerWithURLString(s.url, inController: s, withKey: "exam", allowsSafari: true, backButtonStyle: .close)
+                WebControllerManager.sharedManager.presentWebControllerWithURLString(s.url + "?from_mobile_app=true", inController: s, withKey: "exam", allowsSafari: true, backButtonStyle: .close)
             }
         }))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {
+            action in
+            cancelAction()
+        }))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -156,12 +159,13 @@ extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = course.sections[indexPath.row] 
         if section.isExam {
-            showExamAlert()
+            showExamAlert(cancel: {
+                tableView.deselectRow(at: indexPath, animated: true)
+            })
             return
         }
         
         performSegue(withIdentifier: "showUnits", sender: (indexPath as NSIndexPath).row)
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
