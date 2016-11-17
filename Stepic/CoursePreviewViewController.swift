@@ -61,7 +61,13 @@ class CoursePreviewViewController: UIViewController {
         
     }
     
-    var displayingInfoType : DisplayingInfoType = .overview 
+    var displayingInfoType : DisplayingInfoType = .overview {
+        didSet {
+            if displayingInfoType == .syllabus {
+                tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +89,7 @@ class CoursePreviewViewController: UIViewController {
             for section in c.sections {
                 sectionTitles += [section.title]
             }
+            print(sectionTitles)
             tableView.reloadData()
             resetHeightConstraints()
             if let introVideo = c.introVideo {
@@ -124,6 +131,7 @@ class CoursePreviewViewController: UIViewController {
                 for section in c.sections {
                     self?.sectionTitles += [section.title]
                 }
+//                print(self?.sectionTitles)
                 self?.isErrorWhileLoadingSections = false
                 self?.isLoadingSections = false
                 UIThread.performUI{ self?.tableView.reloadData() }
@@ -389,6 +397,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            print(max(textData[0].count, textData[1].count, sectionTitles.count, 1))
             return max(textData[0].count, textData[1].count, sectionTitles.count, 1)
         default: 
             return 0
