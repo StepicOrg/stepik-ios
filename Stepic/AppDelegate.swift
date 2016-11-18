@@ -1,4 +1,4 @@
- //
+  //
 //  AppDelegate.swift
 //  Stepic
 //
@@ -78,7 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var currentNavigation : UINavigationController? {
         if let tabController = window?.rootViewController as? UITabBarController {
-            return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
+            let cnt = tabController.viewControllers?.count ?? 0
+            let index = tabController.selectedIndex
+            if index < cnt {
+                return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
+            } else {
+                return tabController.viewControllers?[0] as? UINavigationController
+            }
         }
         return nil
     }

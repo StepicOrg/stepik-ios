@@ -31,6 +31,7 @@ class VideoQualityTableViewController: UITableViewController {
         mediumLabel.text = "\(qualityStrings[1]) (\(defaultQualities[1])p)"
         highLabel.text = "\(qualityStrings[2]) (\(defaultQualities[2])p)"
         veryHighLabel.text = "\(qualityStrings[3]) (\(defaultQualities[3])p)"
+        title = NSLocalizedString("VideoQuality", comment: "")
     }
     
     override func viewDidLoad() {

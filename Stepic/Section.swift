@@ -33,7 +33,7 @@ class Section: NSManagedObject, JSONInitializable {
         hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
         
         testSectionAction = json["actions"]["test_section"].string
-        
+        isExam = json["is_exam"].boolValue
         unitsArray = json["units"].arrayObject as! [Int]
     }
     

@@ -75,7 +75,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
-      showNonLocalizedStrings = "YES"
       language = "ru"
       region = "RU">
       <BuildableProductRunnable

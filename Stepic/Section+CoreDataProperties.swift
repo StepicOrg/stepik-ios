@@ -23,6 +23,7 @@ extension Section {
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedProgressId : String?
     @NSManaged var managedTestSectionAction: String?
+    @NSManaged var managedIsExam: NSNumber?
     
     @NSManaged var managedUnitsArray : NSObject?
 
@@ -116,6 +117,15 @@ extension Section {
         }
         get {
             return managedActive?.boolValue ?? false
+        }
+    }
+    
+    var isExam : Bool {
+        set(value){
+            self.managedIsExam = value as NSNumber?
+        }
+        get {
+            return managedIsExam?.boolValue ?? false
         }
     }
     
