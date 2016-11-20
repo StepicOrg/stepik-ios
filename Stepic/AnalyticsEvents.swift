@@ -74,4 +74,9 @@ struct AnalyticsEvents {
         static let course = "deeplink_course"
     }
     
+    struct Tabs {
+        static let myCoursesClicked = "main_choice_my_courses"
+        static let findCoursesClicked = "main_choice_find_courses"
+        static let downloadsClicked = "main_choice_downloads"
+    }
 }
