@@ -68,7 +68,7 @@ extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
             return webViewHelper.setTextWithTeX(text)
         } else {
             choiceLabel.isHidden = false
-            choiceLabel.text = text
+            choiceLabel.setTextWithHTMLString(text)
             let w = textContainerView.bounds.width 
             return {
                 return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
