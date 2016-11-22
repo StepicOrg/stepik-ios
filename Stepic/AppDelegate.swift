@@ -230,6 +230,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
         }
+        if url.scheme == "vk5628680" || url.scheme == "fb171127739724012" {
+            return true
+        }
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            

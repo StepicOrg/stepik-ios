@@ -95,6 +95,7 @@ class SocialNetworksViewController: UIViewController {
                 }, error: {
                     error in
                     print("error while social auth")
+                    SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                 })
             } else {
                 WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self,  
