@@ -23,10 +23,10 @@ class VKSocialSDKProvider : NSObject, SocialSDKProvider {
         sdkInstance.register(self)
     }
     
-    func getAccessToken(success: @escaping (String) -> Void, error: @escaping (SocialSDKError) -> Void) {
+    func getAccessToken(success successHandler: @escaping (String) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
         VKSdk.authorize(["email"])
-        successHandler = success
-        errorHandler = error
+        self.successHandler = successHandler
+        self.errorHandler = errorHandler
     }
     
     fileprivate var successHandler : ((String) -> Void)? = nil

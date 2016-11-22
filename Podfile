@@ -34,6 +34,8 @@ def all_pods
     pod 'TUSafariActivity', '~> 1.0'
     
     pod "VK-ios-sdk" 
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
 end
 
 #post_install do |installer|

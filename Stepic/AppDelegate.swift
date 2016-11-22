@@ -16,7 +16,7 @@ import IQKeyboardManagerSwift
 import SVProgressHUD
 import MagicalRecord
 import VK_ios_sdk
-  
+import FBSDKCoreKit
 //import YandexMobileMetrica
 
 @UIApplicationMain
@@ -39,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
 //        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
         
@@ -223,6 +225,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
         if VKSdk.processOpen(url, fromApplication: sourceApplication) {
+            return true
+        }
+        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
         }
         let codeOpt = Parser.sharedParser.codeFromURL(url)
