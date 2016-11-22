@@ -189,6 +189,12 @@
 		088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */; };
 		088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
 		088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
+		088E58BD1DE33B410009B9CE /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58BC1DE33B410009B9CE /* AuthAPI.swift */; };
+		088E58BE1DE33B410009B9CE /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58BC1DE33B410009B9CE /* AuthAPI.swift */; };
+		088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
+		088E58C21DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
+		088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
+		088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -696,6 +702,9 @@
 		088AADA71D175DA00034D86D /* HTMLStringWrapperUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLStringWrapperUtil.swift; sourceTree = "<group>"; };
 		088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLContentViewInteractionDelegate.swift; sourceTree = "<group>"; };
 		088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerDataset.swift; sourceTree = "<group>"; };
+		088E58BC1DE33B410009B9CE /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSDKProvider.swift; sourceTree = "<group>"; };
+		088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKSocialSDKProvider.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -1226,6 +1235,7 @@
 		0885F84B1BA8376D00F2A188 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				088E58BF1DE34E140009B9CE /* SocialSDKProviders */,
 				0869530E1D747DC0003857A2 /* RequestChain.swift */,
 				086953111D748303003857A2 /* ApiRequest.swift */,
 				08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */,
@@ -1241,6 +1251,7 @@
 				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
 				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
 				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
+				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1276,6 +1287,15 @@
 				088AADA81D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift */,
 			);
 			name = HTMLContentView;
+			sourceTree = "<group>";
+		};
+		088E58BF1DE34E140009B9CE /* SocialSDKProviders */ = {
+			isa = PBXGroup;
+			children = (
+				088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */,
+				088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */,
+			);
+			name = SocialSDKProviders;
 			sourceTree = "<group>";
 		};
 		08901E661CD0F94C00D94613 /* In-app version control */ = {
@@ -2224,6 +2244,7 @@
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
+				088E58BE1DE33B410009B9CE /* AuthAPI.swift in Sources */,
 				08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08D120821C937B2200A54ABC /* VideoURL+CoreDataProperties.swift in Sources */,
 				08901E731CD1173200D94613 /* Version.swift in Sources */,
@@ -2266,6 +2287,7 @@
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
 				08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
+				088E58C21DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
@@ -2393,6 +2415,7 @@
 				08CB6B471C98776D00E8BA50 /* SbControllerHelperLaunchExtension.swift in Sources */,
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
+				088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
@@ -2460,6 +2483,7 @@
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
+				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
@@ -2476,6 +2500,7 @@
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
+				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
@@ -2512,6 +2537,7 @@
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
+				088E58BD1DE33B410009B9CE /* AuthAPI.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,

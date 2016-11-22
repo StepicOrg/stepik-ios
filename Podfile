@@ -32,6 +32,8 @@ def all_pods
     pod 'Kanna', '~> 2.0.0'
     pod 'CRToast'
     pod 'TUSafariActivity', '~> 1.0'
+    
+    pod "VK-ios-sdk" 
 end
 
 #post_install do |installer|

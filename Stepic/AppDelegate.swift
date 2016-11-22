@@ -15,6 +15,8 @@ import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
 import MagicalRecord
+import VK_ios_sdk
+  
 //import YandexMobileMetrica
 
 @UIApplicationMain
@@ -156,16 +158,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        print("opened app via url \(url.absoluteString)")
-        let codeOpt = Parser.sharedParser.codeFromURL(url)
-        if let code = codeOpt {
-            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
-        } else {
-            print("error while authentificating")
-        }
-        return true
-    }
+//    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+//        print("opened app via url \(url.absoluteString)")
+//        let codeOpt = Parser.sharedParser.codeFromURL(url)
+//        if let code = codeOpt {
+//            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
+//        } else {
+//            print("error while authentificating")
+//        }
+//        return true
+//    }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
@@ -220,6 +222,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("opened app via url \(url.absoluteString)")
+        if VKSdk.processOpen(url, fromApplication: sourceApplication) {
+            return true
+        }
         let codeOpt = Parser.sharedParser.codeFromURL(url)
         if let code = codeOpt {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            

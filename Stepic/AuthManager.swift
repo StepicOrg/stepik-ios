@@ -15,6 +15,7 @@ class AuthManager : NSObject {
     
     fileprivate override init() {}
     
+    static let oauth = AuthAPI()
     
     func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         

@@ -16,7 +16,8 @@ enum SocialNetworks : Int {
         switch self {
         case .vk: 
             return SocialNetwork(name: self.name, image: UIImage(named: "vk_filled")!, 
-                registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                                 registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!, 
+                                 socialSDKProvider : VKSocialSDKProvider.instance)
         case .google: 
             return SocialNetwork(name: self.name, image: UIImage(named: "google_filled")!, 
                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
@@ -65,9 +66,12 @@ struct SocialNetwork {
     var image : UIImage!
     var registerURL : URL!
     var name: String!
-    init(name: String, image: UIImage, registerURL: URL) {
+    var socialSDKProvider: SocialSDKProvider?
+    
+    init(name: String, image: UIImage, registerURL: URL, socialSDKProvider: SocialSDKProvider? = nil) {
         self.name = name
         self.image = image
         self.registerURL = registerURL
+        self.socialSDKProvider = socialSDKProvider
     }
 }
