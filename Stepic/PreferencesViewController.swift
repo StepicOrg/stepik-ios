@@ -9,7 +9,6 @@
 import UIKit
 
 class PreferencesViewController: UITableViewController {
-
     
     @IBOutlet weak var onlyWiFiSwitch: UISwitch!
     @IBOutlet weak var videoQualityLabel: UILabel!
@@ -23,11 +22,17 @@ class PreferencesViewController: UITableViewController {
     @IBOutlet weak var ignoreMuteSwitchLabel: UILabel!
     @IBOutlet weak var ignoreMuteSwitchSwitch: UISwitch!
     
-    var heightForRows = [[40, 0, 40], [40, 40]]
-    let selectionForRows = [[false, false, true], [false, true]]
+    @IBOutlet weak var notifyStreaksLabel: UILabel!
+    @IBOutlet weak var notificationTimeTitleLabel: UILabel!
+    @IBOutlet weak var notificationTimeLabel: UILabel!
+    @IBOutlet weak var allowStreaksNotificationsSwitch: UISwitch!
+    
+    var heightForRows = [[40, 0, 40], [40, 40], [40, 0]]
+    let selectionForRows = [[false, false, true], [false, true], [false, true]]
     let sectionTitles = [
         NSLocalizedString("Video", comment: ""),
         NSLocalizedString("Updates", comment: ""),
+        "Notifications"
     ]
     
     
@@ -37,6 +42,8 @@ class PreferencesViewController: UITableViewController {
         checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), for: UIControlState())
         wifiLoadLabel.text = NSLocalizedString("WiFiLoadPreference", comment: "") 
         videoQualityTextLabel.text = NSLocalizedString("LoadingVideoQualityPreference", comment: "")
+        notifyStreaksLabel.text = "Notify about streaks"
+        notificationTimeTitleLabel.text = "Notification time"
     }
 
     
@@ -47,6 +54,13 @@ class PreferencesViewController: UITableViewController {
         
         if !StepicApplicationsInfo.inAppUpdatesAvailable {
             heightForRows[1] = [0, 0]
+        }
+        
+        if PreferencesContainer.notifications.allowStreaksNotifications {
+            allowStreaksNotificationsSwitch.isOn = false
+        } else {
+            allowStreaksNotificationsSwitch.isOn = true
+            heightForRows[2][1] = 40
         }
         
         localize() 
@@ -78,9 +92,16 @@ class PreferencesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath as NSIndexPath).section  == 1 && (indexPath as NSIndexPath).row == 1 {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
             checkForUpdates()
+            return
         }
+        
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
+            selectStreakNotificationTime()
+            return
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -118,6 +139,51 @@ class PreferencesViewController: UITableViewController {
     
     @IBAction func allowAutoUpdateChanged(_ sender: UISwitch) {
         UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = sender.isOn
+    }
+    
+    @IBAction func allowStreaksNotificationsChanged(_ sender: Any) {
+        if allowStreaksNotificationsSwitch.isOn {
+            LocalNotificationManager.scheduleStreakLocalNotification(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            heightForRows[2][1] = 40
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        } else {
+            LocalNotificationManager.cancelStreakLocalNotifications()
+            heightForRows[2][1] = 0
+        }
+    }
+    
+    func getDisplayingStreakTimeInterval(startHour: Int) -> String {
+        
+        let startInterval = TimeInterval((startHour % 24) * 60 * 60)
+        let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
+        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60)
+        let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
+        return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
+    }
+    
+    let streakTimePickerPresenter : Presentr = {
+        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        return streakTimePickerPresenter
+    }()
+    
+    func selectStreakNotificationTime() {
+        let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
+        vc.selectedBlock = {
+            [weak self]
+            selectedStartHour in 
+            if let s = self {
+                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: selectedStartHour)
+                PreferencesContainer.notifications.streaksNotificationStartHour = selectedStartHour
+                LocalNotificationManager.scheduleStreakLocalNotification(startHour: selectedStartHour)
+            }
+        }
+        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
     
     func checkForUpdates() {

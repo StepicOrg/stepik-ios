@@ -202,6 +202,72 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Notifications" id="980-Hd-s94">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="41" id="7eh-nm-KkT">
+                                        <rect key="frame" x="0.0" y="378" width="375" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7eh-nm-KkT" id="GMu-DC-sVm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify about streaks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggc-yS-bnj">
+                                                    <rect key="frame" x="16" y="12" width="294" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyP-qk-EPT">
+                                                    <rect key="frame" x="318" y="5" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="RRJ-SF-HDI"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="allowAutoUpdateChanged:" destination="eOc-Yk-EBU" eventType="valueChanged" id="xRJ-hb-1Ez"/>
+                                                        <action selector="allowStreaksNotificationsChanged:" destination="eOc-Yk-EBU" eventType="valueChanged" id="wat-6e-OiS"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xyP-qk-EPT" firstAttribute="centerY" secondItem="GMu-DC-sVm" secondAttribute="centerY" id="KE0-hQ-vNh"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="ggc-yS-bnj" secondAttribute="leading" constant="-8" id="X04-sf-aod"/>
+                                                <constraint firstItem="xyP-qk-EPT" firstAttribute="leading" secondItem="ggc-yS-bnj" secondAttribute="trailing" constant="8" id="Z8b-L9-2dz"/>
+                                                <constraint firstItem="ggc-yS-bnj" firstAttribute="centerY" secondItem="GMu-DC-sVm" secondAttribute="centerY" id="x91-lV-RPx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="xyP-qk-EPT" secondAttribute="trailing" id="yUb-Dx-sNn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="41" id="dhh-yS-spB">
+                                        <rect key="frame" x="0.0" y="419" width="375" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dhh-yS-spB" id="WpX-fB-CNk">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-OB-aIn">
+                                                    <rect key="frame" x="16" y="12" width="106.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpl-HP-Yc2" userLabel="Time">
+                                                    <rect key="frame" x="130.5" y="20" width="211.5" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gpl-HP-Yc2" firstAttribute="centerY" secondItem="WpX-fB-CNk" secondAttribute="centerY" id="1XE-LZ-I4P"/>
+                                                <constraint firstItem="ui7-OB-aIn" firstAttribute="centerY" secondItem="WpX-fB-CNk" secondAttribute="centerY" id="5yO-jg-vtC"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="ui7-OB-aIn" secondAttribute="leading" constant="-8" id="PWV-h8-og5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gpl-HP-Yc2" secondAttribute="trailing" constant="-8" id="da8-1e-woD"/>
+                                                <constraint firstItem="gpl-HP-Yc2" firstAttribute="leading" secondItem="ui7-OB-aIn" secondAttribute="trailing" constant="8" id="x1c-IU-faL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="eOc-Yk-EBU" id="UhJ-AN-BEc"/>
@@ -209,11 +275,15 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="allowStreaksNotificationsSwitch" destination="xyP-qk-EPT" id="9r4-67-MdL"/>
                         <outlet property="autoCheckForUpdatesLabel" destination="ID2-La-jlM" id="PgH-c4-3Ft"/>
                         <outlet property="autoCheckForUpdatesSwitch" destination="a3f-n8-bIb" id="E7q-aG-kA8"/>
                         <outlet property="checkForUpdatesButton" destination="D2g-2w-qDg" id="tZH-WP-Unj"/>
                         <outlet property="ignoreMuteSwitchLabel" destination="2dm-HK-fr2" id="RXO-HP-SvL"/>
                         <outlet property="ignoreMuteSwitchSwitch" destination="jin-Bs-yJW" id="nAj-g5-i8l"/>
+                        <outlet property="notificationTimeLabel" destination="gpl-HP-Yc2" id="LQa-tL-GiC"/>
+                        <outlet property="notificationTimeTitleLabel" destination="ui7-OB-aIn" id="hd2-at-4e6"/>
+                        <outlet property="notifyStreaksLabel" destination="ggc-yS-bnj" id="IIr-1h-KT9"/>
                         <outlet property="onlyWiFiSwitch" destination="SDg-gr-fR0" id="ZnQ-mR-cOh"/>
                         <outlet property="videoQualityLabel" destination="jUH-cJ-Qvl" id="e11-tr-SEX"/>
                         <outlet property="videoQualityTextLabel" destination="UAm-Dx-9es" id="ecQ-a5-OO2"/>
@@ -308,7 +378,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Longest streak:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6e-1n-Qmn">
-                                                    <rect key="frame" x="16" y="41" width="351" height="25.5"/>
+                                                    <rect key="frame" x="16" y="41" width="351" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
