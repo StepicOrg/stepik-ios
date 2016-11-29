@@ -60,6 +60,7 @@ class PreferencesViewController: UITableViewController {
             allowStreaksNotificationsSwitch.isOn = false
         } else {
             allowStreaksNotificationsSwitch.isOn = true
+            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
             heightForRows[2][1] = 40
         }
         
@@ -151,16 +152,18 @@ class PreferencesViewController: UITableViewController {
         } else {
             LocalNotificationManager.cancelStreakLocalNotifications()
             heightForRows[2][1] = 0
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
     
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
         
-        let startInterval = TimeInterval((startHour % 24) * 60 * 60)
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+        let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
-        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60)
+        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60 - timeZoneDiff) 
         let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
-        
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
@@ -175,12 +178,9 @@ class PreferencesViewController: UITableViewController {
     func selectStreakNotificationTime() {
         let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
         vc.selectedBlock = {
-            [weak self]
-            selectedStartHour in 
+            [weak self] in 
             if let s = self {
-                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: selectedStartHour)
-                PreferencesContainer.notifications.streaksNotificationStartHour = selectedStartHour
-                LocalNotificationManager.scheduleStreakLocalNotification(startHour: selectedStartHour)
+                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
             }
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)

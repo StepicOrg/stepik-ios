@@ -16,15 +16,17 @@ class LocalNotificationManager {
         
         let notification = UILocalNotification()
         let calendar = Calendar(identifier: .gregorian)
-        let date = calendar.date(bySettingHour: startHour, minute: 0, second: 0, of: Date())
-        
+        let currentDate = Date()
+        let date = calendar.date(bySettingHour: startHour, minute: 0, second: 0, of: currentDate)
+
         notification.alertBody = "Would like some courses, huh?"
         notification.fireDate = date
         notification.repeatInterval = NSCalendar.Unit.day
         notification.soundName = "default_sound.wav"
         
-        UIApplication.shared.scheduleLocalNotification(notification)
         
+        UIApplication.shared.scheduleLocalNotification(notification)
+
     }
     
     static func cancelStreakLocalNotifications() {

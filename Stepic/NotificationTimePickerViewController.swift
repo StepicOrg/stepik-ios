@@ -14,7 +14,7 @@ class NotificationTimePickerViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
     
-    var selectedBlock: ((Int) -> Void)? 
+    var selectedBlock: ((Void) -> Void)? 
     var startHour : Int = 0
     
     override func viewDidLoad() {
@@ -36,17 +36,35 @@ class NotificationTimePickerViewController: UIViewController {
     }
     
     @IBAction func selectPressed(_ sender: UIButton) {
+        
+        let selectedLocalStartHour = picker.selectedRow(inComponent: 0)
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+        var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
+        
+        if selectedUTCStartHour < 0 {
+            selectedUTCStartHour = 24 + selectedUTCStartHour
+        }
+        
+        if selectedUTCStartHour > 23 {
+            selectedUTCStartHour = selectedUTCStartHour - 24
+        }
+        
+        PreferencesContainer.notifications.streaksNotificationStartHour = selectedUTCStartHour
+        LocalNotificationManager.scheduleStreakLocalNotification(startHour: selectedUTCStartHour)
+
+        
+        
         dismiss(animated: true, completion: nil)
-        selectedBlock?(picker.selectedRow(inComponent: 0))
+        selectedBlock?()
     }
     
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
         
-        let startInterval = TimeInterval((startHour % 24) * 60 * 60)
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+        let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
-        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60)
+        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60 - timeZoneDiff) 
         let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
-        
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
