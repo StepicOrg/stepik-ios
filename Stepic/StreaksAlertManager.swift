@@ -16,9 +16,12 @@ class StreaksAlertManager : AlertManager {
         controller.present(alert, animated: true, completion: nil)
     }
     
-    func construct() -> UIAlertController {
+    func construct(notify notifyHandler : @escaping (Void)->Void) -> UIAlertController {
         let alert = UIAlertController(title: "Streaks", message: "Notify about streaks? This option can be changed in preferences.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Notify", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Notify", style: .default, handler: {
+            action in
+            notifyHandler()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alert
     }

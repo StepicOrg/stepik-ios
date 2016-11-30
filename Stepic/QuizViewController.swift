@@ -414,6 +414,32 @@ class QuizViewController: UIViewController {
         })
     }
     
+    let streakTimePickerPresenter : Presentr = {
+        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        return streakTimePickerPresenter
+    }()
+    
+    func selectStreakNotificationTime() {
+        let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
+        vc.selectedBlock = {
+            [weak self] in 
+            if let s = self {
+//                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            }
+        }
+        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
+    }
+    
+    func checkCorrect() {
+//        if !QuizDataManager.submission.didMakeSuccessfulSubmission {
+            let alert = Alerts.streaks.construct(notify: {
+                [weak self] in
+                self?.selectStreakNotificationTime()
+            })
+            Alerts.streaks.present(alert: alert, inController: self)
+            QuizDataManager.submission.didMakeSuccessfulSubmission = true
+//        }
+    }
     
     //Measured in seconds
     fileprivate let checkTimeStandardInterval = 0.5
@@ -428,6 +454,9 @@ class QuizViewController: UIViewController {
                         self.checkSubmission(id, time: time + 1, completion: completion)
                     } else {
                         self.submission = submission
+                        if submission.status == "correct" {
+                            self.checkCorrect() 
+                        }
                         completion?()
                     }
                     }, error: { 
