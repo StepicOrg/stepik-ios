@@ -102,6 +102,7 @@ class SignInTableViewController: UITableViewController {
         return 1
     }
 
+    
     func authentificateWithCode(_ code: String) {
         SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
         AuthManager.sharedManager.logInWithCode(code, 
@@ -236,6 +237,16 @@ class SignInTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
+        if segue.identifier == "socialNetworksEmbedSegue" {
+            let dvc = segue.destination as? SocialNetworksViewController
+            dvc?.dismissBlock = {
+                self.navigationController?.dismiss(animated: true, completion: {
+                    [weak self] in
+                    self?.success?()
+                })
+
+            }
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import SVProgressHUD
 
 class SocialNetworksViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class SocialNetworksViewController: UIViewController {
     
     let socialNetworks = SocialNetworks.all
 
+    var dismissBlock : ((Void)->Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +60,47 @@ class SocialNetworksViewController: UIViewController {
         let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
         if let indexPath = indexPathOptional {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)" as NSObject])
-            WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, 
-                withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close)
+            let socialNetwork = getSocialNetworkByIndexPath(indexPath)
+            if let provider = socialNetwork.socialSDKProvider {
+                provider.getAccessToken(success: {
+                    token in
+                    AuthManager.oauth.signUpWith(socialToken: token, provider: provider.name, success: {
+                        t in
+                        AuthInfo.shared.token = t
+                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+                        ApiDataDownloader.sharedDownloader.getCurrentUser({
+                            user in
+                            AuthInfo.shared.user = user
+                            User.removeAllExcept(user)
+                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                            UIThread.performUI { 
+                                [weak self] in
+                                self?.dismissBlock?()
+                            }
+                            AnalyticsHelper.sharedHelper.changeSignIn()
+                            AnalyticsHelper.sharedHelper.sendSignedIn()
+                        }, failure: {
+                            e in
+                            print("successfully signed in, but could not get user")
+                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                            UIThread.performUI { 
+                                [weak self] in
+                                self?.dismissBlock?()
+                            }
+                        })
+                    }, failure: {
+                        e in
+                        SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+                    })                        
+                }, error: {
+                    error in
+                    print("error while social auth")
+                    SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+                })
+            } else {
+                WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self,  
+                                                                               withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close)
+            }
         }
     }
 

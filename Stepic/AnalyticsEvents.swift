@@ -47,6 +47,10 @@ struct AnalyticsEvents {
     
     struct CourseOverview {
         static let shared = "share_course_clicked"
+        struct JoinPressed {
+            static let anonymous = "join_course_anonymous"
+            static let signed = "join_course_signed"
+        }
     }
     
     struct Step {        
@@ -74,4 +78,13 @@ struct AnalyticsEvents {
         static let course = "deeplink_course"
     }
     
+    struct Tabs {
+        static let myCoursesClicked = "main_choice_my_courses"
+        static let findCoursesClicked = "main_choice_find_courses"
+        static let downloadsClicked = "main_choice_downloads"
+    }
+    
+    struct Token {
+        static let requestedNotNilToken = "token_requested_not_nil"
+    }
 }

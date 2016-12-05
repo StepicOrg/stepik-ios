@@ -13,6 +13,7 @@ class StyledTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UICustomizer.sharedCustomizer.setStepicTabBar(tabBar)
+        delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -20,6 +21,8 @@ class StyledTabBarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     /*
     // MARK: - Navigation
@@ -31,4 +34,27 @@ class StyledTabBarViewController: UITabBarController {
     }
     */
 
+    func getEventNameForTabIndex(index: Int) -> String? {
+        switch index {
+        case 0:
+            return AnalyticsEvents.Tabs.myCoursesClicked
+        case 1:
+            return AnalyticsEvents.Tabs.findCoursesClicked
+        case 2:
+            return AnalyticsEvents.Tabs.downloadsClicked
+        default:
+            return nil
+        }
+    }
+    
+}
+
+extension StyledTabBarViewController : UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let selectedIndex = tabBarController.viewControllers?.index(of: viewController) {
+            if let eventName = getEventNameForTabIndex(index: selectedIndex) {
+                AnalyticsReporter.reportEvent(eventName, parameters: nil)
+            }
+        }
+    }
 }
