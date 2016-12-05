@@ -73,6 +73,7 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
+        
         performRequest({
             ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
                 secs in
@@ -93,32 +94,32 @@ class Course: NSManagedObject, JSONInitializable {
         })        
     }
     
-    //TODO: Remove these methods
-    func loadSectionsWithoutAuth(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
-        ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
-            secs in
-            self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
-            CoreDataHelper.instance.save()
-            success()  
-            }, failure : {
-                error in
-                print("error while loading section")
-                errorHandler()
-        })
-    }
-    
-    func loadInstructorsWithoutAuth(success: @escaping ((Void) -> Void)) {
-            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
-                users in
-                //                print("instructors count inside Course class -> \(users.count)")
-                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
-                CoreDataHelper.instance.save()
-                success()  
-                }, failure : {
-                    error in
-                    print("error while loading section")
-            })
-    }
+//    //TODO: Remove these methods
+//    func loadSectionsWithoutAuth(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
+//        ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
+//            secs in
+//            self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
+//            CoreDataHelper.instance.save()
+//            success()  
+//            }, failure : {
+//                error in
+//                print("error while loading section")
+//                errorHandler()
+//        })
+//    }
+//    
+//    func loadInstructorsWithoutAuth(success: @escaping ((Void) -> Void)) {
+//            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
+//                users in
+//                //                print("instructors count inside Course class -> \(users.count)")
+//                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
+//                CoreDataHelper.instance.save()
+//                success()  
+//                }, failure : {
+//                    error in
+//                    print("error while loading section")
+//            })
+//    }
     
     func loadProgressesForSections(_ completion: @escaping ((Void)->Void), error errorHandler : @escaping ((Void)->Void)) {
         var progressIds : [String] = []
