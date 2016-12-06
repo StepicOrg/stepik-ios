@@ -362,7 +362,11 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func getContentHeight(_ webView : UIWebView) -> Int {
-        return Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
+        let h = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
+//        if h != 0 {
+//            return h + 8
+//        } 
+        return h
         //        return Int(webView.scrollView.contentSize.height)
     }
     

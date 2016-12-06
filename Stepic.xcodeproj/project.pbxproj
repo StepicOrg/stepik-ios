@@ -168,6 +168,8 @@
 		08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
+		087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
@@ -688,6 +690,7 @@
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
+		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -1571,6 +1574,7 @@
 		08DE94141B8C58AC00D278AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				087854F41DF6EE0D00368A50 /* wysiwyg.css */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
 				08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */,
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
@@ -1965,6 +1969,7 @@
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
 				08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
+				087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */,
@@ -2023,6 +2028,7 @@
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
+				087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,

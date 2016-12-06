@@ -16,16 +16,17 @@ class HTMLBuilder: NSObject {
         var res : String = ""
         res += "<style>"
         res += "\nhtml{-webkit-text-size-adjust: 100%;}"
-        res += "\nbody{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
+        res += "\nbody{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; }"
+        res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
+        res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
+        res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
         res += "\nimg { max-width: 100%; }"
         
 //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 //        res += "\npre { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
 
         res += "\n</style>\n"
+        res += "\n<link rel=\"stylesheet\" type=\"text/css\" href=\"wysiwyg.css\">"
         return res
     }
     
@@ -34,15 +35,16 @@ class HTMLBuilder: NSObject {
         res += "<style>"
         res += "\nhtml{-webkit-text-size-adjust: 100%;}"
         res += "\nbody{font-size: 10pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh1{font-size: 18pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh2{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
-        res += "\nh3{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em;}"
+        res += "\nh1{font-size: 18pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
+        res += "\nh2{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
+        res += "\nh3{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
         res += "\nimg { max-width: 100%; }"
         
         //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
         //        res += "\npre { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"
         
         res += "\n</style>\n"
+        res += "\n<link rel=\"stylesheet\" type=\"text/css\" href=\"wysiwyg.css\">"
         return res
     }
 
