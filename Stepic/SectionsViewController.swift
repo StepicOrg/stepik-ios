@@ -255,7 +255,7 @@ extension SectionsViewController : PKDownloadButtonDelegate {
                 storeSection(course.sections[downloadButton.tag], downloadButton: downloadButton)
             } else {
                 UIThread.performUI({downloadButton.state = PKDownloadButtonState.pending})
-                course.sections[downloadButton.tag].loadUnits(completion: {
+                course.sections[downloadButton.tag].loadUnits(success: {
                     UIThread.performUI({downloadButton.state = PKDownloadButtonState.downloading})
                     self.storeSection(self.course.sections[downloadButton.tag], downloadButton: downloadButton)
                 }, error: {

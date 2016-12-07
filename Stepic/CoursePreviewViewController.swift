@@ -145,11 +145,11 @@ class CoursePreviewViewController: UIViewController {
             }
         
             isLoadingSections = true
-            if AuthInfo.shared.isAuthorized {
+//            if AuthInfo.shared.isAuthorized {
                 c.loadAllSections(success: successBlock, error: errorBlock, withProgresses: false)
-            } else {
-                c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
-            }
+//            } else {
+//                c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
+//            }
         }
     }
     
@@ -307,6 +307,7 @@ class CoursePreviewViewController: UIViewController {
         }
         
         if !AuthInfo.shared.isAuthorized {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.anonymous, parameters: nil)
             if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
                 vc.success = {
                     [weak self] in
@@ -317,6 +318,8 @@ class CoursePreviewViewController: UIViewController {
                 self.present(vc, animated: true, completion: nil)
             }
             return
+        } else {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.signed, parameters: nil)
         }
         
         //TODO : Add statuses
