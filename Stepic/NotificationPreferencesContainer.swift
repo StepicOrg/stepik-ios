@@ -12,7 +12,7 @@ class NotificationPreferencesContainer {
     fileprivate let defaults = UserDefaults.standard
     
     fileprivate let allowStreaksNotificationKey = "allowStreaksNotification"
-    fileprivate let streaksNotificationStartHourKey = "streaksNotificationStartHourKey"
+    fileprivate let streaksNotificationStartHourUTCKey = "streaksNotificationStartHourUTCKey"
 
     
     var allowStreaksNotifications: Bool {
@@ -32,12 +32,12 @@ class NotificationPreferencesContainer {
     }
     
     
-    var streaksNotificationStartHour: Int {
+    var streaksNotificationStartHourUTC: Int {
         get {
-            return (defaults.value(forKey: streaksNotificationStartHourKey) as? Int) ?? 12
+            return (defaults.value(forKey: streaksNotificationStartHourUTCKey) as? Int) ?? 12
         } 
         set(start) {
-            defaults.set(start, forKey: streaksNotificationStartHourKey)
+            defaults.set(start, forKey: streaksNotificationStartHourUTCKey)
             defaults.synchronize()
         }
     }

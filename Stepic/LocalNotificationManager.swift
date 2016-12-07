@@ -9,21 +9,31 @@
 import Foundation
 
 class LocalNotificationManager {
-    static func scheduleStreakLocalNotification(startHour: Int, cancelPrevious: Bool = true) {
+    static func scheduleStreakLocalNotification(UTCStartHour: Int, cancelPrevious: Bool = true) {
         if cancelPrevious {
             cancelStreakLocalNotifications()
+        }
+        
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
+        var localStartHour = UTCStartHour + timeZoneDiff
+        if localStartHour < 0 {
+            localStartHour = 24 + localStartHour
+        }
+        
+        if localStartHour > 23 {
+            localStartHour = localStartHour - 24
         }
         
         let notification = UILocalNotification()
         let calendar = Calendar(identifier: .gregorian)
         let currentDate = Date()
-        let date = calendar.date(bySettingHour: startHour, minute: 0, second: 0, of: currentDate)
-
+        print("local start hour -> \(localStartHour) current date -> \(currentDate)")
+        let date = calendar.date(bySettingHour: localStartHour, minute: 0, second: 0, of: currentDate)
+        print("date set -> \(date)")
         notification.alertBody = "Would like some courses, huh?"
         notification.fireDate = date
         notification.repeatInterval = NSCalendar.Unit.day
         notification.soundName = "default_sound.wav"
-        
         
         UIApplication.shared.scheduleLocalNotification(notification)
 

@@ -60,7 +60,7 @@ class PreferencesViewController: UITableViewController {
             allowStreaksNotificationsSwitch.isOn = false
         } else {
             allowStreaksNotificationsSwitch.isOn = true
-            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             heightForRows[2][1] = 40
         }
         
@@ -144,8 +144,8 @@ class PreferencesViewController: UITableViewController {
     
     @IBAction func allowStreaksNotificationsChanged(_ sender: Any) {
         if allowStreaksNotificationsSwitch.isOn {
-            LocalNotificationManager.scheduleStreakLocalNotification(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
-            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
+            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             heightForRows[2][1] = 40
             tableView.beginUpdates()
             tableView.endUpdates()
@@ -159,10 +159,10 @@ class PreferencesViewController: UITableViewController {
     
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
         
-        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
-        let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
+//        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+        let startInterval = TimeInterval((startHour % 24) * 60 * 60)// + timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
-        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60 - timeZoneDiff) 
+        let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60) //+ timeZoneDiff) 
         let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
@@ -180,7 +180,7 @@ class PreferencesViewController: UITableViewController {
         vc.selectedBlock = {
             [weak self] in 
             if let s = self {
-                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             }
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)

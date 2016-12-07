@@ -38,7 +38,7 @@ class NotificationTimePickerViewController: UIViewController {
     @IBAction func selectPressed(_ sender: UIButton) {
         
         let selectedLocalStartHour = picker.selectedRow(inComponent: 0)
-        let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
         var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
         
         if selectedUTCStartHour < 0 {
@@ -49,10 +49,12 @@ class NotificationTimePickerViewController: UIViewController {
             selectedUTCStartHour = selectedUTCStartHour - 24
         }
         
-        PreferencesContainer.notifications.streaksNotificationStartHour = selectedUTCStartHour
-        LocalNotificationManager.scheduleStreakLocalNotification(startHour: selectedUTCStartHour)
-
+        print("selected UTC start hour -> \(selectedUTCStartHour)")
         
+        PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
+        LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
+
+    
         
         dismiss(animated: true, completion: nil)
         selectedBlock?()
