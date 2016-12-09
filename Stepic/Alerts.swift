@@ -12,5 +12,5 @@ import Foundation
  Class, which contains different alert managers
  */
 class Alerts {
-    static let streaks = StreaksAlertManager()
+    static let streaks = StreaksStepikAlertManager()
 }
