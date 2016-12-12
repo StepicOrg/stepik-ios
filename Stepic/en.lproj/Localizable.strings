@@ -160,3 +160,6 @@ StreakAlertTitle = "Congrats!";
 StreakAlertMessage = "You are solving %@ %@ in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.";
 Select = "Select";
 SelectTimeTitle = "Pick time";
+NotifyAboutStreaksPreference = "Notify about streaks";
+NotificationTime = "Notification time";
+Notifications = "Notifications";

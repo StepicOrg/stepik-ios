@@ -32,7 +32,7 @@ class PreferencesViewController: UITableViewController {
     let sectionTitles = [
         NSLocalizedString("Video", comment: ""),
         NSLocalizedString("Updates", comment: ""),
-        "Notifications"
+        NSLocalizedString("Notifications", comment: "")
     ]
     
     
@@ -42,8 +42,8 @@ class PreferencesViewController: UITableViewController {
         checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), for: UIControlState())
         wifiLoadLabel.text = NSLocalizedString("WiFiLoadPreference", comment: "") 
         videoQualityTextLabel.text = NSLocalizedString("LoadingVideoQualityPreference", comment: "")
-        notifyStreaksLabel.text = "Notify about streaks"
-        notificationTimeTitleLabel.text = "Notification time"
+        notifyStreaksLabel.text = NSLocalizedString("NotifyAboutStreaksPreference", comment: "")
+        notificationTimeTitleLabel.text = NSLocalizedString("NotificationTime", comment: "")
     }
 
     

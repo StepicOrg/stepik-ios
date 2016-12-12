@@ -26,7 +26,6 @@ class StreakAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.image = Images.lessonPlaceholderImage.size50x50
         localize()
         // Do any additional setup after loading the view.
     }
