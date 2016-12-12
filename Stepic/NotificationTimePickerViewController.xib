@@ -14,6 +14,7 @@
                 <outlet property="backButton" destination="Dm9-le-zKo" id="K7O-cp-Oqu"/>
                 <outlet property="picker" destination="Zdr-e9-mf9" id="GnL-lD-nUK"/>
                 <outlet property="selectButton" destination="qdr-ho-8KE" id="FRn-nq-exm"/>
+                <outlet property="selectTimeLabel" destination="iH6-pI-6Tu" id="emF-u9-S8P"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,12 +24,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdr-e9-mf9">
-                    <rect key="frame" x="0.0" y="58" width="375" height="609"/>
+                    <rect key="frame" x="0.0" y="87" width="375" height="580"/>
                     <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
                 </pickerView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dm9-le-zKo">
-                    <rect key="frame" x="16" y="20" width="34" height="30"/>
-                    <state key="normal" title="Back"/>
+                    <rect key="frame" x="16" y="20" width="48" height="30"/>
+                    <state key="normal" title="Cancel"/>
                     <connections>
                         <action selector="backPressed:" destination="-1" eventType="touchUpInside" id="aQc-0W-6Un"/>
                     </connections>
@@ -40,18 +41,27 @@
                         <action selector="selectPressed:" destination="-1" eventType="touchUpInside" id="WZB-ss-4b2"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iH6-pI-6Tu">
+                    <rect key="frame" x="16" y="58" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="qdr-ho-8KE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="2Zr-qC-QaQ"/>
                 <constraint firstItem="Dm9-le-zKo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="8mx-JA-cPs"/>
+                <constraint firstItem="iH6-pI-6Tu" firstAttribute="top" secondItem="Dm9-le-zKo" secondAttribute="bottom" constant="8" id="Jn8-AI-gPL"/>
                 <constraint firstItem="Dm9-le-zKo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="KWC-cz-rl0"/>
-                <constraint firstItem="Zdr-e9-mf9" firstAttribute="top" secondItem="qdr-ho-8KE" secondAttribute="bottom" constant="8" id="LfN-Db-QZ7"/>
                 <constraint firstItem="Zdr-e9-mf9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="St4-Eb-x36"/>
                 <constraint firstAttribute="trailing" secondItem="Zdr-e9-mf9" secondAttribute="trailing" id="TtR-Zj-uWK"/>
                 <constraint firstAttribute="trailing" secondItem="qdr-ho-8KE" secondAttribute="trailing" constant="16" id="Zhf-ef-32a"/>
+                <constraint firstAttribute="trailing" secondItem="iH6-pI-6Tu" secondAttribute="trailing" constant="16" id="hUb-vV-4gO"/>
                 <constraint firstAttribute="bottom" secondItem="Zdr-e9-mf9" secondAttribute="bottom" id="jo4-pU-yy5"/>
-                <constraint firstItem="Zdr-e9-mf9" firstAttribute="top" secondItem="Dm9-le-zKo" secondAttribute="bottom" constant="8" id="suh-Xi-HmV"/>
+                <constraint firstItem="iH6-pI-6Tu" firstAttribute="top" secondItem="qdr-ho-8KE" secondAttribute="bottom" constant="8" id="jxX-9J-Ru4"/>
+                <constraint firstItem="Zdr-e9-mf9" firstAttribute="top" secondItem="iH6-pI-6Tu" secondAttribute="bottom" constant="8" id="liu-pk-6HR"/>
+                <constraint firstItem="iH6-pI-6Tu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="rQL-FJ-slA"/>
             </constraints>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>

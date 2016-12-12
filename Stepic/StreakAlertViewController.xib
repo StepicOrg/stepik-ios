@@ -21,17 +21,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="328" height="360"/>
+            <rect key="frame" x="0.0" y="0.0" width="341" height="360"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" image="lesson_cover_50" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-uw-6tk">
-                    <rect key="frame" x="0.0" y="0.0" width="328" height="180"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="lesson_cover_50" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-uw-6tk">
+                    <rect key="frame" x="0.0" y="0.0" width="341" height="180"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="180" id="ji4-Rg-uex"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Congrats!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ8-T8-j2i">
-                    <rect key="frame" x="129" y="188" width="71" height="25"/>
+                    <rect key="frame" x="135" y="188" width="71" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="tNM-9B-zkd"/>
                     </constraints>
@@ -39,18 +39,18 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-6N-g3B">
-                    <rect key="frame" x="8" y="221" width="312" height="90"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="755" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-6N-g3B">
+                    <rect key="frame" x="8" y="221" width="325" height="90"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="S9Y-gT-lgJ"/>
                     </constraints>
-                    <string key="text">You successfully solved your first quiz. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.</string>
+                    <string key="text">You are solving %d days in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4q-7w-ovw">
-                    <rect key="frame" x="16" y="327" width="144" height="25"/>
+                    <rect key="frame" x="16" y="327" width="150.5" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="MAk-d1-UYH"/>
                     </constraints>
@@ -62,7 +62,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0U4-CN-7kp">
-                    <rect key="frame" x="168" y="327" width="144" height="25"/>
+                    <rect key="frame" x="174.5" y="327" width="150.5" height="25"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Yes">
                         <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,7 +95,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="11" y="-90"/>
+            <point key="canvasLocation" x="4.5" y="-90"/>
         </view>
     </objects>
     <resources>

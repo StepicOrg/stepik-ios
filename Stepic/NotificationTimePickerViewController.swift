@@ -13,6 +13,7 @@ class NotificationTimePickerViewController: UIViewController {
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var selectTimeLabel: UILabel!
     
     var selectedBlock: ((Void) -> Void)? 
     var startHour : Int = 0
@@ -23,9 +24,17 @@ class NotificationTimePickerViewController: UIViewController {
         picker.dataSource = self
         picker.delegate = self
         picker.selectRow(startHour, inComponent: 0, animated: false)
+        
+        localize()
         // Do any additional setup after loading the view.
     }
 
+    func localize() {
+        backButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        selectButton.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
+        selectTimeLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

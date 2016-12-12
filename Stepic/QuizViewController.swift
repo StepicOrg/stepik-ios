@@ -415,7 +415,7 @@ class QuizViewController: UIViewController {
     }
     
     let streakTimePickerPresenter : Presentr = {
-        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        let streakTimePickerPresenter = Presentr(presentationType: .popup)
         return streakTimePickerPresenter
     }()
     
@@ -431,14 +431,25 @@ class QuizViewController: UIViewController {
     }
     
     func checkCorrect() {
-//        if !QuizDataManager.submission.didMakeSuccessfulSubmission {
-            let alert = Alerts.streaks.construct(notify: {
-                [weak self] in
-                self?.selectStreakNotificationTime()
-            })
-            Alerts.streaks.present(alert: alert, inController: self)
-            QuizDataManager.submission.didMakeSuccessfulSubmission = true
-//        }
+        let alert = Alerts.streaks.construct(notify: {
+            [weak self] in
+            self?.selectStreakNotificationTime()
+        })
+        
+        guard let user = AuthInfo.shared.user else { 
+            return 
+        }
+        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
+            [weak self] 
+            activity in
+            if let s = self {
+                alert.currentStreak = activity.currentStreak
+                Alerts.streaks.present(alert: alert, inController: s)
+                QuizDataManager.submission.didMakeSuccessfulSubmission = true
+            }
+            }, error: {
+                error in
+        })
     }
     
     //Measured in seconds
