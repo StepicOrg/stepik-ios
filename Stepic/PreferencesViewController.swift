@@ -149,9 +149,11 @@ class PreferencesViewController: UITableViewController {
             heightForRows[2][1] = 40
             tableView.beginUpdates()
             tableView.endUpdates()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         } else {
             LocalNotificationManager.cancelStreakLocalNotifications()
             heightForRows[2][1] = 0
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOff, parameters: nil)
             tableView.beginUpdates()
             tableView.endUpdates()
         }

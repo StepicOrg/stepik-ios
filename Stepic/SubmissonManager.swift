@@ -11,22 +11,57 @@ import Foundation
 class SubmissionManager {
     fileprivate let defaults = UserDefaults.standard
     
-    fileprivate let didMakeSuccessfulSubmissionKey = "didMakeSuccessfulSubmissionKey"
+    fileprivate let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
+    fileprivate let streakAlertShownCntKey = "streakAlertShownCntKey"
+    fileprivate let maxStreakAlertShownCnt = 3
     
-    var didMakeSuccessfulSubmission: Bool {
+    fileprivate var lastStreakAlertShownTime: TimeInterval {
         get {
-            if let didMake = defaults.value(forKey: didMakeSuccessfulSubmissionKey) as? Bool {
-                return didMake
+            if let time = defaults.value(forKey: lastStreakAlertShownTimeKey) as? TimeInterval {
+                return time
             } else {
-                self.didMakeSuccessfulSubmission = false
-                return false 
+                self.lastStreakAlertShownTime = 0.0
+                return 0.0 
             }
         }
         
         set(value) {
-            defaults.set(value, forKey: didMakeSuccessfulSubmissionKey)
+            defaults.set(value, forKey: lastStreakAlertShownTimeKey)
             defaults.synchronize()
         }
     }
 
+    fileprivate func updateShownNotificationTime() {
+        lastStreakAlertShownTime = Date().timeIntervalSince1970
+    }
+    
+    fileprivate var isStreakAlertAvailableNow : Bool {
+        return Date().timeIntervalSince1970 - lastStreakAlertShownTime >= 60 * 60 * 24  
+    }
+        
+    var streakAlertShownCnt: Int {
+        get {
+            if let cnt = defaults.value(forKey: streakAlertShownCntKey) as? Int {
+                return cnt
+            } else {
+                self.streakAlertShownCnt = 0
+                return 0
+            }
+        }
+        
+        set(value) {
+            defaults.set(value, forKey: streakAlertShownCntKey)
+            defaults.synchronize()
+        }
+    }
+    
+    func didShowStreakAlert() {
+        streakAlertShownCnt = streakAlertShownCnt + 1
+        updateShownNotificationTime()
+    }
+    
+    var canShowAlert : Bool {
+        return isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt
+    }
+    
 }

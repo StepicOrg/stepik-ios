@@ -430,7 +430,14 @@ class QuizViewController: UIViewController {
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
     
+    private let maxAlertCount = 3
+    
     func checkCorrect() {
+        
+        guard QuizDataManager.submission.canShowAlert else {
+            return
+        }
+        
         let alert = Alerts.streaks.construct(notify: {
             [weak self] in
             self?.selectStreakNotificationTime()
@@ -442,10 +449,13 @@ class QuizViewController: UIViewController {
         _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
             [weak self] 
             activity in
+            guard activity.currentStreak > 0 else {
+                return
+            }
             if let s = self {
+                QuizDataManager.submission.didShowStreakAlert()
                 alert.currentStreak = activity.currentStreak
                 Alerts.streaks.present(alert: alert, inController: s)
-                QuizDataManager.submission.didMakeSuccessfulSubmission = true
             }
             }, error: {
                 error in

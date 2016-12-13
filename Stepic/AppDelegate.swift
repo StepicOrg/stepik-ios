@@ -63,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
         
+        if let localNotificationDict = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? [NSString: AnyObject] {
+            handleLocalNotification(localNotificationDict)
+        }
+        
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [NSString: AnyObject] {
             handleNotification(notificationDict)
         }
@@ -73,6 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func handleLocalNotification(_ localNotificationDict: [NSString: AnyObject]) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)
+    }
+        
     fileprivate func handleNotification(_ notificationDict: [NSString: AnyObject]) {
         if let reaction = NotificationReactionHandler().handleNotificationWithUserInfo(notificationDict), 
             let topController = currentNavigation?.topViewController {
