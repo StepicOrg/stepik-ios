@@ -57,11 +57,11 @@ class PreferencesViewController: UITableViewController {
         }
         
         if PreferencesContainer.notifications.allowStreaksNotifications {
-            allowStreaksNotificationsSwitch.isOn = false
-        } else {
             allowStreaksNotificationsSwitch.isOn = true
             notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             heightForRows[2][1] = 40
+        } else {
+            allowStreaksNotificationsSwitch.isOn = false
         }
         
         localize() 
@@ -146,12 +146,14 @@ class PreferencesViewController: UITableViewController {
         if allowStreaksNotificationsSwitch.isOn {
             LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
+            PreferencesContainer.notifications.allowStreaksNotifications = true
             heightForRows[2][1] = 40
             tableView.beginUpdates()
             tableView.endUpdates()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         } else {
             LocalNotificationManager.cancelStreakLocalNotifications()
+            PreferencesContainer.notifications.allowStreaksNotifications = false
             heightForRows[2][1] = 0
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOff, parameters: nil)
             tableView.beginUpdates()

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,17 +21,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="341" height="305"/>
+            <rect key="frame" x="0.0" y="0.0" width="374" height="305"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="mobile-background-1" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-uw-6tk">
-                    <rect key="frame" x="0.0" y="0.0" width="341" height="113.5"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="fh5-uw-6tk" secondAttribute="height" multiplier="3:1" id="8ia-q7-Z71"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="mobile-background-1" translatesAutoresizingMaskIntoConstraints="NO" id="fh5-uw-6tk">
+                    <rect key="frame" x="0.0" y="0.0" width="374" height="141.5"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Congrats!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ8-T8-j2i">
-                    <rect key="frame" x="135" y="133" width="71" height="25"/>
+                    <rect key="frame" x="152" y="160.5" width="71" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="tNM-9B-zkd"/>
                     </constraints>
@@ -40,18 +36,15 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="755" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-6N-g3B">
-                    <rect key="frame" x="8" y="166" width="325" height="90"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="90" id="S9Y-gT-lgJ"/>
-                    </constraints>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UE8-6N-g3B">
+                    <rect key="frame" x="8" y="193.5" width="358" height="62.5"/>
                     <string key="text">You are solving %d days in a row. Solve quizzes every day and increase your streak! Would you like to be notified about streaks to learn every day? You can always change this option in preferences.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4q-7w-ovw">
-                    <rect key="frame" x="16" y="272" width="150.5" height="25"/>
+                    <rect key="frame" x="16" y="272" width="167" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="MAk-d1-UYH"/>
                     </constraints>
@@ -63,7 +56,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0U4-CN-7kp">
-                    <rect key="frame" x="174" y="272" width="150.5" height="25"/>
+                    <rect key="frame" x="191" y="272" width="167" height="25"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="Yes">
                         <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,7 +89,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="4.5" y="-117.5"/>
+            <point key="canvasLocation" x="83" y="-117.5"/>
         </view>
     </objects>
     <resources>

@@ -53,12 +53,14 @@ class StreakAlertViewController: UIViewController {
     
     @IBAction func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        PreferencesContainer.notifications.allowStreaksNotifications = false
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.fail(QuizDataManager.submission.streakAlertShownCnt), parameters: nil)
         noAction?()
     }
 
     @IBAction func yesPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        PreferencesContainer.notifications.allowStreaksNotifications = true
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.Suggestion.success(QuizDataManager.submission.streakAlertShownCnt), parameters: nil)
         yesAction?()
     }

@@ -61,7 +61,7 @@ class SubmissionManager {
     }
     
     var canShowAlert : Bool {
-        return isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt
+        return isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt && PreferencesContainer.notifications.allowStreaksNotifications == false
     }
     
 }

@@ -25,8 +25,8 @@ class NotificationPreferencesContainer {
             }
         }
         
-        set(allowStreaksNotification) {
-            defaults.set(allowStreaksNotification, forKey: allowStreaksNotificationKey)
+        set(value) {
+            defaults.set(value, forKey: allowStreaksNotificationKey)
             defaults.synchronize()
         }
     }
