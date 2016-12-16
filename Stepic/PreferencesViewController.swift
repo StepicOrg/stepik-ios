@@ -142,8 +142,30 @@ class PreferencesViewController: UITableViewController {
         UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks = sender.isOn
     }
     
+    fileprivate func showStreaksSettingsNotificationAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+            action in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: {
+            [weak self] in
+            self?.allowStreaksNotificationsSwitch.setOn(false, animated: true)
+        })
+    }
+    
     @IBAction func allowStreaksNotificationsChanged(_ sender: Any) {
         if allowStreaksNotificationsSwitch.isOn {
+
+            
+            guard UIApplication.shared.isRegisteredForRemoteNotifications else {
+                showStreaksSettingsNotificationAlert()
+                return
+            }
+            
             LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             PreferencesContainer.notifications.allowStreaksNotifications = true
