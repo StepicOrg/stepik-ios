@@ -34,7 +34,7 @@ class NotificationPreferencesContainer {
     
     var streaksNotificationStartHourUTC: Int {
         get {
-            return (defaults.value(forKey: streaksNotificationStartHourUTCKey) as? Int) ?? 12
+            return (defaults.value(forKey: streaksNotificationStartHourUTCKey) as? Int) ?? 17
         } 
         set(start) {
             defaults.set(start, forKey: streaksNotificationStartHourUTCKey)
