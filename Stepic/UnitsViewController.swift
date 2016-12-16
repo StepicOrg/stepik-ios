@@ -51,7 +51,7 @@ class UnitsViewController: UIViewController {
             self.tableView.contentOffset = offset
         }
         
-        section.loadProgressesForUnits({
+        section.loadProgressesForUnits(units: section.units, completion: {
             UIThread.performUI({
                 self.tableView.reloadData()
             })
@@ -68,7 +68,7 @@ class UnitsViewController: UIViewController {
 
     func refreshUnits() {
         didRefresh = false
-        section.loadUnits(completion: {
+        section.loadUnits(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()

@@ -87,4 +87,18 @@ struct AnalyticsEvents {
     struct Token {
         static let requestedNotNilToken = "token_requested_not_nil"
     }
+    
+    struct Streaks {
+        static let preferencesOn = "streak_notification_pref_on"
+        static let preferencesOff = "streak_notification_pref_off"
+        struct Suggestion {
+            static func fail(_ index: Int) -> String {
+                return "streak_suggestion_\(index)_fail"
+            }
+            static func success(_ index: Int) -> String {
+                return "streak_suggestion_\(index)_success"
+            }
+        }
+        static let notificationOpened = "streak_notification_opened"
+    }
 }

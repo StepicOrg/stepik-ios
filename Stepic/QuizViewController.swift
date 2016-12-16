@@ -414,6 +414,53 @@ class QuizViewController: UIViewController {
         })
     }
     
+    let streakTimePickerPresenter : Presentr = {
+        let streakTimePickerPresenter = Presentr(presentationType: .popup)
+        return streakTimePickerPresenter
+    }()
+    
+    func selectStreakNotificationTime() {
+        let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
+        vc.selectedBlock = {
+            [weak self] in 
+            if let s = self {
+//                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
+            }
+        }
+        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
+    }
+    
+    private let maxAlertCount = 3
+    
+    func checkCorrect() {
+        
+        guard QuizDataManager.submission.canShowAlert else {
+            return
+        }
+        
+        let alert = Alerts.streaks.construct(notify: {
+            [weak self] in
+            self?.selectStreakNotificationTime()
+        })
+        
+        guard let user = AuthInfo.shared.user else { 
+            return 
+        }
+        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
+            [weak self] 
+            activity in
+            guard activity.currentStreak > 0 else {
+                return
+            }
+            if let s = self {
+                QuizDataManager.submission.didShowStreakAlert()
+                alert.currentStreak = activity.currentStreak
+                Alerts.streaks.present(alert: alert, inController: s)
+            }
+            }, error: {
+                error in
+        })
+    }
     
     //Measured in seconds
     fileprivate let checkTimeStandardInterval = 0.5
@@ -428,6 +475,9 @@ class QuizViewController: UIViewController {
                         self.checkSubmission(id, time: time + 1, completion: completion)
                     } else {
                         self.submission = submission
+                        if submission.status == "correct" {
+                            self.checkCorrect() 
+                        }
                         completion?()
                     }
                     }, error: { 

@@ -21,7 +21,10 @@ class UserActivity {
     
     var currentStreak : Int {
         var res = 0
-        for pin in pins {
+        for (index, pin) in pins.enumerated() {
+            if pin == 0 && index == 0 {
+                continue
+            }
             if pin == 0 {
                 return res 
             } else {

@@ -19,6 +19,10 @@
 		0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
 		0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
 		0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8271D070F68006C987E /* DiscussionsAPITests.swift */; };
+		08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* SubmissonManager.swift */; };
+		08019A831DEED7E900691F0B /* SubmissonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* SubmissonManager.swift */; };
+		08019A851DEED8B900691F0B /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A841DEED8B900691F0B /* QuizDataManager.swift */; };
+		08019A861DEED8B900691F0B /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A841DEED8B900691F0B /* QuizDataManager.swift */; };
 		0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
@@ -44,6 +48,42 @@
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
+		08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
+		08263D721DE5F230002E5B7F /* NotificationTimePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* NotificationTimePickerViewController.xib */; };
+		08263D731DE5F230002E5B7F /* NotificationTimePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* NotificationTimePickerViewController.xib */; };
+		08263D861DE5FC01002E5B7F /* Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D751DE5FC01002E5B7F /* Alert.xib */; };
+		08263D871DE5FC01002E5B7F /* Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D751DE5FC01002E5B7F /* Alert.xib */; };
+		08263D881DE5FC01002E5B7F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D761DE5FC01002E5B7F /* AlertViewController.swift */; };
+		08263D891DE5FC01002E5B7F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D761DE5FC01002E5B7F /* AlertViewController.swift */; };
+		08263D8A1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D771DE5FC01002E5B7F /* CoverHorizontalAnimation.swift */; };
+		08263D8B1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D771DE5FC01002E5B7F /* CoverHorizontalAnimation.swift */; };
+		08263D8C1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D781DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift */; };
+		08263D8D1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D781DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift */; };
+		08263D8E1DE5FC01002E5B7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08263D791DE5FC01002E5B7F /* Info.plist */; };
+		08263D8F1DE5FC01002E5B7F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08263D791DE5FC01002E5B7F /* Info.plist */; };
+		08263D901DE5FC01002E5B7F /* KeyboardTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7A1DE5FC01002E5B7F /* KeyboardTranslation.swift */; };
+		08263D911DE5FC01002E5B7F /* KeyboardTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7A1DE5FC01002E5B7F /* KeyboardTranslation.swift */; };
+		08263D921DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7B1DE5FC01002E5B7F /* ModalCenterPosition.swift */; };
+		08263D931DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7B1DE5FC01002E5B7F /* ModalCenterPosition.swift */; };
+		08263D941DE5FC01002E5B7F /* ModalSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7C1DE5FC01002E5B7F /* ModalSize.swift */; };
+		08263D951DE5FC01002E5B7F /* ModalSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7C1DE5FC01002E5B7F /* ModalSize.swift */; };
+		08263D961DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08263D7D1DE5FC01002E5B7F /* Montserrat-Regular.ttf */; };
+		08263D971DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08263D7D1DE5FC01002E5B7F /* Montserrat-Regular.ttf */; };
+		08263D981DE5FC01002E5B7F /* PresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7E1DE5FC01002E5B7F /* PresentationType.swift */; };
+		08263D991DE5FC01002E5B7F /* PresentationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7E1DE5FC01002E5B7F /* PresentationType.swift */; };
+		08263D9A1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7F1DE5FC01002E5B7F /* Presentr+Equatable.swift */; };
+		08263D9B1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D7F1DE5FC01002E5B7F /* Presentr+Equatable.swift */; };
+		08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D811DE5FC01002E5B7F /* Presentr.swift */; };
+		08263D9D1DE5FC01002E5B7F /* Presentr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D811DE5FC01002E5B7F /* Presentr.swift */; };
+		08263D9E1DE5FC01002E5B7F /* PresentrAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D821DE5FC01002E5B7F /* PresentrAnimation.swift */; };
+		08263D9F1DE5FC01002E5B7F /* PresentrAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D821DE5FC01002E5B7F /* PresentrAnimation.swift */; };
+		08263DA01DE5FC01002E5B7F /* PresentrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D831DE5FC01002E5B7F /* PresentrController.swift */; };
+		08263DA11DE5FC01002E5B7F /* PresentrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D831DE5FC01002E5B7F /* PresentrController.swift */; };
+		08263DA21DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */; };
+		08263DA31DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */; };
+		08263DA41DE5FC01002E5B7F /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D851DE5FC01002E5B7F /* TransitionType.swift */; };
+		08263DA51DE5FC01002E5B7F /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D851DE5FC01002E5B7F /* TransitionType.swift */; };
 		0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
 		0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
 		0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
@@ -83,6 +123,18 @@
 		083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
 		083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
+		083749261DE5AE0400144C14 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749251DE5AE0400144C14 /* Alerts.swift */; };
+		083749271DE5AE0400144C14 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749251DE5AE0400144C14 /* Alerts.swift */; };
+		0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749291DE5AF8A00144C14 /* StreaksAlertManager.swift */; };
+		0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749291DE5AF8A00144C14 /* StreaksAlertManager.swift */; };
+		0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492C1DE5B07900144C14 /* AlertManager.swift */; };
+		0837492E1DE5B07900144C14 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492C1DE5B07900144C14 /* AlertManager.swift */; };
+		083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */; };
+		083749311DE5BBF700144C14 /* PreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */; };
+		083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
+		083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
+		083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
+		083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
@@ -168,6 +220,8 @@
 		08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
+		087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
@@ -271,6 +325,10 @@
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
+		08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
+		08C6E31D1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
+		08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
 		08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */; };
 		08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -547,6 +605,12 @@
 		08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30E21DC385B400E4684F /* ProfileViewController.swift */; };
 		08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30E21DC385B400E4684F /* ProfileViewController.swift */; };
 		08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
+		08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */; };
+		08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */; };
+		08FF752C1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
+		08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
+		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
+		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		572BF3DA6DE2DAE16D7E15C8 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */; };
 		CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E978D25313465538A2470BA2 /* Pods_Stepic.framework */; };
 /* End PBXBuildFile section */
@@ -570,6 +634,8 @@
 		0800B8211D07029B006C987E /* CommentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
 		0800B8241D0704B6006C987E /* ApiUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUtil.swift; sourceTree = "<group>"; };
 		0800B8271D070F68006C987E /* DiscussionsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsAPITests.swift; sourceTree = "<group>"; };
+		08019A811DEED7E900691F0B /* SubmissonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissonManager.swift; sourceTree = "<group>"; };
+		08019A841DEED8B900691F0B /* QuizDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataManager.swift; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v2.xcdatamodel; sourceTree = "<group>"; };
 		0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -599,6 +665,25 @@
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
+		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
+		08263D6F1DE5F230002E5B7F /* NotificationTimePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTimePickerViewController.xib; sourceTree = "<group>"; };
+		08263D751DE5FC01002E5B7F /* Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Alert.xib; sourceTree = "<group>"; };
+		08263D761DE5FC01002E5B7F /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		08263D771DE5FC01002E5B7F /* CoverHorizontalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverHorizontalAnimation.swift; sourceTree = "<group>"; };
+		08263D781DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverVerticalFromTopAnimation.swift; sourceTree = "<group>"; };
+		08263D791DE5FC01002E5B7F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08263D7A1DE5FC01002E5B7F /* KeyboardTranslation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardTranslation.swift; sourceTree = "<group>"; };
+		08263D7B1DE5FC01002E5B7F /* ModalCenterPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCenterPosition.swift; sourceTree = "<group>"; };
+		08263D7C1DE5FC01002E5B7F /* ModalSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSize.swift; sourceTree = "<group>"; };
+		08263D7D1DE5FC01002E5B7F /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		08263D7E1DE5FC01002E5B7F /* PresentationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationType.swift; sourceTree = "<group>"; };
+		08263D7F1DE5FC01002E5B7F /* Presentr+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Presentr+Equatable.swift"; sourceTree = "<group>"; };
+		08263D801DE5FC01002E5B7F /* Presentr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Presentr.h; sourceTree = "<group>"; };
+		08263D811DE5FC01002E5B7F /* Presentr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentr.swift; sourceTree = "<group>"; };
+		08263D821DE5FC01002E5B7F /* PresentrAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentrAnimation.swift; sourceTree = "<group>"; };
+		08263D831DE5FC01002E5B7F /* PresentrController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentrController.swift; sourceTree = "<group>"; };
+		08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		08263D851DE5FC01002E5B7F /* TransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionType.swift; sourceTree = "<group>"; };
 		0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Section+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF6D1BC5D177000AFEA7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -626,6 +711,12 @@
 		083622D71CD1FA4800CD8915 /* StepTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabView.swift; sourceTree = "<group>"; };
 		083622DB1CD1FA6700CD8915 /* StepTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepTabView.xib; sourceTree = "<group>"; };
 		083622E11CD24C2100CD8915 /* Model_v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v4.xcdatamodel; sourceTree = "<group>"; };
+		083749251DE5AE0400144C14 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		083749291DE5AF8A00144C14 /* StreaksAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksAlertManager.swift; sourceTree = "<group>"; };
+		0837492C1DE5B07900144C14 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesContainer.swift; sourceTree = "<group>"; };
+		083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesContainer.swift; sourceTree = "<group>"; };
+		083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
@@ -688,6 +779,7 @@
 		0870392F1CD7413D00B6571B /* NotificationAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertConstructor.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
+		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
@@ -762,6 +854,8 @@
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
 		08C5E4FC1C315272004AA626 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakAlertViewController.swift; sourceTree = "<group>"; };
+		08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreakAlertViewController.xib; sourceTree = "<group>"; };
 		08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_exams_v10.xcdatamodel; sourceTree = "<group>"; };
 		08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebControllerManager.swift; sourceTree = "<group>"; };
 		08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stepic-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -868,6 +962,9 @@
 		08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		08FB30E21DC385B400E4684F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
+		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
+		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
 		3F57B4346FD0BE2A8F687821 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		58D8A36D6D3D52FD72FCBC8E /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -976,6 +1073,31 @@
 			name = Stepic;
 			sourceTree = "<group>";
 		};
+		08263D741DE5FC01002E5B7F /* Presentr */ = {
+			isa = PBXGroup;
+			children = (
+				08263D751DE5FC01002E5B7F /* Alert.xib */,
+				08263D761DE5FC01002E5B7F /* AlertViewController.swift */,
+				08263D771DE5FC01002E5B7F /* CoverHorizontalAnimation.swift */,
+				08263D781DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift */,
+				08263D791DE5FC01002E5B7F /* Info.plist */,
+				08263D7A1DE5FC01002E5B7F /* KeyboardTranslation.swift */,
+				08263D7B1DE5FC01002E5B7F /* ModalCenterPosition.swift */,
+				08263D7C1DE5FC01002E5B7F /* ModalSize.swift */,
+				08263D7D1DE5FC01002E5B7F /* Montserrat-Regular.ttf */,
+				08263D7E1DE5FC01002E5B7F /* PresentationType.swift */,
+				08263D7F1DE5FC01002E5B7F /* Presentr+Equatable.swift */,
+				08263D801DE5FC01002E5B7F /* Presentr.h */,
+				08263D811DE5FC01002E5B7F /* Presentr.swift */,
+				08263D821DE5FC01002E5B7F /* PresentrAnimation.swift */,
+				08263D831DE5FC01002E5B7F /* PresentrController.swift */,
+				08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */,
+				08263D851DE5FC01002E5B7F /* TransitionType.swift */,
+			);
+			name = Presentr;
+			path = Stepic/Presentr;
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,6 +1203,25 @@
 				083622DB1CD1FA6700CD8915 /* StepTabView.xib */,
 			);
 			name = StepTabView;
+			sourceTree = "<group>";
+		};
+		083749281DE5AE1400144C14 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				083749251DE5AE0400144C14 /* Alerts.swift */,
+				08FF752E1DF9B87A00D656C4 /* Streaks */,
+				0837492C1DE5B07900144C14 /* AlertManager.swift */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
+		083749321DE5BBFE00144C14 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */,
+				083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		083D64A11C17523E003222F0 /* Social network cell */ = {
@@ -1212,6 +1353,9 @@
 				082EDED21D881562006B51DC /* StepsControllerRouter.swift */,
 				085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */,
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
+				083749281DE5AE1400144C14 /* Alerts */,
+				083749321DE5BBFE00144C14 /* Preferences */,
+				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1219,6 +1363,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				08FF75271DF9938E00D656C4 /* Alerts */,
 				08EF9A0B1C91D12700433E4A /* Video Player */,
 				0889FEAD1BFB76FF00C6417E /* Downloads */,
 				084156981BCC08F9006B8C73 /* Steps */,
@@ -1372,6 +1517,8 @@
 				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
 				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
 				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
+				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
+				08263D6F1DE5F230002E5B7F /* NotificationTimePickerViewController.xib */,
 			);
 			name = "User Preferences";
 			sourceTree = "<group>";
@@ -1571,6 +1718,7 @@
 		08DE94141B8C58AC00D278AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				087854F41DF6EE0D00368A50 /* wysiwyg.css */,
 				0869F6D71CE3684000F8A6DB /* default_sound.wav */,
 				08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */,
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
@@ -1608,6 +1756,8 @@
 				08CB4ABB1C4D3DAB00D7F918 /* WKWebViewPanelManager */,
 				08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */,
 				08901E661CD0F94C00D94613 /* In-app version control */,
+				08019A811DEED7E900691F0B /* SubmissonManager.swift */,
+				08019A841DEED8B900691F0B /* QuizDataManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1787,9 +1937,30 @@
 			name = old;
 			sourceTree = "<group>";
 		};
+		08FF75271DF9938E00D656C4 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */,
+				08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */,
+				08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */,
+				08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
+		08FF752E1DF9B87A00D656C4 /* Streaks */ = {
+			isa = PBXGroup;
+			children = (
+				083749291DE5AF8A00144C14 /* StreaksAlertManager.swift */,
+				08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */,
+			);
+			name = Streaks;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08263D741DE5FC01002E5B7F /* Presentr */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
 				08E16F201BDBA495004822E1 /* Reachability */,
@@ -1965,6 +2136,7 @@
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
 				08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
+				087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */,
@@ -1972,14 +2144,19 @@
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				08CB6B441C98774200E8BA50 /* SbEntranceViewController.xib in Resources */,
+				08263D731DE5F230002E5B7F /* NotificationTimePickerViewController.xib in Resources */,
+				08263D971DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
+				08263D8F1DE5FC01002E5B7F /* Info.plist in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
+				08263D871DE5FC01002E5B7F /* Alert.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
 				08D121151C937B2200A54ABC /* Images.xcassets in Resources */,
 				08CB6B431C98773C00E8BA50 /* SbLaunchScreen.xib in Resources */,
@@ -1995,10 +2172,12 @@
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
+				08263DA31DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
+				08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2014,15 +2193,21 @@
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
+				08263DA21DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */,
 				089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
+				08FF752C1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
+				08263D8E1DE5FC01002E5B7F /* Info.plist in Resources */,
+				08263D721DE5F230002E5B7F /* NotificationTimePickerViewController.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
+				08263D861DE5FC01002E5B7F /* Alert.xib in Resources */,
+				087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
@@ -2033,9 +2218,11 @@
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
+				08263D961DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
+				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
@@ -2240,12 +2427,14 @@
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
+				08263D8D1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */,
 				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
 				08CB6B451C98776400E8BA50 /* SbEntranceViewController.swift in Sources */,
 				08407EC81DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
 				08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */,
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
+				08263D991DE5FC01002E5B7F /* PresentationType.swift in Sources */,
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -2259,6 +2448,7 @@
 				08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
+				08019A831DEED7E900691F0B /* SubmissonManager.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
 				08D120881C937B2200A54ABC /* RegistrationErrorInfo.swift in Sources */,
 				088AADAE1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
@@ -2268,6 +2458,7 @@
 				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
+				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -2293,6 +2484,7 @@
 				08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				0835542A1CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				088E58C21DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
+				08263D951DE5FC01002E5B7F /* ModalSize.swift in Sources */,
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
@@ -2301,6 +2493,7 @@
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
+				08263DA51DE5FC01002E5B7F /* TransitionType.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -2310,6 +2503,7 @@
 				08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
+				08263D9D1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
 				088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */,
@@ -2325,6 +2519,7 @@
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */,
+				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
 				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
 				08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
@@ -2332,6 +2527,7 @@
 				08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */,
 				08D120AE1C937B2200A54ABC /* Unit.swift in Sources */,
 				08D120AF1C937B2200A54ABC /* VideoDownload.swift in Sources */,
+				083749271DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08D120B01C937B2200A54ABC /* StringQuizViewController.swift in Sources */,
 				08D120B11C937B2200A54ABC /* FreeAnswerReply.swift in Sources */,
@@ -2352,17 +2548,22 @@
 				0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
+				08263D8B1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
 				08D120C11C937B2200A54ABC /* AudioManager.swift in Sources */,
 				08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */,
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
+				0837492E1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */,
 				08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
+				08263DA11DE5FC01002E5B7F /* PresentrController.swift in Sources */,
+				08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				08D120C71C937B2200A54ABC /* QuizControllerDelegate.swift in Sources */,
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
+				08263D891DE5FC01002E5B7F /* AlertViewController.swift in Sources */,
 				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
 				08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */,
@@ -2370,6 +2571,7 @@
 				08D120CD1C937B2200A54ABC /* StepicVideoPlayerViewController.swift in Sources */,
 				08D120CE1C937B2200A54ABC /* StringDatasetExtension.swift in Sources */,
 				08D120CF1C937B2200A54ABC /* User.swift in Sources */,
+				083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				08D120D01C937B2200A54ABC /* WKWebViewPanelManager.m in Sources */,
 				08D120D11C937B2200A54ABC /* UIImageExtension.swift in Sources */,
 				08CB6B461C98776900E8BA50 /* SbAppDelegate.swift in Sources */,
@@ -2387,6 +2589,7 @@
 				08D120DA1C937B2200A54ABC /* CourseTableViewCell.swift in Sources */,
 				083056D21DBFB4BE00F1F2A4 /* DiscussionWebTableViewCell.swift in Sources */,
 				08ECC4491DB8D56E0005D401 /* StyledTabBarViewController.swift in Sources */,
+				08C6E31D1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */,
 				083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				08D120DB1C937B2200A54ABC /* JSQWebViewController.swift in Sources */,
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
@@ -2404,17 +2607,22 @@
 				08D120E31C937B2200A54ABC /* Video.swift in Sources */,
 				08D120E41C937B2200A54ABC /* UIThreadHelper.swift in Sources */,
 				08D120E51C937B2200A54ABC /* DownloadsViewController.swift in Sources */,
+				08263D931DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */,
+				08019A861DEED8B900691F0B /* QuizDataManager.swift in Sources */,
 				08D120E61C937B2200A54ABC /* Step.swift in Sources */,
 				08D120E71C937B2200A54ABC /* Submission.swift in Sources */,
 				08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08D120E81C937B2200A54ABC /* AuthInfo.swift in Sources */,
 				08FB30E11DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				08D120E91C937B2200A54ABC /* VideoDownloadDelegate.swift in Sources */,
+				083749311DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				08D120EA1C937B2200A54ABC /* TextReply.swift in Sources */,
 				082FD64D1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				08D120EB1C937B2200A54ABC /* JSONInitializable.swift in Sources */,
 				08D120EC1C937B2200A54ABC /* UIImageViewExtension.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
+				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				08263D9B1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
 				08CB6B471C98776D00E8BA50 /* SbControllerHelperLaunchExtension.swift in Sources */,
@@ -2428,6 +2636,7 @@
 				08D120F61C937B2200A54ABC /* Sorter.swift in Sources */,
 				082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */,
+				08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
@@ -2450,9 +2659,11 @@
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
+				08263D911DE5FC01002E5B7F /* KeyboardTranslation.swift in Sources */,
 				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
 				08FB30DE1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
+				08263D9F1DE5FC01002E5B7F /* PresentrAnimation.swift in Sources */,
 				0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */,
 			);
@@ -2479,9 +2690,11 @@
 				08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */,
 				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
+				08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */,
 				08970ED31C6A326900846119 /* PlaceholderStyleExtensions.swift in Sources */,
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				083540641CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
+				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
@@ -2491,8 +2704,11 @@
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
+				08263D8C1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
+				08263D941DE5FC01002E5B7F /* ModalSize.swift in Sources */,
+				08263DA01DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
@@ -2507,6 +2723,7 @@
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
+				08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
@@ -2518,6 +2735,7 @@
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
+				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
@@ -2540,6 +2758,7 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
+				08263D9E1DE5FC01002E5B7F /* PresentrAnimation.swift in Sources */,
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				088E58BD1DE33B410009B9CE /* AuthAPI.swift in Sources */,
@@ -2551,21 +2770,26 @@
 				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */,
+				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
+				08263D9A1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
+				08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
+				08263D901DE5FC01002E5B7F /* KeyboardTranslation.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
+				08263D8A1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
@@ -2573,12 +2797,14 @@
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
+				08019A851DEED8B900691F0B /* QuizDataManager.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				082EDED31D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				08263D981DE5FC01002E5B7F /* PresentationType.swift in Sources */,
 				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
@@ -2587,6 +2813,7 @@
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
+				08263D881DE5FC01002E5B7F /* AlertViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
@@ -2617,12 +2844,14 @@
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
+				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
+				08263D921DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
@@ -2642,13 +2871,17 @@
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
+				08263DA41DE5FC01002E5B7F /* TransitionType.swift in Sources */,
+				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
+				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONInitializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
+				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
@@ -2669,6 +2902,7 @@
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
+				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
@@ -2688,6 +2922,7 @@
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
+				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
@@ -2927,6 +3162,7 @@
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-Xfrontend\" \"-warn-long-function-bodies=100\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2952,6 +3188,7 @@
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-Xfrontend\" \"-warn-long-function-bodies=100\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

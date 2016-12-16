@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepikAlertViewController" customModule="SberbankUniversity" customModuleProvider="target">
+            <connections>
+                <outlet property="actionsView" destination="zC4-J2-NqX" id="vvM-LL-xdL"/>
+                <outlet property="descriptionLabel" destination="Ngc-Uk-laI" id="hvh-gp-2eW"/>
+                <outlet property="image" destination="iDK-tU-KTL" id="48V-T9-Eo1"/>
+                <outlet property="titleLabel" destination="AM5-KZ-YqT" id="yny-Yb-nJk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="244"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iDK-tU-KTL">
+                    <rect key="frame" x="0.0" y="0.0" width="348" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="HNz-hS-30K"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AM5-KZ-YqT">
+                    <rect key="frame" x="16" y="158" width="316" height="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-Uk-laI">
+                    <rect key="frame" x="16" y="184" width="316" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zC4-J2-NqX">
+                    <rect key="frame" x="0.0" y="208" width="348" height="36"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="mtd-Zv-zfd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zC4-J2-NqX" secondAttribute="trailing" id="1En-gk-bBt"/>
+                <constraint firstItem="AM5-KZ-YqT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="4Dg-3h-7YZ"/>
+                <constraint firstItem="AM5-KZ-YqT" firstAttribute="top" secondItem="iDK-tU-KTL" secondAttribute="bottom" constant="8" id="6bM-d1-7XP"/>
+                <constraint firstItem="zC4-J2-NqX" firstAttribute="top" secondItem="Ngc-Uk-laI" secondAttribute="bottom" constant="8" id="83s-Ko-wMS"/>
+                <constraint firstItem="Ngc-Uk-laI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9XH-Wr-JH1"/>
+                <constraint firstAttribute="trailing" secondItem="AM5-KZ-YqT" secondAttribute="trailing" constant="16" id="CUQ-Ej-ZeR"/>
+                <constraint firstAttribute="bottom" secondItem="zC4-J2-NqX" secondAttribute="bottom" id="HVc-lO-K5h"/>
+                <constraint firstAttribute="trailing" secondItem="iDK-tU-KTL" secondAttribute="trailing" id="SnJ-UY-nBF"/>
+                <constraint firstItem="Ngc-Uk-laI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="VWv-a1-5oe"/>
+                <constraint firstItem="zC4-J2-NqX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WfA-4q-mKq"/>
+                <constraint firstItem="AM5-KZ-YqT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="guK-H2-xVn"/>
+                <constraint firstItem="Ngc-Uk-laI" firstAttribute="top" secondItem="AM5-KZ-YqT" secondAttribute="bottom" constant="8" id="qYx-ZE-Rni"/>
+                <constraint firstItem="iDK-tU-KTL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sH2-Ar-3Wp"/>
+                <constraint firstAttribute="trailing" secondItem="Ngc-Uk-laI" secondAttribute="trailing" constant="16" id="xgi-HQ-wOE"/>
+                <constraint firstItem="iDK-tU-KTL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zD2-hn-45C"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="21" y="-158"/>
+        </view>
+    </objects>
+</document>

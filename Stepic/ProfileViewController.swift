@@ -98,6 +98,7 @@ class ProfileViewController: UITableViewController {
             }
         }, error: {
             error in
+            
             //TODO: Display error button
         })
         

@@ -148,5 +148,4 @@ extension DiscussionWebTableViewCell : WKScriptMessageHandler {
             })
         }
     }
-
 }

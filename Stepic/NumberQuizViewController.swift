@@ -53,9 +53,6 @@ class NumberQuizViewController: QuizViewController {
         } else {
             textField.isEnabled = true
         }
-        //        if reload {
-        //            textField.text = ""
-        //        }
     }
     
     //Override this in subclass
@@ -77,15 +74,6 @@ class NumberQuizViewController: QuizViewController {
         }))
         
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    override func checkReplyReady() -> Bool {
-        if (Double(textField.text ?? "") != nil) {
-            return true
-        } else {
-            presentWrongFormatAlert()
-            return false
-        }
     }
     
     /*

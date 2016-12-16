@@ -145,11 +145,11 @@ class CoursePreviewViewController: UIViewController {
             }
         
             isLoadingSections = true
-            if AuthInfo.shared.isAuthorized {
+//            if AuthInfo.shared.isAuthorized {
                 c.loadAllSections(success: successBlock, error: errorBlock, withProgresses: false)
-            } else {
-                c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
-            }
+//            } else {
+//                c.loadSectionsWithoutAuth(success: successBlock, error: errorBlock)
+//            }
         }
     }
     

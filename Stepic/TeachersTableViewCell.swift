@@ -34,17 +34,17 @@ class TeachersTableViewCell: UITableViewCell {
     func initWithCourse(_ course: Course) {
         //TODO: JUST REMOVE THIS AT SOME TIME
 //        instructors = course.instructors
-        if AuthInfo.shared.isAuthorized {
+//        if AuthInfo.shared.isAuthorized {
         course.loadAllInstructors(success: {
             self.instructors = course.instructors
             UIThread.performUI({self.collectionView.reloadData()})
         })
-        } else {
-            course.loadInstructorsWithoutAuth(success: {
-                self.instructors = course.instructors
-                UIThread.performUI({self.collectionView.reloadData()})
-            })
-        }
+//        } else {
+//            course.loadInstructorsWithoutAuth(success: {
+//                self.instructors = course.instructors
+//                UIThread.performUI({self.collectionView.reloadData()})
+//            })
+//        }
 //        collectionView.reloadData()
     }
     

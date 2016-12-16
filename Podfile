@@ -36,6 +36,7 @@ def all_pods
     pod "VK-ios-sdk" 
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
+    
 end
 
 #post_install do |installer|

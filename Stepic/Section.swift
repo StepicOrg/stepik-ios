@@ -63,25 +63,58 @@ class Section: NSManagedObject, JSONInitializable {
         }
     }
     
-    func loadUnits(completion: @escaping ((Void) -> Void), error errorHandler: @escaping ((Void) -> Void)) {
+    func loadUnits(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
         performRequest({
-            ApiDataDownloader.sharedDownloader.getUnitsByIds(self.unitsArray, deleteUnits: self.units, refreshMode: .update, success: {
-                newUnits in 
-                self.units = Sorter.sort(newUnits, byIds: self.unitsArray)
-                self.loadProgressesForUnits({
-                    self.loadLessonsForUnits(completion: completion)
-                })
-                }, failure: {
-                    error in
-                    print("Error while downloading units")
+            let requestUnitsCount = 50
+            var dimCount = 0
+            var idsArray = Array<Array<Int>>()
+            for (index, unitId) in self.unitsArray.enumerated() {
+                if index % requestUnitsCount == 0 {
+                    idsArray.append(Array<Int>())
+                    dimCount += 1
+                }
+                idsArray[dimCount - 1].append(unitId)
+            }
+            
+            //            let sectionsToDownload = idsArray.count
+            var downloadedUnits = [Unit]()
+            
+            let idsDownloaded : ([Unit]) -> (Void) = {
+                uns in
+                downloadedUnits.append(contentsOf: uns)
+                if downloadedUnits.count == self.unitsArray.count {
+                    self.units = Sorter.sort(downloadedUnits, byIds: self.unitsArray)
+                    CoreDataHelper.instance.save()
+                    success()
+                }
+            }
+            
+            var wasError = false
+            let errorWhileDownloading : (Void) -> (Void) = {
+                if !wasError {
+                    wasError = true
                     errorHandler()
-            })
-            }, error:  {
-                errorHandler()
+                }
+            }
+            
+            for ids in idsArray {
+                _ = ApiDataDownloader.sharedDownloader.getUnitsByIds(ids, deleteUnits: self.units, refreshMode: .update, success: {
+                    newUnits in 
+                    self.loadProgressesForUnits(units: newUnits, completion: {
+                        self.loadLessonsForUnits(units: newUnits, completion: {
+                            idsDownloaded(newUnits)
+                        })
+                    })
+                    }, failure: {
+                        error in
+                        print("Error while downloading units")
+                        errorWhileDownloading()
+                })
+            }
         })
     }
     
-    func loadProgressesForUnits(_ completion: @escaping ((Void)->Void)) {
+    func loadProgressesForUnits(units: [Unit], completion: @escaping ((Void)->Void)) {
         var progressIds : [String] = []
         var progresses : [Progress] = []
         for unit in units {
@@ -94,11 +127,11 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         performRequest({
-            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+            _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
                 (newProgresses) -> Void in
                 progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0 ..< min(self.units.count, progresses.count) {
-                    self.units[i].progress = progresses[i]
+                for i in 0 ..< min(units.count, progresses.count) {
+                    units[i].progress = progresses[i]
                 }
                 
                 CoreDataHelper.instance.save()
@@ -111,7 +144,7 @@ class Section: NSManagedObject, JSONInitializable {
         })
     }
     
-    func loadLessonsForUnits(completion: @escaping ((Void) -> Void)) {
+    func loadLessonsForUnits(units: [Unit], completion: @escaping ((Void) -> Void)) {
         var lessonIds : [Int] = []
         var lessons : [Lesson] = []
         for unit in units {
@@ -122,12 +155,12 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         performRequest({
-            ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
+            _ = ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
                 newLessons in
                 lessons = Sorter.sort(newLessons, byIds: lessonIds)
                 
-                for i in 0 ..< self.units.count {
-                    self.units[i].lesson = lessons[i]
+                for i in 0 ..< units.count {
+                    units[i].lesson = lessons[i]
                 }
                 
                 CoreDataHelper.instance.save()
