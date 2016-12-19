@@ -26,7 +26,7 @@ extension StepicVideoPlayerViewController: WatchSessionDataObserver {
 			case .play:
 				self.handlePlay()
 			case .pause:
-				self.player.pause()
+                self.handlePlay()
 			case .forward:
 				self.seekForwardPressed(UIButton())
 			case .backward:

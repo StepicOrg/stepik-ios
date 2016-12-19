@@ -56,6 +56,37 @@ class Course: NSManagedObject, JSONInitializable {
         return "No deadlines"
     }
     
+    var nearestDeadlines: (nearest: TimeInterval?, second: TimeInterval?) {
+        //TODO: Add nearest deadline calculation
+        guard sections.count > 0 else {
+            return nil
+        }
+        
+        var deadlinesSet = Set<TimeInterval>()
+        for section in sections {
+            if let soft = section.softDeadline {
+                deadlinesSet.insert(soft.timeIntervalSince1970)
+            }
+            if let hard = section.hardDeadline {
+                deadlinesSet.insert(hard.timeIntervalSince1970)
+            }
+        }
+        
+        let deadlines = deadlinesSet.sorted()
+        
+        for (index, deadline) in deadlines.enumerated() {
+            if deadline > Date().timeIntervalSince1970 {
+                if index + 1 < deadlines.count {
+                    return (nearest: deadline, second: deadlines[index + 1])
+                } else {
+                    return (nearest: deadline, second: nil)
+                }
+            }
+        }
+        
+        return (nearest: nil, second: nil)
+    }
+    
     
     func update(json: JSON) {
         initialize(json)
