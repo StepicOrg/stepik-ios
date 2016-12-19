@@ -12,7 +12,7 @@ import Foundation
 extension WatchSessionSender.Name {
   static let Metainfo = WatchSessionSender.Name("Metainfo")
   static func Metainfo(courseId: Int) -> WatchSessionSender.Name {
-    return WatchSessionSender.Name(Metainfo.rawValue + "\(courseId)")
+    return WatchSessionSender.Name(Metainfo.rawValue + "-\(courseId)")
   }
 }
 

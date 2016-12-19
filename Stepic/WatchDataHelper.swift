@@ -26,15 +26,7 @@ class WatchDataHelper {
             
             limit -= 1
         }
-        
-        let data = [WatchSessionSender.Name.Courses: plainCourses.toData()]
-        let success = WatchSessionManager.sharedManager.sendMessage(message: data)
-        
-        if !success {
-            do {
-                try WatchSessionManager.sharedManager.updateApplicationContext(applicationContext: data)
-            }
-            catch { }
-        }
+
+      WatchSessionSender.sendPlainCourses(plainCourses)
     }
 }

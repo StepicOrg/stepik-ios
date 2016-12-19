@@ -35,6 +35,8 @@ class CourseInfoInterfaceController: WKInterfaceController {
   override func awake(withContext context: Any?) {
     super.awake(withContext: context)
 
+    WatchSessionManager.sharedManager.addObserver(self)
+
     self.course = context as! CoursePlainEntity
   }
 
@@ -61,5 +63,11 @@ class CourseInfoInterfaceController: WKInterfaceController {
     // This method is called when watch view controller is about to be visible to user
     super.willActivate()
     updateTable()
+  }
+
+  override func willDisappear() {
+    super.willDisappear()
+
+    WatchSessionManager.sharedManager.removeObserver(self)
   }
 }

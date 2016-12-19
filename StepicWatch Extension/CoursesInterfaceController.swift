@@ -65,6 +65,9 @@ class CoursesInterfaceController: WKInterfaceController {
   }
 
   override func willActivate() {
+
+    WatchSessionSender.requestCourses()
+
     if let data = UserDefaults.standard.object(forKey: WatchSessionSender.Name.Courses.rawValue) {
       self.courses = Array<CoursePlainEntity>.fromData(data: data as! Data)
     }

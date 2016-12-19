@@ -125,10 +125,18 @@ extension WatchSessionManager {
 		DispatchQueue.main.async {
 			for (key, value) in applicationContext {
 				self.contextContainer[key] = value
+        self.executeMetainfoCheck(key: key, value: value)
 			}
 			self.sendDataToAllObservers(data: applicationContext)
 		}
 	}
+
+  func executeMetainfoCheck(key: String, value: Any) {
+    // IS kind of metainfo container
+    if key.hasPrefix(WatchSessionSender.Name.Metainfo.rawValue) && key != WatchSessionSender.Name.Metainfo.rawValue {
+      UserDefaults.standard.set(value, forKey: key)
+    }
+  }
 }
 
 // MARK: User Info
@@ -229,6 +237,9 @@ extension WatchSessionManager {
 	
 	func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
 		DispatchQueue.main.async {
+      for (key, value) in message {
+        self.contextContainer[key] = value
+      }
 			self.sendDataToAllObservers(data: message)
 			// make sure to put on the main queue to update UI!
 		}

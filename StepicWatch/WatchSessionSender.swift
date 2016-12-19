@@ -18,7 +18,32 @@ class WatchSessionSender {
 	static func requestStatus() -> Bool {
 		return WatchSessionManager.sharedManager.sendMessage(message: [WatchSessionSender.Name.RequestPlaybackStatus: ""])
 	}
-	
+
+  static func sendPlainCourses(_ courses: [CoursePlainEntity]) {
+    let data = [WatchSessionSender.Name.Courses: courses.toData()]
+    let success = WatchSessionManager.sharedManager.sendMessage(message: data)
+
+    if !success {
+      do {
+        try WatchSessionManager.sharedManager.updateApplicationContext(applicationContext: data)
+      }
+      catch { }
+    }
+  }
+
+  static func sendMetainfo(metainfoContainer: CourseMetainfoContainer) {
+    let data = [WatchSessionSender.Name.Metainfo: metainfoContainer.toData()]
+    let success = WatchSessionManager.sharedManager.sendMessage(message: data)
+
+    if !success {
+      do {
+        let contextData = [WatchSessionSender.Name.Metainfo(courseId: metainfoContainer.courseId): metainfoContainer.toData()]
+        try WatchSessionManager.sharedManager.updateApplicationContext(applicationContext: contextData)
+      }
+      catch { }
+    }
+  }
+
 	static func sendPlaybackStatus(_ status: PlaybackStatusEntity.Status) {
 		let statusEntity = PlaybackStatusEntity(status: status)
 		_ = WatchSessionManager.sharedManager.sendMessage(message: [WatchSessionSender.Name.PlaybackStatus: statusEntity.toData()])
@@ -32,7 +57,7 @@ class WatchSessionSender {
 	struct Name: RawRepresentable, Equatable, Hashable, Comparable {
 		let rawValue: String
 		typealias RawValue = String
-		
+
 		public init(_ rawValue: String) {
 			self.rawValue = rawValue
 		}
@@ -52,5 +77,9 @@ class WatchSessionSender {
 		static func ==(lhs: Name, rhs: Name) -> Bool {
 			return lhs.rawValue == rhs.rawValue
 		}
+
+    public init(stringLiteral value: String) {
+      self.rawValue = value
+    }
 	}
 }
