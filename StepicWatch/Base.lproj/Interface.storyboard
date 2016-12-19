@@ -17,17 +17,14 @@
                         <table alignment="left" id="B1Z-Ej-1KO">
                             <items>
                                 <tableRow identifier="InfoCell" id="Pj0-y8-6rw" customClass="DataRowType" customModule="StepicWatch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="pRV-C3-zZd">
+                                    <group key="rootItem" width="1" height="1" alignment="left" layout="vertical" id="pRV-C3-zZd">
                                         <items>
-                                            <label alignment="left" text="Title" id="puL-PT-6Fq"/>
-                                            <label alignment="left" text="Subtitle" id="Vk1-Hp-fIu">
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                            <label alignment="center" verticalAlignment="center" text="Title" textAlignment="center" numberOfLines="0" id="puL-PT-6Fq">
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                                             </label>
                                         </items>
                                     </group>
                                     <connections>
-                                        <outlet property="subtitleLabel" destination="Vk1-Hp-fIu" id="QEp-m0-ocH"/>
                                         <outlet property="titleLabel" destination="puL-PT-6Fq" id="HfQ-30-n2u"/>
                                     </connections>
                                 </tableRow>
@@ -37,7 +34,7 @@
                                             <separator alignment="left" alpha="0.0" id="JCl-Wb-SDq"/>
                                             <imageView width="40" height="40" alignment="center" id="8Zl-3k-vXr"/>
                                             <label alignment="center" text="Name of course Name of course" textAlignment="center" numberOfLines="2" id="VKD-a6-KET">
-                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                             </label>
                                             <label alignment="center" text="Meta info" textAlignment="center" numberOfLines="0" id="1sX-Ra-UN6">
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,22 +42,24 @@
                                             </label>
                                             <separator alignment="left" alpha="0.0" id="3zA-ii-At8"/>
                                         </items>
+                                        <connections>
+                                            <segue destination="nKU-Dp-L6s" kind="push" id="NXo-4G-EHh"/>
+                                        </connections>
                                     </group>
                                     <connections>
                                         <outlet property="image" destination="8Zl-3k-vXr" id="SeH-An-2F1"/>
                                         <outlet property="metainfoLabel" destination="1sX-Ra-UN6" id="nzg-Dh-Vru"/>
                                         <outlet property="nameLabel" destination="VKD-a6-KET" id="fDx-mr-1z7"/>
-                                        <segue destination="BLK-tB-Grd" kind="push" id="ZDY-m1-KuF"/>
                                     </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
-                    <menu key="menu" id="unv-ro-d8a">
+                    <menu key="menu" id="8RI-7t-gbl">
                         <items>
-                            <menuItem title="Control Playback" icon="play" id="7at-QK-oQR">
+                            <menuItem title="Проигрывание" icon="play" id="zRw-6v-Pij">
                                 <connections>
-                                    <action selector="controlPlaybackAction" destination="VCF-Lx-63K" id="Okw-6e-YjZ"/>
+                                    <action selector="controlPlaybackAction" destination="VCF-Lx-63K" id="jgE-Du-neB"/>
                                 </connections>
                             </menuItem>
                         </items>

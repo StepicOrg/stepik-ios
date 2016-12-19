@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 @available(iOS 9.0, *)
 extension WatchSessionSender.Name {
@@ -15,25 +16,37 @@ extension WatchSessionSender.Name {
 }
 
 class CoursePlainEntity: DataConvertable {
-	var name: String = ""
-	var metainfo: String = ""
-	var imageURL: String = ""
+    var id: Int
+	var name: String
+	var metainfo: String
+	var imageURL: String
+    var dealine: CGFloat
+
+    var hasDeadline: Bool {
+        return dealine != 0
+    }
 	
-	init(name: String, metainfo: String, imageURL: String) {
+    init(id: Int, name: String, metainfo: String, imageURL: String, dealine: CGFloat?) {
+        self.id = id
 		self.name = name
 		self.metainfo = metainfo
 		self.imageURL = imageURL
+        self.dealine = dealine ?? 0
 	}
 	
 	required init(dictionary: [String: AnyObject]) {
+        self.id = dictionary["id"] as! Int
 		self.name = dictionary["name"] as! String
 		self.metainfo = dictionary["metainfo"] as! String
 		self.imageURL = dictionary["imageURL"] as! String
+        self.dealine = dictionary["dealine"] as! CGFloat
 	}
 	
 	func toDictionary() -> [String: AnyObject] {
-		return ["name": name as AnyObject,
+		return ["id": id as AnyObject,
+                "name": name as AnyObject,
 		        "metainfo": metainfo as AnyObject,
-		        "imageURL": imageURL as AnyObject]
+		        "imageURL": imageURL as AnyObject,
+		        "dealine": dealine as AnyObject]
 	}
 }
