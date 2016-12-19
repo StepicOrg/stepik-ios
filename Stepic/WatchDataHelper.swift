@@ -21,7 +21,7 @@ class WatchDataHelper {
                 break
             }
             
-            let plainCourse = CoursePlainEntity(id: course.id, name: course.title, metainfo: course.metaInfo, imageURL: course.coverURLString, deadlineDate: nil)
+          let plainCourse = CoursePlainEntity(id: course.id, name: course.title, metainfo: course.metaInfo, imageURL: course.coverURLString, firstDeadlineDate: nil, secondDeadlineDate: nil)
             plainCourses.append(plainCourse)
             
             limit -= 1

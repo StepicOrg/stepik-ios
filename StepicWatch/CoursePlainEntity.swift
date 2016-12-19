@@ -20,25 +20,50 @@ struct CoursePlainEntity: DataConvertable {
   var name: String
   var metainfo: String
   var imageURL: String
-  var deadline: TimeInterval
+  var firstDeadline: TimeInterval
+  var secondDeadline: TimeInterval
+
+  var firstDeadlineDate: Date {
+    return Date(timeIntervalSince1970: firstDeadline)
+  }
+
+  var secondDeadlineDate: Date {
+    return Date(timeIntervalSince1970: secondDeadline)
+  }
 
   var hasDeadline: Bool {
-    return deadline != 0
+    if firstDeadline > 0 || secondDeadline > 0 {
+      if Date().compare(firstDeadlineDate) == ComparisonResult.orderedAscending {
+        return true
+      }
+
+      if Date().compare(secondDeadlineDate) == ComparisonResult.orderedAscending {
+        return true
+      }
+    }
+
+    return false
   }
 
   var deadlineDate: Date? {
     if !hasDeadline {
       return nil
     }
-    return Date(timeIntervalSince1970: deadline)
+
+    if Date().compare(firstDeadlineDate) == ComparisonResult.orderedAscending {
+      return firstDeadlineDate
+    }
+
+    return secondDeadlineDate
   }
 
-  init(id: Int, name: String, metainfo: String, imageURL: String, deadlineDate: Date?) {
+  init(id: Int, name: String, metainfo: String, imageURL: String, firstDeadlineDate: Date?, secondDeadlineDate: Date?) {
     self.id = id
     self.name = name
     self.metainfo = metainfo
     self.imageURL = imageURL
-    self.deadline = deadlineDate?.timeIntervalSince1970 ?? 0
+    self.firstDeadline = firstDeadlineDate?.timeIntervalSince1970 ?? 0
+    self.secondDeadline = secondDeadlineDate?.timeIntervalSince1970 ?? 0
   }
 
   init(dictionary: [String: AnyObject]) {
@@ -46,7 +71,8 @@ struct CoursePlainEntity: DataConvertable {
     self.name = dictionary["name"] as! String
     self.metainfo = dictionary["metainfo"] as! String
     self.imageURL = dictionary["imageURL"] as! String
-    self.deadline = dictionary["dealine"] as! TimeInterval
+    self.firstDeadline = dictionary["firstDeadline"] as! TimeInterval
+    self.secondDeadline = dictionary["secondDeadline"] as! TimeInterval
   }
 
   func toDictionary() -> [String: AnyObject] {
@@ -54,6 +80,7 @@ struct CoursePlainEntity: DataConvertable {
             "name": name as AnyObject,
             "metainfo": metainfo as AnyObject,
             "imageURL": imageURL as AnyObject,
-            "dealine": deadline as AnyObject]
+            "firstDeadline": firstDeadline as AnyObject,
+            "secondDeadline": secondDeadline as AnyObject]
   }
 }
