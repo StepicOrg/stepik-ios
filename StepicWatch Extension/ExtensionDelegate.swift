@@ -10,10 +10,37 @@ import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 	
+  var courses: [CoursePlainEntity] = []
+  
+  func fetchCourses() {
+    if let data = UserDefaults.standard.object(forKey: WatchSessionSender.Name.Courses.rawValue) {
+      self.courses = Array<CoursePlainEntity>.fromData(data: data as! Data)
+    }
+  }
+  
+  func scheduleNextBackgroundRefresh() {
+    let prefferedDate = Date(timeIntervalSinceNow: (1 * 60 * 60))
+    let userInfo: [String: Any] = ["lastUpdated": Date(),
+                                  "reason": "New deadlines update"]
+    WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: prefferedDate, userInfo: userInfo as NSSecureCoding) { error in
+      if let error = error {
+        print("Error scheduling next refresh: \(error.localizedDescription)")
+      }
+    }
+  }
+  
+  func updateComplication() {
+    let complicationServer = CLKComplicationServer.sharedInstance()
+    for complication in (complicationServer.activeComplications ?? []) {
+      complicationServer.reloadTimeline(for: complication)
+    }
+  }
+  
 	func applicationDidFinishLaunching() {
 		// Perform any final initialization of your application.
 		
 		WatchSessionManager.sharedManager.startSession()
+    fetchCourses()
 	}
 	
 	func applicationDidBecomeActive() {
@@ -32,7 +59,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 			switch task {
 			case let backgroundTask as WKApplicationRefreshBackgroundTask:
 				// Be sure to complete the background task once you’re done.
-				backgroundTask.setTaskCompleted()
+        scheduleNextBackgroundRefresh()
+        updateComplication()
+        backgroundTask.setTaskCompleted()
 			case let snapshotTask as WKSnapshotRefreshBackgroundTask:
 				// Snapshot tasks have a unique completion call, make sure to set your expiration date
 				snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
