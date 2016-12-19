@@ -31,30 +31,20 @@ struct CoursePlainEntity: DataConvertable {
     return Date(timeIntervalSince1970: secondDeadline)
   }
 
-  var hasDeadline: Bool {
+  var deadlineDates: [Date] {
+    var result: [Date] = []
+
     if firstDeadline > 0 || secondDeadline > 0 {
       if Date().compare(firstDeadlineDate) == ComparisonResult.orderedAscending {
-        return true
+        result.append(firstDeadlineDate)
       }
 
       if Date().compare(secondDeadlineDate) == ComparisonResult.orderedAscending {
-        return true
+        result.append(secondDeadlineDate)
       }
     }
 
-    return false
-  }
-
-  var deadlineDate: Date? {
-    if !hasDeadline {
-      return nil
-    }
-
-    if Date().compare(firstDeadlineDate) == ComparisonResult.orderedAscending {
-      return firstDeadlineDate
-    }
-
-    return secondDeadlineDate
+    return result
   }
 
   init(id: Int, name: String, metainfo: String, imageURL: String, firstDeadlineDate: Date?, secondDeadlineDate: Date?) {

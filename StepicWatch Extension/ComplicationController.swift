@@ -9,6 +9,14 @@
 import ClockKit
 import WatchKit
 
+extension String {
+  func substring(with range: Range<Int>) -> String {
+    let beginIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+    let endIndex = self.index(self.startIndex, offsetBy: range.upperBound)
+    return self.substring(with: beginIndex..<endIndex)
+  }
+}
+
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
   
@@ -18,12 +26,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     let NoDeadlines = "Дедлайнов нет"
   
     func fetchDeadlinesFromUD() -> [Date: String] {
+
+      var dealines: [Date: String] = [:]
+
       if let mainContainer = WKExtension.shared().delegate as? ExtensionDelegate {
         print(mainContainer.courses) // ← Get courses, let's extract deadlines and return
+        for course in mainContainer.courses {
+          for date in course.deadlineDates {
+            let name = "\(course.name.substring(with: 0..<10))..."
+            if dealines[date] != nil {
+              dealines[date]! += " " + name
+            } else {
+              dealines[date] = "❌" + name
+            }
+          }
+        }
       }
-      
-      return [Date(): "❌ Философия",
-              Date().addingTimeInterval(60 * 60): "❌ Программирование"]
+
+      return dealines
     }
   
     // MARK: - Timeline Configuration
@@ -53,13 +73,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
         deadlines = fetchDeadlinesFromUD()
-      
+
         if complication.family == .modularLarge {
           let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "hh:mm"
           
           var entry: CLKComplicationTimelineEntry!
-          if let first = deadlines.keys.first {
+          if let first = deadlines.keys.sorted().first {
             let timeString = dateFormatter.string(from: first)
             entry = createTimeLineEntry(headerText: timeString, bodyText: deadlines[first] ?? NoDeadlines, date: Date())
           } else {
