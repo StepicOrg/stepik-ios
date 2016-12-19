@@ -7,22 +7,23 @@
 //
 
 import ClockKit
+import WatchKit
 
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
   
     // I ASSUME IT'S SORTED BY DATE
-    var deadlines = [Date: String]() { // time: topic
-      didSet {
-        deadlines = fetchDeadlinesFromUD()
-      }
-    }
+    var deadlines = [Date: String]() // time: topic
   
     let NoDeadlines = "Дедлайнов нет"
   
     func fetchDeadlinesFromUD() -> [Date: String] {
-      return [Date(): "Первый дедлайн",
-              Date().addingTimeInterval(60 * 60): "Второй дедлайн"]
+      if let mainContainer = WKExtension.shared().delegate as? ExtensionDelegate {
+        print(mainContainer.courses) // ← Get courses, let's extract deadlines and return
+      }
+      
+      return [Date(): "❌ Философия",
+              Date().addingTimeInterval(60 * 60): "❌ Программирование"]
     }
   
     // MARK: - Timeline Configuration
@@ -51,6 +52,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
+        deadlines = fetchDeadlinesFromUD()
+      
         if complication.family == .modularLarge {
           let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "hh:mm"
@@ -92,6 +95,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
+      deadlines = fetchDeadlinesFromUD()
       var timeLineEntryArray = [CLKComplicationTimelineEntry]()
       // Right after the first deadline we will show the next one
       for (index, key) in deadlines.keys.enumerated() {
