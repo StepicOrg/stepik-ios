@@ -19,7 +19,14 @@ extension String {
 
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
-  
+
+
+  var dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd.MM EE hh:mm"
+    return dateFormatter
+  }()
+
     // I ASSUME IT'S SORTED BY DATE
     var deadlines = [Date: String]() // time: topic
   
@@ -28,16 +35,19 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func fetchDeadlinesFromUD() -> [Date: String] {
 
       var dealines: [Date: String] = [:]
+      var counter: [Date: Int] = [:]
 
       if let mainContainer = WKExtension.shared().delegate as? ExtensionDelegate {
         print(mainContainer.courses) // ← Get courses, let's extract deadlines and return
         for course in mainContainer.courses {
           for date in course.deadlineDates {
-            let name = "\(course.name.substring(with: 0..<10))..."
+            let name = course.name
             if dealines[date] != nil {
-              dealines[date]! += " " + name
+               counter[date]! += 1
+              dealines[date]! = "Курсов: \(counter[date]!)"
             } else {
               dealines[date] = "❌" + name
+              counter[date] = 1
             }
           }
         }
@@ -75,22 +85,22 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         deadlines = fetchDeadlinesFromUD()
 
         if complication.family == .modularLarge {
-          let dateFormatter = DateFormatter()
-          dateFormatter.dateFormat = "hh:mm"
-          
           var entry: CLKComplicationTimelineEntry!
           if let first = deadlines.keys.sorted().first {
             let timeString = dateFormatter.string(from: first)
-            entry = createTimeLineEntry(headerText: timeString, bodyText: deadlines[first] ?? NoDeadlines, date: Date())
+            entry = createTimeLineEntry(headerText: timeString, bodyText: deadlines[first] ?? NoDeadlines, date: first)
           } else {
-            let timeString = dateFormatter.string(from: Date())
-            entry = createTimeLineEntry(headerText: timeString, bodyText: NoDeadlines, date: Date())
+            entry = createEmptyTimeLineEntity()
           }
           handler(entry)
         } else {
           handler(nil)
         }
     }
+
+  func createEmptyTimeLineEntity(date: Date = Date()) -> CLKComplicationTimelineEntry {
+    return createTimeLineEntry(headerText: "--:--", bodyText: NoDeadlines, date: date)
+  }
   
   func createTimeLineEntry(headerText: String, bodyText: String, date: Date) -> CLKComplicationTimelineEntry {
     
@@ -117,20 +127,27 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the timeline entries after to the given date
       deadlines = fetchDeadlinesFromUD()
       var timeLineEntryArray = [CLKComplicationTimelineEntry]()
+
+      var lastDate = date
       // Right after the first deadline we will show the next one
-      for (index, key) in deadlines.keys.enumerated() {
-        if index == 0 {
+      for key in deadlines.keys.sorted() {
+        if key.compare(date) == ComparisonResult.orderedAscending {
           continue
         }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        
+
         let timeString = dateFormatter.string(from: key)
         
         let entry = createTimeLineEntry(headerText: timeString, bodyText: deadlines[key] ?? NoDeadlines, date: key)
+        lastDate = key.addingTimeInterval(1)
         
         timeLineEntryArray.append(entry)
       }
+
+      if timeLineEntryArray.count != 0 {
+        let entity = createEmptyTimeLineEntity(date: lastDate)
+        timeLineEntryArray.append(entity)
+      }
+
       handler(timeLineEntryArray)
     }
     
