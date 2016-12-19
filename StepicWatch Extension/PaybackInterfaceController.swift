@@ -25,14 +25,14 @@ extension PaybackInterfaceController: WatchSessionDataObserver {
 		if key == .PlaybackStatus {
 			let statusEntity = PlaybackStatusEntity(data: data as! Data)
 			switch statusEntity.status {
-			case .Available:
+			case .available:
 				status = .Enable
-			case .NoVideo:
+			case .noVideo:
 				status = .NoVideo
-			case .Pause:
+			case .pause:
 				status = .Enable
 				isOnPlay = false
-			case .Play:
+			case .play:
 				status = .Enable
 				isOnPlay = true
 			}
@@ -113,14 +113,14 @@ class PaybackInterfaceController: WKInterfaceController {
 	
 	@IBAction func playButtonAction() {
 		isOnPlay = !isOnPlay
-		WatchSessionSender.sendPlaybackCommand(isOnPlay ? .Pause : .Play)
+		WatchSessionSender.sendPlaybackCommand(isOnPlay ? .pause : .play)
 	}
 	
 	@IBAction func backButtonAction() {
-		WatchSessionSender.sendPlaybackCommand(.Backward)
+		WatchSessionSender.sendPlaybackCommand(.backward)
 	}
 	
 	@IBAction func forwardButtonAction() {
-		WatchSessionSender.sendPlaybackCommand(.Forward)
+		WatchSessionSender.sendPlaybackCommand(.forward)
 	}
 }

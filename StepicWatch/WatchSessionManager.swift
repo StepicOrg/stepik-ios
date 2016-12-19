@@ -10,6 +10,15 @@ import WatchConnectivity
 import WatchKit
 
 @available(iOS 9.0, *)
+class TypeWeakContainer {
+	weak var value: WatchSessionDataObserver?
+	
+	init(_ value: WatchSessionDataObserver) {
+		self.value = value
+	}
+}
+
+@available(iOS 9.0, *)
 class WatchSessionManager: NSObject, WCSessionDelegate {
 	
 	static let sharedManager = WatchSessionManager()
@@ -17,11 +26,12 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 		super.init()
 	}
 	
-	fileprivate var observers: [WatchSessionDataObserver] = []
+	fileprivate var observers: [TypeWeakContainer] = []
 	
 	func addObserver(_ observer: WatchSessionDataObserver) {
+		let container = TypeWeakContainer(observer)
 		removeObserver(observer)
-		observers.append(observer)
+		observers.append(container)
 		sendDataToObserver(observer, data: contextContainer)
 	}
 	
@@ -29,7 +39,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 		var index = 0
 		var finded = false
 		for el in observers {
-			if el.compare(toObject: observer) {
+			if el.value?.compare(toObject: observer) ?? false {
 				finded = true
 				break
 			}
@@ -42,7 +52,9 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
 	
 	func sendDataToAllObservers(data: [String: Any]) {
 		for observer in self.observers {
-			sendDataToObserver(observer, data: data)
+			if let value = observer.value {
+				sendDataToObserver(value, data: data)
+			}
 		}
 	}
 	

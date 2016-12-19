@@ -15,10 +15,10 @@ extension WatchSessionSender.Name {
 
 struct PlaybackCommandEntity: DataConvertable {
 	enum Command: Int {
-		case Play
-		case Pause
-		case Forward
-		case Backward
+		case play
+		case pause
+		case forward
+		case backward
 	}
 	
 	var command: Command

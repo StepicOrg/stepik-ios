@@ -11,6 +11,36 @@ import AVKit
 import AVFoundation
 import FLKAutoLayout
 
+
+@available(iOS 9.0, *)
+extension StepicVideoPlayerViewController: WatchSessionDataObserver {
+	
+	var keysForObserving: [WatchSessionSender.Name] {
+		return [.PlaybackCommand, .RequestPlaybackStatus]
+	}
+	
+	func recieved(data: Any, forKey key: WatchSessionSender.Name) {
+		if key == .PlaybackCommand {
+			let commandEntity = PlaybackCommandEntity(data: data as! Data)
+			switch commandEntity.command {
+			case .play:
+				self.handlePlay()
+			case .pause:
+				self.player.pause()
+			case .forward:
+				self.seekForwardPressed(UIButton())
+			case .backward:
+				self.seekBackPressed(UIButton())
+			}
+		}
+
+		if key == .RequestPlaybackStatus {
+			WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
+		}
+	}
+}
+
+
 class StepicVideoPlayerViewController: UIViewController {
     
     
@@ -174,9 +204,18 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the playback state
     @IBAction func playPressed(_ sender: UIButton) {
         handlePlay()
-    }   
+    }
+	
+	fileprivate var isPlaying: Bool = false {
+		didSet {
+			if #available(iOS 9.0, *) {
+				WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
+			}
+		}
+	}
     
     fileprivate func setButtonPlaying(_ isPlaying: Bool) {
+		self.isPlaying = isPlaying
         fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, for: UIControlState())
     }
     
@@ -196,7 +235,11 @@ class StepicVideoPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		if #available(iOS 9.0, *) {
+			WatchSessionManager.sharedManager.addObserver(self)
+			WatchSessionSender.sendPlaybackStatus(.available)
+		}
         
         NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: NSNotification.Name.AVAudioSessionRouteChange, object: nil)
         
@@ -243,6 +286,10 @@ class StepicVideoPlayerViewController: UIViewController {
     }
     
     deinit{
+		if #available(iOS 9.0, *) {
+			WatchSessionSender.sendPlaybackStatus(.noVideo)
+			WatchSessionManager.sharedManager.removeObserver(self)
+		}
         print("did deinit")
         saveCurrentPlayerTime()
     }

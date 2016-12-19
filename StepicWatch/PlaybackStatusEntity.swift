@@ -16,10 +16,10 @@ extension WatchSessionSender.Name {
 
 struct PlaybackStatusEntity: DataConvertable {
 	enum Status: Int {
-		case Available
-		case NoVideo
-		case Pause
-		case Play
+		case available
+		case noVideo
+		case pause
+		case play
 	}
 	
 	var status: Status
