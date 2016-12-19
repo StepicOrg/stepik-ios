@@ -12,9 +12,18 @@ import ClockKit
 class ComplicationController: NSObject, CLKComplicationDataSource {
   
     // I ASSUME IT'S SORTED BY DATE
-    var deadlines = [Date: String]() // time: topic
+    var deadlines = [Date: String]() { // time: topic
+      didSet {
+        deadlines = fetchDeadlinesFromUD()
+      }
+    }
   
     let NoDeadlines = "Дедлайнов нет"
+  
+    func fetchDeadlinesFromUD() -> [Date: String] {
+      return [Date(): "Первый дедлайн",
+              Date().addingTimeInterval(60 * 60): "Второй дедлайн"]
+    }
   
     // MARK: - Timeline Configuration
     
