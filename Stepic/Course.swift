@@ -51,6 +51,11 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
     
+    var metaInfo : String {
+        //TODO: add deadlines via sections here
+        return "No deadlines"
+    }
+    
     
     func update(json: JSON) {
         initialize(json)

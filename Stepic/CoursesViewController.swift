@@ -1,3 +1,4 @@
+
 //
 //  CoursesViewController.swift
 //  Stepic
@@ -99,6 +100,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     }
     
     
+    func onRefresh() {
+    }
+    
+    
     func refreshCourses() {
         isRefreshing = true
         performRequest({
@@ -113,11 +118,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     self.tabIds = ids
 					
                     DispatchQueue.main.async {
-						
-						if #available(iOS 9.0, *) {
-							self.pasreAndAddPlainCourses(self.courses)
-						}
-						
+						self.onRefresh()
                         self.emptyDatasetState = .empty
                         self.refreshControl?.endRefreshing()
                         self.tableView.reloadData()
@@ -141,32 +142,6 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 self.handleRefreshError()
         })
     }
-	
-	@available(iOS 9.0, *)
-	func pasreAndAddPlainCourses(_ courses: [Course]) {
-		var plainCourses: [CoursePlainEntity] = []
-		var limin = 5
-		for course in self.courses {
-			if limin == 0 {
-				break
-			}
-			
-			let plainCourese = CoursePlainEntity(name: course.title, metainfo: "No deadlines", imageURL: course.coverURLString)
-			plainCourses.append(plainCourese)
-			
-			limin -= 1
-		}
-		
-		let data = [WatchSessionSender.Name.Courses: plainCourses.toData()]
-		let success = WatchSessionManager.sharedManager.sendMessage(message: data)
-		
-		if !success {
-			do {
-				try WatchSessionManager.sharedManager.updateApplicationContext(applicationContext: data)
-			}
-			catch { }
-		}
-	}
     
     var emptyDatasetState : EmptyDatasetState = .empty {
         didSet {
