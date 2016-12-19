@@ -615,6 +615,8 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		572BF3DA6DE2DAE16D7E15C8 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
+		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
 		9F9C711D1E076AE000EC8DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */; };
 		9F9C71241E076AE100EC8DA3 /* StepicWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1041,6 +1043,7 @@
 		62AA8D793147E46AC91793A2 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -2123,6 +2126,7 @@
 				9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */,
 				9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */,
 				9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */,
+				9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */,
 				9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */,
 				9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */,
 			);
@@ -3005,6 +3009,7 @@
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */,
+				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
@@ -3173,6 +3178,7 @@
 				9F9C71511E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
 				9F9C71431E076B0000EC8DA3 /* CourseInfoInterfaceController.swift in Sources */,
 				9F9C71571E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
+				9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				9F9C71471E076B0000EC8DA3 /* DataRowType.swift in Sources */,
 				9F9C71441E076B0000EC8DA3 /* PaybackInterfaceController.swift in Sources */,
 				9F9C71591E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="watchOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
@@ -77,14 +76,18 @@
                     <items>
                         <table alignment="left" id="ypF-As-GpD">
                             <items>
-                                <tableRow id="XCa-Os-ZS9" customClass="DataRowType" customModule="StepicWatch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="clg-bb-O2z">
+                                <tableRow identifier="InfoCell" id="XCa-Os-ZS9" customClass="DataRowType" customModule="StepicWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="clg-bb-O2z">
                                         <items>
-                                            <label alignment="left" text="Title" id="6Ef-bz-d6H"/>
-                                            <label alignment="left" text="Subtitle" id="194-qY-A9R">
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <separator alignment="left" alpha="0.0" id="bwc-0Q-dK1"/>
+                                            <label alignment="left" text="Title" numberOfLines="0" id="6Ef-bz-d6H">
                                                 <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                             </label>
+                                            <label alignment="left" text="Subtitle" numberOfLines="0" id="194-qY-A9R">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <separator alignment="left" alpha="0.0" id="sZm-fV-RkN"/>
                                         </items>
                                     </group>
                                     <connections>
@@ -95,6 +98,9 @@
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="table" destination="ypF-As-GpD" id="n40-yj-sxW"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="303" y="-64"/>

@@ -9,15 +9,57 @@
 import WatchKit
 import Foundation
 
+extension CourseInfoInterfaceController: WatchSessionDataObserver {
+  var keysForObserving: [WatchSessionSender.Name] {
+    return [.Metainfo]
+  }
+
+  func recieved(data: Any, forKey key: WatchSessionSender.Name) {
+    if key == .Metainfo {
+      let container = CourseMetainfoContainer(data: data as! Data)
+      UserDefaults.standard.set(data, forKey: WatchSessionSender.Name.Metainfo(courseId: container.courseId).rawValue)
+
+      if container.courseId == course.id {
+        updateTable()
+      }
+    }
+  }
+}
+
 class CourseInfoInterfaceController: WKInterfaceController {
-	
-	override func awake(withContext context: Any?) {
-		super.awake(withContext: context)
-		
-	}
-	
-	override func willActivate() {
-		// This method is called when watch view controller is about to be visible to user
-		super.willActivate()
-	}
+
+  @IBOutlet var table: WKInterfaceTable!
+  var course: CoursePlainEntity!
+  var metainfo: [CourseMetainfoEntity] = []
+
+  override func awake(withContext context: Any?) {
+    super.awake(withContext: context)
+
+    self.course = context as! CoursePlainEntity
+  }
+
+  func updateTable() {
+    if let data = UserDefaults.standard.object(forKey: WatchSessionSender.Name.Metainfo(courseId: course.id).rawValue) {
+      let container = CourseMetainfoContainer(data: data as! Data)
+      metainfo = container.metainfo
+    }
+
+    let count = metainfo.count + 1
+    table.setNumberOfRows(count, withRowType: "InfoCell")
+    for (index, cellInfo) in metainfo.enumerated() {
+      let cell = table.rowController(at: index + 1) as! DataRowType
+      cell.titleLabel.setText(cellInfo.title)
+      cell.subtitleLabel.setText(cellInfo.subtitle)
+    }
+
+    let cell = table.rowController(at: 0) as! DataRowType
+    cell.titleLabel.setText("Важная информация")
+    cell.subtitleLabel.setText(course.metainfo)
+  }
+
+  override func willActivate() {
+    // This method is called when watch view controller is about to be visible to user
+    super.willActivate()
+    updateTable()
+  }
 }
