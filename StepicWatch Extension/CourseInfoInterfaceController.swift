@@ -35,9 +35,9 @@ class CourseInfoInterfaceController: WKInterfaceController {
   override func awake(withContext context: Any?) {
     super.awake(withContext: context)
 
-    WatchSessionManager.sharedManager.addObserver(self)
-
     self.course = context as! CoursePlainEntity
+
+    WatchSessionManager.sharedManager.addObserver(self)
   }
 
   func updateTable() {
@@ -46,12 +46,25 @@ class CourseInfoInterfaceController: WKInterfaceController {
       metainfo = container.metainfo
     }
 
-    let count = metainfo.count + 1
+    let ifDeadline = course.deadlineDates.first != nil
+    let deadlineMove = ifDeadline ? 1 : 0
+
+    let count = metainfo.count + 1 + deadlineMove
     table.setNumberOfRows(count, withRowType: "InfoCell")
+
     for (index, cellInfo) in metainfo.enumerated() {
-      let cell = table.rowController(at: index + 1) as! DataRowType
+      let cell = table.rowController(at: index + 1 + deadlineMove) as! DataRowType
       cell.titleLabel.setText(cellInfo.title)
       cell.subtitleLabel.setText(cellInfo.subtitle)
+    }
+
+    if let dealine = course.deadlineDates.first {
+      let cell = table.rowController(at: 1) as! DataRowType
+      cell.titleLabel.setText("Ближайший дедлайн")
+
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "dd.MM EE hh:mm"
+      cell.subtitleLabel.setText(dateFormatter.string(from: dealine))
     }
 
     let cell = table.rowController(at: 0) as! DataRowType

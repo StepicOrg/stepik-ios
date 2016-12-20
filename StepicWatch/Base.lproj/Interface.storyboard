@@ -35,7 +35,7 @@
                                             <label alignment="center" text="Name of course Name of course" textAlignment="center" numberOfLines="2" id="VKD-a6-KET">
                                                 <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                             </label>
-                                            <label alignment="center" text="Label" id="5jA-jH-aMR">
+                                            <label alignment="center" text="Label" textAlignment="center" numberOfLines="0" id="5jA-jH-aMR">
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                             </label>

@@ -55,7 +55,7 @@ class Course: NSManagedObject, JSONInitializable {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {
             let percentage = Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100)
-            return String(format: NSLocalizedString("PassedPercent", comment: ""), "\(percentage)")
+            return "Выполнение курса: " + "\(percentage)%"
         } else {
             return ""
         }
@@ -64,12 +64,12 @@ class Course: NSManagedObject, JSONInitializable {
     var metaInfoContainer : CourseMetainfoContainer {
         var metaArr = [CourseMetainfoEntity]()
         
-        if summary != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Summary", comment: ""), subtitle: summary)]
-        }
-        if courseDescription != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Description", comment: ""), subtitle: courseDescription)]
-        }
+//        if summary != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Summary", comment: ""), subtitle: summary)]
+//        }
+//        if courseDescription != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Description", comment: ""), subtitle: courseDescription)]
+//        }
         if workload != "" {
             metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""),subtitle: workload)]
         }
@@ -82,10 +82,10 @@ class Course: NSManagedObject, JSONInitializable {
         if format != "" {
             metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Format", comment: ""), subtitle: format)]
         }
-        if requirements != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Requirements", comment: ""), subtitle: requirements)]
-        }
-        
+//        if requirements != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Requirements", comment: ""), subtitle: requirements)]
+//        }
+//        
         return CourseMetainfoContainer(courseId: id, metainfo: metaArr)
     }
     
