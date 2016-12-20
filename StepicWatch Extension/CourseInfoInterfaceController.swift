@@ -55,7 +55,7 @@ class CourseInfoInterfaceController: WKInterfaceController {
     }
 
     let cell = table.rowController(at: 0) as! DataRowType
-    cell.titleLabel.setText("Важная информация")
+    cell.titleLabel.setText("Завершение курса")
     cell.subtitleLabel.setText(course.metainfo)
   }
 

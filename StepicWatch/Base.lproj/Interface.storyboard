@@ -35,8 +35,12 @@
                                             <label alignment="center" text="Name of course Name of course" textAlignment="center" numberOfLines="2" id="VKD-a6-KET">
                                                 <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                             </label>
-                                            <label alignment="center" text="Meta info" textAlignment="center" numberOfLines="0" id="1sX-Ra-UN6">
+                                            <label alignment="center" text="Label" id="5jA-jH-aMR">
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <label alignment="center" text="Meta info" textAlignment="center" numberOfLines="0" id="1sX-Ra-UN6">
+                                                <color key="textColor" red="0.73838114306099056" green="0.322112542729874" blue="0.24385972289797445" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                             </label>
                                             <separator alignment="left" alpha="0.0" id="3zA-ii-At8"/>
@@ -46,8 +50,9 @@
                                         </connections>
                                     </group>
                                     <connections>
+                                        <outlet property="dealineLabel" destination="1sX-Ra-UN6" id="EGm-cQ-fKC"/>
                                         <outlet property="image" destination="8Zl-3k-vXr" id="SeH-An-2F1"/>
-                                        <outlet property="metainfoLabel" destination="1sX-Ra-UN6" id="nzg-Dh-Vru"/>
+                                        <outlet property="metainfoLabel" destination="5jA-jH-aMR" id="UHw-9H-cSj"/>
                                         <outlet property="nameLabel" destination="VKD-a6-KET" id="fDx-mr-1z7"/>
                                     </connections>
                                 </tableRow>

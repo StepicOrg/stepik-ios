@@ -55,6 +55,16 @@ class CoursesInterfaceController: WKInterfaceController {
     for (index, cellInfo) in courses.enumerated() {
       let cell = table.rowController(at: index) as! CourseRowType
       cell.nameLabel.setText(cellInfo.name)
+
+      cell.dealineLabel.setHidden(true)
+      if let dealine = cellInfo.deadlineDates.first {
+        cell.dealineLabel.setHidden(false)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM EE hh:mm"
+        cell.dealineLabel.setText("Следующий дедлайн: \(dateFormatter.string(from: dealine))")
+      }
+
       cell.metainfoLabel.setText(cellInfo.metainfo)
 
       cell.image.setImageNamed("img_animation_")
@@ -65,9 +75,6 @@ class CoursesInterfaceController: WKInterfaceController {
   }
 
   override func willActivate() {
-
-    WatchSessionSender.requestCourses()
-
     if let data = UserDefaults.standard.object(forKey: WatchSessionSender.Name.Courses.rawValue) {
       self.courses = Array<CoursePlainEntity>.fromData(data: data as! Data)
     }

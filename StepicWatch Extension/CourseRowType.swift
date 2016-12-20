@@ -13,4 +13,5 @@ class CourseRowType: NSObject {
 	@IBOutlet var image: WKInterfaceImage!
 	@IBOutlet var nameLabel: WKInterfaceLabel!
 	@IBOutlet var metainfoLabel: WKInterfaceLabel!
+  @IBOutlet var dealineLabel: WKInterfaceLabel!
 }
