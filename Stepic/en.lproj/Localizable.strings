@@ -163,3 +163,4 @@ SelectTimeTitle = "Pick time";
 NotifyAboutStreaksPreference = "Notify about streaks";
 NotificationTime = "Notification time";
 Notifications = "Notifications";
+PassedPercent = "%@% Passed";

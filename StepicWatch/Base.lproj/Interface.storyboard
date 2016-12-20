@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VCF-Lx-63K">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Courses Interface Controller-->
+        <scene sceneID="ytP-5m-HNT">
+            <objects>
+                <controller id="VCF-Lx-63K" customClass="CoursesInterfaceController" customModule="StepicWatch_Extension">
+                    <items>
+                        <table alignment="left" id="B1Z-Ej-1KO">
+                            <items>
+                                <tableRow identifier="InfoCell" id="Pj0-y8-6rw" customClass="DataRowType" customModule="StepicWatch_Extension">
+                                    <group key="rootItem" width="1" height="1" alignment="left" layout="vertical" id="pRV-C3-zZd">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Title" textAlignment="center" numberOfLines="0" id="puL-PT-6Fq">
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="puL-PT-6Fq" id="HfQ-30-n2u"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="CourseCell" id="kSJ-ag-Xiu" customClass="CourseRowType" customModule="StepicWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="9V0-Eg-co2">
+                                        <items>
+                                            <separator alignment="left" alpha="0.0" id="JCl-Wb-SDq"/>
+                                            <imageView width="40" height="40" alignment="center" id="8Zl-3k-vXr"/>
+                                            <label alignment="center" text="Name of course Name of course" textAlignment="center" numberOfLines="2" id="VKD-a6-KET">
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                            </label>
+                                            <label alignment="center" text="Label" textAlignment="center" numberOfLines="0" id="5jA-jH-aMR">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <label alignment="center" text="Meta info" textAlignment="center" numberOfLines="0" id="1sX-Ra-UN6">
+                                                <color key="textColor" red="0.73838114306099056" green="0.322112542729874" blue="0.24385972289797445" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <separator alignment="left" alpha="0.0" id="3zA-ii-At8"/>
+                                        </items>
+                                        <connections>
+                                            <segue destination="nKU-Dp-L6s" kind="push" id="NXo-4G-EHh"/>
+                                        </connections>
+                                    </group>
+                                    <connections>
+                                        <outlet property="dealineLabel" destination="1sX-Ra-UN6" id="EGm-cQ-fKC"/>
+                                        <outlet property="image" destination="8Zl-3k-vXr" id="SeH-An-2F1"/>
+                                        <outlet property="metainfoLabel" destination="5jA-jH-aMR" id="UHw-9H-cSj"/>
+                                        <outlet property="nameLabel" destination="VKD-a6-KET" id="fDx-mr-1z7"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="8RI-7t-gbl">
+                        <items>
+                            <menuItem title="Проигрывание" icon="play" id="zRw-6v-Pij">
+                                <connections>
+                                    <action selector="controlPlaybackAction" destination="VCF-Lx-63K" id="jgE-Du-neB"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="table" destination="B1Z-Ej-1KO" id="QUD-C7-vDP"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+        <!--Course Info Interface Controller-->
+        <scene sceneID="coO-z1-oys">
+            <objects>
+                <controller id="nKU-Dp-L6s" customClass="CourseInfoInterfaceController" customModule="StepicWatch_Extension">
+                    <items>
+                        <table alignment="left" id="ypF-As-GpD">
+                            <items>
+                                <tableRow identifier="InfoCell" id="XCa-Os-ZS9" customClass="DataRowType" customModule="StepicWatch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="clg-bb-O2z">
+                                        <items>
+                                            <separator alignment="left" alpha="0.0" id="bwc-0Q-dK1"/>
+                                            <label alignment="left" text="Title" numberOfLines="0" id="6Ef-bz-d6H">
+                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                            </label>
+                                            <label alignment="left" text="Subtitle" numberOfLines="0" id="194-qY-A9R">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <separator alignment="left" alpha="0.0" id="sZm-fV-RkN"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="subtitleLabel" destination="194-qY-A9R" id="N0B-OU-dhl"/>
+                                        <outlet property="titleLabel" destination="6Ef-bz-d6H" id="hXU-ZY-0zL"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="ypF-As-GpD" id="n40-yj-sxW"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="303" y="-64"/>
+        </scene>
+        <!--Проигрывание-->
+        <scene sceneID="Bmd-zm-aRc">
+            <objects>
+                <controller identifier="Playback" title="Проигрывание" id="BLK-tB-Grd" customClass="PaybackInterfaceController" customModule="StepicWatch_Extension">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Идет поиск телефона..." numberOfLines="0" id="jh3-ir-NDS"/>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="WrP-U6-WsH">
+                            <items>
+                                <button width="1" alignment="left" title="Play" id="G9n-QX-kUj">
+                                    <connections>
+                                        <action selector="playButtonAction" destination="BLK-tB-Grd" id="zs0-u9-kRx"/>
+                                    </connections>
+                                </button>
+                                <separator alignment="left" alpha="0.0" id="ehS-zQ-Xce"/>
+                                <group width="1" alignment="left" id="y0T-nf-5tS">
+                                    <items>
+                                        <button width="48" height="48" alignment="center" backgroundImage="ic_replay" id="msM-z9-1O1">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="backButtonAction" destination="BLK-tB-Grd" id="FqN-3d-Kbt"/>
+                                            </connections>
+                                        </button>
+                                        <separator alignment="center" alpha="0.0" id="EdG-qs-jn8"/>
+                                        <button width="48" height="48" alignment="center" backgroundImage="ic_forward" id="fj1-wq-pYT">
+                                            <connections>
+                                                <action selector="forwardButtonAction" destination="BLK-tB-Grd" id="ubf-nq-ZhC"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="backButton" destination="msM-z9-1O1" id="g76-OE-mKP"/>
+                        <outlet property="buttonsGroup" destination="WrP-U6-WsH" id="nQE-9n-JUc"/>
+                        <outlet property="forwardButton" destination="fj1-wq-pYT" id="D2R-eS-as9"/>
+                        <outlet property="playButton" destination="G9n-QX-kUj" id="jkE-q4-R4T"/>
+                        <outlet property="statusLabel" destination="jh3-ir-NDS" id="6XP-n2-pIV"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="280" y="330"/>
+        </scene>
+    </scenes>
+</document>
