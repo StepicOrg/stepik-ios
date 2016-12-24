@@ -59,18 +59,25 @@ class WebControllerManager: NSObject {
     }
     
     func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true) {
-        self.currentWebControllerKey = key
+        
+        if #available(iOS 9.0, *) {
+            let svc = SFSafariViewController(url: url)
+            c.present(svc, animated: true, completion: nil)
+        } else {
+            self.currentWebControllerKey = key
 //        if #available(iOS 9.0, *) {
 //            let svc = SFSafariViewController(URL: url)
 //            self.currentWebController = svc
 //            c.presentViewController(svc, animated: true, completion: nil)
 //        } else {
-        presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
+            presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
+        }
 //        }
     }
     
     func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
-        if let url = URL(string: urlString) {
+        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed))
+        if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!) {
             presentWebControllerWithURL(url, 
                 inController: c, 
                 withKey: key, 
