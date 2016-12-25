@@ -324,6 +324,8 @@
 		08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
+		08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
+		08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
 		08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
 		08C6E31D1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
@@ -853,6 +855,7 @@
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
+		08C454791E10306800134E24 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		08C5E4FC1C315272004AA626 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakAlertViewController.swift; sourceTree = "<group>"; };
 		08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreakAlertViewController.xib; sourceTree = "<group>"; };
@@ -1146,6 +1149,7 @@
 				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
 				08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */,
 				08D674921D78B46900B60963 /* AuthNavigationViewController.swift */,
+				08C454791E10306800134E24 /* SignInViewController.swift */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -2555,6 +2559,7 @@
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
+				08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */,
 				0837492E1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */,
 				08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
@@ -2816,6 +2821,7 @@
 				08263D881DE5FC01002E5B7F /* AlertViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
+				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,
 				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
