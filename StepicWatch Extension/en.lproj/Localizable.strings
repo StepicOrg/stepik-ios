@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Stepic
+
+  Created by Alexander Karpov on 27.12.16.
+  Copyright © 2016 Alex Karpov. All rights reserved.
+*/
+
+NoAvailableCourses = "No courses available";
+PlugDeviceForSettingUp = "Connect your device for initial setup";
+NextDeadline = "Next deadline";
+NearestDeadline = "Nearest deadline";
+CourseFinish = "Course finish";
+SearchingForDevice = "Searching for device...";
+NotAvailable = "Not available";
+VideoNotFound = "Video not found";
+Pause = "Pause";
+Play = "Play";
+NoDeadlines = "No deadlines";
+CoursesCnt = "Courses"";
+CoursesStepik = "Stepik courses";
+Deadlines = "Deadlines";

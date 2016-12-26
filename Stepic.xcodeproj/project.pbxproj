@@ -135,6 +135,7 @@
 		083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
 		083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
 		083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
+		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
@@ -160,6 +161,7 @@
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
+		0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
 		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
@@ -192,6 +194,8 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
+		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0867023F1DB167D5005006AE /* GoogleService-Info.plist */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
@@ -612,6 +616,35 @@
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		572BF3DA6DE2DAE16D7E15C8 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */; };
+		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
+		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
+		9F9C711D1E076AE000EC8DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */; };
+		9F9C71241E076AE100EC8DA3 /* StepicWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F9C712D1E076AE100EC8DA3 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */; };
+		9F9C712F1E076AE100EC8DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */; };
+		9F9C71331E076AE100EC8DA3 /* StepicWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9F9C71171E076AE000EC8DA3 /* StepicWatch.app */; };
+		9F9C71421E076B0000EC8DA3 /* CoursesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */; };
+		9F9C71431E076B0000EC8DA3 /* CourseInfoInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */; };
+		9F9C71441E076B0000EC8DA3 /* PaybackInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */; };
+		9F9C71451E076B0000EC8DA3 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */; };
+		9F9C71461E076B0000EC8DA3 /* CourseRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */; };
+		9F9C71471E076B0000EC8DA3 /* DataRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71411E076B0000EC8DA3 /* DataRowType.swift */; };
+		9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
+		9F9C71511E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
+		9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
+		9F9C71531E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
+		9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
+		9F9C71551E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
+		9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
+		9F9C71571E076B3E00EC8DA3 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
+		9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		9F9C71591E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
+		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
+		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
+		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E978D25313465538A2470BA2 /* Pods_Stepic.framework */; };
 /* End PBXBuildFile section */
 
@@ -623,7 +656,46 @@
 			remoteGlobalIDString = 08DE94101B8C58AC00D278AB;
 			remoteInfo = Stepic;
 		};
+		9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F9C71221E076AE000EC8DA3;
+			remoteInfo = "StepicWatch Extension";
+		};
+		9F9C71311E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F9C71161E076AE000EC8DA3;
+			remoteInfo = StepicWatch;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F9C71391E076AE100EC8DA3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9F9C71241E076AE100EC8DA3 /* StepicWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				9F9C71331E076AE100EC8DA3 /* StepicWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0403A15AD3DF220BD701250D /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
@@ -718,6 +790,8 @@
 		083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesContainer.swift; sourceTree = "<group>"; };
 		083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
+		083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCoursesDisplayingHelper.swift; sourceTree = "<group>"; };
+		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		083B164C1C2AF27700250B37 /* JSQWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQWebViewController.swift; sourceTree = "<group>"; };
@@ -741,6 +815,7 @@
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
 		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHeightDependentCellProtocol.swift; sourceTree = "<group>"; };
@@ -762,6 +837,9 @@
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
+		08666B5E1E11C54300799731 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
 		0867023F1DB167D5005006AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SberbankUniversity/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
@@ -970,6 +1048,29 @@
 		5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA8D793147E46AC91793A2 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
+		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F9C711E1E076AE000EC8DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "StepicWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F9C71301E076AE100EC8DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesInterfaceController.swift; sourceTree = "<group>"; };
+		9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoInterfaceController.swift; sourceTree = "<group>"; };
+		9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaybackInterfaceController.swift; sourceTree = "<group>"; };
+		9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseRowType.swift; sourceTree = "<group>"; };
+		9F9C71411E076B0000EC8DA3 /* DataRowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRowType.swift; sourceTree = "<group>"; };
+		9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionDataObserver.swift; sourceTree = "<group>"; };
+		9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionSender.swift; sourceTree = "<group>"; };
+		9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertable.swift; sourceTree = "<group>"; };
+		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
+		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
+		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
 		BEB95337B40E5EA1A5CC59C0 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E978D25313465538A2470BA2 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBF79018631E426E2CF59E3 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
@@ -999,6 +1100,13 @@
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
 				CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9C71201E076AE000EC8DA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,6 +1145,7 @@
 				089611031D52250500561AC1 /* DeepLinkRouter.swift */,
 				0840707F1D64847000308FC1 /* SharingHelper.swift */,
 				08D035231D65B5C5003515C6 /* Analytics */,
+				083AA36B1E0842FE003E054E /* Watch Helpers */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1222,6 +1331,15 @@
 				083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		083AA36B1E0842FE003E054E /* Watch Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */,
+				083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */,
+			);
+			name = "Watch Helpers";
 			sourceTree = "<group>";
 		};
 		083D64A11C17523E003222F0 /* Social network cell */ = {
@@ -1676,6 +1794,9 @@
 			children = (
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
+				9F9C71481E076B3200EC8DA3 /* Shared */,
+				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
+				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* SberbankUniversity */,
@@ -1689,6 +1810,8 @@
 				08DE94111B8C58AC00D278AB /* Stepic.app */,
 				08D121241C937B2200A54ABC /* SberbankUniversity.app */,
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
+				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
+				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1974,6 +2097,51 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
+			isa = PBXGroup;
+			children = (
+				9F9C71191E076AE000EC8DA3 /* Interface.storyboard */,
+				9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */,
+				9F9C711E1E076AE000EC8DA3 /* Info.plist */,
+			);
+			path = StepicWatch;
+			sourceTree = "<group>";
+		};
+		9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */,
+				9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */,
+				9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */,
+				9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */,
+				9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */,
+				9F9C71411E076B0000EC8DA3 /* DataRowType.swift */,
+				9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */,
+				828CF38D1E0866E40058ACFC /* clock.png */,
+				9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */,
+				9F9C71301E076AE100EC8DA3 /* Info.plist */,
+				08666B5C1E11C53D00799731 /* Localizable.strings */,
+				08666B601E11C57500799731 /* Localizables.swift */,
+			);
+			path = "StepicWatch Extension";
+			sourceTree = "<group>";
+		};
+		9F9C71481E076B3200EC8DA3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */,
+				9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */,
+				9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */,
+				9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */,
+				9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */,
+				9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */,
+				9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */,
+				9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */,
+			);
+			name = Shared;
+			path = StepicWatch;
+			sourceTree = "<group>";
+		};
 		CEE9B37BB7249EABE232367B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2043,15 +2211,51 @@
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
 				CF145F9E3645BAF88D9635F7 /* [CP] Embed Pods Frameworks */,
 				C3B4810E2B3F66831986FF1C /* [CP] Copy Pods Resources */,
+				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9F9C71321E076AE100EC8DA3 /* PBXTargetDependency */,
 			);
 			name = Stepic;
 			productName = Stepic;
 			productReference = 08DE94111B8C58AC00D278AB /* Stepic.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9F9C71161E076AE000EC8DA3 /* StepicWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F9C713A1E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch" */;
+			buildPhases = (
+				9F9C71151E076AE000EC8DA3 /* Resources */,
+				9F9C71391E076AE100EC8DA3 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */,
+			);
+			name = StepicWatch;
+			productName = StepicWatch;
+			productReference = 9F9C71171E076AE000EC8DA3 /* StepicWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F9C71381E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch Extension" */;
+			buildPhases = (
+				9F9C711F1E076AE000EC8DA3 /* Sources */,
+				9F9C71201E076AE000EC8DA3 /* Frameworks */,
+				9F9C71211E076AE000EC8DA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "StepicWatch Extension";
+			productName = "StepicWatch Extension";
+			productReference = 9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -2060,7 +2264,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
@@ -2096,6 +2300,16 @@
 							};
 						};
 					};
+					9F9C71161E076AE000EC8DA3 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 4562ZPB9BG;
+						ProvisioningStyle = Automatic;
+					};
+					9F9C71221E076AE000EC8DA3 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 4562ZPB9BG;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 08DE940C1B8C58AC00D278AB /* Build configuration list for PBXProject "Stepic" */;
@@ -2115,6 +2329,8 @@
 				08DE94101B8C58AC00D278AB /* Stepic */,
 				08D120731C937B2200A54ABC /* SberbankUniversity */,
 				085D5CD81D007F2100092060 /* StepicTests */,
+				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
+				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -2231,6 +2447,25 @@
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9C71151E076AE000EC8DA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F9C711D1E076AE000EC8DA3 /* Assets.xcassets in Resources */,
+				9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9C71211E076AE000EC8DA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				828CF38E1E0866E40058ACFC /* clock.png in Resources */,
+				08666B5A1E11C53D00799731 /* Localizable.strings in Resources */,
+				9F9C712F1E076AE100EC8DA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2695,11 +2930,13 @@
 				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				083540641CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
+				9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
+				9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
@@ -2710,6 +2947,7 @@
 				08263D941DE5FC01002E5B7F /* ModalSize.swift in Sources */,
 				08263DA01DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
+				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
 				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
@@ -2736,6 +2974,7 @@
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
+				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
@@ -2779,6 +3018,7 @@
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */,
+				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
@@ -2794,6 +3034,7 @@
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
+				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
@@ -2804,6 +3045,7 @@
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
 				08263D981DE5FC01002E5B7F /* PresentationType.swift in Sources */,
 				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
@@ -2862,6 +3104,7 @@
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
+				9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
 				08CA59D91BBC008A008DC44D /* CoursePreviewViewController.swift in Sources */,
@@ -2918,6 +3161,7 @@
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
+				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
@@ -2926,7 +3170,31 @@
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
+				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F9C711F1E076AE000EC8DA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
+				9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
+				08666B611E11C57500799731 /* Localizables.swift in Sources */,
+				9F9C71531E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
+				9F9C71451E076B0000EC8DA3 /* ExtensionDelegate.swift in Sources */,
+				9F9C71421E076B0000EC8DA3 /* CoursesInterfaceController.swift in Sources */,
+				9F9C71511E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
+				9F9C71431E076B0000EC8DA3 /* CourseInfoInterfaceController.swift in Sources */,
+				9F9C71571E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
+				9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */,
+				9F9C71471E076B0000EC8DA3 /* DataRowType.swift in Sources */,
+				9F9C71441E076B0000EC8DA3 /* PaybackInterfaceController.swift in Sources */,
+				9F9C71591E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
+				9F9C71551E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
+				9F9C712D1E076AE100EC8DA3 /* ComplicationController.swift in Sources */,
+				9F9C71461E076B0000EC8DA3 /* CourseRowType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2938,9 +3206,28 @@
 			target = 08DE94101B8C58AC00D278AB /* Stepic */;
 			targetProxy = 085D5CDE1D007F2200092060 /* PBXContainerItemProxy */;
 		};
+		9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */;
+			targetProxy = 9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */;
+		};
+		9F9C71321E076AE100EC8DA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F9C71161E076AE000EC8DA3 /* StepicWatch */;
+			targetProxy = 9F9C71311E076AE100EC8DA3 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		08666B5C1E11C53D00799731 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08666B5E1E11C54300799731 /* ru */,
+				08666B5F1E11C55F00799731 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		08A1257B1BDEBCC90066B2B2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2966,6 +3253,14 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		9F9C71191E076AE000EC8DA3 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F9C711A1E076AE000EC8DA3 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3198,6 +3493,92 @@
 			};
 			name = Release;
 		};
+		9F9C71341E076AE100EC8DA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				IBSC_MODULE = StepicWatch_Extension;
+				INFOPLIST_FILE = StepicWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		9F9C71351E076AE100EC8DA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				IBSC_MODULE = StepicWatch_Extension;
+				INFOPLIST_FILE = StepicWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
+		9F9C71361E076AE100EC8DA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		9F9C71371E076AE100EC8DA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3237,12 +3618,31 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9F9C71381E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F9C71361E076AE100EC8DA3 /* Debug */,
+				9F9C71371E076AE100EC8DA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F9C713A1E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F9C71341E076AE100EC8DA3 /* Debug */,
+				9F9C71351E076AE100EC8DA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */,
 				08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */,
 				082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */,
 				084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */,
@@ -3254,7 +3654,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */;
+			currentVersion = 083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
