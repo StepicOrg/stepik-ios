@@ -47,7 +47,7 @@ class CoursesInterfaceController: WKInterfaceController {
       table.setNumberOfRows(1, withRowType: "InfoCell")
       let cell = table.rowController(at: 0) as! DataRowType
       let wasConnection = UserDefaults.standard.object(forKey: WatchSessionSender.Name.Courses.rawValue) != nil
-      cell.titleLabel.setText(wasConnection ? "Нет доступных курсов" : "Подключите айфон для первоначальной настройки")
+      cell.titleLabel.setText(wasConnection ? Localizables.noAvailableCourses : Localizables.connectDeviceForSetup)
       return
     }
 
@@ -62,7 +62,7 @@ class CoursesInterfaceController: WKInterfaceController {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM EE hh:mm"
-        cell.dealineLabel.setText("Следующий дедлайн: \(dateFormatter.string(from: dealine))")
+        cell.dealineLabel.setText("\(Localizables.nextDeadline): \(dateFormatter.string(from: dealine))")
       }
 
       cell.metainfoLabel.setText(cellInfo.metainfo)

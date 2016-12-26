@@ -30,7 +30,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     // I ASSUME IT'S SORTED BY DATE
     var deadlines = [Date: String]() // time: topic
   
-    let NoDeadlines = "Дедлайнов нет"
+    let NoDeadlines = Localizables.noDeadlines
   
     func fetchDeadlinesFromUD() -> [Date: String] {
 
@@ -44,7 +44,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let name = course.name
             if dealines[date] != nil {
                counter[date]! += 1
-              dealines[date]! = "Курсов: \(counter[date]!)"
+              dealines[date]! = "\(Localizables.coursesCnt): \(counter[date]!)"
             } else {
               dealines[date] = "❌" + name
               counter[date] = 1
@@ -162,9 +162,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         CLKImageProvider(onePieceImage: clock!)
       
       template.headerTextProvider =
-        CLKSimpleTextProvider(text: "Курсы Stepic")
+        CLKSimpleTextProvider(text: Localizables.coursesStepik)
       template.body1TextProvider =
-        CLKSimpleTextProvider(text: "Расписание дедлайнов")
+        CLKSimpleTextProvider(text: Localizables.deadlines)
       
       handler(template)
     }

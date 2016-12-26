@@ -60,7 +60,7 @@ class CourseInfoInterfaceController: WKInterfaceController {
 
     if let dealine = course.deadlineDates.first {
       let cell = table.rowController(at: 1) as! DataRowType
-      cell.titleLabel.setText("Ближайший дедлайн")
+      cell.titleLabel.setText(Localizables.nearestDeadline)
 
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "dd.MM EE hh:mm"
@@ -68,7 +68,7 @@ class CourseInfoInterfaceController: WKInterfaceController {
     }
 
     let cell = table.rowController(at: 0) as! DataRowType
-    cell.titleLabel.setText("Завершение курса")
+    cell.titleLabel.setText(Localizables.courseFinish)
     cell.subtitleLabel.setText(course.metainfo)
   }
 

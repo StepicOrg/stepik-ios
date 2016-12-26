@@ -194,6 +194,8 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
+		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0867023F1DB167D5005006AE /* GoogleService-Info.plist */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
@@ -835,6 +837,9 @@
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
+		08666B5E1E11C54300799731 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
 		0867023F1DB167D5005006AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SberbankUniversity/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
@@ -2115,6 +2120,8 @@
 				828CF38D1E0866E40058ACFC /* clock.png */,
 				9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */,
 				9F9C71301E076AE100EC8DA3 /* Info.plist */,
+				08666B5C1E11C53D00799731 /* Localizable.strings */,
+				08666B601E11C57500799731 /* Localizables.swift */,
 			);
 			path = "StepicWatch Extension";
 			sourceTree = "<group>";
@@ -2457,6 +2464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				828CF38E1E0866E40058ACFC /* clock.png in Resources */,
+				08666B5A1E11C53D00799731 /* Localizable.strings in Resources */,
 				9F9C712F1E076AE100EC8DA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3173,6 +3181,7 @@
 			files = (
 				9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
+				08666B611E11C57500799731 /* Localizables.swift in Sources */,
 				9F9C71531E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
 				9F9C71451E076B0000EC8DA3 /* ExtensionDelegate.swift in Sources */,
 				9F9C71421E076B0000EC8DA3 /* CoursesInterfaceController.swift in Sources */,
@@ -3210,6 +3219,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		08666B5C1E11C53D00799731 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08666B5E1E11C54300799731 /* ru */,
+				08666B5F1E11C55F00799731 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		08A1257B1BDEBCC90066B2B2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

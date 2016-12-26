@@ -58,14 +58,14 @@ class PaybackInterfaceController: WKInterfaceController {
 			
 			switch status {
 			case .Seaching:
-				statusLabel.setText("Идет поиск устрйоства...")
+				statusLabel.setText(Localizables.searchingForDevice)
 			case .Enable:
 				statusLabel.setHidden(true)
 				enable = true
 			case .Disable:
-				statusLabel.setText("Недоступно")
+				statusLabel.setText(Localizables.notAvailable)
 			case .NoVideo:
-				statusLabel.setText("Видео не найдено")
+				statusLabel.setText(Localizables.videoNotFound)
 			}
 		}
 	}
@@ -81,7 +81,7 @@ class PaybackInterfaceController: WKInterfaceController {
 	
 	var isOnPlay: Bool = false {
 		didSet {
-			playButton.setTitle(isOnPlay ? "Пауза" : "Играть")
+			playButton.setTitle(isOnPlay ? Localizables.pause : Localizables.play)
 		}
 	}
 	
