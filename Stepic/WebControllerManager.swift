@@ -29,12 +29,12 @@ class WebControllerManager: NSObject {
     func dismissWebControllerWithKey(_ key: String, animated: Bool, completion: (()->Void)?, error: ((String)->Void)?) {
         if let c = currentWebController, 
             let k = currentWebControllerKey {
-                if k == key {
-                    c.dismiss(animated: animated, completion: completion)
-                    currentWebController = nil
-                    currentWebControllerKey = nil
-                    return
-                } 
+            if k == key {
+                c.dismiss(animated: animated, completion: completion)
+                currentWebController = nil
+                currentWebControllerKey = nil
+                return
+            } 
         }
         print(currentWebController)
         error?("Could not dismiss web controller with key \(key)")
@@ -46,7 +46,7 @@ class WebControllerManager: NSObject {
         controller.backButtonStyle = backButtonStyle
         let nav = UINavigationController(rootViewController: controller)
         self.currentWebController = nav
-//        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
+        //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
         c.present(nav, animated: animated, completion: nil)
         controller.webView.navigationDelegate = self
         controller.webView.uiDelegate = self
@@ -63,26 +63,28 @@ class WebControllerManager: NSObject {
         if #available(iOS 9.0, *) {
             let svc = SFSafariViewController(url: url)
             c.present(svc, animated: true, completion: nil)
+            self.currentWebControllerKey = key
+            self.currentWebController = svc
         } else {
             self.currentWebControllerKey = key
-//        if #available(iOS 9.0, *) {
-//            let svc = SFSafariViewController(URL: url)
-//            self.currentWebController = svc
-//            c.presentViewController(svc, animated: true, completion: nil)
-//        } else {
+            //        if #available(iOS 9.0, *) {
+            //            let svc = SFSafariViewController(URL: url)
+            //            self.currentWebController = svc
+            //            c.presentViewController(svc, animated: true, completion: nil)
+            //        } else {
             presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
         }
-//        }
+        //        }
     }
     
     func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
         print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed))
         if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!) {
             presentWebControllerWithURL(url, 
-                inController: c, 
-                withKey: key, 
-                allowsSafari: allowsSafari, 
-                backButtonStyle: backButtonStyle)
+                                        inController: c, 
+                                        withKey: key, 
+                                        allowsSafari: allowsSafari, 
+                                        backButtonStyle: backButtonStyle)
             
         } else {
             print("Invalid url")
@@ -116,7 +118,7 @@ extension WebControllerManager : WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if (navigationAction.targetFrame != nil) {
             let rurl = navigationAction.request.url
-//            print(rurl)
+            //            print(rurl)
             if let url = rurl {
                 if url.scheme == "stepic" {
                     UIApplication.shared.openURL(url)
