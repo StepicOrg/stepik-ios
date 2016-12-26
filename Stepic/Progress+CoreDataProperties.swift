@@ -24,6 +24,7 @@ extension Progress {
     @NSManaged var managedStep: Step?
     @NSManaged var managedSection: Section?
     @NSManaged var managedUnit: Unit?
+    @NSManaged var managedCourse: Course?
 
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!

@@ -1,3 +1,4 @@
+
 //
 //  CoursesViewController.swift
 //  Stepic
@@ -99,6 +100,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     }
     
     
+    func onRefresh() {
+    }
+    
+    
     func refreshCourses() {
         isRefreshing = true
         performRequest({
@@ -107,31 +112,63 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
-                    self.courses = Sorter.sort(newCourses, byIds: ids)
-                    self.meta = meta
-                    self.currentPage = 1
-                    self.tabIds = ids
-                    DispatchQueue.main.async {
-                        self.emptyDatasetState = .empty
-                        self.refreshControl?.endRefreshing()
-                        self.tableView.reloadData()
+                    let coursesCompletion = {
+                        self.courses = Sorter.sort(newCourses, byIds: ids)
+                        self.meta = meta
+                        self.currentPage = 1
+                        self.tabIds = ids
+                        
+                        DispatchQueue.main.async {
+                            self.onRefresh()
+                            self.emptyDatasetState = .empty
+                            self.refreshControl?.endRefreshing()
+                            self.tableView.reloadData()
+                        }
+                        
+                        self.lastUser = AuthInfo.shared.user
+                        self.isRefreshing = false
                     }
-                    self.lastUser = AuthInfo.shared.user
-                    self.isRefreshing = false
+                    
+                    var progressIds : [String] = []
+                    var progresses : [Progress] = []
+                    for course in newCourses {
+                        if let progressId = course.progressId {
+                            progressIds += [progressId]
+                        }
+                        if let progress = course.progress {
+                            progresses += [progress]
+                        }
+                    }
+                    
+                    _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses,refreshMode: .update, success: { 
+                        (newProgresses) -> Void in
+                        progresses = Sorter.sort(newProgresses, byIds: progressIds)
+                        for i in 0 ..< min(newCourses.count, progresses.count) {
+                            newCourses[i].progress = progresses[i]
+                        }
+                            
+                        CoreDataHelper.instance.save()
+                        coursesCompletion()
                     }, failure: { 
                         (error) -> Void in
-                        print("failed downloading courses data in refresh")
-                        self.handleRefreshError()
-                })
-                
+                        coursesCompletion()
+                        print("Error while dowloading progresses")
+                    })
+            
+                    
                 }, failure: { 
                     (error) -> Void in
-                    print("failed refreshing course ids in refresh")
+                    print("failed downloading courses data in refresh")
                     self.handleRefreshError()
-                    
-            })
-            }, error:  {
+                })
+                
+            }, failure: { 
+                (error) -> Void in
+                print("failed refreshing course ids in refresh")
                 self.handleRefreshError()
+            })
+        }, error:  {
+            self.handleRefreshError()
         })
     }
     

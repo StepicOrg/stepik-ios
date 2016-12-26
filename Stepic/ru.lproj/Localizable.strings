@@ -165,3 +165,4 @@ NotificationTime = "Время уведомления";
 Notifications = "Уведомления";
 StreakNotificationsAlertTitle = "Уведомления";
 StreakNotificationsAlertMessage = "Похоже, вы запретили приложению присылать уведомления. Разрешить в настройках?";
+PassedPercent = "Пройдено";
