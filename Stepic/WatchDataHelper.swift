@@ -14,7 +14,7 @@ class WatchDataHelper {
     
     @available(iOS 9.0, *)
     static func parseAndAddPlainCourses(_ courses: [Course]) {
-        var limit = 5
+        var limit = courses.count
         let maxL = limit
         
         var ids: [Int] = []
