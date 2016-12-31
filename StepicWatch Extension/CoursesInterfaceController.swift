@@ -10,6 +10,7 @@ import WatchKit
 import Foundation
 
 extension CoursesInterfaceController: WatchSessionDataObserver {
+    
   var keysForObserving: [WatchSessionSender.Name] {
     return [.Courses, .Metainfo]
   }
@@ -31,6 +32,8 @@ extension CoursesInterfaceController: WatchSessionDataObserver {
 class CoursesInterfaceController: WKInterfaceController {
 
   @IBOutlet var table: WKInterfaceTable!
+    
+    
   var courses: [CoursePlainEntity] = [] {
     didSet {
       updateCourses()

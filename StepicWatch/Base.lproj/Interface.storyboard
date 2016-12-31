@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VCF-Lx-63K">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VCF-Lx-63K">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
@@ -61,7 +61,7 @@
                     </items>
                     <menu key="menu" id="8RI-7t-gbl">
                         <items>
-                            <menuItem title="Проигрывание" icon="play" id="zRw-6v-Pij">
+                            <menuItem title="Проигрывание" icon="play" id="zRw-6v-Pij" userLabel="Player">
                                 <connections>
                                     <action selector="controlPlaybackAction" destination="VCF-Lx-63K" id="jgE-Du-neB"/>
                                 </connections>
@@ -108,14 +108,14 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="303" y="-64"/>
+            <point key="canvasLocation" x="354" y="-64"/>
         </scene>
         <!--Проигрывание-->
         <scene sceneID="Bmd-zm-aRc">
             <objects>
                 <controller identifier="Playback" title="Проигрывание" id="BLK-tB-Grd" customClass="PaybackInterfaceController" customModule="StepicWatch_Extension">
                     <items>
-                        <label alignment="center" verticalAlignment="center" text="Идет поиск телефона..." numberOfLines="0" id="jh3-ir-NDS"/>
+                        <label alignment="center" verticalAlignment="center" text="Searching device..." numberOfLines="0" id="jh3-ir-NDS"/>
                         <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="WrP-U6-WsH">
                             <items>
                                 <button width="1" alignment="left" title="Play" id="G9n-QX-kUj">
@@ -153,7 +153,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="280" y="330"/>
+            <point key="canvasLocation" x="325" y="399"/>
         </scene>
     </scenes>
 </document>

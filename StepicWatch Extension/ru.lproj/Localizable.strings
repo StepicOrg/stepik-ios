@@ -8,7 +8,7 @@
 
 NoAvailableCourses = "Нет доступных курсов";
 PlugDeviceForSettingUp = "Подключите айфон для первоначальной настройки";
-NextDeadline = "Следующий дедлайн: %@";
+NextDeadline = "Следующий дедлайн";
 NearestDeadline = "Ближайший дедлайн";
 CourseFinish = "Завершение курса";
 SearchingForDevice = "Идет поиск устройства...";
@@ -17,6 +17,6 @@ VideoNotFound = "Видео не найдено";
 Pause = "Пауза";
 Play = "Играть";
 NoDeadlines = "Дедлайнов нет";
-CoursesCnt = "Курсов: %@";
+CoursesCnt = "Курсов";
 CoursesStepik = "Курсы Stepik";
 Deadlines = "Расписание дедлайнов";
