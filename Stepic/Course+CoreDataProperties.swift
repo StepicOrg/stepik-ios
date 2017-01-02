@@ -31,6 +31,7 @@ extension Course {
     @NSManaged var managedCertificate: String?
     @NSManaged var managedRequirements: String?
     @NSManaged var managedSlug: String?
+    @NSManaged var managedProgressId: String?
     
     @NSManaged var managedInstructors : NSOrderedSet?
     @NSManaged var managedSections : NSOrderedSet?
@@ -39,7 +40,8 @@ extension Course {
     @NSManaged var managedInstructorsArray : NSObject?
     
     @NSManaged var managedIntroVideo : Video?
-
+    
+    @NSManaged var managedProgress: Progress?
     
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -100,6 +102,15 @@ extension Course {
         }
         get{
             return managedImageURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+        }
+    }
+    
+    var progressId : String? {
+        get {
+            return managedProgressId
+        }
+        set(value) {
+            managedProgressId = value
         }
     }
     
@@ -192,6 +203,15 @@ extension Course {
         }
         get {
             return managedRequirements ?? ""
+        }
+    }
+    
+    var progress : Progress? {
+        get {
+            return managedProgress
+        }
+        set(value) {
+            managedProgress = value
         }
     }
     

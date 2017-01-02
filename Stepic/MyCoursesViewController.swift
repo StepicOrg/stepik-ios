@@ -42,6 +42,12 @@ class MyCoursesViewController: CoursesViewController {
         }
     }
     
+    override func onRefresh() {
+        if #available(iOS 9.0, *) {
+            WatchDataHelper.parseAndAddPlainCourses(self.courses)
+        }
+    }
+
     
     func handleCourseUpdates() {
         if CoursesJoinManager.sharedManager.hasUpdates {
@@ -67,6 +73,7 @@ class MyCoursesViewController: CoursesViewController {
             self.tableView.endUpdates()
             
             CoursesJoinManager.sharedManager.clean()
+            self.onRefresh()
         }
     }
     

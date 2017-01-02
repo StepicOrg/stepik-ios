@@ -40,7 +40,7 @@ class Course: NSManagedObject, JSONInitializable {
         certificate = json["certificate"].stringValue
         requirements = json["requirements"].stringValue
         slug = json["slug"].string
-        
+        progressId = json["progress"].string
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
         
@@ -49,6 +49,75 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
+    }
+    
+    var metaInfo : String {
+        //percent of completion = n_steps_passed/n_steps
+        if let p = self.progress {
+            let percentage = Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100)
+            return "\(NSLocalizedString("PassedPercent", comment: "")) \(percentage)%"
+//            return "Выполнение курса: " + "\(percentage)%"
+        } else {
+            return ""
+        }
+    }
+    
+    var metaInfoContainer : CourseMetainfoContainer {
+        var metaArr = [CourseMetainfoEntity]()
+        
+//        if summary != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Summary", comment: ""), subtitle: summary)]
+//        }
+//        if courseDescription != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Description", comment: ""), subtitle: courseDescription)]
+//        }
+        if workload != "" {
+            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""),subtitle: workload)]
+        }
+        if certificate != "" {
+            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Certificate", comment: ""), subtitle: certificate)]
+        }
+        if audience != "" {
+            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Audience", comment: ""), subtitle: audience)]
+        }
+        if format != "" {
+            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Format", comment: ""), subtitle: format)]
+        }
+//        if requirements != "" {
+//            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Requirements", comment: ""), subtitle: requirements)]
+//        }
+//        
+        return CourseMetainfoContainer(courseId: id, metainfo: metaArr)
+    }
+    
+    var nearestDeadlines: (nearest: Date?, second: Date?)? {
+        guard sections.count > 0 else {
+            return nil
+        }
+        
+        var deadlinesSet = Set<TimeInterval>()
+        for section in sections {
+            if let soft = section.softDeadline {
+                deadlinesSet.insert(soft.timeIntervalSince1970)
+            }
+            if let hard = section.hardDeadline {
+                deadlinesSet.insert(hard.timeIntervalSince1970)
+            }
+        }
+        
+        let deadlines = deadlinesSet.sorted()
+        
+        for (index, deadline) in deadlines.enumerated() {
+            if deadline > Date().timeIntervalSince1970 {
+                if index + 1 < deadlines.count {
+                    return (nearest: Date(timeIntervalSince1970: deadline), second: Date(timeIntervalSince1970: deadlines[index + 1]))
+                } else {
+                    return (nearest: Date(timeIntervalSince1970: deadline), second: nil)
+                }
+            }
+        }
+        
+        return (nearest: nil, second: nil)
     }
     
     

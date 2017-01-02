@@ -7,7 +7,7 @@
 		<key>SberbankUniversity.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Stepic.xcscheme</key>
 		<dict>
@@ -15,6 +15,16 @@
 			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>StepicWatch (Complication).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
+		<key>StepicWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -35,6 +45,11 @@
 			<true/>
 		</dict>
 		<key>08DE94251B8C58AC00D278AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9F9C71161E076AE000EC8DA3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

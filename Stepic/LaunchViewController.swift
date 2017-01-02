@@ -14,7 +14,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     
-    var signInController : SignInTableViewController?
+    var signInController : SignInViewController?
     
     func setupLocalizations() {
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
@@ -73,7 +73,7 @@ class LaunchViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "signInSegue" {
-            let dvc = segue.destination as! SignInTableViewController
+            let dvc = segue.destination as! SignInViewController
             signInController = dvc
         }
     }

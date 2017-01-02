@@ -163,3 +163,6 @@ SelectTimeTitle = "Pick time";
 NotifyAboutStreaksPreference = "Notify about streaks";
 NotificationTime = "Notification time";
 Notifications = "Notifications";
+StreakNotificationsAlertTitle = "Streak notifications";
+StreakNotificationsAlertMessage = "Seems like you've disabled notifications in settings. Enable them in preferences?";
+PassedPercent = "Passed";

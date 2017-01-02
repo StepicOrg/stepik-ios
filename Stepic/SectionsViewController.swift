@@ -151,7 +151,7 @@ class SectionsViewController: UIViewController {
             cancelAction()
         }))
         
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: {})
     }
 }
 
@@ -159,9 +159,8 @@ extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = course.sections[indexPath.row] 
         if section.isExam {
-            showExamAlert(cancel: {
-                tableView.deselectRow(at: indexPath, animated: true)
-            })
+            showExamAlert(cancel: {})
+            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         
