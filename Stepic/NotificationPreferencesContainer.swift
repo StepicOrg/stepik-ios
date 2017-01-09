@@ -21,7 +21,7 @@ class NotificationPreferencesContainer {
                 return allow
             } else {
                 self.allowStreaksNotifications = false
-                return true
+                return false
             }
         }
         
