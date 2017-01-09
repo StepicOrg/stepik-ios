@@ -339,6 +339,20 @@ class QuizViewController: UIViewController {
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
         refreshAttempt(step.id)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
+            NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func becameActive() {
+        if didTransitionToSettings { 
+            didTransitionToSettings = false
+            self.notifyPressed(fromPreferences: true)
+        }
     }
     
     @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
@@ -433,6 +447,34 @@ class QuizViewController: UIViewController {
     
     private let maxAlertCount = 3
     
+    private var didTransitionToSettings = false 
+    
+    fileprivate func showStreaksSettingsNotificationAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+            [weak self]
+            action in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+            self?.didTransitionToSettings = true
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    fileprivate func notifyPressed(fromPreferences: Bool) {
+        guard UIApplication.shared.isRegisteredForRemoteNotifications else {
+            if !fromPreferences {
+                showStreaksSettingsNotificationAlert()
+            }
+            return
+        }
+        
+        self.selectStreakNotificationTime()
+    }
+    
     func checkCorrect() {
         
         guard QuizDataManager.submission.canShowAlert else {
@@ -441,7 +483,7 @@ class QuizViewController: UIViewController {
         
         let alert = Alerts.streaks.construct(notify: {
             [weak self] in
-            self?.selectStreakNotificationTime()
+            self?.notifyPressed(fromPreferences: false)
         })
         
         guard let user = AuthInfo.shared.user else { 
