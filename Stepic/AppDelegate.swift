@@ -67,6 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
         
+        print(launchOptions)
+        
         if let localNotificationDict = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? [NSString: AnyObject] {
             handleLocalNotification(localNotificationDict)
         }
