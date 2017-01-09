@@ -23,6 +23,14 @@ class NumberQuizViewController: QuizViewController {
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
+        
+        textField.addTarget(self, action: #selector(NumberQuizViewController.textFieldTextDidChange(textField:)), for: UIControlEvents.editingChanged)
+    }
+    
+    func textFieldTextDidChange(textField: UITextField) {
+        if submission != nil {
+            submission = nil
+        }
     }
     
     func tap() {

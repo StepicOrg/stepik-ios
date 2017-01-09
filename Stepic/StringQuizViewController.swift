@@ -23,6 +23,14 @@ class StringQuizViewController: QuizViewController {
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
+        
+        textView.delegate = self
+    }
+    
+    func textViewTextDidChange(textView: UITextView) {
+        if submission != nil {
+            submission = nil
+        }
     }
     
     func tap() {
@@ -75,4 +83,10 @@ class StringQuizViewController: QuizViewController {
     }
     */
 
+}
+
+extension StringQuizViewController : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        textViewTextDidChange(textView: textView)
+    }
 }

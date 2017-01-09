@@ -172,6 +172,11 @@ class QuizViewController: UIViewController {
     
     fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
     
+    fileprivate func setStatusElements(visible: Bool) {
+        statusLabel.isHidden = !visible
+        statusImageView.isHidden = !visible
+    }
+    
     var submission : Submission? {
         didSet {
             UIThread.performUI {                
@@ -181,12 +186,12 @@ class QuizViewController: UIViewController {
                     self.buttonStateSubmit = true
                     self.view.backgroundColor = UIColor.white
                     
-                    //TODO: Localize
                     self.sendButton.setTitle(self.submitTitle, for: UIControlState())
                     self.statusViewHeight.constant = 0
                     self.hintHeight.constant = 0
                     self.peerReviewHeight.constant = 0
                     self.peerReviewButton.isHidden = true
+                    self.setStatusElements(visible: false)
                     
                     if self.didGetErrorWhileSendingSubmission {
                         self.updateQuizAfterSubmissionUpdate(reload: false)   
@@ -217,7 +222,8 @@ class QuizViewController: UIViewController {
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
                         self.statusLabel.text = self.correctTitle
-                        
+                        self.setStatusElements(visible: true)
+
                         if self.needPeerReview {
                             self.peerReviewHeight.constant = 40
                             self.peerReviewButton.isHidden = false
@@ -245,6 +251,8 @@ class QuizViewController: UIViewController {
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
                         self.statusLabel.text = self.wrongTitle
+                        self.setStatusElements(visible: true)
+
                         break
                         
                     case "evaluation":
