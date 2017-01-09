@@ -23,22 +23,19 @@ class LocalNotificationManager {
         if localStartHour > 23 {
             localStartHour = localStartHour - 24
         }
-        
-        for minute in 0 ..< 60 {         
-            let notification = UILocalNotification()
-            let calendar = Calendar(identifier: .gregorian)
-            let currentDate = Date()
-            print("local start hour -> \(localStartHour) current date -> \(currentDate)")
-            let date = calendar.date(bySettingHour: localStartHour, minute: minute, second: 0, of: currentDate)
-            print("date set -> \(date)")
-            notification.alertBody = NSLocalizedString("StreakNotificationAlertBody", comment: "")
-            notification.fireDate = date
-            notification.repeatInterval = NSCalendar.Unit.day
-            notification.soundName = "default_sound.wav"
-            
-            UIApplication.shared.scheduleLocalNotification(notification)
 
-        }
+        let notification = UILocalNotification()
+        let calendar = Calendar(identifier: .gregorian)
+        let currentDate = Date()
+        print("local start hour -> \(localStartHour) current date -> \(currentDate)")
+        let date = calendar.date(bySettingHour: localStartHour, minute: 0, second: 0, of: currentDate)
+        print("date set -> \(date)")
+        notification.alertBody = NSLocalizedString("StreakNotificationAlertBody", comment: "")
+        notification.fireDate = date
+        notification.repeatInterval = NSCalendar.Unit.day
+        notification.soundName = "default_sound.wav"
+            
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     static func cancelStreakLocalNotifications() {
