@@ -66,9 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(application)
         }
-        
-        if let localNotificationDict = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? [NSString: AnyObject] {
-            handleLocalNotification(localNotificationDict)
+                
+        if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil  {
+            handleLocalNotification()
         }
         
         if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [NSString: AnyObject] {
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func handleLocalNotification(_ localNotificationDict: [NSString: AnyObject]) {
+    func handleLocalNotification() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)
     }
         
