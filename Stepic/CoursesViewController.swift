@@ -330,7 +330,17 @@ extension CoursesViewController : UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return (indexPath as NSIndexPath).row < courses.count
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard (indexPath as NSIndexPath).row < courses.count else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
         if courses[(indexPath as NSIndexPath).row].enrolled {
             self.performSegue(withIdentifier: "showSections", sender: courses[(indexPath as NSIndexPath).row])
         } else {
