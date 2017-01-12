@@ -120,7 +120,20 @@ class VideoStepViewController: UIViewController {
         initialize()
     }
     
+    fileprivate func presentNoVideoAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("NoVideo", comment: ""), message: NSLocalizedString("AuthorDidntUploadVideo", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     fileprivate func playVideo() {
+        
+        if video.urls.count == 0 {
+            presentNoVideoAlert()
+            return
+        }
+        
         if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
@@ -211,6 +224,12 @@ class VideoStepViewController: UIViewController {
 
 extension VideoStepViewController : PKDownloadButtonDelegate {
     func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
+        
+        if video.urls.count == 0 {
+            presentNoVideoAlert()
+            return
+        }
+        
         switch downloadButton.state {
         case .startDownload: 
             
