@@ -172,6 +172,11 @@ class QuizViewController: UIViewController {
     
     fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
     
+    fileprivate func setStatusElements(visible: Bool) {
+        statusLabel.isHidden = !visible
+        statusImageView.isHidden = !visible
+    }
+    
     var submission : Submission? {
         didSet {
             UIThread.performUI {                
@@ -181,12 +186,12 @@ class QuizViewController: UIViewController {
                     self.buttonStateSubmit = true
                     self.view.backgroundColor = UIColor.white
                     
-                    //TODO: Localize
                     self.sendButton.setTitle(self.submitTitle, for: UIControlState())
                     self.statusViewHeight.constant = 0
                     self.hintHeight.constant = 0
                     self.peerReviewHeight.constant = 0
                     self.peerReviewButton.isHidden = true
+                    self.setStatusElements(visible: false)
                     
                     if self.didGetErrorWhileSendingSubmission {
                         self.updateQuizAfterSubmissionUpdate(reload: false)   
@@ -217,7 +222,8 @@ class QuizViewController: UIViewController {
                         self.view.backgroundColor = UIColor.correctQuizBackgroundColor()
                         self.statusImageView.image = Images.correctQuizImage
                         self.statusLabel.text = self.correctTitle
-                        
+                        self.setStatusElements(visible: true)
+
                         if self.needPeerReview {
                             self.peerReviewHeight.constant = 40
                             self.peerReviewButton.isHidden = false
@@ -245,6 +251,8 @@ class QuizViewController: UIViewController {
                         self.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
                         self.statusImageView.image = Images.wrongQuizImage
                         self.statusLabel.text = self.wrongTitle
+                        self.setStatusElements(visible: true)
+
                         break
                         
                     case "evaluation":
@@ -339,6 +347,20 @@ class QuizViewController: UIViewController {
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
         refreshAttempt(step.id)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
+            NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func becameActive() {
+        if didTransitionToSettings { 
+            didTransitionToSettings = false
+            self.notifyPressed(fromPreferences: true)
+        }
     }
     
     @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
@@ -421,6 +443,7 @@ class QuizViewController: UIViewController {
     
     func selectStreakNotificationTime() {
         let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
+        vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in 
             if let s = self {
@@ -432,6 +455,34 @@ class QuizViewController: UIViewController {
     
     private let maxAlertCount = 3
     
+    private var didTransitionToSettings = false 
+    
+    fileprivate func showStreaksSettingsNotificationAlert() {
+        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+            [weak self]
+            action in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+            self?.didTransitionToSettings = true
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    fileprivate func notifyPressed(fromPreferences: Bool) {
+        guard UIApplication.shared.isRegisteredForRemoteNotifications else {
+            if !fromPreferences {
+                showStreaksSettingsNotificationAlert()
+            }
+            return
+        }
+        
+        self.selectStreakNotificationTime()
+    }
+    
     func checkCorrect() {
         
         guard QuizDataManager.submission.canShowAlert else {
@@ -440,7 +491,7 @@ class QuizViewController: UIViewController {
         
         let alert = Alerts.streaks.construct(notify: {
             [weak self] in
-            self?.selectStreakNotificationTime()
+            self?.notifyPressed(fromPreferences: false)
         })
         
         guard let user = AuthInfo.shared.user else { 

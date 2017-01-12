@@ -166,3 +166,5 @@ Notifications = "Уведомления";
 StreakNotificationsAlertTitle = "Уведомления";
 StreakNotificationsAlertMessage = "Похоже, вы запретили приложению присылать уведомления. Разрешить в настройках?";
 PassedPercent = "Пройдено";
+AuthorDidntUploadVideo = "Автор еще не загрузил видео.";
+NoVideo = "Нет видео";

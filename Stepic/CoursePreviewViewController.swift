@@ -327,8 +327,10 @@ class CoursePreviewViewController: UIViewController {
             
             if sender.isEnabledToJoin {
                 SVProgressHUD.show()
+                sender.isEnabled = false
                 AuthManager.sharedManager.joinCourseWithId(c.id, success : {
                     SVProgressHUD.showSuccess(withStatus: "")
+                    sender.isEnabled = true
                     sender.setDisabledJoined()
                     self.course?.enrolled = true
                     CoreDataHelper.instance.save()
@@ -340,12 +342,15 @@ class CoursePreviewViewController: UIViewController {
                     }, error:  {
                         status in
                         SVProgressHUD.showError(withStatus: status)
+                        sender.isEnabled = true
                 }) 
             } else {
                 askForUnenroll(unenroll: {
                     SVProgressHUD.show()
+                    sender.isEnabled = false
                     AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
                         SVProgressHUD.showSuccess(withStatus: "")
+                        sender.isEnabled = true
                         sender.setEnabledJoined()
                         self.course?.enrolled = false
                         CoreDataHelper.instance.save()
@@ -357,6 +362,7 @@ class CoursePreviewViewController: UIViewController {
                         }, error:  {
                             status in
                             SVProgressHUD.showError(withStatus: status)
+                            sender.isEnabled = true
                     })
                 })
             }
