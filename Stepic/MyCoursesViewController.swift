@@ -28,10 +28,10 @@ class MyCoursesViewController: CoursesViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        handleCourseUpdates()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        handleCourseUpdates()
+//    }
     
     fileprivate func getExistingIndexPathsFromCourses(_ newCourses: [Course]) -> [IndexPath] {
         return newCourses.flatMap{ 
@@ -49,7 +49,7 @@ class MyCoursesViewController: CoursesViewController {
     }
 
     
-    func handleCourseUpdates() {
+    override func handleCourseUpdates() {
         if CoursesJoinManager.sharedManager.hasUpdates {
             print("deleting courses -> \(CoursesJoinManager.sharedManager.deletedCourses.count)")
             print("adding courses -> \(CoursesJoinManager.sharedManager.addedCourses.count)")

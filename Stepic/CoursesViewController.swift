@@ -75,9 +75,16 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         if lastUser != AuthInfo.shared.user {
             refreshControl?.beginRefreshing()
             getCachedCourses(completion: {
+                self.handleCourseUpdates()
                 self.refreshCourses()
             })
+        } else {
+            self.handleCourseUpdates()
         }
+    }
+    
+    func handleCourseUpdates() {
+        //override this method in subclass
     }
     
     fileprivate func getCachedCourses(completion: ((Void) -> Void)?) {
@@ -88,10 +95,11 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)
                 self.courses = Sorter.sort(c, byIds: cachedIds)
+                print("got cached courses \(self.courses.count): \(cachedIds)\n")
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    completion?()
                 }       
-                completion?()
             }
             catch {
                 print("Error while fetching data from store")
