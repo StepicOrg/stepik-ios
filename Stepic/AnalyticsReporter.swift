@@ -26,7 +26,7 @@ class AnalyticsReporter {
 //        YMMYandexMetrica.reportEvent(event, parameters: parameters, onFailure: nil)
     }
     
-    private static func reportMixpanelEvent(_ event: String, parameters: [String: NSObject]?) {
+    static func reportMixpanelEvent(_ event: String, parameters: [String: NSObject]?) {
         var transformedParameters : Properties = [:]
         if let p = parameters {
             for (key, value) in p {

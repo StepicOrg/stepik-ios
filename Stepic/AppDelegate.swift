@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
         
         Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
+        AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
+        
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
