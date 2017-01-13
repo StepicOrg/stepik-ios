@@ -8,12 +8,14 @@
 
 import Foundation
 import Firebase
+import Mixpanel
 //import YandexMobileMetrica
 
 class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: NSObject]?) {
         reportFirebaseEvent(event, parameters: parameters)
         reportAppMetricaEvent(event, parameters: parameters)
+        reportMixpanelEvent(event, parameters: parameters)
     }
     
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {
@@ -22,5 +24,17 @@ class AnalyticsReporter {
     
     private static func reportAppMetricaEvent(_ event: String, parameters: [String: NSObject]?) {
 //        YMMYandexMetrica.reportEvent(event, parameters: parameters, onFailure: nil)
+    }
+    
+    private static func reportMixpanelEvent(_ event: String, parameters: [String: NSObject]?) {
+        var transformedParameters : Properties = [:]
+        if let p = parameters {
+            for (key, value) in p {
+                if let v = value as? MixpanelType {
+                    transformedParameters[key] = v
+                }
+            }
+        }
+        Mixpanel.mainInstance().track(event: event, properties: transformedParameters)
     }
 }

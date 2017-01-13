@@ -17,6 +17,7 @@ import SVProgressHUD
 import MagicalRecord
 import VK_ios_sdk
 import FBSDKCoreKit
+import Mixpanel
 //import YandexMobileMetrica
 
 @UIApplicationMain
@@ -43,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        
+        Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
