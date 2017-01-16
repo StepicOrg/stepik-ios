@@ -18,7 +18,7 @@ import MagicalRecord
 import VK_ios_sdk
 import FBSDKCoreKit
 import Mixpanel
-//import YandexMobileMetrica
+import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-//        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
+        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         
