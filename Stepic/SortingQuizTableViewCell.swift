@@ -53,6 +53,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionLabel.isHidden = true
     }
 
+    var sortable: Bool = true
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -73,7 +74,7 @@ extension SortingQuizTableViewCell : TextHeightDependentCellProtocol {
             return {
                 [weak self] in
                 if let w = self?.textContainerView.bounds.width {
-                    return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 60))) + 17
+                    return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - ((self?.sortable ?? true) ? 60 : 16)))) + 17
                 } else {
                     return 0
                 }

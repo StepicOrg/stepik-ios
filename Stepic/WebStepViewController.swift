@@ -202,7 +202,10 @@ class WebStepViewController: UIViewController {
             let quizController = SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
-            
+        case "matching":
+            let quizController = MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl

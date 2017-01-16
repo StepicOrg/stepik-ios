@@ -111,6 +111,12 @@
 		083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */; };
 		083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
 		083267AA1CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
+		0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
+		0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
+		0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
+		0834C46D1E2CE66B002F8516 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
+		0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */; };
+		0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */; };
 		083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */; };
 		083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */; };
 		083540641CE5FBA100BDFEA5 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540631CE5FBA100BDFEA5 /* NotificationType.swift */; };
@@ -778,6 +784,9 @@
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
 		083267A51CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskRecoveryManager.swift; sourceTree = "<group>"; };
 		083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySerializable.swift; sourceTree = "<group>"; };
+		0834C4681E2CE469002F8516 /* MatchingDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingDataset.swift; sourceTree = "<group>"; };
+		0834C46B1E2CE66B002F8516 /* MatchingReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingReply.swift; sourceTree = "<group>"; };
+		0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingQuizViewController.swift; sourceTree = "<group>"; };
 		083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NotificationReactionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		083540631CE5FBA100BDFEA5 /* NotificationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		083540661CE5FC0E00BDFEA5 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -1302,6 +1311,14 @@
 				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
 			);
 			name = Discussions;
+			sourceTree = "<group>";
+		};
+		0834C4741E2CEC55002F8516 /* MatchingQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */,
+			);
+			name = MatchingQuizViewController;
 			sourceTree = "<group>";
 		};
 		083554261CC8FD0B004C4E85 /* Notifications */ = {
@@ -2020,6 +2037,7 @@
 				08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */,
 				08F485A91C580D61000165AA /* MathReply.swift */,
 				08F485B01C58EB0D000165AA /* SortingReply.swift */,
+				0834C46B1E2CE66B002F8516 /* MatchingReply.swift */,
 			);
 			name = Replies;
 			sourceTree = "<group>";
@@ -2032,6 +2050,7 @@
 				08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */,
 				08F485AE1C58E946000165AA /* SortingDataset.swift */,
 				088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */,
+				0834C4681E2CE469002F8516 /* MatchingDataset.swift */,
 			);
 			name = Datasets;
 			sourceTree = "<group>";
@@ -2050,6 +2069,7 @@
 				08F485A81C57B029000165AA /* FreeAnswerQuizViewController */,
 				08F485AD1C580DB8000165AA /* MathQuizViewController */,
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
+				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -2675,6 +2695,7 @@
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
+				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08263D8D1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */,
 				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
@@ -2684,6 +2705,7 @@
 				08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */,
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				08263D991DE5FC01002E5B7F /* PresentationType.swift in Sources */,
+				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -2788,6 +2810,7 @@
 				08D120B61C937B2200A54ABC /* DownloadTableViewCell.swift in Sources */,
 				0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08D120B71C937B2200A54ABC /* CacheManager.swift in Sources */,
+				0834C46D1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
 				08D120B81C937B2200A54ABC /* Time.swift in Sources */,
 				08D120B91C937B2200A54ABC /* Assignment+CoreDataProperties.swift in Sources */,
 				08D120BA1C937B2200A54ABC /* RefreshTableViewCell.swift in Sources */,
@@ -2923,6 +2946,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
@@ -2960,6 +2984,7 @@
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				08263D941DE5FC01002E5B7F /* ModalSize.swift in Sources */,
+				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				08263DA01DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
@@ -2974,6 +2999,7 @@
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
+				0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
 				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */,
