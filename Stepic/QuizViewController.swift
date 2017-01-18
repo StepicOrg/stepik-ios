@@ -115,7 +115,7 @@ class QuizViewController: UIViewController {
                 //TODO: Implement in subclass, then it may need a height update
                 self.updateQuizAfterAttemptUpdate()
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
-                self.view.layoutIfNeeded()
+//                self.view.layoutIfNeeded()
             }
         }
     }
@@ -270,7 +270,7 @@ class QuizViewController: UIViewController {
                     self.updateQuizAfterSubmissionUpdate()                    
                 }
                 self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true)
-                self.view.layoutIfNeeded()
+//                self.view.layoutIfNeeded()
             }
         }
     }
@@ -283,7 +283,7 @@ class QuizViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+//        self.view.layoutIfNeeded()
     }
     
     //Measured in seconds

@@ -71,7 +71,7 @@ class ControllerQuizWebViewHelper {
         
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
             UIThread.performUI{
-                self.view.layoutIfNeeded()
+//                self.view.layoutIfNeeded()
                 self.successBlock?()
             }
             return
@@ -79,7 +79,7 @@ class ControllerQuizWebViewHelper {
         
         if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
             UIThread.performUI{
-                self.view.layoutIfNeeded()
+//                self.view.layoutIfNeeded()
                 self.successBlock?()
             }
             return 

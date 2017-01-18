@@ -396,11 +396,11 @@ extension WebStepViewController : QuizControllerDelegate {
             UIView.animate(withDuration: 0.2, animations: {
                 [weak self] in
                 self?.view.layoutIfNeeded()
-                self?.quizPlaceholderView.layoutIfNeeded()
+//                self?.quizPlaceholderView.layoutIfNeeded()
                 })
         } else {
             self.view.layoutIfNeeded()
-            self.quizPlaceholderView.layoutIfNeeded()
+//            self.quizPlaceholderView.layoutIfNeeded()
         }
     }
 }

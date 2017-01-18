@@ -138,7 +138,7 @@ class MatchingQuizViewController: QuizViewController {
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
         UIThread.performUI {
-            self.view.layoutIfNeeded()
+//            self.view.layoutIfNeeded()
         }
     }
     
