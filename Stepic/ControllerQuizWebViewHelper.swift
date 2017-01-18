@@ -16,6 +16,7 @@ class ControllerQuizWebViewHelper {
     fileprivate var expectedQuizHeightClosure : ((Void) -> CGFloat)
     fileprivate var noQuizHeightClosure : ((Void) -> CGFloat)
     fileprivate var delegate : QuizControllerDelegate?
+    fileprivate var successBlock : ((Void) -> Void)?
     
     fileprivate var optionsCount : Int {
         return countClosure()
@@ -29,14 +30,16 @@ class ControllerQuizWebViewHelper {
         return noQuizHeightClosure()
     }
     
+//    fileprivate var finishedCells : [Int] = []
     
-    init(tableView: UITableView, view: UIView, countClosure: @escaping ((Void) -> Int), expectedQuizHeightClosure: @escaping ((Void) -> CGFloat), noQuizHeightClosure: @escaping ((Void) -> CGFloat), delegate: QuizControllerDelegate?) {
+    init(tableView: UITableView, view: UIView, countClosure: @escaping ((Void) -> Int), expectedQuizHeightClosure: @escaping ((Void) -> CGFloat), noQuizHeightClosure: @escaping ((Void) -> CGFloat), delegate: QuizControllerDelegate?, success: ((Void) -> Void)? = nil) {
         self.tableView = tableView
         self.view = view
         self.countClosure = countClosure
         self.expectedQuizHeightClosure = expectedQuizHeightClosure
         self.noQuizHeightClosure = noQuizHeightClosure
         self.delegate = delegate
+        self.successBlock = success
     }
     
     func initChoicesHeights() {
@@ -44,10 +47,10 @@ class ControllerQuizWebViewHelper {
     }
     
     func updateChoicesHeights() {
+//        finishedCells = []
         initHeightUpdateBlocks()
         self.tableView.reloadData()
         performHeightUpdates()
-        self.view.layoutIfNeeded()
     }
     
     fileprivate func initHeightUpdateBlocks() {
@@ -65,12 +68,23 @@ class ControllerQuizWebViewHelper {
     let noReloadTimeout = 1.0
     
     fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
+        
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
+            UIThread.performUI{
+                self.view.layoutIfNeeded()
+                self.successBlock?()
+            }
             return
         }
+        
         if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
+            UIThread.performUI{
+                self.view.layoutIfNeeded()
+                self.successBlock?()
+            }
             return 
         }
+        
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
             if self?.countHeights() == true {
@@ -78,6 +92,7 @@ class ControllerQuizWebViewHelper {
                     self?.tableView.reloadData() 
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
+                        print("needs height update called from controllerwebviewhelper")
                         self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
                     }
                 }
@@ -85,7 +100,7 @@ class ControllerQuizWebViewHelper {
             } else {
                 self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
             }
-            })  
+        })  
     }    
     
     fileprivate func performHeightUpdates() {
@@ -101,6 +116,13 @@ class ControllerQuizWebViewHelper {
                 //                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
                 cellHeights[index] = h
                 didChangeHeight = true
+//                if let id = finishedCells.index(of: index) {
+//                    finishedCells.remove(at: id)
+//                }
+            } else {
+//                if finishedCells.index(of: index) != nil {
+//                    finishedCells += [index]
+//                }
             }
             index += 1
         }
