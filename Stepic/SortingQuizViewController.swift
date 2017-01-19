@@ -42,7 +42,6 @@ class SortingQuizViewController: QuizViewController {
             }, delegate: delegate
         )
 
-        
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
     }

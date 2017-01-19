@@ -390,17 +390,23 @@ extension WebStepViewController : UIScrollViewDelegate {
 
 extension WebStepViewController : QuizControllerDelegate {
     func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool) {
-        quizPlaceholderViewHeight.constant = newHeight
-        view.setNeedsLayout()
-        if animated { 
-            UIView.animate(withDuration: 0.2, animations: {
-                [weak self] in
+//        if quizPlaceholderViewHeight.constant == newHeight {
+//            return
+//        }
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.quizPlaceholderViewHeight.constant = newHeight
+//        view.setNeedsLayout()
+            if animated { 
+                UIView.animate(withDuration: 0.2, animations: {
+                    [weak self] in
+                    self?.view.layoutIfNeeded()
+                    })
+            } else {
                 self?.view.layoutIfNeeded()
-//                self?.quizPlaceholderView.layoutIfNeeded()
-                })
-        } else {
-            self.view.layoutIfNeeded()
-//            self.quizPlaceholderView.layoutIfNeeded()
+            }
+            
         }
+    
     }
 }

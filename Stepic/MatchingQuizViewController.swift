@@ -42,10 +42,11 @@ class MatchingQuizViewController: QuizViewController {
         firstTableView.alignTop("0", bottom: "0", to: self.containerView)
         firstTableView.alignLeadingEdge(with: self.containerView, predicate: "0")
         firstTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
-
+        firstTableView.constrainTrailingSpace(to: secondTableView, predicate: "0")
+        
         secondTableView.alignTop("0", bottom: "0", to: self.containerView)
         secondTableView.alignTrailingEdge(with: self.containerView, predicate: "0")
-        secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
+//        secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
         
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
@@ -91,7 +92,6 @@ class MatchingQuizViewController: QuizViewController {
             }
 
         )
-
         
         // Do any additional setup after loading the view.
     }
@@ -131,15 +131,15 @@ class MatchingQuizViewController: QuizViewController {
         
         firstWebViewHelper.initChoicesHeights()
         firstWebViewHelper.updateChoicesHeights()
+        
         secondWebViewHelper.initChoicesHeights()
         secondWebViewHelper.updateChoicesHeights()
 
-        
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
-        UIThread.performUI {
-//            self.view.layoutIfNeeded()
-        }
+//        UIThread.performUI {
+////            self.view.layoutIfNeeded()
+//        }
     }
     
     //TODO: Something strange is happening here, check this

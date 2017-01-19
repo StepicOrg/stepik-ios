@@ -64,7 +64,7 @@ class ControllerQuizWebViewHelper {
     
     //Measured in seconds
     let reloadTimeStandardInterval = 0.5
-    let reloadTimeout = 5.0
+    let reloadTimeout = 2.5
     let noReloadTimeout = 1.0
     
     fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
