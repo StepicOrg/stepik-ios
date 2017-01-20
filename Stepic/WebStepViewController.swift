@@ -287,6 +287,7 @@ class WebStepViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
+    var webViewUpdatingHeight : Float? = nil
     
     func resetWebViewHeight(_ height: Float) {
         if height == 0.0 {
@@ -296,6 +297,7 @@ class WebStepViewController: UIViewController {
         
         if isCurrentlyUpdatingHeight {
             print("Currently updating height in resetWebViewHeight")
+            webViewUpdatingHeight = height
             return
         }
         
@@ -308,6 +310,14 @@ class WebStepViewController: UIViewController {
             [weak self] 
             completed in
             self?.isCurrentlyUpdatingHeight = false
+            
+            if self?.webViewUpdatingHeight == height {
+                self?.webViewUpdatingHeight = nil
+            }
+
+            if let h = self?.webViewUpdatingHeight {
+                self?.resetWebViewHeight(h)
+            }
         })
     }
     
@@ -415,15 +425,18 @@ extension WebStepViewController : QuizControllerDelegate {
 //        if quizPlaceholderViewHeight.constant == newHeight {
 //            return
 //        }
+        
         if newHeight == self.quizPlaceholderViewHeight.constant {
             print("\n\nNot changing equal height, return\n\n")
             return
         }
+        
         if isCurrentlyUpdatingHeight {
             print("\n\nIs currently updating height, queuing & returning\n\n")
             lastUpdatingQuizHeight = newHeight
             return
         }
+        
         isCurrentlyUpdatingHeight = true
         print("\n\nChanging height to \(newHeight)\n\n")
         DispatchQueue.main.async {
@@ -448,6 +461,9 @@ extension WebStepViewController : QuizControllerDelegate {
             } else {
                 self?.view.layoutIfNeeded()
                 self?.isCurrentlyUpdatingHeight = false
+                if self?.lastUpdatingQuizHeight == newHeight {
+                    self?.lastUpdatingQuizHeight = nil
+                }
                 if let h = self?.lastUpdatingQuizHeight {
                     self?.needsHeightUpdate(h, animated: animated)
                 }
