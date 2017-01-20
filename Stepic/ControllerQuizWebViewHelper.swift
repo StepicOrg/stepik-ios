@@ -70,32 +70,32 @@ class ControllerQuizWebViewHelper {
     fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
         
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
-            UIThread.performUI{
+//            UIThread.performUI{
 //                self.view.layoutIfNeeded()
                 self.successBlock?()
-            }
+//            }
             return
         }
         
         if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
-            UIThread.performUI{
+//            UIThread.performUI{
 //                self.view.layoutIfNeeded()
                 self.successBlock?()
-            }
+//            }
             return 
         }
         
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
             if self?.countHeights() == true {
-                UIThread.performUI{
+//                UIThread.performUI{
                     self?.tableView.reloadData() 
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
                         print("needs height update called from controllerwebviewhelper")
                         self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
                     }
-                }
+//                }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)
             } else {
                 self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)

@@ -294,11 +294,21 @@ class WebStepViewController: UIViewController {
             return
         }
         
+        if isCurrentlyUpdatingHeight {
+            print("Currently updating height in resetWebViewHeight")
+            return
+        }
+        
+        isCurrentlyUpdatingHeight = true
         stepWebViewHeight.constant = CGFloat(height)
         UIView.animate(withDuration: 0.2, animations: { 
             [weak self] in
             self?.view.layoutIfNeeded() 
-            })
+        }, completion: {
+            [weak self] 
+            completed in
+            self?.isCurrentlyUpdatingHeight = false
+        })
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
@@ -325,6 +335,9 @@ class WebStepViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
+    
+    var isCurrentlyUpdatingHeight: Bool = false
+    var lastUpdatingQuizHeight: CGFloat? = nil
 }
 
 extension WebStepViewController : UIWebViewDelegate {
@@ -381,6 +394,15 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        if isCurrentlyUpdatingHeight {
+            delay(0.2, closure: {
+                [weak self] in
+                if let s = self {
+                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
+                }
+            })
+            return
+        }
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
     }
 }
@@ -393,6 +415,17 @@ extension WebStepViewController : QuizControllerDelegate {
 //        if quizPlaceholderViewHeight.constant == newHeight {
 //            return
 //        }
+        if newHeight == self.quizPlaceholderViewHeight.constant {
+            print("\n\nNot changing equal height, return\n\n")
+            return
+        }
+        if isCurrentlyUpdatingHeight {
+            print("\n\nIs currently updating height, queuing & returning\n\n")
+            lastUpdatingQuizHeight = newHeight
+            return
+        }
+        isCurrentlyUpdatingHeight = true
+        print("\n\nChanging height to \(newHeight)\n\n")
         DispatchQueue.main.async {
             [weak self] in
             self?.quizPlaceholderViewHeight.constant = newHeight
@@ -401,9 +434,23 @@ extension WebStepViewController : QuizControllerDelegate {
                 UIView.animate(withDuration: 0.2, animations: {
                     [weak self] in
                     self?.view.layoutIfNeeded()
-                    })
+                }, completion: {
+                    [weak self] 
+                    completed in
+                    self?.isCurrentlyUpdatingHeight = false
+                    if self?.lastUpdatingQuizHeight == newHeight {
+                        self?.lastUpdatingQuizHeight = nil
+                    }
+                    if let h = self?.lastUpdatingQuizHeight {
+                        self?.needsHeightUpdate(h, animated: animated)
+                    }
+                })
             } else {
                 self?.view.layoutIfNeeded()
+                self?.isCurrentlyUpdatingHeight = false
+                if let h = self?.lastUpdatingQuizHeight {
+                    self?.needsHeightUpdate(h, animated: animated)
+                }
             }
             
         }
