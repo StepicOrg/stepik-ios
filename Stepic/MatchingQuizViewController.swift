@@ -132,6 +132,7 @@ class MatchingQuizViewController: QuizViewController {
     }
     
     fileprivate var orderedOptions : [String] = []
+    fileprivate var optionsPermutation : [Int] = []
     fileprivate var positionForOptionInAttempt : [String : Int] = [:]
     
     var optionsCount: Int {
@@ -152,9 +153,11 @@ class MatchingQuizViewController: QuizViewController {
     fileprivate func resetOptionsToAttempt() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
+        optionsPermutation = []
         if let dataset = attempt?.dataset as? MatchingDataset {
             self.orderedOptions = dataset.secondValues
             for (index, option) in dataset.secondValues.enumerated() {
+                optionsPermutation += [index]
                 positionForOptionInAttempt[option] = index
             }
         }
@@ -174,6 +177,7 @@ class MatchingQuizViewController: QuizViewController {
                     for (index, order) in r.ordering.enumerated() {
                         o[index] = dataset.secondValues[order]
                     }
+                    optionsPermutation = r.ordering
                 }
                 orderedOptions = o
             }
@@ -214,7 +218,7 @@ class MatchingQuizViewController: QuizViewController {
     }
     
     override func getReply() -> Reply {
-        let r = MatchingReply(ordering: orderedOptions.flatMap({return positionForOptionInAttempt[$0]}))
+        let r = MatchingReply(ordering: optionsPermutation)
         print(r.ordering)
         return r
     }
@@ -331,6 +335,9 @@ extension MatchingQuizViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movingOption = orderedOptions[(sourceIndexPath as NSIndexPath).row]
+        let movingIndex = optionsPermutation[sourceIndexPath.row]
+        optionsPermutation.remove(at: sourceIndexPath.row)
+        optionsPermutation.insert(movingIndex, at: destinationIndexPath.row)
         orderedOptions.remove(at: (sourceIndexPath as NSIndexPath).row)
         orderedOptions.insert(movingOption, at: (destinationIndexPath as NSIndexPath).row)
     }
