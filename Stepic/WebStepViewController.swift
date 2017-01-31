@@ -168,7 +168,7 @@ class WebStepViewController: UIViewController {
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.align(to: quizPlaceholderView)
-        self.view.setNeedsLayout()
+//        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
@@ -219,8 +219,8 @@ class WebStepViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+//        self.view.setNeedsLayout()
+//        self.view.layoutIfNeeded()
         
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
@@ -296,7 +296,7 @@ class WebStepViewController: UIViewController {
         }
         
         if isCurrentlyUpdatingHeight {
-            print("Currently updating height in resetWebViewHeight")
+            print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
             webViewUpdatingHeight = height
             return
         }
@@ -427,18 +427,24 @@ extension WebStepViewController : QuizControllerDelegate {
 //        }
         
         if newHeight == self.quizPlaceholderViewHeight.constant {
-            print("\n\nNot changing equal height, return\n\n")
+            print("STEPID: \(self.stepId)  \n\nNot changing equal height \(newHeight), return\n\n")
             return
         }
         
         if isCurrentlyUpdatingHeight {
-            print("\n\nIs currently updating height, queuing & returning\n\n")
-            lastUpdatingQuizHeight = newHeight
+            print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
+            if let last = lastUpdatingQuizHeight {
+                if newHeight > last {
+                    lastUpdatingQuizHeight = newHeight
+                }
+            } else {
+                lastUpdatingQuizHeight = newHeight
+            }
             return
         }
         
         isCurrentlyUpdatingHeight = true
-        print("\n\nChanging height to \(newHeight)\n\n")
+        print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
         DispatchQueue.main.async {
             [weak self] in
             self?.quizPlaceholderViewHeight.constant = newHeight
