@@ -295,13 +295,15 @@ class WebStepViewController: UIViewController {
             return
         }
         
-        if isCurrentlyUpdatingHeight {
-            print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
-            webViewUpdatingHeight = height
-            return
+        if needsQuizUpdateAttention {
+            if isCurrentlyUpdatingHeight {
+                print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
+                webViewUpdatingHeight = height
+                return
+            }
+            
+            isCurrentlyUpdatingHeight = true
         }
-        
-        isCurrentlyUpdatingHeight = true
         stepWebViewHeight.constant = CGFloat(height)
         UIView.animate(withDuration: 0.2, animations: { 
             [weak self] in
@@ -309,14 +311,16 @@ class WebStepViewController: UIViewController {
         }, completion: {
             [weak self] 
             completed in
-            self?.isCurrentlyUpdatingHeight = false
-            
-            if self?.webViewUpdatingHeight == height {
-                self?.webViewUpdatingHeight = nil
-            }
+            if (self?.needsQuizUpdateAttention ?? false) {
+                self?.isCurrentlyUpdatingHeight = false
+                
+                if self?.webViewUpdatingHeight == height {
+                    self?.webViewUpdatingHeight = nil
+                }
 
-            if let h = self?.webViewUpdatingHeight {
-                self?.resetWebViewHeight(h)
+                if let h = self?.webViewUpdatingHeight {
+                    self?.resetWebViewHeight(h)
+                }
             }
         })
     }
@@ -404,7 +408,7 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if isCurrentlyUpdatingHeight {
+        if isCurrentlyUpdatingHeight && needsQuizUpdateAttention {
             delay(0.2, closure: {
                 [weak self] in
                 if let s = self {
@@ -414,6 +418,10 @@ extension WebStepViewController : UIWebViewDelegate {
             return
         }
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
+    }
+    
+    var needsQuizUpdateAttention: Bool {
+        return step.block.name == "matching"
     }
 }
 
@@ -426,25 +434,28 @@ extension WebStepViewController : QuizControllerDelegate {
 //            return
 //        }
         
-        if newHeight == self.quizPlaceholderViewHeight.constant {
-            print("STEPID: \(self.stepId)  \n\nNot changing equal height \(newHeight), return\n\n")
-            return
-        }
+        if needsQuizUpdateAttention {
         
-        if isCurrentlyUpdatingHeight {
-            print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
-            if let last = lastUpdatingQuizHeight {
-                if newHeight > last {
+            if newHeight == self.quizPlaceholderViewHeight.constant {
+                print("STEPID: \(self.stepId)  \n\nNot changing equal height \(newHeight), return\n\n")
+                return
+            }
+        
+            if isCurrentlyUpdatingHeight {
+                print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
+                if let last = lastUpdatingQuizHeight {
+                    if newHeight > last {
+                        lastUpdatingQuizHeight = newHeight
+                    }
+                } else {
                     lastUpdatingQuizHeight = newHeight
                 }
-            } else {
-                lastUpdatingQuizHeight = newHeight
+                return
             }
-            return
-        }
         
-        isCurrentlyUpdatingHeight = true
-        print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
+            isCurrentlyUpdatingHeight = true
+            print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
+        }
         DispatchQueue.main.async {
             [weak self] in
             self?.quizPlaceholderViewHeight.constant = newHeight
@@ -456,6 +467,20 @@ extension WebStepViewController : QuizControllerDelegate {
                 }, completion: {
                     [weak self] 
                     completed in
+                    if (self?.needsQuizUpdateAttention ?? false) {
+                        self?.isCurrentlyUpdatingHeight = false
+                        if self?.lastUpdatingQuizHeight == newHeight {
+                            self?.lastUpdatingQuizHeight = nil
+                        }
+                        if let h = self?.lastUpdatingQuizHeight {
+                            self?.needsHeightUpdate(h, animated: animated)
+                        }
+                    }
+                })
+            } else {
+                self?.view.layoutIfNeeded()
+                if (self?.needsQuizUpdateAttention ?? false) {
+
                     self?.isCurrentlyUpdatingHeight = false
                     if self?.lastUpdatingQuizHeight == newHeight {
                         self?.lastUpdatingQuizHeight = nil
@@ -463,15 +488,6 @@ extension WebStepViewController : QuizControllerDelegate {
                     if let h = self?.lastUpdatingQuizHeight {
                         self?.needsHeightUpdate(h, animated: animated)
                     }
-                })
-            } else {
-                self?.view.layoutIfNeeded()
-                self?.isCurrentlyUpdatingHeight = false
-                if self?.lastUpdatingQuizHeight == newHeight {
-                    self?.lastUpdatingQuizHeight = nil
-                }
-                if let h = self?.lastUpdatingQuizHeight {
-                    self?.needsHeightUpdate(h, animated: animated)
                 }
             }
             
