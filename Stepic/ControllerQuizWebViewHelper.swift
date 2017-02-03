@@ -10,12 +10,12 @@ import Foundation
 
 class ControllerQuizWebViewHelper {
     
-    fileprivate var tableView: UITableView
-    fileprivate var view: UIView
+    fileprivate weak var tableView: UITableView?
+    fileprivate weak var view: UIView?
     fileprivate var countClosure : ((Void) -> Int)
     fileprivate var expectedQuizHeightClosure : ((Void) -> CGFloat)
     fileprivate var noQuizHeightClosure : ((Void) -> CGFloat)
-    fileprivate var delegate : QuizControllerDelegate?
+    fileprivate weak var delegate : QuizControllerDelegate?
     fileprivate var successBlock : ((Void) -> Void)?
     
     fileprivate var optionsCount : Int {
@@ -49,7 +49,7 @@ class ControllerQuizWebViewHelper {
     func updateChoicesHeights() {
 //        finishedCells = []
         initHeightUpdateBlocks()
-        self.tableView.reloadData()
+        self.tableView?.reloadData()
         performHeightUpdates()
     }
     
@@ -89,7 +89,7 @@ class ControllerQuizWebViewHelper {
             [weak self] in
             if self?.countHeights() == true {
 //                UIThread.performUI{
-                    self?.tableView.reloadData() 
+                    self?.tableView?.reloadData() 
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
                         print("needs height update called from controllerwebviewhelper")
@@ -131,4 +131,8 @@ class ControllerQuizWebViewHelper {
     
     var cellHeightUpdateBlocks : [((Void)->Int)] = []
     var cellHeights : [Int] = []
+    
+    deinit {
+        print("in deinit controller web view helper")
+    }
 }

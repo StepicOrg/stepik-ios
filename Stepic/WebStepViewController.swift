@@ -36,7 +36,7 @@ class WebStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
-    var stepsVC : StepsViewController!
+    weak var stepsVC : StepsViewController!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -61,9 +61,7 @@ class WebStepViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
-        
+            
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
@@ -222,6 +220,8 @@ class WebStepViewController: UIViewController {
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
 
@@ -237,7 +237,8 @@ class WebStepViewController: UIViewController {
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
                                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
-                            UIThread.performUI{
+                            DispatchQueue.main.async {
+                                [weak self] in
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
                             }                    
@@ -246,6 +247,11 @@ class WebStepViewController: UIViewController {
                 })
             })
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
     
     //Measured in seconds
@@ -258,10 +264,14 @@ class WebStepViewController: UIViewController {
         }
         
         delay(reloadTimeStandardInterval * Double(count), closure: {
-            UIThread.performUI{
-                self.resetWebViewHeight(Float(self.getContentHeight(self.stepWebView)))
+            [weak self] in
+            DispatchQueue.main.async{
+                [weak self] in
+                if let s = self {
+                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
+                }
             }
-            self.reloadWithCount(count + 1)
+            self?.reloadWithCount(count + 1)
         })  
     }
     
@@ -347,6 +357,7 @@ class WebStepViewController: UIViewController {
     }
     
     deinit {
+        print("deinit webstepviewcontroller")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
     
@@ -361,8 +372,11 @@ extension WebStepViewController : UIWebViewDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: { 
             (action) -> Void in
-            UIThread.performUI{
-                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+            DispatchQueue.main.async{
+                [weak self] in
+                if let s = self {
+                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+                }
             }
         }))
         
