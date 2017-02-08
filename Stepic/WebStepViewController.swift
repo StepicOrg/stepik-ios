@@ -448,7 +448,7 @@ extension WebStepViewController : QuizControllerDelegate {
 //            return
 //        }
         
-        if needsQuizUpdateAttention && breaksSynchronizationControl {
+        if needsQuizUpdateAttention && !breaksSynchronizationControl {
             if newHeight <= self.quizPlaceholderViewHeight.constant {
                 print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
                 return
