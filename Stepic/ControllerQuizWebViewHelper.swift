@@ -93,7 +93,7 @@ class ControllerQuizWebViewHelper {
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
                         print("needs height update called from controllerwebviewhelper")
-                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true) 
+                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true, breaksSynchronizationControl: false) 
                     }
 //                }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)

@@ -443,12 +443,12 @@ extension WebStepViewController : UIScrollViewDelegate {
 }
 
 extension WebStepViewController : QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool) {
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
 //        if quizPlaceholderViewHeight.constant == newHeight {
 //            return
 //        }
         
-        if needsQuizUpdateAttention {
+        if needsQuizUpdateAttention && breaksSynchronizationControl {
             if newHeight <= self.quizPlaceholderViewHeight.constant {
                 print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
                 return
@@ -487,7 +487,7 @@ extension WebStepViewController : QuizControllerDelegate {
                             self?.lastUpdatingQuizHeight = nil
                         }
                         if let h = self?.lastUpdatingQuizHeight {
-                            self?.needsHeightUpdate(h, animated: animated)
+                            self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
                         }
                     }
                 })
@@ -500,7 +500,7 @@ extension WebStepViewController : QuizControllerDelegate {
                         self?.lastUpdatingQuizHeight = nil
                     }
                     if let h = self?.lastUpdatingQuizHeight {
-                        self?.needsHeightUpdate(h, animated: animated)
+                        self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
                     }
                 }
             }

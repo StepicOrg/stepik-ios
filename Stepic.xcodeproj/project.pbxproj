@@ -141,6 +141,10 @@
 		083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
 		083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
 		083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
+		083879771E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
+		083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
+		083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
+		0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
 		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
@@ -800,6 +804,8 @@
 		0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesContainer.swift; sourceTree = "<group>"; };
 		083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesContainer.swift; sourceTree = "<group>"; };
 		083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingQuizTableViewCell.swift; sourceTree = "<group>"; };
+		083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchingQuizTableViewCell.xib; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
 		083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCoursesDisplayingHelper.swift; sourceTree = "<group>"; };
 		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
@@ -1317,6 +1323,8 @@
 			isa = PBXGroup;
 			children = (
 				0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */,
+				083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */,
+				083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */,
 			);
 			name = MatchingQuizViewController;
 			sourceTree = "<group>";
@@ -2418,6 +2426,7 @@
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
+				0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */,
@@ -2463,6 +2472,7 @@
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
@@ -2765,6 +2775,7 @@
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				08263DA51DE5FC01002E5B7F /* TransitionType.swift in Sources */,
+				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -3207,6 +3218,7 @@
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
+				083879771E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
