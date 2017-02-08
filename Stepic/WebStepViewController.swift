@@ -449,9 +449,8 @@ extension WebStepViewController : QuizControllerDelegate {
 //        }
         
         if needsQuizUpdateAttention {
-        
-            if newHeight == self.quizPlaceholderViewHeight.constant {
-                print("STEPID: \(self.stepId)  \n\nNot changing equal height \(newHeight), return\n\n")
+            if newHeight <= self.quizPlaceholderViewHeight.constant {
+                print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
                 return
             }
         
@@ -470,6 +469,7 @@ extension WebStepViewController : QuizControllerDelegate {
             isCurrentlyUpdatingHeight = true
             print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
         }
+        
         DispatchQueue.main.async {
             [weak self] in
             self?.quizPlaceholderViewHeight.constant = newHeight
