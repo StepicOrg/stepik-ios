@@ -127,6 +127,16 @@ class AuthManager : NSObject {
     }
     
     func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+        func logRefreshError(statusCode: Int?, message: String?) {
+            var parameters : [String: NSObject] = [:]
+            if let code = statusCode {
+                parameters["code"] = code as NSObject?
+            }
+            if let m = message {
+                parameters["message"] = m as NSObject?
+            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
+        }
         
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
@@ -170,7 +180,9 @@ class AuthManager : NSObject {
             }
             let response = response.response
 
+            
             if let e = error {
+                logRefreshError(statusCode: response?.statusCode, message: "Error \(e.localizedDescription) while refreshing")
                 failure(e)
                 return
             }
@@ -178,6 +190,7 @@ class AuthManager : NSObject {
             let token : StepicToken = StepicToken(json: json)
             
             if token.accessToken == "" {
+                logRefreshError(statusCode: response?.statusCode, message: "Error after getting empty access token")
                 failure(NSError.tokenRefreshError)
                 return
             }
