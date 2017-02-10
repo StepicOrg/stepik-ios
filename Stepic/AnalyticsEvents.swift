@@ -101,4 +101,12 @@ struct AnalyticsEvents {
         }
         static let notificationOpened = "streak_notification_opened"
     }
+    
+    struct App {
+        static let opened = "app_opened"
+    }
+    
+    struct Errors {
+        static let tokenRefresh = "error_token_refresh"
+    }
 }

@@ -10,18 +10,18 @@ import Foundation
 
 class CellWebViewHelper {
     
-    fileprivate var webView : UIWebView
+    fileprivate weak var webView : UIWebView?
     fileprivate var heightWithoutWebView : Int
     
     init(webView: UIWebView, heightWithoutWebView: Int) {
         self.webView = webView
         self.heightWithoutWebView = heightWithoutWebView
-        webView.isOpaque = false
-        webView.backgroundColor = UIColor.clear
-        webView.isUserInteractionEnabled = false
-        webView.scrollView.backgroundColor = UIColor.clear
-        webView.scrollView.showsVerticalScrollIndicator = false
-        webView.scrollView.canCancelContentTouches = false
+        self.webView?.isOpaque = false
+        self.webView?.backgroundColor = UIColor.clear
+        self.webView?.isUserInteractionEnabled = false
+        self.webView?.scrollView.backgroundColor = UIColor.clear
+        self.webView?.scrollView.showsVerticalScrollIndicator = false
+        self.webView?.scrollView.canCancelContentTouches = false
     }
     
     fileprivate func getContentHeight(_ webView : UIWebView) -> Int {
@@ -32,7 +32,7 @@ class CellWebViewHelper {
     func setTextWithTeX(_ text: String, textColorHex : String = "#000000") -> ((Void)->Int) {
         let scriptsString = "\(Scripts.localTexScript)"
         let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, addStyle: true, textColorHex: textColorHex)
-        webView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         return {
             [weak self] in
             if let cw = self?.webView {
@@ -46,7 +46,7 @@ class CellWebViewHelper {
     }
 
     deinit {
-        print("deinit helper")
+        print("deinit cell helper")
     }
     
 }

@@ -54,7 +54,8 @@ class Course: NSManagedObject, JSONInitializable {
     var metaInfo : String {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {
-            let percentage = Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100)
+            
+            let percentage = p.numberOfSteps != 0 ? Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100) : 100
             return "\(NSLocalizedString("PassedPercent", comment: "")) \(percentage)%"
 //            return "Выполнение курса: " + "\(percentage)%"
         } else {

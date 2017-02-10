@@ -17,7 +17,7 @@ def all_pods
     pod 'Crashlytics'
     pod 'DZNEmptyDataSet'
     
-#    pod 'YandexMobileMetrica/Dynamic', '2.6.2'
+    pod 'YandexMobileMetrica/Dynamic'
 
     pod 'Firebase', '<= 3.4.0'
 #    pod 'Firebase/Messaging'
@@ -26,6 +26,8 @@ def all_pods
     pod 'FirebaseAnalytics', '3.3.0'
 #    pod 'Firebase/Core'
     
+    pod 'Mixpanel-swift'
+
     pod "MagicalRecord"
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
@@ -36,8 +38,7 @@ def all_pods
     pod "VK-ios-sdk" 
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
-    
-end
+    end
 
 #post_install do |installer|
 #    appmetricaPlistPath = "Pods/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework/Info.plist"

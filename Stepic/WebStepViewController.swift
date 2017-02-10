@@ -36,7 +36,7 @@ class WebStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
-    var stepsVC : StepsViewController!
+    weak var stepsVC : StepsViewController!
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -61,9 +61,7 @@ class WebStepViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
-        
+            
         stepWebView.delegate = self
         
         stepWebView.scrollView.delegate = self
@@ -168,7 +166,7 @@ class WebStepViewController: UIViewController {
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.align(to: quizPlaceholderView)
-        self.view.setNeedsLayout()
+//        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
     
@@ -202,7 +200,10 @@ class WebStepViewController: UIViewController {
             let quizController = SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
-            
+        case "matching":
+            let quizController = MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl
@@ -216,9 +217,11 @@ class WebStepViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
+//        self.view.setNeedsLayout()
+//        self.view.layoutIfNeeded()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
 
@@ -234,7 +237,8 @@ class WebStepViewController: UIViewController {
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
                                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
-                            UIThread.performUI{
+                            DispatchQueue.main.async {
+                                [weak self] in
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
                             }                    
@@ -243,6 +247,11 @@ class WebStepViewController: UIViewController {
                 })
             })
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
     
     //Measured in seconds
@@ -255,10 +264,14 @@ class WebStepViewController: UIViewController {
         }
         
         delay(reloadTimeStandardInterval * Double(count), closure: {
-            UIThread.performUI{
-                self.resetWebViewHeight(Float(self.getContentHeight(self.stepWebView)))
+            [weak self] in
+            DispatchQueue.main.async{
+                [weak self] in
+                if let s = self {
+                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
+                }
             }
-            self.reloadWithCount(count + 1)
+            self?.reloadWithCount(count + 1)
         })  
     }
     
@@ -284,6 +297,7 @@ class WebStepViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
+    var webViewUpdatingHeight : Float? = nil
     
     func resetWebViewHeight(_ height: Float) {
         if height == 0.0 {
@@ -291,11 +305,34 @@ class WebStepViewController: UIViewController {
             return
         }
         
+        if needsQuizUpdateAttention {
+            if isCurrentlyUpdatingHeight {
+                print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
+                webViewUpdatingHeight = height
+                return
+            }
+            
+            isCurrentlyUpdatingHeight = true
+        }
         stepWebViewHeight.constant = CGFloat(height)
         UIView.animate(withDuration: 0.2, animations: { 
             [weak self] in
             self?.view.layoutIfNeeded() 
-            })
+        }, completion: {
+            [weak self] 
+            completed in
+            if (self?.needsQuizUpdateAttention ?? false) {
+                self?.isCurrentlyUpdatingHeight = false
+                
+                if self?.webViewUpdatingHeight == height {
+                    self?.webViewUpdatingHeight = nil
+                }
+
+                if let h = self?.webViewUpdatingHeight {
+                    self?.resetWebViewHeight(h)
+                }
+            }
+        })
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
@@ -320,8 +357,12 @@ class WebStepViewController: UIViewController {
     }
     
     deinit {
+        print("deinit webstepviewcontroller")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
     }
+    
+    var isCurrentlyUpdatingHeight: Bool = false
+    var lastUpdatingQuizHeight: CGFloat? = nil
 }
 
 extension WebStepViewController : UIWebViewDelegate {
@@ -331,8 +372,11 @@ extension WebStepViewController : UIWebViewDelegate {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Open", comment: ""), style: .default, handler: { 
             (action) -> Void in
-            UIThread.performUI{
-                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+            DispatchQueue.main.async{
+                [weak self] in
+                if let s = self {
+                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+                }
             }
         }))
         
@@ -378,7 +422,20 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        if isCurrentlyUpdatingHeight && needsQuizUpdateAttention {
+            delay(0.2, closure: {
+                [weak self] in
+                if let s = self {
+                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
+                }
+            })
+            return
+        }
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
+    }
+    
+    var needsQuizUpdateAttention: Bool {
+        return step.block.name == "matching"
     }
 }
 
@@ -386,18 +443,69 @@ extension WebStepViewController : UIScrollViewDelegate {
 }
 
 extension WebStepViewController : QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool) {
-        quizPlaceholderViewHeight.constant = newHeight
-        view.setNeedsLayout()
-        if animated { 
-            UIView.animate(withDuration: 0.2, animations: {
-                [weak self] in
-                self?.view.layoutIfNeeded()
-                self?.quizPlaceholderView.layoutIfNeeded()
-                })
-        } else {
-            self.view.layoutIfNeeded()
-            self.quizPlaceholderView.layoutIfNeeded()
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
+//        if quizPlaceholderViewHeight.constant == newHeight {
+//            return
+//        }
+        
+        if needsQuizUpdateAttention && !breaksSynchronizationControl {
+            if newHeight <= self.quizPlaceholderViewHeight.constant {
+                print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
+                return
+            }
+        
+            if isCurrentlyUpdatingHeight {
+                print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
+                if let last = lastUpdatingQuizHeight {
+                    if newHeight > last {
+                        lastUpdatingQuizHeight = newHeight
+                    }
+                } else {
+                    lastUpdatingQuizHeight = newHeight
+                }
+                return
+            }
+        
+            isCurrentlyUpdatingHeight = true
+            print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
         }
+        
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.quizPlaceholderViewHeight.constant = newHeight
+//        view.setNeedsLayout()
+            if animated { 
+                UIView.animate(withDuration: 0.2, animations: {
+                    [weak self] in
+                    self?.view.layoutIfNeeded()
+                }, completion: {
+                    [weak self] 
+                    completed in
+                    if (self?.needsQuizUpdateAttention ?? false) {
+                        self?.isCurrentlyUpdatingHeight = false
+                        if self?.lastUpdatingQuizHeight == newHeight {
+                            self?.lastUpdatingQuizHeight = nil
+                        }
+                        if let h = self?.lastUpdatingQuizHeight {
+                            self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
+                        }
+                    }
+                })
+            } else {
+                self?.view.layoutIfNeeded()
+                if (self?.needsQuizUpdateAttention ?? false) {
+
+                    self?.isCurrentlyUpdatingHeight = false
+                    if self?.lastUpdatingQuizHeight == newHeight {
+                        self?.lastUpdatingQuizHeight = nil
+                    }
+                    if let h = self?.lastUpdatingQuizHeight {
+                        self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
+                    }
+                }
+            }
+            
+        }
+    
     }
 }

@@ -43,6 +43,8 @@ class Attempt: NSObject {
             return SortingDataset(json: json)
         case "free-answer":
             return FreeAnswerDataset(json: json)
+        case "matching":
+            return MatchingDataset(json: json)
         default: 
             return nil
         }

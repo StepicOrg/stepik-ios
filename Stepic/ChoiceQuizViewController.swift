@@ -15,7 +15,7 @@ class ChoiceQuizViewController: QuizViewController {
 
     var tableView = UITableView()
     
-    var webViewHelper : ControllerQuizWebViewHelper!
+    var webViewHelper : ControllerQuizWebViewHelper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +59,8 @@ class ChoiceQuizViewController: QuizViewController {
     
     override func updateQuizAfterAttemptUpdate() {
         self.choices = [Bool](repeating: false, count: optionsCount)
-        webViewHelper.initChoicesHeights()
-        webViewHelper.updateChoicesHeights()
+        webViewHelper?.initChoicesHeights()
+        webViewHelper?.updateChoicesHeights()
     }
     
         
@@ -87,13 +87,13 @@ class ChoiceQuizViewController: QuizViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
                 
-        webViewHelper.initChoicesHeights()
+        webViewHelper?.initChoicesHeights()
         for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
             if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? ChoiceQuizTableViewCell {
                 cell.choiceWebView.reload()
             }
         }
-        webViewHelper.updateChoicesHeights()
+        webViewHelper?.updateChoicesHeights()
     }
     
 }
@@ -102,7 +102,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let _ = attempt?.dataset as? ChoiceDataset {
-            return CGFloat(webViewHelper.cellHeights[(indexPath as NSIndexPath).row])
+            return CGFloat(webViewHelper?.cellHeights[(indexPath as NSIndexPath).row] ?? 0)
         }
         return 0
     }
@@ -163,7 +163,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let dataset = attempt?.dataset as? ChoiceDataset {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
-            webViewHelper.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(dataset.options[(indexPath as NSIndexPath).row])
+            webViewHelper?.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(dataset.options[(indexPath as NSIndexPath).row])
             if dataset.isMultipleChoice {
                 cell.checkBox.boxType = .square
             } else {
