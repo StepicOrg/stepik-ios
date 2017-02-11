@@ -185,6 +185,20 @@
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
+		0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
+		0859AE961E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
+		0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
+		0859AE9A1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */; };
+		0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
+		0859AE9C1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
+		0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */; };
+		0859AEA21E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */; };
+		0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
+		0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
+		0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */; };
+		0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */; };
+		0859AEAA1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
+		0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
 		085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */; };
@@ -845,6 +859,13 @@
 		085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerQuizWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		0858B7081CFF271200459A6A /* TagDetectionUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetectionUtil.swift; sourceTree = "<group>"; };
+		0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewController.swift; sourceTree = "<group>"; };
+		0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksChoiceTableViewCell.swift; sourceTree = "<group>"; };
+		0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillBlanksChoiceTableViewCell.xib; sourceTree = "<group>"; };
+		0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksInputTableViewCell.swift; sourceTree = "<group>"; };
+		0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillBlanksInputTableViewCell.xib; sourceTree = "<group>"; };
+		0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksTextTableViewCell.swift; sourceTree = "<group>"; };
+		0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillBlanksTextTableViewCell.xib; sourceTree = "<group>"; };
 		085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsAPI.swift; sourceTree = "<group>"; };
 		085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControllerDeepLinkRouter.swift; sourceTree = "<group>"; };
 		085D5CD91D007F2100092060 /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1432,6 +1453,44 @@
 				0858B7081CFF271200459A6A /* TagDetectionUtil.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0859AEA51E4F26AF00A0D206 /* Text Cell */,
+				0859AE9E1E4F229000A0D206 /* Input Cell */,
+				0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */,
+				0859AE9D1E4F228500A0D206 /* Choice Cell */,
+			);
+			name = FillBlanksQuizViewController;
+			sourceTree = "<group>";
+		};
+		0859AE9D1E4F228500A0D206 /* Choice Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0859AE971E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift */,
+				0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */,
+			);
+			name = "Choice Cell";
+			sourceTree = "<group>";
+		};
+		0859AE9E1E4F229000A0D206 /* Input Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */,
+				0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */,
+			);
+			name = "Input Cell";
+			sourceTree = "<group>";
+		};
+		0859AEA51E4F26AF00A0D206 /* Text Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */,
+				0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */,
+			);
+			name = "Text Cell";
 			sourceTree = "<group>";
 		};
 		085D5CDA1D007F2100092060 /* StepicTests */ = {
@@ -2086,6 +2145,7 @@
 				08F485AD1C580DB8000165AA /* MathQuizViewController */,
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
+				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -2408,6 +2468,7 @@
 				086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */,
 				08D1210C1C937B2200A54ABC /* MathJax in Resources */,
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
+				0859AE9C1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				08CB6B441C98774200E8BA50 /* SbEntranceViewController.xib in Resources */,
 				08263D731DE5F230002E5B7F /* NotificationTimePickerViewController.xib in Resources */,
@@ -2420,6 +2481,7 @@
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
+				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08263D8F1DE5FC01002E5B7F /* Info.plist in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08263D871DE5FC01002E5B7F /* Alert.xib in Resources */,
@@ -2445,6 +2507,7 @@
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
 				08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
+				0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2452,6 +2515,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
@@ -2461,6 +2525,7 @@
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */,
 				08263DA21DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */,
+				0859AEAA1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
 				0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
@@ -2490,6 +2555,7 @@
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
+				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
@@ -2721,6 +2787,7 @@
 				08CB6B451C98776400E8BA50 /* SbEntranceViewController.swift in Sources */,
 				08407EC81DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
+				0859AEA21E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */,
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				08263D991DE5FC01002E5B7F /* PresentationType.swift in Sources */,
@@ -2737,6 +2804,7 @@
 				08EB85ED1D100B7400E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08D120841C937B2200A54ABC /* Model.xcdatamodeld in Sources */,
 				08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
+				0859AE961E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
 				08019A831DEED7E900691F0B /* SubmissonManager.swift in Sources */,
@@ -2823,6 +2891,7 @@
 				08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08D120B01C937B2200A54ABC /* StringQuizViewController.swift in Sources */,
 				08D120B11C937B2200A54ABC /* FreeAnswerReply.swift in Sources */,
+				0859AE9A1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				08D120B21C937B2200A54ABC /* QuizViewController.swift in Sources */,
 				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
@@ -2923,6 +2992,7 @@
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
+				0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
@@ -3003,6 +3073,7 @@
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				08263D8C1DE5FC01002E5B7F /* CoverVerticalFromTopAnimation.swift in Sources */,
+				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				08263D941DE5FC01002E5B7F /* ModalSize.swift in Sources */,
@@ -3194,6 +3265,7 @@
 				086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
+				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -3205,6 +3277,8 @@
 				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
+				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
+				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
