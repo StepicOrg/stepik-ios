@@ -62,9 +62,15 @@ class StepsViewController: RGPageViewController {
     var doesPresentActivityIndicatorView : Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                UIThread.performUI{self.activityView.isHidden = false}
+                DispatchQueue.main.async{
+                    [weak self] in
+                    self?.activityView.isHidden = false
+                }
             } else {
-                UIThread.performUI{self.activityView.isHidden = true}
+                DispatchQueue.main.async{
+                    [weak self] in
+                    self?.activityView.isHidden = true
+                }
             }
         }
     }
@@ -72,9 +78,15 @@ class StepsViewController: RGPageViewController {
     var doesPresentWarningView : Bool = false {
         didSet {
             if doesPresentWarningView {
-                UIThread.performUI{self.warningView.isHidden = false}
+                DispatchQueue.main.async{
+                    [weak self] in
+                    self?.warningView.isHidden = false
+                }
             } else {
-                UIThread.performUI{self.warningView.isHidden = true}
+                DispatchQueue.main.async{
+                    [weak self] in
+                    self?.warningView.isHidden = true
+                }
             }
         }
     }
@@ -139,7 +151,8 @@ class StepsViewController: RGPageViewController {
                     }
                 } 
                 
-                UIThread.performUI {
+                DispatchQueue.main.async {
+                    [weak self] in
                     s.view.isUserInteractionEnabled = true
                     reloadBlock()
                     s.doesPresentWarningView = false
@@ -156,7 +169,7 @@ class StepsViewController: RGPageViewController {
             }, error: {
                 errorText in
                 print("error while loading steps in stepsviewcontroller")
-                UIThread.performUI{
+                DispatchQueue.main.async{
                     [weak self] in
                     if let s = self {
                         s.view.isUserInteractionEnabled = true

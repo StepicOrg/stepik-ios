@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool)
+protocol QuizControllerDelegate: class {
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool)
 }
