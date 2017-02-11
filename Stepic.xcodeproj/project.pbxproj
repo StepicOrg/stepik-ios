@@ -199,6 +199,8 @@
 		0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */; };
 		0859AEAA1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
 		0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
+		0859AEAD1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
+		0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */; };
 		085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */; };
 		085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */; };
@@ -866,6 +868,7 @@
 		0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillBlanksInputTableViewCell.xib; sourceTree = "<group>"; };
 		0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksTextTableViewCell.swift; sourceTree = "<group>"; };
 		0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FillBlanksTextTableViewCell.xib; sourceTree = "<group>"; };
+		0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksActiveTableViewCellProtocol.swift; sourceTree = "<group>"; };
 		085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsAPI.swift; sourceTree = "<group>"; };
 		085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControllerDeepLinkRouter.swift; sourceTree = "<group>"; };
 		085D5CD91D007F2100092060 /* StepicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1462,6 +1465,7 @@
 				0859AE9E1E4F229000A0D206 /* Input Cell */,
 				0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */,
 				0859AE9D1E4F228500A0D206 /* Choice Cell */,
+				0859AEAC1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift */,
 			);
 			name = FillBlanksQuizViewController;
 			sourceTree = "<group>";
@@ -2819,6 +2823,7 @@
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -3110,6 +3115,7 @@
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
+				0859AEAD1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,

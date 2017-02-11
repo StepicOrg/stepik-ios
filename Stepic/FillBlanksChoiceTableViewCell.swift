@@ -15,7 +15,7 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     
     let selectAnswerString: String = "Select your answer"
     let selectButtonString: String = "Select"
-    let selectedAction : (Void -> Void)? = nil
+    let selectedAction : ((Void) -> Void)? = nil
     
     @IBAction func selectPressed(_ sender: UIButton) {
         selectedAction?()
@@ -34,11 +34,17 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
         optionLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         optionLabel.textAlignment = NSTextAlignment.natural
         optionLabel.backgroundColor = UIColor.clear
+        optionLabel.textColor = UIColor.gray
     }
 
-    class func getHeight(text: String, width w: CGFloat) -> String {
-        let buttonWidth = 50
-        let buttonToLabelDistance = 8
+    func setOption(text: String) {
+        optionLabel.text = text
+        optionLabel.textColor = UIColor.black
+    }
+    
+    class func getHeight(text: String, width w: CGFloat) -> CGFloat {
+        let buttonWidth : CGFloat = 50
+        let buttonToLabelDistance : CGFloat = 8
         return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w -  24 - buttonWidth - buttonToLabelDistance)) + 17
     }
     
@@ -49,4 +55,10 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+
+extension FillBlanksChoiceTableViewCell : FillBlanksActiveTableViewCellProtocol {
+    var result : String {
+        return optionLabel.text == selectAnswerString ? "" : (optionLabel.text ?? "")
+    }
 }

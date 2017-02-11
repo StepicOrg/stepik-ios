@@ -47,16 +47,37 @@ class FillBlanksQuizViewController: QuizViewController {
     }
     */
 
-    func getAnswerForComponent(atIndex: Int) -> String {
+    func getAnswerForComponent(atIndex index: Int) -> String? {
         guard let dataset = attempt?.dataset as? FillBlanksDataset else {
-            return ""
+            return nil
         }
         
         guard index < dataset.components.count else {
-            return ""
+            return nil
         }
         
+        if let p = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FillBlanksActiveTableViewCellProtocol {
+            return p.result
+        } else {
+            return nil
+        }
         
+    }
+    
+    override func getReply() -> Reply {
+        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+            return FillBlanksReply(blanks: [])
+        }
+        
+        var blanks : [String] = []
+        
+        for (index, component) in dataset.components.enumerate() {
+            if component.type != .text {
+                blanks += [getAnswerForComponent(atIndex: index)]
+            }
+        }
+        
+        return FillBlanksReply(blanks: blanks)
     }
 }
 
@@ -76,13 +97,21 @@ extension FillBlanksQuizViewController : UITableViewDelegate {
         case .text:
             return FillBlanksTextTableViewCell.getHeight(htmlText: dataset.components[indexPath.row].text, width: self.view.bounds.width)
         case .select:
-            return FillBlanksChoiceTableViewCell.getHeight(text: getAnswerForComponent(atIndex: indexPath.row), width: self.view.bounds.width)
+            if let ans = getAnswerForComponent(atIndex: indexPath.row) {
+                return FillBlanksChoiceTableViewCell.getHeight(text: ans, width: self.view.bounds.width)
+            } else {
+                return 0
+            }
         }
     }
     
 }
 
 extension FillBlanksQuizViewController : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if attempt != nil {

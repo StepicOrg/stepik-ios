@@ -19,7 +19,6 @@ class FillBlanksReply: Reply {
     
     required init(json: JSON) {
         blanks = json["blanks"].arrayValue.map({return $0.stringValue})
-        super.init()
     }
     
     var dictValue : [String : Any] {

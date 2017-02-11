@@ -14,11 +14,11 @@ class FillBlanksInputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var inputTextField: UITextField!
     
-    let placeholderText = "Enter your answer" 
+    let placeholderString : String = "Enter your answer" 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        inputTextField.placeholder = placeholderText
+        inputTextField.placeholder = placeholderString
         // Initialization code
     }
 
@@ -29,6 +29,12 @@ class FillBlanksInputTableViewCell: UITableViewCell {
     }
     
     
-    class var defaultHeight : CGFloat = 44
+    static let defaultHeight : CGFloat = 44
     
+}
+
+extension FillBlanksInputTableViewCell : FillBlanksActiveTableViewCellProtocol {
+    var result : String {
+        return inputTextField.text ?? ""
+    }
 }
