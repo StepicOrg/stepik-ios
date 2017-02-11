@@ -71,9 +71,11 @@ class FillBlanksQuizViewController: QuizViewController {
         
         var blanks : [String] = []
         
-        for (index, component) in dataset.components.enumerate() {
+        for (index, component) in dataset.components.enumerated() {
             if component.type != .text {
-                blanks += [getAnswerForComponent(atIndex: index)]
+                if let ans = getAnswerForComponent(atIndex: index) {
+                    blanks += [ans]
+                }
             }
         }
         
@@ -110,7 +112,32 @@ extension FillBlanksQuizViewController : UITableViewDelegate {
 extension FillBlanksQuizViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+            return UITableViewCell()
+        }
+        
+        guard indexPath.row < dataset.components.count else {
+            return UITableViewCell()
+        }
+        
+        let component = dataset.components[indexPath.row]
+        
+        switch component.type {
+        case .text:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksTextTableViewCell", for: indexPath) as! FillBlanksTextTableViewCell
+            cell.setHTMLText(component.text)
+            return cell 
+        case .input:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksInputTableViewCell", for: indexPath) as! FillBlanksInputTableViewCell
+            return cell
+        case .select:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksChoiceTableViewCell", for: indexPath) as! FillBlanksChoiceTableViewCell
+            cell.selectedAction = {
+                [weak self] in
+                
+            }
+            return cell
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

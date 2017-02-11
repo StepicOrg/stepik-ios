@@ -15,7 +15,7 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     
     let selectAnswerString: String = "Select your answer"
     let selectButtonString: String = "Select"
-    let selectedAction : ((Void) -> Void)? = nil
+    var selectedAction : ((Void) -> Void)? = nil
     
     @IBAction func selectPressed(_ sender: UIButton) {
         selectedAction?()
