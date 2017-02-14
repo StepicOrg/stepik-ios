@@ -23,10 +23,10 @@ struct StepicApplicationsInfo {
         redirectUri: "stepic://stepic.org/password"
     )
 
-    static let apiURL = "https://stepik.org/api"    
-    static let oauthURL = "https://stepik.org/oauth2"
-    static let stepicURL = "https://stepik.org"
-    static let versionInfoURL = "https://stepik.org/media/attachments/lesson/26869/version.json"
+    static let apiURL = "https://dev:512@dev.stepik.org/api"    
+    static let oauthURL = "https://dev:512@dev.stepik.org/oauth2"
+    static let stepicURL = "https://dev:512@dev.stepik.org@dev:512"
+    static let versionInfoURL = "https://dev:512@stepik.org/media/attachments/lesson/26869/version.json"
     
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
