@@ -17,10 +17,10 @@ struct StepicApplicationsInfo {
     )
     
     static var password : ApplicationInfo? = ApplicationInfo(
-        clientId: "FTQwD022nS8FDO25NzfTyYv1rFGvyHHEtVrk1Men",
-        clientSecret: "4VMEZVDV5ApYBvSk1Y5yqDQthp4PO4NpXauaPnqn7rSS2KZd3PJleebX1GqHweWRSCCPZ2KgN8hRpqH1IGIfvRBjDcpPlVib2mTHZAXTm49agD16lqMhnmHBGfVYRhOz",
-        credentials: "RlRRd0QwMjJuUzhGRE8yNU56ZlR5WXYxckZHdnlISEV0VnJrMU1lbjo0Vk1FWlZEVjVBcFlCdlNrMVk1eXFEUXRocDRQTzROcFhhdWFQbnFuN3JTUzJLWmQzUEpsZWViWDFHcUh3ZVdSU0NDUFoyS2dOOGhScHFIMUlHSWZ2UkJqRGNwUGxWaWIybVRIWkFYVG00OWFnRDE2bHFNaG5tSEJHZlZZUmhPeg==",
-        redirectUri: "stepic://stepic.org/oauth"
+        clientId: "mxTldCXcL6WCnmHbElZAYDtRH4yHWGFqVD8kMPNK",
+        clientSecret: "P29j50MBdIUSMJF8qy2LWIA6Zai1YschwrOB3WZLqqof6fMdkLsKIkWLO2yGMbMUrnbO5mBUmNIaTfHcSdn4QHoSdExWH0dkAuzOaLkSptu85DhcWtwM2kD53PnZrP29",
+        credentials: "bXhUbGRDWGNMNldDbm1IYkVsWkFZRHRSSDR5SFdHRnFWRDhrTVBOSzpQMjlqNTBNQmRJVVNNSkY4cXkyTFdJQTZaYWkxWXNjaHdyT0IzV1pMcXFvZjZmTWRrTHNLSWtXTE8yeUdNYk1Vcm5iTzVtQlVtTklhVGZIY1NkbjRRSG9TZEV4V0gwZGtBdXpPYUxrU3B0dTg1RGhjV3R3TTJrRDUzUG5aclAyOQ==",
+        redirectUri: "stepic://stepic.org/password"
     )
 
     static let apiURL = "https://dev.stepik.org/api"    
