@@ -46,7 +46,6 @@ class UserActivity {
             } else {
                 cStreak += 1
             }
-            print("pin: \(pin), current: \(cStreak), longest: \(lStreak)") 
         }
         if cStreak > lStreak {
             lStreak = cStreak

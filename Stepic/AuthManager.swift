@@ -111,13 +111,14 @@ class AuthManager : NSObject {
                 return
             }
             
+            print(json)
+
             if json["error"] != nil {
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
                 failure(e)
                 return
             }
             
-            print(json)
             //            print("no error")
             let token : StepicToken = StepicToken(json: json)
             //            print(token.accessToken)

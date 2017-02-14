@@ -17,16 +17,19 @@ struct StepicApplicationsInfo {
     )
     
     static var password : ApplicationInfo? = ApplicationInfo(
-        clientId: "1r15RgyxPvb91KSSDGwDZlFWzEXlegD9uz52MN4O",
-        clientSecret: "plKrsCERhQJG9j83LvX2kGZOGj1F4GIzvgazrz1W0Ji8nQxvndrbiIpmx1tMuD1ciiN32Rp3fb4ce5JFpfL3Zq0S3LqDAnHjaDB6wLTtnwB25VlngSO58cDBLVqk7dGA",
-        credentials: "MXIxNVJneXhQdmI5MUtTU0RHd0RabEZXekVYbGVnRDl1ejUyTU40TzpwbEtyc0NFUmhRSkc5ajgzTHZYMmtHWk9HajFGNEdJenZnYXpyejFXMEppOG5ReHZuZHJiaUlwbXgxdE11RDFjaWlOMzJScDNmYjRjZTVKRnBmTDNacTBTM0xxREFuSGphREI2d0xUdG53QjI1VmxuZ1NPNThjREJMVnFrN2RHQQ==",
-        redirectUri: "stepic://stepic.org/password"
+        clientId: "FTQwD022nS8FDO25NzfTyYv1rFGvyHHEtVrk1Men",
+        clientSecret: "4VMEZVDV5ApYBvSk1Y5yqDQthp4PO4NpXauaPnqn7rSS2KZd3PJleebX1GqHweWRSCCPZ2KgN8hRpqH1IGIfvRBjDcpPlVib2mTHZAXTm49agD16lqMhnmHBGfVYRhOz",
+        credentials: "RlRRd0QwMjJuUzhGRE8yNU56ZlR5WXYxckZHdnlISEV0VnJrMU1lbjo0Vk1FWlZEVjVBcFlCdlNrMVk1eXFEUXRocDRQTzROcFhhdWFQbnFuN3JTUzJLWmQzUEpsZWViWDFHcUh3ZVdSU0NDUFoyS2dOOGhScHFIMUlHSWZ2UkJqRGNwUGxWaWIybVRIWkFYVG00OWFnRDE2bHFNaG5tSEJHZlZZUmhPeg==",
+        redirectUri: "stepic://stepic.org/oauth"
     )
 
-    static let apiURL = "https://dev:512@dev.stepik.org/api"    
-    static let oauthURL = "https://dev:512@dev.stepik.org/oauth2"
-    static let stepicURL = "https://dev:512@dev.stepik.org@dev:512"
-    static let versionInfoURL = "https://dev:512@stepik.org/media/attachments/lesson/26869/version.json"
+    static let apiURL = "https://dev.stepik.org/api"    
+    static let oauthURL = "https://dev.stepik.org/oauth2"
+    static let stepicURL = "https://dev.stepik.org"
+    static let versionInfoURL = "https://stepik.org/media/attachments/lesson/26869/version.json"
+   
+    static let cookiePrefix = "dev_"
+
     
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
