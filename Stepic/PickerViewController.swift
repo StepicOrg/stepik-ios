@@ -47,8 +47,13 @@ class PickerViewController: UIViewController {
     
     @IBAction func selectPressed(_ sender: UIButton) {
         selectedAction?()
+        dismiss(animated: true, completion: nil)
+        selectedBlock?()
     }
     
+    var selectedData: String {
+        return data[picker.selectedRow(inComponent: 0)]
+    }
     
     /*
      // MARK: - Navigation

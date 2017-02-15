@@ -50,9 +50,6 @@ class NotificationTimePickerViewController: PickerViewController {
                 
                 PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
                 LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
-                
-                s.dismiss(animated: true, completion: nil)
-                s.selectedBlock?()
             }
         }
     }

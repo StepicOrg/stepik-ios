@@ -1431,6 +1431,15 @@
 			name = "Social networks";
 			sourceTree = "<group>";
 		};
+		083F11761E54DB09006EF4F1 /* Picker View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				084BD9BA1E5368B600B1901E /* PickerViewController.swift */,
+				08263D6F1DE5F230002E5B7F /* PickerViewController.xib */,
+			);
+			name = "Picker View Controller";
+			sourceTree = "<group>";
+		};
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
@@ -1551,7 +1560,7 @@
 				08F485971C5752D0000165AA /* UIViewLoadExtension.swift */,
 				083622DA1CD1FA4F00CD8915 /* StepTabView */,
 				089F58871D22BD44000CD540 /* DiscussionCountView */,
-				084BD9BA1E5368B600B1901E /* PickerViewController.swift */,
+				083F11761E54DB09006EF4F1 /* Picker View Controller */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1746,7 +1755,6 @@
 				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
 				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
-				08263D6F1DE5F230002E5B7F /* PickerViewController.xib */,
 			);
 			name = "User Preferences";
 			sourceTree = "<group>";

@@ -45,6 +45,8 @@ class Attempt: NSObject {
             return FreeAnswerDataset(json: json)
         case "matching":
             return MatchingDataset(json: json)
+        case "fill-blanks":
+            return FillBlanksDataset(json: json)
         default: 
             return nil
         }

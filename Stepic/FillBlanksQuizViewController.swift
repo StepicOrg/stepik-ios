@@ -56,6 +56,7 @@ class FillBlanksQuizViewController: QuizViewController {
             return nil
         }
         
+        //TODO: Remove cellForRow from here
         if let p = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FillBlanksActiveTableViewCellProtocol {
             return p.result
         } else {
@@ -81,25 +82,45 @@ class FillBlanksQuizViewController: QuizViewController {
         
         return FillBlanksReply(blanks: blanks)
     }
-}
+    
+    let fillBlanksPickerPresenter : Presentr = {
+        let fillBlanksPickerPresenter = Presentr(presentationType: .popup)
+        return fillBlanksPickerPresenter
+    }()
 
-extension FillBlanksQuizViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    func presentPicker(data: [String], selectedBlock: @escaping (String)->Void) {
+        let vc = PickerViewController(nibName: "PickerViewController", bundle: nil) 
+        vc.data = data
+        vc.selectedBlock = {
+            [weak self] in 
+            selectedBlock(vc.selectedData)
+            self?.tableView.reloadData()
+            if let exp = self?.expectedQuizHeight, 
+                let without = self?.heightWithoutQuiz {
+                self?.delegate?.needsHeightUpdate(exp + without, animated: true, breaksSynchronizationControl: false)
+
+            }
+        }
+        customPresentViewController(fillBlanksPickerPresenter, viewController: vc, animated: true, completion: nil)
+    }
+    
+    func heightForComponentRow(index: Int) -> CGFloat {
         guard let dataset = attempt?.dataset as? FillBlanksDataset else {
             return 0
         }
         
-        guard indexPath.row < dataset.components.count else {
+        guard index < dataset.components.count else {
             return 0
         }
         
-        switch dataset.components[indexPath.row].type {
+        switch dataset.components[index].type {
         case .input :
             return FillBlanksInputTableViewCell.defaultHeight
         case .text:
-            return FillBlanksTextTableViewCell.getHeight(htmlText: dataset.components[indexPath.row].text, width: self.view.bounds.width)
+            return FillBlanksTextTableViewCell.getHeight(htmlText: dataset.components[index].text, width: self.view.bounds.width)
         case .select:
-            if let ans = getAnswerForComponent(atIndex: indexPath.row) {
+            if let ans = getAnswerForComponent(atIndex: index) {
                 return FillBlanksChoiceTableViewCell.getHeight(text: ans, width: self.view.bounds.width)
             } else {
                 return 0
@@ -107,11 +128,31 @@ extension FillBlanksQuizViewController : UITableViewDelegate {
         }
     }
     
+    override func updateQuizAfterAttemptUpdate() {        
+        
+        self.tableView.reloadData()
+        self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: false)
+    }
+
+    
+    override var expectedQuizHeight : CGFloat {
+        return self.tableView.contentSize.height
+    }
+
+}
+
+extension FillBlanksQuizViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("height for row at indexPath \(indexPath.row)")
+        return heightForComponentRow(index: indexPath.row)
+    }
+    
 }
 
 extension FillBlanksQuizViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cell for row at indexPath \(indexPath.row)")
         guard let dataset = attempt?.dataset as? FillBlanksDataset else {
             return UITableViewCell()
         }
@@ -126,7 +167,7 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksTextTableViewCell", for: indexPath) as! FillBlanksTextTableViewCell
             cell.setHTMLText(component.text)
-            return cell 
+            return cell
         case .input:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksInputTableViewCell", for: indexPath) as! FillBlanksInputTableViewCell
             return cell
@@ -134,7 +175,11 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksChoiceTableViewCell", for: indexPath) as! FillBlanksChoiceTableViewCell
             cell.selectedAction = {
                 [weak self] in
-                
+                self?.presentPicker(data: component.options, selectedBlock: {
+                    [weak self]
+                    selectedOption in
+                    cell.setOption(text: selectedOption)
+                })
             }
             return cell
         }
