@@ -16,6 +16,8 @@ class FillBlanksTextTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        contentView.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
         optionLabel.numberOfLines = 0
         optionLabel.font = UIFont(name: "ArialMT", size: 16)
         optionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail

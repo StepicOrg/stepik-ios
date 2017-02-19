@@ -14,10 +14,15 @@ class FillBlanksInputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var inputTextField: UITextField!
     
-    let placeholderString : String = "Enter your answer" 
+    let placeholderString : String = NSLocalizedString("FillBlankInputTextFieldPlaceholder", comment: "") 
+    
+    var answerDidChange : ((String) -> Void)? 
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        contentView.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
         inputTextField.placeholder = placeholderString
         // Initialization code
     }
@@ -28,13 +33,16 @@ class FillBlanksInputTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func textFieldDidChange(_ sender: UITextField) {
+        answerDidChange?(inputTextField.text ?? "")
+    }
+    
+    var answer : String? = "" {
+        didSet {
+            inputTextField.text = answer
+        }
+    }
     
     static let defaultHeight : CGFloat = 44
     
-}
-
-extension FillBlanksInputTableViewCell : FillBlanksActiveTableViewCellProtocol {
-    var result : String {
-        return inputTextField.text ?? ""
-    }
 }

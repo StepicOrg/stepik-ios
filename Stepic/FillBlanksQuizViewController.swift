@@ -23,7 +23,8 @@ class FillBlanksQuizViewController: QuizViewController {
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.allowsSelection = false
+
         tableView.register(UINib(nibName: "FillBlanksChoiceTableViewCell", bundle: nil), forCellReuseIdentifier: "FillBlanksChoiceTableViewCell")
         tableView.register(UINib(nibName: "FillBlanksTextTableViewCell", bundle: nil), forCellReuseIdentifier: "FillBlanksTextTableViewCell")
         tableView.register(UINib(nibName: "FillBlanksInputTableViewCell", bundle: nil), forCellReuseIdentifier: "FillBlanksInputTableViewCell")
@@ -35,7 +36,6 @@ class FillBlanksQuizViewController: QuizViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     /*
     // MARK: - Navigation
@@ -56,13 +56,7 @@ class FillBlanksQuizViewController: QuizViewController {
             return nil
         }
         
-        //TODO: Remove cellForRow from here
-        if let p = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? FillBlanksActiveTableViewCellProtocol {
-            return p.result
-        } else {
-            return nil
-        }
-        
+        return answerForComponent[index] ?? ""
     }
     
     override func getReply() -> Reply {
@@ -92,6 +86,7 @@ class FillBlanksQuizViewController: QuizViewController {
     func presentPicker(data: [String], selectedBlock: @escaping (String)->Void) {
         let vc = PickerViewController(nibName: "PickerViewController", bundle: nil) 
         vc.data = data
+        vc.titleLabel.text = NSLocalizedString("FillBlankOptionTitle", comment: "") 
         vc.selectedBlock = {
             [weak self] in 
             selectedBlock(vc.selectedData)
@@ -128,12 +123,36 @@ class FillBlanksQuizViewController: QuizViewController {
         }
     }
     
+    var answerForComponent: [Int: String] = [:]
+    
     override func updateQuizAfterAttemptUpdate() {        
-        
+        self.tableView.isUserInteractionEnabled = true
+        answerForComponent = [:]
         self.tableView.reloadData()
         self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: false)
     }
 
+    override func updateQuizAfterSubmissionUpdate(reload: Bool) {
+        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+            return
+        }
+        
+        guard let reply = submission?.reply as? FillBlanksReply else {
+            return
+        }
+        
+        self.tableView.isUserInteractionEnabled = false
+        
+        var activeComponentIndex = 0
+        for (index, component) in dataset.components.enumerated() {
+            if component.type != .text {
+                answerForComponent[index] = reply.blanks[activeComponentIndex]
+                activeComponentIndex += 1
+            }
+        }
+        
+        self.tableView.reloadData()
+    }
     
     override var expectedQuizHeight : CGFloat {
         return self.tableView.contentSize.height
@@ -162,7 +181,7 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
         }
         
         let component = dataset.components[indexPath.row]
-        
+                
         switch component.type {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksTextTableViewCell", for: indexPath) as! FillBlanksTextTableViewCell
@@ -170,15 +189,32 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
             return cell
         case .input:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksInputTableViewCell", for: indexPath) as! FillBlanksInputTableViewCell
+            if let ans = answerForComponent[indexPath.row]  {
+                cell.answer = ans
+            } else {
+                cell.answer = ""
+            }
+            cell.answerDidChange = {
+                [weak self] 
+                answer in
+                self?.answerForComponent[indexPath.row] = answer
+                self?.tableView.reloadData()
+            }
             return cell
         case .select:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksChoiceTableViewCell", for: indexPath) as! FillBlanksChoiceTableViewCell
+            if let ans = answerForComponent[indexPath.row] {
+                cell.setOption(text: ans)
+            } else {
+                cell.setOption(text: nil)
+            }
             cell.selectedAction = {
                 [weak self] in
                 self?.presentPicker(data: component.options, selectedBlock: {
                     [weak self]
                     selectedOption in
-                    cell.setOption(text: selectedOption)
+                    self?.answerForComponent[indexPath.row] = selectedOption
+                    self?.tableView.reloadData()
                 })
             }
             return cell

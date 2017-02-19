@@ -13,8 +13,8 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var optionLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     
-    let selectAnswerString: String = "Select your answer"
-    let selectButtonString: String = "Select"
+    let selectAnswerString: String = NSLocalizedString("FillBlanksSelectAnswerString", comment: "")
+    let selectButtonString: String = NSLocalizedString("FillBlanksSelectButtonString", comment: "")
     var selectedAction : ((Void) -> Void)? = nil
     
     @IBAction func selectPressed(_ sender: UIButton) {
@@ -24,6 +24,9 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        contentView.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
         
         optionLabel.text = selectAnswerString
         selectButton.setTitle(selectButtonString, for: .normal)
@@ -37,9 +40,14 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
         optionLabel.textColor = UIColor.gray
     }
 
-    func setOption(text: String) {
-        optionLabel.text = text
-        optionLabel.textColor = UIColor.black
+    func setOption(text: String?) {
+        if let t = text {
+            optionLabel.text = text
+            optionLabel.textColor = UIColor.black
+        } else {
+            optionLabel.text = selectAnswerString
+            optionLabel.textColor = UIColor.gray
+        }
     }
     
     class func getHeight(text: String, width w: CGFloat) -> CGFloat {
@@ -55,10 +63,4 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-}
-
-extension FillBlanksChoiceTableViewCell : FillBlanksActiveTableViewCellProtocol {
-    var result : String {
-        return optionLabel.text == selectAnswerString ? "" : (optionLabel.text ?? "")
-    }
 }
