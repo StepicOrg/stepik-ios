@@ -8,66 +8,59 @@
 
 import UIKit
 
-class NotificationTimePickerViewController: UIViewController {
-
-    @IBOutlet weak var picker: UIPickerView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var selectTimeLabel: UILabel!
+class NotificationTimePickerViewController: PickerViewController {
     
-    var selectedBlock: ((Void) -> Void)? 
     var startHour : Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        picker.dataSource = self
-        picker.delegate = self
-        picker.selectRow(startHour, inComponent: 0, animated: false)
+        titleLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
         
-        localize()
-        // Do any additional setup after loading the view.
+        initializeData()
+        initializeSelectedAction()
+        picker.reloadAllComponents()
+        picker.selectRow(startHour, inComponent: 0, animated: false)
     }
-
-    func localize() {
-        backButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
-        selectButton.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
-        selectTimeLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
+    
+    func initializeData() {
+        data = []
+        for hour in 0..<24 {
+            data += [getDisplayingStreakTimeInterval(startHour: hour)]
+        }
     }
+    
+    func initializeSelectedAction() {
+        selectedAction = {
+            [weak self] in
+            if let s = self {
+                let selectedLocalStartHour = s.picker.selectedRow(inComponent: 0)
+                let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
+                var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
+                
+                if selectedUTCStartHour < 0 {
+                    selectedUTCStartHour = 24 + selectedUTCStartHour
+                }
+                
+                if selectedUTCStartHour > 23 {
+                    selectedUTCStartHour = selectedUTCStartHour - 24
+                }
+                
+                print("selected UTC start hour -> \(selectedUTCStartHour)")
+                
+                PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
+                LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
+            }
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
         
-    @IBAction func backPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
     
-    @IBAction func selectPressed(_ sender: UIButton) {
-        
-        let selectedLocalStartHour = picker.selectedRow(inComponent: 0)
-        let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
-        var selectedUTCStartHour = selectedLocalStartHour - timeZoneDiff
-        
-        if selectedUTCStartHour < 0 {
-            selectedUTCStartHour = 24 + selectedUTCStartHour
-        }
-        
-        if selectedUTCStartHour > 23 {
-            selectedUTCStartHour = selectedUTCStartHour - 24
-        }
-        
-        print("selected UTC start hour -> \(selectedUTCStartHour)")
-        
-        PreferencesContainer.notifications.streaksNotificationStartHourUTC = selectedUTCStartHour
-        LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: selectedUTCStartHour)
-
-    
-        
-        dismiss(animated: true, completion: nil)
-        selectedBlock?()
-    }
     
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
         
@@ -93,20 +86,4 @@ class NotificationTimePickerViewController: UIViewController {
     }
     */
 
-}
-
-extension NotificationTimePickerViewController : UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 24
-    }
-}
-
-extension NotificationTimePickerViewController : UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return getDisplayingStreakTimeInterval(startHour: row)
-    }
 }

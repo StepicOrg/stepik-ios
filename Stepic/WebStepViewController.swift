@@ -204,8 +204,14 @@ class WebStepViewController: UIViewController {
             let quizController = MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
+        case "fill-blanks":
+            let quizController = FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
+ 
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
+            print("unknown type \(step.block.name)")
             quizController.stepUrl = self.stepUrl
             quizController.delegate = self
             self.addChildViewController(quizController)

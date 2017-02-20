@@ -471,7 +471,7 @@ class QuizViewController: UIViewController {
     }()
     
     func selectStreakNotificationTime() {
-        let vc = NotificationTimePickerViewController(nibName: "NotificationTimePickerViewController", bundle: nil) as NotificationTimePickerViewController 
+        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController 
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in 
