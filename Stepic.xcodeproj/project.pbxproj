@@ -281,6 +281,8 @@
 		0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
 		0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
+		089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
+		089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
 		089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
 		089611051D52250500561AC1 /* DeepLinkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089611031D52250500561AC1 /* DeepLinkRouter.swift */; };
 		08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
@@ -906,6 +908,7 @@
 		089142471BCEE4EE0000BCB0 /* VideoURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoURL.swift; sourceTree = "<group>"; };
 		0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
 		0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebStepViewController.swift; sourceTree = "<group>"; };
+		089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SVGDownload.swift"; sourceTree = "<group>"; };
 		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeepLinkRouter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08970ECA1C6A326900846119 /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDataSource.swift; sourceTree = "<group>"; };
@@ -1424,6 +1427,7 @@
 			children = (
 				087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */,
 				0858B7081CFF271200459A6A /* TagDetectionUtil.swift */,
+				089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2716,6 +2720,7 @@
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				08263D991DE5FC01002E5B7F /* PresentationType.swift in Sources */,
 				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
+				089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
 				086953101D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -3069,6 +3074,7 @@
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
 				08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
+				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
