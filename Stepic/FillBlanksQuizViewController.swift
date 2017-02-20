@@ -86,7 +86,7 @@ class FillBlanksQuizViewController: QuizViewController {
     func presentPicker(data: [String], selectedBlock: @escaping (String)->Void) {
         let vc = PickerViewController(nibName: "PickerViewController", bundle: nil) 
         vc.data = data
-        vc.titleLabel.text = NSLocalizedString("FillBlankOptionTitle", comment: "") 
+        vc.pickerTitle = NSLocalizedString("FillBlankOptionTitle", comment: "") 
         vc.selectedBlock = {
             [weak self] in 
             selectedBlock(vc.selectedData)

@@ -16,12 +16,15 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     var selectedBlock: ((Void) -> Void)? 
+    var pickerTitle: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         picker.dataSource = self
         picker.delegate = self
+        
+        titleLabel.text = pickerTitle
         
         localize()
         // Do any additional setup after loading the view.
