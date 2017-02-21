@@ -24,6 +24,8 @@ class FillBlanksInputTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor.clear
         backgroundColor = UIColor.clear
         inputTextField.placeholder = placeholderString
+        inputTextField.returnKeyType = .done
+        inputTextField.delegate = self
         // Initialization code
     }
 
@@ -43,6 +45,13 @@ class FillBlanksInputTableViewCell: UITableViewCell {
         }
     }
     
-    static let defaultHeight : CGFloat = 44
+    static let defaultHeight : CGFloat = 52
     
+}
+
+extension FillBlanksInputTableViewCell : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }

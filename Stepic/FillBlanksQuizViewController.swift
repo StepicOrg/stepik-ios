@@ -78,7 +78,7 @@ class FillBlanksQuizViewController: QuizViewController {
     }
     
     let fillBlanksPickerPresenter : Presentr = {
-        let fillBlanksPickerPresenter = Presentr(presentationType: .popup)
+        let fillBlanksPickerPresenter = Presentr(presentationType: .bottomHalf)
         return fillBlanksPickerPresenter
     }()
 
@@ -198,7 +198,6 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
                 [weak self] 
                 answer in
                 self?.answerForComponent[indexPath.row] = answer
-                self?.tableView.reloadData()
             }
             return cell
         case .select:
