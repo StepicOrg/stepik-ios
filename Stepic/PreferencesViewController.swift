@@ -64,6 +64,12 @@ class PreferencesViewController: UITableViewController {
             allowStreaksNotificationsSwitch.isOn = false
         }
         
+        if !AuthInfo.shared.isAuthorized {
+            heightForRows[2][0] = 0
+            heightForRows[2][1] = 0
+        }
+        
+        
         localize() 
         
         onlyWiFiSwitch.isOn = !ConnectionHelper.shared.reachableOnWWAN
