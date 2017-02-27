@@ -394,6 +394,7 @@ class ApiDataDownloader: NSObject {
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)
+                print((e as NSError).code)
                 errorHandler(d)
                 return
             }
