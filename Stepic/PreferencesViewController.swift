@@ -56,19 +56,8 @@ class PreferencesViewController: UITableViewController {
             heightForRows[1] = [0, 0]
         }
         
-        if PreferencesContainer.notifications.allowStreaksNotifications {
-            allowStreaksNotificationsSwitch.isOn = true
-            notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
-            heightForRows[2][1] = 40
-        } else {
-            allowStreaksNotificationsSwitch.isOn = false
-        }
-        
-        if !AuthInfo.shared.isAuthorized {
-            heightForRows[2][0] = 0
-            heightForRows[2][1] = 0
-        }
-        
+
+        initStreaksRows()
         
         localize() 
         
@@ -78,10 +67,30 @@ class PreferencesViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    fileprivate func initStreaksRows() {
+        if AuthInfo.shared.isAuthorized {
+            if PreferencesContainer.notifications.allowStreaksNotifications {
+                allowStreaksNotificationsSwitch.isOn = true
+                notificationTimeLabel.text = getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
+                heightForRows[2][0] = 40
+                heightForRows[2][1] = 40
+            } else {
+                heightForRows[2][0] = 40
+                allowStreaksNotificationsSwitch.isOn = false
+            } 
+        } else {
+            heightForRows[2][0] = 0
+            heightForRows[2][1] = 0
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+        initStreaksRows()
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,7 +122,7 @@ class PreferencesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         print("getting title for header in section \(section)")
-        if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 1) {
+        if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 1) || (!AuthInfo.shared.isAuthorized && section == 2) {
             return nil 
         } else {
             return sectionTitles[section]
@@ -121,20 +130,20 @@ class PreferencesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 1 {
+        if (!StepicApplicationsInfo.inAppUpdatesAvailable && section == 1) || (!AuthInfo.shared.isAuthorized && section == 2) {
             return 0.1
         } else {
             return super.tableView(tableView, heightForHeaderInSection: section)
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 1 {
-            return 0.1
-        } else {
-            return super.tableView(tableView, heightForFooterInSection: section)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        if !StepicApplicationsInfo.inAppUpdatesAvailable && section == 1 {
+//            return 0.1
+//        } else {
+//            return super.tableView(tableView, heightForFooterInSection: section)
+//        }
+//    }
     
     @IBAction func allow3GChanged(_ sender: UISwitch) {
         ConnectionHelper.shared.reachableOnWWAN = !sender.isOn
@@ -167,7 +176,7 @@ class PreferencesViewController: UITableViewController {
         if allowStreaksNotificationsSwitch.isOn {
 
             
-            guard UIApplication.shared.isRegisteredForRemoteNotifications else {
+            guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
                 showStreaksSettingsNotificationAlert()
                 return
             }

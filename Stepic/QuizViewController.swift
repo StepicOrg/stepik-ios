@@ -502,7 +502,8 @@ class QuizViewController: UIViewController {
     
     
     fileprivate func notifyPressed(fromPreferences: Bool) {
-        guard UIApplication.shared.isRegisteredForRemoteNotifications else {
+        
+        guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
             if !fromPreferences {
                 showStreaksSettingsNotificationAlert()
             }
