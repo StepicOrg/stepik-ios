@@ -106,6 +106,8 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     var currentRequest : Request?
     
+    let cancelErrorCode : Int = -999
+    
     override func refreshCourses() {
         isRefreshing = true
         performRequest({ 
@@ -130,14 +132,18 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         }, failure: { 
                             (error) -> Void in
                             print("failed downloading courses data in refresh")
-                            s.handleRefreshError()
-                        
+                            let e = error as NSError 
+                            if e.code != s.cancelErrorCode {
+                                s.handleRefreshError()
+                            }
                     })
                     
                     }, error: { 
                         (error) -> Void in
                         print("failed refreshing course ids in refresh")
-                        s.handleRefreshError()
+                        if error.code != s.cancelErrorCode {
+                            s.handleRefreshError()
+                        }
                 })
             }
             }, error:  {
