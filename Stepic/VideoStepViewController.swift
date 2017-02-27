@@ -42,10 +42,14 @@ class VideoStepViewController: UIViewController {
     @IBOutlet weak var nextLessonButton: UIButton!
     @IBOutlet weak var nextLessonButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var prevLessonButtonHeight: NSLayoutConstraint!
-    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
-    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
-    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
-    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
+    
+    @IBOutlet weak var prevNextLessonButtonsContainerViewHeight: NSLayoutConstraint!
+    
+    
+//    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
+//    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
+//    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
+//    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
     
     var imageTapHelper : ImageTapHelper!
     
@@ -109,10 +113,11 @@ class VideoStepViewController: UIViewController {
         if nextLessonHandler == nil && prevLessonHandler == nil {
             nextLessonButtonHeight.constant = 0
             prevLessonButtonHeight.constant = 0
-            discussionToNextDistance.constant = 0
-            discussionToPrevDistance.constant = 0
-            prevToBottomDistance.constant = 0
-            nextToBottomDistance.constant = 0
+            prevNextLessonButtonsContainerViewHeight.constant = 0
+//            discussionToNextDistance.constant = 0
+//            discussionToPrevDistance.constant = 0
+//            prevToBottomDistance.constant = 0
+//            nextToBottomDistance.constant = 0
         }
     }
     

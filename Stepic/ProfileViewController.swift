@@ -72,7 +72,10 @@ class ProfileViewController: UITableViewController {
     
     fileprivate func initWithUser(_ user : User) {
         print("\(user.avatarURL)")
-        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: [])
+        
+        avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
+//        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: [])
+        
         userNameLabel.text = "\(user.firstName) \(user.lastName)"
         if !AuthInfo.shared.isAuthorized {
             signInHeight.constant = 40
