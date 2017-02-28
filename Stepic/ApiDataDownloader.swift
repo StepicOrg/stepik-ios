@@ -17,17 +17,26 @@ class ApiDataDownloader: NSObject {
     fileprivate override init() {}
     
     
-    func getDisplayedCoursesIds(featured: Bool?, enrolled: Bool?, page: Int?, success : @escaping ([Int], Meta) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    func getDisplayedCoursesIds(featured: Bool?, enrolled: Bool?, isPublic: Bool?, order: String?, page: Int?, success : @escaping ([Int], Meta) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         let headers : HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
         // = ["Authorization" : "\(AuthInfo.shared.token!.tokenType) \(AuthInfo.shared.token!.accessToken)"]
         
         var params = Parameters()
+        
         if let f = featured {
             params["is_featured"] = f ? "true" : "false"
         } 
         
         if let e = enrolled {
             params["enrolled"] = e ? "true" : "false"
+        }
+        
+        if let p = isPublic {
+            params["is_public"] = p ? "true" : "false"
+        }
+        
+        if let o = order {
+            params["order"] = o
         }
         
         if let p = page {

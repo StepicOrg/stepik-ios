@@ -46,7 +46,9 @@ class FindCoursesViewController: CoursesViewController {
     override func viewDidLoad() {
         
         loadEnrolled = nil
-        loadFeatured = true
+        loadFeatured = nil
+        loadPublic = true
+        loadOrder = "-activity"
         
         searchResultsVC = ControllerHelper.instantiateViewController(identifier: "SearchResultsCoursesViewController") as! SearchResultsCoursesViewController
         searchResultsVC.parentVC = self

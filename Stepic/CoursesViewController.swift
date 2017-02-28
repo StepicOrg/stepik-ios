@@ -17,8 +17,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     var loadEnrolled : Bool? = nil
     var loadFeatured : Bool? = nil
+    var loadPublic : Bool? = nil    
+    var loadOrder: String? = nil
+
     var refreshEnabled : Bool = true
-    
     var lastUser: User?
     
     //need to override in subclass
@@ -115,7 +117,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     func refreshCourses() {
         isRefreshing = true
         performRequest({
-            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: 1, success: { 
+            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
                 (ids, meta) -> Void in
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
@@ -258,7 +260,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, page: self.currentPage + 1, success: { 
+            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
                 var ids = idsImmutable
                 ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 

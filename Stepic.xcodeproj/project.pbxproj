@@ -770,6 +770,7 @@
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
+		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
 		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
@@ -3808,6 +3809,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */,
 				083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */,
 				08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */,
 				082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */,
@@ -3820,7 +3822,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */;
+			currentVersion = 081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
