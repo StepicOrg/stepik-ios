@@ -182,14 +182,14 @@ class VideoStepViewController: UIViewController {
         if shouldSendViewsBlock() {
             performRequest({
                 [weak self] in
-                ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{
                         cstep.progress?.isPassed = true
                         CoreDataHelper.instance.save()
                     }
                 }) 
-                })
+            })
         }
     }
     

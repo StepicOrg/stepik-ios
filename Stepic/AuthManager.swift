@@ -126,7 +126,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : TokenRefreshError) -> Void) -> Request? {
         func logRefreshError(statusCode: Int?, message: String?) {
             var parameters : [String: NSObject] = [:]
             if let code = statusCode {
@@ -141,17 +141,17 @@ class AuthManager : NSObject {
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
         case .none:
-            failure(ConnectionError.tokenRefreshError)
+            failure(TokenRefreshError.other)
             return nil
         case .code:
             if StepicApplicationsInfo.social == nil {
-                failure(NSError.noAppWithCredentials as Error)
+                failure(TokenRefreshError.noAppWithCredentials)
                 return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .password:
             if StepicApplicationsInfo.password == nil {
-                failure(NSError.noAppWithCredentials as Error)
+                failure(TokenRefreshError.noAppWithCredentials)
                 return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials
@@ -183,7 +183,7 @@ class AuthManager : NSObject {
             
             if let e = error {
                 logRefreshError(statusCode: response?.statusCode, message: "Error \(e.localizedDescription) while refreshing")
-                failure(e)
+                failure(TokenRefreshError.other)
                 return
             }
 
@@ -191,7 +191,11 @@ class AuthManager : NSObject {
             
             if token.accessToken == "" {
                 logRefreshError(statusCode: response?.statusCode, message: "Error after getting empty access token")
-                failure(NSError.tokenRefreshError)
+                if response?.statusCode == 401 {
+                    failure(TokenRefreshError.noAccess)
+                } else {
+                    failure(TokenRefreshError.other)
+                }
                 return
             }
             
@@ -330,6 +334,10 @@ class AuthManager : NSObject {
                     }
             })
     }
+}
+
+enum TokenRefreshError: Error {
+    case noAccess, noAppWithCredentials, other
 }
 
 extension NSError {

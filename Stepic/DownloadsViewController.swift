@@ -181,11 +181,10 @@ extension DownloadsViewController : UITableViewDelegate {
                             if AuthInfo.shared.isAuthorized {
                                 joinBlock()
                             } else {
-                                if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-                                    vc.success = {
-                                        joinBlock()
-                                    }
-                                    self?.present(vc, animated: true, completion: nil)
+                                if let s = self {
+                                    RoutingManager.auth.routeFrom(controller: s, success: {
+                                            joinBlock()
+                                    }, cancel: nil)
                                 }
                             }
                         })

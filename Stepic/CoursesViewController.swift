@@ -117,26 +117,29 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     func refreshCourses() {
         isRefreshing = true
         performRequest({
-            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
+            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
                 (ids, meta) -> Void in
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                    [weak self]
                     (newCourses) -> Void in
                     
+                    guard let s = self else { return }
+                    
                     let coursesCompletion = {
-                        self.courses = Sorter.sort(newCourses, byIds: ids)
-                        self.meta = meta
-                        self.currentPage = 1
-                        self.tabIds = ids
+                        s.courses = Sorter.sort(newCourses, byIds: ids)
+                        s.meta = meta
+                        s.currentPage = 1
+                        s.tabIds = ids
                         
                         DispatchQueue.main.async {
-                            self.onRefresh()
-                            self.emptyDatasetState = .empty
-                            self.refreshControl?.endRefreshing()
-                            self.tableView.reloadData()
+                            s.onRefresh()
+                            s.emptyDatasetState = .empty
+                            s.refreshControl?.endRefreshing()
+                            s.tableView.reloadData()
                         }
                         
-                        self.lastUser = AuthInfo.shared.user
-                        self.isRefreshing = false
+                        s.lastUser = AuthInfo.shared.user
+                        s.isRefreshing = false
                     }
                     
                     var progressIds : [String] = []
@@ -160,25 +163,39 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         CoreDataHelper.instance.save()
                         coursesCompletion()
                     }, failure: { 
-                        (error) -> Void in
+                        error in
                         coursesCompletion()
                         print("Error while dowloading progresses")
                     })
             
                     
                 }, failure: { 
-                    (error) -> Void in
+                    [weak self]
+                    error in
                     print("failed downloading courses data in refresh")
-                    self.handleRefreshError()
+                    self?.handleRefreshError()
                 })
                 
             }, failure: { 
-                (error) -> Void in
+                [weak self]
+                error in
                 print("failed refreshing course ids in refresh")
-                self.handleRefreshError()
+                self?.handleRefreshError()
             })
         }, error:  {
-            self.handleRefreshError()
+            [weak self] 
+            error in
+            guard let s = self else { return }
+            if error == PerformRequestError.noAccessToRefreshToken {
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: s, success: {
+                    [weak self] in 
+                    self?.getCachedCourses(completion: {
+                        self?.refreshCourses()
+                    })
+                }, cancel: nil)
+            }
+            self?.handleRefreshError()
         })
     }
     
@@ -260,42 +277,58 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
+            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
                 var ids = idsImmutable
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                    [weak self]
                     (newCoursesImmutable) -> Void in
+                    guard let s = self else { return }
                     var newCourses = newCoursesImmutable
-                    newCourses = self.getNonExistingCourses(newCourses)
+                    newCourses = s.getNonExistingCourses(newCourses)
                     ids = ids.flatMap{
                         id in
                         return newCourses.index{$0.id == id} != nil ? id : nil
                     }
                     
-                    self.currentPage += 1
-                    self.courses += Sorter.sort(newCourses, byIds: ids)
-                    self.meta = meta
-                    self.tabIds += ids
+                    s.currentPage += 1
+                    s.courses += Sorter.sort(newCourses, byIds: ids)
+                    s.meta = meta
+                    s.tabIds += ids
                     //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI{self.tableView.reloadData()}
+                    UIThread.performUI{s.tableView.reloadData()}
                     
                     
-                    self.isLoadingMore = false
-                    self.failedLoadingMore = false
+                    s.isLoadingMore = false
+                    s.failedLoadingMore = false
                     }, failure: { 
-                        (error) -> Void in
+                        [weak self]
+                        error in
                         print("failed downloading courses data in Next")
-                        self.handleLoadMoreError()
+                        self?.handleLoadMoreError()
                 })
                 
                 }, failure: { 
-                    (error) -> Void in
+                    [weak self]
+                    error in
                     print("failed refreshing course ids in Next")
-                    self.handleLoadMoreError()
+                    self?.handleLoadMoreError()
                     
             })
-            }, error:  {
-                self.handleLoadMoreError()
+            }, error: {
+                [weak self] 
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    RoutingManager.auth.routeFrom(controller: s, success: {
+                        [weak self] in 
+                        self?.getCachedCourses(completion: {
+                            self?.refreshCourses()
+                        })
+                    }, cancel: nil)
+                }
+                self?.handleLoadMoreError()
         })
     }
     

@@ -147,7 +147,17 @@ class SearchResultsCoursesViewController: CoursesViewController {
                 })
             }
             }, error:  {
-                self.handleRefreshError()
+                [weak self] 
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    RoutingManager.auth.routeFrom(controller: s, success: {
+                        [weak self] in 
+                        self?.refreshCourses()
+                        }, cancel: nil)
+                }
+                self?.handleRefreshError()
         })
     }
     
@@ -160,10 +170,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
+            _ = ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
                 (searchResults, meta) -> Void in
                 let ids = searchResults.flatMap({return $0.courseId})
-                ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
                     if !self.isLoadingMore {
@@ -191,8 +201,18 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     self.handleLoadMoreError()
                     
             })
-            }, error:  {
-                self.handleLoadMoreError()
+        }, error:  {
+            [weak self] 
+            error in
+            guard let s = self else { return }
+            if error == PerformRequestError.noAccessToRefreshToken {
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: s, success: {
+                    [weak self] in 
+                    self?.refreshCourses()
+                    }, cancel: nil)
+            }
+            self?.handleRefreshError()
         })
     }
     
