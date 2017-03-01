@@ -82,12 +82,14 @@ class ProfileViewController: UITableViewController {
             signInNameDistance.constant = 8
             heightForRows[0][0] = 131 + 48
             heightForRows[2][0] = 0
+            heightForRows[1][0] = 0
             signInButton.isHidden = false
         } else {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
             heightForRows[0][0] = 131
             heightForRows[2][0] = 40
+            heightForRows[1][0] = 75
             signInButton.isHidden = true
         }
         
@@ -139,7 +141,7 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == 1 && heightForRows[2][0] == 0) {
+        if (section == 2 && heightForRows[2][0] == 0) || (section == 1 && heightForRows[1][0] == 0) {
             return nil 
         } else {
             return sectionTitles[section]
