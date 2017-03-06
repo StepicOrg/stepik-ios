@@ -68,7 +68,7 @@ class WebStepViewController: UIViewController {
         stepWebView.scrollView.backgroundColor = UIColor.white
 //        stepWebView.backgroundColor = UIColor.white
         
-        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView.panGestureRecognizer)
+        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView!.panGestureRecognizer)
         print(self.view.gestureRecognizers)
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())

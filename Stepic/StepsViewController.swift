@@ -99,10 +99,10 @@ class StepsViewController: RGPageViewController {
         datasource = self
         delegate = self
         
-        if numberOfPagesForViewController(self) == 0 {
+        if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
         }
-        
+                
         refreshSteps()
     }
     
@@ -114,7 +114,7 @@ class StepsViewController: RGPageViewController {
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     fileprivate func refreshSteps() {
         var prevStepsIds = [Int]()
-        if numberOfPagesForViewController(self) == 0 {
+        if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
             self.doesPresentWarningView = false
             self.doesPresentActivityIndicatorView = true
@@ -143,7 +143,7 @@ class StepsViewController: RGPageViewController {
                         print("did send step updated notification")
                         //update tab views
                         for index in 0 ..< s.lesson!.steps.count { 
-                            let tabView = s.tabViewForPageAtIndex(s, index: index) as? StepTabView
+                            let tabView = s.pageViewController(s, tabViewForPageAt: index) as? StepTabView
                             if let progress = s.lesson!.steps[index].progress {
                                 tabView?.setTab(selected: progress.isPassed, animated: true)
                             }
@@ -174,7 +174,7 @@ class StepsViewController: RGPageViewController {
                     if let s = self {
                         s.view.isUserInteractionEnabled = true
                         s.doesPresentActivityIndicatorView = false
-                        if s.numberOfPagesForViewController(s) == 0 {
+                        if s.numberOfPages(for: s) == 0 {
                             s.doesPresentWarningView = true
                         }
                     }
@@ -260,13 +260,13 @@ class StepsViewController: RGPageViewController {
 }
 
 extension StepsViewController : RGPageViewControllerDataSource {
-    func numberOfPagesForViewController(_ pageViewController: RGPageViewController) -> Int {
-        pagesCount = lesson?.steps.count ?? 0
-        return pagesCount
-    }
-    
-    func tabViewForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIView {
-        
+    /// Asks the dataSource for a view to display as a tab item.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the tab whose view is asked.
+    ///
+    /// - returns: a `UIView` instance that will be shown as tab at the given index.
+    public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
         //Just a try to fix a strange bug
         if index >= lesson!.steps.count {
             return UIView()
@@ -284,9 +284,25 @@ extension StepsViewController : RGPageViewControllerDataSource {
             return UIView()
         }
     }
+
+    /// Asks the dataSource about the number of page.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    ///
+    /// - returns: the total number of pages
+    public func numberOfPages(for pageViewController: RGPageViewController) -> Int {
+        pagesCount = lesson?.steps.count ?? 0
+        return pagesCount
+
+    }
     
-    func viewControllerForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIViewController? {
-        
+    /// Asks the datasource to give a ViewController to display as a page.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the content whose ViewController is asked.
+    ///
+    /// - returns: a `UIViewController` instance whose view will be shown as content.
+    public func pageViewController(_ pageViewController: RGPageViewController, viewControllerForPageAt index: Int) -> UIViewController? {
         if let lesson = lesson {
             //Just a try to fix a strange bug
             if index >= lesson.steps.count {
@@ -302,7 +318,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.startStepId = startStepId
                 stepController.stepId = index + 1
                 stepController.lessonSlug = lesson.slug
-
+                
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -313,7 +329,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 }
                 
                 if context == .unit {
-//                    stepController.assignment = lesson.unit?.assignments[index]
+                    //                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
@@ -349,7 +365,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 }
                 stepController.lessonSlug = lesson.slug
                 if context == .unit {
-//                    stepController.assignment = lesson.unit?.assignments[index]
+                    //                    stepController.assignment = lesson.unit?.assignments[index]
                     
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
@@ -370,18 +386,33 @@ extension StepsViewController : RGPageViewControllerDataSource {
             }
         }
         return nil
-    } 
+    }
+    
+    
+    
 }
 
 extension StepsViewController : RGPageViewControllerDelegate {
-    func heightForTabAtIndex(_ index: Int) -> CGFloat {
+    
+    /// Delegate objects can implement this method if tabs use dynamic width or to overwrite the default width for tabs.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the tab.
+    ///
+    /// - returns: the width for the tab at the given index.
+    func pageViewController(_ pageViewController: RGPageViewController, widthForTabAt index: Int) -> CGFloat {
         return 44.0 
     }
     
-    // use this to set a custom width for a tab
-    func widthForTabAtIndex(_ index: Int) -> CGFloat {
+    /// Delegate objects can implement this method if tabs use dynamic height or to overwrite the default height for tabs.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the tab.
+    ///
+    /// - returns: the height for the tab at the given index.
+    func pageViewController(_ pageViewController: RGPageViewController, heightForTabAt index: Int) -> CGFloat {
         return 44.0
-    }
+    }    
 }
 
 extension StepsViewController : WarningViewDelegate {
