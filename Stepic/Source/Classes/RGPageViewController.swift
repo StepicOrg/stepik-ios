@@ -120,6 +120,10 @@ open class RGPageViewController: UIViewController {
       if !cellIsVisible {
         let indexPath = IndexPath(item: currentTabIndex, section: 0)
         
+        if !(indexPath.section < tabScrollView.numberOfSections && indexPath.item < tabScrollView.numberOfItems(inSection: indexPath.section)) {
+            return
+        }
+        
         switch tabbarPosition {
         case .top, .bottom:
           tabScrollView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)

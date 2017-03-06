@@ -63,11 +63,13 @@ class CoursePreviewViewController: UIViewController {
     
     var displayingInfoType : DisplayingInfoType = .overview {
         didSet {
-            if displayingInfoType == .syllabus {
+            if displayingInfoType == .syllabus && didLoad {
                 tableView.reloadData()
             }
         }
     }
+    
+    var didLoad: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +103,7 @@ class CoursePreviewViewController: UIViewController {
             }
             updateSections()
         }
+        didLoad = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
