@@ -110,7 +110,7 @@ class DeepLinkRouter {
                     })
                     return
                 } 
-                if courses.count == 1 {
+                if courses.count >= 1 {
                     vc.course = courses[0]
                     completion(vc, true)
                     return
@@ -165,7 +165,7 @@ class DeepLinkRouter {
                 })
                 return
             } 
-            if courses.count == 1 {
+            if courses.count >= 1 {
                 let course = courses[0]
                 if course.enrolled {
                     if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
