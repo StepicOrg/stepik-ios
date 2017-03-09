@@ -108,25 +108,48 @@ class UserPreferencesContainerViewController: RGPageViewController {
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDelegate {
-    func widthForTabAtIndex(_ index: Int) -> CGFloat {
+    /// Delegate objects can implement this method if tabs use dynamic width or to overwrite the default width for tabs.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the tab.
+    ///
+    /// - returns: the width for the tab at the given index.
+    func pageViewController(_ pageViewController: RGPageViewController, widthForTabAt index: Int) -> CGFloat {
         return (UIScreen.main.bounds.width - 16) / CGFloat(numberOfTabs)
-    }
+    }    
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDataSource {
-    func numberOfPagesForViewController(_ pageViewController: RGPageViewController) -> Int {
-        return numberOfTabs
-    }
-    
-    func tabViewForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIView {
+    /// Asks the dataSource for a view to display as a tab item.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the tab whose view is asked.
+    ///
+    /// - returns: a `UIView` instance that will be shown as tab at the given index.
+    public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
         let l = UILabel()
         l.text = tabNames[index]
         l.textColor = UIColor.white
         l.sizeToFit()
         return l
     }
+
+    /// Asks the dataSource about the number of page.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    ///
+    /// - returns: the total number of pages
+    public func numberOfPages(for pageViewController: RGPageViewController) -> Int {
+        return numberOfTabs
+    }
     
-    func viewControllerForPageAtIndex(_ pageViewController: RGPageViewController, index: Int) -> UIViewController? {
+    /// Asks the datasource to give a ViewController to display as a page.
+    ///
+    /// - parameter pageViewController: the `RGPageViewController` instance.
+    /// - parameter index: the index of the content whose ViewController is asked.
+    ///
+    /// - returns: a `UIViewController` instance whose view will be shown as content.
+    func pageViewController(_ pageViewController: RGPageViewController, viewControllerForPageAt index: Int) -> UIViewController? {
         switch index {
         case 0:
             let vc = ControllerHelper.instantiateViewController(identifier: "Profile", storyboardName: "UserPreferences")
@@ -137,6 +160,5 @@ extension UserPreferencesContainerViewController : RGPageViewControllerDataSourc
         default:
             return nil
         }
-    } 
-
+    }
 }

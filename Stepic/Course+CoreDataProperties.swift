@@ -22,6 +22,7 @@ extension Course {
     @NSManaged var managedImageURL: String?
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
+    @NSManaged var managedPublic: NSNumber?
     
     @NSManaged var managedSummary: String?
     @NSManaged var managedWorkload: String?
@@ -138,6 +139,15 @@ extension Course {
         }
         get {
             return managedFeatured?.boolValue ?? false
+        }
+    }
+    
+    var isPublic : Bool {
+        set(isPublic){
+            self.managedPublic = isPublic as NSNumber?
+        }
+        get {
+            return managedPublic?.boolValue ?? false
         }
     }
     

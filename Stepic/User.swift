@@ -42,7 +42,19 @@ class User: NSManagedObject, JSONInitializable {
     }
     
     static func fetchById(_ id: Int) -> [User]? {
-        return User.mr_findAll(with: NSPredicate(format: "managedId == %@", id as NSNumber)) as? [User]
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
+        
+        request.predicate = predicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request) 
+            return results as? [User]
+        }
+        catch {
+            return nil
+        }
     }
 
     //synchronous 
@@ -50,7 +62,7 @@ class User: NSManagedObject, JSONInitializable {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
                 if fetchedUser != user {
-                    fetchedUser.mr_deleteEntity()
+                    CoreDataHelper.instance.deleteFromStore(fetchedUser, save: false)
                 }
             }
             CoreDataHelper.instance.save()

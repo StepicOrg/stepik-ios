@@ -169,7 +169,6 @@
 		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
-		0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569C1BCC09F2006B8C73 /* StepsViewController.swift */; };
 		0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
 		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
@@ -343,6 +342,32 @@
 		08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */; };
 		08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
+		08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
+		08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */; };
+		08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
+		08AF59E71E6D9BE800423EFF /* RGTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */; };
+		08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
+		08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D71E6D9BE800423EFF /* RGTabView.swift */; };
+		08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
+		08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */; };
+		08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
+		08AF59ED1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */; };
+		08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
+		08AF59EF1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */; };
+		08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
+		08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */; };
+		08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
+		08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */; };
+		08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
+		08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */; };
+		08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
+		08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */; };
+		08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
+		08AF59F91E6D9BE800423EFF /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */; };
+		08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
+		08AF59FB1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */; };
+		08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
+		08AF59FD1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */; };
 		08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */; };
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
@@ -439,7 +464,6 @@
 		08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
 		08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9F7CF1C29AE8B00E544D0 /* WebControllerManager.swift */; };
 		08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
-		08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841569A1BCC0910006B8C73 /* RGPageViewController.swift */; };
 		08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
 		08D120AC1C937B2200A54ABC /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
 		08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
@@ -770,6 +794,7 @@
 		081A7DF21C56A09300583728 /* QuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizViewController.xib; sourceTree = "<group>"; };
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
+		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
 		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
@@ -853,7 +878,6 @@
 		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
-		0841569A1BCC0910006B8C73 /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
 		0841569C1BCC09F2006B8C73 /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
 		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
@@ -971,6 +995,19 @@
 		08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevicesAPI.swift; sourceTree = "<group>"; };
 		08AEC3A41CCA69F300FFF29E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIDefaults.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewController.swift; sourceTree = "<group>"; };
+		08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabBarItem.swift; sourceTree = "<group>"; };
+		08AF59D71E6D9BE800423EFF /* RGTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGTabView.swift; sourceTree = "<group>"; };
+		08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
+		08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
+		08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDataSource.swift"; sourceTree = "<group>"; };
+		08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIPageViewControllerDelegate.swift"; sourceTree = "<group>"; };
+		08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RGPageViewController+UIToolbarDelegate.swift"; sourceTree = "<group>"; };
+		08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDataSource.swift; sourceTree = "<group>"; };
+		08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGPageViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08B5E2971BF4FF5A00B875E6 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
@@ -1448,7 +1485,7 @@
 			children = (
 				082CB1AD1D088B6900C79A27 /* Discussions */,
 				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
-				0841569A1BCC0910006B8C73 /* RGPageViewController.swift */,
+				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
 				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
 			);
 			name = Steps;
@@ -1747,6 +1784,58 @@
 				08AC21471CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift */,
 			);
 			name = "Users data";
+			sourceTree = "<group>";
+		};
+		08AF59CC1E6D9A8100423EFF /* RGPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08AF59D31E6D9BE800423EFF /* Source */,
+			);
+			name = RGPageViewController;
+			sourceTree = "<group>";
+		};
+		08AF59D31E6D9BE800423EFF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				08AF59D41E6D9BE800423EFF /* Classes */,
+				08AF59D81E6D9BE800423EFF /* Extensions */,
+				08AF59E11E6D9BE800423EFF /* Protocols */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		08AF59D41E6D9BE800423EFF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				08AF59D51E6D9BE800423EFF /* RGPageViewController.swift */,
+				08AF59D61E6D9BE800423EFF /* RGTabBarItem.swift */,
+				08AF59D71E6D9BE800423EFF /* RGTabView.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		08AF59D81E6D9BE800423EFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08AF59D91E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift */,
+				08AF59DA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift */,
+				08AF59DB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift */,
+				08AF59DC1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift */,
+				08AF59DD1E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift */,
+				08AF59DE1E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift */,
+				08AF59DF1E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift */,
+				08AF59E01E6D9BE800423EFF /* UINavigationBar.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		08AF59E11E6D9BE800423EFF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				08AF59E21E6D9BE800423EFF /* RGPageViewControllerDataSource.swift */,
+				08AF59E31E6D9BE800423EFF /* RGPageViewControllerDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		08B361061BB2E3C100090843 /* User Preferences */ = {
@@ -2789,6 +2878,7 @@
 			files = (
 				08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */,
 				08D120751C937B2200A54ABC /* Course.swift in Sources */,
+				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */,
 				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
@@ -2848,6 +2938,9 @@
 				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
+				08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
+				08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
+				08AF59FD1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */,
 				08D1208E1C937B2200A54ABC /* DeviceInfo.swift in Sources */,
 				08D1208F1C937B2200A54ABC /* UIViewLoadExtension.swift in Sources */,
@@ -2875,6 +2968,7 @@
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				08263DA51DE5FC01002E5B7F /* TransitionType.swift in Sources */,
 				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
+				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -2886,20 +2980,22 @@
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				08263D9D1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
+				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
+				08AF59E71E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */,
 				08D120A31C937B2200A54ABC /* UIViewExtensions.swift in Sources */,
 				08D035261D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
 				08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */,
+				08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */,
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				083540651CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
 				089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
-				08D120AA1C937B2200A54ABC /* RGPageViewController.swift in Sources */,
 				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
 				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
@@ -2917,6 +3013,7 @@
 				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
+				08AF59F91E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				08D120B51C937B2200A54ABC /* Parser.swift in Sources */,
 				08D120B61C937B2200A54ABC /* DownloadTableViewCell.swift in Sources */,
 				0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */,
@@ -2941,6 +3038,8 @@
 				08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */,
 				0837492E1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */,
+				08AF59EF1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
+				08AF59ED1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08263DA11DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
@@ -2948,6 +3047,7 @@
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
 				08263D891DE5FC01002E5B7F /* AlertViewController.swift in Sources */,
+				08AF59FB1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
 				08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */,
@@ -3023,6 +3123,7 @@
 				08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */,
 				08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
+				08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
@@ -3059,14 +3160,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
+				08AF59E81E6D9BE800423EFF /* RGTabView.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
+				08AF59FC1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
+				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
+				08AF59F01E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
@@ -3147,6 +3252,7 @@
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
+				08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
@@ -3177,7 +3283,6 @@
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				08263D9C1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
-				0841569B1BCC0910006B8C73 /* RGPageViewController.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				08263D901DE5FC01002E5B7F /* KeyboardTranslation.swift in Sources */,
@@ -3237,6 +3342,7 @@
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
+				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08970ED71C6A36E500846119 /* PlaceholderTestViewController.swift in Sources */,
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
@@ -3246,8 +3352,10 @@
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
 				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
+				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
@@ -3256,6 +3364,7 @@
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
+				08AF59E61E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,
@@ -3263,6 +3372,7 @@
 				080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */,
 				0869F6D21CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
+				08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
 				9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
@@ -3273,6 +3383,7 @@
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
+				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				08263DA41DE5FC01002E5B7F /* TransitionType.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
@@ -3293,6 +3404,7 @@
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
+				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
@@ -3309,6 +3421,7 @@
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
+				08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
 				0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */,
@@ -3808,6 +3921,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */,
 				083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */,
 				08C70F261DDA10D200B72CAB /* Model_exams_v10.xcdatamodel */,
 				082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */,
@@ -3820,7 +3934,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */;
+			currentVersion = 081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

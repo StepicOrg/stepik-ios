@@ -31,7 +31,8 @@ class Course: NSManagedObject, JSONInitializable {
         
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
-        
+        isPublic = json["is_public"].boolValue
+
         summary = json["summary"].stringValue
         workload = json["workload"].stringValue
         introURL = json["intro"].stringValue
@@ -43,7 +44,6 @@ class Course: NSManagedObject, JSONInitializable {
         progressId = json["progress"].string
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
-        
         if let _ = json["intro_video"].null {
             introVideo = nil
         } else {
@@ -252,7 +252,7 @@ class Course: NSManagedObject, JSONInitializable {
         })
     }
     
-    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil) throws -> [Course] {
+    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) throws -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
         
@@ -269,6 +269,11 @@ class Course: NSManagedObject, JSONInitializable {
         if let e = enrolled {
             nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
         }
+        
+        if let p = isPublic {
+            nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
+        }
+        
         let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
         
         let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
@@ -283,6 +288,8 @@ class Course: NSManagedObject, JSONInitializable {
             throw FetchError.requestExecution
         }
     }
+    
+    
     
     class func getAllCourses(enrolled : Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")

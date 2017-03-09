@@ -228,15 +228,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    @available(iOS 8.0, *)
+//    @available(iOS 8.0, *)
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(userActivity.webpageURL?.absoluteString)")
             if let url = userActivity.webpageURL {
                 handleOpenedFromDeepLink(url)
+                return true
             }
         }
-        return true
+        return false
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
