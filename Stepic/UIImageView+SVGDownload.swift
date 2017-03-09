@@ -22,12 +22,17 @@ extension UIImageView {
             self.sd_setImage(with: url, placeholderImage: placeholder)
         } else {
             self.image = placeholder
-            let svgImage = SVGKImage(contentsOf: url)
-            
-            if !(svgImage?.hasSize() ?? true)  {
-                svgImage?.size = CGSize(width: 200, height: 200)
+            DispatchQueue.global(qos: .userInitiated).async {
+                let svgImage = SVGKImage(contentsOf: url)
+                
+                if !(svgImage?.hasSize() ?? true)  {
+                    svgImage?.size = CGSize(width: 200, height: 200)
+                }
+                let img = svgImage?.uiImage ?? placeholder
+                DispatchQueue.main.async {
+                    self.image = img
+                }
             }
-            self.image = svgImage?.uiImage ?? placeholder
         }
     }
 }
