@@ -172,4 +172,6 @@ FillBlankOptionTitle = "Выберите вариант";
 FillBlankInputTextFieldPlaceholder = "Введите ответ";
 FillBlanksSelectAnswerString = "Выберите ответ";
 FillBlanksSelectButtonString = "Выбрать";
+DeletedComment = "Комментарий удален";
+
 

@@ -69,10 +69,18 @@ class DiscussionTableViewCell: UITableViewCell {
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
-        
+        labelContainerView.backgroundColor = UIColor.clear
         timeLabel.text = comment.lastTime.getStepicFormatString(withTime: true)
         setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
         loadLabel(comment.text)
+        if comment.isDeleted {
+            self.contentView.backgroundColor = UIColor.wrongQuizBackgroundColor()
+            if comment.text == "" {
+                loadLabel(NSLocalizedString("DeletedComment", comment: ""))
+            }
+        } else {
+            self.contentView.backgroundColor = UIColor.white
+        }
     }
     
     fileprivate func constructLabel() {
