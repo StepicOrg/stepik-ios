@@ -9,6 +9,7 @@
 import Foundation
 import SDWebImage
 import SVGKit
+import Alamofire
 
 extension UIImageView {
     func setImageWithURL(url optionalURL: URL?, placeholder: UIImage) {
@@ -22,17 +23,28 @@ extension UIImageView {
             self.sd_setImage(with: url, placeholderImage: placeholder)
         } else {
             self.image = placeholder
-            DispatchQueue.global(qos: .userInitiated).async {
-                let svgImage = SVGKImage(contentsOf: url)
+            Alamofire.request(url).responseData(completionHandler: {
+                response in
+                if response.result.error != nil {
+                    return
+                } 
                 
-                if !(svgImage?.hasSize() ?? true)  {
-                    svgImage?.size = CGSize(width: 200, height: 200)
+                guard let data = response.result.value else {
+                    return
                 }
-                let img = svgImage?.uiImage ?? placeholder
-                DispatchQueue.main.async {
-                    self.image = img
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let svgImage = SVGKImage(data: data)
+                    if !(svgImage?.hasSize() ?? true)  {
+                        svgImage?.size = CGSize(width: 200, height: 200)
+                    }
+                    let img = svgImage?.uiImage ?? placeholder
+                    DispatchQueue.main.async {
+                        self.image = img
+                    }
                 }
-            }
+
+            })
         }
     }
 }
