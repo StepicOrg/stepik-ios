@@ -172,4 +172,5 @@ FillBlankOptionTitle = "Select option";
 FillBlankInputTextFieldPlaceholder = "Enter your answer";
 FillBlanksSelectAnswerString = "Select your answer";
 FillBlanksSelectButtonString = "Select";
+DeletedComment = "Comment deleted";
 
