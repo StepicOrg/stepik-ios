@@ -42,6 +42,7 @@ class Course: NSManagedObject, JSONInitializable {
         requirements = json["requirements"].stringValue
         slug = json["slug"].string
         progressId = json["progress"].string
+        lastStepId = json["last_step"].string
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
         if let _ = json["intro_video"].null {
@@ -127,6 +128,23 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
         
+    func loadLastStep(success: @escaping ((Void) -> Void)) {
+        guard let id = self.lastStepId else { 
+            return 
+        }
+        performRequest({
+            _ = ApiDataDownloader.lastSteps.retrieve(id: id, success: {
+                [weak self]
+                lastStep in
+                self?.changeLastStepTo(lastStep: lastStep)
+                success()
+            }, error: {
+                error in
+                print("error while loading last step")
+            })
+        })        
+    }
+    
     func loadAllInstructors(success: @escaping ((Void) -> Void)) {
         performRequest({
             ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
@@ -312,9 +330,11 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
     
-    func changeLastStepTo(lastStep: LastStep) {
+    func changeLastStepTo(lastStep: LastStep?) {
         let objectToDelete = self.lastStep
         self.lastStep = lastStep
-        CoreDataHelper.instance.deleteFromStore(objectToDelete, save: true)
+        if let deletingObject = objectToDelete { 
+            CoreDataHelper.instance.deleteFromStore(deletingObject, save: true)
+        }
     }
 }

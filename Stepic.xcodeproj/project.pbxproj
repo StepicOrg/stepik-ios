@@ -182,6 +182,8 @@
 		084F7AA81E76EF690088368A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
 		084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
 		084F7AAB1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
+		084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
+		084F7AAE1E775A210088368A /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
@@ -892,6 +894,7 @@
 		084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_last_step_v13.xcdatamodel; sourceTree = "<group>"; };
 		084F7AA61E76EF690088368A /* LastStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStep.swift; sourceTree = "<group>"; };
 		084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		084F7AAC1E775A210088368A /* LastStepsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepsAPI.swift; sourceTree = "<group>"; };
 		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
 		085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerQuizWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
@@ -1500,6 +1503,22 @@
 			name = Steps;
 			sourceTree = "<group>";
 		};
+		084F7AAF1E775A410088368A /* API Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
+				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
+				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				086A8B271D21796800F45C45 /* VotesAPI.swift */,
+				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
+				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
+				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
+				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
+				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
+			);
+			name = "API Endpoints";
+			sourceTree = "<group>";
+		};
 		085514E91CFB09170080CB88 /* WebViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1677,16 +1696,9 @@
 				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
 				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
 				08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */,
-				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
+				084F7AAF1E775A410088368A /* API Endpoints */,
 				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
-				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
-				0800B8211D07029B006C987E /* CommentsAPI.swift */,
 				0800B8241D0704B6006C987E /* ApiUtil.swift */,
-				086A8B271D21796800F45C45 /* VotesAPI.swift */,
-				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
-				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
-				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
-				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -3062,6 +3074,7 @@
 				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
 				08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */,
+				084F7AAE1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				08D120CC1C937B2200A54ABC /* PlaceholderTestViewController.swift in Sources */,
 				08D120CD1C937B2200A54ABC /* StepicVideoPlayerViewController.swift in Sources */,
 				08D120CE1C937B2200A54ABC /* StringDatasetExtension.swift in Sources */,
@@ -3281,6 +3294,7 @@
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
+				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */,
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,

@@ -11,7 +11,7 @@ import CoreData
 
 extension LastStep {
     
-    @NSManaged var managedId: String??
+    @NSManaged var managedId: String?
     @NSManaged var managedStepId: NSNumber?
     @NSManaged var managedUnitId: NSNumber?
     

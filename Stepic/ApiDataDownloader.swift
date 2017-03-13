@@ -689,6 +689,7 @@ class ApiDataDownloader: NSObject {
     static let stepics = StepicsAPI()
     static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
+    static let lastSteps = LastStepsAPI()
 }
 
 enum RefreshMode {

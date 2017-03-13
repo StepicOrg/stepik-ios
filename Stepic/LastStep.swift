@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class LastStep: NSManagedObject, JSONInitializable {
+class LastStep: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     convenience required init(json: JSON){
