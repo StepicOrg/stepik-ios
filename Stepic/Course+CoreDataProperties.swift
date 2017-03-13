@@ -43,6 +43,7 @@ extension Course {
     @NSManaged var managedIntroVideo : Video?
     
     @NSManaged var managedProgress: Progress?
+    @NSManaged var managedLastStep: LastStep?
     
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -222,6 +223,15 @@ extension Course {
         }
         set(value) {
             managedProgress = value
+        }
+    }
+    
+    var lastStep : LastStep? {
+        get {
+            return managedLastStep
+        }
+        set(value) {
+            managedLastStep = value
         }
     }
     

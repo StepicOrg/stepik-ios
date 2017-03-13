@@ -311,4 +311,10 @@ class Course: NSManagedObject, JSONInitializable {
 //            throw FetchError.RequestExecution
         }
     }
+    
+    func changeLastStepTo(lastStep: LastStep) {
+        let objectToDelete = self.lastStep
+        self.lastStep = lastStep
+        CoreDataHelper.instance.deleteFromStore(objectToDelete, save: true)
+    }
 }
