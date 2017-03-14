@@ -685,6 +685,7 @@
 		1B149E571E735FE80063C961 /* StepicTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B149E561E735FE80063C961 /* StepicTVTests.swift */; };
 		1B149E5F1E7361C60063C961 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
 		1B7A65AC1E78324D002A9755 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
+		1B7A65AE1E7835BC002A9755 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */; };
 		1B95F5621E7364CC0055D495 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		1B95F5631E7364DE0055D495 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
 		1B95F5641E73656B0055D495 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
@@ -1252,6 +1253,7 @@
 		1B149E521E735FE80063C961 /* StepicTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B149E561E735FE80063C961 /* StepicTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicTVTests.swift; sourceTree = "<group>"; };
 		1B149E581E735FE80063C961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		1B95F5851E736B980055D495 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1BE6E9091E74AA86006B9837 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		1BE6E90C1E74AC08006B9837 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
@@ -2444,6 +2446,7 @@
 				1BE6E90B1E74AA92006B9837 /* Xibs */,
 				1B149E441E735FE80063C961 /* AppDelegate.swift */,
 				1B149E461E735FE80063C961 /* CoursesViewController.swift */,
+				1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */,
 				1B149E481E735FE80063C961 /* Main.storyboard */,
 				1B149E4B1E735FE80063C961 /* Assets.xcassets */,
 				1B149E4D1E735FE80063C961 /* Info.plist */,
@@ -3791,6 +3794,7 @@
 				1B95F57F1E736A9E0055D495 /* ApiRequest.swift in Sources */,
 				1B95F56C1E7367160055D495 /* Section.swift in Sources */,
 				1B95F5681E7366CA0055D495 /* Parser.swift in Sources */,
+				1B7A65AE1E7835BC002A9755 /* CoursePreviewViewController.swift in Sources */,
 				1BE6E9021E749FD1006B9837 /* StepicsAPI.swift in Sources */,
 				1B95F5AE1E740FF40055D495 /* FillBlanksDataset.swift in Sources */,
 				1B149E471E735FE80063C961 /* CoursesViewController.swift in Sources */,

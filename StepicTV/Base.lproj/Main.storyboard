@@ -42,6 +42,7 @@
                     <connections>
                         <outlet property="tableView" destination="zVB-zI-kea" id="8fv-do-3ok"/>
                         <segue destination="oi0-ob-Or4" kind="show" identifier="showCourse" id="GYR-Jg-anl"/>
+                        <segue destination="zWj-Ye-1T5" kind="show" id="Hi6-k8-48O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -63,7 +64,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiP-lz-CDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3321" y="72"/>
+            <point key="canvasLocation" x="3313" y="-510"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="esc-Gz-WSV">
+            <objects>
+                <viewController id="zWj-Ye-1T5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="biY-Wq-x2L"/>
+                        <viewControllerLayoutGuide type="bottom" id="bhb-w7-AfX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T6p-Eg-ORR">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFT-Lq-nnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3313" y="1996"/>
         </scene>
     </scenes>
 </document>
