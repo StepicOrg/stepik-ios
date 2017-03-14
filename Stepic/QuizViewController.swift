@@ -395,45 +395,60 @@ class QuizViewController: UIViewController {
         self.doesPresentActivityIndicatorView = true
         performRequest({
             [weak self] in
-            if let s = self {
-                ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: s.step.block.name, stepId: stepId, success: { 
-                    [weak self]
-                    attempts, meta in
-                    if attempts.count == 0 || attempts[0].status != "active" {
-                        //Create attempt
-                        s.createNewAttempt(completion: {
-                            s.doesPresentActivityIndicatorView = false
-                            }, error:  {
-                                s.doesPresentActivityIndicatorView = false
-                                s.doesPresentWarningView = true
-                        })
-                    } else {
-                        //Get submission for attempt
-                        let currentAttempt = attempts[0]
-                        s.attempt = currentAttempt
-                        ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
-                            [weak self]
-                            submissions, meta in
-                            if submissions.count == 0 {
-                                s.submission = nil
-                                //There are no current submissions for attempt
-                            } else {
-                                //Displaying the last submission
-                                s.submission = submissions[0]
-                            }
-                            s.doesPresentActivityIndicatorView = false
-                            }, error: {
-                                errorText in
-                                s.doesPresentActivityIndicatorView = false
-                                print("failed to get submissions")
-                                //TODO: Test this
-                        })
-                    }
-                    }, error: {
-                        errorText in
+            guard let s = self else { return }
+            _ = ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: s.step.block.name, stepId: stepId, success: { 
+                [weak self]
+                attempts, meta in
+                if attempts.count == 0 || attempts[0].status != "active" {
+                    //Create attempt
+                    s.createNewAttempt(completion: {
                         s.doesPresentActivityIndicatorView = false
-                        s.doesPresentWarningView = true
-                        //TODO: Test this
+                        }, error:  {
+                            s.doesPresentActivityIndicatorView = false
+                            s.doesPresentWarningView = true
+                    })
+                } else {
+                    //Get submission for attempt
+                    let currentAttempt = attempts[0]
+                    s.attempt = currentAttempt
+                    _ = ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
+                        [weak self]
+                        submissions, meta in
+                        if submissions.count == 0 {
+                            s.submission = nil
+                            //There are no current submissions for attempt
+                        } else {
+                            //Displaying the last submission
+                            s.submission = submissions[0]
+                        }
+                        s.doesPresentActivityIndicatorView = false
+                        }, error: {
+                            errorText in
+                            s.doesPresentActivityIndicatorView = false
+                            print("failed to get submissions")
+                            //TODO: Test this
+                    })
+                }
+                }, error: {
+                    errorText in
+                    s.doesPresentActivityIndicatorView = false
+                    s.doesPresentWarningView = true
+                    //TODO: Test this
+            })
+        }, error: {
+            [weak self] 
+            error in
+            guard let s = self else { return }
+            if error == PerformRequestError.noAccessToRefreshToken {
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: s, success: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.refreshAttempt(s.step.id)
+                }, cancel: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.refreshAttempt(s.step.id)
                 })
             }
         })
@@ -448,21 +463,38 @@ class QuizViewController: UIViewController {
         print("creating attempt for step id -> \(self.step.id) name -> \(self.step.block.name)")
         performRequest({
             [weak self] in
-            if let s = self {
-                ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: s.step.block.name, stepId: s.step.id, success: {
-                    [weak self]
-                    attempt in
-                    s.attempt = attempt
-                    s.submission = nil
-                    completion?()
-                    }, error: {
-                        errorText in   
-                        print(errorText)
-                        error?()
-                        //TODO: Test this
-                })
-            }
+            guard let s = self else { return }
+            _ = ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: s.step.block.name, stepId: s.step.id, success: {
+                [weak self]
+                attempt in
+                guard let s = self else { return }
+                s.attempt = attempt
+                s.submission = nil
+                completion?()
+                }, error: {
+                    errorText in   
+                    print(errorText)
+                    error?()
+                    //TODO: Test this
+            })
+            }, error: {
+                [weak self] 
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    RoutingManager.auth.routeFrom(controller: s, success: {
+                        [weak self] in
+                        guard let s = self else { return }
+                        s.refreshAttempt(s.step.id)
+                        }, cancel: {
+                            [weak self] in
+                            guard let s = self else { return }
+                            s.refreshAttempt(s.step.id)
+                    })
+                }
         })
+
     }
     
     let streakTimePickerPresenter : Presentr = {
@@ -551,26 +583,41 @@ class QuizViewController: UIViewController {
             performRequest({
                 [weak self] in
                 
-                if let s = self {
-                    ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: s.step.block.name, submissionId: id, success: {
-                        [weak self]
-                        submission in
-                        print("did get submission id \(id), with status \(submission.status)")
-                        if submission.status == "evaluation" {
-                            s.checkSubmission(id, time: time + 1, completion: completion)
-                        } else {
-                            s.submission = submission
-                            if submission.status == "correct" {
-                                s.checkCorrect() 
-                            }
-                            completion?()
+                guard let s = self else { return }
+                _ = ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: s.step.block.name, submissionId: id, success: {
+                    [weak self]
+                    submission in
+                    print("did get submission id \(id), with status \(submission.status)")
+                    if submission.status == "evaluation" {
+                        s.checkSubmission(id, time: time + 1, completion: completion)
+                    } else {
+                        s.submission = submission
+                        if submission.status == "correct" {
+                            s.checkCorrect() 
                         }
-                        }, error: { 
-                            errorText in
-                            s.didGetErrorWhileSendingSubmission = true
-                            s.submission = nil
-                            completion?()
-                            //TODO: test this
+                        completion?()
+                    }
+                    }, error: { 
+                        errorText in
+                        s.didGetErrorWhileSendingSubmission = true
+                        s.submission = nil
+                        completion?()
+                        //TODO: test this
+                })
+            }, error: {
+                [weak self] 
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    RoutingManager.auth.routeFrom(controller: s, success: {
+                        [weak self] in
+                        guard let s = self else { return }
+                        s.refreshAttempt(s.step.id)
+                        }, cancel: {
+                            [weak self] in
+                            guard let s = self else { return }
+                            s.refreshAttempt(s.step.id)
                     })
                 }
             })
@@ -582,16 +629,31 @@ class QuizViewController: UIViewController {
         let id = attempt!.id!
         performRequest({
             [weak self] in
-            if let s = self {
-                ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: s.step.block.name, attemptId: id, reply: r, success: {
-                    [weak self]
-                    submission in
-                    s.submission = submission
-                    s.checkSubmission(submission.id!, time: 0, completion: completion)
-                    }, error: {
-                        errorText in
-                        errorHandler(errorText)
-                        //TODO: test this
+            guard let s = self else { return }
+            _ = ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: s.step.block.name, attemptId: id, reply: r, success: {
+                [weak self]
+                submission in
+                s.submission = submission
+                s.checkSubmission(submission.id!, time: 0, completion: completion)
+                }, error: {
+                    errorText in
+                    errorHandler(errorText)
+                    //TODO: test this
+            })
+        }, error: {
+            [weak self] 
+            error in
+            guard let s = self else { return }
+            if error == PerformRequestError.noAccessToRefreshToken {
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: s, success: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.refreshAttempt(s.step.id)
+                    }, cancel: {
+                        [weak self] in
+                        guard let s = self else { return }
+                        s.refreshAttempt(s.step.id)
                 })
             }
         })

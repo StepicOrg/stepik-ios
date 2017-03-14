@@ -39,20 +39,16 @@ class Unit: NSManagedObject, JSONInitializable {
     }
     
     func loadAssignments(_ completion: @escaping ((Void)->Void), errorHandler: @escaping ((Void)->Void)) {
-        performRequest({
-            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
-                newAssignments in 
-                self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
-                completion()
-                }, failure: {
-                    error in
-                    print("Error while downloading assignments")
-                    errorHandler()
-            })
-            }, error:  {
+        _ = ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
+            newAssignments in 
+            self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
+            completion()
+            }, failure: {
+                error in
+                print("Error while downloading assignments")
                 errorHandler()
         })
-    }
+   }
     
     func getUnitForLessonId(_ id: Int) -> Unit? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")

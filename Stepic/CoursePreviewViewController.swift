@@ -311,15 +311,12 @@ class CoursePreviewViewController: UIViewController {
         
         if !AuthInfo.shared.isAuthorized {
             AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.anonymous, parameters: nil)
-            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-                vc.success = {
-                    [weak self] in
-                    if let s = self {
-                        s.joinButtonPressed(sender)
-                    }
+            RoutingManager.auth.routeFrom(controller: self, success: {
+                [weak self] in
+                if let s = self {
+                    s.joinButtonPressed(sender)
                 }
-                self.present(vc, animated: true, completion: nil)
-            }
+            }, cancel: nil)
             return
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.signed, parameters: nil)
