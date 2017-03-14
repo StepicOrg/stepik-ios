@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 class DeepLinkRouter {
-    
+    @available(iOS 8.0, *)
     static func routeFromDeepLink(_ link: URL, completion: @escaping (UIViewController?, Bool) -> Void) {
         
         func getID(_ stringId: String, reversed: Bool) -> Int? {
@@ -31,10 +32,10 @@ class DeepLinkRouter {
             return slugId
         }
         
-                
-        let components = link.pathComponents 
-            //just a check if everything is OK with the link length
-            
+        
+        let components = link.pathComponents
+        //just a check if everything is OK with the link length
+        
         if components[1].lowercased() == "course" && components.count >= 3 {
             guard let courseId = getID(components[2], reversed: true) else {
                 completion(nil, false)
@@ -42,22 +43,26 @@ class DeepLinkRouter {
             }
             
             if components.count == 3 {
+                
                 AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.course, parameters: ["id": courseId as NSObject])
+                
                 routeToCourseWithId(courseId, completion: completion)
                 return
             }
-    
+            
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
+                
                 AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId as NSObject])
+                
                 routeToSyllabusWithId(courseId, completion: completion)
                 return
             }
             
             completion(nil, false)
             return
-        }  
-            
-            
+        }
+        
+        
         if components[1].lowercased() == "lesson" && components.count >= 5 {
             guard let lessonId = getID(components[2], reversed: true) else {
                 completion(nil, false)
@@ -73,12 +78,12 @@ class DeepLinkRouter {
                 completion(nil, false)
                 return
             }
-            
             AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId as NSObject, "step": stepId as NSObject])
+            
             routeToStepWithId(stepId, lessonId: lessonId, completion: completion)
             return
-        }            
-         
+        }
+        
         completion(nil, false)
         return
     }
@@ -90,7 +95,7 @@ class DeepLinkRouter {
                 if courses.count == 0 {
                     performRequest({
                         ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
-                            loadedCourses in 
+                            loadedCourses in
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
                                     vc.course = loadedCourses[0]
@@ -101,15 +106,15 @@ class DeepLinkRouter {
                                 completion(nil, false)
                                 return
                             }
-                            }, failure: {
-                                error in
-                                print("error while downloading course with id \(courseId)")
-                                completion(nil, false) 
-                                return
+                        }, failure: {
+                            error in
+                            print("error while downloading course with id \(courseId)")
+                            completion(nil, false)
+                            return
                         })
                     })
                     return
-                } 
+                }
                 if courses.count >= 1 {
                     vc.course = courses[0]
                     completion(vc, true)
@@ -134,7 +139,7 @@ class DeepLinkRouter {
             if courses.count == 0 {
                 performRequest({
                     ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
-                        loadedCourses in 
+                        loadedCourses in
                         if loadedCourses.count == 1 {
                             UIThread.performUI {
                                 let course = loadedCourses[0]
@@ -156,15 +161,15 @@ class DeepLinkRouter {
                             completion(nil, false)
                             return
                         }
-                        }, failure: {
-                            error in
-                            print("error while downloading course with id \(courseId)")
-                            completion(nil, false) 
-                            return
+                    }, failure: {
+                        error in
+                        print("error while downloading course with id \(courseId)")
+                        completion(nil, false)
+                        return
                     })
                 })
                 return
-            } 
+            }
             if courses.count >= 1 {
                 let course = courses[0]
                 if course.enrolled {
@@ -188,22 +193,22 @@ class DeepLinkRouter {
             print("something bad happened")
             completion(nil, false)
             return
-        }        
+        }
     }
     
     static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping (UIViewController?, Bool) -> Void) {
         let router = StepsControllerDeepLinkRouter()
-        router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: 
+        router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success:
             {
                 vc in
                 completion(vc, true)
-            }, error: 
+        }, error:
             {
-                errorMsg in 
+                errorMsg in
                 print(errorMsg)
                 completion(nil, false)
-            }
+        }
         )
-
+        
     }
 }

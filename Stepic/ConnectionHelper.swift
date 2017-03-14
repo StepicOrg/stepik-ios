@@ -67,7 +67,9 @@ class ConnectionHelper : NSObject {
                 completed, errors in 
                 print("Cancelled \(completed) videos")
                 if completed + errors != 0 {
+                    #if os(iOS)
                     UIThread.performUI({Messages.sharedManager.showCancelledDownloadMessage(count: completed)})
+                    #endif
                 }
                 if errors != 0 { print("Cancelled \(completed+errors) dowloads with \(errors) errors") }
             })

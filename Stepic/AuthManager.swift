@@ -21,7 +21,7 @@ class AuthManager : NSObject {
         
         if StepicApplicationsInfo.social == nil {
             failure(NSError.noAppWithCredentials as Error)
-            return nil 
+            return nil
         }
         
         let headers = [
@@ -36,7 +36,7 @@ class AuthManager : NSObject {
         ]
         
         return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON {
-//            (_,_, json, error) in
+            //            (_,_, json, error) in
             response in
             
             var error = response.result.error
@@ -75,7 +75,7 @@ class AuthManager : NSObject {
         
         if StepicApplicationsInfo.password == nil {
             failure(NSError.noAppWithCredentials as Error)
-            return nil 
+            return nil
         }
         
         // Specifying the Headers we need
@@ -104,7 +104,7 @@ class AuthManager : NSObject {
                 json = response.result.value!
             }
             let response = response.response
-
+            
             
             if let e = error {
                 failure(e)
@@ -135,7 +135,9 @@ class AuthManager : NSObject {
             if let m = message {
                 parameters["message"] = m as NSObject?
             }
+            
             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
+            
         }
         
         var credentials = ""
@@ -146,13 +148,13 @@ class AuthManager : NSObject {
         case .code:
             if StepicApplicationsInfo.social == nil {
                 failure(NSError.noAppWithCredentials as Error)
-                return nil 
+                return nil
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .password:
             if StepicApplicationsInfo.password == nil {
                 failure(NSError.noAppWithCredentials as Error)
-                return nil 
+                return nil
             }
             credentials = StepicApplicationsInfo.password!.credentials
         }
@@ -179,14 +181,14 @@ class AuthManager : NSObject {
                 json = response.result.value!
             }
             let response = response.response
-
+            
             
             if let e = error {
                 logRefreshError(statusCode: response?.statusCode, message: "Error \(e.localizedDescription) while refreshing")
                 failure(e)
                 return
             }
-
+            
             let token : StepicToken = StepicToken(json: json)
             
             if token.accessToken == "" {
@@ -212,17 +214,17 @@ class AuthManager : NSObject {
             
             AuthInfo.shared.token = t
             success?()
-            }, failure : {
-                error in
-                print("error while auto refresh token")
-                failure?()
+        }, failure : {
+            error in
+            print("error while auto refresh token")
+            failure?()
         })
     }
     
     func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
-
+        
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-
+        
         let params : Parameters = [
             "enrollment" : [
                 "course" : "\(courseId)"
@@ -243,7 +245,7 @@ class AuthManager : NSObject {
                     json = response.result.value!
                 }
                 let response = response.response
-
+                
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -270,7 +272,7 @@ class AuthManager : NSObject {
                     json = response.result.value!
                 }
                 let response = response.response
-
+                
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -288,9 +290,9 @@ class AuthManager : NSObject {
     
     //TODO: When refactoring code think about this function
     func signUpWith(_ firstname: String, lastname: String, email: String, password: String, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String?, RegistrationErrorInfo?) -> Void)) {
-            let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-                                    
-            let params : Parameters = 
+        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
+        
+        let params : Parameters =
             ["user" :
                 [
                     "first_name" : firstname,
@@ -298,37 +300,37 @@ class AuthManager : NSObject {
                     "email" : email,
                     "password" : password,
                 ]
-            ]
+        ]
+        
+        print("sending request with headers:\n\(headers)\nparams:\n\(params)")
+        _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(  {
+            response in
             
-            print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-            _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(  { 
-                    response in
-                    
-                    var error = response.result.error
-                    var json : JSON = [:]
-                    if response.result.value == nil {
-                        if error == nil {
-                            error = NSError()
-                        }
-                    } else {
-                        json = response.result.value!
-                    }
-                    let response = response.response
-                
-                    if let e = (error as? NSError) {
-                        let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
-                        errorHandler(errormsg, nil)
-                        return
-                    }
-                    
-                    if let r = response {
-                        if r.statusCode.isSuccess() {
-                            success()
-                        } else if r.statusCode == 400 {
-                            errorHandler(nil, RegistrationErrorInfo(json: json))
-                        }
-                    }
-            })
+            var error = response.result.error
+            var json : JSON = [:]
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            } else {
+                json = response.result.value!
+            }
+            let response = response.response
+            
+            if let e = (error as? NSError) {
+                let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
+                errorHandler(errormsg, nil)
+                return
+            }
+            
+            if let r = response {
+                if r.statusCode.isSuccess() {
+                    success()
+                } else if r.statusCode == 400 {
+                    errorHandler(nil, RegistrationErrorInfo(json: json))
+                }
+            }
+        })
     }
 }
 

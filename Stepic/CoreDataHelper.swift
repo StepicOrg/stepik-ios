@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 class CoreDataHelper: NSObject {
     static var instance = CoreDataHelper()

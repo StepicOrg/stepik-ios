@@ -9,11 +9,7 @@
 import Foundation
 import CoreGraphics
 
-@available(iOS 9.0, *)
-extension WatchSessionSender.Name {
-  static let RequestCourses = WatchSessionSender.Name("RequestCourses")
-  static let Courses = WatchSessionSender.Name("Courses")
-}
+
 
 struct CoursePlainEntity: DataConvertable {
   var id: Int

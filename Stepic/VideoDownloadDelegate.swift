@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import DownloadButton
 
 protocol VideoDownloadDelegate {
     func didDownload(_ video: Video, cancelled: Bool)

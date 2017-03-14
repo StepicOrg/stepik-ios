@@ -10,6 +10,8 @@
 import UIKit
 import FLKAutoLayout
 import DZNEmptyDataSet
+@IBOutlet weak var tableView: UITableView!
+@IBOutlet weak var tableView: UITableView!
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
