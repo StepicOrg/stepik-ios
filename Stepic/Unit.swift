@@ -26,6 +26,7 @@ class Unit: NSManagedObject, JSONInitializable {
         isActive = json["is_active"].boolValue
         lessonId = json["lesson"].intValue
         progressId = json["progress"].stringValue
+        sectionId = json["section"].intValue
         
         assignmentsArray = json["assignments"].arrayObject as! [Int]
         
@@ -50,7 +51,7 @@ class Unit: NSManagedObject, JSONInitializable {
         })
    }
     
-    func getUnitForLessonId(_ id: Int) -> Unit? {
+    class func getUnit(id: Int) -> Unit? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
@@ -59,11 +60,13 @@ class Unit: NSManagedObject, JSONInitializable {
         
         do {
             let results = try CoreDataHelper.instance.context.fetch(request) 
+            if results.count > 1 {
+                print("CORE DATA WARNING: More than 1 unit with id \(id)")
+            }
             return (results as? [Unit])?.first
         }
         catch {
             return nil
         }
-//        return Unit.MR_findFirstWithPredicate(NSPredicate(format: "managedLessonId == %@", id as NSNumber))
     }
 }

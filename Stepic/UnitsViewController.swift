@@ -14,7 +14,6 @@ class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    
     /*
      There are 2 ways of instantiating the controller
      1) a Section object
@@ -29,7 +28,7 @@ class UnitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = section.title
+        self.navigationItem.title = section?.title ?? "Module"
         self.navigationItem.backBarButtonItem?.title = " "
 
         tableView.tableFooterView = UIView()
@@ -43,27 +42,73 @@ class UnitsViewController: UIViewController {
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         refreshControl.beginRefreshing()
-        refreshUnits()
-
+        
+        refreshUnits() 
         // Do any additional setup after loading the view.
     }
 
+    func getSectionByUnit(id: Int) {
+        //Search for unit by its id locally
+        if let localUnit = Unit.getUnit(id: id) {
+            if let localSection = localUnit.section {
+                self.section = localSection
+                refreshUnits()
+                return
+            }
+            loadUnit(id: id, localUnit: localUnit)
+        }
+        
+        loadUnit(id: id)
+    }
+    
+    func loadUnit(id: Int, localUnit: Unit? = nil) {
+        ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
+            units in
+            guard let unit = units.first else { return }
+            let localSection = try! Section.getSections(unit.sectionId).first
+            ApiDataDownloader.sharedDownloader.getSectionsByIds([unit.sectionId], existingSections: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
+                [weak self]
+                sections in
+                guard let section = sections.first else { return }
+                section.unit = unit
+                self?.section = section
+                self?.refreshUnits()
+            }, failure: {
+                error in
+                UIThread.performUI({
+                    self.refreshControl.endRefreshing()
+                    self.emptyDatasetState = EmptyDatasetState.connectionError
+                })
+                self.didRefresh = true
+            })
+        }, failure: {
+            error in
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+                self.emptyDatasetState = EmptyDatasetState.connectionError
+            })
+            self.didRefresh = true
+        })
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         tableView.reloadData()
-        if(self.refreshControl.isRefreshing) {
+        if (self.refreshControl.isRefreshing) {
             let offset = self.tableView.contentOffset
             self.refreshControl.endRefreshing()
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
         
-        section.loadProgressesForUnits(units: section.units, completion: {
-            UIThread.performUI({
-                self.tableView.reloadData()
+        if let section = section {
+            section.loadProgressesForUnits(units: section.units, completion: {
+                UIThread.performUI({
+                    self.tableView.reloadData()
+                })
             })
-        })
+        }
     }
     
     var emptyDatasetState : EmptyDatasetState = .empty {
@@ -75,8 +120,16 @@ class UnitsViewController: UIViewController {
     }
 
     func refreshUnits() {
+        
+        guard section != nil else {
+            if let id = unitId {
+                getSectionByUnit(id: id) 
+            }
+            return
+        }
+        
         didRefresh = false
-        section.loadUnits(success: {
+        section?.loadUnits(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -104,6 +157,10 @@ class UnitsViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let section = section else {
+            return
+        }
+        
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destination as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
@@ -154,6 +211,9 @@ class StepsPresentation {
 
 extension UnitsViewController : SectionNavigationDelegate {
     func displayNext() {        
+        guard let section = section else {
+            return 
+        }
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
                 selectUnitAtIndex(uIndex + 1, replace: true)
@@ -177,7 +237,10 @@ extension UnitsViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UnitTableViewCell.heightForCellWithUnit(self.section.units[(indexPath as NSIndexPath).row])
+        guard let section = section else {
+            return 0
+        } 
+        return UnitTableViewCell.heightForCellWithUnit(section.units[(indexPath as NSIndexPath).row])
     }
     
 }
@@ -188,13 +251,20 @@ extension UnitsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.section.units.count
+        guard let ssection = self.section else {
+            return 0
+        }
+        return ssection.units.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UnitTableViewCell", for: indexPath) as! UnitTableViewCell
         
-        cell.initWithUnit(self.section.units[(indexPath as NSIndexPath).row], delegate: self)
+        guard let section = section else {
+            return cell
+        }
+        
+        cell.initWithUnit(section.units[(indexPath as NSIndexPath).row], delegate: self)
         
         return cell
     }
@@ -243,6 +313,9 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             return
         }
         
+        guard let section = section else {
+            return
+        }
 
         
         switch (state) {
@@ -262,7 +335,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                 storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
             } else {
                 section.units[downloadButton.tag].lesson?.loadSteps(completion: {
-                    self.storeLesson(self.section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
+                    self.storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
                 })
             }
             break
@@ -289,7 +362,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {
-                self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
+                section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
                     DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()
                         downloadButton.state = PKDownloadButtonState.startDownload

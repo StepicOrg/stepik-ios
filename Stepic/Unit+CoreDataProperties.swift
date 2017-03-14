@@ -22,6 +22,7 @@ extension Unit {
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedProgressId : String?
+    @NSManaged var managedSectionId : NSNumber?
     
     @NSManaged var managedAssignmentsArray : NSObject?
 
@@ -46,6 +47,15 @@ extension Unit {
         }
         get {
             return managedId?.intValue ?? -1
+        }
+    }
+    
+    var sectionId : Int {
+        set(newId){
+            self.managedSectionId = newId as NSNumber?
+        }
+        get {
+            return managedSectionId?.intValue ?? -1
         }
     }
     
@@ -113,10 +123,6 @@ extension Unit {
         }
     }
     
-    var section : Section {
-        return managedSection!
-    }
-    
     var progress : Progress? {
         get {
             return managedProgress
@@ -153,6 +159,15 @@ extension Unit {
         
         set(value) {
             managedAssignments = NSOrderedSet(array: value)
+        }
+    }
+    
+    var section: Section? {
+        get {
+            return managedSection
+        }
+        set(value) {
+            self.managedSection = value
         }
     }
     
