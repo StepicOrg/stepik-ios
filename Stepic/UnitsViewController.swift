@@ -70,7 +70,7 @@ class UnitsViewController: UIViewController {
                 [weak self]
                 sections in
                 guard let section = sections.first else { return }
-                section.unit = unit
+                unit.section = section
                 self?.section = section
                 self?.refreshUnits()
             }, failure: {

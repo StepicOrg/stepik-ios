@@ -101,7 +101,7 @@ class StepsViewController: RGPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = lesson?.title
+        self.navigationItem.title = lesson?.title ?? "Lesson"
         
         datasource = self
         delegate = self
@@ -120,6 +120,11 @@ class StepsViewController: RGPageViewController {
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     fileprivate func refreshSteps() {
+        
+        guard lesson != nil else {
+            loadLesson()
+        }
+        
         var prevStepsIds = [Int]()
         if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
@@ -187,6 +192,10 @@ class StepsViewController: RGPageViewController {
                     }
                 }
             }, onlyLesson: context == .lesson)
+    }
+    
+    func loadSteps() {
+        
     }
     
     var didSelectTab = false
@@ -274,6 +283,11 @@ extension StepsViewController : RGPageViewControllerDataSource {
     ///
     /// - returns: a `UIView` instance that will be shown as tab at the given index.
     public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
+        
+        guard lesson != nil else {
+            return UIView()
+        }
+        
         //Just a try to fix a strange bug
         if index >= lesson!.steps.count {
             return UIView()
