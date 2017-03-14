@@ -361,6 +361,27 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
     }
+    
+    func continueLearning(course: Course) {
+        guard let lastStep = course.lastStep else {
+            return
+        }
+        
+        guard 
+        let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
+        let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController,
+        let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+            return
+        }
+        
+        sectionsVC.course = course
+        unitsVC.unitId = lastStep.unitId
+        stepsVC.stepId = lastStep.stepId
+        
+        navigationController?.pushViewController(sectionsVC, animated: false)
+        navigationController?.pushViewController(unitsVC, animated: false)
+        navigationController?.pushViewController(stepsVC, animated: true)
+    }
 }
 
 

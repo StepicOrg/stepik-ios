@@ -15,8 +15,15 @@ enum StepsControllerPresentationContext {
 
 class StepsViewController: RGPageViewController {
     
-    //TODO: really need optionals here?
+    /*
+     There are two ways of initializing the StepsViewController
+     1) a Lesson object
+     2) a Step id , which is used to load the lesson data
+     */
     var lesson : Lesson?
+    var stepId : Int?
+    
+    
     var startStepId : Int = 0
         
     var canSendViews: Bool = false

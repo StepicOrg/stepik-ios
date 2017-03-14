@@ -838,7 +838,7 @@
         <!--Units-->
         <scene sceneID="fwV-16-Q11">
             <objects>
-                <viewController id="8ik-tt-HOc" customClass="UnitsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UnitsViewController" id="8ik-tt-HOc" customClass="UnitsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R3Q-gr-8aW"/>
                         <viewControllerLayoutGuide type="bottom" id="dbc-fW-0PT"/>
@@ -1269,9 +1269,9 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nf5-of-tUO"/>
-        <segue reference="WuO-Je-0sX"/>
-        <segue reference="gVj-jL-WXR"/>
         <segue reference="22V-K9-ItS"/>
+        <segue reference="WuO-Je-0sX"/>
+        <segue reference="Ymm-um-wgY"/>
+        <segue reference="oyz-px-1HN"/>
     </inferredMetricsTieBreakers>
 </document>

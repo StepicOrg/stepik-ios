@@ -14,7 +14,15 @@ class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var section : Section!
+    
+    /*
+     There are 2 ways of instantiating the controller
+     1) a Section object
+     2) a Unit id - used for instantiation via navigation by LastStep
+     */
+    var section : Section?
+    var unitId: Int?
+    
     var didRefresh = false
     let refreshControl = UIRefreshControl()
 

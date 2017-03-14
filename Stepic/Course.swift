@@ -132,17 +132,15 @@ class Course: NSManagedObject, JSONInitializable {
         guard let id = self.lastStepId else { 
             return 
         }
-        performRequest({
-            _ = ApiDataDownloader.lastSteps.retrieve(id: id, success: {
-                [weak self]
-                lastStep in
-                self?.changeLastStepTo(lastStep: lastStep)
-                success()
-            }, error: {
-                error in
-                print("error while loading last step")
-            })
-        })        
+        _ = ApiDataDownloader.lastSteps.retrieve(id: id, success: {
+            [weak self]
+            lastStep in
+            self?.changeLastStepTo(lastStep: lastStep)
+            success()
+        }, error: {
+            error in
+            print("error while loading last step")
+        })
     }
     
     func loadAllInstructors(success: @escaping ((Void) -> Void)) {
