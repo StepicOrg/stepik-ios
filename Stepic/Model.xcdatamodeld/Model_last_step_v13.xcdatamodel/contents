@@ -108,6 +108,7 @@
         <attribute name="managedLessonId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedPosition" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedProgressId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedSectionId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedSoftDeadline" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedAssignments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Assignment" inverseName="managedUnit" inverseEntity="Assignment" syncable="YES"/>
         <relationship name="managedLesson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lesson" inverseName="managedUnit" inverseEntity="Lesson" syncable="YES"/>
@@ -150,7 +151,7 @@
         <element name="Progress" positionX="-45" positionY="135" width="128" height="195"/>
         <element name="Section" positionX="-54" positionY="126" width="128" height="270"/>
         <element name="Step" positionX="-45" positionY="135" width="128" height="195"/>
-        <element name="Unit" positionX="-45" positionY="144" width="128" height="240"/>
+        <element name="Unit" positionX="-45" positionY="144" width="128" height="255"/>
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>

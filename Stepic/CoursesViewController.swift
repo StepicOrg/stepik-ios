@@ -172,6 +172,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
                         _ = ApiDataDownloader.lastSteps.retrieve(ids: lastStepIds, updatingLastSteps: lastSteps, success: {
                             newLastSteps -> Void in
+                            
                             guard newLastSteps.count > 0 else {
                                 coursesCompletion()
                                 return
@@ -427,7 +428,7 @@ extension CoursesViewController : UITableViewDelegate {
         if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
             return 60
         } else {
-            return 100
+            return 126
         }
     }
     

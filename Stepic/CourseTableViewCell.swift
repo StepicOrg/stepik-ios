@@ -15,11 +15,14 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseNameLabel: UILabel!
     @IBOutlet weak var courseDescriptionLabel: UILabel!
     @IBOutlet weak var deadlinesLabel: UILabel!
+    @IBOutlet weak var continueButton: UIButton!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        continueButton.setStepicWhiteStyle()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
