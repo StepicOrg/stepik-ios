@@ -74,6 +74,8 @@ class Lesson: NSManagedObject, JSONInitializable {
                                 print("Error while downloading assignments")
                                 errorHandler?("Error while downloading assignments")
                         })
+                    } else {
+                        completion()
                     }
                 } else {
                     completion()

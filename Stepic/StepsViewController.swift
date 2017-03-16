@@ -122,6 +122,10 @@ class StepsViewController: RGPageViewController {
             print("ERROR: Load lesson without lesson and step id called")
             return
         }
+
+        self.view.isUserInteractionEnabled = false
+        self.doesPresentWarningView = false
+        self.doesPresentActivityIndicatorView = true
         
         var step : Step? = nil
         
@@ -201,8 +205,12 @@ class StepsViewController: RGPageViewController {
             self.doesPresentWarningView = false
             self.doesPresentActivityIndicatorView = true
         } else {
-            if let l = lesson {
+            if let l = lesson, l.stepsArray.count == l.steps.count {
                 prevStepsIds = l.stepsArray
+            } else {
+                self.view.isUserInteractionEnabled = false
+                self.doesPresentWarningView = false
+                self.doesPresentActivityIndicatorView = true
             }
         }
         

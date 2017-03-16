@@ -475,7 +475,12 @@ extension CoursesViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseTableViewCell", for: indexPath) as! CourseTableViewCell
         
-        cell.initWithCourse(courses[(indexPath as NSIndexPath).row])
+        let course = courses[(indexPath as NSIndexPath).row]
+        cell.initWithCourse(course)
+        cell.continueAction = {
+            [weak self] in
+            self?.continueLearning(course: course)
+        }
         
         return cell
     }
