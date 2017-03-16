@@ -16,7 +16,10 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var courseDescriptionLabel: UILabel!
     @IBOutlet weak var deadlinesLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var deadlineLabelHeight: NSLayoutConstraint! //14
+    @IBOutlet weak var continueButtonHeight: NSLayoutConstraint! //32
     
+    var continueAction : ((Void) -> Void)? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,10 +56,27 @@ class CourseTableViewCell: UITableViewCell {
         
         courseDescriptionLabel.setTextWithHTMLString(course.summary)
     
-        deadlinesLabel.text = getTextFromDates(course)
+        let deadlinesText = getTextFromDates(course)
+        if deadlinesText == "" {
+            deadlineLabelHeight.constant = 0
+        } else {
+            deadlinesLabel.text = deadlinesText
+            deadlineLabelHeight.constant = 14
+        }
         
+        if course.enrolled && course.lastStep != nil {
+            continueButtonHeight.constant = 32
+        } else {
+            continueButtonHeight.constant = 0
+        }
         
         courseImageView.sd_setImage(with: URL(string: course.coverURLString), placeholderImage: Constants.placeholderImage)
         
     }
+    
+    @IBAction func continueButtonPressed(_ sender: UIButton) {
+        continueAction?()
+    }
+    
+    
 }

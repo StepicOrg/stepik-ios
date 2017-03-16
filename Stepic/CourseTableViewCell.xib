@@ -31,8 +31,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 января 2015 - 23 мая 2016" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6o-2l-HFE">
-                        <rect key="frame" x="84" y="73" width="165" height="14"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="84" y="73" width="153" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="sop-gy-sZK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -44,6 +47,9 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="Continue"/>
+                        <connections>
+                            <action selector="continueButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dbc-PH-IWC"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RLA-4o-65X">
                         <rect key="frame" x="8" y="8" width="68" height="68"/>
@@ -56,7 +62,6 @@
                 <constraints>
                     <constraint firstItem="RLA-4o-65X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="18A-6D-BXw"/>
                     <constraint firstItem="F48-nf-4UJ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="28w-ID-23z"/>
-                    <constraint firstItem="RLA-4o-65X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="8Mm-oT-BEe"/>
                     <constraint firstItem="F48-nf-4UJ" firstAttribute="leading" secondItem="RLA-4o-65X" secondAttribute="trailing" constant="8" id="8oh-GF-bjc"/>
                     <constraint firstAttribute="bottomMargin" secondItem="mZk-pd-goe" secondAttribute="bottom" constant="-3.5" id="Fpd-n6-8MD"/>
                     <constraint firstItem="y6Q-DF-gKl" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="JTH-y1-aTM"/>
@@ -71,18 +76,15 @@
                     <constraint firstItem="mZk-pd-goe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="F48-nf-4UJ" secondAttribute="bottom" constant="8" id="mFj-gG-RfZ"/>
                     <constraint firstAttribute="topMargin" secondItem="RLA-4o-65X" secondAttribute="top" id="rbx-tZ-v9b"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="8Mm-oT-BEe"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="77" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <inset key="separatorInset" minX="84" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="continueButton" destination="mZk-pd-goe" id="CSQ-dq-Xhx"/>
+                <outlet property="continueButtonHeight" destination="zqw-ew-SQk" id="eZC-bE-e7n"/>
                 <outlet property="courseDescriptionLabel" destination="F48-nf-4UJ" id="8PV-UJ-362"/>
                 <outlet property="courseImageView" destination="RLA-4o-65X" id="NAB-pB-pRy"/>
                 <outlet property="courseNameLabel" destination="y6Q-DF-gKl" id="UeL-Dc-kIA"/>
+                <outlet property="deadlineLabelHeight" destination="sop-gy-sZK" id="0nP-Ru-Tzc"/>
                 <outlet property="deadlinesLabel" destination="D6o-2l-HFE" id="ljc-Nd-CcI"/>
             </connections>
             <point key="canvasLocation" x="354" y="370"/>
