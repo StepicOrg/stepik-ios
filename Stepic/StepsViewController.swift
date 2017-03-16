@@ -117,12 +117,82 @@ class StepsViewController: RGPageViewController {
     
     fileprivate var tabViewsForStepId = [Int: UIView]()
     
+    func loadLesson() {
+        guard let stepId = stepId else {
+            print("ERROR: Load lesson without lesson and step id called")
+            return
+        }
+        
+        var step : Step? = nil
+        
+        if let localStep = Step.getStepWithId(stepId) {
+            step = localStep
+            if let localLesson = localStep.lesson {
+                self.lesson = localLesson
+                refreshSteps()
+                return
+            }
+        }
+        
+        _ = ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: (step != nil) ? [step!] : [], refreshMode: .update, success: {
+            steps in
+            
+            guard let step = steps.first else { 
+                return 
+            }
+            
+            var localLesson: Lesson? = nil
+            localLesson =  Lesson.getLesson(step.lessonId)
+            
+            _ = ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
+                [weak self]
+                lessons in
+                guard let lesson = lessons.first else {
+                    return
+                }
+                
+                self?.lesson = lesson
+                step.lesson = lesson
+                self?.refreshSteps()
+                return
+                
+            }, failure: {
+                error in
+                print("Error while downloading lesson")
+                DispatchQueue.main.async{
+                    [weak self] in
+                    if let s = self {
+                        s.view.isUserInteractionEnabled = true
+                        s.doesPresentActivityIndicatorView = false
+                        if s.numberOfPages(for: s) == 0 {
+                            s.doesPresentWarningView = true
+                        }
+                    }
+                }
+            })
+        }, failure: {
+            error in
+            print("Error while downloading step")
+            DispatchQueue.main.async{
+                [weak self] in
+                if let s = self {
+                    s.view.isUserInteractionEnabled = true
+                    s.doesPresentActivityIndicatorView = false
+                    if s.numberOfPages(for: s) == 0 {
+                        s.doesPresentWarningView = true
+                    }
+                }
+            }
+        })
+    }
+    
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     fileprivate func refreshSteps() {
         
         guard lesson != nil else {
             loadLesson()
+            return
         }
         
         var prevStepsIds = [Int]()

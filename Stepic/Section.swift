@@ -14,7 +14,7 @@ import SwiftyJSON
 class Section: NSManagedObject, JSONInitializable {
     
     // Insert code here to add functionality to your managed object subclass
-    
+    typealias idType = Int
     
     convenience required init(json: JSON){
         self.init()
@@ -39,6 +39,10 @@ class Section: NSManagedObject, JSONInitializable {
     
     func update(json: JSON) {
         initialize(json)
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     class func getSections(_ id: Int) throws -> [Section] {

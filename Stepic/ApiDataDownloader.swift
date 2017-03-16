@@ -125,7 +125,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    fileprivate func constructIdsString<TID>(array arr: [TID]) -> String {
+    func constructIdsString<TID>(array arr: [TID]) -> String {
         var result = ""
         for element in arr {
             result += "ids[]=\(element)&"
@@ -226,7 +226,7 @@ class ApiDataDownloader: NSObject {
             case .update:
                 
                 for objectJSON in json[requestString].arrayValue {
-                    let existing = deleteObjects.filter({obj in obj.id == objectJSON["id"].intValue})
+                    let existing = deleteObjects.filter({obj in obj.hasEqualId(json: objectJSON)})
                     
                     switch existing.count {
                     case 0: 

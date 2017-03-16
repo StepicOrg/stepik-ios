@@ -25,30 +25,33 @@ extension LastStep {
         self.init(entity: LastStep.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
     
-    var id : String? {
+    var id : String {
         set(newId){
             self.managedId = newId
         }
         get {
-            return managedId
+            if managedId == nil {
+                print("Requested LastStep id when it is nil")
+            }
+            return managedId ?? "-1"
         }
     }
     
-    var stepId : Int {
+    var stepId : Int? {
         set(newId){
-            self.managedStepId = newId as NSNumber?
+            self.managedStepId = newId as NSNumber? 
         }
         get {
-            return managedStepId?.intValue ?? -1
+            return managedStepId?.intValue
         }
     }
     
-    var unitId : Int {
+    var unitId : Int? {
         set(newId){
             self.managedUnitId = newId as NSNumber?
         }
         get {
-            return managedUnitId?.intValue ?? -1
+            return managedUnitId?.intValue
         }
     }
     

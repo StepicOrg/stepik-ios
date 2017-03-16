@@ -62,11 +62,11 @@ class UnitsViewController: UIViewController {
     }
     
     func loadUnit(id: Int, localUnit: Unit? = nil) {
-        ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
+        _ = ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
             units in
             guard let unit = units.first else { return }
             let localSection = try! Section.getSections(unit.sectionId).first
-            ApiDataDownloader.sharedDownloader.getSectionsByIds([unit.sectionId], existingSections: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
+            _ = ApiDataDownloader.sharedDownloader.getSectionsByIds([unit.sectionId], existingSections: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
                 [weak self]
                 sections in
                 guard let section = sections.first else { return }

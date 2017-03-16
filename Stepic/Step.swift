@@ -13,7 +13,8 @@ import MagicalRecord
 
 class Step: NSManagedObject, JSONInitializable {
 
-// Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
+
     convenience required init(json: JSON){
         self.init()
         initialize(json)
@@ -38,6 +39,10 @@ class Step: NSManagedObject, JSONInitializable {
     func update(json: JSON) {
         initialize(json)
         block.update(json: json["block"])
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     var hasReview : Bool = false

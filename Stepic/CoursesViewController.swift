@@ -144,12 +144,21 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     
                     var progressIds : [String] = []
                     var progresses : [Progress] = []
+                    var lastStepIds : [String] = []
+                    var lastSteps : [LastStep] = []
                     for course in newCourses {
                         if let progressId = course.progressId {
                             progressIds += [progressId]
                         }
                         if let progress = course.progress {
                             progresses += [progress]
+                        }
+                        
+                        if let lastStepId = course.lastStepId {
+                            lastStepIds += [lastStepId]
+                        }
+                        if let lastStep = course.lastStep {
+                            lastSteps += [lastStep]
                         }
                     }
                     
@@ -159,15 +168,40 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         for i in 0 ..< min(newCourses.count, progresses.count) {
                             newCourses[i].progress = progresses[i]
                         }
-                            
                         CoreDataHelper.instance.save()
-                        coursesCompletion()
+
+                        _ = ApiDataDownloader.lastSteps.retrieve(ids: lastStepIds, updatingLastSteps: lastSteps, success: {
+                            newLastSteps -> Void in
+                            guard newLastSteps.count > 0 else {
+                                coursesCompletion()
+                                return
+                            }
+                            lastSteps = Sorter.sort(newLastSteps, byIds: lastStepIds, canMissElements: true)
+                            
+                            var lastStepIndex = 0
+                            
+                            for i in 0 ..< newCourses.count {
+                                if lastSteps[lastStepIndex].id == newCourses[i].lastStepId { 
+                                    newCourses[i].lastStep = lastSteps[lastStepIndex]
+                                    print("\n Course \(newCourses[i].id) has lastStep with id \(lastSteps[lastStepIndex].id)\n")
+                                    lastStepIndex += 1
+                                }
+                            }
+                            CoreDataHelper.instance.save()
+                            coursesCompletion()
+                        }, error: {
+                            error in
+                            coursesCompletion()
+                            print("Error while downloading last steps")
+                        })
+                        
+                        
                     }, failure: { 
                         error in
                         coursesCompletion()
                         print("Error while dowloading progresses")
                     })
-            
+                    
                     
                 }, failure: { 
                     [weak self]

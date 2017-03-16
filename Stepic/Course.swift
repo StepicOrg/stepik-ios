@@ -15,6 +15,8 @@ class Course: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
     
+    typealias idType = Int
+    
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
@@ -50,6 +52,10 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     var metaInfo : String {
@@ -128,20 +134,21 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
         
-    func loadLastStep(success: @escaping ((Void) -> Void)) {
-        guard let id = self.lastStepId else { 
-            return 
-        }
-        _ = ApiDataDownloader.lastSteps.retrieve(id: id, success: {
-            [weak self]
-            lastStep in
-            self?.changeLastStepTo(lastStep: lastStep)
-            success()
-        }, error: {
-            error in
-            print("error while loading last step")
-        })
-    }
+//    func loadLastStep(success: @escaping ((Void) -> Void)) {
+//        guard let id = self.lastStepId else { 
+//            return 
+//        }
+//        _ = ApiDataDownloader.lastSteps.retrieve(ids: [id], success: {
+//            [weak self]
+//            lastSteps in
+//            
+//            self?.changeLastStepTo(lastStep: lastSteps.first!)
+//            success()
+//        }, error: {
+//            error in
+//            print("error while loading last step")
+//        })
+//    }
     
     func loadAllInstructors(success: @escaping ((Void) -> Void)) {
         _ = ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
@@ -300,11 +307,11 @@ class Course: NSManagedObject, JSONInitializable {
         }
     }
     
-    func changeLastStepTo(lastStep: LastStep?) {
-        let objectToDelete = self.lastStep
-        self.lastStep = lastStep
-        if let deletingObject = objectToDelete { 
-            CoreDataHelper.instance.deleteFromStore(deletingObject, save: true)
-        }
-    }
+//    func changeLastStepTo(lastStep: LastStep?) {
+//        let objectToDelete = self.lastStep
+//        self.lastStep = lastStep
+//        if let deletingObject = objectToDelete { 
+//            CoreDataHelper.instance.deleteFromStore(deletingObject, save: true)
+//        }
+//    }
 }

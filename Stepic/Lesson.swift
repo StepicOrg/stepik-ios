@@ -14,6 +14,8 @@ import MagicalRecord
 class Lesson: NSManagedObject, JSONInitializable {
     
     // Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
+
     
     convenience required init(json: JSON){
         self.init()
@@ -50,6 +52,10 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     func update(json: JSON) {
         initialize(json)
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     func loadSteps(completion: @escaping ((Void) -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
