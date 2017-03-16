@@ -186,6 +186,9 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                                     print("\n Course \(newCourses[i].id) has lastStep with id \(lastSteps[lastStepIndex].id)\n")
                                     lastStepIndex += 1
                                 }
+                                if lastStepIndex == lastSteps.count {
+                                    break
+                                }
                             }
                             CoreDataHelper.instance.save()
                             coursesCompletion()

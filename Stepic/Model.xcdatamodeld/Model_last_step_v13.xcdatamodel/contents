@@ -41,7 +41,7 @@
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedCourse" inverseEntity="Progress" syncable="YES"/>
         <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
     </entity>
-    <entity name="LastStep" representedClassName="LastStep" syncable="YES">
+    <entity name="LastStep" representedClassName=".LastStep" syncable="YES">
         <attribute name="managedId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedStepId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedUnitId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -145,6 +145,7 @@
         <element name="Assignment" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="435"/>
+        <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Progress" positionX="-45" positionY="135" width="128" height="195"/>
         <element name="Section" positionX="-54" positionY="126" width="128" height="270"/>
@@ -153,6 +154,5 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
-        <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
     </elements>
 </model>

@@ -26,7 +26,7 @@ extension LastStep {
     }
     
     var id : String {
-        set(newId){
+        set (newId){
             self.managedId = newId
         }
         get {
