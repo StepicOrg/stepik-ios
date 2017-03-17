@@ -25,10 +25,14 @@ class UnitsViewController: UIViewController {
     var didRefresh = false
     let refreshControl = UIRefreshControl()
 
+    fileprivate func updateTitle() {
+        self.navigationItem.title = section?.title ?? NSLocalizedString("Module", comment: "")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = section?.title ?? "Module"
+        updateTitle()
         self.navigationItem.backBarButtonItem?.title = " "
 
         tableView.tableFooterView = UIView()
@@ -127,6 +131,8 @@ class UnitsViewController: UIViewController {
             }
             return
         }
+        
+        updateTitle()
         
         didRefresh = false
         section?.loadUnits(success: {

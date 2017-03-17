@@ -173,4 +173,7 @@ FillBlankInputTextFieldPlaceholder = "Enter your answer";
 FillBlanksSelectAnswerString = "Select your answer";
 FillBlanksSelectButtonString = "Select";
 DeletedComment = "Comment deleted";
+Section = "Section";
+Lesson = "Lesson";
+ContinueLearning = "Continue";
 

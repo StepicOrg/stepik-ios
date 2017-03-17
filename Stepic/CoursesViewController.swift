@@ -413,12 +413,17 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
         
         sectionsVC.course = course
+        sectionsVC.hidesBottomBarWhenPushed = true
         unitsVC.unitId = lastStep.unitId
         stepsVC.stepId = lastStep.stepId
         
         navigationController?.pushViewController(sectionsVC, animated: false)
-        navigationController?.pushViewController(unitsVC, animated: false)
-        navigationController?.pushViewController(stepsVC, animated: true)
+
+        if lastStep.unitId != nil && lastStep.stepId != nil {
+            navigationController?.pushViewController(unitsVC, animated: false)
+            navigationController?.pushViewController(stepsVC, animated: true)
+        }
+        
     }
 }
 

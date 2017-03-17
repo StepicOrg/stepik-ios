@@ -26,6 +26,7 @@ class CourseTableViewCell: UITableViewCell {
         // Initialization code
         
         continueButton.setStepicWhiteStyle()
+        continueButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

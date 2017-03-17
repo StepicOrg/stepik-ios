@@ -98,10 +98,14 @@ class StepsViewController: RGPageViewController {
         }
     }
     
+    fileprivate func updateTitle() {
+        self.navigationItem.title = lesson?.title ?? NSLocalizedString("Lesson", comment: "")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = lesson?.title ?? "Lesson"
+        updateTitle()
         
         datasource = self
         delegate = self
