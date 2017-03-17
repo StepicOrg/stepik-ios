@@ -132,6 +132,7 @@ class UnitsViewController: UIViewController {
             return
         }
         
+        
         updateTitle()
         
         didRefresh = false
@@ -170,7 +171,7 @@ class UnitsViewController: UIViewController {
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destination as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
-            
+            dvc.unitId = section.units[index].id
             if let stepsPresentation = sender as? StepsPresentation {
                 
                 let index = stepsPresentation.index

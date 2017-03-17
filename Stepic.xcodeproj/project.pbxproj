@@ -266,6 +266,8 @@
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
 		087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
+		0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
+		0884696D1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
 		0885F8471BA833C600F2A188 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		0885F8481BA833C600F2A188 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
@@ -951,6 +953,7 @@
 		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
+		0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepGlobalContext.swift; sourceTree = "<group>"; };
 		0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
 		0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ApiDataDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1681,6 +1684,7 @@
 				083749281DE5AE1400144C14 /* Alerts */,
 				083749321DE5BBFE00144C14 /* Preferences */,
 				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
+				0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3088,6 +3092,7 @@
 				08EB85F11D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08263DA11DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
+				0884696D1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */,
 				08D120C71C937B2200A54ABC /* QuizControllerDelegate.swift in Sources */,
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
@@ -3392,6 +3397,7 @@
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
+				0884696C1E7C2E01009131E9 /* LastStepGlobalContext.swift in Sources */,
 				080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */,
 				08F485AA1C580D61000165AA /* MathReply.swift in Sources */,
 				08AF59F61E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,

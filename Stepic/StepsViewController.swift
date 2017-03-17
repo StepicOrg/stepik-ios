@@ -22,7 +22,7 @@ class StepsViewController: RGPageViewController {
      */
     var lesson : Lesson?
     var stepId : Int?
-    
+    var unitId : Int?
     
     var startStepId : Int = 0
         
@@ -106,6 +106,8 @@ class StepsViewController: RGPageViewController {
         super.viewDidLoad()
         
         updateTitle()
+        
+        LastStepGlobalContext.context.unitId = unitId
         
         datasource = self
         delegate = self

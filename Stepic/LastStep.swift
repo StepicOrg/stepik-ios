@@ -30,10 +30,18 @@ class LastStep: NSManagedObject, JSONInitializable {
         stepId = json["step"].int
     }
     
-    func initialize(unitId: Int?, stepId: Int?) {
+    func update(unitId: Int?, stepId: Int?) {
         self.unitId = unitId
         self.stepId = stepId
     }
+    
+    convenience init(unitId: Int?, stepId: Int?) {
+        self.init()
+        self.unitId = unitId
+        self.stepId = stepId
+        self.id = nil
+    }
+
     
     func update(json: JSON) {
         initialize(json)

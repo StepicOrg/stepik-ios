@@ -20,7 +20,9 @@ class SectionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        LastStepGlobalContext.context.course = course
+        
         self.navigationItem.title = course.title
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "

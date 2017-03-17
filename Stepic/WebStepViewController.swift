@@ -230,12 +230,15 @@ class WebStepViewController: UIViewController {
 
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
-
+        
+        LastStepGlobalContext.context.stepId = stepid
+        
         if stepId - 1 == startStepId {
             startStepBlock()
         }
         
         if shouldSendViewsBlock() {
+            //Send view to views
             performRequest({
                 [weak self] in
                 _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
@@ -252,6 +255,17 @@ class WebStepViewController: UIViewController {
                     }
                 })
             })
+            //Update LastStep locally from the context
+            if let course = LastStepGlobalContext.context.course, 
+                let unitId = LastStepGlobalContext.context.unitId, 
+                let stepId = LastStepGlobalContext.context.stepId {
+                
+                if let lastStep = course.lastStep {
+                    lastStep.update(unitId: unitId, stepId: stepId)
+                } else {
+                    course.lastStep = LastStep(unitId: unitId, stepId: stepId)
+                }
+            } 
         }
     }
     
