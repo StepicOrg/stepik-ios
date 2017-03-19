@@ -143,7 +143,7 @@ class StepsViewController: RGPageViewController {
                 return
             }
         }
-        
+                
         _ = ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: (step != nil) ? [step!] : [], refreshMode: .update, success: {
             steps in
             
@@ -205,6 +205,14 @@ class StepsViewController: RGPageViewController {
             return
         }
         
+        if let stepId = stepId {
+            if let index = lesson?.stepsArray.index(of: stepId) {
+                startStepId = index
+                didSelectTab = false
+            }
+        }
+
+        
         var prevStepsIds = [Int]()
         if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
@@ -260,6 +268,7 @@ class StepsViewController: RGPageViewController {
                             s.didSelectTab = true
                         }
                     }
+                    s.didInitSteps = true
                 }
             }
             }, error: {
@@ -272,23 +281,27 @@ class StepsViewController: RGPageViewController {
                         s.doesPresentActivityIndicatorView = false
                         if s.numberOfPages(for: s) == 0 {
                             s.doesPresentWarningView = true
+                            if s.startStepId < s.lesson!.steps.count {
+                                if !s.didSelectTab {
+                                    s.selectTabAtIndex(s.startStepId, updatePage: true)
+                                    s.didSelectTab = true
+                                }
+                            }
+                            self?.didInitSteps = true
                         }
                     }
                 }
             }, onlyLesson: context == .lesson)
     }
     
-    func loadSteps() {
-        
-    }
-    
     var didSelectTab = false
+    var didInitSteps = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
-            if !didSelectTab && l.steps.count != 0  && startStepId < l.steps.count {
+            if !didSelectTab && l.steps.count != 0  && startStepId < l.steps.count && didInitSteps {
                 print("\nselected tab for step with id -> \(startStepId)\n")
                 didSelectTab = true
                 self.selectTabAtIndex(startStepId, updatePage: true)

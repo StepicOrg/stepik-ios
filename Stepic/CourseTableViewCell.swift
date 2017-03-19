@@ -65,7 +65,7 @@ class CourseTableViewCell: UITableViewCell {
             deadlineLabelHeight.constant = 14
         }
         
-        if course.enrolled && course.lastStep != nil {
+        if course.enrolled {
             continueButtonHeight.constant = 32
         } else {
             continueButtonHeight.constant = 0

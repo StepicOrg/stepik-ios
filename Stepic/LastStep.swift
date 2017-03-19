@@ -35,11 +35,11 @@ class LastStep: NSManagedObject, JSONInitializable {
         self.stepId = stepId
     }
     
-    convenience init(unitId: Int?, stepId: Int?) {
+    convenience init(id: String, unitId: Int?, stepId: Int?) {
         self.init()
         self.unitId = unitId
         self.stepId = stepId
-        self.id = nil
+        self.id = ""
     }
 
     

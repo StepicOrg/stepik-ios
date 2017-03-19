@@ -10,6 +10,7 @@
 import UIKit
 import FLKAutoLayout
 import DZNEmptyDataSet
+import SVProgressHUD
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
@@ -170,34 +171,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         }
                         CoreDataHelper.instance.save()
 
-                        _ = ApiDataDownloader.lastSteps.retrieve(ids: lastStepIds, updatingLastSteps: lastSteps, success: {
-                            newLastSteps -> Void in
-                            
-                            guard newLastSteps.count > 0 else {
-                                coursesCompletion()
-                                return
-                            }
-                            lastSteps = Sorter.sort(newLastSteps, byIds: lastStepIds, canMissElements: true)
-                            
-                            var lastStepIndex = 0
-                            
-                            for i in 0 ..< newCourses.count {
-                                if lastSteps[lastStepIndex].id == newCourses[i].lastStepId { 
-                                    newCourses[i].lastStep = lastSteps[lastStepIndex]
-                                    print("\n Course \(newCourses[i].id) has lastStep with id \(lastSteps[lastStepIndex].id)\n")
-                                    lastStepIndex += 1
-                                }
-                                if lastStepIndex == lastSteps.count {
-                                    break
-                                }
-                            }
-                            CoreDataHelper.instance.save()
-                            coursesCompletion()
-                        }, error: {
-                            error in
-                            coursesCompletion()
-                            print("Error while downloading last steps")
-                        })
+                        coursesCompletion()
                         
                         
                     }, failure: { 
@@ -426,6 +400,53 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
         
     }
+    
+    func continuePressed(course: Course) {
+        SVProgressHUD.show()
+        guard let lastStepId = course.lastStepId else {
+            return
+        }
+        
+        let errorBlock = {
+            [weak self] in
+            DispatchQueue.main.async {
+                if course.lastStep != nil {
+                    SVProgressHUD.showSuccess(withStatus: "")
+                    self?.continueLearning(course: course)
+                } else {
+                    SVProgressHUD.showError(withStatus: "")
+                }
+            }
+        }
+        
+        let successBlock = {
+            [weak self] in
+            DispatchQueue.main.async {
+                SVProgressHUD.showSuccess(withStatus: "")
+                self?.continueLearning(course: course)
+            }
+        }
+        
+        _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
+            [weak self]
+            newLastSteps -> Void in
+            
+            guard let newLastStep = newLastSteps.first, 
+                (newLastSteps.count > 0 && newLastSteps.count < 2) else {
+                errorBlock()
+                return
+            }
+
+            course.lastStep = newLastStep
+            CoreDataHelper.instance.save()
+            successBlock()
+            
+        }, error: {
+            error in
+            print("Error while downloading last step")
+            errorBlock()
+        })
+    }
 }
 
 
@@ -485,7 +506,7 @@ extension CoursesViewController : UITableViewDataSource {
         cell.initWithCourse(course)
         cell.continueAction = {
             [weak self] in
-            self?.continueLearning(course: course)
+            self?.continuePressed(course: course)
         }
         
         return cell

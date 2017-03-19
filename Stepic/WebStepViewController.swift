@@ -263,7 +263,7 @@ class WebStepViewController: UIViewController {
                 if let lastStep = course.lastStep {
                     lastStep.update(unitId: unitId, stepId: stepId)
                 } else {
-                    course.lastStep = LastStep(unitId: unitId, stepId: stepId)
+                    course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitId, stepId: stepId)
                 }
             } 
         }

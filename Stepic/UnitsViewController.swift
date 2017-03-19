@@ -171,7 +171,6 @@ class UnitsViewController: UIViewController {
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destination as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
-            dvc.unitId = section.units[index].id
             if let stepsPresentation = sender as? StepsPresentation {
                 
                 let index = stepsPresentation.index
@@ -182,6 +181,7 @@ class UnitsViewController: UIViewController {
                 }
                 dvc.lesson = section.units[index].lesson
                 dvc.sectionNavigationDelegate = self
+                dvc.unitId = section.units[index].id
                 currentlyDisplayingUnitIndex = index
                 dvc.shouldNavigateToPrev = index != 0
                 dvc.shouldNavigateToNext = index < section.units.count - 1
