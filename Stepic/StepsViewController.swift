@@ -135,7 +135,7 @@ class StepsViewController: RGPageViewController {
         
         var step : Step? = nil
         
-        if let localStep = Step.getStepWithId(stepId) {
+        if let localStep = Step.getStepWithId(stepId, unitId: unitId) {
             step = localStep
             if let localLesson = localStep.lesson {
                 self.lesson = localLesson
@@ -205,6 +205,9 @@ class StepsViewController: RGPageViewController {
             return
         }
         
+        updateTitle()
+
+    
         if let stepId = stepId {
             if let index = lesson?.stepsArray.index(of: stepId) {
                 startStepId = index
@@ -437,6 +440,12 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.stepId = index + 1
                 stepController.lessonSlug = lesson.slug
                 
+                if let assignments = lesson.unit?.assignments {
+                    if index < assignments.count {
+                        stepController.assignment = assignments[index]
+                    }
+                }
+                
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -473,6 +482,13 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.stepId = index + 1
                 stepController.nItem = self.navigationItem
                 stepController.startStepId = startStepId
+                
+                if let assignments = lesson.unit?.assignments {
+                    if index < assignments.count {
+                        stepController.assignment = assignments[index]
+                    }
+                }
+                
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true

@@ -390,6 +390,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         sectionsVC.hidesBottomBarWhenPushed = true
         unitsVC.unitId = lastStep.unitId
         stepsVC.stepId = lastStep.stepId
+        stepsVC.unitId = lastStep.unitId
 
         if lastStep.unitId != nil && lastStep.stepId != nil {
             navigationController?.pushViewController(sectionsVC, animated: false)
@@ -403,6 +404,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func continuePressed(course: Course) {
         SVProgressHUD.show()
+        
         guard let lastStepId = course.lastStepId else {
             return
         }
@@ -427,6 +429,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
         
+        print("LastStep stepId before refresh: \(course.lastStep?.stepId)")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
             [weak self]
             newLastSteps -> Void in
@@ -437,6 +440,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 return
             }
 
+            print("new stepId \(newLastStep.stepId)")
+            
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
             successBlock()

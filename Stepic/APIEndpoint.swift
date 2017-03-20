@@ -25,7 +25,7 @@ class APIEndpoint {
     }
 
     
-    func getObjectsByIds<T : JSONInitializable>(requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = true, ids: [T.idType], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : @escaping (_ error : RetrieveError) -> Void) -> Request? {
+    func getObjectsByIds<T : JSONInitializable>(requestString: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, printOutput: Bool = false, ids: [T.idType], deleteObjects : [T], refreshMode: RefreshMode, success : (([T]) -> Void)?, failure : @escaping (_ error : RetrieveError) -> Void) -> Request? {
         
         let params : Parameters = [:]
         
@@ -52,6 +52,8 @@ class APIEndpoint {
             if printOutput { 
                 print(json)
             }
+            
+            print(json)
             
             if let e = error as? NSError {
                 print("RETRIEVE \(requestString)?\(ids): error \(e.domain) \(e.code): \(e.localizedDescription)")
