@@ -109,4 +109,9 @@ struct AnalyticsEvents {
     struct Errors {
         static let tokenRefresh = "error_token_refresh"
     }
+    
+    struct Continue {
+        static let sectionsOpened = "continue_section_opened"
+        static let stepOpened = "continue_step_opened"
+    }
 }

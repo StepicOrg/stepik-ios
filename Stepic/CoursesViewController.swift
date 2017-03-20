@@ -396,8 +396,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             navigationController?.pushViewController(sectionsVC, animated: false)
             navigationController?.pushViewController(unitsVC, animated: false)
             navigationController?.pushViewController(stepsVC, animated: true)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
         } else {
             navigationController?.pushViewController(sectionsVC, animated: true)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
         }
         
     }
