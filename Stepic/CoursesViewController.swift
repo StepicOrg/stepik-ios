@@ -53,7 +53,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         if refreshEnabled {
             refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), for: .valueChanged)
-            tableView.addSubview(refreshControl ?? UIView())
+            if #available(iOS 10.0, *) {
+                tableView.refreshControl = refreshControl
+            } else {
+                tableView.addSubview(refreshControl ?? UIView())
+            }
+            refreshControl?.layoutIfNeeded()
             refreshControl?.beginRefreshing()
             getCachedCourses(completion: {
                 self.refreshCourses()

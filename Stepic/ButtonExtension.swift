@@ -16,21 +16,21 @@ extension UIButton {
         self.clipsToBounds = true
     }
     
-    func setDisabledJoined() {
-        let attributedTitle = NSAttributedString(string: Constants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.gray])
-        setAttributedTitle(attributedTitle, for: UIControlState() )
-        //enabled = false
-        layer.borderColor = UIColor.gray.cgColor
-        self.titleLabel?.textColor = UIColor.gray
-    }
-    
-    func setEnabledJoined() {
-        let attributedTitle = NSAttributedString(string: Constants.joinCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.stepicGreenColor()])
-        setAttributedTitle(attributedTitle, for: UIControlState() )
-        //enabled = false
-        layer.borderColor = UIColor.stepicGreenColor().cgColor
-        self.titleLabel?.textColor = UIColor.stepicGreenColor()
-    }
+//    func setDisabledJoined() {
+//        let attributedTitle = NSAttributedString(string: Constants.alreadyJoinedCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.gray])
+//        setAttributedTitle(attributedTitle, for: UIControlState() )
+//        //enabled = false
+//        layer.borderColor = UIColor.gray.cgColor
+//        self.titleLabel?.textColor = UIColor.gray
+//    }
+//    
+//    func setEnabledJoined() {
+//        let attributedTitle = NSAttributedString(string: Constants.joinCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.stepicGreenColor()])
+//        setAttributedTitle(attributedTitle, for: UIControlState() )
+//        //enabled = false
+//        layer.borderColor = UIColor.stepicGreenColor().cgColor
+//        self.titleLabel?.textColor = UIColor.stepicGreenColor()
+//    }
     
     func setStepicGreenStyle() {
         self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.stepicGreenColor())

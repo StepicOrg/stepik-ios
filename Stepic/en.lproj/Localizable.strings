@@ -176,4 +176,6 @@ DeletedComment = "Comment deleted";
 Section = "Section";
 Lesson = "Lesson";
 ContinueLearning = "Continue";
+DropCourse =  "Drop course";
+
 
