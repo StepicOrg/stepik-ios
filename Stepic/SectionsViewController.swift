@@ -36,8 +36,12 @@ class SectionsViewController: UIViewController {
         tableView.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
         refreshControl.addTarget(self, action: #selector(SectionsViewController.refreshSections), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.layoutIfNeeded()        
         refreshControl.beginRefreshing()
         refreshSections()
 

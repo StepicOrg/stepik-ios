@@ -41,7 +41,12 @@ class UnitsViewController: UIViewController {
         
         
         refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.layoutIfNeeded()
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
