@@ -205,6 +205,14 @@ class StepsViewController: RGPageViewController {
             return
         }
         
+        if let section = lesson?.unit?.section, 
+            let unitId = unitId {
+            if let index = section.unitsArray.index(of: unitId) {
+                shouldNavigateToPrev = index != 0
+                shouldNavigateToNext = index < section.unitsArray.count - 1
+            }
+        }
+        
         updateTitle()
 
     

@@ -394,6 +394,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         unitsVC.unitId = course.lastStep?.unitId
         stepsVC.stepId = course.lastStep?.stepId
         stepsVC.unitId = course.lastStep?.unitId
+        
+        //For prev-next step buttons navigation
+        stepsVC.sectionNavigationDelegate = unitsVC
+
 
         if course.lastStep?.unitId != nil && course.lastStep?.stepId != nil {
             navigationController?.pushViewController(sectionsVC, animated: false)
@@ -419,13 +423,6 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             DispatchQueue.main.async {
                 SVProgressHUD.showSuccess(withStatus: "")
                 self?.continueLearning(course: course)
-
-//                if course.lastStep != nil {
-//                    SVProgressHUD.showSuccess(withStatus: "")
-//                    self?.continueLearning(course: course)
-//                } else {
-//                    SVProgressHUD.showError(withStatus: "")
-//                }
             }
         }
         
