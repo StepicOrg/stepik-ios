@@ -385,7 +385,7 @@ class CoursePreviewViewController: UIViewController {
                     [weak self] in
                     SVProgressHUD.showSuccess(withStatus: "")
                     sender.isEnabled = true
-                    sender.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+                    sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
                     self?.course?.enrolled = true
                     CoreDataHelper.instance.save()
                     CoursesJoinManager.sharedManager.addedCourses += [c]

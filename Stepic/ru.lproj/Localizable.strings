@@ -177,5 +177,5 @@ Section = "Модуль";
 Lesson = "Урок";
 ContinueLearning = "Учиться";
 DropCourse =  "Покинуть курс";
-
+Continue = "Продолжить";
 

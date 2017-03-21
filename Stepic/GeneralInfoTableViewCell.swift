@@ -53,7 +53,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         courseNameLabel.text = course.title
         if course.enrolled {
             joinButton.setStepicWhiteStyle()
-            joinButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+            joinButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         } else {
             joinButton.setStepicWhiteStyle()
             joinButton.setTitle(Constants.joinCourseButtonText, for: .normal)
