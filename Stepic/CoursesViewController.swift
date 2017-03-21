@@ -381,9 +381,6 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     }
     
     func continueLearning(course: Course) {
-        guard let lastStep = course.lastStep else {
-            return
-        }
         
         guard 
         let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
@@ -394,11 +391,11 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
-        unitsVC.unitId = lastStep.unitId
-        stepsVC.stepId = lastStep.stepId
-        stepsVC.unitId = lastStep.unitId
+        unitsVC.unitId = course.lastStep?.unitId
+        stepsVC.stepId = course.lastStep?.stepId
+        stepsVC.unitId = course.lastStep?.unitId
 
-        if lastStep.unitId != nil && lastStep.stepId != nil {
+        if course.lastStep?.unitId != nil && course.lastStep?.stepId != nil {
             navigationController?.pushViewController(sectionsVC, animated: false)
             navigationController?.pushViewController(unitsVC, animated: false)
             navigationController?.pushViewController(stepsVC, animated: true)
@@ -420,12 +417,15 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         let errorBlock = {
             [weak self] in
             DispatchQueue.main.async {
-                if course.lastStep != nil {
-                    SVProgressHUD.showSuccess(withStatus: "")
-                    self?.continueLearning(course: course)
-                } else {
-                    SVProgressHUD.showError(withStatus: "")
-                }
+                SVProgressHUD.showSuccess(withStatus: "")
+                self?.continueLearning(course: course)
+
+//                if course.lastStep != nil {
+//                    SVProgressHUD.showSuccess(withStatus: "")
+//                    self?.continueLearning(course: course)
+//                } else {
+//                    SVProgressHUD.showError(withStatus: "")
+//                }
             }
         }
         
