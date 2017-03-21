@@ -178,7 +178,7 @@ extension SectionsViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return course.sections[(indexPath as NSIndexPath).row].isActive || (course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil)
+        return (course.sections[(indexPath as NSIndexPath).row].isActive || course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil) && course.sections[(indexPath as NSIndexPath).row].progressId != nil 
     }
     
 }

@@ -229,21 +229,38 @@ class Course: NSManagedObject, JSONInitializable {
             }
         }
         
+        if progressIds.count == 0 {
+            completion()
+            return
+        }
+        
 //        print("progress ids array -> \(progressIds)")
         _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            for i in 0 ..< min(sections.count, progresses.count) {
-                sections[i].progress = progresses[i]
+            
+            if progresses.count == 0 {
+                CoreDataHelper.instance.save()
+                completion()
+                return
             }
-        
+            
+            var progressCnt = 0
+            for i in 0 ..< sections.count {
+                if sections[i].progressId == progresses[progressCnt].id {
+                    sections[i].progress = progresses[progressCnt]
+                }
+                progressCnt += 1
+                if progressCnt == progresses.count {
+                    break
+                }
+            }
             CoreDataHelper.instance.save()
-        
             completion()
-            }, failure: { 
-                (error) -> Void in
-                print("Error while downloading progresses")
-                errorHandler()
+        }, failure: { 
+            (error) -> Void in
+            print("Error while downloading progresses")
+            errorHandler()
         })
     }
     
