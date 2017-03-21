@@ -74,6 +74,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
         if refreshEnabled && (self.refreshControl?.isRefreshing ?? false) {
             let offset = self.tableView.contentOffset
             self.refreshControl?.endRefreshing()
