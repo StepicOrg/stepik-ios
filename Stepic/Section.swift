@@ -68,6 +68,12 @@ class Section: NSManagedObject, JSONInitializable {
     }
     
     func loadUnits(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
+        
+        if self.unitsArray.count == 0 {
+            success()
+            return
+        }
+        
         let requestUnitsCount = 50
         var dimCount = 0
         var idsArray = Array<Array<Int>>()

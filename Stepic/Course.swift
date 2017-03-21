@@ -163,6 +163,12 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
     func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
+        
+        if sectionsArray.count == 0 {
+            success()
+            return
+        }
+        
         let requestSectionsCount = 50
         var dimCount = 0
         var idsArray = Array<Array<Int>>()

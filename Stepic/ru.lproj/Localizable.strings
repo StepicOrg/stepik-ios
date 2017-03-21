@@ -178,4 +178,6 @@ Lesson = "Урок";
 ContinueLearning = "Учиться";
 DropCourse =  "Покинуть курс";
 Continue = "Продолжить";
-
+Refreshing = "Обновляем...";
+RefreshingDescription = "";
+EmptyTitle = "Пусто :(";

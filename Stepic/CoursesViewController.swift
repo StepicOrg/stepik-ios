@@ -120,9 +120,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     func onRefresh() {
     }
     
+    func refreshBegan() {
+    }
     
     func refreshCourses() {
         isRefreshing = true
+        refreshBegan()
         performRequest({
             _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
                 (ids, meta) -> Void in

@@ -95,6 +95,7 @@ class SectionsViewController: UIViewController {
     
     func refreshSections() {
         didRefresh = false
+        emptyDatasetState = .refreshing
         course.loadAllSections(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
@@ -318,6 +319,8 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
         }
     }
     
@@ -325,10 +328,13 @@ extension SectionsViewController : DZNEmptyDataSetSource {
         var text : String = ""
         switch emptyDatasetState {
         case .empty:
-            text = NSLocalizedString("PullToRefreshSectionsTitle", comment: "")
+            text = NSLocalizedString("EmptyTitle", comment: "")
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
             break
         }
         
@@ -347,6 +353,9 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
             break
         }
         

@@ -178,5 +178,8 @@ Lesson = "Lesson";
 ContinueLearning = "Learn";
 DropCourse =  "Drop course";
 Continue = "Continue";
+RefreshingTitle = "Refreshing...";
+RefreshingDescription = "";
+EmptyTitle = "Nothing here :(";
 
 

@@ -58,9 +58,13 @@ class UnitsViewController: UIViewController {
 
     func getSectionByUnit(id: Int) {
         //Search for unit by its id locally
+        emptyDatasetState = .refreshing
         if let localUnit = Unit.getUnit(id: id) {
             if let localSection = localUnit.section {
                 self.section = localSection
+                if let index = section?.unitsArray.index(of: id) {
+                    currentlyDisplayingUnitIndex = index
+                }
                 refreshUnits()
                 return
             }
@@ -71,6 +75,7 @@ class UnitsViewController: UIViewController {
     }
     
     func loadUnit(id: Int, localUnit: Unit? = nil) {
+        emptyDatasetState = .refreshing
         _ = ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
             units in
             guard let unit = units.first else { return }
@@ -137,7 +142,8 @@ class UnitsViewController: UIViewController {
             return
         }
         
-        
+        emptyDatasetState = .refreshing
+
         updateTitle()
         
         didRefresh = false
@@ -402,6 +408,8 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
         }
     }
     
@@ -413,6 +421,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
             break
         }
         
@@ -431,6 +442,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
             break
         }
         
