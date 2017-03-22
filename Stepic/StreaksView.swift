@@ -26,30 +26,34 @@ class StreaksView: UIView {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
-    fileprivate var currentStreakCount : Int = 0 {
+    fileprivate var currentStreak : Int = 0 {
         didSet {
-            currentStreakLabel.text = "\(currentStreakCount)"
-            currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreakCount)) \(NSLocalizableString("InARow", comment: ""))"
-            bestStreakCountLabel.textColor = colors(index: (currentStreak * 10) / bestStreak)
+            currentStreakCountLabel.text = "\(currentStreak)"
+            currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreak)) \(NSLocalizedString("InARow", comment: ""))"
+            if bestStreak != 0 {
+                currentStreakCountLabel.textColor = color(index: min((currentStreak * 10) / bestStreak, colorsInt.count - 1))
+            } else {
+                bestStreakCountLabel.textColor = color(index: colorsInt.count - 1)
+            }
         }
     }
     
-    fileprivate var bestStreakCount : Int = 0 {
+    fileprivate var bestStreak : Int = 0 {
         didSet {
-            bestStreakLabel.text = "\(bestStreakCount)"
-            bestStreakDaysInARowLabel.text = dayLocalizableFor(daysCnt: bestStreakCount)
-            bestStreakCountLabel.textColor = colors(index: colorsInt.count - 1)
+            bestStreakCountLabel.text = "\(bestStreak)"
+            bestStreakDaysInARowLabel.text = dayLocalizableFor(daysCnt: bestStreak)
+            bestStreakCountLabel.textColor = color(index: colorsInt.count - 1)
         }
     }
     
     var loading : Bool = false {
         didSet {
             if loading {
-                loadingView.hidden = false
+                loadingView.isHidden = false
                 loadingActivityIndicator.startAnimating()
             } else {
                 loadingActivityIndicator.stopAnimating()
-                loadingView.hidden = true
+                loadingView.isHidden = true
             }
         }
     }
@@ -72,15 +76,15 @@ class StreaksView: UIView {
         
         //If there is an error - return green
         guard index >= 0 && index < colorsInt.count else {
-            return UIColor(red: Float(colorsInt[colorsInt.count - 1].0)/255.0, 
-                           green: Float(colorsInt[colorsInt.count - 1].1)/255.0, 
-                           blue: Float(colorsInt[colorsInt.count - 1].2)/255.0, 
+            return UIColor(red: CGFloat(colorsInt[colorsInt.count - 1].0)/255.0, 
+                           green: CGFloat(colorsInt[colorsInt.count - 1].1)/255.0, 
+                           blue: CGFloat(colorsInt[colorsInt.count - 1].2)/255.0, 
                            alpha: 1)
         }
         
-        return UIColor(red: Float(colorsInt[index].0)/255.0, 
-                       green: Float(colorsInt[index].1)/255.0, 
-                       blue: Float(colorsInt[index].2)/255.0, 
+        return UIColor(red: CGFloat(colorsInt[index].0)/255.0, 
+                       green: CGFloat(colorsInt[index].1)/255.0, 
+                       blue: CGFloat(colorsInt[index].2)/255.0, 
                        alpha: 1)
     }
     
@@ -94,16 +98,16 @@ class StreaksView: UIView {
     }
     
     fileprivate func initialize() {
-        currentStreakLabel.text = NSLocalizableString("CurrentStreakTitle", comment: "")
-        currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreakCount)) \(NSLocalizableString("InARow", comment: ""))"
-        bestStreakLabel.text = NSLocalizableString("LongestStreak", comment: "")
-        bestStreakDaysInARowLabel.text = dayLocalizableFor(daysCnt: bestStreakCount)
-        bestStreakCountLabel.textColor = colors(index: colorsInt.count - 1)
+        currentStreakLabel.text = NSLocalizedString("CurrentStreakTitle", comment: "")
+        currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreak)) \(NSLocalizedString("InARow", comment: ""))"
+        bestStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
+        bestStreakDaysInARowLabel.text = dayLocalizableFor(daysCnt: bestStreak)
+        bestStreakCountLabel.textColor = color(index: colorsInt.count - 1)
     }
     
     func setStreaks(current: Int, best: Int) {
-        bestStreakCount = best
-        currentStreakCount = current
+        bestStreak = best
+        currentStreak = current
     }
     
     fileprivate var view: UIView!
