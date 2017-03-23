@@ -13,7 +13,8 @@ import MagicalRecord
 
 class Step: NSManagedObject, JSONInitializable {
 
-// Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
+
     convenience required init(json: JSON){
         self.init()
         initialize(json)
@@ -40,9 +41,13 @@ class Step: NSManagedObject, JSONInitializable {
         block.update(json: json["block"])
     }
     
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
+    }
+    
     var hasReview : Bool = false
 
-    static func getStepWithId(_ id: Int) -> Step? {
+    static func getStepWithId(_ id: Int, unitId: Int? = nil) -> Step? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
@@ -50,8 +55,22 @@ class Step: NSManagedObject, JSONInitializable {
         request.predicate = predicate
         
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) 
-            return (results as? [Step])?.first
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Step] else {
+                return nil
+            }
+            
+            if let unitId = unitId {
+                if let step = results.filter({ return $0.lesson?.unit?.id == unitId }).first {
+                    return step
+                } else {
+                    return results.first
+                }
+            } else {
+                return results.first
+            }
+//            (results as? [Step])?.forEach {
+//                print("\($0.lesson?.unit?.id)")
+//            }
         }
         catch {
             return nil

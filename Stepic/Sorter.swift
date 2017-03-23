@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct Sorter {
-    static func sort<T : JSONInitializable>(_ array : [T], byIds ids: [Int], canMissElements: Bool = false) -> [T] {
+    static func sort<T : JSONInitializable>(_ array : [T], byIds ids: [T.idType], canMissElements: Bool = false) -> [T] {
         var res : [T] = []
         
         for id in ids {
             let elements = array.filter({return $0.id == id})
+//            let elements = array.filter({return $0.hasEqualId(json: JSON(["id": id]))})//$0.id == id})
             if elements.count == 1 {
                 res += [elements[0]]
             } else {

@@ -89,7 +89,7 @@ class RegistrationViewController: UIViewController {
         SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
         performRequest({        
             AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
-                AuthManager.sharedManager.logInWithUsername(email, password: password, 
+                _ = AuthManager.sharedManager.logInWithUsername(email, password: password, 
                     success: {
                         t in
                         AuthInfo.shared.token = t
@@ -134,6 +134,14 @@ class RegistrationViewController: UIViewController {
                     }
             })
             }, error: { 
+                [weak self]
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    //TODO: Think about success & cancel closures here
+                    RoutingManager.auth.routeFrom(controller: s, success: nil, cancel: nil)
+                }
                 SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: "")) 
         })
     }

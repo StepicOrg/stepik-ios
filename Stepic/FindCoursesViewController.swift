@@ -29,6 +29,10 @@ class FindCoursesViewController: CoursesViewController {
         self.searchController.searchBar.resignFirstResponder()
     }
     
+    override func refreshBegan() {
+        emptyDatasetState = .refreshing
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
@@ -108,6 +112,9 @@ extension FindCoursesViewController {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
+
         }
     }
     
@@ -119,6 +126,9 @@ extension FindCoursesViewController {
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
             break
         }
         
@@ -138,6 +148,10 @@ extension FindCoursesViewController {
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
             break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
+            break
+
         }
         
         let paragraph = NSMutableParagraphStyle()

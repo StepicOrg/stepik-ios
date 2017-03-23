@@ -125,7 +125,7 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-    fileprivate func constructIdsString<TID>(array arr: [TID]) -> String {
+    func constructIdsString<TID>(array arr: [TID]) -> String {
         var result = ""
         for element in arr {
             result += "ids[]=\(element)&"
@@ -226,7 +226,7 @@ class ApiDataDownloader: NSObject {
             case .update:
                 
                 for objectJSON in json[requestString].arrayValue {
-                    let existing = deleteObjects.filter({obj in obj.id == objectJSON["id"].intValue})
+                    let existing = deleteObjects.filter({obj in obj.hasEqualId(json: objectJSON)})
                     
                     switch existing.count {
                     case 0: 
@@ -247,6 +247,11 @@ class ApiDataDownloader: NSObject {
     }
     
     func getProgressesByIds(_ ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
+        
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = 120
+
+        
         let requestString = "progresses"
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         var params : Parameters = [:]
@@ -264,8 +269,7 @@ class ApiDataDownloader: NSObject {
             return nil
         }
         
-//        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, headers: headers, encoding: URLEncoding.default).responseSwiftyJSON({
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return manager.request("\(StepicApplicationsInfo.apiURL)/\(requestString)?\(idString)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
             
             var error = response.result.error
@@ -280,9 +284,10 @@ class ApiDataDownloader: NSObject {
             let response = response.response
             
             
-//            print(json)
+            print(json)
             
             if let e = error {
+                print(e)
                 failure(e)
                 return
             }
@@ -689,6 +694,7 @@ class ApiDataDownloader: NSObject {
     static let stepics = StepicsAPI()
     static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
+    static let lastSteps = LastStepsAPI()
 }
 
 enum RefreshMode {

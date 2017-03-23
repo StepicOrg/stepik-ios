@@ -15,6 +15,8 @@ class Course: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
     
+    typealias idType = Int
+    
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
@@ -42,6 +44,7 @@ class Course: NSManagedObject, JSONInitializable {
         requirements = json["requirements"].stringValue
         slug = json["slug"].string
         progressId = json["progress"].string
+        lastStepId = json["last_step"].string
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
         if let _ = json["intro_video"].null {
@@ -49,6 +52,10 @@ class Course: NSManagedObject, JSONInitializable {
         } else {
             introVideo = Video(json: json["intro_video"])
         }
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     var metaInfo : String {
@@ -127,95 +134,91 @@ class Course: NSManagedObject, JSONInitializable {
     }
     
         
-    func loadAllInstructors(success: @escaping ((Void) -> Void)) {
-        performRequest({
-            ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
-                users in
-//                print("instructors count inside Course class -> \(users.count)")
-                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
-                CoreDataHelper.instance.save()
-                success()  
-                }, failure : {
-                    error in
-                    print("error while loading section")
-            })
-        })        
-    }
-    
-//    func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
-//        performRequest({
-//            ApiDataDownloader.sharedDownloader.getSectionsByIds(self.sectionsArray, existingSections: self.sections, refreshMode: .update, success: {
-//                secs in
-//                self.sections = Sorter.sort(secs, byIds: self.sectionsArray)
-//                CoreDataHelper.instance.save()
-//                if withProgresses { 
-//                    self.loadProgressesForSections(success, error: errorHandler) 
-//                } else {
-//                    success()
-//                }
-//                }, failure : {
-//                        error in
-//                        print("error while loading section")
-//                        errorHandler()
-//                })
-//            }, error:  {
-//                errorHandler()
-//        })        
+//    func loadLastStep(success: @escaping ((Void) -> Void)) {
+//        guard let id = self.lastStepId else { 
+//            return 
+//        }
+//        _ = ApiDataDownloader.lastSteps.retrieve(ids: [id], success: {
+//            [weak self]
+//            lastSteps in
+//            
+//            self?.changeLastStepTo(lastStep: lastSteps.first!)
+//            success()
+//        }, error: {
+//            error in
+//            print("error while loading last step")
+//        })
 //    }
     
-    func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
-        performRequest({
-            let requestSectionsCount = 50
-            var dimCount = 0
-            var idsArray = Array<Array<Int>>()
-            for (index, sectionId) in self.sectionsArray.enumerated() {
-                if index % requestSectionsCount == 0 {
-                    idsArray.append(Array<Int>())
-                    dimCount += 1
-                }
-                idsArray[dimCount - 1].append(sectionId)
-            }
-            
-//            let sectionsToDownload = idsArray.count
-            var downloadedSections = [Section]()
-            
-            let idsDownloaded : ([Section]) -> (Void) = {
-                secs in
-                downloadedSections.append(contentsOf: secs)
-                if downloadedSections.count == self.sectionsArray.count {
-                    self.sections = Sorter.sort(downloadedSections, byIds: self.sectionsArray)
-                    CoreDataHelper.instance.save()
-                    success()
-                }
-            }
-            
-            var wasError = false
-            let errorWhileDownloading : (Void) -> (Void) = {
-                if !wasError {
-                    wasError = true
-                    errorHandler()
-                }
-            }
-            
-            for ids in idsArray {
-                ApiDataDownloader.sharedDownloader.getSectionsByIds(ids, existingSections: self.sections, refreshMode: .update, success: {
-                    secs in
-                    if withProgresses { 
-                        self.loadProgressesForSections(sections: secs, success: {
-                            idsDownloaded(secs)
-                        }, error: {
-                            errorWhileDownloading()
-                        }) 
-                    } else {
-                        idsDownloaded(secs)
-                    }
-                }, failure : {
-                    error in
-                    print("error while loading section")
-                    errorWhileDownloading()
-                })
-            }
+    func loadAllInstructors(success: @escaping ((Void) -> Void)) {
+        _ = ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
+            users in
+            self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
+            CoreDataHelper.instance.save()
+            success()  
+            }, failure : {
+                error in
+                print("error while loading section")
         })
+    }
+    
+    func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
+        
+        if sectionsArray.count == 0 {
+            success()
+            return
+        }
+        
+        let requestSectionsCount = 50
+        var dimCount = 0
+        var idsArray = Array<Array<Int>>()
+        for (index, sectionId) in self.sectionsArray.enumerated() {
+            if index % requestSectionsCount == 0 {
+                idsArray.append(Array<Int>())
+                dimCount += 1
+            }
+            idsArray[dimCount - 1].append(sectionId)
+        }
+        
+//            let sectionsToDownload = idsArray.count
+        var downloadedSections = [Section]()
+        
+        let idsDownloaded : ([Section]) -> (Void) = {
+            secs in
+            downloadedSections.append(contentsOf: secs)
+            if downloadedSections.count == self.sectionsArray.count {
+                self.sections = Sorter.sort(downloadedSections, byIds: self.sectionsArray)
+                CoreDataHelper.instance.save()
+                success()
+            }
+        }
+        
+        var wasError = false
+        let errorWhileDownloading : (Void) -> (Void) = {
+            if !wasError {
+                wasError = true
+                errorHandler()
+            }
+        }
+        
+        for ids in idsArray {
+            _ = ApiDataDownloader.sharedDownloader.getSectionsByIds(ids, existingSections: self.sections, refreshMode: .update, success: {
+                secs in
+                if withProgresses { 
+                    self.loadProgressesForSections(sections: secs, success: {
+                        idsDownloaded(secs)
+                    }, error: {
+                        errorWhileDownloading()
+                    }) 
+                } else {
+                    idsDownloaded(secs)
+                }
+            }, failure : {
+                error in
+                print("error while loading section")
+                errorWhileDownloading()
+            })
+        }
     }
     
         
@@ -232,23 +235,38 @@ class Course: NSManagedObject, JSONInitializable {
             }
         }
         
+        if progressIds.count == 0 {
+            completion()
+            return
+        }
+        
 //        print("progress ids array -> \(progressIds)")
-        performRequest({
-            ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
-                (newProgresses) -> Void in
-                progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0 ..< min(sections.count, progresses.count) {
-                    sections[i].progress = progresses[i]
-                }
+        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+            (newProgresses) -> Void in
+            progresses = Sorter.sort(newProgresses, byIds: progressIds)
             
+            if progresses.count == 0 {
                 CoreDataHelper.instance.save()
-            
                 completion()
-                }, failure: { 
-                    (error) -> Void in
-                    print("Error while downloading progresses")
-                    errorHandler()
-            })
+                return
+            }
+            
+            var progressCnt = 0
+            for i in 0 ..< sections.count {
+                if sections[i].progressId == progresses[progressCnt].id {
+                    sections[i].progress = progresses[progressCnt]
+                }
+                progressCnt += 1
+                if progressCnt == progresses.count {
+                    break
+                }
+            }
+            CoreDataHelper.instance.save()
+            completion()
+        }, failure: { 
+            (error) -> Void in
+            print("Error while downloading progresses")
+            errorHandler()
         })
     }
     
@@ -311,4 +329,12 @@ class Course: NSManagedObject, JSONInitializable {
 //            throw FetchError.RequestExecution
         }
     }
+    
+//    func changeLastStepTo(lastStep: LastStep?) {
+//        let objectToDelete = self.lastStep
+//        self.lastStep = lastStep
+//        if let deletingObject = objectToDelete { 
+//            CoreDataHelper.instance.deleteFromStore(deletingObject, save: true)
+//        }
+//    }
 }

@@ -14,7 +14,7 @@ import SwiftyJSON
 class Section: NSManagedObject, JSONInitializable {
     
     // Insert code here to add functionality to your managed object subclass
-    
+    typealias idType = Int
     
     convenience required init(json: JSON){
         self.init()
@@ -41,6 +41,10 @@ class Section: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
+    }
+    
     class func getSections(_ id: Int) throws -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
         
@@ -64,54 +68,58 @@ class Section: NSManagedObject, JSONInitializable {
     }
     
     func loadUnits(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void)) {
-        performRequest({
-            let requestUnitsCount = 50
-            var dimCount = 0
-            var idsArray = Array<Array<Int>>()
-            for (index, unitId) in self.unitsArray.enumerated() {
-                if index % requestUnitsCount == 0 {
-                    idsArray.append(Array<Int>())
-                    dimCount += 1
-                }
-                idsArray[dimCount - 1].append(unitId)
+        
+        if self.unitsArray.count == 0 {
+            success()
+            return
+        }
+        
+        let requestUnitsCount = 50
+        var dimCount = 0
+        var idsArray = Array<Array<Int>>()
+        for (index, unitId) in self.unitsArray.enumerated() {
+            if index % requestUnitsCount == 0 {
+                idsArray.append(Array<Int>())
+                dimCount += 1
             }
-            
-            //            let sectionsToDownload = idsArray.count
-            var downloadedUnits = [Unit]()
-            
-            let idsDownloaded : ([Unit]) -> (Void) = {
-                uns in
-                downloadedUnits.append(contentsOf: uns)
-                if downloadedUnits.count == self.unitsArray.count {
-                    self.units = Sorter.sort(downloadedUnits, byIds: self.unitsArray)
-                    CoreDataHelper.instance.save()
-                    success()
-                }
+            idsArray[dimCount - 1].append(unitId)
+        }
+        
+        //            let sectionsToDownload = idsArray.count
+        var downloadedUnits = [Unit]()
+        
+        let idsDownloaded : ([Unit]) -> (Void) = {
+            uns in
+            downloadedUnits.append(contentsOf: uns)
+            if downloadedUnits.count == self.unitsArray.count {
+                self.units = Sorter.sort(downloadedUnits, byIds: self.unitsArray)
+                CoreDataHelper.instance.save()
+                success()
             }
-            
-            var wasError = false
-            let errorWhileDownloading : (Void) -> (Void) = {
-                if !wasError {
-                    wasError = true
-                    errorHandler()
-                }
+        }
+        
+        var wasError = false
+        let errorWhileDownloading : (Void) -> (Void) = {
+            if !wasError {
+                wasError = true
+                errorHandler()
             }
-            
-            for ids in idsArray {
-                _ = ApiDataDownloader.sharedDownloader.getUnitsByIds(ids, deleteUnits: self.units, refreshMode: .update, success: {
-                    newUnits in 
-                    self.loadProgressesForUnits(units: newUnits, completion: {
-                        self.loadLessonsForUnits(units: newUnits, completion: {
-                            idsDownloaded(newUnits)
-                        })
+        }
+        
+        for ids in idsArray {
+            _ = ApiDataDownloader.sharedDownloader.getUnitsByIds(ids, deleteUnits: self.units, refreshMode: .update, success: {
+                newUnits in 
+                self.loadProgressesForUnits(units: newUnits, completion: {
+                    self.loadLessonsForUnits(units: newUnits, completion: {
+                        idsDownloaded(newUnits)
                     })
-                    }, failure: {
-                        error in
-                        print("Error while downloading units")
-                        errorWhileDownloading()
                 })
-            }
-        })
+                }, failure: {
+                    error in
+                    print("Error while downloading units")
+                    errorWhileDownloading()
+            })
+        }
     }
     
     func loadProgressesForUnits(units: [Unit], completion: @escaping ((Void)->Void)) {
@@ -126,21 +134,19 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        performRequest({
-            _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
-                (newProgresses) -> Void in
-                progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                for i in 0 ..< min(units.count, progresses.count) {
-                    units[i].progress = progresses[i]
-                }
-                
-                CoreDataHelper.instance.save()
-                
-                completion()
-                }, failure: { 
-                    (error) -> Void in
-                    print("Error while dowloading progresses")
-            })
+        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+            (newProgresses) -> Void in
+            progresses = Sorter.sort(newProgresses, byIds: progressIds)
+            for i in 0 ..< min(units.count, progresses.count) {
+                units[i].progress = progresses[i]
+            }
+            
+            CoreDataHelper.instance.save()
+            
+            completion()
+            }, failure: { 
+                (error) -> Void in
+                print("Error while dowloading progresses")
         })
     }
     
@@ -154,22 +160,20 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        performRequest({
-            _ = ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
-                newLessons in
-                lessons = Sorter.sort(newLessons, byIds: lessonIds)
-                
-                for i in 0 ..< units.count {
-                    units[i].lesson = lessons[i]
-                }
-                
-                CoreDataHelper.instance.save()
-                
-                completion()
-                }, failure: {
-                    error in
-                    print("Error while downloading units")
-            })
+        _ = ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
+            newLessons in
+            lessons = Sorter.sort(newLessons, byIds: lessonIds)
+            
+            for i in 0 ..< units.count {
+                units[i].lesson = lessons[i]
+            }
+            
+            CoreDataHelper.instance.save()
+            
+            completion()
+            }, failure: {
+                error in
+                print("Error while downloading units")
         })
     }
     

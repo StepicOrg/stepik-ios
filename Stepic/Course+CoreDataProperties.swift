@@ -33,6 +33,7 @@ extension Course {
     @NSManaged var managedRequirements: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
+    @NSManaged var managedLastStepId: String?
     
     @NSManaged var managedInstructors : NSOrderedSet?
     @NSManaged var managedSections : NSOrderedSet?
@@ -43,6 +44,7 @@ extension Course {
     @NSManaged var managedIntroVideo : Video?
     
     @NSManaged var managedProgress: Progress?
+    @NSManaged var managedLastStep: LastStep?
     
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -121,6 +123,15 @@ extension Course {
         }
         get{
             return managedSlug
+        }
+    }
+    
+    var lastStepId: String? {
+        set(id){
+            self.managedLastStepId = id
+        }
+        get{
+            return managedLastStepId
         }
     }
     
@@ -222,6 +233,15 @@ extension Course {
         }
         set(value) {
             managedProgress = value
+        }
+    }
+    
+    var lastStep : LastStep? {
+        get {
+            return managedLastStep
+        }
+        set(value) {
+            managedLastStep = value
         }
     }
     

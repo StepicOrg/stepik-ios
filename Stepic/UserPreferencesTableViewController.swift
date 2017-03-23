@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 
+
+//WARNING: Deprecated class
 class UserPreferencesTableViewController: UITableViewController {
     
     @IBOutlet weak var signInHeight: NSLayoutConstraint!

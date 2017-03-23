@@ -52,9 +52,11 @@ class GeneralInfoTableViewCell: UITableViewCell {
     func initWithCourse(_ course: Course) {
         courseNameLabel.text = course.title
         if course.enrolled {
-            joinButton.setDisabledJoined()
+            joinButton.setStepicWhiteStyle()
+            joinButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         } else {
-            joinButton.setEnabledJoined()
+            joinButton.setStepicWhiteStyle()
+            joinButton.setTitle(Constants.joinCourseButtonText, for: .normal)
         }
     }
     

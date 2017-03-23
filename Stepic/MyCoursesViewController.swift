@@ -48,6 +48,9 @@ class MyCoursesViewController: CoursesViewController {
         }
     }
 
+    override func refreshBegan() {
+        emptyDatasetState = .refreshing
+    }
     
     override func handleCourseUpdates() {
         if CoursesJoinManager.sharedManager.hasUpdates {
@@ -88,6 +91,8 @@ extension MyCoursesViewController {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
         }
     }
     
@@ -100,6 +105,10 @@ extension MyCoursesViewController {
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
+            break
+
         }
         
         let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
@@ -122,6 +131,10 @@ extension MyCoursesViewController {
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
+            break
+            
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
             break
         }
                 
@@ -151,6 +164,11 @@ extension MyCoursesViewController {
         case .connectionError:
             text = ""
             break
+            
+        case .refreshing:
+            text = ""
+            break
+
         }
         
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
@@ -187,6 +205,9 @@ extension MyCoursesViewController  {
             
             break
         case .connectionError:
+            break
+            
+        case .refreshing:
             break
         }
     }
