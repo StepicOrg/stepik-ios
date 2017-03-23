@@ -708,7 +708,6 @@
 		864D66AC1E83DE03001E8D9E /* Scripts.plist in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
 		864D66AD1E83DE03001E8D9E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
 		864D66AE1E83DE03001E8D9E /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
-		864D66AF1E83DE03001E8D9E /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		864D66B01E83DE03001E8D9E /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		864D66B11E83DE03001E8D9E /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
 		864D66B21E83DE03001E8D9E /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
@@ -969,8 +968,44 @@
 		864D67D41E83E1D2001E8D9E /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D851DE5FC01002E5B7F /* TransitionType.swift */; };
 		864D67D51E83E23B001E8D9E /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		864D67D61E83E394001E8D9E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
+		864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */; };
+		86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
+		86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
+		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
+		86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
+		86AE94701E84511A00F67691 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
+		86AE94711E84511A00F67691 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
+		86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
+		86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
+		86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
+		86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
+		86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
+		86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
+		86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
+		86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
+		86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
+		86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
+		86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
+		86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
+		86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
+		86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
+		86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
+		86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
+		86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
+		86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
+		86AE94851E84511A00F67691 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
+		86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
+		86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
+		86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
+		86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
+		86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
+		86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
+		86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
+		86AE948D1E84511A00F67691 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
+		86B916251E849548000C2842 /* AdaptiveMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveMainViewController.swift */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
-		86EF29391E83CEA900F8D214 /* AdaptiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */; };
+		86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
@@ -1443,9 +1478,11 @@
 		69FDA1D6EB73023FE3F54878 /* Pods-StepicAdaptiveCourse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
+		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
-		86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveViewController.swift; sourceTree = "<group>"; };
+		86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAuthViewController.swift.swift; sourceTree = "<group>"; };
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2637,12 +2674,14 @@
 		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
 			isa = PBXGroup;
 			children = (
+				86B916241E849548000C2842 /* AdaptiveMainViewController.swift */,
 				86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */,
-				86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */,
+				86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift.swift */,
 				86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */,
 				86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */,
 				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
 				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
+				864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */,
 			);
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
@@ -3041,6 +3080,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
+				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
+				86AE94701E84511A00F67691 /* WarningView.xib in Resources */,
+				86AE94711E84511A00F67691 /* StepTabView.xib in Resources */,
+				86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */,
+				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
+				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
+				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
+				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
+				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
+				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
+				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
+				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
+				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
+				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
+				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
+				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
+				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
+				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
+				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
+				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
+				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
+				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
+				86AE94851E84511A00F67691 /* FillBlanksChoiceTableViewCell.xib in Resources */,
+				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
+				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
+				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
+				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
+				86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */,
+				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
+				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
+				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
+				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
+				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
@@ -3962,6 +4035,7 @@
 				864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */,
 				864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */,
 				864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */,
+				86B916251E849548000C2842 /* AdaptiveMainViewController.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
 				864D67AA1E83E08E001E8D9E /* PreferencesViewController.swift in Sources */,
@@ -3984,6 +4058,7 @@
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
 				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
+				864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,
@@ -4033,7 +4108,6 @@
 				864D66AC1E83DE03001E8D9E /* Scripts.plist in Sources */,
 				864D66AD1E83DE03001E8D9E /* Constants.swift in Sources */,
 				864D66AE1E83DE03001E8D9E /* Images.swift in Sources */,
-				864D66AF1E83DE03001E8D9E /* StepicApplicationsInfo.swift in Sources */,
 				864D66B01E83DE03001E8D9E /* ApplicationInfo.swift in Sources */,
 				864D66B11E83DE03001E8D9E /* PathManager.swift in Sources */,
 				864D66B21E83DE03001E8D9E /* AudioManager.swift in Sources */,
@@ -4165,7 +4239,7 @@
 				864D67321E83DE03001E8D9E /* AlamofireExtensions.swift in Sources */,
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
-				86EF29391E83CEA900F8D214 /* AdaptiveViewController.swift in Sources */,
+				86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
