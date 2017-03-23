@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire', :git => 'https://github.com/Homely/Alamofire.git', :branch => 'ios8'
+    pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON', '3.1.0'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
@@ -51,5 +51,9 @@ target 'Stepic' do
 end
 
 target 'SberbankUniversity' do 
+    all_pods
+end
+
+target 'StepicAdaptiveCourse' do
     all_pods
 end

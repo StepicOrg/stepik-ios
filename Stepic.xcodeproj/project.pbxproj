@@ -676,6 +676,11 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		572BF3DA6DE2DAE16D7E15C8 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
+		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
+		86EF29391E83CEA900F8D214 /* AdaptiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */; };
+		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
+		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
+		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -704,6 +709,7 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
+		A37127B627A3D6D9BD5A6780 /* Pods_StepicAdaptiveCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A48600F4551866C105DE4CC /* Pods_StepicAdaptiveCourse.framework */; };
 		CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E978D25313465538A2470BA2 /* Pods_Stepic.framework */; };
 /* End PBXBuildFile section */
 
@@ -1135,12 +1141,22 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
+		0A48600F4551866C105DE4CC /* Pods_StepicAdaptiveCourse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicAdaptiveCourse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B99216E20001F6340BDBB74 /* Pods-StepicAdaptiveCourse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.release.xcconfig"; sourceTree = "<group>"; };
 		3F57B4346FD0BE2A8F687821 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		58D8A36D6D3D52FD72FCBC8E /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA8D793147E46AC91793A2 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		69FDA1D6EB73023FE3F54878 /* Pods-StepicAdaptiveCourse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
+		86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveViewController.swift; sourceTree = "<group>"; };
+		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
+		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
+		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
+		86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdaptiveInfo.plist; sourceTree = "<group>"; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1192,6 +1208,14 @@
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
 				CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86EF29311E83CEA900F8D214 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A37127B627A3D6D9BD5A6780 /* Pods_StepicAdaptiveCourse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2008,6 +2032,7 @@
 				9F9C71481E076B3200EC8DA3 /* Shared */,
 				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
+				86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* SberbankUniversity */,
@@ -2023,6 +2048,7 @@
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
 				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
 				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
+				86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2310,8 +2336,22 @@
 				6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */,
 				E978D25313465538A2470BA2 /* Pods_Stepic.framework */,
 				5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */,
+				0A48600F4551866C105DE4CC /* Pods_StepicAdaptiveCourse.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+			isa = PBXGroup;
+			children = (
+				86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */,
+				86EF29381E83CEA900F8D214 /* AdaptiveViewController.swift */,
+				86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */,
+				86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */,
+				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
+				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
+			);
+			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
 		};
 		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
@@ -2368,6 +2408,8 @@
 				0403A15AD3DF220BD701250D /* Pods-Stepic.release.xcconfig */,
 				BEB95337B40E5EA1A5CC59C0 /* Pods-StepicTests.debug.xcconfig */,
 				3F57B4346FD0BE2A8F687821 /* Pods-StepicTests.release.xcconfig */,
+				69FDA1D6EB73023FE3F54878 /* Pods-StepicAdaptiveCourse.debug.xcconfig */,
+				2B99216E20001F6340BDBB74 /* Pods-StepicAdaptiveCourse.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2440,6 +2482,26 @@
 			productReference = 08DE94111B8C58AC00D278AB /* Stepic.app */;
 			productType = "com.apple.product-type.application";
 		};
+		86EF29331E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "StepicAdaptiveCourse" */;
+			buildPhases = (
+				9B09FF8895C8B2269D6E3C1E /* [CP] Check Pods Manifest.lock */,
+				86EF29301E83CEA900F8D214 /* Sources */,
+				86EF29311E83CEA900F8D214 /* Frameworks */,
+				86EF29321E83CEA900F8D214 /* Resources */,
+				952554F6374603985B9C5F2C /* [CP] Embed Pods Frameworks */,
+				190117624D70167A02515817 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StepicAdaptiveCourse;
+			productName = StepicAdaptiveCourse;
+			productReference = 86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */;
+			productType = "com.apple.product-type.application";
+		};
 		9F9C71161E076AE000EC8DA3 /* StepicWatch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F9C713A1E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch" */;
@@ -2482,7 +2544,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
@@ -2518,6 +2580,11 @@
 							};
 						};
 					};
+					86EF29331E83CEA900F8D214 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 7S8Z9T8WFU;
+						ProvisioningStyle = Automatic;
+					};
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 4562ZPB9BG;
@@ -2549,6 +2616,7 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
+				86EF29331E83CEA900F8D214 /* StepicAdaptiveCourse */,
 			);
 		};
 /* End PBXProject section */
@@ -2676,6 +2744,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86EF29321E83CEA900F8D214 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
+				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
+				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C71151E076AE000EC8DA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2754,6 +2832,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		190117624D70167A02515817 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		914EB098B2CAF1EEEAD05163 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2769,7 +2862,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		952554F6374603985B9C5F2C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9645433E9B237AFE32D23270 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9B09FF8895C8B2269D6E3C1E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3452,6 +3575,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86EF29301E83CEA900F8D214 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86EF29391E83CEA900F8D214 /* AdaptiveViewController.swift in Sources */,
+				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C711F1E076AE000EC8DA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3530,6 +3662,22 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86EF293B1E83CEA900F8D214 /* Base */,
+			);
+			name = AdaptiveMain.storyboard;
+			sourceTree = "<group>";
+		};
+		86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86EF29401E83CEA900F8D214 /* Base */,
+			);
+			name = AdaptiveLaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		9F9C71191E076AE000EC8DA3 /* Interface.storyboard */ = {
@@ -3772,6 +3920,44 @@
 			};
 			name = Release;
 		};
+		86EF29431E83CEA900F8D214 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69FDA1D6EB73023FE3F54878 /* Pods-StepicAdaptiveCourse.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
+				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepicAdaptiveCourse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		86EF29441E83CEA900F8D214 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B99216E20001F6340BDBB74 /* Pods-StepicAdaptiveCourse.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
+				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepicAdaptiveCourse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		9F9C71341E076AE100EC8DA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3893,6 +4079,15 @@
 			buildConfigurations = (
 				08DE94311B8C58AC00D278AB /* Debug */,
 				08DE94321B8C58AC00D278AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "StepicAdaptiveCourse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86EF29431E83CEA900F8D214 /* Debug */,
+				86EF29441E83CEA900F8D214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
