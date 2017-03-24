@@ -54,4 +54,11 @@ class UserActivity {
         
         return lStreak
     }
+    
+    var needsToSolveToday : Bool {
+        guard pins.count > 1 else {
+            return false
+        }
+        return pins[0] == 0 && pins[1] != 0
+    }
 }

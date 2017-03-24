@@ -144,7 +144,6 @@ SignOut = "Выйти";
 Profile = "Профиль";
 Preferences = "Настройки";
 CurrentStreak = "Решаю без перерыва";
-LongestStreak = "Личный рекорд";
 Activity = "Активность";
 days1 = "день";
 days234 = "дня";
@@ -181,3 +180,12 @@ Continue = "Продолжить";
 Refreshing = "Обновляем...";
 RefreshingDescription = "";
 EmptyTitle = "Пусто :(";
+CurrentStreakTitle = "Решаю задачи";
+InARow = "подряд";
+LongestStreak = "Личный рекорд";
+CurrentBestStreakAlertTopText = "Личный рекорд - отличная мотивация для того, чтобы учиться";
+CurrentBestStreakAlertBottomText = "Решайте задачи каждый день и улучшайте свои показатели!";
+ReceiveNotifications = "Получать напоминания";
+
+
+

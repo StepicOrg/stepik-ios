@@ -233,6 +233,10 @@
 		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
 		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0867023F1DB167D5005006AE /* GoogleService-Info.plist */; };
+		0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */; };
+		0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */; };
+		0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
+		0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
@@ -644,6 +648,10 @@
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
 		08F261221E79DD0C00AC908B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
+		08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
+		08F4761F1E82C11C0018E82C /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
+		08F476221E82C1480018E82C /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
+		08F476231E82C1480018E82C /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		08F485931C574D79000165AA /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
 		08F485951C574DAD000165AA /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485971C5752D0000165AA /* UIViewLoadExtension.swift */; };
@@ -934,6 +942,8 @@
 		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
 		0867023F1DB167D5005006AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SberbankUniversity/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentBestStreakViewController.swift; sourceTree = "<group>"; };
+		0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentBestStreakViewController.xib; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		0869530E1D747DC0003857A2 /* RequestChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestChain.swift; sourceTree = "<group>"; };
@@ -1121,6 +1131,8 @@
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		08F261201E79DD0B00AC908B /* APIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		08F4761D1E82C11C0018E82C /* StreaksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreaksView.xib; sourceTree = "<group>"; };
+		08F476211E82C1480018E82C /* StreaksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksView.swift; sourceTree = "<group>"; };
 		08F485921C574D79000165AA /* WarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		08F485941C574DAD000165AA /* WarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WarningView.xib; sourceTree = "<group>"; };
 		08F485971C5752D0000165AA /* UIViewLoadExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewLoadExtension.swift; sourceTree = "<group>"; };
@@ -1633,6 +1645,33 @@
 			name = ExecutionQueue;
 			sourceTree = "<group>";
 		};
+		0867D82A1E85313100B13285 /* Streaks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D82C1E85314600B13285 /* Current Best Streak Alert */,
+				0867D82B1E85313C00B13285 /* Streak Alert */,
+			);
+			name = Streaks;
+			sourceTree = "<group>";
+		};
+		0867D82B1E85313C00B13285 /* Streak Alert */ = {
+			isa = PBXGroup;
+			children = (
+				08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */,
+				08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */,
+			);
+			name = "Streak Alert";
+			sourceTree = "<group>";
+		};
+		0867D82C1E85314600B13285 /* Current Best Streak Alert */ = {
+			isa = PBXGroup;
+			children = (
+				0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */,
+				0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */,
+			);
+			name = "Current Best Streak Alert";
+			sourceTree = "<group>";
+		};
 		08687BAB1BACB41F00F5BDE1 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
@@ -1645,6 +1684,7 @@
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				08F476201E82C12B0018E82C /* StreaksView */,
 				08970EC91C6A325600846119 /* PlaceholderView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
 				08F485961C574DB3000165AA /* WarningView */,
@@ -2173,6 +2213,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		08F476201E82C12B0018E82C /* StreaksView */ = {
+			isa = PBXGroup;
+			children = (
+				08F4761D1E82C11C0018E82C /* StreaksView.xib */,
+				08F476211E82C1480018E82C /* StreaksView.swift */,
+			);
+			name = StreaksView;
+			sourceTree = "<group>";
+		};
 		08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2327,8 +2376,7 @@
 			children = (
 				08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */,
 				08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */,
-				08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */,
-				08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */,
+				0867D82A1E85313100B13285 /* Streaks */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -2614,6 +2662,7 @@
 				08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
+				08F4761F1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
@@ -2636,6 +2685,7 @@
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08263D8F1DE5FC01002E5B7F /* Info.plist in Resources */,
+				0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08263D871DE5FC01002E5B7F /* Alert.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
@@ -2707,6 +2757,7 @@
 				08263D961DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
+				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -2717,6 +2768,7 @@
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
+				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2974,6 +3026,7 @@
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -3037,6 +3090,7 @@
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
 				08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */,
+				08F476231E82C1480018E82C /* StreaksView.swift in Sources */,
 				08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */,
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
@@ -3259,6 +3313,7 @@
 				08263DA01DE5FC01002E5B7F /* PresentrController.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
+				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
@@ -3389,6 +3444,7 @@
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
+				0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,

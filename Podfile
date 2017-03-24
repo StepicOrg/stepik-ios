@@ -5,8 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire', :git => 'https://github.com/Homely/Alamofire.git', :branch => 'ios8'
-    pod 'SwiftyJSON', '3.1.0'
+    pod 'Alamofire', '~> 4.4'    
+    pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -32,7 +32,7 @@ def all_pods
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
-    pod 'CRToast'
+    pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     
     pod "VK-ios-sdk" 

@@ -368,36 +368,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current streak:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ws9-3L-40P">
-                                                    <rect key="frame" x="16" y="8" width="351" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="1OM-fH-LhE"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Longest streak:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6e-1n-Qmn">
-                                                    <rect key="frame" x="16" y="41" width="351" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rNI-lH-fwX">
-                                                    <rect key="frame" x="169" y="19" width="37" height="37"/>
-                                                    <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </activityIndicatorView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yK-gN-OC9" customClass="StreaksView" customModule="SberbankUniversity" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="v6e-1n-Qmn" secondAttribute="trailing" id="5Cu-vF-2Co"/>
-                                                <constraint firstAttribute="topMargin" secondItem="ws9-3L-40P" secondAttribute="top" id="BEb-AH-mXg"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="v6e-1n-Qmn" secondAttribute="leading" constant="-8" id="Dza-fe-7vv"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="v6e-1n-Qmn" secondAttribute="bottom" id="KeW-U2-CH4"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="ws9-3L-40P" secondAttribute="leading" constant="-8" id="P04-2f-vcB"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ws9-3L-40P" secondAttribute="trailing" id="PUT-eu-NaG"/>
-                                                <constraint firstItem="rNI-lH-fwX" firstAttribute="centerX" secondItem="gQF-0U-sKA" secondAttribute="centerX" id="Zst-nI-ljS"/>
-                                                <constraint firstItem="rNI-lH-fwX" firstAttribute="centerY" secondItem="gQF-0U-sKA" secondAttribute="centerY" id="sML-nP-VWF"/>
-                                                <constraint firstItem="v6e-1n-Qmn" firstAttribute="top" secondItem="ws9-3L-40P" secondAttribute="bottom" constant="8" id="sT4-Mb-crt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7yK-gN-OC9" secondAttribute="trailing" constant="-8" id="0Po-UO-waw"/>
+                                                <constraint firstItem="7yK-gN-OC9" firstAttribute="top" secondItem="gQF-0U-sKA" secondAttribute="topMargin" constant="-8" id="OHa-ad-eMG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7yK-gN-OC9" secondAttribute="bottom" constant="-8" id="Q4K-kB-6w2"/>
+                                                <constraint firstItem="7yK-gN-OC9" firstAttribute="leading" secondItem="gQF-0U-sKA" secondAttribute="leadingMargin" constant="-8" id="fyQ-y0-dLV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -439,13 +419,11 @@
                     </tableView>
                     <connections>
                         <outlet property="avatarImageView" destination="PBJ-gQ-g1O" id="Aql-KF-rvu"/>
-                        <outlet property="currentStreakLabel" destination="ws9-3L-40P" id="sz0-GH-GBz"/>
-                        <outlet property="longestStreakLabel" destination="v6e-1n-Qmn" id="dxU-Kq-J5Q"/>
                         <outlet property="signInButton" destination="KGW-gu-vwY" id="IYD-6R-TTf"/>
                         <outlet property="signInHeight" destination="M7J-XO-GVd" id="GwM-Ch-OQl"/>
                         <outlet property="signInNameDistance" destination="7GM-vX-77p" id="HrZ-r1-4if"/>
                         <outlet property="signOutButton" destination="f8p-87-og4" id="Ue6-io-tfv"/>
-                        <outlet property="streaksActivityIndicator" destination="rNI-lH-fwX" id="5uY-yP-xtF"/>
+                        <outlet property="streaksView" destination="7yK-gN-OC9" id="NOk-gL-rTS"/>
                         <outlet property="userNameLabel" destination="HiL-nw-DqU" id="iFP-Fp-3sj"/>
                     </connections>
                 </tableViewController>
