@@ -27,8 +27,9 @@ class AdaptiveMainViewController: UIViewController {
                             let step = newStepsImmutable.first
                             
                             if let step = step {
-                                //let vc = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-                                //self.present(vc, animated: true, completion: nil)
+                                let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
+                                stepVC.step = step
+                                self.present(stepVC, animated: true, completion: nil)
                             }
                             }, failure: { (error) -> Void in
                                 print("failed downloading steps data in Next")

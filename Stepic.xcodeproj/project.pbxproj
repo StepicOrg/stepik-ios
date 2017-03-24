@@ -970,6 +970,7 @@
 		864D67D61E83E394001E8D9E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
+		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
@@ -1480,6 +1481,7 @@
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
+		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -2683,6 +2685,7 @@
 				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
 				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
 				864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */,
+				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
 			);
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
@@ -3974,6 +3977,7 @@
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67531E83E08E001E8D9E /* StepikAlertViewController.swift in Sources */,
+				86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */,
 				864D67551E83E08E001E8D9E /* StreakAlertViewController.swift in Sources */,
 				864D67571E83E08E001E8D9E /* StepicVideoPlayerViewController.swift in Sources */,
 				864D675A1E83E08E001E8D9E /* PlayerTestViewController.swift in Sources */,
