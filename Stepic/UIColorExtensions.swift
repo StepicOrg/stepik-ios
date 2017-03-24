@@ -32,7 +32,7 @@ extension UIColor {
     
     static let navigationBlackColor : UIColor = UIColor(hex: 0x222222)    
     
-    static let navigationColor = navigationBlackColor
+    static let navigationColor = stepicGreenColor()
     
     class func backgroundColor() -> UIColor {
         return UIColor(white: 0.9, alpha: 1)
