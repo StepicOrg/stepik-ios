@@ -63,6 +63,9 @@ struct AnalyticsEvents {
             static let newAttempt = "clicked_generate_new_attempt"
             static let solveInWebPressed = "clicked_solve_in_web"
         }
+        
+        static let hasRestrictions = "step_with_submission_restriction"
+        static let opened = "step_type_opened"
     }
     
     struct VideoPlayer {

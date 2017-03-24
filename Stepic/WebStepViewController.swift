@@ -226,6 +226,12 @@ class WebStepViewController: UIViewController {
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
         
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        
+        if step.hasSubmissionRestrictions {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
 
         let stepid = step.id

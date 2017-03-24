@@ -909,6 +909,7 @@
 		0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHeightDependentCellProtocol.swift; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_steps_restrictions_v14.xcdatamodel; sourceTree = "<group>"; };
 		084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_last_step_v13.xcdatamodel; sourceTree = "<group>"; };
 		084F7AA61E76EF690088368A /* LastStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStep.swift; sourceTree = "<group>"; };
 		084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -4036,6 +4037,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */,
 				084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */,
 				081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */,
 				083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */,
@@ -4050,7 +4052,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */;
+			currentVersion = 084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

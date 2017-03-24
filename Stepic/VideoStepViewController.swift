@@ -175,6 +175,9 @@ class VideoStepViewController: UIViewController {
         guard let cstep = step else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+
         let stepid = step.id         
         if stepId - 1 == startStepId {
             startStepBlock()
