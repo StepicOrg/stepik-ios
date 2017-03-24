@@ -513,6 +513,10 @@ extension CoursesViewController : UITableViewDataSource {
             return cell
         }
         
+        guard indexPath.row < courses.count else {
+            return UITableViewCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseTableViewCell", for: indexPath) as! CourseTableViewCell
         
         let course = courses[(indexPath as NSIndexPath).row]
