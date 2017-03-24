@@ -233,6 +233,10 @@
 		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
 		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		086702411DB167DC005006AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0867023F1DB167D5005006AE /* GoogleService-Info.plist */; };
+		0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */; };
+		0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */; };
+		0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
+		0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869530E1D747DC0003857A2 /* RequestChain.swift */; };
@@ -938,6 +942,8 @@
 		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
 		0867023F1DB167D5005006AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SberbankUniversity/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentBestStreakViewController.swift; sourceTree = "<group>"; };
+		0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentBestStreakViewController.xib; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		0869530E1D747DC0003857A2 /* RequestChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestChain.swift; sourceTree = "<group>"; };
@@ -1637,6 +1643,33 @@
 				08BC47111CDA3BFF009A1D25 /* Task Managers */,
 			);
 			name = ExecutionQueue;
+			sourceTree = "<group>";
+		};
+		0867D82A1E85313100B13285 /* Streaks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D82C1E85314600B13285 /* Current Best Streak Alert */,
+				0867D82B1E85313C00B13285 /* Streak Alert */,
+			);
+			name = Streaks;
+			sourceTree = "<group>";
+		};
+		0867D82B1E85313C00B13285 /* Streak Alert */ = {
+			isa = PBXGroup;
+			children = (
+				08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */,
+				08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */,
+			);
+			name = "Streak Alert";
+			sourceTree = "<group>";
+		};
+		0867D82C1E85314600B13285 /* Current Best Streak Alert */ = {
+			isa = PBXGroup;
+			children = (
+				0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */,
+				0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */,
+			);
+			name = "Current Best Streak Alert";
 			sourceTree = "<group>";
 		};
 		08687BAB1BACB41F00F5BDE1 /* Generic */ = {
@@ -2343,8 +2376,7 @@
 			children = (
 				08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */,
 				08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */,
-				08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */,
-				08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */,
+				0867D82A1E85313100B13285 /* Streaks */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -2653,6 +2685,7 @@
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08263D8F1DE5FC01002E5B7F /* Info.plist in Resources */,
+				0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08263D871DE5FC01002E5B7F /* Alert.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
@@ -2735,6 +2768,7 @@
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
+				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2992,6 +3026,7 @@
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				08CB6B481C98777200E8BA50 /* SbStepicApplicationsInfo.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -3409,6 +3444,7 @@
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
+				0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,

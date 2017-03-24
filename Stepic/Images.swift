@@ -71,5 +71,10 @@ struct Images {
     struct points {
         static let vertical = UIImage(named: "Points_vertical")!
     }
+    
+    struct streak {
+        static let black = UIImage(named: "streak-icon-black")!
+        static let white = UIImage(named: "streak-icon-white-bordered")!
+    }
 
 }

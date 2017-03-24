@@ -183,5 +183,7 @@ EmptyTitle = "Nothing here :(";
 CurrentStreakTitle = "Solving quizzes";
 InARow = "in a row";
 LongestStreak = "Longest streak";
-
+CurrentBestStreakAlertTopText = "Best streak is a great motivation to learn";
+CurrentBestStreakAlertBottomText = "Solve quizzes every day and improve your results!";
+ReceiveNotifications = "Receive notifications";
 
