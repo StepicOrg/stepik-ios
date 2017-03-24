@@ -352,7 +352,7 @@ class StepsViewController: RGPageViewController {
     
     override var barTintColor: UIColor? {
         get {
-            return UIColor.stepicGreenColor()
+            return UIColor.navigationColor
         }
     }
     

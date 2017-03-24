@@ -68,7 +68,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
     
     override var barTintColor: UIColor? {
         get {
-            return UIColor.stepicGreenColor()
+            return UIColor.navigationColor
         }
     }
     
@@ -86,7 +86,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
     
     override var tabbarHeight : CGFloat {
         get {
-            return 30
+            return 44.0
         }
     }
     

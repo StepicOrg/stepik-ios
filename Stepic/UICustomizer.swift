@@ -15,7 +15,8 @@ class UICustomizer: NSObject {
     
     func setStepicNavigationBar(_ navigationBar: UINavigationBar?) {
         if let bar = navigationBar {
-            bar.barTintColor = UIColor.stepicGreenColor()
+//            bar.barTintColor = UIColor.stepicGreenColor()
+            bar.barTintColor = UIColor.navigationColor
             bar.isTranslucent = false
             bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
             bar.tintColor = UIColor.white
@@ -24,7 +25,7 @@ class UICustomizer: NSObject {
     
     func setStepicTabBar(_ tabBar: UITabBar?) {
         if let bar = tabBar {
-            bar.tintColor = UIColor.stepicGreenColor()
+            bar.tintColor = UIColor.navigationColor
             bar.isTranslucent = false
         }
     }
