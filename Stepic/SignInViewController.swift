@@ -197,6 +197,7 @@ extension SignInViewController : UITextFieldDelegate {
         
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
             signIn()
             return true
         }
