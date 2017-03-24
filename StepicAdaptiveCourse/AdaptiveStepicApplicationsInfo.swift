@@ -31,5 +31,5 @@ struct StepicApplicationsInfo {
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
     
-    static let adaptiveCourseId = "1838"
+    static let adaptiveCourseId = 1838
 }

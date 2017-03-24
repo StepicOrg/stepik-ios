@@ -64,6 +64,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRe-BV-APm">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5y-Ue-fKH">
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="2ZH-ub-JIR"/>
+                                    <constraint firstAttribute="height" constant="44" id="5nX-g7-tMD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Start learning">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onStartLearningButtonClick:" destination="ZJG-W2-va5" eventType="touchUpInside" id="PnF-cy-O1c"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8Tr-eq-K1y"/>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3n-G0-bgz">
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -81,11 +101,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="P3n-G0-bgz" firstAttribute="centerY" secondItem="xh9-YW-lxo" secondAttribute="centerY" id="MQA-Dj-976"/>
+                            <constraint firstItem="eRe-BV-APm" firstAttribute="top" secondItem="p1D-Lp-eLG" secondAttribute="bottom" constant="24" id="IKG-Fi-VJO"/>
+                            <constraint firstItem="V5y-Ue-fKH" firstAttribute="centerX" secondItem="xh9-YW-lxo" secondAttribute="centerX" id="QaV-Wc-5jl"/>
+                            <constraint firstItem="eRe-BV-APm" firstAttribute="centerX" secondItem="xh9-YW-lxo" secondAttribute="centerX" id="izU-oE-WAd"/>
+                            <constraint firstItem="8Tr-eq-K1y" firstAttribute="top" secondItem="p1D-Lp-eLG" secondAttribute="bottom" constant="25" id="jMl-n0-Qlg"/>
+                            <constraint firstItem="P3n-G0-bgz" firstAttribute="top" secondItem="V5y-Ue-fKH" secondAttribute="bottom" constant="19" id="jUU-wP-eco"/>
+                            <constraint firstItem="8Tr-eq-K1y" firstAttribute="centerX" secondItem="xh9-YW-lxo" secondAttribute="centerX" id="lgE-Wu-uoe"/>
+                            <constraint firstItem="V5y-Ue-fKH" firstAttribute="top" secondItem="eRe-BV-APm" secondAttribute="bottom" constant="246" id="qbz-aa-oJ9"/>
                             <constraint firstItem="P3n-G0-bgz" firstAttribute="centerX" secondItem="xh9-YW-lxo" secondAttribute="centerX" id="uMg-qj-nmu"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="courseNameLabel" destination="eRe-BV-APm" id="iLb-vh-udG"/>
+                        <outlet property="loadingIndicator" destination="8Tr-eq-K1y" id="e3n-O9-01N"/>
+                        <outlet property="startLearningButton" destination="V5y-Ue-fKH" id="PRW-qT-AxS"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="openStartScreen" id="tLV-dY-Lhs"/>
                     </connections>
                 </viewController>
