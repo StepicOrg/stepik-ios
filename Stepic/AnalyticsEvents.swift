@@ -24,6 +24,10 @@ struct AnalyticsEvents {
         static let onSignUpScreen = "clicked_SignUp_on_sign_up_screen"
     }
     
+    struct Login {
+        static let success = "success_login"
+    }
+    
     struct Syllabus {
         static let shared = "share_syllabus_clicked"
     }

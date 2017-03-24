@@ -76,8 +76,8 @@ class RegistrationViewController: UIViewController {
         signUpToStepic()
     }
     
-    var success : ((Void)->Void)? {
-        return (navigationController as? AuthNavigationViewController)?.success
+    var success : ((String)->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
     
     func signUpToStepic() {
@@ -102,7 +102,7 @@ class RegistrationViewController: UIViewController {
                             UIThread.performUI { 
                                 self.navigationController?.dismiss(animated: true, completion: {
                                     [weak self] in
-                                    self?.success?()
+                                    self?.success?("registered")
                                     })
                             }
                             AnalyticsHelper.sharedHelper.changeSignIn()
@@ -114,7 +114,7 @@ class RegistrationViewController: UIViewController {
                                 UIThread.performUI { 
                                     self.navigationController?.dismiss(animated: true, completion: {
                                         [weak self] in
-                                        self?.success?()
+                                        self?.success?("registered")
                                         })
                                 }
                         })

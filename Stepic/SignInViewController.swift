@@ -26,8 +26,8 @@ class SignInViewController: UIViewController {
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), for: UIControlState())
     }
     
-    var success : ((Void)->Void)? {
-        return (navigationController as? AuthNavigationViewController)?.success
+    var success : ((String)->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
@@ -90,7 +90,7 @@ class SignInViewController: UIViewController {
                                                         UIThread.performUI { 
                                                             self.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
-                                                                self?.success?()
+                                                                self?.success?("social")
                                                             })
                                                         }
                                                         AnalyticsHelper.sharedHelper.changeSignIn()
@@ -102,7 +102,7 @@ class SignInViewController: UIViewController {
                                                         UIThread.performUI { 
                                                             self.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
-                                                                self?.success?()
+                                                                self?.success?("social")
                                                             })
                                                         }
                                                     })
@@ -130,7 +130,7 @@ class SignInViewController: UIViewController {
                                                             UIThread.performUI { 
                                                                 self.navigationController?.dismiss(animated: true, completion: {
                                                                     [weak self] in
-                                                                    self?.success?()
+                                                                    self?.success?("password")
                                                                 })
                                                             }
                                                             AnalyticsHelper.sharedHelper.changeSignIn()
@@ -142,7 +142,7 @@ class SignInViewController: UIViewController {
                                                             UIThread.performUI{ 
                                                                 self.navigationController?.dismiss(animated: true, completion: {
                                                                     [weak self] in
-                                                                    self?.success?()
+                                                                    self?.success?("password")
                                                                 })
                                                             }
                                                         })
@@ -164,7 +164,7 @@ class SignInViewController: UIViewController {
             dvc?.dismissBlock = {
                 self.navigationController?.dismiss(animated: true, completion: {
                     [weak self] in
-                    self?.success?()
+                    self?.success?("social")
                 })
                 
             }
