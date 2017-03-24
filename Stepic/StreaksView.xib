@@ -23,56 +23,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="318" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="324" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Решаю задачи" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMO-jo-4DS">
-                    <rect key="frame" x="8" y="1" width="117" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-hg-qhz">
-                    <rect key="frame" x="45" y="30" width="43" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="a3h-bD-HQP"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                    <color key="textColor" red="0.98624199628829956" green="0.7796865701675415" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="дней подряд" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2h-RH-O0z">
-                    <rect key="frame" x="15" y="78" width="102" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Личный рекорд" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25m-0O-2Da">
-                    <rect key="frame" x="185" y="1" width="125" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-rV-tRC">
-                    <rect key="frame" x="223" y="30" width="50" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="pRr-4x-JZl"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                    <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="дней" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-U7-xm8">
-                    <rect key="frame" x="228" y="78" width="40" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rJ-XG-K9C">
-                    <rect key="frame" x="0.0" y="0.0" width="318" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="324" height="100"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="m4P-Q8-H6e">
-                            <rect key="frame" x="141" y="31.5" width="37" height="37"/>
+                            <rect key="frame" x="144" y="31.5" width="37" height="37"/>
                             <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </activityIndicatorView>
                     </subviews>
@@ -82,14 +40,56 @@
                         <constraint firstItem="m4P-Q8-H6e" firstAttribute="centerY" secondItem="4rJ-XG-K9C" secondAttribute="centerY" id="oDT-ep-qcL"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Решаю задачи" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMO-jo-4DS">
+                    <rect key="frame" x="23.5" y="1" width="117" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-hg-qhz">
+                    <rect key="frame" x="60.5" y="30" width="43" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="a3h-bD-HQP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                    <color key="textColor" red="0.98624199628829956" green="0.7796865701675415" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="дней подряд" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2h-RH-O0z">
+                    <rect key="frame" x="30.5" y="78" width="102" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Личный рекорд" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25m-0O-2Da">
+                    <rect key="frame" x="179" y="1" width="125" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-rV-tRC">
+                    <rect key="frame" x="217" y="30" width="50" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pRr-4x-JZl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                    <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="дней" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRd-U7-xm8">
+                    <rect key="frame" x="222" y="78" width="40" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="6Ri-rV-tRC" firstAttribute="top" secondItem="25m-0O-2Da" secondAttribute="bottom" constant="8" id="6a5-Q0-Nzo"/>
                 <constraint firstAttribute="bottom" secondItem="4rJ-XG-K9C" secondAttribute="bottom" id="AqU-xk-w2S"/>
                 <constraint firstAttribute="trailing" secondItem="4rJ-XG-K9C" secondAttribute="trailing" id="BQ4-s1-OHb"/>
-                <constraint firstAttribute="trailing" secondItem="25m-0O-2Da" secondAttribute="trailing" constant="8" id="Jso-jj-h8I"/>
                 <constraint firstItem="6Ri-rV-tRC" firstAttribute="centerX" secondItem="25m-0O-2Da" secondAttribute="centerX" id="JvZ-R7-mGQ"/>
+                <constraint firstItem="gwD-hg-qhz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-80" id="KCe-mJ-amT"/>
                 <constraint firstItem="6Ri-rV-tRC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MZH-rG-ljQ"/>
                 <constraint firstItem="JRd-U7-xm8" firstAttribute="top" secondItem="6Ri-rV-tRC" secondAttribute="bottom" constant="8" id="Phl-Vo-ozP"/>
                 <constraint firstItem="gwD-hg-qhz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SX1-fJ-xBj"/>
@@ -97,14 +97,14 @@
                 <constraint firstItem="F2h-RH-O0z" firstAttribute="centerX" secondItem="gwD-hg-qhz" secondAttribute="centerX" id="TmW-cW-3Vd"/>
                 <constraint firstItem="gwD-hg-qhz" firstAttribute="top" secondItem="KMO-jo-4DS" secondAttribute="bottom" constant="8" id="bG5-Qm-ImV"/>
                 <constraint firstItem="gwD-hg-qhz" firstAttribute="centerX" secondItem="KMO-jo-4DS" secondAttribute="centerX" id="hR7-ah-0o4"/>
-                <constraint firstItem="KMO-jo-4DS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="kcw-X4-yfo"/>
+                <constraint firstItem="6Ri-rV-tRC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="80" id="npe-VL-vso"/>
                 <constraint firstItem="F2h-RH-O0z" firstAttribute="top" secondItem="gwD-hg-qhz" secondAttribute="bottom" constant="8" id="oKb-ff-pMZ"/>
                 <constraint firstItem="4rJ-XG-K9C" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rsR-o5-gUu"/>
                 <constraint firstItem="4rJ-XG-K9C" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zHp-8E-6rj"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="5" y="-208"/>
+            <point key="canvasLocation" x="8" y="-208"/>
         </view>
     </objects>
 </document>
