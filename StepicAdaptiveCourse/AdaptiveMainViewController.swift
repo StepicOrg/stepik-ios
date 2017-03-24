@@ -17,30 +17,37 @@ class AdaptiveMainViewController: UIViewController {
     @IBOutlet weak var startLearningButton: UIButton!
     
     @IBAction func onStartLearningButtonClick(_ sender: AnyObject) {
+        guard let course = course else {
+            return
+        }
+        
+        
         performRequest({
-            ApiDataDownloader.sharedDownloader.getLessonsByIds([37012], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                let lesson = newLessonsImmutable.first
-                
-                if let lesson = lesson, let stepId = lesson.stepsArray.first {
-                    performRequest({
-                        ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                            let step = newStepsImmutable.first
-                            
-                            if let step = step {
-                                let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
-                                stepVC.step = step
-                                self.present(stepVC, animated: true, completion: nil)
-                            }
-                            }, failure: { (error) -> Void in
-                                print("failed downloading steps data in Next")
+            RecommendationsAPI.getRecommendedLessonId(courseId: course.id, success: { recommendedLessonId in
+                ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                    let lesson = newLessonsImmutable.first
+                    
+                    if let lesson = lesson, let stepId = lesson.stepsArray.first {
+                        performRequest({
+                            ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+                                let step = newStepsImmutable.first
+                                
+                                if let step = step {
+                                    let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
+                                    stepVC.step = step
+                                    self.present(stepVC, animated: true, completion: nil)
+                                }
+                                }, failure: { (error) -> Void in
+                                    print("failed downloading steps data in Next")
+                            })
+                            }, error: {
+                                print("failed performing API request")
                         })
-                        }, error: {
-                            print("failed performing API request")
-                    })
-                }
-                }, failure: { (error) -> Void in
-                    print("failed downloading lessons data in Next")
-            })
+                    }
+                    }, failure: { (error) -> Void in
+                        print("failed downloading lessons data in Next")
+                })
+            }, error: { error in print(error) })
             }, error: {
                 print("failed performing API request")
         })
@@ -56,7 +63,7 @@ class AdaptiveMainViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.courseInfoDidLoad), name: NSNotification.Name(rawValue: "courseInfoDidLoad"), object: nil)
-        //ChoiceQuizViewController
+
         performRequest({
             ApiDataDownloader.sharedDownloader.getCoursesByIds([StepicApplicationsInfo.adaptiveCourseId], deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { (coursesImmutable) -> Void in
                 self.course = coursesImmutable.first

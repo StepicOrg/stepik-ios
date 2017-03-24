@@ -971,6 +971,7 @@
 		864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
+		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
@@ -1482,6 +1483,7 @@
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
+		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsAPI.swift; sourceTree = "<group>"; };
 		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -2674,18 +2676,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				86B916241E849548000C2842 /* AdaptiveMainViewController.swift */,
-				86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */,
 				86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */,
+				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		86795EF51E85323F00A985C2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+			isa = PBXGroup;
+			children = (
+				86795EF51E85323F00A985C2 /* API */,
+				86795EF41E85322B00A985C2 /* Controllers */,
+				86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */,
 				86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */,
 				86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */,
 				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
 				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
 				864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */,
-				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
 			);
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
@@ -4235,6 +4254,7 @@
 				864D67271E83DE03001E8D9E /* StandardsExtensions.swift in Sources */,
 				864D67281E83DE03001E8D9E /* LabelExtension.swift in Sources */,
 				864D67291E83DE03001E8D9E /* ButtonExtension.swift in Sources */,
+				86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */,
 				864D672A1E83DE03001E8D9E /* UIImageViewExtension.swift in Sources */,
 				864D672B1E83DE03001E8D9E /* NSDateExtensions.swift in Sources */,
 				864D672C1E83DE03001E8D9E /* StringExtensions.swift in Sources */,
