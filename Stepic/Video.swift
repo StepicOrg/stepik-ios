@@ -79,18 +79,36 @@ class Video: NSManagedObject, JSONInitializable {
     
     var state : VideoState! {
         get {
+            print("getting state for video \(id)")
             if let s = _state {
+                print("state: \(s)")
                 return s
             } else {
                 if PathManager.sharedManager.doesExistVideoWith(id: id) {
-                    _state = .cached
+                    if self.cachedQuality != nil {
+                        print("found cachedQuality \(cachedQuality)")
+                        _state = .cached
+                    } else {
+                        do { 
+                            print("deleting video, cachedQuality is nil")
+                            let path = try PathManager.sharedManager.getPathForStoredVideoWithName(self.name)
+                            try PathManager.sharedManager.deleteVideoFileAtPath(path)
+                        } 
+                        catch {
+                            print("error while deleting video")
+                        }
+                        _state = .online
+                    }
                 } else {
                     _state = .online
                 }
+                print("state: \(_state!)")
+
                 return _state!
             }
         }
         set(value) {
+            print("setting state for video \(id) -> \(value)")
             _state = value
         }
     }
@@ -142,7 +160,8 @@ class Video: NSManagedObject, JSONInitializable {
             errorHandler(NSError())
         }
         
-        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
+        let manager = TCBlobDownloadManager(taskIdentifier: name)
+        download = manager.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.downloadingSize = bytesExpectedToWrite
                 self.totalProgress = prog
@@ -157,7 +176,7 @@ class Video: NSManagedObject, JSONInitializable {
                     catch let error as NSError {
                         if error.code != 4 {
                             print("strange error deleting videos!")
-                            print(error.localizedFailureReason)
+                            print(error.localizedFailureReason ?? "")
                             print(error.code)
                             print(error.localizedDescription)
                         }
@@ -189,14 +208,12 @@ class Video: NSManagedObject, JSONInitializable {
                 } 
                 
                 print("video download completed with quality -> \(quality)")
-                if let fileURL = location {
-//                    self.managedCachedPath = fileURL.lastPathComponent!
+                if location != nil {
                     self.state = .cached
                     self.cachedQuality = self.loadingQuality
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
-//                    self.managedCachedPath = nil
                     self.state = .online
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
@@ -223,21 +240,19 @@ class Video: NSManagedObject, JSONInitializable {
             catch let error as NSError {
                 if error.code == 4 {
                     print("Video not found")
-//                    self.managedCachedPath = nil
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
                     return true
                 } else {
                     print("strange error deleting videos!")
-                    print(error.localizedFailureReason)
+                    print(error.localizedFailureReason ?? "")
                     print(error.code)
                     print(error.localizedDescription)
                     return false
                 }
             }
 
-//            self.managedCachedPath = nil
             self.cachedQuality = nil
             self.totalProgress = 0
             CoreDataHelper.instance.save()

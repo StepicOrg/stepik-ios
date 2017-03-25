@@ -310,6 +310,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        print("completed background task with id: \(identifier)")
+        completionHandler()
+    }
+    
+    
+    
     func applicationWillTerminate(_ application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
