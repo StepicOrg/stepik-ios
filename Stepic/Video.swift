@@ -85,10 +85,14 @@ class Video: NSManagedObject, JSONInitializable {
                 return s
             } else {
                 if PathManager.sharedManager.doesExistVideoWith(id: id) {
-                    if self.cachedQuality != nil {
+                    if self.cachedQuality != nil && self.cachedQuality != "0" {
                         print("found cachedQuality \(cachedQuality)")
                         _state = .cached
                     } else {
+                        if self.cachedQuality != nil {
+                            self.cachedQuality = nil
+                            CoreDataHelper.instance.save()
+                        }
                         do { 
                             print("deleting video, cachedQuality is nil")
                             let path = try PathManager.sharedManager.getPathForStoredVideoWithName(self.name)

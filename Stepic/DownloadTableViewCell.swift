@@ -20,6 +20,9 @@ class DownloadTableViewCell: UITableViewCell {
     var video : Video!
     var quality : String! {
         didSet {
+            if quality == nil {
+                print("quality is nil for video \(video.id) in DownloadTableViewCell didSet quality")
+            }
             qualityLabel.text = "\(quality ?? "0")p"
         }
     }

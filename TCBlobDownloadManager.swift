@@ -170,7 +170,9 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     }
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let download = self.downloads[downloadTask.taskIdentifier]!
+        guard let download = self.downloads[downloadTask.taskIdentifier] else {
+            return
+        }
         let progress = totalBytesExpectedToWrite == NSURLSessionTransferSizeUnknown ? -1 : Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
 
         download.progress = progress
@@ -183,7 +185,9 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     }
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        let download = self.downloads[downloadTask.taskIdentifier]!
+        guard let download = self.downloads[downloadTask.taskIdentifier] else {
+            return
+        }
         var fileError: NSError?
         var resultingURL: NSURL?
 
@@ -197,7 +201,9 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError sessionError: Error?) {
-        let download = self.downloads[task.taskIdentifier]!
+        guard let download = self.downloads[task.taskIdentifier] else {
+            return
+        }
         var error: NSError? = sessionError as NSError?? ?? download.error
         // Handle possible HTTP errors
         if let response = task.response as? HTTPURLResponse {
