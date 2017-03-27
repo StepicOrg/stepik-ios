@@ -149,6 +149,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onHardButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="nvK-Zq-2xD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K00-mQ-gwG">
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -164,6 +167,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onEasyButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="w4M-0P-jLg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJl-qH-8tX">
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -179,6 +185,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onNextButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="3qe-7Y-OzT"/>
+                                </connections>
                             </button>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5eX-H9-4P6">
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,6 +218,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="easyReactionButton" destination="K00-mQ-gwG" id="7nV-Gz-Q7C"/>
+                        <outlet property="hardReactionButton" destination="Ii5-JZ-2XS" id="hMq-5r-2K1"/>
+                        <outlet property="nextButton" destination="LJl-qH-8tX" id="hUN-u6-cjk"/>
                         <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
                         <outlet property="stepWebView" destination="5eX-H9-4P6" id="ORF-cp-ZMN"/>
                     </connections>

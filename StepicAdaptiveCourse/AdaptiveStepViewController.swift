@@ -10,33 +10,50 @@ import UIKit
 
 class AdaptiveStepViewController: UIViewController {
 
-    var step: Step?
+    var course: Course?
+    var recommendedLesson: Lesson?
+    
+    var quizVC: ChoiceQuizViewController?
     
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
     
+    @IBOutlet weak var easyReactionButton: UIButton!
+    @IBOutlet weak var hardReactionButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBAction func onEasyButtonClick(_ sender: AnyObject) {
+        sendReactionAndGetNewLesson(reaction: .neverAgain)
+    }
+    
+    @IBAction func onNextButtonClick(_ sender: AnyObject) {
+        sendReactionAndGetNewLesson(reaction: .solved)
+    }
+    
+    @IBAction func onHardButtonClick(_ sender: AnyObject) {
+        sendReactionAndGetNewLesson(reaction: .maybeLater)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let course = course else {
+            return
+        }
 
-        let vc = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-        vc.step = step
-        
-        self.addChildViewController(vc)
-        self.quizPlaceholderView.addSubview(vc.view)
-        vc.view.align(to: quizPlaceholderView)
-        //        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
-        
-        loadStepHTML()
+        getNewRecommendation(for: course, success: { step in
+            self.loadQuiz(for: step)
+            self.loadStepHTML(for: step)
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    fileprivate func loadStepHTML() {
-        if let htmlText = step?.block.text {
+    fileprivate func loadStepHTML(for step: Step) {
+        if let htmlText = step.block.text {
             let scriptsString = "\(Scripts.localTexScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
             html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -44,15 +61,77 @@ class AdaptiveStepViewController: UIViewController {
             stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    fileprivate func loadQuiz(for step: Step) {
+        if let quizVC = self.quizVC {
+            quizVC.view.removeFromSuperview()
+            quizVC.removeFromParentViewController()
+        }
+        
+        self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+        
+        guard let quizVC = self.quizVC else {
+            print("quizVC init failed")
+            return
+        }
+        quizVC.step = step
+        
+        self.addChildViewController(quizVC)
+        self.quizPlaceholderView.addSubview(quizVC.view)
+        quizVC.view.align(to: self.quizPlaceholderView)
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
-    */
-
+    
+    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction) {
+        guard let course = course,
+            let userId = AuthInfo.shared.userId,
+            let lessonId = recommendedLesson?.id else {
+                return
+        }
+        
+        performRequest({
+            RecommendationsAPI.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
+                self.getNewRecommendation(for: course, success: { step in
+                    self.loadQuiz(for: step)
+                    self.loadStepHTML(for: step)
+                })
+                }, error: { error in
+                    print("failed sending reaction: \(error)")
+            })
+            }, error: {
+                print("failed performing API request")
+        })
+    }
+    
+    fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
+        performRequest({
+            RecommendationsAPI.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
+                ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                    let lesson = newLessonsImmutable.first
+                    
+                    if let lesson = lesson, let stepId = lesson.stepsArray.first {
+                        self.recommendedLesson = lesson
+                        performRequest({
+                            ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+                                let step = newStepsImmutable.first
+                                
+                                if let step = step {
+                                    success(step)
+                                }
+                                }, failure: { (error) -> Void in
+                                    print("failed downloading steps data in Next")
+                            })
+                            }, error: {
+                                print("failed performing API request")
+                        })
+                    }
+                    }, failure: { (error) -> Void in
+                        print("failed downloading lessons data in Next")
+                })
+                }, error: { error in print(error) })
+            }, error: {
+                print("failed performing API request")
+        })
+    }
 }

@@ -21,36 +21,9 @@ class AdaptiveMainViewController: UIViewController {
             return
         }
         
-        
-        performRequest({
-            RecommendationsAPI.getRecommendedLessonId(courseId: course.id, success: { recommendedLessonId in
-                ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                    let lesson = newLessonsImmutable.first
-                    
-                    if let lesson = lesson, let stepId = lesson.stepsArray.first {
-                        performRequest({
-                            ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                                let step = newStepsImmutable.first
-                                
-                                if let step = step {
-                                    let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
-                                    stepVC.step = step
-                                    self.present(stepVC, animated: true, completion: nil)
-                                }
-                                }, failure: { (error) -> Void in
-                                    print("failed downloading steps data in Next")
-                            })
-                            }, error: {
-                                print("failed performing API request")
-                        })
-                    }
-                    }, failure: { (error) -> Void in
-                        print("failed downloading lessons data in Next")
-                })
-            }, error: { error in print(error) })
-            }, error: {
-                print("failed performing API request")
-        })
+        let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
+        stepVC.course = course
+        self.present(stepVC, animated: true, completion: nil)
     }
     
     @IBAction func onLogoutButtonClick(_ sender: AnyObject) {
