@@ -13,4 +13,11 @@ class StepTabCollectionViewCell: UICollectionViewCell {
     static let nibName = "StepTabCollectionViewCell"
     
     @IBOutlet weak var stepImage: UIImageView!
+    @IBOutlet weak var stepCompleteImage: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.cornerRadius = 20
+    }
 }

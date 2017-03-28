@@ -14,9 +14,7 @@ enum StepsControllerPresentationContext {
 }
 
 class StepsViewController: RGPageViewController {
-    
     //TODO: really need optionals here?
-    @IBOutlet weak var stepsBarCollectionView: UICollectionView!
     var lesson : Lesson?
     var startStepId : Int = 0
         

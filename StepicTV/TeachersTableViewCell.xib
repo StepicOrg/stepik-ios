@@ -27,7 +27,6 @@
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cTT-NZ-MWX">
                         <rect key="frame" x="8" y="74" width="1912" height="199"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="199" id="9Q2-0X-7BA"/>
                         </constraints>

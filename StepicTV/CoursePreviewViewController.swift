@@ -18,7 +18,6 @@ class CoursePreviewViewController: UIViewController {
     fileprivate var textData : [(String, String)] = []
     
     var video: Video!
-//    var moviePlayer : MPMoviePlayerController? = nil
     
     var sectionTitles = [String]()
     var isErrorWhileLoadingSections : Bool = false
@@ -66,13 +65,6 @@ class CoursePreviewViewController: UIViewController {
     
     
     fileprivate func setupPlayerWithVideo(_ video: Video) {
-        //        thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
-        //
-        //        imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: {
-        //            [weak self]
-        //            recognizer in
-        //            self?.playVideo()
-        //        })
         //
         //        self.video = video
         //
@@ -100,8 +92,7 @@ class CoursePreviewViewController: UIViewController {
     }
     
     //MARK: - Enrollment
-    @IBAction func joinButtonPressed(_ sender: UIButton) {
-//        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
+    //        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
 //            return
 //        }
 //        
@@ -161,8 +152,7 @@ class CoursePreviewViewController: UIViewController {
 //                })
 //            }
 //        }
-    }
-
+//    }
 }
 
 extension CoursePreviewViewController : UITableViewDataSource {
@@ -171,45 +161,30 @@ extension CoursePreviewViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return textData.count
-//        switch section {
-//        case 0:
-//            return 1
-//        case 1:
-//            return textData[1].count
-//        default:
-//            return 0
-//        }
+        return textData.count + 2
     }
     
+    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row != 0
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        if indexPath.row < sectionTitles.count && indexPath.section == 1 {
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell")
-//            if cell == nil {
-//                cell = UITableViewCell(style: .default, reuseIdentifier: "SectionTitleTableViewCell")
-//            }
-//            cell?.textLabel?.text = "\((indexPath as NSIndexPath).row + 1). \(sectionTitles[(indexPath as NSIndexPath).row])"
-//            cell?.textLabel?.numberOfLines = 0
-//            return cell ?? UITableViewCell()
-//        } else {
-//            return UITableViewCell()
-//        }
-//        
-//        if indexPath.row >= textData[1].count {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultTableViewCell", for: indexPath)
-//            return cell
-//        }
-        
         if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CoursePreviewTableViewCell", for: indexPath) as! CoursePreviewTableViewCell
+            cell.initWith(course: course!)
+            cell.delegate = self
+            return cell
+        }
+        
+        if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TeachersTableViewCell", for: indexPath) as! TeachersTableViewCell
             cell.initWithCourse(course!)
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTextTableViewCell", for: indexPath) as! TitleTextTableViewCell
-        cell.initWith(title: textData[indexPath.row - 1].0, text: textData[indexPath.row].1)
+        cell.initWith(title: textData[indexPath.row - 2].0, text: textData[indexPath.row - 2].1)
         return cell
     }
     
@@ -232,5 +207,15 @@ extension CoursePreviewViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 20
+    }
+}
+
+extension CoursePreviewViewController : CoursePreviewTableViewCellDelegate{
+    func joinButtonTap(in cell: CoursePreviewTableViewCell){
+        
+    }
+    
+    func playButtonTap(in cell: CoursePreviewTableViewCell){
+        
     }
 }

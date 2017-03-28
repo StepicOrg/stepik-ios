@@ -12,31 +12,44 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tabCell" id="pvV-Kr-9k2" customClass="StepTabCollectionViewCell" customModule="StepicTV" customModuleProvider="target">
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="pvV-Kr-9k2" customClass="StepTabCollectionViewCell" customModule="StepicTV" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="177" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="177" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" translatesAutoresizingMaskIntoConstraints="NO" id="NKF-0I-w22">
-                        <rect key="frame" x="0.0" y="8" width="169" height="144"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NKF-0I-w22">
+                        <rect key="frame" x="32" y="32" width="113" height="96"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_solved_task_white" translatesAutoresizingMaskIntoConstraints="NO" id="oyA-69-3TX">
+                        <rect key="frame" x="111" y="94" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="1Zt-Gg-CSX"/>
+                            <constraint firstAttribute="height" constant="50" id="ENH-wG-Qmg"/>
+                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="NKF-0I-w22" firstAttribute="leading" secondItem="pvV-Kr-9k2" secondAttribute="leadingMargin" constant="-8" id="bSf-BE-JUE"/>
-                <constraint firstAttribute="topMargin" secondItem="NKF-0I-w22" secondAttribute="top" id="eW3-rP-XFx"/>
-                <constraint firstAttribute="trailingMargin" secondItem="NKF-0I-w22" secondAttribute="trailing" id="mDA-66-9l5"/>
-                <constraint firstAttribute="bottomMargin" secondItem="NKF-0I-w22" secondAttribute="bottom" id="onZ-vo-o8K"/>
+                <constraint firstAttribute="trailing" secondItem="oyA-69-3TX" secondAttribute="trailing" constant="16" id="Sf6-B8-nnN"/>
+                <constraint firstItem="NKF-0I-w22" firstAttribute="leading" secondItem="pvV-Kr-9k2" secondAttribute="leadingMargin" constant="24" id="bSf-BE-JUE"/>
+                <constraint firstAttribute="topMargin" secondItem="NKF-0I-w22" secondAttribute="top" constant="-24" id="eW3-rP-XFx"/>
+                <constraint firstAttribute="trailingMargin" secondItem="NKF-0I-w22" secondAttribute="trailing" constant="24" id="mDA-66-9l5"/>
+                <constraint firstAttribute="bottom" secondItem="oyA-69-3TX" secondAttribute="bottom" constant="16" id="nNB-87-t2l"/>
+                <constraint firstAttribute="bottomMargin" secondItem="NKF-0I-w22" secondAttribute="bottom" constant="24" id="onZ-vo-o8K"/>
             </constraints>
             <connections>
+                <outlet property="stepCompleteImage" destination="oyA-69-3TX" id="ELJ-6e-5Fy"/>
                 <outlet property="stepImage" destination="NKF-0I-w22" id="iM2-el-6xb"/>
             </connections>
+            <point key="canvasLocation" x="69.5" y="106"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_solved_task_white" width="48" height="48"/>
         <image name="video" width="96" height="96"/>
     </resources>
 </document>

@@ -61,6 +61,7 @@ class CoursesViewController: UIViewController {
         }
     }
 
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +74,12 @@ class CoursesViewController: UIViewController {
         refreshCourses()
         
     }
+    
+    //MARK: - Custom methods
 
+    func handleCourseUpdates() {
+        //override this method in subclass
+    }
     
     func refreshCourses() {
         performRequest({

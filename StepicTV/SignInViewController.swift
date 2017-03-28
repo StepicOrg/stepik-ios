@@ -15,9 +15,9 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     
-    var success : ((Void)->Void)? {
-        return (navigationController as? AuthNavigationViewController)?.success
-    }
+    var success : ((SignInViewController)->Void)?
+    var cancel : ((SignInViewController)->Void)?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +56,7 @@ class SignInViewController: UIViewController {
                                     AuthInfo.shared.user = user
                                     User.removeAllExcept(user)
                                     UIThread.performUI {
-                                        self.navigationController?.dismiss(animated: true, completion: {
-                                            [weak self] in
-                                            self?.success?()
-                                        })
+                                        self.success?(self)
                                     }
                                     AnalyticsHelper.sharedHelper.changeSignIn()
                                     AnalyticsHelper.sharedHelper.sendSignedIn()
@@ -67,10 +64,7 @@ class SignInViewController: UIViewController {
                                     
                                     print("successfully signed in, but could not get user")
                                     UIThread.performUI{
-                                        self.navigationController?.dismiss(animated: true, completion: {
-                                            [weak self] in
-                                            self?.success?()
-                                        })
+                                        self.success?(self)
                                     }
                                 })
             }, failure: { e in
