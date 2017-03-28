@@ -1,0 +1,91 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.23.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    cocoapods
+    
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    scan
+  end
+
+  desc "Submit a new Beta Build to Crashlytics"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+
+  	# Ensure that your git status is not dirty
+  	ensure_git_status_clean
+
+  	# Increment the build number (not the version number)
+  	# Providing the xcodeproj is optional
+  	increment_build_number(xcodeproj: "Stepic.xcodeproj")
+
+  	# Commit the version bump
+  	commit_version_bump(xcodeproj: "Stepic.xcodeproj")
+
+  	# Add a git tag for this build. This will automatically
+  	# use an appropriate git tag name
+  	add_git_tag
+
+  	# Push the new commit and tag back to your git remote
+ 	push_to_git_remote
+    # match(type: "appstore") # more information: https://codesigning.guide
+    gym(scheme: "Stepic") # Build your app - more options available
+    crashlytics(api_token: "d4016589326f6f7814080b7ff9017e18711a1959",
+              build_secret: "7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8")
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here (run `fastlane actions`)
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # match(type: "appstore")
+    # snapshot
+    gym(scheme: "Stepic") # Build your app - more options available
+    deliver(force: true)
+    # frameit
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
