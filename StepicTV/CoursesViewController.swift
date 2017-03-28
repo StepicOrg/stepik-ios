@@ -207,6 +207,24 @@ class CoursesViewController: UIViewController {
         self.isLoadingMore = false
         self.failedLoadingMore = true
     }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCourse" {
+            let dvc = segue.destination as! CoursePreviewViewController
+            dvc.course = sender as? Course
+        }
+        
+        if segue.identifier == "showSections" {
+            let dvc = segue.destination as! SectionsViewController
+            dvc.course = sender as? Course
+        }
+        
+        if segue.identifier == "showPreferences" {
+            let dvc = segue.destination
+        }
+    }
 }
 
 extension CoursesViewController : UITableViewDelegate {

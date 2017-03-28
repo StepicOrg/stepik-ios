@@ -15,6 +15,7 @@ class CoursePreviewViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
             
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var videoWebView: UIWebView!
     @IBOutlet weak var playButton: UIButton!
@@ -58,7 +59,6 @@ class CoursePreviewViewController: UIViewController {
                 }
             } 
         }
-        
     }
     
     var displayingInfoType : DisplayingInfoType = .overview {
@@ -301,75 +301,6 @@ class CoursePreviewViewController: UIViewController {
     @IBAction func displayingSegmentedControlValueChanged(_ sender: UISegmentedControl) {
         displayingInfoType = DisplayingInfoType(rawValue: sender.selectedSegmentIndex) ?? .overview
         reloadTableView()
-    }
-    
-    
-    @IBAction func joinButtonPressed(_ sender: UIButton) {
-        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
-            return
-        }
-        
-        if !AuthInfo.shared.isAuthorized {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.anonymous, parameters: nil)
-            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-                vc.success = {
-                    [weak self] in
-                    if let s = self {
-                        s.joinButtonPressed(sender)
-                    }
-                }
-                self.present(vc, animated: true, completion: nil)
-            }
-            return
-        } else {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.signed, parameters: nil)
-        }
-        
-        //TODO : Add statuses
-        if let c = course {
-            
-            if sender.isEnabledToJoin {
-                SVProgressHUD.show()
-                sender.isEnabled = false
-                AuthManager.sharedManager.joinCourseWithId(c.id, success : {
-                    SVProgressHUD.showSuccess(withStatus: "")
-                    sender.isEnabled = true
-                    sender.setDisabledJoined()
-                    self.course?.enrolled = true
-                    CoreDataHelper.instance.save()
-                    CoursesJoinManager.sharedManager.addedCourses += [c]
-                    if #available(iOS 9.0, *) {
-                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    } 
-                    self.performSegue(withIdentifier: "showSections", sender: nil)
-                    }, error:  {
-                        status in
-                        SVProgressHUD.showError(withStatus: status)
-                        sender.isEnabled = true
-                }) 
-            } else {
-                askForUnenroll(unenroll: {
-                    SVProgressHUD.show()
-                    sender.isEnabled = false
-                    AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
-                        SVProgressHUD.showSuccess(withStatus: "")
-                        sender.isEnabled = true
-                        sender.setEnabledJoined()
-                        self.course?.enrolled = false
-                        CoreDataHelper.instance.save()
-                        CoursesJoinManager.sharedManager.deletedCourses += [c]
-                        if #available(iOS 9.0, *) {
-                            WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                        } 
-                        self.navigationController?.popToRootViewController(animated: true)
-                        }, error:  {
-                            status in
-                            SVProgressHUD.showError(withStatus: status)
-                            sender.isEnabled = true
-                    })
-                })
-            }
-        }
     }
     
     func askForUnenroll(unenroll: @escaping (Void)->Void) {

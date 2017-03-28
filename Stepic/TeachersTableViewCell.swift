@@ -21,8 +21,10 @@ class TeachersTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        #if os(iOS)
+            UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+            NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        #endif
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -77,6 +79,10 @@ extension TeachersTableViewCell : UICollectionViewDelegateFlowLayout {
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
         
         return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: 300, height: 300)
     }
 }
 

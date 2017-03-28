@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="aQX-Ma-wO0" customClass="TeacherCollectionViewCell" customModule="StepicTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="268" height="269"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="268" height="269"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wSG-bH-ozE">
+                        <rect key="frame" x="59" y="8" width="150" height="150"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="150" id="CtP-2t-xEJ"/>
+                            <constraint firstAttribute="width" constant="150" id="mt1-nU-dsD"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teacher name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIz-10-4pf">
+                        <rect key="frame" x="8" y="170" width="260" height="29"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text=" Label Label Label Label Label Label Label Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cta-L8-Nhc">
+                        <rect key="frame" x="8" y="207" width="252" height="54"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="iIz-10-4pf" firstAttribute="leading" secondItem="aQX-Ma-wO0" secondAttribute="leading" constant="8" id="1DK-2m-E4t"/>
+                <constraint firstItem="wSG-bH-ozE" firstAttribute="centerX" secondItem="aQX-Ma-wO0" secondAttribute="centerX" id="786-Ob-d3Z"/>
+                <constraint firstItem="cta-L8-Nhc" firstAttribute="leading" secondItem="aQX-Ma-wO0" secondAttribute="leading" constant="8" id="Ckm-MJ-Qys"/>
+                <constraint firstAttribute="bottom" secondItem="cta-L8-Nhc" secondAttribute="bottom" constant="8" id="Dmc-Ne-cl8"/>
+                <constraint firstItem="iIz-10-4pf" firstAttribute="top" secondItem="wSG-bH-ozE" secondAttribute="bottom" constant="12" id="Kea-rp-25Z"/>
+                <constraint firstAttribute="trailing" secondItem="cta-L8-Nhc" secondAttribute="trailing" constant="8" id="NTE-VR-tMw"/>
+                <constraint firstItem="cta-L8-Nhc" firstAttribute="top" secondItem="iIz-10-4pf" secondAttribute="bottom" constant="8" id="PHg-Ah-XMy"/>
+                <constraint firstItem="wSG-bH-ozE" firstAttribute="top" secondItem="aQX-Ma-wO0" secondAttribute="top" constant="8" id="TbM-Tv-4Dw"/>
+                <constraint firstAttribute="trailing" secondItem="iIz-10-4pf" secondAttribute="trailing" id="emK-OU-H3N"/>
+            </constraints>
+            <size key="customSize" width="268" height="269"/>
+            <connections>
+                <outlet property="avatarImageView" destination="wSG-bH-ozE" id="Bgw-If-0Je"/>
+                <outlet property="infoLabel" destination="cta-L8-Nhc" id="Pxe-EC-hhi"/>
+                <outlet property="nameLabel" destination="iIz-10-4pf" id="l6t-hi-1rc"/>
+            </connections>
+            <point key="canvasLocation" x="-10" y="161.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

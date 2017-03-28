@@ -8,10 +8,11 @@ def shared_pods
     pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'SDWebImage'
+    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
 end
 
 def all_pods
-    
+    shared_pods
     
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -44,7 +45,7 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
 end
 
 target 'Stepic' do

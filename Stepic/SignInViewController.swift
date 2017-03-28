@@ -13,6 +13,10 @@ import TextFieldEffects
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: HoshiTextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
