@@ -149,6 +149,7 @@
 		083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
 		083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
 		0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
+		083996381E8B012600EE15C0 /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083996371E8B012600EE15C0 /* SbAuth.storyboard */; };
 		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
@@ -595,7 +596,6 @@
 		08D674911D7880E200B60963 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DA79021DB77DF0003491C4 /* SbAuth.storyboard */; };
 		08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -878,6 +878,7 @@
 		083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingQuizTableViewCell.swift; sourceTree = "<group>"; };
 		083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchingQuizTableViewCell.xib; sourceTree = "<group>"; };
+		083996371E8B012600EE15C0 /* SbAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SbAuth.storyboard; path = SberbankUniversity/SbAuth.storyboard; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
 		083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCoursesDisplayingHelper.swift; sourceTree = "<group>"; };
 		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
@@ -1091,7 +1092,6 @@
 		08D674901D7880E200B60963 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
-		08DA79021DB77DF0003491C4 /* SbAuth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SbAuth.storyboard; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
@@ -2053,6 +2053,7 @@
 		08D121261C93882400A54ABC /* SberbankUniversity */ = {
 			isa = PBXGroup;
 			children = (
+				083996371E8B012600EE15C0 /* SbAuth.storyboard */,
 				0867023F1DB167D5005006AE /* GoogleService-Info.plist */,
 				08CB6B311C98772D00E8BA50 /* SbLaunchScreen.xib */,
 				08CB6B321C98772D00E8BA50 /* SbEntranceViewController.xib */,
@@ -2063,7 +2064,6 @@
 				08CB6B371C98772D00E8BA50 /* SberbankUniversity.xcassets */,
 				08CB6B381C98772D00E8BA50 /* SbStepicApplicationsInfo.swift */,
 				08CB6B391C98772D00E8BA50 /* SbSocialNetworks.swift */,
-				08DA79021DB77DF0003491C4 /* SbAuth.storyboard */,
 			);
 			name = SberbankUniversity;
 			sourceTree = "<group>";
@@ -2703,7 +2703,6 @@
 				0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
-				08DA79031DB77DF1003491C4 /* SbAuth.storyboard in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				08263DA31DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
@@ -2768,6 +2767,7 @@
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
+				083996381E8B012600EE15C0 /* SbAuth.storyboard in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
