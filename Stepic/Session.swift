@@ -53,8 +53,8 @@ class Session {
                 
                 Session.cookieDict = cookieDict
                 
-                if let csrftoken = cookieDict["csrftoken"],
-                    let sessionId = cookieDict["sessionid"] {
+                if let csrftoken = cookieDict["\(StepicApplicationsInfo.cookiePrefix)csrftoken"],
+                    let sessionId = cookieDict["\(StepicApplicationsInfo.cookiePrefix)sessionid"] {
                     
                     Session.cookieHeaders = [
                         "Referer" : "\(StepicApplicationsInfo.stepicURL)/",
