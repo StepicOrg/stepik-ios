@@ -102,13 +102,37 @@ platform :ios do
     # snapshot
     matchrelease
     gym(scheme: "Stepic")         # build your app
-    deliver                       # upload your app to iTunes Connect
+    deliver     
+    slack(
+      message: "Successfully released iOS beta #{version_string(get_version_number, get_build_number)}", 
+      channel: "#ios-ci"
+    )                  
+    # upload your app to iTunes Connect
     # frameit
   end
 
   lane :sb do 
-  	gym(scheme: "SberbankUniversity") # Build your app - more options available
-   	deliver(force: true)
+  	import_certificate(
+  	  certificate_path: "cert/cert.p12",
+  	  certificate_password: "123123"
+	)
+	import_certificate(
+  	  certificate_path: "cert/stepic_push.p12",
+  	  certificate_password: "123123"
+	)
+	update_project_provisioning(
+  	  xcodeproj: "Stepic.xcodeproj",
+      profile: "cert/Step.mobileprovision", # optional if you use sigh
+      target_filter: "SberbankUniversity", # matches name or type of a target
+      build_configuration: "Release"
+    )
+  	gym(
+  	  scheme: "SberbankUniversity",
+  	  output_directory: "artefacts",
+  	  output_name: "SberbankUniversity.ipa",
+  	  include_bitcode: true,
+  	  export_method: "enterprise"
+  	) # Build your app - more options available
   end
 
   # You can define as many lanes as you want
@@ -116,9 +140,9 @@ platform :ios do
   after_all do |lane|
     # This block is called, only if the executed lane was successful
 
-    slack(
-      message: "Successfully deployed new App Update for iOS."
-    )
+    # slack(
+    #   message: "Successfully deployed new App Update for iOS."
+    # )
   end
 
   error do |lane, exception|
