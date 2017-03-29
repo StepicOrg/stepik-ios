@@ -1,4 +1,4 @@
-SberbankUniversity/** filter=git-crypt diff=git-crypt
+Sb/** filter=git-crypt diff=git-crypt
 cert/** filter=git-crypt diff=git-crypt
 fastlane/** filter=git-crypt diff=git-crypt
 .gitattributes !filter !diff
