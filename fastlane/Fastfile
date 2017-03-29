@@ -16,10 +16,10 @@ fastlane_version "2.23.0"
 default_platform :ios
 
 platform :ios do
+
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
     cocoapods
-    
   end
 
   desc "Runs all the tests"
@@ -27,17 +27,25 @@ platform :ios do
     scan
   end
 
+  def version_string(version_number, build_number)
+    "v. #{version_number} (#{build_number})"
+  end
+
+
   desc "Submit a new Beta Build to Crashlytics"
   desc "This will also make sure the profile is up to date"
   lane :beta do
 
+  	matchadhoc
+
   	# Ensure that your git status is not dirty
   	ensure_git_status_clean
 
+
   	# Increment the build number (not the version number)
   	# Providing the xcodeproj is optional
-  	increment_build_number(xcodeproj: "Stepic.xcodeproj")
-
+  	build_number = increment_build_number(xcodeproj: "Stepic.xcodeproj")
+  	version_number = get_version_number
   	# Commit the version bump
   	commit_version_bump(xcodeproj: "Stepic.xcodeproj")
 
@@ -52,25 +60,55 @@ platform :ios do
     crashlytics(api_token: "d4016589326f6f7814080b7ff9017e18711a1959",
               build_secret: "7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8",
               notifications: true)
-
+    slack(
+      message: "Successfully released iOS beta #{version_string(version_number, build_number)}", 
+      channel: "#ios-ci"
+    )
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
   end
 
+  desc "Match all certificates"
+  lane :matchall do 
+  	matchdev
+  	matchadhoc
+  	matchrelease
+  end
+
+  lane :matchdev do
+  	match(type: "development", force_for_new_devices: true, 
+  		app_identifier: ["com.AlexKarpov.Stepic", 
+  		"com.AlexKarpov.Stepic.watchkitapp", 
+  		"com.AlexKarpov.Stepic.watchkitapp.watchkitextension"])
+  end
+
+  lane :matchadhoc do
+  	match(type: "adhoc", force_for_new_devices: true, 
+  		app_identifier: ["com.AlexKarpov.Stepic", 
+  		"com.AlexKarpov.Stepic.watchkitapp", 
+  		"com.AlexKarpov.Stepic.watchkitapp.watchkitextension"])  
+  end
+
+  lane :matchrelease do
+  	match(type: "appstore", force_for_new_devices: true, 
+  		app_identifier: ["com.AlexKarpov.Stepic", 
+  		"com.AlexKarpov.Stepic.watchkitapp", 
+  		"com.AlexKarpov.Stepic.watchkitapp.watchkitextension"])
+  end
+
   desc "Deploy a new version to the App Store"
-  lane :appstore do
+  lane :release do
     # match(type: "appstore")
     # snapshot
-    match(type: "appstore")       # see code signing guide for more information
-    gym(scheme: "Stepic")          # build your app
-    appstore                      # upload your app to iTunes Connect
+    matchrelease
+    gym(scheme: "Stepic")         # build your app
+    deliver                       # upload your app to iTunes Connect
     # frameit
   end
 
   lane :sb do 
   	gym(scheme: "SberbankUniversity") # Build your app - more options available
    	deliver(force: true)
-
   end
 
   # You can define as many lanes as you want
@@ -78,16 +116,16 @@ platform :ios do
   after_all do |lane|
     # This block is called, only if the executed lane was successful
 
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
+    slack(
+      message: "Successfully deployed new App Update for iOS."
+    )
   end
 
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    slack(
+      message: exception.message,
+      success: false
+    )
   end
 end
 

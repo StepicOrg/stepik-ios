@@ -41,11 +41,36 @@ fastlane ios beta
 Submit a new Beta Build to Crashlytics
 
 This will also make sure the profile is up to date
+### ios matchall
+```
+fastlane ios matchall
+```
+Match all certificates
+### ios matchdev
+```
+fastlane ios matchdev
+```
+
+### ios matchadhoc
+```
+fastlane ios matchadhoc
+```
+
+### ios matchrelease
+```
+fastlane ios matchrelease
+```
+
 ### ios release
 ```
 fastlane ios release
 ```
 Deploy a new version to the App Store
+### ios sb
+```
+fastlane ios sb
+```
+
 
 ----
 
