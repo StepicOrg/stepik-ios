@@ -25,6 +25,7 @@ DerivedData
 #
 Pods/
 artefacts/
+fastlane/screenshots/
 *.lock
 # Carthage
 #
