@@ -142,7 +142,7 @@ class CoursesViewController: UIViewController {
                 print("failed refreshing course ids in refresh")
                 self.handleRefreshError()
             })
-        }, error:  {
+        }, error:  { error in
             self.handleRefreshError()
         })
     }
@@ -190,7 +190,7 @@ class CoursesViewController: UIViewController {
                 self.handleLoadMoreError()
                 
             })
-        }, error:  {
+        }, error:  { error in
             self.handleLoadMoreError()
         })
     }

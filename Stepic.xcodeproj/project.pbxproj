@@ -804,6 +804,9 @@
 		1B95F5B51E740FFE0055D495 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
 		1B95F5B61E740FFE0055D495 /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
 		1B95F5B71E7410B00055D495 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
+		1B9B5C901E8D671F006CF88D /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
+		1B9B5C911E8D6731006CF88D /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
+		1B9B5C921E8D6798006CF88D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
 		1BC1E95A1E81AC31006E6728 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */; };
 		1BC1E95B1E81AE01006E6728 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		1BC1E95D1E81B08C006E6728 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */; };
@@ -3995,6 +3998,7 @@
 				1BC1E95B1E81AE01006E6728 /* TitleTextTableViewCell.swift in Sources */,
 				1B95F5681E7366CA0055D495 /* Parser.swift in Sources */,
 				1B7A65AE1E7835BC002A9755 /* CoursePreviewViewController.swift in Sources */,
+				1B9B5C901E8D671F006CF88D /* LastStep.swift in Sources */,
 				1BE6E9021E749FD1006B9837 /* StepicsAPI.swift in Sources */,
 				1B95F5AE1E740FF40055D495 /* FillBlanksDataset.swift in Sources */,
 				1B149E471E735FE80063C961 /* CoursesViewController.swift in Sources */,
@@ -4055,8 +4059,10 @@
 				1B95F5831E736B0B0055D495 /* CoursePlainEntity.swift in Sources */,
 				1B95F5891E736C2B0055D495 /* Progress+CoreDataProperties.swift in Sources */,
 				1B95F5711E7367F60055D495 /* Lesson+CoreDataProperties.swift in Sources */,
+				1B9B5C911E8D6731006CF88D /* LastStep+CoreDataProperties.swift in Sources */,
 				1B95F5741E7368F40055D495 /* VideoDownloadDelegate.swift in Sources */,
 				1B95F5621E7364CC0055D495 /* AuthInfo.swift in Sources */,
+				1B9B5C921E8D6798006CF88D /* ButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
