@@ -11,6 +11,7 @@ import MediaPlayer
 import SVProgressHUD
 import DownloadButton
 import FLKAutoLayout
+@IBOutlet weak var thumbnailImageView: UIImageView!
 
 class VideoStepViewController: UIViewController {
     
@@ -164,11 +165,6 @@ class VideoStepViewController: UIViewController {
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(_ animated: Bool) {

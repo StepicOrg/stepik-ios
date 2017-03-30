@@ -14,7 +14,7 @@ enum StepsControllerPresentationContext {
 
 class StepsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var stepsBarCollectionView: UICollectionView!
     var lesson: Lesson!
     var startStepId : Int = 0
@@ -28,6 +28,8 @@ class StepsViewController: UIViewController, UICollectionViewDelegate, UICollect
     lazy var warningView : UIView = self.initWarningView()
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
+    
+    //MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,15 +75,58 @@ class StepsViewController: UIViewController, UICollectionViewDelegate, UICollect
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        testLabel.text = "\(indexPath.row)"
-    }
-    
     func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
-         testLabel.text = "\(context.nextFocusedIndexPath!.row)"
+        
+        guard let indexPath = context.nextFocusedIndexPath else { return false }
+        let step = lesson.steps[indexPath.row]
+        
+        if step.block.type == .Video {
+            let videoStepVC = VideoStepViewController()
+            videoStepVC.video = step.block.video!
+            activeViewController = videoStepVC
+        } else {
+            activeViewController = QuizStepViewController()
+        }
+        
         return true
     }
     
+    //MARK: - Tabs
+    
+    
+    private var activeViewController: UIViewController? {
+        didSet {
+            removeInactiveViewController(oldValue)
+            updateActiveViewController()
+        }
+    }
+    
+    private func removeInactiveViewController(_ inactiveViewController: UIViewController?) {
+        if let inActiveVC = inactiveViewController {
+            // call before removing child view controller's view from hierarchy
+            inActiveVC.willMove(toParentViewController: nil)
+            
+            inActiveVC.view.removeFromSuperview()
+            
+            // call after removing child view controller's view from hierarchy
+            inActiveVC.removeFromParentViewController()
+        }
+    }
+    
+    private func updateActiveViewController() {
+        if let activeVC = activeViewController {
+            // call before adding child view controller's view as subview
+            addChildViewController(activeVC)
+            
+            activeVC.view.frame = containerView.bounds
+            containerView.addSubview(activeVC.view)
+            
+            // call before adding child view controller's view as subview
+            activeVC.didMove(toParentViewController: self)
+        }
+    }
+    
+    //MARK: - Custom methods
     
     func initWarningView() -> UIView {
         return UIView()

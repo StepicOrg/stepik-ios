@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rAO-Zt-Gws">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rAO-Zt-Gws">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -259,6 +259,7 @@
                                             <outlet property="courseInfoLabel" destination="K0H-pc-KbM" id="b68-SX-aJ0"/>
                                             <outlet property="courseNameLabel" destination="YMQ-N3-h1w" id="F5c-tW-7Dq"/>
                                             <outlet property="joinButton" destination="Ib9-yK-clI" id="hF2-FS-XF3"/>
+                                            <outlet property="playButton" destination="xX5-tP-Q1u" id="q0L-NR-fIk"/>
                                             <outlet property="thumbnailImageView" destination="F2X-fv-722" id="mpZ-LJ-FLZ"/>
                                         </connections>
                                     </tableViewCell>
@@ -441,19 +442,7 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="en6-h4-Rce">
                                 <rect key="frame" x="0.0" y="168" width="1920" height="912"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xob-fr-CCZ">
-                                        <rect key="frame" x="842" y="396" width="236" height="120"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Xob-fr-CCZ" firstAttribute="centerY" secondItem="en6-h4-Rce" secondAttribute="centerY" id="FEf-2e-Ccf"/>
-                                    <constraint firstItem="Xob-fr-CCZ" firstAttribute="centerX" secondItem="en6-h4-Rce" secondAttribute="centerX" id="l0Y-JI-lGa"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <constraints>
@@ -467,8 +456,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="en6-h4-Rce" id="5aa-Sk-2wk"/>
                         <outlet property="stepsBarCollectionView" destination="5Zt-lE-46U" id="11H-hH-fC8"/>
-                        <outlet property="testLabel" destination="Xob-fr-CCZ" id="NtT-HT-ObD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysj-eR-dLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

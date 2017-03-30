@@ -693,6 +693,11 @@
 		1B17A7DB1E85B80B0036C60A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
 		1B17A7DC1E85C07D0036C60A /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		1B17A7DE1E85C3310036C60A /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7DD1E85C3310036C60A /* StepsViewController.swift */; };
+		1B37594B1E8B14310085A931 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B37594A1E8B14310085A931 /* StepViewController.swift */; };
+		1B3759581E8B18910085A931 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3759561E8B18910085A931 /* VideoStepViewController.swift */; };
+		1B3759591E8B18910085A931 /* VideoStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3759571E8B18910085A931 /* VideoStepViewController.xib */; };
+		1B37595C1E8B18C00085A931 /* QuizStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */; };
+		1B37595D1E8B18C00085A931 /* QuizStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */; };
 		1B62BFA61E83154D005FCB8A /* TeachersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B62BFA51E83154D005FCB8A /* TeachersTableViewCell.xib */; };
 		1B62BFA71E831622005FCB8A /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
 		1B62BFA81E831814005FCB8A /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
@@ -1290,6 +1295,11 @@
 		1B17A7D71E85B7900036C60A /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		1B17A7D81E85B7900036C60A /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		1B17A7DD1E85C3310036C60A /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		1B37594A1E8B14310085A931 /* StepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
+		1B3759561E8B18910085A931 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
+		1B3759571E8B18910085A931 /* VideoStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoStepViewController.xib; sourceTree = "<group>"; };
+		1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStepViewController.swift; sourceTree = "<group>"; };
+		1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizStepViewController.xib; sourceTree = "<group>"; };
 		1B62BFA51E83154D005FCB8A /* TeachersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachersTableViewCell.xib; sourceTree = "<group>"; };
 		1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
 		1B7B4CE71E8A817800615424 /* StepTabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2540,6 +2550,11 @@
 		1B7B4CEB1E8AAE0200615424 /* Steps Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1B37594A1E8B14310085A931 /* StepViewController.swift */,
+				1B3759561E8B18910085A931 /* VideoStepViewController.swift */,
+				1B3759571E8B18910085A931 /* VideoStepViewController.xib */,
+				1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */,
+				1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */,
 			);
 			name = "Steps Controllers";
 			sourceTree = "<group>";
@@ -3017,6 +3032,7 @@
 			files = (
 				1B7B4CEA1E8A817800615424 /* StepTabCollectionViewCell.xib in Resources */,
 				1B149E4C1E735FE80063C961 /* Assets.xcassets in Resources */,
+				1B37595D1E8B18C00085A931 /* QuizStepViewController.xib in Resources */,
 				1B17A7D31E85AF780036C60A /* SectionTableViewCell.xib in Resources */,
 				1BC1E95A1E81AC31006E6728 /* TitleTextTableViewCell.xib in Resources */,
 				1B17A7DA1E85B7910036C60A /* UnitTableViewCell.xib in Resources */,
@@ -3025,6 +3041,7 @@
 				1B62BFA61E83154D005FCB8A /* TeachersTableViewCell.xib in Resources */,
 				1BC1E9611E81B95F006E6728 /* Main.storyboard in Resources */,
 				1BE6E90D1E74AC08006B9837 /* RefreshTableViewCell.xib in Resources */,
+				1B3759591E8B18910085A931 /* VideoStepViewController.xib in Resources */,
 				1BE6E90A1E74AA87006B9837 /* CourseTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3897,13 +3914,16 @@
 				1B7B4CF71E8AD93700615424 /* CoursesJoinManager.swift in Sources */,
 				1B7B4CE91E8A817800615424 /* StepTabCollectionViewCell.swift in Sources */,
 				1B95F5B41E740FFE0055D495 /* SortingReply.swift in Sources */,
+				1B37594B1E8B14310085A931 /* StepViewController.swift in Sources */,
 				1B7B4CF81E8AD9BE00615424 /* TabsInfo.swift in Sources */,
 				1B95F57D1E736A220055D495 /* User+CoreDataProperties.swift in Sources */,
 				1B17A7DE1E85C3310036C60A /* StepsViewController.swift in Sources */,
 				1B95F5881E736C140055D495 /* Section+CoreDataProperties.swift in Sources */,
 				1B7B4CED1E8AB30800615424 /* CoursePreviewTableViewCell.swift in Sources */,
 				1B068CFE1E748F620051B57C /* CacheManager.swift in Sources */,
+				1B3759581E8B18910085A931 /* VideoStepViewController.swift in Sources */,
 				1B95F56E1E73678B0055D495 /* Step.swift in Sources */,
+				1B37595C1E8B18C00085A931 /* QuizStepViewController.swift in Sources */,
 				1B95F5661E73661D0055D495 /* Course.swift in Sources */,
 				1B95F56A1E7366E20055D495 /* Video.swift in Sources */,
 				1B95F5B31E740FFE0055D495 /* MathReply.swift in Sources */,

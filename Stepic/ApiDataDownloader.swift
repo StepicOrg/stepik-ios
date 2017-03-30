@@ -682,13 +682,17 @@ class ApiDataDownloader: NSObject {
         })
     }
     
-//    static let devices = DevicesAPI()
-//    static let discussionProxies = DiscussionProxiesAPI()
-//    static let comments = CommentsAPI()
-//    static let votes = VotesAPI()
     static let stepics = StepicsAPI()
-//    static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
+    
+    #if os(iOS)
+    static let devices = DevicesAPI()
+    static let discussionProxies = DiscussionProxiesAPI()
+    static let comments = CommentsAPI()
+    static let votes = VotesAPI()
+    static let units = UnitsAPI()
+    #endif
+    
 }
 
 enum RefreshMode {

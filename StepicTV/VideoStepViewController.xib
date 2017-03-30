@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoStepViewController" customModule="StepicTV" customModuleProvider="target">
+            <connections>
+                <outlet property="thumbnailImageView" destination="NL7-T1-3iM" id="AJA-Lc-ewX"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Eym-vH-oyN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NL7-T1-3iM">
+                    <rect key="frame" x="20" y="108" width="1880" height="864"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPz-Na-gFw">
+                    <rect key="frame" x="846" y="445" width="230" height="190"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" image="stepic_play"/>
+                    <connections>
+                        <action selector="playButtonPressed:" destination="-1" eventType="primaryActionTriggered" id="eOB-4H-lcf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NL7-T1-3iM" secondAttribute="trailing" constant="20" id="BkC-ID-96L"/>
+                <constraint firstItem="zPz-Na-gFw" firstAttribute="centerX" secondItem="NL7-T1-3iM" secondAttribute="centerX" id="Gzr-yu-uaO"/>
+                <constraint firstItem="NL7-T1-3iM" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="8:10" id="J0J-kh-3sn"/>
+                <constraint firstItem="NL7-T1-3iM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="fgm-8N-UgN"/>
+                <constraint firstItem="zPz-Na-gFw" firstAttribute="centerY" secondItem="NL7-T1-3iM" secondAttribute="centerY" id="jje-bO-UYT"/>
+                <constraint firstItem="NL7-T1-3iM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vNR-zT-OKR"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="stepic_play" width="150" height="150"/>
+    </resources>
+</document>

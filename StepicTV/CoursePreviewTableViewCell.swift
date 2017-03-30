@@ -19,6 +19,7 @@ class CoursePreviewTableViewCell: UITableViewCell {
     @IBOutlet weak var courseInfoLabel: UILabel!
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var playButton: UIButton!
     
     var delegate: CoursePreviewTableViewCellDelegate?
     
@@ -36,5 +37,12 @@ class CoursePreviewTableViewCell: UITableViewCell {
     
     @IBAction func playButtonTap(_ sender: UIButton) {
         delegate?.playButtonTap(in: self)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        var focusGuide = UIFocusGuide()
+        focusGuide.preferredFocusEnvironments = [joinButton, playButton]
+        addLayoutGuide(focusGuide)
     }
 }

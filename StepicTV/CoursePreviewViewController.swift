@@ -63,43 +63,29 @@ class CoursePreviewViewController: UIViewController {
         tableView.estimatedRowHeight = 300
     }
     
+    //MARK: - Enrollment
     
-    fileprivate func setupPlayerWithVideo(_ video: Video) {
-        //
-        //        self.video = video
-        //
-        //        if video.urls.count == 0 {
-        //            videoWebView.isHidden = true
-        //            playButton.isHidden = true
-        //            thumbnailImageView.isHidden = false
-        //            return
-        //        }
-        //
-        //        self.moviePlayer = MPMoviePlayerController(contentURL: videoURL)
-        //        if let player = self.moviePlayer {
-        //            player.scalingMode = MPMovieScalingMode.aspectFit
-        //            player.isFullscreen = false
-        //            player.movieSourceType = MPMovieSourceType.file
-        //            player.repeatMode = MPMovieRepeatMode.none
-        //            self.contentView.addSubview(player.view)
-        //            NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
-        //            NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
-        //
-        //            self.moviePlayer?.view.alignLeading("0", trailing: "0", to: self.contentView)
-        //            self.moviePlayer?.view.alignTop("0", bottom: "0", to: self.contentView)
-        //            self.moviePlayer?.view.isHidden = true
-        //        }
+    func askForUnenroll(unenroll: @escaping (Void)->Void) {
+        let alert = UIAlertController(title: NSLocalizedString("UnenrollAlertTitle", comment: "") , message: NSLocalizedString("UnenrollAlertMessage", comment: ""), preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Unenroll", comment: "") , style: .destructive, handler: {
+            action in
+            unenroll()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - Enrollment
-    //        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
+    @IBAction func joinButtonTap(sender:UIButton){
+//            if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
 //            return
 //        }
 //        
 //        if !AuthInfo.shared.isAuthorized {
-//            if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+//            if let vc = TVControllerHelper.getAuthController(){
 //                vc.success = {
-//                    [weak self] in
+//                    [weak self] controller in
 //                    if let s = self {
 //                        s.joinButtonPressed(sender)
 //                    }
@@ -113,8 +99,6 @@ class CoursePreviewViewController: UIViewController {
 //        if let c = course {
 //            
 //            if sender.isEnabledToJoin {
-//                
-//                sender.isEnabled = false
 //                AuthManager.sharedManager.joinCourseWithId(c.id, success : {
 //                    
 //                    sender.isEnabled = true
@@ -127,12 +111,12 @@ class CoursePreviewViewController: UIViewController {
 //                }, error:  {
 //                    status in
 //                    
-//                    sender.isEnabled = true
+//                    
 //                })
 //            } else {
 //                askForUnenroll(unenroll: {
 //                    
-//                    sender.isEnabled = false
+//                    
 //                    AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
 //                        
 //                        sender.isEnabled = true
@@ -140,19 +124,16 @@ class CoursePreviewViewController: UIViewController {
 //                        self.course?.enrolled = false
 //                        CoreDataHelper.instance.save()
 //                        CoursesJoinManager.sharedManager.deletedCourses += [c]
-//                        if #available(iOS 9.0, *) {
-//                            WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-//                        }
 //                        self.navigationController?.popToRootViewController(animated: true)
 //                    }, error:  {
 //                        status in
 //                    
-//                        sender.isEnabled = true
+//                        
 //                    })
 //                })
 //            }
 //        }
-//    }
+    }
 }
 
 extension CoursePreviewViewController : UITableViewDataSource {
