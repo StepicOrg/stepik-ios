@@ -63,4 +63,5 @@ end
 target 'StepicTV' do
     platform :tvos, '9.0'
     shared_pods
+    pod "SwiftSoup"
 end

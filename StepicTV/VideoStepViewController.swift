@@ -19,11 +19,6 @@ class VideoStepViewController: UIViewController {
         super.viewDidLoad()
         initialize()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func initialize() {
         thumbnailImageView.sd_setImage(with: URL(string: video.thumbnailURL), placeholderImage: Images.videoPlaceholder)
@@ -46,8 +41,8 @@ class VideoStepViewController: UIViewController {
         if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             ///Present player
             let player = TVPlayerViewController()
-            player.playVideo(url: video.getUrlForQuality("480"))
             self.present(player, animated: true, completion: nil)
+            player.playVideo(url: video.getUrlForQuality("480"))
             
         } else {
             if let vc = self.parent{

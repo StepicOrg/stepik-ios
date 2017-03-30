@@ -91,7 +91,9 @@ class StepsViewController: UIViewController, UICollectionViewDelegate, UICollect
             videoStepVC.video = step.block.video!
             activeViewController = videoStepVC
         } else {
-            activeViewController = QuizStepViewController()
+            let quizController = QuizStepViewController()
+            quizController.step = step
+            activeViewController = quizController
         }
         
         return true

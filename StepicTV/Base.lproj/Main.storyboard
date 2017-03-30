@@ -124,7 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="dJL-1m-POf">
-                                <rect key="frame" x="0.0" y="127" width="1920" height="953"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="wLc-Ep-ixD" id="Ywl-4v-EHh"/>
@@ -133,7 +133,7 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="dJL-1m-POf" firstAttribute="top" secondItem="t9o-GI-zDS" secondAttribute="bottom" constant="127" id="EpX-PB-d8Y"/>
+                            <constraint firstItem="dJL-1m-POf" firstAttribute="top" secondItem="t9o-GI-zDS" secondAttribute="bottom" id="EpX-PB-d8Y"/>
                             <constraint firstItem="dJL-1m-POf" firstAttribute="leading" secondItem="IYw-aq-On6" secondAttribute="leadingMargin" constant="-20" id="SKF-K4-yZN"/>
                             <constraint firstItem="C6q-DR-r3b" firstAttribute="top" secondItem="dJL-1m-POf" secondAttribute="bottom" id="eX7-8z-YZs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dJL-1m-POf" secondAttribute="trailing" constant="-20" id="sVv-1f-gnR"/>
@@ -253,6 +253,10 @@
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F2X-fv-722">
                                                     <rect key="frame" x="1256" y="8" width="640" height="345"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="345" id="Suk-jg-g1l"/>
+                                                        <constraint firstAttribute="width" constant="640" id="eM7-kh-lrC"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-tP-Q1u">
                                                     <rect key="frame" x="1461" y="85" width="230" height="190"/>
@@ -265,13 +269,11 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="F2X-fv-722" firstAttribute="width" secondItem="tAE-v8-8OS" secondAttribute="width" multiplier="1:3" id="1Wi-uC-PvP"/>
+                                                <constraint firstItem="F2X-fv-722" firstAttribute="centerY" secondItem="tAE-v8-8OS" secondAttribute="centerY" id="4Jo-3b-wrU"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="YMQ-N3-h1w" secondAttribute="leading" constant="-16" id="4Sl-tE-Kzt"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="F2X-fv-722" secondAttribute="trailing" constant="16" id="JcA-9Z-ZnM"/>
                                                 <constraint firstItem="K0H-pc-KbM" firstAttribute="top" secondItem="YMQ-N3-h1w" secondAttribute="bottom" constant="8" id="KH1-3Y-uda"/>
                                                 <constraint firstAttribute="topMargin" secondItem="YMQ-N3-h1w" secondAttribute="top" id="Lwc-CV-V76"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="F2X-fv-722" secondAttribute="bottom" id="QKS-rb-TeA"/>
-                                                <constraint firstAttribute="topMargin" secondItem="F2X-fv-722" secondAttribute="top" id="Tk4-e4-HgF"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ib9-yK-clI" secondAttribute="bottom" id="U3t-ht-OX7"/>
                                                 <constraint firstItem="F2X-fv-722" firstAttribute="leading" secondItem="K0H-pc-KbM" secondAttribute="trailing" constant="128" id="WDF-OW-L3K"/>
                                                 <constraint firstItem="Ib9-yK-clI" firstAttribute="centerX" secondItem="K0H-pc-KbM" secondAttribute="centerX" id="Wr6-B3-Tak"/>
@@ -558,7 +560,7 @@
         <image name="stepic_play" width="150" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hi6-k8-48O"/>
-        <segue reference="GYR-Jg-anl"/>
+        <segue reference="qVc-Ni-29o"/>
+        <segue reference="imW-Rc-kLj"/>
     </inferredMetricsTieBreakers>
 </document>
