@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="tvOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,25 +21,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NL7-T1-3iM">
-                    <rect key="frame" x="20" y="108" width="1880" height="864"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPz-Na-gFw">
-                    <rect key="frame" x="863" y="497" width="195" height="86"/>
-                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="playButtonPressed:" destination="-1" eventType="primaryActionTriggered" id="eOB-4H-lcf"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="NL7-T1-3iM" secondAttribute="trailing" constant="20" id="BkC-ID-96L"/>
-                <constraint firstItem="zPz-Na-gFw" firstAttribute="centerX" secondItem="NL7-T1-3iM" secondAttribute="centerX" id="Gzr-yu-uaO"/>
-                <constraint firstItem="NL7-T1-3iM" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="8:10" id="J0J-kh-3sn"/>
-                <constraint firstItem="NL7-T1-3iM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="fgm-8N-UgN"/>
-                <constraint firstItem="zPz-Na-gFw" firstAttribute="centerY" secondItem="NL7-T1-3iM" secondAttribute="centerY" id="jje-bO-UYT"/>
-                <constraint firstItem="NL7-T1-3iM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vNR-zT-OKR"/>
+                <constraint firstAttribute="bottom" secondItem="NL7-T1-3iM" secondAttribute="bottom" id="58K-xh-FJX"/>
+                <constraint firstAttribute="trailing" secondItem="NL7-T1-3iM" secondAttribute="trailing" id="BkC-ID-96L"/>
+                <constraint firstItem="NL7-T1-3iM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fgm-8N-UgN"/>
+                <constraint firstItem="NL7-T1-3iM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wzR-cB-IG2"/>
             </constraints>
         </view>
     </objects>

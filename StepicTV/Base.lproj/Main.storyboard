@@ -208,7 +208,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="629" y="-510"/>
+            <point key="canvasLocation" x="629" y="-188"/>
         </scene>
         <!--Course Preview View Controller-->
         <scene sceneID="Daa-P3-84u">
@@ -345,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiP-lz-CDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081" y="-510"/>
+            <point key="canvasLocation" x="4716" y="-1290"/>
         </scene>
         <!--Sections View Controller-->
         <scene sceneID="esc-Gz-WSV">
@@ -445,27 +445,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="32" minY="10" maxX="32" maxY="10"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tabCell" id="SrI-MX-p19">
-                                        <rect key="frame" x="32" y="10" width="160" height="140"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="160" height="140"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" translatesAutoresizingMaskIntoConstraints="NO" id="sl9-30-aVX">
-                                                    <rect key="frame" x="0.0" y="8" width="152" height="124"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="sl9-30-aVX" secondAttribute="trailing" id="9ha-G0-Oy0"/>
-                                            <constraint firstAttribute="topMargin" secondItem="sl9-30-aVX" secondAttribute="top" id="EK2-09-W5x"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="sl9-30-aVX" secondAttribute="bottom" id="KC4-91-bRI"/>
-                                            <constraint firstItem="sl9-30-aVX" firstAttribute="leading" secondItem="SrI-MX-p19" secondAttribute="leadingMargin" constant="-8" id="dBz-bo-6wb"/>
-                                        </constraints>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="en6-h4-Rce">
                                 <rect key="frame" x="0.0" y="168" width="1920" height="912"/>
@@ -576,10 +556,9 @@
         <image name="launch-bckgr-3" width="760" height="1280"/>
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
         <image name="stepic_play" width="150" height="150"/>
-        <image name="video" width="96" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="imW-Rc-kLj"/>
-        <segue reference="qVc-Ni-29o"/>
+        <segue reference="Hi6-k8-48O"/>
+        <segue reference="GYR-Jg-anl"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -807,6 +807,7 @@
 		1B9B5C901E8D671F006CF88D /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
 		1B9B5C911E8D6731006CF88D /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
 		1B9B5C921E8D6798006CF88D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
+		1B9B5C941E8D9691006CF88D /* TVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B5C931E8D9691006CF88D /* TVPlayer.swift */; };
 		1BC1E95A1E81AC31006E6728 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */; };
 		1BC1E95B1E81AE01006E6728 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		1BC1E95D1E81B08C006E6728 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */; };
@@ -1334,6 +1335,7 @@
 		1B7B4CF31E8AD31200615424 /* TVControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVControllerHelper.swift; sourceTree = "<group>"; };
 		1B7B4CF51E8AD8F600615424 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
 		1B95F5851E736B980055D495 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1B9B5C931E8D9691006CF88D /* TVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVPlayer.swift; sourceTree = "<group>"; };
 		1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
 		1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		1BC1E9631E81DE22006E6728 /* TeacherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2552,6 +2554,7 @@
 				1BC1E9621E81CAAE006E6728 /* Controllers */,
 				1B149E441E735FE80063C961 /* AppDelegate.swift */,
 				1B7B4CF31E8AD31200615424 /* TVControllerHelper.swift */,
+				1B9B5C931E8D9691006CF88D /* TVPlayer.swift */,
 				1B149E481E735FE80063C961 /* Main.storyboard */,
 				1B149E4B1E735FE80063C961 /* Assets.xcassets */,
 				1B149E4D1E735FE80063C961 /* Info.plist */,
@@ -3988,6 +3991,7 @@
 				1B37595C1E8B18C00085A931 /* QuizStepViewController.swift in Sources */,
 				1B95F5661E73661D0055D495 /* Course.swift in Sources */,
 				1B95F56A1E7366E20055D495 /* Video.swift in Sources */,
+				1B9B5C941E8D9691006CF88D /* TVPlayer.swift in Sources */,
 				1B95F5B31E740FFE0055D495 /* MathReply.swift in Sources */,
 				1B95F57B1E7369CD0055D495 /* VideoURL.swift in Sources */,
 				1B149E5F1E7361C60063C961 /* ApiDataDownloader.swift in Sources */,

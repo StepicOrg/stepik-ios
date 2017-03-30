@@ -11,6 +11,7 @@ import MediaPlayer
 import SVProgressHUD
 import DownloadButton
 import FLKAutoLayout
+@IBOutlet weak var playButton: UIButton!
 @IBOutlet weak var thumbnailImageView: UIImageView!
 
 class VideoStepViewController: UIViewController {

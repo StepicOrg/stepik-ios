@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class VideoStepViewController: UIViewController {
 
@@ -16,19 +17,12 @@ class VideoStepViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         initialize()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-
-    @IBAction func playButtonPressed(_ sender: UIButton) {
-        playVideo()
     }
     
     func initialize() {
@@ -42,7 +36,7 @@ class VideoStepViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    fileprivate func playVideo() {
+    func playVideo() {
         
         if video.urls.count == 0 {
             presentNoVideoAlert()
@@ -51,6 +45,10 @@ class VideoStepViewController: UIViewController {
         
         if video.state == VideoState.cached || (ConnectionHelper.shared.reachability.isReachableViaWiFi() || ConnectionHelper.shared.reachability.isReachableViaWWAN()) {
             ///Present player
+            let player = TVPlayerViewController()
+            player.playVideo(url: video.getUrlForQuality("480"))
+            self.present(player, animated: true, completion: nil)
+            
         } else {
             if let vc = self.parent{
             

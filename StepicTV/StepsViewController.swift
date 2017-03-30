@@ -74,6 +74,12 @@ class StepsViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let videoController = childViewControllers.first as? VideoStepViewController {
+            videoController.playVideo()
+        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
         
