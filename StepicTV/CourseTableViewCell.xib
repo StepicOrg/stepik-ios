@@ -21,41 +21,41 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qat-Ki-c0c">
-                        <rect key="frame" x="8" y="8" width="221" height="221"/>
+                        <rect key="frame" x="24" y="24" width="189" height="189"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Qat-Ki-c0c" secondAttribute="height" multiplier="1:1" id="Isq-jH-nvh"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOy-44-RZa">
-                        <rect key="frame" x="237" y="8" width="1667" height="58"/>
+                        <rect key="frame" x="229" y="8" width="1675" height="58"/>
                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4R-T2-4ER">
-                        <rect key="frame" x="237" y="74" width="1667" height="43"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Course description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4R-T2-4ER">
+                        <rect key="frame" x="229" y="74" width="1675" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="36"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 января 2015 - 23 мая 2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpT-4S-pPc">
-                        <rect key="frame" x="237" y="208" width="234" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="229" y="186" width="483" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="Qat-Ki-c0c" secondAttribute="bottom" id="BFY-NK-CAF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Qat-Ki-c0c" secondAttribute="bottom" constant="16" id="BFY-NK-CAF"/>
                     <constraint firstItem="C4R-T2-4ER" firstAttribute="top" secondItem="bOy-44-RZa" secondAttribute="bottom" constant="8" id="Cqw-76-ZgR"/>
                     <constraint firstAttribute="bottomMargin" secondItem="NpT-4S-pPc" secondAttribute="bottom" id="Iag-ha-J8F"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="Qat-Ki-c0c" secondAttribute="leading" id="N5p-FN-Jl7"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Qat-Ki-c0c" secondAttribute="leading" constant="-16" id="N5p-FN-Jl7"/>
                     <constraint firstAttribute="topMargin" secondItem="bOy-44-RZa" secondAttribute="top" id="X54-ao-Wyh"/>
-                    <constraint firstItem="bOy-44-RZa" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="8" id="bzs-cc-DX0"/>
+                    <constraint firstItem="bOy-44-RZa" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="16" id="bzs-cc-DX0"/>
                     <constraint firstItem="NpT-4S-pPc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="C4R-T2-4ER" secondAttribute="bottom" constant="8" id="cFV-20-3jp"/>
-                    <constraint firstItem="C4R-T2-4ER" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="8" id="ezo-m9-7I9"/>
-                    <constraint firstItem="NpT-4S-pPc" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="8" id="qK5-b7-3iY"/>
-                    <constraint firstAttribute="topMargin" secondItem="Qat-Ki-c0c" secondAttribute="top" id="rEc-3W-bRK"/>
+                    <constraint firstItem="C4R-T2-4ER" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="16" id="ezo-m9-7I9"/>
+                    <constraint firstItem="NpT-4S-pPc" firstAttribute="leading" secondItem="Qat-Ki-c0c" secondAttribute="trailing" constant="16" id="qK5-b7-3iY"/>
+                    <constraint firstAttribute="topMargin" secondItem="Qat-Ki-c0c" secondAttribute="top" constant="-16" id="rEc-3W-bRK"/>
                 </constraints>
             </tableViewCellContentView>
             <constraints>

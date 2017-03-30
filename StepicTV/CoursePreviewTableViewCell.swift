@@ -41,8 +41,18 @@ class CoursePreviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        var focusGuide = UIFocusGuide()
+        
+        let focusGuide = UIFocusGuide()
         focusGuide.preferredFocusEnvironments = [joinButton, playButton]
         addLayoutGuide(focusGuide)
+        contentView.addLayoutGuide(focusGuide)
+    }
+    
+    override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
+        return true
+    }
+    
+    override var preferredFocusEnvironments: [UIFocusEnvironment]{
+        return [playButton]
     }
 }
