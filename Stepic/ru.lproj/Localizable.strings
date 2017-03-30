@@ -173,5 +173,11 @@ FillBlankInputTextFieldPlaceholder = "Введите ответ";
 FillBlanksSelectAnswerString = "Выберите ответ";
 FillBlanksSelectButtonString = "Выбрать";
 DeletedComment = "Комментарий удален";
-
-
+Section = "Модуль";
+Lesson = "Урок";
+ContinueLearning = "Учиться";
+DropCourse =  "Покинуть курс";
+Continue = "Продолжить";
+Refreshing = "Обновляем...";
+RefreshingDescription = "";
+EmptyTitle = "Пусто :(";

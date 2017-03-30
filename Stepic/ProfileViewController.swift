@@ -67,6 +67,20 @@ class ProfileViewController: UITableViewController {
                 if let user = AuthInfo.shared.user {
                     self.initWithUser(user)
                 }
+            }, error: {
+                [weak self] 
+                error in
+                guard let s = self else { return }
+                if error == PerformRequestError.noAccessToRefreshToken {
+                    AuthInfo.shared.token = nil
+                    RoutingManager.auth.routeFrom(controller: s, success: {
+                        [weak self] in 
+                        self?.updateUser()
+                    }, cancel: {
+                        [weak self] in
+                        self?.updateUser()
+                    })
+                }
             })
         }
     }
@@ -152,24 +166,18 @@ class ProfileViewController: UITableViewController {
     func signOut() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Logout.clicked, parameters: nil)
         AuthInfo.shared.token = nil
-        if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-            vc.success = {
-                [weak self] in
-                self?.updateUser()
-            }
-            vc.cancel = vc.success
-            self.present(vc, animated: true, completion: nil)
+        let updateBlock : ((Void)->Void) = {
+            [weak self] in
+            self?.updateUser()
         }
+        RoutingManager.auth.routeFrom(controller: self, success: updateBlock, cancel: updateBlock)
     }
     
     func signIn() {
-        if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-            vc.success = {
-                [weak self] in
-                self?.updateUser()
-            }
-            self.present(vc, animated: true, completion: nil)
-        }
+        RoutingManager.auth.routeFrom(controller: self, success: {
+            [weak self] in
+            self?.updateUser()
+        }, cancel: nil)
     }
     
     @IBAction func signInButtonPressed(_ sender: AnyObject) {

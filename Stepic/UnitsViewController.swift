@@ -14,14 +14,25 @@ class UnitsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var section : Section!
+    /*
+     There are 2 ways of instantiating the controller
+     1) a Section object
+     2) a Unit id - used for instantiation via navigation by LastStep
+     */
+    var section : Section?
+    var unitId: Int?
+    
     var didRefresh = false
     let refreshControl = UIRefreshControl()
 
+    fileprivate func updateTitle() {
+        self.navigationItem.title = section?.title ?? NSLocalizedString("Module", comment: "")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = section.title
+        updateTitle()
         self.navigationItem.backBarButtonItem?.title = " "
 
         tableView.tableFooterView = UIView()
@@ -30,32 +41,88 @@ class UnitsViewController: UIViewController {
         
         
         refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.layoutIfNeeded()
         
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
         refreshControl.beginRefreshing()
-        refreshUnits()
-
+        
+        refreshUnits() 
         // Do any additional setup after loading the view.
     }
 
+    func getSectionByUnit(id: Int) {
+        //Search for unit by its id locally
+        emptyDatasetState = .refreshing
+        if let localUnit = Unit.getUnit(id: id) {
+            if let localSection = localUnit.section {
+                self.section = localSection
+                if let index = section?.unitsArray.index(of: id) {
+                    currentlyDisplayingUnitIndex = index
+                }
+                refreshUnits()
+                return
+            }
+            loadUnit(id: id, localUnit: localUnit)
+        }
+        
+        loadUnit(id: id)
+    }
+    
+    func loadUnit(id: Int, localUnit: Unit? = nil) {
+        emptyDatasetState = .refreshing
+        _ = ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
+            units in
+            guard let unit = units.first else { return }
+            let localSection = try! Section.getSections(unit.sectionId).first
+            _ = ApiDataDownloader.sharedDownloader.getSectionsByIds([unit.sectionId], existingSections: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
+                [weak self]
+                sections in
+                guard let section = sections.first else { return }
+                unit.section = section
+                self?.section = section
+                self?.refreshUnits()
+            }, failure: {
+                error in
+                UIThread.performUI({
+                    self.refreshControl.endRefreshing()
+                    self.emptyDatasetState = EmptyDatasetState.connectionError
+                })
+                self.didRefresh = true
+            })
+        }, failure: {
+            error in
+            UIThread.performUI({
+                self.refreshControl.endRefreshing()
+                self.emptyDatasetState = EmptyDatasetState.connectionError
+            })
+            self.didRefresh = true
+        })
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
         tableView.reloadData()
-        if(self.refreshControl.isRefreshing) {
+        if (self.refreshControl.isRefreshing) {
             let offset = self.tableView.contentOffset
             self.refreshControl.endRefreshing()
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
         
-        section.loadProgressesForUnits(units: section.units, completion: {
-            UIThread.performUI({
-                self.tableView.reloadData()
+        if let section = section {
+            section.loadProgressesForUnits(units: section.units, completion: {
+                UIThread.performUI({
+                    self.tableView.reloadData()
+                })
             })
-        })
+        }
     }
     
     var emptyDatasetState : EmptyDatasetState = .empty {
@@ -67,8 +134,20 @@ class UnitsViewController: UIViewController {
     }
 
     func refreshUnits() {
+        
+        guard section != nil else {
+            if let id = unitId {
+                getSectionByUnit(id: id) 
+            }
+            return
+        }
+        
+        emptyDatasetState = .refreshing
+
+        updateTitle()
+        
         didRefresh = false
-        section.loadUnits(success: {
+        section?.loadUnits(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
@@ -96,10 +175,13 @@ class UnitsViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let section = section else {
+            return
+        }
+        
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
             let dvc = segue.destination as! StepsViewController
             dvc.hidesBottomBarWhenPushed = true
-            
             if let stepsPresentation = sender as? StepsPresentation {
                 
                 let index = stepsPresentation.index
@@ -110,6 +192,7 @@ class UnitsViewController: UIViewController {
                 }
                 dvc.lesson = section.units[index].lesson
                 dvc.sectionNavigationDelegate = self
+                dvc.unitId = section.units[index].id
                 currentlyDisplayingUnitIndex = index
                 dvc.shouldNavigateToPrev = index != 0
                 dvc.shouldNavigateToNext = index < section.units.count - 1
@@ -146,6 +229,9 @@ class StepsPresentation {
 
 extension UnitsViewController : SectionNavigationDelegate {
     func displayNext() {        
+        guard let section = section else {
+            return 
+        }
         if let uIndex = currentlyDisplayingUnitIndex {
             if uIndex + 1 < section.units.count {
                 selectUnitAtIndex(uIndex + 1, replace: true)
@@ -169,7 +255,10 @@ extension UnitsViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UnitTableViewCell.heightForCellWithUnit(self.section.units[(indexPath as NSIndexPath).row])
+        guard let section = section else {
+            return 0
+        } 
+        return UnitTableViewCell.heightForCellWithUnit(section.units[(indexPath as NSIndexPath).row])
     }
     
 }
@@ -180,13 +269,20 @@ extension UnitsViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.section.units.count
+        guard let ssection = self.section else {
+            return 0
+        }
+        return ssection.units.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UnitTableViewCell", for: indexPath) as! UnitTableViewCell
         
-        cell.initWithUnit(self.section.units[(indexPath as NSIndexPath).row], delegate: self)
+        guard let section = section else {
+            return cell
+        }
+        
+        cell.initWithUnit(section.units[(indexPath as NSIndexPath).row], delegate: self)
         
         return cell
     }
@@ -235,6 +331,9 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             return
         }
         
+        guard let section = section else {
+            return
+        }
 
         
         switch (state) {
@@ -254,7 +353,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
                 storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
             } else {
                 section.units[downloadButton.tag].lesson?.loadSteps(completion: {
-                    self.storeLesson(self.section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
+                    self.storeLesson(section.units[downloadButton.tag].lesson, downloadButton: downloadButton)
                 })
             }
             break
@@ -281,7 +380,7 @@ extension UnitsViewController : PKDownloadButtonDelegate {
             downloadButton.state = PKDownloadButtonState.pending
             downloadButton.pendingView?.startSpin()
             askForRemove(okHandler: {
-                self.section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
+                section.units[downloadButton.tag].lesson?.removeFromStore(completion: {
                     DispatchQueue.main.async(execute: {
                         downloadButton.pendingView?.stopSpin()
                         downloadButton.state = PKDownloadButtonState.startDownload
@@ -309,6 +408,8 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
         }
     }
     
@@ -320,6 +421,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
             break
         }
         
@@ -338,6 +442,9 @@ extension UnitsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("PullToRefreshUnitsDescription", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
             break
         }
         

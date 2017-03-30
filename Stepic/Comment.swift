@@ -17,6 +17,9 @@ enum UserRole: String {
  Comment model, without voting
  */
 class Comment: JSONInitializable {
+    
+    typealias idType = Int
+    
     var id: Int
     var parentId: Int?
     var userId: Int
@@ -79,6 +82,9 @@ class Comment: JSONInitializable {
         initialize(json)
     }
     
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
+    }
     
 //    
 //    init(sampleId: Int) {

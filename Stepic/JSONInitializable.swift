@@ -12,8 +12,12 @@ import SwiftyJSON
 
 protocol JSONInitializable {
     
+    associatedtype idType : Equatable
+    
     init(json: JSON)
     func update(json: JSON)
     
-    var id : Int {get set}
+    var id : idType {get set}
+    
+    func hasEqualId(json: JSON) -> Bool
 }

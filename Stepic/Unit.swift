@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class Unit: NSManagedObject, JSONInitializable {
     
-    // Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
     
     convenience required init(json: JSON){
         self.init()
@@ -25,6 +25,7 @@ class Unit: NSManagedObject, JSONInitializable {
         isActive = json["is_active"].boolValue
         lessonId = json["lesson"].intValue
         progressId = json["progress"].stringValue
+        sectionId = json["section"].intValue
         
         assignmentsArray = json["assignments"].arrayObject as! [Int]
         
@@ -37,23 +38,23 @@ class Unit: NSManagedObject, JSONInitializable {
         initialize(json)
     }
     
-    func loadAssignments(_ completion: @escaping ((Void)->Void), errorHandler: @escaping ((Void)->Void)) {
-        performRequest({
-            ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
-                newAssignments in 
-                self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
-                completion()
-                }, failure: {
-                    error in
-                    print("Error while downloading assignments")
-                    errorHandler()
-            })
-            }, error:  {
-                errorHandler()
-        })
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
-    func getUnitForLessonId(_ id: Int) -> Unit? {
+    func loadAssignments(_ completion: @escaping ((Void)->Void), errorHandler: @escaping ((Void)->Void)) {
+        _ = ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
+            newAssignments in 
+            self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
+            completion()
+            }, failure: {
+                error in
+                print("Error while downloading assignments")
+                errorHandler()
+        })
+   }
+    
+    class func getUnit(id: Int) -> Unit? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
         
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
@@ -62,11 +63,13 @@ class Unit: NSManagedObject, JSONInitializable {
         
         do {
             let results = try CoreDataHelper.instance.context.fetch(request) 
+            if results.count > 1 {
+                print("CORE DATA WARNING: More than 1 unit with id \(id)")
+            }
             return (results as? [Unit])?.first
         }
         catch {
             return nil
         }
-//        return Unit.MR_findFirstWithPredicate(NSPredicate(format: "managedLessonId == %@", id as NSNumber))
     }
 }

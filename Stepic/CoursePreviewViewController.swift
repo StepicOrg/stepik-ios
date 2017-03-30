@@ -15,7 +15,6 @@ class CoursePreviewViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
             
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var videoWebView: UIWebView!
     @IBOutlet weak var playButton: UIButton!
@@ -59,6 +58,7 @@ class CoursePreviewViewController: UIViewController {
                 }
             } 
         }
+        
     }
     
     var displayingInfoType : DisplayingInfoType = .overview {
@@ -71,6 +71,16 @@ class CoursePreviewViewController: UIViewController {
     
     var didLoad: Bool = false
     
+    fileprivate func initBarButtonItems(dropAvailable: Bool) {
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
+        if dropAvailable {
+            let moreBarButtonItem = UIBarButtonItem(image: Images.points.vertical, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
+            self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
+        } else {
+            self.navigationItem.rightBarButtonItem = shareBarButtonItem
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
@@ -82,10 +92,7 @@ class CoursePreviewViewController: UIViewController {
         tableView.estimatedRowHeight = 44.0
         videoWebView.scrollView.isScrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
-        
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
-        self.navigationItem.rightBarButtonItem = shareBarButtonItem
-        
+
         if let c = course {
             sectionTitles = []
             for section in c.sections {
@@ -102,6 +109,8 @@ class CoursePreviewViewController: UIViewController {
                 loadVimeoURL(NSURL(string: c.introURL) as! URL)
             }
             updateSections()
+
+            initBarButtonItems(dropAvailable: c.enrolled)
         }
         didLoad = true
     }
@@ -126,6 +135,50 @@ class CoursePreviewViewController: UIViewController {
         }
     }
     
+    func moreButtonPressed(_ button: UIBarButtonItem) {
+
+        guard let c = course else {
+            return
+        }
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("DropCourse", comment: ""), style: .destructive, handler: {
+            [weak self]
+            action in
+            self?.askForUnenroll(unenroll: {
+                [weak self] in
+                SVProgressHUD.show()
+                button.isEnabled = false
+                _ = AuthManager.sharedManager.joinCourseWithId(c.id, delete: true, success : {
+                    SVProgressHUD.showSuccess(withStatus: "")
+                    button.isEnabled = true
+                    c.enrolled = false
+                    CoreDataHelper.instance.save()
+                    CoursesJoinManager.sharedManager.deletedCourses += [c]
+                    if #available(iOS 9.0, *) {
+                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                    }
+                    self?.initBarButtonItems(dropAvailable: c.enrolled)
+                    _ = self?.navigationController?.popToRootViewController(animated: true)
+                    }, error:  {
+                        status in
+                        SVProgressHUD.showError(withStatus: status)
+                        button.isEnabled = true
+                })
+            })
+        }))
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+
+
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = button
+        }
+
+        self.present(alert, animated: true)
+    }
+
     fileprivate func updateSections() {
         if let c = course {
             let successBlock = {
@@ -217,8 +270,8 @@ class CoursePreviewViewController: UIViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
             
-            self.moviePlayer?.view.alignLeading("0", trailing: "0", to: self.contentView)
-            self.moviePlayer?.view.alignTop("0", bottom: "0", to: self.contentView)
+            _ = self.moviePlayer?.view.alignLeading("0", trailing: "0", to: self.contentView)
+            _ = self.moviePlayer?.view.alignTop("0", bottom: "0", to: self.contentView)
             self.moviePlayer?.view.isHidden = true
         }
     }
@@ -301,6 +354,55 @@ class CoursePreviewViewController: UIViewController {
     @IBAction func displayingSegmentedControlValueChanged(_ sender: UISegmentedControl) {
         displayingInfoType = DisplayingInfoType(rawValue: sender.selectedSegmentIndex) ?? .overview
         reloadTableView()
+    }
+    
+    
+    @IBAction func joinButtonPressed(_ sender: UIButton) {
+        if !StepicApplicationsInfo.doesAllowCourseUnenrollment {
+            return
+        }
+        
+        if !AuthInfo.shared.isAuthorized {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.anonymous, parameters: nil)
+            RoutingManager.auth.routeFrom(controller: self, success: {
+                [weak self] in
+                if let s = self {
+                    s.joinButtonPressed(sender)
+                }
+            }, cancel: nil)
+            return
+        } else {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.signed, parameters: nil)
+        }
+
+        //TODO : Add statuses
+        if let c = course {
+
+            if !c.enrolled {
+                SVProgressHUD.show()
+                sender.isEnabled = false
+                _ = AuthManager.sharedManager.joinCourseWithId(c.id, success : {
+                    [weak self] in
+                    SVProgressHUD.showSuccess(withStatus: "")
+                    sender.isEnabled = true
+                    sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
+                    self?.course?.enrolled = true
+                    CoreDataHelper.instance.save()
+                    CoursesJoinManager.sharedManager.addedCourses += [c]
+                    if #available(iOS 9.0, *) {
+                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
+                    }
+                    self?.performSegue(withIdentifier: "showSections", sender: nil)
+                    self?.initBarButtonItems(dropAvailable: c.enrolled)
+                    }, error:  {
+                        status in
+                        SVProgressHUD.showError(withStatus: status)
+                        sender.isEnabled = true
+                })
+            } else {
+                self.performSegue(withIdentifier: "showSections", sender: nil)
+            }
+        }
     }
     
     func askForUnenroll(unenroll: @escaping (Void)->Void) {

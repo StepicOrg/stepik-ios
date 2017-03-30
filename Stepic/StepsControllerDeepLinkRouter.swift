@@ -50,7 +50,7 @@ class StepsControllerDeepLinkRouter : NSObject {
     }
     
     fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler : ((UIViewController) -> Void), error errorHandler : ((String) -> Void)) {
-        let enrolled = lesson.unit?.section.course?.enrolled ?? false
+        let enrolled = lesson.unit?.section?.course?.enrolled ?? false
         if lesson.isPublic || enrolled {
             guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
                 errorHandler("Could not instantiate controller")

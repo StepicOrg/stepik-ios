@@ -20,7 +20,9 @@ class SectionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        LastStepGlobalContext.context.course = course
+        
         self.navigationItem.title = course.title
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -34,8 +36,12 @@ class SectionsViewController: UIViewController {
         tableView.register(UINib(nibName: "SectionTableViewCell", bundle: nil), forCellReuseIdentifier: "SectionTableViewCell")
 
         refreshControl.addTarget(self, action: #selector(SectionsViewController.refreshSections), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.layoutIfNeeded()        
         refreshControl.beginRefreshing()
         refreshSections()
 
@@ -89,6 +95,7 @@ class SectionsViewController: UIViewController {
     
     func refreshSections() {
         didRefresh = false
+        emptyDatasetState = .refreshing
         course.loadAllSections(success: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
@@ -172,7 +179,7 @@ extension SectionsViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return course.sections[(indexPath as NSIndexPath).row].isActive || (course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil)
+        return (course.sections[(indexPath as NSIndexPath).row].isActive || course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil) && course.sections[(indexPath as NSIndexPath).row].progressId != nil 
     }
     
 }
@@ -312,6 +319,8 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             return Images.emptyCoursesPlaceholder
         case .connectionError:
             return Images.noWifiImage.size250x250
+        case .refreshing:
+            return Images.emptyCoursesPlaceholder
         }
     }
     
@@ -319,10 +328,13 @@ extension SectionsViewController : DZNEmptyDataSetSource {
         var text : String = ""
         switch emptyDatasetState {
         case .empty:
-            text = NSLocalizedString("PullToRefreshSectionsTitle", comment: "")
+            text = NSLocalizedString("EmptyTitle", comment: "")
             break
         case .connectionError:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
             break
         }
         
@@ -341,6 +353,9 @@ extension SectionsViewController : DZNEmptyDataSetSource {
             break
         case .connectionError:
             text = NSLocalizedString("PullToRefreshSectionsDescription", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
             break
         }
         

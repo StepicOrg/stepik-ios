@@ -97,7 +97,7 @@ class SectionTableViewCell: UITableViewCell {
         downloadButton.tag = section.position - 1
         downloadButton.delegate = delegate
         
-        if !section.isActive && section.testSectionAction == nil {
+        if (!section.isActive && section.testSectionAction == nil) || section.progressId == nil {
             titleLabel.isEnabled = false
             datesLabel.isEnabled = false
             downloadButton.isHidden = true
@@ -106,11 +106,6 @@ class SectionTableViewCell: UITableViewCell {
             datesLabel.isEnabled = true
             downloadButton.isHidden = false
         }
-//        if let cr = section.beginDate?.compare(NSDate()) {
-//            if cr = NSComparisonResult.OrderedDescending {
-//                
-//            }
-//        }
     }
     
 }

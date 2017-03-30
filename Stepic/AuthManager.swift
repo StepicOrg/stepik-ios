@@ -21,7 +21,7 @@ class AuthManager : NSObject {
         
         if StepicApplicationsInfo.social == nil {
             failure(NSError.noAppWithCredentials as Error)
-            return nil
+            return nil 
         }
         
         let headers = [
@@ -75,7 +75,7 @@ class AuthManager : NSObject {
         
         if StepicApplicationsInfo.password == nil {
             failure(NSError.noAppWithCredentials as Error)
-            return nil
+            return nil 
         }
         
         // Specifying the Headers we need
@@ -104,7 +104,7 @@ class AuthManager : NSObject {
                 json = response.result.value!
             }
             let response = response.response
-            
+
             
             if let e = error {
                 failure(e)
@@ -126,7 +126,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : TokenRefreshError) -> Void) -> Request? {
         func logRefreshError(statusCode: Int?, message: String?) {
             var parameters : [String: NSObject] = [:]
             if let code = statusCode {
@@ -135,26 +135,24 @@ class AuthManager : NSObject {
             if let m = message {
                 parameters["message"] = m as NSObject?
             }
-            
             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.tokenRefresh, parameters: parameters)
-            
         }
         
         var credentials = ""
         switch AuthInfo.shared.authorizationType {
         case .none:
-            failure(ConnectionError.tokenRefreshError)
+            failure(TokenRefreshError.other)
             return nil
         case .code:
             if StepicApplicationsInfo.social == nil {
-                failure(NSError.noAppWithCredentials as Error)
-                return nil
+                failure(TokenRefreshError.noAppWithCredentials)
+                return nil 
             }
             credentials = StepicApplicationsInfo.social!.credentials
         case .password:
             if StepicApplicationsInfo.password == nil {
-                failure(NSError.noAppWithCredentials as Error)
-                return nil
+                failure(TokenRefreshError.noAppWithCredentials)
+                return nil 
             }
             credentials = StepicApplicationsInfo.password!.credentials
         }
@@ -181,19 +179,23 @@ class AuthManager : NSObject {
                 json = response.result.value!
             }
             let response = response.response
-            
+
             
             if let e = error {
                 logRefreshError(statusCode: response?.statusCode, message: "Error \(e.localizedDescription) while refreshing")
-                failure(e)
+                failure(TokenRefreshError.other)
                 return
             }
-            
+
             let token : StepicToken = StepicToken(json: json)
             
             if token.accessToken == "" {
                 logRefreshError(statusCode: response?.statusCode, message: "Error after getting empty access token")
-                failure(NSError.tokenRefreshError)
+                if response?.statusCode == 401 {
+                    failure(TokenRefreshError.noAccess)
+                } else {
+                    failure(TokenRefreshError.other)
+                }
                 return
             }
             
@@ -214,17 +216,17 @@ class AuthManager : NSObject {
             
             AuthInfo.shared.token = t
             success?()
-        }, failure : {
-            error in
-            print("error while auto refresh token")
-            failure?()
+            }, failure : {
+                error in
+                print("error while auto refresh token")
+                failure?()
         })
     }
     
     func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
-        
+
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-        
+
         let params : Parameters = [
             "enrollment" : [
                 "course" : "\(courseId)"
@@ -245,7 +247,7 @@ class AuthManager : NSObject {
                     json = response.result.value!
                 }
                 let response = response.response
-                
+
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -272,7 +274,7 @@ class AuthManager : NSObject {
                     json = response.result.value!
                 }
                 let response = response.response
-                
+
                 if let r = response {
                     if r.statusCode.isSuccess() {
                         success()
@@ -290,9 +292,9 @@ class AuthManager : NSObject {
     
     //TODO: When refactoring code think about this function
     func signUpWith(_ firstname: String, lastname: String, email: String, password: String, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String?, RegistrationErrorInfo?) -> Void)) {
-        let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
-        
-        let params : Parameters =
+            let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
+                                    
+            let params : Parameters = 
             ["user" :
                 [
                     "first_name" : firstname,
@@ -300,38 +302,42 @@ class AuthManager : NSObject {
                     "email" : email,
                     "password" : password,
                 ]
-        ]
-        
-        print("sending request with headers:\n\(headers)\nparams:\n\(params)")
-        _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(  {
-            response in
+            ]
             
-            var error = response.result.error
-            var json : JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
-            }
-            let response = response.response
-            
-            if let e = (error as? NSError) {
-                let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
-                errorHandler(errormsg, nil)
-                return
-            }
-            
-            if let r = response {
-                if r.statusCode.isSuccess() {
-                    success()
-                } else if r.statusCode == 400 {
-                    errorHandler(nil, RegistrationErrorInfo(json: json))
-                }
-            }
-        })
+            print("sending request with headers:\n\(headers)\nparams:\n\(params)")
+            _ = Alamofire.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(  { 
+                    response in
+                    
+                    var error = response.result.error
+                    var json : JSON = [:]
+                    if response.result.value == nil {
+                        if error == nil {
+                            error = NSError()
+                        }
+                    } else {
+                        json = response.result.value!
+                    }
+                    let response = response.response
+                
+                    if let e = (error as? NSError) {
+                        let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
+                        errorHandler(errormsg, nil)
+                        return
+                    }
+                    
+                    if let r = response {
+                        if r.statusCode.isSuccess() {
+                            success()
+                        } else if r.statusCode == 400 {
+                            errorHandler(nil, RegistrationErrorInfo(json: json))
+                        }
+                    }
+            })
     }
+}
+
+enum TokenRefreshError: Error {
+    case noAccess, noAppWithCredentials, other
 }
 
 extension NSError {
