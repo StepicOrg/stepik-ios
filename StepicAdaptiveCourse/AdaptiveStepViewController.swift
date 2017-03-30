@@ -91,7 +91,7 @@ class AdaptiveStepViewController: UIViewController {
         }
         
         performRequest({
-            RecommendationsAPI.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
+            ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
                 self.getNewRecommendation(for: course, success: { step in
                     self.loadQuiz(for: step)
                     self.loadStepHTML(for: step)
@@ -106,7 +106,7 @@ class AdaptiveStepViewController: UIViewController {
     
     fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
         performRequest({
-            RecommendationsAPI.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
+            ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
                 ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     let lesson = newLessonsImmutable.first
                     

@@ -11,11 +11,11 @@ import Alamofire
 import SwiftyJSON
 
 class RecommendationsAPI {
-    static let name = "recommendations"
-    static let reactionName = "recommendation-reactions"
+    let name = "recommendations"
+    let reactionName = "recommendation-reactions"
     
-    @discardableResult static func getRecommendedLessonId(course courseId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Int) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(RecommendationsAPI.name)?course=\(courseId)", headers: headers).responseSwiftyJSON(
+    @discardableResult func getRecommendedLessonId(course courseId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Int) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)?course=\(courseId)", headers: headers).responseSwiftyJSON(
             {
                 response in
                 var error = response.result.error
@@ -54,7 +54,7 @@ class RecommendationsAPI {
     }
     
     // TODO: should we pass reaction/lessonId to success handler?
-    @discardableResult static func sendRecommendationReaction(user userId: Int, lesson lessonId: Int, reaction: Reaction, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Void) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
+    @discardableResult func sendRecommendationReaction(user userId: Int, lesson lessonId: Int, reaction: Reaction, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Void) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         let params = [
             "recommendationReaction": [
                 "reaction": reaction.rawValue,
@@ -62,7 +62,7 @@ class RecommendationsAPI {
                 "user": userId
             ]
         ]
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(RecommendationsAPI.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON(
             {
                 response in
                 var error = response.result.error

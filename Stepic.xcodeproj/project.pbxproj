@@ -1483,7 +1483,7 @@
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
-		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationsAPI.swift; sourceTree = "<group>"; };
+		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -2037,6 +2037,7 @@
 				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
 				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
 				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
+				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -2689,7 +2690,6 @@
 		86795EF51E85323F00A985C2 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
