@@ -7,13 +7,10 @@
 //
 
 import UIKit
-import MediaPlayer
 
 class CoursePreviewViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var thumbnailImageView: UIImageView!
     
     fileprivate var textData : [(String, String)] = []
     
@@ -140,6 +137,10 @@ extension CoursePreviewViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row != 0
+    }
+    
+    func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
+        return true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

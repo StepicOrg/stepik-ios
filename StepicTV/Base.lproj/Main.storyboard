@@ -258,12 +258,11 @@
                                                         <constraint firstAttribute="width" constant="640" id="eM7-kh-lrC"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-tP-Q1u">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-tP-Q1u">
                                                     <rect key="frame" x="1461" y="85" width="230" height="190"/>
                                                     <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                                     <state key="normal" image="stepic_play"/>
                                                     <connections>
-                                                        <action selector="joinButtonTap:" destination="hnA-rw-UCq" eventType="primaryActionTriggered" id="WWU-lh-3q1"/>
                                                         <action selector="playButtonTap:" destination="hnA-rw-UCq" eventType="primaryActionTriggered" id="UMm-RS-bAO"/>
                                                     </connections>
                                                 </button>

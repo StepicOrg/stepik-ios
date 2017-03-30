@@ -23,6 +23,8 @@ class CoursePreviewTableViewCell: UITableViewCell {
     
     var delegate: CoursePreviewTableViewCellDelegate?
     
+    var preferredToFocus: UIFocusItem?
+    
     func initWith(course: Course){
         courseNameLabel.text = course.title
         courseInfoLabel.text = course.summary
@@ -43,16 +45,40 @@ class CoursePreviewTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         let focusGuide = UIFocusGuide()
-        focusGuide.preferredFocusEnvironments = [joinButton, playButton]
+        focusGuide.preferredFocusEnvironments = [playButton]
         addLayoutGuide(focusGuide)
         contentView.addLayoutGuide(focusGuide)
+        
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swiped(sender:)))
+        swipeRecognizer.direction = [.right, .left]
+        contentView.addGestureRecognizer(swipeRecognizer)
+        
     }
     
-    override func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
-        return true
+    func swiped(sender: UISwipeGestureRecognizer){
+        if sender.direction == .right {
+           preferredToFocus = playButton
+        } else {
+            preferredToFocus = joinButton
+        }
+        
+        self.setNeedsFocusUpdate()
     }
     
     override var preferredFocusEnvironments: [UIFocusEnvironment]{
-        return [playButton]
+        return [preferredToFocus ?? joinButton]
+    }
+    
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        for press in presses{
+            if press.type == .rightArrow{
+                preferredToFocus = playButton
+            }
+            if press.type == .leftArrow{
+                preferredToFocus = joinButton
+            }
+            
+            self.setNeedsFocusUpdate()
+        }
     }
 }
