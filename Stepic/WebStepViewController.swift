@@ -411,20 +411,29 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        guard let url = request.url else {
+            return false
+        }
+        //Check if the request is an iFrame 
+        
+        if let text = step.block.text {
+            if HTMLParsingUtil.getAlliFrameLinks(text).index(of: url.absoluteString) != nil {
+                return true
+            }
+        }
+        
 //        print(request.URLString)
         if didStartLoadingFirstRequest {
-            if let url = request.url { 
-                
-                if url.scheme != "file" {
-                    if url.scheme == "ready" {
-                        print("scheme ready reported")
-                        resetWebViewHeight(Float(getContentHeight(webView)))
-                    } else {
-                        print("trying to open in browser url -> \(url)")
-                        openInBrowserAlert(url) 
-                    }
-                } 
-            }
+            if url.scheme != "file" {
+                if url.scheme == "ready" {
+                    print("scheme ready reported")
+                    resetWebViewHeight(Float(getContentHeight(webView)))
+                } else {
+                    print("trying to open in browser url -> \(url)")
+                    openInBrowserAlert(url) 
+                }
+            } 
             return false
         } else {
             didStartLoadingFirstRequest = true
