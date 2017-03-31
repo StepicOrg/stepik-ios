@@ -21,6 +21,8 @@ class AdaptiveStepViewController: UIViewController {
     @IBOutlet weak var easyReactionButton: UIButton!
     @IBOutlet weak var hardReactionButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
     @IBAction func onEasyButtonClick(_ sender: AnyObject) {
         sendReactionAndGetNewLesson(reaction: .neverAgain)
@@ -75,6 +77,7 @@ class AdaptiveStepViewController: UIViewController {
             return
         }
         quizVC.step = step
+        quizVC.delegate = self
         
         self.addChildViewController(quizVC)
         self.quizPlaceholderView.addSubview(quizVC.view)
@@ -112,18 +115,14 @@ class AdaptiveStepViewController: UIViewController {
                     
                     if let lesson = lesson, let stepId = lesson.stepsArray.first {
                         self.recommendedLesson = lesson
-                        performRequest({
-                            ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                                let step = newStepsImmutable.first
-                                
-                                if let step = step {
-                                    success(step)
-                                }
-                                }, failure: { (error) -> Void in
-                                    print("failed downloading steps data in Next")
-                            })
-                            }, error: {
-                                print("failed performing API request")
+                        ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+                            let step = newStepsImmutable.first
+                            
+                            if let step = step {
+                                success(step)
+                            }
+                            }, failure: { (error) -> Void in
+                                print("failed downloading steps data in Next")
                         })
                     }
                     }, failure: { (error) -> Void in
@@ -133,5 +132,43 @@ class AdaptiveStepViewController: UIViewController {
             }, error: {
                 print("failed performing API request")
         })
+    }
+    
+}
+
+extension AdaptiveStepViewController: UIWebViewDelegate {
+    func resetWebViewHeight(_ height: Float) {
+        stepWebViewHeight.constant = CGFloat(height)
+    }
+    
+    func getContentHeight(_ webView : UIWebView) -> Int {
+        let height = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
+        return height
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        resetWebViewHeight(Float(getContentHeight(webView)))
+    }
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        resetWebViewHeight(Float(getContentHeight(stepWebView)))
+    }
+}
+
+extension AdaptiveStepViewController: QuizControllerDelegate {
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.quizPlaceholderViewHeight.constant = newHeight
+            if animated {
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    self?.view.layoutIfNeeded()
+                }, completion: nil)
+            } else {
+                self?.view.layoutIfNeeded()
+            }
+            
+        }
+        
     }
 }
