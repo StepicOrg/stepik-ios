@@ -140,6 +140,7 @@ Medium = "Medium";
 VeryHigh = "Very High";
 WiFiLoadPreference = "Only Wi-Fi video downloads";
 LoadingVideoQualityPreference = "Downloading video quality";
+WatchingVideoQualityPreference = "Online video quality";
 SignOut = "Sign out";
 Profile = "Profile";
 Preferences = "Preferences";

@@ -8,11 +8,20 @@
 
 import UIKit
 
+enum VideoQualityChoiceAction {
+    case downloading, watching
+}
+
 class PreferencesViewController: UITableViewController {
     
     @IBOutlet weak var onlyWiFiSwitch: UISwitch!
-    @IBOutlet weak var videoQualityLabel: UILabel!
-    @IBOutlet weak var videoQualityTextLabel: UILabel!
+    
+    @IBOutlet weak var downloadingVideoQualityLabel: UILabel!
+    @IBOutlet weak var downloadingVideoQualityTextLabel: UILabel!
+    
+    @IBOutlet weak var watchingVideoQualityLabel: UILabel!
+    @IBOutlet weak var watchingVideoQualityTextLabel: UILabel!
+    
     @IBOutlet weak var wifiLoadLabel: UILabel!
     
     @IBOutlet weak var autoCheckForUpdatesLabel: UILabel!
@@ -27,8 +36,8 @@ class PreferencesViewController: UITableViewController {
     @IBOutlet weak var notificationTimeLabel: UILabel!
     @IBOutlet weak var allowStreaksNotificationsSwitch: UISwitch!
     
-    var heightForRows = [[40, 0, 40], [40, 40], [40, 0]]
-    let selectionForRows = [[false, false, true], [false, true], [false, true]]
+    var heightForRows = [[40, 0, 40, 40], [40, 40], [40, 0]]
+    let selectionForRows = [[false, false, true, true], [false, true], [false, true]]
     let sectionTitles = [
         NSLocalizedString("Video", comment: ""),
         NSLocalizedString("Updates", comment: ""),
@@ -41,7 +50,8 @@ class PreferencesViewController: UITableViewController {
         autoCheckForUpdatesLabel.text = NSLocalizedString("AutoCheckForUpdates", comment: "")
         checkForUpdatesButton.setTitle(NSLocalizedString("CheckForUpdates", comment: ""), for: UIControlState())
         wifiLoadLabel.text = NSLocalizedString("WiFiLoadPreference", comment: "") 
-        videoQualityTextLabel.text = NSLocalizedString("LoadingVideoQualityPreference", comment: "")
+        downloadingVideoQualityTextLabel.text = NSLocalizedString("LoadingVideoQualityPreference", comment: "")
+        watchingVideoQualityTextLabel.text = NSLocalizedString("WatchingVideoQualityPreference", comment: "")
         notifyStreaksLabel.text = NSLocalizedString("NotifyAboutStreaksPreference", comment: "")
         notificationTimeTitleLabel.text = NSLocalizedString("NotificationTime", comment: "")
     }
@@ -99,21 +109,35 @@ class PreferencesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(heightForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])
+        return CGFloat(heightForRows[indexPath.section][indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return selectionForRows[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        return selectionForRows[indexPath.section][indexPath.row]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
+        
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 2: 
+                performSegue(withIdentifier: "showVideoQualityChoice", sender: VideoQualityChoiceAction.downloading)
+                return
+            case 3:
+                performSegue(withIdentifier: "showVideoQualityChoice", sender: VideoQualityChoiceAction.watching)
+                return
+            default:
+                return
+            }
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 1 {
             checkForUpdates()
             return
         }
         
-        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
+        if indexPath.section == 2 && indexPath.row == 1 {
             selectStreakNotificationTime()
             return
         }
@@ -254,15 +278,28 @@ class PreferencesViewController: UITableViewController {
         checkForUpdates()
     }
 
-    /*
+    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        switch segue.identifier {
+        case "showVideoQualityChoice" :
+            guard let action = sender as? VideoQualityChoiceAction else {
+                return
+            }
+            let dvc = segue.destination
+            dvc.action = action
+            return
+        default:
+            return
+        }
+        
     }
-    */
 
     
     

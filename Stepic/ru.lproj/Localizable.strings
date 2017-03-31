@@ -140,6 +140,7 @@ Medium = "Среднее";
 VeryHigh = "Очень Высокое";
 WiFiLoadPreference = "Загрузка только по Wi-Fi";
 LoadingVideoQualityPreference = "Качество загружаемого видео";
+WatchingVideoQualityPreference = "Качество видео онлайн";
 SignOut = "Выйти";
 Profile = "Профиль";
 Preferences = "Настройки";
@@ -186,6 +187,7 @@ LongestStreak = "Личный рекорд";
 CurrentBestStreakAlertTopText = "Личный рекорд - отличная мотивация для того, чтобы учиться";
 CurrentBestStreakAlertBottomText = "Решайте задачи каждый день и улучшайте свои показатели!";
 ReceiveNotifications = "Получать напоминания";
+
 
 
 
