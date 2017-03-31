@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum VideoQualityChoiceAction {
-    case downloading, watching
+enum VideoQualityChoiceAction: Int {
+    case downloading = 0, watching
 }
 
 class PreferencesViewController: UITableViewController {
@@ -96,7 +96,8 @@ class PreferencesViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        videoQualityLabel.text = "\(VideosInfo.videoQuality)p"
+        downloadingVideoQualityLabel.text = "\(VideosInfo.downloadingVideoQuality)p"
+        watchingVideoQualityLabel.text = "\(VideosInfo.watchingVideoQuality)p"
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
         initStreaksRows()
@@ -287,15 +288,12 @@ class PreferencesViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        switch segue.identifier {
-        case "showVideoQualityChoice" :
+        if segue.identifier ==  "showVideoQualityChoice" {
             guard let action = sender as? VideoQualityChoiceAction else {
                 return
             }
-            let dvc = segue.destination
-            dvc.action = action
-            return
-        default:
+            let dvc = segue.destination as? VideoQualityTableViewController
+            dvc?.action = action
             return
         }
         

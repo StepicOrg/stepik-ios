@@ -49,7 +49,7 @@ class VideoQualityTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setCheckmarkTo(defaultQualities.index(of: VideosInfo.videoQuality) ?? 0)
+        setCheckmarkTo(defaultQualities.index(of: (action == .downloading ? VideosInfo.downloadingVideoQuality : VideosInfo.watchingVideoQuality)) ?? 0)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,11 +58,11 @@ class VideoQualityTableViewController: UITableViewController {
     }
     
     func setQualutyTo(quality: String) {
-        switch action {
-        case .downloading:
+        switch action! {
+        case VideoQualityChoiceAction.downloading:
             VideosInfo.downloadingVideoQuality = quality
             return
-        case .watching:
+        case VideoQualityChoiceAction.watching:
             VideosInfo.watchingVideoQuality = quality
             return
         }

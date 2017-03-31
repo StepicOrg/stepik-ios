@@ -161,7 +161,9 @@ class StepicVideoPlayerViewController: UIViewController {
     
     var currentQuality : String! {
         didSet {
+            VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: currentQuality)
             qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControlState())
+            
         }
     }
     
@@ -298,15 +300,15 @@ class StepicVideoPlayerViewController: UIViewController {
         if video.state == VideoState.cached {
             return try! URL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.name))
         } else {
-            return video.getUrlForQuality(VideosInfo.videoQuality)
+            return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
         }
     }
     
     fileprivate func getInitialQuality() -> String {
         if video.state == VideoState.cached {
-            return video.cachedQuality ?? VideosInfo.videoQuality
+            return video.cachedQuality ?? VideosInfo.downloadingVideoQuality
         } else {
-            return video.getNearestQualityToDefault(VideosInfo.videoQuality)
+            return video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
         }
     }
     

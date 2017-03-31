@@ -269,7 +269,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
         
         for vid in loadingVideos! {
-            vid.store(VideosInfo.videoQuality, progress: {
+            vid.store(VideosInfo.downloadingVideoQuality, progress: {
                 prog in
                 self.storeProgress?(self.goodProgress)
                 }, completion : {

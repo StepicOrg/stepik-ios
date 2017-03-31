@@ -45,6 +45,19 @@ class Video: NSManagedObject, JSONInitializable {
         return id == json["id"].intValue
     }
     
+    static func getNearestDefault(to quality: String) -> String {
+        let qualities = ["270", "360", "720", "1080"]
+        var minDifference = 10000
+        var res : String = "270"
+        for defaultQuality in qualities {
+            if abs(Int(defaultQuality)! - Int(quality)!) <  minDifference {
+                minDifference = abs(Int(defaultQuality)! - Int(quality)!)
+                res = defaultQuality
+            }
+        }
+        return res
+    }
+    
     func getNearestQualityToDefault(_ quality: String) -> String {
         var minDifference = 10000
         var res : String = "270"
@@ -338,7 +351,7 @@ class Video: NSManagedObject, JSONInitializable {
     fileprivate func getOnlineSizeForCurrentState(_ completion: ((Int64) -> Void)) {
         var quality : String
         if state == .online {
-            quality = VideosInfo.videoQuality
+            quality = VideosInfo.downloadingVideoQuality
         } else {
             quality = loadingQuality!
         }

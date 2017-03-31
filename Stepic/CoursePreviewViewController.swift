@@ -289,7 +289,7 @@ class CoursePreviewViewController: UIViewController {
     }
     
     var videoURL : URL {
-        return video.getUrlForQuality(VideosInfo.videoQuality)
+        return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
     }
     
     func reload(reloadViews rv: Bool) {

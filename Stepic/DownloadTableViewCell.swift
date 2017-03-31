@@ -71,14 +71,14 @@ class DownloadTableViewCell: UITableViewCell {
 //        video.downloadDelegate = self.downloadDelegate
         if video.state ==  VideoState.cached {
             downloadButton.state = .downloaded
-            self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
+            self.quality = self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality 
             return
         }
         
         if video.state == VideoState.downloading {
             downloadButton.state = .downloading
             
-            self.quality = self.video.loadingQuality! ?? VideosInfo.videoQuality
+            self.quality = self.video.loadingQuality! ?? VideosInfo.downloadingVideoQuality
 
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             
@@ -93,7 +93,7 @@ class DownloadTableViewCell: UITableViewCell {
                 } else {
                 }
                 UIThread.performUI({
-                    self.quality = self.video.cachedQuality ?? VideosInfo.videoQuality 
+                    self.quality = self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality 
 //                    self.qualityLabel.text = "\(self.quality.rawString)p"
                 })
             }
