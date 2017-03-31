@@ -1007,6 +1007,7 @@
 		86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		86AE948D1E84511A00F67691 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		86B916251E849548000C2842 /* AdaptiveMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveMainViewController.swift */; };
+		86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
@@ -3103,6 +3104,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
 				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
