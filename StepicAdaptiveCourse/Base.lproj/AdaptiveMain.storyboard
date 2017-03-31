@@ -228,18 +228,33 @@
                                     <constraint firstItem="5eX-H9-4P6" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="16" id="uwH-JJ-niY"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1v-Rp-eR8" userLabel="Dim view">
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cWL-Ga-IC2"/>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="cWL-Ga-IC2" firstAttribute="centerY" secondItem="n1v-Rp-eR8" secondAttribute="centerY" id="UlX-XL-dPH"/>
+                                    <constraint firstItem="cWL-Ga-IC2" firstAttribute="centerX" secondItem="n1v-Rp-eR8" secondAttribute="centerX" id="i6q-wo-tpZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="n1v-Rp-eR8" secondAttribute="trailing" id="BQi-kn-xK7"/>
                             <constraint firstItem="1Am-VA-FTv" firstAttribute="leading" secondItem="wqO-Jl-YEe" secondAttribute="leading" id="QxB-tu-k6A"/>
+                            <constraint firstItem="jVy-dP-WyP" firstAttribute="top" secondItem="n1v-Rp-eR8" secondAttribute="bottom" id="bGQ-Hy-F1V"/>
                             <constraint firstAttribute="trailing" secondItem="1Am-VA-FTv" secondAttribute="trailing" id="fpD-5D-DxD"/>
                             <constraint firstItem="1Am-VA-FTv" firstAttribute="top" secondItem="aeI-qb-4nR" secondAttribute="bottom" id="jGX-3X-byr"/>
+                            <constraint firstItem="n1v-Rp-eR8" firstAttribute="top" secondItem="aeI-qb-4nR" secondAttribute="bottom" constant="-20" id="rfB-C0-IJh"/>
+                            <constraint firstItem="n1v-Rp-eR8" firstAttribute="leading" secondItem="wqO-Jl-YEe" secondAttribute="leading" id="stB-Zz-Mh3"/>
                             <constraint firstItem="jVy-dP-WyP" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="bottom" id="vpG-j8-eQH"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="dimView" destination="n1v-Rp-eR8" id="wO7-vY-Cpx"/>
                         <outlet property="easyReactionButton" destination="K00-mQ-gwG" id="7nV-Gz-Q7C"/>
                         <outlet property="hardReactionButton" destination="Ii5-JZ-2XS" id="hMq-5r-2K1"/>
                         <outlet property="nextButton" destination="LJl-qH-8tX" id="hUN-u6-cjk"/>

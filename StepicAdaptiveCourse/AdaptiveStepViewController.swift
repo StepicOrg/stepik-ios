@@ -23,6 +23,7 @@ class AdaptiveStepViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var dimView: UIView!
     
     @IBAction func onEasyButtonClick(_ sender: AnyObject) {
         sendReactionAndGetNewLesson(reaction: .neverAgain)
@@ -45,6 +46,8 @@ class AdaptiveStepViewController: UIViewController {
         }
 
         getNewRecommendation(for: course, success: { step in
+            self.dimView.isHidden = true
+            
             self.loadQuiz(for: step)
             self.loadStepHTML(for: step)
         })
@@ -93,14 +96,18 @@ class AdaptiveStepViewController: UIViewController {
                 return
         }
         
+        dimView.isHidden = false
         performRequest({
             ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
                 self.getNewRecommendation(for: course, success: { step in
+                    self.dimView.isHidden = true
+                    
                     self.loadQuiz(for: step)
                     self.loadStepHTML(for: step)
                 })
                 }, error: { error in
                     print("failed sending reaction: \(error)")
+                    self.dimView.isHidden = true
             })
             }, error: {
                 print("failed performing API request")
@@ -133,7 +140,6 @@ class AdaptiveStepViewController: UIViewController {
                 print("failed performing API request")
         })
     }
-    
 }
 
 extension AdaptiveStepViewController: UIWebViewDelegate {
