@@ -97,7 +97,7 @@ class SectionTableViewCell: UITableViewCell {
         downloadButton.tag = section.position - 1
         downloadButton.delegate = delegate
         
-        if (!section.isActive && section.testSectionAction == nil) || section.progressId == nil {
+        if (!section.isActive && section.testSectionAction == nil) || (section.progressId == nil && !section.isExam)  {
             titleLabel.isEnabled = false
             datesLabel.isEnabled = false
             downloadButton.isHidden = true

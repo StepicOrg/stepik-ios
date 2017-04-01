@@ -171,15 +171,15 @@ extension SectionsViewController : UITableViewDelegate {
             return
         }
         
-        performSegue(withIdentifier: "showUnits", sender: (indexPath as NSIndexPath).row)
+        performSegue(withIdentifier: "showUnits", sender: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SectionTableViewCell.heightForCellInSection(course.sections[(indexPath as NSIndexPath).row])
+        return SectionTableViewCell.heightForCellInSection(course.sections[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return (course.sections[(indexPath as NSIndexPath).row].isActive || course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil) && course.sections[(indexPath as NSIndexPath).row].progressId != nil 
+        return (course.sections[indexPath.row].isActive || course.sections[indexPath.row].testSectionAction != nil) && (course.sections[indexPath.row].progressId != nil || course.sections[indexPath.row].isExam)
     }
     
 }
@@ -197,7 +197,7 @@ extension SectionsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
         
-        cell.initWithSection(course.sections[(indexPath as NSIndexPath).row], delegate: self)
+        cell.initWithSection(course.sections[indexPath.row], delegate: self)
         
         return cell
     }
