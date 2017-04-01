@@ -415,6 +415,7 @@ extension WebStepViewController : UIWebViewDelegate {
         guard let url = request.url else {
             return false
         }
+        
         //Check if the request is an iFrame 
         
         if let text = step.block.text {
@@ -423,7 +424,21 @@ extension WebStepViewController : UIWebViewDelegate {
             }
         }
         
-//        print(request.URLString)
+        //Check if the request is a navigation inside a lesson
+        if url.absoluteString.range(of: "\(lesson.id)/step/") != nil {
+            let components = url.pathComponents
+            if let index = components.index(of: "step") {
+                if index + 1 < components.count {
+                    let urlStepIdString = components[index + 1]
+                    if let urlStepId = Int(urlStepIdString) {
+                        stepsVC.selectTabAtIndex(urlStepId, updatePage: true)
+                        return false
+                    }
+                }
+            }
+        }
+        
+        
         if didStartLoadingFirstRequest {
             if url.scheme != "file" {
                 if url.scheme == "ready" {
