@@ -11,7 +11,7 @@ alert(&apos;WKWebView JS Call!&apos;)});
 &lt;/script&gt;</string>
 	<key>LocalTexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});
+  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
 &lt;/script&gt;</string>
 	<key>SizeReportScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
@@ -21,10 +21,7 @@ alert(&apos;WKWebView JS Call!&apos;)});
 &lt;/script&gt;</string>
 	<key>TexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  MathJax.Hub.Config({tex2jax: {inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]]}});
-&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;
-  src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+  MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
 &lt;/script&gt;</string>
 </dict>
 </plist>
