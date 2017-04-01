@@ -187,7 +187,4 @@ LongestStreak = "Личный рекорд";
 CurrentBestStreakAlertTopText = "Личный рекорд - отличная мотивация для того, чтобы учиться";
 CurrentBestStreakAlertBottomText = "Решайте задачи каждый день и улучшайте свои показатели!";
 ReceiveNotifications = "Получать напоминания";
-
-
-
-
+Teachers = "Преподаватели";
