@@ -359,6 +359,7 @@ class QuizViewController: UIViewController {
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
         self.hintView.backgroundColor = UIColor.black
+        self.hintWebView.isUserInteractionEnabled = true
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
