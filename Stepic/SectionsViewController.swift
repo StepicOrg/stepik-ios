@@ -60,13 +60,13 @@ class SectionsViewController: UIViewController {
     
     func shareButtonPressed(_ button: UIBarButtonItem) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .background).async {
             let shareVC = SharingHelper.getSharingController(self.url)
             shareVC.popoverPresentationController?.barButtonItem = button
             DispatchQueue.main.async {
                 self.present(shareVC, animated: true, completion: nil)
             }
-            }
+        }
     }
     
     func infoButtonPressed(_ button: UIButton) {
