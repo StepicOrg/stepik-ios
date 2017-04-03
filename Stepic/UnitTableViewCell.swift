@@ -33,7 +33,7 @@ class UnitTableViewCell: UITableViewCell {
     }
     
     class func heightForCellWithUnit(_ unit: Unit) -> CGFloat {
-        let defaultTitle = "Ooops, something got wrong"
+        let defaultTitle = ""
         let text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
         return 50 + UILabel.heightForLabelWithText(text, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 129)
         
@@ -70,7 +70,7 @@ class UnitTableViewCell: UITableViewCell {
     }
     
     func initWithUnit(_ unit: Unit, delegate : PKDownloadButtonDelegate) {
-        let defaultTitle = "Ooops, something got wrong"
+        let defaultTitle = ""
         titleLabel.text = "\(unit.position). \(unit.lesson?.title ?? defaultTitle)"
         
         updateDownloadButton(unit)

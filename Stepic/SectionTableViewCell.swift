@@ -13,14 +13,14 @@ class SectionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var datesLabel: UILabel!
-    @IBOutlet weak var progressView: UIView!
-        
+    @IBOutlet weak var scoreProgressView: UIProgressView!
+    @IBOutlet weak var scoreLabel: UILabel!
+    
     @IBOutlet weak var downloadButton: PKDownloadButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        progressView.setRoundedBounds(width: 0)
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
         // Initialization code
     }
@@ -49,7 +49,7 @@ class SectionTableViewCell: UITableViewCell {
     class func heightForCellInSection(_ section: Section) -> CGFloat {
         let titleText = "\(section.position). \(section.title)"
         let datesText = SectionTableViewCell.getTextFromSection(section)
-        return 32 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 117) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 117))
+        return 46 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107))
     }
     
     func updateDownloadButton(_ section: Section) {
@@ -85,10 +85,13 @@ class SectionTableViewCell: UITableViewCell {
         
         datesLabel.text = SectionTableViewCell.getTextFromSection(section)
         
-        progressView.backgroundColor = UIColor.gray
-        if let passed = section.progress?.isPassed {
-            if passed {
-                progressView.backgroundColor = UIColor.stepicGreenColor()
+        if let progress = section.progress {
+            if progress.cost == 0 {
+                scoreProgressView.isHidden = true
+                scoreLabel.isHidden = true
+            } else {
+                scoreProgressView.progress = Float(progress.score) / Float(progress.cost)
+                scoreLabel.text = "\(progress.score)/\(progress.cost)"
             }
         }
                 
@@ -106,6 +109,7 @@ class SectionTableViewCell: UITableViewCell {
             datesLabel.isEnabled = true
             downloadButton.isHidden = false
         }
+        
     }
     
 }
