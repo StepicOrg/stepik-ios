@@ -89,6 +89,7 @@ struct AnalyticsEvents {
         static let step = "deeplink_step"
         static let syllabus = "deeplink_syllabus"
         static let course = "deeplink_course"
+        static let section = "deeplink_section"
     }
     
     struct Tabs {

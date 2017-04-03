@@ -163,15 +163,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func handleOpenedFromDeepLink(_ url: URL) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
-            controller, push in
-            if let vc = controller { 
+            controllers in
+            if controllers.count > 0 { 
                 if let s = self {
                     if let topController = s.currentNavigation?.topViewController {
                         delay(0.5, closure: {
-                            if push { 
-                                topController.navigationController?.pushViewController(vc, animated: true) 
-                            } else {
-                                topController.present(vc, animated: true, completion: nil)
+                            for (index, vc) in controllers.enumerated() {
+                                if index == controllers.count - 1 {
+                                    topController.navigationController?.pushViewController(vc, animated: true) 
+                                } else {
+                                    topController.navigationController?.pushViewController(vc, animated: false) 
+                                }
                             }
                         })
                     } 

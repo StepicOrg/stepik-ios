@@ -18,6 +18,8 @@ class SectionsViewController: UIViewController {
     var didRefresh = false
     var course : Course! 
     
+    var moduleId: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,6 +103,11 @@ class SectionsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 self.emptyDatasetState = EmptyDatasetState.empty
                 self.tableView.reloadData()
+                if let m = self.moduleId {
+                    if (1...self.course.sectionsArray.count ~= m) && (self.isReachable(section: m - 1)) { 
+                        self.showSection(section: m - 1) 
+                    }
+                }
             })
             self.didRefresh = true
         }, error: {
@@ -109,6 +116,11 @@ class SectionsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 self.emptyDatasetState = EmptyDatasetState.connectionError
                 self.tableView.reloadData()
+                if let m = self.moduleId {
+                    if (1...self.course.sectionsArray.count ~= m) && self.isReachable(section: m - 1) { 
+                        self.showSection(section: m - 1) 
+                    }
+                }
             })
             self.didRefresh = true
         })
@@ -160,18 +172,27 @@ class SectionsViewController: UIViewController {
         
         self.present(alert, animated: true, completion: {})
     }
+    
+    func isReachable(section: Int) -> Bool {
+        return (course.sections[section].isActive || course.sections[section].testSectionAction != nil) && (course.sections[section].progressId != nil || course.sections[section].isExam)
+    }
+    
+    func showSection(section sectionId: Int) {
+        let section = course.sections[sectionId] 
+        if section.isExam {
+            showExamAlert(cancel: {})
+            return
+        }
+        
+        performSegue(withIdentifier: "showUnits", sender: sectionId)
+    }
+    
 }
 
 extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = course.sections[indexPath.row] 
-        if section.isExam {
-            showExamAlert(cancel: {})
-            tableView.deselectRow(at: indexPath, animated: true)
-            return
-        }
-        
-        performSegue(withIdentifier: "showUnits", sender: indexPath.row)
+        showSection(section: indexPath.row)
+        //        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -179,7 +200,7 @@ extension SectionsViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return (course.sections[indexPath.row].isActive || course.sections[indexPath.row].testSectionAction != nil) && (course.sections[indexPath.row].progressId != nil || course.sections[indexPath.row].isExam)
+        return isReachable(section: indexPath.row)
     }
     
 }
