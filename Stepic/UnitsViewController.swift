@@ -61,8 +61,12 @@ class UnitsViewController: UIViewController {
     }
 
     var url : String? {
-        if let slug = section?.course?.slug {
-            return StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus/"
+        guard let section = section else { 
+            return nil 
+        }
+        if let slug = section.course?.slug,  
+            let module = section.course?.sectionsArray.index(of: section.id) {
+            return StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus?module=\(module + 1)"
         } else {
             return nil
         }
