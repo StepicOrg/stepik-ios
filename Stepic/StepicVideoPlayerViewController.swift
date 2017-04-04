@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import FLKAutoLayout
-
+import MediaPlayer
 
 @available(iOS 9.0, *)
 extension StepicVideoPlayerViewController: WatchSessionDataObserver {
@@ -281,6 +281,12 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpOutside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpInside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControlEvents.touchDown)
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
+//        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand.addTarget(self, action: #selector(togglePlayStop(_:)));
+    }
+    
+    func togglePlayPause() {
+        handlePlay()
     }
     
     func saveCurrentPlayerTime() {
