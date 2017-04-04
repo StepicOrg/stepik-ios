@@ -431,7 +431,7 @@ extension WebStepViewController : UIWebViewDelegate {
                 if index + 1 < components.count {
                     let urlStepIdString = components[index + 1]
                     if let urlStepId = Int(urlStepIdString) {
-                        stepsVC.selectTabAtIndex(urlStepId, updatePage: true)
+                        stepsVC.selectTabAtIndex(urlStepId - 1, updatePage: true)
                         return false
                     }
                 }
