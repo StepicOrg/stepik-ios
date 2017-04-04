@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -396,7 +396,7 @@
                                     <action selector="signUpPressed:" destination="Fbi-PC-nZO" eventType="touchUpInside" id="xtb-3k-8Tn"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="BHd-zA-Tpe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="260" verticalHuggingPriority="260" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="BHd-zA-Tpe">
                                 <rect key="frame" x="4" y="24" width="367" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="8Gc-mP-XVr"/>
@@ -424,6 +424,7 @@
                             <constraint firstItem="iRz-un-9LF" firstAttribute="centerX" secondItem="Vyr-6E-R7Q" secondAttribute="centerX" id="GgB-2q-REe"/>
                             <constraint firstItem="iRz-un-9LF" firstAttribute="width" secondItem="nbo-iQ-rJA" secondAttribute="width" multiplier="0.5" priority="999" id="KE5-dF-yxk"/>
                             <constraint firstItem="nbo-iQ-rJA" firstAttribute="top" secondItem="Vyr-6E-R7Q" secondAttribute="top" id="KyD-jA-Di3"/>
+                            <constraint firstItem="0Sk-3l-6o0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iRz-un-9LF" secondAttribute="bottom" constant="8" id="LnE-6v-kHl"/>
                             <constraint firstItem="6Cc-TL-lCk" firstAttribute="centerX" secondItem="Vyr-6E-R7Q" secondAttribute="centerX" id="TST-mz-Kkj"/>
                             <constraint firstItem="6Cc-TL-lCk" firstAttribute="leading" secondItem="BHd-zA-Tpe" secondAttribute="leading" id="dpN-JV-UBe"/>
                             <constraint firstItem="nbo-iQ-rJA" firstAttribute="bottom" secondItem="0Sk-3l-6o0" secondAttribute="top" id="ekV-Sq-w5Z"/>
@@ -630,7 +631,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gVK-PQ-cBh" id="lRO-Rd-GN1">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="577"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="577.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VS-bz-0Ei">
@@ -849,7 +850,7 @@
                 <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="4QR-Lx-HW0" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xnv-IR-UyR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xnv-IR-UyR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
