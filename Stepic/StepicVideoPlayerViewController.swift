@@ -170,16 +170,18 @@ class StepicVideoPlayerViewController: UIViewController {
     fileprivate func displayQualityChangeAlert() {
         let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         for url in video.urls {
-            let action = UIAlertAction(title: url.quality, style: .default, handler: { 
-                [unowned self]
-                action in
-                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
-                    ["quality" : url.quality as NSObject, 
-                        "device": DeviceInfo.deviceModelString as NSObject])
-                self.currentQuality = url.quality
-                self.currentQualityURL = NSURL(string: url.url) as! URL
-            })
-            alertController.addAction(action)
+            if url.quality != video.cachedQuality {
+                let action = UIAlertAction(title: url.quality, style: .default, handler: { 
+                    [unowned self]
+                    action in
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
+                        ["quality" : url.quality as NSObject, 
+                            "device": DeviceInfo.deviceModelString as NSObject])
+                    self.currentQuality = url.quality
+                    self.currentQualityURL = NSURL(string: url.url) as! URL
+                })
+                alertController.addAction(action)
+            }
         }
         if video.state == VideoState.cached {
             if let cachedQuality = video.cachedQuality  {
