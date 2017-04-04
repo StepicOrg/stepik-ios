@@ -104,10 +104,14 @@ class SectionTableViewCell: UITableViewCell {
             titleLabel.isEnabled = false
             datesLabel.isEnabled = false
             downloadButton.isHidden = true
+            scoreProgressView.isHidden = true
+            scoreLabel.isHidden = true
         } else {
             titleLabel.isEnabled = true
             datesLabel.isEnabled = true
             downloadButton.isHidden = false
+            scoreProgressView.isHidden = false
+            scoreLabel.isHidden = false
         }
         
     }
