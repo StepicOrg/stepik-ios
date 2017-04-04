@@ -12,7 +12,8 @@ import SwiftyJSON
 
 class Assignment: NSManagedObject, JSONInitializable {
 
-// Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
+    
     convenience required init(json: JSON){
         self.init()
         initialize(json)
@@ -28,4 +29,7 @@ class Assignment: NSManagedObject, JSONInitializable {
         initialize(json)
     }
 
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
+    }
 }

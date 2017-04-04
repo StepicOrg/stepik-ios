@@ -68,5 +68,8 @@ struct Images {
         static let filled = UIImage(named: "Thumb Up Green")!
     }
     
+    struct points {
+        static let vertical = UIImage(named: "Points_vertical")!
+    }
 
 }

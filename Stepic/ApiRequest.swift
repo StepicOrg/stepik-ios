@@ -10,14 +10,18 @@ import Foundation
 import Alamofire 
 
 
-func performRequest(_ request: @escaping ((Void)->Void), error: ((Void)->Void)? = nil) {
+enum PerformRequestError : Error {
+    case noAccessToRefreshToken, other
+}
+
+//Should preferrably be called from a UIViewController subclass
+func performRequest(_ request: @escaping ((Void)->Void), error: ((PerformRequestError)->Void)? = nil) {
     ApiRequestPerformer.performAPIRequest(request, error: error)
 }
 
 class ApiRequestPerformer {
     
-    //TODO: Add error type for this
-    static func performAPIRequest(_ completion: @escaping ((Void)->Void), error errorHandler: ((Void)->Void)? = nil) {
+    static func performAPIRequest(_ completion: @escaping ((Void)->Void), error errorHandler: ((PerformRequestError)->Void)? = nil) {
         print("performing API request")
         if !AuthInfo.shared.hasUser {
             print("no user in AuthInfo, retrieving")
@@ -30,7 +34,7 @@ class ApiRequestPerformer {
                     performRequestWithAuthorizationCheck(completion, error: errorHandler)
                 }, error: {
                     errorMsg in
-                    errorHandler?()
+                    errorHandler?(.other)
                 }
             )
         } else {
@@ -39,17 +43,17 @@ class ApiRequestPerformer {
          
     }
     
-    fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping ((Void)->Void), error errorHandler: ((Void)->Void)? = nil) {
+    fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping ((Void)->Void), error errorHandler: ((PerformRequestError)->Void)? = nil) {
         
 //        if let user = AuthInfo.shared.user {
 //            print("performing request with user \(user.id)")
         if !AuthInfo.shared.isAuthorized && Session.needsRefresh {
-            Session.refresh(completion: 
+            _ = Session.refresh(completion: 
                 {
                     completion()
                 }, error: {
                     _ in 
-                    errorHandler?()
+                    errorHandler?(.other)
                 }
             )
             return
@@ -65,13 +69,17 @@ class ApiRequestPerformer {
                     }, failure : {
                         error in
                         print("error while auto refresh token")
-                        errorHandler?()
+                        if error == TokenRefreshError.noAccess {
+                            errorHandler?(.noAccessToRefreshToken)
+                        } else {
+                            errorHandler?(.other)
+                        }
                     }
                 )
                 return
             } else {
                     //No token to refresh with authorized user
-                errorHandler?()
+                errorHandler?(.other)
                 return
             }
         }

@@ -89,7 +89,7 @@ class DeepLinkRouter {
                 let courses = try Course.getCourses([courseId])
                 if courses.count == 0 {
                     performRequest({
-                        ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
+                        _ = ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
                             loadedCourses in 
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
@@ -133,7 +133,7 @@ class DeepLinkRouter {
             let courses = try Course.getCourses([courseId])
             if courses.count == 0 {
                 performRequest({
-                    ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
+                    _ = ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
                         loadedCourses in 
                         if loadedCourses.count == 1 {
                             UIThread.performUI {

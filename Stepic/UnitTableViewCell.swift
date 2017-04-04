@@ -96,7 +96,7 @@ class UnitTableViewCell: UITableViewCell {
         }
         
                 
-        if !(unit.isActive || unit.section.testSectionAction != nil) {
+        if !(unit.isActive || unit.section?.testSectionAction != nil) {
             titleLabel.isEnabled = false
             downloadButton.isHidden = true
             scoreProgressView.isHidden = true

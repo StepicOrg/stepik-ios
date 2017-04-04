@@ -14,7 +14,7 @@ import MagicalRecord
 @objc
 class User: NSManagedObject, JSONInitializable {
 
-// Insert code here to add functionality to your managed object subclass
+    typealias idType = Int
     
     convenience required init(json: JSON) {
         self.init()
@@ -35,6 +35,10 @@ class User: NSManagedObject, JSONInitializable {
     
     func update(json: JSON) {
         initialize(json)
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].intValue
     }
     
     var isGuest : Bool {

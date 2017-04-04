@@ -173,4 +173,13 @@ FillBlankInputTextFieldPlaceholder = "Enter your answer";
 FillBlanksSelectAnswerString = "Select your answer";
 FillBlanksSelectButtonString = "Select";
 DeletedComment = "Comment deleted";
+Section = "Section";
+Lesson = "Lesson";
+ContinueLearning = "Learn";
+DropCourse =  "Drop course";
+Continue = "Continue";
+RefreshingTitle = "Refreshing...";
+RefreshingDescription = "";
+EmptyTitle = "Nothing here :(";
+
 
