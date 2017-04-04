@@ -52,6 +52,8 @@ class AdaptiveMainViewController: UIViewController {
                 print("failed downloading courses data in Next")
             })
             }, error: {
+                //TODO: Add logout action - like in other controllers
+                error in
                 print("failed performing API request")
         })
     

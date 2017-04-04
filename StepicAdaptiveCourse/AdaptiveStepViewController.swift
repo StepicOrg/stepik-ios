@@ -110,6 +110,8 @@ class AdaptiveStepViewController: UIViewController {
                     self.dimView.isHidden = true
             })
             }, error: {
+                //TODO: add error handling here - add logout like in other controllers
+                error in
                 print("failed performing API request")
         })
     }
@@ -137,6 +139,8 @@ class AdaptiveStepViewController: UIViewController {
                 })
                 }, error: { error in print(error) })
             }, error: {
+                //TODO: add error handling here - add logout like in other controllers
+                error in
                 print("failed performing API request")
         })
     }
