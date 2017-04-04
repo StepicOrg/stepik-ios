@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import MagicalRecord
+
 
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
     
     fileprivate let defaults = UserDefaults.standard
-        
+    
     fileprivate override init() {
         super.init()
         
@@ -21,14 +21,14 @@ class AuthInfo: NSObject {
         if let id = userId {
             if let users = User.fetchById(id) {
                 let c = users.count
-//                if c > 1 {
-//                    print("users count > 1, deleting all")
-//                    for user in users {
-//                        user.MR_deleteEntity()
-//                    }
-//                    c = 0
-//                    CoreDataHelper.instance.save()
-//                }
+                //                if c > 1 {
+                //                    print("users count > 1, deleting all")
+                //                    for user in users {
+                //                        user.MR_deleteEntity()
+                //                    }
+                //                    c = 0
+                //                    CoreDataHelper.instance.save()
+                //                }
                 
                 if c == 0 {
                     print("No user with such id found, downloading")
@@ -41,7 +41,7 @@ class AuthInfo: NSObject {
                         }
                         print("downloaded user")
                         CoreDataHelper.instance.save()
-
+                        
                         }, failure: {
                             [weak self]
                             _ in
@@ -57,7 +57,7 @@ class AuthInfo: NSObject {
             }
         }
     }
-        
+    
     fileprivate func setTokenValue(_ newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
@@ -72,24 +72,26 @@ class AuthInfo: NSObject {
                 print("\nsetting new token to nil\n")
                 
                 //Unregister from notifications
-                NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
-                    UIThread.performUI{
-                        //Delete enrolled information
-                        TabsInfo.myCoursesIds = []
-                        let c = Course.getAllCourses(enrolled: true)
-                        for course in c {
-                            course.enrolled = false
+                #if os(iOS)
+                    NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
+                        UIThread.performUI{
+                            //Delete enrolled information
+                            TabsInfo.myCoursesIds = []
+                            let c = Course.getAllCourses(enrolled: true)
+                            for course in c {
+                                course.enrolled = false
+                            }
+                            
+                            Progress.deleteAllStoredProgresses()
+                            CoreDataHelper.instance.save()
+                            
+                            AuthInfo.shared.user = nil
+                            
+                            AnalyticsHelper.sharedHelper.changeSignIn()
+                            self.setTokenValue(newToken)
                         }
-                        
-                        Progress.deleteAllStoredProgresses()
-                        CoreDataHelper.instance.save()
-
-                        AuthInfo.shared.user = nil
-                        
-                        AnalyticsHelper.sharedHelper.changeSignIn()
-                        self.setTokenValue(newToken)
-                    }
-                })
+                    })
+                #endif
             } else {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
@@ -100,11 +102,13 @@ class AuthInfo: NSObject {
         
         get {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
-            let refreshToken = defaults.value(forKey: "refresh_token") as? String,
-            let tokenType = defaults.value(forKey: "token_type") as? String {
+                let refreshToken = defaults.value(forKey: "refresh_token") as? String,
+                let tokenType = defaults.value(forKey: "token_type") as? String {
                 print("got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
+                
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Token.requestedNotNilToken, parameters: nil)
+                
                 return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil

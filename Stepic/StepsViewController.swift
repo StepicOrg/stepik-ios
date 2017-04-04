@@ -23,7 +23,7 @@ class StepsViewController: RGPageViewController {
     var lesson : Lesson?
     var stepId : Int?
     var unitId : Int?
-    
+
     var startStepId : Int = 0
         
     var canSendViews: Bool = false
@@ -101,12 +101,12 @@ class StepsViewController: RGPageViewController {
     fileprivate func updateTitle() {
         self.navigationItem.title = lesson?.title ?? NSLocalizedString("Lesson", comment: "")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateTitle()
-        
+
         LastStepGlobalContext.context.unitId = unitId
         
         datasource = self
@@ -132,9 +132,9 @@ class StepsViewController: RGPageViewController {
         self.view.isUserInteractionEnabled = false
         self.doesPresentWarningView = false
         self.doesPresentActivityIndicatorView = true
-        
+
         var step : Step? = nil
-        
+
         if let localStep = Step.getStepWithId(stepId, unitId: unitId) {
             step = localStep
             if let localLesson = localStep.lesson {
@@ -143,29 +143,29 @@ class StepsViewController: RGPageViewController {
                 return
             }
         }
-                
+
         _ = ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: (step != nil) ? [step!] : [], refreshMode: .update, success: {
             steps in
-            
-            guard let step = steps.first else { 
-                return 
+
+            guard let step = steps.first else {
+                return
             }
-            
+
             var localLesson: Lesson? = nil
             localLesson =  Lesson.getLesson(step.lessonId)
-            
+
             _ = ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
                 lessons in
                 guard let lesson = lessons.first else {
                     return
                 }
-                
+
                 self?.lesson = lesson
                 step.lesson = lesson
                 self?.refreshSteps()
                 return
-                
+
             }, failure: {
                 error in
                 print("Error while downloading lesson")
@@ -195,27 +195,27 @@ class StepsViewController: RGPageViewController {
             }
         })
     }
-    
+
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     fileprivate func refreshSteps() {
-        
+
         guard lesson != nil else {
             loadLesson()
             return
         }
-        
-        if let section = lesson?.unit?.section, 
+
+        if let section = lesson?.unit?.section,
             let unitId = unitId {
             if let index = section.unitsArray.index(of: unitId) {
                 shouldNavigateToPrev = index != 0
                 shouldNavigateToNext = index < section.unitsArray.count - 1
             }
         }
-        
+
         updateTitle()
 
-    
+
         if let stepId = stepId {
             if let index = lesson?.stepsArray.index(of: stepId) {
                 startStepId = index
@@ -223,7 +223,7 @@ class StepsViewController: RGPageViewController {
             }
         }
 
-        
+
         var prevStepsIds = [Int]()
         if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
@@ -307,7 +307,7 @@ class StepsViewController: RGPageViewController {
     
     var didSelectTab = false
     var didInitSteps = false
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.backBarButtonItem?.title = " "
@@ -391,11 +391,11 @@ extension StepsViewController : RGPageViewControllerDataSource {
     ///
     /// - returns: a `UIView` instance that will be shown as tab at the given index.
     public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
-        
+
         guard lesson != nil else {
             return UIView()
         }
-        
+
         //Just a try to fix a strange bug
         if index >= lesson!.steps.count {
             return UIView()
@@ -453,7 +453,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                         stepController.assignment = assignments[index]
                     }
                 }
-                
+
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -490,13 +490,13 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.stepId = index + 1
                 stepController.nItem = self.navigationItem
                 stepController.startStepId = startStepId
-                
+
                 if let assignments = lesson.unit?.assignments {
                     if index < assignments.count {
                         stepController.assignment = assignments[index]
                     }
                 }
-                
+
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true

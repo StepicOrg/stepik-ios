@@ -36,7 +36,7 @@ class AuthManager : NSObject {
         ]
         
         return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON {
-//            (_,_, json, error) in
+            //            (_,_, json, error) in
             response in
             
             var error = response.result.error

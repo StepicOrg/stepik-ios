@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /*
  Protocol for all AlertManager classes.

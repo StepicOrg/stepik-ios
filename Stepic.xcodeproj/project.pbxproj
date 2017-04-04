@@ -688,6 +688,145 @@
 		08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
+		1B068CFE1E748F620051B57C /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370E1BFA210F003DC593 /* CacheManager.swift */; };
+		1B068CFF1E748F6D0051B57C /* RegistrationErrorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADDE771C2EB981006D1261 /* RegistrationErrorInfo.swift */; };
+		1B068D001E748F730051B57C /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58BC1DE33B410009B9CE /* AuthAPI.swift */; };
+		1B068D021E7490180051B57C /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
+		1B149E451E735FE80063C961 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B149E441E735FE80063C961 /* AppDelegate.swift */; };
+		1B149E471E735FE80063C961 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B149E461E735FE80063C961 /* CoursesViewController.swift */; };
+		1B149E4C1E735FE80063C961 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B149E4B1E735FE80063C961 /* Assets.xcassets */; };
+		1B149E571E735FE80063C961 /* StepicTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B149E561E735FE80063C961 /* StepicTVTests.swift */; };
+		1B149E5F1E7361C60063C961 /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		1B17A7CD1E85AD3A0036C60A /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7CC1E85AD3A0036C60A /* SectionsViewController.swift */; };
+		1B17A7CF1E85AE970036C60A /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
+		1B17A7D21E85AF780036C60A /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7D01E85AF780036C60A /* SectionTableViewCell.swift */; };
+		1B17A7D31E85AF780036C60A /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B17A7D11E85AF780036C60A /* SectionTableViewCell.xib */; };
+		1B17A7D51E85B6480036C60A /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7D41E85B6480036C60A /* UnitViewController.swift */; };
+		1B17A7D91E85B7910036C60A /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7D71E85B7900036C60A /* UnitTableViewCell.swift */; };
+		1B17A7DA1E85B7910036C60A /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B17A7D81E85B7900036C60A /* UnitTableViewCell.xib */; };
+		1B17A7DB1E85B80B0036C60A /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
+		1B17A7DC1E85C07D0036C60A /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
+		1B17A7DE1E85C3310036C60A /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17A7DD1E85C3310036C60A /* StepsViewController.swift */; };
+		1B37594B1E8B14310085A931 /* StepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B37594A1E8B14310085A931 /* StepViewController.swift */; };
+		1B3759581E8B18910085A931 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3759561E8B18910085A931 /* VideoStepViewController.swift */; };
+		1B3759591E8B18910085A931 /* VideoStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3759571E8B18910085A931 /* VideoStepViewController.xib */; };
+		1B37595C1E8B18C00085A931 /* QuizStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */; };
+		1B37595D1E8B18C00085A931 /* QuizStepViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */; };
+		1B62BFA61E83154D005FCB8A /* TeachersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B62BFA51E83154D005FCB8A /* TeachersTableViewCell.xib */; };
+		1B62BFA71E831622005FCB8A /* TeachersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E51BBD25DC008DC44D /* TeachersTableViewCell.swift */; };
+		1B62BFA81E831814005FCB8A /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
+		1B7A65AC1E78324D002A9755 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
+		1B7A65AE1E7835BC002A9755 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */; };
+		1B7B4CE91E8A817800615424 /* StepTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B4CE71E8A817800615424 /* StepTabCollectionViewCell.swift */; };
+		1B7B4CEA1E8A817800615424 /* StepTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B7B4CE81E8A817800615424 /* StepTabCollectionViewCell.xib */; };
+		1B7B4CED1E8AB30800615424 /* CoursePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B4CEC1E8AB30800615424 /* CoursePreviewTableViewCell.swift */; };
+		1B7B4CF01E8AC8F200615424 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B4CEF1E8AC8F200615424 /* ProfileViewController.swift */; };
+		1B7B4CF11E8ACB7000615424 /* UserActivitiesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */; };
+		1B7B4CF21E8ACB8100615424 /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
+		1B7B4CF41E8AD31200615424 /* TVControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B4CF31E8AD31200615424 /* TVControllerHelper.swift */; };
+		1B7B4CF61E8AD8F600615424 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B4CF51E8AD8F600615424 /* MyCoursesViewController.swift */; };
+		1B7B4CF71E8AD93700615424 /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
+		1B7B4CF81E8AD9BE00615424 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
+		1B95F5621E7364CC0055D495 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
+		1B95F5631E7364DE0055D495 /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8531BA9DB5C00F2A188 /* Meta.swift */; };
+		1B95F5641E73656B0055D495 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F01BBFD65E008DC44D /* User.swift */; };
+		1B95F5651E73660C0055D495 /* JSONInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF821BC800C0000AFEA7 /* JSONInitializable.swift */; };
+		1B95F5661E73661D0055D495 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF721BB5636700BE84E6 /* Course.swift */; };
+		1B95F5671E7366850055D495 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
+		1B95F5681E7366CA0055D495 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
+		1B95F5691E7366D60055D495 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		1B95F56A1E7366E20055D495 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
+		1B95F56B1E7366F60055D495 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
+		1B95F56C1E7367160055D495 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
+		1B95F56D1E7367230055D495 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */; };
+		1B95F56E1E73678B0055D495 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
+		1B95F56F1E7367940055D495 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
+		1B95F5701E7367DF0055D495 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
+		1B95F5711E7367F60055D495 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
+		1B95F5721E73688B0055D495 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
+		1B95F5731E7368AE0055D495 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
+		1B95F5741E7368F40055D495 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
+		1B95F5751E7368FE0055D495 /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
+		1B95F5771E7369760055D495 /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
+		1B95F5781E7369800055D495 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
+		1B95F5791E7369890055D495 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841568F1BCBFFBD006B8C73 /* Block+CoreDataProperties.swift */; };
+		1B95F57A1E7369A80055D495 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
+		1B95F57B1E7369CD0055D495 /* VideoURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142471BCEE4EE0000BCB0 /* VideoURL.swift */; };
+		1B95F57C1E7369E00055D495 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
+		1B95F57D1E736A220055D495 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59EF1BBFD65E008DC44D /* User+CoreDataProperties.swift */; };
+		1B95F57E1E736A370055D495 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
+		1B95F57F1E736A9E0055D495 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086953111D748303003857A2 /* ApiRequest.swift */; };
+		1B95F5801E736AB60055D495 /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
+		1B95F5811E736AC10055D495 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
+		1B95F5821E736AFD0055D495 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */; };
+		1B95F5831E736B0B0055D495 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
+		1B95F5841E736B290055D495 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
+		1B95F5861E736B980055D495 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B95F5851E736B980055D495 /* Extensions.swift */; };
+		1B95F5871E736BEE0055D495 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
+		1B95F5881E736C140055D495 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
+		1B95F5891E736C2B0055D495 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
+		1B95F58A1E736C440055D495 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555571C4FAF5200C877E8 /* Submission.swift */; };
+		1B95F58B1E736C570055D495 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
+		1B95F58C1E736C6D0055D495 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
+		1B95F58D1E736D2A0055D495 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
+		1B95F58E1E736D460055D495 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
+		1B95F58F1E736D530055D495 /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
+		1B95F5901E736D600055D495 /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D8B1BDA77A200BA35EA /* PathManager.swift */; };
+		1B95F5911E736D790055D495 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
+		1B95F5921E740C940055D495 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
+		1B95F5931E740D3E0055D495 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
+		1B95F5941E740D620055D495 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
+		1B95F5951E740DBD0055D495 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		1B95F5981E740E230055D495 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
+		1B95F59A1E740E230055D495 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
+		1B95F59B1E740E230055D495 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
+		1B95F59C1E740E230055D495 /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		1B95F59D1E740E230055D495 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
+		1B95F59E1E740E230055D495 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086A9D611C74AF90003611DC /* GlobalFunctions.swift */; };
+		1B95F59F1E740E230055D495 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
+		1B95F5A41E740E230055D495 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492C1DE5B07900144C14 /* AlertManager.swift */; };
+		1B95F5A51E740E5E0055D495 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
+		1B95F5A61E740E5E0055D495 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */; };
+		1B95F5A71E740E660055D495 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */; };
+		1B95F5A81E740F020055D495 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
+		1B95F5A91E740FF40055D495 /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
+		1B95F5AA1E740FF40055D495 /* StringDatasetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555551C4F9FAB00C877E8 /* StringDatasetExtension.swift */; };
+		1B95F5AB1E740FF40055D495 /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
+		1B95F5AC1E740FF40055D495 /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
+		1B95F5AD1E740FF40055D495 /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
+		1B95F5AE1E740FF40055D495 /* FillBlanksDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E59ABE1E433057008EEECE /* FillBlanksDataset.swift */; };
+		1B95F5AF1E740FFE0055D495 /* ChoiceReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5555B1C4FB1E300C877E8 /* ChoiceReply.swift */; };
+		1B95F5B01E740FFE0055D495 /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
+		1B95F5B11E740FFE0055D495 /* NumberReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859F1C579318000165AA /* NumberReply.swift */; };
+		1B95F5B21E740FFE0055D495 /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
+		1B95F5B31E740FFE0055D495 /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
+		1B95F5B41E740FFE0055D495 /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
+		1B95F5B51E740FFE0055D495 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
+		1B95F5B61E740FFE0055D495 /* FillBlanksReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */; };
+		1B95F5B71E7410B00055D495 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
+		1B9B5C901E8D671F006CF88D /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
+		1B9B5C911E8D6731006CF88D /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
+		1B9B5C921E8D6798006CF88D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
+		1B9B5C941E8D9691006CF88D /* TVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B5C931E8D9691006CF88D /* TVPlayer.swift */; };
+		1BC1E95A1E81AC31006E6728 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */; };
+		1BC1E95B1E81AE01006E6728 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
+		1BC1E95D1E81B08C006E6728 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */; };
+		1BC1E95F1E81B2F7006E6728 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		1BC1E9611E81B95F006E6728 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B149E481E735FE80063C961 /* Main.storyboard */; };
+		1BC1E9641E81DE22006E6728 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC1E9631E81DE22006E6728 /* TeacherCollectionViewCell.xib */; };
+		1BC1E9661E81E689006E6728 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
+		1BC1E9671E81E6B1006E6728 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
+		1BE6E9001E749E35006B9837 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
+		1BE6E9011E749F05006B9837 /* APIDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */; };
+		1BE6E9021E749FD1006B9837 /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
+		1BE6E9031E74A93D006B9837 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
+		1BE6E9051E74A955006B9837 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
+		1BE6E9071E74AA04006B9837 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
+		1BE6E9081E74AA23006B9837 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
+		1BE6E90A1E74AA87006B9837 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BE6E9091E74AA86006B9837 /* CourseTableViewCell.xib */; };
+		1BE6E90D1E74AC08006B9837 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BE6E90C1E74AC08006B9837 /* RefreshTableViewCell.xib */; };
+		1BE6E90E1E74B0EF006B9837 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
+		22C5FA89C5E541F84E6ED2CF /* Pods_StepicTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5324FB4175445C57477DA86B /* Pods_StepicTV.framework */; };
 		572BF3DA6DE2DAE16D7E15C8 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
@@ -728,6 +867,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 08DE94101B8C58AC00D278AB;
 			remoteInfo = Stepic;
+		};
+		1B149E531E735FE80063C961 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B149E411E735FE70063C961;
+			remoteInfo = StepicTV;
 		};
 		9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -772,6 +918,7 @@
 
 /* Begin PBXFileReference section */
 		0403A15AD3DF220BD701250D /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		04EA1DD8A250458B13B99320 /* Pods-StepicTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTV/Pods-StepicTV.debug.xcconfig"; sourceTree = "<group>"; };
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
 		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
@@ -1157,12 +1304,51 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
+		1B068CFD1E748E3B0051B57C /* StepicTV-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StepicTV-Bridging-Header.h"; sourceTree = "<group>"; };
+		1B149E421E735FE70063C961 /* StepicTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B149E441E735FE80063C961 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1B149E461E735FE80063C961 /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
+		1B149E491E735FE80063C961 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1B149E4B1E735FE80063C961 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B149E4D1E735FE80063C961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B149E521E735FE80063C961 /* StepicTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepicTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B149E561E735FE80063C961 /* StepicTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepicTVTests.swift; sourceTree = "<group>"; };
+		1B149E581E735FE80063C961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B17A7CC1E85AD3A0036C60A /* SectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsViewController.swift; sourceTree = "<group>"; };
+		1B17A7D01E85AF780036C60A /* SectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
+		1B17A7D11E85AF780036C60A /* SectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionTableViewCell.xib; sourceTree = "<group>"; };
+		1B17A7D41E85B6480036C60A /* UnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
+		1B17A7D71E85B7900036C60A /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
+		1B17A7D81E85B7900036C60A /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
+		1B17A7DD1E85C3310036C60A /* StepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		1B37594A1E8B14310085A931 /* StepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepViewController.swift; sourceTree = "<group>"; };
+		1B3759561E8B18910085A931 /* VideoStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoStepViewController.swift; sourceTree = "<group>"; };
+		1B3759571E8B18910085A931 /* VideoStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoStepViewController.xib; sourceTree = "<group>"; };
+		1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizStepViewController.swift; sourceTree = "<group>"; };
+		1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuizStepViewController.xib; sourceTree = "<group>"; };
+		1B62BFA51E83154D005FCB8A /* TeachersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachersTableViewCell.xib; sourceTree = "<group>"; };
+		1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewViewController.swift; sourceTree = "<group>"; };
+		1B7B4CE71E8A817800615424 /* StepTabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabCollectionViewCell.swift; sourceTree = "<group>"; };
+		1B7B4CE81E8A817800615424 /* StepTabCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepTabCollectionViewCell.xib; sourceTree = "<group>"; };
+		1B7B4CEC1E8AB30800615424 /* CoursePreviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePreviewTableViewCell.swift; sourceTree = "<group>"; };
+		1B7B4CEF1E8AC8F200615424 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1B7B4CF31E8AD31200615424 /* TVControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVControllerHelper.swift; sourceTree = "<group>"; };
+		1B7B4CF51E8AD8F600615424 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
+		1B95F5851E736B980055D495 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1B9B5C931E8D9691006CF88D /* TVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVPlayer.swift; sourceTree = "<group>"; };
+		1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
+		1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		1BC1E9631E81DE22006E6728 /* TeacherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherCollectionViewCell.xib; sourceTree = "<group>"; };
+		1BE6E9091E74AA86006B9837 /* CourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseTableViewCell.xib; sourceTree = "<group>"; };
+		1BE6E90C1E74AC08006B9837 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		3F57B4346FD0BE2A8F687821 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		5324FB4175445C57477DA86B /* Pods_StepicTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D8A36D6D3D52FD72FCBC8E /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA8D793147E46AC91793A2 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
 		6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		9F1FEDF4427B6572835D62EA /* Pods-StepicTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTV.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTV/Pods-StepicTV.release.xcconfig"; sourceTree = "<group>"; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1214,6 +1400,21 @@
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
 				CE0041AFAFDACBE34B231B16 /* Pods_Stepic.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B149E3F1E735FE70063C961 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22C5FA89C5E541F84E6ED2CF /* Pods_StepicTV.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B149E4F1E735FE80063C961 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2052,6 +2253,8 @@
 				9F9C71481E076B3200EC8DA3 /* Shared */,
 				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
+				1B149E431E735FE80063C961 /* StepicTV */,
+				1B149E551E735FE80063C961 /* StepicTVTests */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* SberbankUniversity */,
@@ -2067,6 +2270,8 @@
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
 				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
 				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
+				1B149E421E735FE70063C961 /* StepicTV.app */,
+				1B149E521E735FE80063C961 /* StepicTVTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2342,6 +2547,77 @@
 			name = Streaks;
 			sourceTree = "<group>";
 		};
+		1B149E431E735FE80063C961 /* StepicTV */ = {
+			isa = PBXGroup;
+			children = (
+				1BE6E90B1E74AA92006B9837 /* Cells */,
+				1BC1E9621E81CAAE006E6728 /* Controllers */,
+				1B149E441E735FE80063C961 /* AppDelegate.swift */,
+				1B7B4CF31E8AD31200615424 /* TVControllerHelper.swift */,
+				1B9B5C931E8D9691006CF88D /* TVPlayer.swift */,
+				1B149E481E735FE80063C961 /* Main.storyboard */,
+				1B149E4B1E735FE80063C961 /* Assets.xcassets */,
+				1B149E4D1E735FE80063C961 /* Info.plist */,
+				1B068CFD1E748E3B0051B57C /* StepicTV-Bridging-Header.h */,
+			);
+			path = StepicTV;
+			sourceTree = "<group>";
+		};
+		1B149E551E735FE80063C961 /* StepicTVTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B149E561E735FE80063C961 /* StepicTVTests.swift */,
+				1B149E581E735FE80063C961 /* Info.plist */,
+			);
+			path = StepicTVTests;
+			sourceTree = "<group>";
+		};
+		1B17A7DF1E85CBF00036C60A /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1BE6E9091E74AA86006B9837 /* CourseTableViewCell.xib */,
+				1BE6E90C1E74AC08006B9837 /* RefreshTableViewCell.xib */,
+				1BC1E9591E81AC31006E6728 /* TitleTextTableViewCell.xib */,
+				1B62BFA51E83154D005FCB8A /* TeachersTableViewCell.xib */,
+				1B17A7D11E85AF780036C60A /* SectionTableViewCell.xib */,
+				1B17A7D01E85AF780036C60A /* SectionTableViewCell.swift */,
+				1B17A7D71E85B7900036C60A /* UnitTableViewCell.swift */,
+				1B17A7D81E85B7900036C60A /* UnitTableViewCell.xib */,
+				1B7B4CEC1E8AB30800615424 /* CoursePreviewTableViewCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		1B7B4CE61E8A811400615424 /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1BC1E9631E81DE22006E6728 /* TeacherCollectionViewCell.xib */,
+				1B7B4CE71E8A817800615424 /* StepTabCollectionViewCell.swift */,
+				1B7B4CE81E8A817800615424 /* StepTabCollectionViewCell.xib */,
+			);
+			name = "Collection View Cells";
+			sourceTree = "<group>";
+		};
+		1B7B4CEB1E8AAE0200615424 /* Steps Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B37594A1E8B14310085A931 /* StepViewController.swift */,
+				1B3759561E8B18910085A931 /* VideoStepViewController.swift */,
+				1B3759571E8B18910085A931 /* VideoStepViewController.xib */,
+				1B37595A1E8B18C00085A931 /* QuizStepViewController.swift */,
+				1B37595B1E8B18C00085A931 /* QuizStepViewController.xib */,
+			);
+			name = "Steps Controllers";
+			sourceTree = "<group>";
+		};
+		1B7B4CEE1E8AC8B600615424 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1B7B4CEF1E8AC8F200615424 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2355,8 +2631,34 @@
 				6A2D83A787103650B0C2E19F /* Pods_SberbankUniversity.framework */,
 				E978D25313465538A2470BA2 /* Pods_Stepic.framework */,
 				5A39D9733A6BA339399F0478 /* Pods_StepicTests.framework */,
+				5324FB4175445C57477DA86B /* Pods_StepicTV.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1BC1E9621E81CAAE006E6728 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B7B4CEE1E8AC8B600615424 /* Profile */,
+				1B149E461E735FE80063C961 /* CoursesViewController.swift */,
+				1B7B4CF51E8AD8F600615424 /* MyCoursesViewController.swift */,
+				1B7A65AD1E7835BC002A9755 /* CoursePreviewViewController.swift */,
+				1BC1E95C1E81B08C006E6728 /* SignInViewController.swift */,
+				1B17A7D41E85B6480036C60A /* UnitViewController.swift */,
+				1B17A7CC1E85AD3A0036C60A /* SectionsViewController.swift */,
+				1B17A7DD1E85C3310036C60A /* StepsViewController.swift */,
+				1B7B4CEB1E8AAE0200615424 /* Steps Controllers */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1BE6E90B1E74AA92006B9837 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1B7B4CE61E8A811400615424 /* Collection View Cells */,
+				1B17A7DF1E85CBF00036C60A /* Table View Cells */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
@@ -2399,6 +2701,7 @@
 				9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */,
 				9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */,
 				9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */,
+				1B95F5851E736B980055D495 /* Extensions.swift */,
 			);
 			name = Shared;
 			path = StepicWatch;
@@ -2413,6 +2716,8 @@
 				0403A15AD3DF220BD701250D /* Pods-Stepic.release.xcconfig */,
 				BEB95337B40E5EA1A5CC59C0 /* Pods-StepicTests.debug.xcconfig */,
 				3F57B4346FD0BE2A8F687821 /* Pods-StepicTests.release.xcconfig */,
+				04EA1DD8A250458B13B99320 /* Pods-StepicTV.debug.xcconfig */,
+				9F1FEDF4427B6572835D62EA /* Pods-StepicTV.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2484,6 +2789,44 @@
 			productName = Stepic;
 			productReference = 08DE94111B8C58AC00D278AB /* Stepic.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1B149E411E735FE70063C961 /* StepicTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B149E5D1E735FE80063C961 /* Build configuration list for PBXNativeTarget "StepicTV" */;
+			buildPhases = (
+				4339ED5ABAB68B9A44FF0C86 /* [CP] Check Pods Manifest.lock */,
+				1B149E3E1E735FE70063C961 /* Sources */,
+				1B149E3F1E735FE70063C961 /* Frameworks */,
+				1B149E401E735FE70063C961 /* Resources */,
+				E3E3F9A96BB63751BA1C847F /* [CP] Embed Pods Frameworks */,
+				21FB3F19DCCC50FFBF834C7D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StepicTV;
+			productName = StepicTV;
+			productReference = 1B149E421E735FE70063C961 /* StepicTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1B149E511E735FE80063C961 /* StepicTVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B149E5E1E735FE80063C961 /* Build configuration list for PBXNativeTarget "StepicTVTests" */;
+			buildPhases = (
+				1B149E4E1E735FE80063C961 /* Sources */,
+				1B149E4F1E735FE80063C961 /* Frameworks */,
+				1B149E501E735FE80063C961 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B149E541E735FE80063C961 /* PBXTargetDependency */,
+			);
+			name = StepicTVTests;
+			productName = StepicTVTests;
+			productReference = 1B149E521E735FE80063C961 /* StepicTVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9F9C71161E076AE000EC8DA3 /* StepicWatch */ = {
 			isa = PBXNativeTarget;
@@ -2563,6 +2906,17 @@
 							};
 						};
 					};
+					1B149E411E735FE70063C961 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3YGLEX9HN3;
+						ProvisioningStyle = Automatic;
+					};
+					1B149E511E735FE80063C961 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3YGLEX9HN3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1B149E411E735FE70063C961;
+					};
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 4562ZPB9BG;
@@ -2594,6 +2948,8 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
+				1B149E411E735FE70063C961 /* StepicTV */,
+				1B149E511E735FE80063C961 /* StepicTVTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2721,6 +3077,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1B149E401E735FE70063C961 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B7B4CEA1E8A817800615424 /* StepTabCollectionViewCell.xib in Resources */,
+				1B149E4C1E735FE80063C961 /* Assets.xcassets in Resources */,
+				1B37595D1E8B18C00085A931 /* QuizStepViewController.xib in Resources */,
+				1B17A7D31E85AF780036C60A /* SectionTableViewCell.xib in Resources */,
+				1BC1E95A1E81AC31006E6728 /* TitleTextTableViewCell.xib in Resources */,
+				1B17A7DA1E85B7910036C60A /* UnitTableViewCell.xib in Resources */,
+				1BE6E90E1E74B0EF006B9837 /* Images.xcassets in Resources */,
+				1BC1E9641E81DE22006E6728 /* TeacherCollectionViewCell.xib in Resources */,
+				1B62BFA61E83154D005FCB8A /* TeachersTableViewCell.xib in Resources */,
+				1BC1E9611E81B95F006E6728 /* Main.storyboard in Resources */,
+				1BE6E90D1E74AC08006B9837 /* RefreshTableViewCell.xib in Resources */,
+				1B3759591E8B18910085A931 /* VideoStepViewController.xib in Resources */,
+				1BE6E90A1E74AA87006B9837 /* CourseTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B149E501E735FE80063C961 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C71151E076AE000EC8DA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2797,6 +3180,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		21FB3F19DCCC50FFBF834C7D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTV/Pods-StepicTV-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4339ED5ABAB68B9A44FF0C86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		914EB098B2CAF1EEEAD05163 /* [CP] Copy Pods Resources */ = {
@@ -2887,6 +3300,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3E3F9A96BB63751BA1C847F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTV/Pods-StepicTV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F5E75AD6D1B1DC95DF53FD74 /* [CP] Copy Pods Resources */ = {
@@ -3385,6 +3813,7 @@
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */,
 				083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */,
+				1B95F5861E736B980055D495 /* Extensions.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
 				08D1EF731BB5636700BE84E6 /* Course+CoreDataProperties.swift in Sources */,
@@ -3511,6 +3940,144 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1B149E3E1E735FE70063C961 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B95F56F1E7367940055D495 /* Assignment.swift in Sources */,
+				1B95F5791E7369890055D495 /* Block+CoreDataProperties.swift in Sources */,
+				1B95F5771E7369760055D495 /* VideosInfo.swift in Sources */,
+				1B95F56D1E7367230055D495 /* Lesson.swift in Sources */,
+				1B95F5951E740DBD0055D495 /* NSDateExtensions.swift in Sources */,
+				1B95F5801E736AB60055D495 /* DictionarySerializable.swift in Sources */,
+				1B95F5751E7368FE0055D495 /* TCBlobDownload.swift in Sources */,
+				1B17A7DB1E85B80B0036C60A /* Images.swift in Sources */,
+				1B95F59A1E740E230055D495 /* UIThreadHelper.swift in Sources */,
+				1B95F58B1E736C570055D495 /* Reply.swift in Sources */,
+				1B95F5981E740E230055D495 /* ConnectionHelper.swift in Sources */,
+				1B95F5941E740D620055D495 /* AuthManager.swift in Sources */,
+				1B068D021E7490180051B57C /* TCBlobDownloadManager.swift in Sources */,
+				1B95F5871E736BEE0055D495 /* CourseMetainfoEntity.swift in Sources */,
+				1B95F59C1E740E230055D495 /* AnalyticsHelper.swift in Sources */,
+				1B17A7CD1E85AD3A0036C60A /* SectionsViewController.swift in Sources */,
+				1B95F5701E7367DF0055D495 /* Assignment+CoreDataProperties.swift in Sources */,
+				1B95F57A1E7369A80055D495 /* VideoURL+CoreDataProperties.swift in Sources */,
+				1BE6E9001E749E35006B9837 /* ControllerHelper.swift in Sources */,
+				1B95F5931E740D3E0055D495 /* Session.swift in Sources */,
+				1B95F5731E7368AE0055D495 /* CoreDataHelper.swift in Sources */,
+				1B95F5AD1E740FF40055D495 /* MatchingDataset.swift in Sources */,
+				1B62BFA71E831622005FCB8A /* TeachersTableViewCell.swift in Sources */,
+				1B068CFF1E748F6D0051B57C /* RegistrationErrorInfo.swift in Sources */,
+				1B95F5AC1E740FF40055D495 /* FreeAnswerDataset.swift in Sources */,
+				1B95F5A71E740E660055D495 /* Model.xcdatamodeld in Sources */,
+				1B95F5B21E740FFE0055D495 /* FreeAnswerReply.swift in Sources */,
+				1B95F5B51E740FFE0055D495 /* MatchingReply.swift in Sources */,
+				1B17A7D21E85AF780036C60A /* SectionTableViewCell.swift in Sources */,
+				1BC1E9661E81E689006E6728 /* UIImageViewExtension.swift in Sources */,
+				1B7A65AC1E78324D002A9755 /* AnalyticsReporter.swift in Sources */,
+				1B95F59B1E740E230055D495 /* Time.swift in Sources */,
+				1B7B4CF71E8AD93700615424 /* CoursesJoinManager.swift in Sources */,
+				1B7B4CE91E8A817800615424 /* StepTabCollectionViewCell.swift in Sources */,
+				1B95F5B41E740FFE0055D495 /* SortingReply.swift in Sources */,
+				1B37594B1E8B14310085A931 /* StepViewController.swift in Sources */,
+				1B7B4CF81E8AD9BE00615424 /* TabsInfo.swift in Sources */,
+				1B95F57D1E736A220055D495 /* User+CoreDataProperties.swift in Sources */,
+				1B17A7DE1E85C3310036C60A /* StepsViewController.swift in Sources */,
+				1B95F5881E736C140055D495 /* Section+CoreDataProperties.swift in Sources */,
+				1B7B4CED1E8AB30800615424 /* CoursePreviewTableViewCell.swift in Sources */,
+				1B068CFE1E748F620051B57C /* CacheManager.swift in Sources */,
+				1B3759581E8B18910085A931 /* VideoStepViewController.swift in Sources */,
+				1B95F56E1E73678B0055D495 /* Step.swift in Sources */,
+				1B37595C1E8B18C00085A931 /* QuizStepViewController.swift in Sources */,
+				1B95F5661E73661D0055D495 /* Course.swift in Sources */,
+				1B95F56A1E7366E20055D495 /* Video.swift in Sources */,
+				1B9B5C941E8D9691006CF88D /* TVPlayer.swift in Sources */,
+				1B95F5B31E740FFE0055D495 /* MathReply.swift in Sources */,
+				1B95F57B1E7369CD0055D495 /* VideoURL.swift in Sources */,
+				1B149E5F1E7361C60063C961 /* ApiDataDownloader.swift in Sources */,
+				1BE6E9081E74AA23006B9837 /* LabelExtension.swift in Sources */,
+				1B95F5901E736D600055D495 /* PathManager.swift in Sources */,
+				1B95F57F1E736A9E0055D495 /* ApiRequest.swift in Sources */,
+				1B95F56C1E7367160055D495 /* Section.swift in Sources */,
+				1BC1E95B1E81AE01006E6728 /* TitleTextTableViewCell.swift in Sources */,
+				1B95F5681E7366CA0055D495 /* Parser.swift in Sources */,
+				1B7A65AE1E7835BC002A9755 /* CoursePreviewViewController.swift in Sources */,
+				1B9B5C901E8D671F006CF88D /* LastStep.swift in Sources */,
+				1BE6E9021E749FD1006B9837 /* StepicsAPI.swift in Sources */,
+				1B95F5AE1E740FF40055D495 /* FillBlanksDataset.swift in Sources */,
+				1B149E471E735FE80063C961 /* CoursesViewController.swift in Sources */,
+				1B95F5841E736B290055D495 /* DataConvertable.swift in Sources */,
+				1B95F5A41E740E230055D495 /* AlertManager.swift in Sources */,
+				1B7B4CF21E8ACB8100615424 /* UserActivity.swift in Sources */,
+				1B17A7DC1E85C07D0036C60A /* SectionNavigationDelegate.swift in Sources */,
+				1B95F5691E7366D60055D495 /* StepicApplicationsInfo.swift in Sources */,
+				1B95F5811E736AC10055D495 /* Sorter.swift in Sources */,
+				1B95F5721E73688B0055D495 /* Step+CoreDataProperties.swift in Sources */,
+				1B95F5B61E740FFE0055D495 /* FillBlanksReply.swift in Sources */,
+				1B95F5641E73656B0055D495 /* User.swift in Sources */,
+				1B95F5B01E740FFE0055D495 /* TextReply.swift in Sources */,
+				1B95F5A91E740FF40055D495 /* ChoiceDataset.swift in Sources */,
+				1B7B4CF41E8AD31200615424 /* TVControllerHelper.swift in Sources */,
+				1B95F58A1E736C440055D495 /* Submission.swift in Sources */,
+				1B95F5671E7366850055D495 /* Course+CoreDataProperties.swift in Sources */,
+				1BE6E9011E749F05006B9837 /* APIDefaults.swift in Sources */,
+				1B95F5A51E740E5E0055D495 /* Progress.swift in Sources */,
+				1B95F5911E736D790055D495 /* Dataset.swift in Sources */,
+				1B95F5B71E7410B00055D495 /* Reachability.m in Sources */,
+				1B7B4CF61E8AD8F600615424 /* MyCoursesViewController.swift in Sources */,
+				1B95F57C1E7369E00055D495 /* DeviceInfo.swift in Sources */,
+				1B7B4CF01E8AC8F200615424 /* ProfileViewController.swift in Sources */,
+				1B95F5B11E740FFE0055D495 /* NumberReply.swift in Sources */,
+				1B7B4CF11E8ACB7000615424 /* UserActivitiesAPI.swift in Sources */,
+				1B95F57E1E736A370055D495 /* StepicToken.swift in Sources */,
+				1B95F59E1E740E230055D495 /* GlobalFunctions.swift in Sources */,
+				1B95F58C1E736C6D0055D495 /* Video+CoreDataProperties.swift in Sources */,
+				1BE6E9051E74A955006B9837 /* RefreshTableViewCell.swift in Sources */,
+				1B95F5781E7369800055D495 /* Block.swift in Sources */,
+				1B95F5AB1E740FF40055D495 /* SortingDataset.swift in Sources */,
+				1B95F5AA1E740FF40055D495 /* StringDatasetExtension.swift in Sources */,
+				1B149E451E735FE80063C961 /* AppDelegate.swift in Sources */,
+				1B95F5A81E740F020055D495 /* AnalyticsEvents.swift in Sources */,
+				1BE6E9031E74A93D006B9837 /* CourseTableViewCell.swift in Sources */,
+				1B62BFA81E831814005FCB8A /* TeacherCollectionViewCell.swift in Sources */,
+				1B95F59D1E740E230055D495 /* GCDThings.swift in Sources */,
+				1B95F5651E73660C0055D495 /* JSONInitializable.swift in Sources */,
+				1BC1E9671E81E6B1006E6728 /* UIViewExtensions.swift in Sources */,
+				1B95F58F1E736D530055D495 /* ErrorEnums.swift in Sources */,
+				1B95F59F1E740E230055D495 /* TimeFormatHelper.swift in Sources */,
+				1BC1E95F1E81B2F7006E6728 /* AuthNavigationViewController.swift in Sources */,
+				1B95F5631E7364DE0055D495 /* Meta.swift in Sources */,
+				1B95F56B1E7366F60055D495 /* Attempt.swift in Sources */,
+				1BE6E9071E74AA04006B9837 /* Constants.swift in Sources */,
+				1B17A7D51E85B6480036C60A /* UnitViewController.swift in Sources */,
+				1B95F58E1E736D460055D495 /* SearchResult.swift in Sources */,
+				1BC1E95D1E81B08C006E6728 /* SignInViewController.swift in Sources */,
+				1B95F5921E740C940055D495 /* ApplicationInfo.swift in Sources */,
+				1B95F5A61E740E5E0055D495 /* Unit.swift in Sources */,
+				1B17A7D91E85B7910036C60A /* UnitTableViewCell.swift in Sources */,
+				1B95F5AF1E740FFE0055D495 /* ChoiceReply.swift in Sources */,
+				1B17A7CF1E85AE970036C60A /* UIColorExtensions.swift in Sources */,
+				1B95F5821E736AFD0055D495 /* Unit+CoreDataProperties.swift in Sources */,
+				1B068D001E748F730051B57C /* AuthAPI.swift in Sources */,
+				1B95F58D1E736D2A0055D495 /* Alamofire-SwiftyJSON.swift in Sources */,
+				1B95F5831E736B0B0055D495 /* CoursePlainEntity.swift in Sources */,
+				1B95F5891E736C2B0055D495 /* Progress+CoreDataProperties.swift in Sources */,
+				1B95F5711E7367F60055D495 /* Lesson+CoreDataProperties.swift in Sources */,
+				1B9B5C911E8D6731006CF88D /* LastStep+CoreDataProperties.swift in Sources */,
+				1B95F5741E7368F40055D495 /* VideoDownloadDelegate.swift in Sources */,
+				1B95F5621E7364CC0055D495 /* AuthInfo.swift in Sources */,
+				1B9B5C921E8D6798006CF88D /* ButtonExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B149E4E1E735FE80063C961 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B149E571E735FE80063C961 /* StepicTVTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C711F1E076AE000EC8DA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3541,6 +4108,11 @@
 			isa = PBXTargetDependency;
 			target = 08DE94101B8C58AC00D278AB /* Stepic */;
 			targetProxy = 085D5CDE1D007F2200092060 /* PBXContainerItemProxy */;
+		};
+		1B149E541E735FE80063C961 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B149E411E735FE70063C961 /* StepicTV */;
+			targetProxy = 1B149E531E735FE80063C961 /* PBXContainerItemProxy */;
 		};
 		9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3589,6 +4161,14 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		1B149E481E735FE80063C961 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B149E491E735FE80063C961 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		9F9C71191E076AE000EC8DA3 /* Interface.storyboard */ = {
@@ -3831,6 +4411,90 @@
 			};
 			name = Release;
 		};
+		1B149E591E735FE80063C961 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04EA1DD8A250458B13B99320 /* Pods-StepicTV.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				INFOPLIST_FILE = StepicTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepicTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "StepicTV/StepicTV-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		1B149E5A1E735FE80063C961 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F1FEDF4427B6572835D62EA /* Pods-StepicTV.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				INFOPLIST_FILE = StepicTV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepicTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "StepicTV/StepicTV-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		1B149E5B1E735FE80063C961 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				INFOPLIST_FILE = StepicTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepicTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StepicTV.app/StepicTV";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		1B149E5C1E735FE80063C961 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 3YGLEX9HN3;
+				INFOPLIST_FILE = StepicTVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepicTVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StepicTV.app/StepicTV";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
 		9F9C71341E076AE100EC8DA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3952,6 +4616,24 @@
 			buildConfigurations = (
 				08DE94311B8C58AC00D278AB /* Debug */,
 				08DE94321B8C58AC00D278AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B149E5D1E735FE80063C961 /* Build configuration list for PBXNativeTarget "StepicTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B149E591E735FE80063C961 /* Debug */,
+				1B149E5A1E735FE80063C961 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B149E5E1E735FE80063C961 /* Build configuration list for PBXNativeTarget "StepicTVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B149E5B1E735FE80063C961 /* Debug */,
+				1B149E5C1E735FE80063C961 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" rowHeight="103" id="fBs-An-CcD" customClass="SectionTableViewCell" customModule="StepicTV" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="103"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fBs-An-CcD" id="S0Q-fX-qc8">
+                <rect key="frame" x="0.0" y="0.0" width="1904" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uF1-1g-1Y0">
+                        <rect key="frame" x="24" y="36" width="30" height="30"/>
+                        <color key="backgroundColor" red="0.1190913096" green="0.92267745729999995" blue="0.72304755450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="DcS-Ci-cNy"/>
+                            <constraint firstAttribute="width" constant="30" id="iON-gP-mhO"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJd-0q-kdj">
+                        <rect key="frame" x="86" y="8" width="1826" height="58"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6r-H0-dN5">
+                        <rect key="frame" x="86" y="74" width="1818" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uF1-1g-1Y0" firstAttribute="centerY" secondItem="S0Q-fX-qc8" secondAttribute="centerY" id="4hA-mU-ysD"/>
+                    <constraint firstAttribute="topMargin" secondItem="mJd-0q-kdj" secondAttribute="top" id="G2J-WH-dBA"/>
+                    <constraint firstItem="e6r-H0-dN5" firstAttribute="top" secondItem="mJd-0q-kdj" secondAttribute="bottom" constant="8" id="P1d-Ti-LXm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mJd-0q-kdj" secondAttribute="trailing" id="RN7-5n-laC"/>
+                    <constraint firstItem="mJd-0q-kdj" firstAttribute="leading" secondItem="uF1-1g-1Y0" secondAttribute="trailing" constant="32" id="Sn7-av-mha"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="uF1-1g-1Y0" secondAttribute="leading" constant="-16" id="UHR-Pk-F1c"/>
+                    <constraint firstItem="e6r-H0-dN5" firstAttribute="leading" secondItem="mJd-0q-kdj" secondAttribute="leading" id="vt9-3A-CyC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="e6r-H0-dN5" secondAttribute="trailing" constant="16" id="AWc-Mb-prU"/>
+            </constraints>
+            <connections>
+                <outlet property="datesLabel" destination="e6r-H0-dN5" id="2J0-2J-d7a"/>
+                <outlet property="progressView" destination="uF1-1g-1Y0" id="8F1-rC-YzA"/>
+                <outlet property="titleLabel" destination="mJd-0q-kdj" id="Pa6-BF-jj0"/>
+            </connections>
+            <point key="canvasLocation" x="99" y="133.5"/>
+        </tableViewCell>
+    </objects>
+</document>

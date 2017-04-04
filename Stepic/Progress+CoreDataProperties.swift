@@ -12,7 +12,7 @@
 import Foundation
 import CoreData
 
-extension Progress {
+extension Progress{
 
     @NSManaged var managedId: String?
     @NSManaged var managedIsPassed: NSNumber?

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Images {
     static let downloadFromCloud = UIImage(named: "Download From Cloud Bounded")!

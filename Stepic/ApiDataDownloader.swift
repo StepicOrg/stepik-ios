@@ -247,11 +247,11 @@ class ApiDataDownloader: NSObject {
     }
     
     func getProgressesByIds(_ ids: [String], deleteProgresses : [Progress], refreshMode: RefreshMode, success : (([Progress]) -> Void)?, failure : @escaping (_ error : Error) -> Void) -> Request? {
-        
+
         let manager = Alamofire.SessionManager.default
         manager.session.configuration.timeoutIntervalForRequest = 120
 
-        
+
         let requestString = "progresses"
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
         var params : Parameters = [:]
@@ -687,14 +687,19 @@ class ApiDataDownloader: NSObject {
         })
     }
     
+    static let stepics = StepicsAPI()
+    static let userActivities = UserActivitiesAPI()
+
+    #if os(iOS)
     static let devices = DevicesAPI()
     static let discussionProxies = DiscussionProxiesAPI()
     static let comments = CommentsAPI()
     static let votes = VotesAPI()
-    static let stepics = StepicsAPI()
     static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
     static let lastSteps = LastStepsAPI()
+    #endif
+
 }
 
 enum RefreshMode {

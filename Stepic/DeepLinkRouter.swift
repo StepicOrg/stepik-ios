@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 class DeepLinkRouter {
-    
+    @available(iOS 8.0, *)
     static func routeFromDeepLink(_ link: URL, completion: @escaping (UIViewController?, Bool) -> Void) {
         
         func getID(_ stringId: String, reversed: Bool) -> Int? {

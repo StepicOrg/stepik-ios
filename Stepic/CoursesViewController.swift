@@ -122,19 +122,19 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func refreshBegan() {
     }
-    
+
     func refreshCourses() {
         isRefreshing = true
         refreshBegan()
         performRequest({
-            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
+            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: {
                 (ids, meta) -> Void in
-                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: {
                     [weak self]
                     (newCourses) -> Void in
                     
                     guard let s = self else { return }
-                    
+
                     let coursesCompletion = {
                         s.courses = Sorter.sort(newCourses, byIds: ids)
                         s.meta = meta
@@ -163,7 +163,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         if let progress = course.progress {
                             progresses += [progress]
                         }
-                        
+
                         if let lastStepId = course.lastStepId {
                             lastStepIds += [lastStepId]
                         }
@@ -181,14 +181,14 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         CoreDataHelper.instance.save()
 
                         coursesCompletion()
-                        
-                        
-                    }, failure: { 
+
+
+                    }, failure: {
                         error in
                         coursesCompletion()
                         print("Error while dowloading progresses")
                     })
-                    
+
                     
                 }, failure: { 
                     [weak self]
@@ -204,13 +204,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 self?.handleRefreshError()
             })
         }, error:  {
-            [weak self] 
+            [weak self]
             error in
             guard let s = self else { return }
             if error == PerformRequestError.noAccessToRefreshToken {
                 AuthInfo.shared.token = nil
                 RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in 
+                    [weak self] in
                     self?.getCachedCourses(completion: {
                         self?.refreshCourses()
                     })
@@ -298,10 +298,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
+            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: {
                 (idsImmutable, meta) -> Void in
                 var ids = idsImmutable
-                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: {
                     [weak self]
                     (newCoursesImmutable) -> Void in
                     guard let s = self else { return }
@@ -337,13 +337,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     
             })
             }, error: {
-                [weak self] 
+                [weak self]
                 error in
                 guard let s = self else { return }
                 if error == PerformRequestError.noAccessToRefreshToken {
                     AuthInfo.shared.token = nil
                     RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in 
+                        [weak self] in
                         self?.getCachedCourses(completion: {
                             self?.refreshCourses()
                         })
@@ -382,22 +382,22 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
     }
-    
+
     func continueLearning(course: Course) {
-        
-        guard 
+
+        guard
         let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
         let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController,
         let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
             return
         }
-        
+
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
         unitsVC.unitId = course.lastStep?.unitId
         stepsVC.stepId = course.lastStep?.stepId
         stepsVC.unitId = course.lastStep?.unitId
-        
+
         //For prev-next step buttons navigation
         stepsVC.sectionNavigationDelegate = unitsVC
 
@@ -411,16 +411,16 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             navigationController?.pushViewController(sectionsVC, animated: true)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.sectionsOpened, parameters: nil)
         }
-        
+
     }
-    
+
     func continuePressed(course: Course) {
         SVProgressHUD.show()
-        
+
         guard let lastStepId = course.lastStepId else {
             return
         }
-        
+
         let errorBlock = {
             [weak self] in
             DispatchQueue.main.async {
@@ -428,7 +428,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 self?.continueLearning(course: course)
             }
         }
-        
+
         let successBlock = {
             [weak self] in
             DispatchQueue.main.async {
@@ -436,24 +436,24 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 self?.continueLearning(course: course)
             }
         }
-        
+
         print("LastStep stepId before refresh: \(course.lastStep?.stepId)")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
             [weak self]
             newLastSteps -> Void in
-            
-            guard let newLastStep = newLastSteps.first, 
+
+            guard let newLastStep = newLastSteps.first,
                 (newLastSteps.count > 0 && newLastSteps.count < 2) else {
                 errorBlock()
                 return
             }
 
             print("new stepId \(newLastStep.stepId)")
-            
+
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
             successBlock()
-            
+
         }, error: {
             error in
             print("Error while downloading last step")

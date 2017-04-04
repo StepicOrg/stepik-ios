@@ -17,6 +17,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
+    @IBOutlet weak var currentStreakLabel: UILabel!
     @IBOutlet weak var signOutButton: UIButton!
     
     @IBOutlet weak var currentStreakLabel: UILabel!
@@ -33,7 +34,7 @@ class ProfileViewController: UITableViewController {
     ]
 
     fileprivate func localize() {
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
+        signInButton.setTitle(, for: UIControlState())
         signOutButton.setTitle(NSLocalizedString("SignOut", comment: ""), for: UIControlState())
         currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
         longestStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
@@ -44,7 +45,7 @@ class ProfileViewController: UITableViewController {
 
         tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
         
-        localize() 
+        localize()
         setStreaks(visible: false)
         signInButton.setStepicWhiteStyle()
         avatarImageView.setRoundedBounds(width: 0)

@@ -73,14 +73,14 @@ class CoursePreviewViewController: UIViewController {
     
     fileprivate func initBarButtonItems(dropAvailable: Bool) {
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
-        if dropAvailable { 
+        if dropAvailable {
             let moreBarButtonItem = UIBarButtonItem(image: Images.points.vertical, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
             self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
         } else {
             self.navigationItem.rightBarButtonItem = shareBarButtonItem
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "TitleTextTableViewCell", bundle: nil), forCellReuseIdentifier: "TitleTextTableViewCell")
@@ -92,7 +92,7 @@ class CoursePreviewViewController: UIViewController {
         tableView.estimatedRowHeight = 44.0
         videoWebView.scrollView.isScrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
-                        
+
         if let c = course {
             sectionTitles = []
             for section in c.sections {
@@ -109,7 +109,7 @@ class CoursePreviewViewController: UIViewController {
                 loadVimeoURL(NSURL(string: c.introURL) as! URL)
             }
             updateSections()
-            
+
             initBarButtonItems(dropAvailable: c.enrolled)
         }
         didLoad = true
@@ -136,13 +136,13 @@ class CoursePreviewViewController: UIViewController {
     }
     
     func moreButtonPressed(_ button: UIBarButtonItem) {
-        
+
         guard let c = course else {
             return
         }
-        
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("DropCourse", comment: ""), style: .destructive, handler: {
             [weak self]
             action in
@@ -158,7 +158,7 @@ class CoursePreviewViewController: UIViewController {
                     CoursesJoinManager.sharedManager.deletedCourses += [c]
                     if #available(iOS 9.0, *) {
                         WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    } 
+                    }
                     self?.initBarButtonItems(dropAvailable: c.enrolled)
                     _ = self?.navigationController?.popToRootViewController(animated: true)
                     }, error:  {
@@ -168,17 +168,17 @@ class CoursePreviewViewController: UIViewController {
                 })
             })
         }))
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-      
-        
+
+
         if let popoverController = alert.popoverPresentationController {
             popoverController.barButtonItem = button
         }
-        
+
         self.present(alert, animated: true)
     }
-    
+
     fileprivate func updateSections() {
         if let c = course {
             let successBlock = {
@@ -374,10 +374,10 @@ class CoursePreviewViewController: UIViewController {
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.JoinPressed.signed, parameters: nil)
         }
-        
+
         //TODO : Add statuses
         if let c = course {
-            
+
             if !c.enrolled {
                 SVProgressHUD.show()
                 sender.isEnabled = false
@@ -391,14 +391,14 @@ class CoursePreviewViewController: UIViewController {
                     CoursesJoinManager.sharedManager.addedCourses += [c]
                     if #available(iOS 9.0, *) {
                         WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    } 
+                    }
                     self?.performSegue(withIdentifier: "showSections", sender: nil)
                     self?.initBarButtonItems(dropAvailable: c.enrolled)
                     }, error:  {
                         status in
                         SVProgressHUD.showError(withStatus: status)
                         sender.isEnabled = true
-                }) 
+                })
             } else {
                 self.performSegue(withIdentifier: "showSections", sender: nil)
             }

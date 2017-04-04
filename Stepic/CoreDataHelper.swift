@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 class CoreDataHelper: NSObject {
     static var instance = CoreDataHelper()
@@ -23,7 +22,12 @@ class CoreDataHelper: NSObject {
         let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
         model = NSManagedObjectModel(contentsOf: modelURL)!
         let fileManager = FileManager.default
-        let docsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
+        #if os(iOS)
+            let docsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
+        #else
+            let docsURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).last! as URL
+        #endif
+        
         storeURL = docsURL.appendingPathComponent("base.sqlite")
         
         coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)

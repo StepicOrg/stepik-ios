@@ -4,19 +4,26 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-def all_pods
-    pod 'Alamofire', :git => 'https://github.com/Homely/Alamofire.git', :branch => 'ios8'
-    pod 'SwiftyJSON', '3.1.0'
+def shared_pods
+    pod 'Alamofire'
+    pod 'SwiftyJSON'
     pod 'SDWebImage'
+    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+end
+
+def all_pods
+    shared_pods
+    
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
-    pod 'FLKAutoLayout', '0.2.1'
+    
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'DZNEmptyDataSet'
     
+    pod 'DZNEmptyDataSet'
+    pod 'FLKAutoLayout', '0.2.1'
     pod 'YandexMobileMetrica/Dynamic'
 
     pod 'Firebase', '<= 3.4.0'
@@ -28,7 +35,6 @@ def all_pods
     
     pod 'Mixpanel-swift'
 
-    pod "MagicalRecord"
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
@@ -39,7 +45,7 @@ def all_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
-    pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
 end
 
 target 'Stepic' do
@@ -52,4 +58,10 @@ end
 
 target 'SberbankUniversity' do 
     all_pods
+end
+
+target 'StepicTV' do
+    platform :tvos, '9.0'
+    shared_pods
+    pod "SwiftSoup"
 end
