@@ -520,7 +520,11 @@ extension CoursePreviewViewController : UITableViewDelegate {
             return 0
         }
         if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
-            return 167
+            if course?.instructorsArray.count == 0 {
+                return 0
+            } else {
+                return 167
+            }
         }
         return heights[displayingInfoType.rawValue][indexPath.row]
     }
