@@ -21,7 +21,7 @@ class ProfileViewController: UITableViewController {
         
     @IBOutlet weak var streaksView: StreaksView!
     
-    var heightForRows = [[131], [75], [40]]
+    var heightForRows = [[131], [0], [40]]
     let selectionForRows = [[false], [false], [true]]
     let sectionTitles = [
         NSLocalizedString("UserInfo", comment: ""),

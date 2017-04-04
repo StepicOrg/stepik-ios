@@ -93,6 +93,9 @@ class SectionTableViewCell: UITableViewCell {
                 scoreProgressView.progress = Float(progress.score) / Float(progress.cost)
                 scoreLabel.text = "\(progress.score)/\(progress.cost)"
             }
+        } else {
+            scoreProgressView.isHidden = true
+            scoreLabel.isHidden = true
         }
                 
         updateDownloadButton(section)
@@ -104,14 +107,10 @@ class SectionTableViewCell: UITableViewCell {
             titleLabel.isEnabled = false
             datesLabel.isEnabled = false
             downloadButton.isHidden = true
-            scoreProgressView.isHidden = true
-            scoreLabel.isHidden = true
         } else {
             titleLabel.isEnabled = true
             datesLabel.isEnabled = true
             downloadButton.isHidden = false
-            scoreProgressView.isHidden = false
-            scoreLabel.isHidden = false
         }
         
     }

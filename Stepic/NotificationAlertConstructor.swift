@@ -66,7 +66,7 @@ class NotificationAlertConstructor {
             kCRToastAnimationInDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
             kCRToastAnimationOutDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
             kCRToastAnimationInTimeIntervalKey : 0.3,
-            kCRToastTimeIntervalKey : 10.0,
+            kCRToastTimeIntervalKey : NSNumber(value: 10.0),
             kCRToastAnimationOutTimeIntervalKey : 0.3,
             kCRToastSubtitleTextMaxNumberOfLinesKey : 3,
             kCRToastTextMaxNumberOfLinesKey : 3,
