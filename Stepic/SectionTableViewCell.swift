@@ -92,6 +92,8 @@ class SectionTableViewCell: UITableViewCell {
             } else {
                 scoreProgressView.progress = Float(progress.score) / Float(progress.cost)
                 scoreLabel.text = "\(progress.score)/\(progress.cost)"
+                scoreProgressView.isHidden = false
+                scoreLabel.isHidden = false
             }
         } else {
             scoreProgressView.isHidden = true
