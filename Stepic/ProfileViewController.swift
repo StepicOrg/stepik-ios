@@ -99,20 +99,22 @@ class ProfileViewController: UITableViewController {
             signInButton.isHidden = true
         }
         
-        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
-            [weak self] 
-            activity in
-            if let s = self {
-                s.setStreaks(activity: activity)
-                s.heightForRows[1][0] = 108
-                s.tableView.beginUpdates()
-                s.tableView.endUpdates()
-            }
-        }, error: {
-            error in
-            
-            //TODO: Display error button
-        })
+        if AuthInfo.shared.isAuthorized {
+            _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
+                [weak self] 
+                activity in
+                if let s = self {
+                    s.setStreaks(activity: activity)
+                    s.heightForRows[1][0] = 108
+                    s.tableView.beginUpdates()
+                    s.tableView.endUpdates()
+                }
+            }, error: {
+                error in
+                
+                //TODO: Display error button
+            })
+        }
         
         print("beginning updates")
         tableView.reloadData()
