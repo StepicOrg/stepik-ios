@@ -188,3 +188,6 @@ CurrentBestStreakAlertTopText = "Личный рекорд - отличная м
 CurrentBestStreakAlertBottomText = "Решайте задачи каждый день и улучшайте свои показатели!";
 ReceiveNotifications = "Получать напоминания";
 Teachers = "Преподаватели";
+YouAreSolving = "Вы решаете уже";
+SolveToImprove = "Решите задачу сегодня для улучшения результата!";
+TapToLearnAboutStreaks = "Нажмите, чтобы узнать о рекорде";

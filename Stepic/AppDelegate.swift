@@ -114,6 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func checkStreaks() {
+        func dayLocalizableFor(daysCnt: Int) -> String {
+            switch (daysCnt % 10) {
+            case 1: return NSLocalizedString("days1", comment: "")
+            case 2, 3, 4: return NSLocalizedString("days234", comment: "")
+            default: return NSLocalizedString("days567890", comment: "")
+            }
+        }
         guard let userId = AuthInfo.shared.userId else {
             return
         }
@@ -121,8 +128,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [weak self]
             userActivity in
             if userActivity.needsToSolveToday {
-                let streakText = "Your current streak: \(userActivity.currentStreak).\nSolve anything today to improve your streak!"
-                let subtitleText = "Tap to learn more about streaks."
+                let streakText = "\(NSLocalizedString("YouAreSolving", comment: "")) \(userActivity.currentStreak) \(dayLocalizableFor(daysCnt: userActivity.currentStreak)) \(NSLocalizedString("InARow", comment: "")).\n\(NSLocalizedString("SolveToImprove", comment: ""))"
+                let subtitleText = "\(NSLocalizedString("TapToLearnAboutStreaks", comment: ""))"
                 NotificationAlertConstructor.sharedConstructor.presentStreakNotificationFake(streakText, subtitleText: subtitleText, success: {
                     [weak self] in
                     self?.presentStreaks(userActivity: userActivity)
