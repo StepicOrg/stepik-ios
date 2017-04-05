@@ -14,14 +14,9 @@ class LastStep: NSManagedObject, JSONInitializable {
     
     typealias idType = String
     
-    // Insert code here to add functionality to your managed object subclass
     convenience required init(json: JSON) {
         self.init()
-        print("Initializing the LastStep object from JSON: \(json)")
-        id = json["id"].stringValue
-        unitId = json["unit"].int
-        stepId = json["step"].int
-//        initialize(json)
+        initialize(json)
     }
     
     func initialize(_ json: JSON) {

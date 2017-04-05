@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Progress: NSManagedObject {
+class Progress: NSManagedObject, JSONInitializable {
 
-// Insert code here to add functionality to your managed object subclass
-
+    typealias idType = String
+    
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
@@ -30,6 +30,10 @@ class Progress: NSManagedObject {
     
     func update(json: JSON) {
         initialize(json)
+    }
+    
+    func hasEqualId(json: JSON) -> Bool {
+        return id == json["id"].stringValue
     }
     
     static func deleteAllStoredProgresses() {

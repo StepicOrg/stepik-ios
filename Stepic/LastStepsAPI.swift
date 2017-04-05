@@ -19,6 +19,3 @@ class LastStepsAPI : APIEndpoint {
     }
 }
 
-enum RetrieveError : Error {
-    case connectionError, badStatus
-}

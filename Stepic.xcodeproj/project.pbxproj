@@ -30,6 +30,28 @@
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
+		080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		080CE1471E9560EB0089A27F /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		080CE14A1E9562430089A27F /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		080CE14D1E9562BF0089A27F /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		080CE1531E9563170089A27F /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
+		080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
@@ -801,6 +823,17 @@
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
+		080CE1421E955D300089A27F /* CoursesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPI.swift; sourceTree = "<group>"; };
+		080CE1451E9560EB0089A27F /* SectionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsAPI.swift; sourceTree = "<group>"; };
+		080CE1481E9562430089A27F /* LessonsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsAPI.swift; sourceTree = "<group>"; };
+		080CE14B1E9562BF0089A27F /* UsersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersAPI.swift; sourceTree = "<group>"; };
+		080CE14E1E9562F30089A27F /* StepsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsAPI.swift; sourceTree = "<group>"; };
+		080CE1511E9563170089A27F /* AssignmentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentsAPI.swift; sourceTree = "<group>"; };
+		080CE1541E9563590089A27F /* ProgressesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesAPI.swift; sourceTree = "<group>"; };
+		080CE1571E9566220089A27F /* ViewsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsAPI.swift; sourceTree = "<group>"; };
+		080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsAPI.swift; sourceTree = "<group>"; };
+		080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptsAPI.swift; sourceTree = "<group>"; };
+		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
 		080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCoursesViewController.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
@@ -1552,6 +1585,17 @@
 				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
+				080CE1421E955D300089A27F /* CoursesAPI.swift */,
+				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
+				080CE1481E9562430089A27F /* LessonsAPI.swift */,
+				080CE14B1E9562BF0089A27F /* UsersAPI.swift */,
+				080CE14E1E9562F30089A27F /* StepsAPI.swift */,
+				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
+				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
+				080CE1571E9566220089A27F /* ViewsAPI.swift */,
+				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
+				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
+				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -2986,6 +3030,7 @@
 				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */,
 				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
+				080CE1531E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
 				08D120791C937B2200A54ABC /* AuthManager.swift in Sources */,
 				0895A13C1E43836B00FE22DD /* FillBlanksReply.swift in Sources */,
@@ -3057,6 +3102,7 @@
 				08D120931C937B2200A54ABC /* UnknownTypeQuizViewController.swift in Sources */,
 				0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				08D120941C937B2200A54ABC /* CoursesJoinManager.swift in Sources */,
+				080CE14A1E9562430089A27F /* LessonsAPI.swift in Sources */,
 				08D120951C937B2200A54ABC /* SortingDataset.swift in Sources */,
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
@@ -3076,6 +3122,7 @@
 				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
+				080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */,
 				084F7AA81E76EF690088368A /* LastStep.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -3087,6 +3134,7 @@
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				08263D9D1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				082BE3B31E67686B006BC60F /* RoutingManager.swift in Sources */,
+				080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
@@ -3096,6 +3144,7 @@
 				08D035261D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
+				080CE14D1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */,
 				08F476231E82C1480018E82C /* StreaksView.swift in Sources */,
 				08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */,
@@ -3107,6 +3156,7 @@
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
+				080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
 				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
 				08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
@@ -3174,6 +3224,8 @@
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */,
+				080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
 				08D120D41C937B2200A54ABC /* GeneralInfoTableViewCell.swift in Sources */,
 				08D120D51C937B2200A54ABC /* NumberQuizViewController.swift in Sources */,
@@ -3221,6 +3273,7 @@
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				08263D9B1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
+				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
@@ -3242,10 +3295,12 @@
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08E6BB6C1DC8EB45006622EC /* UserActivity.swift in Sources */,
+				080CE1471E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08ECC4481DB8D3D60005D401 /* GreenNavigationViewController.swift in Sources */,
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
+				080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
 				086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
@@ -3282,6 +3337,7 @@
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
+				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
@@ -3331,6 +3387,7 @@
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
+				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
@@ -3362,6 +3419,7 @@
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
@@ -3393,6 +3451,7 @@
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
+				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				08263D9A1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
@@ -3414,6 +3473,7 @@
 				08263D8A1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
+				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
@@ -3442,6 +3502,7 @@
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,
+				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
@@ -3457,6 +3518,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
+				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
@@ -3482,6 +3544,7 @@
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
+				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				08263D921DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
@@ -3519,6 +3582,7 @@
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
+				080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */,
 				086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
@@ -3528,6 +3592,7 @@
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
@@ -3568,6 +3633,7 @@
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
+				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
