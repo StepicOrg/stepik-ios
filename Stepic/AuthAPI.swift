@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class AuthAPI {
-    func signUpWith(socialToken: String, provider: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    @discardableResult func signUpWith(socialToken: String, provider: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         let params: Parameters = [
             "provider": provider,
             "code": socialToken,

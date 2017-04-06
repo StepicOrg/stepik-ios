@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class VotesAPI {
 
-    func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote)->Void), error errorHandler: @escaping ((String)->Void)) {
+    @discardableResult func update(_ vote: Vote, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Vote)->Void), error errorHandler: @escaping ((String)->Void)) {
         let params : Parameters? = [
             "vote" : vote.json as AnyObject
         ]
@@ -32,13 +32,13 @@ class VotesAPI {
                 let response = response.response
                 
                                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("PUT vote: error \(e.domain) \(e.code): \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("PUT vote: bad response status code \(response?.statusCode)")
+                    errorHandler("PUT vote: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
                 
