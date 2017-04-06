@@ -31,6 +31,12 @@ class AdaptiveStepViewController: UIViewController {
         })
     }
     
+    @IBAction func onNextButtonClick(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: { _ in
+            self.successHandler()
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -13,7 +13,8 @@ class AdaptiveStepsViewController: UIViewController {
     
     @IBOutlet weak var kolodaView: KolodaView!
 
-    var isCurrentCardDone = false
+    fileprivate var isCurrentCardDone = false
+    fileprivate var lastReaction: Reaction?
 
     var course: Course!
     var recommendedLesson: Lesson?
@@ -60,7 +61,7 @@ class AdaptiveStepsViewController: UIViewController {
         })
     }
     
-    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction) {
+    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction, success: @escaping (Step) -> (Void)) {
         guard let course = course,
             let userId = AuthInfo.shared.userId,
             let lessonId = recommendedLesson?.id else {
@@ -70,8 +71,7 @@ class AdaptiveStepsViewController: UIViewController {
         performRequest({
             ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
                 self.getNewRecommendation(for: course, success: { step in
-                    //self.loadQuiz(for: step)
-                    //self.loadStepHTML(for: step)
+                    success(step)
                 })
                 }, error: { error in
                     print("failed sending reaction: \(error)")
@@ -91,6 +91,17 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     
     func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
         return false
+    }
+    
+    func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
+        
+        if direction == .left {
+            self.lastReaction = .neverAgain
+        } else if direction == .left {
+            self.lastReaction = .maybeLater
+        }
+        
+        return true
     }
     
     func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
@@ -123,6 +134,8 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                     return
                 }
                 
+                self.lastReaction = .solved
+                    
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
@@ -168,7 +181,7 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     return
                 }
                 
-                self?.getNewRecommendation(for: course, success: { step in
+                let successHandler: (Step) -> (Void) = { step in
                     guard let lesson = self?.recommendedLesson else {
                         return
                     }
@@ -180,11 +193,18 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                             card?.showContent()
                         })
                     }
-                })
+                }
+                if self?.lastReaction == nil {
+                    // First recommendation -> just get it
+                    print("getting first recommendation...")
+                    self?.getNewRecommendation(for: course, success: successHandler)
+                } else {
+                    // Next recommendation -> send reaction before
+                    print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
+                    self?.sendReactionAndGetNewLesson(reaction: (self?.lastReaction)!, success: successHandler)
+                }
             }
         }
         return card!
     }
 }
-
-

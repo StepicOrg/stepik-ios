@@ -173,13 +173,24 @@
                                             <action selector="onDismissButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="1mC-XS-BOB"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-03-tiA">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Далее">
+                                            <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onNextButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="jO4-3a-Bhl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="16" id="4oq-9A-P9H"/>
                                     <constraint firstAttribute="trailing" secondItem="Lbp-Hw-f8f" secondAttribute="trailing" constant="16" id="5i4-a0-QPH"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="top" secondItem="5eX-H9-4P6" secondAttribute="bottom" constant="8" id="BJ1-3G-PZH"/>
+                                    <constraint firstItem="DIs-03-tiA" firstAttribute="top" secondItem="1Am-VA-FTv" secondAttribute="top" constant="15" id="CPz-Up-eGv"/>
                                     <constraint firstItem="5eX-H9-4P6" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Nhi-Te-N7k"/>
                                     <constraint firstItem="HoT-V9-yDd" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="10" id="Nnh-Zg-wde"/>
+                                    <constraint firstAttribute="trailing" secondItem="DIs-03-tiA" secondAttribute="trailing" constant="16" id="PTo-aB-wWg"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="centerX" secondItem="1Am-VA-FTv" secondAttribute="centerX" id="Qbk-78-Csk"/>
                                     <constraint firstAttribute="trailing" secondItem="5eX-H9-4P6" secondAttribute="trailing" constant="16" id="W8E-yz-NVM"/>
                                     <constraint firstAttribute="bottom" secondItem="Lbp-Hw-f8f" secondAttribute="bottom" constant="38" id="Ypn-52-3cC"/>
