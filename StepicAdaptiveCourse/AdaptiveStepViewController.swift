@@ -10,47 +10,32 @@ import UIKit
 
 class AdaptiveStepViewController: UIViewController {
 
-    var course: Course?
-    var recommendedLesson: Lesson?
+    var course: Course!
+    var recommendedLesson: Lesson!
+    var step: Step!
     
     var quizVC: ChoiceQuizViewController?
     
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
-    
-    @IBOutlet weak var easyReactionButton: UIButton!
-    @IBOutlet weak var hardReactionButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var dimView: UIView!
     
-    @IBAction func onEasyButtonClick(_ sender: AnyObject) {
-        sendReactionAndGetNewLesson(reaction: .neverAgain)
-    }
+    var dismissHandler: () -> () = { }
+    var successHandler: () -> () = { }
     
-    @IBAction func onNextButtonClick(_ sender: AnyObject) {
-        sendReactionAndGetNewLesson(reaction: .solved)
-    }
-    
-    @IBAction func onHardButtonClick(_ sender: AnyObject) {
-        sendReactionAndGetNewLesson(reaction: .maybeLater)
-        
+    @IBAction func onDismissButtonClick(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: { _ in
+            self.dismissHandler()
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let course = course else {
-            return
-        }
-
-        getNewRecommendation(for: course, success: { step in
-            self.dimView.isHidden = true
-            
-            self.loadQuiz(for: step)
-            self.loadStepHTML(for: step)
-        })
+        self.loadQuiz(for: step)
+        self.loadStepHTML(for: step)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,62 +72,6 @@ class AdaptiveStepViewController: UIViewController {
         quizVC.view.align(to: self.quizPlaceholderView)
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-    }
-    
-    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction) {
-        guard let course = course,
-            let userId = AuthInfo.shared.userId,
-            let lessonId = recommendedLesson?.id else {
-                return
-        }
-        
-        dimView.isHidden = false
-        performRequest({
-            ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
-                self.getNewRecommendation(for: course, success: { step in
-                    self.dimView.isHidden = true
-                    
-                    self.loadQuiz(for: step)
-                    self.loadStepHTML(for: step)
-                })
-                }, error: { error in
-                    print("failed sending reaction: \(error)")
-                    self.dimView.isHidden = true
-            })
-            }, error: {
-                //TODO: add error handling here - add logout like in other controllers
-                error in
-                print("failed performing API request")
-        })
-    }
-    
-    fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
-        performRequest({
-            ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
-                ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                    let lesson = newLessonsImmutable.first
-                    
-                    if let lesson = lesson, let stepId = lesson.stepsArray.first {
-                        self.recommendedLesson = lesson
-                        ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                            let step = newStepsImmutable.first
-                            
-                            if let step = step {
-                                success(step)
-                            }
-                            }, failure: { (error) -> Void in
-                                print("failed downloading steps data in Next")
-                        })
-                    }
-                    }, failure: { (error) -> Void in
-                        print("failed downloading lessons data in Next")
-                })
-                }, error: { error in print(error) })
-            }, error: {
-                //TODO: add error handling here - add logout like in other controllers
-                error in
-                print("failed performing API request")
-        })
     }
 }
 

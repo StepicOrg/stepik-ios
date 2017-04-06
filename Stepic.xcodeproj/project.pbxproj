@@ -993,6 +993,10 @@
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
+		86ABC66A1E9686670012E8A6 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86ABC6691E9686670012E8A6 /* StepCardView.xib */; };
+		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
+		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
+		86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */; };
 		86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
@@ -1511,6 +1515,10 @@
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		867F7BB2DE0CEB922BD0C0EE /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86ABC6691E9686670012E8A6 /* StepCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCardView.xib; sourceTree = "<group>"; };
+		86ABC66B1E96867A0012E8A6 /* StepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
+		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
+		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
 		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -2751,21 +2759,41 @@
 				86B916241E849548000C2842 /* AdaptiveMainViewController.swift */,
 				86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */,
 				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
+				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		86795EF51E85323F00A985C2 /* API */ = {
+		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
+				86ABC6661E9685F80012E8A6 /* StepCardView */,
 			);
-			name = API;
+			name = Views;
+			sourceTree = "<group>";
+		};
+		86ABC6661E9685F80012E8A6 /* StepCardView */ = {
+			isa = PBXGroup;
+			children = (
+				86ABC6691E9686670012E8A6 /* StepCardView.xib */,
+				86ABC66B1E96867A0012E8A6 /* StepCardView.swift */,
+			);
+			name = StepCardView;
+			sourceTree = "<group>";
+		};
+		86ABC6681E96861F0012E8A6 /* LoadingAnimationView */ = {
+			isa = PBXGroup;
+			children = (
+				86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */,
+			);
+			name = LoadingAnimationView;
 			sourceTree = "<group>";
 		};
 		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
 			isa = PBXGroup;
 			children = (
-				86795EF51E85323F00A985C2 /* API */,
+				86ABC6651E9685E70012E8A6 /* Views */,
 				86795EF41E85322B00A985C2 /* Controllers */,
 				86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */,
 				86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */,
@@ -2990,7 +3018,7 @@
 					};
 					86EF29331E83CEA900F8D214 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 4562ZPB9BG;
+						DevelopmentTeam = 7S8Z9T8WFU;
 						ProvisioningStyle = Automatic;
 					};
 					9F9C71161E076AE000EC8DA3 = {
@@ -3158,6 +3186,7 @@
 			files = (
 				86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
+				86ABC66A1E9686670012E8A6 /* StepCardView.xib in Resources */,
 				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
 				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
 				86AE94701E84511A00F67691 /* WarningView.xib in Resources */,
@@ -4137,6 +4166,7 @@
 				864D67AB1E83E08E001E8D9E /* ProfileViewController.swift in Sources */,
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
+				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
 				864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */,
 				864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */,
 				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,
@@ -4244,6 +4274,7 @@
 				864D66D51E83DE03001E8D9E /* Dataset.swift in Sources */,
 				864D66D61E83DE03001E8D9E /* ChoiceDataset.swift in Sources */,
 				864D66D71E83DE03001E8D9E /* StringDatasetExtension.swift in Sources */,
+				86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */,
 				864D66D81E83DE03001E8D9E /* SortingDataset.swift in Sources */,
 				864D66D91E83DE03001E8D9E /* FreeAnswerDataset.swift in Sources */,
 				864D66DA1E83DE03001E8D9E /* MatchingDataset.swift in Sources */,
@@ -4339,6 +4370,7 @@
 				864D67311E83DE03001E8D9E /* NSAttributedStringExtensions.swift in Sources */,
 				864D67321E83DE03001E8D9E /* AlamofireExtensions.swift in Sources */,
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
+				86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
 				86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
@@ -4690,11 +4722,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.adaptive.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepikAdaptive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
@@ -4710,11 +4742,11 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.adaptive.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepikAdaptive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

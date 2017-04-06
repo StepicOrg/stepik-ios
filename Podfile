@@ -56,4 +56,6 @@ end
 
 target 'StepicAdaptiveCourse' do
     all_pods
+    
+    pod 'Koloda'
 end

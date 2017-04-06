@@ -21,7 +21,7 @@ class AdaptiveMainViewController: UIViewController {
             return
         }
         
-        let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepViewController") as! AdaptiveStepViewController
+        let stepVC = UIStoryboard(name: "AdaptiveMain", bundle: nil).instantiateViewController(withIdentifier: "AdaptiveStepsViewController") as! AdaptiveStepsViewController
         stepVC.course = course
         self.present(stepVC, animated: true, completion: nil)
     }
