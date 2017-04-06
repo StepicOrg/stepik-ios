@@ -29,14 +29,14 @@ class UnitsAPI : APIEndpoint {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     print("RETRIEVE units?\(lessonId): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     errorHandler(.connectionError)
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    print("RETRIEVE units?\(lessonId)): bad response status code \(response?.statusCode)")
+                    print("RETRIEVE units?\(lessonId)): bad response status code \(String(describing: response?.statusCode))")
                     errorHandler(.badStatus)
                     return
                 }
