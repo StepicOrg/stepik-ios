@@ -10,12 +10,14 @@ import Foundation
 
 struct VideosInfo {
     
-    fileprivate static let videoQualityKey = "VideoQuality"
+    fileprivate static let downloadingVideoQualityKey = "VideoQuality"
+    fileprivate static let watchingVideoQualityKey = "WatchingVideoQuality"
+
     fileprivate static let defaults = UserDefaults.standard
 
-    static var videoQuality : String {
+    static var downloadingVideoQuality : String {
         get {
-            if let quality = defaults.value(forKey: videoQualityKey) as? String {
+            if let quality = defaults.value(forKey: downloadingVideoQualityKey) as? String {
                 return quality
             } else {
                 if DeviceInfo.isIPad() {
@@ -27,8 +29,26 @@ struct VideosInfo {
         }
         
         set(value) {
-            print("setting \(value)")
-            defaults.set(value, forKey: videoQualityKey)
+            defaults.set(value, forKey: downloadingVideoQualityKey)
+            defaults.synchronize()
+        }
+    }
+    
+    static var watchingVideoQuality : String {
+        get {
+            if let quality = defaults.value(forKey: watchingVideoQualityKey) as? String {
+                return quality
+            } else {
+                if DeviceInfo.isIPad() {
+                    return "720"
+                } else {
+                    return "360"
+                }
+            }
+        }
+        
+        set(value) {
+            defaults.set(value, forKey: watchingVideoQualityKey)
             defaults.synchronize()
         }
     }

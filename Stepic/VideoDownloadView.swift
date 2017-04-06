@@ -76,13 +76,13 @@ class VideoDownloadView: UIView {
     func updateButton() {
         if video.state == VideoState.cached {
             downloadButton.state = .downloaded
-            self.quality = video.cachedQuality ?? VideosInfo.videoQuality 
+            self.quality = video.cachedQuality ?? VideosInfo.downloadingVideoQuality 
             return
         }
         
         if video.state == VideoState.downloading {
             downloadButton.state = .downloading
-            self.quality = self.video.loadingQuality ?? VideosInfo.videoQuality
+            self.quality = self.video.loadingQuality ?? VideosInfo.downloadingVideoQuality
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             video.storedProgress = {
                 prog in
@@ -103,7 +103,7 @@ class VideoDownloadView: UIView {
         
         if video.state == .online {
             downloadButton.state = .startDownload
-            self.quality = video.getNearestQualityToDefault(VideosInfo.videoQuality)
+            self.quality = video.getNearestQualityToDefault(VideosInfo.downloadingVideoQuality)
             return
         }
         

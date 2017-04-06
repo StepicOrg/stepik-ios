@@ -77,7 +77,12 @@ extension Video {
         }
         set(value) {
             if let v = value {
-                managedCachedQuality = Int(v) as NSNumber?
+                if v == "0" {
+                    print("setting cachedQuality to 0")
+                    managedCachedQuality = nil
+                } else {
+                    managedCachedQuality = Int(v) as NSNumber?
+                }
             } else {
                 managedCachedQuality = nil
             }

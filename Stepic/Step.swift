@@ -26,6 +26,8 @@ class Step: NSManagedObject, JSONInitializable {
         position = json["position"].intValue
         status = json["status"].stringValue
         progressId = json["progress"].stringValue
+        hasSubmissionRestrictions = json["has_submissions_restrictions"].boolValue
+        
         if let doesReview = json["actions"]["do_review"].string {
             hasReview = (doesReview != "")
         } else {
@@ -34,6 +36,7 @@ class Step: NSManagedObject, JSONInitializable {
         discussionsCount = json["discussions_count"].int
         discussionProxyId = json["discussion_proxy"].string
         lessonId = json["lesson"].intValue
+        
     }
     
     func update(json: JSON) {

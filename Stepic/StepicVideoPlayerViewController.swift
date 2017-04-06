@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import FLKAutoLayout
-
+import MediaPlayer
 
 @available(iOS 9.0, *)
 extension StepicVideoPlayerViewController: WatchSessionDataObserver {
@@ -161,23 +161,27 @@ class StepicVideoPlayerViewController: UIViewController {
     
     var currentQuality : String! {
         didSet {
+            VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: currentQuality)
             qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControlState())
+            
         }
     }
     
     fileprivate func displayQualityChangeAlert() {
         let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         for url in video.urls {
-            let action = UIAlertAction(title: url.quality, style: .default, handler: { 
-                [unowned self]
-                action in
-                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
-                    ["quality" : url.quality as NSObject, 
-                        "device": DeviceInfo.deviceModelString as NSObject])
-                self.currentQuality = url.quality
-                self.currentQualityURL = NSURL(string: url.url) as! URL
-            })
-            alertController.addAction(action)
+            if url.quality != video.cachedQuality {
+                let action = UIAlertAction(title: url.quality, style: .default, handler: { 
+                    [unowned self]
+                    action in
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters: 
+                        ["quality" : url.quality as NSObject, 
+                            "device": DeviceInfo.deviceModelString as NSObject])
+                    self.currentQuality = url.quality
+                    self.currentQualityURL = NSURL(string: url.url) as! URL
+                })
+                alertController.addAction(action)
+            }
         }
         if video.state == VideoState.cached {
             if let cachedQuality = video.cachedQuality  {
@@ -277,6 +281,12 @@ class StepicVideoPlayerViewController: UIViewController {
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpOutside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpInside)
         topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControlEvents.touchDown)
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
+//        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand.addTarget(self, action: #selector(togglePlayStop(_:)));
+    }
+    
+    func togglePlayPause() {
+        handlePlay()
     }
     
     func saveCurrentPlayerTime() {
@@ -298,15 +308,15 @@ class StepicVideoPlayerViewController: UIViewController {
         if video.state == VideoState.cached {
             return try! URL(fileURLWithPath: PathManager.sharedManager.getPathForStoredVideoWithName(video.name))
         } else {
-            return video.getUrlForQuality(VideosInfo.videoQuality)
+            return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
         }
     }
     
     fileprivate func getInitialQuality() -> String {
         if video.state == VideoState.cached {
-            return video.cachedQuality ?? VideosInfo.videoQuality
+            return video.cachedQuality ?? VideosInfo.downloadingVideoQuality
         } else {
-            return video.getNearestQualityToDefault(VideosInfo.videoQuality)
+            return video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
         }
     }
     

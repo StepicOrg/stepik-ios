@@ -26,12 +26,12 @@ class CoursePreviewViewController: UIViewController {
     var course : Course? = nil {
         didSet {
             if let c = course {                
-                textData[0] += [("", "")]
-                heights[0] += [0]
                 if c.summary != "" {
                     textData[0] += [(NSLocalizedString("Summary", comment: ""), c.summary)]
                     heights[0] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Summary", comment: ""), text: c.summary)]
                 }
+                textData[0] += [("", "")]
+                heights[0] += [0]
                 if c.courseDescription != "" {
                     textData[1] += [(NSLocalizedString("Description", comment: ""), c.courseDescription)]
                     heights[1] += [TitleTextTableViewCell.heightForCellWith(title: NSLocalizedString("Description", comment: ""), text: c.courseDescription)]
@@ -289,7 +289,7 @@ class CoursePreviewViewController: UIViewController {
     }
     
     var videoURL : URL {
-        return video.getUrlForQuality(VideosInfo.videoQuality)
+        return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
     }
     
     func reload(reloadViews rv: Bool) {
@@ -458,31 +458,31 @@ extension CoursePreviewViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if displayingInfoType == .syllabus {
-            if (indexPath as NSIndexPath).row < sectionTitles.count {
+            if indexPath.row < sectionTitles.count {
                 var cell = tableView.dequeueReusableCell(withIdentifier: "SectionTitleTableViewCell") 
                 if cell == nil {
                     cell = UITableViewCell(style: .default, reuseIdentifier: "SectionTitleTableViewCell")
                 }
-                cell?.textLabel?.text = "\((indexPath as NSIndexPath).row + 1). \(sectionTitles[(indexPath as NSIndexPath).row])"
+                cell?.textLabel?.text = "\(indexPath.row + 1). \(sectionTitles[indexPath.row])"
                 cell?.textLabel?.numberOfLines = 0
                 return cell ?? UITableViewCell()
             } else {
                 return UITableViewCell()
             }
         }
-        if (indexPath as NSIndexPath).row >= textData[displayingInfoType.rawValue].count {
+        if indexPath.row >= textData[displayingInfoType.rawValue].count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultTableViewCell", for: indexPath)
             return cell
         }
         
-        if textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0 == "" {
+        if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TeachersTableViewCell", for: indexPath) as! TeachersTableViewCell
             cell.initWithCourse(course!)
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TitleTextTableViewCell", for: indexPath) as! TitleTextTableViewCell
-        cell.initWith(title: textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0, text: textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].1)
+        cell.initWith(title: textData[displayingInfoType.rawValue][indexPath.row].0, text: textData[displayingInfoType.rawValue][indexPath.row].1)
         return cell
     }
     
@@ -510,19 +510,23 @@ extension CoursePreviewViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if displayingInfoType == .syllabus {
-            if (indexPath as NSIndexPath).row < sectionTitles.count {
+            if indexPath.row < sectionTitles.count {
                 return UITableViewAutomaticDimension
             } else {
                 return 0
             }
         }
-        if (indexPath as NSIndexPath).row >= textData[displayingInfoType.rawValue].count {
+        if indexPath.row >= textData[displayingInfoType.rawValue].count {
             return 0
         }
-        if textData[displayingInfoType.rawValue][(indexPath as NSIndexPath).row].0 == "" {
-            return 137
+        if textData[displayingInfoType.rawValue][indexPath.row].0 == "" {
+            if course?.instructorsArray.count == 0 {
+                return 0
+            } else {
+                return 167
+            }
         }
-        return heights[displayingInfoType.rawValue][(indexPath as NSIndexPath).row]
+        return heights[displayingInfoType.rawValue][indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

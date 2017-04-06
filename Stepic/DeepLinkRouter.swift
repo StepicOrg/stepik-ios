@@ -10,7 +10,7 @@ import Foundation
 
 class DeepLinkRouter {
     
-    static func routeFromDeepLink(_ link: URL, completion: @escaping (UIViewController?, Bool) -> Void) {
+    static func routeFromDeepLink(_ link: URL, completion: @escaping ([UIViewController]) -> Void) {
         
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
@@ -37,7 +37,7 @@ class DeepLinkRouter {
             
         if components[1].lowercased() == "course" && components.count >= 3 {
             guard let courseId = getID(components[2], reversed: true) else {
-                completion(nil, false)
+                completion([])
                 return
             }
             
@@ -48,29 +48,40 @@ class DeepLinkRouter {
             }
     
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
+                
+                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems  {
+                    if let module = queryItems.filter({ (item) in item.name == "module" }).first?.value! {
+                        if let moduleInt = Int(module) {
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.section, parameters: ["course": courseId as NSObject, "module": module as NSObject])
+                            routeToSyllabusWithId(courseId, moduleId: moduleInt, completion: completion)
+                            return
+                        }
+                    }
+                } 
+                
                 AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.syllabus, parameters: ["id": courseId as NSObject])
                 routeToSyllabusWithId(courseId, completion: completion)
                 return
             }
             
-            completion(nil, false)
+            completion([])
             return
         }  
             
             
         if components[1].lowercased() == "lesson" && components.count >= 5 {
             guard let lessonId = getID(components[2], reversed: true) else {
-                completion(nil, false)
+                completion([])
                 return
             }
             
             guard components[3].lowercased() == "step" else {
-                completion(nil, false)
+                completion([])
                 return
             }
             
             guard let stepId = getID(components[4], reversed: false) else {
-                completion(nil, false)
+                completion([])
                 return
             }
             
@@ -79,11 +90,11 @@ class DeepLinkRouter {
             return
         }            
          
-        completion(nil, false)
+        completion([])
         return
     }
     
-    fileprivate static func routeToCourseWithId(_ courseId: Int, completion: @escaping (UIViewController?, Bool) -> Void) {
+    fileprivate static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
         if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
             do {
                 let courses = try Course.getCourses([courseId])
@@ -94,17 +105,17 @@ class DeepLinkRouter {
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
                                     vc.course = loadedCourses[0]
-                                    completion(vc, true)
+                                    completion([vc])
                                 }
                             } else {
                                 print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                                completion(nil, false)
+                                completion([])
                                 return
                             }
                             }, failure: {
                                 error in
                                 print("error while downloading course with id \(courseId)")
-                                completion(nil, false) 
+                                completion([]) 
                                 return
                         })
                     })
@@ -112,23 +123,23 @@ class DeepLinkRouter {
                 } 
                 if courses.count >= 1 {
                     vc.course = courses[0]
-                    completion(vc, true)
+                    completion([vc])
                     return
                 }
-                completion(nil, false)
+                completion([])
                 return
             }
             catch {
                 print("something bad happened")
-                completion(nil, false)
+                completion([])
                 return
             }
         }
         
-        completion(nil, false)
+        completion([])
     }
     
-    fileprivate static func routeToSyllabusWithId(_ courseId: Int, completion: @escaping (UIViewController?, Bool) -> Void) {
+    fileprivate static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
         do {
             let courses = try Course.getCourses([courseId])
             if courses.count == 0 {
@@ -141,25 +152,26 @@ class DeepLinkRouter {
                                 if course.enrolled {
                                     if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
                                         vc.course = course
-                                        completion(vc, true)
+                                        vc.moduleId = moduleId
+                                        completion([vc])
                                     }
                                 } else {
                                     if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
                                         vc.course = course
                                         vc.displayingInfoType = DisplayingInfoType.syllabus
-                                        completion(vc, true)
+                                        completion([vc])
                                     }
                                 }
                             }
                         } else {
                             print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                            completion(nil, false)
+                            completion([])
                             return
                         }
                         }, failure: {
                             error in
                             print("error while downloading course with id \(courseId)")
-                            completion(nil, false) 
+                            completion([]) 
                             return
                     })
                 })
@@ -170,38 +182,39 @@ class DeepLinkRouter {
                 if course.enrolled {
                     if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
                         vc.course = course
-                        completion(vc, true)
+                        vc.moduleId = moduleId
+                        completion([vc])
                     }
                 } else {
                     if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
                         vc.course = course
                         vc.displayingInfoType = DisplayingInfoType.syllabus
-                        completion(vc, true)
+                        completion([vc])
                     }
                 }
                 return
             }
-            completion(nil, false)
+            completion([])
             return
         }
         catch {
             print("something bad happened")
-            completion(nil, false)
+            completion([])
             return
         }        
     }
     
-    static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping (UIViewController?, Bool) -> Void) {
+    static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping ([UIViewController]) -> Void) {
         let router = StepsControllerDeepLinkRouter()
         router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: 
             {
                 vc in
-                completion(vc, true)
+                completion([vc])
             }, error: 
             {
                 errorMsg in 
                 print(errorMsg)
-                completion(nil, false)
+                completion([])
             }
         )
 

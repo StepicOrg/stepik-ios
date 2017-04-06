@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrentBestStreakViewController" customModule="SberbankUniversity" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomTextLabel" destination="aYg-bo-aVb" id="GkA-FK-woN"/>
+                <outlet property="notificationsViewHeight" destination="xYD-2j-aau" id="tDM-JR-Kut"/>
+                <outlet property="receiveNotificationsLabel" destination="vxc-Uy-hfh" id="Wrs-AA-P4q"/>
+                <outlet property="receiveNotificationsSwitch" destination="Kx1-vX-sb3" id="qLL-Z0-xdz"/>
+                <outlet property="streaksView" destination="3Gu-pv-dpg" id="GtT-LU-5Hg"/>
+                <outlet property="topTextLabel" destination="VZp-0s-9Ow" id="88M-Wi-I9t"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" text="Личный рекорд - отличная мотивация для того, чтобы учиться" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZp-0s-9Ow">
+                    <rect key="frame" x="16" y="8" width="343" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="3Gu-pv-dpg" customClass="StreaksView" customModule="SberbankUniversity" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="52" width="375" height="158"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" text="Решайте задачи каждый день и улучшайте свои показатели!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYg-bo-aVb">
+                    <rect key="frame" x="16" y="218" width="343" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="204" translatesAutoresizingMaskIntoConstraints="NO" id="m3B-fn-jwH">
+                    <rect key="frame" x="0.0" y="262" width="375" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Получать напоминания" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxc-Uy-hfh">
+                            <rect key="frame" x="16" y="0.0" width="294" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kx1-vX-sb3">
+                            <rect key="frame" x="318" y="0.0" width="51" height="30"/>
+                            <connections>
+                                <action selector="receiveNotificationsValueChanged:" destination="-1" eventType="valueChanged" id="Yqm-5a-7V8"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Kx1-vX-sb3" firstAttribute="centerY" secondItem="m3B-fn-jwH" secondAttribute="centerY" id="55S-zH-qA2"/>
+                        <constraint firstItem="Kx1-vX-sb3" firstAttribute="height" secondItem="m3B-fn-jwH" secondAttribute="height" id="7O7-99-5ut"/>
+                        <constraint firstItem="Kx1-vX-sb3" firstAttribute="leading" secondItem="vxc-Uy-hfh" secondAttribute="trailing" constant="8" id="Co4-Ya-Ah5"/>
+                        <constraint firstItem="vxc-Uy-hfh" firstAttribute="centerY" secondItem="m3B-fn-jwH" secondAttribute="centerY" id="N5k-Yq-oIA"/>
+                        <constraint firstAttribute="trailing" secondItem="Kx1-vX-sb3" secondAttribute="trailing" constant="8" id="ZTQ-Lb-AkE"/>
+                        <constraint firstItem="vxc-Uy-hfh" firstAttribute="leading" secondItem="m3B-fn-jwH" secondAttribute="leading" constant="16" id="alj-8D-Dbn"/>
+                        <constraint firstItem="vxc-Uy-hfh" firstAttribute="height" secondItem="m3B-fn-jwH" secondAttribute="height" id="vZr-r5-yQo"/>
+                        <constraint firstAttribute="height" constant="30" id="xYD-2j-aau"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="m3B-fn-jwH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4KT-QF-iSJ"/>
+                <constraint firstItem="aYg-bo-aVb" firstAttribute="top" secondItem="3Gu-pv-dpg" secondAttribute="bottom" constant="8" id="7Mb-nj-fuv"/>
+                <constraint firstItem="VZp-0s-9Ow" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="INQ-aM-OKJ"/>
+                <constraint firstAttribute="trailing" secondItem="3Gu-pv-dpg" secondAttribute="trailing" id="Kzm-Lb-Cyl"/>
+                <constraint firstAttribute="trailing" secondItem="m3B-fn-jwH" secondAttribute="trailing" id="RYq-qL-5yB"/>
+                <constraint firstItem="aYg-bo-aVb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Xnk-DS-pjO"/>
+                <constraint firstItem="3Gu-pv-dpg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YoC-Zn-Y4I"/>
+                <constraint firstItem="VZp-0s-9Ow" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="b24-Ax-49n"/>
+                <constraint firstItem="m3B-fn-jwH" firstAttribute="top" secondItem="aYg-bo-aVb" secondAttribute="bottom" constant="8" id="eRD-EB-NlE"/>
+                <constraint firstAttribute="trailing" secondItem="aYg-bo-aVb" secondAttribute="trailing" constant="16" id="gyr-bl-Jxh"/>
+                <constraint firstAttribute="trailing" secondItem="VZp-0s-9Ow" secondAttribute="trailing" constant="16" id="lM7-eg-Wze"/>
+                <constraint firstItem="3Gu-pv-dpg" firstAttribute="top" secondItem="VZp-0s-9Ow" secondAttribute="bottom" constant="8" id="raa-zf-CSV"/>
+                <constraint firstAttribute="bottom" secondItem="m3B-fn-jwH" secondAttribute="bottom" constant="8" id="uby-ZO-1xc"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="-110.5"/>
+        </view>
+    </objects>
+</document>

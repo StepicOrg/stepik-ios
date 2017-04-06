@@ -18,6 +18,8 @@ class SectionsViewController: UIViewController {
     var didRefresh = false
     var course : Course! 
     
+    var moduleId: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,13 +62,13 @@ class SectionsViewController: UIViewController {
     
     func shareButtonPressed(_ button: UIBarButtonItem) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .background).async {
             let shareVC = SharingHelper.getSharingController(self.url)
             shareVC.popoverPresentationController?.barButtonItem = button
             DispatchQueue.main.async {
                 self.present(shareVC, animated: true, completion: nil)
             }
-            }
+        }
     }
     
     func infoButtonPressed(_ button: UIButton) {
@@ -101,6 +103,11 @@ class SectionsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 self.emptyDatasetState = EmptyDatasetState.empty
                 self.tableView.reloadData()
+                if let m = self.moduleId {
+                    if (1...self.course.sectionsArray.count ~= m) && (self.isReachable(section: m - 1)) { 
+                        self.showSection(section: m - 1) 
+                    }
+                }
             })
             self.didRefresh = true
         }, error: {
@@ -109,6 +116,11 @@ class SectionsViewController: UIViewController {
                 self.refreshControl.endRefreshing()
                 self.emptyDatasetState = EmptyDatasetState.connectionError
                 self.tableView.reloadData()
+                if let m = self.moduleId {
+                    if (1...self.course.sectionsArray.count ~= m) && self.isReachable(section: m - 1) { 
+                        self.showSection(section: m - 1) 
+                    }
+                }
             })
             self.didRefresh = true
         })
@@ -160,26 +172,35 @@ class SectionsViewController: UIViewController {
         
         self.present(alert, animated: true, completion: {})
     }
+    
+    func isReachable(section: Int) -> Bool {
+        return (course.sections[section].isActive || course.sections[section].testSectionAction != nil) && (course.sections[section].progressId != nil || course.sections[section].isExam)
+    }
+    
+    func showSection(section sectionId: Int) {
+        let section = course.sections[sectionId] 
+        if section.isExam {
+            showExamAlert(cancel: {})
+            return
+        }
+        
+        performSegue(withIdentifier: "showUnits", sender: sectionId)
+    }
+    
 }
 
 extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = course.sections[indexPath.row] 
-        if section.isExam {
-            showExamAlert(cancel: {})
-            tableView.deselectRow(at: indexPath, animated: true)
-            return
-        }
-        
-        performSegue(withIdentifier: "showUnits", sender: (indexPath as NSIndexPath).row)
+        showSection(section: indexPath.row)
+        //        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SectionTableViewCell.heightForCellInSection(course.sections[(indexPath as NSIndexPath).row])
+        return SectionTableViewCell.heightForCellInSection(course.sections[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return (course.sections[(indexPath as NSIndexPath).row].isActive || course.sections[(indexPath as NSIndexPath).row].testSectionAction != nil) && course.sections[(indexPath as NSIndexPath).row].progressId != nil 
+        return isReachable(section: indexPath.row)
     }
     
 }
@@ -197,7 +218,7 @@ extension SectionsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SectionTableViewCell", for: indexPath) as! SectionTableViewCell
         
-        cell.initWithSection(course.sections[(indexPath as NSIndexPath).row], delegate: self)
+        cell.initWithSection(course.sections[indexPath.row], delegate: self)
         
         return cell
     }

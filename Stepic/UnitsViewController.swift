@@ -39,6 +39,10 @@ class UnitsViewController: UIViewController {
                 
         tableView.register(UINib(nibName: "UnitTableViewCell", bundle: nil), forCellReuseIdentifier: "UnitTableViewCell")
         
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(UnitsViewController.shareButtonPressed(_:)))
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem
+
+        
         
         refreshControl.addTarget(self, action: #selector(UnitsViewController.refreshUnits), for: .valueChanged)
         if #available(iOS 10.0, *) {
@@ -56,6 +60,33 @@ class UnitsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    var url : String? {
+        guard let section = section else { 
+            return nil 
+        }
+        if let slug = section.course?.slug,  
+            let module = section.course?.sectionsArray.index(of: section.id) {
+            return StepicApplicationsInfo.stepicURL + "/course/" + slug + "/syllabus?module=\(module + 1)"
+        } else {
+            return nil
+        }
+    }
+    
+    func shareButtonPressed(_ button: UIBarButtonItem) {
+        guard let url = self.url else {
+            return
+        }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Units.shared, parameters: nil)
+        DispatchQueue.global(qos: .background).async {
+            let shareVC = SharingHelper.getSharingController(url)
+            shareVC.popoverPresentationController?.barButtonItem = button
+            DispatchQueue.main.async {
+                self.present(shareVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
     func getSectionByUnit(id: Int) {
         //Search for unit by its id locally
         emptyDatasetState = .refreshing

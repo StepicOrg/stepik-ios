@@ -175,6 +175,9 @@ class VideoStepViewController: UIViewController {
         guard let cstep = step else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+
         let stepid = step.id         
         if stepId - 1 == startStepId {
             startStepBlock()
@@ -246,7 +249,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
             }
             
             downloadButton.state = .downloading
-            video.store(VideosInfo.videoQuality, progress: {
+            video.store(VideosInfo.downloadingVideoQuality, progress: {
                 prog in
                 UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
                 }, completion: {

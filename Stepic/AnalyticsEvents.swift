@@ -17,15 +17,25 @@ struct AnalyticsEvents {
     struct SignIn {
         static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
         static let onSignInScreen = "clicked_SignIn_on_sign_in_screen"
+        static let nextButton = "click_sign_in_next_sign_in_screen"
     }
     
     struct SignUp {
         static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
         static let onSignUpScreen = "clicked_SignUp_on_sign_up_screen"
+        static let nextButton = "click_registration_send_ime"
+    }
+    
+    struct Login {
+        static let success = "success_login"
     }
     
     struct Syllabus {
         static let shared = "share_syllabus_clicked"
+    }
+    
+    struct Units {
+        static let shared = "share_units_clicked"
     }
     
     struct Section {
@@ -59,6 +69,9 @@ struct AnalyticsEvents {
             static let newAttempt = "clicked_generate_new_attempt"
             static let solveInWebPressed = "clicked_solve_in_web"
         }
+        
+        static let hasRestrictions = "step_with_submission_restriction"
+        static let opened = "step_type_opened"
     }
     
     struct VideoPlayer {
@@ -76,6 +89,7 @@ struct AnalyticsEvents {
         static let step = "deeplink_step"
         static let syllabus = "deeplink_syllabus"
         static let course = "deeplink_course"
+        static let section = "deeplink_section"
     }
     
     struct Tabs {

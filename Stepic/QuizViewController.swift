@@ -359,6 +359,8 @@ class QuizViewController: UIViewController {
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
         self.hintView.backgroundColor = UIColor.black
+        self.hintWebView.isUserInteractionEnabled = true
+        self.hintWebView.delegate = self
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
@@ -744,6 +746,18 @@ extension QuizViewController : PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
         self.doesPresentWarningView = false
         self.refreshAttempt(step.id)
+    }
+}
+
+extension QuizViewController : UIWebViewDelegate {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let url = request.url {
+            if url.isFileURL {
+                return true
+            }
+            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "HintWebController", allowsSafari: true, backButtonStyle: .close)
+        }
+        return false
     }
 }
 
