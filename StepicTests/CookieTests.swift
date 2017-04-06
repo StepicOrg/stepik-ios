@@ -33,7 +33,7 @@ class CookieTests : XCTestCase {
                     { 
                     user in
                         print("retrieved user \(user.id) \(user.firstName) \(user.lastName)")
-                        ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: "choice", stepId: 115260, success: 
+                        ApiDataDownloader.attempts.create(stepName: "choice", stepId: 115260, success: 
                             {
                                 attempt in
                                 print("created attempt \(attempt.id)")

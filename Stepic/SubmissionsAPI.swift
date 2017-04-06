@@ -13,7 +13,7 @@ import SwiftyJSON
 class SubmissionsAPI : APIEndpoint {
     let name = "submissions"
     
-    fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         var params : Parameters = [:]
         
@@ -55,21 +55,21 @@ class SubmissionsAPI : APIEndpoint {
                 success(submissions, meta)
                 return
             } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
         })
     }
 
-    func retrieve(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func retrieve(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         return retrieve(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
     }
     
-    func retrieve(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func retrieve(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId : Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         return retrieve(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
     }
     
-    func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         let params : Parameters = [:]
         
@@ -99,13 +99,13 @@ class SubmissionsAPI : APIEndpoint {
                 success(submission)
                 return
             } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
         })
     }
     
-    func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         let params : Parameters = [
             "submission": [
@@ -140,7 +140,7 @@ class SubmissionsAPI : APIEndpoint {
                 success(submission)
                 return
             } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
         })

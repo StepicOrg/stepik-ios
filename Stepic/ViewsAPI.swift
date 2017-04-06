@@ -13,7 +13,7 @@ import SwiftyJSON
 class ViewsAPI : APIEndpoint {
     let name = "views"
     
-    func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Void)->Void) -> Request? {
+    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Void)->Void) -> Request? {
         var params : Parameters = [:]
         
         if let assignment = assignment {
@@ -44,7 +44,7 @@ class ViewsAPI : APIEndpoint {
             } else {
                 json = response.result.value!
             }
-            let response = response.response
+//            let response = response.response
             
             
             if let _ = error {

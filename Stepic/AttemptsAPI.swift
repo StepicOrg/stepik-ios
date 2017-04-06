@@ -13,7 +13,7 @@ import SwiftyJSON
 class AttemptsAPI : APIEndpoint {
     let name = "attempts"
     
-    func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
                 
         let params : Parameters = [
             "attempt": [
@@ -43,21 +43,21 @@ class AttemptsAPI : APIEndpoint {
                 return
             }
             
-            print("request headers: \(request?.allHTTPHeaderFields)")
+            print("request headers: \(String(describing: request?.allHTTPHeaderFields))")
             
             if response?.statusCode == 201 {
                 let attempt = Attempt(json: json["attempts"].arrayValue[0], stepName: stepName) 
                 success(attempt)
                 return
             } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
             
         })
     }
     
-    func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
+    @discardableResult func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta)->Void, error errorHandler: @escaping (String)->Void) -> Request? {
         
         let headers = AuthInfo.shared.initialHTTPHeaders
         
@@ -96,7 +96,7 @@ class AttemptsAPI : APIEndpoint {
                 success(attempts, meta)
                 return
             } else {
-                errorHandler("Response status code is wrong(\(response?.statusCode))")
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
             

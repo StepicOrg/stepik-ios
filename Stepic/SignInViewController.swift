@@ -96,7 +96,7 @@ class SignInViewController: UIViewController {
                                                     t in
                                                     AuthInfo.shared.token = t
                                                     NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                                                    _ = ApiDataDownloader.sharedDownloader.getCurrentUser({
+                                                    _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                                                         user in
                                                         AuthInfo.shared.user = user
                                                         User.removeAllExcept(user)
@@ -109,7 +109,7 @@ class SignInViewController: UIViewController {
                                                         }
                                                         AnalyticsHelper.sharedHelper.changeSignIn()
                                                         AnalyticsHelper.sharedHelper.sendSignedIn()
-                                                    }, failure: {
+                                                    }, error: {
                                                         e in
                                                         print("successfully signed in, but could not get user")
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
@@ -135,7 +135,7 @@ class SignInViewController: UIViewController {
                                                             t in
                                                             AuthInfo.shared.token = t
                                                             NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                                                            _ = ApiDataDownloader.sharedDownloader.getCurrentUser({
+                                                            _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                                                                 user in
                                                                 AuthInfo.shared.user = user
                                                                 User.removeAllExcept(user)
@@ -148,7 +148,7 @@ class SignInViewController: UIViewController {
                                                                 }
                                                                 AnalyticsHelper.sharedHelper.changeSignIn()
                                                                 AnalyticsHelper.sharedHelper.sendSignedIn()
-                                                            }, failure: {
+                                                            }, error: {
                                                                 e in
                                                                 print("successfully signed in, but could not get user")
                                                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))

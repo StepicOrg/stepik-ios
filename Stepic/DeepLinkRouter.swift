@@ -100,7 +100,7 @@ class DeepLinkRouter {
                 let courses = try Course.getCourses([courseId])
                 if courses.count == 0 {
                     performRequest({
-                        _ = ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
+                        _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: [], refreshMode: .delete, success: {
                             loadedCourses in 
                             if loadedCourses.count == 1 {
                                 UIThread.performUI {
@@ -112,7 +112,7 @@ class DeepLinkRouter {
                                 completion([])
                                 return
                             }
-                            }, failure: {
+                            }, error: {
                                 error in
                                 print("error while downloading course with id \(courseId)")
                                 completion([]) 
@@ -144,7 +144,7 @@ class DeepLinkRouter {
             let courses = try Course.getCourses([courseId])
             if courses.count == 0 {
                 performRequest({
-                    _ = ApiDataDownloader.sharedDownloader.getCoursesByIds([courseId], deleteCourses: [], refreshMode: .delete, success: {
+                    _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: [], refreshMode: .delete, success: {
                         loadedCourses in 
                         if loadedCourses.count == 1 {
                             UIThread.performUI {
@@ -168,7 +168,7 @@ class DeepLinkRouter {
                             completion([])
                             return
                         }
-                        }, failure: {
+                        }, error: {
                             error in
                             print("error while downloading course with id \(courseId)")
                             completion([]) 

@@ -13,7 +13,7 @@ import SwiftyJSON
 class UsersAPI : APIEndpoint {
     let name = "users"
     
-    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [User], refreshMode: RefreshMode, success: @escaping (([User]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [User], refreshMode: RefreshMode, success: @escaping (([User]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }    
 }

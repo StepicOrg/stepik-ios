@@ -68,7 +68,7 @@ class SocialNetworksViewController: UIViewController {
                         t in
                         AuthInfo.shared.token = t
                         NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        ApiDataDownloader.sharedDownloader.getCurrentUser({
+                        ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                             user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
@@ -79,7 +79,7 @@ class SocialNetworksViewController: UIViewController {
                             }
                             AnalyticsHelper.sharedHelper.changeSignIn()
                             AnalyticsHelper.sharedHelper.sendSignedIn()
-                        }, failure: {
+                        }, error: {
                             e in
                             print("successfully signed in, but could not get user")
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))

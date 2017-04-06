@@ -44,11 +44,11 @@ class Unit: NSManagedObject, JSONInitializable {
     }
     
     func loadAssignments(_ completion: @escaping ((Void)->Void), errorHandler: @escaping ((Void)->Void)) {
-        _ = ApiDataDownloader.sharedDownloader.getAssignmentsByIds(self.assignmentsArray, deleteAssignments: self.assignments, refreshMode: .update, success: {
+        _ = ApiDataDownloader.assignments.retrieve(ids: self.assignmentsArray, existing: self.assignments, refreshMode: .update, success: {
             newAssignments in 
             self.assignments = Sorter.sort(newAssignments, byIds: self.assignmentsArray)
             completion()
-            }, failure: {
+            }, error: {
                 error in
                 print("Error while downloading assignments")
                 errorHandler()

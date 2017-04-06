@@ -13,7 +13,7 @@ import SwiftyJSON
 class UnitsAPI : APIEndpoint {
     let name = "units"
     
-    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
+    @discardableResult func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
             {
                 response in
@@ -55,7 +55,7 @@ class UnitsAPI : APIEndpoint {
         )
     }
     
-    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Unit], refreshMode: RefreshMode, success: @escaping (([Unit]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Unit], refreshMode: RefreshMode, success: @escaping (([Unit]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }    
 }

@@ -51,7 +51,7 @@ class CoursesAPI : APIEndpoint {
             } else {
                 json = response.result.value!
             }
-            let response = response.response
+//            let response = response.response
             
             
             //TODO: Remove from here 
