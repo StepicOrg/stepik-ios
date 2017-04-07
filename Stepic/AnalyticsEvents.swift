@@ -22,8 +22,12 @@ struct AnalyticsEvents {
     
     struct SignUp {
         static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
-        static let onSignUpScreen = "clicked_SignUp_on_sign_up_screen"
+        static let onSignUpScreen = "click_registration_with_interaction_type"
         static let nextButton = "click_registration_send_ime"
+        struct Fields {
+            static let tap = "tap_on_fields_registration"
+            static let typing = "typing_text_fields_registration"
+        }
     }
     
     struct Login {
