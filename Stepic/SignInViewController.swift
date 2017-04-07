@@ -47,9 +47,14 @@ class SignInViewController: UIViewController {
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-
+        
+        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
     }
 
+    func textFieldDidChange(textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,8 +112,6 @@ class SignInViewController: UIViewController {
                                                                 self?.success?("social")
                                                             })
                                                         }
-                                                        AnalyticsHelper.sharedHelper.changeSignIn()
-                                                        AnalyticsHelper.sharedHelper.sendSignedIn()
                                                     }, error: {
                                                         e in
                                                         print("successfully signed in, but could not get user")
@@ -126,9 +129,7 @@ class SignInViewController: UIViewController {
         })
     }
     
-    fileprivate func signIn() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
-        
+    fileprivate func signIn() {        
         SVProgressHUD.show(withStatus: "")
         _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
                                                         success: {
@@ -146,8 +147,6 @@ class SignInViewController: UIViewController {
                                                                         self?.success?("password")
                                                                     })
                                                                 }
-                                                                AnalyticsHelper.sharedHelper.changeSignIn()
-                                                                AnalyticsHelper.sharedHelper.sendSignedIn()
                                                             }, error: {
                                                                 e in
                                                                 print("successfully signed in, but could not get user")
@@ -166,6 +165,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInPressed(_ sender: UIButton) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
         signIn()
     }
     
@@ -189,6 +189,11 @@ class SignInViewController: UIViewController {
 }
 
 extension SignInViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
@@ -198,6 +203,7 @@ extension SignInViewController : UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
             signIn()
             return true
         }

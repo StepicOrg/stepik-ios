@@ -130,8 +130,6 @@ class RegistrationViewController: UIViewController {
                                     self?.success?("registered")
                                     })
                             }
-                            AnalyticsHelper.sharedHelper.changeSignIn()
-                            AnalyticsHelper.sharedHelper.sendSignedIn()
                             }, error: {
                                 e in
                                 print("successfully signed in, but could not get user")

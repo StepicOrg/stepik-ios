@@ -16,8 +16,12 @@ struct AnalyticsEvents {
         
     struct SignIn {
         static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
-        static let onSignInScreen = "clicked_SignIn_on_sign_in_screen"
+        static let onSignInScreen = "click_sign_in_with_interaction_type"
         static let nextButton = "click_sign_in_next_sign_in_screen"
+        struct Fields {
+            static let tap = "tap_on_fields_login"
+            static let typing = "typing_text_fields_login"
+        }
     }
     
     struct SignUp {
