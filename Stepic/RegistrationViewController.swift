@@ -70,6 +70,10 @@ class RegistrationViewController: UIViewController {
         emailTextField.keyboardType = .emailAddress     
         
         firstNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        lastNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+
     }
 
     func textFieldDidChange(textField: UITextField) {
