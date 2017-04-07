@@ -22,6 +22,10 @@ struct AnalyticsEvents {
             static let tap = "tap_on_fields_login"
             static let typing = "typing_text_fields_login"
         }
+        struct Social {
+            static let clicked = "social_login"
+            static let codeReceived = "Api:auth with social account"
+        }
     }
     
     struct SignUp {

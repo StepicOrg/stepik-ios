@@ -95,6 +95,7 @@ class SignInViewController: UIViewController {
     
     
     func authentificateWithCode(_ code: String) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.codeReceived, parameters: nil)
         SVProgressHUD.show(withStatus: "")
         _ = AuthManager.sharedManager.logInWithCode(code, 
                                                 success: {

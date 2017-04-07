@@ -59,7 +59,7 @@ class SocialNetworksViewController: UIViewController {
         let locationInCollection = CGPoint(x: location.x, y: location.y)
         let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
         if let indexPath = indexPathOptional {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)" as NSObject])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name!)" as NSObject])
             let socialNetwork = getSocialNetworkByIndexPath(indexPath)
             if let provider = socialNetwork.socialSDKProvider {
                 provider.getAccessToken(success: {
