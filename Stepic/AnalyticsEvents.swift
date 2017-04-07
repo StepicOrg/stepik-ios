@@ -130,6 +130,7 @@ struct AnalyticsEvents {
     
     struct App {
         static let opened = "app_opened"
+        static let firstLaunch = "first_launch_after_install"
     }
     
     struct Errors {

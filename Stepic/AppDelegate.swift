@@ -82,6 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         checkStreaks() 
         
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            DefaultsContainer.launch.didLaunch = true
+        }
+        
         return true
     }
 

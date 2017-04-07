@@ -338,6 +338,10 @@
 		08901E721CD1173200D94613 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
 		08901E731CD1173200D94613 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E711CD1173200D94613 /* Version.swift */; };
 		08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */; };
+		0890560A1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
+		0890560B1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
+		0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
+		0890560E1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
 		089142491BCEE4EF0000BCB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
@@ -1032,6 +1036,8 @@
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
 		08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionUpdateAlertConstructor.swift; sourceTree = "<group>"; };
 		08901E711CD1173200D94613 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		089056091E97CD7900B8FE6A /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
+		0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
 		089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		089142451BCEE4EE0000BCB0 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoURL+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -2135,6 +2141,8 @@
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
+				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
+				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
 				9F9C71481E076B3200EC8DA3 /* Shared */,
@@ -3027,6 +3035,7 @@
 			files = (
 				08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */,
 				08D120751C937B2200A54ABC /* Course.swift in Sources */,
+				0890560E1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */,
 				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
@@ -3174,6 +3183,7 @@
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
 				08F261221E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
+				0890560B1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */,
 				08AF59F91E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				08D120B51C937B2200A54ABC /* Parser.swift in Sources */,
 				08D120B61C937B2200A54ABC /* DownloadTableViewCell.swift in Sources */,
@@ -3445,6 +3455,7 @@
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
+				0890560A1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */,
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,
 				088AADA91D175DA00034D86D /* HTMLContentView.swift in Sources */,
@@ -3605,6 +3616,7 @@
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
+				0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
