@@ -206,6 +206,8 @@ class QuizViewController: UIViewController {
                         s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
+                        s.hintHeightUpdateBlock = nil
+                        s.hintView.isHidden = true
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
                         s.setStatusElements(visible: false)
@@ -222,6 +224,7 @@ class QuizViewController: UIViewController {
                         
                         if let hint = s.submission?.hint {
                             if hint != "" {
+                                s.hintView.isHidden = false
                                 s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
                                 s.performHeightUpdates()
                             } else {
