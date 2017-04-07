@@ -248,7 +248,7 @@ class WebStepViewController: UIViewController {
             performRequest({
                 [weak self] in
                 print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
-                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {

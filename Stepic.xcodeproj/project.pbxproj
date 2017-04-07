@@ -30,6 +30,28 @@
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
+		080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
+		080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		080CE1471E9560EB0089A27F /* SectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1451E9560EB0089A27F /* SectionsAPI.swift */; };
+		080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		080CE14A1E9562430089A27F /* LessonsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1481E9562430089A27F /* LessonsAPI.swift */; };
+		080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		080CE14D1E9562BF0089A27F /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14B1E9562BF0089A27F /* UsersAPI.swift */; };
+		080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE14E1E9562F30089A27F /* StepsAPI.swift */; };
+		080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		080CE1531E9563170089A27F /* AssignmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1511E9563170089A27F /* AssignmentsAPI.swift */; };
+		080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1541E9563590089A27F /* ProgressesAPI.swift */; };
+		080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1571E9566220089A27F /* ViewsAPI.swift */; };
+		080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */; };
+		080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
+		080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
+		080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1601E9581960089A27F /* SubmissionsAPI.swift */; };
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
@@ -696,10 +718,10 @@
 		08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
-		4080BE1178BF35622622F4ED /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F96CAF3E44AE3D6AB76231 /* Pods_Stepic.framework */; };
+		27A47C3F518B1951C6546431 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */; };
+		7A72E6ECE5142ECB1ED3378F /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
-		8C059559882A61CA600BE68E /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2E73D0FFBFF9D52EDC53C /* Pods_StepicTests.framework */; };
-		8E6BFF2C733A9C7924A8982E /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF765CB72EF4204721FD7F9 /* Pods_SberbankUniversity.framework */; };
+		99BCB6BC2799073C8EB7A141 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -780,7 +802,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		06E539E4ED7B29ED9D06E870 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
 		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
@@ -801,6 +822,17 @@
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
+		080CE1421E955D300089A27F /* CoursesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPI.swift; sourceTree = "<group>"; };
+		080CE1451E9560EB0089A27F /* SectionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsAPI.swift; sourceTree = "<group>"; };
+		080CE1481E9562430089A27F /* LessonsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsAPI.swift; sourceTree = "<group>"; };
+		080CE14B1E9562BF0089A27F /* UsersAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersAPI.swift; sourceTree = "<group>"; };
+		080CE14E1E9562F30089A27F /* StepsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsAPI.swift; sourceTree = "<group>"; };
+		080CE1511E9563170089A27F /* AssignmentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentsAPI.swift; sourceTree = "<group>"; };
+		080CE1541E9563590089A27F /* ProgressesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesAPI.swift; sourceTree = "<group>"; };
+		080CE1571E9566220089A27F /* ViewsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsAPI.swift; sourceTree = "<group>"; };
+		080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsAPI.swift; sourceTree = "<group>"; };
+		080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttemptsAPI.swift; sourceTree = "<group>"; };
+		080CE1601E9581960089A27F /* SubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionsAPI.swift; sourceTree = "<group>"; };
 		080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCoursesViewController.swift; sourceTree = "<group>"; };
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
@@ -1172,12 +1204,13 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
-		26F96CAF3E44AE3D6AB76231 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48A1E2EF1A647029315C63FB /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
-		6491543AB624F9C4ED19F84B /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
-		69A2E73D0FFBFF9D52EDC53C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
+		45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		8AC649DBE26B71494FA62962 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1200,9 +1233,9 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
-		BA43AD219895E56FE341DCDE /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		EDF765CB72EF4204721FD7F9 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F666D4ECE7EDBFE55126ED5E /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
+		FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1210,7 +1243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C059559882A61CA600BE68E /* Pods_StepicTests.framework in Frameworks */,
+				27A47C3F518B1951C6546431 /* Pods_StepicTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,7 +1252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */,
-				8E6BFF2C733A9C7924A8982E /* Pods_SberbankUniversity.framework in Frameworks */,
+				7A72E6ECE5142ECB1ED3378F /* Pods_SberbankUniversity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,7 +1261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
-				4080BE1178BF35622622F4ED /* Pods_Stepic.framework in Frameworks */,
+				99BCB6BC2799073C8EB7A141 /* Pods_Stepic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1552,6 +1585,17 @@
 				088E58BC1DE33B410009B9CE /* AuthAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
+				080CE1421E955D300089A27F /* CoursesAPI.swift */,
+				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
+				080CE1481E9562430089A27F /* LessonsAPI.swift */,
+				080CE14B1E9562BF0089A27F /* UsersAPI.swift */,
+				080CE14E1E9562F30089A27F /* StepsAPI.swift */,
+				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
+				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
+				080CE1571E9566220089A27F /* ViewsAPI.swift */,
+				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
+				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
+				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -2099,7 +2143,7 @@
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
-				7307266F3CB8EEB158085C23 /* Pods */,
+				5F704016CA5D04D146C6D1F6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2404,22 +2448,22 @@
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				EDF765CB72EF4204721FD7F9 /* Pods_SberbankUniversity.framework */,
-				26F96CAF3E44AE3D6AB76231 /* Pods_Stepic.framework */,
-				69A2E73D0FFBFF9D52EDC53C /* Pods_StepicTests.framework */,
+				C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */,
+				86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */,
+				749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7307266F3CB8EEB158085C23 /* Pods */ = {
+		5F704016CA5D04D146C6D1F6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6491543AB624F9C4ED19F84B /* Pods-SberbankUniversity.debug.xcconfig */,
-				48A1E2EF1A647029315C63FB /* Pods-SberbankUniversity.release.xcconfig */,
-				BA43AD219895E56FE341DCDE /* Pods-Stepic.debug.xcconfig */,
-				F666D4ECE7EDBFE55126ED5E /* Pods-Stepic.release.xcconfig */,
-				06E539E4ED7B29ED9D06E870 /* Pods-StepicTests.debug.xcconfig */,
-				8AC649DBE26B71494FA62962 /* Pods-StepicTests.release.xcconfig */,
+				45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */,
+				2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */,
+				C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */,
+				81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */,
+				FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */,
+				4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2476,12 +2520,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
 			buildPhases = (
-				65E1A1104A33E4F0CFBA7671 /* [CP] Check Pods Manifest.lock */,
+				76730F95A6D09D81A7A3AC28 /* [CP] Check Pods Manifest.lock */,
 				085D5CD51D007F2100092060 /* Sources */,
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
-				FF9CD4365DEDEFEF430EF6EB /* [CP] Embed Pods Frameworks */,
-				FDE1CEEEC29EF7CF46944CD6 /* [CP] Copy Pods Resources */,
+				A7F8263E7C6BFC291B58134D /* [CP] Embed Pods Frameworks */,
+				3CE0CC406597F30CDEC6739E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2497,13 +2541,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */;
 			buildPhases = (
-				A24B42D31188F49586F60C35 /* [CP] Check Pods Manifest.lock */,
+				6C6FD0BAE9D09DEE6A3AE326 /* [CP] Check Pods Manifest.lock */,
 				08D120741C937B2200A54ABC /* Sources */,
 				08D121031C937B2200A54ABC /* Frameworks */,
 				08D121061C937B2200A54ABC /* Resources */,
 				08D1211F1C937B2200A54ABC /* ShellScript */,
-				F025743B2CB58D592390AF84 /* [CP] Embed Pods Frameworks */,
-				A8CF50E1CF7CF045F125D972 /* [CP] Copy Pods Resources */,
+				571CFD70861828075A939C48 /* [CP] Embed Pods Frameworks */,
+				325D37ADFD457ABFEA51E33E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2518,14 +2562,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
-				19255FEF303F3EE1F9DAEB30 /* [CP] Check Pods Manifest.lock */,
+				F972AD9AAD93563C19584F11 /* [CP] Check Pods Manifest.lock */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
-				7CDEB112986B47C241FEE1EC /* [CP] Embed Pods Frameworks */,
-				594FCBF0EDE95745E9D79637 /* [CP] Copy Pods Resources */,
+				427C889518E3953D2D926877 /* [CP] Embed Pods Frameworks */,
+				A35470479093EA10D4D5CCC0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2829,82 +2873,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		19255FEF303F3EE1F9DAEB30 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		594FCBF0EDE95745E9D79637 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		65E1A1104A33E4F0CFBA7671 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		7CDEB112986B47C241FEE1EC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A24B42D31188F49586F60C35 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A8CF50E1CF7CF045F125D972 /* [CP] Copy Pods Resources */ = {
+		325D37ADFD457ABFEA51E33E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2919,22 +2888,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F025743B2CB58D592390AF84 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FDE1CEEEC29EF7CF46944CD6 /* [CP] Copy Pods Resources */ = {
+		3CE0CC406597F30CDEC6739E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2949,7 +2903,82 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF9CD4365DEDEFEF430EF6EB /* [CP] Embed Pods Frameworks */ = {
+		427C889518E3953D2D926877 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		571CFD70861828075A939C48 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C6FD0BAE9D09DEE6A3AE326 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		76730F95A6D09D81A7A3AC28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A35470479093EA10D4D5CCC0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7F8263E7C6BFC291B58134D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2962,6 +2991,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F972AD9AAD93563C19584F11 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2986,6 +3030,7 @@
 				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				08D120761C937B2200A54ABC /* UIAppearance+Swift.m in Sources */,
 				08EB85EA1D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
+				080CE1531E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
 				08D120791C937B2200A54ABC /* AuthManager.swift in Sources */,
 				0895A13C1E43836B00FE22DD /* FillBlanksReply.swift in Sources */,
@@ -3057,6 +3102,7 @@
 				08D120931C937B2200A54ABC /* UnknownTypeQuizViewController.swift in Sources */,
 				0800B8191D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				08D120941C937B2200A54ABC /* CoursesJoinManager.swift in Sources */,
+				080CE14A1E9562430089A27F /* LessonsAPI.swift in Sources */,
 				08D120951C937B2200A54ABC /* SortingDataset.swift in Sources */,
 				08758A9D1CDB99CF00159233 /* Device.swift in Sources */,
 				08D120961C937B2200A54ABC /* SearchResult.swift in Sources */,
@@ -3076,6 +3122,7 @@
 				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
+				080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */,
 				084F7AA81E76EF690088368A /* LastStep.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
@@ -3087,6 +3134,7 @@
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
 				08263D9D1DE5FC01002E5B7F /* Presentr.swift in Sources */,
 				082BE3B31E67686B006BC60F /* RoutingManager.swift in Sources */,
+				080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
@@ -3096,6 +3144,7 @@
 				08D035261D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				08D120A41C937B2200A54ABC /* Section+CoreDataProperties.swift in Sources */,
 				08D120A51C937B2200A54ABC /* VideoStepViewController.swift in Sources */,
+				080CE14D1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				08D120A61C937B2200A54ABC /* NSDateExtensions.swift in Sources */,
 				08F476231E82C1480018E82C /* StreaksView.swift in Sources */,
 				08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */,
@@ -3107,6 +3156,7 @@
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
+				080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08D120AB1C937B2200A54ABC /* SectionTableViewCell.swift in Sources */,
 				0800B81C1D06DC1B006C987E /* Comment.swift in Sources */,
 				08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
@@ -3174,6 +3224,8 @@
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */,
+				080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
 				08D120D41C937B2200A54ABC /* GeneralInfoTableViewCell.swift in Sources */,
 				08D120D51C937B2200A54ABC /* NumberQuizViewController.swift in Sources */,
@@ -3221,6 +3273,7 @@
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				08263D9B1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
+				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
@@ -3242,10 +3295,12 @@
 				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08E6BB6C1DC8EB45006622EC /* UserActivity.swift in Sources */,
+				080CE1471E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083267A71CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				08ECC4481DB8D3D60005D401 /* GreenNavigationViewController.swift in Sources */,
 				08AC21461CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				085C4FF41D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
+				080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
 				086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
@@ -3282,6 +3337,7 @@
 				086A9D621C74AF90003611DC /* GlobalFunctions.swift in Sources */,
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
+				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
@@ -3331,6 +3387,7 @@
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
+				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
@@ -3362,6 +3419,7 @@
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
@@ -3393,6 +3451,7 @@
 				083749261DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */,
 				08C9F7D01C29AE8B00E544D0 /* WebControllerManager.swift in Sources */,
+				080CE15B1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08DE94171B8C58AC00D278AB /* AppDelegate.swift in Sources */,
 				08263D9A1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
 				080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */,
@@ -3414,6 +3473,7 @@
 				08263D8A1DE5FC01002E5B7F /* CoverHorizontalAnimation.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
+				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
@@ -3442,6 +3502,7 @@
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,
+				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
@@ -3457,6 +3518,7 @@
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
+				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
@@ -3482,6 +3544,7 @@
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
+				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				08263D921DE5FC01002E5B7F /* ModalCenterPosition.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
@@ -3519,6 +3582,7 @@
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
 				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
+				080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */,
 				086E96601BF66A1800AB952D /* VideoDownloadView.swift in Sources */,
 				080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
@@ -3528,6 +3592,7 @@
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
@@ -3568,6 +3633,7 @@
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
+				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
@@ -3670,7 +3736,7 @@
 /* Begin XCBuildConfiguration section */
 		085D5CE01D007F2200092060 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06E539E4ED7B29ED9D06E870 /* Pods-StepicTests.debug.xcconfig */;
+			baseConfigurationReference = FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -3689,7 +3755,7 @@
 		};
 		085D5CE11D007F2200092060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AC649DBE26B71494FA62962 /* Pods-StepicTests.release.xcconfig */;
+			baseConfigurationReference = 4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -3707,7 +3773,7 @@
 		};
 		08D121221C937B2200A54ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6491543AB624F9C4ED19F84B /* Pods-SberbankUniversity.debug.xcconfig */;
+			baseConfigurationReference = 45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -3728,7 +3794,7 @@
 		};
 		08D121231C937B2200A54ABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48A1E2EF1A647029315C63FB /* Pods-SberbankUniversity.release.xcconfig */;
+			baseConfigurationReference = 2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -3848,7 +3914,7 @@
 		};
 		08DE94311B8C58AC00D278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA43AD219895E56FE341DCDE /* Pods-Stepic.debug.xcconfig */;
+			baseConfigurationReference = C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3876,7 +3942,7 @@
 		};
 		08DE94321B8C58AC00D278AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F666D4ECE7EDBFE55126ED5E /* Pods-Stepic.release.xcconfig */;
+			baseConfigurationReference = 81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

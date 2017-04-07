@@ -59,17 +59,17 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     func loadSteps(completion: @escaping ((Void) -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
-        _ = ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .update, success: {
+        _ = ApiDataDownloader.steps.retrieve(ids: self.stepsArray, existing: self.steps, refreshMode: .update, success: {
             newSteps in 
             self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
             self.loadProgressesForSteps({
                 if !onlyLesson {
                     if let u = self.unit {
-                        _ = ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .update, success: {
+                        _ = ApiDataDownloader.assignments.retrieve(ids: u.assignmentsArray, existing: u.assignments, refreshMode: .update, success: {
                             newAssignments in 
                             u.assignments = Sorter.sort(newAssignments,steps: self.steps)
                             completion()
-                            }, failure: {
+                            }, error: {
                                 error in
                                 print("Error while downloading assignments")
                                 errorHandler?("Error while downloading assignments")
@@ -82,10 +82,10 @@ class Lesson: NSManagedObject, JSONInitializable {
                 }
             })
             CoreDataHelper.instance.save()
-            }, failure: {
+            }, error: {
                 error in
-                print("Error while downloading units")
-                errorHandler?("Error while downloading units")
+                print("Error while downloading steps")
+                errorHandler?("Error while downloading steps")
         })
         
     }
@@ -104,7 +104,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             }
         }
         
-        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
             for i in 0 ..< min(self.steps.count, progresses.count) {
@@ -114,7 +114,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             CoreDataHelper.instance.save()
             
             completion()
-            }, failure: { 
+            }, error: { 
                 (error) -> Void in
                 print("Error while dowloading progresses")
         }) 

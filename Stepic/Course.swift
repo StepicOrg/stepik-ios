@@ -151,12 +151,12 @@ class Course: NSManagedObject, JSONInitializable {
 //    }
     
     func loadAllInstructors(success: @escaping ((Void) -> Void)) {
-        _ = ApiDataDownloader.sharedDownloader.getUsersByIds(self.instructorsArray, deleteUsers: self.instructors, refreshMode: .update, success: {
+        _ = ApiDataDownloader.users.retrieve(ids: self.instructorsArray, existing: self.instructors, refreshMode: .update, success: {
             users in
             self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
             CoreDataHelper.instance.save()
             success()  
-            }, failure : {
+            }, error : {
                 error in
                 print("error while loading section")
         })
@@ -202,7 +202,7 @@ class Course: NSManagedObject, JSONInitializable {
         }
         
         for ids in idsArray {
-            _ = ApiDataDownloader.sharedDownloader.getSectionsByIds(ids, existingSections: self.sections, refreshMode: .update, success: {
+            _ = ApiDataDownloader.sections.retrieve(ids: ids, existing: self.sections, refreshMode: .update, success: {
                 secs in
                 if withProgresses { 
                     self.loadProgressesForSections(sections: secs, success: {
@@ -213,7 +213,7 @@ class Course: NSManagedObject, JSONInitializable {
                 } else {
                     idsDownloaded(secs)
                 }
-            }, failure : {
+            }, error : {
                 error in
                 print("error while loading section")
                 errorWhileDownloading()
@@ -241,7 +241,7 @@ class Course: NSManagedObject, JSONInitializable {
         }
         
 //        print("progress ids array -> \(progressIds)")
-        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
             
@@ -263,7 +263,7 @@ class Course: NSManagedObject, JSONInitializable {
             }
             CoreDataHelper.instance.save()
             completion()
-        }, failure: { 
+        }, error: { 
             (error) -> Void in
             print("Error while downloading progresses")
             errorHandler()

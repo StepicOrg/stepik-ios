@@ -13,7 +13,7 @@ import SwiftyJSON
 class UserActivitiesAPI {
     let name = "user-activities"
     
-    func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((UserActivity) -> Void), error errorHandler: @escaping ((UserRetrieveError) -> Void)) -> Request {
+    @discardableResult func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((UserActivity) -> Void), error errorHandler: @escaping ((UserRetrieveError) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(userId)", headers: headers).responseSwiftyJSON(
             {
                 response in

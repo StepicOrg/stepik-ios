@@ -11,6 +11,10 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 
+enum RetrieveError : Error {
+    case connectionError, badStatus
+}
+
 class APIEndpoint {
     
     func constructIdsString<TID>(array arr: [TID]) -> String {

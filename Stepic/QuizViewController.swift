@@ -398,7 +398,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: s.step.block.name, stepId: stepId, success: { 
+            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: { 
                 [weak self]
                 attempts, meta in
                 if attempts.count == 0 || attempts[0].status != "active" {
@@ -413,7 +413,7 @@ class QuizViewController: UIViewController {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
-                    _ = ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
+                    _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
                         [weak self]
                         submissions, meta in
                         if submissions.count == 0 {
@@ -466,7 +466,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: s.step.block.name, stepId: s.step.id, success: {
+            _ = ApiDataDownloader.attempts.create(stepName: s.step.block.name, stepId: s.step.id, success: {
                 [weak self]
                 attempt in
                 guard let s = self else { return }
@@ -586,7 +586,7 @@ class QuizViewController: UIViewController {
                 [weak self] in
                 
                 guard let s = self else { return }
-                _ = ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: s.step.block.name, submissionId: id, success: {
+                _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     [weak self]
                     submission in
                     print("did get submission id \(id), with status \(submission.status)")
@@ -632,7 +632,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: s.step.block.name, attemptId: id, reply: r, success: {
+            _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
                 [weak self]
                 submission in
                 s.submission = submission

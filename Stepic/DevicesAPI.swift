@@ -21,7 +21,7 @@ class DevicesAPI: NSObject {
         manager = Alamofire.SessionManager(configuration: configuration)
     }
     
-    func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
         let params = ["device": device.getJSON()]
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
@@ -57,7 +57,7 @@ class DevicesAPI: NSObject {
         })
     }
     
-    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
         
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
             response in

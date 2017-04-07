@@ -13,7 +13,7 @@ import SwiftyJSON
 class CommentsAPI {
     let name = "comments"
     
-    func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
+    @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         let idsString = ApiUtil.constructIdsString(array: ids)
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?\(idsString)", headers: headers).responseSwiftyJSON(
             {
@@ -68,7 +68,7 @@ class CommentsAPI {
         )
     }
     
-    func create(_ comment: CommentPostable, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
+    @discardableResult func create(_ comment: CommentPostable, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         let params: Parameters = [
             "comment" : comment.json
         ]
