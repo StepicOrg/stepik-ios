@@ -342,6 +342,10 @@
 		0890560B1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
 		0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		0890560E1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
+		089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
+		089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
+		089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
+		089056141E98021000B8FE6A /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
 		089142491BCEE4EF0000BCB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142451BCEE4EE0000BCB0 /* Video.swift */; };
 		0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */; };
@@ -1036,8 +1040,10 @@
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
 		08901E6F1CD111F200D94613 /* VersionUpdateAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionUpdateAlertConstructor.swift; sourceTree = "<group>"; };
 		08901E711CD1173200D94613 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
-		089056091E97CD7900B8FE6A /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
-		0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
+		089056091E97CD7900B8FE6A /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultsContainer.swift; path = ../DefaultsContainer.swift; sourceTree = "<group>"; };
+		0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchDefaultsContainer.swift; path = ../LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
+		0890560F1E98021000B8FE6A /* RateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
+		089056101E98021000B8FE6A /* RateAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateAppViewController.xib; sourceTree = "<group>"; };
 		089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		089142451BCEE4EE0000BCB0 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		089142461BCEE4EE0000BCB0 /* VideoURL+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoURL+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1301,6 +1307,8 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
+				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
 				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
@@ -2141,8 +2149,6 @@
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
-				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
-				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
 				9F9C71481E076B3200EC8DA3 /* Shared */,
@@ -2433,6 +2439,8 @@
 				08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */,
 				08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */,
 				0867D82A1E85313100B13285 /* Streaks */,
+				0890560F1E98021000B8FE6A /* RateAppViewController.swift */,
+				089056101E98021000B8FE6A /* RateAppViewController.xib */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -2733,6 +2741,7 @@
 				08263D971DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
+				089056141E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
@@ -2816,6 +2825,7 @@
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08263D961DE5FC01002E5B7F /* Montserrat-Regular.ttf in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
+				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
@@ -3283,6 +3293,7 @@
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				08263D9B1DE5FC01002E5B7F /* Presentr+Equatable.swift in Sources */,
+				089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
@@ -3510,6 +3521,7 @@
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				08263D881DE5FC01002E5B7F /* AlertViewController.swift in Sources */,
+				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,

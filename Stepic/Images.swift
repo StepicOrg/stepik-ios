@@ -76,5 +76,10 @@ struct Images {
         static let black = UIImage(named: "streak-icon-black")!
         static let white = UIImage(named: "streak-icon-white-bordered")!
     }
+    
+    struct star {
+        static let empty = UIImage(named: "star_gray")!
+        static let filled = UIImage(named: "star_yellow")!
+    }
 
 }
