@@ -105,6 +105,8 @@
 		08263DA31DE5FC01002E5B7F /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */; };
 		08263DA41DE5FC01002E5B7F /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D851DE5FC01002E5B7F /* TransitionType.swift */; };
 		08263DA51DE5FC01002E5B7F /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D851DE5FC01002E5B7F /* TransitionType.swift */; };
+		082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
+		082799491E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082799471E9B81AF008A3786 /* RateAppAlertManager.swift */; };
 		0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
 		0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6D1BC5D177000AFEA7 /* Section.swift */; };
 		0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
@@ -879,6 +881,7 @@
 		08263D831DE5FC01002E5B7F /* PresentrController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentrController.swift; sourceTree = "<group>"; };
 		08263D841DE5FC01002E5B7F /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		08263D851DE5FC01002E5B7F /* TransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionType.swift; sourceTree = "<group>"; };
+		082799471E9B81AF008A3786 /* RateAppAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppAlertManager.swift; sourceTree = "<group>"; };
 		0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Section+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF6D1BC5D177000AFEA7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -1525,6 +1528,7 @@
 				083749251DE5AE0400144C14 /* Alerts.swift */,
 				08FF752E1DF9B87A00D656C4 /* Streaks */,
 				0837492C1DE5B07900144C14 /* AlertManager.swift */,
+				082799471E9B81AF008A3786 /* RateAppAlertManager.swift */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -2438,9 +2442,9 @@
 			children = (
 				08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */,
 				08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */,
-				0867D82A1E85313100B13285 /* Streaks */,
 				0890560F1E98021000B8FE6A /* RateAppViewController.swift */,
 				089056101E98021000B8FE6A /* RateAppViewController.xib */,
+				0867D82A1E85313100B13285 /* Streaks */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -3299,6 +3303,7 @@
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
 				08D120EF1C937B2200A54ABC /* TCBlobDownloadManager.swift in Sources */,
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
+				082799491E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
@@ -3427,6 +3432,7 @@
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
+				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,

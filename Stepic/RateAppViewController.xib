@@ -92,12 +92,18 @@
                             <state key="normal" title="Later">
                                 <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </state>
+                            <connections>
+                                <action selector="laterButtonPressed:" destination="-1" eventType="touchUpInside" id="x8M-nJ-FWh"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fN-rR-caM">
                             <rect key="frame" x="245" y="9" width="238.5" height="30"/>
                             <state key="normal" title="Right">
                                 <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </state>
+                            <connections>
+                                <action selector="rightButtonPressed:" destination="-1" eventType="touchUpInside" id="Xde-gU-ypj"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

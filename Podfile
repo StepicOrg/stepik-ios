@@ -40,6 +40,8 @@ def all_pods
     pod 'FBSDKLoginKit'
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
+    pod 'Presentr'
 end
 
 target 'Stepic' do

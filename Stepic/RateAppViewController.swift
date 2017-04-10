@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class RateAppViewController: UIViewController {
 
@@ -20,6 +21,27 @@ class RateAppViewController: UIViewController {
     @IBOutlet var starImageViews: [UIImageView]!
     
     @IBOutlet weak var buttonsContainerHeight: NSLayoutConstraint!
+    
+    enum AfterRateActionType {
+        case appStore, email
+    }
+    
+    var buttonState : AfterRateActionType? = nil {
+        didSet {
+            guard buttonState != nil else {
+                return
+            }
+            
+            switch buttonState! {
+            case AfterRateActionType.appStore:
+                rightButton.setTitle("Email", for: .normal)
+                break
+            case AfterRateActionType.email:
+                rightButton.setTitle("AppStore", for: .normal)
+                break
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +74,28 @@ class RateAppViewController: UIViewController {
         
         let rating = tappedIndex + 1 
         if rating < 4 {
-            rightButton.setTitle("Email", for: .normal)
+            buttonState = .email
         } else {
-            rightButton.setTitle("App Store", for: .normal)
+            buttonState = .appStore
         }
+    }
+    
+    func showEmail() {
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        
+        composeVC.setToRecipients(["address@example.com"])
+        composeVC.setSubject("Hello!")
+        composeVC.setMessageBody("Hello from California!", isHTML: false)
+        
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    func showAppStore() {
+        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review") else {
+            return
+        }
+        UIApplication.shared.openURL(appStoreURL)
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,7 +103,26 @@ class RateAppViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func laterButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
+    @IBAction func rightButtonPressed(_ sender: UIButton) {
+        guard buttonState != nil else {
+            return
+        }
+        
+        switch buttonState! {
+        case AfterRateActionType.appStore:
+            showEmail()
+            break
+        case AfterRateActionType.email:
+            showAppStore()
+            break
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -74,4 +133,20 @@ class RateAppViewController: UIViewController {
     }
     */
 
+}
+
+extension RateAppViewController : MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController,
+                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        // Check the result or perform other tasks.
+        
+        // Dismiss the mail compose view controller.
+        
+        //TODO: Add thank you message to completion block depending on the way user completed action
+        // Show Thank You message
+        controller.dismiss(animated: true, completion: {
+            [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        })
+    }
 }

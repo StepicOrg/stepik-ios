@@ -13,4 +13,5 @@ import Foundation
  */
 class Alerts {
     static let streaks = StreaksStepikAlertManager()
+    static let rate = RateAppAlertManager()
 }
