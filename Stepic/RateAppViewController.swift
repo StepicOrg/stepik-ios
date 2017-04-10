@@ -49,25 +49,26 @@ class RateAppViewController: UIViewController {
         centerViewWidth.constant = 0.5
         buttonsContainerHeight.constant = 0
 
-        let tapG = UITapGestureRecognizer(target: self, action: #selector(RateAppViewController.didTap(recognizer:)))
         
-        starImageViews.forEach{
-            $0.addGestureRecognizer(tapG)
+        for star in starImageViews {
+            let tapG = UITapGestureRecognizer(target: self, action: #selector(RateAppViewController.didTap(_:)))
+            star.isUserInteractionEnabled = true
+            star.addGestureRecognizer(tapG)
         }
         
         // Do any additional setup after loading the view.
     }
 
-    func didTap(recognizer: UIGestureRecognizer) {
+    func didTap(_ recognizer: UITapGestureRecognizer) {
         guard let tappedIndex = recognizer.view?.tag else {
             return
         }
         
-        starImageViews.forEach{
-            if $0.tag <= tappedIndex {
-                $0.isHighlighted = true
+        for star in starImageViews {
+            if star.tag <= tappedIndex {
+                star.isHighlighted = true
             }
-            $0.isUserInteractionEnabled = false
+            star.isUserInteractionEnabled = false
         }
         
         buttonsContainerHeight.constant = 48
@@ -136,17 +137,15 @@ class RateAppViewController: UIViewController {
 }
 
 extension RateAppViewController : MFMailComposeViewControllerDelegate {
-    func mailComposeController(controller: MFMailComposeViewController,
-                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult, error: Error?) {
         // Check the result or perform other tasks.
         
         // Dismiss the mail compose view controller.
         
-        //TODO: Add thank you message to completion block depending on the way user completed action
-        // Show Thank You message
-        controller.dismiss(animated: true, completion: {
-            [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+
+        self.dismiss(animated: true, completion: {
+//            controller.dismiss(animated: true, completion: nil)
         })
     }
 }

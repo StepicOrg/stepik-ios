@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Presentr
 
 class RateAppAlertManager : AlertManager {
     func present(alert: UIViewController, inController controller: UIViewController)  {
@@ -14,7 +15,8 @@ class RateAppAlertManager : AlertManager {
     }
     
     let presenter: Presentr = {
-        let presenter = Presentr(presentationType: .dynamic)
+        let presenter = Presentr(presentationType: .dynamic(center: .center))
+        presenter.roundCorners = true
         return presenter
     }()
     

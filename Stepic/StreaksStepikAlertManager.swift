@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Presentr
 
 /*
  AlertManager class for streaks alert

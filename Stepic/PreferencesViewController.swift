@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 enum VideoQualityChoiceAction: Int {
     case downloading = 0, watching

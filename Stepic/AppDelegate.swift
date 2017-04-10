@@ -19,6 +19,7 @@ import VK_ios_sdk
 import FBSDKCoreKit
 import Mixpanel
 import YandexMobileMetrica
+import Presentr
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

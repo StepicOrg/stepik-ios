@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class QuizViewController: UIViewController {
     
