@@ -13,6 +13,7 @@ class SubmissionManager {
     
     fileprivate let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
     fileprivate let streakAlertShownCntKey = "streakAlertShownCntKey"
+    
     fileprivate let maxStreakAlertShownCnt = 3
     
     fileprivate var lastStreakAlertShownTime: TimeInterval {
@@ -63,5 +64,6 @@ class SubmissionManager {
     var canShowAlert : Bool {
         return AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt && PreferencesContainer.notifications.allowStreaksNotifications == false
     }
+    
     
 }

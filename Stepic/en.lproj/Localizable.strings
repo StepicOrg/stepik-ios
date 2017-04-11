@@ -63,7 +63,7 @@ OpenInBrowser = "Open the link in browser?";
 Open = "Open";
 TryJoinFromWeb = "Try to join course in web version!";
 Error = "Error";
-Email = "E-mail";
+Email = "Email";
 Password = "Password";
 SignIn = "Sign in";
 SignUp = "Sign up";
@@ -191,3 +191,11 @@ Teachers = "Instructors";
 YouAreSolving = "You are solving";
 SolveToImprove = "Solve anything today to improve your streak!";
 TapToLearnAboutStreaks = "Tap to learn more about streaks";
+AppStore = "AppStore";
+FeedbackAboutStepik = "Feedback about the Stepik iOS App";
+HowWouldYouRateStepik = "How would you rate Stepik?";
+PleaseLeaveFeedbackAppstore = "Please, leave your feedback in the AppStore";
+PleaseLeaveFeedbackEmail = "Please, send your feedback by email";
+ThankYou = "Thank you!";
+
+

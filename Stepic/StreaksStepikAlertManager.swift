@@ -19,7 +19,8 @@ class StreaksStepikAlertManager : AlertManager {
     }
     
     let presenter: Presentr = {
-        let presenter = Presentr(presentationType: .popup)
+        let presenter = Presentr(presentationType: .dynamic(center: .center))
+        presenter.roundCorners = true
         return presenter
     }()
     

@@ -88,6 +88,8 @@
 		0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
+		0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
+		0829B8331E9C4CB5009B4A84 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
@@ -846,6 +848,7 @@
 		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
+		0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppManager.swift; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
@@ -2159,6 +2162,7 @@
 		08E542071C6CD59A00DEC38E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */,
 				082BE3B01E676856006BC60F /* RoutingManagers */,
 				08DF1D8B1BDA77A200BA35EA /* PathManager.swift */,
 				08C5E4FC1C315272004AA626 /* AudioManager.swift */,
@@ -3117,6 +3121,7 @@
 				08D120B71C937B2200A54ABC /* CacheManager.swift in Sources */,
 				0834C46D1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
 				08D120B81C937B2200A54ABC /* Time.swift in Sources */,
+				0829B8331E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				08D120B91C937B2200A54ABC /* Assignment+CoreDataProperties.swift in Sources */,
 				08D120BA1C937B2200A54ABC /* RefreshTableViewCell.swift in Sources */,
 				08D120BB1C937B2200A54ABC /* Messages.swift in Sources */,
@@ -3394,6 +3399,7 @@
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
+				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
 				0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */,
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,

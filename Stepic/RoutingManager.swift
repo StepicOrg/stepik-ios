@@ -10,4 +10,5 @@ import Foundation
 
 class RoutingManager {
     static let auth = AuthRoutingManager()
+    static let rate = RateAppManager()
 }

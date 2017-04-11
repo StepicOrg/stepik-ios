@@ -8,6 +8,8 @@
 
 import UIKit
 import MessageUI
+import Presentr
+import FLKAutoLayout
 
 class RateAppViewController: UIViewController {
 
@@ -33,15 +35,21 @@ class RateAppViewController: UIViewController {
             }
             
             switch buttonState! {
-            case AfterRateActionType.appStore:
-                rightButton.setTitle("Email", for: .normal)
+            case .appStore:
+                rightButton.titleLabel?.text = NSLocalizedString("AppStore", comment: "")
+                rightButton.setTitle(NSLocalizedString("AppStore", comment: ""), for: .normal)
+                rightButton.setTitleColor(UIColor.stepicGreenColor(), for: .normal)
                 break
-            case AfterRateActionType.email:
-                rightButton.setTitle("AppStore", for: .normal)
+            case .email:
+                rightButton.titleLabel?.text = NSLocalizedString("Email", comment: "")
+                rightButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
+                rightButton.setTitleColor(UIColor.errorRedColor(), for: .normal)
                 break
             }
         }
     }
+    
+    var bottomLabelWidth : NSLayoutConstraint? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +57,18 @@ class RateAppViewController: UIViewController {
         centerViewWidth.constant = 0.5
         buttonsContainerHeight.constant = 0
 
+        laterButton.setTitle(NSLocalizedString("Later", comment: ""), for: .normal)
+        topLabel.text = NSLocalizedString("HowWouldYouRateStepik", comment: "")
+        bottomLabel.text = ""
+        
+        bottomLabelWidth = bottomLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)").first as? NSLayoutConstraint
         
         for star in starImageViews {
+            print(star.tag)
             let tapG = UITapGestureRecognizer(target: self, action: #selector(RateAppViewController.didTap(_:)))
             star.isUserInteractionEnabled = true
+            star.image = Images.star.empty
+            star.highlightedImage = Images.star.filled
             star.addGestureRecognizer(tapG)
         }
         
@@ -71,25 +87,34 @@ class RateAppViewController: UIViewController {
             star.isUserInteractionEnabled = false
         }
         
-        buttonsContainerHeight.constant = 48
-        
-        let rating = tappedIndex + 1 
+        topLabel.text = NSLocalizedString("ThankYou", comment: "")
+        let rating = tappedIndex + 1
         if rating < 4 {
             buttonState = .email
+            bottomLabel.text = NSLocalizedString("PleaseLeaveFeedbackEmail", comment: "")
         } else {
             buttonState = .appStore
+            bottomLabel.text = NSLocalizedString("PleaseLeaveFeedbackAppstore", comment: "")
         }
+        
+        buttonsContainerHeight.constant = 48
+        
+        self.view.frame = CGRect(origin: self.view.frame.origin, size: CGSize(width: self.view.frame.width, height: self.view.frame.height + 48.0))
+        UIView.animate(withDuration: 0.2, animations: {
+            [weak self] in
+            self?.view.layoutIfNeeded()
+        })
     }
     
     func showEmail() {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         
-        composeVC.setToRecipients(["address@example.com"])
-        composeVC.setSubject("Hello!")
-        composeVC.setMessageBody("Hello from California!", isHTML: false)
-        
-        self.present(composeVC, animated: true, completion: nil)
+        composeVC.setToRecipients(["support@stepik.org"])
+        composeVC.setSubject("Feedback about the Stepik iOS App")
+        composeVC.setMessageBody("", isHTML: false)
+        self.customPresentViewController(mailPresenter, viewController: composeVC, animated: true, completion: nil)
+
     }
     
     func showAppStore() {
@@ -97,6 +122,7 @@ class RateAppViewController: UIViewController {
             return
         }
         UIApplication.shared.openURL(appStoreURL)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,6 +131,7 @@ class RateAppViewController: UIViewController {
     }
     
     @IBAction func laterButtonPressed(_ sender: UIButton) {
+        RoutingManager.rate.pressedShowLater()
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -112,40 +139,41 @@ class RateAppViewController: UIViewController {
         guard buttonState != nil else {
             return
         }
-        
+        RoutingManager.rate.neverShow()
         switch buttonState! {
-        case AfterRateActionType.appStore:
-            showEmail()
-            break
-        case AfterRateActionType.email:
+        case .appStore:
             showAppStore()
+            break
+        case .email:
+            showEmail()
             break
         }
     }
     
+    let mailPresenter : Presentr = {
+        let width = ModalSize.sideMargin(value: 0)
+        let height = ModalSize.sideMargin(value: 0)
+        let center = ModalCenterPosition.center
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+        
+        let presenter = Presentr(presentationType: customType)
+        presenter.roundCorners = false
+        return presenter
+    }()
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        bottomLabelWidth?.constant = UIScreen.main.bounds.height - 48
     }
-    */
 
 }
 
 extension RateAppViewController : MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult, error: Error?) {
-        // Check the result or perform other tasks.
-        
-        // Dismiss the mail compose view controller.
-        
-
-        self.dismiss(animated: true, completion: {
-//            controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: {
+            [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         })
     }
 }

@@ -191,3 +191,10 @@ Teachers = "Преподаватели";
 YouAreSolving = "Вы решаете уже";
 SolveToImprove = "Решите задачу сегодня для улучшения результата!";
 TapToLearnAboutStreaks = "Нажмите, чтобы узнать о рекорде";
+AppStore = "AppStore";
+FeedbackAboutStepik = "Отзыв о приложении Stepik для iOS";
+HowWouldYouRateStepik = "Как бы Вы оценили Stepik?";
+PleaseLeaveFeedbackAppstore = "Пожалуйста, оставьте отзыв в AppStore";
+PleaseLeaveFeedbackEmail = "Пожалуйста, отправьте отзыв по электронной почте";
+ThankYou = "Спасибо!";
+

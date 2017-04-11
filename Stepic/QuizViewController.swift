@@ -553,6 +553,11 @@ class QuizViewController: UIViewController {
     
     func checkCorrect() {
         
+        if RoutingManager.rate.submittedCorrect() {
+            Alerts.rate.present(alert: Alerts.rate.construct(), inController: self)
+            return
+        }
+        
         guard QuizDataManager.submission.canShowAlert else {
             return
         }

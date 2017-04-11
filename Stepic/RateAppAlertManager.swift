@@ -17,6 +17,7 @@ class RateAppAlertManager : AlertManager {
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.roundCorners = true
+        presenter.dismissOnTap = false
         return presenter
     }()
     

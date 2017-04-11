@@ -78,8 +78,8 @@ struct Images {
     }
     
     struct star {
-        static let empty = UIImage(named: "star_gray")!
-        static let filled = UIImage(named: "star_yellow")!
+        static let empty = UIImage(named: "star-rate-gray")!
+        static let filled = UIImage(named: "star-rate-yellow")!
     }
 
 }
