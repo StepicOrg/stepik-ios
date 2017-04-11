@@ -24,6 +24,16 @@ class RateAppViewController: UIViewController {
     
     @IBOutlet weak var buttonsContainerHeight: NSLayoutConstraint!
     
+    var lessonProgress : String? = nil
+    
+    var defaultAnalyticsParams : [String: Any] {
+        if let progress = lessonProgress {
+            return ["lesson_progress": progress]
+        } else {
+            return [:]
+        }
+    }
+    
     enum AfterRateActionType {
         case appStore, email
     }
@@ -90,7 +100,9 @@ class RateAppViewController: UIViewController {
         topLabel.text = NSLocalizedString("ThankYou", comment: "")
         let rating = tappedIndex + 1
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.rated, parameters: ["rating" : rating])
+        var params = defaultAnalyticsParams
+        params["rating"] = rating
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.rated, parameters: params)
         
         if rating < 4 {
             buttonState = .email
@@ -111,7 +123,7 @@ class RateAppViewController: UIViewController {
     
     func showEmail() {
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.email, parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.email, parameters: defaultAnalyticsParams)
         
         if !MFMailComposeViewController.canSendMail() {
             //TODO: Present alert that mail is not supported on this device
@@ -131,7 +143,7 @@ class RateAppViewController: UIViewController {
     }
     
     func showAppStore() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: defaultAnalyticsParams)
         guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review") else {
             return
         }
@@ -153,10 +165,10 @@ class RateAppViewController: UIViewController {
         }
         switch buttonState! {
         case .appStore:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.later, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.later, parameters: defaultAnalyticsParams)
             break
         case .email:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.later, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.later, parameters: defaultAnalyticsParams)
             break
         }
     }
@@ -199,9 +211,9 @@ extension RateAppViewController : MFMailComposeViewControllerDelegate {
                                didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled, .failed, .saved:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.cancelled, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.cancelled, parameters: defaultAnalyticsParams)
         case .sent:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.success, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.success, parameters: defaultAnalyticsParams)
         }
         
         controller.dismiss(animated: true, completion: {

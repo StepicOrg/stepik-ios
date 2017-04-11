@@ -80,5 +80,4 @@ class Step: NSManagedObject, JSONInitializable {
         }
 //        return Step.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
-    
 }

@@ -21,8 +21,9 @@ class RateAppAlertManager : AlertManager {
         return presenter
     }()
     
-    func construct() -> RateAppViewController {
+    func construct(lessonProgress: String? = nil) -> RateAppViewController {
         let alert = RateAppViewController(nibName: "RateAppViewController", bundle: nil)
+        alert.lessonProgress = lessonProgress
         return alert
     }
 }

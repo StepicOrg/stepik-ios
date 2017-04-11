@@ -551,10 +551,20 @@ class QuizViewController: UIViewController {
         self.selectStreakNotificationTime()
     }
     
+    fileprivate var positionPercentageString : String? {
+        if let cnt = step.lesson?.stepsArray.count {
+            let res = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
+            print(res)
+            return res
+        }
+        return nil
+    }
+    
+    
     func checkCorrect() {
         
         if RoutingManager.rate.submittedCorrect() {
-            Alerts.rate.present(alert: Alerts.rate.construct(), inController: self)
+            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
             return
         }
         
