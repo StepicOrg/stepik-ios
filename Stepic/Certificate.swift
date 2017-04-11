@@ -38,4 +38,23 @@ class Certificate: NSManagedObject, JSONInitializable {
         return id == json["id"].int
     }
     
+    class func fetch(_ ids: [Int]) -> [Certificate] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
+        
+        let idPredicates = ids.map{
+            return NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        
+        request.predicate = idCompoundPredicate
+        
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request)
+            return results as! [Certificate]
+        }
+        catch {
+            return []
+        }
+    }
+    
 }

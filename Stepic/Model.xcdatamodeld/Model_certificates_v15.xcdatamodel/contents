@@ -22,6 +22,7 @@
         <attribute name="managedType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="managedCertificateEntity" inverseEntity="Course" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName=".Course" syncable="YES">
@@ -158,6 +159,7 @@
     <elements>
         <element name="Assignment" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
+        <element name="Certificate" positionX="-45" positionY="135" width="128" height="195"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="450"/>
         <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
@@ -168,6 +170,5 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
-        <element name="Certificate" positionX="-45" positionY="135" width="128" height="180"/>
     </elements>
 </model>
