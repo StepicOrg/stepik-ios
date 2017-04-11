@@ -141,4 +141,20 @@ struct AnalyticsEvents {
         static let sectionsOpened = "continue_section_opened"
         static let stepOpened = "continue_step_opened"
     }
+    
+    struct Rate {
+        static let rated = "app_rate"
+        struct Positive {
+            static let later = "app_rate_positive_later"
+            static let appstore = "app_rate_positive_appstore"
+        }
+        struct Negative {
+            static let later = "app_rate_negative_later"
+            static let email = "app_rate_negative_email"
+            struct Email {
+                static let cancelled = "app_rate_negative_email_cancelled"
+                static let success = "app_rate_negative_email_success"
+            }
+        }
+    }
 }

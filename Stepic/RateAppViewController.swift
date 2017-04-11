@@ -89,6 +89,9 @@ class RateAppViewController: UIViewController {
         
         topLabel.text = NSLocalizedString("ThankYou", comment: "")
         let rating = tappedIndex + 1
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.rated, parameters: ["rating" : rating])
+        
         if rating < 4 {
             buttonState = .email
             bottomLabel.text = NSLocalizedString("PleaseLeaveFeedbackEmail", comment: "")
@@ -107,6 +110,16 @@ class RateAppViewController: UIViewController {
     }
     
     func showEmail() {
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.email, parameters: nil)
+        
+        if !MFMailComposeViewController.canSendMail() {
+            //TODO: Present alert that mail is not supported on this device
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+
+        
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
         
@@ -118,6 +131,7 @@ class RateAppViewController: UIViewController {
     }
     
     func showAppStore() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: nil)
         guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review") else {
             return
         }
@@ -133,6 +147,18 @@ class RateAppViewController: UIViewController {
     @IBAction func laterButtonPressed(_ sender: UIButton) {
         RoutingManager.rate.pressedShowLater()
         self.dismiss(animated: true, completion: nil)
+        
+        guard buttonState != nil else {
+            return
+        }
+        switch buttonState! {
+        case .appStore:
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.later, parameters: nil)
+            break
+        case .email:
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.later, parameters: nil)
+            break
+        }
     }
 
     @IBAction func rightButtonPressed(_ sender: UIButton) {
@@ -171,6 +197,13 @@ class RateAppViewController: UIViewController {
 extension RateAppViewController : MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled, .failed, .saved:
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.cancelled, parameters: nil)
+        case .sent:
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.success, parameters: nil)
+        }
+        
         controller.dismiss(animated: true, completion: {
             [weak self] in
             self?.dismiss(animated: true, completion: nil)
