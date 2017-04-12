@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadingPaginationView" customModule="SberbankUniversity" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="HUE-tg-nDg" id="xlT-K7-RBP"/>
+                <outlet property="refreshButton" destination="Oy2-Fy-MDz" id="OOn-yi-VJQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HUE-tg-nDg">
+                    <rect key="frame" x="177" y="41" width="20" height="20"/>
+                </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-Fy-MDz">
+                    <rect key="frame" x="172" y="36" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="FK1-oF-AIh"/>
+                        <constraint firstAttribute="width" constant="30" id="z3c-mh-vkI"/>
+                    </constraints>
+                    <state key="normal" image="Refresh"/>
+                    <connections>
+                        <action selector="refreshPressed:" destination="-1" eventType="touchUpInside" id="qEc-Hj-HLI"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="HUE-tg-nDg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9MS-uT-dlh"/>
+                <constraint firstItem="Oy2-Fy-MDz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="J0w-2o-jeZ"/>
+                <constraint firstItem="Oy2-Fy-MDz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TUi-7a-xX2"/>
+                <constraint firstItem="HUE-tg-nDg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z6i-7b-bF3"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="32.5" y="-280.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Refresh" width="72" height="74"/>
+    </resources>
+</document>

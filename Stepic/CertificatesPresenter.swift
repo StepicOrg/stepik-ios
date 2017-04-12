@@ -117,13 +117,21 @@ class CertificatesPresenter {
         return CertificateViewData(courseName: certificate.course?.title, courseImageURL: courseImageURL, grade: certificate.grade, certificateURL: certificateURL, certificateDescription: certificateDescriptionString)
     }
     
-    func getNextPage() {
+    fileprivate var isGettingNextPage: Bool = false
+    
+    func getNextPage() -> Bool {
         guard let userId = AuthInfo.shared.userId else {
             certificates = []
             view?.displayAnonymous()
-            return
+            return false
         }
-
+        
+        if isGettingNextPage {
+            return false
+        }
+        
+        isGettingNextPage = true
+        
         certificatesAPI?.retrieve(userId: userId, page: page + 1, success: {
             [weak self]
             meta, newCertificates in
@@ -133,16 +141,22 @@ class CertificatesPresenter {
             self?.loadCoursesForCertificates(certificates: newCertificates, completion: {
                 [weak self] in
                 guard let s = self else {
+                    self?.isGettingNextPage = true
                     return
                 }
                 s.view?.setCertificates(certificates: s.certificates.flatMap({
                     [weak self] in
                     return self?.certificateViewData(fromCertificate: $0)
-                }), hasNextPage: meta.hasNext)            })
+                }), hasNextPage: meta.hasNext)
+                self?.isGettingNextPage = true
+            })
         }, error: {
             [weak self]
             error in
             self?.view?.displayLoadNextPageError()
+            self?.isGettingNextPage = true
         })
+        
+        return true
     }
 }

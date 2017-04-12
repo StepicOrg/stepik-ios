@@ -56,11 +56,30 @@ class CertificatesViewController : UIViewController, CertificatesView {
         presenter?.refreshCertificates()
         
         tableView.backgroundColor = UIColor.white
+        
+        initPaginationView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.checkStatus()
+    }
+    
+    fileprivate func initPaginationView() {
+        paginationView = LoadingPaginationView()
+        paginationView?.refreshAction = {
+            [weak self] in
+            
+            guard let presenter = self?.presenter else {
+                return
+            }
+            
+            if presenter.getNextPage() {
+                self?.paginationView?.setLoading()
+            }
+        }
+        
+        paginationView?.setLoading()
     }
     
     func refreshCertificates() {
@@ -94,11 +113,25 @@ class CertificatesViewController : UIViewController, CertificatesView {
     }
     
     func displayLoadNextPageError() {
-        //TODO: Make footer view display error & refresh button
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        paginationView?.setError()
     }
     
     func updateData() {
         tableView.reloadData()
+    }
+    
+    var paginationView : LoadingPaginationView? = nil
+    
+    func loadNextPage() {
+        guard let presenter = presenter else {
+            return
+        }
+        
+        if presenter.getNextPage() {
+            paginationView?.setLoading()
+        }
     }
 }
 
@@ -128,6 +161,23 @@ extension CertificatesViewController : DZNEmptyDataSetDelegate {
 }
 
 extension CertificatesViewController : UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard showNextPageFooter else {
+            return UIView()
+        }
+        
+        return paginationView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return showNextPageFooter ? 0.1 : 40.0
+    }
+    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -152,6 +202,10 @@ extension CertificatesViewController : UITableViewDataSource {
         }
         
         cell.initWith(certificateViewData: certificates[indexPath.row])
+        
+        if certificates.count == indexPath.row + 1 {
+            loadNextPage()
+        }
         
         return cell
     }
