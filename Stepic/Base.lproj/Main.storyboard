@@ -52,7 +52,7 @@
                 <viewControllerPlaceholder storyboardName="UserPreferences" id="jbH-Jk-mjZ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lS-w7-ZlN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2269" y="1332"/>
+            <point key="canvasLocation" x="2163" y="1729"/>
         </scene>
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
@@ -1310,7 +1310,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7Zk-g8-6bm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -1322,7 +1322,15 @@
                             <constraint firstItem="30u-pL-bXu" firstAttribute="top" secondItem="7Zk-g8-6bm" secondAttribute="bottom" id="dVt-uT-jVE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW">
+                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="djw-nQ-n4l">
+                            <connections>
+                                <segue destination="jbH-Jk-mjZ" kind="show" identifier="showPreferences" id="wpv-Oi-Qbe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="7Zk-g8-6bm" id="xI7-bT-N3B"/>
                     </connections>
@@ -1343,8 +1351,8 @@
         <image name="success" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="22V-K9-ItS"/>
-        <segue reference="oyz-px-1HN"/>
+        <segue reference="wpv-Oi-Qbe"/>
+        <segue reference="gVj-jL-WXR"/>
         <segue reference="LaP-cg-j2K"/>
         <segue reference="Ymm-um-wgY"/>
     </inferredMetricsTieBreakers>
