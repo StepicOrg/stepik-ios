@@ -21,13 +21,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HUE-tg-nDg">
-                    <rect key="frame" x="177" y="41" width="20" height="20"/>
+                    <rect key="frame" x="178" y="42" width="20" height="20"/>
+                    <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-Fy-MDz">
-                    <rect key="frame" x="172" y="36" width="30" height="30"/>
+                    <rect key="frame" x="177" y="41" width="20" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="FK1-oF-AIh"/>
-                        <constraint firstAttribute="width" constant="30" id="z3c-mh-vkI"/>
+                        <constraint firstAttribute="height" constant="20" id="FK1-oF-AIh"/>
+                        <constraint firstAttribute="width" constant="20" id="z3c-mh-vkI"/>
                     </constraints>
                     <state key="normal" image="Refresh"/>
                     <connections>

@@ -49,11 +49,13 @@ class CertificatesPresenter {
         lastRefreshedUserId = userId
         certificates = []
         view?.displayRefreshing()
+        
         certificatesAPI?.retrieve(userId: userId, success: {
             [weak self]
             meta, newCertificates in
             
             self?.certificates = newCertificates
+            self?.page = 1
             
             self?.loadCoursesForCertificates(certificates: newCertificates, completion: {
                 [weak self] in
@@ -141,20 +143,20 @@ class CertificatesPresenter {
             self?.loadCoursesForCertificates(certificates: newCertificates, completion: {
                 [weak self] in
                 guard let s = self else {
-                    self?.isGettingNextPage = true
+                    self?.isGettingNextPage = false
                     return
                 }
                 s.view?.setCertificates(certificates: s.certificates.flatMap({
                     [weak self] in
                     return self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
-                self?.isGettingNextPage = true
+                self?.isGettingNextPage = false
             })
         }, error: {
             [weak self]
             error in
             self?.view?.displayLoadNextPageError()
-            self?.isGettingNextPage = true
+            self?.isGettingNextPage = false
         })
         
         return true

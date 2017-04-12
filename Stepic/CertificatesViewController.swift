@@ -89,8 +89,8 @@ class CertificatesViewController : UIViewController, CertificatesView {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
         self.certificates = certificates
         self.showNextPageFooter = hasNextPage
-        refreshControl.endRefreshing()
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func displayAnonymous() {
@@ -113,8 +113,6 @@ class CertificatesViewController : UIViewController, CertificatesView {
     }
     
     func displayLoadNextPageError() {
-        tableView.beginUpdates()
-        tableView.endUpdates()
         paginationView?.setError()
     }
     
@@ -175,7 +173,7 @@ extension CertificatesViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return showNextPageFooter ? 0.1 : 40.0
+        return showNextPageFooter ? 60.0 : 0.1
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
@@ -203,7 +201,7 @@ extension CertificatesViewController : UITableViewDataSource {
         
         cell.initWith(certificateViewData: certificates[indexPath.row])
         
-        if certificates.count == indexPath.row + 1 {
+        if certificates.count == indexPath.row + 1 && showNextPageFooter {
             loadNextPage()
         }
         

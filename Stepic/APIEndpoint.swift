@@ -57,7 +57,6 @@ class APIEndpoint {
                 print(json)
             }
             
-            print(json)
             
             if let e = error as? NSError {
                 print("RETRIEVE \(requestString)?\(ids): error \(e.domain) \(e.code): \(e.localizedDescription)")
