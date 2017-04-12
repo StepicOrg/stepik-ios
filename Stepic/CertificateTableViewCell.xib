@@ -34,19 +34,19 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ed-hd-TGJ">
-                        <rect key="frame" x="8" y="16" width="198" height="36"/>
+                        <rect key="frame" x="16" y="16" width="190" height="36"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сертификат с отличием за курс Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-d9-iaV">
-                        <rect key="frame" x="8" y="60" width="198" height="43"/>
+                        <rect key="frame" x="16" y="60" width="190" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат: 100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGI-vZ-HOK">
-                        <rect key="frame" x="8" y="120" width="116" height="18"/>
+                        <rect key="frame" x="16" y="120" width="116" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,9 +54,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="zUU-df-7sN" firstAttribute="leading" secondItem="0WE-d9-iaV" secondAttribute="trailing" constant="16" id="0yH-NQ-5Ec"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="0WE-d9-iaV" secondAttribute="leading" id="1ee-oa-QG9"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="kGI-vZ-HOK" secondAttribute="leading" id="1je-5i-3gv"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="3Ed-hd-TGJ" secondAttribute="leading" id="7hH-ug-SF9"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="0WE-d9-iaV" secondAttribute="leading" constant="-8" id="1ee-oa-QG9"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="kGI-vZ-HOK" secondAttribute="leading" constant="-8" id="1je-5i-3gv"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="3Ed-hd-TGJ" secondAttribute="leading" constant="-8" id="7hH-ug-SF9"/>
                     <constraint firstAttribute="trailingMargin" secondItem="zUU-df-7sN" secondAttribute="trailing" id="FXo-IE-gI5"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="3sx-Bh-D4h" secondAttribute="bottom" id="Hqx-OT-avt"/>
                     <constraint firstItem="kGI-vZ-HOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0WE-d9-iaV" secondAttribute="bottom" constant="8" id="QTM-uh-IF4"/>
