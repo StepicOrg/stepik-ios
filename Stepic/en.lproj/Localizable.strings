@@ -197,5 +197,9 @@ HowWouldYouRateStepik = "How would you rate Stepik?";
 PleaseLeaveFeedbackAppstore = "Please, leave your feedback in the AppStore";
 PleaseLeaveFeedbackEmail = "Please, send your feedback by email";
 ThankYou = "Thank you!";
-
+Share = "Share";
+CertificateWithDistinction = "Certificate with distinction";
+Certificate = "Certificate";
+CertificateDescriptionBody = "for the course";
+Result = "Result";
 

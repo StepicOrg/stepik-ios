@@ -10,8 +10,12 @@ import Foundation
 
 protocol CertificatesView: class {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool)
+    
     func displayAnonymous()
     func displayError()
+    func displayEmpty()
+    func displayRefreshing()
+    
     func displayLoadNextPageError()
     func updateData()
 }

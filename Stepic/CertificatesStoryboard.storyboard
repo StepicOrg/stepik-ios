@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LHK-cu-T61">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,6 +13,7 @@
         <scene sceneID="K0I-oE-pFa">
             <objects>
                 <navigationController id="LHK-cu-T61" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="BwG-ab-5HL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -25,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-985" y="134"/>
         </scene>
-        <!--Certificates View Controller-->
+        <!--Certificates-->
         <scene sceneID="rZr-gy-UUH">
             <objects>
                 <viewController id="LA4-n1-9Nw" customClass="CertificatesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
@@ -36,13 +37,28 @@
                     <view key="view" contentMode="scaleToFill" id="MKs-Ub-urU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="xIF-ha-DwF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="leading" secondItem="MKs-Ub-urU" secondAttribute="leading" id="8hM-fF-g9B"/>
+                            <constraint firstItem="boy-3d-wvt" firstAttribute="top" secondItem="xIF-ha-DwF" secondAttribute="bottom" id="Weu-mb-Fw5"/>
+                            <constraint firstAttribute="trailing" secondItem="xIF-ha-DwF" secondAttribute="trailing" id="gfx-4l-SaK"/>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="top" secondItem="MKs-Ub-urU" secondAttribute="top" id="y9W-9h-Xkx"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jf7-xo-enf"/>
+                    <navigationItem key="navigationItem" title="Certificates" id="jf7-xo-enf"/>
+                    <connections>
+                        <outlet property="tableView" destination="xIF-ha-DwF" id="VmJ-tY-im3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSg-WS-uip" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-138" y="134"/>
+            <point key="canvasLocation" x="-138.40000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>

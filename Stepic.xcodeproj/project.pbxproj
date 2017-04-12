@@ -173,6 +173,10 @@
 		083F2B1B1E9D920500714173 /* CertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B191E9D920500714173 /* CertificatesPresenter.swift */; };
 		083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
 		083F2B1E1E9D9ABB00714173 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
+		083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
+		083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
+		083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
+		083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		084070801D64847000308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		084070811D64847400308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
@@ -919,6 +923,8 @@
 		083F2B161E9D8F1D00714173 /* CertificatesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesView.swift; sourceTree = "<group>"; };
 		083F2B191E9D920500714173 /* CertificatesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresenter.swift; sourceTree = "<group>"; };
 		083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewData.swift; sourceTree = "<group>"; };
+		083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTableViewCell.swift; sourceTree = "<group>"; };
+		083F2B201E9E645000714173 /* CertificateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTableViewCell.xib; sourceTree = "<group>"; };
 		0840707F1D64847000308FC1 /* SharingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingHelper.swift; sourceTree = "<group>"; };
 		084070821D64883400308FC1 /* Model_v7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v7.xcdatamodel; sourceTree = "<group>"; };
 		084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyrillicURLActivityItemSource.swift; sourceTree = "<group>"; };
@@ -1545,6 +1551,8 @@
 				083F2B161E9D8F1D00714173 /* CertificatesView.swift */,
 				083F2B191E9D920500714173 /* CertificatesPresenter.swift */,
 				083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */,
+				083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */,
+				083F2B201E9E645000714173 /* CertificateTableViewCell.xib */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -2721,6 +2729,7 @@
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
 				083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
+				083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -2807,6 +2816,7 @@
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
+				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
@@ -3068,6 +3078,7 @@
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -3520,6 +3531,7 @@
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
+				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,

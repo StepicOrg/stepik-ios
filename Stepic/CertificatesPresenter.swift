@@ -14,22 +14,41 @@ class CertificatesPresenter {
     private var certificatesAPI : CertificatesAPI?
     private var coursesAPI : CoursesAPI?
     
+    private var lastRefreshedUserId : Int?
+    
     init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI) {
         self.certificatesAPI = certificatesAPI
+        self.coursesAPI = coursesAPI
     }
     
     private var page : Int = 1
     private var certificates: [Certificate] = []
     
+    func checkStatus() {
+        if lastRefreshedUserId != AuthInfo.shared.userId {
+            certificates = []
+            if !AuthInfo.shared.isAuthorized {
+                view?.displayAnonymous()
+                view?.setCertificates(certificates: [], hasNextPage: false)
+            } else {
+                view?.displayEmpty()
+                view?.setCertificates(certificates: [], hasNextPage: false)
+                refreshCertificates()
+            }
+        }
+    }
+    
     func refreshCertificates() {
         guard let userId = AuthInfo.shared.userId else {
             certificates = []
+            lastRefreshedUserId = nil
             view?.displayAnonymous()
             return
         }
         
+        lastRefreshedUserId = userId
         certificates = []
-        
+        view?.displayRefreshing()
         certificatesAPI?.retrieve(userId: userId, success: {
             [weak self]
             meta, newCertificates in
@@ -91,7 +110,11 @@ class CertificatesPresenter {
             certificateURL = URL(string: certificateURLString)
         }
         
-        return CertificateViewData(courseName: certificate.course?.title, courseImageURL: courseImageURL, grade: certificate.grade, certificateURL: certificateURL)
+        let certificateDescriptionBeginning = certificate.type == .distinction ? "\(NSLocalizedString("CertificateWithDistinction", comment: ""))" : "\(NSLocalizedString("Certificate", comment: ""))"
+        
+        let certificateDescriptionString = "\(certificateDescriptionBeginning) \(NSLocalizedString("CertificateDescriptionBody", comment: "")) \(certificate.course?.title ?? "")"
+        
+        return CertificateViewData(courseName: certificate.course?.title, courseImageURL: courseImageURL, grade: certificate.grade, certificateURL: certificateURL, certificateDescription: certificateDescriptionString)
     }
     
     func getNextPage() {

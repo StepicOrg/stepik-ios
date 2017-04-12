@@ -13,4 +13,5 @@ struct CertificateViewData {
     let courseImageURL: URL?
     let grade: Int
     let certificateURL: URL?
+    let certificateDescription: String?
 }

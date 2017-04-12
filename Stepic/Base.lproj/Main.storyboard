@@ -610,7 +610,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgq-Q2-Hep">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="687"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="736"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="zgu-O5-Qtl">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="185"/>
@@ -806,7 +806,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <navigationBar key="tableFooterView" contentMode="scaleToFill" id="OA9-cU-ctc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -858,7 +858,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="8ik-tt-HOc" id="d6o-oi-Nnu"/>
@@ -1243,11 +1243,22 @@
                         <segue destination="NxB-SA-EGM" kind="relationship" relationship="viewControllers" id="Mdt-J3-Xrw"/>
                         <segue destination="hRS-2a-8JM" kind="relationship" relationship="viewControllers" id="pbO-De-jhh"/>
                         <segue destination="MT9-2h-A7A" kind="relationship" relationship="viewControllers" id="K9p-hw-MVx"/>
+                        <segue destination="4bs-eV-3LS" kind="relationship" relationship="viewControllers" id="sxR-zJ-4go"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emr-b4-LSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-108" y="1442"/>
+        </scene>
+        <!--CertificatesStoryboard-->
+        <scene sceneID="MsX-mC-Udr">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="CertificatesStoryboardId" storyboardName="CertificatesStoryboard" id="3Hz-a3-8IE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Certificates" image="success" id="RKv-AA-WDV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rfW-xr-YVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="22" y="2090"/>
         </scene>
         <!--Green Navigation View Controller-->
         <scene sceneID="Laj-7g-BZD">
@@ -1268,6 +1279,58 @@
             </objects>
             <point key="canvasLocation" x="917" y="2163"/>
         </scene>
+        <!--Certificates-->
+        <scene sceneID="3uD-23-Gsy">
+            <objects>
+                <navigationController id="4bs-eV-3LS" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Certificates" image="success" id="mwm-pG-FxV"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E6m-D0-KUL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Jgo-IS-dmc" kind="relationship" relationship="rootViewController" id="jQD-SR-EKB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uPA-0r-Ug7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-684" y="2588"/>
+        </scene>
+        <!--Certificates-->
+        <scene sceneID="47F-vv-gBJ">
+            <objects>
+                <viewController id="Jgo-IS-dmc" customClass="CertificatesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bOo-fc-ILW"/>
+                        <viewControllerLayoutGuide type="bottom" id="30u-pL-bXu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="odL-NN-Dgc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7Zk-g8-6bm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Zk-g8-6bm" firstAttribute="leading" secondItem="odL-NN-Dgc" secondAttribute="leading" id="Cpc-sJ-9Oi"/>
+                            <constraint firstAttribute="trailing" secondItem="7Zk-g8-6bm" secondAttribute="trailing" id="PQH-Iz-50k"/>
+                            <constraint firstItem="7Zk-g8-6bm" firstAttribute="top" secondItem="odL-NN-Dgc" secondAttribute="top" id="QXZ-bY-zOb"/>
+                            <constraint firstItem="30u-pL-bXu" firstAttribute="top" secondItem="7Zk-g8-6bm" secondAttribute="bottom" id="dVt-uT-jVE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW"/>
+                    <connections>
+                        <outlet property="tableView" destination="7Zk-g8-6bm" id="xI7-bT-N3B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XoH-0z-dYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="164" y="2588"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Circled User Male" width="25" height="25"/>
@@ -1277,6 +1340,7 @@
         <image name="Elective Filled" width="25" height="25"/>
         <image name="Info" width="25" height="25"/>
         <image name="stepic_play" width="150" height="150"/>
+        <image name="success" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="22V-K9-ItS"/>

@@ -197,4 +197,8 @@ HowWouldYouRateStepik = "Как бы Вы оценили Stepik?";
 PleaseLeaveFeedbackAppstore = "Пожалуйста, оставьте отзыв в AppStore";
 PleaseLeaveFeedbackEmail = "Пожалуйста, отправьте отзыв по электронной почте";
 ThankYou = "Спасибо!";
-
+Share = "Поделиться";
+CertificateWithDistinction = "Сертификат с отличием";
+Certificate = "Сертификат";
+CertificateDescriptionBody = "за прохождение курса";
+Result = "Результат";
