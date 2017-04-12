@@ -16,6 +16,10 @@ class CertificateTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var courseImage: UIImageView!
     
+    var url : URL? = nil
+    
+    var shareBlock : ((URL, UIButton) -> Void)? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,6 +34,7 @@ class CertificateTableViewCell: UITableViewCell {
     }
     
     func initWith(certificateViewData: CertificateViewData) {
+        self.url = certificateViewData.certificateURL
         courseTitle.text = certificateViewData.courseName
         certificateDescription.text = certificateViewData.certificateDescription
         certificateResult.text = "\(NSLocalizedString("Result", comment: "")): \(certificateViewData.grade)%"
@@ -37,6 +42,10 @@ class CertificateTableViewCell: UITableViewCell {
     }
     
     @IBAction func sharePressed(_ sender: UIButton) {
+        guard let url = url else {
+            return
+        }
+        shareBlock?(url, sender)
     }
     
     

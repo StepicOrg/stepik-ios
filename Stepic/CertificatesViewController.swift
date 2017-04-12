@@ -82,6 +82,16 @@ class CertificatesViewController : UIViewController, CertificatesView {
         paginationView?.setLoading()
     }
     
+    func shareURL(url: URL, button: UIButton) {
+        DispatchQueue.global(qos: .background).async {
+            let shareVC = SharingHelper.getSharingController(url.absoluteString)
+            shareVC.popoverPresentationController?.sourceView = button
+            DispatchQueue.main.async {
+                self.present(shareVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func refreshCertificates() {
         presenter?.refreshCertificates()
     }
@@ -200,6 +210,12 @@ extension CertificatesViewController : UITableViewDataSource {
         }
         
         cell.initWith(certificateViewData: certificates[indexPath.row])
+        
+        cell.shareBlock = {
+            [weak self]
+            url, button in
+            self?.shareURL(url: url, button: button)
+        }
         
         if certificates.count == indexPath.row + 1 && showNextPageFooter {
             loadNextPage()
