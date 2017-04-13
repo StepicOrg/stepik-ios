@@ -12,6 +12,7 @@ import Koloda
 class AdaptiveStepsViewController: UIViewController {
     
     @IBOutlet weak var kolodaView: KolodaView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
 
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
@@ -25,6 +26,9 @@ class AdaptiveStepsViewController: UIViewController {
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
+        
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage(named: "shadow-pixel")
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,16 +170,26 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
 extension AdaptiveStepsViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        return 3
+        return 2
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-        let card = Bundle.main.loadNibNamed("StepCardView", owner: self, options: nil)?.first as? StepCardView
         if index > 0 {
-            card?.hideContent()
+            let card = Bundle.main.loadNibNamed("StepReversedCardView", owner: self, options: nil)?.first as? StepReversedCardView
+            card?.addPattern()
+            return card!
         } else {
+            let card = Bundle.main.loadNibNamed("StepCardView", owner: self, options: nil)?.first as? StepCardView
             card?.hideContent()
-            card?.loadingView.isHidden = false
+            
+            // Smooth appearance animation
+            card?.alpha = 0.5
+            UIView.animate(withDuration: 0.2, animations: {
+                card?.alpha = 1.0
+            }, completion: { _ in
+                card?.loadingView.isHidden = false
+            })
+            
             DispatchQueue.global().async { [weak self] in
                 guard let course = self?.course else {
                     return
@@ -204,7 +218,7 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     self?.sendReactionAndGetNewLesson(reaction: (self?.lastReaction)!, success: successHandler)
                 }
             }
+            return card!
         }
-        return card!
     }
 }
