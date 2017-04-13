@@ -175,6 +175,9 @@ class VideoStepViewController: UIViewController {
         guard let cstep = step else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+
         let stepid = step.id         
         if stepId - 1 == startStepId {
             startStepBlock()
@@ -183,7 +186,7 @@ class VideoStepViewController: UIViewController {
             performRequest({
                 [weak self] in
                 print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
-                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{
                         cstep.progress?.isPassed = true
@@ -246,7 +249,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
             }
             
             downloadButton.state = .downloading
-            video.store(VideosInfo.videoQuality, progress: {
+            video.store(VideosInfo.downloadingVideoQuality, progress: {
                 prog in
                 UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
                 }, completion: {

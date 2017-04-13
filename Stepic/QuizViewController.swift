@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class QuizViewController: UIViewController {
     
@@ -206,6 +207,8 @@ class QuizViewController: UIViewController {
                         s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
+                        s.hintHeightUpdateBlock = nil
+                        s.hintView.isHidden = true
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
                         s.setStatusElements(visible: false)
@@ -222,6 +225,7 @@ class QuizViewController: UIViewController {
                         
                         if let hint = s.submission?.hint {
                             if hint != "" {
+                                s.hintView.isHidden = false
                                 s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
                                 s.performHeightUpdates()
                             } else {
@@ -359,6 +363,8 @@ class QuizViewController: UIViewController {
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
         self.hintView.backgroundColor = UIColor.black
+        self.hintWebView.isUserInteractionEnabled = true
+        self.hintWebView.delegate = self
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
@@ -396,7 +402,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: s.step.block.name, stepId: stepId, success: { 
+            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: { 
                 [weak self]
                 attempts, meta in
                 if attempts.count == 0 || attempts[0].status != "active" {
@@ -411,7 +417,7 @@ class QuizViewController: UIViewController {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
-                    _ = ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
+                    _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
                         [weak self]
                         submissions, meta in
                         if submissions.count == 0 {
@@ -464,7 +470,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: s.step.block.name, stepId: s.step.id, success: {
+            _ = ApiDataDownloader.attempts.create(stepName: s.step.block.name, stepId: s.step.id, success: {
                 [weak self]
                 attempt in
                 guard let s = self else { return }
@@ -545,7 +551,22 @@ class QuizViewController: UIViewController {
         self.selectStreakNotificationTime()
     }
     
+    fileprivate var positionPercentageString : String? {
+        if let cnt = step.lesson?.stepsArray.count {
+            let res = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
+            print(res)
+            return res
+        }
+        return nil
+    }
+    
+    
     func checkCorrect() {
+        
+        if RoutingManager.rate.submittedCorrect() {
+            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
+            return
+        }
         
         guard QuizDataManager.submission.canShowAlert else {
             return
@@ -584,7 +605,7 @@ class QuizViewController: UIViewController {
                 [weak self] in
                 
                 guard let s = self else { return }
-                _ = ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: s.step.block.name, submissionId: id, success: {
+                _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     [weak self]
                     submission in
                     print("did get submission id \(id), with status \(submission.status)")
@@ -630,7 +651,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: s.step.block.name, attemptId: id, reply: r, success: {
+            _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
                 [weak self]
                 submission in
                 s.submission = submission
@@ -744,6 +765,18 @@ extension QuizViewController : PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
         self.doesPresentWarningView = false
         self.refreshAttempt(step.id)
+    }
+}
+
+extension QuizViewController : UIWebViewDelegate {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let url = request.url {
+            if url.isFileURL {
+                return true
+            }
+            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "HintWebController", allowsSafari: true, backButtonStyle: .close)
+        }
+        return false
     }
 }
 

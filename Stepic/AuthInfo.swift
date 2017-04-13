@@ -32,7 +32,7 @@ class AuthInfo: NSObject {
                 
                 if c == 0 {
                     print("No user with such id found, downloading")
-                    ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .update, success: {
+                    ApiDataDownloader.users.retrieve(ids: [id], existing: [], refreshMode: .update, success: {
                         [weak self]
                         users in
                         if let user = users.first {
@@ -42,7 +42,7 @@ class AuthInfo: NSObject {
                         print("downloaded user")
                         CoreDataHelper.instance.save()
 
-                        }, failure: {
+                        }, error: {
                             [weak self]
                             _ in
                             print("failed to fetch user")

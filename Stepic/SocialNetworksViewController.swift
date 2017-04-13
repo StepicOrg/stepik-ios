@@ -59,7 +59,7 @@ class SocialNetworksViewController: UIViewController {
         let locationInCollection = CGPoint(x: location.x, y: location.y)
         let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
         if let indexPath = indexPathOptional {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name)" as NSObject])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name!)" as NSObject])
             let socialNetwork = getSocialNetworkByIndexPath(indexPath)
             if let provider = socialNetwork.socialSDKProvider {
                 provider.getAccessToken(success: {
@@ -68,7 +68,7 @@ class SocialNetworksViewController: UIViewController {
                         t in
                         AuthInfo.shared.token = t
                         NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        ApiDataDownloader.sharedDownloader.getCurrentUser({
+                        ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                             user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
@@ -79,7 +79,7 @@ class SocialNetworksViewController: UIViewController {
                             }
                             AnalyticsHelper.sharedHelper.changeSignIn()
                             AnalyticsHelper.sharedHelper.sendSignedIn()
-                        }, failure: {
+                        }, error: {
                             e in
                             print("successfully signed in, but could not get user")
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))

@@ -41,7 +41,7 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    func setupLocalizations() {
+    fileprivate func setupLocalizations() {
         title = NSLocalizedString("SignUp", comment: "")
         firstNameTextField.placeholder = NSLocalizedString("FirstName", comment: "")
         lastNameTextField.placeholder = NSLocalizedString("LastName", comment: "")
@@ -51,19 +51,43 @@ class RegistrationViewController: UIViewController {
     }
 
     
+    fileprivate func setupTextFields() {
+        firstNameTextField.returnKeyType = .next
+        lastNameTextField.returnKeyType = .next
+        emailTextField.returnKeyType = .next
+        passwordTextField.returnKeyType = .send
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+                
+        firstNameTextField.autocapitalizationType = .words
+        lastNameTextField.autocapitalizationType = .words
+        
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
+        emailTextField.keyboardType = .emailAddress     
+        
+        firstNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        lastNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+
+    }
+
+    func textFieldDidChange(textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         
         setupLocalizations()
-        firstNameTextField.autocapitalizationType = .words
-        lastNameTextField.autocapitalizationType = .words
+        setupTextFields()
         
-        emailTextField.autocapitalizationType = .none
-        emailTextField.autocorrectionType = .no
-        
-        passwordTextField.delegate = self
         visiblePasswordButton.isHidden = true
     }
     
@@ -73,20 +97,21 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func signUpPressed(_ sender: AnyObject) {
-        signUpToStepic()
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
+        signUp()
     }
     
-    var success : ((Void)->Void)? {
-        return (navigationController as? AuthNavigationViewController)?.success
+    var success : ((String)->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
     
-    func signUpToStepic() {
+    func signUp() {
         let email = emailTextField.text ?? ""
         let firstName = firstNameTextField.text ?? ""
         let lastName = lastNameTextField.text ?? ""
         let password = passwordTextField.text ?? ""
         
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
+        SVProgressHUD.show(withStatus: "")
         performRequest({        
             AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
                 _ = AuthManager.sharedManager.logInWithUsername(email, password: password, 
@@ -94,7 +119,7 @@ class RegistrationViewController: UIViewController {
                         t in
                         AuthInfo.shared.token = t
                         NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        ApiDataDownloader.sharedDownloader.getCurrentUser({
+                        _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                             user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
@@ -102,19 +127,17 @@ class RegistrationViewController: UIViewController {
                             UIThread.performUI { 
                                 self.navigationController?.dismiss(animated: true, completion: {
                                     [weak self] in
-                                    self?.success?()
+                                    self?.success?("registered")
                                     })
                             }
-                            AnalyticsHelper.sharedHelper.changeSignIn()
-                            AnalyticsHelper.sharedHelper.sendSignedIn()
-                            }, failure: {
+                            }, error: {
                                 e in
                                 print("successfully signed in, but could not get user")
                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                                 UIThread.performUI { 
                                     self.navigationController?.dismiss(animated: true, completion: {
                                         [weak self] in
-                                        self?.success?()
+                                        self?.success?("registered")
                                         })
                                 }
                         })
@@ -192,12 +215,15 @@ class RegistrationViewController: UIViewController {
 }
 
 extension RegistrationViewController : UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("did begin")
         passwordSecure = true
         if textField == passwordTextField {
             visiblePasswordButton.isHidden = false
         }
+       
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -207,4 +233,32 @@ extension RegistrationViewController : UITextFieldDelegate {
             visiblePasswordButton.isHidden = true
         }
     }    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == firstNameTextField {
+            lastNameTextField.becomeFirstResponder()
+            return true
+        }
+        
+        if textField == lastNameTextField {
+            emailTextField.becomeFirstResponder()
+            return true
+        }
+        
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+            return true
+        }
+        
+        if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
+            signUp()
+            return true
+        }
+        
+        return true
+    }
 }

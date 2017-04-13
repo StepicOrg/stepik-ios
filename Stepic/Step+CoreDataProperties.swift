@@ -18,7 +18,8 @@ extension Step {
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedStatus: String?
     @NSManaged var managedProgressId: String?
-    @NSManaged var managedLessonId : NSNumber?
+    @NSManaged var managedLessonId: NSNumber?
+    @NSManaged var managedHasSubmissionRestrictions: NSNumber?
     
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
@@ -59,6 +60,16 @@ extension Step {
         }
         get {
             return managedPosition?.intValue ?? -1
+        }
+    }
+    
+    
+    var hasSubmissionRestrictions : Bool {
+        set(value){
+            self.managedHasSubmissionRestrictions = value as NSNumber?
+        }
+        get {
+            return managedHasSubmissionRestrictions?.boolValue ?? false
         }
     }
     

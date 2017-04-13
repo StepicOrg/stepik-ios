@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class StreakAlertViewController: UIViewController {
 
@@ -23,9 +24,13 @@ class StreakAlertViewController: UIViewController {
     var yesAction : ((Void) -> Void)?
     var noAction : ((Void) -> Void)?
     
+    var messageLabelWidth : NSLayoutConstraint? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)").first as? NSLayoutConstraint
+
         localize()
         // Do any additional setup after loading the view.
     }
@@ -65,14 +70,9 @@ class StreakAlertViewController: UIViewController {
         yesAction?()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        messageLabelWidth?.constant = UIScreen.main.bounds.height - 48
     }
-    */
 
 }

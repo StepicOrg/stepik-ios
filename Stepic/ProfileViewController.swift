@@ -18,13 +18,10 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     @IBOutlet weak var signOutButton: UIButton!
+        
+    @IBOutlet weak var streaksView: StreaksView!
     
-    @IBOutlet weak var currentStreakLabel: UILabel!
-    @IBOutlet weak var longestStreakLabel: UILabel!
-    @IBOutlet weak var streaksActivityIndicator: UIActivityIndicatorView!
-    
-    
-    var heightForRows = [[131], [75], [40]]
+    var heightForRows = [[131], [0], [40]]
     let selectionForRows = [[false], [false], [true]]
     let sectionTitles = [
         NSLocalizedString("UserInfo", comment: ""),
@@ -35,8 +32,6 @@ class ProfileViewController: UITableViewController {
     fileprivate func localize() {
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
         signOutButton.setTitle(NSLocalizedString("SignOut", comment: ""), for: UIControlState())
-        currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
-        longestStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
     }
 
     override func viewDidLoad() {
@@ -45,17 +40,14 @@ class ProfileViewController: UITableViewController {
         tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
         
         localize() 
-        setStreaks(visible: false)
         signInButton.setStepicWhiteStyle()
         avatarImageView.setRoundedBounds(width: 0)
         signInButton.isHidden = false
         // Do any additional setup after loading the view.
     }
     
-    func setStreaks(visible: Bool) {
-        currentStreakLabel.isHidden = !visible
-        longestStreakLabel.isHidden = !visible
-        streaksActivityIndicator.isHidden = visible
+    func setStreaks(activity: UserActivity) {
+        streaksView.setStreaks(current: activity.currentStreak, best: activity.longestStreak)
     }
     
     func updateUser() {
@@ -102,24 +94,27 @@ class ProfileViewController: UITableViewController {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
             heightForRows[0][0] = 131
-            heightForRows[2][0] = 40
-            heightForRows[1][0] = 75
+            heightForRows[2][0] = 40        
+//            heightForRows[1][0] = 0
             signInButton.isHidden = true
         }
         
-        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
-            [weak self] 
-            activity in
-            if let s = self {
-                s.currentStreakLabel.text = "\(NSLocalizedString("CurrentStreak", comment: "")) \(activity.currentStreak) \(s.dayLocalizableFor(daysCnt: activity.currentStreak))"
-                s.longestStreakLabel.text = "\(NSLocalizedString("LongestStreak", comment: "")) \(activity.longestStreak) \(s.dayLocalizableFor(daysCnt: activity.longestStreak))"
-                s.setStreaks(visible: true)
-            }
-        }, error: {
-            error in
-            
-            //TODO: Display error button
-        })
+        if AuthInfo.shared.isAuthorized {
+            _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
+                [weak self] 
+                activity in
+                if let s = self {
+                    s.setStreaks(activity: activity)
+                    s.heightForRows[1][0] = 108
+                    s.tableView.beginUpdates()
+                    s.tableView.endUpdates()
+                }
+            }, error: {
+                error in
+                
+                //TODO: Display error button
+            })
+        }
         
         print("beginning updates")
         tableView.reloadData()

@@ -226,6 +226,12 @@ class WebStepViewController: UIViewController {
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
         
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        
+        if step.hasSubmissionRestrictions {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
 
         let stepid = step.id
@@ -242,7 +248,7 @@ class WebStepViewController: UIViewController {
             performRequest({
                 [weak self] in
                 print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
-                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
@@ -405,20 +411,44 @@ extension WebStepViewController : UIWebViewDelegate {
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-//        print(request.URLString)
-        if didStartLoadingFirstRequest {
-            if let url = request.url { 
-                
-                if url.scheme != "file" {
-                    if url.scheme == "ready" {
-                        print("scheme ready reported")
-                        resetWebViewHeight(Float(getContentHeight(webView)))
-                    } else {
-                        print("trying to open in browser url -> \(url)")
-                        openInBrowserAlert(url) 
-                    }
-                } 
+        
+        guard let url = request.url else {
+            return false
+        }
+        
+        //Check if the request is an iFrame 
+        
+        if let text = step.block.text {
+            if HTMLParsingUtil.getAlliFrameLinks(text).index(of: url.absoluteString) != nil {
+                return true
             }
+        }
+        
+        //Check if the request is a navigation inside a lesson
+        if url.absoluteString.range(of: "\(lesson.id)/step/") != nil {
+            let components = url.pathComponents
+            if let index = components.index(of: "step") {
+                if index + 1 < components.count {
+                    let urlStepIdString = components[index + 1]
+                    if let urlStepId = Int(urlStepIdString) {
+                        stepsVC.selectTabAtIndex(urlStepId - 1, updatePage: true)
+                        return false
+                    }
+                }
+            }
+        }
+        
+        
+        if didStartLoadingFirstRequest {
+            if url.scheme != "file" {
+                if url.scheme == "ready" {
+                    print("scheme ready reported")
+                    resetWebViewHeight(Float(getContentHeight(webView)))
+                } else {
+                    print("trying to open in browser url -> \(url)")
+                    openInBrowserAlert(url) 
+                }
+            } 
             return false
         } else {
             didStartLoadingFirstRequest = true

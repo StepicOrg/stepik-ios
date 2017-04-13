@@ -43,6 +43,42 @@ class NotificationAlertConstructor {
         return alert
     }
     
+    func presentStreakNotificationFake(_ text: String, subtitleText: String, success: @escaping ((Void) -> Void)) {
+        let responder = CRToastInteractionResponder(interactionType: CRToastInteractionType.tap, automaticallyDismiss: true, block: 
+            {
+                interactionType in
+                success()
+            }
+        )
+        
+        let toastOptions : [AnyHashable: Any] = [
+            kCRToastImageKey : Images.streak.white,
+            kCRToastTextKey : text,
+            kCRToastSubtitleTextKey : subtitleText,
+            kCRToastTextAlignmentKey : NSTextAlignment.left,
+            kCRToastSubtitleTextAlignmentKey : NSTextAlignment.left,
+            kCRToastSubtitleTextColorKey : UIColor.lightGray,
+            kCRToastNotificationTypeKey : NSNumber(value: CRToastType.navigationBar.rawValue),
+            kCRToastNotificationPresentationTypeKey : NSNumber(value: CRToastPresentationType.cover.rawValue),
+            kCRToastUnderStatusBarKey : true,
+            kCRToastAnimationInTypeKey : NSNumber(value: CRToastAnimationType.gravity.rawValue),
+            kCRToastAnimationOutTypeKey : NSNumber(value: CRToastAnimationType.gravity.rawValue),
+            kCRToastAnimationInDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationOutDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationInTimeIntervalKey : 0.3,
+            kCRToastTimeIntervalKey : NSNumber(value: 10.0),
+            kCRToastAnimationOutTimeIntervalKey : 0.3,
+            kCRToastSubtitleTextMaxNumberOfLinesKey : 3,
+            kCRToastTextMaxNumberOfLinesKey : 3,
+            kCRToastImageContentModeKey : NSNumber(value: UIViewContentMode.scaleAspectFit.rawValue),
+            kCRToastBackgroundColorKey: UIColor.black,
+            kCRToastInteractionRespondersKey : [responder]
+        ]
+        
+        CRToastManager.showNotification(options: toastOptions) { 
+            print("show notification completed!")
+        }
+    }
     
     func presentNotificationFake(_ text: String, success: @escaping ((Void) -> Void)) {
         
@@ -56,24 +92,24 @@ class NotificationAlertConstructor {
         let toastOptions : [AnyHashable: Any] = [
             kCRToastImageKey : Images.boundedStepicIcon,
             kCRToastTextKey : text,
-            kCRToastNotificationTypeKey : CRToastType.navigationBar.rawValue,
-            kCRToastNotificationPresentationTypeKey : CRToastPresentationType.cover.rawValue,
+            kCRToastNotificationTypeKey : NSNumber(value: CRToastType.navigationBar.rawValue),
+            kCRToastNotificationPresentationTypeKey : NSNumber(value: CRToastPresentationType.cover.rawValue),
             kCRToastUnderStatusBarKey : true,
-            kCRToastAnimationInTypeKey : CRToastAnimationType.gravity.rawValue,
-            kCRToastAnimationOutTypeKey : CRToastAnimationType.gravity.rawValue,
-            kCRToastAnimationInDirectionKey : CRToastAnimationDirection.top.rawValue,
-            kCRToastAnimationOutDirectionKey : CRToastAnimationDirection.top.rawValue,
+            kCRToastAnimationInTypeKey : NSNumber(value: CRToastAnimationType.gravity.rawValue),
+            kCRToastAnimationOutTypeKey : NSNumber(value: CRToastAnimationType.gravity.rawValue),
+            kCRToastAnimationInDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationOutDirectionKey : NSNumber(value: CRToastAnimationDirection.top.rawValue),
             kCRToastAnimationInTimeIntervalKey : 0.3,
             kCRToastTimeIntervalKey : 5.0,
             kCRToastAnimationOutTimeIntervalKey : 0.3,
             kCRToastTextMaxNumberOfLinesKey : 2,
-            kCRToastImageContentModeKey : UIViewContentMode.scaleAspectFit.rawValue,
+            kCRToastImageContentModeKey : NSNumber(value: UIViewContentMode.scaleAspectFit.rawValue),
             kCRToastBackgroundColorKey: UIColor.black,
             kCRToastInteractionRespondersKey : [responder]
         ]
         
         CRToastManager.showNotification(options: toastOptions) { 
-            print("show notificatoin completed!")
+            print("show notification completed!")
         }
         
     }

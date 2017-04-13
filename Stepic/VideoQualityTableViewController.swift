@@ -17,6 +17,7 @@ class VideoQualityTableViewController: UITableViewController {
     @IBOutlet weak var highLabel: UILabel!
     @IBOutlet weak var veryHighLabel: UILabel!
     
+    var action: VideoQualityChoiceAction!
     
     let defaultQualities = ["270", "360", "720", "1080"]
     let qualityStrings = [
@@ -48,13 +49,25 @@ class VideoQualityTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setCheckmarkTo(defaultQualities.index(of: VideosInfo.videoQuality) ?? 0)
+        setCheckmarkTo(defaultQualities.index(of: (action == .downloading ? VideosInfo.downloadingVideoQuality : VideosInfo.watchingVideoQuality)) ?? 0)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setQualutyTo(quality: String) {
+        switch action! {
+        case VideoQualityChoiceAction.downloading:
+            VideosInfo.downloadingVideoQuality = quality
+            return
+        case VideoQualityChoiceAction.watching:
+            VideosInfo.watchingVideoQuality = quality
+            return
+        }
+    }
+    
 }
 
 extension VideoQualityTableViewController {
@@ -75,7 +88,7 @@ extension VideoQualityTableViewController {
         case 0: 
             print("error! selected a video quality cell without a tag!")
         case 1:
-            VideosInfo.videoQuality = defaultQualities[filtered[0].tag]
+            setQualutyTo(quality: defaultQualities[filtered[0].tag])
             setCheckmarkTo(filtered[0].tag)
             tableView.deselectRow(at: indexPath, animated: true)
         default:

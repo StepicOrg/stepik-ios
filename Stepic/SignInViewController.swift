@@ -18,7 +18,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var socialLabel: UILabel!
     
-    func setupLocalizations() {
+    fileprivate func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
@@ -26,24 +26,43 @@ class SignInViewController: UIViewController {
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), for: UIControlState())
     }
     
-    var success : ((Void)->Void)? {
-        return (navigationController as? AuthNavigationViewController)?.success
+    
+    var success : ((String)->Void)? {
+        return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate func setupTextFields() {
+        emailTextField.returnKeyType = .next
+        passwordTextField.returnKeyType = .send
         
-        setupLocalizations()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         passwordTextField.isSecureTextEntry = true
         
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         
+        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+    }
+
+    func textFieldDidChange(textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupLocalizations()
+        
+        setupTextFields()
+                
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
@@ -76,13 +95,14 @@ class SignInViewController: UIViewController {
     
     
     func authentificateWithCode(_ code: String) {
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        AuthManager.sharedManager.logInWithCode(code, 
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.codeReceived, parameters: nil)
+        SVProgressHUD.show(withStatus: "")
+        _ = AuthManager.sharedManager.logInWithCode(code, 
                                                 success: {
                                                     t in
                                                     AuthInfo.shared.token = t
                                                     NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                                                    ApiDataDownloader.sharedDownloader.getCurrentUser({
+                                                    _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                                                         user in
                                                         AuthInfo.shared.user = user
                                                         User.removeAllExcept(user)
@@ -90,19 +110,17 @@ class SignInViewController: UIViewController {
                                                         UIThread.performUI { 
                                                             self.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
-                                                                self?.success?()
+                                                                self?.success?("social")
                                                             })
                                                         }
-                                                        AnalyticsHelper.sharedHelper.changeSignIn()
-                                                        AnalyticsHelper.sharedHelper.sendSignedIn()
-                                                    }, failure: {
+                                                    }, error: {
                                                         e in
                                                         print("successfully signed in, but could not get user")
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                                                         UIThread.performUI { 
                                                             self.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
-                                                                self?.success?()
+                                                                self?.success?("social")
                                                             })
                                                         }
                                                     })
@@ -112,44 +130,44 @@ class SignInViewController: UIViewController {
         })
     }
     
-    @IBAction func signInPressed(_ sender: UIButton) {
-        
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
-        
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
-                                                    success: {
-                                                        t in
-                                                        AuthInfo.shared.token = t
-                                                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                                                        ApiDataDownloader.sharedDownloader.getCurrentUser({
-                                                            user in
-                                                            AuthInfo.shared.user = user
-                                                            User.removeAllExcept(user)
-                                                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                            UIThread.performUI { 
-                                                                self.navigationController?.dismiss(animated: true, completion: {
-                                                                    [weak self] in
-                                                                    self?.success?()
-                                                                })
-                                                            }
-                                                            AnalyticsHelper.sharedHelper.changeSignIn()
-                                                            AnalyticsHelper.sharedHelper.sendSignedIn()
-                                                        }, failure: {
-                                                            e in
-                                                            print("successfully signed in, but could not get user")
-                                                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                            UIThread.performUI{ 
-                                                                self.navigationController?.dismiss(animated: true, completion: {
-                                                                    [weak self] in
-                                                                    self?.success?()
-                                                                })
-                                                            }
-                                                        })
+    fileprivate func signIn() {        
+        SVProgressHUD.show(withStatus: "")
+        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
+                                                        success: {
+                                                            t in
+                                                            AuthInfo.shared.token = t
+                                                            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+                                                            _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
+                                                                user in
+                                                                AuthInfo.shared.user = user
+                                                                User.removeAllExcept(user)
+                                                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                                                                UIThread.performUI { 
+                                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                                        [weak self] in
+                                                                        self?.success?("password")
+                                                                    })
+                                                                }
+                                                            }, error: {
+                                                                e in
+                                                                print("successfully signed in, but could not get user")
+                                                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                                                                UIThread.performUI{ 
+                                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                                        [weak self] in
+                                                                        self?.success?("password")
+                                                                    })
+                                                                }
+                                                            })
         }, failure: {
             e in
             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
+    }
+    
+    @IBAction func signInPressed(_ sender: UIButton) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
+        signIn()
     }
     
     @IBAction func forgotPasswordPressed(_ sender: UIButton) {
@@ -164,12 +182,33 @@ class SignInViewController: UIViewController {
             dvc?.dismissBlock = {
                 self.navigationController?.dismiss(animated: true, completion: {
                     [weak self] in
-                    self?.success?()
+                    self?.success?("social")
                 })
-                
             }
         }
     }
+}
+
+extension SignInViewController : UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+    }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+            return true
+        }
+        
+        if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
+            signIn()
+            return true
+        }
+        
+        return true
+    }
 }

@@ -433,7 +433,7 @@ open class RGPageViewController: UIViewController {
   }
   
   internal func selectTabAtIndex(_ index: Int, updatePage: Bool) {
-    if index >= pageCount {
+    if index < 0 || index >= pageCount {
       return
     }
     

@@ -31,5 +31,7 @@ struct StepicApplicationsInfo {
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
     
+    static let cookiePrefix = ""
+    
     static let adaptiveCourseId = 1838
 }

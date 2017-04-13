@@ -16,16 +16,38 @@ struct AnalyticsEvents {
         
     struct SignIn {
         static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
-        static let onSignInScreen = "clicked_SignIn_on_sign_in_screen"
+        static let onSignInScreen = "click_sign_in_with_interaction_type"
+        static let nextButton = "click_sign_in_next_sign_in_screen"
+        struct Fields {
+            static let tap = "tap_on_fields_login"
+            static let typing = "typing_text_fields_login"
+        }
+        struct Social {
+            static let clicked = "social_login"
+            static let codeReceived = "Api:auth with social account"
+        }
     }
     
     struct SignUp {
         static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
-        static let onSignUpScreen = "clicked_SignUp_on_sign_up_screen"
+        static let onSignUpScreen = "click_registration_with_interaction_type"
+        static let nextButton = "click_registration_send_ime"
+        struct Fields {
+            static let tap = "tap_on_fields_registration"
+            static let typing = "typing_text_fields_registration"
+        }
+    }
+    
+    struct Login {
+        static let success = "success_login"
     }
     
     struct Syllabus {
         static let shared = "share_syllabus_clicked"
+    }
+    
+    struct Units {
+        static let shared = "share_units_clicked"
     }
     
     struct Section {
@@ -59,6 +81,9 @@ struct AnalyticsEvents {
             static let newAttempt = "clicked_generate_new_attempt"
             static let solveInWebPressed = "clicked_solve_in_web"
         }
+        
+        static let hasRestrictions = "step_with_submission_restriction"
+        static let opened = "step_type_opened"
     }
     
     struct VideoPlayer {
@@ -76,6 +101,7 @@ struct AnalyticsEvents {
         static let step = "deeplink_step"
         static let syllabus = "deeplink_syllabus"
         static let course = "deeplink_course"
+        static let section = "deeplink_section"
     }
     
     struct Tabs {
@@ -104,6 +130,7 @@ struct AnalyticsEvents {
     
     struct App {
         static let opened = "app_opened"
+        static let firstLaunch = "first_launch_after_install"
     }
     
     struct Errors {
@@ -113,5 +140,21 @@ struct AnalyticsEvents {
     struct Continue {
         static let sectionsOpened = "continue_section_opened"
         static let stepOpened = "continue_step_opened"
+    }
+    
+    struct Rate {
+        static let rated = "app_rate"
+        struct Positive {
+            static let later = "app_rate_positive_later"
+            static let appstore = "app_rate_positive_appstore"
+        }
+        struct Negative {
+            static let later = "app_rate_negative_later"
+            static let email = "app_rate_negative_email"
+            struct Email {
+                static let cancelled = "app_rate_negative_email_cancelled"
+                static let success = "app_rate_negative_email_success"
+            }
+        }
     }
 }

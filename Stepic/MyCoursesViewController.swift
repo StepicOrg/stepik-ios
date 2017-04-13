@@ -28,6 +28,11 @@ class MyCoursesViewController: CoursesViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        Alerts.rate.present(alert: Alerts.rate.construct(), inController: self)
+    }
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        handleCourseUpdates()

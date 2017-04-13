@@ -15,7 +15,7 @@ class StepsControllerDeepLinkRouter : NSObject {
         //Download lesson and pass stepId to StepsViewController
         
         if let lesson = Lesson.getLesson(lessonId) {        
-            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [lesson], refreshMode: .update, success: 
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: 
                 {
                     lessons in
                     if let lesson = lessons.first {
@@ -24,14 +24,14 @@ class StepsControllerDeepLinkRouter : NSObject {
                         errorHandler("Could not get lesson for deep link")
                     }
                 
-                }, failure: 
+                }, error: 
                 {
                     error in 
                     self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                 }
             )
         } else {
-            ApiDataDownloader.sharedDownloader.getLessonsByIds([lessonId], deleteLessons: [], refreshMode: .update, success: 
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: 
                 {
                     lessons in
                     if let lesson = lessons.first {
@@ -40,7 +40,7 @@ class StepsControllerDeepLinkRouter : NSObject {
                         errorHandler("Could not get lesson for deep link")
                     }
                     
-                }, failure: 
+                }, error: 
                 {
                     error in 
                     errorHandler("Could not get lesson for deep link")

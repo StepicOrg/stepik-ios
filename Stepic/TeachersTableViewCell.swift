@@ -12,6 +12,8 @@ class TeachersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var teachersTitleLabel: UILabel!
+    
     var instructors : [User] = []
     
     override func awakeFromNib() {
@@ -20,6 +22,8 @@ class TeachersTableViewCell: UITableViewCell {
         self.collectionView?.register(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        teachersTitleLabel.text = NSLocalizedString("Teachers", comment: "")
         
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)

@@ -28,6 +28,8 @@ struct StepicApplicationsInfo {
     static let stepicURL = "https://stepik.org"
     static let versionInfoURL = "https://stepik.org/media/attachments/lesson/26869/version.json"
     
+    static let cookiePrefix = ""
+
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
 }

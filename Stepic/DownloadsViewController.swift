@@ -198,7 +198,7 @@ extension DownloadsViewController : UITableViewDelegate {
 //                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
 //                        authVC.success = {
 //                            performRequest ({
-//                                ApiDataDownloader.sharedDownloader.getCoursesByIds([course.id], deleteCourses: [course], refreshMode: .Update, success: {
+//                                ApiDataDownloader.courses.retrieve([course.id], deleteCourses: [course], refreshMode: .Update, success: {
 //                                    course in 
 //                                    enterDownloadBlock()
 //                                    }, failure: {

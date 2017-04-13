@@ -144,7 +144,7 @@ class StepsViewController: RGPageViewController {
             }
         }
                 
-        _ = ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: (step != nil) ? [step!] : [], refreshMode: .update, success: {
+        _ = ApiDataDownloader.steps.retrieve(ids: [stepId], existing: (step != nil) ? [step!] : [], refreshMode: .update, success: {
             steps in
             
             guard let step = steps.first else { 
@@ -154,7 +154,7 @@ class StepsViewController: RGPageViewController {
             var localLesson: Lesson? = nil
             localLesson =  Lesson.getLesson(step.lessonId)
             
-            _ = ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
+            _ = ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
                 lessons in
                 guard let lesson = lessons.first else {
@@ -166,7 +166,7 @@ class StepsViewController: RGPageViewController {
                 self?.refreshSteps()
                 return
                 
-            }, failure: {
+            }, error: {
                 error in
                 print("Error while downloading lesson")
                 DispatchQueue.main.async{
@@ -180,7 +180,7 @@ class StepsViewController: RGPageViewController {
                     }
                 }
             })
-        }, failure: {
+        }, error: {
             error in
             print("Error while downloading step")
             DispatchQueue.main.async{
@@ -352,7 +352,7 @@ class StepsViewController: RGPageViewController {
     
     override var barTintColor: UIColor? {
         get {
-            return UIColor.stepicGreenColor()
+            return UIColor.navigationColor
         }
     }
     

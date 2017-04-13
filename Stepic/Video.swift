@@ -45,6 +45,19 @@ class Video: NSManagedObject, JSONInitializable {
         return id == json["id"].intValue
     }
     
+    static func getNearestDefault(to quality: String) -> String {
+        let qualities = ["270", "360", "720", "1080"]
+        var minDifference = 10000
+        var res : String = "270"
+        for defaultQuality in qualities {
+            if abs(Int(defaultQuality)! - Int(quality)!) <  minDifference {
+                minDifference = abs(Int(defaultQuality)! - Int(quality)!)
+                res = defaultQuality
+            }
+        }
+        return res
+    }
+    
     func getNearestQualityToDefault(_ quality: String) -> String {
         var minDifference = 10000
         var res : String = "270"
@@ -83,10 +96,26 @@ class Video: NSManagedObject, JSONInitializable {
                 return s
             } else {
                 if PathManager.sharedManager.doesExistVideoWith(id: id) {
-                    _state = .cached
+                    if self.cachedQuality != nil && self.cachedQuality != "0" {
+                        _state = .cached
+                    } else {
+                        if self.cachedQuality != nil {
+                            self.cachedQuality = nil
+                            CoreDataHelper.instance.save()
+                        }
+                        do { 
+                            let path = try PathManager.sharedManager.getPathForStoredVideoWithName(self.name)
+                            try PathManager.sharedManager.deleteVideoFileAtPath(path)
+                        } 
+                        catch {
+                            print("error while deleting video")
+                        }
+                        _state = .online
+                    }
                 } else {
                     _state = .online
                 }
+
                 return _state!
             }
         }
@@ -142,7 +171,8 @@ class Video: NSManagedObject, JSONInitializable {
             errorHandler(NSError())
         }
         
-        download = TCBlobDownloadManager.sharedInstance.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
+        let manager = TCBlobDownloadManager(taskIdentifier: name)
+        download = manager.downloadFileAtURL(url, toDirectory: videoURL, withName: name, progression: {
             prog, bytesWritten, bytesExpectedToWrite in
                 self.downloadingSize = bytesExpectedToWrite
                 self.totalProgress = prog
@@ -157,7 +187,7 @@ class Video: NSManagedObject, JSONInitializable {
                     catch let error as NSError {
                         if error.code != 4 {
                             print("strange error deleting videos!")
-                            print(error.localizedFailureReason)
+                            print(error.localizedFailureReason ?? "")
                             print(error.code)
                             print(error.localizedDescription)
                         }
@@ -189,14 +219,12 @@ class Video: NSManagedObject, JSONInitializable {
                 } 
                 
                 print("video download completed with quality -> \(quality)")
-                if let fileURL = location {
-//                    self.managedCachedPath = fileURL.lastPathComponent!
+                if location != nil {
                     self.state = .cached
                     self.cachedQuality = self.loadingQuality
                     self.totalProgress = 1
                     CoreDataHelper.instance.save()
                 } else {
-//                    self.managedCachedPath = nil
                     self.state = .online
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
@@ -223,21 +251,19 @@ class Video: NSManagedObject, JSONInitializable {
             catch let error as NSError {
                 if error.code == 4 {
                     print("Video not found")
-//                    self.managedCachedPath = nil
                     self.cachedQuality = nil
                     CoreDataHelper.instance.save()
                     self.totalProgress = 0
                     return true
                 } else {
                     print("strange error deleting videos!")
-                    print(error.localizedFailureReason)
+                    print(error.localizedFailureReason ?? "")
                     print(error.code)
                     print(error.localizedDescription)
                     return false
                 }
             }
 
-//            self.managedCachedPath = nil
             self.cachedQuality = nil
             self.totalProgress = 0
             CoreDataHelper.instance.save()
@@ -319,7 +345,7 @@ class Video: NSManagedObject, JSONInitializable {
     fileprivate func getOnlineSizeForCurrentState(_ completion: ((Int64) -> Void)) {
         var quality : String
         if state == .online {
-            quality = VideosInfo.videoQuality
+            quality = VideosInfo.downloadingVideoQuality
         } else {
             quality = loadingQuality!
         }

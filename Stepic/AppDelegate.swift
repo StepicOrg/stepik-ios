@@ -19,6 +19,7 @@ import VK_ios_sdk
 import FBSDKCoreKit
 import Mixpanel
 import YandexMobileMetrica
+import Presentr
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -80,12 +81,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             handleNotification(notificationDict)
         }
         
-//        let deepLink = NSURL(string: "https://stepik.org/lesson/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%B8-%D1%82%D1%80%D0%B0%D0%B4%D0%B8%D1%86%D0%B8%D1%8F-477/step/1")!
-//        handleOpenedFromDeepLink(deepLink)
+        checkStreaks() 
+        
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
+            DefaultsContainer.launch.didLaunch = true
+        }
         
         return true
     }
 
+    
+    //Streaks presentation
+    
+    let streaksPopupPresentr : Presentr = {
+        let width = ModalSize.sideMargin(value: 24)
+        let height = ModalSize.custom(size: 300.0)
+        let center = ModalCenterPosition.center
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+
+        let customPresenter = Presentr(presentationType: customType)
+        customPresenter.transitionType = .coverVerticalFromTop
+        customPresenter.dismissTransitionType = .coverVerticalFromTop
+        customPresenter.roundCorners = true
+        customPresenter.backgroundColor = UIColor.black
+        customPresenter.backgroundOpacity = 0.5
+        return customPresenter
+    }()
+    
+    func presentStreaks(userActivity: UserActivity) {
+        guard let nav = currentNavigation else {
+            return
+        }
+        let vc = CurrentBestStreakViewController(nibName: "CurrentBestStreakViewController", bundle: nil) as CurrentBestStreakViewController
+        
+        vc.activity = userActivity
+        nav.customPresentViewController(streaksPopupPresentr, viewController: vc, animated: true, completion: nil)
+    }
+    
+    func checkStreaks() {
+        func dayLocalizableFor(daysCnt: Int) -> String {
+            switch (daysCnt % 10) {
+            case 1: return NSLocalizedString("days1", comment: "")
+            case 2, 3, 4: return NSLocalizedString("days234", comment: "")
+            default: return NSLocalizedString("days567890", comment: "")
+            }
+        }
+        guard let userId = AuthInfo.shared.userId else {
+            return
+        }
+        _ = ApiDataDownloader.userActivities.retrieve(user: userId, success: {
+            [weak self]
+            userActivity in
+            if userActivity.needsToSolveToday {
+                let streakText = "\(NSLocalizedString("YouAreSolving", comment: "")) \(userActivity.currentStreak) \(dayLocalizableFor(daysCnt: userActivity.currentStreak)) \(NSLocalizedString("InARow", comment: "")).\n\(NSLocalizedString("SolveToImprove", comment: ""))"
+                let subtitleText = "\(NSLocalizedString("TapToLearnAboutStreaks", comment: ""))"
+                NotificationAlertConstructor.sharedConstructor.presentStreakNotificationFake(streakText, subtitleText: subtitleText, success: {
+                    [weak self] in
+                    self?.presentStreaks(userActivity: userActivity)
+                })
+            }
+        }, error: {
+            error in
+        })
+    }
+    
+    
+    //Notification handling
+    
     func handleLocalNotification() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)
     }
@@ -113,15 +176,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func handleOpenedFromDeepLink(_ url: URL) {
         DeepLinkRouter.routeFromDeepLink(url, completion: {
             [weak self]
-            controller, push in
-            if let vc = controller { 
+            controllers in
+            if controllers.count > 0 { 
                 if let s = self {
                     if let topController = s.currentNavigation?.topViewController {
                         delay(0.5, closure: {
-                            if push { 
-                                topController.navigationController?.pushViewController(vc, animated: true) 
-                            } else {
-                                topController.present(vc, animated: true, completion: nil)
+                            for (index, vc) in controllers.enumerated() {
+                                if index == controllers.count - 1 {
+                                    topController.navigationController?.pushViewController(vc, animated: true) 
+                                } else {
+                                    topController.navigationController?.pushViewController(vc, animated: false) 
+                                }
                             }
                         })
                     } 
@@ -259,6 +324,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        print("completed background task with id: \(identifier)")
+        completionHandler()
+    }
+    
+    
     
     func applicationWillTerminate(_ application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()

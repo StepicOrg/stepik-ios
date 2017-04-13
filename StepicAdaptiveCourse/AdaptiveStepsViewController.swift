@@ -35,22 +35,22 @@ class AdaptiveStepsViewController: UIViewController {
     fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
         performRequest({
             ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
-                ApiDataDownloader.sharedDownloader.getLessonsByIds([recommendedLessonId], deleteLessons: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                ApiDataDownloader.lessons.retrieve(ids: [recommendedLessonId], existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     let lesson = newLessonsImmutable.first
                     
                     if let lesson = lesson, let stepId = lesson.stepsArray.first {
                         self.recommendedLesson = lesson
-                        ApiDataDownloader.sharedDownloader.getStepsByIds([stepId], deleteSteps: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+                        ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                             let step = newStepsImmutable.first
                             
                             if let step = step {
                                 success(step)
                             }
-                            }, failure: { (error) -> Void in
+                            }, error: { (error) -> Void in
                                 print("failed downloading steps data in Next")
                         })
                     }
-                    }, failure: { (error) -> Void in
+                    }, error: { (error) -> Void in
                         print("failed downloading lessons data in Next")
                 })
                 }, error: { error in print(error) })

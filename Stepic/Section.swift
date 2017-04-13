@@ -107,14 +107,14 @@ class Section: NSManagedObject, JSONInitializable {
         }
         
         for ids in idsArray {
-            _ = ApiDataDownloader.sharedDownloader.getUnitsByIds(ids, deleteUnits: self.units, refreshMode: .update, success: {
+            _ = ApiDataDownloader.units.retrieve(ids: ids, existing: self.units, refreshMode: .update, success: {
                 newUnits in 
                 self.loadProgressesForUnits(units: newUnits, completion: {
                     self.loadLessonsForUnits(units: newUnits, completion: {
                         idsDownloaded(newUnits)
                     })
                 })
-                }, failure: {
+                }, error: {
                     error in
                     print("Error while downloading units")
                     errorWhileDownloading()
@@ -134,7 +134,7 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
             for i in 0 ..< min(units.count, progresses.count) {
@@ -144,7 +144,7 @@ class Section: NSManagedObject, JSONInitializable {
             CoreDataHelper.instance.save()
             
             completion()
-            }, failure: { 
+            }, error: { 
                 (error) -> Void in
                 print("Error while dowloading progresses")
         })
@@ -160,7 +160,7 @@ class Section: NSManagedObject, JSONInitializable {
             }
         }
         
-        _ = ApiDataDownloader.sharedDownloader.getLessonsByIds(lessonIds, deleteLessons: lessons, refreshMode: .update, success: {
+        _ = ApiDataDownloader.lessons.retrieve(ids: lessonIds, existing: lessons, refreshMode: .update, success: {
             newLessons in
             lessons = Sorter.sort(newLessons, byIds: lessonIds)
             
@@ -171,7 +171,7 @@ class Section: NSManagedObject, JSONInitializable {
             CoreDataHelper.instance.save()
             
             completion()
-            }, failure: {
+            }, error: {
                 error in
                 print("Error while downloading units")
         })

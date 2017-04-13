@@ -5,8 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire', '~> 4.4'
-    pod 'SwiftyJSON', '3.1.0'
+    pod 'Alamofire', '~> 4.4'    
+    pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
     pod "DownloadButton"
@@ -19,12 +19,10 @@ def all_pods
     
     pod 'YandexMobileMetrica/Dynamic'
 
-    pod 'Firebase', '<= 3.4.0'
-#    pod 'Firebase/Messaging'
-    pod 'FirebaseAppIndexing', '1.0.4'
-    pod 'FirebaseMessaging', '1.1.1'
-    pod 'FirebaseAnalytics', '3.3.0'
-#    pod 'Firebase/Core'
+    pod 'Firebase/Core', '3.16.0'
+    pod 'Firebase/AppIndexing', '3.16.0'
+    pod 'Firebase/Messaging', '3.16.0'
+    pod 'Firebase/Analytics', '3.16.0'
     
     pod 'Mixpanel-swift'
 
@@ -32,7 +30,7 @@ def all_pods
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
     pod 'Kanna', '~> 2.0.0'
-    pod 'CRToast'
+    pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     
     pod "VK-ios-sdk" 
@@ -40,6 +38,8 @@ def all_pods
     pod 'FBSDKLoginKit'
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
+    pod 'Presentr'
 end
 
 target 'Stepic' do

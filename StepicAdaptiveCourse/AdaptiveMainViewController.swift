@@ -38,7 +38,7 @@ class AdaptiveMainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.courseInfoDidLoad), name: NSNotification.Name(rawValue: "courseInfoDidLoad"), object: nil)
 
         performRequest({
-            ApiDataDownloader.sharedDownloader.getCoursesByIds([StepicApplicationsInfo.adaptiveCourseId], deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { (coursesImmutable) -> Void in
+            ApiDataDownloader.courses.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
                 self.course = coursesImmutable.first
                 
                 guard let course = self.course else {
@@ -48,7 +48,7 @@ class AdaptiveMainViewController: UIViewController {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "courseInfoDidLoad"), object: nil)
                 self.courseNameLabel.text = course.title
-            }, failure: { (error) -> Void in
+            }, error: { (error) -> Void in
                 print("failed downloading courses data in Next")
             })
             }, error: {
