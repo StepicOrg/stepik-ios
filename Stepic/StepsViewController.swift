@@ -310,6 +310,9 @@ class StepsViewController: RGPageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
             if !didSelectTab && l.steps.count != 0  && startStepId < l.steps.count && didInitSteps {
@@ -319,6 +322,13 @@ class StepsViewController: RGPageViewController {
             } 
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = nil
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

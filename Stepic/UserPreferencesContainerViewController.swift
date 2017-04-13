@@ -26,6 +26,18 @@ class UserPreferencesContainerViewController: RGPageViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = nil
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
