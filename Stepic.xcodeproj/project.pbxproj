@@ -1012,6 +1012,10 @@
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
+		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
+		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
+		868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
+		868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BC6E31EA0276500E204EE /* StepControlButton.swift */; };
 		86ABC66A1E9686670012E8A6 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86ABC6691E9686670012E8A6 /* StepCardView.xib */; };
 		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
@@ -1545,6 +1549,7 @@
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
+		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
 		86ABC6691E9686670012E8A6 /* StepCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepCardView.xib; sourceTree = "<group>"; };
 		86ABC66B1E96867A0012E8A6 /* StepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
 		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
@@ -2836,6 +2841,7 @@
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
 				86ABC6661E9685F80012E8A6 /* StepCardView */,
+				868BC6E31EA0276500E204EE /* StepControlButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3253,6 +3259,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
+				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
+				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
 				86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				86ABC66A1E9686670012E8A6 /* StepCardView.xib in Resources */,
@@ -4142,6 +4151,7 @@
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
 				864514EA1E9FD4F6007F73BE /* SectionsAPI.swift in Sources */,
+				868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */,
 				864514EB1E9FD4F6007F73BE /* LessonsAPI.swift in Sources */,
 				864514EC1E9FD4F6007F73BE /* UsersAPI.swift in Sources */,
 				864514ED1E9FD4F6007F73BE /* StepsAPI.swift in Sources */,

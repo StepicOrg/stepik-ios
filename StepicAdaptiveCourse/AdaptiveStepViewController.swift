@@ -16,11 +16,15 @@ class AdaptiveStepViewController: UIViewController {
     
     var quizVC: ChoiceQuizViewController?
     
-    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var doneButton: StepControlButton!
+    @IBOutlet weak var dismissButton: StepControlButton!
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var dismissHandler: () -> () = { }
     var successHandler: () -> () = { }
@@ -40,6 +44,15 @@ class AdaptiveStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bottomView.bounds
+        gradientLayer.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
+                                UIColor.white.withAlphaComponent(0.4).cgColor,
+                                UIColor.white.withAlphaComponent(0.6).cgColor]
+        gradientLayer.locations = [0.0, 0.5, 1.0]
+        bottomView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        self.titleLabel.text = recommendedLesson.title
         self.loadQuiz(for: step)
         self.loadStepHTML(for: step)
     }
