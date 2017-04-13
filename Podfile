@@ -44,11 +44,17 @@ def all_pods
     pod 'Presentr'
 end
 
+def testing_pods
+    pod 'Quick'
+    pod 'Nimble'
+end
+
 target 'Stepic' do
     all_pods
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        testing_pods
     end
 end
 
