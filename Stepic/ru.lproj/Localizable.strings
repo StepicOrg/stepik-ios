@@ -202,3 +202,7 @@ CertificateWithDistinction = "Сертификат с отличием";
 Certificate = "Сертификат";
 CertificateDescriptionBody = "за прохождение курса";
 Result = "Результат";
+Downloads = "Загрузки";
+FindCourses = "Все курсы";
+MyCourses = "Мои курсы";
+Certificates = "Сертификаты";
