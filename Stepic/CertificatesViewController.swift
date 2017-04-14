@@ -84,6 +84,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
     }
     
     func shareURL(url: URL, button: UIButton) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Certificates.shared)
         DispatchQueue.global(qos: .background).async {
             let shareVC = SharingHelper.getSharingController(url.absoluteString)
             shareVC.popoverPresentationController?.sourceView = button
@@ -202,6 +203,11 @@ extension CertificatesViewController : UITableViewDelegate {
         guard let url = certificates[indexPath.row].certificateURL else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Certificates.opened, parameters: [
+            "grade": certificates[indexPath.row].grade,
+            "course": certificates[indexPath.row].courseName ?? ""
+            ])
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "certificate", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }

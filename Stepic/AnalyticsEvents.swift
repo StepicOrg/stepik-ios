@@ -158,4 +158,9 @@ struct AnalyticsEvents {
             }
         }
     }
+    
+    struct Certificates {
+        static let opened = "certificates_opened_certificate"
+        static let shared = "certificates_pressed_share_certificate"
+    }
 }
