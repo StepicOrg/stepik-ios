@@ -21,8 +21,8 @@ class CertificatesPresenter {
         self.coursesAPI = coursesAPI
     }
     
-    private var page : Int = 1
-    private var certificates: [Certificate] = []
+    var page : Int = 1
+    var certificates: [Certificate] = []
     
     func checkStatus() {
         if lastRefreshedUserId != AuthInfo.shared.userId {

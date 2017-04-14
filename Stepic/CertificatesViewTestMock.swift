@@ -10,34 +10,34 @@ import Foundation
 
 class CertificatesViewTestMock : CertificatesView {
     
-    var ids : [Int] = []
+    var grades : [Int] = []
+    var presenter : CertificatesPresenter!
     
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
-        
+        grades = certificates.map {
+            $0.grade
+        }
+        didSetCertificates?()
     }
     
+    var didSetCertificates : ((Void) -> Void)? = nil
+    
     func displayAnonymous() {
-        
     }
     
     func displayError() {
-        
     }
     
     func displayEmpty() {
-        
     }
     
     func displayRefreshing() {
-        
     }
     
     func displayLoadNextPageError() {
-        
     }
     
     func updateData() {
-        
     }
     
 }

@@ -26,6 +26,11 @@
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
+		080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA22F1EA017FB0079272F /* CertificateSpec.swift */; };
+		080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
+		080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
+		080AA2351EA05BE00079272F /* TestInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 080AA2341EA05BE00079272F /* TestInfo.plist */; };
+		080AA2371EA05CD20079272F /* TestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2361EA05CD20079272F /* TestConfig.swift */; };
 		080ACF501BD79D5500329F2B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
@@ -727,9 +732,9 @@
 		08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
-		367255D2CE84D6AFF1288BB6 /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1DA40A853509B174D25033 /* Pods_SberbankUniversity.framework */; };
-		70C4968124B7B1BA6B0852E5 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78259F25BA17919F5B664BF8 /* Pods_Stepic.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
+		8543C9DD6E8EA503F235269A /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5D4806714632E1DBDC6831 /* Pods_StepicTests.framework */; };
+		9E49779683FA325246E0E136 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD423B8F584788A34C2E0ECC /* Pods_Stepic.framework */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -758,7 +763,7 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		D8C0706CA036CD2C56C93B38 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86FE0DCD1185A4BB6C14857 /* Pods_StepicTests.framework */; };
+		B55517C1657F02BE34467DDF /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336CBB5C25C34F1FBFB35340 /* Pods_SberbankUniversity.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -811,7 +816,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01BDEBB580227619E19B4820 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		026820F430F5261263BC1296 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		0800B8171D06D961006C987E /* DiscussionProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxy.swift; sourceTree = "<group>"; };
 		0800B81A1D06DC1B006C987E /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0800B81D1D06ECB5006C987E /* Model_v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v5.xcdatamodel; sourceTree = "<group>"; };
@@ -828,6 +833,10 @@
 		08047E6B1BFD44920071C875 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextTableViewCell.swift; sourceTree = "<group>"; };
 		08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
+		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
+		080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPIPaginatedMock.swift; sourceTree = "<group>"; };
+		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
+		080AA2361EA05CD20079272F /* TestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConfig.swift; sourceTree = "<group>"; };
 		080ACF4F1BD79D5500329F2B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
@@ -1219,12 +1228,13 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
-		46FA21E52ABD180A2B92A0E3 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
-		6E8A1D9FAF5DBEA3B25AED97 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
-		78259F25BA17919F5B664BF8 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8276E21E5661C2B05F0D35F5 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		1A6B211E9742350615141365 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		3095019A29F64DBF72D4D4F3 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		336CBB5C25C34F1FBFB35340 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D023559784154A2979EA9C8 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A5D4806714632E1DBDC6831 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		8E0330D9935A5F4CE7A585AF /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
+		988BBA03FA379F1E2DC08CAD /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1247,9 +1257,8 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
-		BF1DA40A853509B174D25033 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2C8E066347622D8265E9CB4 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		C86FE0DCD1185A4BB6C14857 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD423B8F584788A34C2E0ECC /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD7085F1DD2B01B76430A7D9 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1257,7 +1266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8C0706CA036CD2C56C93B38 /* Pods_StepicTests.framework in Frameworks */,
+				8543C9DD6E8EA503F235269A /* Pods_StepicTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1266,7 +1275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */,
-				367255D2CE84D6AFF1288BB6 /* Pods_SberbankUniversity.framework in Frameworks */,
+				B55517C1657F02BE34467DDF /* Pods_SberbankUniversity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,7 +1284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
-				70C4968124B7B1BA6B0852E5 /* Pods_Stepic.framework in Frameworks */,
+				9E49779683FA325246E0E136 /* Pods_Stepic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1371,6 +1380,7 @@
 			isa = PBXGroup;
 			children = (
 				083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */,
+				080AA22F1EA017FB0079272F /* CertificateSpec.swift */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -1378,7 +1388,9 @@
 		081058331E9FDD1800FAC30A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */,
 				081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */,
+				080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -1582,7 +1594,6 @@
 				083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */,
 				083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */,
 				083F2B201E9E645000714173 /* CertificateTableViewCell.xib */,
-				083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -1702,6 +1713,8 @@
 				0800B8271D070F68006C987E /* DiscussionsAPITests.swift */,
 				08AB823A1D75AA9300FDEADE /* CookieTests.swift */,
 				081058321E9FB50700FAC30A /* Certificates */,
+				080AA2341EA05BE00079272F /* TestInfo.plist */,
+				080AA2361EA05CD20079272F /* TestConfig.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -2182,7 +2195,7 @@
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
-				1AA5D12050345B796E3BF238 /* Pods */,
+				D7C27AF323B844B987D051DF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2480,19 +2493,6 @@
 			name = Streaks;
 			sourceTree = "<group>";
 		};
-		1AA5D12050345B796E3BF238 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8276E21E5661C2B05F0D35F5 /* Pods-SberbankUniversity.debug.xcconfig */,
-				8E0330D9935A5F4CE7A585AF /* Pods-SberbankUniversity.release.xcconfig */,
-				C2C8E066347622D8265E9CB4 /* Pods-Stepic.debug.xcconfig */,
-				46FA21E52ABD180A2B92A0E3 /* Pods-Stepic.release.xcconfig */,
-				01BDEBB580227619E19B4820 /* Pods-StepicTests.debug.xcconfig */,
-				6E8A1D9FAF5DBEA3B25AED97 /* Pods-StepicTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2502,9 +2502,9 @@
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				BF1DA40A853509B174D25033 /* Pods_SberbankUniversity.framework */,
-				78259F25BA17919F5B664BF8 /* Pods_Stepic.framework */,
-				C86FE0DCD1185A4BB6C14857 /* Pods_StepicTests.framework */,
+				336CBB5C25C34F1FBFB35340 /* Pods_SberbankUniversity.framework */,
+				BD423B8F584788A34C2E0ECC /* Pods_Stepic.framework */,
+				5A5D4806714632E1DBDC6831 /* Pods_StepicTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2554,6 +2554,19 @@
 			path = StepicWatch;
 			sourceTree = "<group>";
 		};
+		D7C27AF323B844B987D051DF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				988BBA03FA379F1E2DC08CAD /* Pods-SberbankUniversity.debug.xcconfig */,
+				026820F430F5261263BC1296 /* Pods-SberbankUniversity.release.xcconfig */,
+				FD7085F1DD2B01B76430A7D9 /* Pods-Stepic.debug.xcconfig */,
+				1A6B211E9742350615141365 /* Pods-Stepic.release.xcconfig */,
+				4D023559784154A2979EA9C8 /* Pods-StepicTests.debug.xcconfig */,
+				3095019A29F64DBF72D4D4F3 /* Pods-StepicTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2561,12 +2574,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
 			buildPhases = (
-				0557FFBD9E660BF11A867FCC /* [CP] Check Pods Manifest.lock */,
+				16D884D8C372051524DD3657 /* [CP] Check Pods Manifest.lock */,
 				085D5CD51D007F2100092060 /* Sources */,
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
-				F8ED15EB0743A20B11477995 /* [CP] Embed Pods Frameworks */,
-				F7FCCE3FD3CBB538B1DD1EEF /* [CP] Copy Pods Resources */,
+				838B7AD06D4A078F429FC302 /* [CP] Embed Pods Frameworks */,
+				EDE56E14AB529339A270C573 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2582,13 +2595,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */;
 			buildPhases = (
-				83E272BECCE64F848F79D580 /* [CP] Check Pods Manifest.lock */,
+				D389DCEAB330C014CFEE9542 /* [CP] Check Pods Manifest.lock */,
 				08D120741C937B2200A54ABC /* Sources */,
 				08D121031C937B2200A54ABC /* Frameworks */,
 				08D121061C937B2200A54ABC /* Resources */,
 				08D1211F1C937B2200A54ABC /* ShellScript */,
-				9C5144385BFD5838F82FF357 /* [CP] Embed Pods Frameworks */,
-				13ACAF447EC0796CE235EBA1 /* [CP] Copy Pods Resources */,
+				D1CB47F2BA15CC537E8AA441 /* [CP] Embed Pods Frameworks */,
+				79F5E3841B8558B6CB813727 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2603,14 +2616,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
-				7E960607CDEC1D0817766C1E /* [CP] Check Pods Manifest.lock */,
+				6228E45502EA1A2AB32DA59A /* [CP] Check Pods Manifest.lock */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
-				6F27E6F3FBF9A15839A19342 /* [CP] Embed Pods Frameworks */,
-				064CC3FF2E30A62B4E934044 /* [CP] Copy Pods Resources */,
+				F3E9F0087D153975725742F1 /* [CP] Embed Pods Frameworks */,
+				BFF224609D56428F7DFF8405 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2743,6 +2756,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2888,36 +2902,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0557FFBD9E660BF11A867FCC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		064CC3FF2E30A62B4E934044 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2944,7 +2928,37 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		13ACAF447EC0796CE235EBA1 /* [CP] Copy Pods Resources */ = {
+		16D884D8C372051524DD3657 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6228E45502EA1A2AB32DA59A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		79F5E3841B8558B6CB813727 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2959,82 +2973,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6F27E6F3FBF9A15839A19342 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7E960607CDEC1D0817766C1E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		83E272BECCE64F848F79D580 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9C5144385BFD5838F82FF357 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7FCCE3FD3CBB538B1DD1EEF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F8ED15EB0743A20B11477995 /* [CP] Embed Pods Frameworks */ = {
+		838B7AD06D4A078F429FC302 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3049,6 +2988,81 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BFF224609D56428F7DFF8405 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1CB47F2BA15CC537E8AA441 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D389DCEAB330C014CFEE9542 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EDE56E14AB529339A270C573 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3E9F0087D153975725742F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3059,7 +3073,9 @@
 				083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
 				0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */,
+				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
+				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3237,6 +3253,7 @@
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
 				08D120C11C937B2200A54ABC /* AudioManager.swift in Sources */,
 				08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */,
+				080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
@@ -3649,6 +3666,7 @@
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
+				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
@@ -3786,7 +3804,7 @@
 /* Begin XCBuildConfiguration section */
 		085D5CE01D007F2200092060 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01BDEBB580227619E19B4820 /* Pods-StepicTests.debug.xcconfig */;
+			baseConfigurationReference = 4D023559784154A2979EA9C8 /* Pods-StepicTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -3805,7 +3823,7 @@
 		};
 		085D5CE11D007F2200092060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E8A1D9FAF5DBEA3B25AED97 /* Pods-StepicTests.release.xcconfig */;
+			baseConfigurationReference = 3095019A29F64DBF72D4D4F3 /* Pods-StepicTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -3823,7 +3841,7 @@
 		};
 		08D121221C937B2200A54ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8276E21E5661C2B05F0D35F5 /* Pods-SberbankUniversity.debug.xcconfig */;
+			baseConfigurationReference = 988BBA03FA379F1E2DC08CAD /* Pods-SberbankUniversity.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -3844,7 +3862,7 @@
 		};
 		08D121231C937B2200A54ABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E0330D9935A5F4CE7A585AF /* Pods-SberbankUniversity.release.xcconfig */;
+			baseConfigurationReference = 026820F430F5261263BC1296 /* Pods-SberbankUniversity.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -3964,7 +3982,7 @@
 		};
 		08DE94311B8C58AC00D278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2C8E066347622D8265E9CB4 /* Pods-Stepic.debug.xcconfig */;
+			baseConfigurationReference = FD7085F1DD2B01B76430A7D9 /* Pods-Stepic.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3992,7 +4010,7 @@
 		};
 		08DE94321B8C58AC00D278AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46FA21E52ABD180A2B92A0E3 /* Pods-Stepic.release.xcconfig */;
+			baseConfigurationReference = 1A6B211E9742350615141365 /* Pods-Stepic.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
