@@ -206,4 +206,9 @@ Downloads = "Downloads";
 FindCourses = "Find courses";
 MyCourses = "My courses";
 Certificates = "Certificates";
+AnonymousCertificatesTitle = "Anonymous users can't have certificates";
+EmptyCertificatesTitle = "No certificates";
+SignInToHaveCertificates = "Sign in to be able to get a certificate";
+EmptyCertificatesDescription = "Choose a course and learn to get a certificate";
+ChooseCourse = "Choose course";
 

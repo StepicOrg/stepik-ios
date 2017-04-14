@@ -206,3 +206,12 @@ Downloads = "Загрузки";
 FindCourses = "Все курсы";
 MyCourses = "Мои курсы";
 Certificates = "Сертификаты";
+AnonymousCertificatesTitle = "Анонимные пользователи не могут иметь сертификаты";
+EmptyCertificatesTitle = "Ни одного сертификата";
+SignInToHaveCertificates = "Войдите, чтобы иметь возможность получить сертификат";
+EmptyCertificatesDescription = "Выберите курс и учитесь, чтобы получить сертификат";
+ChooseCourse = "Выбрать курс";
+
+
+
+

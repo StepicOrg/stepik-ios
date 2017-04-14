@@ -14,7 +14,7 @@ class CertificatesPresenter {
     private var certificatesAPI : CertificatesAPI?
     private var coursesAPI : CoursesAPI?
     
-    private var lastRefreshedUserId : Int?
+    private var lastRefreshedUserId : Int? = nil
     
     init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI) {
         self.certificatesAPI = certificatesAPI
@@ -27,6 +27,7 @@ class CertificatesPresenter {
     func checkStatus() {
         if lastRefreshedUserId != AuthInfo.shared.userId {
             certificates = []
+            lastRefreshedUserId = AuthInfo.shared.userId
             if !AuthInfo.shared.isAuthorized {
                 view?.displayAnonymous()
                 view?.setCertificates(certificates: [], hasNextPage: false)
@@ -39,7 +40,8 @@ class CertificatesPresenter {
     }
     
     func refreshCertificates() {
-        guard let userId = AuthInfo.shared.userId else {
+        guard let userId = AuthInfo.shared.userId,
+            AuthInfo.shared.isAuthorized else {
             certificates = []
             lastRefreshedUserId = nil
             view?.displayAnonymous()
@@ -66,6 +68,7 @@ class CertificatesPresenter {
                     [weak self] in
                     return self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
+                s.view?.displayEmpty()
             })
         }, error: {
             [weak self]

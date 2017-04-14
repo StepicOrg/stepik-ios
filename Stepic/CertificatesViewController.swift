@@ -33,6 +33,8 @@ class CertificatesViewController : UIViewController, CertificatesView {
         tableView.delegate = self
         tableView.dataSource = self
     
+        title = NSLocalizedString("Certificates", comment: "")
+        
         presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses)
         presenter?.view = self
         
@@ -55,7 +57,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
 
         presenter?.refreshCertificates()
         
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = UIColor.groupTableViewBackground
         
         initPaginationView()
     }
@@ -119,7 +121,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
     }
     
     func displayRefreshing() {
-        emptyState = .refreshing
+//        emptyState = .refreshing
     }
     
     func displayLoadNextPageError() {
@@ -230,13 +232,13 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         //Add correct placeholders here
         switch emptyState {
         case .anonymous:
-            return Images.emptyCoursesPlaceholder
+            return Images.placeholders.anonymous
         case .empty:
-            return Images.emptyCoursesPlaceholder
+            return Images.placeholders.certificates
         case .error:
-            return Images.noWifiImage.size250x250
+            return Images.placeholders.connectionError
         case .refreshing:
-            return Images.emptyCoursesPlaceholder
+            return Images.placeholders.certificates
         }
     }
     
@@ -245,9 +247,9 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         
         switch emptyState {
         case .anonymous:
-            text = "Anonymous users can't have certificates"
+            text = NSLocalizedString("AnonymousCertificatesTitle", comment: "")
         case .empty:
-            text = NSLocalizedString("EmptyMyCoursesTitle", comment: "")
+            text = NSLocalizedString("EmptyCertificatesTitle", comment: "")
             break
         case .error:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
@@ -268,10 +270,10 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         
         switch emptyState {
         case .anonymous:
-            text = NSLocalizedString("SignInToJoin", comment: "")
+            text = NSLocalizedString("SignInToHaveCertificates", comment: "")
             break
         case .empty:
-            text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
+            text = NSLocalizedString("EmptyCertificatesDescription", comment: "")
             break
         case .error:
             text = NSLocalizedString("ConnectionErrorPullToRefresh", comment: "")
@@ -298,7 +300,7 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         case .anonymous:
             text = NSLocalizedString("SignIn", comment: "")
         case .empty:
-            text = NSLocalizedString("AllCourses", comment: "")
+            text = NSLocalizedString("ChooseCourse", comment: "")
         case .error:
             text = ""
             break
@@ -314,6 +316,6 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
     }
     
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return UIColor.white
+        return UIColor.groupTableViewBackground
     }
 }
