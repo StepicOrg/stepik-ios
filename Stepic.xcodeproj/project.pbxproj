@@ -1059,7 +1059,6 @@
 		86B916251E849548000C2842 /* AdaptiveMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveMainViewController.swift */; };
 		86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
-		86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
@@ -1557,7 +1556,6 @@
 		86B916241E849548000C2842 /* AdaptiveMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveMainViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
-		86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAuthViewController.swift; sourceTree = "<group>"; };
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -2828,7 +2826,6 @@
 			isa = PBXGroup;
 			children = (
 				86B916241E849548000C2842 /* AdaptiveMainViewController.swift */,
-				86EF29381E83CEA900F8D214 /* AdaptiveAuthViewController.swift */,
 				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
 				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
 			);
@@ -4458,7 +4455,6 @@
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
 				86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
-				86EF29391E83CEA900F8D214 /* AdaptiveAuthViewController.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
