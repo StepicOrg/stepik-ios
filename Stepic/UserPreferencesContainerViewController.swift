@@ -34,8 +34,6 @@ class UserPreferencesContainerViewController: RGPageViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = nil
     }
     
     override func didReceiveMemoryWarning() {
