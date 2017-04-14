@@ -16,7 +16,5 @@ protocol CertificatesView: class {
     func displayEmpty()
     func displayRefreshing()
     func displayLoadNextPageError()
-    
-    func updateData()
-    
+    func updateData()    
 }
