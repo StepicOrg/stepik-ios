@@ -118,11 +118,9 @@ class CurrentBestStreakViewController: UIViewController {
     func selectStreakNotificationTime() {
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController 
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
-        vc.selectedBlock = {
-//            [weak self] in 
-//            if let s = self {
-////                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
-//            }
+        vc.cancelAction = {
+            [weak self] in
+            self?.receiveNotificationsSwitch.isOn = false
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }

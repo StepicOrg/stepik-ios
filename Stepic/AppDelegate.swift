@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     //Streaks presentation
-    
+    //TODO: Refactor this into a class
     let streaksPopupPresentr : Presentr = {
         let width = ModalSize.sideMargin(value: 24)
         let height = ModalSize.custom(size: 300.0)
