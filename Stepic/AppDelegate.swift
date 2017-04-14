@@ -110,9 +110,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func presentStreaks(userActivity: UserActivity) {
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+            "current" : userActivity.currentStreak,
+            "longest" : userActivity.longestStreak,
+            "percentage" : String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+            ])
+
+        
         guard let nav = currentNavigation else {
             return
         }
+        
         let vc = CurrentBestStreakViewController(nibName: "CurrentBestStreakViewController", bundle: nil) as CurrentBestStreakViewController
         
         vc.activity = userActivity
@@ -140,6 +149,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     [weak self] in
                     self?.presentStreaks(userActivity: userActivity)
                 })
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+                    "current" : userActivity.currentStreak,
+                    "longest" : userActivity.longestStreak,
+                    "percentage" : String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+                    ])
             }
         }, error: {
             error in

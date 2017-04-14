@@ -127,6 +127,16 @@ struct AnalyticsEvents {
             }
         }
         static let notificationOpened = "streak_notification_opened"
+        
+        struct LocalNotification {
+            static let shown = "streak_local_notification_shown"
+            static let clicked = "streak_local_notification_clicked"
+        }
+        struct ImproveAlert {
+            static let notificationOffered = "streak_improve_alert_notifications_offered"
+            static let timeSelected = "streak_improve_alert_time_selected"
+            static let timeCancelled = "streak_improve_alert_time_cancelled"
+        }
     }
     
     struct App {

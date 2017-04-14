@@ -40,6 +40,7 @@ class CurrentBestStreakViewController: UIViewController {
                 hideNotificationsView()            
             } else {
                 receiveNotificationsSwitch.isOn = false
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.notificationOffered)
             } 
         } else {
             hideNotificationsView()
@@ -121,6 +122,10 @@ class CurrentBestStreakViewController: UIViewController {
         vc.cancelAction = {
             [weak self] in
             self?.receiveNotificationsSwitch.isOn = false
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.timeCancelled)
+        }
+        vc.selectedBlock = {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.timeSelected)
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
