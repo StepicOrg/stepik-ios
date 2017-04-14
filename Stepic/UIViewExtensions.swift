@@ -17,10 +17,14 @@ extension UIView {
         self.clipsToBounds = true
     }
     
-    func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
+    func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat? = nil, borderColor: UIColor? = nil ) {
         self.layer.cornerRadius = radius
-        self.layer.borderWidth = borderWidth 
-        self.layer.borderColor = borderColor.cgColor;
+        if let bw = borderWidth {
+            self.layer.borderWidth = bw
+        }
+        if let bc = borderColor {
+            self.layer.borderColor = bc.cgColor
+        }
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }

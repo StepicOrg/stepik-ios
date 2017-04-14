@@ -211,6 +211,8 @@ EmptyCertificatesTitle = "Ни одного сертификата";
 SignInToHaveCertificates = "Войдите, чтобы иметь возможность получить сертификат";
 EmptyCertificatesDescription = "Выберите курс и учитесь, чтобы получить сертификат";
 ChooseCourse = "Выбрать курс";
+CourseStaff = "Команда курса";
+Staff = "Команда Stepik";
 
 
 

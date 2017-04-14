@@ -211,4 +211,7 @@ EmptyCertificatesTitle = "No certificates";
 SignInToHaveCertificates = "Sign in to be able to get a certificate";
 EmptyCertificatesDescription = "Choose a course and learn to get a certificate";
 ChooseCourse = "Choose course";
+CourseStaff = "Course staff";
+Staff = "Stepik staff";
+
 
