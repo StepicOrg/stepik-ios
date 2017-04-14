@@ -58,7 +58,6 @@ class CertificatesViewController : UIViewController, CertificatesView {
         presenter?.refreshCertificates()
         
         tableView.backgroundColor = UIColor.groupTableViewBackground
-        
         initPaginationView()
     }
     
@@ -121,7 +120,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
     }
     
     func displayRefreshing() {
-//        emptyState = .refreshing
+        emptyState = .refreshing
     }
     
     func displayLoadNextPageError() {
@@ -189,7 +188,22 @@ extension CertificatesViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard certificates.count > indexPath.row else {
+            return
+        }
+        
+        guard let url = certificates[indexPath.row].certificateURL else {
+            return
+        }
+        
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "certificate", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }
 }
 
