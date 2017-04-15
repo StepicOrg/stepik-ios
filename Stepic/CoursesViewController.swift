@@ -98,8 +98,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     fileprivate func getCachedCourses(completion: ((Void) -> Void)?) {
         isRefreshing = true
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             do {
                 let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)

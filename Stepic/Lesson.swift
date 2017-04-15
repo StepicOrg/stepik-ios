@@ -320,8 +320,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             return
         }
         
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
                     _ = vid.cancelStore()

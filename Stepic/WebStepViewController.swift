@@ -84,7 +84,7 @@ class WebStepViewController: UIViewController {
             return
         }
 //        let slug = lessonSlug!
-        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
             DispatchQueue.main.async {
