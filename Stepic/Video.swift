@@ -305,7 +305,7 @@ class Video: NSManagedObject, JSONInitializable {
                     return true
                 } else {
                     print("strange error deleting videos!")
-                    print(error.localizedFailureReason)
+                    print(error.localizedFailureReason ?? "")
                     print(error.code)
                     print(error.localizedDescription)
                     return false

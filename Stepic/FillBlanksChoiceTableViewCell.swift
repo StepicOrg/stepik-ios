@@ -41,7 +41,7 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     }
 
     func setOption(text: String?) {
-        if let t = text {
+        if text != nil {
             optionLabel.text = text
             optionLabel.textColor = UIColor.black
         } else {

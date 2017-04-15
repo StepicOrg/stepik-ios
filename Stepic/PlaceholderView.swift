@@ -69,7 +69,7 @@ class PlaceholderView: UIView {
         imageView?.image = image
         imageViewHeight = imageView!.constrainHeight("\(image.size.height)")[0] as? NSLayoutConstraint
         imageViewWidth = imageView!.constrainWidth("\(image.size.width)")[0] as? NSLayoutConstraint
-        imageView?.alignCenterX(with: middleView, predicate: "0")
+        _ = imageView?.alignCenterX(with: middleView, predicate: "0")
     }
     
     fileprivate func addTitle(_ title: String) {

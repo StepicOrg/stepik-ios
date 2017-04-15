@@ -61,7 +61,7 @@ class RemoteVersionManager: NSObject {
             let response = response.response
             
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler(e)
                 return
             }

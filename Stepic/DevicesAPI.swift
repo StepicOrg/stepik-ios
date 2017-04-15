@@ -40,7 +40,7 @@ class DevicesAPI: NSObject {
             
             print(json)
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
@@ -63,7 +63,7 @@ class DevicesAPI: NSObject {
             response in
 //            _, response, data, error in
             
-            if let e = response.error as? NSError {
+            if let e = response.error as NSError? {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }

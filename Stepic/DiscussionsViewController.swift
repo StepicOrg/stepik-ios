@@ -622,7 +622,7 @@ extension DiscussionsViewController : UITableViewDelegate {
 
         }
         
-        if let shouldLoadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
+        if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
             let idsToLoad = getNextDiscussionIdsToLoad()
             if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true

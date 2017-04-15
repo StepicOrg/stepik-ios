@@ -324,7 +324,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         DispatchQueue.global(priority: priority).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
                     //                    vid.removeFromStore()
                 }
@@ -343,9 +343,9 @@ class Lesson: NSManagedObject, JSONInitializable {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
                     print("not cached video can not be removed!")
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
-                    vid.removeFromStore()
+                    _ = vid.removeFromStore()
                 }
             }
             

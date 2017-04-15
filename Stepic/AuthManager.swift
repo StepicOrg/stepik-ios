@@ -17,7 +17,7 @@ class AuthManager : NSObject {
     
     static let oauth = AuthAPI()
     
-    func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    @discardableResult func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
             failure(NSError.noAppWithCredentials as Error)
@@ -48,7 +48,7 @@ class AuthManager : NSObject {
             } else {
                 json = response.result.value!
             }
-            let response = response.response
+//            let response = response.response
             
             if let e = error {
                 failure(e)
@@ -71,7 +71,7 @@ class AuthManager : NSObject {
         
     }
     
-    func logInWithUsername(_ username : String, password : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    @discardableResult func logInWithUsername(_ username : String, password : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
             failure(NSError.noAppWithCredentials as Error)
@@ -103,7 +103,7 @@ class AuthManager : NSObject {
             } else {
                 json = response.result.value!
             }
-            let response = response.response
+//            let response = response.response
 
             
             if let e = error {
@@ -126,7 +126,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : TokenRefreshError) -> Void) -> Request? {
+    @discardableResult func refreshTokenWith(_ refresh_token : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : TokenRefreshError) -> Void) -> Request? {
         func logRefreshError(statusCode: Int?, message: String?) {
             var parameters : [String: NSObject] = [:]
             if let code = statusCode {
@@ -204,7 +204,7 @@ class AuthManager : NSObject {
         
     }
     
-    func autoRefreshToken(success : ((Void) -> Void)? = nil, failure : ((Void) -> Void)? = nil) -> Request? {
+    @discardableResult func autoRefreshToken(success : ((Void) -> Void)? = nil, failure : ((Void) -> Void)? = nil) -> Request? {
         
         if AuthInfo.shared.didRefresh {
             success?()
@@ -223,7 +223,7 @@ class AuthManager : NSObject {
         })
     }
     
-    func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
+    @discardableResult func joinCourseWithId(_ courseId: Int, delete: Bool = false, success : @escaping ((Void) -> Void), error errorHandler: @escaping ((String)->Void)) -> Request? {
 
         let headers : [String : String] = AuthInfo.shared.initialHTTPHeaders
 
@@ -319,7 +319,7 @@ class AuthManager : NSObject {
                     }
                     let response = response.response
                 
-                    if let e = (error as? NSError) {
+                    if let e = (error as NSError?) {
                         let errormsg = "\(e.code)\n\(e.localizedFailureReason ?? "")\n\(e.localizedRecoverySuggestion ?? "")\n\(e.localizedDescription)"
                         errorHandler(errormsg, nil)
                         return

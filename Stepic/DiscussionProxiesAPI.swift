@@ -30,7 +30,7 @@ class DiscussionProxiesAPI {
                 let response = response.response
                 
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("RETRIEVE discussion-proxies/\(id): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     return
                 }

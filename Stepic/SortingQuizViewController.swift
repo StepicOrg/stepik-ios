@@ -151,7 +151,7 @@ extension SortingQuizViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let a = attempt {
-            if let dataset = a.dataset as? SortingDataset {
+            if (a.dataset as? SortingDataset) != nil {
                 //                print("heightForRowAtIndexPath: \(indexPath.row) -> \(cellHeights[indexPath.row])")
                 return CGFloat(webViewHelper.cellHeights[(indexPath as NSIndexPath).row])
                 //                dataset.options[indexPath.row]

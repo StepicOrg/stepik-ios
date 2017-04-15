@@ -36,7 +36,7 @@ class WebControllerManager: NSObject {
                 return
             } 
         }
-        print(currentWebController)
+        print(currentWebController ?? "")
         error?("Could not dismiss web controller with key \(key)")
     }
     
@@ -78,7 +78,7 @@ class WebControllerManager: NSObject {
     }
     
     func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
-        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed))
+        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed) ?? "")
         if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!) {
             presentWebControllerWithURL(url, 
                                         inController: c, 

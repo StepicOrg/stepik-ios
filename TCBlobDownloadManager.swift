@@ -193,7 +193,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
 
         do {
             try FileManager.default.replaceItem(at: download.destinationURL as URL, withItemAt: location, backupItemName: nil, options: [], resultingItemURL: &resultingURL)
-            download.resultingURL = resultingURL as? URL
+            download.resultingURL = resultingURL as URL?
         } catch let error1 as NSError {
             fileError = error1
             download.error = fileError

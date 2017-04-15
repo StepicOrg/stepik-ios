@@ -29,7 +29,7 @@ class UserActivitiesAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     print("RETRIEVE user-activities/\(userId): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     errorHandler(.connectionError)
                     return
