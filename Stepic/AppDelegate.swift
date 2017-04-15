@@ -310,7 +310,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    @available(iOS 8.0, *)
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            print("\(userActivity.webpageURL?.absoluteString)")
+            print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
                 handleOpenedFromDeepLink(url)
                 return true

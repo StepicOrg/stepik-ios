@@ -176,7 +176,7 @@ class UserPreferencesTableViewController: UITableViewController {
     
     
     @IBAction func printTokenButtonPressed(_ sender: UIButton) {
-        print(AuthInfo.shared.token?.accessToken)
+        print(AuthInfo.shared.token?.accessToken ?? "")
     }
     
     @IBAction func printDocumentsPathButtonPressed(_ sender: UIButton) {

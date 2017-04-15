@@ -46,7 +46,7 @@ class DevicesAPI: NSObject {
             }
             
             if response?.statusCode != 201 {
-                errorHandler("CREATE device: bad response status code \(response?.statusCode)")
+                errorHandler("CREATE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
             
@@ -69,7 +69,7 @@ class DevicesAPI: NSObject {
             }
             
             if response.response?.statusCode != 204 && response.response?.statusCode != 404 {
-                errorHandler("DESTROY device: bad response status code \(response.response?.statusCode)")
+                errorHandler("DESTROY device: bad response status code \(String(describing: response.response?.statusCode))")
                 return
             }
             
@@ -101,7 +101,7 @@ class DevicesAPI: NSObject {
             }
             
             if response?.statusCode != 200 {
-                errorHandler("RETRIEVE device: bad response status code \(response?.statusCode)")
+                errorHandler("RETRIEVE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
             

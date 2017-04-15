@@ -185,7 +185,7 @@ class VideoStepViewController: UIViewController {
         if shouldSendViewsBlock() {
             performRequest({
                 [weak self] in
-                print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
+                print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
                 _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{

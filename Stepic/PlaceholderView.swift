@@ -192,7 +192,7 @@ class PlaceholderView: UIView {
         layoutIfNeeded()
         middleView.layoutSubviews()
         print("middle view height -> \(middleView.bounds.height)")
-        print("image view height -> \(imageView?.bounds.height)")
+        print("image view height -> \(String(describing: imageView?.bounds.height))")
     }
     
     fileprivate func setup() {

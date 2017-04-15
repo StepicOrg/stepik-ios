@@ -36,7 +36,7 @@ class CommentsAPI {
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("RETRIEVE comments: bad response status code \(response?.statusCode)")
+                    errorHandler("RETRIEVE comments: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
                 
@@ -93,7 +93,7 @@ class CommentsAPI {
                 }
                 
                 if response?.statusCode != 201 {
-                    errorHandler("CREATE comments: bad response status code \(response?.statusCode)")
+                    errorHandler("CREATE comments: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
 

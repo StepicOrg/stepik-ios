@@ -125,7 +125,7 @@ class QuizViewController: UIViewController {
             DispatchQueue.main.async {
                 [weak self] in
                 if let s = self {
-                    print("did set attempt id \(self?.attempt?.id)")
+                    print("did set attempt id \(String(describing: self?.attempt?.id))")
                     
                     //TODO: Implement in subclass, then it may need a height update
                     s.updateQuizAfterAttemptUpdate()
@@ -220,7 +220,7 @@ class QuizViewController: UIViewController {
                             s.updateQuizAfterSubmissionUpdate()
                         }
                     } else {
-                        print("did set submission id \(s.submission?.id)")
+                        print("did set submission id \(String(describing: s.submission?.id))")
                         s.buttonStateSubmit = false
                         
                         if let hint = s.submission?.hint {
@@ -608,7 +608,7 @@ class QuizViewController: UIViewController {
                 _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     [weak self]
                     submission in
-                    print("did get submission id \(id), with status \(submission.status)")
+                    print("did get submission id \(id), with status \(String(describing: submission.status))")
                     if submission.status == "evaluation" {
                         s.checkSubmission(id, time: time + 1, completion: completion)
                     } else {

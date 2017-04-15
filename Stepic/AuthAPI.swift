@@ -38,7 +38,7 @@ class AuthAPI {
             }
             let response = response.response
             
-            print("\(response?.statusCode)")
+            print("\(String(describing: response?.statusCode))")
             print(json)
 
             if let e = error {

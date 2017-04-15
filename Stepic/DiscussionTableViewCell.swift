@@ -100,7 +100,7 @@ class DiscussionTableViewCell: UITableViewCell {
     fileprivate func constructLabel() {
         commentLabel = UILabel()
         labelContainerView.addSubview(commentLabel!)
-        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
+        _ = commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
         commentLabel?.numberOfLines = 0
     }
     

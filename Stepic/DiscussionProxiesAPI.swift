@@ -36,7 +36,7 @@ class DiscussionProxiesAPI {
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("RETRIEVE discussion-proxies/\(id): bad response status code \(response?.statusCode)")
+                    errorHandler("RETRIEVE discussion-proxies/\(id): bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
 

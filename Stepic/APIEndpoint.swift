@@ -65,7 +65,7 @@ class APIEndpoint {
             }
             
             if response?.statusCode != 200 {
-                print("RETRIEVE \(requestString)?\(ids)): bad response status code \(response?.statusCode)")
+                print("RETRIEVE \(requestString)?\(ids)): bad response status code \(String(describing: response?.statusCode))")
                 failure(.badStatus)
                 return
             }

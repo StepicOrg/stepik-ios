@@ -411,7 +411,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
         
         
         if let step = lesson?.steps[index] {
-            print("initializing tab view for step id \(step.id), progress is \(step.progress))")
+            print("initializing tab view for step id \(step.id), progress is \(String(describing: step.progress)))")
             //            if tabViewsForStepId[step.id] == nil {
             tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
             //            }

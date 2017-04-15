@@ -29,7 +29,7 @@ class LocalNotificationManager {
         let currentDate = Date()
         print("local start hour -> \(localStartHour) current date -> \(currentDate)")
         let date = calendar.date(bySettingHour: localStartHour, minute: 0, second: 0, of: currentDate)
-        print("date set -> \(date)")
+        print("date set -> \(String(describing: date))")
         notification.alertBody = NSLocalizedString("StreakNotificationAlertBody", comment: "")
         notification.fireDate = date
         notification.repeatInterval = NSCalendar.Unit.day

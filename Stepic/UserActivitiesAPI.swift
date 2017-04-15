@@ -36,7 +36,7 @@ class UserActivitiesAPI {
                 }
                 
                 if response?.statusCode != 200 {
-                    print("RETRIEVE user-activities/\(userId): bad response status code \(response?.statusCode)")
+                    print("RETRIEVE user-activities/\(userId): bad response status code \(String(describing: response?.statusCode))")
                     errorHandler(.badStatus)
                     return
                 }

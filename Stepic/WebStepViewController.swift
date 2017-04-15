@@ -69,7 +69,7 @@ class WebStepViewController: UIViewController {
 //        stepWebView.backgroundColor = UIColor.white
         
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView!.panGestureRecognizer)
-        print(self.view.gestureRecognizers)
+        print(self.view.gestureRecognizers ?? "")
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
@@ -247,7 +247,7 @@ class WebStepViewController: UIViewController {
             //Send view to views
             performRequest({
                 [weak self] in
-                print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
+                print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
                 _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
                     if let cstep = self?.step {

@@ -437,7 +437,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
         
-        print("LastStep stepId before refresh: \(course.lastStep?.stepId)")
+        print("LastStep stepId before refresh: \(String(describing: course.lastStep?.stepId))")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
             [weak self]
             newLastSteps -> Void in
@@ -448,7 +448,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 return
             }
 
-            print("new stepId \(newLastStep.stepId)")
+            print("new stepId \(String(describing: newLastStep.stepId))")
             
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()

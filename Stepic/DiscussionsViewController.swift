@@ -717,7 +717,7 @@ extension DiscussionsViewController : UITableViewDataSource {
 
 extension DiscussionsViewController : WriteCommentDelegate {
     func didWriteComment(_ comment: Comment) {
-        print(comment.parentId)
+        print(comment.parentId ?? "")
         if let parentId = comment.parentId {
             //insert row in an existing section
             if let section = discussions.index(where: {$0.id == parentId}) {
