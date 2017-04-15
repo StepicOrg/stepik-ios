@@ -95,7 +95,7 @@ class DevicesAPI: NSObject {
             let response = response.response
             
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler("RETRIEVE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }

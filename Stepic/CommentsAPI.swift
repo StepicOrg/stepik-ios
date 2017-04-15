@@ -30,7 +30,7 @@ class CommentsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("RETRIEVE comments: error \(e.localizedDescription)")
                     return
                 }

@@ -189,7 +189,7 @@ extension SortingQuizViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
         
-        if let dataset = attempt?.dataset as? SortingDataset {
+        if (attempt?.dataset as? SortingDataset) != nil {
             webViewHelper.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row])
         }
         

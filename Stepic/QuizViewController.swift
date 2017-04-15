@@ -513,7 +513,7 @@ class QuizViewController: UIViewController {
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in 
-            if let s = self {
+            if self != nil {
 //                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
             }
         }

@@ -78,7 +78,7 @@ class DownloadTableViewCell: UITableViewCell {
         if video.state == VideoState.downloading {
             downloadButton.state = .downloading
             
-            self.quality = self.video.loadingQuality! ?? VideosInfo.downloadingVideoQuality
+            self.quality = self.video.loadingQuality ?? VideosInfo.downloadingVideoQuality
 
             UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(self.video.totalProgress)})
             
