@@ -337,8 +337,7 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     func removeFromStore(completion: @escaping (Void) -> Void) {
         print("entered lesson removeFromStore")
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
                     print("not cached video can not be removed!")

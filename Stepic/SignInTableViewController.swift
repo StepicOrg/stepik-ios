@@ -104,8 +104,8 @@ class SignInTableViewController: UITableViewController {
 
     
     func authentificateWithCode(_ code: String) {
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        AuthManager.sharedManager.logInWithCode(code, 
+        SVProgressHUD.show()
+        AuthManager.sharedManager.logInWithCode(code,
             success: {
                 t in
                 AuthInfo.shared.token = t
@@ -144,8 +144,8 @@ class SignInTableViewController: UITableViewController {
         
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
         
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
+        SVProgressHUD.show()
+        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!,
             success: {
                 t in
                 AuthInfo.shared.token = t
