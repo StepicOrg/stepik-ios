@@ -80,7 +80,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(titleLabel!)
         middleView.bringSubview(toFront: titleLabel!)
         setUpVerticalConstraints(titleLabel!)
-        titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
 
         if let style = datasource?.placeholderStyle() {
             titleLabel?.implementStyle(style.title)
@@ -100,7 +100,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(descriptionLabel!)
         middleView.bringSubview(toFront: descriptionLabel!)
         setUpVerticalConstraints(descriptionLabel!)
-        descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
         
 
         if let style = datasource?.placeholderStyle() {
@@ -131,7 +131,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(button!)
         middleView.bringSubview(toFront: button!)
         setUpVerticalConstraints(button!)
-        button?.alignCenterX(with: middleView, predicate: "0")
+        _ = button?.alignCenterX(with: middleView, predicate: "0")
         buttonHeight = button?.constrainHeight("30")[0] as? NSLayoutConstraint
     }
     

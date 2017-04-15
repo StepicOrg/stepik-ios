@@ -267,7 +267,6 @@ class StepsViewController: RGPageViewController {
                 } 
                 
                 DispatchQueue.main.async {
-                    [weak self] in
                     s.view.isUserInteractionEnabled = true
                     reloadBlock()
                     s.doesPresentWarningView = false

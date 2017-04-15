@@ -106,7 +106,7 @@ class CoursePreviewViewController: UIViewController {
                 setupPlayerWithVideo(introVideo)
             } else {
                 setIntroMode(fromVideo: false)
-                loadVimeoURL(NSURL(string: c.introURL) as! URL)
+                loadVimeoURL(URL(string: c.introURL))
             }
             updateSections()
             
@@ -228,7 +228,10 @@ class CoursePreviewViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
-    fileprivate func loadVimeoURL(_ url: URL) {
+    fileprivate func loadVimeoURL(_ url: URL?) {
+        guard let url = url else {
+            return
+        }
         DispatchQueue.global(qos: .default).async {
             self.videoWebView.loadRequest(URLRequest(url: url))
         }

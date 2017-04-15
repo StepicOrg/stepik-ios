@@ -55,7 +55,7 @@ class AuthManager : NSObject {
                 return
             }
             
-            if json["error"] != nil {
+            if json["error"] != JSON.null {
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
                 failure(e)
                 return
@@ -111,7 +111,7 @@ class AuthManager : NSObject {
                 return
             }
             
-            if json["error"] != nil {
+            if json["error"] != JSON.null {
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
                 failure(e)
                 return
@@ -238,13 +238,13 @@ class AuthManager : NSObject {
                 response in
                 
                 var error = response.result.error
-                var json : JSON = [:]
+//                var json : JSON = [:]
                 if response.result.value == nil {
                     if error == nil {
                         error = NSError()
                     }
                 } else {
-                    json = response.result.value!
+//                    json = response.result.value!
                 }
                 let response = response.response
 
@@ -265,13 +265,13 @@ class AuthManager : NSObject {
                 response in
                 
                 var error = response.result.error
-                var json : JSON = [:]
+//                var json : JSON = [:]
                 if response.result.value == nil {
                     if error == nil {
                         error = NSError()
                     }
                 } else {
-                    json = response.result.value!
+//                    json = response.result.value!
                 }
                 let response = response.response
 

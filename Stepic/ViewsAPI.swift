@@ -36,13 +36,13 @@ class ViewsAPI : APIEndpoint {
             response in
             
             var error = response.result.error
-            var json : JSON = [:]
+//            var json : JSON = [:]
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
                 }
             } else {
-                json = response.result.value!
+//                json = response.result.value!
             }
 //            let response = response.response
             

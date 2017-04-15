@@ -254,7 +254,6 @@ class WebStepViewController: UIViewController {
                         if cstep.block.name == "text" {
                                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                             DispatchQueue.main.async {
-                                [weak self] in
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
                             }                    

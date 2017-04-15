@@ -438,7 +438,6 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         
         print("LastStep stepId before refresh: \(String(describing: course.lastStep?.stepId))")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
-            [weak self]
             newLastSteps -> Void in
             
             guard let newLastStep = newLastSteps.first, 

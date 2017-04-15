@@ -403,7 +403,6 @@ class QuizViewController: UIViewController {
             [weak self] in
             guard let s = self else { return }
             _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: { 
-                [weak self]
                 attempts, meta in
                 if attempts.count == 0 || attempts[0].status != "active" {
                     //Create attempt
@@ -418,7 +417,6 @@ class QuizViewController: UIViewController {
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
                     _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
-                        [weak self]
                         submissions, meta in
                         if submissions.count == 0 {
                             s.submission = nil
@@ -606,7 +604,6 @@ class QuizViewController: UIViewController {
                 
                 guard let s = self else { return }
                 _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
-                    [weak self]
                     submission in
                     print("did get submission id \(id), with status \(String(describing: submission.status))")
                     if submission.status == "evaluation" {
@@ -652,7 +649,6 @@ class QuizViewController: UIViewController {
             [weak self] in
             guard let s = self else { return }
             _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
-                [weak self]
                 submission in
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)

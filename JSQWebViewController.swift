@@ -123,7 +123,7 @@ class WebViewController: UIViewController {
     /// :nodoc:
     required init?(coder aDecoder: NSCoder) {
         self.configuration = WKWebViewConfiguration()
-        self.urlRequest = URLRequest(url: NSURL(string: "") as! URL)
+        self.urlRequest = URLRequest(url: NSURL(string: "")! as URL)
         self.activities = nil
         super.init(coder: aDecoder)
     }

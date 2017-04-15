@@ -704,7 +704,7 @@ extension DiscussionsViewController : UITableViewDataSource {
             return cell
         }
         
-        if let loadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
+        if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
             print("load discussions cell")
             let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(discussionIds.leftToLoad))"

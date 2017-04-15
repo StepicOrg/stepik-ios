@@ -112,7 +112,7 @@ class DownloadsViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.clear, parameters: nil)
         askForClearCache(remove: {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
-            SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
+            SVProgressHUD.show()
             CacheManager.sharedManager.clearCache(completion: {
                 completed, errors in 
                 if errors != 0 {
