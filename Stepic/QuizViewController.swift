@@ -391,7 +391,7 @@ class QuizViewController: UIViewController {
     
     @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
         if let stepurl = stepUrl {
-            let url = URL(string: stepurl.addingPercentEscapes(using: String.Encoding.utf8)!)!
+            let url = URL(string: stepurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
             
             WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
         }
