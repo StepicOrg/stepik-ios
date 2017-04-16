@@ -104,8 +104,8 @@ class SocialNetworksViewController: UIViewController {
         }
     }
 
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        super.didRotate(from: fromInterfaceOrientation)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         socialNetworksCollectionView.collectionViewLayout.invalidateLayout()
     }
 }
