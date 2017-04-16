@@ -374,7 +374,7 @@ class Video: NSManagedObject, JSONInitializable {
         do {
             let filePath = try PathManager.sharedManager.getPathForStoredVideoWithName(name)
 
-            let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: filePath) as? NSDictionary
+            let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: filePath) as NSDictionary
             
             if let _attr = attr {
                 completion(Int64(_attr.fileSize()));
