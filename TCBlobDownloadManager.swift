@@ -204,7 +204,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
         guard let download = self.downloads[task.taskIdentifier] else {
             return
         }
-        var error: NSError? = sessionError as NSError?? ?? download.error
+        var error: NSError? = sessionError as NSError?
         // Handle possible HTTP errors
         if let response = task.response as? HTTPURLResponse {
             // NSURLErrorDomain errors are not supposed to be reported by this delegate
