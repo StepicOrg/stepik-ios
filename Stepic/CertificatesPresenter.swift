@@ -13,16 +13,31 @@ class CertificatesPresenter {
     weak var view : CertificatesView?
     private var certificatesAPI : CertificatesAPI?
     private var coursesAPI : CoursesAPI?
+    private var presentationContainer : CertificatesPresentationContainer?
     
     private var lastRefreshedUserId : Int? = nil
     
-    init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI) {
+    init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI, presentationContainer: CertificatesPresentationContainer) {
         self.certificatesAPI = certificatesAPI
         self.coursesAPI = coursesAPI
+        self.presentationContainer = presentationContainer
+        
+        guard let userId = AuthInfo.shared.userId,
+            AuthInfo.shared.isAuthorized else {
+                certificates = []
+                lastRefreshedUserId = nil
+                view?.displayAnonymous()
+                return
+        }
+        getCachedCertificates(userId: userId)
     }
     
     var page : Int = 1
-    var certificates: [Certificate] = []
+    var certificates: [Certificate] = [] {
+        didSet {
+            self.updatePersistentPresentationData()
+        }
+    }
     
     func checkStatus() {
         if lastRefreshedUserId != AuthInfo.shared.userId {
@@ -37,6 +52,32 @@ class CertificatesPresenter {
                 refreshCertificates()
             }
         }
+    }
+    
+    fileprivate func getCachedCertificates(userId: Int) {
+        guard let localIds = presentationContainer?.certificatesIds else {
+            return
+        }
+        
+        let localCertificates = Certificate.fetch(localIds, user: userId).sorted(by: {
+            guard let index1 = localIds.index(of: $0.id),
+                let index2 = localIds.index(of: $1.id) else {
+                    return false
+            }
+            return index1 < index2
+        }).flatMap{
+            [weak self] in
+            return self?.certificateViewData(fromCertificate: $0)
+        }
+
+        
+        view?.setCertificates(certificates: localCertificates, hasNextPage: false)
+    }
+    
+    fileprivate func updatePersistentPresentationData() {
+        presentationContainer?.certificatesIds = certificates.map({
+            return $0.id
+        })
     }
     
     func refreshCertificates() {
@@ -69,6 +110,7 @@ class CertificatesPresenter {
                     return self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
                 s.view?.displayEmpty()
+                CoreDataHelper.instance.save()
             })
         }, error: {
             [weak self]
@@ -140,6 +182,7 @@ class CertificatesPresenter {
         certificatesAPI?.retrieve(userId: userId, page: page + 1, success: {
             [weak self]
             meta, newCertificates in
+            
             self?.page += 1
             self?.certificates += newCertificates
             
@@ -153,6 +196,7 @@ class CertificatesPresenter {
                     [weak self] in
                     return self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
+                CoreDataHelper.instance.save()
                 self?.isGettingNextPage = false
             })
         }, error: {

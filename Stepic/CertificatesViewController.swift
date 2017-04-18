@@ -35,7 +35,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
     
         title = NSLocalizedString("Certificates", comment: "")
         
-        presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses)
+        presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses, presentationContainer: PresentationContainer.certificates)
         presenter?.view = self
         
         tableView.emptyDataSetSource = self
@@ -109,8 +109,14 @@ class CertificatesViewController : UIViewController, CertificatesView {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool) {
         self.certificates = certificates
         self.showNextPageFooter = hasNextPage
-        tableView.reloadData()
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            [weak self] in
+            self?.tableView.reloadData()
+        })
         refreshControl.endRefreshing()
+        CATransaction.commit()
     }
     
     func displayAnonymous() {

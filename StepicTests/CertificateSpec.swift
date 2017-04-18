@@ -37,7 +37,7 @@ class CertificateSpec : QuickSpec {
                 view = CertificatesViewTestMock()
                 coursesAPI = CoursesAPIPaginatedMock()
                 certificatesAPI = CertificatesAPIPaginatedMock()
-                presenter = CertificatesPresenter(certificatesAPI: certificatesAPI, coursesAPI: coursesAPI)
+                presenter = CertificatesPresenter(certificatesAPI: certificatesAPI, coursesAPI: coursesAPI, presentationContainer: PresentationContainer.certificates)
                 presenter.view = view
             }
         

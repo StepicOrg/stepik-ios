@@ -57,7 +57,7 @@ class CertificatesAPI : APIEndpoint {
                 
                 //Fetch certificates data for all retrieved ids
                 
-                let existingCertificates = Certificate.fetch(ids)
+                let existingCertificates = Certificate.fetch(ids, user: userId)
                 
                 //Update existing certificates & create new
                 

@@ -60,6 +60,10 @@
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
+		080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
+		080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
+		080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
+		080EBA381EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
@@ -856,6 +860,8 @@
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
+		080EBA321EA64BC000C43C93 /* PresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainer.swift; sourceTree = "<group>"; };
+		080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresentationContainer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
 		080F74631BD9213D0064AAEA /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
@@ -1318,8 +1324,7 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
-				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+				080EBA301EA64A5400C43C93 /* Containers */,
 				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
@@ -1364,6 +1369,34 @@
 				080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */,
 			);
 			name = TCBlobDownload;
+			sourceTree = "<group>";
+		};
+		080EBA301EA64A5400C43C93 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				083749321DE5BBFE00144C14 /* Preferences */,
+				080EBA311EA64A6300C43C93 /* Defaults */,
+				080EBA351EA64BCF00C43C93 /* Presentation */,
+			);
+			name = Containers;
+			sourceTree = "<group>";
+		};
+		080EBA311EA64A6300C43C93 /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
+				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+			);
+			name = Defaults;
+			sourceTree = "<group>";
+		};
+		080EBA351EA64BCF00C43C93 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				080EBA321EA64BC000C43C93 /* PresentationContainer.swift */,
+				080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */,
+			);
+			name = Presentation;
 			sourceTree = "<group>";
 		};
 		080F74621BD921130064AAEA /* Stepic */ = {
@@ -1820,7 +1853,6 @@
 				085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */,
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
 				083749281DE5AE1400144C14 /* Alerts */,
-				083749321DE5BBFE00144C14 /* Preferences */,
 				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
 				0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */,
 			);
@@ -3188,6 +3220,7 @@
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08E6BB691DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
+				080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
@@ -3379,6 +3412,7 @@
 				083F2B151E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
+				080EBA381EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
 				08FB30DE1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
@@ -3578,6 +3612,7 @@
 				0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
+				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
@@ -3632,6 +3667,7 @@
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
+				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
