@@ -32,7 +32,7 @@ class Session {
         return Alamofire.request(stepicURLString, parameters: nil, encoding: URLEncoding.default).response { 
             response in
             
-            var error = response.error
+            let error = response.error
             let response = response.response
             
             
