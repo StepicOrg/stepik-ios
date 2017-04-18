@@ -17,18 +17,19 @@ class CertificatesPresenter {
     
     private var lastRefreshedUserId : Int? = nil
     
-    init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI, presentationContainer: CertificatesPresentationContainer) {
+    init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI, presentationContainer: CertificatesPresentationContainer, view: CertificatesView) {
         self.certificatesAPI = certificatesAPI
         self.coursesAPI = coursesAPI
         self.presentationContainer = presentationContainer
-        
+        self.view = view
         guard let userId = AuthInfo.shared.userId,
             AuthInfo.shared.isAuthorized else {
                 certificates = []
                 lastRefreshedUserId = nil
-                view?.displayAnonymous()
+                view.displayAnonymous()
                 return
         }
+        
         getCachedCertificates(userId: userId)
     }
     
@@ -54,7 +55,7 @@ class CertificatesPresenter {
         }
     }
     
-    fileprivate func getCachedCertificates(userId: Int) {
+    func getCachedCertificates(userId: Int) {
         guard let localIds = presentationContainer?.certificatesIds else {
             return
         }
@@ -90,7 +91,6 @@ class CertificatesPresenter {
         }
         
         lastRefreshedUserId = userId
-        certificates = []
         view?.displayRefreshing()
         
         certificatesAPI?.retrieve(userId: userId, success: {

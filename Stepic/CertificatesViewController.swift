@@ -35,7 +35,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
     
         title = NSLocalizedString("Certificates", comment: "")
         
-        presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses, presentationContainer: PresentationContainer.certificates)
+        presenter = CertificatesPresenter(certificatesAPI: ApiDataDownloader.certificates, coursesAPI: ApiDataDownloader.courses, presentationContainer: PresentationContainer.certificates, view: self)
         presenter?.view = self
         
         tableView.emptyDataSetSource = self
@@ -54,7 +54,7 @@ class CertificatesViewController : UIViewController, CertificatesView {
         }
         refreshControl.layoutIfNeeded()
         refreshControl.beginRefreshing()
-
+        
         presenter?.refreshCertificates()
         
         tableView.backgroundColor = UIColor.groupTableViewBackground
