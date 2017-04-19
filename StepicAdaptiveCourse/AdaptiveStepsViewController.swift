@@ -8,6 +8,7 @@
 
 import UIKit
 import Koloda
+import SVProgressHUD
 
 class AdaptiveStepsViewController: UIViewController {
     
@@ -21,11 +22,41 @@ class AdaptiveStepsViewController: UIViewController {
     var recommendedLesson: Lesson?
     var step: Step?
     
+    lazy var alertController: UIAlertController = { [weak self] in
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        let aboutCourseAction = UIAlertAction(title: "О курсе", style: .default) { action in
+            let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseInfo", storyboardName: "AdaptiveMain") as! AdaptiveCourseViewController
+            vc.course = self?.course
+            
+            self?.present(vc, animated: true)
+        }
+        alertController.addAction(aboutCourseAction)
+        
+        let destroyAction = UIAlertAction(title: "Выйти", style: .destructive) { action in
+            AuthInfo.shared.token = nil
+            AuthInfo.shared.user = nil
+            
+            self?.presentAuthViewController()
+        }
+        alertController.addAction(destroyAction)
+        
+        return alertController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
+        if !AuthInfo.shared.isAuthorized {
+            presentAuthViewController()
+        } else {
+            self.joinAndLoadCourse(completion: {
+                self.initKoloda()
+            })
+        }
         
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage(named: "shadow-pixel")
@@ -86,6 +117,66 @@ class AdaptiveStepsViewController: UIViewController {
                 print("failed performing API request")
         })
     }
+    
+    @IBAction func onUserMenuButtonClick(_ sender: Any) {
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
+        SVProgressHUD.show(withStatus: "Загружаем курс...")
+        performRequest({
+            ApiDataDownloader.courses.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
+                self.course = coursesImmutable.first
+                
+                guard let course = self.course else {
+                    print("course not found")
+                    return
+                }
+                
+                if !course.enrolled {
+                    SVProgressHUD.show(withStatus: "Записываемся на курс...")
+                    _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
+                        SVProgressHUD.dismiss()
+                        self.course.enrolled = true
+                        print("success joined course -> loading cards")
+                        
+                        completion()
+                    }, error: {error in
+                        SVProgressHUD.dismiss()
+                        print("failed joining course: \(error)")
+                    })
+                } else {
+                    SVProgressHUD.dismiss()
+                    print("already joined target course -> loading cards")
+                    
+                    completion()
+                }
+            }, error: { (error) -> Void in
+                SVProgressHUD.dismiss()
+                
+                print("failed downloading course data")
+            })
+        }, error: { error in
+            SVProgressHUD.dismiss()
+            
+            print("failed performing API request")
+        })
+    }
+    
+    fileprivate func initKoloda() {
+        kolodaView.dataSource = self
+        kolodaView.delegate = self
+    }
+    
+    fileprivate func presentAuthViewController() {
+        let vc = ControllerHelper.getAuthController() as! AuthNavigationViewController
+        vc.success = { [weak self] in
+            self?.joinAndLoadCourse(completion: {
+                self?.initKoloda()
+            })
+        }
+        self.present(vc, animated: false, completion: nil)
+    }
 }
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
@@ -139,14 +230,14 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                 }
                 
                 self.lastReaction = .solved
-                    
+                
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
-                    }, completion: { _ in
-                        self.isCurrentCardDone = true
-                        koloda.swipe(.up)
-                        self.isCurrentCardDone = false
+                }, completion: { _ in
+                    self.isCurrentCardDone = true
+                    koloda.swipe(.up)
+                    self.isCurrentCardDone = false
                 })
             }
             vc.recommendedLesson = lesson
@@ -156,8 +247,8 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
             card.hideContent()
             UIView.animate(withDuration: 0.3, animations: {
                 card.transform = CGAffineTransform.init(scaleX: 2, y: 2)
-                }, completion: { completed in
-                    self.present(vc, animated: false, completion: nil)
+            }, completion: { completed in
+                self.present(vc, animated: false, completion: nil)
             })
         }
     }
@@ -218,7 +309,9 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     self?.sendReactionAndGetNewLesson(reaction: (self?.lastReaction)!, success: successHandler)
                 }
             }
+            
             return card!
         }
     }
 }
+
