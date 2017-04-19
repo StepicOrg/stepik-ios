@@ -112,7 +112,7 @@ class DownloadsViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.clear, parameters: nil)
         askForClearCache(remove: {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
-            SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
+            SVProgressHUD.show()
             CacheManager.sharedManager.clearCache(completion: {
                 completed, errors in 
                 if errors != 0 {
@@ -164,7 +164,9 @@ extension DownloadsViewController : UITableViewDelegate {
                         self?.showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
                             let joinBlock : ((Void) -> Void) = {
                                 [weak self] in
-                                UIThread.performUI({SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)})
+                                UIThread.performUI({
+                                    SVProgressHUD.show()
+                                })
                                 AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
                                     UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "")})
                                     self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
@@ -198,7 +200,7 @@ extension DownloadsViewController : UITableViewDelegate {
 //                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
 //                        authVC.success = {
 //                            performRequest ({
-//                                ApiDataDownloader.sharedDownloader.getCoursesByIds([course.id], deleteCourses: [course], refreshMode: .Update, success: {
+//                                ApiDataDownloader.courses.retrieve([course.id], deleteCourses: [course], refreshMode: .Update, success: {
 //                                    course in 
 //                                    enterDownloadBlock()
 //                                    }, failure: {

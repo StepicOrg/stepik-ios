@@ -22,7 +22,7 @@ class StepicsAPI {
     }()
 
     
-    func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
+    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
         
         let params = Parameters()
         
@@ -41,12 +41,12 @@ class StepicsAPI {
                 json = response.result.value!
             }
             let request = response.request
-            let response = response.response
+//            let response = response.response
             
             
-            print("headers while retrieving user: \(request?.allHTTPHeaderFields), retrieved user: \(json)")
+            print("headers while retrieving user: \(String(describing: request?.allHTTPHeaderFields)), retrieved user: \(json)")
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 print(e.localizedDescription)
                 
                 errorHandler(e.localizedDescription)

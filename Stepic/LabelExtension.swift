@@ -69,3 +69,16 @@ extension UILabel {
         return label.bounds.height
     }
 }
+
+extension CGSize {
+    func sizeByDelta(dw: CGFloat, dh: CGFloat) -> CGSize {
+        return CGSize(width: self.width + dw, height: self.height + dh)
+    }
+}
+
+class WiderLabel : UILabel {
+    override var intrinsicContentSize : CGSize {
+        return super.intrinsicContentSize.sizeByDelta(dw: 10, dh: 0)
+    }
+}
+

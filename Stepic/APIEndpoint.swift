@@ -11,6 +11,10 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 
+enum RetrieveError : Error {
+    case connectionError, badStatus
+}
+
 class APIEndpoint {
     
     func constructIdsString<TID>(array arr: [TID]) -> String {
@@ -53,16 +57,15 @@ class APIEndpoint {
                 print(json)
             }
             
-            print(json)
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 print("RETRIEVE \(requestString)?\(ids): error \(e.domain) \(e.code): \(e.localizedDescription)")
                 failure(.connectionError)
                 return
             }
             
             if response?.statusCode != 200 {
-                print("RETRIEVE \(requestString)?\(ids)): bad response status code \(response?.statusCode)")
+                print("RETRIEVE \(requestString)?\(ids)): bad response status code \(String(describing: response?.statusCode))")
                 failure(.badStatus)
                 return
             }

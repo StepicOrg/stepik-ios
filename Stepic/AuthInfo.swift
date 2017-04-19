@@ -17,7 +17,7 @@ class AuthInfo: NSObject {
     fileprivate override init() {
         super.init()
         
-        print("initializing AuthInfo with userId \(userId)")
+        print("initializing AuthInfo with userId \(String(describing: userId))")
         if let id = userId {
             if let users = User.fetchById(id) {
                 let c = users.count
@@ -32,7 +32,7 @@ class AuthInfo: NSObject {
                 
                 if c == 0 {
                     print("No user with such id found, downloading")
-                    ApiDataDownloader.sharedDownloader.getUsersByIds([id], deleteUsers: [], refreshMode: .update, success: {
+                    ApiDataDownloader.users.retrieve(ids: [id], existing: [], refreshMode: .update, success: {
                         [weak self]
                         users in
                         if let user = users.first {
@@ -42,7 +42,7 @@ class AuthInfo: NSObject {
                         print("downloaded user")
                         CoreDataHelper.instance.save()
 
-                        }, failure: {
+                        }, error: {
                             [weak self]
                             _ in
                             print("failed to fetch user")
@@ -86,7 +86,6 @@ class AuthInfo: NSObject {
 
                         AuthInfo.shared.user = nil
                         
-                        AnalyticsHelper.sharedHelper.changeSignIn()
                         self.setTokenValue(newToken)
                     }
                 })
@@ -152,26 +151,26 @@ class AuthInfo: NSObject {
         set(id) {
             if let user = user {
                 if user.isGuest {
-                    print("setting anonymous user id \(id)")
+                    print("setting anonymous user id \(String(describing: id))")
                     anonymousUserId = id
                     return
                 }
             }
-            print("setting user id \(id)")
+            print("setting user id \(String(describing: id))")
             defaults.setValue(id, forKey: "user_id")
             defaults.synchronize()
         }
         get {
             if let user = user {
                 if user.isGuest {
-                    print("returning anonymous user id \(anonymousUserId)")
+                    print("returning anonymous user id \(String(describing: anonymousUserId))")
                     return anonymousUserId
                 } else {
-                    print("returning normal user id \(defaults.value(forKey: "user_id") as? Int)")
+                    print("returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
                     return defaults.value(forKey: "user_id") as? Int
                 }
             } else {
-                print("returning normal user id \(defaults.value(forKey: "user_id") as? Int)")
+                print("returning normal user id \(String(describing: defaults.value(forKey: "user_id") as? Int))")
                 return defaults.value(forKey: "user_id") as? Int
             }
         }
@@ -179,7 +178,7 @@ class AuthInfo: NSObject {
     
     var user : User? {
         didSet {
-            print("\n\ndid set user with id \(user?.id)\n\n")
+            print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
             userId = user?.id
         }
     }

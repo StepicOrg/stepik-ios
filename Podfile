@@ -40,6 +40,13 @@ def all_pods
     pod 'FBSDKLoginKit'
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    
+    pod 'Presentr'
+end
+
+def testing_pods
+    pod 'Quick'
+    pod 'Nimble'
 end
 
 target 'Stepic' do
@@ -47,6 +54,7 @@ target 'Stepic' do
     target 'StepicTests' do
         inherit! :search_paths
         all_pods
+        testing_pods
     end
 end
 

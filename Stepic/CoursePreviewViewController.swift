@@ -106,7 +106,7 @@ class CoursePreviewViewController: UIViewController {
                 setupPlayerWithVideo(introVideo)
             } else {
                 setIntroMode(fromVideo: false)
-                loadVimeoURL(NSURL(string: c.introURL) as! URL)
+                loadVimeoURL(URL(string: c.introURL))
             }
             updateSections()
             
@@ -125,7 +125,7 @@ class CoursePreviewViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
         
         if let slug = course?.slug {
-            DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+            DispatchQueue.global(qos: .default).async {
                 let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/")
                 shareVC.popoverPresentationController?.barButtonItem = button
                 DispatchQueue.main.async {
@@ -228,8 +228,11 @@ class CoursePreviewViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
-    fileprivate func loadVimeoURL(_ url: URL) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+    fileprivate func loadVimeoURL(_ url: URL?) {
+        guard let url = url else {
+            return
+        }
+        DispatchQueue.global(qos: .default).async {
             self.videoWebView.loadRequest(URLRequest(url: url))
         }
     }

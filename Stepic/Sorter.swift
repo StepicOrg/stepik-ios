@@ -47,21 +47,6 @@ struct Sorter {
         return res
     }
     
-    static func sort(_ array: [Progress], byIds ids: [String]) -> [Progress] {
-        var res : [Progress] = []
-        
-        for id in ids {
-            let elements = array.filter({return $0.id == id})
-            if elements.count == 1 {
-                res += [elements[0]]
-            } else {
-                //TODO : Maybe should throw exception here
-                print("Something went wrong")
-            }
-        }
-        
-        return res
-    }
     
     static func sort(_ assignments : [Assignment], steps : [Step]) -> [Assignment] {
         

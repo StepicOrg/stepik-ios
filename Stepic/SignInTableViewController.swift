@@ -104,13 +104,13 @@ class SignInTableViewController: UITableViewController {
 
     
     func authentificateWithCode(_ code: String) {
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        AuthManager.sharedManager.logInWithCode(code, 
+        SVProgressHUD.show()
+        AuthManager.sharedManager.logInWithCode(code,
             success: {
                 t in
                 AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                ApiDataDownloader.sharedDownloader.getCurrentUser({
+                ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                     user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
@@ -123,7 +123,7 @@ class SignInTableViewController: UITableViewController {
                     }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
-                    }, failure: {
+                    }, error: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
@@ -144,13 +144,13 @@ class SignInTableViewController: UITableViewController {
         
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
         
-        SVProgressHUD.show(withStatus: "", maskType: SVProgressHUDMaskType.clear)
-        AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
+        SVProgressHUD.show()
+        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!,
             success: {
                 t in
                 AuthInfo.shared.token = t
                 NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                ApiDataDownloader.sharedDownloader.getCurrentUser({
+                ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                     user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
@@ -163,7 +163,7 @@ class SignInTableViewController: UITableViewController {
                     }
                     AnalyticsHelper.sharedHelper.changeSignIn()
                     AnalyticsHelper.sharedHelper.sendSignedIn()
-                    }, failure: {
+                    }, error: {
                         e in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))

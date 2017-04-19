@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class CurrentBestStreakViewController: UIViewController {
 
@@ -39,6 +40,7 @@ class CurrentBestStreakViewController: UIViewController {
                 hideNotificationsView()            
             } else {
                 receiveNotificationsSwitch.isOn = false
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.notificationOffered)
             } 
         } else {
             hideNotificationsView()
@@ -117,11 +119,13 @@ class CurrentBestStreakViewController: UIViewController {
     func selectStreakNotificationTime() {
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController 
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
+        vc.cancelAction = {
+            [weak self] in
+            self?.receiveNotificationsSwitch.isOn = false
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.timeCancelled)
+        }
         vc.selectedBlock = {
-//            [weak self] in 
-//            if let s = self {
-////                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
-//            }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.ImproveAlert.timeSelected)
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }

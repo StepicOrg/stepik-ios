@@ -29,7 +29,7 @@ class StepsControllerRouter {
             }
         } 
         
-        ApiDataDownloader.sharedDownloader.getStepsByIds([id], deleteSteps: [], refreshMode: .update, success: 
+        ApiDataDownloader.steps.retrieve(ids: [id], existing: [], refreshMode: .update, success: 
             { 
                 steps in
                 if let step = steps.first {
@@ -37,7 +37,7 @@ class StepsControllerRouter {
                 } else {
                     errorHandler("No step with id \(id)")
                 }
-            }, failure: 
+            }, error: 
             {
                 error in
                 errorHandler("failed to get steps with id \(id)")
@@ -67,7 +67,7 @@ class StepsControllerRouter {
             return
         }
         
-        ApiDataDownloader.sharedDownloader.getLessonsByIds([step.lessonId], deleteLessons: [], refreshMode: .update, success: 
+        ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: [], refreshMode: .update, success: 
             {
                 lessons in
                 if let lesson = lessons.first {
@@ -77,7 +77,7 @@ class StepsControllerRouter {
                     errorHandler("No lesson with id \(step.lessonId)")
                 }
                 
-            }, failure: 
+            }, error: 
             {
                 error in 
                 errorHandler("failed to get lesson with id \(step.lessonId)") 
@@ -129,7 +129,7 @@ class StepsControllerRouter {
         //Check, if cached assignments contain nil progresses
 //        unit.assignments.contains({$0.})
         
-        ApiDataDownloader.sharedDownloader.getAssignmentsByIds(unit.assignmentsArray, deleteAssignments: unit.assignments, refreshMode: .update, success: {
+        ApiDataDownloader.assignments.retrieve(ids: unit.assignmentsArray, existing: unit.assignments, refreshMode: .update, success: {
             newAssignments in 
             
             if newAssignments.count == 0 {
@@ -141,7 +141,7 @@ class StepsControllerRouter {
             getStepsControllerForUnitContext(step, lesson: lesson, unit: unit, success: successHandler, error: errorHandler) 
             return
             
-            }, failure: {
+            }, error: {
                 error in
                 errorHandler("Error while downloading assignments")
         })

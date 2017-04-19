@@ -76,5 +76,18 @@ struct Images {
         static let black = UIImage(named: "streak-icon-black")!
         static let white = UIImage(named: "streak-icon-white-bordered")!
     }
+    
+    struct star {
+        static let empty = UIImage(named: "star-rate-gray")!
+        static let filled = UIImage(named: "star-rate-yellow")!
+    }
+    
+    struct placeholders {
+        static let certificates = #imageLiteral(resourceName: "empty-certificates")
+        static let connectionError = #imageLiteral(resourceName: "placeholder-connection-error")
+        static let emptyDownloads = #imageLiteral(resourceName: "empty-downloads")
+        static let emptyFindCourses = #imageLiteral(resourceName: "empty-findCourses")
+        static let anonymous = #imageLiteral(resourceName: "placeholder-anonymous-dark-background")
+    }
 
 }

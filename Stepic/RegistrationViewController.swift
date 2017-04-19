@@ -67,9 +67,18 @@ class RegistrationViewController: UIViewController {
         
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-        emailTextField.keyboardType = .emailAddress        
+        emailTextField.keyboardType = .emailAddress     
+        
+        firstNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        lastNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
+
     }
 
+    func textFieldDidChange(textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +97,7 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func signUpPressed(_ sender: AnyObject) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
         signUp()
     }
     
@@ -109,7 +119,7 @@ class RegistrationViewController: UIViewController {
                         t in
                         AuthInfo.shared.token = t
                         NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        _ = ApiDataDownloader.sharedDownloader.getCurrentUser({
+                        _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
                             user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
@@ -120,9 +130,7 @@ class RegistrationViewController: UIViewController {
                                     self?.success?("registered")
                                     })
                             }
-                            AnalyticsHelper.sharedHelper.changeSignIn()
-                            AnalyticsHelper.sharedHelper.sendSignedIn()
-                            }, failure: {
+                            }, error: {
                                 e in
                                 print("successfully signed in, but could not get user")
                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
@@ -207,12 +215,15 @@ class RegistrationViewController: UIViewController {
 }
 
 extension RegistrationViewController : UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("did begin")
         passwordSecure = true
         if textField == passwordTextField {
             visiblePasswordButton.isHidden = false
         }
+       
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -243,6 +254,7 @@ extension RegistrationViewController : UITextFieldDelegate {
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
             signUp()
             return true
         }

@@ -36,6 +36,7 @@ class PickerViewController: UIViewController {
     }
         
     var selectedAction : ((Void)->Void)?
+    var cancelAction : ((Void) -> Void)?
     
     var data : [String] = []
     
@@ -45,6 +46,7 @@ class PickerViewController: UIViewController {
     }
     
     @IBAction func backPressed(_ sender: UIButton) {
+        cancelAction?()
         dismiss(animated: true, completion: nil)
     }
     

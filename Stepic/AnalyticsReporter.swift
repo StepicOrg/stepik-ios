@@ -12,10 +12,15 @@ import Mixpanel
 import YandexMobileMetrica
 
 class AnalyticsReporter {
-    static func reportEvent(_ event: String, parameters: [String: NSObject]?) {
-        reportFirebaseEvent(event, parameters: parameters)
-        reportAppMetricaEvent(event, parameters: parameters)
-        reportMixpanelEvent(event, parameters: parameters)
+    static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
+        
+        guard let params = parameters as? [String: NSObject] else {
+            return
+        }
+        
+        reportFirebaseEvent(event, parameters: params)
+        reportAppMetricaEvent(event, parameters: params)
+        reportMixpanelEvent(event, parameters: params)
     }
     
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {

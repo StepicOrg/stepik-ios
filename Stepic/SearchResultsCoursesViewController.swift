@@ -114,11 +114,11 @@ class SearchResultsCoursesViewController: CoursesViewController {
             [weak self]
             () -> Void in
             if let s = self {
-                s.currentRequest = ApiDataDownloader.sharedDownloader.search(query: s.query, type: "course", page: 1, success: { 
+                s.currentRequest = ApiDataDownloader.search.search(query: s.query, type: "course", page: 1, success: { 
                     (searchResults, meta) -> Void in
                     let ids = searchResults.flatMap({return $0.courseId})
                     
-                    s.currentRequest = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                    s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
                         (newCourses) -> Void in
                         
                         s.courses = Sorter.sort(newCourses, byIds: ids)
@@ -129,7 +129,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                             s.tableView.reloadData()
                         }
                         s.isRefreshing = false
-                        }, failure: { 
+                        }, error: { 
                             (error) -> Void in
                             print("failed downloading courses data in refresh")
                             let e = error as NSError 
@@ -170,10 +170,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            _ = ApiDataDownloader.sharedDownloader.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
+            _ = ApiDataDownloader.search.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
                 (searchResults, meta) -> Void in
                 let ids = searchResults.flatMap({return $0.courseId})
-                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
                     (newCourses) -> Void in
                     
                     if !self.isLoadingMore {
@@ -189,7 +189,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     
                     self.isLoadingMore = false
                     self.failedLoadingMore = false
-                    }, failure: { 
+                    }, error: { 
                         (error) -> Void in
                         print("failed downloading courses data in Next")
                         self.handleLoadMoreError()

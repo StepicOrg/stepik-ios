@@ -107,18 +107,18 @@ class UnitsViewController: UIViewController {
     
     func loadUnit(id: Int, localUnit: Unit? = nil) {
         emptyDatasetState = .refreshing
-        _ = ApiDataDownloader.sharedDownloader.getUnitsByIds([id], deleteUnits: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
+        _ = ApiDataDownloader.units.retrieve(ids: [id], existing: (localUnit != nil) ? [localUnit!] : [], refreshMode: .update, success: {
             units in
             guard let unit = units.first else { return }
             let localSection = try! Section.getSections(unit.sectionId).first
-            _ = ApiDataDownloader.sharedDownloader.getSectionsByIds([unit.sectionId], existingSections: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
+            _ = ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: (localSection != nil) ? [localSection!] : [], refreshMode: .update, success: {
                 [weak self]
                 sections in
                 guard let section = sections.first else { return }
                 unit.section = section
                 self?.section = section
                 self?.refreshUnits()
-            }, failure: {
+            }, error: {
                 error in
                 UIThread.performUI({
                     self.refreshControl.endRefreshing()
@@ -126,7 +126,7 @@ class UnitsViewController: UIViewController {
                 })
                 self.didRefresh = true
             })
-        }, failure: {
+        }, error: {
             error in
             UIThread.performUI({
                 self.refreshControl.endRefreshing()

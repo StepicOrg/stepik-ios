@@ -10,10 +10,10 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class UnitsAPI {
+class UnitsAPI : APIEndpoint {
     let name = "units"
     
-    func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
+    @discardableResult func retrieve(lesson lessonId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Unit) -> Void), error errorHandler: @escaping ((UnitRetrieveError) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)?lesson=\(lessonId)", headers: headers).responseSwiftyJSON(
             {
                 response in
@@ -29,14 +29,14 @@ class UnitsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     print("RETRIEVE units?\(lessonId): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     errorHandler(.connectionError)
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    print("RETRIEVE units?\(lessonId)): bad response status code \(response?.statusCode)")
+                    print("RETRIEVE units?\(lessonId)): bad response status code \(String(describing: response?.statusCode))")
                     errorHandler(.badStatus)
                     return
                 }
@@ -54,6 +54,10 @@ class UnitsAPI {
             }
         )
     }
+    
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Unit], refreshMode: RefreshMode, success: @escaping (([Unit]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
+        return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    }    
 }
 
 

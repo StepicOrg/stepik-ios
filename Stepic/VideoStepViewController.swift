@@ -76,7 +76,7 @@ class VideoStepViewController: UIViewController {
         guard let slug = lessonSlug, let stepid = stepId else {
             return
         }
-        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
             DispatchQueue.main.async {
@@ -185,8 +185,8 @@ class VideoStepViewController: UIViewController {
         if shouldSendViewsBlock() {
             performRequest({
                 [weak self] in
-                print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
-                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
+                _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                     UIThread.performUI{
                         cstep.progress?.isPassed = true

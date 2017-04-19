@@ -69,7 +69,7 @@ class WebStepViewController: UIViewController {
 //        stepWebView.backgroundColor = UIColor.white
         
         scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView!.panGestureRecognizer)
-        print(self.view.gestureRecognizers)
+        print(self.view.gestureRecognizers ?? "")
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
@@ -84,7 +84,7 @@ class WebStepViewController: UIViewController {
             return
         }
 //        let slug = lessonSlug!
-        DispatchQueue.global( priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .default).async {
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
             DispatchQueue.main.async {
@@ -247,14 +247,13 @@ class WebStepViewController: UIViewController {
             //Send view to views
             performRequest({
                 [weak self] in
-                print("Sending view for step with id \(stepid) & assignment \(self?.assignment?.id)")
-                _ = ApiDataDownloader.sharedDownloader.didVisitStepWith(id: stepid, assignment: self?.assignment?.id, success: {
+                print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
+                _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
                     if let cstep = self?.step {
                         if cstep.block.name == "text" {
                                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
                             DispatchQueue.main.async {
-                                [weak self] in
                                 cstep.progress?.isPassed = true
                                 CoreDataHelper.instance.save()
                             }                    
@@ -306,7 +305,7 @@ class WebStepViewController: UIViewController {
         //        print(stepUrl)
         //        print(NSURL(string: stepUrl))
         
-        let url = URL(string: stepUrl.addingPercentEscapes(using: String.Encoding.utf8)!)!
+        let url = URL(string: stepUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }

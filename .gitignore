@@ -26,6 +26,7 @@ DerivedData
 Pods/
 artefacts/
 fastlane/screenshots/
+fastlane/report.xml
 *.lock
 # Carthage
 #
@@ -33,3 +34,5 @@ fastlane/screenshots/
 # Carthage/Checkouts
 
 Carthage/Build
+
+.DS_Store

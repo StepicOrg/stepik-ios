@@ -21,7 +21,7 @@ class DevicesAPI: NSObject {
         manager = Alamofire.SessionManager(configuration: configuration)
     }
     
-    func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
         let params = ["device": device.getJSON()]
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
@@ -40,13 +40,13 @@ class DevicesAPI: NSObject {
             
             print(json)
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
             
             if response?.statusCode != 201 {
-                errorHandler("CREATE device: bad response status code \(response?.statusCode)")
+                errorHandler("CREATE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
             
@@ -57,19 +57,19 @@ class DevicesAPI: NSObject {
         })
     }
     
-    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
         
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
             response in
 //            _, response, data, error in
             
-            if let e = response.error as? NSError {
+            if let e = response.error as NSError? {
                 errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
             
             if response.response?.statusCode != 204 && response.response?.statusCode != 404 {
-                errorHandler("DESTROY device: bad response status code \(response.response?.statusCode)")
+                errorHandler("DESTROY device: bad response status code \(String(describing: response.response?.statusCode))")
                 return
             }
             
@@ -95,13 +95,13 @@ class DevicesAPI: NSObject {
             let response = response.response
             
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler("RETRIEVE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
             
             if response?.statusCode != 200 {
-                errorHandler("RETRIEVE device: bad response status code \(response?.statusCode)")
+                errorHandler("RETRIEVE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
             

@@ -16,14 +16,26 @@ struct AnalyticsEvents {
         
     struct SignIn {
         static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
-        static let onSignInScreen = "clicked_SignIn_on_sign_in_screen"
+        static let onSignInScreen = "click_sign_in_with_interaction_type"
         static let nextButton = "click_sign_in_next_sign_in_screen"
+        struct Fields {
+            static let tap = "tap_on_fields_login"
+            static let typing = "typing_text_fields_login"
+        }
+        struct Social {
+            static let clicked = "social_login"
+            static let codeReceived = "Api:auth with social account"
+        }
     }
     
     struct SignUp {
         static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
-        static let onSignUpScreen = "clicked_SignUp_on_sign_up_screen"
+        static let onSignUpScreen = "click_registration_with_interaction_type"
         static let nextButton = "click_registration_send_ime"
+        struct Fields {
+            static let tap = "tap_on_fields_registration"
+            static let typing = "typing_text_fields_registration"
+        }
     }
     
     struct Login {
@@ -96,6 +108,7 @@ struct AnalyticsEvents {
         static let myCoursesClicked = "main_choice_my_courses"
         static let findCoursesClicked = "main_choice_find_courses"
         static let downloadsClicked = "main_choice_downloads"
+        static let certificatesClicked = "main_choice_certificates"
     }
     
     struct Token {
@@ -114,10 +127,21 @@ struct AnalyticsEvents {
             }
         }
         static let notificationOpened = "streak_notification_opened"
+        
+        struct LocalNotification {
+            static let shown = "streak_local_notification_shown"
+            static let clicked = "streak_local_notification_clicked"
+        }
+        struct ImproveAlert {
+            static let notificationOffered = "streak_improve_alert_notifications_offered"
+            static let timeSelected = "streak_improve_alert_time_selected"
+            static let timeCancelled = "streak_improve_alert_time_cancelled"
+        }
     }
     
     struct App {
         static let opened = "app_opened"
+        static let firstLaunch = "first_launch_after_install"
     }
     
     struct Errors {
@@ -127,5 +151,26 @@ struct AnalyticsEvents {
     struct Continue {
         static let sectionsOpened = "continue_section_opened"
         static let stepOpened = "continue_step_opened"
+    }
+    
+    struct Rate {
+        static let rated = "app_rate"
+        struct Positive {
+            static let later = "app_rate_positive_later"
+            static let appstore = "app_rate_positive_appstore"
+        }
+        struct Negative {
+            static let later = "app_rate_negative_later"
+            static let email = "app_rate_negative_email"
+            struct Email {
+                static let cancelled = "app_rate_negative_email_cancelled"
+                static let success = "app_rate_negative_email_success"
+            }
+        }
+    }
+    
+    struct Certificates {
+        static let opened = "certificates_opened_certificate"
+        static let shared = "certificates_pressed_share_certificate"
     }
 }

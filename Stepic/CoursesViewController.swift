@@ -98,8 +98,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     fileprivate func getCachedCourses(completion: ((Void) -> Void)?) {
         isRefreshing = true
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             do {
                 let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)
@@ -127,9 +126,9 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         isRefreshing = true
         refreshBegan()
         performRequest({
-            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
+            _ = ApiDataDownloader.courses.retrieveDisplayedIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: { 
                 (ids, meta) -> Void in
-                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
                     [weak self]
                     (newCourses) -> Void in
                     
@@ -172,7 +171,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         }
                     }
                     
-                    _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses,refreshMode: .update, success: { 
+                    _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses,refreshMode: .update, success: { 
                         (newProgresses) -> Void in
                         progresses = Sorter.sort(newProgresses, byIds: progressIds)
                         for i in 0 ..< min(newCourses.count, progresses.count) {
@@ -183,14 +182,14 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         coursesCompletion()
                         
                         
-                    }, failure: { 
+                    }, error: { 
                         error in
                         coursesCompletion()
                         print("Error while dowloading progresses")
                     })
                     
                     
-                }, failure: { 
+                }, error: { 
                     [weak self]
                     error in
                     print("failed downloading courses data in refresh")
@@ -298,10 +297,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         //TODO : Check if it should be executed in another thread
         performRequest({ 
             () -> Void in
-            _ = ApiDataDownloader.sharedDownloader.getDisplayedCoursesIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
+            _ = ApiDataDownloader.courses.retrieveDisplayedIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: { 
                 (idsImmutable, meta) -> Void in
                 var ids = idsImmutable
-                _ = ApiDataDownloader.sharedDownloader.getCoursesByIds(ids, deleteCourses: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
                     [weak self]
                     (newCoursesImmutable) -> Void in
                     guard let s = self else { return }
@@ -322,7 +321,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
-                    }, failure: { 
+                    }, error: { 
                         [weak self]
                         error in
                         print("failed downloading courses data in Next")
@@ -437,9 +436,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
         
-        print("LastStep stepId before refresh: \(course.lastStep?.stepId)")
+        print("LastStep stepId before refresh: \(String(describing: course.lastStep?.stepId))")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
-            [weak self]
             newLastSteps -> Void in
             
             guard let newLastStep = newLastSteps.first, 
@@ -448,7 +446,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 return
             }
 
-            print("new stepId \(newLastStep.stepId)")
+            print("new stepId \(String(describing: newLastStep.stepId))")
             
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()

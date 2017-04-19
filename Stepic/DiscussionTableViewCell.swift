@@ -14,6 +14,8 @@ class DiscussionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var badgeLabel: WiderLabel!
 
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -81,12 +83,24 @@ class DiscussionTableViewCell: UITableViewCell {
         } else {
             self.contentView.backgroundColor = UIColor.white
         }
+        
+        switch comment.userRole {
+        case .Student:
+            badgeLabel.text = ""
+            badgeLabel.backgroundColor = UIColor.white
+        case .Teacher:
+            badgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
+            badgeLabel.backgroundColor = UIColor.lightGray
+        case .Staff:
+            badgeLabel.text = NSLocalizedString("Staff", comment: "")
+            badgeLabel.backgroundColor = UIColor.lightGray
+        }
     }
     
     fileprivate func constructLabel() {
         commentLabel = UILabel()
         labelContainerView.addSubview(commentLabel!)
-        commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
+        _ = commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
         commentLabel?.numberOfLines = 0
     }
     
@@ -130,6 +144,7 @@ class DiscussionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         userAvatarImageView.setRoundedBounds(width: 0)
         constructLabel()
+        badgeLabel.setRoundedCorners(cornerRadius: 10)
     }
     
     override func prepareForReuse() {

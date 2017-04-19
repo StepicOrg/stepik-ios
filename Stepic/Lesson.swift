@@ -59,17 +59,17 @@ class Lesson: NSManagedObject, JSONInitializable {
     }
     
     func loadSteps(completion: @escaping ((Void) -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
-        _ = ApiDataDownloader.sharedDownloader.getStepsByIds(self.stepsArray, deleteSteps: self.steps, refreshMode: .update, success: {
+        _ = ApiDataDownloader.steps.retrieve(ids: self.stepsArray, existing: self.steps, refreshMode: .update, success: {
             newSteps in 
             self.steps = Sorter.sort(newSteps, byIds: self.stepsArray)
             self.loadProgressesForSteps({
                 if !onlyLesson {
                     if let u = self.unit {
-                        _ = ApiDataDownloader.sharedDownloader.getAssignmentsByIds(u.assignmentsArray, deleteAssignments: u.assignments, refreshMode: .update, success: {
+                        _ = ApiDataDownloader.assignments.retrieve(ids: u.assignmentsArray, existing: u.assignments, refreshMode: .update, success: {
                             newAssignments in 
                             u.assignments = Sorter.sort(newAssignments,steps: self.steps)
                             completion()
-                            }, failure: {
+                            }, error: {
                                 error in
                                 print("Error while downloading assignments")
                                 errorHandler?("Error while downloading assignments")
@@ -82,10 +82,10 @@ class Lesson: NSManagedObject, JSONInitializable {
                 }
             })
             CoreDataHelper.instance.save()
-            }, failure: {
+            }, error: {
                 error in
-                print("Error while downloading units")
-                errorHandler?("Error while downloading units")
+                print("Error while downloading steps")
+                errorHandler?("Error while downloading steps")
         })
         
     }
@@ -104,7 +104,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             }
         }
         
-        _ = ApiDataDownloader.sharedDownloader.getProgressesByIds(progressIds, deleteProgresses: progresses, refreshMode: .update, success: { 
+        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: { 
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
             for i in 0 ..< min(self.steps.count, progresses.count) {
@@ -114,7 +114,7 @@ class Lesson: NSManagedObject, JSONInitializable {
             CoreDataHelper.instance.save()
             
             completion()
-            }, failure: { 
+            }, error: { 
                 (error) -> Void in
                 print("Error while dowloading progresses")
         }) 
@@ -289,9 +289,9 @@ class Lesson: NSManagedObject, JSONInitializable {
                     self.storeCompletion?(self.completedVideos, self.cancelledVideos)
                     
                     print("Video download error in lesson")
-                    print(error?.localizedFailureReason)
-                    print(error?.code)
-                    print(error?.localizedDescription)
+                    print(error?.localizedFailureReason ?? "")
+                    print(error?.code ?? "")
+                    print(error?.localizedDescription ?? "")
                     
                     self.completedVideos = 0
                     self.cancelledVideos = 0
@@ -320,11 +320,10 @@ class Lesson: NSManagedObject, JSONInitializable {
             return
         }
         
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
                     //                    vid.removeFromStore()
                 }
@@ -338,14 +337,13 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     func removeFromStore(completion: @escaping (Void) -> Void) {
         print("entered lesson removeFromStore")
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
                     print("not cached video can not be removed!")
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
-                    vid.removeFromStore()
+                    _ = vid.removeFromStore()
                 }
             }
             

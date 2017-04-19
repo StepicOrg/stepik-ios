@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class QuizViewController: UIViewController {
     
@@ -124,7 +125,7 @@ class QuizViewController: UIViewController {
             DispatchQueue.main.async {
                 [weak self] in
                 if let s = self {
-                    print("did set attempt id \(self?.attempt?.id)")
+                    print("did set attempt id \(String(describing: self?.attempt?.id))")
                     
                     //TODO: Implement in subclass, then it may need a height update
                     s.updateQuizAfterAttemptUpdate()
@@ -206,6 +207,8 @@ class QuizViewController: UIViewController {
                         s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
+                        s.hintHeightUpdateBlock = nil
+                        s.hintView.isHidden = true
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
                         s.setStatusElements(visible: false)
@@ -217,11 +220,12 @@ class QuizViewController: UIViewController {
                             s.updateQuizAfterSubmissionUpdate()
                         }
                     } else {
-                        print("did set submission id \(s.submission?.id)")
+                        print("did set submission id \(String(describing: s.submission?.id))")
                         s.buttonStateSubmit = false
                         
                         if let hint = s.submission?.hint {
                             if hint != "" {
+                                s.hintView.isHidden = false
                                 s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
                                 s.performHeightUpdates()
                             } else {
@@ -387,7 +391,7 @@ class QuizViewController: UIViewController {
     
     @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
         if let stepurl = stepUrl {
-            let url = URL(string: stepurl.addingPercentEscapes(using: String.Encoding.utf8)!)!
+            let url = URL(string: stepurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
             
             WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
         }
@@ -398,8 +402,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.getAttemptsFor(stepName: s.step.block.name, stepId: stepId, success: { 
-                [weak self]
+            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: { 
                 attempts, meta in
                 if attempts.count == 0 || attempts[0].status != "active" {
                     //Create attempt
@@ -413,8 +416,7 @@ class QuizViewController: UIViewController {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
-                    _ = ApiDataDownloader.sharedDownloader.getSubmissionsWith(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
-                        [weak self]
+                    _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
                         submissions, meta in
                         if submissions.count == 0 {
                             s.submission = nil
@@ -466,7 +468,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createNewAttemptWith(stepName: s.step.block.name, stepId: s.step.id, success: {
+            _ = ApiDataDownloader.attempts.create(stepName: s.step.block.name, stepId: s.step.id, success: {
                 [weak self]
                 attempt in
                 guard let s = self else { return }
@@ -509,7 +511,7 @@ class QuizViewController: UIViewController {
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in 
-            if let s = self {
+            if self != nil {
 //                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
             }
         }
@@ -547,7 +549,22 @@ class QuizViewController: UIViewController {
         self.selectStreakNotificationTime()
     }
     
+    fileprivate var positionPercentageString : String? {
+        if let cnt = step.lesson?.stepsArray.count {
+            let res = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
+            print(res)
+            return res
+        }
+        return nil
+    }
+    
+    
     func checkCorrect() {
+        
+        if RoutingManager.rate.submittedCorrect() {
+            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
+            return
+        }
         
         guard QuizDataManager.submission.canShowAlert else {
             return
@@ -586,10 +603,9 @@ class QuizViewController: UIViewController {
                 [weak self] in
                 
                 guard let s = self else { return }
-                _ = ApiDataDownloader.sharedDownloader.getSubmissionFor(stepName: s.step.block.name, submissionId: id, success: {
-                    [weak self]
+                _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     submission in
-                    print("did get submission id \(id), with status \(submission.status)")
+                    print("did get submission id \(id), with status \(String(describing: submission.status))")
                     if submission.status == "evaluation" {
                         s.checkSubmission(id, time: time + 1, completion: completion)
                     } else {
@@ -632,8 +648,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.sharedDownloader.createSubmissionFor(stepName: s.step.block.name, attemptId: id, reply: r, success: {
-                [weak self]
+            _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
                 submission in
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)

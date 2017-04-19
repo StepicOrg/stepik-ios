@@ -17,7 +17,7 @@ class UnknownTypeQuizViewController: UIViewController {
     
     @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed, parameters: nil)
-        let url = URL(string: stepUrl.addingPercentEscapes(using: String.Encoding.utf8)!)!
+        let url = URL(string: stepUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }
