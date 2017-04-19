@@ -26,6 +26,10 @@ class LaunchViewController: UIViewController {
         return (navigationController as? AuthNavigationViewController)?.cancel
     }
     
+    var canDismiss: Bool {
+        return (navigationController as? AuthNavigationViewController)?.canDismiss ?? true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,10 +69,12 @@ class LaunchViewController: UIViewController {
     }
 
     @IBAction func сlosePressed(_ sender: AnyObject) {
-        self.navigationController?.dismiss(animated: true, completion: {
-            [weak self] in
-            self?.cancel?()
-        })
+        if canDismiss {
+            self.navigationController?.dismiss(animated: true, completion: {
+                [weak self] in
+                self?.cancel?()
+            })
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

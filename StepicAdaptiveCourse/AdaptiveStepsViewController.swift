@@ -170,6 +170,7 @@ class AdaptiveStepsViewController: UIViewController {
     
     fileprivate func presentAuthViewController() {
         let vc = ControllerHelper.getAuthController() as! AuthNavigationViewController
+        vc.canDismiss = false
         vc.success = { [weak self] in
             self?.joinAndLoadCourse(completion: {
                 self?.initKoloda()
