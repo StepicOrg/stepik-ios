@@ -15,6 +15,7 @@ class AdaptiveStepsViewController: UIViewController {
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
 
+    fileprivate var isRecommendationLoaded = false
     fileprivate var isKolodaPresented = false
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
@@ -76,6 +77,8 @@ class AdaptiveStepsViewController: UIViewController {
     }
     
     fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
+        isRecommendationLoaded = false
+        
         performRequest({
             ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
                 ApiDataDownloader.lessons.retrieve(ids: [recommendedLessonId], existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
@@ -87,6 +90,7 @@ class AdaptiveStepsViewController: UIViewController {
                             let step = newStepsImmutable.first
                             
                             if let step = step {
+                                self.isRecommendationLoaded = true
                                 success(step)
                             }
                             }, error: { (error) -> Void in
@@ -172,8 +176,10 @@ class AdaptiveStepsViewController: UIViewController {
     }
     
     fileprivate func initKoloda() {
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
+        if kolodaView.delegate == nil {
+            kolodaView.dataSource = self
+            kolodaView.delegate = self
+        }
     }
     
     fileprivate func presentAuthViewController() {
@@ -181,6 +187,10 @@ class AdaptiveStepsViewController: UIViewController {
         vc.canDismiss = false
         vc.success = { [weak self] in
             self?.joinAndLoadCourse(completion: {
+                // Present tutorial after log in
+                let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
+                self?.present(tutorialVC, animated: true, completion: nil)
+                
                 self?.initKoloda()
             })
         }
@@ -217,7 +227,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
             return
         }
         
-        guard let lesson = self.recommendedLesson, let step = self.step else {
+        guard isRecommendationLoaded, let lesson = self.recommendedLesson, let step = self.step else {
             print("recommendation not loaded yet")
             return
         }
@@ -308,6 +318,7 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                         })
                     }
                 }
+                
                 if self?.lastReaction == nil {
                     // First recommendation -> just get it
                     print("getting first recommendation...")
@@ -327,4 +338,3 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
         return Bundle.main.loadNibNamed("CardOverlayView", owner: self, options: nil)?.first as? CardOverlayView
     }
 }
-

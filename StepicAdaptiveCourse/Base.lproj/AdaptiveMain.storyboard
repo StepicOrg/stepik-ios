@@ -10,6 +10,64 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Adaptive Tutorial View Controller-->
+        <scene sceneID="CI4-MM-aft">
+            <objects>
+                <pageViewController storyboardIdentifier="AdaptiveTutorial" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XJA-TY-jvO" customClass="AdaptiveTutorialViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wo0-BU-Eon" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1194" y="1462"/>
+        </scene>
+        <!--Adaptive Tutorial Page View Controller-->
+        <scene sceneID="BqQ-4o-TJe">
+            <objects>
+                <viewController storyboardIdentifier="TutorialPage1ViewController" id="NZs-vb-Gi2" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lIR-eh-4bM"/>
+                        <viewControllerLayoutGuide type="bottom" id="a8A-OK-m5p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vZQ-4l-FQX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чтобы получить новую рекомендацию, смахните карточку" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9M-UC-0Jd">
+                                <rect key="frame" x="18" y="40" width="339" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="hkh-It-PWl">
+                                <rect key="frame" x="87" y="233.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="wQa-ET-Wpl"/>
+                                    <constraint firstAttribute="width" constant="200" id="zIX-hq-ucj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cмахните карточку влево, если задание кажется вам слишком простым, или вправо, если задание кажется вам слишком сложным" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB9-HH-Rnt">
+                                <rect key="frame" x="20" y="535.5" width="335" height="81.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="I9M-UC-0Jd" secondAttribute="trailing" constant="18" id="68a-v3-RaT"/>
+                            <constraint firstItem="I9M-UC-0Jd" firstAttribute="top" secondItem="lIR-eh-4bM" secondAttribute="bottom" constant="20" id="GxW-TQ-uM3"/>
+                            <constraint firstAttribute="trailing" secondItem="OB9-HH-Rnt" secondAttribute="trailing" constant="20" id="K6A-dO-3YM"/>
+                            <constraint firstItem="hkh-It-PWl" firstAttribute="centerY" secondItem="vZQ-4l-FQX" secondAttribute="centerY" id="Kea-dX-x4y"/>
+                            <constraint firstItem="hkh-It-PWl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="I9M-UC-0Jd" secondAttribute="bottom" constant="60" id="O7T-ev-KKN"/>
+                            <constraint firstItem="hkh-It-PWl" firstAttribute="centerX" secondItem="vZQ-4l-FQX" secondAttribute="centerX" id="eXT-rc-5AZ"/>
+                            <constraint firstItem="I9M-UC-0Jd" firstAttribute="leading" secondItem="vZQ-4l-FQX" secondAttribute="leading" constant="18" id="hbf-9t-BrG"/>
+                            <constraint firstItem="OB9-HH-Rnt" firstAttribute="leading" secondItem="vZQ-4l-FQX" secondAttribute="leading" constant="20" id="m3C-ii-Iey"/>
+                            <constraint firstItem="a8A-OK-m5p" firstAttribute="top" secondItem="OB9-HH-Rnt" secondAttribute="bottom" constant="50" id="utx-XR-Y36"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t0z-vh-oVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1920.8" y="1460.4197901049477"/>
+        </scene>
         <!--Adaptive Course View Controller-->
         <scene sceneID="EOF-rR-jAh">
             <objects>
@@ -347,12 +405,128 @@
             </objects>
             <point key="canvasLocation" x="2700" y="35.532233883058474"/>
         </scene>
+        <!--Adaptive Tutorial Page View Controller-->
+        <scene sceneID="fuf-OE-y8R">
+            <objects>
+                <viewController storyboardIdentifier="TutorialPage2ViewController" id="ECl-eS-5YR" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="F9m-Uw-F8P"/>
+                        <viewControllerLayoutGuide type="bottom" id="rXa-Fy-ddR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RFU-i1-PzL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для того чтобы решить задание, нажмите на карточку" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeP-Fi-ccw">
+                                <rect key="frame" x="8" y="40" width="359" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradebook" translatesAutoresizingMaskIntoConstraints="NO" id="qAo-Wg-X3Y">
+                                <rect key="frame" x="87" y="233.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="47o-E6-kbV"/>
+                                    <constraint firstAttribute="width" constant="200" id="nnh-9L-OvG"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Решите задание и перейдите к следующему" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6JF-Q7-PJN">
+                                <rect key="frame" x="16" y="576" width="343" height="41"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="qAo-Wg-X3Y" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xeP-Fi-ccw" secondAttribute="bottom" constant="60" id="6mA-L2-LNt"/>
+                            <constraint firstItem="qAo-Wg-X3Y" firstAttribute="centerX" secondItem="RFU-i1-PzL" secondAttribute="centerX" id="8uS-zu-Gqf"/>
+                            <constraint firstItem="qAo-Wg-X3Y" firstAttribute="centerY" secondItem="RFU-i1-PzL" secondAttribute="centerY" id="KZO-dz-VJ9"/>
+                            <constraint firstItem="xeP-Fi-ccw" firstAttribute="leading" secondItem="RFU-i1-PzL" secondAttribute="leading" constant="8" id="NIi-tW-KL6"/>
+                            <constraint firstItem="6JF-Q7-PJN" firstAttribute="leading" secondItem="RFU-i1-PzL" secondAttribute="leading" constant="16" id="aiZ-CJ-Vbx"/>
+                            <constraint firstItem="rXa-Fy-ddR" firstAttribute="top" secondItem="6JF-Q7-PJN" secondAttribute="bottom" constant="50" id="iTO-zF-DjN"/>
+                            <constraint firstAttribute="trailing" secondItem="6JF-Q7-PJN" secondAttribute="trailing" constant="16" id="oUs-PW-BiP"/>
+                            <constraint firstItem="xeP-Fi-ccw" firstAttribute="top" secondItem="F9m-Uw-F8P" secondAttribute="bottom" constant="20" id="st6-7h-EFb"/>
+                            <constraint firstAttribute="trailing" secondItem="xeP-Fi-ccw" secondAttribute="trailing" constant="8" id="unB-pz-O1d"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7PX-64-Nd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2700" y="1459.52023988006"/>
+        </scene>
+        <!--Adaptive Tutorial Page View Controller-->
+        <scene sceneID="q9d-Um-yM8">
+            <objects>
+                <viewController storyboardIdentifier="TutorialPage3ViewController" id="9dw-R9-oPl" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="21g-dt-7EX"/>
+                        <viewControllerLayoutGuide type="bottom" id="yjf-a4-2Eb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1VW-jH-IgC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Система сама будет подбирать вам вопросы, учитывая уровень знаний" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hl-sE-eeH">
+                                <rect key="frame" x="8" y="50" width="359" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPA-qf-uB7">
+                                <rect key="frame" x="87" y="557" width="200" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9MS-e4-75b"/>
+                                    <constraint firstAttribute="width" constant="200" id="NbG-zf-rlt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Начать обучение">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onStartLearningButtonClick:" destination="9dw-R9-oPl" eventType="touchUpInside" id="HzJ-dW-3lw"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs" translatesAutoresizingMaskIntoConstraints="NO" id="8FO-wh-aF7">
+                                <rect key="frame" x="87" y="233.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="BYj-Di-qib"/>
+                                    <constraint firstAttribute="height" constant="200" id="CMu-5j-BTN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Hl-sE-eeH" firstAttribute="top" secondItem="21g-dt-7EX" secondAttribute="bottom" constant="30" id="08I-vs-lXz"/>
+                            <constraint firstAttribute="trailing" secondItem="6Hl-sE-eeH" secondAttribute="trailing" constant="8" id="Rt8-3X-ctz"/>
+                            <constraint firstItem="8FO-wh-aF7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Hl-sE-eeH" secondAttribute="bottom" constant="60" id="TdB-a8-z0D"/>
+                            <constraint firstItem="qPA-qf-uB7" firstAttribute="centerX" secondItem="1VW-jH-IgC" secondAttribute="centerX" id="VHw-oL-WZy"/>
+                            <constraint firstItem="8FO-wh-aF7" firstAttribute="centerY" secondItem="1VW-jH-IgC" secondAttribute="centerY" id="YqE-Jw-HzR"/>
+                            <constraint firstItem="yjf-a4-2Eb" firstAttribute="top" secondItem="qPA-qf-uB7" secondAttribute="bottom" constant="60" id="Zjz-wC-FvY"/>
+                            <constraint firstItem="8FO-wh-aF7" firstAttribute="centerX" secondItem="1VW-jH-IgC" secondAttribute="centerX" id="qxt-z1-mDv"/>
+                            <constraint firstItem="6Hl-sE-eeH" firstAttribute="leading" secondItem="1VW-jH-IgC" secondAttribute="leading" constant="8" id="wZH-3b-JsG"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xza-zt-aIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3492" y="1461"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Checkmark-100" width="16" height="16"/>
         <image name="Circled User Male" width="25" height="25"/>
         <image name="Cross" width="25" height="25"/>
+        <image name="book" width="501" height="500"/>
+        <image name="gradebook" width="500" height="500"/>
         <image name="stepic_logo_black_and_white" width="228" height="228"/>
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
+        <image name="thumbs" width="501" height="500"/>
     </resources>
 </document>

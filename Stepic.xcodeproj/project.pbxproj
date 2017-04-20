@@ -1059,6 +1059,8 @@
 		86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		86B457041E9F98BC00D31850 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		86B916251E849548000C2842 /* AdaptiveCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */; };
+		86B96CE81EA931B7007A0995 /* AdaptiveTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */; };
+		86B96CEB1EA95126007A0995 /* AdaptiveTutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */; };
 		86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
@@ -1558,6 +1560,8 @@
 		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
 		86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseViewController.swift; sourceTree = "<group>"; };
+		86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialViewController.swift; sourceTree = "<group>"; };
+		86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialPageViewController.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
@@ -2841,6 +2845,7 @@
 				86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */,
 				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
 				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
+				86B96CE91EA95094007A0995 /* Tutorial */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -2872,6 +2877,15 @@
 				86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */,
 			);
 			name = LoadingAnimationView;
+			sourceTree = "<group>";
+		};
+		86B96CE91EA95094007A0995 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */,
+				86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */,
+			);
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
@@ -4237,6 +4251,7 @@
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
+				86B96CE81EA931B7007A0995 /* AdaptiveTutorialViewController.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
 				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
 				866DDDC81EA8079500BAD48E /* CardOverlayView.swift in Sources */,
@@ -4334,6 +4349,7 @@
 				864D66AE1E83DE03001E8D9E /* Images.swift in Sources */,
 				864D66B01E83DE03001E8D9E /* ApplicationInfo.swift in Sources */,
 				864D66B11E83DE03001E8D9E /* PathManager.swift in Sources */,
+				86B96CEB1EA95126007A0995 /* AdaptiveTutorialPageViewController.swift in Sources */,
 				864D66B21E83DE03001E8D9E /* AudioManager.swift in Sources */,
 				864D66B31E83DE03001E8D9E /* WebControllerManager.swift in Sources */,
 				864D66B41E83DE03001E8D9E /* CacheManager.swift in Sources */,
