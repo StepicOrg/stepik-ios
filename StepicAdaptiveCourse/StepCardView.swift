@@ -14,10 +14,26 @@ class StepCardView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var quizPlaceholderView: UIView!
+    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
+    
+    private var quizVC: ChoiceQuizViewController?
+    
+    lazy var parentViewController: UIViewController? = {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }()
     
     fileprivate var contentDidLoadHandler: () -> () = {}
     
-    override func draw(_ rect: CGRect) {        
+    override func draw(_ rect: CGRect) {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.stepicGreenColor().cgColor
         
@@ -37,16 +53,44 @@ class StepCardView: UIView {
         titleLabel.isHidden = true
     }
     
-    func updateContent(title: String, text: String?, completion: @escaping () -> () = { }) {
+    func updateContent(title: String, text: String?, step: Step, completion: @escaping () -> () = { }) {
         contentDidLoadHandler = completion
         
+        // Step title
         titleLabel.text = title
         
+        // Step text
         if let text = text {
             let scriptsString = "\(Scripts.localTexScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, width: Int(UIScreen.main.bounds.width))
             html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             webView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        }
+        
+        // Step quiz
+        if let quizVC = self.quizVC {
+            quizVC.view.removeFromSuperview()
+            quizVC.removeFromParentViewController()
+        }
+        
+        if let parentVC = self.parentViewController {
+            self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+            
+            guard let quizVC = self.quizVC else {
+                print("quizVC init failed")
+                return
+            }
+            
+            quizVC.step = step
+            quizVC.delegate = self
+            
+            parentVC.addChildViewController(quizVC)
+            self.quizPlaceholderView.addSubview(quizVC.view)
+            quizVC.view.align(to: self.quizPlaceholderView)
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            
+            quizVC.sendButton.isHidden = true
         }
     }
     
@@ -59,7 +103,37 @@ class StepCardView: UIView {
 }
 
 extension StepCardView: UIWebViewDelegate {
+    func resetWebViewHeight(_ height: Float) {
+        webViewHeight.constant = CGFloat(height)
+    }
+    
+    func getContentHeight(_ webView : UIWebView) -> Int {
+        let height = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
+        return height
+    }
+    
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        resetWebViewHeight(Float(getContentHeight(webView)))
         contentDidLoadHandler()
     }
 }
+
+extension StepCardView: QuizControllerDelegate {
+    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.quizPlaceholderViewHeight.constant = newHeight
+            if animated {
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    self?.layoutIfNeeded()
+                    }, completion: nil)
+            } else {
+                self?.layoutIfNeeded()
+            }
+            
+        }
+        
+    }
+}
+
+

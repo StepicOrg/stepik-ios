@@ -38,16 +38,28 @@
                     <rect key="frame" x="0.0" y="50" width="375" height="567"/>
                     <subviews>
                         <webView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOj-fe-XSw">
-                            <rect key="frame" x="8" y="0.0" width="359" height="567"/>
+                            <rect key="frame" x="8" y="0.0" width="359" height="10"/>
                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="75D-rJ-b5F"/>
+                            </constraints>
                         </webView>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3x-VB-gaQ">
+                            <rect key="frame" x="8" y="10" width="359" height="10"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="Q3A-aj-gh0"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="SOj-fe-XSw" secondAttribute="bottom" id="0Ua-Yz-PwT"/>
                         <constraint firstAttribute="trailing" secondItem="SOj-fe-XSw" secondAttribute="trailing" constant="8" id="8bi-zf-Lbe"/>
+                        <constraint firstItem="I3x-VB-gaQ" firstAttribute="top" secondItem="SOj-fe-XSw" secondAttribute="bottom" id="8pn-f6-2YZ"/>
+                        <constraint firstItem="I3x-VB-gaQ" firstAttribute="leading" secondItem="LM4-eR-A8y" secondAttribute="leading" constant="8" id="Jqe-V8-fbd"/>
                         <constraint firstItem="SOj-fe-XSw" firstAttribute="top" secondItem="LM4-eR-A8y" secondAttribute="top" id="Q0a-5v-yad"/>
                         <constraint firstItem="SOj-fe-XSw" firstAttribute="leading" secondItem="LM4-eR-A8y" secondAttribute="leading" constant="8" id="ef3-fu-inx"/>
+                        <constraint firstAttribute="trailing" secondItem="I3x-VB-gaQ" secondAttribute="trailing" constant="8" id="kwq-n0-TaI"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -126,8 +138,11 @@
             <connections>
                 <outlet property="contentView" destination="LM4-eR-A8y" id="R7J-cL-EWa"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="4bf-SP-sBL"/>
+                <outlet property="quizPlaceholderView" destination="I3x-VB-gaQ" id="gyL-hJ-33Y"/>
+                <outlet property="quizPlaceholderViewHeight" destination="Q3A-aj-gh0" id="mzB-Of-erJ"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="r1U-3N-2i9"/>
                 <outlet property="webView" destination="SOj-fe-XSw" id="rux-HM-OuI"/>
+                <outlet property="webViewHeight" destination="75D-rJ-b5F" id="gSF-Yb-33F"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>

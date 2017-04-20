@@ -302,7 +302,7 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     
                     self?.step = step
                     DispatchQueue.main.async {
-                        card?.updateContent(title: lesson.title, text: step.block.text, completion: {
+                        card?.updateContent(title: lesson.title, text: step.block.text, step: step, completion: {
                             card?.loadingView.isHidden = true
                             card?.showContent()
                         })
