@@ -230,7 +230,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJg-K7-k2k" userLabel="Bottom view">
                                         <rect key="frame" x="0.0" y="810" width="375" height="70"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwf-Iv-1gG" customClass="StepControlButton" customModule="StepicAdaptiveCourse" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwf-Iv-1gG" customClass="StepControlButton" customModule="StepicAdaptiveCourse" customModuleProvider="target">
                                                 <rect key="frame" x="203" y="0.0" width="60" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -238,6 +238,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="yxB-fg-dqr"/>
                                                 </constraints>
                                                 <state key="normal" image="Checkmark-100"/>
+                                                <state key="disabled" image="Checkmark-100"/>
                                                 <connections>
                                                     <action selector="onNextButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="7Db-aZ-JgV"/>
                                                 </connections>
@@ -284,7 +285,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="AYZ-82-IiP" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" constant="10" id="27O-9c-ZAr"/>
-                                    <constraint firstAttribute="bottom" secondItem="Lbp-Hw-f8f" secondAttribute="bottom" constant="75" id="36P-G1-CxM"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lbp-Hw-f8f" secondAttribute="bottom" constant="80" id="36P-G1-CxM"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="leading" secondItem="1Am-VA-FTv" secondAttribute="leading" id="4oq-9A-P9H"/>
                                     <constraint firstAttribute="trailing" secondItem="Lbp-Hw-f8f" secondAttribute="trailing" id="5i4-a0-QPH"/>
                                     <constraint firstItem="Lbp-Hw-f8f" firstAttribute="top" secondItem="5eX-H9-4P6" secondAttribute="bottom" constant="8" id="BJ1-3G-PZH"/>

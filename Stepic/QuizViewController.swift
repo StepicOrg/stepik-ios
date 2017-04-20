@@ -257,6 +257,8 @@ class QuizViewController: UIViewController {
                                 }
                             }
                             
+                            self?.delegate?.submissionDidCorrect()
+                            
                             break
                             
                         case "wrong":
@@ -274,6 +276,8 @@ class QuizViewController: UIViewController {
                             s.statusLabel.text = s.wrongTitle
                             s.setStatusElements(visible: true)
 
+                            self?.delegate?.submissionDidWrong()
+                            
                             break
                             
                         case "evaluation":

@@ -15,6 +15,11 @@ class AdaptiveStepViewController: UIViewController {
     var step: Step!
     
     var quizVC: ChoiceQuizViewController?
+    var isCorrectSolved = false {
+        didSet {
+            doneButton.isEnabled = isCorrectSolved
+        }
+    }
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -31,7 +36,11 @@ class AdaptiveStepViewController: UIViewController {
     
     @IBAction func onDismissButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: false, completion: { _ in
-            self.dismissHandler()
+            if !self.isCorrectSolved {
+                self.dismissHandler()
+            } else {
+                self.successHandler()
+            }
         })
     }
     
@@ -127,6 +136,13 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
             }
             
         }
-        
+    }
+    
+    func submissionDidCorrect() {
+        isCorrectSolved = true
+    }
+    
+    func submissionDidWrong() {
+        isCorrectSolved = false
     }
 }
