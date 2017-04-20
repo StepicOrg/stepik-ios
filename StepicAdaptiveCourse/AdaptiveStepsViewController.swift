@@ -209,7 +209,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
         
-        if direction == .left {
+        if direction == .right {
             self.lastReaction = .neverAgain
         } else if direction == .left {
             self.lastReaction = .maybeLater

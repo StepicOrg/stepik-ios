@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="width" constant="200" id="zIX-hq-ucj"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cмахните карточку влево, если задание кажется вам слишком простым, или вправо, если задание кажется вам слишком сложным" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB9-HH-Rnt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cмахните карточку вправо, если задание кажется вам слишком простым, или влево, если задание кажется вам слишком сложным" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB9-HH-Rnt">
                                 <rect key="frame" x="20" y="535.5" width="335" height="81.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -469,7 +469,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Система сама будет подбирать вам вопросы, учитывая уровень знаний" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hl-sE-eeH">
-                                <rect key="frame" x="8" y="50" width="359" height="43"/>
+                                <rect key="frame" x="8" y="40" width="359" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -504,7 +504,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Hl-sE-eeH" firstAttribute="top" secondItem="21g-dt-7EX" secondAttribute="bottom" constant="30" id="08I-vs-lXz"/>
+                            <constraint firstItem="6Hl-sE-eeH" firstAttribute="top" secondItem="21g-dt-7EX" secondAttribute="bottom" constant="20" id="08I-vs-lXz"/>
                             <constraint firstAttribute="trailing" secondItem="6Hl-sE-eeH" secondAttribute="trailing" constant="8" id="Rt8-3X-ctz"/>
                             <constraint firstItem="8FO-wh-aF7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Hl-sE-eeH" secondAttribute="bottom" constant="60" id="TdB-a8-z0D"/>
                             <constraint firstItem="qPA-qf-uB7" firstAttribute="centerX" secondItem="1VW-jH-IgC" secondAttribute="centerX" id="VHw-oL-WZy"/>

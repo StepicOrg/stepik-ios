@@ -9,8 +9,8 @@
 import UIKit
 import Koloda
 
-private let overlayRightImageName = "overlay_hard"
-private let overlayLeftImageName = "overlay_simple"
+private let overlayRightImageName = "overlay_simple"
+private let overlayLeftImageName = "overlay_hard"
 
 class CardOverlayView: OverlayView {
     
