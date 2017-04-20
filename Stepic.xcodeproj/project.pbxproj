@@ -1009,6 +1009,8 @@
 		864D67D51E83E23B001E8D9E /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		864D67D61E83E394001E8D9E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */; };
+		866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
+		866DDDC81EA8079500BAD48E /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DDDC71EA8079500BAD48E /* CardOverlayView.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
@@ -1546,6 +1548,8 @@
 		8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepReversedCardView.xib; sourceTree = "<group>"; };
 		86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
+		866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardOverlayView.xib; sourceTree = "<group>"; };
+		866DDDC71EA8079500BAD48E /* CardOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
@@ -2822,6 +2826,15 @@
 			name = StepReversedCardView;
 			sourceTree = "<group>";
 		};
+		866DDDC41EA8060400BAD48E /* CardOverlayView */ = {
+			isa = PBXGroup;
+			children = (
+				866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */,
+				866DDDC71EA8079500BAD48E /* CardOverlayView.swift */,
+			);
+			name = CardOverlayView;
+			sourceTree = "<group>";
+		};
 		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2835,6 +2848,7 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				866DDDC41EA8060400BAD48E /* CardOverlayView */,
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
 				86ABC6661E9685F80012E8A6 /* StepCardView */,
@@ -3274,6 +3288,7 @@
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
+				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
@@ -4224,6 +4239,7 @@
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
 				864D67941E83E08E001E8D9E /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
+				866DDDC81EA8079500BAD48E /* CardOverlayView.swift in Sources */,
 				864D67951E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				864D67961E83E08E001E8D9E /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				864D67971E83E08E001E8D9E /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,

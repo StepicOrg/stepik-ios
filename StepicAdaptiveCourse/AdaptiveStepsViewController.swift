@@ -15,6 +15,7 @@ class AdaptiveStepsViewController: UIViewController {
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
 
+    fileprivate var isKolodaPresented = false
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
 
@@ -50,16 +51,23 @@ class AdaptiveStepsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !AuthInfo.shared.isAuthorized {
-            presentAuthViewController()
-        } else {
-            self.joinAndLoadCourse(completion: {
-                self.initKoloda()
-            })
-        }
-        
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage(named: "shadow-pixel")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !isKolodaPresented {
+            isKolodaPresented = true
+            if !AuthInfo.shared.isAuthorized {
+                presentAuthViewController()
+            } else {
+                self.joinAndLoadCourse(completion: {
+                    self.initKoloda()
+                })
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -313,6 +321,10 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
             
             return card!
         }
+    }
+    
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+        return Bundle.main.loadNibNamed("CardOverlayView", owner: self, options: nil)?.first as? CardOverlayView
     }
 }
 
