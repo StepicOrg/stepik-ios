@@ -30,13 +30,13 @@ class CommentsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("RETRIEVE comments: error \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("RETRIEVE comments: bad response status code \(response?.statusCode)")
+                    errorHandler("RETRIEVE comments: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
                 
@@ -87,13 +87,13 @@ class CommentsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("CREATE comments: error \(e.domain) \(e.code): \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 201 {
-                    errorHandler("CREATE comments: bad response status code \(response?.statusCode)")
+                    errorHandler("CREATE comments: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
 

@@ -12,7 +12,7 @@ import Mixpanel
 import YandexMobileMetrica
 
 class AnalyticsReporter {
-    static func reportEvent(_ event: String, parameters: [String: Any]?) {
+    static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
         
         guard let params = parameters as? [String: NSObject] else {
             return

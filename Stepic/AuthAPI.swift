@@ -38,7 +38,7 @@ class AuthAPI {
             }
             let response = response.response
             
-            print("\(response?.statusCode)")
+            print("\(String(describing: response?.statusCode))")
             print(json)
 
             if let e = error {
@@ -46,7 +46,7 @@ class AuthAPI {
                 return
             }
             
-            if json["error"] != nil {
+            if json["error"] != JSON.null {
                 print(json["error_description"].stringValue)
                 let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
                 failure(e)

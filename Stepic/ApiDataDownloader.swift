@@ -32,6 +32,7 @@ class ApiDataDownloader {
     static let progresses = ProgressesAPI()
     static let steps = StepsAPI()
     static let assignments = AssignmentsAPI()
+    static let certificates = CertificatesAPI()
 }
 
 enum RefreshMode {

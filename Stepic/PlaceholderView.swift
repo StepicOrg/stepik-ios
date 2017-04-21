@@ -69,7 +69,7 @@ class PlaceholderView: UIView {
         imageView?.image = image
         imageViewHeight = imageView!.constrainHeight("\(image.size.height)")[0] as? NSLayoutConstraint
         imageViewWidth = imageView!.constrainWidth("\(image.size.width)")[0] as? NSLayoutConstraint
-        imageView?.alignCenterX(with: middleView, predicate: "0")
+        _ = imageView?.alignCenterX(with: middleView, predicate: "0")
     }
     
     fileprivate func addTitle(_ title: String) {
@@ -80,7 +80,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(titleLabel!)
         middleView.bringSubview(toFront: titleLabel!)
         setUpVerticalConstraints(titleLabel!)
-        titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
 
         if let style = datasource?.placeholderStyle() {
             titleLabel?.implementStyle(style.title)
@@ -100,7 +100,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(descriptionLabel!)
         middleView.bringSubview(toFront: descriptionLabel!)
         setUpVerticalConstraints(descriptionLabel!)
-        descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
         
 
         if let style = datasource?.placeholderStyle() {
@@ -131,7 +131,7 @@ class PlaceholderView: UIView {
         middleView.addSubview(button!)
         middleView.bringSubview(toFront: button!)
         setUpVerticalConstraints(button!)
-        button?.alignCenterX(with: middleView, predicate: "0")
+        _ = button?.alignCenterX(with: middleView, predicate: "0")
         buttonHeight = button?.constrainHeight("30")[0] as? NSLayoutConstraint
     }
     
@@ -192,7 +192,7 @@ class PlaceholderView: UIView {
         layoutIfNeeded()
         middleView.layoutSubviews()
         print("middle view height -> \(middleView.bounds.height)")
-        print("image view height -> \(imageView?.bounds.height)")
+        print("image view height -> \(String(describing: imageView?.bounds.height))")
     }
     
     fileprivate func setup() {

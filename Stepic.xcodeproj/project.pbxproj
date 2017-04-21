@@ -26,6 +26,11 @@
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
+		080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA22F1EA017FB0079272F /* CertificateSpec.swift */; };
+		080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
+		080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
+		080AA2351EA05BE00079272F /* TestInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 080AA2341EA05BE00079272F /* TestInfo.plist */; };
+		080AA2371EA05CD20079272F /* TestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2361EA05CD20079272F /* TestConfig.swift */; };
 		080ACF501BD79D5500329F2B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
@@ -55,10 +60,16 @@
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
+		080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
+		080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
+		080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
+		080EBA381EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
 		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
+		081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */; };
+		081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */; };
 		081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */; };
 		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
@@ -90,6 +101,12 @@
 		0828FF8D1BC81F41000AFEA7 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
 		0829B8331E9C4CB5009B4A84 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
+		0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
+		0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
+		0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
+		0829B83B1E9D05AE009B4A84 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
+		0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		0829B83D1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
@@ -156,6 +173,27 @@
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
+		083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */; };
+		083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
+		083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
+		083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B131E9D8EF800714173 /* CertificatesViewController.swift */; };
+		083F2B151E9D8EF800714173 /* CertificatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B131E9D8EF800714173 /* CertificatesViewController.swift */; };
+		083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B161E9D8F1D00714173 /* CertificatesView.swift */; };
+		083F2B181E9D8F1D00714173 /* CertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B161E9D8F1D00714173 /* CertificatesView.swift */; };
+		083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B191E9D920500714173 /* CertificatesPresenter.swift */; };
+		083F2B1B1E9D920500714173 /* CertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B191E9D920500714173 /* CertificatesPresenter.swift */; };
+		083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
+		083F2B1E1E9D9ABB00714173 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
+		083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
+		083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
+		083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
+		083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
+		083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
+		083F2B271E9EC10A00714173 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
+		083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
+		083F2B2B1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
+		083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
+		083F2B2E1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
 		084070801D64847000308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		084070811D64847400308FC1 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */; };
@@ -705,9 +743,26 @@
 		08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
-		27A47C3F518B1951C6546431 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */; };
-		7A72E6ECE5142ECB1ED3378F /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */; };
+		2E2A9660993A3FAE086841C2 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9BD7E9A613D69588A40833 /* Pods_Stepic.framework */; };
+		39E66D92CCE041F385D35C3B /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55367E7F0B2C22A99CD1795D /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
+		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
+		860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
+		860BC33A1EAA1E520058F440 /* CertificatesViewTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */; };
+		860BC33B1EAA1E520058F440 /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
+		860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B131E9D8EF800714173 /* CertificatesViewController.swift */; };
+		860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B161E9D8F1D00714173 /* CertificatesView.swift */; };
+		860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B191E9D920500714173 /* CertificatesPresenter.swift */; };
+		860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */; };
+		860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */; };
+		860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
+		860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
+		860BC3431EAA1E520058F440 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8381E9D05AE009B4A84 /* Certificate.swift */; };
+		860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
+		860BC3451EAA1E520058F440 /* CertificatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */; };
+		860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
+		860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
+		860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
 		8618E3E41EA0063D00FB3D0F /* StepReversedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618E3E31EA0063D00FB3D0F /* StepReversedCardView.swift */; };
 		8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -1066,7 +1121,7 @@
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
-		99BCB6BC2799073C8EB7A141 /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */; };
+		8D76B0A93E3C133FC4541C67 /* Pods_StepicAdaptiveCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1ECA746011CD9EC428620F /* Pods_StepicAdaptiveCourse.framework */; };
 		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
@@ -1095,7 +1150,7 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		C8623A3B964ABB9AEEE7FA8C /* Pods_StepicAdaptiveCourse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA9BCF90A9241B0226ADE89 /* Pods_StepicAdaptiveCourse.framework */; };
+		EE389044486FF1814A78F159 /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D706CA40822BB2749A2C85 /* Pods_SberbankUniversity.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1164,6 +1219,10 @@
 		08047E6B1BFD44920071C875 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextTableViewCell.swift; sourceTree = "<group>"; };
 		08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
+		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
+		080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPIPaginatedMock.swift; sourceTree = "<group>"; };
+		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
+		080AA2361EA05CD20079272F /* TestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConfig.swift; sourceTree = "<group>"; };
 		080ACF4F1BD79D5500329F2B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
@@ -1183,10 +1242,13 @@
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
+		080EBA321EA64BC000C43C93 /* PresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainer.swift; sourceTree = "<group>"; };
+		080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresentationContainer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
 		080F74631BD9213D0064AAEA /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
 		080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQualityTableViewController.swift; sourceTree = "<group>"; };
+		081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesViewTestMock.swift; sourceTree = "<group>"; };
 		081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GreenNavigationViewController.swift; sourceTree = "<group>"; };
 		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1215,6 +1277,10 @@
 		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppManager.swift; sourceTree = "<group>"; };
+		0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesAPI.swift; sourceTree = "<group>"; };
+		0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_certificates_v15.xcdatamodel; sourceTree = "<group>"; };
+		0829B8381E9D05AE009B4A84 /* Certificate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
+		0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Certificate+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRoutingManager.swift; sourceTree = "<group>"; };
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
@@ -1258,6 +1324,17 @@
 		083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialNetworksViewController.swift; sourceTree = "<group>"; };
 		083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationInfo.swift; sourceTree = "<group>"; };
+		083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesAPITest.swift; sourceTree = "<group>"; };
+		083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CertificatesStoryboard.storyboard; sourceTree = "<group>"; };
+		083F2B131E9D8EF800714173 /* CertificatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesViewController.swift; sourceTree = "<group>"; };
+		083F2B161E9D8F1D00714173 /* CertificatesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesView.swift; sourceTree = "<group>"; };
+		083F2B191E9D920500714173 /* CertificatesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresenter.swift; sourceTree = "<group>"; };
+		083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewData.swift; sourceTree = "<group>"; };
+		083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTableViewCell.swift; sourceTree = "<group>"; };
+		083F2B201E9E645000714173 /* CertificateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificateTableViewCell.xib; sourceTree = "<group>"; };
+		083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingPaginationView.xib; sourceTree = "<group>"; };
+		083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingPaginationView.swift; sourceTree = "<group>"; };
+		083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesAPIPaginatedMock.swift; sourceTree = "<group>"; };
 		0840707F1D64847000308FC1 /* SharingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingHelper.swift; sourceTree = "<group>"; };
 		084070821D64883400308FC1 /* Model_v7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v7.xcdatamodel; sourceTree = "<group>"; };
 		084070861D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CyrillicURLActivityItemSource.swift; sourceTree = "<group>"; };
@@ -1539,16 +1616,16 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
-		2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
-		45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
-		4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
-		708DD9D46F433FF2CFC02775 /* Pods-StepicAdaptiveCourse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.debug.xcconfig"; sourceTree = "<group>"; };
-		749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		1BAE14D93BB95401CE6BB4D1 /* Pods-StepicAdaptiveCourse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.release.xcconfig"; sourceTree = "<group>"; };
+		2A9B6F456E38868FDBABB40D /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		3917CA61A045C23EAB5D0547 /* Pods-StepicAdaptiveCourse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.debug.xcconfig"; sourceTree = "<group>"; };
+		55367E7F0B2C22A99CD1795D /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D706CA40822BB2749A2C85 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65D7CED3F37796057ECFA6CC /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
+		6CDCDBDA20A25A3B80026F49 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		8618E3E31EA0063D00FB3D0F /* StepReversedCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepReversedCardView.swift; sourceTree = "<group>"; };
 		8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepReversedCardView.xib; sourceTree = "<group>"; };
-		86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardOverlayView.xib; sourceTree = "<group>"; };
 		866DDDC71EA8079500BAD48E /* CardOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
@@ -1568,6 +1645,9 @@
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
 		86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdaptiveInfo.plist; sourceTree = "<group>"; };
+		88BD8349A19E48699B665F5C /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8BA7EB483708E5DD0B1570F9 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		8F9BD7E9A613D69588A40833 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1590,11 +1670,8 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
-		B7D5BA66113374DEE5363233 /* Pods-StepicAdaptiveCourse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicAdaptiveCourse.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse.release.xcconfig"; sourceTree = "<group>"; };
-		C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		FBA9BCF90A9241B0226ADE89 /* Pods_StepicAdaptiveCourse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicAdaptiveCourse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CD1ECA746011CD9EC428620F /* Pods_StepicAdaptiveCourse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicAdaptiveCourse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3C23B5928061304728B63D6 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1602,7 +1679,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A47C3F518B1951C6546431 /* Pods_StepicTests.framework in Frameworks */,
+				39E66D92CCE041F385D35C3B /* Pods_StepicTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1611,7 +1688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */,
-				7A72E6ECE5142ECB1ED3378F /* Pods_SberbankUniversity.framework in Frameworks */,
+				EE389044486FF1814A78F159 /* Pods_SberbankUniversity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,7 +1697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
-				99BCB6BC2799073C8EB7A141 /* Pods_Stepic.framework in Frameworks */,
+				2E2A9660993A3FAE086841C2 /* Pods_Stepic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1628,7 +1705,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8623A3B964ABB9AEEE7FA8C /* Pods_StepicAdaptiveCourse.framework in Frameworks */,
+				8D76B0A93E3C133FC4541C67 /* Pods_StepicAdaptiveCourse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1662,8 +1739,7 @@
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
-				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+				080EBA301EA64A5400C43C93 /* Containers */,
 				08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */,
 				080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */,
 				087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */,
@@ -1710,6 +1786,34 @@
 			name = TCBlobDownload;
 			sourceTree = "<group>";
 		};
+		080EBA301EA64A5400C43C93 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				083749321DE5BBFE00144C14 /* Preferences */,
+				080EBA311EA64A6300C43C93 /* Defaults */,
+				080EBA351EA64BCF00C43C93 /* Presentation */,
+			);
+			name = Containers;
+			sourceTree = "<group>";
+		};
+		080EBA311EA64A6300C43C93 /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */,
+				089056091E97CD7900B8FE6A /* DefaultsContainer.swift */,
+			);
+			name = Defaults;
+			sourceTree = "<group>";
+		};
+		080EBA351EA64BCF00C43C93 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				080EBA321EA64BC000C43C93 /* PresentationContainer.swift */,
+				080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */,
+			);
+			name = Presentation;
+			sourceTree = "<group>";
+		};
 		080F74621BD921130064AAEA /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
@@ -1720,9 +1824,30 @@
 			name = Stepic;
 			sourceTree = "<group>";
 		};
+		081058321E9FB50700FAC30A /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				083F2B0D1E9D87C000714173 /* CertificatesAPITest.swift */,
+				080AA22F1EA017FB0079272F /* CertificateSpec.swift */,
+			);
+			name = Certificates;
+			sourceTree = "<group>";
+		};
+		081058331E9FDD1800FAC30A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */,
+				081058341E9FDD3B00FAC30A /* CertificatesViewTestMock.swift */,
+				080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				0829B8381E9D05AE009B4A84 /* Certificate.swift */,
+				0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */,
 				0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */,
 				0813EEA51BFE5A5400DB4B83 /* Assignment.swift */,
 				083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */,
@@ -1906,6 +2031,30 @@
 			name = "Picker View Controller";
 			sourceTree = "<group>";
 		};
+		083F2B0F1E9D8E2A00714173 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				081058331E9FDD1800FAC30A /* Tests */,
+				083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */,
+				083F2B131E9D8EF800714173 /* CertificatesViewController.swift */,
+				083F2B161E9D8F1D00714173 /* CertificatesView.swift */,
+				083F2B191E9D920500714173 /* CertificatesPresenter.swift */,
+				083F2B1C1E9D9ABB00714173 /* CertificateViewData.swift */,
+				083F2B1F1E9E645000714173 /* CertificateTableViewCell.swift */,
+				083F2B201E9E645000714173 /* CertificateTableViewCell.xib */,
+			);
+			name = Certificates;
+			sourceTree = "<group>";
+		};
+		083F2B281E9EC11600714173 /* Loading Pagination View */ = {
+			isa = PBXGroup;
+			children = (
+				083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */,
+				083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */,
+			);
+			name = "Loading Pagination View";
+			sourceTree = "<group>";
+		};
 		084156981BCC08F9006B8C73 /* Steps */ = {
 			isa = PBXGroup;
 			children = (
@@ -1936,6 +2085,7 @@
 				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
 				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
 				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
+				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -2005,6 +2155,9 @@
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
 				0800B8271D070F68006C987E /* DiscussionsAPITests.swift */,
 				08AB823A1D75AA9300FDEADE /* CookieTests.swift */,
+				081058321E9FB50700FAC30A /* Certificates */,
+				080AA2341EA05BE00079272F /* TestInfo.plist */,
+				080AA2361EA05CD20079272F /* TestConfig.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -2079,6 +2232,7 @@
 				083622DA1CD1FA4F00CD8915 /* StepTabView */,
 				089F58871D22BD44000CD540 /* DiscussionCountView */,
 				083F11761E54DB09006EF4F1 /* Picker View Controller */,
+				083F2B281E9EC11600714173 /* Loading Pagination View */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2109,7 +2263,6 @@
 				085C4FF51D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift */,
 				08E6BB6A1DC8EB45006622EC /* UserActivity.swift */,
 				083749281DE5AE1400144C14 /* Alerts */,
-				083749321DE5BBFE00144C14 /* Preferences */,
 				083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */,
 				0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */,
 			);
@@ -2119,6 +2272,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				083F2B0F1E9D8E2A00714173 /* Certificates */,
 				08FF75271DF9938E00D656C4 /* Alerts */,
 				08EF9A0B1C91D12700433E4A /* Video Player */,
 				0889FEAD1BFB76FF00C6417E /* Downloads */,
@@ -2490,7 +2644,7 @@
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
-				5F704016CA5D04D146C6D1F6 /* Pods */,
+				AC941A59FBC8ED077EB62444 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2798,27 +2952,12 @@
 				080ACF591BD7DCCD00329F2B /* TCBlobDownload */,
 				0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */,
 				083B164C1C2AF27700250B37 /* JSQWebViewController.swift */,
-				C7D15F90BCDF8BC1B6AAB128 /* Pods_SberbankUniversity.framework */,
-				86493A4B31DEB22A7AEC150B /* Pods_Stepic.framework */,
-				749081FE513D6177B822ECA4 /* Pods_StepicTests.framework */,
-				FBA9BCF90A9241B0226ADE89 /* Pods_StepicAdaptiveCourse.framework */,
+				55D706CA40822BB2749A2C85 /* Pods_SberbankUniversity.framework */,
+				8F9BD7E9A613D69588A40833 /* Pods_Stepic.framework */,
+				CD1ECA746011CD9EC428620F /* Pods_StepicAdaptiveCourse.framework */,
+				55367E7F0B2C22A99CD1795D /* Pods_StepicTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5F704016CA5D04D146C6D1F6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */,
-				2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */,
-				C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */,
-				81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */,
-				FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */,
-				4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */,
-				708DD9D46F433FF2CFC02775 /* Pods-StepicAdaptiveCourse.debug.xcconfig */,
-				B7D5BA66113374DEE5363233 /* Pods-StepicAdaptiveCourse.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		8618E3E21EA0061000FB3D0F /* StepReversedCardView */ = {
@@ -2948,6 +3087,21 @@
 			path = StepicWatch;
 			sourceTree = "<group>";
 		};
+		AC941A59FBC8ED077EB62444 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A9B6F456E38868FDBABB40D /* Pods-SberbankUniversity.debug.xcconfig */,
+				6CDCDBDA20A25A3B80026F49 /* Pods-SberbankUniversity.release.xcconfig */,
+				65D7CED3F37796057ECFA6CC /* Pods-Stepic.debug.xcconfig */,
+				8BA7EB483708E5DD0B1570F9 /* Pods-Stepic.release.xcconfig */,
+				3917CA61A045C23EAB5D0547 /* Pods-StepicAdaptiveCourse.debug.xcconfig */,
+				1BAE14D93BB95401CE6BB4D1 /* Pods-StepicAdaptiveCourse.release.xcconfig */,
+				88BD8349A19E48699B665F5C /* Pods-StepicTests.debug.xcconfig */,
+				D3C23B5928061304728B63D6 /* Pods-StepicTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2955,12 +3109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 085D5CE21D007F2200092060 /* Build configuration list for PBXNativeTarget "StepicTests" */;
 			buildPhases = (
-				76730F95A6D09D81A7A3AC28 /* [CP] Check Pods Manifest.lock */,
+				271CCBFC26235A75CDDF31E9 /* [CP] Check Pods Manifest.lock */,
 				085D5CD51D007F2100092060 /* Sources */,
 				085D5CD61D007F2100092060 /* Frameworks */,
 				085D5CD71D007F2100092060 /* Resources */,
-				A7F8263E7C6BFC291B58134D /* [CP] Embed Pods Frameworks */,
-				3CE0CC406597F30CDEC6739E /* [CP] Copy Pods Resources */,
+				07E0F27612CD8B6759F59AAC /* [CP] Embed Pods Frameworks */,
+				7D16EB3C0F56050F0FDD6B6E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2976,13 +3130,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */;
 			buildPhases = (
-				6C6FD0BAE9D09DEE6A3AE326 /* [CP] Check Pods Manifest.lock */,
+				E68A74FB9C5F36275E07D0C8 /* [CP] Check Pods Manifest.lock */,
 				08D120741C937B2200A54ABC /* Sources */,
 				08D121031C937B2200A54ABC /* Frameworks */,
 				08D121061C937B2200A54ABC /* Resources */,
 				08D1211F1C937B2200A54ABC /* ShellScript */,
-				571CFD70861828075A939C48 /* [CP] Embed Pods Frameworks */,
-				325D37ADFD457ABFEA51E33E /* [CP] Copy Pods Resources */,
+				9DF6D3DC7FDE714108719B1D /* [CP] Embed Pods Frameworks */,
+				A0C884484E01392F1A7C16E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2997,14 +3151,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08DE94301B8C58AC00D278AB /* Build configuration list for PBXNativeTarget "Stepic" */;
 			buildPhases = (
-				F972AD9AAD93563C19584F11 /* [CP] Check Pods Manifest.lock */,
+				0FA7C69C6095ECECAE5A0739 /* [CP] Check Pods Manifest.lock */,
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
-				427C889518E3953D2D926877 /* [CP] Embed Pods Frameworks */,
-				A35470479093EA10D4D5CCC0 /* [CP] Copy Pods Resources */,
+				17C15DCA4CB5FE9660865431 /* [CP] Embed Pods Frameworks */,
+				340C3184DF58059999E9CA78 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3020,12 +3174,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "StepicAdaptiveCourse" */;
 			buildPhases = (
-				6C6FD0BAE9D09DEE6A3AE326 /* [CP] Check Pods Manifest.lock */,
+				75A91FE284B414BB44C0E8D0 /* [CP] Check Pods Manifest.lock */,
 				86EF29301E83CEA900F8D214 /* Sources */,
 				86EF29311E83CEA900F8D214 /* Frameworks */,
 				86EF29321E83CEA900F8D214 /* Resources */,
-				DE124F7A998246EC79D8789B /* [CP] Embed Pods Frameworks */,
-				DFA6F40F28B5E51641036D2D /* [CP] Copy Pods Resources */,
+				D0F018642F69B1F942E74D63 /* [CP] Embed Pods Frameworks */,
+				4A916063B5777232A0F760F7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3163,6 +3317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3187,7 +3342,9 @@
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
 				089056141E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				08D121101C937B2200A54ABC /* QuizViewController.xib in Resources */,
+				083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
+				083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -3199,6 +3356,7 @@
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
 				08D121141C937B2200A54ABC /* DownloadTableViewCell.xib in Resources */,
 				08D121151C937B2200A54ABC /* Images.xcassets in Resources */,
+				083F2B271E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */,
 				08D121161C937B2200A54ABC /* Scripts.plist in Resources */,
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
@@ -3257,6 +3415,7 @@
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -3265,6 +3424,7 @@
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
+				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -3273,6 +3433,7 @@
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
+				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
@@ -3284,6 +3445,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
+				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
+				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
 				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
 				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
@@ -3354,138 +3518,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
-		};
-		08D1211F1C937B2200A54ABC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
-		};
-		325D37ADFD457ABFEA51E33E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3CE0CC406597F30CDEC6739E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		427C889518E3953D2D926877 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		571CFD70861828075A939C48 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C6FD0BAE9D09DEE6A3AE326 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		76730F95A6D09D81A7A3AC28 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A35470479093EA10D4D5CCC0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A7F8263E7C6BFC291B58134D /* [CP] Embed Pods Frameworks */ = {
+		07E0F27612CD8B6759F59AAC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3500,7 +3533,48 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DE124F7A998246EC79D8789B /* [CP] Embed Pods Frameworks */ = {
+		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}\"/Fabric/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+		};
+		08D1211F1C937B2200A54ABC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}\"/Fabric/Fabric.framework/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+		};
+		0FA7C69C6095ECECAE5A0739 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		17C15DCA4CB5FE9660865431 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3512,10 +3586,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DFA6F40F28B5E51641036D2D /* [CP] Copy Pods Resources */ = {
+		271CCBFC26235A75CDDF31E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		340C3184DF58059999E9CA78 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A916063B5777232A0F760F7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3530,7 +3634,82 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F972AD9AAD93563C19584F11 /* [CP] Check Pods Manifest.lock */ = {
+		75A91FE284B414BB44C0E8D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7D16EB3C0F56050F0FDD6B6E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DF6D3DC7FDE714108719B1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0C884484E01392F1A7C16E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0F018642F69B1F942E74D63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E68A74FB9C5F36275E07D0C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3552,9 +3731,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
 				0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */,
+				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
+				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3595,6 +3777,7 @@
 				08E59AC01E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08D120821C937B2200A54ABC /* VideoURL+CoreDataProperties.swift in Sources */,
+				083F2B2B1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				08901E731CD1173200D94613 /* Version.swift in Sources */,
 				08D120831C937B2200A54ABC /* Video+CoreDataProperties.swift in Sources */,
 				08EB85ED1D100B7400E4F345 /* DiscussionCellDelegate.swift in Sources */,
@@ -3613,8 +3796,10 @@
 				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
+				081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -3648,6 +3833,7 @@
 				08D120971C937B2200A54ABC /* Assignment.swift in Sources */,
 				08D120981C937B2200A54ABC /* PathManager.swift in Sources */,
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
+				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
@@ -3663,6 +3849,7 @@
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				08E6BB691DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08D1209D1C937B2200A54ABC /* Progress+CoreDataProperties.swift in Sources */,
+				080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				08FB30E41DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08D1209E1C937B2200A54ABC /* ButtonExtension.swift in Sources */,
 				08D120A01C937B2200A54ABC /* TeachersTableViewCell.swift in Sources */,
@@ -3721,12 +3908,14 @@
 				08D120BB1C937B2200A54ABC /* Messages.swift in Sources */,
 				08D120BC1C937B2200A54ABC /* WarningView.swift in Sources */,
 				08D120BD1C937B2200A54ABC /* CoreDataHelper.swift in Sources */,
+				083F2B181E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
 				08D120C11C937B2200A54ABC /* AudioManager.swift in Sources */,
 				08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */,
+				080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
@@ -3748,6 +3937,7 @@
 				084F7AAE1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				08D120CC1C937B2200A54ABC /* PlaceholderTestViewController.swift in Sources */,
 				08D120CD1C937B2200A54ABC /* StepicVideoPlayerViewController.swift in Sources */,
+				0829B83B1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08D120CE1C937B2200A54ABC /* StringDatasetExtension.swift in Sources */,
 				08D120CF1C937B2200A54ABC /* User.swift in Sources */,
 				083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
@@ -3757,6 +3947,7 @@
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */,
+				0829B83D1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
 				08D120D41C937B2200A54ABC /* GeneralInfoTableViewCell.swift in Sources */,
@@ -3775,8 +3966,10 @@
 				08D120DB1C937B2200A54ABC /* JSQWebViewController.swift in Sources */,
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
 				084070881D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				083F2B1B1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				08D120DD1C937B2200A54ABC /* TCBlobDownload.swift in Sources */,
 				08D120DE1C937B2200A54ABC /* User+CoreDataProperties.swift in Sources */,
+				083F2B2E1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
 				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
@@ -3842,11 +4035,14 @@
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
 				08D035221D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
+				083F2B1E1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				084070811D64847400308FC1 /* SharingHelper.swift in Sources */,
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
+				083F2B151E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
 				08D121001C937B2200A54ABC /* UICustomizer.swift in Sources */,
+				080EBA381EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				08EB85E71D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				08D121011C937B2200A54ABC /* Constants.swift in Sources */,
 				08FB30DE1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
@@ -3916,6 +4112,7 @@
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
+				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
 				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
@@ -3948,6 +4145,7 @@
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
+				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
@@ -3961,6 +4159,7 @@
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
+				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
@@ -4004,6 +4203,7 @@
 				08FB30E31DC385B400E4684F /* ProfileViewController.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
+				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
 				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
@@ -4020,6 +4220,7 @@
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
+				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -4042,10 +4243,12 @@
 				0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
+				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,
+				0829B83A1E9D05AE009B4A84 /* Certificate.swift in Sources */,
 				08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */,
 				08F5555C1C4FB1E300C877E8 /* ChoiceReply.swift in Sources */,
 				08AEC3A31CCA69C800FFF29E /* DevicesAPI.swift in Sources */,
@@ -4057,6 +4260,7 @@
 				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
+				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
@@ -4094,6 +4298,7 @@
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				08AF59EA1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
+				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
@@ -4115,17 +4320,22 @@
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08AF59FA1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
+				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
+				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
+				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
+				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
+				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
 				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
@@ -4170,6 +4380,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */,
+				860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				860BC33A1EAA1E520058F440 /* CertificatesViewTestMock.swift in Sources */,
+				860BC33B1EAA1E520058F440 /* CoursesAPIPaginatedMock.swift in Sources */,
+				860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */,
+				860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */,
+				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
+				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
+				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
+				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
+				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
+				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
+				860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */,
+				860BC3451EAA1E520058F440 /* CertificatesAPI.swift in Sources */,
 				864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,
 				864514E61E9FD4F6007F73BE /* CurrentBestStreakViewController.swift in Sources */,
@@ -4602,7 +4826,7 @@
 /* Begin XCBuildConfiguration section */
 		085D5CE01D007F2200092060 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FED33D5957B637D51EC30755 /* Pods-StepicTests.debug.xcconfig */;
+			baseConfigurationReference = 88BD8349A19E48699B665F5C /* Pods-StepicTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4621,7 +4845,7 @@
 		};
 		085D5CE11D007F2200092060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D490B77C51ADF0FB1B5F618 /* Pods-StepicTests.release.xcconfig */;
+			baseConfigurationReference = D3C23B5928061304728B63D6 /* Pods-StepicTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4639,7 +4863,7 @@
 		};
 		08D121221C937B2200A54ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45702091BE7139B684BF2CC9 /* Pods-SberbankUniversity.debug.xcconfig */;
+			baseConfigurationReference = 2A9B6F456E38868FDBABB40D /* Pods-SberbankUniversity.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -4660,7 +4884,7 @@
 		};
 		08D121231C937B2200A54ABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C307A31879A545E569C283F /* Pods-SberbankUniversity.release.xcconfig */;
+			baseConfigurationReference = 6CDCDBDA20A25A3B80026F49 /* Pods-SberbankUniversity.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = SbAppIcon;
@@ -4780,7 +5004,7 @@
 		};
 		08DE94311B8C58AC00D278AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7D83741F8FA807B53E64EC7 /* Pods-Stepic.debug.xcconfig */;
+			baseConfigurationReference = 65D7CED3F37796057ECFA6CC /* Pods-Stepic.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4788,7 +5012,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -4808,7 +5032,7 @@
 		};
 		08DE94321B8C58AC00D278AB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81878F19D8F4401449068A38 /* Pods-Stepic.release.xcconfig */;
+			baseConfigurationReference = 8BA7EB483708E5DD0B1570F9 /* Pods-Stepic.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4816,7 +5040,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -4825,7 +5049,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b0c0c092-abaf-46f6-84ee-78eedb9ddac0";
+				PROVISIONING_PROFILE = "123664dc-4560-4c33-a37f-c6538d5c47a9";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -4835,7 +5059,7 @@
 		};
 		86EF29431E83CEA900F8D214 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 708DD9D46F433FF2CFC02775 /* Pods-StepicAdaptiveCourse.debug.xcconfig */;
+			baseConfigurationReference = 3917CA61A045C23EAB5D0547 /* Pods-StepicAdaptiveCourse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4859,7 +5083,7 @@
 		};
 		86EF29441E83CEA900F8D214 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7D5BA66113374DEE5363233 /* Pods-StepicAdaptiveCourse.release.xcconfig */;
+			baseConfigurationReference = 1BAE14D93BB95401CE6BB4D1 /* Pods-StepicAdaptiveCourse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4921,7 +5145,7 @@
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d5fe3a3-3cea-47ab-b398-f0b88175ac5c";
+				PROVISIONING_PROFILE = "ae0cb1a3-b372-427c-975f-a7dc1f1db87a";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -4965,7 +5189,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "187ffe3b-224b-4ec7-b128-c1a77ff67b1a";
+				PROVISIONING_PROFILE = "2043acd1-e1dd-49db-83ee-fe508bfe2c04";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -5047,6 +5271,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */,
 				084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */,
 				084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */,
 				081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */,
@@ -5062,7 +5287,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */;
+			currentVersion = 0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

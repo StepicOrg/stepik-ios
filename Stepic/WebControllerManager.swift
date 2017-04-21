@@ -36,7 +36,7 @@ class WebControllerManager: NSObject {
                 return
             } 
         }
-        print(currentWebController)
+        print(currentWebController ?? "")
         error?("Could not dismiss web controller with key \(key)")
     }
     
@@ -78,7 +78,7 @@ class WebControllerManager: NSObject {
     }
     
     func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
-        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed))
+        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed) ?? "")
         if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!) {
             presentWebControllerWithURL(url, 
                                         inController: c, 
@@ -90,6 +90,8 @@ class WebControllerManager: NSObject {
             print("Invalid url")
         }
     }
+    
+    func defaultSelector() {}
 }
 
 enum BackButtonStyle {
@@ -99,15 +101,15 @@ enum BackButtonStyle {
     var barButtonItem : UIBarButtonItem {
         switch self {
         case .close:
-            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: Selector(""))
+            let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         case .back:
-            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: Selector(""))
+            let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         case .done:
-            let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: Selector(""))
+            let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(WebControllerManager.defaultSelector))
             item.tintColor = UIColor.stepicGreenColor()
             return item
         }

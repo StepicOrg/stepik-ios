@@ -23,7 +23,7 @@ class RemoteVersionManager: NSObject {
     
     func checkRemoteVersionChange(needUpdateHandler update: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
         let local = getLocalVersion()
-        getRemoteVersion(
+        _ = getRemoteVersion(
             success: {
                 remote, url in
                 if self.isVersion(remote, olderThan: local) {
@@ -58,10 +58,10 @@ class RemoteVersionManager: NSObject {
             } else {
                 json = response.result.value!
             }
-            let response = response.response
+//            let response = response.response
             
             
-            if let e = error as? NSError {
+            if let e = error as NSError? {
                 errorHandler(e)
                 return
             }

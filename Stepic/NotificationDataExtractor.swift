@@ -46,7 +46,7 @@ class NotificationDataExtractor {
                 print("\(StepicApplicationsInfo.stepicURL)\(commentsLink)")
                 let urlString = StepicApplicationsInfo.stepicURL + commentsLink
                 let u = URL(string: urlString)
-                print(u)
+                print(u ?? "")
                 return u
             } else {
                 return nil

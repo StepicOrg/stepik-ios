@@ -304,7 +304,7 @@ extension MatchingQuizViewController : UITableViewDelegate {
         if latexSupportNeeded {
             if let a = attempt {
                 if !finishedBothUpdates {
-                    if let dataset = a.dataset as? MatchingDataset {
+                    if (a.dataset as? MatchingDataset) != nil {
                         switch tableView.tag {
                         case 1: 
                             return CGFloat(firstWebViewHelper.cellHeights[indexPath.row])

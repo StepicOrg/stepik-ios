@@ -46,7 +46,7 @@ extension VKSocialSDKProvider : VKSdkDelegate {
     }
 
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        if let error = result.error {
+        if (result.error) != nil {
             print(result.error)
             errorHandler?(SocialSDKError.connectionError)
             return

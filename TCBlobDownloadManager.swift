@@ -193,7 +193,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
 
         do {
             try FileManager.default.replaceItem(at: download.destinationURL as URL, withItemAt: location, backupItemName: nil, options: [], resultingItemURL: &resultingURL)
-            download.resultingURL = resultingURL as? URL
+            download.resultingURL = resultingURL as URL?
         } catch let error1 as NSError {
             fileError = error1
             download.error = fileError
@@ -204,7 +204,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
         guard let download = self.downloads[task.taskIdentifier] else {
             return
         }
-        var error: NSError? = sessionError as NSError?? ?? download.error
+        var error: NSError? = sessionError as NSError?
         // Handle possible HTTP errors
         if let response = task.response as? HTTPURLResponse {
             // NSURLErrorDomain errors are not supposed to be reported by this delegate

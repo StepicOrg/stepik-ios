@@ -98,8 +98,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     fileprivate func getCachedCourses(completion: ((Void) -> Void)?) {
         isRefreshing = true
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             do {
                 let cachedIds = self.tabIds 
                 let c = try Course.getCourses(cachedIds)
@@ -437,9 +436,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
         }
         
-        print("LastStep stepId before refresh: \(course.lastStep?.stepId)")
+        print("LastStep stepId before refresh: \(String(describing: course.lastStep?.stepId))")
         _ = ApiDataDownloader.lastSteps.retrieve(ids: [lastStepId], updatingLastSteps: course.lastStep != nil ? [course.lastStep!] : [] , success: {
-            [weak self]
             newLastSteps -> Void in
             
             guard let newLastStep = newLastSteps.first, 
@@ -448,7 +446,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 return
             }
 
-            print("new stepId \(newLastStep.stepId)")
+            print("new stepId \(String(describing: newLastStep.stepId))")
             
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()

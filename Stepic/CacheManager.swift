@@ -14,7 +14,7 @@ class CacheManager: NSObject {
     
     //Returns (successful, failed)
     func clearCache(completion: @escaping (Int, Int)->Void) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        DispatchQueue.global(qos: .default).async {
             let videos = Video.getAllVideos()
             var completed = 0
             var errors = 0
@@ -35,7 +35,7 @@ class CacheManager: NSObject {
                 }
             }
             completion(completed, errors)
-        })
+        }
     }
     
     var connectionCancelled : [Video] = []
@@ -47,7 +47,7 @@ class CacheManager: NSObject {
             completed += connectionCancelled.count 
         }
         connectionCancelled = []
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        DispatchQueue.global(qos: .default).async {
             let videos = Video.getAllVideos()
             for video in videos {
                 if video.state == VideoState.downloading {
@@ -59,7 +59,7 @@ class CacheManager: NSObject {
                 }
             }
             completion(completed, errors)
-        })
+        }
     }
     
 }

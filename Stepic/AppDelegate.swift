@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     //Streaks presentation
-    
+    //TODO: Refactor this into a class
     let streaksPopupPresentr : Presentr = {
         let width = ModalSize.sideMargin(value: 24)
         let height = ModalSize.custom(size: 300.0)
@@ -110,9 +110,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func presentStreaks(userActivity: UserActivity) {
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+            "current" : userActivity.currentStreak,
+            "longest" : userActivity.longestStreak,
+            "percentage" : String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+            ])
+
+        
         guard let nav = currentNavigation else {
             return
         }
+        
         let vc = CurrentBestStreakViewController(nibName: "CurrentBestStreakViewController", bundle: nil) as CurrentBestStreakViewController
         
         vc.activity = userActivity
@@ -140,6 +149,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     [weak self] in
                     self?.presentStreaks(userActivity: userActivity)
                 })
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
+                    "current" : userActivity.currentStreak,
+                    "longest" : userActivity.longestStreak,
+                    "percentage" : String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+                    ])
             }
         }, error: {
             error in
@@ -296,7 +310,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    @available(iOS 8.0, *)
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            print("\(userActivity.webpageURL?.absoluteString)")
+            print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
                 handleOpenedFromDeepLink(url)
                 return true

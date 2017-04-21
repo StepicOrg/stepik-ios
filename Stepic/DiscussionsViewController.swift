@@ -622,7 +622,7 @@ extension DiscussionsViewController : UITableViewDelegate {
 
         }
         
-        if let shouldLoadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
+        if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
             let idsToLoad = getNextDiscussionIdsToLoad()
             if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true
@@ -704,7 +704,7 @@ extension DiscussionsViewController : UITableViewDataSource {
             return cell
         }
         
-        if let loadDiscussions = cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions {
+        if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
             print("load discussions cell")
             let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(discussionIds.leftToLoad))"
@@ -717,7 +717,7 @@ extension DiscussionsViewController : UITableViewDataSource {
 
 extension DiscussionsViewController : WriteCommentDelegate {
     func didWriteComment(_ comment: Comment) {
-        print(comment.parentId)
+        print(comment.parentId ?? "")
         if let parentId = comment.parentId {
             //insert row in an existing section
             if let section = discussions.index(where: {$0.id == parentId}) {

@@ -108,6 +108,7 @@ struct AnalyticsEvents {
         static let myCoursesClicked = "main_choice_my_courses"
         static let findCoursesClicked = "main_choice_find_courses"
         static let downloadsClicked = "main_choice_downloads"
+        static let certificatesClicked = "main_choice_certificates"
     }
     
     struct Token {
@@ -126,6 +127,16 @@ struct AnalyticsEvents {
             }
         }
         static let notificationOpened = "streak_notification_opened"
+        
+        struct LocalNotification {
+            static let shown = "streak_local_notification_shown"
+            static let clicked = "streak_local_notification_clicked"
+        }
+        struct ImproveAlert {
+            static let notificationOffered = "streak_improve_alert_notifications_offered"
+            static let timeSelected = "streak_improve_alert_time_selected"
+            static let timeCancelled = "streak_improve_alert_time_cancelled"
+        }
     }
     
     struct App {
@@ -156,5 +167,10 @@ struct AnalyticsEvents {
                 static let success = "app_rate_negative_email_success"
             }
         }
+    }
+    
+    struct Certificates {
+        static let opened = "certificates_opened_certificate"
+        static let shared = "certificates_pressed_share_certificate"
     }
 }

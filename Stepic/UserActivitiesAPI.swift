@@ -29,14 +29,14 @@ class UserActivitiesAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     print("RETRIEVE user-activities/\(userId): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     errorHandler(.connectionError)
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    print("RETRIEVE user-activities/\(userId): bad response status code \(response?.statusCode)")
+                    print("RETRIEVE user-activities/\(userId): bad response status code \(String(describing: response?.statusCode))")
                     errorHandler(.badStatus)
                     return
                 }

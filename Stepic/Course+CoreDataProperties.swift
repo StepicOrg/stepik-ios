@@ -45,6 +45,7 @@ extension Course {
     
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedLastStep: LastStep?
+    @NSManaged var managedCertificateEntity: Certificate?
     
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!

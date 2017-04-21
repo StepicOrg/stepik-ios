@@ -289,9 +289,9 @@ class Lesson: NSManagedObject, JSONInitializable {
                     self.storeCompletion?(self.completedVideos, self.cancelledVideos)
                     
                     print("Video download error in lesson")
-                    print(error?.localizedFailureReason)
-                    print(error?.code)
-                    print(error?.localizedDescription)
+                    print(error?.localizedFailureReason ?? "")
+                    print(error?.code ?? "")
+                    print(error?.localizedDescription ?? "")
                     
                     self.completedVideos = 0
                     self.cancelledVideos = 0
@@ -320,11 +320,10 @@ class Lesson: NSManagedObject, JSONInitializable {
             return
         }
         
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
                     //                    vid.removeFromStore()
                 }
@@ -338,14 +337,13 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     func removeFromStore(completion: @escaping (Void) -> Void) {
         print("entered lesson removeFromStore")
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
+        DispatchQueue.global(qos: .default).async {
             for vid in self.stepVideos {
                 if vid.state != VideoState.cached { 
                     print("not cached video can not be removed!")
-                    vid.cancelStore()
+                    _ = vid.cancelStore()
                 } else {
-                    vid.removeFromStore()
+                    _ = vid.removeFromStore()
                 }
             }
             

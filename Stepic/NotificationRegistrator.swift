@@ -56,7 +56,7 @@ class NotificationRegistrator: NSObject {
     // Should be executed first before any actions were performed, contains abort()
     //TODO: remove abort, add failure completion handler 
     func unregisterFromNotifications(completion: @escaping ((Void)->Void)) {
-        print(AuthInfo.shared.token?.accessToken)
+        print(AuthInfo.shared.token?.accessToken ?? "")
         UIApplication.shared.unregisterForRemoteNotifications()
         if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
             ApiDataDownloader.devices.delete(deviceId, success: 
@@ -68,7 +68,7 @@ class NotificationRegistrator: NSObject {
                     errorMessage in 
                     print(errorMessage)
                     print("initializing delete device task")
-                    print("user id \(AuthInfo.shared.userId) , token \(AuthInfo.shared.token)")
+                    print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
                     if let userId =  AuthInfo.shared.userId,
                         let token = AuthInfo.shared.token {
                         

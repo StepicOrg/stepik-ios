@@ -61,7 +61,7 @@ class NotificationReactionHandler {
                 return nil
             }
             let sectionsCOpt = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController
-            print(sectionsCOpt)
+            print(sectionsCOpt ?? "")
             if let sectionsController = sectionsCOpt,
                 let course = course {
                 sectionsController.course = course

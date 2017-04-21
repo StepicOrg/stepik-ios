@@ -10,9 +10,22 @@ import UIKit
 
 class StyledTabBarViewController: UITabBarController {
 
+    
+    let titles = [
+        NSLocalizedString("MyCourses", comment: ""),
+        NSLocalizedString("FindCourses", comment: ""),
+        NSLocalizedString("Downloads", comment: ""),
+        NSLocalizedString("Certificates", comment: "")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UICustomizer.sharedCustomizer.setStepicTabBar(tabBar)
+        if let items = tabBar.items {
+            for (index, item) in items.enumerated() {
+                item.title = titles[index]
+            }
+        }
         delegate = self
         // Do any additional setup after loading the view.
     }
@@ -21,7 +34,6 @@ class StyledTabBarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     
     /*
@@ -42,6 +54,8 @@ class StyledTabBarViewController: UITabBarController {
             return AnalyticsEvents.Tabs.findCoursesClicked
         case 2:
             return AnalyticsEvents.Tabs.downloadsClicked
+        case 3:
+            return AnalyticsEvents.Tabs.certificatesClicked
         default:
             return nil
         }
