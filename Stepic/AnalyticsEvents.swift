@@ -110,11 +110,7 @@ struct AnalyticsEvents {
         static let downloadsClicked = "main_choice_downloads"
         static let certificatesClicked = "main_choice_certificates"
     }
-    
-    struct Token {
-        static let requestedNotNilToken = "token_requested_not_nil"
-    }
-    
+   
     struct Streaks {
         static let preferencesOn = "streak_notification_pref_on"
         static let preferencesOff = "streak_notification_pref_off"
