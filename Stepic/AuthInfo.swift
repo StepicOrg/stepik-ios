@@ -103,7 +103,6 @@ class AuthInfo: NSObject {
             let tokenType = defaults.value(forKey: "token_type") as? String {
                 print("got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Token.requestedNotNilToken, parameters: nil)
                 return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil
