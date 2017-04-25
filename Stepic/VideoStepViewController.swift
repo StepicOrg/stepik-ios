@@ -32,6 +32,9 @@ class VideoStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
+    //variable for sending analytics correctly - if view appears after dismissing video player, the event is not being sent
+    var didPresentVideoPlayer: Bool = false
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
@@ -143,7 +146,9 @@ class VideoStepViewController: UIViewController {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
             self.present(player, animated: true, completion: {
+                [weak self] in
                 print("stepic player successfully presented!")
+                self?.didPresentVideoPlayer = true
             })
         } else {
             if let vc = self.parentNavigationController {
@@ -176,7 +181,11 @@ class VideoStepViewController: UIViewController {
             return
         }
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        if !didPresentVideoPlayer {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        } else {
+            didPresentVideoPlayer = false
+        }
 
         let stepid = step.id         
         if stepId - 1 == startStepId {
