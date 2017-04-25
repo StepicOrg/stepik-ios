@@ -18,6 +18,9 @@ class WebControllerManager: NSObject {
     
     var currentWebController : UIViewController? {
         willSet(newValue) {
+            guard newValue != nil else {
+                return
+            }
             if let c = currentWebController {
                 c.dismiss(animated: false, completion: nil)
                 print("Web controllers conflict! Dismissed the underlying one.")
@@ -62,19 +65,17 @@ class WebControllerManager: NSObject {
         
         if #available(iOS 9.0, *) {
             let svc = SFSafariViewController(url: url)
-            c.present(svc, animated: true, completion: nil)
-            self.currentWebControllerKey = key
-            self.currentWebController = svc
+//            if let nav = c.navigationController {
+//                nav.pushViewController(svc, animated: true)
+//            } else {
+                c.present(svc, animated: true, completion: nil)
+                self.currentWebControllerKey = key
+                self.currentWebController = svc
+//            }
         } else {
             self.currentWebControllerKey = key
-            //        if #available(iOS 9.0, *) {
-            //            let svc = SFSafariViewController(URL: url)
-            //            self.currentWebController = svc
-            //            c.presentViewController(svc, animated: true, completion: nil)
-            //        } else {
             presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
         }
-        //        }
     }
     
     func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
