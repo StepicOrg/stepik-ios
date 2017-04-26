@@ -63,5 +63,5 @@ end
 target 'StepicAdaptiveCourse' do
     all_pods
     
-    pod 'Koloda'
+    pod 'Koloda', '4.0'
 end

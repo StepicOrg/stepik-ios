@@ -34,4 +34,11 @@ struct StepicApplicationsInfo {
     static let cookiePrefix = ""
     
     static let adaptiveCourseId = 1838
+    
+    struct SocialInfo {
+        struct AppIds {
+            static let vk = "5995451"
+            static let facebook = "171127739724012"
+        }
+    }
 }

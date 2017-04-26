@@ -32,4 +32,11 @@ struct StepicApplicationsInfo {
 
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
+    
+    struct SocialInfo {
+        struct AppIds {
+            static let vk = "5628680"
+            static let facebook = "171127739724012"
+        }
+    }
 }

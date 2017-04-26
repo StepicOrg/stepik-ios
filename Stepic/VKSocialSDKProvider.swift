@@ -18,7 +18,7 @@ class VKSocialSDKProvider : NSObject, SocialSDKProvider {
     private var sdkInstance : VKSdk
     
     private override init() {
-        sdkInstance = VKSdk.initialize(withAppId: "5628680")
+        sdkInstance = VKSdk.initialize(withAppId: StepicApplicationsInfo.SocialInfo.AppIds.vk)
         super.init()
         sdkInstance.register(self)
     }
