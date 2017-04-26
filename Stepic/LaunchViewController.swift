@@ -12,6 +12,7 @@ class LaunchViewController: UIViewController {
 
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     
     var signInController : SignInViewController?
@@ -42,6 +43,8 @@ class LaunchViewController: UIViewController {
         
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+        
+        dismissButton.isHidden = !canDismiss
     }
 
     override func viewWillAppear(_ animated: Bool) {
