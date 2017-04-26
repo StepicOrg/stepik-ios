@@ -78,14 +78,17 @@ class SignInViewController: UIViewController {
     func didGetAuthentificationCode(_ notification: Foundation.Notification) {
         print("entered didGetAuthentificationCode")
         
-        //TODO: Implement WebControllerManager
-        
-        WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
-            self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
-        }, error: {
-            errorMessage in
-            print(errorMessage)
-        })        
+//        if #available(iOS 9.0, *) {
+//            self.navigationController?.popViewController(animated: true)
+//            self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
+//        } else {
+            WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
+                self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
+            }, error: {
+                errorMessage in
+                print(errorMessage)
+            })
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,8 +110,9 @@ class SignInViewController: UIViewController {
                                                         AuthInfo.shared.user = user
                                                         User.removeAllExcept(user)
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                        UIThread.performUI { 
-                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                        UIThread.performUI {
+                                                            [weak self] in
+                                                            self?.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
                                                                 self?.success?("social")
                                                             })
@@ -117,8 +121,9 @@ class SignInViewController: UIViewController {
                                                         e in
                                                         print("successfully signed in, but could not get user")
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                        UIThread.performUI { 
-                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                        UIThread.performUI {
+                                                            [weak self] in
+                                                            self?.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
                                                                 self?.success?("social")
                                                             })
@@ -142,8 +147,9 @@ class SignInViewController: UIViewController {
                                                                 AuthInfo.shared.user = user
                                                                 User.removeAllExcept(user)
                                                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                                UIThread.performUI { 
-                                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                                UIThread.performUI {
+                                                                    [weak self] in
+                                                                    self?.navigationController?.dismiss(animated: true, completion: {
                                                                         [weak self] in
                                                                         self?.success?("password")
                                                                     })
@@ -152,8 +158,9 @@ class SignInViewController: UIViewController {
                                                                 e in
                                                                 print("successfully signed in, but could not get user")
                                                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                                UIThread.performUI{ 
-                                                                    self.navigationController?.dismiss(animated: true, completion: {
+                                                                UIThread.performUI{
+                                                                    [weak self] in
+                                                                    self?.navigationController?.dismiss(animated: true, completion: {
                                                                         [weak self] in
                                                                         self?.success?("password")
                                                                     })
@@ -180,12 +187,18 @@ class SignInViewController: UIViewController {
         if segue.identifier == "socialNetworksEmbedSegue" {
             let dvc = segue.destination as? SocialNetworksViewController
             dvc?.dismissBlock = {
-                self.navigationController?.dismiss(animated: true, completion: {
+                [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: {
                     [weak self] in
                     self?.success?("social")
                 })
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("did deinit SignInViewController")
     }
 }
 
