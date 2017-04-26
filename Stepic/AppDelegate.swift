@@ -49,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
         AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
         
-        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
@@ -256,17 +255,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-//        print("opened app via url \(url.absoluteString)")
-//        let codeOpt = Parser.sharedParser.codeFromURL(url)
-//        if let code = codeOpt {
-//            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
-//        } else {
-//            print("error while authentificating")
-//        }
-//        return true
-//    }
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         NotificationRegistrator.sharedInstance.getGCMRegistrationToken(deviceToken: deviceToken)
     }
@@ -327,7 +315,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
         }
-        if url.scheme == "vk5628680" || url.scheme == "fb171127739724012" {
+        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
         let codeOpt = Parser.sharedParser.codeFromURL(url)
@@ -343,8 +331,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("completed background task with id: \(identifier)")
         completionHandler()
     }
-    
-    
     
     func applicationWillTerminate(_ application: UIApplication) {
 //        CoreDataHelper.instance.deleteAllPending()

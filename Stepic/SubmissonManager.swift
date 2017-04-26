@@ -62,7 +62,7 @@ class SubmissionManager {
     }
     
     var canShowAlert : Bool {
-        return AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt && PreferencesContainer.notifications.allowStreaksNotifications == false
+        return AuthInfo.shared.isAuthorized && isStreakAlertAvailableNow && streakAlertShownCnt < maxStreakAlertShownCnt && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
     }
     
     

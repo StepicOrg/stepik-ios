@@ -136,7 +136,7 @@ class RateAppViewController: UIViewController {
         composeVC.mailComposeDelegate = self
         
         composeVC.setToRecipients(["support@stepik.org"])
-        composeVC.setSubject("Feedback about the Stepik iOS App")
+        composeVC.setSubject("Feedback about the \(StepicApplicationsInfo.emailAppTitle) App")
         composeVC.setMessageBody("", isHTML: false)
         self.customPresentViewController(mailPresenter, viewController: composeVC, animated: true, completion: nil)
 
@@ -144,7 +144,7 @@ class RateAppViewController: UIViewController {
     
     func showAppStore() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: defaultAnalyticsParams)
-        guard let appStoreURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review") else {
+        guard let appStoreURL = StepicApplicationsInfo.appStoreRateURL else {
             return
         }
         UIApplication.shared.openURL(appStoreURL)

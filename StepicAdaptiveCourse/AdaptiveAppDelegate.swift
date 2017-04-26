@@ -8,6 +8,8 @@
 
 import UIKit
 import Mixpanel
+import VK_ios_sdk
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,6 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        print("opened app via url \(url.absoluteString)")
+        if VKSdk.processOpen(url, fromApplication: sourceApplication) {
+            return true
+        }
+        if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+            return true
+        }
+        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+            return true
+        }
+        if let code = Parser.sharedParser.codeFromURL(url) {
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])
+        } else {
+            print("deep link somehow opened StepicAdaptiveCourse")
+        }
+        return true
+    }
 
 }
 

@@ -3273,7 +3273,7 @@
 					};
 					86EF29331E83CEA900F8D214 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 7S8Z9T8WFU;
+						DevelopmentTeam = 4562ZPB9BG;
 						ProvisioningStyle = Automatic;
 					};
 					9F9C71161E076AE000EC8DA3 = {
@@ -5067,11 +5067,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepikAdaptive;
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.adaptive.pdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5090,11 +5090,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7S8Z9T8WFU;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pw.kvld.StepikAdaptive;
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.adaptive.pdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
