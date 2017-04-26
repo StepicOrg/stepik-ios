@@ -33,6 +33,8 @@ struct StepicApplicationsInfo {
     static let doesAllowCourseUnenrollment = true
     static let inAppUpdatesAvailable = false
     
+    static let streaksEnabled = true
+    
     struct SocialInfo {
         struct AppIds {
             static let vk = "5628680"

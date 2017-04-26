@@ -35,6 +35,8 @@ struct StepicApplicationsInfo {
     
     static let adaptiveCourseId = 1838
     
+    static let streaksEnabled = false
+    
     struct SocialInfo {
         struct AppIds {
             static let vk = "5995451"
