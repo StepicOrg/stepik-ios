@@ -188,8 +188,13 @@ class AdaptiveStepsViewController: UIViewController {
         vc.success = { [weak self] in
             self?.joinAndLoadCourse(completion: {
                 // Present tutorial after log in
-                let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-                self?.present(tutorialVC, animated: true, completion: nil)
+                let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
+                
+                if isTutorialNeeded {
+                    let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
+                    self?.present(tutorialVC, animated: true, completion: nil)
+                    UserDefaults.standard.set(true, forKey: "isTutorialShown")
+                }
                 
                 self?.initKoloda()
             })
