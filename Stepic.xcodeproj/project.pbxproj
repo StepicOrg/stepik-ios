@@ -1150,6 +1150,7 @@
 		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
+		D6E9CACBB90174FE95B76ADC /* Pods_Adaptive_PDD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89E21223A8B6250274EAF46 /* Pods_Adaptive_PDD.framework */; };
 		EE389044486FF1814A78F159 /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D706CA40822BB2749A2C85 /* Pods_SberbankUniversity.framework */; };
 /* End PBXBuildFile section */
 
@@ -1648,6 +1649,7 @@
 		88BD8349A19E48699B665F5C /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8BA7EB483708E5DD0B1570F9 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		8F9BD7E9A613D69588A40833 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97F6CDAB061231D0D3FF5C96 /* Pods-Adaptive PDD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive PDD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive PDD/Pods-Adaptive PDD.debug.xcconfig"; sourceTree = "<group>"; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1672,6 +1674,8 @@
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
 		CD1ECA746011CD9EC428620F /* Pods_StepicAdaptiveCourse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicAdaptiveCourse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3C23B5928061304728B63D6 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
+		D5358D97B5317B80C5B586C8 /* Pods-Adaptive PDD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive PDD.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive PDD/Pods-Adaptive PDD.release.xcconfig"; sourceTree = "<group>"; };
+		F89E21223A8B6250274EAF46 /* Pods_Adaptive_PDD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_PDD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1706,6 +1710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D76B0A93E3C133FC4541C67 /* Pods_StepicAdaptiveCourse.framework in Frameworks */,
+				D6E9CACBB90174FE95B76ADC /* Pods_Adaptive_PDD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2956,6 +2961,7 @@
 				8F9BD7E9A613D69588A40833 /* Pods_Stepic.framework */,
 				CD1ECA746011CD9EC428620F /* Pods_StepicAdaptiveCourse.framework */,
 				55367E7F0B2C22A99CD1795D /* Pods_StepicTests.framework */,
+				F89E21223A8B6250274EAF46 /* Pods_Adaptive_PDD.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3099,6 +3105,8 @@
 				1BAE14D93BB95401CE6BB4D1 /* Pods-StepicAdaptiveCourse.release.xcconfig */,
 				88BD8349A19E48699B665F5C /* Pods-StepicTests.debug.xcconfig */,
 				D3C23B5928061304728B63D6 /* Pods-StepicTests.release.xcconfig */,
+				97F6CDAB061231D0D3FF5C96 /* Pods-Adaptive PDD.debug.xcconfig */,
+				D5358D97B5317B80C5B586C8 /* Pods-Adaptive PDD.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3572,7 +3580,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		17C15DCA4CB5FE9660865431 /* [CP] Embed Pods Frameworks */ = {
@@ -3602,7 +3610,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		340C3184DF58059999E9CA78 /* [CP] Copy Pods Resources */ = {
@@ -3632,7 +3640,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive PDD/Pods-Adaptive PDD-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		75A91FE284B414BB44C0E8D0 /* [CP] Check Pods Manifest.lock */ = {
@@ -3647,7 +3655,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7D16EB3C0F56050F0FDD6B6E /* [CP] Copy Pods Resources */ = {
@@ -3707,7 +3715,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicAdaptiveCourse/Pods-StepicAdaptiveCourse-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive PDD/Pods-Adaptive PDD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E68A74FB9C5F36275E07D0C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -3722,7 +3730,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5060,7 +5068,7 @@
 		};
 		86EF29431E83CEA900F8D214 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3917CA61A045C23EAB5D0547 /* Pods-StepicAdaptiveCourse.debug.xcconfig */;
+			baseConfigurationReference = 97F6CDAB061231D0D3FF5C96 /* Pods-Adaptive PDD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5084,7 +5092,7 @@
 		};
 		86EF29441E83CEA900F8D214 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BAE14D93BB95401CE6BB4D1 /* Pods-StepicAdaptiveCourse.release.xcconfig */;
+			baseConfigurationReference = D5358D97B5317B80C5B586C8 /* Pods-Adaptive PDD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
