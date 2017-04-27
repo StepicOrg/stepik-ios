@@ -1639,7 +1639,7 @@
 		86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseViewController.swift; sourceTree = "<group>"; };
 		86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialViewController.swift; sourceTree = "<group>"; };
 		86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialPageViewController.swift; sourceTree = "<group>"; };
-		86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicAdaptiveCourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86EF29341E83CEA900F8D214 /* Adaptive PDD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive PDD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
@@ -2640,7 +2640,7 @@
 				9F9C71481E076B3200EC8DA3 /* Shared */,
 				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
-				86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */,
+				86EF29351E83CEA900F8D214 /* Adaptive Course */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
@@ -2656,7 +2656,7 @@
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
 				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
 				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
-				86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */,
+				86EF29341E83CEA900F8D214 /* Adaptive PDD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3027,7 +3027,7 @@
 			name = Tutorial;
 			sourceTree = "<group>";
 		};
-		86EF29351E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
 				86ABC6651E9685E70012E8A6 /* Views */,
@@ -3039,6 +3039,7 @@
 				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
 				864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */,
 			);
+			name = "Adaptive Course";
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
 		};
@@ -3170,9 +3171,9 @@
 			productReference = 08DE94111B8C58AC00D278AB /* Stepic.app */;
 			productType = "com.apple.product-type.application";
 		};
-		86EF29331E83CEA900F8D214 /* StepicAdaptiveCourse */ = {
+		86EF29331E83CEA900F8D214 /* Adaptive PDD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "StepicAdaptiveCourse" */;
+			buildConfigurationList = 86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "Adaptive PDD" */;
 			buildPhases = (
 				75A91FE284B414BB44C0E8D0 /* [CP] Check Pods Manifest.lock */,
 				86EF29301E83CEA900F8D214 /* Sources */,
@@ -3185,9 +3186,9 @@
 			);
 			dependencies = (
 			);
-			name = StepicAdaptiveCourse;
+			name = "Adaptive PDD";
 			productName = StepicAdaptiveCourse;
-			productReference = 86EF29341E83CEA900F8D214 /* StepicAdaptiveCourse.app */;
+			productReference = 86EF29341E83CEA900F8D214 /* Adaptive PDD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9F9C71161E076AE000EC8DA3 /* StepicWatch */ = {
@@ -3307,7 +3308,7 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
-				86EF29331E83CEA900F8D214 /* StepicAdaptiveCourse */,
+				86EF29331E83CEA900F8D214 /* Adaptive PDD */,
 			);
 		};
 /* End PBXProject section */
@@ -5238,7 +5239,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "StepicAdaptiveCourse" */ = {
+		86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "Adaptive PDD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86EF29431E83CEA900F8D214 /* Debug */,
