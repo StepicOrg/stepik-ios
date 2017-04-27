@@ -60,7 +60,7 @@ target 'SberbankUniversity' do
     all_pods
 end
 
-target 'StepicAdaptiveCourse' do
+target 'Adaptive PDD' do
     all_pods
     
     pod 'Koloda', '4.0'
