@@ -307,6 +307,10 @@
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
+		087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
+		087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
+		087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
@@ -1032,6 +1036,8 @@
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
 		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
+		087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
+		087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepGlobalContext.swift; sourceTree = "<group>"; };
@@ -2492,6 +2498,8 @@
 				084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */,
 				084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */,
 				0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */,
+				087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */,
+				087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */,
 			);
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
@@ -2843,6 +2851,7 @@
 				086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
+				087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
@@ -2886,6 +2895,7 @@
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
@@ -3206,6 +3216,7 @@
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
+				087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
@@ -3592,6 +3603,7 @@
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
