@@ -127,7 +127,7 @@ class Video: NSManagedObject, JSONInitializable {
     var download : TCBlobDownload? = nil
     var totalProgress : Float = 0
     
-    var downloadDelegate : VideoDownloadDelegate? = nil
+    weak var downloadDelegate : VideoDownloadDelegate? = nil
     var loadingQuality : String?
     
     var storedProgress : ((Float)->Void)?

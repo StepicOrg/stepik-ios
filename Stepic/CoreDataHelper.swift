@@ -47,9 +47,11 @@ class CoreDataHelper: NSObject {
 
     func save() {
         lockQueue.sync {
-            self.context.perform({
+            [weak self] in
+            self?.context.perform({
+                [weak self] in
                 do {
-                    try self.context.save()
+                    try self?.context.save()
                 }
                 catch {
                     print("SAVING ERROR")
@@ -62,10 +64,12 @@ class CoreDataHelper: NSObject {
     
     func deleteFromStore(_ object: NSManagedObject, save s: Bool = true) {
         lockQueue.sync {
-            self.context.perform({
-                self.context.delete(object)
+            [weak self] in
+            self?.context.perform({
+                [weak self] in
+                self?.context.delete(object)
                 if s == true {
-                    self.save()
+                    self?.save()
                 }
             })
         }

@@ -57,7 +57,7 @@ class VideoDownloadView: UIView {
     } 
     
     
-    var downloadDelegate : VideoDownloadDelegate?
+    weak var downloadDelegate : VideoDownloadDelegate?
     
     convenience init(frame: CGRect, video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {
         self.init(frame: frame)
@@ -111,6 +111,9 @@ class VideoDownloadView: UIView {
         print("Something got wrong while initializing download button state. Should not be pending")
     }
 
+    deinit {
+        print("deinit video download view")
+    }
     
     /*
     // Only override drawRect: if you perform custom drawing.

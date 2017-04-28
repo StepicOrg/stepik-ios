@@ -378,7 +378,7 @@ class QuizViewController: UIViewController {
     }
     
     deinit {
-        print("did deinit quiz controller for step \(step.id)")
+        print("deinit quiz controller for step \(step.id)")
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -599,9 +599,10 @@ class QuizViewController: UIViewController {
     
     fileprivate func checkSubmission(_ id: Int, time: Int, completion: ((Void)->Void)? = nil) {
         delay(checkTimeStandardInterval * Double(time), closure: {
+            [weak self] in
+            guard self != nil else { return }
             performRequest({
                 [weak self] in
-                
                 guard let s = self else { return }
                 _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     submission in

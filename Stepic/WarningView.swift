@@ -55,7 +55,7 @@ class WarningView: UIView {
         setup()
     } 
     
-    var delegate : WarningViewDelegate?
+    weak var delegate : WarningViewDelegate?
     
     fileprivate func localize() {
         tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControlState())
@@ -100,6 +100,6 @@ class WarningView: UIView {
 
 }
 
-protocol WarningViewDelegate {
+protocol WarningViewDelegate : class {
     func didPressButton()
 }
