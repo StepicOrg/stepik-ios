@@ -387,6 +387,8 @@
 		08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		08A3A9CE1BD5A14D0032C36E /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */; };
+		08A7B0E61EB32E3F00C1BA71 /* AdaptiveAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E51EB32E3F00C1BA71 /* AdaptiveAuth.plist */; };
+		08A7B0E81EB340F500C1BA71 /* StepikAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* StepikAuth.plist */; };
 		08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
 		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
@@ -1470,6 +1472,8 @@
 		08A1257A1BDEBCC90066B2B2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
+		08A7B0E51EB32E3F00C1BA71 /* AdaptiveAuth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdaptiveAuth.plist; sourceTree = "<group>"; };
+		08A7B0E71EB340F500C1BA71 /* StepikAuth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepikAuth.plist; sourceTree = "<group>"; };
 		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegistrationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
 		08AB82371D74C44100FDEADE /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -2692,6 +2696,7 @@
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
 				08DE94151B8C58AC00D278AB /* Info.plist */,
 				08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */,
+				08A7B0E71EB340F500C1BA71 /* StepikAuth.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3053,6 +3058,7 @@
 				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
 				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
 				864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */,
+				08A7B0E51EB32E3F00C1BA71 /* AdaptiveAuth.plist */,
 			);
 			name = "Adaptive Course";
 			path = StepicAdaptiveCourse;
@@ -3435,6 +3441,7 @@
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
+				08A7B0E81EB340F500C1BA71 /* StepikAuth.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
@@ -3452,6 +3459,7 @@
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
 				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
+				08A7B0E61EB32E3F00C1BA71 /* AdaptiveAuth.plist in Resources */,
 				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
 				86BD22511E8DD5A4006B63B0 /* Localizable.strings in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
