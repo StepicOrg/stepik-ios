@@ -20,10 +20,13 @@ class NotificationRegistrator: NSObject {
     }
         
     func registerForRemoteNotifications(_ application: UIApplication) {
-        let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        if StepicApplicationsInfo.shouldRegisterNotifications {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
+        
         if AuthInfo.shared.isAuthorized {
             if let token = FIRInstanceID.instanceID().token() {
                 registerDevice(token)

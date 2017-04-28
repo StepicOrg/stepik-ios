@@ -26,6 +26,7 @@ struct StepicApplicationsInfo {
     static let inAppUpdatesAvailable = false
     
     static let streaksEnabled = true
+    static let shouldRegisterNotifications = true
     
     static let appStoreRateURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review")
     static let emailAppTitle = "Stepik"
