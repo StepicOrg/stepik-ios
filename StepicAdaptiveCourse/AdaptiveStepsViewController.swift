@@ -90,8 +90,25 @@ class AdaptiveStepsViewController: UIViewController {
                             let step = newStepsImmutable.first
                             
                             if let step = step {
-                                self.isRecommendationLoaded = true
-                                success(step)
+                                guard let progressId = step.progressId else {
+                                    print("invalid progress id")
+                                    return
+                                }
+                                
+                                ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
+                                    let progress = progresses.first
+                                    if progress != nil && progress!.isPassed {
+                                        print("step already passed -> getting new recommendation")
+                                        self.sendReactionAndGetNewLesson(reaction: .solved, success: success)
+                                    } else {
+                                        self.isRecommendationLoaded = true
+                                        success(step)
+                                    }
+                                }, error: { (error) -> Void in
+                                    print("failed getting step progress -> step with unknown progress")
+                                    self.isRecommendationLoaded = true
+                                    success(step)
+                                })
                             }
                             }, error: { (error) -> Void in
                                 print("failed downloading steps data in Next")
