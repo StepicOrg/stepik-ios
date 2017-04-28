@@ -198,6 +198,8 @@ class AdaptiveStepsViewController: UIViewController {
         if kolodaView.delegate == nil {
             kolodaView.dataSource = self
             kolodaView.delegate = self
+        } else {
+            kolodaView.reloadData()
         }
     }
     
