@@ -3181,6 +3181,7 @@
 				86EF29321E83CEA900F8D214 /* Resources */,
 				2BAEA3400A81F06D1E18E320 /* [CP] Embed Pods Frameworks */,
 				44661D3E75E56052E52FEC1E /* [CP] Copy Pods Resources */,
+				08A947FE1EB2B1A5001EC02D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3274,6 +3275,7 @@
 					};
 					86EF29331E83CEA900F8D214 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 4562ZPB9BG;
 						ProvisioningStyle = Manual;
 					};
 					9F9C71161E076AE000EC8DA3 = {
@@ -3530,6 +3532,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+		};
+		08A947FE1EB2B1A5001EC02D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
 		08D1211F1C937B2200A54ABC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5067,14 +5082,14 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.pdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dea7fa6d-8c43-46ec-843d-f2e5302475f8";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.stepik.ios.adaptive.pdd";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -5089,15 +5104,15 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.pdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "e69c0cba-b6a9-4d83-bf0e-04014bd59401";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc org.stepik.ios.adaptive.pdd";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

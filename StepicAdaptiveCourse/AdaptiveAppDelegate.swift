@@ -10,6 +10,8 @@ import UIKit
 import Mixpanel
 import VK_ios_sdk
 import FBSDKCoreKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
+        Fabric.with([Crashlytics.self])
+        
         return true
     }
 
