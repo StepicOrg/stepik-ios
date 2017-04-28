@@ -13,6 +13,7 @@ struct StepicApplicationsInfo {
     static var social : ApplicationInfo? = ApplicationInfo(plist: "StepikAuth", type: .social)
     static var password : ApplicationInfo? = ApplicationInfo(plist: "StepikAuth", type: .password)
 
+    static let urlScheme = "stepic"
     
     static let apiURL = "https://stepik.org/api"
     static let oauthURL = "https://stepik.org/oauth2"
