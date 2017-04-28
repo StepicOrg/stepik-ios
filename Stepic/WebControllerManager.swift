@@ -123,7 +123,7 @@ extension WebControllerManager : WKNavigationDelegate {
             let rurl = navigationAction.request.url
             //            print(rurl)
             if let url = rurl {
-                if url.scheme == "stepic" {
+                if url.scheme == StepicApplicationsInfo.urlScheme {
                     UIApplication.shared.openURL(url)
                 }
             }

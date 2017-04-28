@@ -2,4 +2,7 @@ Sb/** filter=git-crypt diff=git-crypt
 cert/** filter=git-crypt diff=git-crypt
 fastlane/** filter=git-crypt diff=git-crypt
 StepicTests/TestInfo.plist filter=git-crypt diff=git-crypt
+Stepic/StepikAuth.plist filter=git-crypt diff=git-crypt
+StepicAdaptiveCourse/AdaptiveAuth.plist filter=git-crypt diff=git-crypt
+
 .gitattributes !filter !diff
