@@ -375,6 +375,7 @@
                     <connections>
                         <outlet property="kolodaView" destination="AHb-6A-jG0" id="hFz-AB-TRu"/>
                         <outlet property="navigationBar" destination="ffE-02-bXy" id="eAh-b5-QtM"/>
+                        <outlet property="userMenuButton" destination="cay-sV-aN7" id="udP-dE-Qv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>

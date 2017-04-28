@@ -12,6 +12,7 @@ import SVProgressHUD
 
 class AdaptiveStepsViewController: UIViewController {
     
+    @IBOutlet weak var userMenuButton: UIBarButtonItem!
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
 
@@ -148,6 +149,7 @@ class AdaptiveStepsViewController: UIViewController {
     }
     
     @IBAction func onUserMenuButtonClick(_ sender: Any) {
+        alertController.popoverPresentationController?.barButtonItem = userMenuButton
         self.present(alertController, animated: true, completion: nil)
     }
     
