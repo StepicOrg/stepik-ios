@@ -13,7 +13,7 @@
         <!--Adaptive Tutorial View Controller-->
         <scene sceneID="CI4-MM-aft">
             <objects>
-                <pageViewController storyboardIdentifier="AdaptiveTutorial" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XJA-TY-jvO" customClass="AdaptiveTutorialViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="AdaptiveTutorial" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XJA-TY-jvO" customClass="AdaptiveTutorialViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wo0-BU-Eon" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1194" y="1462"/>
@@ -21,7 +21,7 @@
         <!--Adaptive Tutorial Page View Controller-->
         <scene sceneID="BqQ-4o-TJe">
             <objects>
-                <viewController storyboardIdentifier="TutorialPage1ViewController" id="NZs-vb-Gi2" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialPage1ViewController" id="NZs-vb-Gi2" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lIR-eh-4bM"/>
                         <viewControllerLayoutGuide type="bottom" id="a8A-OK-m5p"/>
@@ -71,7 +71,7 @@
         <!--Adaptive Course View Controller-->
         <scene sceneID="EOF-rR-jAh">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveCourseInfo" id="ZJG-W2-va5" customClass="AdaptiveCourseViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveCourseInfo" id="ZJG-W2-va5" customClass="AdaptiveCourseViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p1D-Lp-eLG"/>
                         <viewControllerLayoutGuide type="bottom" id="c5c-qX-SLk"/>
@@ -194,7 +194,7 @@
         <!--Adaptive Step View Controller-->
         <scene sceneID="0gR-Yw-kZD">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveStepViewController" id="eJP-Ja-phW" customClass="AdaptiveStepViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveStepViewController" id="eJP-Ja-phW" customClass="AdaptiveStepViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aeI-qb-4nR"/>
                         <viewControllerLayoutGuide type="bottom" id="jVy-dP-WyP"/>
@@ -230,50 +230,26 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJg-K7-k2k" userLabel="Bottom view">
                                         <rect key="frame" x="0.0" y="810" width="375" height="70"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwf-Iv-1gG" customClass="StepControlButton" customModule="StepicAdaptiveCourse" customModuleProvider="target">
-                                                <rect key="frame" x="203" y="0.0" width="60" height="60"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwf-Iv-1gG" customClass="StepControlButton" customModule="Adaptive_PDD" customModuleProvider="target">
+                                                <rect key="frame" x="157.5" y="0.0" width="60" height="60"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Ujk-zw-aZD"/>
                                                     <constraint firstAttribute="width" constant="60" id="yxB-fg-dqr"/>
                                                 </constraints>
-                                                <state key="normal" image="Checkmark-100"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" image="Cross"/>
                                                 <state key="disabled" image="Checkmark-100"/>
                                                 <connections>
                                                     <action selector="onNextButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="7Db-aZ-JgV"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzX-kC-GHP" customClass="StepControlButton" customModule="StepicAdaptiveCourse" customModuleProvider="target">
-                                                <rect key="frame" x="112" y="0.0" width="60" height="60"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="dv7-wU-ihp"/>
-                                                    <constraint firstAttribute="height" constant="60" id="e2T-M9-QMN"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                <state key="normal" image="Cross"/>
-                                                <connections>
-                                                    <action selector="onDismissButtonClick:" destination="eJP-Ja-phW" eventType="touchUpInside" id="jrb-Gs-DvV"/>
-                                                </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su9-pI-eOT" userLabel="Separator">
-                                                <rect key="frame" x="187" y="34.5" width="1" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="1" id="HmQ-he-Zuo"/>
-                                                    <constraint firstAttribute="height" constant="1" id="Pun-Y0-f0g"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="4dN-U2-ZDS"/>
-                                            <constraint firstItem="Su9-pI-eOT" firstAttribute="centerY" secondItem="CJg-K7-k2k" secondAttribute="centerY" id="6XK-ex-aaW"/>
-                                            <constraint firstItem="Su9-pI-eOT" firstAttribute="centerX" secondItem="CJg-K7-k2k" secondAttribute="centerX" id="Mj4-Bf-dVO"/>
-                                            <constraint firstItem="Wwf-Iv-1gG" firstAttribute="leading" secondItem="Su9-pI-eOT" secondAttribute="trailing" constant="15" id="hoc-P7-gMN"/>
+                                            <constraint firstItem="Wwf-Iv-1gG" firstAttribute="centerX" secondItem="CJg-K7-k2k" secondAttribute="centerX" id="WiK-py-nox"/>
                                             <constraint firstAttribute="bottom" secondItem="Wwf-Iv-1gG" secondAttribute="bottom" constant="10" id="iIV-0i-al4"/>
-                                            <constraint firstAttribute="bottom" secondItem="IzX-kC-GHP" secondAttribute="bottom" constant="10" id="j21-qd-No1"/>
-                                            <constraint firstItem="Su9-pI-eOT" firstAttribute="leading" secondItem="IzX-kC-GHP" secondAttribute="trailing" constant="15" id="jmS-AS-jJI"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заголовок" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYZ-82-IiP">
@@ -314,7 +290,6 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="bottomView" destination="CJg-K7-k2k" id="DDB-He-yG8"/>
-                        <outlet property="dismissButton" destination="IzX-kC-GHP" id="J44-Kt-E5y"/>
                         <outlet property="doneButton" destination="Wwf-Iv-1gG" id="fQl-LG-FXX"/>
                         <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
                         <outlet property="quizPlaceholderViewHeight" destination="LY2-WB-yMw" id="Fdf-FI-MxF"/>
@@ -331,7 +306,7 @@
         <!--Adaptive Steps View Controller-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveStepsViewController" id="6Dd-WV-Z8n" customClass="AdaptiveStepsViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveStepsViewController" id="6Dd-WV-Z8n" customClass="AdaptiveStepsViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hF7-0Z-sGm"/>
                         <viewControllerLayoutGuide type="bottom" id="N8f-j4-uap"/>
@@ -409,7 +384,7 @@
         <!--Adaptive Tutorial Page View Controller-->
         <scene sceneID="fuf-OE-y8R">
             <objects>
-                <viewController storyboardIdentifier="TutorialPage2ViewController" id="ECl-eS-5YR" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialPage2ViewController" id="ECl-eS-5YR" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F9m-Uw-F8P"/>
                         <viewControllerLayoutGuide type="bottom" id="rXa-Fy-ddR"/>
@@ -459,7 +434,7 @@
         <!--Adaptive Tutorial Page View Controller-->
         <scene sceneID="q9d-Um-yM8">
             <objects>
-                <viewController storyboardIdentifier="TutorialPage3ViewController" id="9dw-R9-oPl" customClass="AdaptiveTutorialPageViewController" customModule="StepicAdaptiveCourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialPage3ViewController" id="9dw-R9-oPl" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="21g-dt-7EX"/>
                         <viewControllerLayoutGuide type="bottom" id="yjf-a4-2Eb"/>

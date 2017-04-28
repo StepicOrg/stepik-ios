@@ -17,14 +17,17 @@ class AdaptiveStepViewController: UIViewController {
     var quizVC: ChoiceQuizViewController?
     var isCorrectSolved = false {
         didSet {
-            doneButton.isEnabled = isCorrectSolved
+            if isCorrectSolved {
+                doneButton.setIcon(for: .done)
+            } else {
+                doneButton.setIcon(for: .dismiss)
+            }
         }
     }
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var doneButton: StepControlButton!
-    @IBOutlet weak var dismissButton: StepControlButton!
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
@@ -34,19 +37,13 @@ class AdaptiveStepViewController: UIViewController {
     var dismissHandler: () -> () = { }
     var successHandler: () -> () = { }
     
-    @IBAction func onDismissButtonClick(_ sender: AnyObject) {
+    @IBAction func onNextButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: false, completion: { _ in
             if !self.isCorrectSolved {
                 self.dismissHandler()
             } else {
                 self.successHandler()
             }
-        })
-    }
-    
-    @IBAction func onNextButtonClick(_ sender: AnyObject) {
-        self.dismiss(animated: false, completion: { _ in
-            self.successHandler()
         })
     }
     
@@ -143,6 +140,10 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
     }
     
     func submissionDidWrong() {
+        isCorrectSolved = false
+    }
+    
+    func didTryAgainButtonClick() {
         isCorrectSolved = false
     }
 }

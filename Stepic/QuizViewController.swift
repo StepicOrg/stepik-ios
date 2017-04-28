@@ -719,6 +719,9 @@ class QuizViewController: UIViewController {
             }
         } else  {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+            
+            self.delegate?.didTryAgainButtonClick()
+            
             createNewAttempt(completion: {
                 [weak self] in
                 DispatchQueue.main.async{

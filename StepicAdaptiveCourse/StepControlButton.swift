@@ -10,6 +10,18 @@ import UIKit
 
 class StepControlButton: UIButton {
 
+    // State of button
+    enum State: String {
+        case dismiss
+        case done
+    }
+    
+    // Icons for each state
+    let icons: [State: UIImage?] = [
+        .dismiss: UIImage(named: "Cross"),
+        .done: UIImage(named: "Checkmark-100")
+    ]
+    
     // TODO: add pressed state
     
     var shadowLayer: CAShapeLayer!
@@ -35,6 +47,12 @@ class StepControlButton: UIButton {
             
             layer.insertSublayer(shadowLayer, at: 0)
         }        
+    }
+    
+    func setIcon(for state: State) {
+        if let icon = self.icons[state] {
+            self.setImage(icon, for: .normal)
+        }
     }
 
 }
