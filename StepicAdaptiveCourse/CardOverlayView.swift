@@ -22,16 +22,24 @@ class CardOverlayView: OverlayView {
         
         return imageView
     }()
+    @IBOutlet var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet var leadingConstraint: NSLayoutConstraint!
     
     override var overlayState: SwipeResultDirection? {
         didSet {
             switch overlayState {
             case .left? :
                 overlayImageView.image = UIImage(named: overlayLeftImageName)
-                overlayImageView.contentMode = .topRight
+
+                leadingConstraint.isActive = false
+                trailingConstraint.isActive = true
+                leadingConstraint.constant = 10
             case .right? :
                 overlayImageView.image = UIImage(named: overlayRightImageName)
-                overlayImageView.contentMode = .topLeft
+
+                leadingConstraint.isActive = true
+                trailingConstraint.isActive = false
+                trailingConstraint.constant = 10
             default:
                 overlayImageView.image = nil
             }
