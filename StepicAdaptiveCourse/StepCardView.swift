@@ -132,8 +132,14 @@ extension StepCardView: QuizControllerDelegate {
             }
             
         }
-        
     }
+
+    func didWarningPlaceholderShow() {
+        if let vc = parentViewController as? AdaptiveStepsViewController {
+            vc.isWarningHidden = false
+        }
+    }
+
 }
 
 

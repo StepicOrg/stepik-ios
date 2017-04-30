@@ -13,10 +13,12 @@ protocol QuizControllerDelegate: class {
     func submissionDidCorrect()
     func submissionDidWrong()
     func didTryAgainButtonClick()
+    func didWarningPlaceholderShow()
 }
 
 extension QuizControllerDelegate {
     func submissionDidCorrect() { }
     func submissionDidWrong() { }
     func didTryAgainButtonClick() { }
+    func didWarningPlaceholderShow() { }
 }

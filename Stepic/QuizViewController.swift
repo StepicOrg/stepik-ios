@@ -106,6 +106,7 @@ class QuizViewController: UIViewController {
                     self?.warningView.isHidden = false
                 }
                 self.delegate?.needsHeightUpdate(200, animated: true, breaksSynchronizationControl: false)
+                self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
