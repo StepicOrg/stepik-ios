@@ -107,6 +107,24 @@ class AdaptiveStepViewController: UIViewController {
             stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         }
     }
+    
+    fileprivate func scrollToSendButton() {
+        guard let quizVC = self.quizVC else {
+            print("quizVC not init")
+            return
+        }
+        
+        let sendButtonY = quizVC.sendButton.frame.origin.y + quizPlaceholderView.frame.origin.y
+        let doneButtonY = doneButton.frame.origin.y + bottomView.frame.origin.y
+        let sendButtonHeight = quizVC.sendButton.frame.height + 10
+        let offset = sendButtonY - doneButtonY + sendButtonHeight
+        if offset > 0 {
+            var scrollViewOffset = scrollView.contentOffset
+            scrollViewOffset.y += offset
+            
+            scrollView.setContentOffset(scrollViewOffset, animated: true)
+        }
+    }
 }
 
 extension AdaptiveStepViewController: UIWebViewDelegate {
@@ -136,9 +154,16 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
             if animated {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     self?.view.layoutIfNeeded()
-                }, completion: nil)
+                }, completion: { _ in
+                    if self?.quizVC?.submission?.status != nil {
+                        self?.scrollToSendButton()
+                    }
+                })
             } else {
                 self?.view.layoutIfNeeded()
+                if self?.quizVC?.submission?.status != nil {
+                    self?.scrollToSendButton()
+                }
             }
             
         }
