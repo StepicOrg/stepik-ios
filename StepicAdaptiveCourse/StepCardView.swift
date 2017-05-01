@@ -18,7 +18,7 @@ class StepCardView: UIView {
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
-    private var quizVC: ChoiceQuizViewController?
+    var quizVC: ChoiceQuizViewController?
     
     lazy var parentViewController: UIViewController? = {
         var parentResponder: UIResponder? = self
@@ -67,31 +67,35 @@ class StepCardView: UIView {
             webView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         }
         
-        // Step quiz
-        if let quizVC = self.quizVC {
-            quizVC.view.removeFromSuperview()
-            quizVC.removeFromParentViewController()
+        // Init step quiz
+        self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+        
+        guard let quizVC = self.quizVC else {
+            print("quizVC init failed")
+            return
         }
         
-        if let parentVC = self.parentViewController {
-            self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-            
-            guard let quizVC = self.quizVC else {
-                print("quizVC init failed")
-                return
-            }
-            
-            quizVC.step = step
+        quizVC.step = step
+        
+        restoreQuizVC()
+    }
+    
+    func restoreQuizVC() {
+        if let quizVC = self.quizVC, let parentVC = self.parentViewController {
             quizVC.delegate = self
             
             parentVC.addChildViewController(quizVC)
             self.quizPlaceholderView.addSubview(quizVC.view)
             quizVC.view.align(to: self.quizPlaceholderView)
+            
+            self.needsHeightUpdate(self.bounds.height, animated: false, breaksSynchronizationControl: false)
+            
             self.setNeedsLayout()
             self.layoutIfNeeded()
             
             quizVC.sendButton.isHidden = true
         }
+        
     }
     
     func showContent() {
@@ -132,8 +136,14 @@ extension StepCardView: QuizControllerDelegate {
             }
             
         }
-        
     }
+
+    func didWarningPlaceholderShow() {
+        if let vc = parentViewController as? AdaptiveStepsViewController {
+            vc.isWarningHidden = false
+        }
+    }
+
 }
 
 

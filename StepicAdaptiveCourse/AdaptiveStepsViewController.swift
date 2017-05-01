@@ -20,10 +20,29 @@ class AdaptiveStepsViewController: UIViewController {
     fileprivate var isKolodaPresented = false
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
-
+    public var isWarningHidden: Bool = true {
+        didSet {
+            self.warningView.isHidden = isWarningHidden
+            self.kolodaView.isHidden = !isWarningHidden
+        }
+    }
+    
     var course: Course!
     var recommendedLesson: Lesson?
     var step: Step?
+    
+    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
+
+    lazy var warningView: UIView = {
+        let v = PlaceholderView()
+        self.view.insertSubview(v, aboveSubview: self.view)
+        v.align(to: self.kolodaView)
+        v.delegate = self
+        v.datasource = self
+        v.backgroundColor = UIColor.white
+        return v
+    }()
+
     
     lazy var alertController: UIAlertController = { [weak self] in
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -113,12 +132,17 @@ class AdaptiveStepsViewController: UIViewController {
                             }
                             }, error: { (error) -> Void in
                                 print("failed downloading steps data in Next")
+                                self.isWarningHidden = false
                         })
                     }
                     }, error: { (error) -> Void in
                         print("failed downloading lessons data in Next")
+                        self.isWarningHidden = false
                 })
-                }, error: { error in print(error) })
+                }, error: { error in
+                    print(error)
+                    self.isWarningHidden = false
+                })
             }, error: {
                 //TODO: add error handling here - add logout like in other controllers
                 error in
@@ -140,6 +164,7 @@ class AdaptiveStepsViewController: UIViewController {
                 })
                 }, error: { error in
                     print("failed sending reaction: \(error)")
+                    self.isWarningHidden = false
             })
             }, error: {
                 //TODO: add error handling here - add logout like in other controllers
@@ -252,7 +277,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
         guard let card = koloda.viewForCard(at: index) as? StepCardView else {
             return
         }
-        
+
         guard isRecommendationLoaded, let lesson = self.recommendedLesson, let step = self.step else {
             print("recommendation not loaded yet")
             return
@@ -264,6 +289,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                     return
                 }
                 
+                card.restoreQuizVC()
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
@@ -276,6 +302,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                 
                 self.lastReaction = .solved
                 
+                card.restoreQuizVC()
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
@@ -288,6 +315,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
             vc.recommendedLesson = lesson
             vc.step = step
             vc.course = self.course
+            vc.quizVC = card.quizVC
             
             card.hideContent()
             UIView.animate(withDuration: 0.3, animations: {
@@ -364,3 +392,36 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
         return Bundle.main.loadNibNamed("CardOverlayView", owner: self, options: nil)?.first as? CardOverlayView
     }
 }
+
+
+extension AdaptiveStepsViewController: PlaceholderViewDataSource {
+    func placeholderImage() -> UIImage? {
+        return Images.noWifiImage.size100x100
+    }
+    
+    func placeholderButtonTitle() -> String? {
+        return NSLocalizedString("TryAgain", comment: "")
+    }
+    
+    func placeholderDescription() -> String? {
+        return nil
+    }
+    
+    func placeholderStyle() -> PlaceholderStyle {
+        return stepicPlaceholderStyle
+    }
+    
+    func placeholderTitle() -> String? {
+        return warningViewTitle
+    }
+}
+
+extension AdaptiveStepsViewController: PlaceholderViewDelegate {
+    func placeholderButtonDidPress() {
+        print("trying again after connection troubles...")
+        lastReaction = nil
+        isWarningHidden = true
+        initKoloda()
+    }
+}
+
