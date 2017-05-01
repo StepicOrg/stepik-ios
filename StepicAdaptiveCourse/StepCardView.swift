@@ -87,6 +87,9 @@ class StepCardView: UIView {
             parentVC.addChildViewController(quizVC)
             self.quizPlaceholderView.addSubview(quizVC.view)
             quizVC.view.align(to: self.quizPlaceholderView)
+            
+            self.needsHeightUpdate(self.bounds.height, animated: false, breaksSynchronizationControl: false)
+            
             self.setNeedsLayout()
             self.layoutIfNeeded()
             
