@@ -59,10 +59,42 @@ class AdaptiveStepViewController: UIViewController {
         bottomView.layer.insertSublayer(gradientLayer, at: 0)
         
         self.titleLabel.text = recommendedLesson.title
-        self.loadQuiz(for: step)
         self.loadStepHTML(for: step)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let quizVC = self.quizVC else {
+            print("quizVC not init")
+            return
+        }
+        
+        // Detach controller from card, attach to current vc and update height
+        quizVC.view.removeFromSuperview()
+        quizVC.removeFromParentViewController()
+        quizVC.delegate = self
+        
+        self.addChildViewController(quizVC)
+        self.quizPlaceholderView.addSubview(quizVC.view)
+        quizVC.view.align(to: self.quizPlaceholderView)
+        
+        self.needsHeightUpdate(quizVC.heightWithoutQuiz + quizVC.expectedQuizHeight, animated: false, breaksSynchronizationControl: false)
+        
+        quizVC.sendButton.isHidden = false
+        
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Detach quiz view controller
+        quizVC?.view.removeFromSuperview()
+        quizVC?.removeFromParentViewController()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -72,31 +104,8 @@ class AdaptiveStepViewController: UIViewController {
             let scriptsString = "\(Scripts.localTexScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
             html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            print("\(Bundle.main.bundlePath)")
             stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         }
-    }
-    
-    fileprivate func loadQuiz(for step: Step) {
-        if let quizVC = self.quizVC {
-            quizVC.view.removeFromSuperview()
-            quizVC.removeFromParentViewController()
-        }
-        
-        self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-        
-        guard let quizVC = self.quizVC else {
-            print("quizVC init failed")
-            return
-        }
-        quizVC.step = step
-        quizVC.delegate = self
-        
-        self.addChildViewController(quizVC)
-        self.quizPlaceholderView.addSubview(quizVC.view)
-        quizVC.view.align(to: self.quizPlaceholderView)
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
     }
 }
 

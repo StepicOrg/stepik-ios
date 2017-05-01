@@ -289,6 +289,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                     return
                 }
                 
+                card.restoreQuizVC()
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
@@ -301,6 +302,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
                 
                 self.lastReaction = .solved
                 
+                card.restoreQuizVC()
                 card.showContent()
                 UIView.animate(withDuration: 0.3, animations: {
                     card.transform = CGAffineTransform.identity
@@ -313,6 +315,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
             vc.recommendedLesson = lesson
             vc.step = step
             vc.course = self.course
+            vc.quizVC = card.quizVC
             
             card.hideContent()
             UIView.animate(withDuration: 0.3, animations: {
