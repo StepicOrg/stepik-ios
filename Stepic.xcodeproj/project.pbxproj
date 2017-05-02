@@ -4194,8 +4194,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "123664dc-4560-4c33-a37f-c6538d5c47a9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "ee9caa85-dcd2-4f01-8162-a19b572a2b69";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4244,8 +4244,8 @@
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae0cb1a3-b372-427c-975f-a7dc1f1db87a";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "127f0dd3-0cc7-4dd2-aa0e-44172da8a3aa";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4288,8 +4288,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "2043acd1-e1dd-49db-83ee-fe508bfe2c04";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "c2a9d809-0c0c-4a15-bc93-f973c9b4a00a";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
