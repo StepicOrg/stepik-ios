@@ -47,10 +47,10 @@ class AdaptiveStepsViewController: UIViewController {
     lazy var alertController: UIAlertController = { [weak self] in
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         alertController.addAction(cancelAction)
         
-        let aboutCourseAction = UIAlertAction(title: "О курсе", style: .default) { action in
+        let aboutCourseAction = UIAlertAction(title: NSLocalizedString("AboutCourse", comment: ""), style: .default) { action in
             let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseInfo", storyboardName: "AdaptiveMain") as! AdaptiveCourseViewController
             vc.course = self?.course
             
@@ -58,7 +58,7 @@ class AdaptiveStepsViewController: UIViewController {
         }
         alertController.addAction(aboutCourseAction)
         
-        let destroyAction = UIAlertAction(title: "Выйти", style: .destructive) { action in
+        let destroyAction = UIAlertAction(title: NSLocalizedString("SignOut", comment: ""), style: .destructive) { action in
             AuthInfo.shared.token = nil
             AuthInfo.shared.user = nil
             
@@ -179,7 +179,7 @@ class AdaptiveStepsViewController: UIViewController {
     }
     
     fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
-        SVProgressHUD.show(withStatus: "Загружаем курс...")
+        SVProgressHUD.show(withStatus: NSLocalizedString("LoadingCourse", comment: ""))
         performRequest({
             ApiDataDownloader.courses.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
                 self.course = coursesImmutable.first
@@ -190,7 +190,7 @@ class AdaptiveStepsViewController: UIViewController {
                 }
                 
                 if !course.enrolled {
-                    SVProgressHUD.show(withStatus: "Записываемся на курс...")
+                    SVProgressHUD.show(withStatus: NSLocalizedString("JoiningCourse", comment: ""))
                     _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
                         SVProgressHUD.dismiss()
                         self.course.enrolled = true

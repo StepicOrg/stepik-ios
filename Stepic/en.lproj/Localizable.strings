@@ -213,5 +213,7 @@ EmptyCertificatesDescription = "Choose a course and learn to get a certificate";
 ChooseCourse = "Choose course";
 CourseStaff = "Course staff";
 Staff = "Stepik staff";
-
+AboutCourse = "About course";
+LoadingCourse = "Loading course...";
+JoiningCourse = "Joining course...";
 
