@@ -1,0 +1,44 @@
+{
+  "stickers" : [
+    {
+      "filename" : "stepik-1.sticker"
+    },
+    {
+      "filename" : "stepik-2.sticker"
+    },
+    {
+      "filename" : "stepik-3.sticker"
+    },
+    {
+      "filename" : "stepik-4.sticker"
+    },
+    {
+      "filename" : "stepik-5.sticker"
+    },
+    {
+      "filename" : "stepik-6.sticker"
+    },
+    {
+      "filename" : "stepik-8.sticker"
+    },
+    {
+      "filename" : "stepik-11.sticker"
+    },
+    {
+      "filename" : "stepik-12.sticker"
+    },
+    {
+      "filename" : "stepik-13.sticker"
+    },
+    {
+      "filename" : "stepik-14.sticker"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  }
+}
