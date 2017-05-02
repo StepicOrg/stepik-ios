@@ -80,6 +80,7 @@ class AdaptiveCourseViewController: UIViewController {
                 print("failed downloading courses data in Next")
             })
         }, error: { error in
+            // Should we logout here?
             print("failed performing API request")
         })
     }
@@ -102,6 +103,7 @@ class AdaptiveCourseViewController: UIViewController {
                 print("failed loading progress for course")
             })
         }, error: { error in
+            // Should we logout here?
             print("failed performing API request")
         })
     }

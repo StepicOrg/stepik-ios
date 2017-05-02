@@ -16,6 +16,7 @@ class AdaptiveStepsViewController: UIViewController {
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
 
+    fileprivate var isJoinedCourse = false
     fileprivate var isRecommendationLoaded = false
     fileprivate var isKolodaPresented = false
     fileprivate var isCurrentCardDone = false
@@ -30,8 +31,6 @@ class AdaptiveStepsViewController: UIViewController {
     var course: Course!
     var recommendedLesson: Lesson?
     var step: Step?
-    
-    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
 
     lazy var warningView: UIView = {
         let v = PlaceholderView()
@@ -59,10 +58,7 @@ class AdaptiveStepsViewController: UIViewController {
         alertController.addAction(aboutCourseAction)
         
         let destroyAction = UIAlertAction(title: NSLocalizedString("SignOut", comment: ""), style: .destructive) { action in
-            AuthInfo.shared.token = nil
-            AuthInfo.shared.user = nil
-            
-            self?.presentAuthViewController()
+            self?.logout()
         }
         alertController.addAction(destroyAction)
         
@@ -100,12 +96,15 @@ class AdaptiveStepsViewController: UIViewController {
         isRecommendationLoaded = false
         
         performRequest({
+            // Get recommended lesson
             ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
                 ApiDataDownloader.lessons.retrieve(ids: [recommendedLessonId], existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     let lesson = newLessonsImmutable.first
                     
                     if let lesson = lesson, let stepId = lesson.stepsArray.first {
                         self.recommendedLesson = lesson
+                        
+                        // Get steps in recommended lesson
                         ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                             let step = newStepsImmutable.first
                             
@@ -115,6 +114,7 @@ class AdaptiveStepsViewController: UIViewController {
                                     return
                                 }
                                 
+                                // Get progress: if step is passed -> skip it
                                 ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
                                     let progress = progresses.first
                                     if progress != nil && progress!.isPassed {
@@ -143,10 +143,9 @@ class AdaptiveStepsViewController: UIViewController {
                     print(error)
                     self.isWarningHidden = false
                 })
-            }, error: {
-                //TODO: add error handling here - add logout like in other controllers
-                error in
-                print("failed performing API request")
+            }, error: { error in
+                print("failed performing API request -> force logout")
+                self.logout()
         })
     }
     
@@ -166,10 +165,9 @@ class AdaptiveStepsViewController: UIViewController {
                     print("failed sending reaction: \(error)")
                     self.isWarningHidden = false
             })
-            }, error: {
-                //TODO: add error handling here - add logout like in other controllers
-                error in
-                print("failed performing API request")
+        }, error: { error in
+            print("failed performing API request -> force logout")
+            self.logout()
         })
     }
     
@@ -190,6 +188,8 @@ class AdaptiveStepsViewController: UIViewController {
                 }
                 
                 if !course.enrolled {
+                    self.isJoinedCourse = true
+                    
                     SVProgressHUD.show(withStatus: NSLocalizedString("JoiningCourse", comment: ""))
                     _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
                         SVProgressHUD.dismiss()
@@ -199,23 +199,25 @@ class AdaptiveStepsViewController: UIViewController {
                         completion()
                     }, error: {error in
                         SVProgressHUD.dismiss()
-                        print("failed joining course: \(error)")
+                        print("failed joining course: \(error) -> show placeholder")
+                        self.isWarningHidden = false
                     })
                 } else {
                     SVProgressHUD.dismiss()
                     print("already joined target course -> loading cards")
                     
+                    self.isJoinedCourse = true
                     completion()
                 }
             }, error: { (error) -> Void in
                 SVProgressHUD.dismiss()
-                
-                print("failed downloading course data")
+                print("failed downloading course data -> show placeholder")
+                self.isWarningHidden = false
             })
         }, error: { error in
             SVProgressHUD.dismiss()
-            
-            print("failed performing API request")
+            print("failed performing API request -> force logout")
+            self.logout()
         })
     }
     
@@ -246,6 +248,13 @@ class AdaptiveStepsViewController: UIViewController {
             })
         }
         self.present(vc, animated: false, completion: nil)
+    }
+    
+    fileprivate func logout() {
+        AuthInfo.shared.token = nil
+        AuthInfo.shared.user = nil
+        
+        self.presentAuthViewController()
     }
 }
 
@@ -412,15 +421,28 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     }
     
     func placeholderTitle() -> String? {
-        return warningViewTitle
+        return NSLocalizedString("ConnectionErrorText", comment: "")
     }
 }
 
 extension AdaptiveStepsViewController: PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
-        print("trying again after connection troubles...")
         lastReaction = nil
         isWarningHidden = true
+        
+        // Two cases:
+        // Course is nil -> invalid state, refresh
+        // Course is initialized, but user is not joined -> load and join it again
+        if course == nil || !isJoinedCourse {
+            print("course or user enrollment has invalid state -> join and load course again")
+            self.joinAndLoadCourse(completion: {
+                self.initKoloda()
+            })
+            return
+        }
+        
+        // Course is initialized, user is joined, just temporary troubles -> only reload koloda
+        print("connection troubles -> trying again")
         initKoloda()
     }
 }
