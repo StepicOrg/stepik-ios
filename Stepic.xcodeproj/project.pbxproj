@@ -1323,6 +1323,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6603885739860CA1A6410CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C71201E076AE000EC8DA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2670,6 +2677,7 @@
 			buildConfigurationList = 0865383F1EB02716003A8415 /* Build configuration list for PBXNativeTarget "StickerPackExtension" */;
 			buildPhases = (
 				086538331EB02715003A8415 /* Resources */,
+				6603885739860CA1A6410CEA /* Frameworks */,
 			);
 			buildRules = (
 			);
