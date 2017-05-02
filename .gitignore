@@ -27,6 +27,7 @@ Pods/
 artefacts/
 fastlane/screenshots/
 fastlane/report.xml
+fastlane/Readme.md
 *.lock
 # Carthage
 #
