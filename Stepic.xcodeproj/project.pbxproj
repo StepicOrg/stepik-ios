@@ -4297,6 +4297,7 @@
 				0865383E1EB02716003A8415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */ = {
 			isa = XCConfigurationList;
