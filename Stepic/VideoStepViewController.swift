@@ -139,6 +139,7 @@ class VideoStepViewController: UIViewController {
                 [weak self] in
                 print("stepic player successfully presented!")
                 self?.didPresentVideoPlayer = true
+                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
             })
         } else {
 //            if let vc = self.parentNavigationController {
