@@ -68,7 +68,7 @@ class RateAppViewController: UIViewController {
         buttonsContainerHeight.constant = 0
 
         laterButton.setTitle(NSLocalizedString("Later", comment: ""), for: .normal)
-        topLabel.text = String(format: NSLocalizedString("HowWouldYouRate", comment: ""), StepicApplicationsInfo.emailAppTitle)
+        topLabel.text = String(format: NSLocalizedString("HowWouldYouRate", comment: ""), Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "Stepik")
         bottomLabel.text = ""
         
         bottomLabelWidth = bottomLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)").first as? NSLayoutConstraint
@@ -136,7 +136,7 @@ class RateAppViewController: UIViewController {
         composeVC.mailComposeDelegate = self
         
         composeVC.setToRecipients(["support@stepik.org"])
-        composeVC.setSubject("Feedback about the \(StepicApplicationsInfo.emailAppTitle) App")
+        composeVC.setSubject(String(format: NSLocalizedString("FeedbackAbout", comment: ""), Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "Stepik"))
         composeVC.setMessageBody("", isHTML: false)
         self.customPresentViewController(mailPresenter, viewController: composeVC, animated: true, completion: nil)
 
