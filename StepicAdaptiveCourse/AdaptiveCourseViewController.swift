@@ -80,8 +80,12 @@ class AdaptiveCourseViewController: UIViewController {
                 print("failed downloading courses data in Next")
             })
         }, error: { error in
-            // Should we logout here?
-            print("failed performing API request")
+            print("failed performing API request -> dismiss and logout")
+            self.dismiss(animated: false) {
+                if let vc = self.parent as? AdaptiveStepsViewController {
+                    vc.logout()
+                }
+            }
         })
     }
     
@@ -91,20 +95,15 @@ class AdaptiveCourseViewController: UIViewController {
             return
         }
         
-        performRequest({
-            ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
-                guard let progress = progresses.first else {
-                    return
-                }
-                
-                course.progress = progress
-                self.updateCourseProgress()
-            }, error: { error in
-                print("failed loading progress for course")
-            })
+        ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
+            guard let progress = progresses.first else {
+                return
+            }
+            
+            course.progress = progress
+            self.updateCourseProgress()
         }, error: { error in
-            // Should we logout here?
-            print("failed performing API request")
+            print("failed loading progress for course")
         })
     }
 }

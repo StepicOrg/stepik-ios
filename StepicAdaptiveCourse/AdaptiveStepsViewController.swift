@@ -250,7 +250,7 @@ class AdaptiveStepsViewController: UIViewController {
         self.present(vc, animated: false, completion: nil)
     }
     
-    fileprivate func logout() {
+    func logout() {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
         
