@@ -18,6 +18,7 @@ class StepCardView: UIView {
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
+    var tapGestureRecognizer: UITapGestureRecognizer!
     var quizVC: ChoiceQuizViewController?
     
     lazy var parentViewController: UIViewController? = {
@@ -46,12 +47,19 @@ class StepCardView: UIView {
         contentView.layer.addSublayer(gradientLayer)
         
         self.webView.delegate = self
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepCardView.tapRecognized(_:)))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        quizPlaceholderView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
     }
     
     func hideContent() {
         contentView.isHidden = true
         titleLabel.isHidden = true
     }
+    
+    func tapRecognized(_ recognizer: UITapGestureRecognizer) { }
     
     func updateContent(title: String, text: String?, step: Step, completion: @escaping () -> () = { }) {
         contentDidLoadHandler = completion
@@ -146,4 +154,24 @@ extension StepCardView: QuizControllerDelegate {
 
 }
 
+extension StepCardView: UIGestureRecognizerDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Pass touch to subviews while current view is not UITableViewCell
+        if touches.first?.view is UITableViewCell {
+            return
+        }
+        
+        if let targetView = touches.first?.view?.next, targetView is UITableViewCell {
+            targetView.touchesBegan(touches, with: event)
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Pass tap to quiz view controller
+        var touches: Set<UITouch> = Set<UITouch>()
+        touches.insert(touch)
+        quizVC?.touchesBegan(touches, with: nil)
+        return false
+    }
+}
 
