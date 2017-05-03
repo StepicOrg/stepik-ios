@@ -132,8 +132,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         }, error: { 
                             (error) -> Void in
                             print("failed downloading courses data in refresh")
-                            let e = error as NSError 
-                            if e.code != s.cancelErrorCode {
+                            if error != .cancelled {
                                 s.handleRefreshError()
                             }
                     })
@@ -167,39 +166,57 @@ class SearchResultsCoursesViewController: CoursesViewController {
         }
         
         isLoadingMore = true
-        //TODO : Check if it should be executed in another thread
-        performRequest({ 
+        performRequest({
+            [weak self]
             () -> Void in
-            _ = ApiDataDownloader.search.search(query: self.query, type: "course", page: self.currentPage + 1, success: { 
+            guard let s = self else {
+                return
+            }
+            _ = ApiDataDownloader.search.search(query: s.query, type: "course", page: s.currentPage + 1, success: {
+                [weak self]
                 (searchResults, meta) -> Void in
+                
+                guard let s = self else {
+                    return
+                }
+                
                 let ids = searchResults.flatMap({return $0.courseId})
-                _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
+                _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
+                    [weak self]
                     (newCourses) -> Void in
                     
-                    if !self.isLoadingMore {
+                    guard let s = self else {
+                        return
+                    }
+
+                    
+                    if !s.isLoadingMore {
                         return
                     }
                     
-                    self.currentPage += 1
-                    self.courses += Sorter.sort(newCourses, byIds: ids)
-                    self.meta = meta
+                    s.currentPage += 1
+                    s.courses += Sorter.sort(newCourses, byIds: ids)
+                    s.meta = meta
                     //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI{self.tableView.reloadData()}
+                    UIThread.performUI{s.tableView.reloadData()}
                     
                     
-                    self.isLoadingMore = false
-                    self.failedLoadingMore = false
+                    s.isLoadingMore = false
+                    s.failedLoadingMore = false
                     }, error: { 
                         (error) -> Void in
                         print("failed downloading courses data in Next")
-                        self.handleLoadMoreError()
+                        if error != .cancelled {
+                            s.handleLoadMoreError()
+                        }
                 })
                 
                 }, error: { 
                     (error) -> Void in
                     print("failed refreshing course ids in Next")
-                    self.handleLoadMoreError()
-                    
+                    if error.code != s.cancelErrorCode {
+                        s.handleLoadMoreError()
+                    }
             })
         }, error:  {
             [weak self] 
@@ -212,7 +229,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     self?.refreshCourses()
                     }, cancel: nil)
             }
-            self?.handleRefreshError()
+            self?.handleLoadMoreError()
         })
     }
     

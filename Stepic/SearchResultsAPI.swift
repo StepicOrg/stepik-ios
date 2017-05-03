@@ -17,7 +17,7 @@ class SearchResultsAPI : APIEndpoint {
         var params : Parameters = [:]
         
         params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
-        params["query"] = query
+        params["query"] = query.lowercased()
         
         if let p = page { 
             params["page"] = p 
@@ -45,7 +45,10 @@ class SearchResultsAPI : APIEndpoint {
                 errorHandler(e)
                 return
             }
-                        
+            
+            print("query: \(query)")
+            print(json)
+
             let meta = Meta(json: json["meta"])
             var results = [SearchResult]() 
             for resultJson in json["search-results"].arrayValue {
