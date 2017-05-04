@@ -12,7 +12,7 @@ import SwiftyJSON
 import CoreData
 
 enum RetrieveError : Error {
-    case connectionError, badStatus
+    case connectionError, badStatus, cancelled
 }
 
 class APIEndpoint {
@@ -60,8 +60,13 @@ class APIEndpoint {
             
             if let e = error as NSError? {
                 print("RETRIEVE \(requestString)?\(ids): error \(e.domain) \(e.code): \(e.localizedDescription)")
-                failure(.connectionError)
-                return
+                if e.code == -999 {
+                    failure(.cancelled)
+                    return
+                } else {
+                    failure(.connectionError)
+                    return
+                }
             }
             
             if response?.statusCode != 200 {

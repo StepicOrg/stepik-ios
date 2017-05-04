@@ -242,63 +242,77 @@ class StepsViewController: RGPageViewController {
         
         lesson?.loadSteps(completion: {
             [weak self] in
-            if let s = self {
-                let newStepsSet = Set(s.lesson!.stepsArray)
-                let prevStepsSet = Set(prevStepsIds)
-                
-                var reloadBlock : ((Void)->Void) = {
-                    [weak self] in 
-                    self?.reloadData()
-                }
-                
-                if newStepsSet.symmetricDifference(prevStepsSet).count == 0 {
-                    //need to reload one by one
-                    reloadBlock = {
-                        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
-                        print("did send step updated notification")
-                        //update tab views
-                        for index in 0 ..< s.lesson!.steps.count { 
-                            let tabView = s.pageViewController(s, tabViewForPageAt: index) as? StepTabView
-                            if let progress = s.lesson!.steps[index].progress {
-                                tabView?.setTab(selected: progress.isPassed, animated: true)
-                            }
+            guard let s = self else {
+                return
+            }
+            let newStepsSet = Set(s.lesson!.stepsArray)
+            let prevStepsSet = Set(prevStepsIds)
+            
+            var reloadBlock : ((Void)->Void) = {
+                [weak self] in 
+                self?.reloadData()
+            }
+            
+            if newStepsSet.symmetricDifference(prevStepsSet).count == 0 {
+                //need to reload one by one
+                reloadBlock = {
+                    [weak self] in
+                    guard let s = self else {
+                        return
+                    }
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+                    print("did send step updated notification")
+                    //update tab views
+                    for index in 0 ..< s.lesson!.steps.count { 
+                        let tabView = s.pageViewController(s, tabViewForPageAt: index) as? StepTabView
+                        if let progress = s.lesson!.steps[index].progress {
+                            tabView?.setTab(selected: progress.isPassed, animated: true)
                         }
                     }
-                } 
-                
-                DispatchQueue.main.async {
-                    s.view.isUserInteractionEnabled = true
-                    reloadBlock()
-                    s.doesPresentWarningView = false
-                    s.doesPresentActivityIndicatorView = false
-                    
-                    if s.startStepId < s.lesson!.steps.count {
-                        if !s.didSelectTab {
-                            s.selectTabAtIndex(s.startStepId, updatePage: true)
-                            s.didSelectTab = true
-                        }
-                    }
-                    s.didInitSteps = true
                 }
+            } 
+            
+            DispatchQueue.main.async {
+                [weak self] in
+                guard let s = self else {
+                    return
+                }
+                s.view.isUserInteractionEnabled = true
+                reloadBlock()
+                s.doesPresentWarningView = false
+                s.doesPresentActivityIndicatorView = false
+                
+                if s.startStepId < s.lesson!.steps.count {
+                    if !s.didSelectTab {
+                        s.selectTabAtIndex(s.startStepId, updatePage: true)
+                        s.didSelectTab = true
+                    }
+                }
+                s.didInitSteps = true
             }
             }, error: {
+                [weak self]
                 errorText in
+                guard self != nil else {
+                    return
+                }
                 print("error while loading steps in stepsviewcontroller")
                 DispatchQueue.main.async{
                     [weak self] in
-                    if let s = self {
-                        s.view.isUserInteractionEnabled = true
-                        s.doesPresentActivityIndicatorView = false
-                        if s.numberOfPages(for: s) == 0 {
-                            s.doesPresentWarningView = true
-                            if s.startStepId < s.lesson!.steps.count {
-                                if !s.didSelectTab {
-                                    s.selectTabAtIndex(s.startStepId, updatePage: true)
-                                    s.didSelectTab = true
-                                }
+                    guard let s = self else {
+                        return
+                    }
+                    s.view.isUserInteractionEnabled = true
+                    s.doesPresentActivityIndicatorView = false
+                    if s.numberOfPages(for: s) == 0 {
+                        s.doesPresentWarningView = true
+                        if s.startStepId < s.lesson!.steps.count {
+                            if !s.didSelectTab {
+                                s.selectTabAtIndex(s.startStepId, updatePage: true)
+                                s.didSelectTab = true
                             }
-                            self?.didInitSteps = true
                         }
+                        self?.didInitSteps = true
                     }
                 }
             }, onlyLesson: context == .lesson)
@@ -388,6 +402,10 @@ class StepsViewController: RGPageViewController {
     }
     
     var pagesCount = 0
+    
+    deinit {
+        print("deinit StepsViewController")
+    }
 }
 
 extension StepsViewController : RGPageViewControllerDataSource {
@@ -411,9 +429,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
         
         if let step = lesson?.steps[index] {
             print("initializing tab view for step id \(step.id), progress is \(String(describing: step.progress)))")
-            //            if tabViewsForStepId[step.id] == nil {
             tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
-            //            }
             
             return tabViewsForStepId[step.id]!
         } else {
@@ -448,9 +464,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
             if lesson.steps[index].block.name == "video" {
                 let stepController = storyboard?.instantiateViewController(withIdentifier: "VideoStepViewController") as! VideoStepViewController
                 stepController.video = lesson.steps[index].block.video!
-                stepController.nItem = self.navigationItem
                 stepController.step = lesson.steps[index]
-                stepController.parentNavigationController = self.navigationController
+//                stepController.parentNavigationController = self.navigationController
                 stepController.startStepId = startStepId
                 stepController.stepId = index + 1
                 stepController.lessonSlug = lesson.slug

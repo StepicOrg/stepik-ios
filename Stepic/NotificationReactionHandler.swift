@@ -86,6 +86,7 @@ class NotificationReactionHandler {
                 controller in
                 
                 delay(1, closure: {
+                    [weak self] in
                     let alert = NotificationAlertConstructor.sharedConstructor.getOpenCommentNotificationViaSafariAlertController({
                         UIThread.performUI {
                             WebControllerManager.sharedManager.presentWebControllerWithURL(commentsURL, inController: controller, withKey: "external link", allowsSafari: true, backButtonStyle:    BackButtonStyle.close, animated: true)

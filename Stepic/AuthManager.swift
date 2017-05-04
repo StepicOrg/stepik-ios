@@ -17,10 +17,10 @@ class AuthManager : NSObject {
     
     static let oauth = AuthAPI()
     
-    @discardableResult func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    @discardableResult func logInWithCode(_ code: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : SignInError) -> Void) -> Request? {
         
         if StepicApplicationsInfo.social == nil {
-            failure(NSError.noAppWithCredentials as Error)
+            failure(SignInError.noAppWithCredentials)
             return nil 
         }
         
@@ -36,7 +36,6 @@ class AuthManager : NSObject {
         ]
         
         return Alamofire.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON {
-//            (_,_, json, error) in
             response in
             
             var error = response.result.error
@@ -48,37 +47,34 @@ class AuthManager : NSObject {
             } else {
                 json = response.result.value!
             }
-//            let response = response.response
+            let response = response.response
             
             if let e = error {
-                failure(e)
+                failure(SignInError.other(error: e, code: nil, message: nil))
                 return
             }
             
-            if json["error"] != JSON.null {
-                let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
-                failure(e)
-                return
+            if let r = response {
+                if !r.statusCode.isSuccess() {
+                    failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                    return
+                }
             }
             
-            print(json)
-            //            print("no error")
             let token : StepicToken = StepicToken(json: json)
-            //            print(token.accessToken)
             AuthInfo.shared.authorizationType = AuthorizationType.code
             success(token)
         }
         
     }
     
-    @discardableResult func logInWithUsername(_ username : String, password : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
+    @discardableResult func logInWithUsername(_ username : String, password : String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : SignInError) -> Void) -> Request? {
         
         if StepicApplicationsInfo.password == nil {
-            failure(NSError.noAppWithCredentials as Error)
+            failure(SignInError.noAppWithCredentials)
             return nil 
         }
         
-        // Specifying the Headers we need
         let headers = [
             "Content-Type" : "application/x-www-form-urlencoded",
             "Authorization" : "Basic \(StepicApplicationsInfo.password!.credentials)"
@@ -103,24 +99,22 @@ class AuthManager : NSObject {
             } else {
                 json = response.result.value!
             }
-//            let response = response.response
+            let response = response.response
 
             
             if let e = error {
-                failure(e)
+                failure(SignInError.other(error: e, code: nil, message: nil))
                 return
             }
             
-            if json["error"] != JSON.null {
-                let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
-                failure(e)
-                return
+            if let r = response {
+                if !r.statusCode.isSuccess() {
+                    failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                    return
+                }
             }
             
-            print(json)
-            //            print("no error")
             let token : StepicToken = StepicToken(json: json)
-            //            print(token.accessToken)
             AuthInfo.shared.authorizationType = AuthorizationType.password
             success(token)
         })
@@ -340,15 +334,10 @@ enum TokenRefreshError: Error {
     case noAccess, noAppWithCredentials, other
 }
 
-extension NSError {
-    
-    static var tokenRefreshError: NSError {
-        return NSError(domain: "APIErrorDomain", code: 1337, userInfo:  [NSLocalizedDescriptionKey : "Token refresh error"])
-    }
-    
-    static var noAppWithCredentials : NSError {
-        return NSError(domain: "APIErrorDomain", code: 1488, userInfo:  [NSLocalizedDescriptionKey : "Not registered application with given credential type"])
-    }
+enum SignInError : Error {
+    case tooManyTries
+    case noAppWithCredentials
+    case other(error: Error?, code: Int?, message: String?)
 }
 
 extension Int {

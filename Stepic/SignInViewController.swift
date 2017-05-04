@@ -78,14 +78,17 @@ class SignInViewController: UIViewController {
     func didGetAuthentificationCode(_ notification: Foundation.Notification) {
         print("entered didGetAuthentificationCode")
         
-        //TODO: Implement WebControllerManager
-        
-        WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
-            self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
-        }, error: {
-            errorMessage in
-            print(errorMessage)
-        })        
+//        if #available(iOS 9.0, *) {
+//            self.navigationController?.popViewController(animated: true)
+//            self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
+//        } else {
+            WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
+                self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
+            }, error: {
+                errorMessage in
+                print(errorMessage)
+            })
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,8 +110,9 @@ class SignInViewController: UIViewController {
                                                         AuthInfo.shared.user = user
                                                         User.removeAllExcept(user)
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                        UIThread.performUI { 
-                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                        UIThread.performUI {
+                                                            [weak self] in
+                                                            self?.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
                                                                 self?.success?("social")
                                                             })
@@ -117,8 +121,9 @@ class SignInViewController: UIViewController {
                                                         e in
                                                         print("successfully signed in, but could not get user")
                                                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                        UIThread.performUI { 
-                                                            self.navigationController?.dismiss(animated: true, completion: {
+                                                        UIThread.performUI {
+                                                            [weak self] in
+                                                            self?.navigationController?.dismiss(animated: true, completion: {
                                                                 [weak self] in
                                                                 self?.success?("social")
                                                             })
@@ -132,36 +137,47 @@ class SignInViewController: UIViewController {
     
     fileprivate func signIn() {        
         SVProgressHUD.show(withStatus: "")
-        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, 
-                                                        success: {
-                                                            t in
-                                                            AuthInfo.shared.token = t
-                                                            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                                                            _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
-                                                                user in
-                                                                AuthInfo.shared.user = user
-                                                                User.removeAllExcept(user)
-                                                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                                UIThread.performUI { 
-                                                                    self.navigationController?.dismiss(animated: true, completion: {
-                                                                        [weak self] in
-                                                                        self?.success?("password")
-                                                                    })
-                                                                }
-                                                            }, error: {
-                                                                e in
-                                                                print("successfully signed in, but could not get user")
-                                                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                                                UIThread.performUI{ 
-                                                                    self.navigationController?.dismiss(animated: true, completion: {
-                                                                        [weak self] in
-                                                                        self?.success?("password")
-                                                                    })
-                                                                }
-                                                            })
+        _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!, success: {
+            t in
+            AuthInfo.shared.token = t
+            NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+            _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
+                user in
+                AuthInfo.shared.user = user
+                User.removeAllExcept(user)
+                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                UIThread.performUI {
+                    [weak self] in
+                    self?.navigationController?.dismiss(animated: true, completion: {
+                        [weak self] in
+                        self?.success?("password")
+                    })
+                }
+            }, error: {
+                e in
+                print("successfully signed in, but could not get user")
+                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+                UIThread.performUI{
+                    [weak self] in
+                    self?.navigationController?.dismiss(animated: true, completion: {
+                        [weak self] in
+                        self?.success?("password")
+                    })
+                }
+            })
         }, failure: {
             e in
-            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+            var hudMessage: String = NSLocalizedString("FailedToSignIn", comment: "")
+            switch e {
+            case .other(error: let _, code: let code, message: let _):
+                if code == 429 {
+                    hudMessage = "Too many attempts. Please, try later."
+                }
+                break
+            default:
+                break
+            }
+            SVProgressHUD.showError(withStatus: hudMessage)
         })
     }
     
@@ -180,12 +196,18 @@ class SignInViewController: UIViewController {
         if segue.identifier == "socialNetworksEmbedSegue" {
             let dvc = segue.destination as? SocialNetworksViewController
             dvc?.dismissBlock = {
-                self.navigationController?.dismiss(animated: true, completion: {
+                [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: {
                     [weak self] in
                     self?.success?("social")
                 })
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("did deinit SignInViewController")
     }
 }
 

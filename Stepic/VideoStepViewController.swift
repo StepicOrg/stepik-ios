@@ -14,9 +14,7 @@ import FLKAutoLayout
 
 class VideoStepViewController: UIViewController {
     
-    var moviePlayer : MPMoviePlayerController? = nil
     var video : Video!
-    var nItem : UINavigationItem!
     var step: Step!
     var stepId : Int!
     var lessonSlug: String!
@@ -27,10 +25,13 @@ class VideoStepViewController: UIViewController {
 
     var assignment : Assignment?
     
-    var parentNavigationController : UINavigationController?
+//    weak var parentNavigationController : UINavigationController?
     
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
+    
+    //variable for sending analytics correctly - if view appears after dismissing video player, the event is not being sent
+    var didPresentVideoPlayer: Bool = false
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -44,12 +45,6 @@ class VideoStepViewController: UIViewController {
     @IBOutlet weak var prevLessonButtonHeight: NSLayoutConstraint!
     
     @IBOutlet weak var prevNextLessonButtonsContainerViewHeight: NSLayoutConstraint!
-    
-    
-//    @IBOutlet weak var discussionToPrevDistance: NSLayoutConstraint!
-//    @IBOutlet weak var discussionToNextDistance: NSLayoutConstraint!
-//    @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
-//    @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
     
     var imageTapHelper : ImageTapHelper!
     
@@ -77,10 +72,12 @@ class VideoStepViewController: UIViewController {
             return
         }
         DispatchQueue.global(qos: .default).async {
+            [weak self] in
             let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/lesson/" + slug + "/step/" + "\(stepid)")
             shareVC.popoverPresentationController?.barButtonItem = item
             DispatchQueue.main.async {
-                self.present(shareVC, animated: true, completion: nil)
+                [weak self] in
+                self?.present(shareVC, animated: true, completion: nil)
             }
         }
     }
@@ -114,10 +111,6 @@ class VideoStepViewController: UIViewController {
             nextLessonButtonHeight.constant = 0
             prevLessonButtonHeight.constant = 0
             prevNextLessonButtonsContainerViewHeight.constant = 0
-//            discussionToNextDistance.constant = 0
-//            discussionToPrevDistance.constant = 0
-//            prevToBottomDistance.constant = 0
-//            nextToBottomDistance.constant = 0
         }
     }
     
@@ -143,12 +136,15 @@ class VideoStepViewController: UIViewController {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = self.video
             self.present(player, animated: true, completion: {
+                [weak self] in
                 print("stepic player successfully presented!")
+                self?.didPresentVideoPlayer = true
+                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
             })
         } else {
-            if let vc = self.parentNavigationController {
-                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-            }
+//            if let vc = self.parentNavigationController {
+//                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+//            }
         }
     }
     
@@ -163,7 +159,7 @@ class VideoStepViewController: UIViewController {
         
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
-        nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
+        navigationItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
     override func didReceiveMemoryWarning() {
@@ -176,7 +172,11 @@ class VideoStepViewController: UIViewController {
             return
         }
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        if !didPresentVideoPlayer {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        } else {
+            didPresentVideoPlayer = false
+        }
 
         let stepid = step.id         
         if stepId - 1 == startStepId {
@@ -220,6 +220,10 @@ class VideoStepViewController: UIViewController {
         nextLessonHandler?()
     }
     
+    deinit {
+        print("deinit VideoStepViewController")
+    }
+    
     /*
      // MARK: - Navigation
      
@@ -251,13 +255,19 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
             downloadButton.state = .downloading
             video.store(VideosInfo.downloadingVideoQuality, progress: {
                 prog in
-                UIThread.performUI({downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
+                UIThread.performUI({
+                    downloadButton.stopDownloadButton?.progress = CGFloat(prog)
+                })
                 }, completion: {
                     completed in
                     if completed {
-                        UIThread.performUI({downloadButton.state = .downloaded})
+                        UIThread.performUI({
+                            downloadButton.state = .downloaded
+                        })
                     } else {
-                        UIThread.performUI({downloadButton.state = .startDownload})
+                        UIThread.performUI({
+                            downloadButton.state = .startDownload
+                        })
                     }
                 }, error: {
                     error in

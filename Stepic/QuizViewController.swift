@@ -19,6 +19,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var hintHeight: NSLayoutConstraint!
     @IBOutlet weak var hintView: UIView!
     @IBOutlet weak var hintWebView: UIWebView!
+    @IBOutlet weak var hintTextView: UITextView!
     
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
@@ -193,6 +194,15 @@ class QuizViewController: UIViewController {
         statusImageView.isHidden = !visible
     }
     
+    fileprivate func getHintHeightFor(hint: String) -> CGFloat {
+        let textView = UITextView()
+        textView.text = hint
+        textView.font = UIFont(name: "ArialMT", size: 16)
+        let fixedWidth = hintTextView.bounds.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        return newSize.height
+    }
+    
     var submission : Submission? {
         didSet {
             DispatchQueue.main.async {
@@ -226,8 +236,17 @@ class QuizViewController: UIViewController {
                         if let hint = s.submission?.hint {
                             if hint != "" {
                                 s.hintView.isHidden = false
-                                s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
-                                s.performHeightUpdates()
+                                if TagDetectionUtil.isWebViewSupportNeeded(hint) {
+                                    s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
+                                    s.performHeightUpdates()
+                                    s.hintTextView.isHidden = true
+                                    s.hintWebView.isHidden = false
+                                } else {
+                                    s.hintWebView.isHidden = true
+                                    s.hintTextView.isHidden = false
+                                    s.hintTextView.text = hint
+                                    s.hintHeight.constant = s.getHintHeightFor(hint: hint)
+                                }
                             } else {
                                 s.hintHeight.constant = 0
                             }
@@ -365,6 +384,13 @@ class QuizViewController: UIViewController {
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true
         self.hintWebView.delegate = self
+        self.hintTextView.isScrollEnabled = false
+        self.hintTextView.backgroundColor = UIColor.clear
+        self.hintTextView.textColor = UIColor.white
+        self.hintTextView.font = UIFont(name: "ArialMT", size: 16)
+        self.hintTextView.isEditable = false
+        self.hintTextView.dataDetectorTypes = .all
+
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
@@ -378,7 +404,7 @@ class QuizViewController: UIViewController {
     }
     
     deinit {
-        print("did deinit quiz controller for step \(step.id)")
+        print("deinit quiz controller for step \(step.id)")
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -599,9 +625,10 @@ class QuizViewController: UIViewController {
     
     fileprivate func checkSubmission(_ id: Int, time: Int, completion: ((Void)->Void)? = nil) {
         delay(checkTimeStandardInterval * Double(time), closure: {
+            [weak self] in
+            guard self != nil else { return }
             performRequest({
                 [weak self] in
-                
                 guard let s = self else { return }
                 _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     submission in

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="containerView" destination="HO0-Wd-0kw" id="BZi-zt-KtT"/>
                 <outlet property="hintHeight" destination="AhP-8s-ofa" id="2bJ-6X-Sgt"/>
+                <outlet property="hintTextView" destination="veh-sk-UzR" id="xRb-0L-ijn"/>
                 <outlet property="hintView" destination="GmL-q5-y6Z" id="mEf-oh-hyb"/>
                 <outlet property="hintWebView" destination="Ke4-HJ-ctM" id="OjG-Wo-RAE"/>
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>
@@ -64,6 +65,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
                     <rect key="frame" x="8" y="415" width="584" height="0.0"/>
                     <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="veh-sk-UzR">
+                            <rect key="frame" x="8" y="0.0" width="568" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                         <webView contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ke4-HJ-ctM">
                             <rect key="frame" x="8" y="8" width="568" height="48"/>
                             <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,8 +82,12 @@
                     <constraints>
                         <constraint firstItem="Ke4-HJ-ctM" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="top" id="2XH-wc-8kn"/>
                         <constraint firstItem="Ke4-HJ-ctM" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="6mF-yE-VMC"/>
+                        <constraint firstAttribute="trailing" secondItem="veh-sk-UzR" secondAttribute="trailing" constant="8" id="9bK-MZ-eOk"/>
                         <constraint firstAttribute="height" id="AhP-8s-ofa"/>
                         <constraint firstAttribute="trailing" secondItem="Ke4-HJ-ctM" secondAttribute="trailing" constant="8" id="Bji-lc-863"/>
+                        <constraint firstAttribute="bottom" secondItem="veh-sk-UzR" secondAttribute="bottom" id="dkg-nF-n0A"/>
+                        <constraint firstItem="veh-sk-UzR" firstAttribute="leading" secondItem="GmL-q5-y6Z" secondAttribute="leading" constant="8" id="iNk-fM-3Fk"/>
+                        <constraint firstItem="veh-sk-UzR" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="top" id="pma-j6-CE3"/>
                         <constraint firstAttribute="bottom" secondItem="Ke4-HJ-ctM" secondAttribute="bottom" id="uhB-wF-5eG"/>
                     </constraints>
                 </view>

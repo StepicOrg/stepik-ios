@@ -101,7 +101,7 @@ class AuthInfo: NSObject {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
             let refreshToken = defaults.value(forKey: "refresh_token") as? String,
             let tokenType = defaults.value(forKey: "token_type") as? String {
-                print("got accessToken \(accessToken)")
+//                print("got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
                 return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {

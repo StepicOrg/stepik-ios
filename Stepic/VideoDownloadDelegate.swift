@@ -9,7 +9,7 @@
 import Foundation
 import DownloadButton
 
-protocol VideoDownloadDelegate {
+protocol VideoDownloadDelegate: class {
     func didDownload(_ video: Video, cancelled: Bool)
     func didGetError(_ video: Video)
 }

@@ -272,6 +272,8 @@
 		086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 086494891E8C753B0083E0BE /* SbAuth.storyboard */; };
 		086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0864948C1E8C753B0083E0BE /* SbEntranceViewController.xib */; };
 		086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0864948D1E8C753B0083E0BE /* SbLaunchScreen.xib */; };
+		086538381EB02716003A8415 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086538371EB02716003A8415 /* Stickers.xcassets */; };
+		0865383C1EB02716003A8415 /* StickerPackExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 086538351EB02715003A8415 /* StickerPackExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
 		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		0867D82F1E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0867D82D1E8531F600B13285 /* CurrentBestStreakViewController.swift */; };
@@ -307,6 +309,10 @@
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
+		087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
+		087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
+		087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */; };
@@ -778,6 +784,13 @@
 			remoteGlobalIDString = 08DE94101B8C58AC00D278AB;
 			remoteInfo = Stepic;
 		};
+		0865383A1EB02716003A8415 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 086538341EB02715003A8415;
+			remoteInfo = StickerPackExtension;
+		};
 		9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
@@ -795,6 +808,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		086538401EB02716003A8415 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0865383C1EB02716003A8415 /* StickerPackExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9F9C71391E076AE100EC8DA3 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1010,6 +1034,9 @@
 		0864948D1E8C753B0083E0BE /* SbLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SbLaunchScreen.xib; path = Sb/SbLaunchScreen.xib; sourceTree = "<group>"; };
 		0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbSocialNetworks.swift; path = Sb/SbSocialNetworks.swift; sourceTree = "<group>"; };
 		0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SbStepicApplicationsInfo.swift; path = Sb/SbStepicApplicationsInfo.swift; sourceTree = "<group>"; };
+		086538351EB02715003A8415 /* StickerPackExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StickerPackExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		086538371EB02716003A8415 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
+		086538391EB02716003A8415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08666B5E1E11C54300799731 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
@@ -1032,6 +1059,8 @@
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
 		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
+		087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
+		087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
 		087F6B981CEA02AE002649AB /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepGlobalContext.swift; sourceTree = "<group>"; };
@@ -1291,6 +1320,13 @@
 			files = (
 				08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */,
 				9E49779683FA325246E0E136 /* Pods_Stepic.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6603885739860CA1A6410CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1775,6 +1811,15 @@
 			name = ExecutionQueue;
 			sourceTree = "<group>";
 		};
+		086538361EB02716003A8415 /* StickerPackExtension */ = {
+			isa = PBXGroup;
+			children = (
+				086538371EB02716003A8415 /* Stickers.xcassets */,
+				086538391EB02716003A8415 /* Info.plist */,
+			);
+			path = StickerPackExtension;
+			sourceTree = "<group>";
+		};
 		0867D82A1E85313100B13285 /* Streaks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2224,6 +2269,7 @@
 				9F9C71481E076B3200EC8DA3 /* Shared */,
 				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
+				086538361EB02716003A8415 /* StickerPackExtension */,
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				08D121261C93882400A54ABC /* Sb */,
@@ -2239,6 +2285,7 @@
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
 				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
 				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
+				086538351EB02715003A8415 /* StickerPackExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2492,6 +2539,8 @@
 				084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */,
 				084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */,
 				0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */,
+				087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */,
+				087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */,
 			);
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
@@ -2623,6 +2672,22 @@
 			productReference = 085D5CD91D007F2100092060 /* StepicTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		086538341EB02715003A8415 /* StickerPackExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0865383F1EB02716003A8415 /* Build configuration list for PBXNativeTarget "StickerPackExtension" */;
+			buildPhases = (
+				086538331EB02715003A8415 /* Resources */,
+				6603885739860CA1A6410CEA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StickerPackExtension;
+			productName = StickerPackExtension;
+			productReference = 086538351EB02715003A8415 /* StickerPackExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
+		};
 		08D120731C937B2200A54ABC /* SberbankUniversity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08D121211C937B2200A54ABC /* Build configuration list for PBXNativeTarget "SberbankUniversity" */;
@@ -2656,11 +2721,13 @@
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				F3E9F0087D153975725742F1 /* [CP] Embed Pods Frameworks */,
 				BFF224609D56428F7DFF8405 /* [CP] Copy Pods Resources */,
+				086538401EB02716003A8415 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				9F9C71321E076AE100EC8DA3 /* PBXTargetDependency */,
+				0865383B1EB02716003A8415 /* PBXTargetDependency */,
 			);
 			name = Stepic;
 			productName = Stepic;
@@ -2718,6 +2785,11 @@
 						DevelopmentTeam = 4562ZPB9BG;
 						LastSwiftMigration = 0800;
 						TestTargetID = 08DE94101B8C58AC00D278AB;
+					};
+					086538341EB02715003A8415 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4562ZPB9BG;
+						ProvisioningStyle = Manual;
 					};
 					08D120731C937B2200A54ABC = {
 						DevelopmentTeam = 4562ZPB9BG;
@@ -2779,6 +2851,7 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
+				086538341EB02715003A8415 /* StickerPackExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2789,6 +2862,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				080AA2351EA05BE00079272F /* TestInfo.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		086538331EB02715003A8415 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				086538381EB02716003A8415 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2843,6 +2924,7 @@
 				086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
+				087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
@@ -2886,6 +2968,7 @@
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
+				087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
@@ -3206,6 +3289,7 @@
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
+				087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
@@ -3592,6 +3676,7 @@
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
@@ -3776,6 +3861,11 @@
 			target = 08DE94101B8C58AC00D278AB /* Stepic */;
 			targetProxy = 085D5CDE1D007F2200092060 /* PBXContainerItemProxy */;
 		};
+		0865383B1EB02716003A8415 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 086538341EB02715003A8415 /* StickerPackExtension */;
+			targetProxy = 0865383A1EB02716003A8415 /* PBXContainerItemProxy */;
+		};
 		9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */;
@@ -3872,6 +3962,47 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stepic.app/Stepic";
+			};
+			name = Release;
+		};
+		0865383D1EB02716003A8415 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				INFOPLIST_FILE = StickerPackExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7a6c5642-e257-4738-9377-a3e9f8ea834d";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.StickerPackExtension";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0865383E1EB02716003A8415 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4562ZPB9BG;
+				INFOPLIST_FILE = StickerPackExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e64a6b06-989a-4533-b28a-c367021df625";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.StickerPackExtension";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4026,7 +4157,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -4054,7 +4185,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = 4562ZPB9BG;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -4063,8 +4194,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "123664dc-4560-4c33-a37f-c6538d5c47a9";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic";
+				PROVISIONING_PROFILE = "ee9caa85-dcd2-4f01-8162-a19b572a2b69";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4113,8 +4244,8 @@
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae0cb1a3-b372-427c-975f-a7dc1f1db87a";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp";
+				PROVISIONING_PROFILE = "127f0dd3-0cc7-4dd2-aa0e-44172da8a3aa";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4157,8 +4288,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "2043acd1-e1dd-49db-83ee-fe508bfe2c04";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "c2a9d809-0c0c-4a15-bc93-f973c9b4a00a";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4175,6 +4306,15 @@
 			buildConfigurations = (
 				085D5CE01D007F2200092060 /* Debug */,
 				085D5CE11D007F2200092060 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0865383F1EB02716003A8415 /* Build configuration list for PBXNativeTarget "StickerPackExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0865383D1EB02716003A8415 /* Debug */,
+				0865383E1EB02716003A8415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
