@@ -28,6 +28,7 @@ artefacts/
 fastlane/screenshots/
 fastlane/report.xml
 fastlane/Readme.md
+Preview.html
 *.lock
 # Carthage
 #
