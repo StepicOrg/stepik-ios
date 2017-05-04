@@ -17,7 +17,8 @@ class LaunchViewController: UIViewController {
     var signInController : SignInViewController?
     
     func setupLocalizations() {
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
+        //signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
+        signInButton.setTitle("Войти с email", for: .normal)
         signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: UIControlState())
         dontHaveAccountLabel.text = NSLocalizedString("DontHaveAccountQuestion", comment: "")
     }
@@ -36,8 +37,8 @@ class LaunchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
         navigationController?.navigationBar.barTintColor = UIColor.white
         
-        signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-        signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+        signInButton.setStepicGreenStyle()
+        signUpButton.setStepicWhiteStyle()        
     }
 
     override func viewWillAppear(_ animated: Bool) {
