@@ -16,13 +16,11 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var socialLabel: UILabel!
     
     fileprivate func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: UIControlState())
-        socialLabel.text = NSLocalizedString("SocialSignIn", comment: "")
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), for: UIControlState())
     }
     

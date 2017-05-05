@@ -621,7 +621,7 @@
                 <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="4QR-Lx-HW0" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xnv-IR-UyR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xnv-IR-UyR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
