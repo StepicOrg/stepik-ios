@@ -67,7 +67,7 @@ Email = "Email";
 Password = "Password";
 SignIn = "Sign in";
 SignUp = "Sign up";
-SocialSignIn = "Sign in with social networks";
+SocialSignIn = "Continue with";
 DontHaveAccountQuestion = "Don't have an account?";
 ForgotPassword = "Forgot password?";
 WrongFields = "Incorrect fields data!";
@@ -213,5 +213,5 @@ EmptyCertificatesDescription = "Choose a course and learn to get a certificate";
 ChooseCourse = "Choose course";
 CourseStaff = "Course staff";
 Staff = "Stepik staff";
-
-
+SignInByEmail = "Sign in by email";
+or = "or";

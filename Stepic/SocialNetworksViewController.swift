@@ -39,6 +39,11 @@ class SocialNetworksViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        socialNetworksCollectionView.performBatchUpdates(nil, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -67,6 +72,7 @@ class SocialNetworksViewController: UIViewController {
             if let provider = socialNetwork.socialSDKProvider {
                 provider.getAccessToken(success: {
                     token in
+                    SVProgressHUD.show(withStatus: "")
                     AuthManager.oauth.signUpWith(socialToken: token, provider: provider.name, success: {
                         t in
                         AuthInfo.shared.token = t
