@@ -26,6 +26,8 @@
 		0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802C3B11BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift */; };
 		08047E6E1BFDC0480071C875 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
+		0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
+		0806B2C31EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
 		080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA22F1EA017FB0079272F /* CertificateSpec.swift */; };
 		080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
 		080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
@@ -861,6 +863,7 @@
 		08047E6B1BFD44920071C875 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextTableViewCell.swift; sourceTree = "<group>"; };
 		08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
+		0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewsExecutableTask.swift; sourceTree = "<group>"; };
 		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
 		080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPIPaginatedMock.swift; sourceTree = "<group>"; };
 		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
@@ -1355,6 +1358,14 @@
 				086A8B241D21434B00F45C45 /* Vote.swift */,
 			);
 			name = Discussions;
+			sourceTree = "<group>";
+		};
+		0806B2C01EBDBAE300FDE0F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		0808A30A1BC84FBB00A95C29 /* Helpers */ = {
@@ -2168,6 +2179,7 @@
 		08BC47121CDA3C09009A1D25 /* Tasks & Serializers */ = {
 			isa = PBXGroup;
 			children = (
+				0806B2C01EBDBAE300FDE0F7 /* Views */,
 				08AC21441CDD493A00FBB9CD /* PersistentRecoveryManager.swift */,
 				08AC21371CDD32E100FBB9CD /* Users data */,
 				08BC47161CDA3F79009A1D25 /* Delete Device */,
@@ -3402,6 +3414,7 @@
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				080CE1591E9566220089A27F /* ViewsAPI.swift in Sources */,
+				0806B2C31EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				0829B83D1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				080CE15F1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				086A8B261D21434B00F45C45 /* Vote.swift in Sources */,
@@ -3582,6 +3595,7 @@
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
+				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,

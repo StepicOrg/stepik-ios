@@ -13,7 +13,7 @@ import SwiftyJSON
 class ViewsAPI : APIEndpoint {
     let name = "views"
     
-    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Void)->Void) -> Request? {
+    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Void)->Void, error errorHandler: @escaping (ViewsCreateError)->Void) -> Request? {
         var params : Parameters = [:]
         
         if let assignment = assignment {
@@ -44,15 +44,33 @@ class ViewsAPI : APIEndpoint {
             } else {
 //                json = response.result.value!
             }
-//            let response = response.response
+            let response = response.response
             
-            
-            if let _ = error {
+            if let e = error {
+                errorHandler(.other(error: e, code: nil, message: nil))
                 return
             }
             
-            success()
+            guard let code = response?.statusCode else {
+                errorHandler(.other(error: nil, code: nil, message: nil))
+                return
+            }
+            
+            switch code{
+            case 200..<300:
+                success()
+                return
+            case 401:
+                errorHandler(.notAuthorized)
+                return
+            default:
+                errorHandler(.other(error: nil, code: code, message: nil))
+                return
+            }
         })
     }
+}
 
+enum ViewsCreateError : Error {
+    case notAuthorized, other(error: Error?, code: Int?, message: String?)
 }

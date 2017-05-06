@@ -57,20 +57,25 @@ class DevicesAPI: NSObject {
         })
     }
     
-    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((DeleteDeviceError)->Void)) -> Request {
         
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
             response in
 //            _, response, data, error in
             
             if let e = response.error as NSError? {
-                errorHandler("DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                errorHandler(.other(error: e, code: nil, message: "DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)"))
                 return
             }
             
-            if response.response?.statusCode != 204 && response.response?.statusCode != 404 {
-                errorHandler("DESTROY device: bad response status code \(String(describing: response.response?.statusCode))")
-                return
+            if let code = response.response?.statusCode {
+                if code != 204 && code != 404 {
+                    errorHandler(.other(error: nil, code: code, message: "DESTROY device: bad response status code \(String(describing: response.response?.statusCode))"))
+                    return
+                }
+                if code == 404 {
+                    errorHandler(.notFound)
+                }
             }
             
             success()
@@ -111,4 +116,8 @@ class DevicesAPI: NSObject {
             return
         })
     }
+}
+
+enum DeleteDeviceError : Error {
+    case notFound, other(error: Error?, code: Int?, message: String?)
 }

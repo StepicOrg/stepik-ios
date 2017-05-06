@@ -36,18 +36,36 @@ class ExecutionQueue : DictionarySerializable {
                 completion(notCompletedExecutionQueue)
             }
         }
-                
-        for executableTask in queue {
-            executableTask.execute(
-                success: {
-                    executedCount += 1
-                    completeIfAllExecuted()
-                }, failure: {
-                    notCompletedExecutionQueue.push(executableTask)
-                    completeIfAllExecuted()                
-                }
-            )
+        
+        func executeTasks(completion: @escaping (Void) -> Void) {
+            guard queue.count > 0 else {
+                completion()
+                return
+            }
+            executeTask(id: 0, completion: completion)
         }
+        
+        func executeTask(id: Int, completion: @escaping (Void) -> Void) {
+            guard id < queue.count else {
+                completion()
+                return
+            }
+            let task = queue[id]
+            task.execute( success: {
+                executeTask(id: id + 1, completion: completion)
+            }, failure: {
+                executionError in
+                if executionError == .retry {
+                    notCompletedExecutionQueue.push(task)
+                }
+                executeTask(id: id + 1, completion: completion)
+            })
+        }
+        
+        executeTasks {
+            completion(notCompletedExecutionQueue)
+        }
+        
     }
     
     init() {}
