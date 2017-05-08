@@ -1,21 +1,21 @@
 
-/* Class = "UILabel"; text = "Система сама будет подбирать вопросы, учитывая Ваш уровень знаний"; ObjectID = "6Hl-sE-eeH"; */
-"6Hl-sE-eeH.text" = "System will recommend problems based on the level of your knowledge";
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "0iw-z3-Xp8"; */
+"0iw-z3-Xp8.text" = "Adaptive learning";
 
-/* Class = "UILabel"; text = "Решите задание и перейдите к следующему"; ObjectID = "6JF-Q7-PJN"; */
-"6JF-Q7-PJN.text" = "Solve the task and move to the next one";
+/* Class = "UILabel"; text = "Решайте задания, которые Вам предлагает система"; ObjectID = "Ggs-a8-mwe"; */
+"Ggs-a8-mwe.text" = "Solve the problems that the system recommends you";
 
-/* Class = "UILabel"; text = "Чтобы получить новую рекомендацию, смахните карточку"; ObjectID = "I9M-UC-0Jd"; */
-"I9M-UC-0Jd.text" = "Swipe the card to get new recommendation";
-
-/* Class = "UILabel"; text = "Cмахните карточку вправо, если задание кажется Вам слишком простым, или влево, если задание кажется слишком сложным"; ObjectID = "OB9-HH-Rnt"; */
-"OB9-HH-Rnt.text" = "Swipe the card to the right if the problem is too easy for you, or to the left if the problem is too hard";
+/* Class = "UILabel"; text = "Смахните карточку вправо, если задание кажется Вам слишком простым"; ObjectID = "KI5-nN-kWq"; */
+"KI5-nN-kWq.text" = "Swipe the card to the right if the problem is too easy for you";
 
 /* Class = "UIBarButtonItem"; title = "Закрыть"; ObjectID = "Sxi-w0-PgC"; */
 "Sxi-w0-PgC.title" = "Cancel";
 
 /* Class = "UINavigationItem"; title = "О курсе"; ObjectID = "TBo-4r-wN7"; */
 "TBo-4r-wN7.title" = "About course";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "Tjp-nj-PEr"; */
+"Tjp-nj-PEr.text" = "Adaptive learning";
 
 /* Class = "UILabel"; text = "- / -"; ObjectID = "W29-0c-Mlf"; */
 "W29-0c-Mlf.text" = "- / -";
@@ -26,11 +26,17 @@
 /* Class = "UILabel"; text = "Course name"; ObjectID = "eRe-BV-APm"; */
 "eRe-BV-APm.text" = "Course name";
 
+/* Class = "UIButton"; normalTitle = "Начать обучение"; ObjectID = "fJE-sh-DRy"; */
+"fJE-sh-DRy.normalTitle" = "Start learning";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "feD-eT-U7I"; */
+"feD-eT-U7I.text" = "Adaptive learning";
+
 /* Class = "UILabel"; text = "Course summary"; ObjectID = "p0o-q2-aUC"; */
 "p0o-q2-aUC.text" = "Course summary";
 
-/* Class = "UIButton"; normalTitle = "Начать обучение"; ObjectID = "qPA-qf-uB7"; */
-"qPA-qf-uB7.normalTitle" = "Start learning";
+/* Class = "UILabel"; text = "Смахните карточку влево, если задание кажется Вам слишком сложным"; ObjectID = "pgL-k5-S5d"; */
+"pgL-k5-S5d.text" = "Swipe the card to the left if the problem is too hard for you";
 
-/* Class = "UILabel"; text = "Нажмите на карточку, чтобы решить задание"; ObjectID = "xeP-Fi-ccw"; */
-"xeP-Fi-ccw.text" = "Tap the card to solve problem";
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "s3F-AI-k5h"; */
+"s3F-AI-k5h.text" = "Adaptive learning";

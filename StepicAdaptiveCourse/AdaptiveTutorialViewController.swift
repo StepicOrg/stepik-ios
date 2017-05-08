@@ -19,7 +19,8 @@ class AdaptiveTutorialViewController: UIPageViewController {
     fileprivate lazy var orderedViewControllers: [UIViewController] = {
         return [self.initTutorialPageViewController(index: 1),
                 self.initTutorialPageViewController(index: 2),
-                self.initTutorialPageViewController(index: 3)]
+                self.initTutorialPageViewController(index: 3),
+                self.initTutorialPageViewController(index: 4)]
     }()
     
     fileprivate func initTutorialPageViewController(index: Int) -> UIViewController {
