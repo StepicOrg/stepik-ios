@@ -10,93 +10,58 @@ import UIKit
 
 class AdaptiveStepViewController: UIViewController {
 
+    var isSendButtonHidden: Bool = false
+    
     var course: Course!
     var recommendedLesson: Lesson!
     var step: Step!
     
-    var quizVC: ChoiceQuizViewController?
-    var isCorrectSolved = false {
-        didSet {
-            if isCorrectSolved {
-                doneButton.setIcon(for: .done)
-            } else {
-                doneButton.setIcon(for: .dismiss)
-            }
-        }
-    }
+    var quizViewController: ChoiceQuizViewController?
     
-    @IBOutlet weak var bottomView: UIView!
+    weak var delegate: AdaptiveStepViewControllerDelegate?
+    
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var doneButton: StepControlButton!
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    var dismissHandler: () -> () = { }
-    var successHandler: () -> () = { }
-    
-    @IBAction func onNextButtonClick(_ sender: AnyObject) {
-        self.dismiss(animated: false, completion: { _ in
-            if !self.isCorrectSolved {
-                self.dismissHandler()
-            } else {
-                self.successHandler()
-            }
-        })
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = bottomView.bounds
-        gradientLayer.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
-                                UIColor.white.withAlphaComponent(0.4).cgColor,
-                                UIColor.white.withAlphaComponent(0.6).cgColor]
-        gradientLayer.locations = [0.0, 0.5, 1.0]
-        bottomView.layer.insertSublayer(gradientLayer, at: 0)
-        
-        self.titleLabel.text = recommendedLesson.title
+        // Load problem
         self.loadStepHTML(for: step)
+        
+        // Set up quiz vc
+        self.quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+        guard let quizVC = self.quizViewController else {
+            print("quizVC init failed")
+            delegate?.contentLoadingDidFail()
+            return
+        }
+        
+        quizVC.step = self.step
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let quizVC = self.quizVC else {
+        guard let quizVC = self.quizViewController else {
             print("quizVC not init")
+            delegate?.contentLoadingDidFail()
             return
         }
         
-        // Detach controller from card, attach to current vc and update height
-        quizVC.view.removeFromSuperview()
-        quizVC.removeFromParentViewController()
         quizVC.delegate = self
         
         self.addChildViewController(quizVC)
         self.quizPlaceholderView.addSubview(quizVC.view)
         quizVC.view.align(to: self.quizPlaceholderView)
         
-        self.needsHeightUpdate(quizVC.heightWithoutQuiz + quizVC.expectedQuizHeight, animated: false, breaksSynchronizationControl: false)
-        
-        quizVC.sendButton.isHidden = false
+        quizVC.isSubmitButtonHidden = isSendButtonHidden
         
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Detach quiz view controller
-        quizVC?.view.removeFromSuperview()
-        quizVC?.removeFromParentViewController()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     fileprivate func loadStepHTML(for step: Step) {
@@ -108,21 +73,23 @@ class AdaptiveStepViewController: UIViewController {
         }
     }
     
-    fileprivate func scrollToSendButton() {
-        guard let quizVC = self.quizVC else {
+    fileprivate func scrollToBottom() {
+        guard let quizVC = self.quizViewController else {
             print("quizVC not init")
+            delegate?.contentLoadingDidFail()
             return
         }
         
-        let sendButtonY = quizVC.sendButton.frame.origin.y + quizPlaceholderView.frame.origin.y
-        let doneButtonY = doneButton.frame.origin.y + bottomView.frame.origin.y
-        let sendButtonHeight = quizVC.sendButton.frame.height + 10
-        let offset = sendButtonY - doneButtonY + sendButtonHeight
-        if offset > 0 {
-            var scrollViewOffset = scrollView.contentOffset
-            scrollViewOffset.y += offset
-            
-            scrollView.setContentOffset(scrollViewOffset, animated: true)
+        let hintViewHeight = quizVC.hintView.frame.height
+        
+        if hintViewHeight > view.frame.height {
+            let childStartPoint = quizVC.statusLabel.superview?.convert(quizVC.statusLabel.frame.origin, to: scrollView)
+            scrollView.scrollRectToVisible(CGRect(x: 0, y: (childStartPoint?.y)!, width: 1, height: scrollView.frame.height), animated: true)
+        } else {
+            let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+            if bottomOffset.y > 0 {
+                scrollView.setContentOffset(bottomOffset, animated: true)
+            }
         }
     }
 }
@@ -142,6 +109,8 @@ extension AdaptiveStepViewController: UIWebViewDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        // Maybe quiz vc should update its height itself ???
+        needsHeightUpdate((quizViewController?.expectedQuizHeight ?? 0) + (quizViewController?.heightWithoutQuiz ?? 0), animated: true, breaksSynchronizationControl: false)
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
     }
 }
@@ -155,14 +124,14 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     self?.view.layoutIfNeeded()
                 }, completion: { _ in
-                    if self?.quizVC?.submission?.status != nil {
-                        self?.scrollToSendButton()
+                    if self?.quizViewController?.submission?.status != nil {
+                        self?.scrollToBottom()
                     }
                 })
             } else {
                 self?.view.layoutIfNeeded()
-                if self?.quizVC?.submission?.status != nil {
-                    self?.scrollToSendButton()
+                if self?.quizViewController?.submission?.status != nil {
+                    self?.scrollToBottom()
                 }
             }
             
@@ -170,14 +139,18 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
     }
     
     func submissionDidCorrect() {
-        isCorrectSolved = true
+        delegate?.stepSubmissionDidCorrect()
     }
     
     func submissionDidWrong() {
-        isCorrectSolved = false
+        delegate?.stepSubmissionDidWrong()
     }
     
-    func didTryAgainButtonClick() {
-        isCorrectSolved = false
+    func submissionDidRetry() {
+        delegate?.stepSubmissionDidRetry()
+    }
+    
+    func didWarningPlaceholderShow() {
+        delegate?.contentLoadingDidFail()
     }
 }

@@ -1128,6 +1128,7 @@
 		86B916251E849548000C2842 /* AdaptiveCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */; };
 		86B96CE81EA931B7007A0995 /* AdaptiveTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */; };
 		86B96CEB1EA95126007A0995 /* AdaptiveTutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */; };
+		86CAFD411EBBB6DF00AF6E2A /* AdaptiveStepViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepViewControllerDelegate.swift */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
@@ -1640,17 +1641,17 @@
 		5A170DF7090CF339424C5036 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7DC9A6006B71E9EEFC6D775A /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		860DB78C1EB8DBA1001E3E42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
-		860DB78E1EB8DBA7001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
-		860DB7931EB8DC17001E3E42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepCardView.strings; sourceTree = "<group>"; };
-		860DB7951EB8DC1A001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		860DB7A41EB9054B001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		860DB7A71EB90555001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		860DB7A91EB906FD001E3E42 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		860DB7AA1EB90761001E3E42 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		8618E3E31EA0063D00FB3D0F /* StepReversedCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepReversedCardView.swift; sourceTree = "<group>"; };
 		8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepReversedCardView.xib; sourceTree = "<group>"; };
+		86226CBE1EBE2FDD0076C82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepCardView.strings; sourceTree = "<group>"; };
+		86226CC01EBE2FE10076C82E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StepCardView.strings; sourceTree = "<group>"; };
+		86226CC21EBE2FFD0076C82E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
+		86226CC41EBE30010076C82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardOverlayView.xib; sourceTree = "<group>"; };
 		866DDDC71EA8079500BAD48E /* CardOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
@@ -1663,6 +1664,7 @@
 		86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseViewController.swift; sourceTree = "<group>"; };
 		86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialViewController.swift; sourceTree = "<group>"; };
 		86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialPageViewController.swift; sourceTree = "<group>"; };
+		86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewControllerDelegate.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* Adaptive PDD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive PDD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
@@ -3034,6 +3036,7 @@
 				86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */,
 				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
 				86B96CE91EA95094007A0995 /* Tutorial */,
+				86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepViewControllerDelegate.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -4769,6 +4772,7 @@
 				864D67301E83DE03001E8D9E /* UIAppearance+Swift.m in Sources */,
 				864D67311E83DE03001E8D9E /* NSAttributedStringExtensions.swift in Sources */,
 				864D67321E83DE03001E8D9E /* AlamofireExtensions.swift in Sources */,
+				86CAFD411EBBB6DF00AF6E2A /* AdaptiveStepViewControllerDelegate.swift in Sources */,
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
 				86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
@@ -4860,8 +4864,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				860DB7901EB8DC13001E3E42 /* Base */,
-				860DB7931EB8DC17001E3E42 /* en */,
-				860DB7951EB8DC1A001E3E42 /* ru */,
+				86226CBE1EBE2FDD0076C82E /* en */,
+				86226CC01EBE2FE10076C82E /* ru */,
 			);
 			name = StepCardView.xib;
 			sourceTree = "<group>";
@@ -4888,8 +4892,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				86EF293B1E83CEA900F8D214 /* Base */,
-				860DB78C1EB8DBA1001E3E42 /* en */,
-				860DB78E1EB8DBA7001E3E42 /* ru */,
+				86226CC21EBE2FFD0076C82E /* ru */,
+				86226CC41EBE30010076C82E /* en */,
 			);
 			name = AdaptiveMain.storyboard;
 			sourceTree = "<group>";

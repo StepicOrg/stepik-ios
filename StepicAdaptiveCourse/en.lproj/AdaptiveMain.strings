@@ -5,9 +5,6 @@
 /* Class = "UILabel"; text = "Решите задание и перейдите к следующему"; ObjectID = "6JF-Q7-PJN"; */
 "6JF-Q7-PJN.text" = "Solve the task and move to the next one";
 
-/* Class = "UILabel"; text = "Заголовок"; ObjectID = "AYZ-82-IiP"; */
-"AYZ-82-IiP.text" = "Title";
-
 /* Class = "UILabel"; text = "Чтобы получить новую рекомендацию, смахните карточку"; ObjectID = "I9M-UC-0Jd"; */
 "I9M-UC-0Jd.text" = "Swipe the card to get new recommendation";
 

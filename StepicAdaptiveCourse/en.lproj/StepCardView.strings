@@ -1,9 +1,9 @@
 
 /* Class = "UILabel"; text = "2.68 Билет 21 Вопрос 4"; ObjectID = "Cwb-9k-TMQ"; */
-"Cwb-9k-TMQ.text" = "Question title";
+"Cwb-9k-TMQ.text" = "Problem title";
+
+/* Class = "UIButton"; normalTitle = "Отправить"; ObjectID = "LCg-u0-xF2"; */
+"LCg-u0-xF2.normalTitle" = "Send";
 
 /* Class = "UILabel"; text = "загружаем..."; ObjectID = "Mhp-0f-kO6"; */
 "Mhp-0f-kO6.text" = "loading...";
-
-/* Class = "UILabel"; text = "Нажмите, чтобы решить"; ObjectID = "mGX-AU-qV7"; */
-"mGX-AU-qV7.text" = "Tap to solve";

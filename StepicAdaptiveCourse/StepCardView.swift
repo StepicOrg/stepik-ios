@@ -10,17 +10,35 @@ import UIKit
 
 class StepCardView: UIView {
 
+    @IBOutlet weak var controlButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var quizPlaceholderView: UIView!
-    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
-    var tapGestureRecognizer: UITapGestureRecognizer!
-    var quizVC: ChoiceQuizViewController?
+    var gradientLayer: CAGradientLayer?
+
+    var step: Step!
+    var course: Course!
+    var lesson: Lesson!
     
+    fileprivate var stepViewController: AdaptiveStepViewController?
+    
+    var controlButtonState: ControlButtonState = .submit {
+        didSet {
+            switch controlButtonState {
+            case .submit:
+                controlButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
+                break
+            case .tryAgain:
+                controlButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: .normal)
+                break
+            case .next:
+                controlButton.setTitle(NSLocalizedString("NextTask", comment: ""), for: .normal)
+                break
+            }
+        }
+    }
+ 
     lazy var parentViewController: UIViewController? = {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -32,26 +50,23 @@ class StepCardView: UIView {
         return nil
     }()
     
-    fileprivate var contentDidLoadHandler: () -> () = {}
-    
+    @IBAction func onControlButtonClick(_ sender: Any) {
+        switch controlButtonState {
+        case .submit:
+            stepViewController?.quizViewController?.submitAttempt()
+            break
+        case .tryAgain:
+            stepViewController?.quizViewController?.retrySubmission()
+            break
+        case .next:
+            (parentViewController as? AdaptiveStepsViewController)?.swipeSolvedCard()
+            break
+        }
+    }
+
     override func draw(_ rect: CGRect) {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.stepicGreenColor().cgColor
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = contentView.bounds
-        gradientLayer.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
-                                UIColor.white.withAlphaComponent(0.4).cgColor,
-                                UIColor.white.withAlphaComponent(1.0).cgColor]
-        gradientLayer.locations = [0.0, 0.8, 1.0]
-        contentView.layer.addSublayer(gradientLayer)
-        
-        self.webView.delegate = self
-        
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepCardView.tapRecognized(_:)))
-        tapGestureRecognizer.cancelsTouchesInView = false
-        quizPlaceholderView.addGestureRecognizer(tapGestureRecognizer)
-        tapGestureRecognizer.delegate = self
     }
     
     func hideContent() {
@@ -59,119 +74,75 @@ class StepCardView: UIView {
         titleLabel.isHidden = true
     }
     
-    func tapRecognized(_ recognizer: UITapGestureRecognizer) { }
-    
-    func updateContent(title: String, text: String?, step: Step, completion: @escaping () -> () = { }) {
-        contentDidLoadHandler = completion
-        
-        // Step title
-        titleLabel.text = title
-        
-        // Step text
-        if let text = text {
-            let scriptsString = "\(Scripts.localTexScript)"
-            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, width: Int(UIScreen.main.bounds.width))
-            html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            webView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-        }
-        
-        // Init step quiz
-        self.quizVC = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-        
-        guard let quizVC = self.quizVC else {
-            print("quizVC init failed")
-            return
-        }
-        
-        quizVC.step = step
-        
-        restoreQuizVC()
-    }
-    
-    func restoreQuizVC() {
-        if let quizVC = self.quizVC, let parentVC = self.parentViewController {
-            quizVC.delegate = self
-            
-            parentVC.addChildViewController(quizVC)
-            self.quizPlaceholderView.addSubview(quizVC.view)
-            quizVC.view.align(to: self.quizPlaceholderView)
-            
-            self.needsHeightUpdate(self.bounds.height, animated: false, breaksSynchronizationControl: false)
-            
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-            
-            quizVC.sendButton.isHidden = true
-        }
-        
-    }
-    
     func showContent() {
         UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.contentView.isHidden = false
             self.titleLabel.isHidden = false
-        }, completion: nil)
-    }
-}
-
-extension StepCardView: UIWebViewDelegate {
-    func resetWebViewHeight(_ height: Float) {
-        webViewHeight.constant = CGFloat(height)
-    }
-    
-    func getContentHeight(_ webView : UIWebView) -> Int {
-        let height = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
-        return height
-    }
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        resetWebViewHeight(Float(getContentHeight(webView)))
-        contentDidLoadHandler()
-    }
-}
-
-extension StepCardView: QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
-        DispatchQueue.main.async {
-            [weak self] in
-            self?.quizPlaceholderViewHeight.constant = newHeight
-            if animated {
-                UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    self?.layoutIfNeeded()
-                    }, completion: nil)
-            } else {
-                self?.layoutIfNeeded()
+            
+            // Set up title
+            self.titleLabel.text = self.lesson.title
+            
+            // Set up step vc
+            self.stepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
+            guard let parentVC = self.parentViewController,
+                let stepVC = self.stepViewController else {
+                print("stepVC init failed")
+                return
             }
             
-        }
-    }
-
-    func didWarningPlaceholderShow() {
-        if let vc = parentViewController as? AdaptiveStepsViewController {
-            vc.isWarningHidden = false
-        }
-    }
-
-}
-
-extension StepCardView: UIGestureRecognizerDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Pass touch to subviews while current view is not UITableViewCell
-        if touches.first?.view is UITableViewCell {
-            return
-        }
-        
-        if let targetView = touches.first?.view?.next, targetView is UITableViewCell {
-            targetView.touchesBegan(touches, with: event)
-        }
+            stepVC.recommendedLesson = self.lesson
+            stepVC.step = self.step
+            stepVC.course = self.course
+            stepVC.delegate = self
+            stepVC.isSendButtonHidden = true
+            
+            parentVC.addChildViewController(stepVC)
+            self.contentView.addSubview(stepVC.view)
+            stepVC.view.align(to: self.contentView)
+            
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+            
+            // Add gradient
+            self.gradientLayer = CAGradientLayer()
+            if let gradient = self.gradientLayer {
+                gradient.frame = self.contentView.bounds
+                gradient.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
+                                             UIColor.white.withAlphaComponent(0.15).cgColor,
+                                             UIColor.white.withAlphaComponent(1.0).cgColor]
+                gradient.locations = [0.0, 0.95, 1.0]
+                self.contentView.layer.addSublayer(gradient)
+            }
+        }, completion: nil)
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        // Pass tap to quiz view controller
-        var touches: Set<UITouch> = Set<UITouch>()
-        touches.insert(touch)
-        quizVC?.touchesBegan(touches, with: nil)
-        return false
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradientLayer?.frame = contentView.bounds
+    }
+    
+    enum ControlButtonState {
+        case submit
+        case tryAgain
+        case next
     }
 }
 
+extension StepCardView: AdaptiveStepViewControllerDelegate {
+    func stepSubmissionDidCorrect() {
+        controlButtonState = .next
+    }
+    
+    func stepSubmissionDidWrong() {
+        controlButtonState = .tryAgain
+    }
+    
+    func stepSubmissionDidRetry() {
+        controlButtonState = .submit
+    }
+    
+    func contentLoadingDidFail() {
+        (parentViewController as? AdaptiveStepsViewController)?.isWarningHidden = false
+    }
+}

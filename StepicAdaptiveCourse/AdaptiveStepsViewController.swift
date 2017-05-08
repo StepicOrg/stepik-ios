@@ -256,6 +256,14 @@ class AdaptiveStepsViewController: UIViewController {
         
         self.presentAuthViewController()
     }
+    
+    func swipeSolvedCard() {
+        self.lastReaction = .solved
+        
+        isCurrentCardDone = true
+        kolodaView.swipe(.up)
+        isCurrentCardDone = false
+    }
 }
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
@@ -280,59 +288,6 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     
     func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
         return isCurrentCardDone ? [.up, .left, .right] : [.left, .right]
-    }
-    
-    func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-        guard let card = koloda.viewForCard(at: index) as? StepCardView else {
-            return
-        }
-
-        guard isRecommendationLoaded, let lesson = self.recommendedLesson, let step = self.step else {
-            print("recommendation not loaded yet")
-            return
-        }
-        
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AdaptiveStepViewController") as? AdaptiveStepViewController {
-            vc.dismissHandler = { [weak card] in
-                guard let card = card else {
-                    return
-                }
-                
-                card.restoreQuizVC()
-                card.showContent()
-                UIView.animate(withDuration: 0.3, animations: {
-                    card.transform = CGAffineTransform.identity
-                })
-            }
-            vc.successHandler = { [weak card, weak koloda] in
-                guard let card = card, let koloda = koloda else {
-                    return
-                }
-                
-                self.lastReaction = .solved
-                
-                card.restoreQuizVC()
-                card.showContent()
-                UIView.animate(withDuration: 0.3, animations: {
-                    card.transform = CGAffineTransform.identity
-                }, completion: { _ in
-                    self.isCurrentCardDone = true
-                    koloda.swipe(.up)
-                    self.isCurrentCardDone = false
-                })
-            }
-            vc.recommendedLesson = lesson
-            vc.step = step
-            vc.course = self.course
-            vc.quizVC = card.quizVC
-            
-            card.hideContent()
-            UIView.animate(withDuration: 0.3, animations: {
-                card.transform = CGAffineTransform.init(scaleX: 2, y: 2)
-            }, completion: { completed in
-                self.present(vc, animated: false, completion: nil)
-            })
-        }
     }
     
     func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool {
@@ -375,10 +330,11 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     
                     self?.step = step
                     DispatchQueue.main.async {
-                        card?.updateContent(title: lesson.title, text: step.block.text, step: step, completion: {
-                            card?.loadingView.isHidden = true
-                            card?.showContent()
-                        })
+                        card?.loadingView.isHidden = true
+                        card?.step = step
+                        card?.course = course
+                        card?.lesson = lesson
+                        card?.showContent()
                     }
                 }
                 
