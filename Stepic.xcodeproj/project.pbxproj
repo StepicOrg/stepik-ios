@@ -5156,7 +5156,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36FEC8B8577C32EA6670B7B7 /* Pods-Adaptive PDD.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1838;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -5180,7 +5180,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 347CDD05CFD6F86EB01EA8FA /* Pods-Adaptive PDD.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1838;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
