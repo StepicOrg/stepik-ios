@@ -219,6 +219,7 @@ class UnitsViewController: UIViewController {
                 if stepsPresentation.isLastStep {
                     if let l = section.units[index].lesson {
                         dvc.startStepId = l.stepsArray.count - 1
+                        dvc.stepId = l.stepsArray.last
                     }
                 }
                 dvc.lesson = section.units[index].lesson
