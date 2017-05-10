@@ -136,6 +136,10 @@ class WebStepViewController: UIViewController {
 
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
         loadStepHTML()
+        
+        if let discussionCount = step.discussionsCount {
+            discussionCountView.commentsCount = discussionCount
+        }
     }
     
     func updatedStepNotification(_ notification: Foundation.Notification) {
@@ -403,6 +407,7 @@ class WebStepViewController: UIViewController {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
             vc.discussionProxyId = discussionProxyId
             vc.target = self.step.id
+            vc.step = self.step
             navigationController?.pushViewController(vc, animated: true)
         } else {
             //TODO: Load comments here
