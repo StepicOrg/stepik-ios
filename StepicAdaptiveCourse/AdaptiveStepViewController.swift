@@ -52,6 +52,7 @@ class AdaptiveStepViewController: UIViewController {
             return
         }
         
+        quizVC.view.layoutIfNeeded()
         quizVC.delegate = self
         
         self.addChildViewController(quizVC)
