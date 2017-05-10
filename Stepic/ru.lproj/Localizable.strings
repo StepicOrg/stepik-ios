@@ -213,7 +213,6 @@ EmptyCertificatesDescription = "Выберите курс и учитесь, ч�
 ChooseCourse = "Выбрать курс";
 CourseStaff = "Команда курса";
 Staff = "Команда Stepik";
-<<<<<<< HEAD
 AboutCourse = "О курсе";
 LoadingCourse = "Загружаем курс...";
 JoiningCourse = "Записываемся на курс...";
