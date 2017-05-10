@@ -44,14 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FIRApp.configure()
-        FIRAppIndexing.sharedInstance().registerApp(1064581926)
+        FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
         
-        Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
+        Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
         AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        YMMYandexMetrica.activate(withApiKey: "fd479031-bdf4-419e-8d8f-6895aab23502")
+        YMMYandexMetrica.activate(withApiKey: Tokens.shared.appMetricaToken)
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         

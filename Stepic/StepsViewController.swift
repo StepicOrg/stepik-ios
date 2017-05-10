@@ -24,6 +24,7 @@ class StepsViewController: RGPageViewController {
     var stepId : Int?
     var unitId : Int?
     
+    
     var startStepId : Int = 0
         
     var canSendViews: Bool = false
@@ -306,14 +307,15 @@ class StepsViewController: RGPageViewController {
                     s.doesPresentActivityIndicatorView = false
                     if s.numberOfPages(for: s) == 0 {
                         s.doesPresentWarningView = true
+                    } else {
                         if s.startStepId < s.lesson!.steps.count {
                             if !s.didSelectTab {
                                 s.selectTabAtIndex(s.startStepId, updatePage: true)
                                 s.didSelectTab = true
                             }
                         }
-                        self?.didInitSteps = true
                     }
+                    self?.didInitSteps = true
                 }
             }, onlyLesson: context == .lesson)
     }

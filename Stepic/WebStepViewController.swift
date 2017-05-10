@@ -221,6 +221,19 @@ class WebStepViewController: UIViewController {
         }
     }
     
+    fileprivate func animateTabSelection() {
+        //Animate the views
+        if let cstep = self.step {
+            if cstep.block.name == "text" {
+                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
+                DispatchQueue.main.async {
+                    cstep.progress?.isPassed = true
+                    CoreDataHelper.instance.save()
+                }
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        self.view.setNeedsLayout()
@@ -244,19 +257,41 @@ class WebStepViewController: UIViewController {
         }
         
         if shouldSendViewsBlock() {
+
             //Send view to views
             performRequest({
                 [weak self] in
                 print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
                 _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
                     [weak self] in
-                    if let cstep = self?.step {
-                        if cstep.block.name == "text" {
-                                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
-                            DispatchQueue.main.async {
-                                cstep.progress?.isPassed = true
-                                CoreDataHelper.instance.save()
-                            }                    
+                    self?.animateTabSelection()
+                }, error: {
+                    [weak self]
+                    error in
+                    
+                    switch error {
+                    case .notAuthorized:
+                        return
+                    default:
+                        self?.animateTabSelection()
+                        print("initializing post views task")
+                        print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
+                        if let userId =  AuthInfo.shared.userId,
+                            let token = AuthInfo.shared.token {
+                            
+                            let task = PostViewsExecutableTask(stepId: stepid, assignmentId: self?.assignment?.id, userId: userId)
+                            ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(task)
+                            
+                            let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                            userPersistencyManager.writeStepicToken(token, userId: userId)
+                            
+                            let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                            taskPersistencyManager.writeTask(task, name: task.id)
+                            
+                            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+                        } else {
+                            print("Could not get current user ID or token to post views")
                         }
                     }
                 })

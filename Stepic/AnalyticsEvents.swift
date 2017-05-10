@@ -87,6 +87,7 @@ struct AnalyticsEvents {
     }
     
     struct VideoPlayer {
+        static let opened = "video_player_opened"
         static let rateChanged = "video_rate_changed"
         static let qualityChanged = "video_quality_changed"
     }

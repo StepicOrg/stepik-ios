@@ -14,6 +14,9 @@ class SocialNetworksViewController: UIViewController {
 
     @IBOutlet weak var socialNetworksCollectionView: UICollectionView!
     
+    var cellSize: CGFloat = 50
+    let cellSpacing: CGFloat = 10
+    
     let socialNetworks = SocialNetworks.all
 
     var dismissBlock : ((Void)->Void)?
@@ -34,6 +37,11 @@ class SocialNetworksViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        socialNetworksCollectionView.performBatchUpdates(nil, completion: nil)
     }
     
 
@@ -64,6 +72,7 @@ class SocialNetworksViewController: UIViewController {
             if let provider = socialNetwork.socialSDKProvider {
                 provider.getAccessToken(success: {
                     token in
+                    SVProgressHUD.show(withStatus: "")
                     AuthManager.oauth.signUpWith(socialToken: token, provider: provider.name, success: {
                         t in
                         AuthInfo.shared.token = t
@@ -115,6 +124,10 @@ extension SocialNetworksViewController : UICollectionViewDelegate {
         return socialNetworks[(indexPath as NSIndexPath).item]
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: cellSize, height: cellSize)
+    }
+    
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 //        UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)
 //    }
@@ -138,7 +151,7 @@ extension SocialNetworksViewController : UICollectionViewDataSource {
 
 extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let usedWidth : CGFloat = CGFloat(socialNetworks.count) * 60 + CGFloat(socialNetworks.count - 1) * 10
+        let usedWidth : CGFloat = CGFloat(socialNetworks.count) * cellSize + CGFloat(socialNetworks.count - 1) * cellSpacing
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
         
         return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets);
