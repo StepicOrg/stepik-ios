@@ -15,10 +15,9 @@ class StepReversedCardView: UIView {
         self.layer.borderColor = UIColor(hex: 0xCCCCCC).cgColor
     }
     
-    func addPattern() {
+    override func layoutSubviews() {
         if let bgImage = UIImage(named: "stepic-pattern-grey") {
             self.backgroundColor = UIColor(patternImage: bgImage)
         }
     }
-
 }
