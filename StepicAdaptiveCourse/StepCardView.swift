@@ -53,10 +53,15 @@ class StepCardView: UIView {
     @IBAction func onControlButtonClick(_ sender: Any) {
         switch controlButtonState {
         case .submit:
-            stepViewController?.quizViewController?.submitAttempt()
+            // We should check attempt for quiz vc before submitting/retrying
+            if stepViewController?.quizViewController?.attempt != nil {
+                stepViewController?.quizViewController?.submitAttempt()
+            }
             break
         case .tryAgain:
-            stepViewController?.quizViewController?.retrySubmission()
+            if stepViewController?.quizViewController?.attempt != nil {
+                stepViewController?.quizViewController?.retrySubmission()
+            }
             break
         case .next:
             (parentViewController as? AdaptiveStepsViewController)?.swipeSolvedCard()
