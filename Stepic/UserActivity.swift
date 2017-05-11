@@ -58,6 +58,6 @@ class UserActivity {
         guard pins.count > 1 else {
             return false
         }
-        return true //pins[0] == 0 && pins[1] != 0
+        return pins[0] == 0 && pins[1] != 0
     }
 }
