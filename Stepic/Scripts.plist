@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>localJQueryScript</key>
+	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;</string>
+	<key>ClickableImages</key>
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function() {
+    $(&quot;img&quot;).each(function() {
+        var $this = $(this);
+        var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
+        $this.addClass(&apos;image&apos;);
+        var a = $(&apos;&lt;a/&gt;&apos;).attr(&apos;href&apos;, src);
+        $this.wrap(a);
+    });
+});
+&lt;/script&gt;</string>
 	<key>MetaViewport</key>
 	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0&quot; /&gt;</string>
 	<key>MathJaxFinishScript</key>

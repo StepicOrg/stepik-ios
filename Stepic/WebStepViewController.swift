@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import FLKAutoLayout
 import SVProgressHUD
+import Agrume
 
 class WebStepViewController: UIViewController {
     
@@ -153,7 +154,7 @@ class WebStepViewController: UIViewController {
             if htmlText == stepText {
                 return
             }
-            let scriptsString = "\(Scripts.localTexScript)"
+            let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
             html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             print("\(Bundle.main.bundlePath)")
@@ -477,6 +478,18 @@ extension WebStepViewController : UIWebViewDelegate {
             }
         }
         
+        if url.scheme == "openimg" {
+            var urlString = url.absoluteString
+            urlString.removeSubrange(urlString.startIndex..<urlString.index(urlString.startIndex, offsetBy: 10))
+            if let offset = urlString.indexOf("//") {
+                urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
+                if let newUrl = URL(string: urlString) {
+                    let agrume = Agrume(imageUrl: newUrl)
+                    agrume.showFrom(self)
+                }
+            }
+            return false
+        }
         
         if didStartLoadingFirstRequest {
             if url.scheme != "file" {

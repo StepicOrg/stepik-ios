@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 def all_pods
-    pod 'Alamofire', '~> 4.4'    
+    pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON', '3.1.4'
     pod 'SDWebImage'
     pod 'TextFieldEffects'
@@ -18,16 +18,14 @@ def all_pods
     pod 'DZNEmptyDataSet'
     
     pod 'YandexMobileMetrica/Dynamic'
-
-    pod 'Firebase', '<= 3.4.0'
-#    pod 'Firebase/Messaging'
-    pod 'FirebaseAppIndexing', '1.0.4'
-    pod 'FirebaseMessaging', '1.1.1'
-    pod 'FirebaseAnalytics', '3.3.0'
-#    pod 'Firebase/Core'
+    
+    pod 'Firebase/Core', '3.16.0'
+    pod 'Firebase/AppIndexing', '3.16.0'
+    pod 'Firebase/Messaging', '3.16.0'
+    pod 'Firebase/Analytics', '3.16.0'
     
     pod 'Mixpanel-swift'
-
+    
     pod "MagicalRecord"
     pod 'BEMCheckBox'
     pod 'IQKeyboardManagerSwift'
@@ -35,13 +33,15 @@ def all_pods
     pod 'CRToast', :git => 'https://github.com/cruffenach/CRToast.git', :branch => 'master'
     pod 'TUSafariActivity', '~> 1.0'
     
-    pod "VK-ios-sdk" 
+    pod "VK-ios-sdk"
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     
     pod 'Presentr'
+    
+    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
 end
 
 def testing_pods
