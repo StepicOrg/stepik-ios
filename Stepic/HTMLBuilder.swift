@@ -20,7 +20,7 @@ class HTMLBuilder: NSObject {
         res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
         res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
         res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center;}"
-        res += "\nimg { width: calc(100% + 32px); margin: -16px; }"
+        res += "\nimg { max-width: 100%; }"
         res += "\niframe { max-width: 100%; }"
         
 //        res += "\np { white-space: pre-wrap; word-wrap: break-word; max-width: 100%; }"

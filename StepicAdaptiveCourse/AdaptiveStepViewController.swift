@@ -105,11 +105,21 @@ extension AdaptiveStepViewController: UIWebViewDelegate {
         return height
     }
     
+    func alignImages(in webView: UIWebView) {
+        var jsCode = "var imgs = document.getElementsByTagName('img');"
+        jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
+        
+        webView.stringByEvaluatingJavaScript(from: jsCode)
+    }
+    
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        alignImages(in: webView)
         resetWebViewHeight(Float(getContentHeight(webView)))
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        alignImages(in: stepWebView)
+        
         // Maybe quiz vc should update its height itself ???
         needsHeightUpdate((quizViewController?.expectedQuizHeight ?? 0) + (quizViewController?.heightWithoutQuiz ?? 0), animated: true, breaksSynchronizationControl: false)
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
