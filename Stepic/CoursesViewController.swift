@@ -492,12 +492,24 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 return nil
             }
             courseVC.course = courses[indexPath.row]
+            courseVC.parentShareBlock = {
+                [weak self]
+                shareVC in
+                shareVC.popoverPresentationController?.sourceView = cell
+                self?.present(shareVC, animated: true, completion: nil)
+            }
             return courseVC
         } else {
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
                 return nil
             }
             courseVC.course = courses[indexPath.row]
+            courseVC.parentShareBlock = {
+                [weak self]
+                shareVC in
+                shareVC.popoverPresentationController?.sourceView = cell
+                self?.present(shareVC, animated: true, completion: nil)
+            }
             return courseVC
         }
     }

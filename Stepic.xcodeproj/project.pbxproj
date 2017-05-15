@@ -81,6 +81,7 @@
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
+		082348391ECA264100D2CB40 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		08263D711DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
@@ -907,6 +908,7 @@
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
 		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		082348381ECA264000D2CB40 /* ShareableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
 		08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTimePickerViewController.swift; sourceTree = "<group>"; };
 		08263D6F1DE5F230002E5B7F /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
@@ -1939,6 +1941,7 @@
 				0828FF871BC81EF2000AFEA7 /* Units */,
 				081387DE1D7AF5C30092E05D /* GreenNavigationViewController.swift */,
 				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
+				082348381ECA264000D2CB40 /* ShareableController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -3697,6 +3700,7 @@
 				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
 				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
+				082348391ECA264100D2CB40 /* ShareableController.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
