@@ -218,3 +218,7 @@ LoadingCourse = "Loading course...";
 JoiningCourse = "Joining course...";
 NextTask = "Next task";
 SignInByEmail = "Sign in by email";
+ReactionTransition1 = "Applying your reaction...";
+ReactionTransition2 = "Looking for next assignment...";
+ReactionTransition3 = "Robots still working...";
+ReactionTransition4 = "Making some math...";

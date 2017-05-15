@@ -219,3 +219,7 @@ JoiningCourse = "Записываемся на курс...";
 NextTask = "Следующее задание";
 SignInByEmail = "Войти с email";
 or = "или";
+ReactionTransition1 = "Анализируем реакцию...";
+ReactionTransition2 = "Ищем следующую задачу...";
+ReactionTransition3 = "Роботы ищут задачи...";
+ReactionTransition4 = "Считаем что-то...";

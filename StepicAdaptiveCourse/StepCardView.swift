@@ -10,10 +10,13 @@ import UIKit
 
 class StepCardView: UIView {
 
+    let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
+    
     @IBOutlet weak var controlButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var loadingLabel: UILabel!
     
     var gradientLayer: CAGradientLayer?
 
@@ -72,6 +75,8 @@ class StepCardView: UIView {
     override func draw(_ rect: CGRect) {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.stepicGreenColor().cgColor
+        
+        loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
     }
     
     func hideContent() {

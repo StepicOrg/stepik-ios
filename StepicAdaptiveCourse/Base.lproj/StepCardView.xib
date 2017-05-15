@@ -114,6 +114,7 @@
             <connections>
                 <outlet property="contentView" destination="LM4-eR-A8y" id="R7J-cL-EWa"/>
                 <outlet property="controlButton" destination="LCg-u0-xF2" id="JPQ-Ku-8Cl"/>
+                <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="Msd-F0-gr3"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="4bf-SP-sBL"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="r1U-3N-2i9"/>
             </connections>
