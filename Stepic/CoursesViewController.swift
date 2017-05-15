@@ -12,7 +12,7 @@ import FLKAutoLayout
 import DZNEmptyDataSet
 import SVProgressHUD
 
-class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UIViewControllerPreviewingDelegate {
     
     var tableView = UITableView()
     
@@ -70,6 +70,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         tableView.emptyDataSetSource = self
         
         lastUser = AuthInfo.shared.user
+        
+        if #available(iOS 9.0, *) {
+            if(traitCollection.forceTouchCapability == .available) {
+                registerForPreviewing(with: self, sourceView: view)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -458,6 +464,47 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             errorBlock()
         })
     }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let locationInTableView = tableView.convert(location, from: self.view)
+        
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else {
+            return nil
+        }
+        
+        guard indexPath.row < courses.count else {
+            return nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? CourseTableViewCell else {
+            return nil
+        }
+        
+        if #available(iOS 9.0, *) {
+            previewingContext.sourceRect = cell.frame
+        } else {
+            return nil
+        }
+
+        if !courses[indexPath.row].enrolled {
+            guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {
+                return nil
+            }
+            courseVC.course = courses[indexPath.row]
+            return courseVC
+        } else {
+            guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
+                return nil
+            }
+            courseVC.course = courses[indexPath.row]
+            return courseVC
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
 }
 
 
@@ -527,3 +574,4 @@ extension CoursesViewController : UITableViewDataSource {
         return cell
     }
 }
+
