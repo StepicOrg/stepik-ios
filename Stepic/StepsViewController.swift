@@ -13,7 +13,7 @@ enum StepsControllerPresentationContext {
     case lesson, unit
 }
 
-class StepsViewController: RGPageViewController {
+class StepsViewController: RGPageViewController, ShareableController {
     
     /*
      There are two ways of initializing the StepsViewController
@@ -24,6 +24,7 @@ class StepsViewController: RGPageViewController {
     var stepId : Int?
     var unitId : Int?
     
+    var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
     
     var startStepId : Int = 0
         
@@ -407,6 +408,40 @@ class StepsViewController: RGPageViewController {
     
     deinit {
         print("deinit StepsViewController")
+    }
+    
+    func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
+        guard let lesson = self.lesson else {
+            return
+        }
+        let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/1?from_mobile_app=true"
+        
+        let shareBlock: ((UIActivityViewController) -> (Void))? = parentShareBlock
+        
+        DispatchQueue.global(qos: .background).async {
+            [weak self] in
+            let shareVC = SharingHelper.getSharingController(url)
+            shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
+            shareVC.popoverPresentationController?.sourceView = popoverView
+            DispatchQueue.main.async {
+                [weak self] in
+                if !fromParent {
+                    self?.present(shareVC, animated: true, completion: nil)
+                } else {
+                    shareBlock?(shareVC)
+                }
+            }
+        }
+    }
+    
+    @available(iOS 9.0, *)
+    override var previewActionItems: [UIPreviewActionItem] {
+        let shareItem = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default, handler: {
+            [weak self]
+            action, vc in
+            self?.share(popoverSourceItem: nil, popoverView: nil, fromParent: true)
+        })
+        return [shareItem]
     }
 }
 
