@@ -498,6 +498,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 shareVC.popoverPresentationController?.sourceView = cell
                 self?.present(shareVC, animated: true, completion: nil)
             }
+            courseVC.hidesBottomBarWhenPushed = true
             return courseVC
         } else {
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
@@ -510,6 +511,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                 shareVC.popoverPresentationController?.sourceView = cell
                 self?.present(shareVC, animated: true, completion: nil)
             }
+            courseVC.hidesBottomBarWhenPushed = true
             return courseVC
         }
     }
