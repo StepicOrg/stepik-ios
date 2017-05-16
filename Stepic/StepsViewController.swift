@@ -506,7 +506,8 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.startStepId = startStepId
                 stepController.stepId = index + 1
                 stepController.lessonSlug = lesson.slug
-                
+                stepController.nItem = self.navigationItem
+
                 if let assignments = lesson.unit?.assignments {
                     if index < assignments.count {
                         stepController.assignment = assignments[index]
