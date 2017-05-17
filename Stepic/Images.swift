@@ -89,5 +89,15 @@ struct Images {
         static let emptyFindCourses = #imageLiteral(resourceName: "empty-findCourses")
         static let anonymous = #imageLiteral(resourceName: "placeholder-anonymous-dark-background")
     }
+    
+    struct logotypes {
+        struct text {
+            struct green {
+                static let bordered = #imageLiteral(resourceName: "logotype-text-green-bordered")
+                static let fitted = #imageLiteral(resourceName: "logotype-text-green")
+                static let navigation = #imageLiteral(resourceName: "logotype-text-green-navigation")
+            }
+        }
+    }
 
 }

@@ -25,11 +25,11 @@ class VideoStepViewController: UIViewController {
 
     var assignment : Assignment?
     
-//    weak var parentNavigationController : UINavigationController?
-    
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
+    var nItem : UINavigationItem!
+
     //variable for sending analytics correctly - if view appears after dismissing video player, the event is not being sent
     var didPresentVideoPlayer: Bool = false
     
@@ -159,7 +159,7 @@ class VideoStepViewController: UIViewController {
         
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
-        navigationItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
+        nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
     override func didReceiveMemoryWarning() {
@@ -167,8 +167,22 @@ class VideoStepViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    fileprivate func animateTabSelection() {
+        //Animate the views
+        if let cstep = self.step {
+            if cstep.block.name == "video" {
+                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
+                DispatchQueue.main.async {
+                    cstep.progress?.isPassed = true
+                    CoreDataHelper.instance.save()
+                }
+            }
+        }
+    }
+
+    
     override func viewDidAppear(_ animated: Bool) {
-        guard let cstep = step else {
+        guard (step) != nil else {
             return
         }
         
@@ -183,16 +197,43 @@ class VideoStepViewController: UIViewController {
             startStepBlock()
         }
         if shouldSendViewsBlock() {
+            
             performRequest({
                 [weak self] in
                 print("Sending view for step with id \(stepid) & assignment \(String(describing: self?.assignment?.id))")
                 _ = ApiDataDownloader.views.create(stepId: stepid, assignment: self?.assignment?.id, success: {
-                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id" : cstep.id])
-                    UIThread.performUI{
-                        cstep.progress?.isPassed = true
-                        CoreDataHelper.instance.save()
+                    [weak self] in
+                    self?.animateTabSelection()
+                }, error: {
+                    [weak self]
+                    error in
+                    
+                    switch error {
+                    case .notAuthorized:
+                        return
+                    default:
+                        self?.animateTabSelection()
+                        print("initializing post views task")
+                        print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
+                        if let userId =  AuthInfo.shared.userId,
+                            let token = AuthInfo.shared.token {
+                            
+                            let task = PostViewsExecutableTask(stepId: stepid, assignmentId: self?.assignment?.id, userId: userId)
+                            ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(task)
+                            
+                            let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                            userPersistencyManager.writeStepicToken(token, userId: userId)
+                            
+                            let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                            taskPersistencyManager.writeTask(task, name: task.id)
+                            
+                            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+                        } else {
+                            print("Could not get current user ID or token to post views")
+                        }
                     }
-                }) 
+                })
             })
         }
     }

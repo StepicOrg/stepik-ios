@@ -42,6 +42,7 @@ class DiscussionsViewController: UIViewController {
 
     var discussionProxyId: String!
     var target: Int!
+    var step: Step!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -717,7 +718,6 @@ extension DiscussionsViewController : UITableViewDataSource {
 
 extension DiscussionsViewController : WriteCommentDelegate {
     func didWriteComment(_ comment: Comment) {
-        print(comment.parentId ?? "")
         if let parentId = comment.parentId {
             //insert row in an existing section
             if let section = discussions.index(where: {$0.id == parentId}) {
@@ -726,22 +726,15 @@ extension DiscussionsViewController : WriteCommentDelegate {
                     replies.loaded[parentId] = []
                 }
                 replies.loaded[parentId]! += [comment]
-//                tableView.beginUpdates()
                 reloadTableData()
-//                let p = NSIndexPath(forRow: replies.loaded[parentId]!.count - 1, inSection: section)
-//                tableView.insertRowsAtIndexPaths([p], withRowAnimation: .Automatic)
-//                tableView.endUpdates()
             }
         } else {
             //insert section
             discussionIds.all.insert(comment.id, at: 0)
             discussionIds.loaded.insert(comment.id, at: 0)
             discussions.insert(comment, at: 0)
-//            tableView.beginUpdates()
             reloadTableData()
-//            let index = NSIndexSet(index: 0)
-//            tableView.insertSections(index, withRowAnimation: .Automatic)
-//            tableView.endUpdates()
+            step.discussionsCount? += 1
         }
     }
 }

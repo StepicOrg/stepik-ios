@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 import MediaPlayer
 
-class CoursePreviewViewController: UIViewController {
+class CoursePreviewViewController: UIViewController, ShareableController {
     
     @IBOutlet weak var tableView: UITableView!
             
@@ -19,9 +19,10 @@ class CoursePreviewViewController: UIViewController {
     @IBOutlet weak var videoWebView: UIWebView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
-
+    
     var video: Video!
     var moviePlayer : MPMoviePlayerController? = nil
+    var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
     
     var course : Course? = nil {
         didSet {
@@ -121,15 +122,26 @@ class CoursePreviewViewController: UIViewController {
     }
     
     func shareButtonPressed(_ button: UIBarButtonItem) {
+        share(popoverSourceItem: button, popoverView: nil, fromParent: false)
+    }
     
+    func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.shared, parameters: nil)
         
+        let shareBlock: ((UIActivityViewController) -> (Void))? = parentShareBlock
         if let slug = course?.slug {
             DispatchQueue.global(qos: .default).async {
+                [weak self] in
                 let shareVC = SharingHelper.getSharingController(StepicApplicationsInfo.stepicURL + "/course/" + slug + "/")
-                shareVC.popoverPresentationController?.barButtonItem = button
+                shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
+                shareVC.popoverPresentationController?.sourceView = popoverView
                 DispatchQueue.main.async {
-                    self.present(shareVC, animated: true, completion: nil)
+                    [weak self] in
+                    if !fromParent {
+                        self?.present(shareVC, animated: true, completion: nil)
+                    } else {
+                        shareBlock?(shareVC)
+                    }
                 }
             }
         }
@@ -441,6 +453,15 @@ class CoursePreviewViewController: UIViewController {
         resetHeightConstraints()
     }
     
+    @available(iOS 9.0, *)
+    override var previewActionItems: [UIPreviewActionItem] {
+        let shareItem = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default, handler: {
+            [weak self]
+            action, vc in
+            self?.share(popoverSourceItem: nil, popoverView: nil, fromParent: true)
+        })
+        return [shareItem]
+    }
 }
 
 extension CoursePreviewViewController : UITableViewDataSource {

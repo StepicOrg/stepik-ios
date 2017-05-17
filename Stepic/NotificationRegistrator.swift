@@ -54,7 +54,7 @@ class NotificationRegistrator: NSObject {
     
     
     // Should be executed first before any actions were performed, contains abort()
-    //TODO: remove abort, add failure completion handler 
+    //TODO: remove abort, add failure completion handler
     func unregisterFromNotifications(completion: @escaping ((Void)->Void)) {
         print(AuthInfo.shared.token?.accessToken ?? "")
         UIApplication.shared.unregisterForRemoteNotifications()
@@ -63,36 +63,43 @@ class NotificationRegistrator: NSObject {
                 {
                     print("successfully deleted device with id \(deviceId) when unregistering from notifications")
                     completion()
-                }, error:
-                {
-                    errorMessage in 
-                    print(errorMessage)
-                    print("initializing delete device task")
-                    print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
-                    if let userId =  AuthInfo.shared.userId,
-                        let token = AuthInfo.shared.token {
-                        
-                        let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
-                        ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
-                        
-                        let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
-                        userPersistencyManager.writeStepicToken(token, userId: userId)
-                        
-                        let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
-                        taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
-                        
-                        let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues") 
-                        queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)                        
-                        
-                        DeviceDefaults.sharedDefaults.deviceId = nil
-                        completion()
-                    } else {
-                        print("Could not get current user ID or token to delete device")
-                        completion()
-//                        abort()
+                }, error: {
+                    error in
+                    switch error {
+                    case .notFound:
+                        print("device not found on deletion, not writing executable task")
+                        return
+                    case .other(error: let e, code: _, message: let message):
+                        if let errorMessage = message {
+                            print(errorMessage)
+                        }
+                        if e != nil {
+                            print("initializing delete device task")
+                            print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
+                            if let userId =  AuthInfo.shared.userId,
+                                let token = AuthInfo.shared.token {
+                                
+                                let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
+                                ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
+                                
+                                let userPersistencyManager = PersistentUserTokenRecoveryManager(baseName: "Users")
+                                userPersistencyManager.writeStepicToken(token, userId: userId)
+                                
+                                let taskPersistencyManager = PersistentTaskRecoveryManager(baseName: "Tasks")
+                                taskPersistencyManager.writeTask(deleteTask, name: deleteTask.id)
+                                
+                                let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+                                queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
+                                
+                                DeviceDefaults.sharedDefaults.deviceId = nil
+                                completion()
+                            } else {
+                                print("Could not get current user ID or token to delete device")
+                                completion()
+                            }
+                        }
                     }
                 }
-                
             )
         } else {
             print("no deviceId found")

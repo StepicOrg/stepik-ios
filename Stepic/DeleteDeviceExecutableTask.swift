@@ -35,7 +35,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
             let device = deviceId,
             let typeS = typeString
         {
-            if ExecutableTaskType(rawValue: typeS) != ExecutableTaskType.DeleteDevice {
+            if ExecutableTaskType(rawValue: typeS) != ExecutableTaskType.deleteDevice {
                 return nil
             }
             self.init(userId: user, deviceId: device)
@@ -59,7 +59,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
 
     
     var type : ExecutableTaskType {
-        return .DeleteDevice
+        return .deleteDevice
     }
     
     var userId : Int
@@ -69,7 +69,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         return "\(type.rawValue) \(userId) \(deviceId)"
     }
     
-    func execute(success: @escaping ((Void) -> Void), failure: @escaping ((Void) -> Void)) {
+    func execute(success: @escaping ((Void) -> Void), failure: @escaping ((ExecutionError) -> Void)) {
         let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")
         if let token = recoveryManager.recoverStepicToken(userId: userId) {
             let device = deviceId
@@ -96,14 +96,26 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
                                 }, error: {
                                     error in
                                     print("error while deleting device with refreshed token")
-                                    failure()
+                                    switch error {
+                                    case .notFound:
+                                        print("device not found on deletion, not writing executable task")
+                                        failure(.remove)
+                                        return
+                                    case .other(error: let e, code: _, message: let message):
+                                        print(message ?? "")
+                                        if e != nil {
+                                            failure(.retry)
+                                        } else {
+                                            failure(.remove)
+                                        }
+                                        return
+                                    }
                                 }
                             )
                         }, failure: {
                             error in
                             print("error while refreshing the token :(")
-                            failure()
-                            //TODO: check the type of an error and check if should remove from queue
+                            failure(error == .other ? .retry : .remove)
                         }
                     )
                 }

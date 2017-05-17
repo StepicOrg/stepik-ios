@@ -27,6 +27,10 @@ class StyledTabBarViewController: UITabBarController {
             }
         }
         delegate = self
+        
+        if !AuthInfo.shared.isAuthorized {
+            selectedIndex = 1
+        }
         // Do any additional setup after loading the view.
     }
 

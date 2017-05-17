@@ -24,7 +24,7 @@ class ExecutionQueues {
     }
     
     @objc func reachabilityChanged(_ notification: Foundation.Notification) {
-        if Reachability.forInternetConnection().isReachable() {
+        if ConnectionHelper.shared.isReachable {
             executeConnectionAvailableQueue()
         }
     }
@@ -34,6 +34,8 @@ class ExecutionQueues {
             newQueue in 
             print("could not execute \(newQueue.count) tasks, rewriting the queue")
             self.connectionAvailableExecutionQueue = newQueue
+            let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
+            queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
         }
     }
     
