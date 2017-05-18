@@ -448,7 +448,7 @@
         <!--Adaptive Tutorial Page View Controller-->
         <scene sceneID="Qsg-kD-1dY">
             <objects>
-                <viewController storyboardIdentifier="TutorialPage4ViewController" id="wyJ-wO-Dun" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialPage5ViewController" id="wyJ-wO-Dun" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aAm-Pz-DA5"/>
                         <viewControllerLayoutGuide type="bottom" id="LgM-zI-WCO"/>
@@ -483,7 +483,7 @@
                                     <action selector="onStartLearningButtonClick:" destination="wyJ-wO-Dun" eventType="touchUpInside" id="nZA-FG-8s2"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial4" translatesAutoresizingMaskIntoConstraints="NO" id="HtT-Ko-oTM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial5" translatesAutoresizingMaskIntoConstraints="NO" id="HtT-Ko-oTM">
                                 <rect key="frame" x="40" y="45" width="295" height="468"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="4x2-d7-jPH"/>
@@ -507,7 +507,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mz2-bU-v0w" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3944.8000000000002" y="1459.52023988006"/>
+            <point key="canvasLocation" x="4660" y="1461"/>
+        </scene>
+        <!--Adaptive Tutorial Page View Controller-->
+        <scene sceneID="g73-Uc-hLN">
+            <objects>
+                <viewController storyboardIdentifier="TutorialPage4ViewController" id="Jef-5v-arH" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RMj-rl-hjO"/>
+                        <viewControllerLayoutGuide type="bottom" id="TBr-l9-OD5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Nz-8M-07l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLf-c9-5Rm">
+                                <rect key="frame" x="16" y="514.5" width="343" height="26"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Перейдите к следующему заданию или смахните карточку с решенным заданием" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcR-3J-IFa">
+                                <rect key="frame" x="16" y="548.5" width="343" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial4" translatesAutoresizingMaskIntoConstraints="NO" id="P7V-iV-I3c">
+                                <rect key="frame" x="40" y="45" width="295" height="469.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="O67-pI-kK8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="DcR-3J-IFa" firstAttribute="leading" secondItem="8Nz-8M-07l" secondAttribute="leadingMargin" id="Amh-K9-96c"/>
+                            <constraint firstItem="P7V-iV-I3c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Nz-8M-07l" secondAttribute="leading" constant="40" id="B0B-MW-VvV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DcR-3J-IFa" secondAttribute="trailing" id="JZh-KQ-2yU"/>
+                            <constraint firstItem="P7V-iV-I3c" firstAttribute="centerX" secondItem="8Nz-8M-07l" secondAttribute="centerX" id="Wbg-Db-WtR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZLf-c9-5Rm" secondAttribute="trailing" id="Y2M-QA-O0J"/>
+                            <constraint firstItem="TBr-l9-OD5" firstAttribute="top" secondItem="DcR-3J-IFa" secondAttribute="bottom" constant="80" id="eUT-Tv-iKO"/>
+                            <constraint firstItem="ZLf-c9-5Rm" firstAttribute="top" secondItem="P7V-iV-I3c" secondAttribute="bottom" id="jt0-eg-P8E"/>
+                            <constraint firstItem="DcR-3J-IFa" firstAttribute="top" secondItem="ZLf-c9-5Rm" secondAttribute="bottom" constant="8" id="o2f-pT-FMG"/>
+                            <constraint firstItem="ZLf-c9-5Rm" firstAttribute="leading" secondItem="8Nz-8M-07l" secondAttribute="leadingMargin" id="onO-NL-X4i"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P7V-iV-I3c" secondAttribute="trailing" constant="40" id="qoa-7c-zuk"/>
+                            <constraint firstItem="P7V-iV-I3c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RMj-rl-hjO" secondAttribute="bottom" constant="25" id="uua-P7-9dp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZoR-yl-yHL" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3960.8000000000002" y="1460.4197901049477"/>
         </scene>
     </scenes>
     <resources>
@@ -518,5 +569,6 @@
         <image name="tutorial2" width="588" height="900"/>
         <image name="tutorial3" width="588" height="900"/>
         <image name="tutorial4" width="588" height="900"/>
+        <image name="tutorial5" width="588" height="900"/>
     </resources>
 </document>

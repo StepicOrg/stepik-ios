@@ -20,7 +20,8 @@ class AdaptiveTutorialViewController: UIPageViewController {
         return [self.initTutorialPageViewController(index: 1),
                 self.initTutorialPageViewController(index: 2),
                 self.initTutorialPageViewController(index: 3),
-                self.initTutorialPageViewController(index: 4)]
+                self.initTutorialPageViewController(index: 4),
+                self.initTutorialPageViewController(index: 5)]
     }()
     
     fileprivate func initTutorialPageViewController(index: Int) -> UIViewController {
