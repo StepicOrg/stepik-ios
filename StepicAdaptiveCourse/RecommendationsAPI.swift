@@ -14,7 +14,7 @@ class RecommendationsAPI {
     let name = "recommendations"
     let reactionName = "recommendation-reactions"
     
-    @discardableResult func getRecommendedLessonId(course courseId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Int) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
+    @discardableResult func getRecommendedLessonId(course courseId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Int?) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)?course=\(courseId)", headers: headers).responseSwiftyJSON(
             {
                 response in
@@ -42,7 +42,7 @@ class RecommendationsAPI {
                 let lessonIds = json["recommendations"].arrayValue.map({ $0["lesson"].intValue })
                 
                 guard let lessonId = lessonIds.first else {
-                    errorHandler("GetRecommendedLesson: no recommendations")
+                    success(nil)
                     return
                 }
                 

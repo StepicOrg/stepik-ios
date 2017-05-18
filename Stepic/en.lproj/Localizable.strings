@@ -222,3 +222,6 @@ ReactionTransition1 = "Applying your reaction...";
 ReactionTransition2 = "Looking for next assignment...";
 ReactionTransition3 = "Robots still working...";
 ReactionTransition4 = "Making some math...";
+NoRecommendations = "We've no recommendations for you.";
+CoursePassed = "Course passed";
+GoToStepikAppStore = "Find courses on Stepik";

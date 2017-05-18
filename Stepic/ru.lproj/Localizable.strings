@@ -223,3 +223,6 @@ ReactionTransition1 = "Анализируем реакцию...";
 ReactionTransition2 = "Ищем следующую задачу...";
 ReactionTransition3 = "Роботы ищут задачи...";
 ReactionTransition4 = "Считаем что-то...";
+NoRecommendations = "У нас больше нет рекомендаций для вас.";
+CoursePassed = "Курс пройден";
+GoToStepikAppStore = "Найти другие курсы на Stepik";

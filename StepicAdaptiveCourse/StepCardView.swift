@@ -153,6 +153,6 @@ extension StepCardView: AdaptiveStepViewControllerDelegate {
     }
     
     func contentLoadingDidFail() {
-        (parentViewController as? AdaptiveStepsViewController)?.isWarningHidden = false
+        (parentViewController as? AdaptiveStepsViewController)?.placeholderState = .connectionError
     }
 }

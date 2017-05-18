@@ -21,10 +21,11 @@ class AdaptiveStepsViewController: UIViewController {
     fileprivate var isKolodaPresented = false
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
-    public var isWarningHidden: Bool = true {
+    
+    var placeholderState: PlaceholderState? = nil {
         didSet {
-            self.warningView.isHidden = isWarningHidden
-            self.kolodaView.isHidden = !isWarningHidden
+            self.placeholderView.isHidden = placeholderState == nil
+            self.kolodaView.isHidden = placeholderState != nil
         }
     }
     
@@ -32,7 +33,7 @@ class AdaptiveStepsViewController: UIViewController {
     var recommendedLesson: Lesson?
     var step: Step?
 
-    lazy var warningView: UIView = {
+    lazy var placeholderView: UIView = {
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.align(to: self.kolodaView)
@@ -98,6 +99,12 @@ class AdaptiveStepsViewController: UIViewController {
         performRequest({
             // Get recommended lesson
             ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
+                // Got nil as recommended lesson -> course passed
+                guard let recommendedLessonId = recommendedLessonId else {
+                    self.placeholderState = .coursePassed
+                    return
+                }
+                
                 ApiDataDownloader.lessons.retrieve(ids: [recommendedLessonId], existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     let lesson = newLessonsImmutable.first
                     
@@ -132,16 +139,16 @@ class AdaptiveStepsViewController: UIViewController {
                             }
                             }, error: { (error) -> Void in
                                 print("failed downloading steps data in Next")
-                                self.isWarningHidden = false
+                                self.placeholderState = .connectionError
                         })
                     }
                     }, error: { (error) -> Void in
                         print("failed downloading lessons data in Next")
-                        self.isWarningHidden = false
+                        self.placeholderState = .connectionError
                 })
                 }, error: { error in
                     print(error)
-                    self.isWarningHidden = false
+                    self.placeholderState = .connectionError
                 })
             }, error: { error in
                 print("failed performing API request -> force logout")
@@ -163,7 +170,7 @@ class AdaptiveStepsViewController: UIViewController {
                 })
                 }, error: { error in
                     print("failed sending reaction: \(error)")
-                    self.isWarningHidden = false
+                    self.placeholderState = .connectionError
             })
         }, error: { error in
             print("failed performing API request -> force logout")
@@ -200,7 +207,7 @@ class AdaptiveStepsViewController: UIViewController {
                     }, error: {error in
                         SVProgressHUD.dismiss()
                         print("failed joining course: \(error) -> show placeholder")
-                        self.isWarningHidden = false
+                        self.placeholderState = .connectionError
                     })
                 } else {
                     SVProgressHUD.dismiss()
@@ -212,7 +219,7 @@ class AdaptiveStepsViewController: UIViewController {
             }, error: { (error) -> Void in
                 SVProgressHUD.dismiss()
                 print("failed downloading course data -> show placeholder")
-                self.isWarningHidden = false
+                self.placeholderState = .connectionError
             })
         }, error: { error in
             SVProgressHUD.dismiss()
@@ -263,6 +270,11 @@ class AdaptiveStepsViewController: UIViewController {
         isCurrentCardDone = true
         kolodaView.swipe(.up)
         isCurrentCardDone = false
+    }
+
+    enum PlaceholderState {
+        case connectionError
+        case coursePassed
     }
 }
 
@@ -360,15 +372,42 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
 
 extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     func placeholderImage() -> UIImage? {
-        return Images.noWifiImage.size100x100
+        guard let placeholderState = self.placeholderState else {
+            return nil
+        }
+        
+        switch placeholderState {
+        case .connectionError:
+            return Images.noWifiImage.size100x100
+        case .coursePassed:
+            return Images.placeholders.coursePassed
+        }
     }
     
     func placeholderButtonTitle() -> String? {
-        return NSLocalizedString("TryAgain", comment: "")
+        guard let placeholderState = self.placeholderState else {
+            return nil
+        }
+        
+        switch placeholderState {
+        case .connectionError:
+            return NSLocalizedString("TryAgain", comment: "")
+        case .coursePassed:
+            return NSLocalizedString("GoToStepikAppStore", comment: "")
+        }
     }
     
     func placeholderDescription() -> String? {
-        return nil
+        guard let placeholderState = self.placeholderState else {
+            return nil
+        }
+        
+        switch placeholderState {
+        case .connectionError:
+            return nil
+        case .coursePassed:
+            return NSLocalizedString("NoRecommendations", comment: "")
+        }
     }
     
     func placeholderStyle() -> PlaceholderStyle {
@@ -376,14 +415,44 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     }
     
     func placeholderTitle() -> String? {
-        return NSLocalizedString("ConnectionErrorText", comment: "")
+        guard let placeholderState = self.placeholderState else {
+            return nil
+        }
+        
+        switch placeholderState {
+        case .connectionError:
+            return NSLocalizedString("ConnectionErrorText", comment: "")
+        case .coursePassed:
+            return NSLocalizedString("CoursePassed", comment: "")
+        }
     }
 }
 
 extension AdaptiveStepsViewController: PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
+        guard let placeholderState = self.placeholderState else {
+            return
+        }
+        
+        switch placeholderState {
+        case .connectionError:
+            tryAgain()
+        case .coursePassed:
+            goToAppStore()
+        }
+    }
+    
+    fileprivate func goToAppStore() {
+        // TODO: move url somewhere (maybe to plist?)
+        if let url = URL(string: "itms-apps://itunes.apple.com/ru/developer/stepik/id1236410565"),
+            UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    fileprivate func tryAgain() {
         lastReaction = nil
-        isWarningHidden = true
+        placeholderState = nil
         
         // Two cases:
         // Course is nil -> invalid state, refresh
