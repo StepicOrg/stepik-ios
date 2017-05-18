@@ -37,7 +37,7 @@ class WebStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
-    weak var stepsVC : StepsViewController!
+    weak var lessonView : LessonView?
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -69,8 +69,10 @@ class WebStepViewController: UIViewController {
         stepWebView.scrollView.backgroundColor = UIColor.white
 //        stepWebView.backgroundColor = UIColor.white
         
-        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView!.panGestureRecognizer)
-        print(self.view.gestureRecognizers ?? "")
+        if let recognizer = lessonView?.pagerGestureRecognizer {
+            scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: recognizer)
+            print(self.view.gestureRecognizers ?? "")
+        }
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
@@ -471,7 +473,7 @@ extension WebStepViewController : UIWebViewDelegate {
                 if index + 1 < components.count {
                     let urlStepIdString = components[index + 1]
                     if let urlStepId = Int(urlStepIdString) {
-                        stepsVC.selectTabAtIndex(urlStepId - 1, updatePage: true)
+                        lessonView?.selectTab(index: urlStepId - 1, updatePage: true)
                         return false
                     }
                 }
