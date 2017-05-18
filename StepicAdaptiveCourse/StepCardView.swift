@@ -80,6 +80,7 @@ class StepCardView: UIView {
     }
     
     func hideContent() {
+        controlButton.isHidden = true
         contentView.isHidden = true
         titleLabel.isHidden = true
     }
@@ -88,6 +89,7 @@ class StepCardView: UIView {
         UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.contentView.isHidden = false
             self.titleLabel.isHidden = false
+            self.controlButton.isHidden = false
             
             // Set up title
             self.titleLabel.text = self.lesson.title
