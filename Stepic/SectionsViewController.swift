@@ -10,7 +10,7 @@ import UIKit
 import DownloadButton
 import DZNEmptyDataSet
 
-class SectionsViewController: UIViewController {
+class SectionsViewController: UIViewController, ShareableController, UIViewControllerPreviewingDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,7 +19,8 @@ class SectionsViewController: UIViewController {
     var course : Course! 
     
     var moduleId: Int?
-    
+    var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +50,12 @@ class SectionsViewController: UIViewController {
 
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-        // Do any additional setup after loading the view.
+        
+        if #available(iOS 9.0, *) {
+            if(traitCollection.forceTouchCapability == .available) {
+                registerForPreviewing(with: self, sourceView: view)
+            }
+        }
     }
     
     var url : String {
@@ -61,14 +67,7 @@ class SectionsViewController: UIViewController {
     }
     
     func shareButtonPressed(_ button: UIBarButtonItem) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
-        DispatchQueue.global(qos: .background).async {
-            let shareVC = SharingHelper.getSharingController(self.url)
-            shareVC.popoverPresentationController?.barButtonItem = button
-            DispatchQueue.main.async {
-                self.present(shareVC, animated: true, completion: nil)
-            }
-        }
+        share(popoverSourceItem: button, popoverView: nil, fromParent: false)
     }
     
     func infoButtonPressed(_ button: UIButton) {
@@ -187,6 +186,81 @@ class SectionsViewController: UIViewController {
         performSegue(withIdentifier: "showUnits", sender: sectionId)
     }
     
+    func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
+        let shareBlock: ((UIActivityViewController) -> (Void))? = parentShareBlock
+        let url = self.url
+        
+        DispatchQueue.global(qos: .background).async {
+            [weak self] in
+            
+            let shareVC = SharingHelper.getSharingController(url)
+            shareVC.popoverPresentationController?.barButtonItem = popoverSourceItem
+            shareVC.popoverPresentationController?.sourceView = popoverView
+            DispatchQueue.main.async {
+                [weak self] in
+                if !fromParent {
+                    self?.present(shareVC, animated: true, completion: nil)
+                } else {
+                    shareBlock?(shareVC)
+                }
+            }
+        }
+    }
+    
+    @available(iOS 9.0, *)
+    override var previewActionItems: [UIPreviewActionItem] {
+        let shareItem = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default, handler: {
+            [weak self]
+            action, vc in
+            self?.share(popoverSourceItem: nil, popoverView: nil, fromParent: true)
+        })
+        return [shareItem]
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let locationInTableView = tableView.convert(location, from: self.view)
+        
+        guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else {
+            return nil
+        }
+        
+        guard indexPath.row < course.sections.count else {
+            return nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? SectionTableViewCell else {
+            return nil
+        }
+        
+        guard tableView(tableView, shouldHighlightRowAt: indexPath) else {
+            return nil
+        }
+        
+        if #available(iOS 9.0, *) {
+            previewingContext.sourceRect = cell.frame
+        } else {
+            return nil
+        }
+        
+        guard let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController else {
+            return nil
+        }
+        unitsVC.section = course.sections[indexPath.row]
+        unitsVC.parentShareBlock = {
+            [weak self]
+            shareVC in
+            shareVC.popoverPresentationController?.sourceView = cell
+            self?.present(shareVC, animated: true, completion: nil)
+        }
+        return unitsVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+
 }
 
 extension SectionsViewController : UITableViewDelegate {

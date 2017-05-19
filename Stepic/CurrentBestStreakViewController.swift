@@ -19,6 +19,8 @@ class CurrentBestStreakViewController: UIViewController {
     @IBOutlet weak var receiveNotificationsLabel: UILabel!
     @IBOutlet weak var receiveNotificationsSwitch: UISwitch!
     
+    @IBOutlet weak var okButton: UIButton!
+    
     var activity : UserActivity?
     
     fileprivate func hideNotificationsView() {
@@ -53,7 +55,7 @@ class CurrentBestStreakViewController: UIViewController {
         }
         
         localize()
-        
+        okButton.setTitleColor(UIColor.stepicGreenColor(), for: .normal)
         // Do any additional setup after loading the view.
     }
 
@@ -130,6 +132,11 @@ class CurrentBestStreakViewController: UIViewController {
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
 
+    @IBAction func okPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 

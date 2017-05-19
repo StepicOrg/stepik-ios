@@ -35,6 +35,13 @@ struct Scripts {
     
     fileprivate static var mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
     
+    fileprivate static var clickableImagesScriptKey: String = "ClickableImages"
+    
+    fileprivate static var localJQueryScriptKey: String = "localJQueryScript"
+    
+    static var localJQueryScript: String {
+        return "\(loadScriptWithKey(localJQueryScriptKey))"
+    }
     
     static var localTexScript : String {
         return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
@@ -46,6 +53,10 @@ struct Scripts {
     
     static var mathJaxFinishedScript: String {
         return "\(loadScriptWithKey(mathJaxFinishedScriptKey))"
+    }
+    
+    static var clickableImagesScript: String {
+        return "\(localJQueryScript)\(loadScriptWithKey(clickableImagesScriptKey))"
     }
     
     fileprivate static var mathJaxLocalPathScript : String {

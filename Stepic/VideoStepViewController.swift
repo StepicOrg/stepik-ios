@@ -25,11 +25,11 @@ class VideoStepViewController: UIViewController {
 
     var assignment : Assignment?
     
-//    weak var parentNavigationController : UINavigationController?
-    
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
+    var nItem : UINavigationItem!
+
     //variable for sending analytics correctly - if view appears after dismissing video player, the event is not being sent
     var didPresentVideoPlayer: Bool = false
     
@@ -159,7 +159,7 @@ class VideoStepViewController: UIViewController {
         
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 30), video: video, buttonDelegate: self, downloadDelegate: self)
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
-        navigationItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
+        nItem.rightBarButtonItems = [shareBarButtonItem, UIBarButtonItem(customView: itemView)]
     }
     
     override func didReceiveMemoryWarning() {
