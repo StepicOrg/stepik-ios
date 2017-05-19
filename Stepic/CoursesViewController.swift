@@ -393,24 +393,24 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         guard 
         let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
         let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController,
-        let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+        let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
             return
         }
         
         sectionsVC.course = course
         sectionsVC.hidesBottomBarWhenPushed = true
         unitsVC.unitId = course.lastStep?.unitId
-        stepsVC.stepId = course.lastStep?.stepId
-        stepsVC.unitId = course.lastStep?.unitId
+        
+        lessonVC.initIds = (stepId: course.lastStep?.stepId, unitId: course.lastStep?.unitId)
         
         //For prev-next step buttons navigation
-        stepsVC.sectionNavigationDelegate = unitsVC
+        lessonVC.sectionNavigationDelegate = unitsVC
 
 
         if course.lastStep?.unitId != nil && course.lastStep?.stepId != nil {
             navigationController?.pushViewController(sectionsVC, animated: false)
             navigationController?.pushViewController(unitsVC, animated: false)
-            navigationController?.pushViewController(stepsVC, animated: true)
+            navigationController?.pushViewController(lessonVC, animated: true)
             AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
         } else {
             navigationController?.pushViewController(sectionsVC, animated: true)

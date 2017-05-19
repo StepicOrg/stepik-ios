@@ -12,13 +12,17 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
     
     var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
 
-    var presenter: LessonPresenter?
+    weak var sectionNavigationDelegate : SectionNavigationDelegate?
+    
+    var navigationRules : (prev: Bool, next: Bool)?
+    
+    fileprivate var presenter: LessonPresenter?
     
     lazy var activityView : UIView = self.initActivityView()
     
     lazy var warningView : UIView = self.initWarningView()
     
-    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
+    fileprivate let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
     fileprivate func initWarningView() -> UIView {
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
@@ -88,8 +92,13 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
         delegate = self
         
         presenter = LessonPresenter(objects: initObjects, ids: initIds)
+        presenter?.view = self
+        presenter?.sectionNavigationDelegate = sectionNavigationDelegate
+        if let rules = navigationRules {
+            presenter?.shouldNavigateToPrev = rules.prev
+            presenter?.shouldNavigateToNext = rules.next
+        }
         presenter?.refreshSteps()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {

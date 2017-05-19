@@ -30,10 +30,8 @@ class LessonPresenter {
     fileprivate var unitId: Int?
     fileprivate var context : StepsControllerPresentationContext = .unit
 
-    fileprivate var shouldNavigateToPrev: Bool = false
-    fileprivate var shouldNavigateToNext: Bool = false
-    
-    fileprivate var displayedSteps: [Step] = []
+    var shouldNavigateToPrev: Bool = false
+    var shouldNavigateToNext: Bool = false
     
     fileprivate var didInitSteps: Bool = false
     fileprivate var didSelectTab: Bool = false
@@ -147,7 +145,7 @@ class LessonPresenter {
         
         
         var prevStepsIds = [Int]()
-        if displayedSteps.count == 0 {
+        if lesson?.steps.count == 0 {
             self.view?.setRefreshing(refreshing: true)
         } else {
             if let l = lesson, l.stepsArray.count == l.steps.count {
@@ -192,7 +190,7 @@ class LessonPresenter {
                     guard let s = self else {
                         return
                     }
-                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+                    NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
                     print("did send step updated notification")
                     s.updateTabViews()
                 }
@@ -208,7 +206,7 @@ class LessonPresenter {
             guard self != nil else {
                 return
             }
-            print("error while loading steps in stepsviewcontroller")
+            print("error while loading steps in LessonPresenter")
             DispatchQueue.main.async{
                 finishedInitBlock()
             }

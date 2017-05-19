@@ -252,7 +252,7 @@ class WebStepViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
 
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
@@ -319,7 +319,7 @@ class WebStepViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
     }
     
     //Measured in seconds
@@ -427,7 +427,7 @@ class WebStepViewController: UIViewController {
     
     deinit {
         print("deinit webstepviewcontroller")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
     }
     
     var isCurrentlyUpdatingHeight: Bool = false

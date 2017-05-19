@@ -250,23 +250,27 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
         
         if segue.identifier == "showSteps" || segue.identifier == "replaceSteps" {
-            let dvc = segue.destination as! StepsViewController
+            let dvc = segue.destination as! LessonViewController
             dvc.hidesBottomBarWhenPushed = true
             if let stepsPresentation = sender as? StepsPresentation {
+                
+                var stepId : Int? = nil
+                var startStepId: Int = 0
                 
                 let index = stepsPresentation.index
                 if stepsPresentation.isLastStep {
                     if let l = section.units[index].lesson {
-                        dvc.startStepId = l.stepsArray.count - 1
-                        dvc.stepId = l.stepsArray.last
+                        startStepId = l.stepsArray.count - 1
+                        stepId = l.stepsArray.last
                     }
                 }
-                dvc.lesson = section.units[index].lesson
+                
+                dvc.initObjects = (lesson: section.units[index].lesson!, startStepId: startStepId, context: .unit)
+                dvc.initIds = (stepId: stepId, unitId: section.units[index].id)
+                
                 dvc.sectionNavigationDelegate = self
-                dvc.unitId = section.units[index].id
                 currentlyDisplayingUnitIndex = index
-                dvc.shouldNavigateToPrev = index != 0
-                dvc.shouldNavigateToNext = index < section.units.count - 1
+                dvc.navigationRules = (prev: index != 0, next: index < section.units.count - 1)
             }
         }
         // Get the new view controller using segue.destinationViewController.
@@ -313,7 +317,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return nil
         }
         
-        guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+        guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
             return nil
         }
         
@@ -321,7 +325,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return nil
         }
         
-        stepsVC.lesson = lesson
+        stepsVC.initObjects = (lesson: lesson, startStepId: 0, context: .unit)
         stepsVC.parentShareBlock = {
             [weak self]
             shareVC in
