@@ -783,6 +783,7 @@
 		860DB7A61EB90555001E3E42 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7A81EB90555001E3E42 /* overlay_hard.png */; };
 		8618E3E41EA0063D00FB3D0F /* StepReversedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618E3E31EA0063D00FB3D0F /* StepReversedCardView.swift */; };
 		8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
+		863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
 		864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F476211E82C1480018E82C /* StreaksView.swift */; };
 		864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
@@ -1094,7 +1095,6 @@
 		868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
 		868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BC6E31EA0276500E204EE /* StepControlButton.swift */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
-		869927DB1ECFB57E007D65A5 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 869927D91ECFB50E007D65A5 /* loading_robot.gif */; };
 		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
 		86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */; };
@@ -1688,13 +1688,13 @@
 		8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepReversedCardView.xib; sourceTree = "<group>"; };
 		86226CBE1EBE2FDD0076C82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StepCardView.strings; sourceTree = "<group>"; };
 		86226CC01EBE2FE10076C82E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StepCardView.strings; sourceTree = "<group>"; };
+		863262F81ECFC5AE007A20B3 /* loading_robot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_robot.gif; sourceTree = "<group>"; };
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardOverlayView.xib; sourceTree = "<group>"; };
 		866DDDC71EA8079500BAD48E /* CardOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
-		869927D91ECFB50E007D65A5 /* loading_robot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading_robot.gif; sourceTree = "<group>"; };
 		86ABC66B1E96867A0012E8A6 /* StepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
 		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
@@ -3063,7 +3063,7 @@
 		860DB79E1EB90505001E3E42 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				869927D91ECFB50E007D65A5 /* loading_robot.gif */,
+				863262F81ECFC5AE007A20B3 /* loading_robot.gif */,
 				860DB7A81EB90555001E3E42 /* overlay_hard.png */,
 				860DB7A51EB9054B001E3E42 /* overlay_simple.png */,
 			);
@@ -3655,7 +3655,7 @@
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
-				869927DB1ECFB57E007D65A5 /* loading_robot.gif in Resources */,
+				863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

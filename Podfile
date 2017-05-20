@@ -18,7 +18,7 @@ def all_pods
     pod 'DZNEmptyDataSet'
     
     pod 'YandexMobileMetrica/Dynamic'
-
+    
     pod 'Firebase/Core', '3.16.0'
     pod 'Firebase/AppIndexing', '3.16.0'
     pod 'Firebase/Messaging', '3.16.0'
