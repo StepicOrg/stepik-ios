@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LessonViewController : RGPageViewController, ShareableController, LessonView {
+class LessonViewController : PagerController, ShareableController, LessonView {
     
     var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
 
@@ -88,8 +88,26 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datasource = self
-        delegate = self
+        dataSource = self
+        initTabs()
+    }
+
+    fileprivate func initTabs() {
+        tabWidth = 44.0
+        tabHeight = 44.0
+        indicatorHeight = 2.0
+        tabOffset = 8.0
+        centerCurrentTab = true
+        indicatorColor = UIColor.white
+        tabsViewBackgroundColor = UIColor.navigationColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.backBarButtonItem?.title = " "
         
         presenter = LessonPresenter(objects: initObjects, ids: initIds)
         presenter?.view = self
@@ -99,14 +117,6 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
             presenter?.shouldNavigateToNext = rules.next
         }
         presenter?.refreshSteps()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationItem.backBarButtonItem?.title = " "
     }
     
     func setRefreshing(refreshing: Bool) {
@@ -129,7 +139,7 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
     
     
     func selectTab(index: Int, updatePage: Bool) {
-        self.selectTabAtIndex(index, updatePage: true)
+        self.selectTabAtIndex(index, swipe: true)
     }
     
     var nItem: UINavigationItem {
@@ -137,67 +147,12 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
     }
     
     var pagerGestureRecognizer: UIPanGestureRecognizer? {
-        return pagerScrollView?.panGestureRecognizer
-    }
-    
-    override var pagerOrientation: UIPageViewControllerNavigationOrientation {
-        get {
-            return .horizontal
-        }
-    }
-    
-    override var tabbarPosition: RGTabbarPosition {
-        get {
-            return .top
-        }
-    }
-    
-    override var tabbarStyle: RGTabbarStyle {
-        get {
-            return RGTabbarStyle.solid
-        }
-    }
-    
-    override var tabIndicatorColor: UIColor {
-        get {
-            return UIColor.white
-        }
-    }
-    
-    override var barTintColor: UIColor? {
-        get {
-            return UIColor.navigationColor
-        }
-    }
-    
-    override var tabStyle: RGTabStyle {
-        get {
-            return .inactiveFaded
-        }
-    }
-    
-    override var tabbarWidth: CGFloat {
-        get {
-            return 44.0
-        }
-    }
-    
-    override var tabbarHeight : CGFloat {
-        get {
-            return 44.0
-        }
-    }
-    
-    override var tabMargin: CGFloat {
-        get {
-            return 8.0
-        }
+        return (self.pageViewController.view.subviews.first as? UIScrollView)?.panGestureRecognizer
     }
     
     deinit {
         print("deinit LessonViewController")
     }
-    
     
     func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
         
@@ -234,32 +189,20 @@ class LessonViewController : RGPageViewController, ShareableController, LessonVi
     }
 }
 
-extension LessonViewController : RGPageViewControllerDataSource {
+extension LessonViewController: PagerDataSource {
+    func numberOfTabs(_ pager: PagerController) -> Int {
+        guard let presenter = presenter else { return 0 }
+        return presenter.pagesCount
+    }
 
-    public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
+    func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         guard let presenter = presenter else { return UIView() }
         return presenter.tabView(index: index)
     }
     
-    public func numberOfPages(for pageViewController: RGPageViewController) -> Int {
-        guard let presenter = presenter else { return 0 }
-        return presenter.pagesCount
-    }
-    
-    public func pageViewController(_ pageViewController: RGPageViewController, viewControllerForPageAt index: Int) -> UIViewController? {
-        guard let presenter = presenter else { return nil }
-        return presenter.controller(index: index)
-    }
-}
-
-extension LessonViewController: RGPageViewControllerDelegate {
-    
-    func pageViewController(_ pageViewController: RGPageViewController, widthForTabAt index: Int) -> CGFloat {
-        return 44.0
-    }
-    
-    func pageViewController(_ pageViewController: RGPageViewController, heightForTabAt index: Int) -> CGFloat {
-        return 44.0
+    func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
+        guard let presenter = presenter else { return UIViewController() }
+        return presenter.controller(index: index) ?? UIViewController()
     }
 }
 
