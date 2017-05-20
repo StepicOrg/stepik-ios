@@ -66,4 +66,5 @@ target 'Adaptive PDD' do
     all_pods
     
     pod 'Koloda', '4.0'
+    pod 'SDWebImage/GIF'
 end

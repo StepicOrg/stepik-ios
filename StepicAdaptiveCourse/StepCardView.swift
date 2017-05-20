@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLAnimatedImage
 
 class StepCardView: UIView {
 
@@ -17,6 +18,7 @@ class StepCardView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var loadingLabel: UILabel!
+    @IBOutlet weak var loadingImageView: FLAnimatedImageView!
     
     var gradientLayer: CAGradientLayer?
 
@@ -76,6 +78,8 @@ class StepCardView: UIView {
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.stepicGreenColor().cgColor
         
+        let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
+        loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
     }
     
