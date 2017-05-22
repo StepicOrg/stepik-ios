@@ -13,6 +13,8 @@ class AuthNavigationViewController: UINavigationController {
     var success: ((Void) -> Void)?
     var cancel: ((Void) -> Void)?
     
+    var canDismiss = true
+    
     lazy var loggedSuccess: ((String) -> Void)? = {
         [weak self] 
         provider in

@@ -1,0 +1,48 @@
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "0iw-z3-Xp8"; */
+"0iw-z3-Xp8.text" = "Адаптивное обучение";
+
+/* Class = "UILabel"; text = "Решайте задания, которые Вам предлагает система"; ObjectID = "Ggs-a8-mwe"; */
+"Ggs-a8-mwe.text" = "Решайте задания, которые Вам предлагает система";
+
+/* Class = "UILabel"; text = "Смахните карточку вправо, если задание кажется Вам слишком простым"; ObjectID = "KI5-nN-kWq"; */
+"KI5-nN-kWq.text" = "Смахните карточку вправо, если задание кажется Вам слишком простым";
+
+/* Class = "UIBarButtonItem"; title = "Закрыть"; ObjectID = "Sxi-w0-PgC"; */
+"Sxi-w0-PgC.title" = "Закрыть";
+
+/* Class = "UINavigationItem"; title = "О курсе"; ObjectID = "TBo-4r-wN7"; */
+"TBo-4r-wN7.title" = "О курсе";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "Tjp-nj-PEr"; */
+"Tjp-nj-PEr.text" = "Адаптивное обучение";
+
+/* Class = "UILabel"; text = "- / -"; ObjectID = "W29-0c-Mlf"; */
+"W29-0c-Mlf.text" = "- / -";
+
+/* Class = "UILabel"; text = "Прогресс по курсу"; ObjectID = "YAS-eb-RDu"; */
+"YAS-eb-RDu.text" = "Прогресс по курсу";
+
+/* Class = "UILabel"; text = "Course name"; ObjectID = "eRe-BV-APm"; */
+"eRe-BV-APm.text" = "Course name";
+
+/* Class = "UIButton"; normalTitle = "Начать обучение"; ObjectID = "fJE-sh-DRy"; */
+"fJE-sh-DRy.normalTitle" = "Начать обучение";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "feD-eT-U7I"; */
+"feD-eT-U7I.text" = "Адаптивное обучение";
+
+/* Class = "UILabel"; text = "Course summary"; ObjectID = "p0o-q2-aUC"; */
+"p0o-q2-aUC.text" = "Course summary";
+
+/* Class = "UILabel"; text = "Смахните карточку влево, если задание кажется Вам слишком сложным"; ObjectID = "pgL-k5-S5d"; */
+"pgL-k5-S5d.text" = "Смахните карточку влево, если задание кажется Вам слишком сложным";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "s3F-AI-k5h"; */
+"s3F-AI-k5h.text" = "Адаптивное обучение";
+
+/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "ZLf-c9-5Rm"; */
+"ZLf-c9-5Rm.text" = "Адаптивное обучение";
+
+/* Class = "UILabel"; text = "Перейдите к следующему заданию или смахните карточку с решенным заданием"; ObjectID = "DcR-3J-IFa"; */
+"DcR-3J-IFa.text" = "Перейдите к следующему заданию или смахните карточку с решенным заданием";

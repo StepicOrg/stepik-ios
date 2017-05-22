@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
         <!--Регистрация-->
         <scene sceneID="Ku3-q6-vGn">
             <objects>
-                <viewController storyboardIdentifier="RegistrationViewController" id="l1F-Qd-nJ0" customClass="RegistrationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" id="l1F-Qd-nJ0" customClass="RegistrationViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EPk-pH-Dv6"/>
                         <viewControllerLayoutGuide type="bottom" id="yEY-ym-p4g"/>
@@ -295,7 +295,7 @@
         <!--Launch View Controller-->
         <scene sceneID="axd-vF-J4m">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="Fbi-PC-nZO" customClass="LaunchViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchViewController" id="Fbi-PC-nZO" customClass="LaunchViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oC4-z8-5Be"/>
                         <viewControllerLayoutGuide type="bottom" id="0Sk-3l-6o0"/>
@@ -466,6 +466,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="continueWithLabel" destination="A4t-66-O94" id="KxH-66-f4O"/>
+                        <outlet property="dismissButton" destination="1yE-wI-0Sh" id="e66-zM-gdI"/>
                         <outlet property="dontHaveAccountLabel" destination="iT8-aQ-22W" id="sd4-93-8nx"/>
                         <outlet property="logotypeHeightConstraint" destination="z2U-P9-b7Z" id="VCQ-Qt-9Fq"/>
                         <outlet property="logotypeImageView" destination="BHd-zA-Tpe" id="vBG-cb-WoI"/>
@@ -483,7 +484,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="A55-3w-AUp">
             <objects>
-                <viewController id="Hi4-CF-Iq2" customClass="SignInViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hi4-CF-Iq2" customClass="SignInViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pJv-JY-Zj1"/>
                         <viewControllerLayoutGuide type="bottom" id="phZ-2G-z3f"/>
@@ -584,7 +585,7 @@
         <!--Social Networks View Controller-->
         <scene sceneID="hfH-av-v8B">
             <objects>
-                <viewController id="WnJ-j3-J8C" customClass="SocialNetworksViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WnJ-j3-J8C" customClass="SocialNetworksViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EPg-eO-QH5"/>
                         <viewControllerLayoutGuide type="bottom" id="y7b-si-ss7"/>
@@ -624,7 +625,7 @@
         <!--Auth Navigation View Controller-->
         <scene sceneID="ssb-c9-Mfl">
             <objects>
-                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="4QR-Lx-HW0" customClass="AuthNavigationViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AuthNavigation" automaticallyAdjustsScrollViewInsets="NO" id="4QR-Lx-HW0" customClass="AuthNavigationViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xnv-IR-UyR">

@@ -61,3 +61,10 @@ end
 target 'SberbankUniversity' do 
     all_pods
 end
+
+target 'Adaptive 1838' do
+    all_pods
+    
+    pod 'Koloda', '4.0'
+    pod 'SDWebImage/GIF'
+end

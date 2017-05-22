@@ -88,6 +88,7 @@ struct Images {
         static let emptyDownloads = #imageLiteral(resourceName: "empty-downloads")
         static let emptyFindCourses = #imageLiteral(resourceName: "empty-findCourses")
         static let anonymous = #imageLiteral(resourceName: "placeholder-anonymous-dark-background")
+        static let coursePassed = #imageLiteral(resourceName: "placeholder-course-passed")
     }
     
     struct logotypes {

@@ -10,4 +10,15 @@ import Foundation
 
 protocol QuizControllerDelegate: class {
     func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool)
+    func submissionDidCorrect()
+    func submissionDidWrong()
+    func submissionDidRetry()
+    func didWarningPlaceholderShow()
+}
+
+extension QuizControllerDelegate {
+    func submissionDidCorrect() { }
+    func submissionDidWrong() { }
+    func submissionDidRetry() { }
+    func didWarningPlaceholderShow() { }
 }

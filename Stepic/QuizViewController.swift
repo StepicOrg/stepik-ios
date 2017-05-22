@@ -11,7 +11,9 @@ import Presentr
 
 class QuizViewController: UIViewController {
     
+    @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
+    
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
@@ -106,6 +108,7 @@ class QuizViewController: UIViewController {
                     self?.warningView.isHidden = false
                 }
                 self.delegate?.needsHeightUpdate(200, animated: true, breaksSynchronizationControl: false)
+                self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
@@ -138,7 +141,7 @@ class QuizViewController: UIViewController {
     }
     
     var heightWithoutQuiz : CGFloat {
-        return 80 + statusViewHeight.constant + hintHeight.constant + peerReviewHeight.constant
+        return 40 + sendButtonHeight.constant + statusViewHeight.constant + hintHeight.constant + peerReviewHeight.constant
     }
     
     override func viewDidLayoutSubviews() {
@@ -276,6 +279,8 @@ class QuizViewController: UIViewController {
                                 }
                             }
                             
+                            self?.delegate?.submissionDidCorrect()
+                            
                             break
                             
                         case "wrong":
@@ -293,6 +298,8 @@ class QuizViewController: UIViewController {
                             s.statusLabel.text = s.wrongTitle
                             s.setStatusElements(visible: true)
 
+                            self?.delegate?.submissionDidWrong()
+                            
                             break
                             
                         case "evaluation":
@@ -715,49 +722,68 @@ class QuizViewController: UIViewController {
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         sendButton.isEnabled = false
-        doesPresentActivityIndicatorView = true
         if buttonStateSubmit {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
-            if checkReplyReady() {
-                submitReply(completion: {
-                    [weak self] in
-                    DispatchQueue.main.async{
-                        self?.sendButton.isEnabled = true
-                        self?.doesPresentActivityIndicatorView = false
-                    }
-                    }, error: {
-                        [weak self]
-                        errorText in
-                        DispatchQueue.main.async{
-                            self?.sendButton.isEnabled = true
-                            self?.doesPresentActivityIndicatorView = false 
-                            if let vc = self?.navigationController {
-                                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-                            }
-                        }
-                    })
-            } else {
-                doesPresentActivityIndicatorView = false
-                sendButton.isEnabled = true
-            }
+            submitAttempt()
         } else  {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
-            createNewAttempt(completion: {
+            retrySubmission()
+        }
+    }
+    
+    public func submitAttempt() {
+        doesPresentActivityIndicatorView = true
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
+        if checkReplyReady() {
+            submitReply(completion: {
                 [weak self] in
                 DispatchQueue.main.async{
                     self?.sendButton.isEnabled = true
                     self?.doesPresentActivityIndicatorView = false
                 }
                 }, error: {
-                    [weak self] in
+                    [weak self]
+                    errorText in
                     DispatchQueue.main.async{
                         self?.sendButton.isEnabled = true
                         self?.doesPresentActivityIndicatorView = false
+                        if let vc = self?.navigationController {
+                            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+                        }
                     }
-                    if let vc = self?.navigationController {
-                        Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-                    }
-                })
+            })
+        } else {
+            doesPresentActivityIndicatorView = false
+            sendButton.isEnabled = true
+        }
+    }
+    
+    public func retrySubmission() {
+        doesPresentActivityIndicatorView = true
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+        
+        self.delegate?.submissionDidRetry()
+        
+        createNewAttempt(completion: {
+            [weak self] in
+            DispatchQueue.main.async{
+                self?.sendButton.isEnabled = true
+                self?.doesPresentActivityIndicatorView = false
+            }
+            }, error: {
+                [weak self] in
+                DispatchQueue.main.async{
+                    self?.sendButton.isEnabled = true
+                    self?.doesPresentActivityIndicatorView = false
+                }
+                if let vc = self?.navigationController {
+                    Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+                }
+        })
+    }
+    
+    var isSubmitButtonHidden: Bool = false {
+        didSet {
+            self.sendButton.isHidden = isSubmitButtonHidden
+            self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 40
         }
     }
 }

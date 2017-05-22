@@ -13,6 +13,7 @@ class LaunchViewController: UIViewController {
 
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var continueWithLabel: UILabel!
     @IBOutlet weak var orLabel: UILabel!
@@ -36,6 +37,10 @@ class LaunchViewController: UIViewController {
         return (navigationController as? AuthNavigationViewController)?.cancel
     }
     
+    var canDismiss: Bool {
+        return (navigationController as? AuthNavigationViewController)?.canDismiss ?? true
+    }
+
     var success : ((String)->Void)? {
         return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
@@ -50,6 +55,7 @@ class LaunchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
         navigationController?.navigationBar.barTintColor = UIColor.white
         
+        dismissButton.isHidden = !canDismiss
         signInButton.setStepicGreenStyle()
         signUpButton.setStepicWhiteStyle()
         
@@ -81,10 +87,12 @@ class LaunchViewController: UIViewController {
     }
 
     @IBAction func сlosePressed(_ sender: AnyObject) {
-        self.navigationController?.dismiss(animated: true, completion: {
-            [weak self] in
-            self?.cancel?()
-        })
+        if canDismiss {
+            self.navigationController?.dismiss(animated: true, completion: {
+                [weak self] in
+                self?.cancel?()
+            })
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

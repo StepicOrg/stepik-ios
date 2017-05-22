@@ -19,6 +19,7 @@ class ApiDataDownloader {
     static let stepics = StepicsAPI()
     static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
+    static let recommendations = RecommendationsAPI()
     static let lastSteps = LastStepsAPI()
     static let courses = CoursesAPI()
     static let sections = SectionsAPI()
