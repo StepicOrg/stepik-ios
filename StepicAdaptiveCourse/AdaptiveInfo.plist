@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Adaptive PDD</string>
+	<string>ПДД 2017</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.33</string>
+	<string>1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -54,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>19</string>
+	<string>21</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -72,7 +72,7 @@
 	<key>FacebookAppID</key>
 	<string>171127739724012</string>
 	<key>FacebookDisplayName</key>
-	<string>Adaptive PDD</string>
+	<string>ПДД 2017</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>vkauthorize</string>

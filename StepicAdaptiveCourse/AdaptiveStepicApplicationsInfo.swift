@@ -30,7 +30,7 @@ struct StepicApplicationsInfo {
     static let streaksEnabled = false
     static let shouldRegisterNotifications = false
     
-    static let appStoreRateURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1229136038&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review")
+    static let appStoreRateURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1239082208&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review")
     
     struct SocialInfo {
         struct AppIds {
