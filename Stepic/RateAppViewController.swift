@@ -68,7 +68,7 @@ class RateAppViewController: UIViewController {
         buttonsContainerHeight.constant = 0
 
         laterButton.setTitle(NSLocalizedString("Later", comment: ""), for: .normal)
-        topLabel.text = String(format: NSLocalizedString("HowWouldYouRate", comment: ""), Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "Stepik")
+        topLabel.text = String(format: NSLocalizedString("HowWouldYouRate", comment: ""), Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Stepik")
         bottomLabel.text = ""
         
         bottomLabelWidth = bottomLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)").first as? NSLayoutConstraint

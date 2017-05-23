@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Agrume
 
 class AdaptiveStepViewController: UIViewController {
 
@@ -67,7 +68,7 @@ class AdaptiveStepViewController: UIViewController {
     
     fileprivate func loadStepHTML(for step: Step) {
         if let htmlText = step.block.text {
-            let scriptsString = "\(Scripts.localTexScript)"
+            let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
             var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
             html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
@@ -110,6 +111,35 @@ extension AdaptiveStepViewController: UIWebViewDelegate {
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"
         
         webView.stringByEvaluatingJavaScript(from: jsCode)
+    }
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        guard let url = request.url else {
+            return false
+        }
+        
+        //Check if the request is an iFrame
+        
+        if let text = step.block.text {
+            if HTMLParsingUtil.getAlliFrameLinks(text).index(of: url.absoluteString) != nil {
+                return true
+            }
+        }
+        
+        if url.scheme == "openimg" {
+            var urlString = url.absoluteString
+            urlString.removeSubrange(urlString.startIndex..<urlString.index(urlString.startIndex, offsetBy: 10))
+            if let offset = urlString.indexOf("//") {
+                urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
+                if let newUrl = URL(string: urlString) {
+                    let agrume = Agrume(imageUrl: newUrl)
+                    agrume.showFrom(self)
+                }
+            }
+            return false
+        }
+        return true
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
