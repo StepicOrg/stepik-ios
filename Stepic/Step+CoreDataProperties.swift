@@ -20,7 +20,7 @@ extension Step {
     @NSManaged var managedProgressId: String?
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedHasSubmissionRestrictions: NSNumber?
-    
+    @NSManaged var managedMaxSubmissionsCount: NSNumber?
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
@@ -134,6 +134,15 @@ extension Step {
         }
         set(value) {
             managedLesson = value
+        }
+    }
+    
+    var maxSubmissionsCount: Int? {
+        get {
+            return managedMaxSubmissionsCount?.intValue
+        }
+        set(value) {
+            managedMaxSubmissionsCount = value as NSNumber?
         }
     }
     

@@ -1266,6 +1266,7 @@
 		08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextTableViewCell.swift; sourceTree = "<group>"; };
 		08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextTableViewCell.xib; sourceTree = "<group>"; };
 		0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewsExecutableTask.swift; sourceTree = "<group>"; };
+		080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_submission_count_v16.xcdatamodel; sourceTree = "<group>"; };
 		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
 		080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPIPaginatedMock.swift; sourceTree = "<group>"; };
 		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
@@ -5553,6 +5554,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */,
 				0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */,
 				084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */,
 				084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */,
@@ -5569,7 +5571,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */;
+			currentVersion = 080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

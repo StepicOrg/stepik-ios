@@ -226,3 +226,6 @@ ReactionTransition4 = "Считаем что-то...";
 NoRecommendations = "У нас больше нет рекомендаций для вас.";
 CoursePassed = "Курс пройден";
 GoToStepikAppStore = "Найти другие курсы на Stepik";
+triesLeft1 = "Осталась %@ попытка";
+triesLeft234 = "Осталось %@ попытки";
+triesLeft567890 = "Осталось %@ попыток";

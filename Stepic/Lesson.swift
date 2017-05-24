@@ -15,7 +15,6 @@ class Lesson: NSManagedObject, JSONInitializable {
     
     // Insert code here to add functionality to your managed object subclass
     typealias idType = Int
-
     
     convenience required init(json: JSON){
         self.init()
