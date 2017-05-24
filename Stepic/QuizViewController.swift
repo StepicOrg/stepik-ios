@@ -28,6 +28,18 @@ class QuizViewController: UIViewController {
     
     weak var delegate : QuizControllerDelegate?
     
+    var submissionCount: Int? {
+        didSet {
+            //TODO: count submissionsLeft using step's max_submission_count 
+        }
+    }
+    
+    var submissionsLeft: Int? {
+        didSet {
+            //TODO: if submission is not nil update button text
+        }
+    }
+    
     var submitTitle : String {
         return NSLocalizedString("Submit", comment: "")
     }
@@ -430,6 +442,31 @@ class QuizViewController: UIViewController {
         }
     }
     
+    fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int)->Void), error: @escaping ((String) -> Void)) {
+        _ = ApiDataDownloader.submissions.retrieve(stepName: step.block.name, stepId: step.id, page: page, success: {
+            [weak self]
+            submissions, meta in
+            guard let s = self else { return }
+            
+            let count = submissions.count
+            if meta.hasNext {
+                s.retrieveSubmissionsCount(page: page + 1, success: {
+                    nextPagesCnt in
+                    success(count + nextPagesCnt)
+                    return
+                }, error: {
+                    errorMsg in
+                    error(errorMsg)
+                    return
+                })
+            }
+        }, error: {
+            errorMsg in
+            error(errorMsg)
+            return
+        })
+    }
+    
     func refreshAttempt(_ stepId: Int) {
         self.doesPresentActivityIndicatorView = true
         performRequest({
@@ -465,6 +502,15 @@ class QuizViewController: UIViewController {
                             print("failed to get submissions")
                             //TODO: Test this
                     })
+                    if s.step.hasSubmissionRestrictions {
+                        s.retrieveSubmissionsCount(page: 1, success: {
+                            count in
+                            s.submissionCount = count
+                        }, error: {
+                            errorMsg in
+                            print("failed to get submissions count")
+                        })
+                    }
                 }
                 }, error: {
                     errorText in
