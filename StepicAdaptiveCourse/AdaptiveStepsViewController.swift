@@ -280,6 +280,13 @@ class AdaptiveStepsViewController: UIViewController {
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        
+        if direction == .right {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy)
+        } else if direction == .left {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard)
+        }
+        
         kolodaView.resetCurrentCardIndex()
     }
     

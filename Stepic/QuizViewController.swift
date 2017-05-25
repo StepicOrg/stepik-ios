@@ -688,6 +688,10 @@ class QuizViewController: UIViewController {
     
     func checkCorrect() {
         
+        if StepicApplicationsInfo.isAdaptive {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.correctAnswer)
+        }
+        
         if RoutingManager.rate.submittedCorrect() {
             Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
             return

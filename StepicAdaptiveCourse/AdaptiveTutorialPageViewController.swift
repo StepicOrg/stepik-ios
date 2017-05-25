@@ -13,6 +13,7 @@ class AdaptiveTutorialPageViewController: UIViewController {
     var dismissHandler: () -> () = { }
     
     @IBAction func onStartLearningButtonClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.onboardingFinished)
         self.dismiss(animated: true, completion: dismissHandler)
     }
     

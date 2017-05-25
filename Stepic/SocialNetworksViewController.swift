@@ -86,8 +86,6 @@ class SocialNetworksViewController: UIViewController {
                                 [weak self] in
                                 self?.dismissBlock?()
                             }
-                            AnalyticsHelper.sharedHelper.changeSignIn()
-                            AnalyticsHelper.sharedHelper.sendSignedIn()
                         }, error: {
                             e in
                             print("successfully signed in, but could not get user")
