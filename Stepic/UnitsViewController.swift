@@ -321,10 +321,13 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return nil
         }
         
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Lesson.peeked)
+
         stepsVC.lesson = lesson
         stepsVC.parentShareBlock = {
             [weak self]
             shareVC in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Lesson.shared)
             shareVC.popoverPresentationController?.sourceView = cell
             self?.present(shareVC, animated: true, completion: nil)
         }
@@ -333,6 +336,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         show(viewControllerToCommit, sender: self)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Lesson.popped)
     }
 }
 

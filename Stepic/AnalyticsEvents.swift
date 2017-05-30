@@ -180,4 +180,24 @@ struct AnalyticsEvents {
             static let hard = "reaction_hard"
         }
     }
+    
+    struct PeekNPop {
+        struct Course {
+            static let peeked = "3dtouch_course_peeked"
+            static let popped = "3dtouch_course_popped"
+            static let shared = "3dtouch_course_shared"
+        }
+        
+        struct Section {
+            static let peeked = "3dtouch_section_peeked"
+            static let popped = "3dtouch_section_popped"
+            static let shared = "3dtouch_section_shared"
+        }
+        
+        struct Lesson {
+            static let peeked = "3dtouch_lesson_peeked"
+            static let popped = "3dtouch_lesson_popped"
+            static let shared = "3dtouch_lesson_shared"
+        }
+    }
 }

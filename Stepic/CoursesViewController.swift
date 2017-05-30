@@ -491,10 +491,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {
                 return nil
             }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
             courseVC.course = courses[indexPath.row]
             courseVC.parentShareBlock = {
                 [weak self]
                 shareVC in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
                 shareVC.popoverPresentationController?.sourceView = cell
                 self?.present(shareVC, animated: true, completion: nil)
             }
@@ -504,10 +506,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
                 return nil
             }
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
             courseVC.course = courses[indexPath.row]
             courseVC.parentShareBlock = {
                 [weak self]
                 shareVC in
+                AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
                 shareVC.popoverPresentationController?.sourceView = cell
                 self?.present(shareVC, animated: true, completion: nil)
             }
@@ -518,6 +522,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         show(viewControllerToCommit, sender: self)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.popped)
     }
 }
 

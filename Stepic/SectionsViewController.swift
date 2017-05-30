@@ -247,10 +247,12 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         guard let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController else {
             return nil
         }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Section.peeked)
         unitsVC.section = course.sections[indexPath.row]
         unitsVC.parentShareBlock = {
             [weak self]
             shareVC in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Section.shared)
             shareVC.popoverPresentationController?.sourceView = cell
             self?.present(shareVC, animated: true, completion: nil)
         }
@@ -258,6 +260,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Section.popped)
         show(viewControllerToCommit, sender: self)
     }
 
