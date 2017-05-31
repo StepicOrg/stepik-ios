@@ -37,7 +37,7 @@ class WebStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
-    weak var stepsVC : StepsViewController!
+    weak var lessonView : LessonView?
     
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
@@ -69,8 +69,10 @@ class WebStepViewController: UIViewController {
         stepWebView.scrollView.backgroundColor = UIColor.white
 //        stepWebView.backgroundColor = UIColor.white
         
-        scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: stepsVC.pagerScrollView!.panGestureRecognizer)
-        print(self.view.gestureRecognizers ?? "")
+        if let recognizer = lessonView?.pagerGestureRecognizer {
+            scrollHelper = WebViewHorizontalScrollHelper(webView: stepWebView, onView: self.view, pagerPanRecognizer: recognizer)
+            print(self.view.gestureRecognizers ?? "")
+        }
         
         nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
@@ -250,7 +252,7 @@ class WebStepViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WebStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
 
         let stepid = step.id
         print("view did appear for web step with id \(stepid)")
@@ -317,7 +319,7 @@ class WebStepViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
     }
     
     //Measured in seconds
@@ -425,7 +427,7 @@ class WebStepViewController: UIViewController {
     
     deinit {
         print("deinit webstepviewcontroller")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
     }
     
     var isCurrentlyUpdatingHeight: Bool = false
@@ -471,7 +473,7 @@ extension WebStepViewController : UIWebViewDelegate {
                 if index + 1 < components.count {
                     let urlStepIdString = components[index + 1]
                     if let urlStepId = Int(urlStepIdString) {
-                        stepsVC.selectTabAtIndex(urlStepId - 1, updatePage: true)
+                        lessonView?.selectTab(index: urlStepId - 1, updatePage: true)
                         return false
                     }
                 }

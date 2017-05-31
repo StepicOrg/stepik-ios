@@ -37,9 +37,10 @@ class QuizViewController: UIViewController {
             let left = maxSubmissionsCount - submissionsCount
             if left > 0 || step.canEdit {
                 sendButton.isEnabled = true
+                isSubmitButtonHidden = false
             } else {
+                sendButton.isEnabled = false
                 isSubmitButtonHidden = true
-//                sendButton.isEnabled = false
             }
             submissionsLeft = left
         }
@@ -359,9 +360,11 @@ class QuizViewController: UIViewController {
                         }
                         
                         if s.step.hasSubmissionRestrictions {
-                            if ((s.submissionsLeft ?? 0) > 0) || s.step.canEdit {
+                            if ((s.submissionsLeft ?? 0) > 0 && s.submission?.status != "correct") || s.step.canEdit {
                                 s.sendButton.isEnabled = true
+                                s.isSubmitButtonHidden = false
                             } else {
+                                s.sendButton.isEnabled = true
                                 s.isSubmitButtonHidden = true
                             }
                         }
@@ -746,6 +749,8 @@ class QuizViewController: UIViewController {
                             s.checkCorrect()
                             if s.step.hasSubmissionRestrictions && !s.step.canEdit {
                                 s.isSubmitButtonHidden = true
+                            } else {
+                                s.isSubmitButtonHidden = false
                             }
                         }
                         completion?()

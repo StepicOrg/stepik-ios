@@ -51,7 +51,7 @@ class VideoStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
         
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]

@@ -72,14 +72,14 @@ class DownloadsViewController: UIViewController {
         }
         
         if segue.identifier == "showSteps" {
-            let dvc = segue.destination as! StepsViewController
+            let dvc = segue.destination as! LessonViewController
             dvc.hidesBottomBarWhenPushed = true
             
             let step = sender as! Step
-            //TODO : pass unit here!
-            dvc.context = .lesson
-            dvc.lesson = step.managedLesson
-            dvc.startStepId = step.managedLesson?.steps.index(of: step) ?? 0
+            if let lesson = step.managedLesson {
+                //TODO : pass unit here!
+                dvc.initObjects = (lesson: lesson, startStepId: lesson.steps.index(of: step) ?? 0, context: .lesson)
+            }
         }
     }
     
