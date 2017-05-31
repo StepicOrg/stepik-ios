@@ -35,12 +35,13 @@ class QuizViewController: UIViewController {
                 return
             }
             let left = maxSubmissionsCount - submissionsCount
-            if left > 0 || step.canEdit {
+            if (left > 0 && self.submission?.status != "correct") || step.canEdit {
                 sendButton.isEnabled = true
                 isSubmitButtonHidden = false
             } else {
                 sendButton.isEnabled = false
-                isSubmitButtonHidden = true
+//                sendButton.setTitle("No submissions left", for: .normal)
+//                isSubmitButtonHidden = true
             }
             submissionsLeft = left
         }
@@ -52,7 +53,12 @@ class QuizViewController: UIViewController {
                 return
             }
             if let count = submissionsLeft {
-                self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: count)))", for: UIControlState())
+                if count > 0 || step.canEdit {
+                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: count)))", for: UIControlState())
+                } else {
+                    self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
+                    self.sendButton.backgroundColor = UIColor.gray
+                }
             }
         }
     }
@@ -185,8 +191,8 @@ class QuizViewController: UIViewController {
         didSet {
             if buttonStateSubmit {
                 self.sendButton.setStepicGreenStyle()
-                if submissionsCount != nil && step.hasSubmissionRestrictions {
-                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: submissionsCount!)))", for: UIControlState())
+                if submissionsLeft != nil && step.hasSubmissionRestrictions {
+                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: submissionsLeft!)))", for: UIControlState())
                 } else {
                     self.sendButton.setTitle(self.submitTitle, for: UIControlState())
                 }
@@ -261,8 +267,7 @@ class QuizViewController: UIViewController {
                         s.statusImageView.image = nil
                         s.buttonStateSubmit = true
                         s.view.backgroundColor = UIColor.white
-                        
-                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
+//                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
                         s.hintHeightUpdateBlock = nil
