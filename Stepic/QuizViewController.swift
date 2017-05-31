@@ -553,8 +553,8 @@ class QuizViewController: UIViewController {
                             print("failed to get submissions")
                             //TODO: Test this
                     })
-                    s.checkSubmissionRestrictions()
                 }
+                s.checkSubmissionRestrictions()
                 }, error: {
                     errorText in
                     s.doesPresentActivityIndicatorView = false
