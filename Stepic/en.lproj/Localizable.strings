@@ -225,3 +225,7 @@ ReactionTransition4 = "Making some math...";
 NoRecommendations = "We've no recommendations for you.";
 CoursePassed = "Course passed";
 GoToStepikAppStore = "Find courses on Stepik";
+triesLeft1 = "%@ try left";
+triesLeft234 = "%@ tries left";
+triesLeft567890 = "%@ tries left";
+NoSubmissionsLeft = "No tries left";

@@ -15,6 +15,8 @@ class Step: NSManagedObject, JSONInitializable {
 
     typealias idType = Int
 
+    var canEdit: Bool = false
+
     convenience required init(json: JSON){
         self.init()
         initialize(json)
@@ -33,9 +35,15 @@ class Step: NSManagedObject, JSONInitializable {
         } else {
             hasReview = false
         }
+        maxSubmissionsCount = json["max_submissions_count"].int
         discussionsCount = json["discussions_count"].int
         discussionProxyId = json["discussion_proxy"].string
         lessonId = json["lesson"].intValue
+        if let edit = json["actions"]["edit_instructions"].string {
+            canEdit = (edit != "")
+        } else {
+            canEdit = false
+        }
         
     }
     

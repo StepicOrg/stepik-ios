@@ -11,7 +11,7 @@ import UIKit
 class StepsControllerRouter {
     
     //Getting step here
-    static func getStepsController(forStepId id: Int, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    static func getStepsController(forStepId id: Int, success successHandler: @escaping ((LessonViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
         let getForStepBlock : ((Step) -> Void) = {
             step in
@@ -47,7 +47,7 @@ class StepsControllerRouter {
     }
     
     //Getting lesson here
-    static func getStepsController(forStep step: Step, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    static func getStepsController(forStep step: Step, success successHandler: @escaping ((LessonViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         let getForLessonBlock : ((Lesson) -> Void) = {
             lesson in 
             getStepsController(forStep: step, lesson: lesson, success: successHandler, error: errorHandler)
@@ -87,7 +87,7 @@ class StepsControllerRouter {
     }
     
     //Getting unit here. 
-    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, success successHandler: @escaping ((LessonViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
         let getForUnitBlock : ((Unit) -> Void) = {
             unit in 
@@ -124,7 +124,7 @@ class StepsControllerRouter {
     }
     
     //Looking for assignments
-    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, unit: Unit, success successHandler: @escaping ((StepsViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    fileprivate static func getStepsController(forStep step: Step, lesson: Lesson, unit: Unit, success successHandler: @escaping ((LessonViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
         
         //Check, if cached assignments contain nil progresses
 //        unit.assignments.contains({$0.})
@@ -150,38 +150,36 @@ class StepsControllerRouter {
     }
     
     //Define this method's signature later
-    fileprivate static func getStepsControllerForLessonContext(_ step: Step, lesson: Lesson, success successHandler: ((StepsViewController) -> Void), error errorHandler: ((String) -> Void)) {
+    fileprivate static func getStepsControllerForLessonContext(_ step: Step, lesson: Lesson, success successHandler: ((LessonViewController) -> Void), error errorHandler: ((String) -> Void)) {
         
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
             errorHandler("Could not instantiate controller")
             return
         }
         
         vc.hidesBottomBarWhenPushed = true
         let step = step
-        vc.context = .lesson
-        vc.lesson = lesson
+        vc.initObjects = (lesson: lesson, startStepId: step.lesson?.steps.index(of: step) ?? 0, context: .lesson)
         
-        //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.index(of: step) ?? 0
         successHandler(vc)
     }
     
     //Define this method's signature later
-    fileprivate static func getStepsControllerForUnitContext(_ step: Step, lesson: Lesson, unit: Unit, success successHandler: ((StepsViewController) -> Void), error errorHandler: ((String) -> Void)) {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "StepsViewController") as? StepsViewController else {
+    fileprivate static func getStepsControllerForUnitContext(_ step: Step, lesson: Lesson, unit: Unit, success successHandler: ((LessonViewController) -> Void), error errorHandler: ((String) -> Void)) {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
             errorHandler("Could not instantiate controller")
             return
         }
         
         vc.hidesBottomBarWhenPushed = true
         let step = step
-        vc.context = .unit
-        vc.lesson = lesson
-//        unit.assignments
+        
+        
         //TODO: Add assignment here
         //TODO: Check if it is better to do it using stepsArray
-        vc.startStepId = step.lesson?.steps.index(of: step) ?? 0
+        
+        vc.initObjects = (lesson: lesson, startStepId: step.lesson?.steps.index(of: step) ?? 0, context: .unit)
+
         successHandler(vc)
     }
 

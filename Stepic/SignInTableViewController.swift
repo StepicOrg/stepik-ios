@@ -121,8 +121,6 @@ class SignInTableViewController: UITableViewController {
                             self?.success?()
                         })
                     }
-                    AnalyticsHelper.sharedHelper.changeSignIn()
-                    AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, error: {
                         e in
                         print("successfully signed in, but could not get user")
@@ -161,8 +159,6 @@ class SignInTableViewController: UITableViewController {
                             self?.success?()
                         })
                     }
-                    AnalyticsHelper.sharedHelper.changeSignIn()
-                    AnalyticsHelper.sharedHelper.sendSignedIn()
                     }, error: {
                         e in
                         print("successfully signed in, but could not get user")

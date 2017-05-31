@@ -8,9 +8,7 @@
 
 import UIKit
 import MediaPlayer
-import Fabric
-import Crashlytics
-import Firebase 
+import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SVProgressHUD
@@ -27,9 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        Fabric.with([Crashlytics.self])
-		
+
+        AnalyticsHelper.sharedHelper.setupAnalytics()
+
 		if #available(iOS 9.0, *) {
 			WatchSessionManager.sharedManager.startSession()
 		}
@@ -37,21 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStore(at: CoreDataHelper.instance.storeURL as URL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         
-//        setVideoTestRootController()
         ConnectionHelper.shared.instantiate()
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
         }
         
-        FIRApp.configure()
         FIRAppIndexing.sharedInstance().registerApp(Tokens.shared.firebaseId)
-        
-        Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
+
         AnalyticsReporter.reportMixpanelEvent(AnalyticsEvents.App.opened, parameters: nil)
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        YMMYandexMetrica.activate(withApiKey: Tokens.shared.appMetricaToken)
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         

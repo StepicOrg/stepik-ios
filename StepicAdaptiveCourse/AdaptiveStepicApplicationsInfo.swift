@@ -27,6 +27,8 @@ struct StepicApplicationsInfo {
     
     static let adaptiveCourseId = 1838
     
+    static let isAdaptive = true
+
     static let streaksEnabled = false
     static let shouldRegisterNotifications = false
     

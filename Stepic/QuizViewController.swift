@@ -28,6 +28,41 @@ class QuizViewController: UIViewController {
     
     weak var delegate : QuizControllerDelegate?
     
+    var submissionsCount: Int? {
+        didSet {
+            guard let maxSubmissionsCount = step.maxSubmissionsCount, let submissionsCount = submissionsCount else {
+                submissionsLeft = nil
+                return
+            }
+            let left = maxSubmissionsCount - submissionsCount
+            if (left > 0 && self.submission?.status != "correct") || step.canEdit {
+                sendButton.isEnabled = true
+                isSubmitButtonHidden = false
+            } else {
+                sendButton.isEnabled = false
+//                sendButton.setTitle("No submissions left", for: .normal)
+//                isSubmitButtonHidden = true
+            }
+            submissionsLeft = left
+        }
+    }
+    
+    var submissionsLeft: Int? {
+        didSet {
+            guard buttonStateSubmit else {
+                return
+            }
+            if let count = submissionsLeft {
+                if count > 0 || step.canEdit {
+                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: count)))", for: UIControlState())
+                } else {
+                    self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
+                    self.sendButton.backgroundColor = UIColor.gray
+                }
+            }
+        }
+    }
+    
     var submitTitle : String {
         return NSLocalizedString("Submit", comment: "")
     }
@@ -156,7 +191,11 @@ class QuizViewController: UIViewController {
         didSet {
             if buttonStateSubmit {
                 self.sendButton.setStepicGreenStyle()
-                self.sendButton.setTitle(self.submitTitle, for: UIControlState())
+                if submissionsLeft != nil && step.hasSubmissionRestrictions {
+                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: submissionsLeft!)))", for: UIControlState())
+                } else {
+                    self.sendButton.setTitle(self.submitTitle, for: UIControlState())
+                }
             } else {
                 self.sendButton.setStepicWhiteStyle()
                 self.sendButton.setTitle(self.tryAgainTitle, for: UIControlState())
@@ -188,6 +227,18 @@ class QuizViewController: UIViewController {
     
     var stepUrl : String? 
     
+    fileprivate func submissionsLeftLocalizable(count: Int) -> String {
+        func triesLocalizableFor(count: Int) -> String {
+            switch (abs(count) % 10) {
+            case 1: return NSLocalizedString("triesLeft1", comment: "")
+            case 2, 3, 4: return NSLocalizedString("triesLeft234", comment: "")
+            default: return NSLocalizedString("triesLeft567890", comment: "")
+            }
+        }
+        
+        return String(format: triesLocalizableFor(count: count), "\(count)")
+    }
+    
     fileprivate var didGetErrorWhileSendingSubmission = false
     
     fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
@@ -216,8 +267,7 @@ class QuizViewController: UIViewController {
                         s.statusImageView.image = nil
                         s.buttonStateSubmit = true
                         s.view.backgroundColor = UIColor.white
-                        
-                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
+//                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
                         s.hintHeightUpdateBlock = nil
@@ -314,7 +364,17 @@ class QuizViewController: UIViewController {
                             break
                         }
                         
-                        s.updateQuizAfterSubmissionUpdate()                    
+                        if s.step.hasSubmissionRestrictions {
+                            if ((s.submissionsLeft ?? 0) > 0 && s.submission?.status != "correct") || s.step.canEdit {
+                                s.sendButton.isEnabled = true
+                                s.isSubmitButtonHidden = false
+                            } else {
+                                s.sendButton.isEnabled = true
+                                s.isSubmitButtonHidden = true
+                            }
+                        }
+
+                        s.updateQuizAfterSubmissionUpdate()
                     }
                     s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
 //                self.view.layoutIfNeeded()
@@ -430,6 +490,34 @@ class QuizViewController: UIViewController {
         }
     }
     
+    fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int)->Void), error: @escaping ((String) -> Void)) {
+        _ = ApiDataDownloader.submissions.retrieve(stepName: step.block.name, stepId: step.id, page: page, success: {
+            [weak self]
+            submissions, meta in
+            guard let s = self else { return }
+            
+            let count = submissions.count
+            if meta.hasNext {
+                s.retrieveSubmissionsCount(page: page + 1, success: {
+                    nextPagesCnt in
+                    success(count + nextPagesCnt)
+                    return
+                }, error: {
+                    errorMsg in
+                    error(errorMsg)
+                    return
+                })
+            } else {
+                success(count)
+                return
+            }
+        }, error: {
+            errorMsg in
+            error(errorMsg)
+            return
+        })
+    }
+    
     func refreshAttempt(_ stepId: Int) {
         self.doesPresentActivityIndicatorView = true
         performRequest({
@@ -466,6 +554,7 @@ class QuizViewController: UIViewController {
                             //TODO: Test this
                     })
                 }
+                s.checkSubmissionRestrictions()
                 }, error: {
                     errorText in
                     s.doesPresentActivityIndicatorView = false
@@ -489,6 +578,19 @@ class QuizViewController: UIViewController {
                 })
             }
         })
+    }
+    
+    fileprivate func checkSubmissionRestrictions() {
+        if step.hasSubmissionRestrictions {
+            retrieveSubmissionsCount(page: 1, success: {
+                [weak self]
+                count in
+                self?.submissionsCount = count
+            }, error: {
+                errorMsg in
+                print("failed to get submissions count")
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -594,6 +696,10 @@ class QuizViewController: UIViewController {
     
     func checkCorrect() {
         
+        if StepicApplicationsInfo.isAdaptive {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.correctAnswer)
+        }
+        
         if RoutingManager.rate.submittedCorrect() {
             Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
             return
@@ -645,7 +751,12 @@ class QuizViewController: UIViewController {
                     } else {
                         s.submission = submission
                         if submission.status == "correct" {
-                            s.checkCorrect() 
+                            s.checkCorrect()
+                            if s.step.hasSubmissionRestrictions && !s.step.canEdit {
+                                s.isSubmitButtonHidden = true
+                            } else {
+                                s.isSubmitButtonHidden = false
+                            }
                         }
                         completion?()
                     }
@@ -768,15 +879,16 @@ class QuizViewController: UIViewController {
                 self?.sendButton.isEnabled = true
                 self?.doesPresentActivityIndicatorView = false
             }
-            }, error: {
-                [weak self] in
-                DispatchQueue.main.async{
-                    self?.sendButton.isEnabled = true
-                    self?.doesPresentActivityIndicatorView = false
-                }
-                if let vc = self?.navigationController {
-                    Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-                }
+            self?.checkSubmissionRestrictions()
+        }, error: {
+            [weak self] in
+            DispatchQueue.main.async{
+                self?.sendButton.isEnabled = true
+                self?.doesPresentActivityIndicatorView = false
+            }
+            if let vc = self?.navigationController {
+                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+            }
         })
     }
     

@@ -28,6 +28,7 @@ class VideoStepViewController: UIViewController {
     var nextLessonHandler: ((Void)->Void)?
     var prevLessonHandler: ((Void)->Void)?
     
+    var nController : UINavigationController?
     var nItem : UINavigationItem!
 
     //variable for sending analytics correctly - if view appears after dismissing video player, the event is not being sent
@@ -51,7 +52,7 @@ class VideoStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VideoStepViewController.updatedStepNotification(_:)), name: NSNotification.Name(rawValue: LessonPresenter.stepUpdatedNotification), object: nil)
         
         imageTapHelper = ImageTapHelper(imageView: thumbnailImageView, action: { 
             [weak self]
@@ -247,7 +248,7 @@ class VideoStepViewController: UIViewController {
             let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil) 
             vc.discussionProxyId = discussionProxyId
             vc.target = self.step.id
-            navigationController?.pushViewController(vc, animated: true)
+            nController?.pushViewController(vc, animated: true)
         } else {
             //TODO: Load comments here
         }
@@ -288,7 +289,7 @@ extension VideoStepViewController : PKDownloadButtonDelegate {
         case .startDownload: 
             
             if !ConnectionHelper.shared.isReachable {
-                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.navigationController!)
+                Messages.sharedManager.show3GDownloadErrorMessage(inController: self.nController ?? UIViewController())
                 print("Not reachable to download")
                 return
             }

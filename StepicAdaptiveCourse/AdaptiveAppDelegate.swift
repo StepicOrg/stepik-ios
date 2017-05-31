@@ -20,9 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        Mixpanel.initialize(token: "cc80751831012d6a0de6bba73ec2f556")
-        Fabric.with([Crashlytics.self])
+    
+        AnalyticsHelper.sharedHelper.setupAnalytics()
+
+        if !DefaultsContainer.launch.didLaunch {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
+            DefaultsContainer.launch.didLaunch = true
+        }
         
         return true
     }
