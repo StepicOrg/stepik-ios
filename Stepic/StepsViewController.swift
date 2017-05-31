@@ -109,7 +109,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         
         updateTitle()
         
-        LastStepGlobalContext.context.unitId = unitId
+        LastStepGlobalContext.context.unitId = unitId // To presenter
         
         datasource = self
         delegate = self
@@ -118,20 +118,22 @@ class StepsViewController: RGPageViewController, ShareableController {
             self.view.isUserInteractionEnabled = false
         }
                 
-        refreshSteps()
+        refreshSteps() //To presenter
     }
     
-    static let stepUpdatedNotification = "StepUpdatedNotification"
+    static let stepUpdatedNotification = "StepUpdatedNotification" //To presenter
     
-    fileprivate var tabViewsForStepId = [Int: UIView]()
+    fileprivate var tabViewsForStepId = [Int: UIView]() //To presenter
     
+    
+    //To presenter
     func loadLesson() {
         guard let stepId = stepId else {
             print("ERROR: Load lesson without lesson and step id called")
             return
         }
 
-        self.view.isUserInteractionEnabled = false
+        self.view.isUserInteractionEnabled = false //To view
         self.doesPresentWarningView = false
         self.doesPresentActivityIndicatorView = true
         
@@ -174,10 +176,10 @@ class StepsViewController: RGPageViewController, ShareableController {
                 DispatchQueue.main.async{
                     [weak self] in
                     if let s = self {
-                        s.view.isUserInteractionEnabled = true
-                        s.doesPresentActivityIndicatorView = false
-                        if s.numberOfPages(for: s) == 0 {
-                            s.doesPresentWarningView = true
+                        s.view.isUserInteractionEnabled = true //To view
+                        s.doesPresentActivityIndicatorView = false //To view
+                        if s.numberOfPages(for: s) == 0 { //To view
+                            s.doesPresentWarningView = true //To view
                         }
                     }
                 }
@@ -188,10 +190,10 @@ class StepsViewController: RGPageViewController, ShareableController {
             DispatchQueue.main.async{
                 [weak self] in
                 if let s = self {
-                    s.view.isUserInteractionEnabled = true
-                    s.doesPresentActivityIndicatorView = false
-                    if s.numberOfPages(for: s) == 0 {
-                        s.doesPresentWarningView = true
+                    s.view.isUserInteractionEnabled = true //To view
+                    s.doesPresentActivityIndicatorView = false //To view
+                    if s.numberOfPages(for: s) == 0 { //To view
+                        s.doesPresentWarningView = true //To view
                     }
                 }
             }
@@ -215,7 +217,7 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
         }
         
-        updateTitle()
+        updateTitle() //To view
 
     
         if let stepId = stepId {
@@ -228,16 +230,16 @@ class StepsViewController: RGPageViewController, ShareableController {
         
         var prevStepsIds = [Int]()
         if numberOfPages(for: self) == 0 {
-            self.view.isUserInteractionEnabled = false
-            self.doesPresentWarningView = false
-            self.doesPresentActivityIndicatorView = true
+            self.view.isUserInteractionEnabled = false //To view
+            self.doesPresentWarningView = false //To view
+            self.doesPresentActivityIndicatorView = true //To view
         } else {
             if let l = lesson, l.stepsArray.count == l.steps.count {
                 prevStepsIds = l.stepsArray
             } else {
-                self.view.isUserInteractionEnabled = false
-                self.doesPresentWarningView = false
-                self.doesPresentActivityIndicatorView = true
+                self.view.isUserInteractionEnabled = false //To view
+                self.doesPresentWarningView = false //To view
+                self.doesPresentActivityIndicatorView = true //To view
             }
         }
         
@@ -250,6 +252,7 @@ class StepsViewController: RGPageViewController, ShareableController {
             let newStepsSet = Set(s.lesson!.stepsArray)
             let prevStepsSet = Set(prevStepsIds)
             
+            //To view
             var reloadBlock : ((Void)->Void) = {
                 [weak self] in 
                 self?.reloadData()
@@ -265,6 +268,7 @@ class StepsViewController: RGPageViewController, ShareableController {
                     NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepsViewController.stepUpdatedNotification), object: nil)
                     print("did send step updated notification")
                     //update tab views
+                    //To view
                     for index in 0 ..< s.lesson!.steps.count { 
                         let tabView = s.pageViewController(s, tabViewForPageAt: index) as? StepTabView
                         if let progress = s.lesson!.steps[index].progress {
@@ -279,14 +283,14 @@ class StepsViewController: RGPageViewController, ShareableController {
                 guard let s = self else {
                     return
                 }
-                s.view.isUserInteractionEnabled = true
+                s.view.isUserInteractionEnabled = true //To view
                 reloadBlock()
-                s.doesPresentWarningView = false
-                s.doesPresentActivityIndicatorView = false
+                s.doesPresentWarningView = false //To view
+                s.doesPresentActivityIndicatorView = false //To view
                 
                 if s.startStepId < s.lesson!.steps.count {
                     if !s.didSelectTab {
-                        s.selectTabAtIndex(s.startStepId, updatePage: true)
+                        s.selectTabAtIndex(s.startStepId, updatePage: true) //To view
                         s.didSelectTab = true
                     }
                 }
@@ -304,14 +308,14 @@ class StepsViewController: RGPageViewController, ShareableController {
                     guard let s = self else {
                         return
                     }
-                    s.view.isUserInteractionEnabled = true
-                    s.doesPresentActivityIndicatorView = false
+                    s.view.isUserInteractionEnabled = true //To view
+                    s.doesPresentActivityIndicatorView = false //To view
                     if s.numberOfPages(for: s) == 0 {
-                        s.doesPresentWarningView = true
+                        s.doesPresentWarningView = true // To view
                     } else {
                         if s.startStepId < s.lesson!.steps.count {
                             if !s.didSelectTab {
-                                s.selectTabAtIndex(s.startStepId, updatePage: true)
+                                s.selectTabAtIndex(s.startStepId, updatePage: true) //To view
                                 s.didSelectTab = true
                             }
                         }
@@ -544,7 +548,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 return stepController
             } else {
                 let stepController = storyboard?.instantiateViewController(withIdentifier: "WebStepViewController") as! WebStepViewController
-                stepController.stepsVC = self
+//                stepController.stepsVC = self
                 stepController.step = lesson.steps[index]
                 stepController.lesson = lesson
                 stepController.stepId = index + 1
