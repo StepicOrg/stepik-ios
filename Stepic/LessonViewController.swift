@@ -146,6 +146,10 @@ class LessonViewController : PagerController, ShareableController, LessonView {
         return self.navigationItem
     }
     
+    var nController: UINavigationController? {
+        return self.navigationController
+    }
+    
     var pagerGestureRecognizer: UIPanGestureRecognizer? {
         return (self.pageViewController.view.subviews.first as? UIScrollView)?.panGestureRecognizer
     }
