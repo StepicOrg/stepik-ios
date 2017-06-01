@@ -11,7 +11,7 @@ import Foundation
 class LessonViewController : PagerController, ShareableController, LessonView {
     
     var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
-
+    
     weak var sectionNavigationDelegate : SectionNavigationDelegate?
     
     var navigationRules : (prev: Bool, next: Bool)?
@@ -30,7 +30,7 @@ class LessonViewController : PagerController, ShareableController, LessonView {
         v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
         return v
     }
-
+    
     fileprivate func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
@@ -46,7 +46,7 @@ class LessonViewController : PagerController, ShareableController, LessonView {
         v.isHidden = false
         return v
     }
-
+    
     var doesPresentActivityIndicatorView : Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
@@ -62,7 +62,7 @@ class LessonViewController : PagerController, ShareableController, LessonView {
             }
         }
     }
-
+    
     var doesPresentWarningView : Bool = false {
         didSet {
             if doesPresentWarningView {
@@ -78,7 +78,7 @@ class LessonViewController : PagerController, ShareableController, LessonView {
             }
         }
     }
-
+    
     func updateTitle(title: String) {
         self.navigationItem.title = title
     }
@@ -90,20 +90,6 @@ class LessonViewController : PagerController, ShareableController, LessonView {
         super.viewDidLoad()
         dataSource = self
         initTabs()
-    }
-
-    fileprivate func initTabs() {
-        tabWidth = 44.0
-        tabHeight = 44.0
-        indicatorHeight = 2.0
-        tabOffset = 8.0
-        centerCurrentTab = true
-        indicatorColor = UIColor.white
-        tabsViewBackgroundColor = UIColor.navigationColor
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -117,6 +103,20 @@ class LessonViewController : PagerController, ShareableController, LessonView {
             presenter?.shouldNavigateToNext = rules.next
         }
         presenter?.refreshSteps()
+    }
+    
+    fileprivate func initTabs() {
+        tabWidth = 44.0
+        tabHeight = 44.0
+        indicatorHeight = 2.0
+        tabOffset = 8.0
+        centerCurrentTab = true
+        indicatorColor = UIColor.white
+        tabsViewBackgroundColor = UIColor.navigationColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func setRefreshing(refreshing: Bool) {
@@ -198,7 +198,7 @@ extension LessonViewController: PagerDataSource {
         guard let presenter = presenter else { return 0 }
         return presenter.pagesCount
     }
-
+    
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         guard let presenter = presenter else { return UIView() }
         return presenter.tabView(index: index)
