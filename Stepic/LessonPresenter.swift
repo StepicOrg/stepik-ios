@@ -244,6 +244,7 @@ class LessonPresenter {
             stepController.stepId = index + 1
             stepController.lessonSlug = lesson.slug
             stepController.nItem = self.view?.nItem
+            stepController.nController = self.view?.nController
             
             if let assignments = lesson.unit?.assignments {
                 if index < assignments.count {
@@ -284,6 +285,7 @@ class LessonPresenter {
             stepController.lesson = lesson
             stepController.stepId = index + 1
             stepController.nItem = self.view?.nItem
+            stepController.nController = self.view?.nController
             stepController.startStepId = startStepId
             
             if let assignments = lesson.unit?.assignments {

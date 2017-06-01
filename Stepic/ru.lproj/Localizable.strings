@@ -229,3 +229,5 @@ GoToStepikAppStore = "Найти другие курсы на Stepik";
 triesLeft1 = "Осталась %@ попытка";
 triesLeft234 = "Осталось %@ попытки";
 triesLeft567890 = "Осталось %@ попыток";
+NoSubmissionsLeft = "Не осталось попыток";
+

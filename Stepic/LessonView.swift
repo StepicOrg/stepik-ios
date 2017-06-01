@@ -14,5 +14,6 @@ protocol LessonView: class {
     func reload()
     func selectTab(index: Int, updatePage: Bool)
     var nItem: UINavigationItem { get }
+    var nController: UINavigationController? { get }
     var pagerGestureRecognizer: UIPanGestureRecognizer? { get }
 }

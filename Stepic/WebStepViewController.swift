@@ -39,6 +39,7 @@ class WebStepViewController: UIViewController {
     
     weak var lessonView : LessonView?
     
+    var nController : UINavigationController?
     var nItem : UINavigationItem!
     var didStartLoadingFirstRequest = false
     
@@ -411,7 +412,7 @@ class WebStepViewController: UIViewController {
             vc.discussionProxyId = discussionProxyId
             vc.target = self.step.id
             vc.step = self.step
-            navigationController?.pushViewController(vc, animated: true)
+            nController?.pushViewController(vc, animated: true)
         } else {
             //TODO: Load comments here
         }
