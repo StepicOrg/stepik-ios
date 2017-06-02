@@ -24,6 +24,7 @@ extension Step {
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
+    @NSManaged var managedOptions: StepOptions?
     
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionsCount: NSNumber?
@@ -134,6 +135,15 @@ extension Step {
         }
         set(value) {
             managedLesson = value
+        }
+    }
+    
+    var options: StepOptions? {
+        get {
+            return managedOptions
+        }
+        set(value) {
+            managedOptions = value
         }
     }
     
