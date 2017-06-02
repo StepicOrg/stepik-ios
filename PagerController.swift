@@ -277,7 +277,9 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         }
         
         
-        self.contentView.alignTop("40", leading: "0", bottom: "0", trailing: "0", to: self.view)
+        self.contentView.alignLeading("0", trailing: "0", to: self.view)
+        self.contentView.constrainTopSpace(to: self.tabsView!, predicate: "-22")
+        self.contentView.alignBottomEdge(with: self.view, predicate: "0")
         _ = self.tabsView?.alignTop("0", leading: "0", to: self.view)
         _ = self.tabsView?.alignTrailingEdge(with: self.view, predicate: "0")
         _ = self.tabsView?.constrainHeight("44")
