@@ -472,10 +472,10 @@
 		08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
-		08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
-		08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
+		08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };

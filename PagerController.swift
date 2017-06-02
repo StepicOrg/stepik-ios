@@ -7,6 +7,7 @@
 //
 import Foundation
 import UIKit.UITableView
+import FLKAutoLayout
 
 //MARK: - Pager Enums
 //Enum for the location of the tab bar
@@ -75,7 +76,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         contentView!.backgroundColor = self.contentViewBackgroundColor
         contentView!.bounds = self.view.bounds
         contentView!.tag = 34
-        
         return contentView!
     }
     
@@ -144,12 +144,10 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     
     override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.layoutSubViews()
     }
     
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.layoutSubViews()
         self.changeActiveTabIndex(self.activeTabIndex)
     }
     
@@ -261,8 +259,8 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         
         self.tabsView!.contentSize = CGSize(width: contentSizeWidth, height: self.tabHeight)
         
+        self.addChildViewController(self.pageViewController)
         self.view.insertSubview(self.contentView, at: 0)
-        
         // Select starting tab
         let index: Int = self.startFromSecondTab ? 1 : 0
         self.selectTabAtIndex(index, swipe: true)
@@ -278,41 +276,17 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             self.tabsView!.addSubview(self.underlineStroke)
         }
         
+        
+        self.contentView.alignLeading("0", trailing: "0", to: self.view)
+        self.contentView.constrainTopSpace(to: self.tabsView!, predicate: "-22")
+        self.contentView.alignBottomEdge(with: self.view, predicate: "0")
+        _ = self.tabsView?.alignTop("0", leading: "0", to: self.view)
+        _ = self.tabsView?.alignTrailingEdge(with: self.view, predicate: "0")
+        _ = self.tabsView?.constrainHeight("44")
+        
         // Set setup done
         self.defaultSetupDone = true
     }
-    
-    func layoutSubViews() {
-        var topLayoutGuide: CGFloat = 0.0
-        if !ignoreTopBarHeight && self.navigationController?.navigationBar.isTranslucent != false {
-            topLayoutGuide = UIApplication.shared.isStatusBarHidden ? 0.0 : 20.0
-            
-            if let nav = self.navigationController {
-                topLayoutGuide += nav.navigationBar.frame.size.height
-            }
-        }
-        
-        var frame: CGRect = self.tabsView!.frame
-        frame.origin.x = 0.0
-        frame.origin.y = (self.tabLocation == .top) ? topLayoutGuide + tabTopOffset: self.view.frame.height - self.tabHeight
-        frame.size.width = self.view.frame.width
-        frame.size.height = self.tabHeight
-        self.tabsView!.frame = frame
-        
-        frame = self.contentView.frame
-        frame.origin.x = 0.0
-        frame.origin.y = (self.tabLocation == .top) ? topLayoutGuide + self.tabsView!.frame.height + tabTopOffset: topLayoutGuide
-        frame.size.width = self.view.frame.width
-        
-        frame.size.height = self.view.frame.height - (topLayoutGuide + self.tabsView!.frame.height + tabTopOffset)
-        
-        if !ignoreBottomBarHeight && self.tabBarController != nil && self.tabBarController?.tabBar.isTranslucent == true {
-            frame.size.height -= self.tabBarController!.tabBar.frame.height
-        }
-        
-        self.contentView.frame = frame
-    }
-    
     
     func indexForViewController(_ viewController: UIViewController) -> Int {
         for (index, element) in self.contents.enumerated() {
@@ -322,7 +296,6 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         }
         return 0
     }
-    
     
     func selectTabAtIndex(_ index: Int, swipe: Bool) {
         if index >= self.tabCount {
