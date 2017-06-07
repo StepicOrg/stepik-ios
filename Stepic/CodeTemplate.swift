@@ -12,16 +12,17 @@ import SwiftyJSON
 
 class CodeTemplate: NSManagedObject {
     
-    convenience required init(json: JSON) {
+    convenience required init(language: String, template: String) {
         self.init()
-        initialize(json)
+        initialize(language: language, template: template)
     }
     
-    func initialize(_ json: JSON) {
+    func initialize(language: String, template: String) {
+        languageString = language
+        templateString = template
     }
     
-    func update(json: JSON) {
-        initialize(json)
+    func update(language: String, template: String) {
+        initialize(language: language, template: template)
     }
-    
 }

@@ -12,16 +12,18 @@ import SwiftyJSON
 
 class CodeLimit: NSManagedObject {
     
-    convenience required init(json: JSON) {
+    convenience required init(language: String, json: JSON) {
         self.init()
-        initialize(json)
+        initialize(language: language, json: json)
     }
     
-    func initialize(_ json: JSON) {
+    func initialize(language: String, json: JSON) {
+        languageString = language
+        time = json["time"].doubleValue
+        memory = json["memory"].doubleValue
     }
     
-    func update(json: JSON) {
-        initialize(json)
+    func update(language: String, json: JSON) {
+        initialize(language: language, json: json)
     }
-    
 }

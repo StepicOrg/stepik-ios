@@ -31,5 +31,24 @@ extension StepOptions {
             return (self.managedSamples as? [String]) ?? []
         }
     }
-
+    
+    var limits : [CodeLimit] {
+        get {
+            return (managedLimits?.array as? [CodeLimit]) ?? []
+        }
+        
+        set(value) {
+            managedLimits = NSOrderedSet(array: value)
+        }
+    }
+    
+    var templates : [CodeTemplate] {
+        get {
+            return (managedTemplates?.array as? [CodeTemplate]) ?? []
+        }
+        
+        set(value) {
+            managedTemplates = NSOrderedSet(array: value)
+        }
+    }
 }

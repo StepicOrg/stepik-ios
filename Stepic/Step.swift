@@ -45,6 +45,12 @@ class Step: NSManagedObject, JSONInitializable {
             canEdit = false
         }
         
+        if let o = options {
+            options?.update(json: json["options"])
+        } else {
+            options = StepOptions(json: json["options"])
+        }
+        
     }
     
     func update(json: JSON) {
