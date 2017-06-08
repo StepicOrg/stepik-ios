@@ -46,7 +46,7 @@ class StepOptions: NSManagedObject {
     }
     
     func limit(language: String) -> CodeLimit? {
-        return limits.filter({
+        return limits.lazy.filter({
             $0.languageString == language
         }).first
     }
@@ -58,7 +58,7 @@ class StepOptions: NSManagedObject {
     }
     
     func template(language: String, userGenerated: Bool) -> CodeTemplate? {
-        return templates.filter({
+        return templates.lazy.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first
     }
