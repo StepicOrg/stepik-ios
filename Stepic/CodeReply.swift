@@ -22,7 +22,6 @@ class CodeReply: Reply {
     required init(json: JSON) {
         code = json["code"].stringValue
         language = json["language"].stringValue
-        super.init()
     }
     
     var dictValue : [String : Any] {
