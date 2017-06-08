@@ -490,10 +490,10 @@
 		08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
-		08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
-		08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
+		08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
+		08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
@@ -706,6 +706,9 @@
 		08E3A3BB1E93C27000E9C2EF /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
 		08E3A3BC1E93C35800E9C2EF /* AuthRoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3AD1E676373006BC60F /* AuthRoutingManager.swift */; };
 		08E3A3BD1E93C40800E9C2EF /* LastStepGlobalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0884696B1E7C2E00009131E9 /* LastStepGlobalContext.swift */; };
+		08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
+		08E3B9681EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
+		08E3B9691EEA16DC0072995B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		08E542011C6A76E100DEC38E /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */; };
@@ -1658,6 +1661,7 @@
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		08E16F281BDBA731004822E1 /* ConnectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHelper.swift; sourceTree = "<group>"; };
+		08E3B9661EEA16DC0072995B /* CodeReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeReply.swift; sourceTree = "<group>"; };
 		08E542001C6A76E100DEC38E /* MathJax */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MathJax; sourceTree = "<group>"; };
 		08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDatasetState.swift; sourceTree = "<group>"; };
 		08E542081C6CD65500DEC38E /* CoursesJoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesJoinManager.swift; sourceTree = "<group>"; };
@@ -3143,6 +3147,7 @@
 				08F485B01C58EB0D000165AA /* SortingReply.swift */,
 				0834C46B1E2CE66B002F8516 /* MatchingReply.swift */,
 				0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */,
+				08E3B9661EEA16DC0072995B /* CodeReply.swift */,
 			);
 			name = Replies;
 			sourceTree = "<group>";
@@ -4258,6 +4263,7 @@
 				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
+				08E3B9681EEA16DC0072995B /* CodeReply.swift in Sources */,
 				08F261221E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				08D120B41C937B2200A54ABC /* SortingQuizViewController.swift in Sources */,
 				0890560B1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */,
@@ -4710,6 +4716,7 @@
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08970ED21C6A326900846119 /* Styles.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
+				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
@@ -4919,6 +4926,7 @@
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,
 				864D67C71E83E08F001E8D9E /* GreenNavigationViewController.swift in Sources */,
 				864D67C81E83E08F001E8D9E /* StyledTabBarViewController.swift in Sources */,
+				08E3B9691EEA16DC0072995B /* CodeReply.swift in Sources */,
 				864D673D1E83DE8A001E8D9E /* TCBlobDownload.swift in Sources */,
 				864D673E1E83DE8A001E8D9E /* TCBlobDownloadManager.swift in Sources */,
 				864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */,
