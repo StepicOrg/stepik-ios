@@ -10,10 +10,9 @@ import Foundation
 import CoreData
 
 extension StepOptions {
-    @NSManaged var managedSamples: NSObject?
-    
     @NSManaged var managedLimits: NSOrderedSet?
     @NSManaged var managedTemplates: NSOrderedSet?
+    @NSManaged var managedSamples: NSOrderedSet?
     
     class var oldEntity : NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "StepOptions", in: CoreDataHelper.instance.context)!
@@ -23,14 +22,6 @@ extension StepOptions {
         self.init(entity: StepOptions.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
-    var samplesArray: [String] {
-        set(value){
-            self.managedSamples = value as NSObject?
-        }
-        get {
-            return (self.managedSamples as? [String]) ?? []
-        }
-    }
     
     var limits : [CodeLimit] {
         get {
@@ -51,4 +42,15 @@ extension StepOptions {
             managedTemplates = NSOrderedSet(array: value)
         }
     }
+    
+    var samples : [CodeSample] {
+        get {
+            return (managedSamples?.array as? [CodeSample]) ?? []
+        }
+        
+        set(value) {
+            managedSamples = NSOrderedSet(array: value)
+        }
+    }
+
 }

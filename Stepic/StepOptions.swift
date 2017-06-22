@@ -39,6 +39,19 @@ class StepOptions: NSManagedObject {
                 limits += [CodeLimit(language: key, json: value)]
             }
         }
+        
+        let oldSamples = samples
+        oldSamples.forEach({
+            CoreDataHelper.instance.deleteFromStore($0)
+        })
+        samples = []
+        if let samplesArray = json["samples"].array {
+            for sampleJSON in samplesArray {
+                if let sampleArray = sampleJSON.arrayObject as? [String] {
+                    samples += [CodeSample(input: sampleArray[0], output: sampleArray[1])]
+                }
+            }
+        }
     }
     
     func update(json: JSON) {

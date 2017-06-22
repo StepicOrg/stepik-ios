@@ -38,6 +38,21 @@
 		080ACF501BD79D5500329F2B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
 		080ACF601BD7DE2A00329F2B /* TCBlobDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */; };
 		080ACF611BD7DE2A00329F2B /* TCBlobDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */; };
+		080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */; };
+		080C5E681EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */; };
+		080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */; };
+		080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
+		080C5E731EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
+		080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
+		080C5E771EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */; };
+		080C5E781EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */; };
+		080C5E791EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */; };
+		080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
+		080C5E7C1EFC13ED0036EB3D /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
+		080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
+		080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
+		080C5E811EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
+		080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
 		080CE1441E955D300089A27F /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
@@ -1306,6 +1321,11 @@
 		080ACF4F1BD79D5500329F2B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		080ACF5E1BD7DE2A00329F2B /* TCBlobDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownload.swift; sourceTree = "<group>"; };
 		080ACF5F1BD7DE2A00329F2B /* TCBlobDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCBlobDownloadManager.swift; sourceTree = "<group>"; };
+		080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeQuizViewController.swift; sourceTree = "<group>"; };
+		080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeQuizToolbarView.xib; sourceTree = "<group>"; };
+		080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeQuizToolbarView.swift; sourceTree = "<group>"; };
+		080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSample.swift; sourceTree = "<group>"; };
+		080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodeSample+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICustomizer.swift; sourceTree = "<group>"; };
 		080CE1421E955D300089A27F /* CoursesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPI.swift; sourceTree = "<group>"; };
 		080CE1451E9560EB0089A27F /* SectionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsAPI.swift; sourceTree = "<group>"; };
@@ -1914,6 +1934,33 @@
 			name = TCBlobDownload;
 			sourceTree = "<group>";
 		};
+		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
+			isa = PBXGroup;
+			children = (
+				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
+				080C5E751EFC09550036EB3D /* Toolbar */,
+			);
+			name = CodeQuizViewController;
+			sourceTree = "<group>";
+		};
+		080C5E751EFC09550036EB3D /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */,
+				080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */,
+			);
+			name = Toolbar;
+			sourceTree = "<group>";
+		};
+		080C5E7E1EFC13F30036EB3D /* CodeSample */ = {
+			isa = PBXGroup;
+			children = (
+				080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */,
+				080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */,
+			);
+			name = CodeSample;
+			sourceTree = "<group>";
+		};
 		080EBA301EA64A5400C43C93 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1990,6 +2037,7 @@
 				0846B0FE1EDDECDB00D64D77 /* Course */,
 				0846B0FF1EDDECE100D64D77 /* User */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
+				080C5E7E1EFC13F30036EB3D /* CodeSample */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -3169,6 +3217,7 @@
 		08F555611C4FE2D200C877E8 /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
+				080C5E641EFC078F0036EB3D /* CodeQuizViewController */,
 				085514E91CFB09170080CB88 /* WebViewHelpers */,
 				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
 				081A7DA81C56625F00583728 /* QuizViewController.swift */,
@@ -3706,6 +3755,7 @@
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */,
 				086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */,
+				080C5E731EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
 				087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
@@ -3769,6 +3819,7 @@
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
+				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
@@ -3827,6 +3878,7 @@
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
 				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
+				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
@@ -4172,6 +4224,7 @@
 				08901E741CD15B0F00D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				08901E6B1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08D1208C1C937B2200A54ABC /* HTMLBuilder.swift in Sources */,
+				080C5E781EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
@@ -4244,6 +4297,7 @@
 				0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */,
 				089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
+				080C5E7C1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */,
 				0837492B1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				080CE1501E9562F30089A27F /* StepsAPI.swift in Sources */,
@@ -4254,6 +4308,7 @@
 				08D120AD1C937B2200A54ABC /* Unit+CoreDataProperties.swift in Sources */,
 				08D120AE1C937B2200A54ABC /* Unit.swift in Sources */,
 				08D120AF1C937B2200A54ABC /* VideoDownload.swift in Sources */,
+				080C5E811EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				083749271DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08D120B01C937B2200A54ABC /* StringQuizViewController.swift in Sources */,
@@ -4357,6 +4412,7 @@
 				0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				08D120E21C937B2200A54ABC /* Block+CoreDataProperties.swift in Sources */,
 				08D120E31C937B2200A54ABC /* Video.swift in Sources */,
+				080C5E681EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				08D120E41C937B2200A54ABC /* UIThreadHelper.swift in Sources */,
 				08D120E51C937B2200A54ABC /* DownloadsViewController.swift in Sources */,
 				08019A861DEED8B900691F0B /* QuizDataManager.swift in Sources */,
@@ -4525,6 +4581,7 @@
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				08DF1D8C1BDA77A200BA35EA /* PathManager.swift in Sources */,
+				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */,
 				083554291CC8FD2D004C4E85 /* NotificationRegistrator.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
@@ -4600,6 +4657,7 @@
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
+				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
 				0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
@@ -4607,6 +4665,7 @@
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
+				080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
@@ -4679,6 +4738,7 @@
 				08CA59F11BBFD65E008DC44D /* User+CoreDataProperties.swift in Sources */,
 				08AF59F41E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08E542031C6C75FD00DEC38E /* EmptyDatasetState.swift in Sources */,
+				080C5E771EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
@@ -4787,6 +4847,7 @@
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
 				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
 				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
+				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
 				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
 				860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */,
@@ -4818,6 +4879,7 @@
 				864D67461E83E08E001E8D9E /* Styles.swift in Sources */,
 				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
+				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
@@ -4909,6 +4971,7 @@
 				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,
 				864D67B41E83E08E001E8D9E /* LaunchViewController.swift in Sources */,
 				864D67B51E83E08E001E8D9E /* SignInTableViewController.swift in Sources */,
+				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				864D67B61E83E08E001E8D9E /* RegistrationViewController.swift in Sources */,
 				864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */,
 				864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */,
@@ -5076,6 +5139,7 @@
 				864D670E1E83DE03001E8D9E /* CommentsAPI.swift in Sources */,
 				864D670F1E83DE03001E8D9E /* ApiUtil.swift in Sources */,
 				864D67101E83DE03001E8D9E /* VotesAPI.swift in Sources */,
+				080C5E791EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				864D67111E83DE03001E8D9E /* StepicsAPI.swift in Sources */,
 				864D67121E83DE03001E8D9E /* UnitsAPI.swift in Sources */,
 				864D67131E83DE03001E8D9E /* UserActivitiesAPI.swift in Sources */,

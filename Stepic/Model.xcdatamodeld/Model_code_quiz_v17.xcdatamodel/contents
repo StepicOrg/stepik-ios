@@ -31,6 +31,11 @@
         <attribute name="managedTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StepOptions" inverseName="managedLimits" inverseEntity="StepOptions" syncable="YES"/>
     </entity>
+    <entity name="CodeSample" representedClassName=".CodeSample" syncable="YES">
+        <attribute name="managedInput" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedOutput" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedOptions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StepOptions" inverseName="managedSamples" inverseEntity="StepOptions" syncable="YES"/>
+    </entity>
     <entity name="CodeTemplate" representedClassName=".CodeTemplate" syncable="YES">
         <attribute name="managedIsUserGenerated" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLanguage" optional="YES" attributeType="String" syncable="YES"/>
@@ -128,8 +133,8 @@
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedStep" inverseEntity="Progress" syncable="YES"/>
     </entity>
     <entity name="StepOptions" representedClassName=".StepOptions" syncable="YES">
-        <attribute name="managedSamples" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="managedLimits" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CodeLimit" inverseName="managedOptions" inverseEntity="CodeLimit" syncable="YES"/>
+        <relationship name="managedSamples" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CodeSample" inverseName="managedOptions" inverseEntity="CodeSample" syncable="YES"/>
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedOptions" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedTemplates" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CodeTemplate" inverseName="managedOptions" inverseEntity="CodeTemplate" syncable="YES"/>
     </entity>
@@ -193,5 +198,6 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
+        <element name="CodeSample" positionX="-36" positionY="135" width="128" height="90"/>
     </elements>
 </model>
