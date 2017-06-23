@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class CodeQuizViewController: UIViewController {
 
+    var limitsLabel: UILabel = UILabel()
+    var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
+    var textView: UITextView = UITextView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

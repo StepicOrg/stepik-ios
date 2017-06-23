@@ -10,10 +10,22 @@ import Foundation
 
 class CodeQuizToolbarView: UIView {
     
-    fileprivate func initialize() {
+    @IBOutlet weak var languageButton: UIButton!
+    @IBOutlet weak var fullscreenButton: UIButton!
+    
+    var language: String = "Language" {
+        didSet {
+            languageButton.setTitle(language, for: .normal)
+        }
     }
     
+    weak var delegate : CodeQuizToolbarDelegate?
+    
     fileprivate var view: UIView!
+    
+    fileprivate func initialize() {
+        
+    }
     
     fileprivate func setup() {
         view = loadViewFromNib()
@@ -46,6 +58,14 @@ class CodeQuizToolbarView: UIView {
         
         // 3. Setup view from .xib file
         setup()
+    }
+    
+    @IBAction func languagePressed(_ sender: UIButton) {
+        delegate?.changeLanguagePressed()
+    }
+    
+    @IBAction func fullscreenPressed(_ sender: UIButton) {
+        delegate?.fullscreenPressed()
     }
     
     
