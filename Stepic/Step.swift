@@ -46,9 +46,9 @@ class Step: NSManagedObject, JSONInitializable {
         }
         
         if let o = options {
-            options?.update(json: json["options"])
+            o.update(json: json["block"]["options"])
         } else {
-            options = StepOptions(json: json["options"])
+            options = StepOptions(json: json["block"]["options"])
         }
         
     }

@@ -134,7 +134,7 @@
     </entity>
     <entity name="StepOptions" representedClassName=".StepOptions" syncable="YES">
         <relationship name="managedLimits" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CodeLimit" inverseName="managedOptions" inverseEntity="CodeLimit" syncable="YES"/>
-        <relationship name="managedSamples" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CodeSample" inverseName="managedOptions" inverseEntity="CodeSample" syncable="YES"/>
+        <relationship name="managedSamples" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CodeSample" inverseName="managedOptions" inverseEntity="CodeSample" syncable="YES"/>
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedOptions" inverseEntity="Step" syncable="YES"/>
         <relationship name="managedTemplates" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CodeTemplate" inverseName="managedOptions" inverseEntity="CodeTemplate" syncable="YES"/>
     </entity>
@@ -186,6 +186,7 @@
         <element name="Block" positionX="-36" positionY="144" width="128" height="120"/>
         <element name="Certificate" positionX="-45" positionY="135" width="128" height="195"/>
         <element name="CodeLimit" positionX="-36" positionY="144" width="128" height="105"/>
+        <element name="CodeSample" positionX="-36" positionY="135" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="450"/>
         <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
@@ -198,6 +199,5 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
-        <element name="CodeSample" positionX="-36" positionY="135" width="128" height="90"/>
     </elements>
 </model>
