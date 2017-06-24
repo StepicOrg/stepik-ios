@@ -19,9 +19,18 @@ class CodeQuizViewController: QuizViewController {
     let codeTextViewHeight : CGFloat = 180
     let limitsLabelHeight : CGFloat = 40
     
+    let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
+    
     var language: String = "" {
         didSet {
-            
+            if let userTemplate = step.options?.template(language: language, userGenerated: true) {
+                codeTextView.text = userTemplate.templateString
+                return
+            }
+            if let template = step.options?.template(language: language, userGenerated: false) {
+                codeTextView.text = template.templateString
+                return
+            }
         }
     }
     
@@ -47,25 +56,41 @@ class CodeQuizViewController: QuizViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupConstraints()
         
         toolbarView.delegate = self
+        
+        guard let options = step.options else {
+            return
+        }
+        
+        languagePicker.languages = options.languages
+       
+        showPicker()
+
         // Do any additional setup after loading the view.
+    }
+    
+    func showPicker() {
+        addChildViewController(languagePicker)
+        view.addSubview(languagePicker.view)
+        languagePicker.view.align(to: containerView)
+        languagePicker.backButton.isHidden = true
+        languagePicker.selectedBlock = {
+            [weak self] in
+            guard let s = self else { return }
+            s.language = s.languagePicker.selectedData
+            s.languagePicker.removeFromParentViewController()
+            s.languagePicker.view.removeFromSuperview()
+        }
     }
     
     override func updateQuizAfterAttemptUpdate() {
         guard let options = step.options else {
             return
         }
-        
-        if language == "" {
-            language = options.languages[0]
-        }
-        
     }
-    
-    
     
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         
@@ -100,7 +125,7 @@ class CodeQuizViewController: QuizViewController {
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
     func changeLanguagePressed() {
-        
+        showPicker()
     }
     
     func fullscreenPressed() {
