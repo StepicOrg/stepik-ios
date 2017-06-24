@@ -9,18 +9,77 @@
 import UIKit
 import FLKAutoLayout
 
-class CodeQuizViewController: UIViewController {
+class CodeQuizViewController: QuizViewController {
 
     var limitsLabel: UILabel = UILabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
-    var textView: UITextView = UITextView()
+    var codeTextView: UITextView = UITextView()
+    
+    let toolbarHeight : CGFloat = 40
+    let codeTextViewHeight : CGFloat = 180
+    let limitsLabelHeight : CGFloat = 40
+    
+    var language: String = "" {
+        didSet {
+            
+        }
+    }
+    
+    override var expectedQuizHeight : CGFloat {
+        return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 8
+    }
+    
+    fileprivate func setupConstraints() {
+        self.containerView.addSubview(limitsLabel)
+        self.containerView.addSubview(toolbarView)
+        self.containerView.addSubview(codeTextView)
+        limitsLabel.alignTopEdge(with: self.containerView, predicate: "0")
+        limitsLabel.alignLeading("0", trailing: "0", to: self.containerView)
+        limitsLabel.constrainHeight("\(limitsLabelHeight)")
+        toolbarView.constrainTopSpace(to: self.limitsLabel, predicate: "8")
+        toolbarView.alignLeading("0", trailing: "0", to: self.containerView)
+        toolbarView.constrainBottomSpace(to: self.codeTextView, predicate: "8")
+        toolbarView.constrainHeight("\(toolbarHeight)")
+        codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
+        codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
+        codeTextView.constrainHeight("\(codeTextViewHeight)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupConstraints()
+        
+        toolbarView.delegate = self
         // Do any additional setup after loading the view.
     }
-
+    
+    override func updateQuizAfterAttemptUpdate() {
+        guard let options = step.options else {
+            return
+        }
+        
+        if language == "" {
+            language = options.languages[0]
+        }
+        
+    }
+    
+    
+    
+    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
+        
+    }
+    
+    override var needsToRefreshAttemptWhenWrong : Bool {
+        return false
+    }
+    
+    override func getReply() -> Reply {
+        return CodeReply(code: codeTextView.text ?? "", language: language)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,4 +96,14 @@ class CodeQuizViewController: UIViewController {
     }
     */
 
+}
+
+extension CodeQuizViewController : CodeQuizToolbarDelegate {
+    func changeLanguagePressed() {
+        
+    }
+    
+    func fullscreenPressed() {
+        
+    }
 }

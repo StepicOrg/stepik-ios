@@ -37,7 +37,7 @@ class CodeQuizToolbarView: UIView {
     
     fileprivate func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "StreaksView", bundle: bundle)
+        let nib = UINib(nibName: "CodeQuizToolbarView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }

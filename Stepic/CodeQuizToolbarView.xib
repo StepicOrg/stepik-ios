@@ -17,18 +17,24 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yc-9T-JTi">
-                    <rect key="frame" x="296" y="10" width="71" height="30"/>
+                    <rect key="frame" x="296" y="10" width="71" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="58q-Fz-83M"/>
+                    </constraints>
                     <state key="normal" title="Fullscreen"/>
                     <connections>
                         <action selector="fullscreenPressed:" destination="-1" eventType="touchUpInside" id="DF0-Bb-t7n"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5E-X7-cUs">
-                    <rect key="frame" x="16" y="10" width="68" height="30"/>
+                    <rect key="frame" x="16" y="10" width="68" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="GAh-t5-RR1"/>
+                    </constraints>
                     <state key="normal" title="Language"/>
                     <connections>
                         <action selector="languagePressed:" destination="-1" eventType="touchUpInside" id="KZn-Lj-DkQ"/>
