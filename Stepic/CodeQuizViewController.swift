@@ -8,6 +8,7 @@
 
 import UIKit
 import FLKAutoLayout
+import Highlightr
 
 class CodeQuizViewController: QuizViewController {
 
@@ -21,8 +22,12 @@ class CodeQuizViewController: QuizViewController {
     
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
+    var highlightr : Highlightr!
+    let textStorage = CodeAttributedString()
+    
     var language: String = "" {
         didSet {
+            textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
                 return
@@ -57,6 +62,21 @@ class CodeQuizViewController: QuizViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer = NSTextContainer()
+        layoutManager.addTextContainer(textContainer)
+        codeTextView = UITextView(frame: CGRect.zero, textContainer: textContainer)
+        codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        codeTextView.autocorrectionType = UITextAutocorrectionType.no
+        codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
+        codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
+        highlightr = textStorage.highlightr
+        highlightr.setTheme(to: "Dracula")
+//        codeTextView.inputAccessoryView = textToolbar
+        codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+
+
         setupConstraints()
         
         toolbarView.delegate = self

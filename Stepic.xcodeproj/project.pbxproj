@@ -82,6 +82,9 @@
 		080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF161C4518BC00DE3E2E /* SearchResult.swift */; };
 		080DCF1C1C4581E700DE3E2E /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */; };
+		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
+		080E80F61F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
+		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
 		080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
 		080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
@@ -1347,6 +1350,7 @@
 		080DCF161C4518BC00DE3E2E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
+		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
 		080EBA321EA64BC000C43C93 /* PresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainer.swift; sourceTree = "<group>"; };
 		080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresentationContainer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
@@ -3239,6 +3243,7 @@
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
+				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -4419,6 +4424,7 @@
 				08D120E11C937B2200A54ABC /* SortingReply.swift in Sources */,
 				0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				08D120E21C937B2200A54ABC /* Block+CoreDataProperties.swift in Sources */,
+				080E80F61F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				08D120E31C937B2200A54ABC /* Video.swift in Sources */,
 				080C5E681EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				08D120E41C937B2200A54ABC /* UIThreadHelper.swift in Sources */,
@@ -4578,6 +4584,7 @@
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
+				080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				08F555631C4FE30400C877E8 /* UnknownTypeQuizViewController.swift in Sources */,
 				08E542091C6CD65500DEC38E /* CoursesJoinManager.swift in Sources */,
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
@@ -5134,6 +5141,7 @@
 				864D67001E83DE03001E8D9E /* AuthInfo.swift in Sources */,
 				08E3A3B91E93C25900E9C2EF /* APIEndpoint.swift in Sources */,
 				08E3A3BC1E93C35800E9C2EF /* AuthRoutingManager.swift in Sources */,
+				080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				864D67011E83DE03001E8D9E /* Session.swift in Sources */,
 				864D67021E83DE03001E8D9E /* SocialSDKProvider.swift in Sources */,
 				864D67031E83DE03001E8D9E /* VKSocialSDKProvider.swift in Sources */,
