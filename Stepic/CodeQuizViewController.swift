@@ -28,6 +28,9 @@ class CodeQuizViewController: QuizViewController {
     var language: String = "" {
         didSet {
             textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
+            if let limit = step.options?.limit(language: language) {
+                setLimits(time: limit.time, memory: limit.memory)
+            }
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
                 return
@@ -40,15 +43,15 @@ class CodeQuizViewController: QuizViewController {
     }
     
     override var expectedQuizHeight : CGFloat {
-        return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 8
+        return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 16
     }
     
     fileprivate func setupConstraints() {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
         self.containerView.addSubview(codeTextView)
-        limitsLabel.alignTopEdge(with: self.containerView, predicate: "0")
-        limitsLabel.alignLeading("0", trailing: "0", to: self.containerView)
+        limitsLabel.alignTopEdge(with: self.containerView, predicate: "8")
+        limitsLabel.alignLeading("8", trailing: "0", to: self.containerView)
         limitsLabel.constrainHeight("\(limitsLabelHeight)")
         toolbarView.constrainTopSpace(to: self.limitsLabel, predicate: "8")
         toolbarView.alignLeading("0", trailing: "0", to: self.containerView)
@@ -57,6 +60,21 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
         codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
         codeTextView.constrainHeight("\(codeTextViewHeight)")
+    }
+    
+    fileprivate func setLimits(time: Double, memory: Double) {
+        
+        let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
+        let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
+        let attTime = NSAttributedString(string: "\(time)\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
+        let attMemory = NSAttributedString(string: "\(memory)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
+
+        let result = NSMutableAttributedString(attributedString: attTimeLimit)
+        result.append(attTime)
+        result.append(attMemoryLimit)
+        result.append(attMemory)
+        limitsLabel.numberOfLines = 2
+        limitsLabel.attributedText = result
     }
     
     override func viewDidLoad() {
@@ -75,7 +93,6 @@ class CodeQuizViewController: QuizViewController {
         highlightr.setTheme(to: "Dracula")
 //        codeTextView.inputAccessoryView = textToolbar
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
-
 
         setupConstraints()
         
