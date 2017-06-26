@@ -130,6 +130,8 @@ class CodeQuizViewController: QuizViewController {
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
+            s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
+
         }
     }
     
