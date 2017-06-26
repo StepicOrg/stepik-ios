@@ -17,7 +17,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     var codeTextView: UITextView = UITextView()
     
     var options: StepOptions!
-    var onDismissBlock : ((String)->Void)?
+    var onDismissBlock : ((String, String)->Void)?
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
     var highlightr : Highlightr!
@@ -77,7 +77,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     }
 
     @IBAction func closePressed(_ sender: Any) {
-        onDismissBlock?(language)
+        onDismissBlock?(language, codeTextView.text)
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -124,6 +124,7 @@ extension FullscreenCodeQuizViewController : UITextViewDelegate {
         } else {
             let newTemplate = CodeTemplate(language: language, template: textView.text)
             newTemplate.isUserGenerated = true
+            options.templates += [newTemplate]
         }
         CoreDataHelper.instance.save()
     }

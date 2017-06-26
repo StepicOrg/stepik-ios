@@ -104,14 +104,14 @@ class CodeQuizViewController: QuizViewController {
         
         languagePicker.languages = options.languages
        
-        if submission != nil {
-            showPicker()
-        } else {
-            if language != "" {
-                let l = language
-                language = l
-            }
-        }
+//        if submission == nil {
+//            showPicker()
+//        } else {
+//            if language != "" {
+//                let l = language
+//                language = l
+//            }
+//        }
 
         codeTextView.delegate = self
         // Do any additional setup after loading the view.
@@ -155,6 +155,7 @@ class CodeQuizViewController: QuizViewController {
         }
         
         guard let reply = submission?.reply as? CodeReply else {
+            showPicker()
             return
         }
         
@@ -203,8 +204,9 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         fullscreen.language = language
         fullscreen.onDismissBlock = {
             [weak self]
-            newLanguage in
+            newLanguage, newText in
             self?.language = newLanguage
+            self?.codeTextView.text = newText
         }
         
         present(fullscreen, animated: true, completion: nil)
@@ -236,6 +238,7 @@ extension CodeQuizViewController : UITextViewDelegate {
         } else {
             let newTemplate = CodeTemplate(language: language, template: textView.text)
             newTemplate.isUserGenerated = true
+            options.templates += [newTemplate]
         }
         CoreDataHelper.instance.save()
     }
