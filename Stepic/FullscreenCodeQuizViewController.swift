@@ -10,6 +10,7 @@ import UIKit
 import FLKAutoLayout
 import Highlightr
 import Presentr
+import IQKeyboardManagerSwift
 
 class FullscreenCodeQuizViewController: UIViewController {
     
@@ -69,6 +70,16 @@ class FullscreenCodeQuizViewController: UIViewController {
         
         languagePicker.languages = options.languages
         // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enable = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
     }
 
     override func didReceiveMemoryWarning() {
