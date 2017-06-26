@@ -36,6 +36,7 @@ class Submission: NSObject {
         case "sorting": return SortingReply(json: json)
         case "matching": return MatchingReply(json: json)
         case "fill-blanks": return FillBlanksReply(json: json)
+        case "code": return CodeReply(json: json)
         default: return nil
         }
     }

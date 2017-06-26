@@ -17,10 +17,17 @@ class CodeTemplate: NSManagedObject {
         initialize(language: language, template: template)
     }
     
+    convenience required init(language: String, template: String, isUserGenerated: Bool) {
+        self.init()
+        initialize(language: language, template: template)
+        self.isUserGenerated = isUserGenerated
+    }
+    
     func initialize(language: String, template: String) {
         languageString = language
         templateString = template
     }
+    
     
     func update(language: String, template: String) {
         initialize(language: language, template: template)

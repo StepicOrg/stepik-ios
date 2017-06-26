@@ -10,14 +10,9 @@ import Foundation
 
 class CodeQuizToolbarView: UIView {
     
-    @IBOutlet weak var languageButton: UIButton!
-    @IBOutlet weak var fullscreenButton: UIButton!
-    
-    var language: String = "Language" {
-        didSet {
-            languageButton.setTitle(language, for: .normal)
-        }
-    }
+    @IBOutlet weak var languageButton: UIBarButtonItem!
+    @IBOutlet weak var resetButton: UIBarButtonItem!
+    @IBOutlet weak var fullscreenButton: UIBarButtonItem!
     
     weak var delegate : CodeQuizToolbarDelegate?
     

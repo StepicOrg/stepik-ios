@@ -27,7 +27,7 @@ class StepOptions: NSManagedObject {
                 if let template = template(language: key, userGenerated: false) {
                     template.update(language: key, template: templateString)
                 } else {
-                    templates += [CodeTemplate(language: key, template: templateString)]
+                    templates += [CodeTemplate(language: key, template: templateString, isUserGenerated: false)]
                 }
             }
         }
@@ -59,7 +59,7 @@ class StepOptions: NSManagedObject {
     }
     
     func limit(language: String) -> CodeLimit? {
-        return limits.lazy.filter({
+        return limits.filter({
             $0.languageString == language
         }).first
     }
@@ -71,7 +71,7 @@ class StepOptions: NSManagedObject {
     }
     
     func template(language: String, userGenerated: Bool) -> CodeTemplate? {
-        return templates.lazy.filter({
+        return templates.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first
     }

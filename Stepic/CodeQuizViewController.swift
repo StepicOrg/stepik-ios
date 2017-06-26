@@ -104,13 +104,21 @@ class CodeQuizViewController: QuizViewController {
         
         languagePicker.languages = options.languages
        
-        showPicker()
+        if submission != nil {
+            showPicker()
+        } else {
+            if language != "" {
+                let l = language
+                language = l
+            }
+        }
 
         codeTextView.delegate = self
         // Do any additional setup after loading the view.
     }
     
     func showPicker() {
+        isSubmitButtonHidden = true
         addChildViewController(languagePicker)
         view.addSubview(languagePicker.view)
         languagePicker.view.align(to: containerView)
@@ -121,6 +129,7 @@ class CodeQuizViewController: QuizViewController {
             s.language = s.languagePicker.selectedData
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
+            s.isSubmitButtonHidden = false
         }
     }
     
@@ -128,10 +137,29 @@ class CodeQuizViewController: QuizViewController {
         guard let options = step.options else {
             return
         }
+        setQuizControls(enabled: true)
+    }
+    
+    fileprivate func setQuizControls(enabled: Bool) {
+        codeTextView.isEditable = enabled
+        toolbarView.fullscreenButton.isEnabled = enabled
+        toolbarView.resetButton.isEnabled = enabled
+        toolbarView.languageButton.isEnabled = enabled
     }
     
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
+        if submission?.status == "correct" {
+            setQuizControls(enabled: false)
+        } else {
+            setQuizControls(enabled: true)
+        }
         
+        guard let reply = submission?.reply as? CodeReply else {
+            return
+        }
+        
+        language = reply.language
+        codeTextView.text = reply.code
     }
     
     override var needsToRefreshAttemptWhenWrong : Bool {
