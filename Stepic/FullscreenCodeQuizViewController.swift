@@ -41,7 +41,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         self.view.addSubview(codeTextView)
         codeTextView.alignLeading("0", trailing: "0", to: self.view)
         codeTextView.alignBottomEdge(with: self.view, predicate: "0")
-        codeTextView.constrainTopSpace(to: self.view, predicate: "0")
+        codeTextView.constrainTopSpace(to: self.toolbar, predicate: "0")
     }
     
     override func viewDidLoad() {
@@ -63,7 +63,10 @@ class FullscreenCodeQuizViewController: UIViewController {
         
         codeTextView.delegate = self
         setupConstraints()
-                
+        
+        let l = language
+        language = l
+        
         languagePicker.languages = options.languages
         // Do any additional setup after loading the view.
     }
