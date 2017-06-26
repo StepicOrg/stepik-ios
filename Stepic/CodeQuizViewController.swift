@@ -16,7 +16,7 @@ class CodeQuizViewController: QuizViewController {
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
     
-    let toolbarHeight : CGFloat = 40
+    let toolbarHeight : CGFloat = 44
     let codeTextViewHeight : CGFloat = 180
     let limitsLabelHeight : CGFloat = 40
     
@@ -180,6 +180,20 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         }
         
         present(fullscreen, animated: true, completion: nil)
+    }
+    
+    func resetPressed() {
+        guard let options = step.options else {
+            return
+        }
+        
+        if let userTemplate = options.template(language: language, userGenerated: true) {
+            CoreDataHelper.instance.deleteFromStore(userTemplate)
+        }
+        if let template = options.template(language: language, userGenerated: false) {
+            codeTextView.text = template.templateString
+        }
+        CoreDataHelper.instance.save()
     }
 }
 

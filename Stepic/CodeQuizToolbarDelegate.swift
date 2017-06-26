@@ -11,4 +11,5 @@ import Foundation
 protocol CodeQuizToolbarDelegate: class {
     func changeLanguagePressed()
     func fullscreenPressed()
+    func resetPressed()
 }

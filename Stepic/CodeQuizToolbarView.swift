@@ -60,13 +60,16 @@ class CodeQuizToolbarView: UIView {
         setup()
     }
     
-    @IBAction func languagePressed(_ sender: UIButton) {
+    @IBAction func languagePressed(_ sender: Any) {
         delegate?.changeLanguagePressed()
     }
     
-    @IBAction func fullscreenPressed(_ sender: UIButton) {
+    @IBAction func fullscreenPressed(_ sender: Any) {
         delegate?.fullscreenPressed()
     }
     
+    @IBAction func resetPressed(_ sender: Any) {
+        delegate?.resetPressed()
+    }
     
 }
