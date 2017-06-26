@@ -85,6 +85,12 @@
 		080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F61F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
 		080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */; };
+		080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
+		080E80FF1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
+		080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
+		080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
+		080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
+		080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
 		080EBA341EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
 		080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
@@ -1351,6 +1357,8 @@
 		080DCF1A1C4581E700DE3E2E /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		080DCF1B1C4581E700DE3E2E /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
 		080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguages.swift; sourceTree = "<group>"; };
+		080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCodeQuizViewController.swift; sourceTree = "<group>"; };
+		080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenCodeQuizViewController.xib; sourceTree = "<group>"; };
 		080EBA321EA64BC000C43C93 /* PresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainer.swift; sourceTree = "<group>"; };
 		080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresentationContainer.swift; sourceTree = "<group>"; };
 		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
@@ -1950,6 +1958,7 @@
 				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
 				080C5E751EFC09550036EB3D /* Toolbar */,
 				081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */,
+				080E81041F0147A300DC0EA5 /* Fullscreen */,
 			);
 			name = CodeQuizViewController;
 			sourceTree = "<group>";
@@ -1971,6 +1980,15 @@
 				080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */,
 			);
 			name = CodeSample;
+			sourceTree = "<group>";
+		};
+		080E81041F0147A300DC0EA5 /* Fullscreen */ = {
+			isa = PBXGroup;
+			children = (
+				080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */,
+				080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */,
+			);
+			name = Fullscreen;
 			sourceTree = "<group>";
 		};
 		080EBA301EA64A5400C43C93 /* Containers */ = {
@@ -3748,6 +3766,7 @@
 				08C6E31F1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				08AC213A1CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
+				080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */,
 				0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
@@ -3812,6 +3831,7 @@
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
+				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
@@ -3874,6 +3894,7 @@
 				86AE94721E84511A00F67691 /* DiscussionCountView.xib in Resources */,
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
+				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
@@ -4217,6 +4238,7 @@
 				0859AE961E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				08D120851C937B2200A54ABC /* ChoiceQuizViewController.swift in Sources */,
 				08D120861C937B2200A54ABC /* ConnectionHelper.swift in Sources */,
+				080E80FF1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				08019A831DEED7E900691F0B /* SubmissonManager.swift in Sources */,
 				08D120871C937B2200A54ABC /* Images.swift in Sources */,
 				08D120881C937B2200A54ABC /* RegistrationErrorInfo.swift in Sources */,
@@ -4565,6 +4587,7 @@
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
+				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */,
@@ -5002,6 +5025,7 @@
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
 				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
 				864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */,
+				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,

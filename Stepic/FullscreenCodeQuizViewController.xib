@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullscreenCodeQuizViewController" customModule="Adaptive_1838" customModuleProvider="target">
+            <connections>
+                <outlet property="toolbar" destination="jhO-pA-wkB" id="G5f-lt-GoN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-pA-wkB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <items>
+                        <barButtonItem style="plain" id="w8k-qu-2RQ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fen-bb-4CV">
+                                <rect key="frame" x="16" y="9.5" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Delete Sign-100"/>
+                            </button>
+                            <connections>
+                                <action selector="closePressed:" destination="-1" id="woj-7Z-eIz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="VcW-ni-y6y"/>
+                        <barButtonItem title="Language" id="4dc-as-vjo">
+                            <connections>
+                                <action selector="changeLanguagePressed:" destination="-1" id="ZFd-gs-92A"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Reset" id="rZr-87-A2M">
+                            <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="resetCodePressed:" destination="-1" id="mdu-5a-xoj"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="jhO-pA-wkB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0Cq-Hq-NG3"/>
+                <constraint firstItem="jhO-pA-wkB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1n-Gy-di4"/>
+                <constraint firstAttribute="trailing" secondItem="jhO-pA-wkB" secondAttribute="trailing" id="pAe-vY-feh"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="76.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Delete Sign-100" width="100" height="100"/>
+    </resources>
+</document>

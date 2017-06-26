@@ -90,7 +90,7 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
-        highlightr.setTheme(to: "Dracula")
+        highlightr.setTheme(to: "Androidstudio")
 //        codeTextView.inputAccessoryView = textToolbar
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
 
@@ -106,6 +106,7 @@ class CodeQuizViewController: QuizViewController {
        
         showPicker()
 
+        codeTextView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -166,6 +167,34 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
     }
     
     func fullscreenPressed() {
+        guard let options = step.options else {
+            return
+        }
+        let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
+        fullscreen.options = options
+        fullscreen.language = language
+        fullscreen.onDismissBlock = {
+            [weak self]
+            newLanguage in
+            self?.language = newLanguage
+        }
         
+        present(fullscreen, animated: true, completion: nil)
+    }
+}
+
+extension CodeQuizViewController : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let options = step.options else {
+            return
+        }
+        
+        if let userTemplate = options.template(language: language, userGenerated: true) {
+            userTemplate.templateString = textView.text
+        } else {
+            let newTemplate = CodeTemplate(language: language, template: textView.text)
+            newTemplate.isUserGenerated = true
+        }
+        CoreDataHelper.instance.save()
     }
 }
