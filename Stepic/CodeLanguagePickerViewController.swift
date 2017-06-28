@@ -21,7 +21,7 @@ class CodeLanguagePickerViewController: PickerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = "Select language"
+        titleLabel.text = NSLocalizedString("SelectLanguage", comment: "")
         
         data = languages
         picker.reloadAllComponents()

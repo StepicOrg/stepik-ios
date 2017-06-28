@@ -230,4 +230,8 @@ triesLeft1 = "Осталась %@ попытка";
 triesLeft234 = "Осталось %@ попытки";
 triesLeft567890 = "Осталось %@ попыток";
 NoSubmissionsLeft = "Не осталось попыток";
+Reset = "Сброс";
+Language = "Язык";
+Fullscreen = "Развернуть";
+SelectLanguage = "Выберите язык";
 

@@ -20,37 +20,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-pA-wkB">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-pA-wkB">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <items>
-                        <barButtonItem style="plain" id="w8k-qu-2RQ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fen-bb-4CV">
-                                <rect key="frame" x="16" y="9.5" width="25" height="25"/>
+                        <barButtonItem title="Done" style="done" id="ULN-ej-hBf">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="closePressed:" destination="-1" id="EOT-2A-Cql"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="VcW-ni-y6y"/>
+                        <barButtonItem style="plain" id="DSh-Kb-D2E">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hpb-Kn-inb">
+                                <rect key="frame" x="326" y="5.5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Delete Sign-100"/>
+                                <state key="normal" image="dots_white"/>
                                 <connections>
-                                    <action selector="closePressed:" destination="-1" eventType="touchUpInside" id="20q-YK-J0h"/>
+                                    <action selector="showMorePressed:" destination="-1" eventType="touchUpInside" id="lvA-ie-Lnz"/>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="VcW-ni-y6y"/>
-                        <barButtonItem title="Language" id="4dc-as-vjo">
-                            <connections>
-                                <action selector="changeLanguagePressed:" destination="-1" id="ZFd-gs-92A"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="Reset" id="rZr-87-A2M">
-                            <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="resetCodePressed:" destination="-1" id="mdu-5a-xoj"/>
-                            </connections>
-                        </barButtonItem>
                     </items>
-                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jhO-pA-wkB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="0Cq-Hq-NG3"/>
                 <constraint firstItem="jhO-pA-wkB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="S1n-Gy-di4"/>
@@ -60,6 +54,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Delete Sign-100" width="100" height="100"/>
+        <image name="dots_white" width="33" height="33"/>
     </resources>
 </document>

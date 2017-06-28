@@ -19,7 +19,9 @@ class CodeQuizToolbarView: UIView {
     fileprivate var view: UIView!
     
     fileprivate func initialize() {
-        
+        languageButton.title = NSLocalizedString("Language", comment: "")
+        resetButton.title = NSLocalizedString("Reset", comment: "")
+        fullscreenButton.title = NSLocalizedString("Fullscreen", comment: "")
     }
     
     fileprivate func setup() {

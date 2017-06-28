@@ -69,7 +69,8 @@ class FullscreenCodeQuizViewController: UIViewController {
         language = l
         
         languagePicker.languages = options.languages
-        // Do any additional setup after loading the view.
+        
+        toolbar.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -92,12 +93,37 @@ class FullscreenCodeQuizViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func showMorePressed(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: {
+            [weak self]
+            action in
+            self?.resetCode()
+        }))
+       
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Language", comment: ""), style: .default, handler: {
+            [weak self]
+            action in
+            self?.changeLanguage()
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = sender as? UIView
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     let changeLanguagePresentr : Presentr = {
         let changeLanguagePresentr = Presentr(presentationType: .bottomHalf)
         return changeLanguagePresentr
     }()
     
-    @IBAction func changeLanguagePressed(_ sender: Any) {
+    func changeLanguage() {
         languagePicker.selectedBlock = {
             [weak self] in
             guard let s = self else { return }
@@ -106,7 +132,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         customPresentViewController(changeLanguagePresentr, viewController: languagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func resetCodePressed(_ sender: Any) {
+    func resetCode() {
         if let userTemplate = options.template(language: language, userGenerated: true) {
             CoreDataHelper.instance.deleteFromStore(userTemplate)
         }
