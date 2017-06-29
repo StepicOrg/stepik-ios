@@ -73,6 +73,8 @@ class FullscreenCodeQuizViewController: UIViewController {
         
         toolbar.clipsToBounds = true
         doneItem.title = NSLocalizedString("Done", comment: "")
+        
+        configureKeyboardNotifications()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +87,26 @@ class FullscreenCodeQuizViewController: UIViewController {
         IQKeyboardManager.sharedManager().enable = true
     }
 
+    fileprivate func configureKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(aNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(aNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc fileprivate func keyboardWasShown(aNotification: NSNotification) {
+        let info = aNotification.userInfo
+        let infoNSValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let kbSize = infoNSValue.cgRectValue.size
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
+        codeTextView.contentInset = contentInsets
+        codeTextView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc fileprivate func keyboardWillBeHidden(aNotification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        codeTextView.contentInset = contentInsets
+        codeTextView.scrollIndicatorInsets = contentInsets
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
