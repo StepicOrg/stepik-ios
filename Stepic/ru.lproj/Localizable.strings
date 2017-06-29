@@ -234,4 +234,5 @@ Reset = "Сброс";
 Language = "Язык";
 Fullscreen = "Развернуть";
 SelectLanguage = "Выберите язык";
+Done = "Готово";
 

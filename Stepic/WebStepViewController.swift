@@ -258,7 +258,7 @@ class WebStepViewController: UIViewController {
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject, "stepId": step.id])
         
         if step.hasSubmissionRestrictions {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)

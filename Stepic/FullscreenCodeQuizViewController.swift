@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 
 class FullscreenCodeQuizViewController: UIViewController {
     
+    @IBOutlet weak var doneItem: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
     var codeTextView: UITextView = UITextView()
     
@@ -71,6 +72,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         languagePicker.languages = options.languages
         
         toolbar.clipsToBounds = true
+        doneItem.title = NSLocalizedString("Done", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +91,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     }
 
     @IBAction func closePressed(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.exitFullscreen, parameters: ["size": "fullscreen"])
         onDismissBlock?(language, codeTextView.text)
         self.dismiss(animated: true, completion: nil)
     }
@@ -128,11 +131,13 @@ class FullscreenCodeQuizViewController: UIViewController {
             [weak self] in
             guard let s = self else { return }
             s.language = s.languagePicker.selectedData
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "fullscreen", "language": s.language])
         }
         customPresentViewController(changeLanguagePresentr, viewController: languagePicker, animated: true, completion: nil)
     }
     
     func resetCode() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "fullscreen"])
         if let userTemplate = options.template(language: language, userGenerated: true) {
             CoreDataHelper.instance.deleteFromStore(userTemplate)
         }

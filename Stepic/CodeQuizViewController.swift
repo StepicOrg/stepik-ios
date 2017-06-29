@@ -42,6 +42,19 @@ class CodeQuizViewController: QuizViewController {
         }
     }
     
+    override var submissionAnalyticsParams: [String : Any]? {
+        guard let step = step else {
+            return nil
+        }
+        var params: [String: Any]? = ["stepId" : step.id, "language": language]
+        
+        if let course = step.lesson?.unit?.section?.course  {
+            params?["course"] = course
+        }
+        
+        return params
+    }
+    
     override var expectedQuizHeight : CGFloat {
         return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 16
     }
@@ -127,11 +140,11 @@ class CodeQuizViewController: QuizViewController {
             [weak self] in
             guard let s = self else { return }
             s.language = s.languagePicker.selectedData
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language])
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
             s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
-
         }
     }
     
@@ -201,6 +214,9 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         guard let options = step.options else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.fullscreenPressed, parameters: ["size": "standard"])
+        
         let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
         fullscreen.options = options
         fullscreen.language = language
@@ -218,6 +234,8 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         guard let options = step.options else {
             return
         }
+        
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
         
         if let userTemplate = options.template(language: language, userGenerated: true) {
             CoreDataHelper.instance.deleteFromStore(userTemplate)

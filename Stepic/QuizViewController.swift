@@ -840,9 +840,13 @@ class QuizViewController: UIViewController {
         }
     }
     
+    var submissionAnalyticsParams : [String: Any]? {
+        return nil
+    }
+    
     public func submitAttempt() {
         doesPresentActivityIndicatorView = true
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: submissionAnalyticsParams)
         if checkReplyReady() {
             submitReply(completion: {
                 [weak self] in

@@ -233,4 +233,5 @@ Reset = "Reset";
 Language = "Language";
 Fullscreen = "Fullscreen";
 SelectLanguage = "Select language";
+Done = "Done";
 
