@@ -116,17 +116,14 @@ class CodeQuizViewController: QuizViewController {
         }
         
         languagePicker.languages = options.languages
-       
-//        if submission == nil {
-//            showPicker()
-//        } else {
-//            if language != "" {
-//                let l = language
-//                language = l
-//            }
-//        }
 
         codeTextView.delegate = self
+        
+        submissionPressedBlock = {
+            [weak self] in
+            self?.codeTextView.resignFirstResponder()
+        }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -185,7 +182,6 @@ class CodeQuizViewController: QuizViewController {
     override func getReply() -> Reply {
         return CodeReply(code: codeTextView.text ?? "", language: language)
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

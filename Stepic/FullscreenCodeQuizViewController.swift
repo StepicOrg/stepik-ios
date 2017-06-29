@@ -92,6 +92,7 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     @IBAction func closePressed(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Code.exitFullscreen, parameters: ["size": "fullscreen"])
+        codeTextView.resignFirstResponder()
         onDismissBlock?(language, codeTextView.text)
         self.dismiss(animated: true, completion: nil)
     }
