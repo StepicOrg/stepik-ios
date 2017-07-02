@@ -48,7 +48,7 @@ class CodeQuizViewController: QuizViewController {
         }
         var params: [String: Any]? = ["stepId" : step.id, "language": language]
         
-        if let course = step.lesson?.unit?.section?.course  {
+        if let course = step.lesson?.unit?.section?.course?.id  {
             params?["course"] = course
         }
         
