@@ -37,7 +37,7 @@ class Attempt: NSObject {
         switch stepName {
         case "choice" : 
             return ChoiceDataset(json: json)
-        case "math", "string", "number" : 
+        case "math", "string", "number", "code" : 
             return String(json: json)
         case "sorting" : 
             return SortingDataset(json: json)

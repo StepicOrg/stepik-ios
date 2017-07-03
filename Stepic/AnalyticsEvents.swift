@@ -200,4 +200,11 @@ struct AnalyticsEvents {
             static let shared = "3dtouch_lesson_shared"
         }
     }
+    
+    struct Code {
+        static let languageChosen = "code_language_chosen"
+        static let fullscreenPressed = "code_fullscreen_pressed"
+        static let resetPressed = "code_reset_pressed"
+        static let exitFullscreen = "code_exit_fullscreen"
+    }
 }

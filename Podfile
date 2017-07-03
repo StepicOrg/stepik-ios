@@ -42,6 +42,7 @@ def all_pods
     pod 'Presentr'
     
     pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
+    pod 'Highlightr'
 end
 
 def testing_pods

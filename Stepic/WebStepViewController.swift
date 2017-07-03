@@ -153,16 +153,24 @@ class WebStepViewController: UIViewController {
     }
     
     fileprivate func loadStepHTML() {
-        if let htmlText = step.block.text {
-            if htmlText == stepText {
-                return
-            }
-            let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
-            var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
-            html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            print("\(Bundle.main.bundlePath)")
-            stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        guard step.block.text != nil else {
+            return
         }
+        var htmlText = step.block.text!
+        if htmlText == stepText {
+            return
+        }
+        if step.block.name == "code" {
+            for (index, sample) in (step.options?.samples ?? []).enumerated() {
+                htmlText += "<h4>Sample input \(index + 1)</h4>\(sample.input)<h4>Sample output \(index + 1)</h4>\(sample.output)"
+            }
+        }
+        let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
+        var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
+        html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        print("\(Bundle.main.bundlePath)")
+        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        
     }
     
     func initQuizController(_ quizController : QuizViewController) {
@@ -216,7 +224,10 @@ class WebStepViewController: UIViewController {
             let quizController = FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
             initQuizController(quizController)
             break
- 
+        case "code":
+            let quizController = CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
+            initQuizController(quizController)
+            break
         default:
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             print("unknown type \(step.block.name)")
@@ -247,7 +258,7 @@ class WebStepViewController: UIViewController {
 //        self.view.setNeedsLayout()
 //        self.view.layoutIfNeeded()
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject])
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject, "stepId": step.id])
         
         if step.hasSubmissionRestrictions {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
