@@ -13,6 +13,7 @@ protocol AdaptiveStepViewControllerDelegate: class {
     func stepSubmissionDidWrong()
     func stepSubmissionDidRetry()
     func contentLoadingDidFail()
+    func contentLoadingDidComplete()
 }
 
 extension AdaptiveStepViewControllerDelegate {
@@ -20,4 +21,5 @@ extension AdaptiveStepViewControllerDelegate {
     func stepSubmissionDidWrong() { }
     func stepSubmissionDidRetry() { }
     func contentLoadingDidFail() { }
+    func contentLoadingDidComplete() { }
 }

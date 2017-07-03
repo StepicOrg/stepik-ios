@@ -13,6 +13,7 @@ class StepCardView: UIView {
 
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
     
+    @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var controlButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -89,11 +90,15 @@ class StepCardView: UIView {
         titleLabel.isHidden = true
     }
     
+    func hideLoadingAnimation() {
+        loadingView.isHidden = true
+        whitePadView.isHidden = true
+    }
+    
     func showContent() {
         UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.contentView.isHidden = false
             self.titleLabel.isHidden = false
-            self.controlButton.isHidden = false
             
             // Set up title
             self.titleLabel.text = self.lesson.title
@@ -160,5 +165,10 @@ extension StepCardView: AdaptiveStepViewControllerDelegate {
     
     func contentLoadingDidFail() {
         (parentViewController as? AdaptiveStepsViewController)?.placeholderState = .connectionError
+    }
+    
+    func contentLoadingDidComplete() {
+        hideLoadingAnimation()
+        controlButton.isHidden = false
     }
 }

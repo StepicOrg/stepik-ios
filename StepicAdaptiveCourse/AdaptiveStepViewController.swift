@@ -143,6 +143,8 @@ extension AdaptiveStepViewController: UIWebViewDelegate {
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        delegate?.contentLoadingDidComplete()
+        
         alignImages(in: webView)
         resetWebViewHeight(Float(getContentHeight(webView)))
     }

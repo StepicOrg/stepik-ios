@@ -348,7 +348,6 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     
                     self?.step = step
                     DispatchQueue.main.async {
-                        card?.loadingView.isHidden = true
                         card?.step = step
                         card?.course = course
                         card?.lesson = lesson
