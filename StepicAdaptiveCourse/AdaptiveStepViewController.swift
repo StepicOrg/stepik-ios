@@ -181,10 +181,12 @@ extension AdaptiveStepViewController: QuizControllerDelegate {
     
     func submissionDidCorrect() {
         delegate?.stepSubmissionDidCorrect()
+        quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidWrong() {
         delegate?.stepSubmissionDidWrong()
+        quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidRetry() {
