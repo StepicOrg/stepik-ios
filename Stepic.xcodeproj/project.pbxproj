@@ -17,7 +17,6 @@
 		0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8211D07029B006C987E /* CommentsAPI.swift */; };
 		0800B8251D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
 		0800B8261D0704B6006C987E /* ApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8241D0704B6006C987E /* ApiUtil.swift */; };
-		0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8271D070F68006C987E /* DiscussionsAPITests.swift */; };
 		08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* SubmissonManager.swift */; };
 		08019A831DEED7E900691F0B /* SubmissonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A811DEED7E900691F0B /* SubmissonManager.swift */; };
 		08019A851DEED8B900691F0B /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08019A841DEED8B900691F0B /* QuizDataManager.swift */; };
@@ -1318,7 +1317,6 @@
 		0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxiesAPI.swift; sourceTree = "<group>"; };
 		0800B8211D07029B006C987E /* CommentsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
 		0800B8241D0704B6006C987E /* ApiUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiUtil.swift; sourceTree = "<group>"; };
-		0800B8271D070F68006C987E /* DiscussionsAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsAPITests.swift; sourceTree = "<group>"; };
 		08019A811DEED7E900691F0B /* SubmissonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissonManager.swift; sourceTree = "<group>"; };
 		08019A841DEED8B900691F0B /* QuizDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDataManager.swift; sourceTree = "<group>"; };
 		0801BE1B1C37123900E4F046 /* CoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
@@ -2502,7 +2500,6 @@
 			children = (
 				085D5CDD1D007F2200092060 /* Info.plist */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
-				0800B8271D070F68006C987E /* DiscussionsAPITests.swift */,
 				08AB823A1D75AA9300FDEADE /* CookieTests.swift */,
 				081058321E9FB50700FAC30A /* Certificates */,
 				080AA2341EA05BE00079272F /* TestInfo.plist */,
@@ -4189,7 +4186,6 @@
 			files = (
 				083F2B0E1E9D87C000714173 /* CertificatesAPITest.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
-				0800B8281D070F68006C987E /* DiscussionsAPITests.swift in Sources */,
 				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
