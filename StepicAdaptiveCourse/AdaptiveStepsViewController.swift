@@ -42,7 +42,6 @@ class AdaptiveStepsViewController: UIViewController {
         v.backgroundColor = UIColor.white
         return v
     }()
-
     
     lazy var alertController: UIAlertController = { [weak self] in
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -57,11 +56,6 @@ class AdaptiveStepsViewController: UIViewController {
             self?.present(vc, animated: true)
         }
         alertController.addAction(aboutCourseAction)
-        
-        let destroyAction = UIAlertAction(title: NSLocalizedString("SignOut", comment: ""), style: .destructive) { action in
-            self?.logout()
-        }
-        alertController.addAction(destroyAction)
         
         return alertController
     }()
@@ -79,7 +73,7 @@ class AdaptiveStepsViewController: UIViewController {
         if !isKolodaPresented {
             isKolodaPresented = true
             if !AuthInfo.shared.isAuthorized {
-                presentAuthViewController()
+                registerAndLogIn()
             } else {
                 self.joinAndLoadCourse(completion: {
                     self.initKoloda()
@@ -137,22 +131,22 @@ class AdaptiveStepsViewController: UIViewController {
                                     success(step)
                                 })
                             }
-                            }, error: { (error) -> Void in
-                                print("failed downloading steps data in Next")
-                                self.placeholderState = .connectionError
+                        }, error: { (error) -> Void in
+                            print("failed downloading steps data in Next")
+                            self.placeholderState = .connectionError
                         })
                     }
-                    }, error: { (error) -> Void in
-                        print("failed downloading lessons data in Next")
-                        self.placeholderState = .connectionError
-                })
-                }, error: { error in
-                    print(error)
+                }, error: { (error) -> Void in
+                    print("failed downloading lessons data in Next")
                     self.placeholderState = .connectionError
                 })
             }, error: { error in
-                print("failed performing API request -> force logout")
-                self.logout()
+                print(error)
+                self.placeholderState = .connectionError
+            })
+        }, error: { error in
+            print("failed performing API request -> force logout")
+            self.logout()
         })
     }
     
@@ -168,9 +162,9 @@ class AdaptiveStepsViewController: UIViewController {
                 self.getNewRecommendation(for: course, success: { step in
                     success(step)
                 })
-                }, error: { error in
-                    print("failed sending reaction: \(error)")
-                    self.placeholderState = .connectionError
+            }, error: { error in
+                print("failed sending reaction: \(error)")
+                self.placeholderState = .connectionError
             })
         }, error: { error in
             print("failed performing API request -> force logout")
@@ -237,31 +231,62 @@ class AdaptiveStepsViewController: UIViewController {
         }
     }
     
-    fileprivate func presentAuthViewController() {
-        let vc = ControllerHelper.getAuthController() as! AuthNavigationViewController
-        vc.canDismiss = false
-        vc.success = { [weak self] in
-            self?.joinAndLoadCourse(completion: {
-                // Present tutorial after log in
-                let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
-                
-                if isTutorialNeeded {
-                    let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-                    self?.present(tutorialVC, animated: true, completion: nil)
-                    UserDefaults.standard.set(true, forKey: "isTutorialShown")
-                }
-                
-                self?.initKoloda()
+    fileprivate func registerAndLogIn() {
+        let firstname = StringHelper.generateRandomString(of: 6)
+        let lastname = StringHelper.generateRandomString(of: 6)
+        let email = "adaptive_\(StepicApplicationsInfo.adaptiveCourseId)_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
+        let password = StringHelper.generateRandomString(of: 16)
+        
+        performRequest({
+            AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
+                print("new user registered: \(email):\(password)")
+                AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
+                    AuthInfo.shared.token = token
+                    ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
+                        AuthInfo.shared.user = user
+                        User.removeAllExcept(user)
+                        
+                        self.joinAndLoadCourse {
+                            // Present tutorial after log in
+                            let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
+                            
+                            if isTutorialNeeded {
+                                let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
+                                self.present(tutorialVC, animated: true, completion: nil)
+                                UserDefaults.standard.set(true, forKey: "isTutorialShown")
+                            }
+                            
+                            self.initKoloda()
+                        }
+                    }, error: { error in
+                        print("successfully signed in, but could not get user")
+                        // TODO: Retry only course joining?
+                        // TODO: Maybe show placeholder?
+                        self.registerAndLogIn()
+                    })
+                }, failure: { error in
+                    print("successfully registered, but login failed: \(error)")
+                    // TODO: Retry only login?
+                    // TODO: Maybe show placeholder?
+                    self.registerAndLogIn()
+                })
+            }, error: { error, registrationErrorInfo in
+                // TODO: Maybe show placeholder?
+                print("user registration failed")
+                self.registerAndLogIn()
             })
-        }
-        self.present(vc, animated: false, completion: nil)
+        }, error: { error in
+            // TODO: Maybe show placeholder?
+            print("user registration failed: \(error)")
+            self.registerAndLogIn()
+        })
     }
     
     func logout() {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
         
-        self.presentAuthViewController()
+        self.registerAndLogIn()
     }
     
     func swipeSolvedCard() {
@@ -271,7 +296,7 @@ class AdaptiveStepsViewController: UIViewController {
         kolodaView.swipe(.up)
         isCurrentCardDone = false
     }
-
+    
     enum PlaceholderState {
         case connectionError
         case coursePassed
@@ -348,6 +373,7 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     
                     self?.step = step
                     DispatchQueue.main.async {
+                        card?.loadingView.isHidden = true
                         card?.step = step
                         card?.course = course
                         card?.lesson = lesson

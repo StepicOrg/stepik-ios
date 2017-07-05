@@ -820,6 +820,7 @@
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
+		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -1762,6 +1763,7 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
+		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3331,6 +3333,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2C03B2A21F0CD84900005383 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -3412,6 +3422,7 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
+				2C03B2A21F0CD84900005383 /* Helpers */,
 				0808527A1ED752DE007C0877 /* GoogleService-Info.plist */,
 				860DB79E1EB90505001E3E42 /* Images */,
 				86ABC6651E9685E70012E8A6 /* Views */,
@@ -5233,6 +5244,7 @@
 				864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */,
 				0846B1171EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */,
+				2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */,
 				864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */,
 				86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */,
 			);
