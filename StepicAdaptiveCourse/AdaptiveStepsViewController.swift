@@ -231,7 +231,7 @@ class AdaptiveStepsViewController: UIViewController {
         }
     }
     
-    fileprivate func registerAndLogIn() {
+    fileprivate func registerAdaptiveUser(success: @escaping ((String, String) -> Void)) {
         let firstname = StringHelper.generateRandomString(of: 6)
         let lastname = StringHelper.generateRandomString(of: 6)
         let email = "adaptive_\(StepicApplicationsInfo.adaptiveCourseId)_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
@@ -240,46 +240,80 @@ class AdaptiveStepsViewController: UIViewController {
         performRequest({
             AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
                 print("new user registered: \(email):\(password)")
-                AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
-                    AuthInfo.shared.token = token
-                    ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
-                        AuthInfo.shared.user = user
-                        User.removeAllExcept(user)
-                        
-                        self.joinAndLoadCourse {
-                            // Present tutorial after log in
-                            let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
-                            
-                            if isTutorialNeeded {
-                                let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-                                self.present(tutorialVC, animated: true, completion: nil)
-                                UserDefaults.standard.set(true, forKey: "isTutorialShown")
-                            }
-                            
-                            self.initKoloda()
-                        }
-                    }, error: { error in
-                        print("successfully signed in, but could not get user")
-                        // TODO: Retry only course joining?
-                        // TODO: Maybe show placeholder?
-                        self.registerAndLogIn()
-                    })
-                }, failure: { error in
-                    print("successfully registered, but login failed: \(error)")
-                    // TODO: Retry only login?
-                    // TODO: Maybe show placeholder?
-                    self.registerAndLogIn()
-                })
+                success(email, password)
             }, error: { error, registrationErrorInfo in
                 // TODO: Maybe show placeholder?
                 print("user registration failed")
-                self.registerAndLogIn()
+                self.registerAdaptiveUser(success: success)
             })
         }, error: { error in
             // TODO: Maybe show placeholder?
             print("user registration failed: \(error)")
-            self.registerAndLogIn()
+            self.registerAdaptiveUser(success: success)
         })
+    }
+    
+    fileprivate func logIn(with email: String, password: String, success: @escaping ((Void) -> Void)) {
+        performRequest({
+            AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
+                AuthInfo.shared.token = token
+                
+                ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
+                    AuthInfo.shared.user = user
+                    User.removeAllExcept(user)
+                    
+                    success()
+                }, error: { error in
+                    print("successfully signed in, but could not get user")
+                    // TODO: Maybe show placeholder?
+                    self.logIn(with: email, password: password, success: success)
+                })
+            }, failure: { error in
+                print("successfully registered, but login failed: \(error)")
+                // TODO: Maybe show placeholder?
+                self.logIn(with: email, password: password, success: success)
+            })
+        }, error: { error in
+            // TODO: Maybe show placeholder?
+            print("user log in failed: \(error)")
+            self.logIn(with: email, password: password, success: success)
+        })
+    }
+    
+    fileprivate func launchOnboarding() {
+        // Present tutorial after log in
+        let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
+        
+        if isTutorialNeeded {
+            let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
+            self.present(tutorialVC, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "isTutorialShown")
+        }
+        
+        self.initKoloda()
+    }
+    
+    fileprivate func registerAndLogIn() {
+        let credentials = Sync.shared.restoreAccountCredentials()
+        print("restored account from iCloud: email = \(credentials.email ?? ""), password = \(credentials.password ?? "")")
+        
+        if let restoredEmail = credentials.email, let restoredPassword = credentials.password {
+            print("log in with restored account, email = \(restoredEmail)")
+            logIn(with: restoredEmail, password: restoredPassword) {
+                self.joinAndLoadCourse {
+                    self.launchOnboarding()
+                }
+            }
+        } else {
+            registerAdaptiveUser { email, password in
+                Sync.shared.saveAccountCredentials(email: email, password: password)
+                self.logIn(with: email, password: password) {
+                    self.joinAndLoadCourse {
+                        self.launchOnboarding()
+                    }
+                }
+            }
+        }
     }
     
     func logout() {
