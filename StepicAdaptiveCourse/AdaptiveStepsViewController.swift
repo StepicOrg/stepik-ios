@@ -22,6 +22,9 @@ class AdaptiveStepsViewController: UIViewController {
     fileprivate var isCurrentCardDone = false
     fileprivate var lastReaction: Reaction?
     
+    fileprivate var topCard: StepCardView?
+    fileprivate weak var currentStepViewController: AdaptiveStepViewController?
+    
     var placeholderState: PlaceholderState? = nil {
         didSet {
             self.placeholderView.isHidden = placeholderState == nil
@@ -326,14 +329,14 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
             return card!
         } else {
             let card = Bundle.main.loadNibNamed("StepCardView", owner: self, options: nil)?.first as? StepCardView
-            card?.hideContent()
+            topCard = card
+            card?.delegate = self
+            card?.cardState = .loading
             
             // Smooth appearance animation
             card?.alpha = 0.5
             UIView.animate(withDuration: 0.2, animations: {
                 card?.alpha = 1.0
-            }, completion: { _ in
-                card?.loadingView.isHidden = false
             })
             
             DispatchQueue.global().async { [weak self] in
@@ -348,10 +351,21 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     
                     self?.step = step
                     DispatchQueue.main.async {
-                        card?.step = step
-                        card?.course = course
-                        card?.lesson = lesson
-                        card?.showContent()
+                        self?.currentStepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
+                        guard let stepVC = self?.currentStepViewController else {
+                                print("stepVC init failed")
+                                return
+                        }
+                        
+                        stepVC.recommendedLesson = self?.recommendedLesson
+                        stepVC.step = self?.step
+                        stepVC.course = self?.course
+                        stepVC.delegate = self
+                        stepVC.isSendButtonHidden = true
+                        
+                        self?.addChildViewController(stepVC)
+                        card?.addContentSubview(stepVC.view)
+                        card?.updateLabel(self?.recommendedLesson?.title ?? "")
                     }
                 }
                 
@@ -474,6 +488,50 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         // Course is initialized, user is joined, just temporary troubles -> only reload koloda
         print("connection troubles -> trying again")
         initKoloda()
+    }
+}
+
+extension AdaptiveStepsViewController: StepCardViewDelegate {
+    func onControlButtonClick(with state: StepCardView.ControlButtonState) {
+        switch state {
+        case .submit:
+            // We should check attempt for quiz vc before submitting/retrying
+            if currentStepViewController?.quizViewController?.attempt != nil {
+                currentStepViewController?.quizViewController?.submitAttempt()
+            }
+            break
+        case .tryAgain:
+            if currentStepViewController?.quizViewController?.attempt != nil {
+                currentStepViewController?.quizViewController?.retrySubmission()
+            }
+            break
+        case .next:
+            self.swipeSolvedCard()
+            break
+        }
+    }
+}
+
+extension AdaptiveStepsViewController: AdaptiveStepViewControllerDelegate {
+    func stepSubmissionDidCorrect() {
+        topCard?.controlButtonState = .next
+    }
+    
+    func stepSubmissionDidWrong() {
+        topCard?.controlButtonState = .tryAgain
+    }
+    
+    func stepSubmissionDidRetry() {
+        topCard?.controlButtonState = .submit
+    }
+    
+    func contentLoadingDidFail() {
+        self.placeholderState = .connectionError
+    }
+    
+    func contentLoadingDidComplete() {
+        topCard?.cardState = .normal
+        topCard?.controlButton.isHidden = false
     }
 }
 
