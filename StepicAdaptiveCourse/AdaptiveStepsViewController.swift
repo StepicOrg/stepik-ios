@@ -10,33 +10,24 @@ import UIKit
 import Koloda
 import SVProgressHUD
 
-class AdaptiveStepsViewController: UIViewController {
-    
-    let recommendationsBatchSize = 10
-    let nextRecommendationsBatch = 5
+class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
+    var presenter: AdaptiveStepsPresenter?
     
     @IBOutlet weak var userMenuButton: UIBarButtonItem!
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-
-    fileprivate var isJoinedCourse = false
-    fileprivate var isRecommendationLoaded = false
-    fileprivate var isKolodaPresented = false
-    fileprivate var isCurrentCardDone = false
-    fileprivate var lastReaction: Reaction?
     
-    var placeholderState: PlaceholderState? = nil {
+    var canSwipeCurrentCardUp = false
+    
+    fileprivate var topCard: StepCardView?
+    
+    var state: AdaptiveStepsViewState = .normal {
         didSet {
-            self.placeholderView.isHidden = placeholderState == nil
-            self.kolodaView.isHidden = placeholderState != nil
+            self.placeholderView.isHidden = state == .normal
+            self.kolodaView.isHidden = state != .normal
         }
     }
     
-    var course: Course!
-    var currentLesson: Lesson?
-    var recommendedLessons: [Lesson] = []
-    var step: Step?
-
     lazy var placeholderView: UIView = {
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
@@ -46,7 +37,6 @@ class AdaptiveStepsViewController: UIViewController {
         v.backgroundColor = UIColor.white
         return v
     }()
-
     
     lazy var alertController: UIAlertController = { [weak self] in
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -55,20 +45,25 @@ class AdaptiveStepsViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         let aboutCourseAction = UIAlertAction(title: NSLocalizedString("AboutCourse", comment: ""), style: .default) { action in
-            let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseInfo", storyboardName: "AdaptiveMain") as! AdaptiveCourseViewController
-            vc.course = self?.course
-            
-            self?.present(vc, animated: true)
+            if let aboutCourse = self?.presenter?.aboutCourseController {
+                self?.present(aboutCourse, animated: true)
+            }
         }
         alertController.addAction(aboutCourseAction)
         
         let destroyAction = UIAlertAction(title: NSLocalizedString("SignOut", comment: ""), style: .destructive) { action in
-            self?.logout()
+            self?.presenter?.logout()
         }
         alertController.addAction(destroyAction)
         
         return alertController
-    }()
+        }()
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        presenter = AdaptiveStepsPresenter(view: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,166 +74,7 @@ class AdaptiveStepsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if !isKolodaPresented {
-            isKolodaPresented = true
-            if !AuthInfo.shared.isAuthorized {
-                presentAuthViewController()
-            } else {
-                self.joinAndLoadCourse(completion: {
-                    self.initKoloda()
-                })
-            }
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
-        if let stepId = recommendedLesson.stepsArray.first {
-            // Get steps in recommended lesson
-            ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                let step = newStepsImmutable.first
-                
-                if let step = step {
-                    guard let progressId = step.progressId else {
-                        print("invalid progress id")
-                        return
-                    }
-                    
-                    // Get progress: if step is passed -> skip it
-                    ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
-                        let progress = progresses.first
-                        if progress != nil && progress!.isPassed {
-                            print("step already passed -> getting new recommendation")
-                            self.sendReactionAndGetNewLesson(reaction: .solved, success: success)
-                        } else {
-                            self.isRecommendationLoaded = true
-                            success(step)
-                        }
-                    }, error: { (error) -> Void in
-                        print("failed getting step progress -> step with unknown progress")
-                        self.isRecommendationLoaded = true
-                        success(step)
-                    })
-                }
-            }, error: { (error) -> Void in
-                print("failed downloading steps data in Next")
-                self.placeholderState = .connectionError
-            })
-        }
-    }
-    
-    fileprivate func loadRecommendations(for course: Course, count: Int, success: @escaping ([Lesson]) -> (Void)) {
-        performRequest({
-            ApiDataDownloader.recommendations.getRecommendedLessonsId(course: course.id, count: count, success: { recommendations in
-                if recommendations.isEmpty {
-                    success([])
-                    return
-                }
-                
-                ApiDataDownloader.lessons.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                    success(newLessonsImmutable)
-                }, error: { (error) -> Void in
-                    print("failed downloading lessons data in Next")
-                    self.placeholderState = .connectionError
-                })
-            }, error: { error in
-                print(error)
-                self.placeholderState = .connectionError
-            })
-        }, error: { error in
-            print("failed performing API request -> force logout")
-            self.logout()
-        })
-    }
-    
-    fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
-        isRecommendationLoaded = false
-        
-        if recommendedLessons.count == 0 {
-            print("recommendations not loaded yet -> loading \(recommendationsBatchSize) lessons...")
-            // Recommendations not loaded yet
-            loadRecommendations(for: course, count: recommendationsBatchSize, success: { recommendedLessons in
-                self.recommendedLessons = recommendedLessons
-                print("loaded batch with \(recommendedLessons.count) lessons")
-                
-                // Got empty array as recommendation -> course passed
-                if recommendedLessons.isEmpty {
-                    self.placeholderState = .coursePassed
-                    return
-                }
-                
-                let lessonsIds = self.recommendedLessons.map { $0.id } 
-                ApiDataDownloader.lessons.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                    self.recommendedLessons = newLessonsImmutable
-                    
-                    let lesson = self.recommendedLessons.first
-                    self.recommendedLessons.remove(at: 0)
-                    
-                    if let lesson = lesson {
-                        self.currentLesson = lesson
-                        self.getStep(for: lesson, success: { step in
-                            success(step)
-                        })
-                    }
-                    
-                }, error: { (error) -> Void in
-                    print("failed downloading lessons data in Next")
-                    self.placeholderState = .connectionError
-                })
-            })
-        } else {
-            print("recommendations loaded (count = (\(self.recommendedLessons.count)), using loaded lesson...")
-            let lesson = self.recommendedLessons.first
-            self.recommendedLessons.remove(at: 0)
-            
-            if let lesson = lesson {
-                self.currentLesson = lesson
-                self.getStep(for: lesson, success: { step in
-                    success(step)
-                    
-                    // Load next batch
-                    if self.recommendedLessons.count <= self.nextRecommendationsBatch {
-                        print("recommendations loaded, loading next \(self.recommendationsBatchSize) lessons...")
-                        self.loadRecommendations(for: course, count: self.recommendationsBatchSize, success: { recommendedLessons in
-                            let existingLessons = self.recommendedLessons.map { $0.id }
-                            recommendedLessons.forEach { lesson in
-                                if !existingLessons.contains(lesson.id) {
-                                    self.recommendedLessons.append(lesson)
-                                }
-                            }
-                        })
-                    }
-                    
-                })
-            }
-        }
-    }
-    
-    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction, success: @escaping (Step) -> (Void)) {
-        guard let course = course,
-            let userId = AuthInfo.shared.userId,
-            let lessonId = currentLesson?.id else {
-                return
-        }
-        
-        performRequest({
-            ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
-                self.getNewRecommendation(for: course, success: { step in
-                    success(step)
-                })
-                }, error: { error in
-                    print("failed sending reaction: \(error)")
-                    self.placeholderState = .connectionError
-            })
-        }, error: { error in
-            print("failed performing API request -> force logout")
-            self.logout()
-        })
+        presenter?.refreshContent()
     }
     
     @IBAction func onUserMenuButtonClick(_ sender: Any) {
@@ -246,52 +82,7 @@ class AdaptiveStepsViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
-        SVProgressHUD.show(withStatus: NSLocalizedString("LoadingCourse", comment: ""))
-        performRequest({
-            ApiDataDownloader.courses.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
-                self.course = coursesImmutable.first
-                
-                guard let course = self.course else {
-                    print("course not found")
-                    return
-                }
-                
-                if !course.enrolled {
-                    self.isJoinedCourse = true
-                    
-                    SVProgressHUD.show(withStatus: NSLocalizedString("JoiningCourse", comment: ""))
-                    _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
-                        SVProgressHUD.dismiss()
-                        self.course.enrolled = true
-                        print("success joined course -> loading cards")
-                        
-                        completion()
-                    }, error: {error in
-                        SVProgressHUD.dismiss()
-                        print("failed joining course: \(error) -> show placeholder")
-                        self.placeholderState = .connectionError
-                    })
-                } else {
-                    SVProgressHUD.dismiss()
-                    print("already joined target course -> loading cards")
-                    
-                    self.isJoinedCourse = true
-                    completion()
-                }
-            }, error: { (error) -> Void in
-                SVProgressHUD.dismiss()
-                print("failed downloading course data -> show placeholder")
-                self.placeholderState = .connectionError
-            })
-        }, error: { error in
-            SVProgressHUD.dismiss()
-            print("failed performing API request -> force logout")
-            self.logout()
-        })
-    }
-    
-    fileprivate func initKoloda() {
+    func initCards() {
         if kolodaView.delegate == nil {
             kolodaView.dataSource = self
             kolodaView.delegate = self
@@ -300,60 +91,39 @@ class AdaptiveStepsViewController: UIViewController {
         }
     }
     
-    fileprivate func presentAuthViewController() {
-        let vc = ControllerHelper.getAuthController() as! AuthNavigationViewController
-        vc.canDismiss = false
-        vc.success = { [weak self] in
-            self?.joinAndLoadCourse(completion: {
-                // Present tutorial after log in
-                let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
-                
-                if isTutorialNeeded {
-                    let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-                    self?.present(tutorialVC, animated: true, completion: nil)
-                    UserDefaults.standard.set(true, forKey: "isTutorialShown")
-                }
-                
-                self?.initKoloda()
-            })
-        }
-        self.present(vc, animated: false, completion: nil)
-    }
-    
-    func logout() {
-        AuthInfo.shared.token = nil
-        AuthInfo.shared.user = nil
-        
-        placeholderState = nil
-        
-        recommendedLessons = []
-        
-        self.presentAuthViewController()
-    }
-    
-    func swipeSolvedCard() {
-        self.lastReaction = .solved
-        
-        isCurrentCardDone = true
+    func swipeCardUp() {
+        canSwipeCurrentCardUp = true
         kolodaView.swipe(.up)
-        isCurrentCardDone = false
+        canSwipeCurrentCardUp = false
     }
-
-    enum PlaceholderState {
-        case connectionError
-        case coursePassed
+    
+    func swipeCardLeft() {
+        kolodaView.swipe(.left)
+    }
+    
+    func swipeCardRight() {
+        kolodaView.swipe(.right)
+    }
+    
+    func updateTopCardControl(stepState: AdaptiveStepState) {
+        topCard?.controlButtonState = stepState
+    }
+    
+    func updateTopCard(cardState: StepCardView.CardState) {
+        topCard?.cardState = cardState
+    }
+    
+    func showHud(withStatus: String) {
+        SVProgressHUD.show(withStatus: withStatus)
+    }
+    
+    func hideHud() {
+        SVProgressHUD.dismiss()
     }
 }
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        
-        if direction == .right {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy)
-        } else if direction == .left {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard)
-        }
-        
         kolodaView.resetCurrentCardIndex()
     }
     
@@ -362,18 +132,17 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     }
     
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
-        
         if direction == .right {
-            self.lastReaction = .neverAgain
+            presenter?.lastReaction = .neverAgain
         } else if direction == .left {
-            self.lastReaction = .maybeLater
+            presenter?.lastReaction = .maybeLater
         }
         
         return true
     }
     
     func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
-        return isCurrentCardDone ? [.up, .left, .right] : [.left, .right]
+        return canSwipeCurrentCardUp ? [.up, .left, .right] : [.left, .right]
     }
     
     func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool {
@@ -382,7 +151,6 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
 }
 
 extension AdaptiveStepsViewController: KolodaViewDataSource {
-    
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return 2
     }
@@ -393,47 +161,8 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
             return card!
         } else {
             let card = Bundle.main.loadNibNamed("StepCardView", owner: self, options: nil)?.first as? StepCardView
-            card?.hideContent()
-            
-            // Smooth appearance animation
-            card?.alpha = 0.5
-            UIView.animate(withDuration: 0.2, animations: {
-                card?.alpha = 1.0
-            }, completion: { _ in
-                card?.loadingView.isHidden = false
-            })
-            
-            DispatchQueue.global().async { [weak self] in
-                guard let course = self?.course else {
-                    return
-                }
-                
-                let successHandler: (Step) -> (Void) = { step in
-                    guard let lesson = self?.currentLesson else {
-                        return
-                    }
-                    
-                    self?.step = step
-                    DispatchQueue.main.async {
-                        card?.step = step
-                        card?.course = course
-                        card?.lesson = lesson
-                        card?.showContent()
-                    }
-                }
-                
-                if self?.lastReaction == nil {
-                    // First recommendation -> just get it
-                    print("getting first recommendation...")
-                    self?.getNewRecommendation(for: course, success: successHandler)
-                } else {
-                    // Next recommendation -> send reaction before
-                    print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
-                    self?.sendReactionAndGetNewLesson(reaction: (self?.lastReaction)!, success: successHandler)
-                }
-            }
-            
-            return card!
+            topCard = presenter?.updateCard(card!)
+            return topCard ?? UIView()
         }
     }
     
@@ -445,41 +174,35 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
 
 extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     func placeholderImage() -> UIImage? {
-        guard let placeholderState = self.placeholderState else {
-            return nil
-        }
-        
-        switch placeholderState {
+        switch state {
         case .connectionError:
             return Images.noWifiImage.size100x100
         case .coursePassed:
             return Images.placeholders.coursePassed
+        default:
+            return nil
         }
     }
     
     func placeholderButtonTitle() -> String? {
-        guard let placeholderState = self.placeholderState else {
-            return nil
-        }
-        
-        switch placeholderState {
+        switch state {
         case .connectionError:
             return NSLocalizedString("TryAgain", comment: "")
         case .coursePassed:
             return NSLocalizedString("GoToStepikAppStore", comment: "")
+        default:
+            return nil
         }
     }
     
     func placeholderDescription() -> String? {
-        guard let placeholderState = self.placeholderState else {
-            return nil
-        }
-        
-        switch placeholderState {
+        switch state {
         case .connectionError:
             return nil
         case .coursePassed:
             return NSLocalizedString("NoRecommendations", comment: "")
+        default:
+            return nil
         }
     }
     
@@ -488,59 +211,26 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     }
     
     func placeholderTitle() -> String? {
-        guard let placeholderState = self.placeholderState else {
-            return nil
-        }
-        
-        switch placeholderState {
+        switch state {
         case .connectionError:
             return NSLocalizedString("ConnectionErrorText", comment: "")
         case .coursePassed:
             return NSLocalizedString("CoursePassed", comment: "")
+        default:
+            return nil
         }
     }
 }
 
 extension AdaptiveStepsViewController: PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
-        guard let placeholderState = self.placeholderState else {
-            return
-        }
-        
-        switch placeholderState {
+        switch state {
         case .connectionError:
-            tryAgain()
+            presenter?.tryAgain()
         case .coursePassed:
-            goToAppStore()
-        }
-    }
-    
-    fileprivate func goToAppStore() {
-        // TODO: move url somewhere (maybe to plist?)
-        if let url = URL(string: "itms-apps://itunes.apple.com/ru/developer/stepik/id1236410565"),
-            UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
-        }
-    }
-    
-    fileprivate func tryAgain() {
-        lastReaction = nil
-        placeholderState = nil
-        
-        // Two cases:
-        // Course is nil -> invalid state, refresh
-        // Course is initialized, but user is not joined -> load and join it again
-        if course == nil || !isJoinedCourse {
-            print("course or user enrollment has invalid state -> join and load course again")
-            self.joinAndLoadCourse(completion: {
-                self.initKoloda()
-            })
+            presenter?.goToAppStore()
+        default:
             return
         }
-        
-        // Course is initialized, user is joined, just temporary troubles -> only reload koloda
-        print("connection troubles -> trying again")
-        initKoloda()
     }
 }
-
