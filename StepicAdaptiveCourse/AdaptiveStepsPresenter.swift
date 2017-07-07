@@ -73,8 +73,6 @@ class AdaptiveStepsPresenter {
     }
     
     func refreshContent() {
-        Sync.shared.clearCredentials()
-        
         if !isKolodaPresented {
             isKolodaPresented = true
             if !AuthInfo.shared.isAuthorized {
@@ -339,23 +337,10 @@ class AdaptiveStepsPresenter {
     }
     
     fileprivate func registerAndLogIn() {
-        let credentials = Sync.shared.restoreAccountCredentials()
-        print("restored account from iCloud: email = \(credentials.email ?? ""), password = \(credentials.password ?? "")")
-        
-        if let restoredEmail = credentials.email, let restoredPassword = credentials.password {
-            print("log in with restored account, email = \(restoredEmail)")
-            logIn(with: restoredEmail, password: restoredPassword) {
+        registerAdaptiveUser { email, password in
+            self.logIn(with: email, password: password) {
                 self.joinAndLoadCourse {
                     self.launchOnboarding()
-                }
-            }
-        } else {
-            registerAdaptiveUser { email, password in
-                Sync.shared.saveAccountCredentials(email: email, password: password)
-                self.logIn(with: email, password: password) {
-                    self.joinAndLoadCourse {
-                        self.launchOnboarding()
-                    }
                 }
             }
         }

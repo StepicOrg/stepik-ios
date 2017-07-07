@@ -820,7 +820,6 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
-		2C03B2A71F0CF29800005383 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A61F0CF29800005383 /* Sync.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -1764,11 +1763,9 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
+		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
-		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
-		2C03B2A51F0CEAD000005383 /* Adaptive 1838.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Adaptive 1838.entitlements"; path = "../Adaptive 1838.entitlements"; sourceTree = "<group>"; };
-		2C03B2A61F0CF29800005383 /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3337,6 +3334,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2C03B2A21F0CD84900005383 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
 			isa = PBXGroup;
 			children = (
@@ -3354,15 +3359,6 @@
 				2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */,
 			);
 			name = AdaptiveSteps;
-			sourceTree = "<group>";
-		};
-		2C03B2A21F0CD84900005383 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
-				2C03B2A61F0CF29800005383 /* Sync.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
@@ -3445,7 +3441,6 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
-				2C03B2A51F0CEAD000005383 /* Adaptive 1838.entitlements */,
 				2C03B2A21F0CD84900005383 /* Helpers */,
 				0808527A1ED752DE007C0877 /* GoogleService-Info.plist */,
 				860DB79E1EB90505001E3E42 /* Images */,
@@ -3724,7 +3719,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -5016,7 +5011,6 @@
 				864D67811E83E08E001E8D9E /* FreeAnswerQuizViewController.swift in Sources */,
 				864D67821E83E08E001E8D9E /* MathQuizViewController.swift in Sources */,
 				864D67831E83E08E001E8D9E /* SortingQuizViewController.swift in Sources */,
-				2C03B2A71F0CF29800005383 /* Sync.swift in Sources */,
 				864D67841E83E08E001E8D9E /* SortingQuizTableViewCell.swift in Sources */,
 				864D67861E83E08E001E8D9E /* MatchingQuizViewController.swift in Sources */,
 				864D67871E83E08E001E8D9E /* MatchingQuizTableViewCell.swift in Sources */,
@@ -5713,7 +5707,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Adaptive 1838.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
@@ -5738,7 +5731,6 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Adaptive 1838.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
