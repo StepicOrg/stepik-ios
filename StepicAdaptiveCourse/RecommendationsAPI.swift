@@ -14,8 +14,8 @@ class RecommendationsAPI {
     let name = "recommendations"
     let reactionName = "recommendation-reactions"
     
-    @discardableResult func getRecommendedLessonId(course courseId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Int?) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)?course=\(courseId)", headers: headers).responseSwiftyJSON(
+    @discardableResult func getRecommendedLessonsId(course courseId: Int, count: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Int]) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)?course=\(courseId)&count=\(count)", headers: headers).responseSwiftyJSON(
             {
                 response in
                 var error = response.result.error
@@ -29,24 +29,19 @@ class RecommendationsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("GetRecommendedLesson: error \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 200 {
-                    errorHandler("GetRecommendedLesson: bad response status code \(response?.statusCode)")
+                    errorHandler("GetRecommendedLesson: bad response status code \(response?.statusCode ?? 0)")
                     return
                 }
                 
                 let lessonIds = json["recommendations"].arrayValue.map({ $0["lesson"].intValue })
                 
-                guard let lessonId = lessonIds.first else {
-                    success(nil)
-                    return
-                }
-                
-                success(lessonId)
+                success(lessonIds)
                 
                 return
             }
@@ -76,13 +71,13 @@ class RecommendationsAPI {
                 }
                 let response = response.response
                 
-                if let e = error as? NSError {
+                if let e = error as NSError? {
                     errorHandler("SendRecommendationReaction: error \(e.localizedDescription)")
                     return
                 }
                 
                 if response?.statusCode != 201 {
-                    errorHandler("SendRecommendationReaction: bad response status code \(response?.statusCode)")
+                    errorHandler("SendRecommendationReaction: bad response status code \(response?.statusCode ?? 0)")
                     return
                 }
                 

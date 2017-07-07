@@ -29,6 +29,9 @@ protocol AdaptiveStepsView: class {
 }
 
 class AdaptiveStepsPresenter {
+    let recommendationsBatchSize = 10
+    let nextRecommendationsBatch = 5
+    
     weak var view: AdaptiveStepsView?
     var currentStepPresenter: AdaptiveStepPresenter?
     
@@ -55,7 +58,8 @@ class AdaptiveStepsPresenter {
     }
     
     var course: Course?
-    var lesson: Lesson?
+    var currentLesson: Lesson?
+    var recommendedLessons: [Lesson] = []
     var step: Step?
     
     lazy var aboutCourseController: UIViewController = {
@@ -81,55 +85,51 @@ class AdaptiveStepsPresenter {
         }
     }
     
-    func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
-        isRecommendationLoaded = false
-        
+    fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
+        if let stepId = recommendedLesson.stepsArray.first {
+            // Get steps in recommended lesson
+            ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+                let step = newStepsImmutable.first
+                
+                if let step = step {
+                    guard let progressId = step.progressId else {
+                        print("invalid progress id")
+                        return
+                    }
+                    
+                    // Get progress: if step is passed -> skip it
+                    ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
+                        let progress = progresses.first
+                        if progress != nil && progress!.isPassed {
+                            print("step already passed -> getting new recommendation")
+                            self.sendReactionAndGetNewLesson(reaction: .solved, success: success)
+                        } else {
+                            self.isRecommendationLoaded = true
+                            success(step)
+                        }
+                    }, error: { (error) -> Void in
+                        print("failed getting step progress -> step with unknown progress")
+                        self.isRecommendationLoaded = true
+                        success(step)
+                    })
+                }
+            }, error: { (error) -> Void in
+                print("failed downloading steps data in Next")
+                self.view?.state = .connectionError
+            })
+        }
+    }
+    
+    fileprivate func loadRecommendations(for course: Course, count: Int, success: @escaping ([Lesson]) -> (Void)) {
         performRequest({
-            // Get recommended lesson
-            ApiDataDownloader.recommendations.getRecommendedLessonId(course: course.id, success: { recommendedLessonId in
-                // Got nil as recommended lesson -> course passed
-                guard let recommendedLessonId = recommendedLessonId else {
-                    self.view?.state = .coursePassed
+            ApiDataDownloader.recommendations.getRecommendedLessonsId(course: course.id, count: count, success: { recommendations in
+                if recommendations.isEmpty {
+                    success([])
                     return
                 }
                 
-                ApiDataDownloader.lessons.retrieve(ids: [recommendedLessonId], existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
-                    let lesson = newLessonsImmutable.first
-                    
-                    if let lesson = lesson, let stepId = lesson.stepsArray.first {
-                        self.lesson = lesson
-                        
-                        // Get steps in recommended lesson
-                        ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
-                            let step = newStepsImmutable.first
-                            
-                            if let step = step {
-                                guard let progressId = step.progressId else {
-                                    print("invalid progress id")
-                                    return
-                                }
-                                
-                                // Get progress: if step is passed -> skip it
-                                ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
-                                    let progress = progresses.first
-                                    if progress != nil && progress!.isPassed {
-                                        print("step already passed -> getting new recommendation")
-                                        self.sendReactionAndGetNewLesson(reaction: .solved, success: success)
-                                    } else {
-                                        self.isRecommendationLoaded = true
-                                        success(step)
-                                    }
-                                }, error: { (error) -> Void in
-                                    print("failed getting step progress -> step with unknown progress")
-                                    self.isRecommendationLoaded = true
-                                    success(step)
-                                })
-                            }
-                        }, error: { (error) -> Void in
-                            print("failed downloading steps data in Next")
-                            self.view?.state = .connectionError
-                        })
-                    }
+                ApiDataDownloader.lessons.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                    success(newLessonsImmutable)
                 }, error: { (error) -> Void in
                     print("failed downloading lessons data in Next")
                     self.view?.state = .connectionError
@@ -144,11 +144,73 @@ class AdaptiveStepsPresenter {
         })
     }
     
+    fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
+        isRecommendationLoaded = false
+        
+        if recommendedLessons.count == 0 {
+            print("recommendations not loaded yet -> loading \(recommendationsBatchSize) lessons...")
+            // Recommendations not loaded yet
+            loadRecommendations(for: course, count: recommendationsBatchSize, success: { recommendedLessons in
+                self.recommendedLessons = recommendedLessons
+                print("loaded batch with \(recommendedLessons.count) lessons")
+                
+                // Got empty array as recommendation -> course passed
+                if recommendedLessons.isEmpty {
+                    self.view?.state = .coursePassed
+                    return
+                }
+                
+                let lessonsIds = self.recommendedLessons.map { $0.id }
+                ApiDataDownloader.lessons.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                    self.recommendedLessons = newLessonsImmutable
+                    
+                    let lesson = self.recommendedLessons.first
+                    self.recommendedLessons.remove(at: 0)
+                    
+                    if let lesson = lesson {
+                        self.currentLesson = lesson
+                        self.getStep(for: lesson, success: { step in
+                            success(step)
+                        })
+                    }
+                    
+                }, error: { (error) -> Void in
+                    print("failed downloading lessons data in Next")
+                    self.view?.state = .connectionError
+                })
+            })
+        } else {
+            print("recommendations loaded (count = (\(self.recommendedLessons.count)), using loaded lesson...")
+            let lesson = self.recommendedLessons.first
+            self.recommendedLessons.remove(at: 0)
+            
+            if let lesson = lesson {
+                self.currentLesson = lesson
+                self.getStep(for: lesson, success: { step in
+                    success(step)
+                    
+                    // Load next batch
+                    if self.recommendedLessons.count <= self.nextRecommendationsBatch {
+                        print("recommendations loaded, loading next \(self.recommendationsBatchSize) lessons...")
+                        self.loadRecommendations(for: course, count: self.recommendationsBatchSize, success: { recommendedLessons in
+                            let existingLessons = self.recommendedLessons.map { $0.id }
+                            recommendedLessons.forEach { lesson in
+                                if !existingLessons.contains(lesson.id) {
+                                    self.recommendedLessons.append(lesson)
+                                }
+                            }
+                        })
+                    }
+                    
+                })
+            }
+        }
+    }
     
     fileprivate func sendReactionAndGetNewLesson(reaction: Reaction, success: @escaping (Step) -> (Void)) {
         guard let course = course,
             let userId = AuthInfo.shared.userId,
-            let lessonId = lesson?.id else {
+            let lessonId = currentLesson?.id else {
                 return
         }
         
@@ -236,6 +298,10 @@ class AdaptiveStepsPresenter {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
         
+        view?.state = .normal
+        
+        recommendedLessons = []
+        
         self.presentAuthViewController()
     }
     
@@ -249,7 +315,7 @@ class AdaptiveStepsPresenter {
             }
             
             let successHandler: (Step) -> (Void) = { step in
-                guard let lesson = self?.lesson else {
+                guard let lesson = self?.currentLesson else {
                     return
                 }
                 
@@ -269,7 +335,7 @@ class AdaptiveStepsPresenter {
                     
                     (self?.view as? UIViewController)?.addChildViewController(stepViewController)
                     card.addContentSubview(stepViewController.view)
-                    card.updateLabel(self?.lesson?.title ?? "")
+                    card.updateLabel(self?.currentLesson?.title ?? "")
                 }
             }
             
