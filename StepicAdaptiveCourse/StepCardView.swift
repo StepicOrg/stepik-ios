@@ -10,7 +10,7 @@ import UIKit
 import FLAnimatedImage
 
 protocol StepCardViewDelegate: class {
-    func onControlButtonClick(with state: StepCardView.ControlButtonState)
+    func onControlButtonClick(for state: AdaptiveStepState)
 }
 
 class StepCardView: UIView {
@@ -27,16 +27,16 @@ class StepCardView: UIView {
     var gradientLayer: CAGradientLayer?
     weak var delegate: StepCardViewDelegate?
     
-    var controlButtonState: ControlButtonState = .submit {
+    var controlButtonState: AdaptiveStepState = .unsolved {
         didSet {
             switch controlButtonState {
-            case .submit:
+            case .unsolved:
                 controlButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
                 break
-            case .tryAgain:
+            case .wrong:
                 controlButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: .normal)
                 break
-            case .next:
+            case .successful:
                 controlButton.setTitle(NSLocalizedString("NextTask", comment: ""), for: .normal)
                 break
             }
@@ -71,7 +71,7 @@ class StepCardView: UIView {
     }
     
     @IBAction func onControlButtonClick(_ sender: Any) {
-        delegate?.onControlButtonClick(with: controlButtonState)
+        delegate?.onControlButtonClick(for: controlButtonState)
     }
 
     override func draw(_ rect: CGRect) {
@@ -98,12 +98,6 @@ class StepCardView: UIView {
     
     func updateLabel(_ text: String) {
         titleLabel.text = text
-    }
-    
-    enum ControlButtonState {
-        case submit
-        case tryAgain
-        case next
     }
     
     enum CardState {

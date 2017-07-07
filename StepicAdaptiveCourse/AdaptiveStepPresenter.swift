@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum AdaptiveStepState {
+    case unsolved
+    case wrong
+    case successful
+}
+
 protocol AdaptiveStepView: class {
     var baseScrollView: UIScrollView { get }
     
