@@ -73,10 +73,12 @@ class AdaptiveStepsPresenter {
     }
     
     func refreshContent() {
+        Sync.shared.clearCredentials()
+        
         if !isKolodaPresented {
             isKolodaPresented = true
             if !AuthInfo.shared.isAuthorized {
-                presentAuthViewController()
+                registerAndLogIn()
             } else {
                 self.joinAndLoadCourse(completion: {
                     self.view?.initCards()
@@ -229,6 +231,68 @@ class AdaptiveStepsPresenter {
         })
     }
     
+    fileprivate func registerAdaptiveUser(success: @escaping ((String, String) -> Void)) {
+        let firstname = StringHelper.generateRandomString(of: 6)
+        let lastname = StringHelper.generateRandomString(of: 6)
+        let email = "adaptive_\(StepicApplicationsInfo.adaptiveCourseId)_ios_\(Int(Date().timeIntervalSince1970))\(StringHelper.generateRandomString(of: 5))@stepik.org"
+        let password = StringHelper.generateRandomString(of: 16)
+        
+        performRequest({
+            AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
+                print("new user registered: \(email):\(password)")
+                success(email, password)
+            }, error: { error, registrationErrorInfo in
+                // TODO: Maybe show placeholder?
+                print("user registration failed")
+                self.registerAdaptiveUser(success: success)
+            })
+        }, error: { error in
+            // TODO: Maybe show placeholder?
+            print("user registration failed: \(error)")
+            self.registerAdaptiveUser(success: success)
+        })
+    }
+    
+    fileprivate func logIn(with email: String, password: String, success: @escaping ((Void) -> Void)) {
+        performRequest({
+            AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
+                AuthInfo.shared.token = token
+                
+                ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
+                    AuthInfo.shared.user = user
+                    User.removeAllExcept(user)
+                    
+                    success()
+                }, error: { error in
+                    print("successfully signed in, but could not get user")
+                    // TODO: Maybe show placeholder?
+                    self.logIn(with: email, password: password, success: success)
+                })
+            }, failure: { error in
+                print("successfully registered, but login failed: \(error)")
+                // TODO: Maybe show placeholder?
+                self.logIn(with: email, password: password, success: success)
+            })
+        }, error: { error in
+            // TODO: Maybe show placeholder?
+            print("user log in failed: \(error)")
+            self.logIn(with: email, password: password, success: success)
+        })
+    }
+    
+    fileprivate func launchOnboarding() {
+        // Present tutorial after log in
+        let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
+        
+        if isTutorialNeeded {
+            let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
+            (self.view as? UIViewController)?.present(tutorialVC, animated: true, completion: nil)
+            UserDefaults.standard.set(true, forKey: "isTutorialShown")
+        }
+        
+        view?.initCards()
+    }
+    
     fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
         self.view?.showHud(withStatus: NSLocalizedString("LoadingCourse", comment: ""))
         performRequest({
@@ -274,24 +338,27 @@ class AdaptiveStepsPresenter {
         })
     }
     
-    fileprivate func presentAuthViewController() {
-        let vc = ControllerHelper.getAuthController() as! AuthNavigationViewController
-        vc.canDismiss = false
-        vc.success = { [weak self] in
-            self?.joinAndLoadCourse(completion: {
-                // Present tutorial after log in
-                let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
-                
-                if isTutorialNeeded {
-                    let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-                    (self?.view as? UIViewController)?.present(tutorialVC, animated: true, completion: nil)
-                    UserDefaults.standard.set(true, forKey: "isTutorialShown")
+    fileprivate func registerAndLogIn() {
+        let credentials = Sync.shared.restoreAccountCredentials()
+        print("restored account from iCloud: email = \(credentials.email ?? ""), password = \(credentials.password ?? "")")
+        
+        if let restoredEmail = credentials.email, let restoredPassword = credentials.password {
+            print("log in with restored account, email = \(restoredEmail)")
+            logIn(with: restoredEmail, password: restoredPassword) {
+                self.joinAndLoadCourse {
+                    self.launchOnboarding()
                 }
-                
-                self?.view?.initCards()
-            })
+            }
+        } else {
+            registerAdaptiveUser { email, password in
+                Sync.shared.saveAccountCredentials(email: email, password: password)
+                self.logIn(with: email, password: password) {
+                    self.joinAndLoadCourse {
+                        self.launchOnboarding()
+                    }
+                }
+            }
         }
-        (view as? UIViewController)?.present(vc, animated: false, completion: nil)
     }
     
     func logout() {
@@ -302,7 +369,7 @@ class AdaptiveStepsPresenter {
         
         recommendedLessons = []
         
-        self.presentAuthViewController()
+        self.registerAndLogIn()
     }
     
     func updateCard(_ card: StepCardView) -> StepCardView {
