@@ -352,19 +352,18 @@ extension AdaptiveStepsViewController: KolodaViewDataSource {
                     self?.step = step
                     DispatchQueue.main.async {
                         self?.currentStepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
-                        guard let stepVC = self?.currentStepViewController else {
-                                print("stepVC init failed")
-                                return
+                        guard let stepViewController = self?.currentStepViewController,
+                              let step = self?.step else {
+                            print("stepVC init failed")
+                            return
                         }
+                        self?.addChildViewController(stepViewController)
                         
-                        stepVC.recommendedLesson = self?.recommendedLesson
-                        stepVC.step = self?.step
-                        stepVC.course = self?.course
-                        stepVC.delegate = self
-                        stepVC.isSendButtonHidden = true
+                        let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, step: step)
+                        adaptiveStepPresenter.observer = self
+                        stepViewController.presenter = adaptiveStepPresenter
                         
-                        self?.addChildViewController(stepVC)
-                        card?.addContentSubview(stepVC.view)
+                        card?.addContentSubview(stepViewController.view)
                         card?.updateLabel(self?.recommendedLesson?.title ?? "")
                     }
                 }
@@ -495,15 +494,10 @@ extension AdaptiveStepsViewController: StepCardViewDelegate {
     func onControlButtonClick(with state: StepCardView.ControlButtonState) {
         switch state {
         case .submit:
-            // We should check attempt for quiz vc before submitting/retrying
-            if currentStepViewController?.quizViewController?.attempt != nil {
-                currentStepViewController?.quizViewController?.submitAttempt()
-            }
+            currentStepViewController?.presenter?.submit()
             break
         case .tryAgain:
-            if currentStepViewController?.quizViewController?.attempt != nil {
-                currentStepViewController?.quizViewController?.retrySubmission()
-            }
+            currentStepViewController?.presenter?.retry()
             break
         case .next:
             self.swipeSolvedCard()
@@ -512,7 +506,7 @@ extension AdaptiveStepsViewController: StepCardViewDelegate {
     }
 }
 
-extension AdaptiveStepsViewController: AdaptiveStepViewControllerDelegate {
+extension AdaptiveStepsViewController: AdaptiveStepObserver {
     func stepSubmissionDidCorrect() {
         topCard?.controlButtonState = .next
     }
