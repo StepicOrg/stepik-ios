@@ -28,18 +28,27 @@ class CodeQuizViewController: QuizViewController {
     let playgroundManager = CodePlaygroundManager()
     var currentCode : String = ""
     
+    var tabSize: Int = 0
+    
     var language: String = "" {
         didSet {
             textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
             if let limit = step.options?.limit(language: language) {
                 setLimits(time: limit.time, memory: limit.memory)
             }
+            
+            if let template = step.options?.template(language: language, userGenerated: false) {
+                tabSize = playgroundManager.countTabSize(text: template.templateString)
+            }
+            
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
+                currentCode = userTemplate.templateString
                 return
             }
             if let template = step.options?.template(language: language, userGenerated: false) {
                 codeTextView.text = template.templateString
+                currentCode = template.templateString
                 return
             }
         }
@@ -107,7 +116,6 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
-//        codeTextView.inputAccessoryView = textToolbar
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
 
         setupConstraints()
@@ -126,8 +134,6 @@ class CodeQuizViewController: QuizViewController {
             [weak self] in
             self?.codeTextView.resignFirstResponder()
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     func showPicker() {
@@ -266,10 +272,10 @@ extension CodeQuizViewController : UITextViewDelegate {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
         
-            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language)
+            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
         
             textView.text = analyzed.text
-            textView.selectedTextRange = textRangeFrom(position: cursorPosition)
+            textView.selectedTextRange = textRangeFrom(position: analyzed.position)
         }
         
         currentCode = textView.text

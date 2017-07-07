@@ -53,7 +53,7 @@ class CodePlaygroundManager {
     
     let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
     
-    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String) -> (text: String, position: Int) {
+    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int) {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
         var text = currentText
@@ -63,7 +63,52 @@ class CodePlaygroundManager {
                 text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
                 return (text: text, position: cursorPosition)
             }
+            
+            if changes.changes == "\n" {
+                let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+                //searching previous \n or beginning of the string
+                let firstPart = text.substring(to: text.index(before: cursorIndex))
+                if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
+                    let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
+                    var spacesCount = 0
+                    for character in line.characters {
+                        if character == " " {
+                            spacesCount += 1
+                        } else {
+                            break
+                        }
+                    }
+                    let offset = spacesCount
+                    let spacesString = String(repeating: " ", count: offset)
+                    text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                    return (text: text, position: cursorPosition + offset)
+                } else {
+                    return (text: text, position: cursorPosition)
+                }
+            }
         }
         return (text: currentText, position: cursorPosition)
+    }
+    
+    func countTabSize(text: String) -> Int {
+        var minTabSize = 100
+        text.enumerateLines {
+            line, _ in
+            var spacesBeforeFirstCharacter = 0
+            for character in line.characters {
+                if character == " " {
+                    spacesBeforeFirstCharacter += 1
+                } else {
+                    break
+                }
+            }
+            if spacesBeforeFirstCharacter > 0 && minTabSize > spacesBeforeFirstCharacter {
+                minTabSize = spacesBeforeFirstCharacter
+            }
+        }
+        if minTabSize == 100 {
+            minTabSize = 4
+        }
+        return minTabSize
     }
 }
