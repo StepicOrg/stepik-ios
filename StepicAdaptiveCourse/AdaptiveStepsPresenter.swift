@@ -283,8 +283,6 @@ class AdaptiveStepsPresenter {
         let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
         
         if isTutorialNeeded {
-            let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-            (self.view as? UIViewController)?.present(tutorialVC, animated: true, completion: nil)
             UserDefaults.standard.set(true, forKey: "isTutorialShown")
         }
         
