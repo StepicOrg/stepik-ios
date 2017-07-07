@@ -25,6 +25,9 @@ class CodeQuizViewController: QuizViewController {
     var highlightr : Highlightr!
     let textStorage = CodeAttributedString()
     
+    let playgroundManager = CodePlaygroundManager()
+    var currentCode : String = ""
+    
     var language: String = "" {
         didSet {
             textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
@@ -173,6 +176,7 @@ class CodeQuizViewController: QuizViewController {
         
         language = reply.language
         codeTextView.text = reply.code
+        currentCode = reply.code
     }
     
     override var needsToRefreshAttemptWhenWrong : Bool {
@@ -221,6 +225,7 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             newLanguage, newText in
             self?.language = newLanguage
             self?.codeTextView.text = newText
+            self?.currentCode = newText
         }
         
         present(fullscreen, animated: true, completion: nil)
@@ -238,16 +243,36 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         }
         if let template = options.template(language: language, userGenerated: false) {
             codeTextView.text = template.templateString
+            currentCode = template.templateString
         }
         CoreDataHelper.instance.save()
     }
 }
 
 extension CodeQuizViewController : UITextViewDelegate {
+    
+    fileprivate func textRangeFrom(position: Int) -> UITextRange {
+        let firstCharacterPosition = codeTextView.beginningOfDocument
+        let characterPosition = codeTextView.position(from: firstCharacterPosition, offset: position)!
+        let characterRange = codeTextView.textRange(from: characterPosition, to: characterPosition)!
+        return characterRange
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         guard let options = step.options else {
             return
         }
+        
+        if let selectedRange = textView.selectedTextRange {
+            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+        
+            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language)
+        
+            textView.text = analyzed.text
+            textView.selectedTextRange = textRangeFrom(position: cursorPosition)
+        }
+        
+        currentCode = textView.text
         
         if let userTemplate = options.template(language: language, userGenerated: true) {
             userTemplate.templateString = textView.text
@@ -256,6 +281,7 @@ extension CodeQuizViewController : UITextViewDelegate {
             newTemplate.isUserGenerated = true
             options.templates += [newTemplate]
         }
+        
         CoreDataHelper.instance.save()
     }
 }

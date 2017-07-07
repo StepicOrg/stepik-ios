@@ -10,7 +10,7 @@ import Foundation
 
 class CodePlaygroundManager {
     init() {}
-    
+
     //All changes should be a substring inserted somewhere into the string
     func getChangesSubstring(currentText: String, previousText: String) -> (isInsertion: Bool, changes: String) {
         
@@ -51,7 +51,19 @@ class CodePlaygroundManager {
         
     }
     
-    func analyze(currentText: String, previousText: String) {
+    let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
+    
+    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String) -> (text: String, position: Int) {
+        let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
+        var text = currentText
+        
+        if changes.isInsertion {
+            if let closer = closers[changes.changes] {
+                text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                return (text: text, position: cursorPosition)
+            }
+        }
+        return (text: currentText, position: cursorPosition)
     }
 }
