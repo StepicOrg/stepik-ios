@@ -53,6 +53,17 @@ class CodePlaygroundManager {
     
     let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
     
+    fileprivate func shouldMakeTabLineAfter(symbol: Character, language: String) -> (shouldMakeNewLine: Bool, paired: Bool) {
+        switch language {
+        case "python3":
+            return symbol == ":" ? (shouldMakeNewLine: true, paired: false) : (shouldMakeNewLine: false, paired: false)
+        case "c", "c++11", "c++", "java", "java8", "mono c#":
+            return symbol == "{" ? (shouldMakeNewLine: true, paired: true) : (shouldMakeNewLine: false, paired: false)
+        default:
+            return (shouldMakeNewLine: false, paired: false)
+        }
+    }
+    
     func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int) {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
@@ -69,7 +80,10 @@ class CodePlaygroundManager {
                 //searching previous \n or beginning of the string
                 let firstPart = text.substring(to: text.index(before: cursorIndex))
                 if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
+                    //extracting previous line before \n
                     let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
+                    
+                    //counting spaces in the beginning to know the offset
                     var spacesCount = 0
                     for character in line.characters {
                         if character == " " {
@@ -79,9 +93,39 @@ class CodePlaygroundManager {
                         }
                     }
                     let offset = spacesCount
+                    
+                    //searching for the last non-space symbol in the string to know if we need to do more than just return
+                    var characterBeforeEndline : Character? = nil
+                    for character in line.characters.reversed() {
+                        if character == " " {
+                            continue
+                        } else {
+                            characterBeforeEndline = character
+                            break
+                        }
+                    }
+                    
+                    //Checking if there is any character before endline (it's not an empty or all-spaces line)
+                    if let char = characterBeforeEndline {
+                        let shouldTab = shouldMakeTabLineAfter(symbol: char, language: language)
+                        if shouldTab.shouldMakeNewLine {
+                            if shouldTab.paired {
+                                let spacesString = String(repeating: " ", count: offset + tabSize) + "\n" + String(repeating: " ", count: offset)
+                                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                                return (text: text, position: cursorPosition + offset + tabSize)
+                            } else {
+                                let spacesString = String(repeating: " ", count: offset + tabSize)
+                                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                                return (text: text, position: cursorPosition + offset + tabSize)
+                            }
+                        }
+                    }
+                    
+                    // returning with just the spaces and offset
                     let spacesString = String(repeating: " ", count: offset)
                     text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
                     return (text: text, position: cursorPosition + offset)
+                    
                 } else {
                     return (text: text, position: cursorPosition)
                 }
