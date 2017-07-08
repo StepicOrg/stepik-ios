@@ -11,13 +11,15 @@ import Foundation
 class CodePlaygroundManager {
     init() {}
 
-    //All changes should be a substring inserted somewhere into the string
+    //Detects the changes string between currentText and previousText
+    //!!!All changes should be a substring inserted somewhere into the string
     func getChangesSubstring(currentText: String, previousText: String) -> (isInsertion: Bool, changes: String) {
         
         var maxString: String = ""
         var minString: String = ""
         var isInsertion: Bool = true
         
+        //Understand, if something was deleted or inserted
         if currentText.characters.count > previousText.characters.count {
             maxString = currentText
             minString = previousText
@@ -28,6 +30,7 @@ class CodePlaygroundManager {
             isInsertion = false
         }
         
+        //Searching for the beginning of the changed substring
         var changesBeginningOffset = 0
         while (changesBeginningOffset < minString.characters.count) && (minString.characters[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)] == maxString.characters[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)]) {
             changesBeginningOffset += 1
@@ -35,11 +38,12 @@ class CodePlaygroundManager {
         minString.removeSubrange(minString.startIndex..<minString.index(minString.startIndex, offsetBy: changesBeginningOffset))
         maxString.removeSubrange(maxString.startIndex..<maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset))
 
-        
+        //Searching for the ending of the changed substring
         var changesEndingOffset = 0
         while (changesEndingOffset < minString.characters.count) && (minString.characters[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)] == maxString.characters[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)]) {
             changesEndingOffset += 1
         }
+        
         if minString != "" {
             minString.removeSubrange(minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset + 1)..<minString.endIndex)
         }
@@ -48,11 +52,11 @@ class CodePlaygroundManager {
         }
 
         return (isInsertion: isInsertion, changes: maxString)
-        
     }
     
     let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
     
+    //Detects, if there should be made a new line after tab
     fileprivate func shouldMakeTabLineAfter(symbol: Character, language: String) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
         case "python3":
@@ -64,6 +68,7 @@ class CodePlaygroundManager {
         }
     }
     
+    //Analyzes given text using parameters
     func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int) {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
