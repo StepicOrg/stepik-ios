@@ -41,6 +41,17 @@ class CodeQuizViewController: QuizViewController {
                 tabSize = playgroundManager.countTabSize(text: template.templateString)
             }
             
+            //setting up input accessory view
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
+                [weak self] in
+                guard let s = self else { return }
+                s.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize))
+            }, insertStringAction: {
+                [weak self]
+                symbols in
+                self?.insertAtCurrentPosition(symbols: symbols)
+            })
+            
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
                 currentCode = userTemplate.templateString
@@ -51,6 +62,18 @@ class CodeQuizViewController: QuizViewController {
                 currentCode = template.templateString
                 return
             }
+        }
+    }
+    
+    fileprivate func insertAtCurrentPosition(symbols: String) {
+        if let selectedRange = codeTextView.selectedTextRange {
+            let cursorPosition = codeTextView.offset(from: codeTextView.beginningOfDocument, to: selectedRange.start)
+            var text = codeTextView.text!
+            text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
+            codeTextView.text = text
+            codeTextView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.characters.count)
+            
+            analyzeAndComplete(textView: codeTextView)
         }
     }
     
@@ -253,6 +276,19 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         }
         CoreDataHelper.instance.save()
     }
+    
+    fileprivate func analyzeAndComplete(textView: UITextView) {
+        if let selectedRange = textView.selectedTextRange {
+            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+            
+            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
+            
+            textView.text = analyzed.text
+            textView.selectedTextRange = textRangeFrom(position: analyzed.position)
+        }
+        
+        currentCode = textView.text
+    }
 }
 
 extension CodeQuizViewController : UITextViewDelegate {
@@ -269,16 +305,7 @@ extension CodeQuizViewController : UITextViewDelegate {
             return
         }
         
-        if let selectedRange = textView.selectedTextRange {
-            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-        
-            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
-        
-            textView.text = analyzed.text
-            textView.selectedTextRange = textRangeFrom(position: analyzed.position)
-        }
-        
-        currentCode = textView.text
+        analyzeAndComplete(textView: codeTextView)
         
         if let userTemplate = options.template(language: language, userGenerated: true) {
             userTemplate.templateString = textView.text

@@ -312,6 +312,10 @@
 		085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
 		085DF8DC1C9AB94C006809D9 /* TimeFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */; };
+		0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
+		0860D9131F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
+		0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
+		0860D9161F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
 		0861E6721CD80A9600B45652 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		0861E6731CD80A9600B45652 /* Executable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6711CD80A9600B45652 /* Executable.swift */; };
 		0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
@@ -1514,6 +1518,8 @@
 		085DF8D41C99B9FB006809D9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		085DF8D71C99C49E006809D9 /* VideoRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRate.swift; sourceTree = "<group>"; };
 		085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFormatHelper.swift; sourceTree = "<group>"; };
+		0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSnippetSymbols.swift; sourceTree = "<group>"; };
+		0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputAccessoryBuilder.swift; sourceTree = "<group>"; };
 		0861E6711CD80A9600B45652 /* Executable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executable.swift; sourceTree = "<group>"; };
 		0861E6741CD8106E00B45652 /* ExecutionQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueue.swift; sourceTree = "<group>"; };
 		0861E67A1CD9483500B45652 /* ExecutionQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionQueues.swift; sourceTree = "<group>"; };
@@ -1975,6 +1981,7 @@
 		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0860D9101F10BE5C0087D61B /* Input Accessory */,
 				0805FE3E1F0D38C5001226B4 /* Code Analysis */,
 				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
 				080C5E751EFC09550036EB3D /* Toolbar */,
@@ -2534,6 +2541,15 @@
 				085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */,
 			);
 			name = Test;
+			sourceTree = "<group>";
+		};
+		0860D9101F10BE5C0087D61B /* Input Accessory */ = {
+			isa = PBXGroup;
+			children = (
+				0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */,
+				0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */,
+			);
+			name = "Input Accessory";
 			sourceTree = "<group>";
 		};
 		0861E6701CD80A0A00B45652 /* ExecutionQueue */ = {
@@ -4321,6 +4337,7 @@
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */,
 				084F7AA81E76EF690088368A /* LastStep.swift in Sources */,
+				0860D9161F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				08D1209C1C937B2200A54ABC /* ControllerHelper.swift in Sources */,
 				085C4FF71D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
@@ -4351,6 +4368,7 @@
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				083540651CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
+				0860D9131F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */,
 				089F58861D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
 				08D120A91C937B2200A54ABC /* TabsInfo.swift in Sources */,
@@ -4606,8 +4624,10 @@
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
 				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
+				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
+				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
 				080E80FE1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
