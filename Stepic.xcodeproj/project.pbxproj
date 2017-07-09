@@ -829,6 +829,8 @@
 		08FEFC1D1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */; };
 		08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
 		08FEFC1F1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
+		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
+		08FEFC221F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */; };
 		08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */; };
 		08FF752C1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
@@ -1783,6 +1785,7 @@
 		08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionTableViewCell.xib; sourceTree = "<group>"; };
+		08FEFC201F127470005CA0FB /* AutocompleteWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteWords.swift; sourceTree = "<group>"; };
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
@@ -2572,6 +2575,7 @@
 				0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */,
 				08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */,
 				08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */,
+				08FEFC201F127470005CA0FB /* AutocompleteWords.swift */,
 			);
 			name = "Code Suggestions";
 			sourceTree = "<group>";
@@ -4438,6 +4442,7 @@
 				08D120BB1C937B2200A54ABC /* Messages.swift in Sources */,
 				08D120BC1C937B2200A54ABC /* WarningView.swift in Sources */,
 				08D120BD1C937B2200A54ABC /* CoreDataHelper.swift in Sources */,
+				08FEFC221F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				083F2B181E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
@@ -4619,6 +4624,7 @@
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
+				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
 				08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */,
 				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,

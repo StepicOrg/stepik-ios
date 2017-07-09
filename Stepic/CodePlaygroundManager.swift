@@ -162,9 +162,12 @@ class CodePlaygroundManager {
             
         }
         
+        //Getting current token of a string
         let token = getCurrentToken(text: text, cursorPosition: cursorPosition)
+        
         if token != "" {
-            return (text: text, position: cursorPosition, autocomplete: (suggestions: ["test", "test"], prefix: token))
+            let suggestions = AutocompleteWords.autocompleteFor(token, language: language)
+            return (text: text, position: cursorPosition, autocomplete: (suggestions: suggestions, prefix: token))
         } else {
             return (text: currentText, position: cursorPosition, autocomplete: nil)
         }
