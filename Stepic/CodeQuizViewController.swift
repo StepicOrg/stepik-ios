@@ -45,11 +45,14 @@ class CodeQuizViewController: QuizViewController {
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
                 [weak self] in
                 guard let s = self else { return }
-                s.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize))
+                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
             }, insertStringAction: {
                 [weak self]
                 symbols in
-                self?.insertAtCurrentPosition(symbols: symbols)
+                guard let s = self else { return }
+                s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
+                s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s)
+                s.currentCode = s.codeTextView.text
             })
             
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
@@ -62,18 +65,6 @@ class CodeQuizViewController: QuizViewController {
                 currentCode = template.templateString
                 return
             }
-        }
-    }
-    
-    fileprivate func insertAtCurrentPosition(symbols: String) {
-        if let selectedRange = codeTextView.selectedTextRange {
-            let cursorPosition = codeTextView.offset(from: codeTextView.beginningOfDocument, to: selectedRange.start)
-            var text = codeTextView.text!
-            text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
-            codeTextView.text = text
-            codeTextView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.characters.count)
-            
-            analyzeAndComplete(textView: codeTextView)
         }
     }
     
@@ -231,11 +222,6 @@ class CodeQuizViewController: QuizViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    var suggestionsController: CodeSuggestionsTableViewController? = nil
-    var isSuggestionsViewPresented : Bool {
-        return suggestionsController != nil
-    }
 }
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
@@ -280,88 +266,18 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         }
         CoreDataHelper.instance.save()
     }
-    
-    fileprivate func hideSuggestions() {
-        //TODO: hide suggestions view here
-        self.suggestionsController?.view.removeFromSuperview()
-        self.suggestionsController?.removeFromParentViewController()
-        self.suggestionsController = nil
-    }
-    
-    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int) {
-        //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
-        if !isSuggestionsViewPresented {
-            suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
-            self.addChildViewController(suggestionsController!)
-            self.codeTextView.addSubview(suggestionsController!.view)
-        }
-        
-
-        suggestionsController?.suggestions = suggestions
-        suggestionsController?.prefix = prefix
-        
-        if let selectedRange = codeTextView.selectedTextRange {
-            // `caretRect` is in the `codeTextView` coordinate space.
-            let caretRect = codeTextView.caretRect(for: selectedRange.end)
-            
-            var suggestionsFrameMinX = caretRect.minX
-            var suggestionsFrameMinY = caretRect.maxY
-            
-            let suggestionsHeight = suggestionsController!.suggestionsHeight
-
-            //check if we need to move suggestionsFrame
-            if suggestionsFrameMinY + suggestionsHeight > (codeTextView.frame.maxY - codeTextView.frame.origin.y) {
-                suggestionsFrameMinY = caretRect.minY - suggestionsHeight
-            }
-            
-            if suggestionsFrameMinX + 80 > (codeTextView.frame.maxX - codeTextView.frame.origin.x) {
-                suggestionsFrameMinX = (codeTextView.frame.maxX - codeTextView.frame.origin.x - 85)
-            }
-            
-            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: suggestionsHeight)
-            suggestionsController?.view.frame = rect
-        }
-    }
-    
-    fileprivate func analyzeAndComplete(textView: UITextView) {
-        if let selectedRange = textView.selectedTextRange {
-            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-            
-            let analyzed = playgroundManager.analyze(currentText: textView.text, previousText: currentCode, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
-            
-            textView.text = analyzed.text
-            textView.selectedTextRange = textRangeFrom(position: analyzed.position)
-            if let autocomplete = analyzed.autocomplete {
-                if autocomplete.suggestions.count == 0 {
-                    hideSuggestions()
-                } else {
-                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position)
-                }
-            } else {
-                hideSuggestions()
-            }
-        }
-        
-        currentCode = textView.text
-    }
 }
 
 extension CodeQuizViewController : UITextViewDelegate {
-    
-    fileprivate func textRangeFrom(position: Int) -> UITextRange {
-        let firstCharacterPosition = codeTextView.beginningOfDocument
-        let characterPosition = codeTextView.position(from: firstCharacterPosition, offset: position)!
-        let characterRange = codeTextView.textRange(from: characterPosition, to: characterPosition)!
-        return characterRange
-    }
-    
     func textViewDidChange(_ textView: UITextView) {
         guard let options = step.options else {
             return
         }
         
-        analyzeAndComplete(textView: codeTextView)
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self)
         
+        currentCode = textView.text
+
         if let userTemplate = options.template(language: language, userGenerated: true) {
             userTemplate.templateString = textView.text
         } else {

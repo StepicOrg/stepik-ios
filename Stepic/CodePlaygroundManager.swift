@@ -13,6 +13,11 @@ class CodePlaygroundManager {
 
     let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
     typealias Autocomplete = (suggestions: [String], prefix: String)
+    
+    var suggestionsController: CodeSuggestionsTableViewController? = nil
+    var isSuggestionsViewPresented : Bool {
+        return suggestionsController != nil
+    }
 
     
     //Detects the changes string between currentText and previousText
@@ -193,5 +198,83 @@ class CodePlaygroundManager {
             minTabSize = 4
         }
         return minTabSize
+    }
+    
+    fileprivate func hideSuggestions() {
+        //TODO: hide suggestions view here
+        suggestionsController?.view.removeFromSuperview()
+        suggestionsController?.removeFromParentViewController()
+        suggestionsController = nil
+    }
+    
+    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView) {
+        //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
+        if suggestionsController == nil {
+            suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
+            vc.addChildViewController(suggestionsController!)
+            textView.addSubview(suggestionsController!.view)
+        }
+        
+        suggestionsController?.suggestions = suggestions
+        suggestionsController?.prefix = prefix
+        
+        if let selectedRange = textView.selectedTextRange {
+            // `caretRect` is in the `textView` coordinate space.
+            let caretRect = textView.caretRect(for: selectedRange.end)
+            
+            var suggestionsFrameMinX = caretRect.minX
+            var suggestionsFrameMinY = caretRect.maxY
+            
+            let suggestionsHeight = suggestionsController!.suggestionsHeight
+            
+            //check if we need to move suggestionsFrame
+            if suggestionsFrameMinY + suggestionsHeight > (textView.frame.maxY - textView.frame.origin.y) {
+                suggestionsFrameMinY = caretRect.minY - suggestionsHeight
+            }
+            
+            if suggestionsFrameMinX + 80 > (textView.frame.maxX - textView.frame.origin.x) {
+                suggestionsFrameMinX = (textView.frame.maxX - textView.frame.origin.x - 85)
+            }
+            
+            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: suggestionsHeight)
+            suggestionsController?.view.frame = rect
+        }
+    }
+    
+    func textRangeFrom(position: Int, textView: UITextView) -> UITextRange {
+        let firstCharacterPosition = textView.beginningOfDocument
+        let characterPosition = textView.position(from: firstCharacterPosition, offset: position)!
+        let characterRange = textView.textRange(from: characterPosition, to: characterPosition)!
+        return characterRange
+    }
+    
+    func insertAtCurrentPosition(symbols: String, textView: UITextView) {
+        if let selectedRange = textView.selectedTextRange {
+            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+            var text = textView.text!
+            text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
+            textView.text = text
+            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.characters.count, textView: textView)
+        }
+    }
+    
+    func analyzeAndComplete(textView: UITextView, previousText: String, language: String, tabSize: Int, inViewController vc: UIViewController) {
+        if let selectedRange = textView.selectedTextRange {
+            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+            
+            let analyzed = analyze(currentText: textView.text, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
+            
+            textView.text = analyzed.text
+            textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
+            if let autocomplete = analyzed.autocomplete {
+                if autocomplete.suggestions.count == 0 {
+                    hideSuggestions()
+                } else {
+                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position, inViewController: vc, textView: textView)
+                }
+            } else {
+                hideSuggestions()
+            }
+        }
     }
 }
