@@ -11,6 +11,10 @@ import Foundation
 class CodePlaygroundManager {
     init() {}
 
+    let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
+    typealias Autocomplete = (suggestions: [String], prefix: String)
+
+    
     //Detects the changes string between currentText and previousText
     //!!!All changes should be a substring inserted somewhere into the string
     func getChangesSubstring(currentText: String, previousText: String) -> (isInsertion: Bool, changes: String) {
@@ -54,8 +58,6 @@ class CodePlaygroundManager {
         return (isInsertion: isInsertion, changes: maxString)
     }
     
-    let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
-    
     //Detects, if there should be made a new line after tab
     fileprivate func shouldMakeTabLineAfter(symbol: Character, language: String) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
@@ -68,8 +70,30 @@ class CodePlaygroundManager {
         }
     }
     
+    let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
+    
+    //Gets current token for text
+    fileprivate func getCurrentToken(text: String, cursorPosition: Int) -> String {
+        
+        var offsetBefore = 0
+        while (text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore) &&
+            allowedCharacters.indexOf("\(text.characters[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])") != nil) {
+            offsetBefore += 1
+        }
+        
+        var offsetAfter = 0
+        while (text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter) &&
+            allowedCharacters.indexOf("\(text.characters[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])") != nil) {
+                offsetAfter += 1
+        }
+        
+        let token = text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)) + text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter))
+        
+        return token
+    }
+    
     //Analyzes given text using parameters
-    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int) {
+    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int, autocomplete: Autocomplete?) {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
         var text = currentText
@@ -77,7 +101,7 @@ class CodePlaygroundManager {
         if changes.isInsertion {
             if let closer = closers[changes.changes] {
                 text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                return (text: text, position: cursorPosition)
+                return (text: text, position: cursorPosition, autocomplete: nil)
             }
             
             if changes.changes == "\n" {
@@ -117,11 +141,11 @@ class CodePlaygroundManager {
                             if shouldTab.paired {
                                 let spacesString = String(repeating: " ", count: offset + tabSize) + "\n" + String(repeating: " ", count: offset)
                                 text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                                return (text: text, position: cursorPosition + offset + tabSize)
+                                return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
                             } else {
                                 let spacesString = String(repeating: " ", count: offset + tabSize)
                                 text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                                return (text: text, position: cursorPosition + offset + tabSize)
+                                return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
                             }
                         }
                     }
@@ -129,14 +153,21 @@ class CodePlaygroundManager {
                     // returning with just the spaces and offset
                     let spacesString = String(repeating: " ", count: offset)
                     text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                    return (text: text, position: cursorPosition + offset)
+                    return (text: text, position: cursorPosition + offset, autocomplete: nil)
                     
                 } else {
-                    return (text: text, position: cursorPosition)
+                    return (text: text, position: cursorPosition, autocomplete: nil)
                 }
             }
+            
         }
-        return (text: currentText, position: cursorPosition)
+        
+        let token = getCurrentToken(text: text, cursorPosition: cursorPosition)
+        if token != "" {
+            return (text: text, position: cursorPosition, autocomplete: (suggestions: ["test", "test"], prefix: token))
+        } else {
+            return (text: currentText, position: cursorPosition, autocomplete: nil)
+        }
     }
     
     func countTabSize(text: String) -> Int {

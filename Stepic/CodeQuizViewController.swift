@@ -178,7 +178,7 @@ class CodeQuizViewController: QuizViewController {
     }
     
     override func updateQuizAfterAttemptUpdate() {
-        guard let options = step.options else {
+        guard step.options != nil else {
             return
         }
         setQuizControls(enabled: true)
@@ -232,6 +232,10 @@ class CodeQuizViewController: QuizViewController {
     }
     */
 
+    var suggestionsController: CodeSuggestionsTableViewController? = nil
+    var isSuggestionsViewPresented : Bool {
+        return suggestionsController != nil
+    }
 }
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
@@ -277,6 +281,35 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         CoreDataHelper.instance.save()
     }
     
+    fileprivate func hideSuggestions() {
+        //TODO: hide suggestions view here
+        self.suggestionsController?.view.removeFromSuperview()
+        self.suggestionsController?.removeFromParentViewController()
+        self.suggestionsController = nil
+    }
+    
+    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int) {
+        //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
+        if !isSuggestionsViewPresented {
+            suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
+            self.addChildViewController(suggestionsController!)
+            self.codeTextView.addSubview(suggestionsController!.view)
+            if let selectedRange = codeTextView.selectedTextRange {
+                // `caretRect` is in the `textView` coordinate space.
+                let caretRect = codeTextView.caretRect(for: selectedRange.end)
+                
+                let suggestionsFrameMinX = caretRect.minX
+//                let suggestionsFrameMaxX = caretRect.minX + 80
+                let suggestionsFrameMinY = caretRect.maxY
+//                let suggestionsFrameMaxY = caretRect.maxY + 120
+                let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: 120)
+                suggestionsController?.view.frame = rect
+            }
+        }
+        suggestionsController?.suggestions = suggestions
+        suggestionsController?.prefix = prefix
+    }
+    
     fileprivate func analyzeAndComplete(textView: UITextView) {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
@@ -285,6 +318,15 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             
             textView.text = analyzed.text
             textView.selectedTextRange = textRangeFrom(position: analyzed.position)
+            if let autocomplete = analyzed.autocomplete {
+                if autocomplete.suggestions.count == 0 {
+                    hideSuggestions()
+                } else {
+                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position)
+                }
+            } else {
+                hideSuggestions()
+            }
         }
         
         currentCode = textView.text
