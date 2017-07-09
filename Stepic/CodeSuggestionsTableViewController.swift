@@ -40,6 +40,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
 
         tableView.register(UINib(nibName: "CodeSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "CodeSuggestionTableViewCell")
 
+        tableView.allowsSelection = true
         self.clearsSelectionOnViewWillAppear = false
     }
 

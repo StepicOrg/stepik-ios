@@ -51,7 +51,7 @@ class CodeQuizViewController: QuizViewController {
                 symbols in
                 guard let s = self else { return }
                 s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
-                s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s)
+                s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
                 s.currentCode = s.codeTextView.text
             })
             
@@ -274,7 +274,7 @@ extension CodeQuizViewController : UITextViewDelegate {
             return
         }
         
-        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self)
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         
         currentCode = textView.text
 
@@ -287,5 +287,14 @@ extension CodeQuizViewController : UITextViewDelegate {
         }
         
         CoreDataHelper.instance.save()
+    }
+}
+
+extension CodeQuizViewController: CodeSuggestionDelegate {
+    func didSelectSuggestion(suggestion: String, prefix: String) {
+        codeTextView.becomeFirstResponder()
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
+        currentCode = codeTextView.text
     }
 }

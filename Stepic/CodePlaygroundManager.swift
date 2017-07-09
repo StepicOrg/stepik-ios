@@ -207,12 +207,13 @@ class CodePlaygroundManager {
         suggestionsController = nil
     }
     
-    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView) {
+    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {
             suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
             vc.addChildViewController(suggestionsController!)
             textView.addSubview(suggestionsController!.view)
+            suggestionsController?.delegate = suggestionsDelegate
         }
         
         suggestionsController?.suggestions = suggestions
@@ -258,7 +259,7 @@ class CodePlaygroundManager {
         }
     }
     
-    func analyzeAndComplete(textView: UITextView, previousText: String, language: String, tabSize: Int, inViewController vc: UIViewController) {
+    func analyzeAndComplete(textView: UITextView, previousText: String, language: String, tabSize: Int, inViewController vc: UIViewController, suggestionsDelegate: CodeSuggestionDelegate) {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
             
@@ -270,7 +271,7 @@ class CodePlaygroundManager {
                 if autocomplete.suggestions.count == 0 {
                     hideSuggestions()
                 } else {
-                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position, inViewController: vc, textView: textView)
+                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position, inViewController: vc, textView: textView, suggestionsDelegate: suggestionsDelegate)
                 }
             } else {
                 hideSuggestions()
