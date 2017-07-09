@@ -233,11 +233,11 @@ class CodePlaygroundManager {
                 suggestionsFrameMinY = caretRect.minY - suggestionsHeight
             }
             
-            if suggestionsFrameMinX + 80 > (textView.frame.maxX - textView.frame.origin.x) {
-                suggestionsFrameMinX = (textView.frame.maxX - textView.frame.origin.x - 85)
+            if suggestionsFrameMinX + 100 > (textView.frame.maxX - textView.frame.origin.x) {
+                suggestionsFrameMinX = (textView.frame.maxX - textView.frame.origin.x - 102)
             }
             
-            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: suggestionsHeight)
+            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 100, height: suggestionsHeight)
             suggestionsController?.view.frame = rect
         }
     }

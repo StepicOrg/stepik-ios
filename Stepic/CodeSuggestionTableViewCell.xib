@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRH-Os-p52">
-                        <rect key="frame" x="15" y="0.0" width="297" height="44"/>
+                        <rect key="frame" x="4" y="0.0" width="308" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,7 +28,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="mRH-Os-p52" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="6nD-KW-wuJ"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="mRH-Os-p52" secondAttribute="leading" constant="-7" id="Nvb-Jb-ipD"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="mRH-Os-p52" secondAttribute="leading" constant="4" id="Nvb-Jb-ipD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="mRH-Os-p52" secondAttribute="bottom" constant="-8.5" id="VJR-Sm-Sdi"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mRH-Os-p52" secondAttribute="trailing" id="nAy-1z-woO"/>
                 </constraints>

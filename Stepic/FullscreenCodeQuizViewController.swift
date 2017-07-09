@@ -112,6 +112,11 @@ class FullscreenCodeQuizViewController: UIViewController {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = true
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        doneItem.tintColor = UIColor.white
+    }
 
     fileprivate func configureKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(aNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -168,7 +173,6 @@ class FullscreenCodeQuizViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
     
     let changeLanguagePresentr : Presentr = {
         let changeLanguagePresentr = Presentr(presentationType: .bottomHalf)

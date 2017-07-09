@@ -242,9 +242,11 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         fullscreen.onDismissBlock = {
             [weak self]
             newLanguage, newText in
-            self?.language = newLanguage
-            self?.codeTextView.text = newText
-            self?.currentCode = newText
+            guard let s = self else { return }
+            s.language = newLanguage
+            s.codeTextView.text = newText
+            s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
+            s.currentCode = newText
         }
         
         present(fullscreen, animated: true, completion: nil)

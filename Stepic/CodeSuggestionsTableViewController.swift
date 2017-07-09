@@ -25,8 +25,9 @@ class CodeSuggestionsTableViewController: UITableViewController {
         }
     }
     
-    fileprivate let suggestionHeight: CGFloat = 20
-    fileprivate let maxSuggestionCount = 5
+    
+    fileprivate let suggestionHeight: CGFloat = 22
+    fileprivate let maxSuggestionCount = 4
     
     weak var delegate: CodeSuggestionDelegate?
     
@@ -40,10 +41,23 @@ class CodeSuggestionsTableViewController: UITableViewController {
 
         tableView.register(UINib(nibName: "CodeSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "CodeSuggestionTableViewCell")
 
-        tableView.allowsSelection = true
+        tableView.allowsSelection = false
         self.clearsSelectionOnViewWillAppear = false
+        tableView.rowHeight = suggestionHeight
+        
+        //Adding tap gesture recognizer to catch selection to avoid resignFirstResponder call and keyboard disappearance 
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(CodeSuggestionsTableViewController.didTap(recognizer:)))
+        tableView.addGestureRecognizer(tapG)
     }
 
+    func didTap(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: self.tableView)
+        let path = tableView.indexPathForRow(at: location)
+        if let row = path?.row {
+            delegate?.didSelectSuggestion(suggestion: suggestions[row], prefix: prefix)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -70,9 +84,9 @@ class CodeSuggestionsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row], prefix: prefix)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row], prefix: prefix)
+//    }
     
     /*
     // Override to support conditional editing of the table view.
