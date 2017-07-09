@@ -25,15 +25,41 @@ class FullscreenCodeQuizViewController: UIViewController {
     var highlightr : Highlightr!
     let textStorage = CodeAttributedString()
     
+    let playgroundManager = CodePlaygroundManager()
+    var currentCode : String = ""
+    
+    var tabSize: Int = 0
+    
     var language: String = "" {
         didSet {
             textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
+            
+            if let template = options.template(language: language, userGenerated: false) {
+                tabSize = playgroundManager.countTabSize(text: template.templateString)
+            }
+            
+            //setting up input accessory view
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
+                [weak self] in
+                guard let s = self else { return }
+                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
+                }, insertStringAction: {
+                    [weak self]
+                    symbols in
+                    guard let s = self else { return }
+                    s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
+                    s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
+                    s.currentCode = s.codeTextView.text
+            })
+            
             if let userTemplate = options.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
+                currentCode = userTemplate.templateString
                 return
             }
             if let template = options.template(language: language, userGenerated: false) {
                 codeTextView.text = template.templateString
+                currentCode = template.templateString
                 return
             }
         }
@@ -166,6 +192,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         }
         if let template = options.template(language: language, userGenerated: false) {
             codeTextView.text = template.templateString
+            currentCode = template.templateString
         }
         CoreDataHelper.instance.save()
     }
@@ -184,6 +211,10 @@ class FullscreenCodeQuizViewController: UIViewController {
 
 extension FullscreenCodeQuizViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
+        
+        currentCode = textView.text
+        
         if let userTemplate = options.template(language: language, userGenerated: true) {
             userTemplate.templateString = textView.text
         } else {
@@ -191,6 +222,17 @@ extension FullscreenCodeQuizViewController : UITextViewDelegate {
             newTemplate.isUserGenerated = true
             options.templates += [newTemplate]
         }
+        
         CoreDataHelper.instance.save()
     }
 }
+
+extension FullscreenCodeQuizViewController: CodeSuggestionDelegate {
+    func didSelectSuggestion(suggestion: String, prefix: String) {
+        codeTextView.becomeFirstResponder()
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
+        currentCode = codeTextView.text
+    }
+}
+
