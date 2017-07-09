@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -282,7 +282,81 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="35.532233883058474"/>
+            <point key="canvasLocation" x="2700" y="35"/>
+        </scene>
+        <!--Adaptive Onboarding View Controller-->
+        <scene sceneID="6gq-w2-TMy">
+            <objects>
+                <viewController storyboardIdentifier="AdaptiveOnboardingViewController" id="dO4-9U-KaY" customClass="AdaptiveOnboardingViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jCB-kh-4ek"/>
+                        <viewControllerLayoutGuide type="bottom" id="N8t-Ky-94v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IJD-wz-J8B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guz-jK-I7X">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="z3R-iG-V3d"/>
+                                </constraints>
+                            </view>
+                            <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eke-nP-u1Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <navigationItem id="rpu-J0-Ui5">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="QrV-Bx-AGX">
+                                            <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="9NP-FY-TlU">
+                                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-iu-ud8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="jSC-iu-ud8" secondAttribute="bottom" id="093-xW-tH4"/>
+                                                <constraint firstAttribute="trailing" secondItem="jSC-iu-ud8" secondAttribute="trailing" id="3Ft-2w-gu7"/>
+                                                <constraint firstItem="jSC-iu-ud8" firstAttribute="leading" secondItem="9NP-FY-TlU" secondAttribute="leading" id="8Nv-EU-kat"/>
+                                                <constraint firstItem="jSC-iu-ud8" firstAttribute="top" secondItem="9NP-FY-TlU" secondAttribute="top" id="8nn-Vv-3bH"/>
+                                            </constraints>
+                                        </view>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJT-Mo-up5" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="12" y="70" width="351" height="581"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aJT-Mo-up5" secondAttribute="trailing" constant="12" id="7sX-1r-LpB"/>
+                            <constraint firstItem="guz-jK-I7X" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" id="FU8-pW-wUt"/>
+                            <constraint firstItem="aJT-Mo-up5" firstAttribute="top" secondItem="eke-nP-u1Z" secondAttribute="bottom" constant="6" id="Ibf-ap-5gm"/>
+                            <constraint firstItem="eke-nP-u1Z" firstAttribute="top" secondItem="jCB-kh-4ek" secondAttribute="bottom" id="MON-Fl-L5C"/>
+                            <constraint firstAttribute="trailing" secondItem="guz-jK-I7X" secondAttribute="trailing" id="SSM-m7-6Xi"/>
+                            <constraint firstItem="aJT-Mo-up5" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" constant="12" id="a7A-xY-o8n"/>
+                            <constraint firstItem="eke-nP-u1Z" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" id="f3K-jF-udC"/>
+                            <constraint firstAttribute="trailing" secondItem="eke-nP-u1Z" secondAttribute="trailing" id="kEk-Za-G84"/>
+                            <constraint firstItem="N8t-Ky-94v" firstAttribute="top" secondItem="aJT-Mo-up5" secondAttribute="bottom" constant="16" id="lyA-PA-bFB"/>
+                            <constraint firstItem="guz-jK-I7X" firstAttribute="top" secondItem="IJD-wz-J8B" secondAttribute="top" id="wIy-TV-jtz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="kolodaView" destination="aJT-Mo-up5" id="loK-Ke-nAG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQ7-1h-hNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2700" y="-702"/>
         </scene>
     </scenes>
     <resources>

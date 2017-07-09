@@ -283,6 +283,10 @@ class AdaptiveStepsPresenter {
         let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
         
         if isTutorialNeeded {
+            let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveOnboardingViewController", storyboardName: "AdaptiveMain") as! AdaptiveOnboardingViewController
+            vc.presenter = AdaptiveOnboardingPresenter(view: vc)
+            
+            (view as? UIViewController)?.present(vc, animated: false, completion: {})
             UserDefaults.standard.set(true, forKey: "isTutorialShown")
         }
         
@@ -434,8 +438,8 @@ class AdaptiveStepsPresenter {
 
 
 extension AdaptiveStepsPresenter: StepCardViewDelegate {
-    func onControlButtonClick(for state: AdaptiveStepState) {
-        switch state {
+    func onControlButtonClick() {
+        switch currentStepPresenter?.state ?? .unsolved {
         case .unsolved:
             currentStepPresenter?.submit()
             break

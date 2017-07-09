@@ -1156,6 +1156,7 @@
 		864D67D81E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */; };
 		866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
 		866DDDC81EA8079500BAD48E /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DDDC71EA8079500BAD48E /* CardOverlayView.swift */; };
+		8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */; };
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
@@ -1790,6 +1791,7 @@
 		864D67D71E83F712001E8D9E /* AdaptiveStepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepicApplicationsInfo.swift; sourceTree = "<group>"; };
 		866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardOverlayView.xib; sourceTree = "<group>"; };
 		866DDDC71EA8079500BAD48E /* CardOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
+		8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingStep.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
 		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
@@ -3366,6 +3368,7 @@
 			children = (
 				2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */,
 				2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */,
+				8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */,
 			);
 			name = AdaptiveOnboarding;
 			sourceTree = "<group>";
@@ -4965,6 +4968,7 @@
 				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
+				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,

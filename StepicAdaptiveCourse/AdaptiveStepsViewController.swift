@@ -101,9 +101,19 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     }
     
     func updateTopCardControl(stepState: AdaptiveStepState) {
-        topCard?.controlButtonState = stepState
+        switch stepState {
+        case .unsolved:
+            topCard?.controlButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
+            break
+        case .wrong:
+            topCard?.controlButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: .normal)
+            break
+        case .successful:
+            topCard?.controlButton.setTitle(NSLocalizedString("NextTask", comment: ""), for: .normal)
+            break
+        }
     }
-    
+
     func updateTopCard(cardState: StepCardView.CardState) {
         topCard?.cardState = cardState
     }

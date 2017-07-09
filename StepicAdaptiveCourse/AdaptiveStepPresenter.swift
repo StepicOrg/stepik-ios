@@ -29,6 +29,7 @@ class AdaptiveStepPresenter {
     weak var observer: AdaptiveStepObserver?
     
     var step: Step!
+    var state: AdaptiveStepState = .unsolved
     
     var quizViewController: ChoiceQuizViewController?
     
@@ -94,16 +95,19 @@ extension AdaptiveStepPresenter: QuizControllerDelegate {
     }
     
     func submissionDidCorrect() {
+        state = .successful
         observer?.stepSubmissionDidCorrect()
         quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidWrong() {
+        state = .wrong
         observer?.stepSubmissionDidWrong()
         quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidRetry() {
+        state = .unsolved
         observer?.stepSubmissionDidRetry()
     }
     
