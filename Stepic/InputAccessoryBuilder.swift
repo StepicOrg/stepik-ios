@@ -17,6 +17,7 @@ class InputAccessoryBuilder {
         
         let tabButton = RFToolbarButton(title: "Tab", andEventHandler: { 
             tabAction()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language, "symbol": "Tab"])
         }, for: UIControlEvents.touchUpInside)!
         
         buttons += [tabButton]
@@ -24,6 +25,7 @@ class InputAccessoryBuilder {
         for symbol in symbols {
             let symButton = RFToolbarButton(title: symbol, andEventHandler: {
                 insertStringAction(symbol)
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language, "symbol": symbol])
             }, for: UIControlEvents.touchUpInside)!
             buttons += [symButton]
         }
