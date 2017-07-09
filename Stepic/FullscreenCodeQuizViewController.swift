@@ -26,7 +26,17 @@ class FullscreenCodeQuizViewController: UIViewController {
     let textStorage = CodeAttributedString()
     
     let playgroundManager = CodePlaygroundManager()
-    var currentCode : String = ""
+    var currentCode : String = "" {
+        didSet {
+            if let userTemplate = options.template(language: language, userGenerated: true) {
+                userTemplate.templateString = codeTextView.text
+            } else {
+                let newTemplate = CodeTemplate(language: language, template: codeTextView.text)
+                newTemplate.isUserGenerated = true
+                options.templates += [newTemplate]
+            }
+        }
+    }
     
     var tabSize: Int = 0
     

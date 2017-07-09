@@ -26,7 +26,18 @@ class CodeQuizViewController: QuizViewController {
     let textStorage = CodeAttributedString()
     
     let playgroundManager = CodePlaygroundManager()
-    var currentCode : String = ""
+    var currentCode : String = "" {
+        didSet {
+            guard let options = step.options else { return }
+            if let userTemplate = options.template(language: language, userGenerated: true) {
+                userTemplate.templateString = codeTextView.text
+            } else {
+                let newTemplate = CodeTemplate(language: language, template: codeTextView.text)
+                newTemplate.isUserGenerated = true
+                options.templates += [newTemplate]
+            }
+        }
+    }
     
     var tabSize: Int = 0
     
@@ -279,14 +290,6 @@ extension CodeQuizViewController : UITextViewDelegate {
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         
         currentCode = textView.text
-
-        if let userTemplate = options.template(language: language, userGenerated: true) {
-            userTemplate.templateString = textView.text
-        } else {
-            let newTemplate = CodeTemplate(language: language, template: textView.text)
-            newTemplate.isUserGenerated = true
-            options.templates += [newTemplate]
-        }
         
         CoreDataHelper.instance.save()
     }
