@@ -294,20 +294,33 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
             self.addChildViewController(suggestionsController!)
             self.codeTextView.addSubview(suggestionsController!.view)
-            if let selectedRange = codeTextView.selectedTextRange {
-                // `caretRect` is in the `textView` coordinate space.
-                let caretRect = codeTextView.caretRect(for: selectedRange.end)
-                
-                let suggestionsFrameMinX = caretRect.minX
-//                let suggestionsFrameMaxX = caretRect.minX + 80
-                let suggestionsFrameMinY = caretRect.maxY
-//                let suggestionsFrameMaxY = caretRect.maxY + 120
-                let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: 120)
-                suggestionsController?.view.frame = rect
-            }
         }
+        
+
         suggestionsController?.suggestions = suggestions
         suggestionsController?.prefix = prefix
+        
+        if let selectedRange = codeTextView.selectedTextRange {
+            // `caretRect` is in the `codeTextView` coordinate space.
+            let caretRect = codeTextView.caretRect(for: selectedRange.end)
+            
+            var suggestionsFrameMinX = caretRect.minX
+            var suggestionsFrameMinY = caretRect.maxY
+            
+            let suggestionsHeight = suggestionsController!.suggestionsHeight
+
+            //check if we need to move suggestionsFrame
+            if suggestionsFrameMinY + suggestionsHeight > (codeTextView.frame.maxY - codeTextView.frame.origin.y) {
+                suggestionsFrameMinY = caretRect.minY - suggestionsHeight
+            }
+            
+            if suggestionsFrameMinX + 80 > (codeTextView.frame.maxX - codeTextView.frame.origin.x) {
+                suggestionsFrameMinX = (codeTextView.frame.maxX - codeTextView.frame.origin.x - 85)
+            }
+            
+            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 80, height: suggestionsHeight)
+            suggestionsController?.view.frame = rect
+        }
     }
     
     fileprivate func analyzeAndComplete(textView: UITextView) {

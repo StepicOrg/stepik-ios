@@ -14,18 +14,26 @@ protocol CodeSuggestionDelegate: class {
 
 class CodeSuggestionsTableViewController: UITableViewController {
     
-    var suggestions : [String] = [] {
+    var suggestions: [String] = [] {
         didSet {
             tableView.reloadData()
         }
     }
-    var prefix : String = "" {
+    var prefix: String = "" {
         didSet {
             tableView.reloadData()
         }
     }
     
+    fileprivate let suggestionHeight: CGFloat = 20
+    fileprivate let maxSuggestionCount = 5
+    
     weak var delegate: CodeSuggestionDelegate?
+    
+    var suggestionsHeight: CGFloat {
+        return suggestionHeight * CGFloat(min(maxSuggestionCount, suggestions.count))
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
