@@ -116,8 +116,8 @@ class CodeQuizViewController: QuizViewController {
         
         let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
         let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
-        let attTime = NSAttributedString(string: "\(time)\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
-        let attMemory = NSAttributedString(string: "\(memory)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
+        let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
+        let attMemory = NSAttributedString(string: "\(memory) MB", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
 
         let result = NSMutableAttributedString(attributedString: attTimeLimit)
         result.append(attTime)
