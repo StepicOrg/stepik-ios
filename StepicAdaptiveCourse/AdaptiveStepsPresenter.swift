@@ -420,8 +420,8 @@ class AdaptiveStepsPresenter {
     }
     
     func goToAppStore() {
-        // TODO: move url somewhere (maybe to plist?)
-        if let url = URL(string: "itms-apps://itunes.apple.com/ru/developer/stepik/id1236410565"),
+        if let link = Bundle.main.infoDictionary?["AppStoreMoreLink"] as? String,
+           let url = URL(string: link),
             UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.openURL(url)
         }
