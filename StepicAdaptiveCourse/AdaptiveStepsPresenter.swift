@@ -35,6 +35,14 @@ class AdaptiveStepsPresenter {
     weak var view: AdaptiveStepsView?
     var currentStepPresenter: AdaptiveStepPresenter?
     
+    // TODO: optimize DI
+    private var coursesAPI: CoursesAPI?
+    private var stepsAPI: StepsAPI?
+    private var lessonsAPI: LessonsAPI?
+    private var progressesAPI: ProgressesAPI?
+    private var stepicsAPI: StepicsAPI?
+    private var recommendationsAPI: RecommendationsAPI?
+    
     var isKolodaPresented = false
     var isJoinedCourse = false
     var isRecommendationLoaded = false
@@ -68,7 +76,13 @@ class AdaptiveStepsPresenter {
         return vc
     }()
     
-    init(view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, view: AdaptiveStepsView) {
+        self.coursesAPI = coursesAPI
+        self.stepsAPI = stepsAPI
+        self.lessonsAPI = lessonsAPI
+        self.progressesAPI = progressesAPI
+        self.stepicsAPI = stepicsAPI
+        self.recommendationsAPI = recommendationsAPI
         self.view = view
     }
     
@@ -88,7 +102,7 @@ class AdaptiveStepsPresenter {
     fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
         if let stepId = recommendedLesson.stepsArray.first {
             // Get steps in recommended lesson
-            ApiDataDownloader.steps.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+            stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                 let step = newStepsImmutable.first
                 
                 if let step = step {
@@ -98,7 +112,7 @@ class AdaptiveStepsPresenter {
                     }
                     
                     // Get progress: if step is passed -> skip it
-                    ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
+                    self.progressesAPI?.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
                         let progress = progresses.first
                         if progress != nil && progress!.isPassed {
                             print("step already passed -> getting new recommendation")
@@ -122,13 +136,13 @@ class AdaptiveStepsPresenter {
     
     fileprivate func loadRecommendations(for course: Course, count: Int, success: @escaping ([Lesson]) -> (Void)) {
         performRequest({
-            ApiDataDownloader.recommendations.getRecommendedLessonsId(course: course.id, count: count, success: { recommendations in
+            self.recommendationsAPI?.getRecommendedLessonsId(course: course.id, count: count, success: { recommendations in
                 if recommendations.isEmpty {
                     success([])
                     return
                 }
                 
-                ApiDataDownloader.lessons.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                self.lessonsAPI?.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     success(newLessonsImmutable)
                 }, error: { (error) -> Void in
                     print("failed downloading lessons data in Next")
@@ -161,7 +175,7 @@ class AdaptiveStepsPresenter {
                 }
                 
                 let lessonsIds = self.recommendedLessons.map { $0.id }
-                ApiDataDownloader.lessons.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                self.lessonsAPI?.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
                     self.recommendedLessons = newLessonsImmutable
                     
                     let lesson = self.recommendedLessons.first
@@ -215,7 +229,7 @@ class AdaptiveStepsPresenter {
         }
         
         performRequest({
-            ApiDataDownloader.recommendations.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
+            self.recommendationsAPI?.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
                 self.getNewRecommendation(for: course, success: { step in
                     success(step)
                 })
@@ -256,7 +270,7 @@ class AdaptiveStepsPresenter {
             AuthManager.sharedManager.logInWithUsername(email, password: password, success: { token in
                 AuthInfo.shared.token = token
                 
-                ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
+                self.stepicsAPI?.retrieveCurrentUser(success: { user in
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     
@@ -294,7 +308,7 @@ class AdaptiveStepsPresenter {
     fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
         self.view?.showHud(withStatus: NSLocalizedString("LoadingCourse", comment: ""))
         performRequest({
-            ApiDataDownloader.courses.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
+            self.coursesAPI?.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
                 self.course = coursesImmutable.first
                 
                 guard let course = self.course else {

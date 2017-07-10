@@ -57,7 +57,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveStepsPresenter(view: self)
+        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, view: self)
     }
     
     override func viewDidLoad() {
