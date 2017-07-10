@@ -151,7 +151,11 @@ class CodeQuizViewController: QuizViewController {
             return
         }
         
-        languagePicker.languages = options.languages
+        if options.languages.count > 1 {
+            languagePicker.languages = options.languages
+        } else {
+            toolbarView.language = options.languages[0]
+        }
 
         codeTextView.delegate = self
         
@@ -172,6 +176,7 @@ class CodeQuizViewController: QuizViewController {
             guard let s = self else { return }
             s.language = s.languagePicker.selectedData
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language])
+            s.toolbarView.language = s.language
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
@@ -187,13 +192,23 @@ class CodeQuizViewController: QuizViewController {
     }
     
     fileprivate func setQuizControls(enabled: Bool) {
+        guard let options = step.options else {
+            return
+        }
+
         codeTextView.isEditable = enabled
         toolbarView.fullscreenButton.isEnabled = enabled
         toolbarView.resetButton.isEnabled = enabled
-        toolbarView.languageButton.isEnabled = enabled
+        if options.languages.count > 1 {
+            toolbarView.languageButton.isEnabled = enabled
+        }
     }
     
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
+        guard let options = step.options else {
+            return
+        }
+        
         if submission?.status == "correct" {
             setQuizControls(enabled: false)
         } else {
@@ -201,7 +216,13 @@ class CodeQuizViewController: QuizViewController {
         }
         
         guard let reply = submission?.reply as? CodeReply else {
-            showPicker()
+            if options.languages.count > 1 {
+                showPicker()
+            } else {
+                language = options.languages[0]
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language])
+                delegate?.needsHeightUpdate(heightWithoutQuiz + expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
+            }
             return
         }
         
@@ -237,7 +258,13 @@ class CodeQuizViewController: QuizViewController {
 
 extension CodeQuizViewController : CodeQuizToolbarDelegate {
     func changeLanguagePressed() {
-        showPicker()
+        guard let options = step.options else {
+            return
+        }
+        
+        if options.languages.count > 1 {
+            showPicker()
+        }
     }
     
     func fullscreenPressed() {
