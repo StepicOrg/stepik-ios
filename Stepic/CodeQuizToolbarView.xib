@@ -14,6 +14,7 @@
                 <outlet property="fullscreenButton" destination="k3C-Yr-XzG" id="npq-wk-MBc"/>
                 <outlet property="languageButton" destination="suB-p4-Ypg" id="UWL-yZ-VFY"/>
                 <outlet property="resetButton" destination="uX2-ZG-muf" id="hBl-LG-wBz"/>
+                <outlet property="toolbar" destination="TAR-ZS-1C2" id="RBQ-b5-sq2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,7 +30,7 @@
                                 <action selector="languagePressed:" destination="-1" id="GHw-e9-fh0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="h1g-hF-yng"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zgO-sG-As9"/>
                         <barButtonItem title="Reset" id="uX2-ZG-muf">
                             <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>

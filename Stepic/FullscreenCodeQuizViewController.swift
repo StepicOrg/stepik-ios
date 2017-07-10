@@ -19,21 +19,57 @@ class FullscreenCodeQuizViewController: UIViewController {
     var codeTextView: UITextView = UITextView()
     
     var options: StepOptions!
-    var onDismissBlock : ((String, String)->Void)?
+    var onDismissBlock : ((CodeLanguage, String)->Void)?
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
     var highlightr : Highlightr!
     let textStorage = CodeAttributedString()
     
-    var language: String = "" {
+    let playgroundManager = CodePlaygroundManager()
+    var currentCode : String = "" {
         didSet {
-            textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
+            if let userTemplate = options.template(language: language, userGenerated: true) {
+                userTemplate.templateString = codeTextView.text
+            } else {
+                let newTemplate = CodeTemplate(language: language, template: codeTextView.text)
+                newTemplate.isUserGenerated = true
+                options.templates += [newTemplate]
+            }
+        }
+    }
+    
+    var tabSize: Int = 0
+    
+    var language: CodeLanguage = .unsupported {
+        didSet {
+            textStorage.language = language.highlightr
+            
+            if let template = options.template(language: language, userGenerated: false) {
+                tabSize = playgroundManager.countTabSize(text: template.templateString)
+            }
+            
+            //setting up input accessory view
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
+                [weak self] in
+                guard let s = self else { return }
+                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
+                }, insertStringAction: {
+                    [weak self]
+                    symbols in
+                    guard let s = self else { return }
+                    s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
+                    s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
+                    s.currentCode = s.codeTextView.text
+            })
+            
             if let userTemplate = options.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
+                currentCode = userTemplate.templateString
                 return
             }
             if let template = options.template(language: language, userGenerated: false) {
                 codeTextView.text = template.templateString
+                currentCode = template.templateString
                 return
             }
         }
@@ -60,7 +96,6 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
-        //        codeTextView.inputAccessoryView = textToolbar
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
         
         codeTextView.delegate = self
@@ -69,7 +104,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         let l = language
         language = l
         
-        languagePicker.languages = options.languages
+        languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
         
         toolbar.clipsToBounds = true
         doneItem.title = NSLocalizedString("Done", comment: "")
@@ -85,6 +120,11 @@ class FullscreenCodeQuizViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        doneItem.tintColor = UIColor.white
     }
 
     fileprivate func configureKeyboardNotifications() {
@@ -143,7 +183,6 @@ class FullscreenCodeQuizViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
     let changeLanguagePresentr : Presentr = {
         let changeLanguagePresentr = Presentr(presentationType: .bottomHalf)
         return changeLanguagePresentr
@@ -153,8 +192,13 @@ class FullscreenCodeQuizViewController: UIViewController {
         languagePicker.selectedBlock = {
             [weak self] in
             guard let s = self else { return }
-            s.language = s.languagePicker.selectedData
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "fullscreen", "language": s.language])
+            
+            guard let selectedLanguage = s.options?.languages.filter({$0.displayName == s.languagePicker.selectedData}).first else {
+                return
+            }
+            
+            s.language = selectedLanguage
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "fullscreen", "language": s.language.rawValue])
         }
         customPresentViewController(changeLanguagePresentr, viewController: languagePicker, animated: true, completion: nil)
     }
@@ -166,6 +210,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         }
         if let template = options.template(language: language, userGenerated: false) {
             codeTextView.text = template.templateString
+            currentCode = template.templateString
         }
         CoreDataHelper.instance.save()
     }
@@ -184,6 +229,10 @@ class FullscreenCodeQuizViewController: UIViewController {
 
 extension FullscreenCodeQuizViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
+        
+        currentCode = textView.text
+        
         if let userTemplate = options.template(language: language, userGenerated: true) {
             userTemplate.templateString = textView.text
         } else {
@@ -191,6 +240,17 @@ extension FullscreenCodeQuizViewController : UITextViewDelegate {
             newTemplate.isUserGenerated = true
             options.templates += [newTemplate]
         }
+        
         CoreDataHelper.instance.save()
     }
 }
+
+extension FullscreenCodeQuizViewController: CodeSuggestionDelegate {
+    func didSelectSuggestion(suggestion: String, prefix: String) {
+        codeTextView.becomeFirstResponder()
+        playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
+        playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
+        currentCode = codeTextView.text
+    }
+}
+
