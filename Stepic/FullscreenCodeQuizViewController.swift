@@ -96,7 +96,6 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
-        //        codeTextView.inputAccessoryView = textToolbar
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
         
         codeTextView.delegate = self
@@ -105,7 +104,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         let l = language
         language = l
         
-        languagePicker.languages = options.languages
+        languagePicker.languages = options.languages.sorted()
         
         toolbar.clipsToBounds = true
         doneItem.title = NSLocalizedString("Done", comment: "")

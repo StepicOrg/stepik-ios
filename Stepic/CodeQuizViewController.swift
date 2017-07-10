@@ -52,6 +52,8 @@ class CodeQuizViewController: QuizViewController {
                 tabSize = playgroundManager.countTabSize(text: template.templateString)
             }
             
+            toolbarView.language = language
+            
             //setting up input accessory view
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
                 [weak self] in
@@ -151,11 +153,7 @@ class CodeQuizViewController: QuizViewController {
             return
         }
         
-        if options.languages.count > 1 {
-            languagePicker.languages = options.languages
-        } else {
-            toolbarView.language = options.languages[0]
-        }
+        languagePicker.languages = options.languages.sorted()
 
         codeTextView.delegate = self
         
@@ -176,7 +174,6 @@ class CodeQuizViewController: QuizViewController {
             guard let s = self else { return }
             s.language = s.languagePicker.selectedData
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language])
-            s.toolbarView.language = s.language
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
