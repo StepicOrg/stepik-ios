@@ -8,7 +8,6 @@
 
 import UIKit
 import Koloda
-import SVProgressHUD
 
 class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     var presenter: AdaptiveStepsPresenter?
@@ -57,7 +56,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveStepsPresenter(view: self)
+        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, view: self)
     }
     
     override func viewDidLoad() {
@@ -116,14 +115,6 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
 
     func updateTopCard(cardState: StepCardView.CardState) {
         topCard?.cardState = cardState
-    }
-    
-    func showHud(withStatus: String) {
-        SVProgressHUD.show(withStatus: withStatus)
-    }
-    
-    func hideHud() {
-        SVProgressHUD.dismiss()
     }
 }
 

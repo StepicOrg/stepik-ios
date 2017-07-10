@@ -1,5 +1,5 @@
 //
-//  AdaptiveStepObserver.swift
+//  AdaptiveStepDelegate.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 04.05.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AdaptiveStepObserver: class {
+protocol AdaptiveStepDelegate: class {
     func stepSubmissionDidCorrect()
     func stepSubmissionDidWrong()
     func stepSubmissionDidRetry()
@@ -16,7 +16,7 @@ protocol AdaptiveStepObserver: class {
     func contentLoadingDidComplete()
 }
 
-extension AdaptiveStepObserver {
+extension AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() { }
     func stepSubmissionDidWrong() { }
     func stepSubmissionDidRetry() { }

@@ -15,7 +15,7 @@ class RecommendationsAPI {
     let reactionName = "recommendation-reactions"
     
     @discardableResult func getRecommendedLessonsId(course courseId: Int, count: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Int]) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)?course=\(courseId)&count=\(count)", headers: headers).responseSwiftyJSON(
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: ["course": courseId, "count": count], headers: headers).responseSwiftyJSON(
             {
                 response in
                 var error = response.result.error

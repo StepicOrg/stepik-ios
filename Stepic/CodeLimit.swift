@@ -12,6 +12,10 @@ import SwiftyJSON
 
 class CodeLimit: NSManagedObject {
     
+    var language : CodeLanguage {
+        return CodeLanguage(rawValue: languageString) ?? CodeLanguage.unsupported
+    }
+
     convenience required init(language: String, json: JSON) {
         self.init()
         initialize(language: language, json: json)
