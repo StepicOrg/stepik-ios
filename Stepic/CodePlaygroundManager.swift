@@ -64,11 +64,11 @@ class CodePlaygroundManager {
     }
     
     //Detects, if there should be made a new line after tab
-    fileprivate func shouldMakeTabLineAfter(symbol: Character, language: String) -> (shouldMakeNewLine: Bool, paired: Bool) {
+    fileprivate func shouldMakeTabLineAfter(symbol: Character, language: CodeLanguage) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
-        case "python3":
+        case .python:
             return symbol == ":" ? (shouldMakeNewLine: true, paired: false) : (shouldMakeNewLine: false, paired: false)
-        case "c", "c++11", "c++", "java", "java8", "mono c#":
+        case .c, .cpp11, .cpp, .java, .java8, .cs, .kotlin:
             return symbol == "{" ? (shouldMakeNewLine: true, paired: true) : (shouldMakeNewLine: false, paired: false)
         default:
             return (shouldMakeNewLine: false, paired: false)
@@ -98,7 +98,7 @@ class CodePlaygroundManager {
     }
     
     //Analyzes given text using parameters
-    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: String, tabSize: Int) -> (text: String, position: Int, autocomplete: Autocomplete?) {
+    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int) -> (text: String, position: Int, autocomplete: Autocomplete?) {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
         
         var text = currentText
@@ -259,7 +259,7 @@ class CodePlaygroundManager {
         }
     }
     
-    func analyzeAndComplete(textView: UITextView, previousText: String, language: String, tabSize: Int, inViewController vc: UIViewController, suggestionsDelegate: CodeSuggestionDelegate) {
+    func analyzeAndComplete(textView: UITextView, previousText: String, language: CodeLanguage, tabSize: Int, inViewController vc: UIViewController, suggestionsDelegate: CodeSuggestionDelegate) {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
             

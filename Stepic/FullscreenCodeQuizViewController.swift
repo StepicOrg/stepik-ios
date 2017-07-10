@@ -19,7 +19,7 @@ class FullscreenCodeQuizViewController: UIViewController {
     var codeTextView: UITextView = UITextView()
     
     var options: StepOptions!
-    var onDismissBlock : ((String, String)->Void)?
+    var onDismissBlock : ((CodeLanguage, String)->Void)?
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
     var highlightr : Highlightr!
@@ -40,9 +40,9 @@ class FullscreenCodeQuizViewController: UIViewController {
     
     var tabSize: Int = 0
     
-    var language: String = "" {
+    var language: CodeLanguage = .unsupported {
         didSet {
-            textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
+            textStorage.language = language.highlightr
             
             if let template = options.template(language: language, userGenerated: false) {
                 tabSize = playgroundManager.countTabSize(text: template.templateString)
@@ -104,7 +104,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         let l = language
         language = l
         
-        languagePicker.languages = options.languages.sorted()
+        languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
         
         toolbar.clipsToBounds = true
         doneItem.title = NSLocalizedString("Done", comment: "")
@@ -192,8 +192,13 @@ class FullscreenCodeQuizViewController: UIViewController {
         languagePicker.selectedBlock = {
             [weak self] in
             guard let s = self else { return }
-            s.language = s.languagePicker.selectedData
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "fullscreen", "language": s.language])
+            
+            guard let selectedLanguage = s.options?.languages.filter({$0.displayName == s.languagePicker.selectedData}).first else {
+                return
+            }
+            
+            s.language = selectedLanguage
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "fullscreen", "language": s.language.rawValue])
         }
         customPresentViewController(changeLanguagePresentr, viewController: languagePicker, animated: true, completion: nil)
     }

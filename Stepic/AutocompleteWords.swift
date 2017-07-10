@@ -10,26 +10,26 @@ import Foundation
 
 struct AutocompleteWords {
     
-    static func autocompleteFor(_ text: String, language: String) -> [String] {
+    static func autocompleteFor(_ text: String, language: CodeLanguage) -> [String] {
         var suggestions: [String] = []
         
         switch language {
-        case "python3":
+        case .python:
             suggestions = python
             break
-        case "c++", "c++11":
+        case .cpp, .cpp11:
             suggestions = cpp
             break
-        case "cs":
+        case .cs:
             suggestions = cs
             break
-        case "java", "java8":
+        case .java, .java8:
             suggestions = java
             break
-        case "javascript":
+        case .javascript:
             suggestions = js
             break
-        case "ruby":
+        case .ruby:
             suggestions = ruby
             break
         default:

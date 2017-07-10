@@ -15,11 +15,11 @@ struct CodeSnippetSymbols {
         return cpp
     }
     
-    static func snippets(language: String) -> [String] {
+    static func snippets(language: CodeLanguage) -> [String] {
         switch language {
-        case "python3" :
+        case .python :
             return python
-        case "java", "java8" :
+        case .java, .java8 :
             return java
         default:
             return cpp

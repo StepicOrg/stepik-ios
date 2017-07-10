@@ -41,9 +41,9 @@ class CodeQuizViewController: QuizViewController {
     
     var tabSize: Int = 0
     
-    var language: String = "" {
+    var language: CodeLanguage = CodeLanguage.unsupported {
         didSet {
-            textStorage.language = Languages.highligtrFromStepik[language.lowercased()]
+            textStorage.language = language.highlightr
             if let limit = step.options?.limit(language: language) {
                 setLimits(time: limit.time, memory: limit.memory)
             }
@@ -52,7 +52,7 @@ class CodeQuizViewController: QuizViewController {
                 tabSize = playgroundManager.countTabSize(text: template.templateString)
             }
             
-            toolbarView.language = language
+            toolbarView.language = language.displayName
             
             //setting up input accessory view
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
@@ -85,7 +85,7 @@ class CodeQuizViewController: QuizViewController {
         guard let step = step else {
             return nil
         }
-        var params: [String: Any]? = ["stepId" : step.id, "language": language]
+        var params: [String: Any]? = ["stepId" : step.id, "language": language.rawValue]
         
         if let course = step.lesson?.unit?.section?.course?.id  {
             params?["course"] = course
@@ -153,7 +153,7 @@ class CodeQuizViewController: QuizViewController {
             return
         }
         
-        languagePicker.languages = options.languages.sorted()
+        languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
 
         codeTextView.delegate = self
         
@@ -172,8 +172,13 @@ class CodeQuizViewController: QuizViewController {
         languagePicker.selectedBlock = {
             [weak self] in
             guard let s = self else { return }
-            s.language = s.languagePicker.selectedData
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language])
+            
+            guard let selectedLanguage = s.step.options?.languages.filter({$0.displayName == s.languagePicker.selectedData}).first else {
+                return
+            }
+            
+            s.language = selectedLanguage
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language.rawValue])
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
@@ -217,7 +222,7 @@ class CodeQuizViewController: QuizViewController {
                 showPicker()
             } else {
                 language = options.languages[0]
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language])
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language.rawValue])
                 delegate?.needsHeightUpdate(heightWithoutQuiz + expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
             return
@@ -307,7 +312,7 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
 
 extension CodeQuizViewController : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        guard let options = step.options else {
+        guard step.options != nil else {
             return
         }
         
