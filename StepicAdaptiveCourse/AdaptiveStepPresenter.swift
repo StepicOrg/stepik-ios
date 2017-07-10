@@ -26,7 +26,7 @@ protocol AdaptiveStepView: class {
 
 class AdaptiveStepPresenter {
     weak var view: AdaptiveStepView?
-    weak var observer: AdaptiveStepObserver?
+    weak var delegate: AdaptiveStepDelegate?
     
     var step: Step!
     
@@ -45,7 +45,7 @@ class AdaptiveStepPresenter {
         quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
         guard let quizViewController = quizViewController else {
             print("quizVC init failed")
-            observer?.contentLoadingDidFail()
+            delegate?.contentLoadingDidFail()
             return
         }
         quizViewController.step = step
@@ -55,8 +55,8 @@ class AdaptiveStepPresenter {
         quizViewController.isSubmitButtonHidden = true
     }
     
-    func problemDidLoaded() {
-        observer?.contentLoadingDidComplete()
+    func problemDidLoad() {
+        delegate?.contentLoadingDidComplete()
     }
     
     // :(
@@ -94,20 +94,20 @@ extension AdaptiveStepPresenter: QuizControllerDelegate {
     }
     
     func submissionDidCorrect() {
-        observer?.stepSubmissionDidCorrect()
+        delegate?.stepSubmissionDidCorrect()
         quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidWrong() {
-        observer?.stepSubmissionDidWrong()
+        delegate?.stepSubmissionDidWrong()
         quizViewController?.isSubmitButtonHidden = true
     }
     
     func submissionDidRetry() {
-        observer?.stepSubmissionDidRetry()
+        delegate?.stepSubmissionDidRetry()
     }
     
     func didWarningPlaceholderShow() {
-        observer?.contentLoadingDidFail()
+        delegate?.contentLoadingDidFail()
     }
 }

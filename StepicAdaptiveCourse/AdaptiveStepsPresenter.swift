@@ -381,7 +381,7 @@ class AdaptiveStepsPresenter {
                     }
 
                     let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, step: step)
-                    adaptiveStepPresenter.observer = self
+                    adaptiveStepPresenter.delegate = self
                     stepViewController.presenter = adaptiveStepPresenter
                     self?.currentStepPresenter = adaptiveStepPresenter
                     
@@ -452,7 +452,7 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
     }
 }
 
-extension AdaptiveStepsPresenter: AdaptiveStepObserver {
+extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
         view?.updateTopCardControl(stepState: .successful)
     }
