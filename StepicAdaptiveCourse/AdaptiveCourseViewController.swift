@@ -83,7 +83,7 @@ class AdaptiveCourseViewController: UIViewController {
             print("failed performing API request -> dismiss and logout")
             self.dismiss(animated: false) {
                 if let vc = self.parent as? AdaptiveStepsViewController {
-                    vc.logout()
+                    vc.presenter?.logout()
                 }
             }
         })
