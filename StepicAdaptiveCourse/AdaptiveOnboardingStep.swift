@@ -9,14 +9,17 @@
 import Foundation
 
 enum AdaptiveOnboardingAction {
-    case swipeLeft
-    case swipeRight
-    case clickButton
+    case swipeLeft    // user should swipe left
+    case swipeRight   // user should swipe right
+    case clickButton  // user should click button
 }
 
 struct AdaptiveOnboardingStep {
+    // We load html, so we should know base url
+    typealias TextContent = (text: String?, baseURL: URL?)
+    
     let title: String
-    let text: String
+    let content: TextContent
     let requiredActions: [AdaptiveOnboardingAction]
     let buttonTitle: String
     let isButtonHidden: Bool

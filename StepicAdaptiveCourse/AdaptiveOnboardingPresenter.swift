@@ -15,15 +15,16 @@ protocol AdaptiveOnboardingView: class {
 class AdaptiveOnboardingPresenter {
     weak var view: AdaptiveOnboardingView?
     
-    let onboardingSteps = [
-        AdaptiveOnboardingStep(title: "Добро пожаловать", text: "Добро пожаловать!", requiredActions: [.clickButton], buttonTitle: "Далее", isButtonHidden: false),
-        AdaptiveOnboardingStep(title: "Смахивание влево", text: "Смахните влево, если сложно", requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
-        AdaptiveOnboardingStep(title: "Смахивание вправо", text: "Смахните вправо, если легко", requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true),
-    ]
+    private var onboardingSteps: [AdaptiveOnboardingStep] = []
     private var onboardingStepIndex = 0
     
     init(view: AdaptiveOnboardingView) {
         self.view = view
+        
+        onboardingSteps = [AdaptiveOnboardingStep(title: "Добро пожаловать", content: loadOnboardingStep(from: "step1"), requiredActions: [.clickButton], buttonTitle: "Далее", isButtonHidden: false),
+        AdaptiveOnboardingStep(title: "Смахивание влево", content: loadOnboardingStep(from: "step2"), requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
+        AdaptiveOnboardingStep(title: "Смахивание вправо", content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true)
+        ]
     }
     
     func getNextCardData() -> AdaptiveOnboardingStep? {
@@ -38,5 +39,20 @@ class AdaptiveOnboardingPresenter {
     
     func finishOnboarding() {
         view?.finishOnboarding()
+    }
+    
+    fileprivate func loadOnboardingStep(from file: String) -> AdaptiveOnboardingStep.TextContent {
+        guard let filePath = Bundle.main.path(forResource: file, ofType: "html") else {
+            return (text: nil, baseURL: nil)
+        }
+    
+        do {
+            let contents = try String(contentsOfFile: filePath, encoding: .utf8)
+            print(contents)
+            let baseUrl = URL(fileURLWithPath: filePath)
+            return (text: contents, baseURL: baseUrl)
+        } catch {
+            return (text: nil, baseURL: nil)
+        }
     }
 }

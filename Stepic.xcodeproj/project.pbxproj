@@ -855,6 +855,12 @@
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
+		2CFB1C641F14CC9C00CD0A4C /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C581F14C89900CD0A4C /* step1.html */; };
+		2CFB1C651F14CC9F00CD0A4C /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C591F14C89900CD0A4C /* step2.html */; };
+		2CFB1C661F14CCA200CD0A4C /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5A1F14C89900CD0A4C /* step3.html */; };
+		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
+		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
+		2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5D1F14C89900CD0A4C /* icon.png */; };
 		53CE540C11629B4C8BF58C65 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
@@ -1236,8 +1242,6 @@
 		86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
 		86B56EAF1EC38F9600CFE4A3 /* StepikAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* StepikAuth.plist */; };
 		86B916251E849548000C2842 /* AdaptiveCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */; };
-		86B96CE81EA931B7007A0995 /* AdaptiveTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */; };
-		86B96CEB1EA95126007A0995 /* AdaptiveTutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */; };
 		86CAFD411EBBB6DF00AF6E2A /* AdaptiveStepDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
@@ -1806,6 +1810,12 @@
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		2CFB1C581F14C89900CD0A4C /* step1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step1.html; path = OnboardingContent/step1.html; sourceTree = "<group>"; };
+		2CFB1C591F14C89900CD0A4C /* step2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step2.html; path = OnboardingContent/step2.html; sourceTree = "<group>"; };
+		2CFB1C5A1F14C89900CD0A4C /* step3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step3.html; path = OnboardingContent/step3.html; sourceTree = "<group>"; };
+		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
+		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
+		2CFB1C5D1F14C89900CD0A4C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = OnboardingContent/icon.png; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1838,8 +1848,6 @@
 		86B56E981EC0E11A00CFE4A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		86B56E9A1EC0E11F00CFE4A3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseViewController.swift; sourceTree = "<group>"; };
-		86B96CE71EA931B7007A0995 /* AdaptiveTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialViewController.swift; sourceTree = "<group>"; };
-		86B96CEA1EA95125007A0995 /* AdaptiveTutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveTutorialPageViewController.swift; sourceTree = "<group>"; };
 		86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepDelegate.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* Adaptive 1838.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 1838.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -3445,6 +3453,27 @@
 			name = AdaptiveOnboarding;
 			sourceTree = "<group>";
 		};
+		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2CFB1C531F14C81100CD0A4C /* Onboarding content */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2CFB1C531F14C81100CD0A4C /* Onboarding content */ = {
+			isa = PBXGroup;
+			children = (
+				2CFB1C581F14C89900CD0A4C /* step1.html */,
+				2CFB1C591F14C89900CD0A4C /* step2.html */,
+				2CFB1C5A1F14C89900CD0A4C /* step3.html */,
+				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
+				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
+				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
+			);
+			name = "Onboarding content";
+			sourceTree = "<group>";
+		};
 		860DB79E1EB90505001E3E42 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -3516,6 +3545,7 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
+				2CFB1C521F14C7EA00CD0A4C /* Supporting Files */,
 				2C03B2A21F0CD84900005383 /* Helpers */,
 				0808527A1ED752DE007C0877 /* GoogleService-Info.plist */,
 				860DB79E1EB90505001E3E42 /* Images */,
@@ -3990,16 +4020,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CFB1C661F14CCA200CD0A4C /* step3.html in Resources */,
 				08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */,
 				08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */,
 				86B56EAF1EC38F9600CFE4A3 /* StepikAuth.plist in Resources */,
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
+				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
 				86830FB71EB4A2FD00CA0E42 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
 				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				860DB7A61EB90555001E3E42 /* overlay_hard.png in Resources */,
+				2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
 				860DB7A31EB9054B001E3E42 /* overlay_simple.png in Resources */,
 				08A7B0E61EB32E3F00C1BA71 /* AdaptiveAuth.plist in Resources */,
@@ -4017,7 +4050,9 @@
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
+				2CFB1C651F14CC9F00CD0A4C /* step2.html in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
+				2CFB1C641F14CC9C00CD0A4C /* step1.html in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
@@ -4051,6 +4086,7 @@
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
+				2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */,
 				863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

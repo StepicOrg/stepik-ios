@@ -76,11 +76,13 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 requiredActions = cardData.requiredActions
                 
                 let webview = UIWebView()
-                webview.isUserInteractionEnabled = false
+                webview.backgroundColor = UIColor.clear
                 card?.addContentSubview(webview)
-                var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "", body: cardData.text, width: Int(UIScreen.main.bounds.width))
+                
+                // Add small top padding
+                var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "<style>\nbody{padding-top: 8px;}</style>\n", body: cardData.content.text ?? "", width: Int(UIScreen.main.bounds.width))
                 html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                webview.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+                webview.loadHTMLString(html, baseURL: cardData.content.baseURL ?? nil)
                 
                 card?.controlButton.setTitle(cardData.buttonTitle, for: .normal)
                 card?.controlButton.isHidden = cardData.isButtonHidden
