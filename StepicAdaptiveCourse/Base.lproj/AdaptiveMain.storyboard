@@ -10,18 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Adaptive Tutorial View Controller-->
-        <scene sceneID="CI4-MM-aft">
-            <objects>
-                <pageViewController storyboardIdentifier="AdaptiveTutorial" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XJA-TY-jvO" customClass="AdaptiveTutorialViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wo0-BU-Eon" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1194" y="1462"/>
-        </scene>
         <!--Adaptive Course View Controller-->
         <scene sceneID="EOF-rR-jAh">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveCourseInfo" id="ZJG-W2-va5" customClass="AdaptiveCourseViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveCourseInfo" id="ZJG-W2-va5" customClass="AdaptiveCourseViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p1D-Lp-eLG"/>
                         <viewControllerLayoutGuide type="bottom" id="c5c-qX-SLk"/>
@@ -144,7 +136,7 @@
         <!--Adaptive Step View Controller-->
         <scene sceneID="0gR-Yw-kZD">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveStepViewController" id="eJP-Ja-phW" customClass="AdaptiveStepViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveStepViewController" id="eJP-Ja-phW" customClass="AdaptiveStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aeI-qb-4nR"/>
                         <viewControllerLayoutGuide type="bottom" id="jVy-dP-WyP"/>
@@ -216,7 +208,7 @@
         <!--Adaptive Steps View Controller-->
         <scene sceneID="pVF-Bu-Kgp">
             <objects>
-                <viewController storyboardIdentifier="AdaptiveStepsViewController" id="6Dd-WV-Z8n" customClass="AdaptiveStepsViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveStepsViewController" id="6Dd-WV-Z8n" customClass="AdaptiveStepsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hF7-0Z-sGm"/>
                         <viewControllerLayoutGuide type="bottom" id="N8f-j4-uap"/>
@@ -290,285 +282,86 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="35.532233883058474"/>
+            <point key="canvasLocation" x="2700" y="35"/>
         </scene>
-        <!--Adaptive Tutorial Page View Controller-->
-        <scene sceneID="bOg-fP-yEO">
+        <!--Adaptive Onboarding View Controller-->
+        <scene sceneID="6gq-w2-TMy">
             <objects>
-                <viewController storyboardIdentifier="TutorialPage1ViewController" id="CdL-OX-nbz" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdaptiveOnboardingViewController" id="dO4-9U-KaY" customClass="AdaptiveOnboardingViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pnY-Qi-pIO"/>
-                        <viewControllerLayoutGuide type="bottom" id="41T-19-vST"/>
+                        <viewControllerLayoutGuide type="top" id="jCB-kh-4ek"/>
+                        <viewControllerLayoutGuide type="bottom" id="N8t-Ky-94v"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mCS-TG-HBo">
+                    <view key="view" contentMode="scaleToFill" id="IJD-wz-J8B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feD-eT-U7I">
-                                <rect key="frame" x="16" y="514.5" width="343" height="26"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Решайте задания, которые Вам предлагает система" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggs-a8-mwe">
-                                <rect key="frame" x="16" y="548.5" width="343" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial1" translatesAutoresizingMaskIntoConstraints="NO" id="gEe-oa-Z7i">
-                                <rect key="frame" x="40" y="45" width="295" height="469.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="JWa-Wh-BQJ"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="feD-eT-U7I" firstAttribute="leading" secondItem="mCS-TG-HBo" secondAttribute="leadingMargin" id="0S6-uK-MtP"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gEe-oa-Z7i" secondAttribute="trailing" constant="40" id="2WP-Q2-cJR"/>
-                            <constraint firstItem="gEe-oa-Z7i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mCS-TG-HBo" secondAttribute="leading" constant="40" id="7x4-SU-ei5"/>
-                            <constraint firstItem="Ggs-a8-mwe" firstAttribute="top" secondItem="feD-eT-U7I" secondAttribute="bottom" constant="8" id="8BB-zQ-HlM"/>
-                            <constraint firstItem="gEe-oa-Z7i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pnY-Qi-pIO" secondAttribute="bottom" constant="25" id="mlD-T5-O8H"/>
-                            <constraint firstItem="Ggs-a8-mwe" firstAttribute="leading" secondItem="mCS-TG-HBo" secondAttribute="leadingMargin" id="nUC-wi-C9b"/>
-                            <constraint firstItem="feD-eT-U7I" firstAttribute="top" secondItem="gEe-oa-Z7i" secondAttribute="bottom" id="uJt-bP-rN2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ggs-a8-mwe" secondAttribute="trailing" id="v7s-bp-Ngw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="feD-eT-U7I" secondAttribute="trailing" id="w7H-bg-Oz6"/>
-                            <constraint firstItem="41T-19-vST" firstAttribute="top" secondItem="Ggs-a8-mwe" secondAttribute="bottom" constant="80" id="wgH-Lu-zg7"/>
-                            <constraint firstItem="gEe-oa-Z7i" firstAttribute="centerX" secondItem="mCS-TG-HBo" secondAttribute="centerX" id="zki-d8-agJ"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fy8-G5-sms" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1874" y="1461"/>
-        </scene>
-        <!--Adaptive Tutorial Page View Controller-->
-        <scene sceneID="anG-8Q-qQD">
-            <objects>
-                <viewController storyboardIdentifier="TutorialPage2ViewController" id="s9w-wJ-WaB" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Upn-JB-63m"/>
-                        <viewControllerLayoutGuide type="bottom" id="b6V-42-HFZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9GZ-Dl-knS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iw-z3-Xp8">
-                                <rect key="frame" x="16" y="514.5" width="343" height="26"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смахните карточку вправо, если задание кажется Вам слишком простым" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI5-nN-kWq">
-                                <rect key="frame" x="16" y="548.5" width="343" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial2" translatesAutoresizingMaskIntoConstraints="NO" id="Vp3-Vl-8Fx">
-                                <rect key="frame" x="40" y="45" width="295" height="469.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="f6U-F2-vFj"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vp3-Vl-8Fx" secondAttribute="trailing" constant="40" id="1mo-2g-6xe"/>
-                            <constraint firstItem="0iw-z3-Xp8" firstAttribute="top" secondItem="Vp3-Vl-8Fx" secondAttribute="bottom" id="9h3-dO-WDG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KI5-nN-kWq" secondAttribute="trailing" id="BwB-Jb-fSu"/>
-                            <constraint firstItem="KI5-nN-kWq" firstAttribute="leading" secondItem="9GZ-Dl-knS" secondAttribute="leadingMargin" id="KTo-7r-pbs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0iw-z3-Xp8" secondAttribute="trailing" id="LRI-WU-axB"/>
-                            <constraint firstItem="KI5-nN-kWq" firstAttribute="top" secondItem="0iw-z3-Xp8" secondAttribute="bottom" constant="8" id="Wyr-v2-h4C"/>
-                            <constraint firstItem="b6V-42-HFZ" firstAttribute="top" secondItem="KI5-nN-kWq" secondAttribute="bottom" constant="80" id="ZBF-ux-uzf"/>
-                            <constraint firstItem="Vp3-Vl-8Fx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9GZ-Dl-knS" secondAttribute="leading" constant="40" id="aLe-oV-6Co"/>
-                            <constraint firstItem="0iw-z3-Xp8" firstAttribute="leading" secondItem="9GZ-Dl-knS" secondAttribute="leadingMargin" id="d31-TC-J2c"/>
-                            <constraint firstItem="Vp3-Vl-8Fx" firstAttribute="centerX" secondItem="9GZ-Dl-knS" secondAttribute="centerX" id="pCt-Ye-Jfz"/>
-                            <constraint firstItem="Vp3-Vl-8Fx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Upn-JB-63m" secondAttribute="bottom" constant="25" id="xLH-6x-7IH"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0T9-ge-2to" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2589.5999999999999" y="1460.4197901049477"/>
-        </scene>
-        <!--Adaptive Tutorial Page View Controller-->
-        <scene sceneID="S6e-wP-YQI">
-            <objects>
-                <viewController storyboardIdentifier="TutorialPage3ViewController" id="MoA-HZ-Few" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="SYg-HM-CEL"/>
-                        <viewControllerLayoutGuide type="bottom" id="We9-qV-H7a"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0ph-5s-Wpe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjp-nj-PEr">
-                                <rect key="frame" x="16" y="514.5" width="343" height="26"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Смахните карточку влево, если задание кажется Вам слишком сложным" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgL-k5-S5d">
-                                <rect key="frame" x="16" y="548.5" width="343" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial3" translatesAutoresizingMaskIntoConstraints="NO" id="AwG-D0-vBK">
-                                <rect key="frame" x="40" y="45" width="295" height="469.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="rc6-tO-weG"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="pgL-k5-S5d" secondAttribute="trailing" id="6dP-B1-mbz"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AwG-D0-vBK" secondAttribute="trailing" constant="40" id="CoZ-gB-4Uu"/>
-                            <constraint firstItem="pgL-k5-S5d" firstAttribute="top" secondItem="Tjp-nj-PEr" secondAttribute="bottom" constant="8" id="IIb-Tp-sOW"/>
-                            <constraint firstItem="Tjp-nj-PEr" firstAttribute="leading" secondItem="0ph-5s-Wpe" secondAttribute="leadingMargin" id="QCq-KM-Wch"/>
-                            <constraint firstItem="AwG-D0-vBK" firstAttribute="centerX" secondItem="0ph-5s-Wpe" secondAttribute="centerX" id="UF0-ia-Lq2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Tjp-nj-PEr" secondAttribute="trailing" id="fYP-um-kBD"/>
-                            <constraint firstItem="We9-qV-H7a" firstAttribute="top" secondItem="pgL-k5-S5d" secondAttribute="bottom" constant="80" id="jDl-C9-gqJ"/>
-                            <constraint firstItem="pgL-k5-S5d" firstAttribute="leading" secondItem="0ph-5s-Wpe" secondAttribute="leadingMargin" id="kEp-Mq-ar3"/>
-                            <constraint firstItem="Tjp-nj-PEr" firstAttribute="top" secondItem="AwG-D0-vBK" secondAttribute="bottom" id="o2W-bd-cfh"/>
-                            <constraint firstItem="AwG-D0-vBK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0ph-5s-Wpe" secondAttribute="leading" constant="40" id="v9a-fw-MOY"/>
-                            <constraint firstItem="AwG-D0-vBK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SYg-HM-CEL" secondAttribute="bottom" constant="25" id="xSa-fy-R14"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zXk-wM-OUJ" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3270" y="1461"/>
-        </scene>
-        <!--Adaptive Tutorial Page View Controller-->
-        <scene sceneID="Qsg-kD-1dY">
-            <objects>
-                <viewController storyboardIdentifier="TutorialPage5ViewController" id="wyJ-wO-Dun" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aAm-Pz-DA5"/>
-                        <viewControllerLayoutGuide type="bottom" id="LgM-zI-WCO"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WZ8-FZ-No6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3F-AI-k5h">
-                                <rect key="frame" x="16" y="513" width="343" height="26"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJE-sh-DRy">
-                                <rect key="frame" x="95" y="555" width="185" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guz-jK-I7X">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Trh-Zi-xdF"/>
-                                    <constraint firstAttribute="width" constant="185" id="WR5-hP-vjT"/>
+                                    <constraint firstAttribute="height" constant="60" id="z3R-iG-V3d"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <state key="normal" title="Начать обучение">
-                                    <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onStartLearningButtonClick:" destination="wyJ-wO-Dun" eventType="touchUpInside" id="nZA-FG-8s2"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial5" translatesAutoresizingMaskIntoConstraints="NO" id="HtT-Ko-oTM">
-                                <rect key="frame" x="40" y="45" width="295" height="468"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="4x2-d7-jPH"/>
-                                </constraints>
-                            </imageView>
+                            </view>
+                            <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eke-nP-u1Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <navigationItem id="rpu-J0-Ui5">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="QrV-Bx-AGX">
+                                            <color key="tintColor" red="0.40000000600000002" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="9NP-FY-TlU">
+                                            <rect key="frame" x="112.5" y="5.5" width="150" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepic_logotype_square_green" translatesAutoresizingMaskIntoConstraints="NO" id="jSC-iu-ud8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="33"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="jSC-iu-ud8" secondAttribute="bottom" id="093-xW-tH4"/>
+                                                <constraint firstAttribute="trailing" secondItem="jSC-iu-ud8" secondAttribute="trailing" id="3Ft-2w-gu7"/>
+                                                <constraint firstItem="jSC-iu-ud8" firstAttribute="leading" secondItem="9NP-FY-TlU" secondAttribute="leading" id="8Nv-EU-kat"/>
+                                                <constraint firstItem="jSC-iu-ud8" firstAttribute="top" secondItem="9NP-FY-TlU" secondAttribute="top" id="8nn-Vv-3bH"/>
+                                            </constraints>
+                                        </view>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJT-Mo-up5" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="12" y="70" width="351" height="581"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="s3F-AI-k5h" firstAttribute="leading" secondItem="WZ8-FZ-No6" secondAttribute="leadingMargin" id="JgR-Jk-aFp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="s3F-AI-k5h" secondAttribute="trailing" id="PFC-uV-Vts"/>
-                            <constraint firstItem="HtT-Ko-oTM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WZ8-FZ-No6" secondAttribute="leading" constant="40" id="Wy0-PM-Tep"/>
-                            <constraint firstItem="HtT-Ko-oTM" firstAttribute="centerX" secondItem="WZ8-FZ-No6" secondAttribute="centerX" id="aIV-Du-I6X"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HtT-Ko-oTM" secondAttribute="trailing" constant="40" id="gh7-eJ-pdG"/>
-                            <constraint firstItem="HtT-Ko-oTM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aAm-Pz-DA5" secondAttribute="bottom" constant="25" id="oZt-6y-4dC"/>
-                            <constraint firstItem="s3F-AI-k5h" firstAttribute="top" secondItem="HtT-Ko-oTM" secondAttribute="bottom" id="pyZ-UT-JHg"/>
-                            <constraint firstItem="fJE-sh-DRy" firstAttribute="top" secondItem="s3F-AI-k5h" secondAttribute="bottom" constant="16" id="qJ5-Zf-4Wc"/>
-                            <constraint firstItem="fJE-sh-DRy" firstAttribute="centerX" secondItem="WZ8-FZ-No6" secondAttribute="centerX" id="u4h-gB-s0L"/>
-                            <constraint firstItem="LgM-zI-WCO" firstAttribute="top" secondItem="fJE-sh-DRy" secondAttribute="bottom" constant="62" id="v1K-Pe-73d"/>
+                            <constraint firstAttribute="trailing" secondItem="aJT-Mo-up5" secondAttribute="trailing" constant="12" id="7sX-1r-LpB"/>
+                            <constraint firstItem="guz-jK-I7X" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" id="FU8-pW-wUt"/>
+                            <constraint firstItem="aJT-Mo-up5" firstAttribute="top" secondItem="eke-nP-u1Z" secondAttribute="bottom" constant="6" id="Ibf-ap-5gm"/>
+                            <constraint firstItem="eke-nP-u1Z" firstAttribute="top" secondItem="jCB-kh-4ek" secondAttribute="bottom" id="MON-Fl-L5C"/>
+                            <constraint firstAttribute="trailing" secondItem="guz-jK-I7X" secondAttribute="trailing" id="SSM-m7-6Xi"/>
+                            <constraint firstItem="aJT-Mo-up5" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" constant="12" id="a7A-xY-o8n"/>
+                            <constraint firstItem="eke-nP-u1Z" firstAttribute="leading" secondItem="IJD-wz-J8B" secondAttribute="leading" id="f3K-jF-udC"/>
+                            <constraint firstAttribute="trailing" secondItem="eke-nP-u1Z" secondAttribute="trailing" id="kEk-Za-G84"/>
+                            <constraint firstItem="N8t-Ky-94v" firstAttribute="top" secondItem="aJT-Mo-up5" secondAttribute="bottom" constant="16" id="lyA-PA-bFB"/>
+                            <constraint firstItem="guz-jK-I7X" firstAttribute="top" secondItem="IJD-wz-J8B" secondAttribute="top" id="wIy-TV-jtz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="kolodaView" destination="aJT-Mo-up5" id="loK-Ke-nAG"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mz2-bU-v0w" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQ7-1h-hNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4660" y="1461"/>
-        </scene>
-        <!--Adaptive Tutorial Page View Controller-->
-        <scene sceneID="g73-Uc-hLN">
-            <objects>
-                <viewController storyboardIdentifier="TutorialPage4ViewController" id="Jef-5v-arH" customClass="AdaptiveTutorialPageViewController" customModule="Adaptive_PDD" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RMj-rl-hjO"/>
-                        <viewControllerLayoutGuide type="bottom" id="TBr-l9-OD5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8Nz-8M-07l">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Адаптивное обучение" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLf-c9-5Rm">
-                                <rect key="frame" x="16" y="514.5" width="343" height="26"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Перейдите к следующему заданию или смахните карточку с решенным заданием" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DcR-3J-IFa">
-                                <rect key="frame" x="16" y="548.5" width="343" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tutorial4" translatesAutoresizingMaskIntoConstraints="NO" id="P7V-iV-I3c">
-                                <rect key="frame" x="40" y="45" width="295" height="469.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="O67-pI-kK8"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="DcR-3J-IFa" firstAttribute="leading" secondItem="8Nz-8M-07l" secondAttribute="leadingMargin" id="Amh-K9-96c"/>
-                            <constraint firstItem="P7V-iV-I3c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Nz-8M-07l" secondAttribute="leading" constant="40" id="B0B-MW-VvV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DcR-3J-IFa" secondAttribute="trailing" id="JZh-KQ-2yU"/>
-                            <constraint firstItem="P7V-iV-I3c" firstAttribute="centerX" secondItem="8Nz-8M-07l" secondAttribute="centerX" id="Wbg-Db-WtR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZLf-c9-5Rm" secondAttribute="trailing" id="Y2M-QA-O0J"/>
-                            <constraint firstItem="TBr-l9-OD5" firstAttribute="top" secondItem="DcR-3J-IFa" secondAttribute="bottom" constant="80" id="eUT-Tv-iKO"/>
-                            <constraint firstItem="ZLf-c9-5Rm" firstAttribute="top" secondItem="P7V-iV-I3c" secondAttribute="bottom" id="jt0-eg-P8E"/>
-                            <constraint firstItem="DcR-3J-IFa" firstAttribute="top" secondItem="ZLf-c9-5Rm" secondAttribute="bottom" constant="8" id="o2f-pT-FMG"/>
-                            <constraint firstItem="ZLf-c9-5Rm" firstAttribute="leading" secondItem="8Nz-8M-07l" secondAttribute="leadingMargin" id="onO-NL-X4i"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P7V-iV-I3c" secondAttribute="trailing" constant="40" id="qoa-7c-zuk"/>
-                            <constraint firstItem="P7V-iV-I3c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RMj-rl-hjO" secondAttribute="bottom" constant="25" id="uua-P7-9dp"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZoR-yl-yHL" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3960.8000000000002" y="1460.4197901049477"/>
+            <point key="canvasLocation" x="2700" y="-702"/>
         </scene>
     </scenes>
     <resources>
         <image name="Circled User Male" width="25" height="25"/>
         <image name="stepic_logo_black_and_white" width="228" height="228"/>
         <image name="stepic_logotype_square_green" width="1000" height="1000"/>
-        <image name="tutorial1" width="588" height="900"/>
-        <image name="tutorial2" width="588" height="900"/>
-        <image name="tutorial3" width="588" height="900"/>
-        <image name="tutorial4" width="588" height="900"/>
-        <image name="tutorial5" width="588" height="900"/>
     </resources>
 </document>

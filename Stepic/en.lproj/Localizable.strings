@@ -234,4 +234,6 @@ Language = "Language";
 Fullscreen = "Fullscreen";
 SelectLanguage = "Select language";
 Done = "Done";
-
+SwipeLeftTitle = "Swipe left";
+SwipeRightTitle = "Swipe right";
+WelcomeTitle = "Welcome";

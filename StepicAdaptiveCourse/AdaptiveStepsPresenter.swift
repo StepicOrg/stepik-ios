@@ -23,9 +23,6 @@ protocol AdaptiveStepsView: class {
     func updateTopCardControl(stepState: AdaptiveStepState)
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
-    
-    func showHud(withStatus: String)
-    func hideHud()
 }
 
 class AdaptiveStepsPresenter {
@@ -47,6 +44,7 @@ class AdaptiveStepsPresenter {
     var isJoinedCourse = false
     var isRecommendationLoaded = false
     var isCurrentCardDone = false
+    var isOnboardingPassed = false
     
     var lastReaction: Reaction? {
         didSet {
@@ -88,19 +86,37 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
+            // Show cards (empty or not)
+            view?.initCards()
             isKolodaPresented = true
+            
+            // Check authorization
             if !AuthInfo.shared.isAuthorized {
-                registerAndLogIn()
+                print("user not authorized -> register new user")
+                
+                registerAdaptiveUser { email, password in
+                    self.logIn(with: email, password: password) {
+                        self.joinAndLoadCourse {
+                            // Reload cards (we can get recommendations now)
+                            self.view?.initCards()
+                        }
+                    }
+                }
             } else {
+                print("user authorized -> load course")
                 self.joinAndLoadCourse(completion: {
                     self.view?.initCards()
                 })
             }
+            
+            // Launch onboarding
+            launchOnboarding()
         }
     }
     
     fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
-        if let stepId = recommendedLesson.stepsArray.first {
+        if let course = self.course,
+           let stepId = recommendedLesson.stepsArray.first {
             // Get steps in recommended lesson
             stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                 let step = newStepsImmutable.first
@@ -116,7 +132,9 @@ class AdaptiveStepsPresenter {
                         let progress = progresses.first
                         if progress != nil && progress!.isPassed {
                             print("step already passed -> getting new recommendation")
-                            self.sendReactionAndGetNewLesson(reaction: .solved, success: success)
+                            self.sendReaction(reaction: .solved, success: {
+                                self.getNewRecommendation(for: course, success: success)
+                            })
                         } else {
                             self.isRecommendationLoaded = true
                             success(step)
@@ -221,18 +239,15 @@ class AdaptiveStepsPresenter {
         }
     }
     
-    fileprivate func sendReactionAndGetNewLesson(reaction: Reaction, success: @escaping (Step) -> (Void)) {
-        guard let course = course,
-            let userId = AuthInfo.shared.userId,
+    fileprivate func sendReaction(reaction: Reaction, success: @escaping () -> (Void)) {
+        guard let userId = AuthInfo.shared.userId,
             let lessonId = currentLesson?.id else {
                 return
         }
         
         performRequest({
             self.recommendationsAPI?.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
-                self.getNewRecommendation(for: course, success: { step in
-                    success(step)
-                })
+                success()
             }, error: { error in
                 print("failed sending reaction: \(error)")
                 self.view?.state = .connectionError
@@ -254,14 +269,12 @@ class AdaptiveStepsPresenter {
                 print("new user registered: \(email):\(password)")
                 success(email, password)
             }, error: { error, registrationErrorInfo in
-                // TODO: Maybe show placeholder?
                 print("user registration failed")
-                self.registerAdaptiveUser(success: success)
+                self.view?.state = .connectionError
             })
         }, error: { error in
-            // TODO: Maybe show placeholder?
             print("user registration failed: \(error)")
-            self.registerAdaptiveUser(success: success)
+            self.view?.state = .connectionError
         })
     }
     
@@ -277,36 +290,35 @@ class AdaptiveStepsPresenter {
                     success()
                 }, error: { error in
                     print("successfully signed in, but could not get user")
-                    // TODO: Maybe show placeholder?
-                    self.logIn(with: email, password: password, success: success)
+                    self.view?.state = .connectionError
                 })
             }, failure: { error in
                 print("successfully registered, but login failed: \(error)")
-                // TODO: Maybe show placeholder?
-                self.logIn(with: email, password: password, success: success)
+                self.view?.state = .connectionError
             })
         }, error: { error in
-            // TODO: Maybe show placeholder?
             print("user log in failed: \(error)")
-            self.logIn(with: email, password: password, success: success)
+            self.view?.state = .connectionError
         })
     }
     
     fileprivate func launchOnboarding() {
-        // Present tutorial after log in
-        let isTutorialNeeded = !UserDefaults.standard.bool(forKey: "isTutorialShown")
+        let isOnboardingNeeded = !UserDefaults.standard.bool(forKey: "isOnboardingShown")
         
-        if isTutorialNeeded {
-            let tutorialVC = ControllerHelper.instantiateViewController(identifier: "AdaptiveTutorial", storyboardName: "AdaptiveMain") as! AdaptiveTutorialViewController
-            (self.view as? UIViewController)?.present(tutorialVC, animated: true, completion: nil)
-            UserDefaults.standard.set(true, forKey: "isTutorialShown")
+        if !isOnboardingPassed && isOnboardingNeeded {
+            let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveOnboardingViewController", storyboardName: "AdaptiveMain") as! AdaptiveOnboardingViewController
+            vc.presenter = AdaptiveOnboardingPresenter(view: vc)
+            
+            (view as? UIViewController)?.present(vc, animated: false, completion: {
+                self.isOnboardingPassed = true
+            })
+            UserDefaults.standard.set(true, forKey: "isOnboardingShown")
+        } else {
+            isOnboardingPassed = true
         }
-        
-        view?.initCards()
     }
     
     fileprivate func joinAndLoadCourse(completion: @escaping () -> ()) {
-        self.view?.showHud(withStatus: NSLocalizedString("LoadingCourse", comment: ""))
         performRequest({
             self.coursesAPI?.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
                 self.course = coursesImmutable.first
@@ -319,47 +331,32 @@ class AdaptiveStepsPresenter {
                 if !course.enrolled {
                     self.isJoinedCourse = true
                     
-                    self.view?.showHud(withStatus: NSLocalizedString("JoiningCourse", comment: ""))
                     _ = AuthManager.sharedManager.joinCourseWithId(course.id, success: {
-                        self.view?.hideHud()
                         self.course?.enrolled = true
                         print("success joined course -> loading cards")
                         
                         completion()
                     }, error: {error in
-                        self.view?.hideHud()
                         print("failed joining course: \(error) -> show placeholder")
                         self.view?.state = .connectionError
                     })
                 } else {
-                    self.view?.hideHud()
                     print("already joined target course -> loading cards")
                     
                     self.isJoinedCourse = true
                     completion()
                 }
             }, error: { (error) -> Void in
-                self.view?.hideHud()
                 print("failed downloading course data -> show placeholder")
                 self.view?.state = .connectionError
             })
         }, error: { error in
-            self.view?.hideHud()
             print("failed performing API request -> force logout")
             self.logout()
         })
     }
     
-    fileprivate func registerAndLogIn() {
-        registerAdaptiveUser { email, password in
-            self.logIn(with: email, password: password) {
-                self.joinAndLoadCourse {
-                    self.launchOnboarding()
-                }
-            }
-        }
-    }
-    
+    // TODO: new user after logout?
     func logout() {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
@@ -368,7 +365,7 @@ class AdaptiveStepsPresenter {
         
         recommendedLessons = []
         
-        self.registerAndLogIn()
+        refreshContent()
     }
     
     func updateCard(_ card: StepCardView) -> StepCardView {
@@ -381,10 +378,6 @@ class AdaptiveStepsPresenter {
             }
             
             let successHandler: (Step) -> (Void) = { step in
-                guard let lesson = self?.currentLesson else {
-                    return
-                }
-                
                 self?.step = step
                 DispatchQueue.main.async {
                     let currentStepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
@@ -405,14 +398,19 @@ class AdaptiveStepsPresenter {
                 }
             }
             
-            if self?.lastReaction == nil {
-                // First recommendation -> just get it
-                print("getting first recommendation...")
-                self?.getNewRecommendation(for: course, success: successHandler)
-            } else {
-                // Next recommendation -> send reaction before
-                print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
-                self?.sendReactionAndGetNewLesson(reaction: (self?.lastReaction)!, success: successHandler)
+            // If onboarding not passed yet, just show card, but skip data loading
+            if self?.isOnboardingPassed ?? false {
+                if self?.lastReaction == nil {
+                    // First recommendation -> just get it
+                    print("getting first recommendation...")
+                    self?.getNewRecommendation(for: course, success: successHandler)
+                } else {
+                    // Next recommendation -> send reaction before
+                    print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
+                    self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
+                        self?.getNewRecommendation(for: course, success: successHandler)
+                    })
+                }
             }
         }
             
@@ -428,21 +426,19 @@ class AdaptiveStepsPresenter {
     }
     
     func tryAgain() {
+        isKolodaPresented = false
         lastReaction = nil
         view?.state = .normal
         
-        // Two cases:
-        // Course is nil -> invalid state, refresh
-        // Course is initialized, but user is not joined -> load and join it again
+        // 1. User not authorized -> register and log in
+        // 2. Course is nil -> invalid state, refresh
+        // 3. Course is initialized, but user is not joined -> load and join it again
         if course == nil || !isJoinedCourse {
-            print("course or user enrollment has invalid state -> join and load course again")
-            self.joinAndLoadCourse(completion: {
-                self.view?.initCards()
-            })
+            refreshContent()
             return
         }
         
-        // Course is initialized, user is joined, just temporary troubles -> only reload koloda
+        // 4. Course is initialized, user is joined, just temporary troubles -> only reload koloda
         print("connection troubles -> trying again")
         view?.initCards()
     }
@@ -450,8 +446,8 @@ class AdaptiveStepsPresenter {
 
 
 extension AdaptiveStepsPresenter: StepCardViewDelegate {
-    func onControlButtonClick(for state: AdaptiveStepState) {
-        switch state {
+    func onControlButtonClick() {
+        switch currentStepPresenter?.state ?? .unsolved {
         case .unsolved:
             currentStepPresenter?.submit()
             break
