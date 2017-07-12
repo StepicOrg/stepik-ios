@@ -105,8 +105,29 @@ class CodePlaygroundManager {
         
         if changes.isInsertion {
             if let closer = closers[changes.changes] {
-                text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                return (text: text, position: cursorPosition, autocomplete: nil)
+                //check, if there is text after the bracket, not a \n or whitespace
+                let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+                if cursorIndex != text.endIndex {
+                    let textAfter = text.substring(from: cursorIndex)
+                    if let indexOfLineEndAfter = textAfter.indexOf("\n") {
+                        let line = textAfter.substring(to: textAfter.index(textAfter.startIndex, offsetBy: indexOfLineEndAfter))
+                        var onlySpaces: Bool = true
+                        for character in line.characters {
+                            if character != " " {
+                                onlySpaces = false
+                                break
+                            }
+                        }
+
+                        if onlySpaces {
+                            text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                            return (text: text, position: cursorPosition, autocomplete: nil)
+                        }
+                    }
+                } else {
+                    text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                    return (text: text, position: cursorPosition, autocomplete: nil)
+                }
             }
             
             if changes.changes == "\n" {
