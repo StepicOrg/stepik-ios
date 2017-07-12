@@ -8,13 +8,14 @@
 
 import UIKit
 import Koloda
+import Presentr
 
 class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     var presenter: AdaptiveStepsPresenter?
     
-    @IBOutlet weak var userMenuButton: UIBarButtonItem!
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var levelProgress: UIProgressView!
     
     var canSwipeCurrentCardUp = false
     
@@ -22,8 +23,9 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     var state: AdaptiveStepsViewState = .normal {
         didSet {
-            self.placeholderView.isHidden = state == .normal
-            self.kolodaView.isHidden = state != .normal
+            self.placeholderView.isHidden = state == .normal || state == .congratulation
+            self.kolodaView.isHidden = state != .normal && state != .congratulation
+            self.congratsView.isHidden = state != .congratulation
         }
     }
     
@@ -37,20 +39,24 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         return v
     }()
     
-    lazy var alertController: UIAlertController = { [weak self] in
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
-        alertController.addAction(cancelAction)
-        
-        let aboutCourseAction = UIAlertAction(title: NSLocalizedString("AboutCourse", comment: ""), style: .default) { action in
-            if let aboutCourse = self?.presenter?.aboutCourseController {
-                self?.present(aboutCourse, animated: true)
-            }
-        }
-        alertController.addAction(aboutCourseAction)
-        
-        return alertController
+    lazy var congratsPresentr: Presentr = {
+        let presenter = Presentr(presentationType: .alert)
+        presenter.backgroundOpacity = 0.0
+        presenter.dismissOnTap = false
+        presenter.dismissAnimated = true
+        presenter.dismissTransitionType = TransitionType.custom(CrossDissolveAnimation(options: .normal(duration: 0.4)))
+        presenter.roundCorners = true
+        presenter.cornerRadius = 10
+        // TODO: clipsToBounds == false for button?
+        // presenter.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.4, shadowOffset: CGSize(width: 0.0, height: 2), shadowRadius: 1.8)
+        return presenter
+    }()
+    
+    lazy var congratsView: UIView = {
+        let congratsView = CongratsView(frame: self.view.bounds)
+        congratsView.isHidden = true
+        self.view.addSubview(congratsView)
+        return congratsView
     }()
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,16 +70,14 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage(named: "shadow-pixel")
+        
+        levelProgress.setProgress(0.0, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         presenter?.refreshContent()
-    }
-    
-    @IBAction func onUserMenuButtonClick(_ sender: Any) {
-        alertController.popoverPresentationController?.barButtonItem = userMenuButton
-        self.present(alertController, animated: true, completion: nil)
     }
     
     func initCards() {
@@ -115,6 +119,32 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
 
     func updateTopCard(cardState: StepCardView.CardState) {
         topCard?.cardState = cardState
+    }
+    
+    func updateProgress(for rating: Int, presentCongratulation: Bool = false) {
+        let currentLevel = RatingHelper.getLevel(for: rating)
+        let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel)
+        let ratingForNextLevel = RatingHelper.getRating(for: currentLevel + 1)
+        
+        if presentCongratulation && rating == ratingForCurrentLevel {
+            // Level up
+            let controller = Presentr.alertViewController(title: "Новый уровень", body: "Поздравляем! Вы достигли \(currentLevel) уровня!")
+            let continueAction = AlertAction(title: "Продолжить", style: .default) { [weak self] in
+                self?.state = .normal
+            }
+            controller.addAction(continueAction)
+            state = .congratulation
+            customPresentViewController(self.congratsPresentr, viewController: controller, animated: true, completion: nil)
+        }
+        
+        setLevelProgress(Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel))
+    }
+    
+    fileprivate func setLevelProgress(_ value: Float) {
+        levelProgress.progress = value
+        UIView.animate(withDuration: 2.0, animations: { [weak self] in
+            self?.levelProgress.layoutIfNeeded()
+        })
     }
 }
 

@@ -856,6 +856,8 @@
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */; };
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
+		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
+		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
@@ -1241,7 +1243,6 @@
 		86B56EAD1EC38F7500CFE4A3 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
 		86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
 		86B56EAF1EC38F9600CFE4A3 /* StepikAuth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* StepikAuth.plist */; };
-		86B916251E849548000C2842 /* AdaptiveCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */; };
 		86CAFD411EBBB6DF00AF6E2A /* AdaptiveStepDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
@@ -1814,6 +1815,8 @@
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
+		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
+		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
@@ -1850,7 +1853,6 @@
 		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
 		86B56E981EC0E11A00CFE4A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		86B56E9A1EC0E11F00CFE4A3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
-		86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveCourseViewController.swift; sourceTree = "<group>"; };
 		86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepDelegate.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* Adaptive 1838.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 1838.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -3423,6 +3425,7 @@
 			isa = PBXGroup;
 			children = (
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
+				2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3510,7 +3513,6 @@
 			children = (
 				2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */,
 				2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */,
-				86B916241E849548000C2842 /* AdaptiveCourseViewController.swift */,
 				2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */,
 			);
 			name = Controllers;
@@ -3524,6 +3526,7 @@
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
 				86ABC6661E9685F80012E8A6 /* StepCardView */,
 				868BC6E31EA0276500E204EE /* StepControlButton.swift */,
+				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -5100,6 +5103,7 @@
 				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
+				2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */,
 				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
@@ -5179,7 +5183,6 @@
 				864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */,
 				864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */,
 				864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */,
-				86B916251E849548000C2842 /* AdaptiveCourseViewController.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
 				864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */,
@@ -5279,6 +5282,7 @@
 				864D66C11E83DE03001E8D9E /* PersistentQueueRecoveryManager.swift in Sources */,
 				864D66C21E83DE03001E8D9E /* Queues.plist in Sources */,
 				864D66C31E83DE03001E8D9E /* ExecutionQueues.swift in Sources */,
+				2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */,
 				864D66C41E83DE03001E8D9E /* PersistentRecoveryManager.swift in Sources */,
 				864D66C51E83DE03001E8D9E /* Users.plist in Sources */,
 				864D66C61E83DE03001E8D9E /* PersistentUserTokenRecoveryManager.swift in Sources */,

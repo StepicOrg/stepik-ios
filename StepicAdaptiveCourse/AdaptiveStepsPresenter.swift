@@ -12,6 +12,7 @@ enum AdaptiveStepsViewState {
     case connectionError
     case coursePassed
     case normal
+    case congratulation
 }
 
 protocol AdaptiveStepsView: class {
@@ -23,6 +24,7 @@ protocol AdaptiveStepsView: class {
     func updateTopCardControl(stepState: AdaptiveStepState)
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
+    func updateProgress(for rating: Int, presentCongratulation: Bool)
 }
 
 class AdaptiveStepsPresenter {
@@ -46,6 +48,8 @@ class AdaptiveStepsPresenter {
     var isCurrentCardDone = false
     var isOnboardingPassed = false
     
+    var rating: Int = 0
+    
     var lastReaction: Reaction? {
         didSet {
             if lastReaction != nil {
@@ -68,12 +72,6 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    lazy var aboutCourseController: UIViewController = {
-        let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseInfo", storyboardName: "AdaptiveMain") as! AdaptiveCourseViewController
-        vc.course = self.course
-        return vc
-    }()
-    
     init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
@@ -86,6 +84,9 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
+            self.rating = RatingHelper.retrieveRating()
+            view?.updateProgress(for: self.rating, presentCongratulation: false)
+            
             // Show cards (empty or not)
             view?.initCards()
             isKolodaPresented = true
@@ -457,6 +458,7 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
+            view?.updateProgress(for: RatingHelper.incrementRating(1), presentCongratulation: true)
             break
         }
     }
