@@ -16,6 +16,7 @@ protocol StepCardViewDelegate: class {
 class StepCardView: UIView {
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
     
+    @IBOutlet weak var titlePadView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -57,14 +58,36 @@ class StepCardView: UIView {
     @IBAction func onControlButtonClick(_ sender: Any) {
         delegate?.onControlButtonClick()
     }
-
+    
+    var shadowLayer: CAShapeLayer!
     override func draw(_ rect: CGRect) {
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.stepicGreenColor().cgColor
+        self.layer.borderColor = UIColor.clear.cgColor
         
         let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
         loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
+            shadowLayer.fillColor = UIColor.white.cgColor
+            
+            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2)
+            shadowLayer.shadowOpacity = 0.4
+            shadowLayer.shadowRadius = 1.8
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+            
+            let topPath = UIBezierPath(roundedRect: titlePadView.bounds, byRoundingCorners:[.topRight, .topLeft], cornerRadii: CGSize(width: 10, height:  10))
+            
+            let maskLayer = CAShapeLayer()
+            
+            maskLayer.path = topPath.cgPath
+            titlePadView.layer.mask = maskLayer
+        }
     }
     
     override func layoutSubviews() {
