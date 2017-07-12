@@ -21,9 +21,9 @@ class AdaptiveOnboardingPresenter {
     init(view: AdaptiveOnboardingView) {
         self.view = view
         
-        onboardingSteps = [AdaptiveOnboardingStep(title: "Добро пожаловать", content: loadOnboardingStep(from: "step1"), requiredActions: [.clickButton], buttonTitle: "Далее", isButtonHidden: false),
-        AdaptiveOnboardingStep(title: "Смахивание влево", content: loadOnboardingStep(from: "step2"), requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
-        AdaptiveOnboardingStep(title: "Смахивание вправо", content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true)
+        onboardingSteps = [AdaptiveOnboardingStep(title: NSLocalizedString("WelcomeTitle", comment: ""), content: loadOnboardingStep(from: "step1"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("NextTask", comment: ""), isButtonHidden: false),
+        AdaptiveOnboardingStep(title: NSLocalizedString("SwipeLeftTitle", comment: ""), content: loadOnboardingStep(from: "step2"), requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
+        AdaptiveOnboardingStep(title: NSLocalizedString("SwipeRightTitle", comment: ""), content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true)
         ]
     }
     

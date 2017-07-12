@@ -846,6 +846,9 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		2C04C1001F160631006B69B3 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1021F160631006B69B3 /* step1.html */; };
+		2C04C1031F160643006B69B3 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
+		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -855,9 +858,6 @@
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
-		2CFB1C641F14CC9C00CD0A4C /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C581F14C89900CD0A4C /* step1.html */; };
-		2CFB1C651F14CC9F00CD0A4C /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C591F14C89900CD0A4C /* step2.html */; };
-		2CFB1C661F14CCA200CD0A4C /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5A1F14C89900CD0A4C /* step3.html */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
 		2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5D1F14C89900CD0A4C /* icon.png */; };
@@ -1806,13 +1806,16 @@
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		2C04C1011F160631006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step1.html; sourceTree = "<group>"; };
+		2C04C1041F160643006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step2.html; sourceTree = "<group>"; };
+		2C04C1071F160650006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step3.html; sourceTree = "<group>"; };
+		2C04C1091F16075A006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step3.html; sourceTree = "<group>"; };
+		2C04C10A1F16075D006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step2.html; sourceTree = "<group>"; };
+		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
-		2CFB1C581F14C89900CD0A4C /* step1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step1.html; path = OnboardingContent/step1.html; sourceTree = "<group>"; };
-		2CFB1C591F14C89900CD0A4C /* step2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step2.html; path = OnboardingContent/step2.html; sourceTree = "<group>"; };
-		2CFB1C5A1F14C89900CD0A4C /* step3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = step3.html; path = OnboardingContent/step3.html; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
 		2CFB1C5D1F14C89900CD0A4C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = OnboardingContent/icon.png; sourceTree = "<group>"; };
@@ -3464,9 +3467,9 @@
 		2CFB1C531F14C81100CD0A4C /* Onboarding content */ = {
 			isa = PBXGroup;
 			children = (
-				2CFB1C581F14C89900CD0A4C /* step1.html */,
-				2CFB1C591F14C89900CD0A4C /* step2.html */,
-				2CFB1C5A1F14C89900CD0A4C /* step3.html */,
+				2C04C1021F160631006B69B3 /* step1.html */,
+				2C04C1051F160643006B69B3 /* step2.html */,
+				2C04C1081F160650006B69B3 /* step3.html */,
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
 				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
@@ -4020,7 +4023,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CFB1C661F14CCA200CD0A4C /* step3.html in Resources */,
+				2C04C1061F160650006B69B3 /* step3.html in Resources */,
 				08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */,
 				08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */,
 				86B56EAF1EC38F9600CFE4A3 /* StepikAuth.plist in Resources */,
@@ -4050,9 +4053,9 @@
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
-				2CFB1C651F14CC9F00CD0A4C /* step2.html in Resources */,
+				2C04C1031F160643006B69B3 /* step2.html in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
-				2CFB1C641F14CC9C00CD0A4C /* step1.html in Resources */,
+				2C04C1001F160631006B69B3 /* step1.html in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
@@ -5496,6 +5499,36 @@
 				08DE94201B8C58AC00D278AB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		2C04C1021F160631006B69B3 /* step1.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C04C1011F160631006B69B3 /* ru */,
+				2C04C10B1F16075F006B69B3 /* en */,
+			);
+			name = step1.html;
+			path = OnboardingContent;
+			sourceTree = "<group>";
+		};
+		2C04C1051F160643006B69B3 /* step2.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C04C1041F160643006B69B3 /* ru */,
+				2C04C10A1F16075D006B69B3 /* en */,
+			);
+			name = step2.html;
+			path = OnboardingContent;
+			sourceTree = "<group>";
+		};
+		2C04C1081F160650006B69B3 /* step3.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C04C1071F160650006B69B3 /* ru */,
+				2C04C1091F16075A006B69B3 /* en */,
+			);
+			name = step3.html;
+			path = OnboardingContent;
 			sourceTree = "<group>";
 		};
 		860DB7911EB8DC13001E3E42 /* StepCardView.xib */ = {
