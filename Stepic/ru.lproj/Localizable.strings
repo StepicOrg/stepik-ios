@@ -235,4 +235,6 @@ Language = "Язык";
 Fullscreen = "Развернуть";
 SelectLanguage = "Выберите язык";
 Done = "Готово";
-
+SwipeLeftTitle = "Смахивание влево";
+SwipeRightTitle = "Смахивание вправо";
+WelcomeTitle = "Добро пожаловать";

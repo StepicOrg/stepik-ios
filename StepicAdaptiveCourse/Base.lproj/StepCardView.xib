@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="StepCardView" customModule="Adaptive_PDD" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="StepCardView" customModule="Adaptive_1838" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -42,6 +42,10 @@
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="top" id="shI-1z-zhM"/>
                         <constraint firstAttribute="trailing" secondItem="Cwb-9k-TMQ" secondAttribute="trailing" constant="8" id="yNN-77-yCt"/>
                     </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHA-bo-OBf">
+                    <rect key="frame" x="0.0" y="45" width="568" height="225"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6W-bQ-X6j" userLabel="Loading View">
                     <rect key="frame" x="84" y="70.5" width="400" height="165"/>
@@ -107,6 +111,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HzP-xg-1iP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2kK-sG-Bgc"/>
+                <constraint firstItem="LCg-u0-xF2" firstAttribute="top" secondItem="xHA-bo-OBf" secondAttribute="bottom" id="9jQ-yF-dBi"/>
                 <constraint firstAttribute="trailing" secondItem="HzP-xg-1iP" secondAttribute="trailing" id="ACj-cH-ub0"/>
                 <constraint firstAttribute="trailing" secondItem="LM4-eR-A8y" secondAttribute="trailing" id="Ar7-6H-fID"/>
                 <constraint firstAttribute="bottom" secondItem="LCg-u0-xF2" secondAttribute="bottom" constant="5" id="De3-fD-9pf"/>
@@ -115,11 +120,14 @@
                 <constraint firstItem="V6W-bQ-X6j" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-7" id="Nkp-bh-8bg"/>
                 <constraint firstItem="LCg-u0-xF2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="OVa-s5-y3D"/>
                 <constraint firstItem="HzP-xg-1iP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QGE-l4-7fH"/>
+                <constraint firstItem="xHA-bo-OBf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QKb-sq-Cef"/>
                 <constraint firstAttribute="trailing" secondItem="LCg-u0-xF2" secondAttribute="trailing" constant="5" id="QMf-YV-eKI"/>
                 <constraint firstItem="V6W-bQ-X6j" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wk8-oo-qze"/>
+                <constraint firstItem="xHA-bo-OBf" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="bottom" id="dju-T6-aSM"/>
                 <constraint firstItem="LM4-eR-A8y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eAr-eM-EGN"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V6W-bQ-X6j" secondAttribute="bottom" id="kCp-B2-O0X"/>
                 <constraint firstItem="LM4-eR-A8y" firstAttribute="top" secondItem="HzP-xg-1iP" secondAttribute="bottom" id="tdP-6K-2fw"/>
+                <constraint firstAttribute="trailing" secondItem="xHA-bo-OBf" secondAttribute="trailing" id="zfK-CI-cHS"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -133,6 +141,7 @@
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="Msd-F0-gr3"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="4bf-SP-sBL"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="r1U-3N-2i9"/>
+                <outlet property="whitePadView" destination="xHA-bo-OBf" id="qhL-KD-H8n"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>

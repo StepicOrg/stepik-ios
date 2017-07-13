@@ -58,21 +58,31 @@ class StepOptions: NSManagedObject {
         initialize(json)
     }
     
-    func limit(language: String) -> CodeLimit? {
+    fileprivate func limit(language: String) -> CodeLimit? {
         return limits.filter({
             $0.languageString == language
         }).first
     }
     
-    var languages : [String] {
+    func limit(language: CodeLanguage) -> CodeLimit? {
+        let lan = language.rawValue
+        return limit(language: lan)
+    }
+    
+    var languages : [CodeLanguage] {
         return limits.flatMap({
-            return $0.languageString
+            return $0.language
         })
     }
     
-    func template(language: String, userGenerated: Bool) -> CodeTemplate? {
+    fileprivate func template(language: String, userGenerated: Bool) -> CodeTemplate? {
         return templates.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first
+    }
+    
+    func template(language: CodeLanguage, userGenerated: Bool) -> CodeTemplate? {
+        let lan = language.rawValue
+        return template(language: lan, userGenerated: userGenerated)
     }
 }

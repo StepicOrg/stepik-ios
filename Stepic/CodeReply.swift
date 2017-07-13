@@ -12,19 +12,19 @@ import SwiftyJSON
 class CodeReply: Reply {
     
     var code: String
-    var language: String
+    var language: CodeLanguage
     
-    init(code: String, language: String) {
+    init(code: String, language: CodeLanguage) {
         self.code = code
         self.language = language
     }
     
     required init(json: JSON) {
         code = json["code"].stringValue
-        language = json["language"].stringValue
+        language = CodeLanguage(rawValue: json["language"].stringValue) ?? .unsupported
     }
     
     var dictValue : [String : Any] {
-        return ["code" : code, "language": language]
+        return ["code" : code, "language": language.rawValue]
     }
 }
