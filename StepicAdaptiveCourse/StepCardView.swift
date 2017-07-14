@@ -25,8 +25,9 @@ class StepCardView: UIView {
     @IBOutlet weak var controlButton: UIButton!
     @IBOutlet weak var loadingImageView: FLAnimatedImageView!
     
-    var gradientLayer: CAGradientLayer?
     weak var delegate: StepCardViewDelegate?
+    
+    var cardPadView: UIView!
     
     var cardState: CardState = .loading {
         didSet {
@@ -38,15 +39,6 @@ class StepCardView: UIView {
                 UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.controlButton.isHidden = false
                     self.contentView.isHidden = false
-                    self.gradientLayer = CAGradientLayer()
-                    if let gradient = self.gradientLayer {
-                        gradient.frame = self.contentView.bounds
-                        gradient.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
-                                           UIColor.white.withAlphaComponent(0.15).cgColor,
-                                           UIColor.white.withAlphaComponent(1.0).cgColor]
-                        gradient.locations = [0.0, 0.95, 1.0]
-                        self.contentView.layer.addSublayer(gradient)
-                    }
                 }, completion: nil)
             } else {
                 self.controlButton.isHidden = true
@@ -58,41 +50,37 @@ class StepCardView: UIView {
     @IBAction func onControlButtonClick(_ sender: Any) {
         delegate?.onControlButtonClick()
     }
-    
-    var shadowLayer: CAShapeLayer!
+
+    var isFirst = true
     override func draw(_ rect: CGRect) {
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.clear.cgColor
-        
         let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
         loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
         
-        if shadowLayer == nil {
-            shadowLayer = CAShapeLayer()
-            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
-            shadowLayer.fillColor = UIColor.white.cgColor
+        if cardPadView == nil {
+            backgroundColor = .clear
+            layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
+            layer.shouldRasterize = true;
+            layer.rasterizationScale = UIScreen.main.scale
+            layer.shadowOffset = CGSize(width: 0.0, height: 6.5)
+            layer.shadowOpacity = 0.2
+            layer.shadowRadius = 7.5
             
-            shadowLayer.shadowColor = UIColor.darkGray.cgColor
-            shadowLayer.shadowPath = shadowLayer.path
-            shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2)
-            shadowLayer.shadowOpacity = 0.4
-            shadowLayer.shadowRadius = 1.8
-            
-            layer.insertSublayer(shadowLayer, at: 0)
-            
-            let topPath = UIBezierPath(roundedRect: titlePadView.bounds, byRoundingCorners:[.topRight, .topLeft], cornerRadii: CGSize(width: 10, height:  10))
-            
-            let maskLayer = CAShapeLayer()
-            
-            maskLayer.path = topPath.cgPath
-            titlePadView.layer.mask = maskLayer
+            cardPadView = UIView(frame: bounds)
+            cardPadView.backgroundColor = .white
+            cardPadView.clipsToBounds = true
+            cardPadView.layer.cornerRadius = 10
+            insertSubview(cardPadView, at: 0)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer?.frame = contentView.bounds
+        
+        if cardPadView != nil {
+            cardPadView.frame = bounds
+            layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        }
     }
     
     func addContentSubview(_ view: UIView) {
