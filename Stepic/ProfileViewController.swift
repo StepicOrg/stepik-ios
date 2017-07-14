@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class ProfileViewController: UITableViewController {
 
@@ -41,8 +42,9 @@ class ProfileViewController: UITableViewController {
         
         localize() 
         signInButton.setStepicWhiteStyle()
-        avatarImageView.setRoundedBounds(width: 0)
         signInButton.isHidden = false
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -133,7 +135,16 @@ class ProfileViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        if !AuthInfo.shared.isAuthorized {
+            tableView.reloadData()
+        }
         updateUser()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        avatarImageView.setRoundedBounds(width: 0)
+
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,6 +167,14 @@ class ProfileViewController: UITableViewController {
             return nil 
         } else {
             return sectionTitles[section]
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if !AuthInfo.shared.isAuthorized {
+            return 0
+        } else {
+            return sectionTitles.count
         }
     }
     
@@ -187,5 +206,59 @@ class ProfileViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension ProfileViewController : DZNEmptyDataSetSource {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return Images.placeholders.anonymous
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = NSLocalizedString("NotWithUsYet", comment: "")
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSForegroundColorAttributeName: UIColor.darkGray]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = NSLocalizedString("JoinCoursesSuggestionDescription", comment: "")
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+                          NSForegroundColorAttributeName: UIColor.lightGray,
+                          NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = NSLocalizedString("SignIn", comment: "")
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
+                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.groupTableViewBackground
+    }
+}
+
+extension ProfileViewController : DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
+        let vc = ControllerHelper.getAuthController()
+        self.present(vc, animated: true, completion: nil)
     }
 }
