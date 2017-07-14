@@ -27,6 +27,8 @@ class SignInCoursesTableViewCell: UITableViewCell {
         // Initialization code
         localize()
         
+        titleLabel.textColor = UIColor.darkGray
+        descriptionLabel.textColor = UIColor.lightGray
         signInButton.tintColor = UIColor.stepicGreenColor()
     }
 
