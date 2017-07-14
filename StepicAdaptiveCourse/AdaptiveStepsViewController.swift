@@ -14,8 +14,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     var presenter: AdaptiveStepsPresenter?
     
     @IBOutlet weak var kolodaView: KolodaView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var levelProgress: UIProgressView!
+    @IBOutlet weak var levelProgress: RatingProgressView!
     
     var canSwipeCurrentCardUp = false
     
@@ -67,11 +66,6 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage(named: "shadow-pixel")
-        
-        levelProgress.setProgress(0.0, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -126,6 +120,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel)
         let ratingForNextLevel = RatingHelper.getRating(for: currentLevel + 1)
         
+        levelProgress.text = "\(rating) ⁄ \(ratingForNextLevel) очков • \(currentLevel) уровень"
+        
         if presentCongratulation && rating == ratingForCurrentLevel {
             // Level up
             let controller = Presentr.alertViewController(title: "Новый уровень", body: "Поздравляем! Вы достигли \(currentLevel) уровня!")
@@ -137,14 +133,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
             customPresentViewController(self.congratsPresentr, viewController: controller, animated: true, completion: nil)
         }
         
-        setLevelProgress(Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel))
-    }
-    
-    fileprivate func setLevelProgress(_ value: Float) {
-        levelProgress.progress = value
-        UIView.animate(withDuration: 2.0, animations: { [weak self] in
-            self?.levelProgress.layoutIfNeeded()
-        })
+        let newProgress = Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel)
+        levelProgress.setProgress(value: newProgress, animated: true)
     }
 }
 
@@ -172,7 +162,7 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     }
     
     func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool {
-        return true
+        return false
     }
 }
 
