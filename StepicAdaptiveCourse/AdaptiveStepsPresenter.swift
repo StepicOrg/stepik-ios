@@ -25,6 +25,7 @@ protocol AdaptiveStepsView: class {
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
     func updateProgress(for rating: Int, presentCongratulation: Bool)
+    func showCongratulation(for rating: Int, isSpecial: Bool)
 }
 
 class AdaptiveStepsPresenter {
@@ -466,6 +467,7 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
+        view?.showCongratulation(for: 1, isSpecial: false)
         view?.updateTopCardControl(stepState: .successful)
     }
     

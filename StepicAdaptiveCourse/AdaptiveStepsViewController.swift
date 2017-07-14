@@ -134,7 +134,13 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         }
         
         let newProgress = Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel)
-        levelProgress.setProgress(value: newProgress, animated: true)
+        levelProgress.hideCongratulation(force: true) {
+            self.levelProgress.setProgress(value: newProgress, animated: true)
+        }
+    }
+    
+    func showCongratulation(for rating: Int, isSpecial: Bool) {
+        levelProgress.showCongratulation(text: "Правильно! +1 очко", duration: 1.0)
     }
 }
 

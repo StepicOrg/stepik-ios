@@ -83,6 +83,18 @@ class RatingProgressView: UIView {
         })
     }
     
+    func hideCongratulation(force: Bool, completion: (() -> ())? = nil) {
+        if force {
+            self.congratulationView.alpha = 0.0
+            completion?()
+        } else {
+            UIView.transition(with: congratulationView, duration: 0.2, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+                self.congratulationView.alpha = 0.0
+                completion?()
+            })
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
