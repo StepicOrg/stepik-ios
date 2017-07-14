@@ -38,6 +38,7 @@ class RatingProgressView: UIView {
     }
     
     func setProgress(value: Float, animated: Bool, completion: (() -> ())? = nil) {
+        progress = value
         if animated {
             if value > progress {
                 self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
@@ -48,11 +49,9 @@ class RatingProgressView: UIView {
                 if value > self.progress {
                     self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
                 }
-                self.progress = value
                 completion?()
             })
         } else {
-            progress = value
             frontView.frame.size.width = bounds.width * CGFloat(value)
             frontViewShadowLayer.frame.size.width = bounds.width * CGFloat(value)
             completion?()
@@ -139,6 +138,7 @@ class RatingProgressView: UIView {
         congratulationLabel.textAlignment = label.textAlignment
         congratulationLabel.textColor = congratulationLabelColor
         congratulationView.addSubview(congratulationLabel)
+        
         let congratsShadowLayer = CAGradientLayer()
         congratsShadowLayer.cornerRadius = self.layer.cornerRadius
         congratsShadowLayer.frame = congratulationView.bounds
@@ -153,6 +153,12 @@ class RatingProgressView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        // Recenter (maybe constraints?)
+        label.center.x = center.x
+        frontLabel.center.x = center.x
+        congratulationLabel.center.x = center.x
+        
+        // Recalculate progress
         frontView.frame.size.width = bounds.width * CGFloat(progress)
         frontViewShadowLayer.frame.size.width = bounds.width * CGFloat(progress)
     }
