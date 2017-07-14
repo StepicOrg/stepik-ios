@@ -79,10 +79,6 @@ class ProfileViewController: UITableViewController {
     fileprivate func initWithUser(_ user : User) {
         print("\(user.avatarURL)")
         
-        avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
-//        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: [])
-        
-        userNameLabel.text = "\(user.firstName) \(user.lastName)"
         if !AuthInfo.shared.isAuthorized {
             signInHeight.constant = 40
             signInNameDistance.constant = 8
@@ -90,6 +86,9 @@ class ProfileViewController: UITableViewController {
             heightForRows[2][0] = 0
             heightForRows[1][0] = 0
             signInButton.isHidden = false
+            userNameLabel.text = NSLocalizedString("NotWithUsYet", comment: "")
+            avatarImageView.contentMode = UIViewContentMode.scaleAspectFit
+            avatarImageView.image = Images.placeholders.anonymous
         } else {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
@@ -97,6 +96,9 @@ class ProfileViewController: UITableViewController {
             heightForRows[2][0] = 40        
 //            heightForRows[1][0] = 0
             signInButton.isHidden = true
+            avatarImageView.contentMode = UIViewContentMode.scaleAspectFill
+            avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
+            userNameLabel.text = "\(user.firstName) \(user.lastName)"
         }
         
         if AuthInfo.shared.isAuthorized {

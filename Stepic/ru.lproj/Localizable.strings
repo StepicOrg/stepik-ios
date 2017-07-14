@@ -238,3 +238,5 @@ Done = "Готово";
 SwipeLeftTitle = "Смахивание влево";
 SwipeRightTitle = "Смахивание вправо";
 WelcomeTitle = "Добро пожаловать";
+NotWithUsYet = "Еще не с нами?";
+
