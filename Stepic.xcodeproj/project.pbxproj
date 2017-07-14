@@ -319,6 +319,12 @@
 		085E9E701F138C3B00D6A4BC /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		085E9E711F138C3F00D6A4BC /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
+		085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085E9E731F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift */; };
+		085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085E9E731F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift */; };
+		085E9E771F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085E9E731F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift */; };
+		085E9E781F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
+		085E9E791F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
+		085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9131F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */; };
 		0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */; };
@@ -1544,6 +1550,8 @@
 		085DF8D41C99B9FB006809D9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		085DF8D71C99C49E006809D9 /* VideoRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRate.swift; sourceTree = "<group>"; };
 		085DF8DA1C9AB94B006809D9 /* TimeFormatHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeFormatHelper.swift; sourceTree = "<group>"; };
+		085E9E731F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInCoursesTableViewCell.swift; sourceTree = "<group>"; };
+		085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInCoursesTableViewCell.xib; sourceTree = "<group>"; };
 		0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSnippetSymbols.swift; sourceTree = "<group>"; };
 		0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputAccessoryBuilder.swift; sourceTree = "<group>"; };
 		0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionsTableViewController.swift; sourceTree = "<group>"; };
@@ -2768,6 +2776,8 @@
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 				0801BE1B1C37123900E4F046 /* CoursesViewController.swift */,
 				080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */,
+				085E9E731F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift */,
+				085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -3928,6 +3938,7 @@
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
 				08D121181C937B2200A54ABC /* Localizable.strings in Resources */,
 				08DB8CBC1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				085E9E791F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -3995,6 +4006,7 @@
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
+				085E9E781F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
@@ -4054,6 +4066,7 @@
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
+				085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C04C1001F160631006B69B3 /* step1.html in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
@@ -4371,6 +4384,7 @@
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
+				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
@@ -4845,6 +4859,7 @@
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
+				085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
@@ -5285,6 +5300,7 @@
 				864D66C71E83DE03001E8D9E /* DeleteDeviceExecutableTask.swift in Sources */,
 				864D66C81E83DE03001E8D9E /* Tasks.plist in Sources */,
 				864D66C91E83DE03001E8D9E /* PersistentTaskRecoveryManager.swift in Sources */,
+				085E9E771F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */,
 				864D66CB1E83DE03001E8D9E /* DictionarySerializable.swift in Sources */,
 				864D66CC1E83DE03001E8D9E /* PersistentTaskManagerProtocol.swift in Sources */,

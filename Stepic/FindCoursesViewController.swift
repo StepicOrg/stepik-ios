@@ -14,7 +14,9 @@ class FindCoursesViewController: CoursesViewController {
     var searchController : UISearchController!
     
     var filteredCourses = [Course]()
-        
+    
+    let signInViewHeight = 135
+    
     override var tabIds :  [Int] {
         get {
             return TabsInfo.allCoursesIds
@@ -81,8 +83,39 @@ class FindCoursesViewController: CoursesViewController {
         self.tableView.backgroundColor = UIColor.lightText
 
         self.navigationItem.titleView = self.searchController.searchBar
+        tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.tableHeaderView = signInView
+    }
+    
+    fileprivate var signInView: UIView? {
+        guard !AuthInfo.shared.isAuthorized else {
+            return nil
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignInCoursesTableViewCell") as? SignInCoursesTableViewCell else {
+            return nil
+        }
+        
+        cell.signInPressedAction = {
+            [weak self] in
+            guard let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController else {
+                return
+            }
+            vc.success = {
+                [weak self] in
+                DispatchQueue.main.async {
+                    self?.refreshCourses()
+                }
+            }
+            self?.present(vc, animated: true, completion: nil)
+        }
+        return cell
+    }
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {

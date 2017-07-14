@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignInCoursesTableViewCell" rowHeight="135" id="KGk-i7-Jjw" customClass="SignInCoursesTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="350" height="134.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-anonymous-dark-background" translatesAutoresizingMaskIntoConstraints="NO" id="I50-pE-3d6">
+                        <rect key="frame" x="16" y="8" width="85" height="118.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="85" id="lK5-Nb-cjC"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Еще не с нами?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tA6-SP-9RZ">
+                        <rect key="frame" x="109" y="8" width="233" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="Войдите, чтобы решать задания, просматривать уроки и получать сертификаты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c48-Da-Xnz">
+                        <rect key="frame" x="109" y="34" width="233" height="59.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfU-X9-RTU">
+                        <rect key="frame" x="125.5" y="101.5" width="200" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="MTx-c1-aca"/>
+                            <constraint firstAttribute="width" priority="750" constant="200" id="XpI-wY-Eoz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                        <state key="normal" title="Sign in"/>
+                        <connections>
+                            <action selector="signInPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9qW-T3-coW"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="c48-Da-Xnz" secondAttribute="trailing" id="0Xl-6b-Upo"/>
+                    <constraint firstItem="c48-Da-Xnz" firstAttribute="top" secondItem="tA6-SP-9RZ" secondAttribute="bottom" constant="8" id="3rf-OL-P8E"/>
+                    <constraint firstAttribute="topMargin" secondItem="tA6-SP-9RZ" secondAttribute="top" id="EUt-lp-QZl"/>
+                    <constraint firstItem="PfU-X9-RTU" firstAttribute="top" secondItem="c48-Da-Xnz" secondAttribute="bottom" constant="8" id="T3I-lq-0yP"/>
+                    <constraint firstItem="PfU-X9-RTU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="I50-pE-3d6" secondAttribute="trailing" constant="8" id="X2O-dF-aEq"/>
+                    <constraint firstItem="c48-Da-Xnz" firstAttribute="centerX" secondItem="tA6-SP-9RZ" secondAttribute="centerX" id="Xci-bI-pa9"/>
+                    <constraint firstItem="I50-pE-3d6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="XiZ-Fs-O3g"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="I50-pE-3d6" secondAttribute="bottom" id="Yv4-KY-Xeh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PfU-X9-RTU" secondAttribute="bottom" id="bz9-zN-paV"/>
+                    <constraint firstItem="I50-pE-3d6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="cJn-F6-mZM"/>
+                    <constraint firstItem="PfU-X9-RTU" firstAttribute="centerX" secondItem="tA6-SP-9RZ" secondAttribute="centerX" id="g2C-y2-kRR"/>
+                    <constraint firstItem="tA6-SP-9RZ" firstAttribute="leading" secondItem="I50-pE-3d6" secondAttribute="trailing" constant="8" id="jOp-iM-wbD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tA6-SP-9RZ" secondAttribute="trailing" id="nCH-rE-xTd"/>
+                    <constraint firstItem="c48-Da-Xnz" firstAttribute="leading" secondItem="I50-pE-3d6" secondAttribute="trailing" constant="8" id="oGZ-jT-5mf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descriptionLabel" destination="c48-Da-Xnz" id="dWU-t9-S8f"/>
+                <outlet property="signInButton" destination="PfU-X9-RTU" id="8dJ-4K-BlB"/>
+                <outlet property="titleLabel" destination="tA6-SP-9RZ" id="fd2-vs-5rq"/>
+            </connections>
+            <point key="canvasLocation" x="19" y="8.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder-anonymous-dark-background" width="149" height="217"/>
+    </resources>
+</document>

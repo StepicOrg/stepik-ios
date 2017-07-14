@@ -238,3 +238,5 @@ SwipeLeftTitle = "Swipe left";
 SwipeRightTitle = "Swipe right";
 WelcomeTitle = "Welcome";
 NotWithUsYet = "Didn't join us yet?";
+JoinCoursesSuggestionDescription = "Sign in to solve assignments, view content of lessons and get certificates";
+
