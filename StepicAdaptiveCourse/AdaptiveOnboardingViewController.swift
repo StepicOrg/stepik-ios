@@ -42,7 +42,7 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
     }
     
     func updateProgress(for current: Int, count: Int) {
-        levelProgress.text = "\(current) ⁄ \(count) очков • обучение"
+        levelProgress.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(current)", "\(count)") + " • " + NSLocalizedString("RatingProgressTutorial", comment: "")
         levelProgress.setProgress(value: Float(current) / Float(count), animated: true)
     }
 }

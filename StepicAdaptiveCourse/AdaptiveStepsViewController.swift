@@ -120,12 +120,13 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel)
         let ratingForNextLevel = RatingHelper.getRating(for: currentLevel + 1)
         
-        levelProgress.text = "\(rating) ⁄ \(ratingForNextLevel) очков • \(currentLevel) уровень"
+        levelProgress.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(ratingForNextLevel)") + " • " + String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
         
         if presentCongratulation && rating == ratingForCurrentLevel {
             // Level up
-            let controller = Presentr.alertViewController(title: "Новый уровень", body: "Поздравляем! Вы достигли \(currentLevel) уровня!")
-            let continueAction = AlertAction(title: "Продолжить", style: .default) { [weak self] in
+            let congratsText = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(currentLevel)")
+            let controller = Presentr.alertViewController(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), body: congratsText)
+            let continueAction = AlertAction(title: NSLocalizedString("Continue", comment: ""), style: .default) { [weak self] in
                 self?.state = .normal
             }
             controller.addAction(continueAction)
@@ -140,7 +141,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     }
     
     func showCongratulation(for rating: Int, isSpecial: Bool) {
-        levelProgress.showCongratulation(text: "Правильно! +1 очко", duration: 1.0)
+        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0)
     }
 }
 
