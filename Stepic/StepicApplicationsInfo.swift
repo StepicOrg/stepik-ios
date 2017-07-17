@@ -30,8 +30,10 @@ struct StepicApplicationsInfo {
     
     static let isAdaptive = false
     
-    
-    static let appStoreRateURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review")
+    struct RateApp {
+        static let correctSubmissionsThreshold = 4
+        static let appStoreURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&action=write-review")
+    }
     
     struct SocialInfo {
         struct AppIds {
