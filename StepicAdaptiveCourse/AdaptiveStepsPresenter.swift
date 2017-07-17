@@ -115,35 +115,13 @@ class AdaptiveStepsPresenter {
     }
     
     fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
-        if let course = self.course,
-           let stepId = recommendedLesson.stepsArray.first {
+        if let stepId = recommendedLesson.stepsArray.first {
             // Get steps in recommended lesson
             stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                 let step = newStepsImmutable.first
-                
                 if let step = step {
-                    guard let progressId = step.progressId else {
-                        print("invalid progress id")
-                        return
-                    }
-                    
-                    // Get progress: if step is passed -> skip it
-                    self.progressesAPI?.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
-                        let progress = progresses.first
-                        if progress != nil && progress!.isPassed {
-                            print("step already passed -> getting new recommendation")
-                            self.sendReaction(reaction: .solved, success: {
-                                self.getNewRecommendation(for: course, success: success)
-                            })
-                        } else {
-                            self.isRecommendationLoaded = true
-                            success(step)
-                        }
-                    }, error: { (error) -> Void in
-                        print("failed getting step progress -> step with unknown progress")
-                        self.isRecommendationLoaded = true
-                        success(step)
-                    })
+                    self.isRecommendationLoaded = true
+                    success(step)
                 }
             }, error: { (error) -> Void in
                 print("failed downloading steps data in Next")
