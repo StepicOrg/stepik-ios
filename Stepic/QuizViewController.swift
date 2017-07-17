@@ -388,6 +388,8 @@ class QuizViewController: UIViewController {
     
     var step : Step!
     
+    var needNewAttempt: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
@@ -464,7 +466,7 @@ class QuizViewController: UIViewController {
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
-        refreshAttempt(step.id)
+        refreshAttempt(step.id, forceCreate: needNewAttempt)
         
         NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
             NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
@@ -518,12 +520,24 @@ class QuizViewController: UIViewController {
         })
     }
     
-    func refreshAttempt(_ stepId: Int) {
+    func refreshAttempt(_ stepId: Int, forceCreate: Bool = false) {
         self.doesPresentActivityIndicatorView = true
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: { 
+            
+            if forceCreate {
+                print("force create new attempt")
+                s.createNewAttempt(completion: {
+                    s.doesPresentActivityIndicatorView = false
+                }, error:  {
+                    s.doesPresentActivityIndicatorView = false
+                    s.doesPresentWarningView = true
+                })
+                return
+            }
+            
+            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: {
                 attempts, meta in
                 if attempts.count == 0 || attempts[0].status != "active" {
                     //Create attempt
