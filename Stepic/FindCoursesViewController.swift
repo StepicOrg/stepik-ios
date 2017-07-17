@@ -14,9 +14,7 @@ class FindCoursesViewController: CoursesViewController {
     var searchController : UISearchController!
     
     var filteredCourses = [Course]()
-    
-    let signInViewHeight = 135
-    
+        
     override var tabIds :  [Int] {
         get {
             return TabsInfo.allCoursesIds
