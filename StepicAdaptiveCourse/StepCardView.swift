@@ -62,9 +62,9 @@ class StepCardView: UIView {
             layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
             layer.shouldRasterize = true;
             layer.rasterizationScale = UIScreen.main.scale
-            layer.shadowOffset = CGSize(width: 0.0, height: 6.5)
+            layer.shadowOffset = CGSize(width: 0.0, height: 3)
             layer.shadowOpacity = 0.2
-            layer.shadowRadius = 7.5
+            layer.shadowRadius = 4.5
             
             cardPadView = UIView(frame: bounds)
             cardPadView.backgroundColor = .white
