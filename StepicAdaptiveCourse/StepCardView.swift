@@ -31,7 +31,7 @@ class StepCardView: UIView {
     
     var cardState: CardState = .loading {
         didSet {
-            titleLabel.isHidden = cardState == .loading
+            titlePadView.isHidden = cardState == .loading
             loadingView.isHidden = cardState != .loading
             whitePadView.isHidden = cardState != .loading
             
