@@ -859,6 +859,7 @@
 		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
+		2C8D08141F1CB24F000E8F32 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08131F1CB24F000E8F32 /* step4.html */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
@@ -1819,6 +1820,7 @@
 		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
+		2C8D08131F1CB24F000E8F32 /* step4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = step4.html; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
@@ -3478,6 +3480,7 @@
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
 				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
+				2C8D08131F1CB24F000E8F32 /* step4.html */,
 			);
 			name = "Onboarding content";
 			sourceTree = "<group>";
@@ -4077,6 +4080,7 @@
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
 				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
 				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
+				2C8D08141F1CB24F000E8F32 /* step4.html in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
