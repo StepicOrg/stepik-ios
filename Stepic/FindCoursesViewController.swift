@@ -35,18 +35,6 @@ class FindCoursesViewController: CoursesViewController {
         emptyDatasetState = .refreshing
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
-        let totalDistance = constraintDistance + tableView.contentInset.top
-        let oldInset = tableView.contentInset.top
-        if totalDistance != 64 && totalDistance != 124 {
-            tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
-            tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y + (oldInset - tableView.contentInset.top)), animated: true)
-            view.layoutIfNeeded()
-        }
-    }
-    
     var topConstraint : NSLayoutConstraint?
     
     override func viewDidLoad() {
@@ -70,12 +58,10 @@ class FindCoursesViewController: CoursesViewController {
         searchController.searchBar.tintColor = UIColor.white
         UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
 
-        self.automaticallyAdjustsScrollViewInsets = false
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         
         searchController.searchBar.scopeButtonTitles = []
-        
         
         super.viewDidLoad()
 
@@ -128,6 +114,7 @@ extension FindCoursesViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let results = searchController.searchResultsController as? SearchResultsCoursesViewController
         results?.query = searchController.searchBar.text!
+        results?.countTopOffset()
     }
 }
 

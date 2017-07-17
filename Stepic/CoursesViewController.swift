@@ -14,7 +14,7 @@ import SVProgressHUD
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UIViewControllerPreviewingDelegate {
     
-    var tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    var tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     var loadEnrolled : Bool? = nil
     var loadFeatured : Bool? = nil
