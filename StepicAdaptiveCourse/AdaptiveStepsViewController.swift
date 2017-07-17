@@ -143,6 +143,12 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     func showCongratulation(for rating: Int, isSpecial: Bool) {
         levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0)
     }
+    
+    func presentShareDialog(with content: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: content, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = topCard?.shareButton ?? view
+        present(activityViewController, animated: true, completion: nil)
+    }
 }
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {

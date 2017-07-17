@@ -26,6 +26,7 @@ protocol AdaptiveStepsView: class {
     func initCards()
     func updateProgress(for rating: Int, presentCongratulation: Bool)
     func showCongratulation(for rating: Int, isSpecial: Bool)
+    func presentShareDialog(with content: [Any])
 }
 
 class AdaptiveStepsPresenter {
@@ -462,6 +463,17 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             view?.updateProgress(for: RatingHelper.incrementRating(1), presentCongratulation: true)
             break
         }
+    }
+    
+    func onShareButtonClick() {
+        // TODO: maybe use short link (but how to get it)?
+        guard let lessonId = currentLesson?.id else {
+            return
+        }
+        let shareLink = "https://stepik.org/lesson/\(lessonId)"
+        let shareURL = URL(fileURLWithPath: shareLink)
+        
+        view?.presentShareDialog(with: [shareLink, shareURL])
     }
 }
 

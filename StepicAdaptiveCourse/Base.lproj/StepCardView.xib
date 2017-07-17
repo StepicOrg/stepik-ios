@@ -47,6 +47,9 @@
                                 <color key="titleColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="onShareButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="0lC-2e-IQZ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -164,6 +167,7 @@
                 <outlet property="loadingImageView" destination="V5w-aY-Ny6" id="4Wt-fs-L3r"/>
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="Msd-F0-gr3"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="4bf-SP-sBL"/>
+                <outlet property="shareButton" destination="8aa-Jm-cMF" id="cj0-xs-SRz"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="r1U-3N-2i9"/>
                 <outlet property="titlePadView" destination="HzP-xg-1iP" id="b09-Ys-1DQ"/>
                 <outlet property="whitePadView" destination="xHA-bo-OBf" id="qhL-KD-H8n"/>

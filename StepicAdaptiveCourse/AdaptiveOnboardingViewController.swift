@@ -116,4 +116,8 @@ extension AdaptiveOnboardingViewController: StepCardViewDelegate {
         kolodaView.swipe(.up)
         canSwipeCurrentCardUp = false
     }
+    
+    func onShareButtonClick() {
+        
+    }
 }

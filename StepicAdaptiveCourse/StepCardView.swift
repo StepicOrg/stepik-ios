@@ -11,11 +11,13 @@ import FLAnimatedImage
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
+    func onShareButtonClick()
 }
 
 class StepCardView: UIView {
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
     
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var titlePadView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
@@ -50,6 +52,11 @@ class StepCardView: UIView {
     @IBAction func onControlButtonClick(_ sender: Any) {
         delegate?.onControlButtonClick()
     }
+
+    @IBAction func onShareButtonClick(_ sender: Any) {
+        delegate?.onShareButtonClick()
+    }
+    
 
     var isFirst = true
     override func draw(_ rect: CGRect) {
