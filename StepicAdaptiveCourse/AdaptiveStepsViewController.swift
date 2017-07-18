@@ -144,8 +144,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0)
     }
     
-    func presentShareDialog(with content: [Any]) {
-        let activityViewController = UIActivityViewController(activityItems: content, applicationActivities: nil)
+    func presentShareDialog(for link: String) {
+        let activityViewController = SharingHelper.getSharingController(link)
         activityViewController.popoverPresentationController?.sourceView = topCard?.shareButton ?? view
         present(activityViewController, animated: true, completion: nil)
     }

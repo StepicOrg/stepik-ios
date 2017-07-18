@@ -26,7 +26,7 @@ protocol AdaptiveStepsView: class {
     func initCards()
     func updateProgress(for rating: Int, presentCongratulation: Bool)
     func showCongratulation(for rating: Int, isSpecial: Bool)
-    func presentShareDialog(with content: [Any])
+    func presentShareDialog(for link: String)
 }
 
 class AdaptiveStepsPresenter {
@@ -470,10 +470,8 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
         guard let lessonId = currentLesson?.id else {
             return
         }
-        let shareLink = "https://stepik.org/lesson/\(lessonId)"
-        let shareURL = URL(fileURLWithPath: shareLink)
-        
-        view?.presentShareDialog(with: [shareLink, shareURL])
+        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lessonId)"
+        view?.presentShareDialog(for: shareLink)
     }
 }
 
