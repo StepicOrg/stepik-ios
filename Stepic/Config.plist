@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>url</key>
+	<dict>
+		<key>scheme</key>
+		<string>stepic</string>
+		<key>api</key>
+		<string>https://stepik.org/api</string>
+		<key>oauth</key>
+		<string>https://stepik.org/oauth2</string>
+		<key>stepik</key>
+		<string>https://stepik.org</string>
+		<key>version</key>
+		<string>https://stepik.org/media/attachments/lesson/26869/version.json</string>
+	</dict>
+	<key>cookie</key>
+	<dict>
+		<key>prefix</key>
+		<string></string>
+	</dict>
+	<key>feature</key>
+	<dict>
+		<key>courseUnenrollment</key>
+		<true/>
+		<key>inAppUpdates</key>
+		<false/>
+		<key>streaks</key>
+		<true/>
+		<key>notifications</key>
+		<true/>
+	</dict>
+	<key>adaptive</key>
+	<dict>
+		<key>isAdaptive</key>
+		<false/>
+	</dict>
+	<key>rateApp</key>
+	<dict>
+		<key>submissionsThreshold</key>
+		<integer>4</integer>
+		<key>appStoreLink</key>
+		<string>itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1064581926&amp;onlyLatestVersion=true&amp;pageNumber=0&amp;sortOrdering=1&amp;type=Purple+Software&amp;action=write-review</string>
+	</dict>
+	<key>socialProviders</key>
+	<dict>
+		<key>vk</key>
+		<string>5628680</string>
+		<key>facebook</key>
+		<string>171127739724012</string>
+	</dict>
+</dict>
+</plist>
