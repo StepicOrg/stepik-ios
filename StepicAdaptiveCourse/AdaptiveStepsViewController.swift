@@ -38,19 +38,6 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         return v
     }()
     
-    lazy var congratsPresentr: Presentr = {
-        let presenter = Presentr(presentationType: .alert)
-        presenter.backgroundOpacity = 0.0
-        presenter.dismissOnTap = false
-        presenter.dismissAnimated = true
-        presenter.dismissTransitionType = TransitionType.custom(CrossDissolveAnimation(options: .normal(duration: 0.4)))
-        presenter.roundCorners = true
-        presenter.cornerRadius = 10
-        // TODO: clipsToBounds == false for button?
-        // presenter.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.4, shadowOffset: CGSize(width: 0.0, height: 2), shadowRadius: 1.8)
-        return presenter
-    }()
-    
     lazy var congratsView: UIView = {
         let congratsView = CongratsView(frame: self.view.bounds)
         congratsView.isHidden = true
@@ -125,13 +112,11 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         if presentCongratulation && rating == ratingForCurrentLevel {
             // Level up
             let congratsText = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(currentLevel)")
-            let controller = Presentr.alertViewController(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), body: congratsText)
-            let continueAction = AlertAction(title: NSLocalizedString("Continue", comment: ""), style: .default) { [weak self] in
+            let controller = Alerts.congratulation.construct(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), congratulationText: congratsText, continueHandler: { [weak self] in
                 self?.state = .normal
-            }
-            controller.addAction(continueAction)
+            })
             state = .congratulation
-            customPresentViewController(self.congratsPresentr, viewController: controller, animated: true, completion: nil)
+            Alerts.congratulation.present(alert: controller, inController: self)
         }
         
         let newProgress = Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel)
