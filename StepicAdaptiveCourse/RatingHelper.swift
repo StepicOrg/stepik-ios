@@ -23,16 +23,28 @@ class RatingHelper {
     }
     
     static func getLevel(for rating: Int) -> Int {
-        if rating < 1 { return 0 }
-        if rating < 2 { return 1 }
-        if rating < 5 { return 2 }
-        return 3 + Int(log(Double(rating) / 5.0) / log(2.0))
+        switch rating {
+        case _ where rating < 1:
+            return 0
+        case _ where rating < 2:
+            return 1
+        case _ where rating < 5:
+            return 2
+        default:
+            return 3 + Int(log(Double(rating) / 5.0) / log(2.0))
+        }
     }
     
     static func getRating(for level: Int) -> Int {
-        if level == 1 { return 1 }
-        if level == 2 { return 2 }
-        if level == 3 { return 5 }
-        return 5 * Int(pow(2.0, Double(level - 3)))
+        switch level {
+        case 1:
+            return 1
+        case 2:
+            return 2
+        case 3:
+            return 5
+        default:
+            return 5 * Int(pow(2.0, Double(level - 3)))
+        }
     }
 }

@@ -11,8 +11,12 @@ import UIKit
 class CongratsView: UIView {
     let backgroundAnimationColor: UIColor = UIColor.white.withAlphaComponent(0.3)
     let backgroundSectionsCount: Int = 18
-    let backgroundRotateDuration: CFTimeInterval = 30.0
     let padOpacity: CGFloat = 0.15
+    
+    struct AnimationDuration {
+        static let hiding: TimeInterval = 0.5
+        static let backgroundRotate: TimeInterval = 30.0
+    }
     
     private var blurView: UIVisualEffectView?
     private var padView: UIView?
@@ -21,7 +25,7 @@ class CongratsView: UIView {
     override var isHidden: Bool {
         willSet {
             self.shapeLayer?.isHidden = !self.isHidden
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: AnimationDuration.hiding, animations: {
                 self.blurView?.alpha = self.isHidden ? 1.0 : 0.0
                 self.padView?.alpha = self.isHidden ? self.padOpacity : 0.0
             })
@@ -70,7 +74,7 @@ class CongratsView: UIView {
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = 0
         animation.toValue = 2 * Double.pi
-        animation.duration = backgroundRotateDuration
+        animation.duration = AnimationDuration.backgroundRotate
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)

@@ -84,6 +84,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 card?.cardState = .normal
                 card?.delegate = self
                 card?.updateLabel(cardData.title)
+                card?.shareButton.isHidden = true
                 
                 requiredActions = cardData.requiredActions
                 
@@ -115,9 +116,5 @@ extension AdaptiveOnboardingViewController: StepCardViewDelegate {
         canSwipeCurrentCardUp = true
         kolodaView.swipe(.up)
         canSwipeCurrentCardUp = false
-    }
-    
-    func onShareButtonClick() {
-        
     }
 }

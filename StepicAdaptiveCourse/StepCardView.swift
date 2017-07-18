@@ -14,6 +14,11 @@ protocol StepCardViewDelegate: class {
     func onShareButtonClick()
 }
 
+extension StepCardViewDelegate {
+    func onControlButtonClick() { }
+    func onShareButtonClick() { }
+}
+
 class StepCardView: UIView {
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
     

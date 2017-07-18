@@ -16,6 +16,14 @@ class RatingProgressView: UIView {
     @IBInspectable var congratulationLabelColor: UIColor? = UIColor.white
     @IBInspectable var labelFont: UIFont? = UIFont.systemFont(ofSize: 15)
     
+    struct AnimationDuration {
+        static let progress: TimeInterval = 1.5
+        static let congratulationSpecial: TimeInterval = 0.3
+        static let congratulationDefault: TimeInterval = 0.5
+        static let congratulationScaling: TimeInterval = 0.25
+        static let hiding: TimeInterval = 0.2
+    }
+    
     private var label: UILabel!
     private var frontView: UIView!
     private var frontLabel: UILabel!
@@ -43,7 +51,7 @@ class RatingProgressView: UIView {
             if value > progress {
                 self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
             }
-            UIView.animate(withDuration: 2.0, animations: {
+            UIView.animate(withDuration: AnimationDuration.progress, animations: {
                 self.frontView.frame.size.width = self.bounds.width * CGFloat(value)
             }, completion: { _ in
                 if value > self.progress {
@@ -60,12 +68,12 @@ class RatingProgressView: UIView {
     
     func showCongratulation(text: String, duration: TimeInterval, isSpecial: Bool = false, completion: (() -> ())? = nil) {
         congratulationLabel.text = text
-        UIView.transition(with: congratulationView, duration: isSpecial ? 0.3 : 0.5, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+        UIView.transition(with: congratulationView, duration: isSpecial ? AnimationDuration.congratulationSpecial : AnimationDuration.congratulationDefault, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
             self.congratulationView.alpha = 1.0
             
             if isSpecial {
                 let animation = CABasicAnimation(keyPath: "transform.scale")
-                animation.duration = 0.25
+                animation.duration = AnimationDuration.congratulationScaling
                 animation.repeatCount = 2
                 animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
                 animation.autoreverses = true
@@ -75,7 +83,7 @@ class RatingProgressView: UIView {
             }
         }, completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration, execute: {
-                UIView.transition(with: self.congratulationView, duration: isSpecial ? 0.3 : 0.5, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+                UIView.transition(with: self.congratulationView, duration: isSpecial ? AnimationDuration.congratulationSpecial : AnimationDuration.congratulationDefault, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
                     self.congratulationView.alpha = 0.0
                     completion?()
                 })
@@ -88,7 +96,7 @@ class RatingProgressView: UIView {
             self.congratulationView.alpha = 0.0
             completion?()
         } else {
-            UIView.transition(with: congratulationView, duration: 0.2, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
+            UIView.transition(with: congratulationView, duration: AnimationDuration.hiding, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
                 self.congratulationView.alpha = 0.0
                 completion?()
             })

@@ -25,9 +25,8 @@ class StepReversedCardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if let whiteView = white,
-           let bgImage = UIImage(named: "stepic-pattern-grey") {
-            whiteView.backgroundColor = UIColor(patternImage: bgImage)
+        if let whiteView = white {
+            whiteView.backgroundColor = UIColor(patternImage: Images.patterns.gray)
         }
     }
 }
