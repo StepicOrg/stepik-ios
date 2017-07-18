@@ -41,7 +41,7 @@
 	<key>rateApp</key>
 	<dict>
 		<key>submissionsThreshold</key>
-		<integer>20</integer>
+		<integer>13</integer>
 		<key>appStoreLink</key>
 		<string>itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1239082208&amp;onlyLatestVersion=true&amp;pageNumber=0&amp;sortOrdering=1&amp;type=Purple+Software&amp;action=write-review</string>
 	</dict>

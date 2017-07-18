@@ -856,7 +856,6 @@
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
 		2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */; };
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
-		2C6ABA651F1E1F0B005A3BCF /* StepicApplicationsInfoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA641F1E1F0B005A3BCF /* StepicApplicationsInfoTest.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1817,7 +1816,6 @@
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
-		2C6ABA641F1E1F0B005A3BCF /* StepicApplicationsInfoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepicApplicationsInfoTest.swift; path = ../StepicApplicationsInfoTest.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -2573,7 +2571,6 @@
 		085D5CDA1D007F2100092060 /* StepicTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C6ABA661F1E20D7005A3BCF /* ApplicationsInfo */,
 				085D5CDD1D007F2200092060 /* Info.plist */,
 				085D5CE31D007F6500092060 /* HTMLParsingTests.swift */,
 				08AB823A1D75AA9300FDEADE /* CookieTests.swift */,
@@ -3451,14 +3448,6 @@
 				2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */,
 			);
 			name = AdaptiveSteps;
-			sourceTree = "<group>";
-		};
-		2C6ABA661F1E20D7005A3BCF /* ApplicationsInfo */ = {
-			isa = PBXGroup;
-			children = (
-				2C6ABA641F1E1F0B005A3BCF /* StepicApplicationsInfoTest.swift */,
-			);
-			name = ApplicationsInfo;
 			sourceTree = "<group>";
 		};
 		2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */ = {
@@ -4365,7 +4354,6 @@
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
-				2C6ABA651F1E1F0B005A3BCF /* StepicApplicationsInfoTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
