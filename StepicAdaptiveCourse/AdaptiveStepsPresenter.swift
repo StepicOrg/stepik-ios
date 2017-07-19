@@ -466,11 +466,10 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
     }
     
     func onShareButtonClick() {
-        // TODO: maybe use short link (but how to get it)?
-        guard let lessonId = currentLesson?.id else {
+        guard let slug = currentLesson?.slug else {
             return
         }
-        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lessonId)"
+        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
         view?.presentShareDialog(for: shareLink)
     }
 }
