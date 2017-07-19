@@ -51,6 +51,7 @@ class AdaptiveStepsPresenter {
     var isOnboardingPassed = false
     
     var rating: Int = 0
+    var streak: Int = 1
     
     var lastReaction: Reaction? {
         didSet {
@@ -86,7 +87,11 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
-            self.rating = RatingHelper.retrieveRating()
+            rating = RatingHelper.retrieveRating()
+            
+            streak = RatingHelper.retrieveStreak()
+            streak = streak == 0 ? RatingHelper.incrementStreak() : streak
+            
             view?.updateProgress(for: self.rating, presentCongratulation: false)
             
             // Show cards (empty or not)
@@ -455,12 +460,21 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.submit()
             break
         case .wrong:
+            // Drop streak
+            if streak > 1 {
+                streak = RatingHelper.incrementStreak(-streak + 1)
+            }
+            
             currentStepPresenter?.retry()
             break
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
-            view?.updateProgress(for: RatingHelper.incrementRating(1), presentCongratulation: true)
+            
+            // Update rating and streak
+            rating = RatingHelper.incrementRating(streak)
+            view?.updateProgress(for: rating, presentCongratulation: true)
+            streak = RatingHelper.incrementStreak()
             break
         }
     }
@@ -476,7 +490,7 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
-        view?.showCongratulation(for: 1, isSpecial: false)
+        view?.showCongratulation(for: streak, isSpecial: streak > 1)
         view?.updateTopCardControl(stepState: .successful)
     }
     

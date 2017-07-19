@@ -126,7 +126,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     }
     
     func showCongratulation(for rating: Int, isSpecial: Bool) {
-        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0)
+        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0, isSpecial: isSpecial)
     }
     
     func presentShareDialog(for link: String) {
