@@ -46,17 +46,26 @@ class RatingProgressView: UIView {
     }
     
     func setProgress(value: Float, animated: Bool, completion: (() -> ())? = nil) {
+        if value < progress {
+            // Animate from value to 1.0
+            setProgress(value: 1.0, animated: true) {
+                // Manually set progress = 0
+                self.progress = 0.0
+                self.frontView.frame.size.width = 0.0
+                self.frontViewShadowLayer.frame.size.width = 0.0
+                // Animate from 0.0 to value
+                self.setProgress(value: value, animated: true)
+            }
+            return
+        }
+        
         progress = value
         if animated {
-            if value > progress {
-                self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
-            }
+            self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
             UIView.animate(withDuration: AnimationDuration.progress, animations: {
                 self.frontView.frame.size.width = self.bounds.width * CGFloat(value)
             }, completion: { _ in
-                if value > self.progress {
-                    self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
-                }
+                self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
                 completion?()
             })
         } else {

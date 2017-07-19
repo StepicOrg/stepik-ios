@@ -24,8 +24,9 @@ protocol AdaptiveStepsView: class {
     func updateTopCardControl(stepState: AdaptiveStepState)
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
-    func updateProgress(for rating: Int, presentCongratulation: Bool)
+    func updateProgress(for rating: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool)
+    func showLevelUpCongratulation(level: Int)
     func presentShareDialog(for link: String)
 }
 
@@ -92,7 +93,7 @@ class AdaptiveStepsPresenter {
             streak = RatingHelper.retrieveStreak()
             streak = streak == 0 ? RatingHelper.incrementStreak() : streak
             
-            view?.updateProgress(for: self.rating, presentCongratulation: false)
+            view?.updateProgress(for: self.rating)
             
             // Show cards (empty or not)
             view?.initCards()
@@ -472,8 +473,14 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             view?.swipeCardUp()
             
             // Update rating and streak
-            rating = RatingHelper.incrementRating(streak)
-            view?.updateProgress(for: rating, presentCongratulation: true)
+            let newRating = RatingHelper.incrementRating(streak)
+            
+            if RatingHelper.getLevel(for: rating) != RatingHelper.getLevel(for: newRating) {
+                view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating))
+            }
+            
+            rating = newRating
+            view?.updateProgress(for: rating)
             streak = RatingHelper.incrementStreak()
             break
         }

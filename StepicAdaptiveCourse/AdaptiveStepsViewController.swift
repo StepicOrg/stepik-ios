@@ -102,27 +102,25 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         topCard?.cardState = cardState
     }
     
-    func updateProgress(for rating: Int, presentCongratulation: Bool = false) {
+    func updateProgress(for rating: Int) {
         let currentLevel = RatingHelper.getLevel(for: rating)
         let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel)
         let ratingForNextLevel = RatingHelper.getRating(for: currentLevel + 1)
         
         levelProgress.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(ratingForNextLevel)") + " • " + String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
-        
-        if presentCongratulation && rating == ratingForCurrentLevel {
-            // Level up
-            let congratsText = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(currentLevel)")
-            let controller = Alerts.congratulation.construct(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), congratulationText: congratsText, continueHandler: { [weak self] in
-                self?.state = .normal
-            })
-            state = .congratulation
-            Alerts.congratulation.present(alert: controller, inController: self)
-        }
-        
         let newProgress = Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel)
         levelProgress.hideCongratulation(force: true) {
             self.levelProgress.setProgress(value: newProgress, animated: true)
         }
+    }
+    
+    func showLevelUpCongratulation(level: Int) {
+        let congratsText = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(level)")
+        let controller = Alerts.congratulation.construct(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), congratulationText: congratsText, continueHandler: { [weak self] in
+            self?.state = .normal
+        })
+        state = .congratulation
+        Alerts.congratulation.present(alert: controller, inController: self)
     }
     
     func showCongratulation(for rating: Int, isSpecial: Bool) {
