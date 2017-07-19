@@ -29,10 +29,12 @@ struct StepicApplicationsInfo {
         return (clientId: id, clientSecret: secret, redirectUri: redirect, credentials: credentials)
     }
     
-    static let social: AuthInfo? = StepicApplicationsInfo.initAuthInfo(idPath: Root.AuthType.Social.id,
+    static let social: AuthInfo? = !(StepicApplicationsInfo.stepikAuthDic?.has(path: Root.AuthType.social) ?? false) ? nil :
+                                    StepicApplicationsInfo.initAuthInfo(idPath: Root.AuthType.Social.id,
                                                                        secretPath: Root.AuthType.Social.secret,
                                                                        redirectPath: Root.AuthType.Social.redirect)
-    static let password: AuthInfo? = StepicApplicationsInfo.initAuthInfo(idPath: Root.AuthType.Password.id,
+    static let password: AuthInfo? = !(StepicApplicationsInfo.stepikAuthDic?.has(path: Root.AuthType.password) ?? false) ? nil :
+                                    StepicApplicationsInfo.initAuthInfo(idPath: Root.AuthType.Password.id,
                                                                        secretPath: Root.AuthType.Password.secret,
                                                                        redirectPath: Root.AuthType.Password.redirect)
 

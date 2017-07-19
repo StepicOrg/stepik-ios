@@ -38,6 +38,8 @@ class ApplicationInfo {
             static let facebookId = "socialProviders.facebook"
         }
         struct AuthType {
+            static let social = "social"
+            static let password = "password"
             struct Social {
                 static let id = "social.id"
                 static let secret = "social.secret"
@@ -72,5 +74,10 @@ class ApplicationInfo {
         return dic.value(forKeyPath: path)
     }
     
-
+    func has(path: String) -> Bool {
+        guard let dic = settings else {
+            return false
+        }
+        return dic.value(forKeyPath: path) != nil
+    }
 }
