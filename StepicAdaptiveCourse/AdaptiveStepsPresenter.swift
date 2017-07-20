@@ -31,8 +31,8 @@ protocol AdaptiveStepsView: class {
 }
 
 class AdaptiveStepsPresenter {
-    let recommendationsBatchSize = 10
-    let nextRecommendationsBatch = 5
+    let recommendationsBatchSize = 6
+    let nextRecommendationsBatch = 4
     
     weak var view: AdaptiveStepsView?
     var currentStepPresenter: AdaptiveStepPresenter?
