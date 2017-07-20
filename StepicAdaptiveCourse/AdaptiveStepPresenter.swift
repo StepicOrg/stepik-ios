@@ -51,6 +51,7 @@ class AdaptiveStepPresenter {
         }
         quizViewController.step = step
         quizViewController.delegate = self
+        quizViewController.needNewAttempt = true
         view?.updateQuiz(with: quizViewController.view)
         
         quizViewController.isSubmitButtonHidden = true

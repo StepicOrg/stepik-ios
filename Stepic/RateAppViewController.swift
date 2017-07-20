@@ -144,7 +144,7 @@ class RateAppViewController: UIViewController {
     
     func showAppStore() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: defaultAnalyticsParams)
-        guard let appStoreURL = StepicApplicationsInfo.appStoreRateURL else {
+        guard let appStoreURL = StepicApplicationsInfo.RateApp.appStoreURL else {
             return
         }
         UIApplication.shared.openURL(appStoreURL)
