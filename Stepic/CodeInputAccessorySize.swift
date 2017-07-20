@@ -12,14 +12,14 @@ enum CodeInputAccessorySize {
     case small
     case big
     
-    typealias SizeParams = (textSize: CGFloat, viewHeight: CGFloat)
+    typealias SizeParams = (textSize: CGFloat, viewHeight: CGFloat, minAccessoryWidth: CGFloat)
     
     var realSizes : SizeParams {
         switch self {
         case .small:
-            return (textSize: 13, viewHeight: 40)
+            return (textSize: 17, viewHeight: 50, minAccessoryWidth: 25)
         case .big:
-            return (textSize: 17, viewHeight: 60)
+            return (textSize: 21, viewHeight: 70, minAccessoryWidth: 35)
         }
     }
 }

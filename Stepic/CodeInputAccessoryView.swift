@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FLKAutoLayout
 
 class CodeInputAccessoryView: UIView {
     
@@ -29,6 +30,8 @@ class CodeInputAccessoryView: UIView {
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(CodeInputAccessoryView.didTapHideKeyboardImageView(recognizer:)))
         hideKeyboardImageView.addGestureRecognizer(tapG)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        hideKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func didTapHideKeyboardImageView(recognizer: UIGestureRecognizer) {
@@ -52,6 +55,11 @@ class CodeInputAccessoryView: UIView {
         return view
     }
     
+//    override var intrinsicContentSize: CGSize {
+//        return CGSize(width: self.bounds.width, height: size.realSizes.viewHeight)
+//    }
+
+    
     override init(frame: CGRect) {
         // 1. setup any properties here
         
@@ -72,9 +80,10 @@ class CodeInputAccessoryView: UIView {
     
     convenience init(frame: CGRect, buttons: [CodeInputAccessoryButtonData], size: CodeInputAccessorySize, hideKeyboardAction: @escaping (Void)->(Void)) {
         self.init(frame: frame)
-        self.buttons = buttons
         self.size = size
         self.hideKeyboardAction = hideKeyboardAction
+        self.buttons = buttons
+        self.constrainHeight("\(size.realSizes.viewHeight)")
     }
 }
 

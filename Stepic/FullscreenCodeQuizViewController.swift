@@ -60,6 +60,10 @@ class FullscreenCodeQuizViewController: UIViewController {
                     s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
                     s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
                     s.currentCode = s.codeTextView.text
+                }, hideKeyboardAction: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.codeTextView.resignFirstResponder()
             })
             
             if let userTemplate = options.template(language: language, userGenerated: true) {

@@ -53,10 +53,17 @@ class InputAccessoryBuilder {
             buttons += [symButton]
         }
         
-        let viewSize = CGSize(width: UIScreen.main.bounds.size.width, height: 40)
+        let size : CodeInputAccessorySize = DeviceInfo.isIPad() ? .big : .small
+        let viewSize = CGSize(width: UIScreen.main.bounds.size.width, height: size.realSizes.viewHeight)
         let frame = CGRect(origin: CGPoint.zero, size: viewSize)
         let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: DeviceInfo.isIPad() ? .big : .small, hideKeyboardAction: hideKeyboardAction)
         accessoryView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        accessoryView.invalidateIntrinsicContentSize()
+        accessoryView.size = DeviceInfo.isIPad() ? .big : .small
+        accessoryView.invalidateIntrinsicContentSize()
+        accessoryView.collectionView.reloadData()
+        accessoryView.setNeedsLayout()
+        accessoryView.layoutIfNeeded()
         return accessoryView
     }
 
