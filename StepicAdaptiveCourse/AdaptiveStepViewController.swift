@@ -10,10 +10,10 @@ import UIKit
 import Agrume
 
 class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
-    var presenter: AdaptiveStepPresenter?
+    weak var presenter: AdaptiveStepPresenter?
     
     var problemText: String?
-    var quizView: UIView?
+    weak var quizView: UIView?
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stepWebView: UIWebView!
@@ -38,6 +38,10 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
         
         view.setNeedsLayout()
         view.layoutIfNeeded()
+    }
+    
+    deinit {
+        print("deinit AdaptiveStepViewController")
     }
     
     func updateProblem(with htmlText: String) {

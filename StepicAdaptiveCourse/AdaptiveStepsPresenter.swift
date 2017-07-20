@@ -36,6 +36,7 @@ class AdaptiveStepsPresenter {
     
     weak var view: AdaptiveStepsView?
     var currentStepPresenter: AdaptiveStepPresenter?
+    var currentStepViewController: AdaptiveStepViewController?
     
     // TODO: optimize DI
     private var coursesAPI: CoursesAPI?
@@ -367,8 +368,12 @@ class AdaptiveStepsPresenter {
             let successHandler: (Step) -> (Void) = { step in
                 self?.step = step
                 DispatchQueue.main.async {
-                    let currentStepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
-                    guard let stepViewController = currentStepViewController,
+                    if self?.currentStepViewController != nil {
+                        self?.currentStepViewController?.removeFromParentViewController()
+                    }
+                    
+                    self?.currentStepViewController = ControllerHelper.instantiateViewController(identifier: "AdaptiveStepViewController", storyboardName: "AdaptiveMain") as? AdaptiveStepViewController
+                    guard let stepViewController = self?.currentStepViewController,
                         let step = self?.step else {
                             print("stepVC init failed")
                             return
@@ -449,6 +454,7 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
+            currentStepPresenter = nil
             
             // Update rating and streak
             let newRating = RatingHelper.incrementRating(streak)
