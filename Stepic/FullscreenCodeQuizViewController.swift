@@ -18,6 +18,8 @@ class FullscreenCodeQuizViewController: UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     var codeTextView: UITextView = UITextView()
     
+    let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
+
     var options: StepOptions!
     var onDismissBlock : ((CodeLanguage, String)->Void)?
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
@@ -49,7 +51,7 @@ class FullscreenCodeQuizViewController: UIViewController {
             }
             
             //setting up input accessory view
-            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
                 [weak self] in
                 guard let s = self else { return }
                 s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
@@ -100,6 +102,9 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
+        let theme = highlightr.theme!
+        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
+        highlightr.theme = theme
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
         
         codeTextView.delegate = self
@@ -255,6 +260,10 @@ extension FullscreenCodeQuizViewController: CodeSuggestionDelegate {
         playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
+    }
+    
+    var suggestionsSize: CodeSuggestionsSize {
+        return self.size.elements.suggestions
     }
 }
 

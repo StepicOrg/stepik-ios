@@ -17,13 +17,13 @@ class CodeQuizViewController: QuizViewController {
     var codeTextView: UITextView = UITextView()
     
     let toolbarHeight : CGFloat = 44
-    let codeTextViewHeight : CGFloat = 180
     let limitsLabelHeight : CGFloat = 40
     
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
     var highlightr : Highlightr!
     let textStorage = CodeAttributedString()
+    let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
     
     let playgroundManager = CodePlaygroundManager()
     var currentCode : String = "" {
@@ -55,7 +55,7 @@ class CodeQuizViewController: QuizViewController {
             toolbarView.language = language.displayName
             
             //setting up input accessory view
-            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
                 [weak self] in
                 guard let s = self else { return }
                 s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
@@ -99,7 +99,7 @@ class CodeQuizViewController: QuizViewController {
     }
     
     override var expectedQuizHeight : CGFloat {
-        return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 16
+        return toolbarHeight + size.elements.editor.realSizes.editorHeight + limitsLabelHeight + 16
     }
     
     fileprivate func setupConstraints() {
@@ -115,7 +115,7 @@ class CodeQuizViewController: QuizViewController {
         toolbarView.constrainHeight("\(toolbarHeight)")
         codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
         codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
-        codeTextView.constrainHeight("\(codeTextViewHeight)")
+        codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
     }
     
     fileprivate func setLimits(time: Double, memory: Double) {
@@ -147,8 +147,10 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
+        let theme = highlightr.theme!
+        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
+        highlightr.theme = theme
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
-
         setupConstraints()
         
         toolbarView.delegate = self
@@ -334,5 +336,9 @@ extension CodeQuizViewController: CodeSuggestionDelegate {
         playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
+    }
+    
+    var suggestionsSize: CodeSuggestionsSize {
+        return self.size.elements.suggestions
     }
 }

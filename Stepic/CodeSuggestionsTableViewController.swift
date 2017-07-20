@@ -10,6 +10,7 @@ import UIKit
 
 protocol CodeSuggestionDelegate: class {
     func didSelectSuggestion(suggestion: String, prefix: String)
+    var suggestionsSize: CodeSuggestionsSize { get }
 }
 
 class CodeSuggestionsTableViewController: UITableViewController {
@@ -26,7 +27,13 @@ class CodeSuggestionsTableViewController: UITableViewController {
     }
     
     
-    fileprivate let suggestionHeight: CGFloat = 22
+    fileprivate var suggestionHeight: CGFloat {
+        if let size = delegate?.suggestionsSize {
+            return size.realSizes.suggestionHeight
+        } else {
+            return 22
+        }
+    }
     fileprivate let maxSuggestionCount = 4
     
     weak var delegate: CodeSuggestionDelegate?
@@ -79,9 +86,13 @@ class CodeSuggestionsTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.characters.count)
+        cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.characters.count, size: delegate?.suggestionsSize)
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return suggestionHeight
     }
     
     /*

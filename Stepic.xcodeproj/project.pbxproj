@@ -413,9 +413,9 @@
 		0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
 		0888D1061F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
 		0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
-		0888D1091F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeInputAccessorySize.swift */; };
-		0888D10A1F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeInputAccessorySize.swift */; };
-		0888D10B1F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeInputAccessorySize.swift */; };
+		0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
+		0888D10A1F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
+		0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
 		0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
@@ -1622,7 +1622,7 @@
 		0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryView.swift; sourceTree = "<group>"; };
 		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryCollectionViewCell.xib; sourceTree = "<group>"; };
-		0888D1081F1E42A000A16863 /* CodeInputAccessorySize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessorySize.swift; sourceTree = "<group>"; };
+		0888D1081F1E42A000A16863 /* CodeElementsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeElementsSize.swift; sourceTree = "<group>"; };
 		0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
 		0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
@@ -2045,6 +2045,7 @@
 		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0888D1081F1E42A000A16863 /* CodeElementsSize.swift */,
 				0860D9101F10BE5C0087D61B /* Input Accessory */,
 				0805FE3E1F0D38C5001226B4 /* Code Analysis */,
 				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
@@ -2800,7 +2801,6 @@
 				0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */,
 				0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */,
 				0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */,
-				0888D1081F1E42A000A16863 /* CodeInputAccessorySize.swift */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -4513,7 +4513,7 @@
 				080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
-				0888D10A1F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */,
+				0888D10A1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
 				08AF59E71E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */,
@@ -5042,7 +5042,7 @@
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
-				0888D1091F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */,
+				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
@@ -5152,7 +5152,7 @@
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
 				0846B1091EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
-				0888D10B1F1E42A000A16863 /* CodeInputAccessorySize.swift in Sources */,
+				0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67531E83E08E001E8D9E /* StepikAlertViewController.swift in Sources */,
 				86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 
 class InputAccessoryBuilder {
     
-    static func buildAccessoryView(language: CodeLanguage, tabAction: @escaping () -> (), insertStringAction: @escaping (String) -> (), hideKeyboardAction: @escaping () -> ()) -> UIView {
+    static func buildAccessoryView(size: CodeInputAccessorySize, language: CodeLanguage, tabAction: @escaping () -> (), insertStringAction: @escaping (String) -> (), hideKeyboardAction: @escaping () -> ()) -> UIView {
         let symbols = CodeSnippetSymbols.snippets(language: language)
         
         var buttons : [CodeInputAccessoryButtonData] = []
@@ -30,10 +30,9 @@ class InputAccessoryBuilder {
             buttons += [symButton]
         }
         
-        let size : CodeInputAccessorySize = DeviceInfo.isIPad() ? .big : .small
         let viewSize = CGSize(width: UIScreen.main.bounds.size.width, height: size.realSizes.viewHeight)
         let frame = CGRect(origin: CGPoint.zero, size: viewSize)
-        let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: DeviceInfo.isIPad() ? .big : .small, hideKeyboardAction: {
+        let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: size, hideKeyboardAction: {
             hideKeyboardAction()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.hideKeyboard)
         })
