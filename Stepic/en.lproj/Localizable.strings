@@ -237,3 +237,4 @@ Done = "Done";
 SwipeLeftTitle = "Swipe left";
 SwipeRightTitle = "Swipe right";
 WelcomeTitle = "Welcome";
+ResetAlertDescription = "Resetting code will remove all your current progress for this assignment";

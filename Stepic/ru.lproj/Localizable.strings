@@ -238,3 +238,4 @@ Done = "Готово";
 SwipeLeftTitle = "Смахивание влево";
 SwipeRightTitle = "Смахивание вправо";
 WelcomeTitle = "Добро пожаловать";
+ResetAlertDescription = "Сброс кода удалит весь текущий прогресс по задаче";

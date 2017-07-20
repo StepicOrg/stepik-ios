@@ -314,16 +314,25 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             return
         }
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
-        
-        if let userTemplate = options.template(language: language, userGenerated: true) {
-            CoreDataHelper.instance.deleteFromStore(userTemplate)
-        }
-        if let template = options.template(language: language, userGenerated: false) {
-            codeTextView.text = template.templateString
-            currentCode = template.templateString
-        }
-        CoreDataHelper.instance.save()
+        let alert = UIAlertController(title: nil, message: NSLocalizedString("ResetAlertDescription", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: {
+            [weak self]
+            action in
+            guard let s = self else { return }
+            
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
+            
+            if let userTemplate = options.template(language: s.language, userGenerated: true) {
+                CoreDataHelper.instance.deleteFromStore(userTemplate)
+            }
+            if let template = options.template(language: s.language, userGenerated: false) {
+                s.codeTextView.text = template.templateString
+                s.currentCode = template.templateString
+            }
+            CoreDataHelper.instance.save()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 
