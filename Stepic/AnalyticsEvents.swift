@@ -207,5 +207,6 @@ struct AnalyticsEvents {
         static let resetPressed = "code_reset_pressed"
         static let exitFullscreen = "code_exit_fullscreen"
         static let toolbarSelected = "code_toolbar_selected"
+        static let hideKeyboard = "code_hide_keyboard"
     }
 }
