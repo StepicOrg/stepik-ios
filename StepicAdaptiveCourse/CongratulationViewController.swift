@@ -27,23 +27,11 @@ class CongratulationViewController: UIViewController {
         case level(level: Int)
     }
     
-    var shareText = ""
     private static let shareAppName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Stepik"
-    
-    var text = ""
     
     var continueHandler: (() -> ())?
     
-    var congratulationType: CongratulationType? {
-        didSet {
-            guard let type = congratulationType else {
-                return
-            }
-            
-            text = type.congratulationText
-            shareText = type.shareText
-        }
-    }
+    var congratulationType: CongratulationType!
     
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var continueButton: UIButton!
@@ -54,7 +42,7 @@ class CongratulationViewController: UIViewController {
             return
         }
         
-        let activityVC = UIActivityViewController(activityItems: [shareText, url], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
         present(activityVC, animated: true)
     }
@@ -69,7 +57,7 @@ class CongratulationViewController: UIViewController {
         super.viewDidLoad()
         
         localize()
-        textLabel.text = text
+        textLabel.text = congratulationType.congratulationText
     }
 
     fileprivate func localize() {
