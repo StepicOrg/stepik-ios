@@ -10,6 +10,7 @@ import Foundation
 
 protocol AdaptiveOnboardingView: class {
     func finishOnboarding()
+    func updateProgress(for current: Int, count: Int)
 }
 
 class AdaptiveOnboardingPresenter {
@@ -23,7 +24,8 @@ class AdaptiveOnboardingPresenter {
         
         onboardingSteps = [AdaptiveOnboardingStep(title: NSLocalizedString("WelcomeTitle", comment: ""), content: loadOnboardingStep(from: "step1"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("NextTask", comment: ""), isButtonHidden: false),
         AdaptiveOnboardingStep(title: NSLocalizedString("SwipeLeftTitle", comment: ""), content: loadOnboardingStep(from: "step2"), requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
-        AdaptiveOnboardingStep(title: NSLocalizedString("SwipeRightTitle", comment: ""), content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true)
+        AdaptiveOnboardingStep(title: NSLocalizedString("SwipeRightTitle", comment: ""), content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true),
+        AdaptiveOnboardingStep(title: NSLocalizedString("ProgressTitle", comment: ""), content: loadOnboardingStep(from: "step4"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("FinishOnboarding", comment: ""), isButtonHidden: false)
         ]
     }
     
@@ -32,6 +34,7 @@ class AdaptiveOnboardingPresenter {
             return nil
         }
         
+        view?.updateProgress(for: onboardingStepIndex, count: onboardingSteps.count)
         let step = onboardingSteps[onboardingStepIndex]
         onboardingStepIndex += 1
         return step
