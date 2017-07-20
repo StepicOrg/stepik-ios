@@ -10,6 +10,7 @@ class ApplicationInfo {
     
     struct Path {
         struct URL {
+            static let appId = "url.appId"
             static let scheme = "url.scheme"
             static let api = "url.api"
             static let oauth = "url.oauth"

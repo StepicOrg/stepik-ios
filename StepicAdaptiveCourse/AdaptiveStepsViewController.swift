@@ -115,8 +115,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     }
     
     func showLevelUpCongratulation(level: Int) {
-        let congratsText = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(level)")
-        let controller = Alerts.congratulation.construct(title: NSLocalizedString("NewLevelCongratulationTitle", comment: ""), congratulationText: congratsText, continueHandler: { [weak self] in
+        let controller = Alerts.congratulation.construct(congratulationType: .level(level: level), continueHandler: { [weak self] in
             self?.state = .normal
         })
         state = .congratulation

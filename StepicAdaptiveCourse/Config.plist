@@ -4,6 +4,8 @@
 <dict>
 	<key>url</key>
 	<dict>
+		<key>appId</key>
+		<string>1239082208</string>
 		<key>scheme</key>
 		<string>adaptive1838</string>
 		<key>api</key>
