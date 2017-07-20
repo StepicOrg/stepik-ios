@@ -104,8 +104,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     func updateProgress(for rating: Int) {
         let currentLevel = RatingHelper.getLevel(for: rating)
-        let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel)
-        let ratingForNextLevel = RatingHelper.getRating(for: currentLevel + 1)
+        let ratingForCurrentLevel = RatingHelper.getRating(for: currentLevel - 1)
+        let ratingForNextLevel = RatingHelper.getRating(for: currentLevel)
         
         levelProgress.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(rating)", "\(ratingForNextLevel)") + " • " + String(format: NSLocalizedString("RatingProgressLevel", comment: ""), "\(currentLevel)")
         let newProgress = Float(rating - ratingForCurrentLevel) / Float(ratingForNextLevel - ratingForCurrentLevel)

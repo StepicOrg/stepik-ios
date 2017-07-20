@@ -38,6 +38,10 @@ class AdaptiveStepPresenter {
         self.view = view
     }
     
+    deinit {
+        print("deinit AdaptiveStepPresenter")
+    }
+    
     func refreshStep() {
         // Set up problem
         view?.updateProblem(with: step.block.text ?? "")
