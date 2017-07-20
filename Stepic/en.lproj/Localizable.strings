@@ -239,4 +239,11 @@ SwipeRightTitle = "Swipe right";
 WelcomeTitle = "Welcome";
 NotWithUsYet = "Didn't join us yet?";
 JoinCoursesSuggestionDescription = "Sign in to solve assignments, view content of lessons and get certificates";
-
+ProgressTitle = "Progress";
+FinishOnboarding = "Start learning";
+RatingProgress = "%@ ⁄ %@ XP";
+RatingProgressTutorial = "tutorial";
+RatingProgressLevel = "%@ level";
+NewLevelCongratulationTitle = "New level";
+NewLevelCongratulationText = "Congratulation! You've reached level %@!";
+RatingCongratulationText = "Correct! +%@ XP";

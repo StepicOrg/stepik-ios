@@ -240,4 +240,11 @@ SwipeRightTitle = "Смахивание вправо";
 WelcomeTitle = "Добро пожаловать";
 NotWithUsYet = "Еще не с нами?";
 JoinCoursesSuggestionDescription = "Войдите, чтобы решать задания, просматривать уроки и получать сертификаты";
-
+ProgressTitle = "Прогресс";
+FinishOnboarding = "Начать обучение";
+RatingProgress = "%@ ⁄ %@ опыта";
+RatingProgressTutorial = "обучение";
+RatingProgressLevel = "%@ уровень";
+NewLevelCongratulationTitle = "Новый уровень";
+NewLevelCongratulationText = "Поздравляем! Вы достигли %@ уровня!";
+RatingCongratulationText = "Правильно! +%@ опыта";

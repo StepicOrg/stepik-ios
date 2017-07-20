@@ -12,6 +12,7 @@ enum AdaptiveStepsViewState {
     case connectionError
     case coursePassed
     case normal
+    case congratulation
 }
 
 protocol AdaptiveStepsView: class {
@@ -23,6 +24,10 @@ protocol AdaptiveStepsView: class {
     func updateTopCardControl(stepState: AdaptiveStepState)
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
+    func updateProgress(for rating: Int)
+    func showCongratulation(for rating: Int, isSpecial: Bool)
+    func showLevelUpCongratulation(level: Int)
+    func presentShareDialog(for link: String)
 }
 
 class AdaptiveStepsPresenter {
@@ -46,6 +51,9 @@ class AdaptiveStepsPresenter {
     var isCurrentCardDone = false
     var isOnboardingPassed = false
     
+    var rating: Int = 0
+    var streak: Int = 1
+    
     var lastReaction: Reaction? {
         didSet {
             if lastReaction != nil {
@@ -68,12 +76,6 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    lazy var aboutCourseController: UIViewController = {
-        let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveCourseInfo", storyboardName: "AdaptiveMain") as! AdaptiveCourseViewController
-        vc.course = self.course
-        return vc
-    }()
-    
     init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
@@ -86,6 +88,13 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
+            rating = RatingHelper.retrieveRating()
+            
+            streak = RatingHelper.retrieveStreak()
+            streak = streak == 0 ? RatingHelper.incrementStreak() : streak
+            
+            view?.updateProgress(for: self.rating)
+            
             // Show cards (empty or not)
             view?.initCards()
             isKolodaPresented = true
@@ -115,35 +124,13 @@ class AdaptiveStepsPresenter {
     }
     
     fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> (Void)) {
-        if let course = self.course,
-           let stepId = recommendedLesson.stepsArray.first {
+        if let stepId = recommendedLesson.stepsArray.first {
             // Get steps in recommended lesson
             stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
                 let step = newStepsImmutable.first
-                
                 if let step = step {
-                    guard let progressId = step.progressId else {
-                        print("invalid progress id")
-                        return
-                    }
-                    
-                    // Get progress: if step is passed -> skip it
-                    self.progressesAPI?.retrieve(ids: [progressId], existing: [], refreshMode: .update, success: { progresses in
-                        let progress = progresses.first
-                        if progress != nil && progress!.isPassed {
-                            print("step already passed -> getting new recommendation")
-                            self.sendReaction(reaction: .solved, success: {
-                                self.getNewRecommendation(for: course, success: success)
-                            })
-                        } else {
-                            self.isRecommendationLoaded = true
-                            success(step)
-                        }
-                    }, error: { (error) -> Void in
-                        print("failed getting step progress -> step with unknown progress")
-                        self.isRecommendationLoaded = true
-                        success(step)
-                    })
+                    self.isRecommendationLoaded = true
+                    success(step)
                 }
             }, error: { (error) -> Void in
                 print("failed downloading steps data in Next")
@@ -452,18 +439,43 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.submit()
             break
         case .wrong:
+            // Drop streak
+            if streak > 1 {
+                streak = RatingHelper.incrementStreak(-streak + 1)
+            }
+            
             currentStepPresenter?.retry()
             break
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
+            
+            // Update rating and streak
+            let newRating = RatingHelper.incrementRating(streak)
+            
+            if RatingHelper.getLevel(for: rating) != RatingHelper.getLevel(for: newRating) {
+                view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating))
+            }
+            
+            rating = newRating
+            view?.updateProgress(for: rating)
+            streak = RatingHelper.incrementStreak()
             break
         }
+    }
+    
+    func onShareButtonClick() {
+        guard let slug = currentLesson?.slug else {
+            return
+        }
+        let shareLink = "\(StepicApplicationsInfo.stepicURL)/lesson/\(slug)"
+        view?.presentShareDialog(for: shareLink)
     }
 }
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
+        view?.showCongratulation(for: streak, isSpecial: streak > 1)
         view?.updateTopCardControl(stepState: .successful)
     }
     
