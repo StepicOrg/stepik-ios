@@ -14,27 +14,28 @@ extension Alerts {
 }
 
 class CongratulationAlertManager: AlertManager {
+    typealias CongratulationType = CongratulationViewController.CongratulationType
+    
     func present(alert: UIViewController, inController controller: UIViewController)  {
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
     }
     
     let presenter: Presentr = {
-        let presenter = Presentr(presentationType: .alert)
+        let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.backgroundOpacity = 0.0
         presenter.dismissOnTap = false
         presenter.dismissAnimated = true
         presenter.dismissTransitionType = TransitionType.custom(CrossDissolveAnimation(options: .normal(duration: 0.4)))
         presenter.roundCorners = true
         presenter.cornerRadius = 10
+        presenter.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.3, shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: 1.2)
         return presenter
     }()
     
-    func construct(title: String? = "", congratulationText: String? = "", continueHandler: (() -> ())? = nil) -> AlertViewController {
-        let controller = Presentr.alertViewController(title: title ?? "", body: congratulationText ?? "")
-        let continueAction = AlertAction(title: NSLocalizedString("Continue", comment: ""), style: .default) {
-            continueHandler?()
-        }
-        controller.addAction(continueAction)
+    func construct(congratulationType: CongratulationType, continueHandler: (() -> ())? = nil) -> CongratulationViewController {
+        let controller = CongratulationViewController(nibName: "CongratulationViewController", bundle: nil)
+        controller.continueHandler = continueHandler
+        controller.congratulationType = congratulationType
         return controller
     }
 }

@@ -39,6 +39,7 @@ struct StepicApplicationsInfo {
                                                                        redirectPath: Root.AuthType.Password.redirect)
 
     // Section: URL
+    static let appId = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.appId) as? String ?? ""
     static let urlScheme = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.scheme) as? String ?? ""
     static let apiURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.api) as? String ?? ""
     static let oauthURL = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.URL.oauth) as? String ?? ""
