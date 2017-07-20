@@ -11,11 +11,19 @@ import FLAnimatedImage
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
+    func onShareButtonClick()
+}
+
+extension StepCardViewDelegate {
+    func onControlButtonClick() { }
+    func onShareButtonClick() { }
 }
 
 class StepCardView: UIView {
     let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
     
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var titlePadView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -24,12 +32,13 @@ class StepCardView: UIView {
     @IBOutlet weak var controlButton: UIButton!
     @IBOutlet weak var loadingImageView: FLAnimatedImageView!
     
-    var gradientLayer: CAGradientLayer?
     weak var delegate: StepCardViewDelegate?
+    
+    var cardPadView: UIView!
     
     var cardState: CardState = .loading {
         didSet {
-            titleLabel.isHidden = cardState == .loading
+            titlePadView.isHidden = cardState == .loading
             loadingView.isHidden = cardState != .loading
             whitePadView.isHidden = cardState != .loading
             
@@ -37,15 +46,6 @@ class StepCardView: UIView {
                 UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.controlButton.isHidden = false
                     self.contentView.isHidden = false
-                    self.gradientLayer = CAGradientLayer()
-                    if let gradient = self.gradientLayer {
-                        gradient.frame = self.contentView.bounds
-                        gradient.colors = [UIColor.white.withAlphaComponent(0.0).cgColor,
-                                           UIColor.white.withAlphaComponent(0.15).cgColor,
-                                           UIColor.white.withAlphaComponent(1.0).cgColor]
-                        gradient.locations = [0.0, 0.95, 1.0]
-                        self.contentView.layer.addSublayer(gradient)
-                    }
                 }, completion: nil)
             } else {
                 self.controlButton.isHidden = true
@@ -58,18 +58,41 @@ class StepCardView: UIView {
         delegate?.onControlButtonClick()
     }
 
+    @IBAction func onShareButtonClick(_ sender: Any) {
+        delegate?.onShareButtonClick()
+    }
+    
+
+    var isFirst = true
     override func draw(_ rect: CGRect) {
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.stepicGreenColor().cgColor
-        
         let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
         loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
+        
+        if cardPadView == nil {
+            backgroundColor = .clear
+            layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
+            layer.shouldRasterize = true;
+            layer.rasterizationScale = UIScreen.main.scale
+            layer.shadowOffset = CGSize(width: 0.0, height: 3)
+            layer.shadowOpacity = 0.2
+            layer.shadowRadius = 4.5
+            
+            cardPadView = UIView(frame: bounds)
+            cardPadView.backgroundColor = .white
+            cardPadView.clipsToBounds = true
+            cardPadView.layer.cornerRadius = 10
+            insertSubview(cardPadView, at: 0)
+        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer?.frame = contentView.bounds
+        
+        if cardPadView != nil {
+            cardPadView.frame = bounds
+            layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        }
     }
     
     func addContentSubview(_ view: UIView) {

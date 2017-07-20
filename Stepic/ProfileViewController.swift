@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class ProfileViewController: UITableViewController {
 
@@ -41,8 +42,9 @@ class ProfileViewController: UITableViewController {
         
         localize() 
         signInButton.setStepicWhiteStyle()
-        avatarImageView.setRoundedBounds(width: 0)
         signInButton.isHidden = false
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -79,10 +81,6 @@ class ProfileViewController: UITableViewController {
     fileprivate func initWithUser(_ user : User) {
         print("\(user.avatarURL)")
         
-        avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
-//        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: [])
-        
-        userNameLabel.text = "\(user.firstName) \(user.lastName)"
         if !AuthInfo.shared.isAuthorized {
             signInHeight.constant = 40
             signInNameDistance.constant = 8
@@ -90,6 +88,9 @@ class ProfileViewController: UITableViewController {
             heightForRows[2][0] = 0
             heightForRows[1][0] = 0
             signInButton.isHidden = false
+            userNameLabel.text = NSLocalizedString("NotWithUsYet", comment: "")
+            avatarImageView.contentMode = UIViewContentMode.scaleAspectFit
+            avatarImageView.image = Images.placeholders.anonymous
         } else {
             signInHeight.constant = 0
             signInNameDistance.constant = 0
@@ -97,6 +98,9 @@ class ProfileViewController: UITableViewController {
             heightForRows[2][0] = 40        
 //            heightForRows[1][0] = 0
             signInButton.isHidden = true
+            avatarImageView.contentMode = UIViewContentMode.scaleAspectFill
+            avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
+            userNameLabel.text = "\(user.firstName) \(user.lastName)"
         }
         
         if AuthInfo.shared.isAuthorized {
@@ -131,7 +135,15 @@ class ProfileViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        if !AuthInfo.shared.isAuthorized {
+            tableView.reloadData()
+        }
         updateUser()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        avatarImageView.setRoundedBounds(width: 0)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -154,6 +166,14 @@ class ProfileViewController: UITableViewController {
             return nil 
         } else {
             return sectionTitles[section]
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if !AuthInfo.shared.isAuthorized {
+            return 0
+        } else {
+            return sectionTitles.count
         }
     }
     
@@ -185,5 +205,59 @@ class ProfileViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension ProfileViewController : DZNEmptyDataSetSource {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return Images.placeholders.anonymous
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = NSLocalizedString("NotWithUsYet", comment: "")
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSForegroundColorAttributeName: UIColor.darkGray]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        
+        let text = NSLocalizedString("JoinCoursesSuggestionDescription", comment: "")
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+                          NSForegroundColorAttributeName: UIColor.lightGray,
+                          NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        let text = NSLocalizedString("SignIn", comment: "")
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
+                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.groupTableViewBackground
+    }
+}
+
+extension ProfileViewController : DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
+        let vc = ControllerHelper.getAuthController()
+        self.present(vc, animated: true, completion: nil)
     }
 }

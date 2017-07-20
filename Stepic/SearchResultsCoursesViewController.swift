@@ -71,37 +71,44 @@ class SearchResultsCoursesViewController: CoursesViewController {
         tableView.emptyDataSetSource = self
         
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.        
     }
-    
-    func printInfo() {
-        print("\n------------------")
-        print("tableView frame resultsController active -> \(tableView.convert(tableView.bounds, to: nil))")
-        print("before change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-        if tableView.contentInset.top != 60 {
-            tableView.contentInset = UIEdgeInsets(top: 60.0, left: 0, bottom: 0, right: 0)
-            tableView.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
-            tableView.layoutIfNeeded()
-        }
-        
-        print("after change resultsController active content offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset)")
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        countTopOffset()
+    }
+    
+    var viewTopHeight : CGFloat?
+    
+    func countTopOffset() {
+        guard let navigationHeight = parentVC?.navigationController?.navigationBar.bounds.height else {
+            return
+        }
+        
+        let topHeight = UIApplication.shared.statusBarFrame.height + navigationHeight
+        
+        if let currentHeight = viewTopHeight {
+            let topOffset = currentHeight - topHeight
+            if topOffset != 0 {
+                self.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - topOffset, width: self.view.frame.width, height: self.view.frame.height + topOffset)
+            }
+        }
+        viewTopHeight = topHeight
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
-        let totalDistance = constraintDistance + tableView.contentInset.top
-        if totalDistance != 64 {
-            tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
-            //            print("searchResults insets changed")
-            view.layoutIfNeeded()
-        }
-        //        print("\n didLayoutSubviews searchResults: tableViewDistance -> \(constraintDistance), offset -> \(tableView.contentOffset), inset -> \(tableView.contentInset), frame -> \(tableView.frame)\n")
+        countTopOffset()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewTopHeight = nil
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     var currentRequest : Request?

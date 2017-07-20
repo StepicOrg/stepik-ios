@@ -33,18 +33,6 @@ class FindCoursesViewController: CoursesViewController {
         emptyDatasetState = .refreshing
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let constraintDistance = tableView.convert(tableView.bounds, to: nil).minY
-        let totalDistance = constraintDistance + tableView.contentInset.top
-        let oldInset = tableView.contentInset.top
-        if totalDistance != 64 && totalDistance != 124 {
-            tableView.contentInset = UIEdgeInsets(top: 64.0 - constraintDistance, left: 0, bottom: 0, right: 0)
-            tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y + (oldInset - tableView.contentInset.top)), animated: true)
-            view.layoutIfNeeded()
-        }
-    }
-    
     var topConstraint : NSLayoutConstraint?
     
     override func viewDidLoad() {
@@ -68,12 +56,10 @@ class FindCoursesViewController: CoursesViewController {
         searchController.searchBar.tintColor = UIColor.white
         UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
 
-        self.automaticallyAdjustsScrollViewInsets = false
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         
         searchController.searchBar.scopeButtonTitles = []
-        
         
         super.viewDidLoad()
 
@@ -81,8 +67,39 @@ class FindCoursesViewController: CoursesViewController {
         self.tableView.backgroundColor = UIColor.lightText
 
         self.navigationItem.titleView = self.searchController.searchBar
+        tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.tableHeaderView = signInView
+    }
+    
+    fileprivate var signInView: UIView? {
+        guard !AuthInfo.shared.isAuthorized else {
+            return nil
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SignInCoursesTableViewCell") as? SignInCoursesTableViewCell else {
+            return nil
+        }
+        
+        cell.signInPressedAction = {
+            [weak self] in
+            guard let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController else {
+                return
+            }
+            vc.success = {
+                [weak self] in
+                DispatchQueue.main.async {
+                    self?.refreshCourses()
+                }
+            }
+            self?.present(vc, animated: true, completion: nil)
+        }
+        return cell
+    }
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
@@ -95,6 +112,7 @@ extension FindCoursesViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let results = searchController.searchResultsController as? SearchResultsCoursesViewController
         results?.query = searchController.searchBar.text!
+        results?.countTopOffset()
     }
 }
 

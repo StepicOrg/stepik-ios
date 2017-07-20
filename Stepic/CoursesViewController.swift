@@ -14,7 +14,7 @@ import SVProgressHUD
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UIViewControllerPreviewingDelegate {
     
-    var tableView = UITableView()
+    var tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     var loadEnrolled : Bool? = nil
     var loadFeatured : Bool? = nil
@@ -177,7 +177,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         }
                     }
                     
-                    _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses,refreshMode: .update, success: { 
+                    _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses,refreshMode: .update, success: {
                         (newProgresses) -> Void in
                         progresses = Sorter.sort(newProgresses, byIds: progressIds)
                         for i in 0 ..< min(newCourses.count, progresses.count) {

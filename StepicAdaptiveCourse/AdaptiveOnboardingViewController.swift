@@ -13,6 +13,7 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
     var presenter: AdaptiveOnboardingPresenter?
     
     @IBOutlet weak var kolodaView: KolodaView!
+    @IBOutlet weak var levelProgress: RatingProgressView!
     
     fileprivate var requiredActions: [AdaptiveOnboardingAction] = []
     fileprivate var canSwipeCurrentCardUp = false
@@ -30,8 +31,19 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
         kolodaView.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        levelProgress.setProgress(value: 0.0, animated: false)
+    }
+    
     func finishOnboarding() {
         dismiss(animated: false, completion: {})
+    }
+    
+    func updateProgress(for current: Int, count: Int) {
+        levelProgress.text = String(format: NSLocalizedString("RatingProgress", comment: ""), "\(current)", "\(count)") + " • " + NSLocalizedString("RatingProgressTutorial", comment: "")
+        levelProgress.setProgress(value: Float(current) / Float(count), animated: true)
     }
 }
 
@@ -72,6 +84,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 card?.cardState = .normal
                 card?.delegate = self
                 card?.updateLabel(cardData.title)
+                card?.shareButton.isHidden = true
                 
                 requiredActions = cardData.requiredActions
                 
