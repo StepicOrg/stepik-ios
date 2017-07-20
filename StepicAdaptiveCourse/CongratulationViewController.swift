@@ -11,6 +11,19 @@ import UIKit
 class CongratulationViewController: UIViewController {
 
     enum CongratulationType {
+        var congratulationText: String {
+            switch self {
+            case .level(let level):
+                return String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(level)")
+            }
+        }
+        var shareText: String {
+            switch self {
+            case .level(let level):
+                return String(format: NSLocalizedString("NewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
+            }
+        }
+        
         case level(level: Int)
     }
     
@@ -27,11 +40,8 @@ class CongratulationViewController: UIViewController {
                 return
             }
             
-            switch type {
-            case .level(let level):
-                text = String(format: NSLocalizedString("NewLevelCongratulationText", comment: ""), "\(level)")
-                shareText = String(format: NSLocalizedString("NewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
-            }
+            text = type.congratulationText
+            shareText = type.shareText
         }
     }
     

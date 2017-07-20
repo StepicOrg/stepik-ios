@@ -3464,13 +3464,13 @@
 			name = AdaptiveSteps;
 			sourceTree = "<group>";
 		};
-		2C5F6BA61F20B25100C251D3 /* CongratulationViewController */ = {
+		2C5F6BA61F20B25100C251D3 /* Congratulation */ = {
 			isa = PBXGroup;
 			children = (
 				2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */,
 				2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */,
 			);
-			name = CongratulationViewController;
+			name = Congratulation;
 			sourceTree = "<group>";
 		};
 		2C6ABA611F1E009E005A3BCF /* Alerts */ = {
@@ -3544,7 +3544,7 @@
 		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2C5F6BA61F20B25100C251D3 /* CongratulationViewController */,
+				2C5F6BA61F20B25100C251D3 /* Congratulation */,
 				2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */,
 				2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */,
 				2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */,
