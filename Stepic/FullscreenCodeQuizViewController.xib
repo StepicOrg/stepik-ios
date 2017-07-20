@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullscreenCodeQuizViewController" customModule="Adaptive_1838" customModuleProvider="target">
             <connections>
                 <outlet property="doneItem" destination="ULN-ej-hBf" id="gBu-6o-21i"/>
+                <outlet property="showMoreButton" destination="hpb-Kn-inb" id="eCW-97-gwT"/>
                 <outlet property="toolbar" destination="jhO-pA-wkB" id="G5f-lt-GoN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -14,12 +14,14 @@ import IQKeyboardManagerSwift
 
 class FullscreenCodeQuizViewController: UIViewController {
     
+    @IBOutlet weak var showMoreButton: UIButton!
     @IBOutlet weak var doneItem: UIBarButtonItem!
     @IBOutlet weak var toolbar: UIToolbar!
     var codeTextView: UITextView = UITextView()
     
     let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
 
+    var isSolved: Bool = false
     var options: StepOptions!
     var onDismissBlock : ((CodeLanguage, String)->Void)?
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
@@ -42,15 +44,8 @@ class FullscreenCodeQuizViewController: UIViewController {
     
     var tabSize: Int = 0
     
-    var language: CodeLanguage = .unsupported {
-        didSet {
-            textStorage.language = language.highlightr
-            
-            if let template = options.template(language: language, userGenerated: false) {
-                tabSize = playgroundManager.countTabSize(text: template.templateString)
-            }
-            
-            //setting up input accessory view
+    fileprivate func setupAccessoryView(editable: Bool) {
+        if editable {
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
                 [weak self] in
                 guard let s = self else { return }
@@ -67,6 +62,21 @@ class FullscreenCodeQuizViewController: UIViewController {
                     guard let s = self else { return }
                     s.codeTextView.resignFirstResponder()
             })
+        } else {
+            codeTextView.inputAccessoryView = nil
+        }
+        codeTextView.reloadInputViews()
+    }
+    
+    var language: CodeLanguage = .unsupported {
+        didSet {
+            textStorage.language = language.highlightr
+            
+            if let template = options.template(language: language, userGenerated: false) {
+                tabSize = playgroundManager.countTabSize(text: template.templateString)
+            }
+            
+            setupAccessoryView(editable: !isSolved)
             
             if let userTemplate = options.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
@@ -117,6 +127,11 @@ class FullscreenCodeQuizViewController: UIViewController {
         
         toolbar.clipsToBounds = true
         doneItem.title = NSLocalizedString("Done", comment: "")
+        
+        if isSolved {
+            codeTextView.isEditable = false
+            showMoreButton.isEnabled = false
+        }
         
         configureKeyboardNotifications()
     }

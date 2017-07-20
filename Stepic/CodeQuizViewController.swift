@@ -41,6 +41,30 @@ class CodeQuizViewController: QuizViewController {
     
     var tabSize: Int = 0
     
+    fileprivate func setupAccessoryView(editable: Bool) {
+        if editable {
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
+                [weak self] in
+                guard let s = self else { return }
+                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
+                }, insertStringAction: {
+                    [weak self]
+                    symbols in
+                    guard let s = self else { return }
+                    s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
+                    s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
+                    s.currentCode = s.codeTextView.text
+                }, hideKeyboardAction: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.codeTextView.resignFirstResponder()
+            })
+        } else {
+            codeTextView.inputAccessoryView = nil
+        }
+        codeTextView.reloadInputViews()
+    }
+    
     var language: CodeLanguage = CodeLanguage.unsupported {
         didSet {
             textStorage.language = language.highlightr
@@ -54,23 +78,7 @@ class CodeQuizViewController: QuizViewController {
             
             toolbarView.language = language.displayName
             
-            //setting up input accessory view
-            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
-                [weak self] in
-                guard let s = self else { return }
-                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
-            }, insertStringAction: {
-                [weak self]
-                symbols in
-                guard let s = self else { return }
-                s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
-                s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
-                s.currentCode = s.codeTextView.text
-            }, hideKeyboardAction: {
-                [weak self] in
-                guard let s = self else { return }
-                s.codeTextView.resignFirstResponder()
-            })
+            setupAccessoryView(editable: submission?.status != "correct")
             
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
@@ -205,7 +213,6 @@ class CodeQuizViewController: QuizViewController {
         }
 
         codeTextView.isEditable = enabled
-        toolbarView.fullscreenButton.isEnabled = enabled
         toolbarView.resetButton.isEnabled = enabled
         if options.languages.count > 1 {
             toolbarView.languageButton.isEnabled = enabled
@@ -219,6 +226,7 @@ class CodeQuizViewController: QuizViewController {
         
         if submission?.status == "correct" {
             setQuizControls(enabled: false)
+            setupAccessoryView(editable: false)
         } else {
             setQuizControls(enabled: true)
         }
@@ -284,6 +292,9 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         
         let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
         fullscreen.options = options
+        if submission?.status == "correct" {
+            fullscreen.isSolved = true
+        }
         fullscreen.language = language
         fullscreen.onDismissBlock = {
             [weak self]
