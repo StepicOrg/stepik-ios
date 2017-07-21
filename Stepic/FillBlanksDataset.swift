@@ -27,6 +27,9 @@ struct FillBlanksComponent {
     
     init(json: JSON) {
         text = json["text"].stringValue
+        if text.indexOf("<br>") == 0 {
+            text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: 4))
+        }
         type = FillBlanksComponentType(rawValue: json["type"].stringValue) ?? .text
         options = json["options"].arrayValue.map({
             return $0.stringValue
