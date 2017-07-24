@@ -26,7 +26,7 @@ struct FillBlanksComponent {
     var options: [String]
     
     fileprivate mutating func removeEmptyLine() {
-        let emptyTags = ["<br>", "<br/>"]
+        let emptyTags = ["<br>", "<br/>", "<br /"]
         for tag in emptyTags {
             if text.indexOf(tag) == 0 {
                 text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: tag.characters.count))
