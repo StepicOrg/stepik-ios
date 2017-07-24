@@ -89,6 +89,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 requiredActions = cardData.requiredActions
                 
                 let webview = UIWebView()
+                webview.isOpaque = false
                 webview.backgroundColor = UIColor.clear
                 card?.addContentSubview(webview)
                 
