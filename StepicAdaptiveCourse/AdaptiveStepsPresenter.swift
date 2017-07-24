@@ -45,6 +45,7 @@ class AdaptiveStepsPresenter {
     private var progressesAPI: ProgressesAPI?
     private var stepicsAPI: StepicsAPI?
     private var recommendationsAPI: RecommendationsAPI?
+    private var profilesAPI: ProfilesAPI?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
@@ -77,13 +78,14 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, profilesAPI: ProfilesAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.progressesAPI = progressesAPI
         self.stepicsAPI = stepicsAPI
         self.recommendationsAPI = recommendationsAPI
+        self.profilesAPI = profilesAPI
         self.view = view
     }
     
@@ -281,7 +283,9 @@ class AdaptiveStepsPresenter {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     
-                    success()
+                    self.unsubscribeForMail(user: user) {
+                        success()
+                    }
                 }, error: { error in
                     print("successfully signed in, but could not get user")
                     self.view?.state = .connectionError
@@ -293,6 +297,37 @@ class AdaptiveStepsPresenter {
         }, error: { error in
             print("user log in failed: \(error)")
             self.view?.state = .connectionError
+        })
+    }
+    
+    fileprivate func unsubscribeForMail(user: User, success: @escaping ((Void) -> Void)) {
+        performRequest({
+            self.profilesAPI?.retrieve(ids: [user.profile], existing: [], refreshMode: .update, success: { profilesImmutable in
+                guard let profile = profilesImmutable.first else {
+                    print("profile not found")
+                    return
+                }
+                
+                profile.subscribedForMail = false
+                self.profilesAPI?.update(profile, success: { updatedProfile in
+                    if updatedProfile.subscribedForMail == false {
+                        print("user unsubscribed for mails")
+                    } else {
+                        // TODO: analytics?
+                        print("failed unsubscribing user for mails")
+                    }
+                }, error: { error in
+                    // TODO: analytics?
+                    print("failed unsubscribing user for mails")
+                })
+            }, error: { (error) -> Void in
+                // TODO: analytics?
+                print("failed unsubscribing user for mails")
+            })
+            success()
+        }, error: { error in
+            print("failed performing API request -> force logout")
+            self.logout()
         })
     }
     
