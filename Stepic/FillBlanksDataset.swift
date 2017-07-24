@@ -25,15 +25,23 @@ struct FillBlanksComponent {
     var type: FillBlanksComponentType
     var options: [String]
     
+    fileprivate mutating func removeEmptyLine() {
+        let emptyTags = ["<br>", "<br/>"]
+        for tag in emptyTags {
+            if text.indexOf(tag) == 0 {
+                text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: tag.characters.count))
+                return
+            }
+        }
+    }
+    
     init(json: JSON) {
         text = json["text"].stringValue
-        if text.indexOf("<br>") == 0 {
-            text.removeSubrange(text.startIndex...text.index(text.startIndex, offsetBy: 4))
-        }
         type = FillBlanksComponentType(rawValue: json["type"].stringValue) ?? .text
         options = json["options"].arrayValue.map({
             return $0.stringValue
         })
+        self.removeEmptyLine()
     }
 }
 
