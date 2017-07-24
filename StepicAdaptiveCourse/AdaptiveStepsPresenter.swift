@@ -45,6 +45,8 @@ class AdaptiveStepsPresenter {
     private var progressesAPI: ProgressesAPI?
     private var stepicsAPI: StepicsAPI?
     private var recommendationsAPI: RecommendationsAPI?
+    private var unitsAPI: UnitsAPI?
+    private var viewsAPI: ViewsAPI?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
@@ -77,13 +79,15 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.progressesAPI = progressesAPI
         self.stepicsAPI = stepicsAPI
         self.recommendationsAPI = recommendationsAPI
+        self.unitsAPI = unitsAPI
+        self.viewsAPI = viewsAPI
         self.view = view
     }
     
@@ -132,6 +136,11 @@ class AdaptiveStepsPresenter {
                 if let step = step {
                     self.isRecommendationLoaded = true
                     success(step)
+                    
+                    // Send view
+                    self.sendView(for: recommendedLesson, step: step) {
+                        print("view for lesson = \(recommendedLesson.id) and step = \(step.id) created")
+                    }
                 }
             }, error: { (error) -> Void in
                 print("failed downloading steps data in Next")
@@ -240,6 +249,25 @@ class AdaptiveStepsPresenter {
             }, error: { error in
                 print("failed sending reaction: \(error)")
                 self.view?.state = .connectionError
+            })
+        }, error: { error in
+            print("failed performing API request -> force logout")
+            self.logout()
+        })
+    }
+    
+    fileprivate func sendView(for lesson: Lesson, step: Step, success: @escaping () -> ()) {
+        performRequest({
+            self.unitsAPI?.retrieve(lesson: lesson.id, success: { unit in
+                if let assignmentId = unit.assignmentsArray.first {
+                    print("sending view with assignment = \(assignmentId) & step = \(step.id)")
+                    self.viewsAPI?.create(stepId: step.id, assignment: assignmentId, success: { success() }, error: { error in
+                        print("failed to create view: \(error)")
+                    })
+                }
+            }, error: { error in
+                print("failed to retrieve units: \(error)")
+                // TODO: do nothing? analytics?
             })
         }, error: { error in
             print("failed performing API request -> force logout")
