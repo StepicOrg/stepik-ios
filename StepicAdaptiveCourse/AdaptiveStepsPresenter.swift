@@ -166,19 +166,15 @@ class AdaptiveStepsPresenter {
     
     fileprivate func getNewRecommendation(for course: Course, success: @escaping (Step) -> (Void)) {
         isRecommendationLoaded = false
+        print("recommendations: preloaded lessons = \(recommendedLessons.map{$0.id})")
         
         if recommendedLessons.count == 0 {
-            print("recommendations not loaded yet -> loading \(recommendationsBatchSize) lessons...")
+            print("recommendations: recommendations not loaded yet -> loading \(recommendationsBatchSize) lessons...")
             // Recommendations not loaded yet
             loadRecommendations(for: course, count: recommendationsBatchSize, success: { recommendedLessons in
                 self.recommendedLessons = recommendedLessons
-                print("loaded batch with \(recommendedLessons.count) lessons")
-                
-                // Got empty array as recommendation -> course passed
-                if recommendedLessons.isEmpty {
-                    self.view?.state = .coursePassed
-                    return
-                }
+                print("recommendations: loaded batch with \(recommendedLessons.count) lessons")
+                print("recommendations: loaded lessons: \(recommendedLessons.map{$0.id})")
                 
                 let lessonsIds = self.recommendedLessons.map { $0.id }
                 self.lessonsAPI?.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
@@ -188,6 +184,7 @@ class AdaptiveStepsPresenter {
                     self.recommendedLessons.remove(at: 0)
                     
                     if let lesson = lesson {
+                        print("recommendations: using lesson = \(lesson.id)")
                         self.currentLesson = lesson
                         self.getStep(for: lesson, success: { step in
                             success(step)
@@ -195,25 +192,29 @@ class AdaptiveStepsPresenter {
                     }
                     
                 }, error: { (error) -> Void in
-                    print("failed downloading lessons data in Next")
+                    print("recommendations: failed downloading lessons data in Next")
                     self.view?.state = .connectionError
                 })
             })
         } else {
-            print("recommendations loaded (count = (\(self.recommendedLessons.count)), using loaded lesson...")
+            print("recommendations: recommendations loaded (count = \(self.recommendedLessons.count)), using loaded lesson...")
             let lesson = self.recommendedLessons.first
             self.recommendedLessons.remove(at: 0)
             
             if let lesson = lesson {
+                print("recommendations: preloaded lesson = \(lesson.id)")
                 self.currentLesson = lesson
                 self.getStep(for: lesson, success: { step in
                     success(step)
                     
                     // Load next batch
-                    if self.recommendedLessons.count <= self.nextRecommendationsBatch {
-                        print("recommendations loaded, loading next \(self.recommendationsBatchSize) lessons...")
+                    if self.recommendedLessons.count < self.nextRecommendationsBatch {
+                        print("recommendations: recommendations loaded, loading next \(self.recommendationsBatchSize) lessons...")
                         self.loadRecommendations(for: course, count: self.recommendationsBatchSize, success: { recommendedLessons in
-                            let existingLessons = self.recommendedLessons.map { $0.id }
+                            print("recommendations: loaded lessons: \(recommendedLessons.map{$0.id})")
+                            var existingLessons = self.recommendedLessons.map { $0.id }
+                            // Add current lesson cause we should ignore it while merging
+                            existingLessons.append(lesson.id)
                             recommendedLessons.forEach { lesson in
                                 if !existingLessons.contains(lesson.id) {
                                     self.recommendedLessons.append(lesson)
