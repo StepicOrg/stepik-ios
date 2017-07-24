@@ -407,6 +407,21 @@
 		0885F8561BA9F18900F2A188 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8551BA9F18900F2A188 /* Parser.swift */; };
 		0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8571BAAD43300F2A188 /* AuthInfo.swift */; };
 		0885F85A1BAAD9AC00F2A188 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
+		0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
+		0888D0FA1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
+		0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
+		0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
+		0888D0FE1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
+		0888D0FF1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */; };
+		0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
+		0888D1031F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
+		0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
+		0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
+		0888D1061F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
+		0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
+		0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
+		0888D10A1F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
+		0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
 		0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
@@ -1619,6 +1634,11 @@
 		0885F8551BA9F18900F2A188 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0885F8571BAAD43300F2A188 /* AuthInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthInfo.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesViewController.swift; sourceTree = "<group>"; };
+		0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryView.xib; sourceTree = "<group>"; };
+		0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryView.swift; sourceTree = "<group>"; };
+		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		0888D1081F1E42A000A16863 /* CodeElementsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeElementsSize.swift; sourceTree = "<group>"; };
 		0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
 		0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
@@ -2049,6 +2069,7 @@
 		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0888D1081F1E42A000A16863 /* CodeElementsSize.swift */,
 				0860D9101F10BE5C0087D61B /* Input Accessory */,
 				0805FE3E1F0D38C5001226B4 /* Code Analysis */,
 				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
@@ -2614,6 +2635,7 @@
 		0860D9101F10BE5C0087D61B /* Input Accessory */ = {
 			isa = PBXGroup;
 			children = (
+				0888D0F31F1E3C0C00A16863 /* Toolbar */,
 				0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */,
 				0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */,
 			);
@@ -2796,6 +2818,17 @@
 				085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */,
 			);
 			name = Courses;
+			sourceTree = "<group>";
+		};
+		0888D0F31F1E3C0C00A16863 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */,
+				0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */,
+				0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */,
+				0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */,
+			);
+			name = Toolbar;
 			sourceTree = "<group>";
 		};
 		0889FEAD1BFB76FF00C6417E /* Downloads */ = {
@@ -3983,6 +4016,7 @@
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08FEFC1F1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
+				0888D0FA1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */,
@@ -3999,6 +4033,7 @@
 				08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 				0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
+				0888D1061F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4052,6 +4087,7 @@
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
+				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				08CA59DD1BBC00B9008DC44D /* TeacherCollectionViewCell.xib in Resources */,
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
@@ -4068,6 +4104,7 @@
 				0867D8311E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				087D96B91EBB7C7700059408 /* Tokens.plist in Resources */,
 				08AC213C1CDD35DF00FBB9CD /* Users.plist in Resources */,
+				0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4107,6 +4144,7 @@
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
+				0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C04C1001F160631006B69B3 /* step1.html in Resources */,
@@ -4121,6 +4159,7 @@
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				080852791ED74C35007C0877 /* Tokens.plist in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
+				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
 				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
@@ -4531,6 +4570,7 @@
 				080CE15C1E95804C0089A27F /* SearchResultsAPI.swift in Sources */,
 				08D120A11C937B2200A54ABC /* PlaceholderViewDelegate.swift in Sources */,
 				08AF59F11E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDataSource.swift in Sources */,
+				0888D10A1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				08D120A21C937B2200A54ABC /* SortingQuizTableViewCell.swift in Sources */,
 				08AF59E71E6D9BE800423EFF /* RGTabBarItem.swift in Sources */,
 				088AADAA1D175DA00034D86D /* HTMLContentView.swift in Sources */,
@@ -4615,6 +4655,7 @@
 				08AF59FB1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
 				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				0846B1111EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
+				0888D1031F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
 				08D120CB1C937B2200A54ABC /* MathReply.swift in Sources */,
 				084F7AAE1E775A210088368A /* LastStepsAPI.swift in Sources */,
@@ -4733,6 +4774,7 @@
 				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				084070811D64847400308FC1 /* SharingHelper.swift in Sources */,
 				08B65AE51CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
+				0888D0FE1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				083F2B151E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				08FEFC1D1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */,
 				08D120FF1C937B2200A54ABC /* ErrorEnums.swift in Sources */,
@@ -4802,6 +4844,7 @@
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
+				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
@@ -4831,6 +4874,7 @@
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
+				0888D0FD1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
@@ -5056,6 +5100,7 @@
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
+				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
@@ -5123,6 +5168,7 @@
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
 				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
+				0888D0FF1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
 				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
@@ -5166,6 +5212,7 @@
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
 				0846B1091EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
+				0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67531E83E08E001E8D9E /* StepikAlertViewController.swift in Sources */,
 				86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */,
@@ -5300,6 +5347,7 @@
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
+				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
 				864D669F1E83DE03001E8D9E /* DeepLinkRouter.swift in Sources */,
 				864D66A01E83DE03001E8D9E /* SharingHelper.swift in Sources */,

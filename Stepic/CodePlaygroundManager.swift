@@ -12,7 +12,10 @@ class CodePlaygroundManager {
     init() {}
 
     let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
+    
     typealias Autocomplete = (suggestions: [String], prefix: String)
+    typealias AnalysisResult = (text: String, position: Int, autocomplete: Autocomplete?)
+    typealias Changes = (isInsertion: Bool, changes: String)
     
     var suggestionsController: CodeSuggestionsTableViewController? = nil
     var isSuggestionsViewPresented : Bool {
@@ -22,7 +25,7 @@ class CodePlaygroundManager {
     
     //Detects the changes string between currentText and previousText
     //!!!All changes should be a substring inserted somewhere into the string
-    func getChangesSubstring(currentText: String, previousText: String) -> (isInsertion: Bool, changes: String) {
+    func getChangesSubstring(currentText: String, previousText: String) -> Changes {
         
         var maxString: String = ""
         var minString: String = ""
@@ -97,14 +100,73 @@ class CodePlaygroundManager {
         return token
     }
     
-    //Analyzes given text using parameters
-    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int) -> (text: String, position: Int, autocomplete: Autocomplete?) {
-        let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
+    fileprivate func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
         
-        var text = currentText
+        if changes.isInsertion && changes.changes == "\n" {
+            var text = currentText
+
+            let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+            //searching previous \n or beginning of the string
+            let firstPart = text.substring(to: text.index(before: cursorIndex))
+            if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
+                //extracting previous line before \n
+                let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
+                
+                //counting spaces in the beginning to know the offset
+                var spacesCount = 0
+                for character in line.characters {
+                    if character == " " {
+                        spacesCount += 1
+                    } else {
+                        break
+                    }
+                }
+                let offset = spacesCount
+                
+                //searching for the last non-space symbol in the string to know if we need to do more than just return
+                var characterBeforeEndline : Character? = nil
+                for character in line.characters.reversed() {
+                    if character == " " {
+                        continue
+                    } else {
+                        characterBeforeEndline = character
+                        break
+                    }
+                }
+                
+                //Checking if there is any character before endline (it's not an empty or all-spaces line)
+                if let char = characterBeforeEndline {
+                    let shouldTab = shouldMakeTabLineAfter(symbol: char, language: language)
+                    if shouldTab.shouldMakeNewLine {
+                        if shouldTab.paired {
+                            let spacesString = String(repeating: " ", count: offset + tabSize) + "\n" + String(repeating: " ", count: offset)
+                            text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                            return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
+                        } else {
+                            let spacesString = String(repeating: " ", count: offset + tabSize)
+                            text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                            return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
+                        }
+                    }
+                }
+                
+                // returning with just the spaces and offset
+                let spacesString = String(repeating: " ", count: offset)
+                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                return (text: text, position: cursorPosition + offset, autocomplete: nil)
+            } else {
+                return (text: text, position: cursorPosition, autocomplete: nil)
+            }
+        }
         
+        return nil
+    }
+    
+    fileprivate func checkPaired(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
         if changes.isInsertion {
             if let closer = closers[changes.changes] {
+                var text = currentText
+
                 //check, if there is text after the bracket, not a \n or whitespace
                 let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
                 if cursorIndex != text.endIndex {
@@ -118,7 +180,7 @@ class CodePlaygroundManager {
                                 break
                             }
                         }
-
+                        
                         if onlySpaces {
                             text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
                             return (text: text, position: cursorPosition, autocomplete: nil)
@@ -129,74 +191,36 @@ class CodePlaygroundManager {
                     return (text: text, position: cursorPosition, autocomplete: nil)
                 }
             }
-            
-            if changes.changes == "\n" {
-                let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
-                //searching previous \n or beginning of the string
-                let firstPart = text.substring(to: text.index(before: cursorIndex))
-                if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
-                    //extracting previous line before \n
-                    let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
-                    
-                    //counting spaces in the beginning to know the offset
-                    var spacesCount = 0
-                    for character in line.characters {
-                        if character == " " {
-                            spacesCount += 1
-                        } else {
-                            break
-                        }
-                    }
-                    let offset = spacesCount
-                    
-                    //searching for the last non-space symbol in the string to know if we need to do more than just return
-                    var characterBeforeEndline : Character? = nil
-                    for character in line.characters.reversed() {
-                        if character == " " {
-                            continue
-                        } else {
-                            characterBeforeEndline = character
-                            break
-                        }
-                    }
-                    
-                    //Checking if there is any character before endline (it's not an empty or all-spaces line)
-                    if let char = characterBeforeEndline {
-                        let shouldTab = shouldMakeTabLineAfter(symbol: char, language: language)
-                        if shouldTab.shouldMakeNewLine {
-                            if shouldTab.paired {
-                                let spacesString = String(repeating: " ", count: offset + tabSize) + "\n" + String(repeating: " ", count: offset)
-                                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                                return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
-                            } else {
-                                let spacesString = String(repeating: " ", count: offset + tabSize)
-                                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                                return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
-                            }
-                        }
-                    }
-                    
-                    // returning with just the spaces and offset
-                    let spacesString = String(repeating: " ", count: offset)
-                    text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                    return (text: text, position: cursorPosition + offset, autocomplete: nil)
-                    
-                } else {
-                    return (text: text, position: cursorPosition, autocomplete: nil)
-                }
-            }
-            
         }
-        
+        return nil
+    }
+    
+    fileprivate func getAutocompleteSuggestions(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage) -> AnalysisResult? {
         //Getting current token of a string
-        let token = getCurrentToken(text: text, cursorPosition: cursorPosition)
+        let token = getCurrentToken(text: currentText, cursorPosition: cursorPosition)
         
         if token != "" {
             let suggestions = AutocompleteWords.autocompleteFor(token, language: language)
-            return (text: text, position: cursorPosition, autocomplete: (suggestions: suggestions, prefix: token))
-        } else {
-            return (text: currentText, position: cursorPosition, autocomplete: nil)
+            return (text: currentText, position: cursorPosition, autocomplete: (suggestions: suggestions, prefix: token))
         }
+        return nil
+    }
+    
+    //Analyzes given text using parameters
+    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int) -> AnalysisResult {
+        let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
+
+        if let nextLineInsertionResult = checkNextLineInsertion(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize, changes: changes) {
+            return nextLineInsertionResult
+        }
+        if let pairedCheckResult = checkPaired(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize, changes: changes) {
+            return pairedCheckResult
+        }
+        if let autocompleteSuggestionsResult = getAutocompleteSuggestions(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language) {
+            return autocompleteSuggestionsResult
+        }
+        
+        return (text: currentText, position: cursorPosition, autocomplete: nil)
     }
     
     func countTabSize(text: String) -> Int {
