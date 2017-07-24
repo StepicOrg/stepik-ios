@@ -255,6 +255,12 @@ class AdaptiveStepsPresenter {
         performRequest({
             AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
                 print("new user registered: \(email):\(password)")
+                
+                // Save account to defaults
+                UserDefaults.standard.set("account_email", forKey: email)
+                UserDefaults.standard.set("account_password", forKey: password)
+                UserDefaults.standard.synchronize()
+                
                 success(email, password)
             }, error: { error, registrationErrorInfo in
                 print("user registration failed")
@@ -344,16 +350,26 @@ class AdaptiveStepsPresenter {
         })
     }
     
-    // TODO: new user after logout?
     func logout() {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
         
         view?.state = .normal
+        isKolodaPresented = false
         
         recommendedLessons = []
         
-        refreshContent()
+        let savedEmail = UserDefaults.standard.string(forKey: "account_email")
+        let savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        print("saved account: \(savedEmail ?? "<empty>");\(savedPassword ?? "<empty>")")
+        
+        if savedEmail != nil && savedPassword != nil {
+            logIn(with: savedEmail!, password: savedPassword!) {
+                self.refreshContent()
+            }
+        } else {
+            refreshContent()
+        }
     }
     
     func updateCard(_ card: StepCardView) -> StepCardView {
