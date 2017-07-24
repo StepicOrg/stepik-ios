@@ -34,7 +34,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         v.align(to: self.kolodaView)
         v.delegate = self
         v.datasource = self
-        v.backgroundColor = UIColor.white
+        v.backgroundColor = self.view.backgroundColor
         return v
     }()
     
@@ -186,9 +186,7 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     func placeholderImage() -> UIImage? {
         switch state {
         case .connectionError:
-            return Images.noWifiImage.size100x100
-        case .coursePassed:
-            return Images.placeholders.coursePassed
+            return Images.placeholders.connectionError
         default:
             return nil
         }
@@ -198,8 +196,6 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return NSLocalizedString("TryAgain", comment: "")
-        case .coursePassed:
-            return NSLocalizedString("GoToStepikAppStore", comment: "")
         default:
             return nil
         }
@@ -209,23 +205,22 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return nil
-        case .coursePassed:
-            return NSLocalizedString("NoRecommendations", comment: "")
         default:
             return nil
         }
     }
     
     func placeholderStyle() -> PlaceholderStyle {
-        return stepicPlaceholderStyle
+        var style = PlaceholderStyle()
+        // TODO: add constant with app color
+        style.button.textColor = levelProgress.mainColor ?? UIColor.black
+        return style
     }
     
     func placeholderTitle() -> String? {
         switch state {
         case .connectionError:
             return NSLocalizedString("ConnectionErrorText", comment: "")
-        case .coursePassed:
-            return NSLocalizedString("CoursePassed", comment: "")
         default:
             return nil
         }
@@ -237,8 +232,6 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         switch state {
         case .connectionError:
             presenter?.tryAgain()
-        case .coursePassed:
-            presenter?.goToAppStore()
         default:
             return
         }

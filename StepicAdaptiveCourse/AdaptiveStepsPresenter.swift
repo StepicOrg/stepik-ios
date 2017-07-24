@@ -10,7 +10,6 @@ import Foundation
 
 enum AdaptiveStepsViewState {
     case connectionError
-    case coursePassed
     case normal
     case congratulation
 }
@@ -175,12 +174,6 @@ class AdaptiveStepsPresenter {
             loadRecommendations(for: course, count: recommendationsBatchSize, success: { recommendedLessons in
                 self.recommendedLessons = recommendedLessons
                 print("loaded batch with \(recommendedLessons.count) lessons")
-                
-                // Got empty array as recommendation -> course passed
-                if recommendedLessons.isEmpty {
-                    self.view?.state = .coursePassed
-                    return
-                }
                 
                 let lessonsIds = self.recommendedLessons.map { $0.id }
                 self.lessonsAPI?.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
@@ -458,14 +451,6 @@ class AdaptiveStepsPresenter {
         }
             
         return card
-    }
-    
-    func goToAppStore() {
-        if let link = Bundle.main.infoDictionary?["AppStoreMoreLink"] as? String,
-           let url = URL(string: link),
-            UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
-        }
     }
     
     func tryAgain() {
