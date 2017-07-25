@@ -51,6 +51,11 @@ class AdaptiveStepsPresenter {
     var isRecommendationLoaded = false
     var isCurrentCardDone = false
     var isOnboardingPassed = false
+    var isContentLoaded = false
+    
+    var canSwipeCard: Bool {
+        return isContentLoaded
+    }
     
     var rating: Int = 0
     var streak: Int = 1
@@ -401,6 +406,7 @@ class AdaptiveStepsPresenter {
     }
     
     func updateCard(_ card: StepCardView) -> StepCardView {
+        isContentLoaded = false
         card.delegate = self
         card.cardState = .loading
         
@@ -550,6 +556,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     }
     
     func contentLoadingDidComplete() {
+        isContentLoaded = true
         view?.updateTopCard(cardState: .normal)
     }
 }
