@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FLKAutoLayout
 
 class StringQuizViewController: QuizViewController {
 
