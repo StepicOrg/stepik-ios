@@ -230,8 +230,7 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     
     func placeholderStyle() -> PlaceholderStyle {
         var style = PlaceholderStyle()
-        // TODO: add constant with app color
-        style.button.textColor = levelProgress.mainColor ?? UIColor.black
+        style.button.textColor = StepicApplicationsInfo.adaptiveMainColor
         return style
     }
     
