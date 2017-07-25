@@ -16,9 +16,13 @@ class CodeSuggestionTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    func setSuggestion(_ suggestion: String, prefixLength: Int) {
-        let boldCourier = UIFont(name: "Courier-Bold", size: 11)!
-        let regularCourier = UIFont(name: "Courier", size: 11)!
+    func setSuggestion(_ suggestion: String, prefixLength: Int, size: CodeSuggestionsSize?) {
+        var fontSize: CGFloat = 11
+        if let sz = size?.realSizes.fontSize {
+            fontSize = sz
+        }
+        let boldCourier = UIFont(name: "Courier-Bold", size: fontSize)!
+        let regularCourier = UIFont(name: "Courier", size: fontSize)!
         let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSFontAttributeName: regularCourier])
         attributedSuggestion.addAttributes([NSFontAttributeName: boldCourier], range: NSMakeRange(0, prefixLength))
         suggestionLabel.attributedText = attributedSuggestion

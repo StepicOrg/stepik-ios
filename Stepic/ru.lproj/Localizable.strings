@@ -238,6 +238,7 @@ Done = "Готово";
 SwipeLeftTitle = "Смахивание влево";
 SwipeRightTitle = "Смахивание вправо";
 WelcomeTitle = "Добро пожаловать";
+ResetAlertDescription = "Сброс кода удалит весь текущий прогресс по задаче";
 NotWithUsYet = "Еще не с нами?";
 JoinCoursesSuggestionDescription = "Войдите, чтобы решать задания, просматривать уроки и получать сертификаты";
 ProgressTitle = "Прогресс";
