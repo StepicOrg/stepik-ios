@@ -301,7 +301,7 @@ class AdaptiveStepsPresenter {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     
-                    self.unsubscribeForMail(user: user) {
+                    self.unsubscribeFromMail(user: user) {
                         success()
                     }
                 }, error: { error in
@@ -318,7 +318,7 @@ class AdaptiveStepsPresenter {
         })
     }
     
-    fileprivate func unsubscribeForMail(user: User, success: @escaping ((Void) -> Void)) {
+    fileprivate func unsubscribeFromMail(user: User, success: @escaping ((Void) -> Void)) {
         performRequest({
             self.profilesAPI?.retrieve(ids: [user.profile], existing: [], refreshMode: .update, success: { profilesImmutable in
                 guard let profile = profilesImmutable.first else {
@@ -329,18 +329,18 @@ class AdaptiveStepsPresenter {
                 profile.subscribedForMail = false
                 self.profilesAPI?.update(profile, success: { updatedProfile in
                     if updatedProfile.subscribedForMail == false {
-                        print("user unsubscribed for mails")
+                        print("user unsubscribed from mails")
                     } else {
                         // TODO: analytics?
-                        print("failed unsubscribing user for mails")
+                        print("failed unsubscribing user from mails")
                     }
                 }, error: { error in
                     // TODO: analytics?
-                    print("failed unsubscribing user for mails")
+                    print("failed unsubscribing user from mails")
                 })
             }, error: { (error) -> Void in
                 // TODO: analytics?
-                print("failed unsubscribing user for mails")
+                print("failed unsubscribing user from mails")
             })
             success()
         }, error: { error in

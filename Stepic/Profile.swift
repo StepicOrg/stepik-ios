@@ -34,7 +34,6 @@ class Profile: NSManagedObject, JSONInitializable {
     }
     
     var json: [String: AnyObject] {
-        print(id, firstName, lastName, subscribedForMail)
         let dict : [String: AnyObject] = [
             "id" : id as AnyObject,
             "first_name": firstName as AnyObject,
