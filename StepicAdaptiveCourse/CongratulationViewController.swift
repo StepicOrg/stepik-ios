@@ -68,6 +68,8 @@ class CongratulationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        colorize()
 
         AnalyticsReporter.reportEvent(congratulationType.analyticsKey, parameters: congratulationType.analyticsParameters)
         
@@ -80,4 +82,8 @@ class CongratulationViewController: UIViewController {
         continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 
+    fileprivate func colorize() {
+        continueButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        shareButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+    }
 }
