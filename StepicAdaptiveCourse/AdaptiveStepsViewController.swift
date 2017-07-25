@@ -114,16 +114,19 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         }
     }
     
-    func showLevelUpCongratulation(level: Int) {
+    func showLevelUpCongratulation(level: Int, completion: (() -> ())? = nil) {
         let controller = Alerts.congratulation.construct(congratulationType: .level(level: level), continueHandler: { [weak self] in
             self?.state = .normal
+            completion?()
         })
         state = .congratulation
         Alerts.congratulation.present(alert: controller, inController: self)
     }
     
-    func showCongratulation(for rating: Int, isSpecial: Bool) {
-        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0, isSpecial: isSpecial)
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())? = nil) {
+        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0, isSpecial: isSpecial) {
+            completion?()
+        }
     }
     
     func presentShareDialog(for link: String) {

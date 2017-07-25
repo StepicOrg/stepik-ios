@@ -95,6 +95,7 @@ class RatingProgressView: UIView {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration, execute: {
                 UIView.transition(with: self.congratulationView, duration: isSpecial ? AnimationDuration.congratulationSpecial : AnimationDuration.congratulationDefault, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
                     self.congratulationView.alpha = 0.0
+                }, completion: { _ in
                     completion?()
                 })
             })

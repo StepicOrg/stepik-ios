@@ -24,8 +24,8 @@ protocol AdaptiveStepsView: class {
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
     func updateProgress(for rating: Int)
-    func showCongratulation(for rating: Int, isSpecial: Bool)
-    func showLevelUpCongratulation(level: Int)
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())?)
+    func showLevelUpCongratulation(level: Int, completion: (() -> ())?)
     func presentShareDialog(for link: String)
 }
 
@@ -443,7 +443,26 @@ class AdaptiveStepsPresenter {
                 } else {
                     // Next recommendation -> send reaction before
                     print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
+                    
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
+                        // Update rating only after reaction was sent
+                        if self?.isCurrentCardDone ?? false {
+                            guard let curStreak = self?.streak,
+                                let curRating = self?.rating else {
+                                    return
+                            }
+                            self?.isCurrentCardDone = false
+                            
+                            let oldRating = curRating
+                            let newRating = curRating + curStreak
+                            self?.rating = RatingHelper.incrementRating(curStreak)
+                            
+                            if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
+                                self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
+                            }
+                            self?.streak = RatingHelper.incrementStreak()
+                        }
+                        
                         self?.getNewRecommendation(for: course, success: successHandler)
                     })
                 }
@@ -480,28 +499,13 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.submit()
             break
         case .wrong:
-            // Drop streak
-            if streak > 1 {
-                streak = RatingHelper.incrementStreak(-streak + 1)
-            }
-            
             currentStepPresenter?.retry()
             break
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
             currentStepPresenter = nil
-            
-            // Update rating and streak
-            let newRating = RatingHelper.incrementRating(streak)
-            
-            if RatingHelper.getLevel(for: rating) != RatingHelper.getLevel(for: newRating) {
-                view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating))
-            }
-            
-            rating = newRating
-            view?.updateProgress(for: rating)
-            streak = RatingHelper.incrementStreak()
+
             break
         }
     }
@@ -517,11 +521,23 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
-        view?.showCongratulation(for: streak, isSpecial: streak > 1)
+        isCurrentCardDone = true
+        // Update rating and streak
+        let newRating = rating + streak
+        
+        view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
+            self.view?.updateProgress(for: newRating)
+        })
+        
         view?.updateTopCardControl(stepState: .successful)
     }
     
     func stepSubmissionDidWrong() {
+        // Drop streak
+        if streak > 1 {
+            streak = RatingHelper.incrementStreak(-streak + 1)
+        }
+        
         view?.updateTopCardControl(stepState: .wrong)
     }
     
