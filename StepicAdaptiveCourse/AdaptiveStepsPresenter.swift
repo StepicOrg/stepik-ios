@@ -540,7 +540,6 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
-            currentStepPresenter = nil
 
             break
         }
