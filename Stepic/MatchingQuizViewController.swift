@@ -11,8 +11,8 @@ import FLKAutoLayout
 
 class MatchingQuizViewController: QuizViewController {
 
-    var firstTableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
-    var secondTableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
+    var firstTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
+    var secondTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
         
     var firstWebViewHelper : ControllerQuizWebViewHelper!
     var secondWebViewHelper : ControllerQuizWebViewHelper!
@@ -40,21 +40,14 @@ class MatchingQuizViewController: QuizViewController {
         self.containerView.addSubview(firstTableView)
         self.containerView.addSubview(secondTableView)
         
-        firstTableView.alignTopEdge(with: self.containerView, predicate: "0")
-        firstTableView.constrainHeight(to: self.containerView, predicate: "*1.0")
-//        firstTableView.alignTop("0", bottom: "0", to: self.containerView)
+        firstTableView.alignTop("0", bottom: "0", to: self.containerView)
         firstTableView.alignLeadingEdge(with: self.containerView, predicate: "0")
         firstTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
-//        firstTableView.constrainTrailingSpace(to: secondTableView, predicate: "0")
         
-        secondTableView.alignTopEdge(with: self.containerView, predicate: "0")
-        secondTableView.constrainHeight(to: self.containerView, predicate: "*1.0")
+        secondTableView.alignTop("0", bottom: "0", to: self.containerView)
         secondTableView.alignTrailingEdge(with: self.containerView, predicate: "0")
         secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
 
-//        secondTableView.alignTop("0", bottom: "0", to: self.containerView)
-//        secondTableView.alignTrailingEdge(with: self.containerView, predicate: "0")
-//        secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
         
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
@@ -128,10 +121,7 @@ class MatchingQuizViewController: QuizViewController {
             if secondWebViewHelper.cellHeights.min() != maxHeight {
                 self.secondTableView.reloadData()
 //                self.secondTableView.endUpdates()
-            }
-            
-//            secondTableViewHeight?.constant = CGFloat(maxHeight)
-//            secondTableViewHeight?.isActive = true
+            }            
         }
     }
     
