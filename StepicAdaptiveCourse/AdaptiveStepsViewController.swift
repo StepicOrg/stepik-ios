@@ -22,9 +22,20 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     var state: AdaptiveStepsViewState = .normal {
         didSet {
-            self.placeholderView.isHidden = state == .normal || state == .congratulation
-            self.kolodaView.isHidden = state != .normal && state != .congratulation
-            self.congratsView.isHidden = state != .congratulation
+            switch state {
+            case .normal:
+                self.placeholderView.isHidden = true
+                self.kolodaView.isHidden = false
+                self.congratsView.isHidden = true
+            case .congratulation:
+                self.placeholderView.isHidden = true
+                self.kolodaView.isHidden = true
+                self.congratsView.isHidden = false
+            case .connectionError:
+                self.placeholderView.isHidden = false
+                self.kolodaView.isHidden = true
+                self.congratsView.isHidden = true
+            }
         }
     }
     
