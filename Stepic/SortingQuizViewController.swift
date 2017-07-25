@@ -11,7 +11,7 @@ import FLKAutoLayout
 
 class SortingQuizViewController: QuizViewController {
 
-    var tableView = UITableView()
+    var tableView = FullHeightTableView()
     
     var webViewHelper : ControllerQuizWebViewHelper!
     
