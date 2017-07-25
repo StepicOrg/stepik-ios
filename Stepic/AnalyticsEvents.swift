@@ -171,16 +171,6 @@ struct AnalyticsEvents {
         static let shared = "certificates_pressed_share_certificate"
     }
     
-    struct Adaptive {
-        static let correctAnswer = "correct_answer"
-        static let firstOpen = "first_open"
-        static let onboardingFinished = "onboarding_finished"
-        struct Reaction {
-            static let easy = "reaction_easy"
-            static let hard = "reaction_hard"
-        }
-    }
-    
     struct PeekNPop {
         struct Course {
             static let peeked = "3dtouch_course_peeked"

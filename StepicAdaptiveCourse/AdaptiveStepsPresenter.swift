@@ -62,22 +62,7 @@ class AdaptiveStepsPresenter {
     var rating: Int = 0
     var streak: Int = 1
     
-    var lastReaction: Reaction? {
-        didSet {
-            if lastReaction != nil {
-                switch lastReaction! {
-                case .maybeLater:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard)
-                    break
-                case .neverAgain:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy)
-                    break
-                default:
-                    return
-                }
-            }
-        }
-    }
+    var lastReaction: Reaction?
     
     var course: Course?
     var currentLesson: Lesson?
@@ -485,6 +470,18 @@ class AdaptiveStepsPresenter {
                     // Next recommendation -> send reaction before
                     print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
                     
+                    // Analytics
+                    if let isCardSolved = self?.isCurrentCardDone,
+                        let reaction = self?.lastReaction {
+                        switch reaction {
+                        case .maybeLater:
+                            AnalyticsReporter.reportEvent(isCardSolved ? AnalyticsEvents.Adaptive.Reaction.hardAfterCorrect : AnalyticsEvents.Adaptive.Reaction.hard)
+                        case .neverAgain:
+                            AnalyticsReporter.reportEvent(isCardSolved ? AnalyticsEvents.Adaptive.Reaction.easyAfterCorrect : AnalyticsEvents.Adaptive.Reaction.easy)
+                        default: break
+                        }
+                    }
+                    
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
                         // Update rating only after reaction was sent
                         if self?.isCurrentCardDone ?? false {
@@ -562,6 +559,8 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
+        
         isCurrentCardDone = true
         // Update rating and streak
         let newRating = rating + streak
@@ -574,6 +573,8 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     }
     
     func stepSubmissionDidWrong() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        
         // Drop streak
         if streak > 1 {
             streak = RatingHelper.incrementStreak(-streak + 1)
@@ -583,6 +584,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     }
     
     func stepSubmissionDidRetry() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
         view?.updateTopCardControl(stepState: .unsolved)
     }
     
