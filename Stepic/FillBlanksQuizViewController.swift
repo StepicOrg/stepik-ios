@@ -94,7 +94,6 @@ class FillBlanksQuizViewController: QuizViewController {
             self?.tableView.reloadData()
             if let exp = self?.expectedQuizHeight, 
                 let without = self?.heightWithoutQuiz {
-                self?.delegate?.needsHeightUpdate(exp + without, animated: true, breaksSynchronizationControl: false)
 
             }
         }
@@ -130,7 +129,6 @@ class FillBlanksQuizViewController: QuizViewController {
         self.tableView.isUserInteractionEnabled = true
         answerForComponent = [:]
         self.tableView.reloadData()
-        self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: false)
     }
 
     override func updateQuizAfterSubmissionUpdate(reload: Bool) {

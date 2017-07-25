@@ -130,7 +130,6 @@ class MatchingQuizViewController: QuizViewController {
 //                self.secondTableView.endUpdates()
             }
             
-            self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: false) 
 //            secondTableViewHeight?.constant = CGFloat(maxHeight)
 //            secondTableViewHeight?.isActive = true
         }
@@ -182,7 +181,6 @@ class MatchingQuizViewController: QuizViewController {
             self.firstTableView.reloadData()
             self.secondTableView.reloadData()
             countedNoLatexMaxHeight = countNoLatexMaxHeight(dataset: dataset)
-            self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: true) 
         }
     }
     

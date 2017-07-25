@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class StringQuizViewController: QuizViewController {
 
@@ -20,7 +21,8 @@ class StringQuizViewController: QuizViewController {
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
-
+        _ = textView.constrainHeight("64")
+        
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
         

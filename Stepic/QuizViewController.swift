@@ -124,13 +124,11 @@ class QuizViewController: UIViewController {
                     [weak self] in
                     self?.activityView.isHidden = false
                 }
-                self.delegate?.needsHeightUpdate(150, animated: true, breaksSynchronizationControl: false)
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
                     self?.activityView.isHidden = true
                 }
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
         }
     }
@@ -142,14 +140,12 @@ class QuizViewController: UIViewController {
                     [weak self] in
                     self?.warningView.isHidden = false
                 }
-                self.delegate?.needsHeightUpdate(200, animated: true, breaksSynchronizationControl: false)
                 self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
                     self?.warningView.isHidden = true
                 }
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
         }
     }
@@ -168,7 +164,6 @@ class QuizViewController: UIViewController {
                     
                     //TODO: Implement in subclass, then it may need a height update
                     s.updateQuizAfterAttemptUpdate()
-                    s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
                 }
 //                self.view.layoutIfNeeded()
             }
@@ -376,8 +371,6 @@ class QuizViewController: UIViewController {
 
                         s.updateQuizAfterSubmissionUpdate()
                     }
-                    s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
-//                self.view.layoutIfNeeded()
                 }
             }
         }
@@ -393,7 +386,6 @@ class QuizViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
     }
     
     //Measured in seconds
@@ -415,7 +407,6 @@ class QuizViewController: UIViewController {
                     [weak self] in
                     if let expectedHeight = self?.expectedQuizHeight, 
                         let noQuizHeight = self?.heightWithoutQuiz {
-                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true, breaksSynchronizationControl: false) 
                     }
                 }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)

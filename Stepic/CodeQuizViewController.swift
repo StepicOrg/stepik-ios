@@ -196,7 +196,6 @@ class CodeQuizViewController: QuizViewController {
             s.languagePicker.removeFromParentViewController()
             s.languagePicker.view.removeFromSuperview()
             s.isSubmitButtonHidden = false
-            s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
         }
     }
     
@@ -237,7 +236,6 @@ class CodeQuizViewController: QuizViewController {
             } else {
                 language = options.languages[0]
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language.rawValue])
-                delegate?.needsHeightUpdate(heightWithoutQuiz + expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
             return
         }

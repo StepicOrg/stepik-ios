@@ -30,7 +30,6 @@ class UnknownTypeQuizViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        delegate?.needsHeightUpdate(56, animated: true, breaksSynchronizationControl: false)
         view.layoutIfNeeded()
     }
     
