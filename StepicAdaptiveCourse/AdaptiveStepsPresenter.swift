@@ -51,7 +51,6 @@ class AdaptiveStepsPresenter {
     var isKolodaPresented = false
     var isJoinedCourse = false
     var isRecommendationLoaded = false
-    var isCurrentCardDone = false
     var isOnboardingPassed = false
     var isContentLoaded = false
     
@@ -471,25 +470,24 @@ class AdaptiveStepsPresenter {
                     print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
                     
                     // Analytics
-                    if let isCardSolved = self?.isCurrentCardDone,
+                    if let curState = self?.currentStepPresenter?.state,
                         let reaction = self?.lastReaction {
                         switch reaction {
                         case .maybeLater:
-                            AnalyticsReporter.reportEvent(isCardSolved ? AnalyticsEvents.Adaptive.Reaction.hardAfterCorrect : AnalyticsEvents.Adaptive.Reaction.hard)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
                         case .neverAgain:
-                            AnalyticsReporter.reportEvent(isCardSolved ? AnalyticsEvents.Adaptive.Reaction.easyAfterCorrect : AnalyticsEvents.Adaptive.Reaction.easy)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
                         default: break
                         }
                     }
                     
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
                         // Update rating only after reaction was sent
-                        if self?.isCurrentCardDone ?? false {
+                        if (self?.currentStepPresenter?.state ?? .unsolved) == .successful {
                             guard let curStreak = self?.streak,
                                 let curRating = self?.rating else {
                                     return
                             }
-                            self?.isCurrentCardDone = false
                             
                             let oldRating = curRating
                             let newRating = curRating + curStreak
@@ -561,7 +559,6 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
         
-        isCurrentCardDone = true
         // Update rating and streak
         let newRating = rating + streak
         

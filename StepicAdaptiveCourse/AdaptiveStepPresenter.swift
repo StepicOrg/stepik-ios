@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum AdaptiveStepState {
-    case unsolved
-    case wrong
-    case successful
+enum AdaptiveStepState: String {
+    case unsolved = "unsolved"
+    case wrong = "wrong"
+    case successful = "successful"
 }
 
 protocol AdaptiveStepView: class {

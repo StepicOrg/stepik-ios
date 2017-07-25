@@ -17,11 +17,11 @@ class ProfilesAPI: APIEndpoint {
         return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }
     
-    func update(_ profile: Profile, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Profile) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    @discardableResult func update(_ profile: Profile, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((Profile) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
         let params : Parameters? = [
             "profile" : profile.json as AnyObject
         ]
-        Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(profile.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({ response in
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(profile.id)", method: .put, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({ response in
                 var error = response.result.error
                 var json: JSON = [:]
                 if response.result.value == nil {
@@ -42,9 +42,9 @@ class ProfilesAPI: APIEndpoint {
                     errorHandler("PUT profile: bad response status code \(String(describing: response?.statusCode))")
                     return
                 }
-                
-                let updatedProfile = Profile(json: json["profiles"].arrayValue[0])
-                success(updatedProfile)
+            
+                profile.update(json: json["profiles"].arrayValue[0])
+                success(profile)
                 
                 return
             }

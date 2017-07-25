@@ -24,8 +24,6 @@ extension AnalyticsEvents {
         struct Reaction {
             static let easy = "adaptive_reaction_easy"
             static let hard = "adaptive_reaction_hard"
-            static let easyAfterCorrect = "adaptive_reaction_easy_after_correct"
-            static let hardAfterCorrect = "adaptive_reaction_hard_after_correct"
         }
     }
 }
