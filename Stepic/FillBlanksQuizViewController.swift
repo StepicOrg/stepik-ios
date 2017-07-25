@@ -12,7 +12,7 @@ import Presentr
 
 class FillBlanksQuizViewController: QuizViewController {
 
-    var tableView = UITableView()
+    var tableView = FullHeightTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
