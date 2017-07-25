@@ -13,7 +13,7 @@ import Foundation
 
 class ChoiceQuizViewController: QuizViewController {
 
-    var tableView = UITableView()
+    var tableView = FullHeightTableView()
     
     var webViewHelper : ControllerQuizWebViewHelper?
     
@@ -118,7 +118,6 @@ class ChoiceQuizViewController: QuizViewController {
         } else {
             tableView.beginUpdates()
             tableView.endUpdates()
-            delegate?.needsHeightUpdate(self.expectedQuizHeight + self.heightWithoutQuiz, animated: true, breaksSynchronizationControl: false)
         }
     }
     

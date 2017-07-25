@@ -20,7 +20,7 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
@@ -565,64 +565,64 @@ extension WebStepViewController : QuizControllerDelegate {
 //            return
 //        }
         
-        if needsQuizUpdateAttention && !breaksSynchronizationControl {
-            if newHeight <= self.quizPlaceholderViewHeight.constant {
-                print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
-                return
-            }
-        
-            if isCurrentlyUpdatingHeight {
-                print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
-                if let last = lastUpdatingQuizHeight {
-                    if newHeight > last {
-                        lastUpdatingQuizHeight = newHeight
-                    }
-                } else {
-                    lastUpdatingQuizHeight = newHeight
-                }
-                return
-            }
-        
-            isCurrentlyUpdatingHeight = true
-            print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
-        }
-        
-        DispatchQueue.main.async {
-            [weak self] in
-            self?.quizPlaceholderViewHeight.constant = newHeight
-//        view.setNeedsLayout()
-            if animated { 
-                UIView.animate(withDuration: 0.2, animations: {
-                    [weak self] in
-                    self?.view.layoutIfNeeded()
-                }, completion: {
-                    [weak self] 
-                    completed in
-                    if (self?.needsQuizUpdateAttention ?? false) {
-                        self?.isCurrentlyUpdatingHeight = false
-                        if self?.lastUpdatingQuizHeight == newHeight {
-                            self?.lastUpdatingQuizHeight = nil
-                        }
-                        if let h = self?.lastUpdatingQuizHeight {
-                            self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
-                        }
-                    }
-                })
-            } else {
-                self?.view.layoutIfNeeded()
-                if (self?.needsQuizUpdateAttention ?? false) {
-
-                    self?.isCurrentlyUpdatingHeight = false
-                    if self?.lastUpdatingQuizHeight == newHeight {
-                        self?.lastUpdatingQuizHeight = nil
-                    }
-                    if let h = self?.lastUpdatingQuizHeight {
-                        self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
-                    }
-                }
-            }
-            
-        }
+//        if needsQuizUpdateAttention && !breaksSynchronizationControl {
+//            if newHeight <= self.quizPlaceholderViewHeight.constant {
+//                print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
+//                return
+//            }
+//        
+//            if isCurrentlyUpdatingHeight {
+//                print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
+//                if let last = lastUpdatingQuizHeight {
+//                    if newHeight > last {
+//                        lastUpdatingQuizHeight = newHeight
+//                    }
+//                } else {
+//                    lastUpdatingQuizHeight = newHeight
+//                }
+//                return
+//            }
+//        
+//            isCurrentlyUpdatingHeight = true
+//            print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
+//        }
+//        
+//        DispatchQueue.main.async {
+//            [weak self] in
+//            self?.quizPlaceholderViewHeight.constant = newHeight
+////        view.setNeedsLayout()
+//            if animated { 
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    [weak self] in
+//                    self?.view.layoutIfNeeded()
+//                }, completion: {
+//                    [weak self] 
+//                    completed in
+//                    if (self?.needsQuizUpdateAttention ?? false) {
+//                        self?.isCurrentlyUpdatingHeight = false
+//                        if self?.lastUpdatingQuizHeight == newHeight {
+//                            self?.lastUpdatingQuizHeight = nil
+//                        }
+//                        if let h = self?.lastUpdatingQuizHeight {
+//                            self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
+//                        }
+//                    }
+//                })
+//            } else {
+//                self?.view.layoutIfNeeded()
+//                if (self?.needsQuizUpdateAttention ?? false) {
+//
+//                    self?.isCurrentlyUpdatingHeight = false
+//                    if self?.lastUpdatingQuizHeight == newHeight {
+//                        self?.lastUpdatingQuizHeight = nil
+//                    }
+//                    if let h = self?.lastUpdatingQuizHeight {
+//                        self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
+//                    }
+//                }
+//            }
+//            
+//        }
     
     }
 }
