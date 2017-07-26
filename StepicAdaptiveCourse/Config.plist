@@ -35,6 +35,8 @@
 	</dict>
 	<key>adaptive</key>
 	<dict>
+		<key>mainColor</key>
+		<integer>32896</integer>
 		<key>isAdaptive</key>
 		<true/>
 		<key>courseId</key>

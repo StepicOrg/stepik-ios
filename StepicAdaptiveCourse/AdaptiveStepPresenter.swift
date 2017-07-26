@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum AdaptiveStepState {
-    case unsolved
-    case wrong
-    case successful
+enum AdaptiveStepState: String {
+    case unsolved = "unsolved"
+    case wrong = "wrong"
+    case successful = "successful"
 }
 
 protocol AdaptiveStepView: class {
@@ -21,7 +21,7 @@ protocol AdaptiveStepView: class {
     func updateQuiz(with view: UIView)
     
     func scrollToQuizBottom(quizHintHeight: CGFloat, quizHintTop: CGPoint)
-    func updateQuizHeight(newHeight: CGFloat, completion: (() -> ())?)
+    func updateQuizHeight(newHeight: CGFloat, animated: Bool, completion: (() -> ())?)
 }
 
 class AdaptiveStepPresenter {
@@ -90,7 +90,7 @@ class AdaptiveStepPresenter {
 
 extension AdaptiveStepPresenter: QuizControllerDelegate {
     func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
-        view?.updateQuizHeight(newHeight: newHeight) { [weak self] in
+        view?.updateQuizHeight(newHeight: newHeight, animated: animated) { [weak self] in
             if self?.quizViewController?.submission?.status != nil {
                 // :(
                 let sPoint = self?.quizViewController?.statusLabel.superview?.convert(self?.quizViewController?.statusLabel.frame.origin ?? CGPoint.zero, to: self?.view?.baseScrollView)

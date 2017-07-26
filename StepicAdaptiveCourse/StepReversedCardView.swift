@@ -26,6 +26,7 @@ class StepReversedCardView: UIView {
         super.layoutSubviews()
         
         if let whiteView = white {
+            whiteView.frame = bounds
             whiteView.backgroundColor = UIColor(patternImage: Images.patterns.gray)
         }
     }
