@@ -9,7 +9,7 @@
 import UIKit
 
 class RatingProgressView: UIView {
-    @IBInspectable var mainColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 128 / 255, alpha: 1.0)
+    @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
     @IBInspectable var frontLabelColor: UIColor? = UIColor.white
@@ -30,6 +30,7 @@ class RatingProgressView: UIView {
     private var congratulationLabel: UILabel!
     private var congratulationView: UIView!
     private var frontViewShadowLayer: CAGradientLayer!
+    private var congratsShadowLayer: CAGradientLayer!
     
     var text: String = "" {
         didSet {
@@ -94,6 +95,7 @@ class RatingProgressView: UIView {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration, execute: {
                 UIView.transition(with: self.congratulationView, duration: isSpecial ? AnimationDuration.congratulationSpecial : AnimationDuration.congratulationDefault, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
                     self.congratulationView.alpha = 0.0
+                }, completion: { _ in
                     completion?()
                 })
             })
@@ -118,6 +120,9 @@ class RatingProgressView: UIView {
     }
     
     fileprivate func initView() {
+        autoresizingMask = .flexibleWidth
+        autoresizesSubviews = true
+        
         // Font
         if #available(iOS 8.2, *) {
             labelFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
@@ -138,6 +143,7 @@ class RatingProgressView: UIView {
         frontFrame.size.width = 0
         frontView = UIView(frame: frontFrame)
         frontView.backgroundColor = mainColor
+        frontView.autoresizingMask = .flexibleWidth
         
         // Make main label (front)
         frontLabel = UILabel(frame: self.bounds)
@@ -162,13 +168,14 @@ class RatingProgressView: UIView {
         congratulationView = UIView(frame: self.bounds)
         congratulationView.alpha = 0.0
         congratulationView.backgroundColor = congratulationColor
+        congratulationView.autoresizingMask = .flexibleWidth
         congratulationLabel = UILabel(frame: self.bounds)
         congratulationLabel.font = labelFont
         congratulationLabel.textAlignment = label.textAlignment
         congratulationLabel.textColor = congratulationLabelColor
         congratulationView.addSubview(congratulationLabel)
         
-        let congratsShadowLayer = CAGradientLayer()
+        congratsShadowLayer = CAGradientLayer()
         congratsShadowLayer.cornerRadius = self.layer.cornerRadius
         congratsShadowLayer.frame = congratulationView.bounds
         congratsShadowLayer.colors = [
@@ -190,5 +197,6 @@ class RatingProgressView: UIView {
         // Recalculate progress
         frontView.frame.size.width = bounds.width * CGFloat(progress)
         frontViewShadowLayer.frame.size.width = bounds.width * CGFloat(progress)
+        congratsShadowLayer.frame.size.width = bounds.width
     }
 }

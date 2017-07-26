@@ -263,7 +263,11 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     }
     */
     
-    var courses : [Course] = []
+    var courses : [Course] = [] {
+        didSet {
+            didSetCourses()
+        }
+    }
     var meta : Meta?
     
     var isLoadingMore = false
@@ -272,6 +276,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             self.refreshingChangedTo(isRefreshing)
         }
     }
+    
+    func didSetCourses() {}
     
     func refreshingChangedTo(_ refreshing: Bool) {
     }

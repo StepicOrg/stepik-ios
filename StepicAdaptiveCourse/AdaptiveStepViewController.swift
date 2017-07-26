@@ -63,14 +63,19 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
         self.view.layoutIfNeeded()
     }
     
-    func updateQuizHeight(newHeight: CGFloat, completion: (() -> ())?) {
+    func updateQuizHeight(newHeight: CGFloat, animated: Bool, completion: (() -> ())?) {
         DispatchQueue.main.async { [weak self] in
             self?.quizPlaceholderViewHeight.constant = newHeight
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            if animated {
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    self?.view.layoutIfNeeded()
+                }, completion: { _ in
+                    completion?()
+                })
+            } else {
                 self?.view.layoutIfNeeded()
-            }, completion: { _ in
                 completion?()
-            })
+            }
         }
     }
     
