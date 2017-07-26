@@ -391,9 +391,6 @@ class QuizViewController: UIViewController {
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
             if self?.countHeight() == true {
-                DispatchQueue.main.async {
-                    [weak self] in
-                }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)
             } else {
                 self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
