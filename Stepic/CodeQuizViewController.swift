@@ -106,10 +106,6 @@ class CodeQuizViewController: QuizViewController {
         return params
     }
     
-    override var expectedQuizHeight : CGFloat {
-        return toolbarHeight + size.elements.editor.realSizes.editorHeight + limitsLabelHeight + 16
-    }
-    
     fileprivate func setupConstraints() {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)

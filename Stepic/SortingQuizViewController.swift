@@ -28,22 +28,10 @@ class SortingQuizViewController: QuizViewController {
         tableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         tableView.isEditing = true
         
-        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
-            , countClosure: 
-            {
-                [weak self] in
-                return self?.optionsCount ?? 0
-            }, expectedQuizHeightClosure: {
-                [weak self] in
-                return self?.expectedQuizHeight ?? 0
-            }, noQuizHeightClosure: {
-                [weak self] in
-                return self?.heightWithoutQuiz ?? 0
-            }, delegate: delegate
-        )
-
-//        self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
+        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, countClosure: {
+            [weak self] in
+            return self?.optionsCount ?? 0
+        })
     }
     
     
@@ -106,14 +94,6 @@ class SortingQuizViewController: QuizViewController {
             }
         }
         webViewHelper.updateChoicesHeights()
-        
-//        webViewHelper.updateChoicesHeights()
-//        self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
-    }
-    
-    override var expectedQuizHeight : CGFloat {
-        return self.tableView.contentSize.height
     }
     
     override func getReply() -> Reply {

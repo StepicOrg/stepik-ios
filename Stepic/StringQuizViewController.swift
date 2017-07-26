@@ -64,11 +64,6 @@ class StringQuizViewController: QuizViewController {
         }
     }
     
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 72
-    }
-
     //Override this in the subclass
     override func getReply() -> Reply {
         return TextReply(text: textView.text ?? "")

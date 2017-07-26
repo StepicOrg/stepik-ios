@@ -63,41 +63,20 @@ class MatchingQuizViewController: QuizViewController {
     }
 
     fileprivate func initWebViewHelpers() {
-        firstWebViewHelper = ControllerQuizWebViewHelper(tableView: firstTableView, view: view
-            , countClosure: 
-            {
-                [weak self] in
-                return self?.optionsCount ?? 0
-            }, expectedQuizHeightClosure: {
-                [weak self] in
-                //                return self?.firstTableView.contentSize.height ?? 0
-                return self?.expectedQuizHeight ?? 0
-            }, noQuizHeightClosure: {
-                [weak self] in
-                return self?.heightWithoutQuiz ?? 0
-            }, delegate: delegate,
-               success: {
-                [weak self] in
-                self?.finishedCellUpdates(tableViewId: 1)
-            }
-        )
+        firstWebViewHelper = ControllerQuizWebViewHelper(tableView: firstTableView, countClosure: {
+            [weak self] in
+            return self?.optionsCount ?? 0
+        }, success: {
+            [weak self] in
+            self?.finishedCellUpdates(tableViewId: 1)
+        })
         
-        secondWebViewHelper = ControllerQuizWebViewHelper(tableView: secondTableView, view: view
-            , countClosure: 
-            {
-                [weak self] in
-                return self?.optionsCount ?? 0
-            }, expectedQuizHeightClosure: {
-                [weak self] in
-                //                return self?.secondTableView.contentSize.height ?? 0
-                return self?.expectedQuizHeight ?? 0
-            }, noQuizHeightClosure: {
-                [weak self] in
-                return self?.heightWithoutQuiz ?? 0
-            }, delegate: delegate,
-               success: {
-                [weak self] in
-                self?.finishedCellUpdates(tableViewId: 2)
+        secondWebViewHelper = ControllerQuizWebViewHelper(tableView: secondTableView, countClosure: {
+            [weak self] in
+            return self?.optionsCount ?? 0
+        }, success: {
+            [weak self] in
+            self?.finishedCellUpdates(tableViewId: 2)
         })
 
     }
@@ -242,12 +221,7 @@ class MatchingQuizViewController: QuizViewController {
         }
         webViewHelper.updateChoicesHeights()
     }
-    
-    override var expectedQuizHeight : CGFloat {
-        return CGFloat(maxHeight * optionsCount)
-//        return max(self.firstTableView.contentSize.height, self.secondTableView.contentSize.height)
-    }
-    
+        
     override func getReply() -> Reply {
         let r = MatchingReply(ordering: optionsPermutation)
         print(r.ordering)

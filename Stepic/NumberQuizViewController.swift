@@ -63,12 +63,7 @@ class NumberQuizViewController: QuizViewController {
             textField.isEnabled = true
         }
     }
-    
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 38
-    }
-    
+        
     //Override this in the subclass
     override func getReply() -> Reply {
         return NumberReply(number: textField.text ?? "")

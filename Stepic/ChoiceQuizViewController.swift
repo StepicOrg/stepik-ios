@@ -33,19 +33,10 @@ class ChoiceQuizViewController: QuizViewController {
         tableView.register(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
         tableView.register(UINib(nibName: "TextChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "TextChoiceQuizTableViewCell")
 
-        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, view: view
-            , countClosure: 
-            {
-                [weak self] in
-                return self?.optionsCount ?? 0
-            }, expectedQuizHeightClosure: {
-                [weak self] in
-                return self?.expectedQuizHeight ?? 0
-            }, noQuizHeightClosure: {
-                [weak self] in
-                return self?.heightWithoutQuiz ?? 0
-            }, delegate: delegate
-        )
+        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, countClosure: {
+            [weak self] in
+            return self?.optionsCount ?? 0
+        })
     }
     
     fileprivate func hasTagsInDataset(dataset: ChoiceDataset) -> Bool {
@@ -94,10 +85,6 @@ class ChoiceQuizViewController: QuizViewController {
             self.tableView.isUserInteractionEnabled = false
         }
         self.tableView.reloadData()
-    }
-    
-    override var expectedQuizHeight : CGFloat {
-        return self.tableView.contentSize.height
     }
     
     override func getReply() -> Reply {
