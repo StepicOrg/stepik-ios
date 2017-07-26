@@ -324,6 +324,7 @@ class QuizViewController: UIViewController {
                                 }
                             }
                             
+                            s.view.layoutIfNeeded()
                             self?.delegate?.submissionDidCorrect()
                             
                             break
@@ -343,6 +344,7 @@ class QuizViewController: UIViewController {
                             s.statusLabel.text = s.wrongTitle
                             s.setStatusElements(visible: true)
 
+                            s.view.layoutIfNeeded()
                             self?.delegate?.submissionDidWrong()
                             
                             break

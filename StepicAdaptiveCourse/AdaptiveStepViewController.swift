@@ -18,7 +18,6 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stepWebView: UIWebView!
     @IBOutlet weak var quizPlaceholderView: UIView!
-    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
     var baseScrollView: UIScrollView {
@@ -63,22 +62,17 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
         self.view.layoutIfNeeded()
     }
     
-    func updateQuizHeight(newHeight: CGFloat, completion: (() -> ())?) {
-        DispatchQueue.main.async { [weak self] in
-            self?.quizPlaceholderViewHeight.constant = newHeight
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                self?.view.layoutIfNeeded()
-            }, completion: { _ in
-                completion?()
-            })
+    func scrollToQuizBottom() {
+        guard let quizHint = presenter?.calculateQuizHintSize() else {
+            return
         }
-    }
-    
-    func scrollToQuizBottom(quizHintHeight: CGFloat, quizHintTop: CGPoint) {
-        if quizHintHeight > view.frame.height {
-            scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHintTop.y, width: 1, height: scrollView.frame.height), animated: true)
+        scrollView.layoutIfNeeded()
+        
+        if quizHint.height > view.frame.height {
+            scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHint.top.y, width: 1, height: scrollView.frame.height), animated: true)
         } else {
             let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+            print(bottomOffset)
             if bottomOffset.y > 0 {
                 scrollView.setContentOffset(bottomOffset, animated: true)
             }
@@ -140,7 +134,6 @@ extension AdaptiveStepViewController: UIWebViewDelegate {
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         alignImages(in: stepWebView)
         
-        presenter?.needsQuizHeightUpdate()
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
     }
 }

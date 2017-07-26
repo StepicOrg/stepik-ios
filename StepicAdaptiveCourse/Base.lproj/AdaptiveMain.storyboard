@@ -42,7 +42,7 @@
                                         <rect key="frame" x="0.0" y="10" width="375" height="5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="LY2-WB-yMw"/>
+                                            <constraint firstAttribute="height" constant="5" placeholder="YES" id="LY2-WB-yMw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -71,7 +71,6 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
-                        <outlet property="quizPlaceholderViewHeight" destination="LY2-WB-yMw" id="Fdf-FI-MxF"/>
                         <outlet property="scrollView" destination="1Am-VA-FTv" id="z2z-6Y-8PD"/>
                         <outlet property="stepWebView" destination="5eX-H9-4P6" id="ORF-cp-ZMN"/>
                         <outlet property="stepWebViewHeight" destination="blu-xZ-KpD" id="miR-yw-cQp"/>
