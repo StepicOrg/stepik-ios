@@ -67,12 +67,7 @@ class FreeAnswerQuizViewController: QuizViewController {
             textView.isEditable = true
         }
     }
-    
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 72
-    }
-    
+        
     //Override this in the subclass
     override func getReply() -> Reply {
         if let d = dataset {

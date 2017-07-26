@@ -64,12 +64,7 @@ class MathQuizViewController: QuizViewController {
         //            textField.text = ""
         //        }
     }
-    
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 38
-    }
-    
+        
     //Override this in the subclass
     override func getReply() -> Reply {
         return MathReply(formula: textField.text ?? "")

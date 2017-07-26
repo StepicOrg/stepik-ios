@@ -92,10 +92,6 @@ class FillBlanksQuizViewController: QuizViewController {
             [weak self] in 
             selectedBlock(vc.selectedData)
             self?.tableView.reloadData()
-            if let exp = self?.expectedQuizHeight, 
-                let without = self?.heightWithoutQuiz {
-
-            }
         }
         customPresentViewController(fillBlanksPickerPresenter, viewController: vc, animated: true, completion: nil)
     }
@@ -152,11 +148,6 @@ class FillBlanksQuizViewController: QuizViewController {
         
         self.tableView.reloadData()
     }
-    
-    override var expectedQuizHeight : CGFloat {
-        return self.tableView.contentSize.height
-    }
-
 }
 
 extension FillBlanksQuizViewController : UITableViewDelegate {

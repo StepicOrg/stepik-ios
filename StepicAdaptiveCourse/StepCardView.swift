@@ -62,9 +62,9 @@ class StepCardView: UIView {
         delegate?.onShareButtonClick()
     }
     
-
-    var isFirst = true
     override func draw(_ rect: CGRect) {
+        colorize()
+        
         let gifFile = FileManager.default.contents(atPath: Bundle.main.path(forResource: "loading_robot", ofType: "gif")!)
         loadingImageView.animatedImage = FLAnimatedImage(animatedGIFData: gifFile)
         loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
@@ -105,6 +105,12 @@ class StepCardView: UIView {
     
     func updateLabel(_ text: String) {
         titleLabel.text = text
+    }
+    
+    fileprivate func colorize() {
+        loadingLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
+        controlButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        shareButton.superview?.tintColor = StepicApplicationsInfo.adaptiveMainColor
     }
     
     enum CardState {

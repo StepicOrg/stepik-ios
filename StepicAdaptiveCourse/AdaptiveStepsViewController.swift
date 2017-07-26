@@ -22,9 +22,20 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     var state: AdaptiveStepsViewState = .normal {
         didSet {
-            self.placeholderView.isHidden = state == .normal || state == .congratulation
-            self.kolodaView.isHidden = state != .normal && state != .congratulation
-            self.congratsView.isHidden = state != .congratulation
+            switch state {
+            case .normal:
+                self.placeholderView.isHidden = true
+                self.kolodaView.isHidden = false
+                self.congratsView.isHidden = true
+            case .congratulation:
+                self.placeholderView.isHidden = true
+                self.kolodaView.isHidden = true
+                self.congratsView.isHidden = false
+            case .connectionError:
+                self.placeholderView.isHidden = false
+                self.kolodaView.isHidden = true
+                self.congratsView.isHidden = true
+            }
         }
     }
     
@@ -34,7 +45,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         v.align(to: self.kolodaView)
         v.delegate = self
         v.datasource = self
-        v.backgroundColor = UIColor.white
+        v.backgroundColor = self.view.backgroundColor
         return v
     }()
     
@@ -48,7 +59,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, view: self)
+        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, profilesAPI: ApiDataDownloader.profiles, view: self)
     }
     
     override func viewDidLoad() {
@@ -114,16 +125,19 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         }
     }
     
-    func showLevelUpCongratulation(level: Int) {
+    func showLevelUpCongratulation(level: Int, completion: (() -> ())? = nil) {
         let controller = Alerts.congratulation.construct(congratulationType: .level(level: level), continueHandler: { [weak self] in
             self?.state = .normal
+            completion?()
         })
         state = .congratulation
         Alerts.congratulation.present(alert: controller, inController: self)
     }
     
-    func showCongratulation(for rating: Int, isSpecial: Bool) {
-        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0, isSpecial: isSpecial)
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())? = nil) {
+        levelProgress.showCongratulation(text: String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), duration: 1.0, isSpecial: isSpecial) {
+            completion?()
+        }
     }
     
     func presentShareDialog(for link: String) {
@@ -143,6 +157,10 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     }
     
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
+        if !(presenter?.canSwipeCard ?? false) {
+            return false
+        }
+        
         if direction == .right {
             presenter?.lastReaction = .neverAgain
         } else if direction == .left {
@@ -186,9 +204,7 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
     func placeholderImage() -> UIImage? {
         switch state {
         case .connectionError:
-            return Images.noWifiImage.size100x100
-        case .coursePassed:
-            return Images.placeholders.coursePassed
+            return Images.placeholders.connectionError
         default:
             return nil
         }
@@ -198,8 +214,6 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return NSLocalizedString("TryAgain", comment: "")
-        case .coursePassed:
-            return NSLocalizedString("GoToStepikAppStore", comment: "")
         default:
             return nil
         }
@@ -209,23 +223,21 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return nil
-        case .coursePassed:
-            return NSLocalizedString("NoRecommendations", comment: "")
         default:
             return nil
         }
     }
     
     func placeholderStyle() -> PlaceholderStyle {
-        return stepicPlaceholderStyle
+        var style = PlaceholderStyle()
+        style.button.textColor = StepicApplicationsInfo.adaptiveMainColor
+        return style
     }
     
     func placeholderTitle() -> String? {
         switch state {
         case .connectionError:
             return NSLocalizedString("ConnectionErrorText", comment: "")
-        case .coursePassed:
-            return NSLocalizedString("CoursePassed", comment: "")
         default:
             return nil
         }
@@ -237,8 +249,6 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         switch state {
         case .connectionError:
             presenter?.tryAgain()
-        case .coursePassed:
-            presenter?.goToAppStore()
         default:
             return
         }

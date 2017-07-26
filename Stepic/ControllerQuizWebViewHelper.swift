@@ -10,35 +10,17 @@ import Foundation
 
 class ControllerQuizWebViewHelper {
     
-    fileprivate weak var tableView: UITableView?
-    fileprivate weak var view: UIView?
+    fileprivate weak var tableView: FullHeightTableView?
     fileprivate var countClosure : ((Void) -> Int)
-    fileprivate var expectedQuizHeightClosure : ((Void) -> CGFloat)
-    fileprivate var noQuizHeightClosure : ((Void) -> CGFloat)
-    fileprivate weak var delegate : QuizControllerDelegate?
     fileprivate var successBlock : ((Void) -> Void)?
     
     fileprivate var optionsCount : Int {
         return countClosure()
     }
     
-    fileprivate var expectedQuizHeight : CGFloat {
-        return expectedQuizHeightClosure()
-    }
-    
-    fileprivate var heightWithoutQuiz : CGFloat {
-        return noQuizHeightClosure()
-    }
-    
-//    fileprivate var finishedCells : [Int] = []
-    
-    init(tableView: UITableView, view: UIView, countClosure: @escaping ((Void) -> Int), expectedQuizHeightClosure: @escaping ((Void) -> CGFloat), noQuizHeightClosure: @escaping ((Void) -> CGFloat), delegate: QuizControllerDelegate?, success: ((Void) -> Void)? = nil) {
+    init(tableView: FullHeightTableView, countClosure: @escaping ((Void) -> Int), success: ((Void) -> Void)? = nil) {
         self.tableView = tableView
-        self.view = view
         self.countClosure = countClosure
-        self.expectedQuizHeightClosure = expectedQuizHeightClosure
-        self.noQuizHeightClosure = noQuizHeightClosure
-        self.delegate = delegate
         self.successBlock = success
     }
     
@@ -47,7 +29,6 @@ class ControllerQuizWebViewHelper {
     }
     
     func updateChoicesHeights() {
-//        finishedCells = []
         initHeightUpdateBlocks()
         self.tableView?.reloadData()
         performHeightUpdates()
@@ -57,8 +38,8 @@ class ControllerQuizWebViewHelper {
         cellHeightUpdateBlocks = []
         for _ in 0 ..< optionsCount {
             cellHeightUpdateBlocks += [{
-                return 1
-                }]
+                return 0
+            }]
         }
     }
     
@@ -70,31 +51,19 @@ class ControllerQuizWebViewHelper {
     fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
         
         if Double(count) * reloadTimeStandardInterval > reloadTimeout {
-//            UIThread.performUI{
-//                self.view.layoutIfNeeded()
                 self.successBlock?()
-//            }
             return
         }
         
         if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
-//            UIThread.performUI{
-//                self.view.layoutIfNeeded()
                 self.successBlock?()
-//            }
-            return 
+            return
         }
         
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
             if self?.countHeights() == true {
-//                UIThread.performUI{
-                    self?.tableView?.reloadData() 
-                    if let expectedHeight = self?.expectedQuizHeight, 
-                        let noQuizHeight = self?.heightWithoutQuiz {
-                        print("needs height update called from controllerwebviewhelper")
-                    }
-//                }
+                self?.tableView?.reloadData()
                 self?.reloadWithCount(count + 1, noReloadCount: 0)
             } else {
                 self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
@@ -112,16 +81,8 @@ class ControllerQuizWebViewHelper {
         for updateBlock in cellHeightUpdateBlocks {
             let h = updateBlock()
             if abs(cellHeights[index] - h) > 1 { 
-                //                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
                 cellHeights[index] = h
                 didChangeHeight = true
-//                if let id = finishedCells.index(of: index) {
-//                    finishedCells.remove(at: id)
-//                }
-            } else {
-//                if finishedCells.index(of: index) != nil {
-//                    finishedCells += [index]
-//                }
             }
             index += 1
         }

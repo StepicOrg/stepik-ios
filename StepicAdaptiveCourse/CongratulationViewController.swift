@@ -23,6 +23,18 @@ class CongratulationViewController: UIViewController {
                 return String(format: NSLocalizedString("NewLevelCongratulationShareText", comment: ""), "\(level)", "\(CongratulationViewController.shareAppName)")
             }
         }
+        var analyticsKey: String {
+            switch self {
+            case .level(_):
+                return AnalyticsEvents.Adaptive.Achievement.level
+            }
+        }
+        var analyticsParameters: [String: Any]? {
+            switch self {
+            case .level(let level):
+                return ["level": level]
+            }
+        }
         
         case level(level: Int)
     }
@@ -42,8 +54,10 @@ class CongratulationViewController: UIViewController {
             return
         }
         
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Achievement.shareClicked)
         let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.popoverPresentationController?.sourceView = shareButton
         present(activityVC, animated: true)
     }
     
@@ -56,6 +70,10 @@ class CongratulationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        colorize()
+
+        AnalyticsReporter.reportEvent(congratulationType.analyticsKey, parameters: congratulationType.analyticsParameters)
+        
         localize()
         textLabel.text = congratulationType.congratulationText
     }
@@ -65,4 +83,8 @@ class CongratulationViewController: UIViewController {
         continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 
+    fileprivate func colorize() {
+        continueButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        shareButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
+    }
 }

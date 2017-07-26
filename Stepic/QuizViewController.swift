@@ -40,8 +40,6 @@ class QuizViewController: UIViewController {
                 isSubmitButtonHidden = false
             } else {
                 sendButton.isEnabled = false
-//                sendButton.setTitle("No submissions left", for: .normal)
-//                isSubmitButtonHidden = true
             }
             submissionsLeft = left
         }
@@ -170,10 +168,6 @@ class QuizViewController: UIViewController {
         }
     }
     
-    var heightWithoutQuiz : CGFloat {
-        return 40 + sendButtonHeight.constant + statusViewHeight.constant + hintHeight.constant + peerReviewHeight.constant
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
@@ -210,12 +204,7 @@ class QuizViewController: UIViewController {
     //Override this in subclass
     func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
     }
-    
-    //Override this in subclass
-    var expectedQuizHeight : CGFloat {
-        return 0
-    }
-    
+        
     var needPeerReview : Bool {
         return stepUrl != nil
     }
@@ -262,7 +251,6 @@ class QuizViewController: UIViewController {
                         s.statusImageView.image = nil
                         s.buttonStateSubmit = true
                         s.view.backgroundColor = UIColor.white
-//                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
                         s.hintHeightUpdateBlock = nil
@@ -405,12 +393,6 @@ class QuizViewController: UIViewController {
         delay(reloadTimeStandardInterval * Double(count), closure: {
             [weak self] in
             if self?.countHeight() == true {
-                DispatchQueue.main.async {
-                    [weak self] in
-                    if let expectedHeight = self?.expectedQuizHeight, 
-                        let noQuizHeight = self?.heightWithoutQuiz {
-                    }
-                }
                 self?.reloadWithCount(count + 1, noReloadCount: 0)
             } else {
                 self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
@@ -702,11 +684,6 @@ class QuizViewController: UIViewController {
     
     
     func checkCorrect() {
-        
-        if StepicApplicationsInfo.isAdaptive {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.correctAnswer)
-        }
-        
         if RoutingManager.rate.submittedCorrect() {
             Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
             return

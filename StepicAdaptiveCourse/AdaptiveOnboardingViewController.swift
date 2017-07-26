@@ -89,6 +89,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 requiredActions = cardData.requiredActions
                 
                 let webview = UIWebView()
+                webview.isOpaque = false
                 webview.backgroundColor = UIColor.clear
                 card?.addContentSubview(webview)
                 
@@ -100,6 +101,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 card?.controlButton.setTitle(cardData.buttonTitle, for: .normal)
                 card?.controlButton.isHidden = cardData.isButtonHidden
             } else {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.onboardingFinished)
                 presenter?.finishOnboarding()
             }
             return card!
