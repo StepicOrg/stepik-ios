@@ -33,6 +33,10 @@ class FindCoursesViewController: CoursesViewController {
         emptyDatasetState = .refreshing
     }
     
+    override func didSetCourses() {
+        tableView.tableHeaderView = signInView
+    }
+    
     var topConstraint : NSLayoutConstraint?
     
     override func viewDidLoad() {
@@ -77,7 +81,7 @@ class FindCoursesViewController: CoursesViewController {
     }
     
     fileprivate var signInView: UIView? {
-        guard !AuthInfo.shared.isAuthorized else {
+        guard !AuthInfo.shared.isAuthorized && courses.count > 0 else {
             return nil
         }
         
