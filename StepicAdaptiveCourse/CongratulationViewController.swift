@@ -57,6 +57,7 @@ class CongratulationViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Achievement.shareClicked)
         let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.popoverPresentationController?.sourceView = shareButton
         present(activityVC, animated: true)
     }
     
