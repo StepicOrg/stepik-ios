@@ -11,7 +11,7 @@ import Foundation
 class RateAppManager {
     fileprivate let defaults = UserDefaults.standard
     
-    fileprivate let correctSubmissionsThreshold = 4
+    fileprivate let correctSubmissionsThreshold = StepicApplicationsInfo.RateApp.correctSubmissionsThreshold 
     
     fileprivate let showRateLaterPressedDateKey = "showRateLaterPressedDateKey"
     

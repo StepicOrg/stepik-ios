@@ -17,13 +17,13 @@ class CodeQuizViewController: QuizViewController {
     var codeTextView: UITextView = UITextView()
     
     let toolbarHeight : CGFloat = 44
-    let codeTextViewHeight : CGFloat = 180
     let limitsLabelHeight : CGFloat = 40
     
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
     
     var highlightr : Highlightr!
     let textStorage = CodeAttributedString()
+    let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
     
     let playgroundManager = CodePlaygroundManager()
     var currentCode : String = "" {
@@ -41,6 +41,30 @@ class CodeQuizViewController: QuizViewController {
     
     var tabSize: Int = 0
     
+    fileprivate func setupAccessoryView(editable: Bool) {
+        if editable {
+            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
+                [weak self] in
+                guard let s = self else { return }
+                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
+                }, insertStringAction: {
+                    [weak self]
+                    symbols in
+                    guard let s = self else { return }
+                    s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
+                    s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
+                    s.currentCode = s.codeTextView.text
+                }, hideKeyboardAction: {
+                    [weak self] in
+                    guard let s = self else { return }
+                    s.codeTextView.resignFirstResponder()
+            })
+        } else {
+            codeTextView.inputAccessoryView = nil
+        }
+        codeTextView.reloadInputViews()
+    }
+    
     var language: CodeLanguage = CodeLanguage.unsupported {
         didSet {
             textStorage.language = language.highlightr
@@ -54,19 +78,7 @@ class CodeQuizViewController: QuizViewController {
             
             toolbarView.language = language.displayName
             
-            //setting up input accessory view
-            codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(language: language, tabAction: {
-                [weak self] in
-                guard let s = self else { return }
-                s.playgroundManager.insertAtCurrentPosition(symbols: String(repeating: " ", count: s.tabSize), textView: s.codeTextView)
-            }, insertStringAction: {
-                [weak self]
-                symbols in
-                guard let s = self else { return }
-                s.playgroundManager.insertAtCurrentPosition(symbols: symbols, textView: s.codeTextView)
-                s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
-                s.currentCode = s.codeTextView.text
-            })
+            setupAccessoryView(editable: submission?.status != "correct")
             
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
@@ -95,7 +107,7 @@ class CodeQuizViewController: QuizViewController {
     }
     
     override var expectedQuizHeight : CGFloat {
-        return toolbarHeight + codeTextViewHeight + limitsLabelHeight + 16
+        return toolbarHeight + size.elements.editor.realSizes.editorHeight + limitsLabelHeight + 16
     }
     
     fileprivate func setupConstraints() {
@@ -111,7 +123,7 @@ class CodeQuizViewController: QuizViewController {
         toolbarView.constrainHeight("\(toolbarHeight)")
         codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
         codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
-        codeTextView.constrainHeight("\(codeTextViewHeight)")
+        codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
     }
     
     fileprivate func setLimits(time: Double, memory: Double) {
@@ -143,8 +155,10 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
+        let theme = highlightr.theme!
+        theme.setCodeFont(UIFont(name: "Courier", size: size.elements.editor.realSizes.fontSize)!)
+        highlightr.theme = theme
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
-
         setupConstraints()
         
         toolbarView.delegate = self
@@ -199,7 +213,6 @@ class CodeQuizViewController: QuizViewController {
         }
 
         codeTextView.isEditable = enabled
-        toolbarView.fullscreenButton.isEnabled = enabled
         toolbarView.resetButton.isEnabled = enabled
         if options.languages.count > 1 {
             toolbarView.languageButton.isEnabled = enabled
@@ -213,6 +226,7 @@ class CodeQuizViewController: QuizViewController {
         
         if submission?.status == "correct" {
             setQuizControls(enabled: false)
+            setupAccessoryView(editable: false)
         } else {
             setQuizControls(enabled: true)
         }
@@ -278,6 +292,9 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         
         let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
         fullscreen.options = options
+        if submission?.status == "correct" {
+            fullscreen.isSolved = true
+        }
         fullscreen.language = language
         fullscreen.onDismissBlock = {
             [weak self]
@@ -297,16 +314,25 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             return
         }
         
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
-        
-        if let userTemplate = options.template(language: language, userGenerated: true) {
-            CoreDataHelper.instance.deleteFromStore(userTemplate)
-        }
-        if let template = options.template(language: language, userGenerated: false) {
-            codeTextView.text = template.templateString
-            currentCode = template.templateString
-        }
-        CoreDataHelper.instance.save()
+        let alert = UIAlertController(title: nil, message: NSLocalizedString("ResetAlertDescription", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: {
+            [weak self]
+            action in
+            guard let s = self else { return }
+            
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
+            
+            if let userTemplate = options.template(language: s.language, userGenerated: true) {
+                CoreDataHelper.instance.deleteFromStore(userTemplate)
+            }
+            if let template = options.template(language: s.language, userGenerated: false) {
+                s.codeTextView.text = template.templateString
+                s.currentCode = template.templateString
+            }
+            CoreDataHelper.instance.save()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -330,5 +356,9 @@ extension CodeQuizViewController: CodeSuggestionDelegate {
         playgroundManager.insertAtCurrentPosition(symbols: suggestion.substring(from: suggestion.index(suggestion.startIndex, offsetBy: prefix.characters.count)), textView: codeTextView)
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
+    }
+    
+    var suggestionsSize: CodeSuggestionsSize {
+        return self.size.elements.suggestions
     }
 }

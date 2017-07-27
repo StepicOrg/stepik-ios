@@ -38,6 +38,10 @@ class AdaptiveStepPresenter {
         self.view = view
     }
     
+    deinit {
+        print("deinit AdaptiveStepPresenter")
+    }
+    
     func refreshStep() {
         // Set up problem
         view?.updateProblem(with: step.block.text ?? "")
@@ -51,6 +55,7 @@ class AdaptiveStepPresenter {
         }
         quizViewController.step = step
         quizViewController.delegate = self
+        quizViewController.needNewAttempt = true
         view?.updateQuiz(with: quizViewController.view)
         
         quizViewController.isSubmitButtonHidden = true

@@ -7,29 +7,36 @@
 //
 
 import Foundation
-import RFKeyboardToolbar
 
 class InputAccessoryBuilder {
-    static func buildAccessoryView(language: CodeLanguage, tabAction: @escaping () -> (), insertStringAction: @escaping (String) -> ()) -> UIView {
+    
+    static func buildAccessoryView(size: CodeInputAccessorySize, language: CodeLanguage, tabAction: @escaping () -> (), insertStringAction: @escaping (String) -> (), hideKeyboardAction: @escaping () -> ()) -> UIView {
         let symbols = CodeSnippetSymbols.snippets(language: language)
         
-        var buttons : [RFToolbarButton] = []
+        var buttons : [CodeInputAccessoryButtonData] = []
         
-        let tabButton = RFToolbarButton(title: "Tab", andEventHandler: { 
+        let tabButton = CodeInputAccessoryButtonData(title: "Tab", action: {
             tabAction()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language.rawValue, "symbol": "Tab"])
-        }, for: UIControlEvents.touchUpInside)!
-        
+        })
+    
         buttons += [tabButton]
         
         for symbol in symbols {
-            let symButton = RFToolbarButton(title: symbol, andEventHandler: {
+            let symButton = CodeInputAccessoryButtonData(title: symbol, action: {
                 insertStringAction(symbol)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language.rawValue, "symbol": symbol])
-            }, for: UIControlEvents.touchUpInside)!
+            })
             buttons += [symButton]
         }
         
-        return RFKeyboardToolbar(buttons: buttons)
+        let viewSize = CGSize(width: UIScreen.main.bounds.size.width, height: size.realSizes.viewHeight)
+        let frame = CGRect(origin: CGPoint.zero, size: viewSize)
+        let accessoryView = CodeInputAccessoryView(frame: frame, buttons: buttons, size: size, hideKeyboardAction: {
+            hideKeyboardAction()
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.hideKeyboard)
+        })
+        return accessoryView
     }
+
 }

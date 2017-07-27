@@ -9,15 +9,24 @@
 import UIKit
 
 class StepReversedCardView: UIView {
-
+    
+    var white: UIView?
+    
     override func draw(_ rect: CGRect) {
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor(hex: 0xCCCCCC).cgColor
+        super.draw(rect)
+        
+        white = UIView(frame: bounds)
+        backgroundColor = .white
+        if white != nil {
+            addSubview(white!)
+        }
     }
     
     override func layoutSubviews() {
-        if let bgImage = UIImage(named: "stepic-pattern-grey") {
-            self.backgroundColor = UIColor(patternImage: bgImage)
+        super.layoutSubviews()
+        
+        if let whiteView = white {
+            whiteView.backgroundColor = UIColor(patternImage: Images.patterns.gray)
         }
     }
 }
