@@ -493,6 +493,10 @@ class AdaptiveStepsPresenter {
                             let newRating = curRating + curStreak
                             self?.rating = RatingHelper.incrementRating(curStreak)
                             
+                            // Update stats
+                            StatsHelper.incrementRating(curStreak)
+                            StatsHelper.updateMaxStreak(with: curStreak)
+                            
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
                                 self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
                             }

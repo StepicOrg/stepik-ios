@@ -880,6 +880,7 @@
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
 		2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
 		2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */; };
+		2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsHelper.swift */; };
 		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
@@ -1863,6 +1864,7 @@
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
+		2C733C391F29E090000E7FAF /* StatsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
@@ -3501,6 +3503,7 @@
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */,
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
+				2C733C391F29E090000E7FAF /* StatsHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -5312,6 +5315,7 @@
 				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
+				2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
