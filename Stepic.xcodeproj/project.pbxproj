@@ -880,6 +880,7 @@
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
 		2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
 		2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */; };
+		2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsHelper.swift */; };
 		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
@@ -889,6 +890,16 @@
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C071F1E519B00FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
+		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
+		2CD846401F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
+		2CD846411F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
+		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
+		2CD846481F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
+		2CD846491F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
+		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		2CD8464C1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
 		2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5D1F14C89900CD0A4C /* icon.png */; };
@@ -1853,6 +1864,7 @@
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
+		2C733C391F29E090000E7FAF /* StatsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
@@ -1862,6 +1874,10 @@
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CBC4C071F1E519B00FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
+		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
 		2CFB1C5D1F14C89900CD0A4C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = OnboardingContent/icon.png; sourceTree = "<group>"; };
@@ -2169,6 +2185,7 @@
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2CD8463D1F25F7AF00E8153C /* Profile */,
 				0846B1131EDDF05F00D64D77 /* CodeTemplates */,
 				0846B10A1EDDEE7100D64D77 /* CodeLimit */,
 				0846B1011EDDECEC00D64D77 /* StepOptions */,
@@ -2547,6 +2564,7 @@
 				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
 				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
+				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -3484,6 +3502,8 @@
 			children = (
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */,
+				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
+				2C733C391F29E090000E7FAF /* StatsHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3532,6 +3552,15 @@
 				8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */,
 			);
 			name = AdaptiveOnboarding;
+			sourceTree = "<group>";
+		};
+		2CD8463D1F25F7AF00E8153C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2CD8463E1F25F7F300E8153C /* Profile.swift */,
+				2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
@@ -4460,6 +4489,7 @@
 				08D120771C937B2200A54ABC /* GlobalFunctions.swift in Sources */,
 				08D120791C937B2200A54ABC /* AuthManager.swift in Sources */,
 				0895A13C1E43836B00FE22DD /* FillBlanksReply.swift in Sources */,
+				2CD846481F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */,
@@ -4518,6 +4548,7 @@
 				080C5E781EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				0800B8231D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
+				2CD8464C1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
 				08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
@@ -4584,6 +4615,7 @@
 				0899842D1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
 				0899842A1ECDE188005C0B27 /* LessonViewController.swift in Sources */,
 				08AF59E91E6D9BE800423EFF /* RGTabView.swift in Sources */,
+				2CD846401F25F7F300E8153C /* Profile.swift in Sources */,
 				08F4CB291CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */,
 				08D120A71C937B2200A54ABC /* WebControllerManager.swift in Sources */,
 				083540651CE5FBA100BDFEA5 /* NotificationType.swift in Sources */,
@@ -4903,6 +4935,7 @@
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
+				2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */,
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
@@ -4945,6 +4978,7 @@
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
+				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				085E9E751F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
@@ -5120,6 +5154,7 @@
 				084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
+				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
@@ -5173,6 +5208,7 @@
 				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
 				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
+				2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */,
 				860BC3451EAA1E520058F440 /* CertificatesAPI.swift in Sources */,
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
@@ -5211,6 +5247,7 @@
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
+				2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				0846B1091EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
@@ -5278,6 +5315,7 @@
 				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
+				2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
@@ -5285,6 +5323,7 @@
 				864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */,
 				864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */,
 				864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */,
+				2CD846411F25F7F300E8153C /* Profile.swift in Sources */,
 				864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
@@ -5513,6 +5552,7 @@
 				864D672C1E83DE03001E8D9E /* StringExtensions.swift in Sources */,
 				864D672D1E83DE03001E8D9E /* UIViewExtensions.swift in Sources */,
 				864D672E1E83DE03001E8D9E /* UIImageExtension.swift in Sources */,
+				2CD846491F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				864D67301E83DE03001E8D9E /* UIAppearance+Swift.m in Sources */,
 				0846B1051EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				864D67311E83DE03001E8D9E /* NSAttributedStringExtensions.swift in Sources */,
@@ -5998,7 +6038,8 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Karpov (X767B24B99)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Karpov (X767B24B99)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
@@ -6006,7 +6047,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "feb35168-0915-43f9-b51b-1acb80437da0";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.stepik.ios.adaptive.1838";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
@@ -6022,15 +6063,16 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
+				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.1838-";
+				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.stepik.ios.adaptive.1838";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

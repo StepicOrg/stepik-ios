@@ -10,7 +10,6 @@ import Foundation
 
 enum AdaptiveStepsViewState {
     case connectionError
-    case coursePassed
     case normal
     case congratulation
 }
@@ -25,8 +24,8 @@ protocol AdaptiveStepsView: class {
     func updateTopCard(cardState: StepCardView.CardState)
     func initCards()
     func updateProgress(for rating: Int)
-    func showCongratulation(for rating: Int, isSpecial: Bool)
-    func showLevelUpCongratulation(level: Int)
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())?)
+    func showLevelUpCongratulation(level: Int, completion: (() -> ())?)
     func presentShareDialog(for link: String)
 }
 
@@ -45,47 +44,38 @@ class AdaptiveStepsPresenter {
     private var progressesAPI: ProgressesAPI?
     private var stepicsAPI: StepicsAPI?
     private var recommendationsAPI: RecommendationsAPI?
+    private var profilesAPI: ProfilesAPI?
     private var unitsAPI: UnitsAPI?
     private var viewsAPI: ViewsAPI?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
     var isRecommendationLoaded = false
-    var isCurrentCardDone = false
     var isOnboardingPassed = false
+    var isContentLoaded = false
+    
+    var canSwipeCard: Bool {
+        return isContentLoaded
+    }
     
     var rating: Int = 0
     var streak: Int = 1
     
-    var lastReaction: Reaction? {
-        didSet {
-            if lastReaction != nil {
-                switch lastReaction! {
-                case .maybeLater:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard)
-                    break
-                case .neverAgain:
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy)
-                    break
-                default:
-                    return
-                }
-            }
-        }
-    }
+    var lastReaction: Reaction?
     
     var course: Course?
     var currentLesson: Lesson?
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.progressesAPI = progressesAPI
         self.stepicsAPI = stepicsAPI
         self.recommendationsAPI = recommendationsAPI
+        self.profilesAPI = profilesAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
         self.view = view
@@ -284,6 +274,12 @@ class AdaptiveStepsPresenter {
         performRequest({
             AuthManager.sharedManager.signUpWith(firstname, lastname: lastname, email: email, password: password, success: {
                 print("new user registered: \(email):\(password)")
+                
+                // Save account to defaults
+                UserDefaults.standard.set("account_email", forKey: email)
+                UserDefaults.standard.set("account_password", forKey: password)
+                UserDefaults.standard.synchronize()
+                
                 success(email, password)
             }, error: { error, registrationErrorInfo in
                 print("user registration failed")
@@ -304,7 +300,9 @@ class AdaptiveStepsPresenter {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     
-                    success()
+                    self.unsubscribeFromMail(user: user) {
+                        success()
+                    }
                 }, error: { error in
                     print("successfully signed in, but could not get user")
                     self.view?.state = .connectionError
@@ -316,6 +314,37 @@ class AdaptiveStepsPresenter {
         }, error: { error in
             print("user log in failed: \(error)")
             self.view?.state = .connectionError
+        })
+    }
+    
+    fileprivate func unsubscribeFromMail(user: User, success: @escaping ((Void) -> Void)) {
+        performRequest({
+            self.profilesAPI?.retrieve(ids: [user.profile], existing: [], refreshMode: .update, success: { profilesImmutable in
+                guard let profile = profilesImmutable.first else {
+                    print("profile not found")
+                    return
+                }
+                
+                profile.subscribedForMail = false
+                self.profilesAPI?.update(profile, success: { updatedProfile in
+                    if updatedProfile.subscribedForMail == false {
+                        print("user unsubscribed from mails")
+                    } else {
+                        // TODO: analytics?
+                        print("failed unsubscribing user from mails")
+                    }
+                }, error: { error in
+                    // TODO: analytics?
+                    print("failed unsubscribing user from mails")
+                })
+            }, error: { (error) -> Void in
+                // TODO: analytics?
+                print("failed unsubscribing user from mails")
+            })
+            success()
+        }, error: { error in
+            print("failed performing API request -> force logout")
+            self.logout()
         })
     }
     
@@ -373,19 +402,30 @@ class AdaptiveStepsPresenter {
         })
     }
     
-    // TODO: new user after logout?
     func logout() {
         AuthInfo.shared.token = nil
         AuthInfo.shared.user = nil
         
         view?.state = .normal
+        isKolodaPresented = false
         
         recommendedLessons = []
         
-        refreshContent()
+        let savedEmail = UserDefaults.standard.string(forKey: "account_email")
+        let savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        print("saved account: \(savedEmail ?? "<empty>");\(savedPassword ?? "<empty>")")
+        
+        if savedEmail != nil && savedPassword != nil {
+            logIn(with: savedEmail!, password: savedPassword!) {
+                self.refreshContent()
+            }
+        } else {
+            refreshContent()
+        }
     }
     
     func updateCard(_ card: StepCardView) -> StepCardView {
+        isContentLoaded = false
         card.delegate = self
         card.cardState = .loading
         
@@ -428,7 +468,41 @@ class AdaptiveStepsPresenter {
                 } else {
                     // Next recommendation -> send reaction before
                     print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
+                    
+                    // Analytics
+                    if let curState = self?.currentStepPresenter?.state,
+                        let reaction = self?.lastReaction {
+                        switch reaction {
+                        case .maybeLater:
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
+                        case .neverAgain:
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
+                        default: break
+                        }
+                    }
+                    
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
+                        // Update rating only after reaction was sent
+                        if (self?.currentStepPresenter?.state ?? .unsolved) == .successful {
+                            guard let curStreak = self?.streak,
+                                let curRating = self?.rating else {
+                                    return
+                            }
+                            
+                            let oldRating = curRating
+                            let newRating = curRating + curStreak
+                            self?.rating = RatingHelper.incrementRating(curStreak)
+                            
+                            // Update stats
+                            StatsHelper.incrementRating(curStreak)
+                            StatsHelper.updateMaxStreak(with: curStreak)
+                            
+                            if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
+                                self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
+                            }
+                            self?.streak = RatingHelper.incrementStreak()
+                        }
+                        
                         self?.getNewRecommendation(for: course, success: successHandler)
                     })
                 }
@@ -436,14 +510,6 @@ class AdaptiveStepsPresenter {
         }
             
         return card
-    }
-    
-    func goToAppStore() {
-        if let link = Bundle.main.infoDictionary?["AppStoreMoreLink"] as? String,
-           let url = URL(string: link),
-            UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
-        }
     }
     
     func tryAgain() {
@@ -473,28 +539,12 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.submit()
             break
         case .wrong:
-            // Drop streak
-            if streak > 1 {
-                streak = RatingHelper.incrementStreak(-streak + 1)
-            }
-            
             currentStepPresenter?.retry()
             break
         case .successful:
             lastReaction = .solved
             view?.swipeCardUp()
-            currentStepPresenter = nil
-            
-            // Update rating and streak
-            let newRating = RatingHelper.incrementRating(streak)
-            
-            if RatingHelper.getLevel(for: rating) != RatingHelper.getLevel(for: newRating) {
-                view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating))
-            }
-            
-            rating = newRating
-            view?.updateProgress(for: rating)
-            streak = RatingHelper.incrementStreak()
+
             break
         }
     }
@@ -510,15 +560,31 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
 
 extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
-        view?.showCongratulation(for: streak, isSpecial: streak > 1)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
+        
+        // Update rating and streak
+        let newRating = rating + streak
+        
+        view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
+            self.view?.updateProgress(for: newRating)
+        })
+        
         view?.updateTopCardControl(stepState: .successful)
     }
     
     func stepSubmissionDidWrong() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.wrongAnswer)
+        
+        // Drop streak
+        if streak > 1 {
+            streak = RatingHelper.incrementStreak(-streak + 1)
+        }
+        
         view?.updateTopCardControl(stepState: .wrong)
     }
     
     func stepSubmissionDidRetry() {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.retry)
         view?.updateTopCardControl(stepState: .unsolved)
     }
     
@@ -527,6 +593,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     }
     
     func contentLoadingDidComplete() {
+        isContentLoaded = true
         view?.updateTopCard(cardState: .normal)
     }
 }
