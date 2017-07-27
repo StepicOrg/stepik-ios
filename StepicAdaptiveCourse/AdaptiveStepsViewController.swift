@@ -64,6 +64,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        levelProgress.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -252,5 +254,11 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         default:
             return
         }
+    }
+}
+
+extension AdaptiveStepsViewController: RatingProgressViewDelegate {
+    func onClick() {
+        print("rating bar clicked")
     }
 }
