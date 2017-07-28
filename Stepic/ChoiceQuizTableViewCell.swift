@@ -8,18 +8,22 @@
 
 import UIKit
 import BEMCheckBox
+import FLKAutoLayout
 
 class ChoiceQuizTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var checkBox: BEMCheckBox!
     
-    var choiceLabel: UILabel! = UILabel()
-    var choiceWebView: UIWebView! = UIWebView()
+    var choiceLabel: UILabel?
+    var choiceWebView: FullHeightWebView?
     
-    var webViewHelper : CellWebViewHelper!
+    var webViewHelper : CellWebViewHelper?
 
     func initLabel() {
+        guard choiceLabel == nil else { return }
+        choiceLabel = UILabel()
+        guard let choiceLabel = choiceLabel else { return }
         choiceLabel.numberOfLines = 0
         choiceLabel.font = UIFont(name: "ArialMT", size: 16)
         choiceLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
@@ -32,6 +36,9 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     }
 
     func initWebView() {
+        guard choiceWebView == nil else { return }
+        choiceWebView = FullHeightWebView()
+        guard let choiceWebView = choiceWebView else { return }
         textContainerView.addSubview(choiceWebView)
         choiceWebView.align(to: textContainerView)
         webViewHelper = CellWebViewHelper(webView: choiceWebView, heightWithoutWebView: 17)
@@ -43,15 +50,16 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         checkBox.onAnimationType = .fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clear
-        
-        initLabel()
-        initWebView()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        choiceWebView.isHidden = true
-        choiceLabel.isHidden = true
+        choiceWebView?.isHidden = true
+//        choiceWebView?.removeFromSuperview()
+//        choiceWebView = nil
+        choiceLabel?.isHidden = true
+//        choiceLabel?.removeFromSuperview()
+//        choiceLabel = nil
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,21 +67,30 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     }
 }
 
-extension ChoiceQuizTableViewCell : TextHeightDependentCellProtocol {
+extension ChoiceQuizTableViewCell { //: TextHeightDependentCellProtocol {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(_ text: String) -> ((Void) -> Int) {
+    func setHTMLText(_ text: String, finishedBlock: ((CGFloat) -> Void)? = nil){
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
-            choiceWebView.isHidden = false
-            return webViewHelper.setTextWithTeX(text)
-        } else {
-            choiceLabel.isHidden = false
-            choiceLabel.setTextWithHTMLString(text)
-            let w = textContainerView.bounds.width 
-            return {
-                return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 16))) + 17
-          
+            initWebView()
+            choiceWebView?.isHidden = false
+            webViewHelper?.mathJaxFinishedBlock = {
+                [weak self] in
+                self?.layoutIfNeeded()
+                if let webView = self?.choiceWebView {
+                    webView.invalidateIntrinsicContentSize()
+                    finishedBlock?(17 + webView.contentHeight)
+                }
             }
+            _ = webViewHelper?.setTextWithTeX(text)
+        } else {
+            initLabel()
+            choiceLabel?.isHidden = false
+            choiceLabel?.setTextWithHTMLString(text)
+            let w = UIScreen.main.bounds.width - 52
+//            let w = textContainerView.bounds.width - 16
+            let height = max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w)) + 17
+            finishedBlock?(height)
         }
     }
 }

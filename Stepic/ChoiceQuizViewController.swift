@@ -15,9 +15,10 @@ class ChoiceQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
     
-    var webViewHelper : ControllerQuizWebViewHelper?
-    
     var latexSupportNeeded : Bool = false
+    var cellHeights: [CGFloat?] = []
+    
+    var didReload: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +33,6 @@ class ChoiceQuizViewController: QuizViewController {
         
         tableView.register(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
         tableView.register(UINib(nibName: "TextChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "TextChoiceQuizTableViewCell")
-
-        webViewHelper = ControllerQuizWebViewHelper(tableView: tableView, countClosure: {
-            [weak self] in
-            return self?.optionsCount ?? 0
-        })
     }
     
     fileprivate func hasTagsInDataset(dataset: ChoiceDataset) -> Bool {
@@ -67,9 +63,9 @@ class ChoiceQuizViewController: QuizViewController {
 
         self.choices = [Bool](repeating: false, count: optionsCount)
         latexSupportNeeded = hasTagsInDataset(dataset: dataset)
+        
         if latexSupportNeeded {
-            webViewHelper?.initChoicesHeights()
-            webViewHelper?.updateChoicesHeights()
+            self.cellHeights = Array(repeating: nil, count: optionsCount)
         } else {
             tableView.reloadData()
         }
@@ -95,17 +91,21 @@ class ChoiceQuizViewController: QuizViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         if latexSupportNeeded {
-            webViewHelper?.initChoicesHeights()
-            for row in 0 ..< self.tableView(self.tableView, numberOfRowsInSection: 0) {
-                if let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? ChoiceQuizTableViewCell {
-                    cell.choiceWebView.reload()
-                }
-            }
-            webViewHelper?.updateChoicesHeights()
+            self.cellHeights = Array(repeating: nil, count: optionsCount)
+            didReload = false
+            tableView.reloadData()
         } else {
             tableView.beginUpdates()
             tableView.endUpdates()
         }
+    }
+    
+    var isSubview: Bool = false
+    func updatesEnded() {
+        guard isSubview == false else { return }
+        self.containerView.addSubview(tableView)
+        tableView.align(to: self.containerView)
+        isSubview = true
     }
     
 }
@@ -117,7 +117,11 @@ extension ChoiceQuizViewController : UITableViewDelegate {
             return 0
         }
         if latexSupportNeeded {
-            return CGFloat(webViewHelper?.cellHeights[(indexPath as NSIndexPath).row] ?? 0)
+            if let height = cellHeights[indexPath.row] {
+                return height
+            } else {
+                return 0.5
+            }
         } else {
             return CGFloat(TextChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.view.bounds.width))
         }
@@ -199,7 +203,30 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         }
         if latexSupportNeeded {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
-            webViewHelper?.cellHeightUpdateBlocks[(indexPath as NSIndexPath).row] = cell.setHTMLText(dataset.options[(indexPath as NSIndexPath).row])
+            _ = cell.setHTMLText(dataset.options[(indexPath as NSIndexPath).row], finishedBlock: {
+                [weak self]
+                newHeight in
+                
+                guard let s = self else { return }
+                if s.didReload { return }
+                
+                s.cellHeights[indexPath.row] = newHeight
+                var sum: CGFloat = 0
+                for height in s.cellHeights {
+                    if height == nil {
+                        return
+                    } else {
+                        sum += height!
+                    }
+                }
+                UIThread.performUI {
+                    s.didReload = true
+                    s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
+                    s.tableView.beginUpdates()
+                    s.tableView.endUpdates()
+                    s.updatesEnded()
+                }
+            })
             if dataset.isMultipleChoice {
                 cell.checkBox.boxType = .square
             } else {
