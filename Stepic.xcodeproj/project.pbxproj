@@ -870,6 +870,7 @@
 		2C04C1001F160631006B69B3 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1021F160631006B69B3 /* step1.html */; };
 		2C04C1031F160643006B69B3 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
+		2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -886,6 +887,9 @@
 		2C8D08151F1CB77B000E8F32 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step4.html */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
+		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
+		2CB425791F2B3BF600D15D93 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB425771F2B3BF600D15D93 /* ProgressTableViewCell.xib */; };
+		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C071F1E519B00FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
@@ -1858,6 +1862,7 @@
 		2C04C1091F16075A006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step3.html; sourceTree = "<group>"; };
 		2C04C10A1F16075D006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step2.html; sourceTree = "<group>"; };
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
+		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
@@ -1870,6 +1875,10 @@
 		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
+		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
+		2CB425771F2B3BF600D15D93 /* ProgressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTableViewCell.xib; sourceTree = "<group>"; };
+		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CBC4C071F1E519B00FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
@@ -3480,6 +3489,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
 				08E16F201BDBA495004822E1 /* Reachability */,
@@ -3503,6 +3513,15 @@
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
+			isa = PBXGroup;
+			children = (
+				2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */,
+				2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */,
+			);
+			name = AdaptiveStats;
 			sourceTree = "<group>";
 		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
@@ -3549,6 +3568,15 @@
 				8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */,
 			);
 			name = AdaptiveOnboarding;
+			sourceTree = "<group>";
+		};
+		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */,
+				2CB425771F2B3BF600D15D93 /* ProgressTableViewCell.xib */,
+			);
+			name = ProgressTableViewCell;
 			sourceTree = "<group>";
 		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {
@@ -3613,6 +3641,7 @@
 		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C1649651F2A0823002C9F99 /* AdaptiveStats */,
 				2C5F6BA61F20B25100C251D3 /* Congratulation */,
 				2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */,
 				2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */,
@@ -3624,6 +3653,7 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */,
 				866DDDC41EA8060400BAD48E /* CardOverlayView */,
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
@@ -4204,6 +4234,7 @@
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
+				2CB425791F2B3BF600D15D93 /* ProgressTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
@@ -5335,6 +5366,7 @@
 				864D67B41E83E08E001E8D9E /* LaunchViewController.swift in Sources */,
 				864D67B51E83E08E001E8D9E /* SignInTableViewController.swift in Sources */,
 				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
+				2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */,
 				864D67B61E83E08E001E8D9E /* RegistrationViewController.swift in Sources */,
 				864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */,
 				864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */,
@@ -5368,6 +5400,7 @@
 				864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */,
 				864D668F1E83DE03001E8D9E /* HTMLBuilder.swift in Sources */,
 				864D66901E83DE03001E8D9E /* UICustomizer.swift in Sources */,
+				2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */,
 				864D66911E83DE03001E8D9E /* CoreDataHelper.swift in Sources */,
 				864D66921E83DE03001E8D9E /* ConnectionHelper.swift in Sources */,
 				864D66931E83DE03001E8D9E /* Sorter.swift in Sources */,
@@ -5491,6 +5524,7 @@
 				864D66FF1E83DE03001E8D9E /* StepicToken.swift in Sources */,
 				864D67001E83DE03001E8D9E /* AuthInfo.swift in Sources */,
 				08E3A3B91E93C25900E9C2EF /* APIEndpoint.swift in Sources */,
+				2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */,
 				08E3A3BC1E93C35800E9C2EF /* AuthRoutingManager.swift in Sources */,
 				080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				864D67011E83DE03001E8D9E /* Session.swift in Sources */,

@@ -259,6 +259,6 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
 
 extension AdaptiveStepsViewController: RatingProgressViewDelegate {
     func onClick() {
-        print("rating bar clicked")
+        self.performSegue(withIdentifier: "openStats", sender: nil)
     }
 }

@@ -69,4 +69,5 @@ target 'Adaptive 1838' do
     
     pod 'Koloda', '4.0'
     pod 'SDWebImage/GIF'
+    pod 'Charts', '3.0.2'
 end
