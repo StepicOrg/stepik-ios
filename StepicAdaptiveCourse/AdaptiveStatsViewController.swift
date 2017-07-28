@@ -41,7 +41,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         currentWeekXPLabel.text = "\(presenter?.currentWeekXP ?? 0)"
         
         // Load data
-        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: [0, 0, 0, 0, 0, 0, 0]), label: ""))
+        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: presenter?.last7DaysProgress.reversed() ?? []), label: ""))
         let data = LineChartData(dataSet: dataSet)
         progressChart.data = data
         progressChart.data?.highlightEnabled = true

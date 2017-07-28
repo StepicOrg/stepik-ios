@@ -15,13 +15,13 @@ class StatsHelper {
     
     private static let secondsInDay: TimeInterval = 24 * 60 * 60
     
-    private static func dayByDate(_ date: Date) -> Int {
+    static func dayByDate(_ date: Date) -> Int {
         // Day num (01.01.1970 - 0, 02.01.1970 - 1, ...)
         let dayNum = Int(date.timeIntervalSince1970 / secondsInDay)
         return dayNum
     }
     
-    private static func dateByDay(_ day: Int) -> Date {
+    static func dateByDay(_ day: Int) -> Date {
         // 00:00 am target day
         let date = Date(timeIntervalSince1970: secondsInDay * Double(day))
         return date
