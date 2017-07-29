@@ -55,7 +55,7 @@ class ChoiceQuizViewController: QuizViewController {
     }
     
     override func updateQuizAfterAttemptUpdate() {
-        guard let dataset = attempt?.dataset as? ChoiceDataset else {
+        guard let _ = attempt?.dataset as? ChoiceDataset else {
             return
         }
 
@@ -89,14 +89,13 @@ class ChoiceQuizViewController: QuizViewController {
         tableView.reloadData()
     }
     
-    var isSubview: Bool = false
-    func updatesEnded() {
-        guard isSubview == false else { return }
-        self.containerView.addSubview(tableView)
-        tableView.align(to: self.containerView)
-        isSubview = true
-    }
-    
+//    var isSubview: Bool = false
+//    func updatesEnded() {
+//        guard isSubview == false else { return }
+//        self.containerView.addSubview(tableView)
+//        tableView.align(to: self.containerView)
+//        isSubview = true
+//    }
 }
 
 extension ChoiceQuizViewController : UITableViewDelegate {
@@ -143,21 +142,6 @@ extension ChoiceQuizViewController : UITableViewDelegate {
                 }
             }
         }
-        
-        if let cell = tableView.cellForRow(at: indexPath) as? TextChoiceQuizTableViewCell {
-            if let dataset = attempt?.dataset as? ChoiceDataset {
-                if dataset.isMultipleChoice {
-                    choices[indexPath.row] = !cell.checkBox.on
-                    cell.checkBox.setOn(!cell.checkBox.on, animated: true)
-                } else {
-                    setAllCellsOff()
-                    choices = [Bool](repeating: false, count: optionsCount)
-                    choices[indexPath.row] = !cell.checkBox.on
-                    cell.checkBox.setOn(!cell.checkBox.on, animated: true)
-                }
-            }
-        }
-
     }
 }
 
@@ -188,7 +172,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
-        _ = cell.setHTMLText(dataset.options[indexPath.row], width: self.view.bounds.width, finishedBlock: {
+        cell.setHTMLText(dataset.options[indexPath.row], width: self.view.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
             
@@ -209,7 +193,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()
-                s.updatesEnded()
+//                s.updatesEnded()
             }
         })
         

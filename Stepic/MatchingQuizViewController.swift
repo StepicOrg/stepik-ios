@@ -152,22 +152,6 @@ class MatchingQuizViewController: QuizViewController {
     
     var updatingWithReload = false
     
-    fileprivate func updateHelper(webViewHelper: ControllerQuizWebViewHelper, tableView: UITableView, withReload: Bool) {
-        webViewHelper.initChoicesHeights()
-        if withReload {
-            for row in 0 ..< self.tableView(tableView, numberOfRowsInSection: 0) {
-                let c = tableView.cellForRow(at: IndexPath(row: row, section: 0))
-                if let cell = c as? SortingQuizTableViewCell {
-                    cell.optionWebView.reload()
-                }
-            }
-            updatingWithReload = true
-        } else {
-            updatingWithReload = false
-        }
-        webViewHelper.updateChoicesHeights()
-    }
-        
     override func getReply() -> Reply {
         let r = MatchingReply(ordering: optionsPermutation)
         print(r.ordering)
@@ -254,10 +238,10 @@ extension MatchingQuizViewController : UITableViewDataSource {
             if let dataset = attempt?.dataset as? MatchingDataset {
                 switch tableView.tag {
                 case 1:
-                    _ = cell.setHTMLText(dataset.firstValues[(indexPath as NSIndexPath).row])
+                    _ = cell.setHTMLText(dataset.firstValues[(indexPath as NSIndexPath).row], width: self.view.bounds.width / 2, finishedBlock: { _ in })
                 case 2:
                     cell.sortable = true
-                    _ = cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row])
+                    _ = cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row], width: self.view.bounds.width / 2, finishedBlock: { _ in })
                 default:
                     break
                 }
