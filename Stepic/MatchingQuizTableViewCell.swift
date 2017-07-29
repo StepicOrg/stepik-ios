@@ -30,8 +30,8 @@ class MatchingQuizTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
         
-    class func getHeightForText(text: String, sortable: Bool, width w: CGFloat) -> Int {
-        return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - (sortable ? 70 : 24)))) + 17
+    class func getHeightForText(text: String, sortable: Bool, width w: CGFloat) -> CGFloat {
+        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - (sortable ? 70 : 24))) + 17
     }
     
     func setHTMLText(_ text: String) {

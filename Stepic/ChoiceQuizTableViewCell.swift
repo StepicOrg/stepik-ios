@@ -55,11 +55,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         choiceWebView?.isHidden = true
-//        choiceWebView?.removeFromSuperview()
-//        choiceWebView = nil
         choiceLabel?.isHidden = true
-//        choiceLabel?.removeFromSuperview()
-//        choiceLabel = nil
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -88,7 +84,6 @@ extension ChoiceQuizTableViewCell { //: TextHeightDependentCellProtocol {
             choiceLabel?.isHidden = false
             choiceLabel?.setTextWithHTMLString(text)
             let w = UIScreen.main.bounds.width - 52
-//            let w = textContainerView.bounds.width - 16
             let height = max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w)) + 17
             finishedBlock?(height)
         }
