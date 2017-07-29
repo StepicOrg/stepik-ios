@@ -70,23 +70,25 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 extension ChoiceQuizTableViewCell {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(_ text: String, width: CGFloat, finishedBlock: ((CGFloat) -> Void)? = nil){
+    func setHTMLText(_ text: String, width: CGFloat, finishedBlock: ((CGFloat) -> Void)? = nil) {
+        initLabel()
+        choiceLabel?.isHidden = false
+        choiceLabel?.setTextWithHTMLString(text)
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
             initWebView()
-            choiceWebView?.isHidden = false
+            choiceWebView?.isHidden = true
             webViewHelper?.mathJaxFinishedBlock = {
                 [weak self] in
                 self?.layoutIfNeeded()
                 if let webView = self?.choiceWebView {
                     webView.invalidateIntrinsicContentSize()
+                    self?.choiceLabel?.isHidden = true
+                    self?.choiceWebView?.isHidden = false
                     finishedBlock?(17 + webView.contentHeight)
                 }
             }
             _ = webViewHelper?.setTextWithTeX(text)
         } else {
-            initLabel()
-            choiceLabel?.isHidden = false
-            choiceLabel?.setTextWithHTMLString(text)
             let height = max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 52)) + 17
             finishedBlock?(height)
         }
