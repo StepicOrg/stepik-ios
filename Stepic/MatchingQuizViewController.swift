@@ -77,7 +77,6 @@ class MatchingQuizViewController: QuizViewController {
         return false
     }
     
-    var latexSupportNeeded : Bool = false
     var countedNoLatexMaxHeight : CGFloat = 0
     
     fileprivate func countNoLatexMaxHeight(dataset: MatchingDataset) -> CGFloat {
@@ -89,21 +88,17 @@ class MatchingQuizViewController: QuizViewController {
     }
     
     override func updateQuizAfterAttemptUpdate() {
-        guard let dataset = attempt?.dataset as? MatchingDataset else {
+        guard let _ = attempt?.dataset as? MatchingDataset else {
             return
         }
         
         resetOptionsToAttempt()
         
-        latexSupportNeeded = hasTagsInDataset(dataset: dataset)
-        if latexSupportNeeded {
-            self.firstTableView.reloadData()
-            self.secondTableView.reloadData()
-        } else {
-            self.firstTableView.reloadData()
-            self.secondTableView.reloadData()
-            countedNoLatexMaxHeight = countNoLatexMaxHeight(dataset: dataset)
-        }
+        self.firstCellHeights = Array(repeating: nil, count: optionsCount)
+        self.secondCellHeights = Array(repeating: nil, count: optionsCount)
+
+        self.firstTableView.reloadData()
+        self.secondTableView.reloadData()
     }
     
     //TODO: Something strange is happening here, check this
@@ -141,13 +136,8 @@ class MatchingQuizViewController: QuizViewController {
             self.secondTableView.isUserInteractionEnabled = false
         }
         
-        if latexSupportNeeded {
-            self.firstTableView.reloadData()
-            self.secondTableView.reloadData()
-        } else {
-            self.firstTableView.reloadData()
-            self.secondTableView.reloadData()
-        }
+        self.firstTableView.reloadData()
+        self.secondTableView.reloadData()
     }
     
     var updatingWithReload = false
@@ -161,16 +151,12 @@ class MatchingQuizViewController: QuizViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        if latexSupportNeeded {
-            self.firstCellHeights = Array(repeating: nil, count: optionsCount)
-            self.secondCellHeights = Array(repeating: nil, count: optionsCount)
-            firstUpdateFinished = false
-            secondUpdateFinished = false
-            firstTableView.reloadData()
-            secondTableView.reloadData()
-        } else {
-            //TODO: Probably should re-count max height of the dataset
-        }
+        self.firstCellHeights = Array(repeating: nil, count: optionsCount)
+        self.secondCellHeights = Array(repeating: nil, count: optionsCount)
+        firstUpdateFinished = false
+        secondUpdateFinished = false
+        firstTableView.reloadData()
+        secondTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -178,21 +164,37 @@ class MatchingQuizViewController: QuizViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    var maxHeight : CGFloat {
-        if latexSupportNeeded {
-            return max(firstCellHeights.flatMap({return $0}).max() ?? 0, secondCellHeights.flatMap({return $0}).max() ?? 0)
-        } else {
-            return countedNoLatexMaxHeight
+    func maxCellHeight(options: [String], heights: [CGFloat?], sortable: Bool) -> CGFloat {
+        
+        var max : CGFloat = 0
+        
+        for (index, height) in heights.enumerated() {
+            if let h = height {
+                if h > max {
+                    max = h
+                }
+            } else {
+                let h = SortingQuizTableViewCell.getHeightForText(text: options[index], width: self.view.bounds.width / 2, sortable: sortable)
+                if h > max {
+                    max = h
+                }
+            }
         }
+        
+        return max
     }
     
+    var maxHeight : CGFloat {
+        guard let dataset = attempt?.dataset as? MatchingDataset else {
+            return 0
+        }
+        return max(maxCellHeight(options: dataset.firstValues, heights: firstCellHeights, sortable: false), maxCellHeight(options: dataset.secondValues, heights: secondCellHeights, sortable: true))
+    }
 }
 
 extension MatchingQuizViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print("table \(tableView.tag) : HEIGHT for row at \(indexPath) called")
         return maxHeight
     }
     
@@ -217,6 +219,13 @@ extension MatchingQuizViewController : UITableViewDelegate {
 }
 
 extension MatchingQuizViewController : UITableViewDataSource {
+    
+    fileprivate func updateTableHeight(table: UITableView) {
+        table.contentSize = CGSize(width: table.contentSize.width, height: maxHeight * CGFloat(optionsCount))
+        table.beginUpdates()
+        table.endUpdates()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         if attempt != nil {
             return 1
@@ -230,40 +239,66 @@ extension MatchingQuizViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("table \(tableView.tag) : CELL for row at \(indexPath) called")
-        if latexSupportNeeded {
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
-            
-            if let dataset = attempt?.dataset as? MatchingDataset {
-                switch tableView.tag {
-                case 1:
-                    _ = cell.setHTMLText(dataset.firstValues[(indexPath as NSIndexPath).row], width: self.view.bounds.width / 2, finishedBlock: { _ in })
-                case 2:
-                    cell.sortable = true
-                    _ = cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row], width: self.view.bounds.width / 2, finishedBlock: { _ in })
-                default:
-                    break
-                }
-            }
-            
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MatchingQuizTableViewCell", for: indexPath) as! MatchingQuizTableViewCell
-            
-            if let dataset = attempt?.dataset as? MatchingDataset {
-                switch tableView.tag {
-                case 1:
-                    cell.setHTMLText(dataset.firstValues[(indexPath as NSIndexPath).row])
-                case 2:
-                    cell.setHTMLText(orderedOptions[(indexPath as NSIndexPath).row])
-                default:
-                    break
-                }
-            }
-            
-            return cell
+        guard let dataset = attempt?.dataset as? MatchingDataset else {
+            return UITableViewCell()
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
+        
+        switch tableView.tag {
+        case 1:
+            cell.setHTMLText(dataset.firstValues[indexPath.row], width: self.view.bounds.width / 2, finishedBlock: {
+                [weak self]
+                newHeight in
+                
+                guard let s = self else { return }
+                if s.firstUpdateFinished { return }
+                
+                s.firstCellHeights[indexPath.row] = newHeight
+                var sum: CGFloat = 0
+                for height in s.firstCellHeights {
+                    if height == nil {
+                        return
+                    } else {
+                        sum += height!
+                    }
+                }
+                UIThread.performUI {
+                    s.firstUpdateFinished = true
+                    s.updateTableHeight(table: s.firstTableView)
+                    s.updateTableHeight(table: s.secondTableView)
+                }
+            })
+        case 2:
+            cell.sortable = true
+            cell.setHTMLText(dataset.secondValues[indexPath.row], width: self.view.bounds.width / 2, finishedBlock: {
+                [weak self]
+                newHeight in
+                
+                guard let s = self else { return }
+                if s.secondUpdateFinished { return }
+                
+                s.secondCellHeights[indexPath.row] = newHeight
+                var sum: CGFloat = 0
+                for height in s.secondCellHeights {
+                    if height == nil {
+                        return
+                    } else {
+                        sum += height!
+                    }
+                }
+                UIThread.performUI {
+                    s.secondUpdateFinished = true
+                    s.updateTableHeight(table: s.secondTableView)
+                    s.updateTableHeight(table: s.firstTableView)
+                }
+            })
+        default:
+            break
+        }
+        
+        return cell
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
