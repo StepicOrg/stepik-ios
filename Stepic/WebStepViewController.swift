@@ -20,8 +20,6 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
-//    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
@@ -351,9 +349,6 @@ class WebStepViewController: UIViewController {
     }
     
     @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
-        //        print(stepUrl)
-        //        print(NSURL(string: stepUrl))
-        
         let url = URL(string: stepUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
@@ -361,7 +356,6 @@ class WebStepViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillLayoutSubviews() {
@@ -380,34 +374,8 @@ class WebStepViewController: UIViewController {
             return
         }
         
-        if needsQuizUpdateAttention {
-            if isCurrentlyUpdatingHeight {
-                print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
-                webViewUpdatingHeight = height
-                return
-            }
-            
-            isCurrentlyUpdatingHeight = true
-        }
         stepWebViewHeight.constant = CGFloat(height)
-        UIView.animate(withDuration: 0.2, animations: { 
-            [weak self] in
-            self?.view.layoutIfNeeded() 
-        }, completion: {
-            [weak self] 
-            completed in
-            if (self?.needsQuizUpdateAttention ?? false) {
-                self?.isCurrentlyUpdatingHeight = false
-                
-                if self?.webViewUpdatingHeight == height {
-                    self?.webViewUpdatingHeight = nil
-                }
-
-                if let h = self?.webViewUpdatingHeight {
-                    self?.resetWebViewHeight(h)
-                }
-            }
-        })
+        self.view.layoutIfNeeded()
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
@@ -529,20 +497,8 @@ extension WebStepViewController : UIWebViewDelegate {
         self.reloadWithCount(0)
     }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if isCurrentlyUpdatingHeight && needsQuizUpdateAttention {
-            delay(0.2, closure: {
-                [weak self] in
-                if let s = self {
-                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
-                }
-            })
-            return
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
-    }
-    
-    var needsQuizUpdateAttention: Bool {
-        return step.block.name == "matching"
     }
 }
