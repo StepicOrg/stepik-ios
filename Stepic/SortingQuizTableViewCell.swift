@@ -47,7 +47,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.align(to: textContainerView)
-        webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
+        webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
     
@@ -89,7 +89,7 @@ extension SortingQuizTableViewCell {
                     finishedBlock(17 + webView.contentHeight)
                 }
             }
-            _ = webViewHelper?.setTextWithTeX(text)
+            webViewHelper?.setTextWithTeX(text)
         } else {
             let height = SortingQuizTableViewCell.getHeightForText(text: text, width: width, sortable: self.sortable)
             finishedBlock(height)

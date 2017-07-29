@@ -11,13 +11,11 @@ import Foundation
 class CellWebViewHelper : NSObject {
     
     fileprivate weak var webView : UIWebView?
-    fileprivate var heightWithoutWebView : Int
     
     var mathJaxFinishedBlock : ((Void) -> Void)?
     
-    init(webView: UIWebView, heightWithoutWebView: Int) {
+    init(webView: UIWebView) {
         self.webView = webView
-        self.heightWithoutWebView = heightWithoutWebView
         self.webView?.isOpaque = false
         self.webView?.backgroundColor = UIColor.clear
         self.webView?.isUserInteractionEnabled = false
@@ -31,21 +29,11 @@ class CellWebViewHelper : NSObject {
     }
         
     //Method sets text and returns the method which returns current cell height according to the webview content height
-    func setTextWithTeX(_ text: String, textColorHex : String = "#000000") -> ((Void)->Int) {
+    func setTextWithTeX(_ text: String, textColorHex : String = "#000000")  {
         let scriptsString = "\(Scripts.localTexScript)\(Scripts.mathJaxFinishedScript)"
         let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, addStyle: true, textColorHex: textColorHex)
         webView?.delegate = self
         webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-        return {
-            [weak self] in
-            if let cw = self?.webView {
-                if let h = self?.getContentHeight(cw),
-                    let noWebViewHeight = self?.heightWithoutWebView {
-                    return h + noWebViewHeight
-                }
-            }
-            return 0
-        }        
     }
 
     deinit {

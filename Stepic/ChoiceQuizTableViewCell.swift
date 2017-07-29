@@ -41,7 +41,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.align(to: textContainerView)
-        webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
+        webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
     
@@ -87,7 +87,7 @@ extension ChoiceQuizTableViewCell {
                     finishedBlock(17 + webView.contentHeight)
                 }
             }
-            _ = webViewHelper?.setTextWithTeX(text)
+            webViewHelper?.setTextWithTeX(text)
         } else {
             let height = ChoiceQuizTableViewCell.getHeightForText(text: text, width: width)
             finishedBlock(height)

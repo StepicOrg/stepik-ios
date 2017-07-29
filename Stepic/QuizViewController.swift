@@ -20,7 +20,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var hintHeight: NSLayoutConstraint!
     @IBOutlet weak var hintView: UIView!
-    @IBOutlet weak var hintWebView: UIWebView!
+    @IBOutlet weak var hintWebView: FullHeightWebView!
     @IBOutlet weak var hintTextView: UITextView!
     
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
@@ -225,8 +225,6 @@ class QuizViewController: UIViewController {
     
     fileprivate var didGetErrorWhileSendingSubmission = false
     
-    fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
-    
     fileprivate func setStatusElements(visible: Bool) {
         statusLabel.isHidden = !visible
         statusImageView.isHidden = !visible
@@ -253,7 +251,6 @@ class QuizViewController: UIViewController {
                         s.view.backgroundColor = UIColor.white
                         s.statusViewHeight.constant = 0
                         s.hintHeight.constant = 0
-                        s.hintHeightUpdateBlock = nil
                         s.hintView.isHidden = true
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
@@ -273,8 +270,17 @@ class QuizViewController: UIViewController {
                             if hint != "" {
                                 s.hintView.isHidden = false
                                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
-                                    s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
-                                    s.performHeightUpdates()
+                                    s.hintHeightWebViewHelper?.mathJaxFinishedBlock = {
+                                        [weak self] in
+                                        if let webView = self?.hintWebView {
+                                            webView.invalidateIntrinsicContentSize()
+                                            UIThread.performUI {
+                                                [weak self] in
+                                                self?.hintHeight.constant = webView.contentHeight
+                                            }
+                                        }
+                                    }
+                                    s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
                                     s.hintTextView.isHidden = true
                                     s.hintWebView.isHidden = false
                                 } else {
@@ -378,53 +384,13 @@ class QuizViewController: UIViewController {
         self.view.setNeedsLayout()
     }
     
-    //Measured in seconds
-    let reloadTimeStandardInterval = 0.5
-    let reloadTimeout = 5.0
-    let noReloadTimeout = 1.0
-    
-    fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
-        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
-            return
-        }
-        if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
-            return 
-        }
-        delay(reloadTimeStandardInterval * Double(count), closure: {
-            [weak self] in
-            if self?.countHeight() == true {
-                self?.reloadWithCount(count + 1, noReloadCount: 0)
-            } else {
-                self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
-            }
-            })  
-    }    
-    
-    fileprivate func countHeight() -> Bool {
-        var index = 0
-        var didChangeHeight = false
-        if let h = hintHeightUpdateBlock?() {
-            if abs(hintHeight.constant - CGFloat(h)) > 1 { 
-                //                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
-                hintHeight.constant = CGFloat(h)
-                didChangeHeight = true
-            }
-            index += 1
-        }
-        return didChangeHeight
-    }
-    
-    fileprivate func performHeightUpdates() {
-        self.reloadWithCount(0, noReloadCount: 0)
-    }
-    
     var hintHeightWebViewHelper : CellWebViewHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
-        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
+        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView)
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true
         self.hintWebView.delegate = self
