@@ -191,10 +191,6 @@
 		083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
 		083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
 		083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */; };
-		083879771E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
-		083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
-		083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
-		0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
 		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
@@ -246,8 +242,6 @@
 		084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
-		0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */; };
-		0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */; };
 		0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1041EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1051EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
@@ -277,8 +271,6 @@
 		084F7AAE1E775A210088368A /* LastStepsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AAC1E775A210088368A /* LastStepsAPI.swift */; };
 		085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
 		085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
-		085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
-		085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
 		0857AA211BECDA640044B505 /* VideoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0857AA201BECDA640044B505 /* VideoDownload.swift */; };
 		0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		0858B70A1CFF271200459A6A /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
@@ -387,10 +379,6 @@
 		08758A9D1CDB99CF00159233 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
-		087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
-		087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
-		087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
-		087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
 		087D96B91EBB7C7700059408 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087D96B81EBB7C7700059408 /* Tokens.plist */; };
 		087D96BB1EBB7F5500059408 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
 		087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
@@ -1163,13 +1151,11 @@
 		864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
 		864D67741E83E08E001E8D9E /* CellWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */; };
-		864D67751E83E08E001E8D9E /* ControllerQuizWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */; };
 		864D67761E83E08E001E8D9E /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		864D67771E83E08E001E8D9E /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		864D67791E83E08E001E8D9E /* UnknownTypeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555621C4FE30400C877E8 /* UnknownTypeQuizViewController.swift */; };
 		864D677B1E83E08E001E8D9E /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		864D677C1E83E08E001E8D9E /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
-		864D677E1E83E08E001E8D9E /* TextHeightDependentCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */; };
 		864D677F1E83E08E001E8D9E /* StringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859B1C5786DE000165AA /* StringQuizViewController.swift */; };
 		864D67801E83E08E001E8D9E /* NumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A11C57987B000165AA /* NumberQuizViewController.swift */; };
 		864D67811E83E08E001E8D9E /* FreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A61C57B023000165AA /* FreeAnswerQuizViewController.swift */; };
@@ -1177,7 +1163,6 @@
 		864D67831E83E08E001E8D9E /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
 		864D67841E83E08E001E8D9E /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
 		864D67861E83E08E001E8D9E /* MatchingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */; };
-		864D67871E83E08E001E8D9E /* MatchingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */; };
 		864D67891E83E08E001E8D9E /* FillBlanksTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AEA61E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift */; };
 		864D678B1E83E08E001E8D9E /* FillBlanksInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE9F1E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift */; };
 		864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */; };
@@ -1238,8 +1223,6 @@
 		86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */; };
 		86795EF71E85325000A985C2 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
-		86830FB61EB4A2F200CA0E42 /* TextChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */; };
-		86830FB71EB4A2FD00CA0E42 /* TextChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */; };
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
@@ -1270,7 +1253,6 @@
 		86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
-		86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */; };
 		86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
 		86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
 		86AE94851E84511A00F67691 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
@@ -1511,8 +1493,6 @@
 		0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesContainer.swift; sourceTree = "<group>"; };
 		083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesContainer.swift; sourceTree = "<group>"; };
 		083749361DE5C7DC00144C14 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
-		083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingQuizTableViewCell.swift; sourceTree = "<group>"; };
-		083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchingQuizTableViewCell.xib; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
 		083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCoursesDisplayingHelper.swift; sourceTree = "<group>"; };
 		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
@@ -1552,7 +1532,6 @@
 		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
-		0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextHeightDependentCellProtocol.swift; sourceTree = "<group>"; };
 		0846B1021EDDED1000D64D77 /* StepOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepOptions.swift; sourceTree = "<group>"; };
 		0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StepOptions+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLimit.swift; sourceTree = "<group>"; };
@@ -1568,7 +1547,6 @@
 		084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LastStep+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084F7AAC1E775A210088368A /* LastStepsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastStepsAPI.swift; sourceTree = "<group>"; };
 		085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWebViewHelper.swift; sourceTree = "<group>"; };
-		085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerQuizWebViewHelper.swift; sourceTree = "<group>"; };
 		0857AA201BECDA640044B505 /* VideoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownload.swift; sourceTree = "<group>"; };
 		0858B7081CFF271200459A6A /* TagDetectionUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetectionUtil.swift; sourceTree = "<group>"; };
 		0859AE941E4F19B600A0D206 /* FillBlanksQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksQuizViewController.swift; sourceTree = "<group>"; };
@@ -1635,8 +1613,6 @@
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		087387D91BB9B768003CFAD1 /* ErrorEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
 		087854F41DF6EE0D00368A50 /* wysiwyg.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = wysiwyg.css; sourceTree = "<group>"; };
-		087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
-		087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		087D96B81EBB7C7700059408 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
 		087D96BA1EBB7F5500059408 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLParsingUtil.swift; sourceTree = "<group>"; };
@@ -2282,8 +2258,6 @@
 			isa = PBXGroup;
 			children = (
 				0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */,
-				083879751E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift */,
-				083879761E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib */,
 			);
 			name = MatchingQuizViewController;
 			sourceTree = "<group>";
@@ -2579,7 +2553,6 @@
 			isa = PBXGroup;
 			children = (
 				085514EA1CFB09760080CB88 /* CellWebViewHelper.swift */,
-				085514ED1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift */,
 			);
 			name = WebViewHelpers;
 			sourceTree = "<group>";
@@ -3451,9 +3424,6 @@
 				08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */,
 				084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */,
 				084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */,
-				0844720A1D05A7D300197166 /* TextHeightDependentCellProtocol.swift */,
-				087B67201EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift */,
-				087B67211EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib */,
 			);
 			name = ChoiceQuizViewController;
 			sourceTree = "<group>";
@@ -4053,14 +4023,12 @@
 				08FEFC1F1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				08D1211A1C937B2200A54ABC /* WarningView.xib in Resources */,
 				0888D0FA1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
-				0838797A1E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				083056D31DBFB4C500F1F2A4 /* DiscussionWebTableViewCell.xib in Resources */,
 				086494A51E8C7A360083E0BE /* SbEntranceViewController.xib in Resources */,
 				086494A01E8C79D60083E0BE /* SberbankUniversity-Info.plist in Resources */,
 				080C5E731EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				0869F6D61CE229C800F8A6DB /* Queues.plist in Resources */,
 				08D1211B1C937B2200A54ABC /* TeacherCollectionViewCell.xib in Resources */,
-				087B67251EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
@@ -4107,9 +4075,7 @@
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
-				083879791E4B918F00B40BE8 /* MatchingQuizTableViewCell.xib in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
-				087B67241EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
@@ -4154,7 +4120,6 @@
 				86B56EAF1EC38F9600CFE4A3 /* Auth.plist in Resources */,
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
 				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
-				86830FB71EB4A2FD00CA0E42 /* TextChoiceQuizTableViewCell.xib in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
@@ -4198,7 +4163,6 @@
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
-				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
 				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				2C8D08151F1CB77B000E8F32 /* step4.html in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
@@ -4539,7 +4503,6 @@
 				08D120891C937B2200A54ABC /* StandardsExtensions.swift in Sources */,
 				089611051D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
 				0861E6731CD80A9600B45652 /* Executable.swift in Sources */,
-				085514EF1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				08D1208A1C937B2200A54ABC /* AnalyticsHelper.swift in Sources */,
 				08D1208B1C937B2200A54ABC /* Lesson.swift in Sources */,
 				081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
@@ -4583,12 +4546,10 @@
 				0800B8201D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
-				087B67231EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
-				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				08A500511F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
@@ -4671,7 +4632,6 @@
 				08D120BD1C937B2200A54ABC /* CoreDataHelper.swift in Sources */,
 				08FEFC221F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				083F2B181E9D8F1D00714173 /* CertificatesView.swift in Sources */,
-				0844720C1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
@@ -4895,7 +4855,6 @@
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
-				085514EE1CFB1A430080CB88 /* ControllerQuizWebViewHelper.swift in Sources */,
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
@@ -5026,7 +4985,6 @@
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
-				087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
@@ -5034,7 +4992,6 @@
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
-				0844720B1D05A7D300197166 /* TextHeightDependentCellProtocol.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
@@ -5180,7 +5137,6 @@
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
-				083879771E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* GreenNavigationViewController.swift in Sources */,
@@ -5204,7 +5160,6 @@
 				869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */,
 				86B56EAD1EC38F7500CFE4A3 /* PostViewsExecutableTask.swift in Sources */,
 				86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */,
-				86830FB61EB4A2F200CA0E42 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */,
 				860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				860BC33A1EAA1E520058F440 /* CertificatesViewTestMock.swift in Sources */,
@@ -5289,14 +5244,12 @@
 				864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */,
 				864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */,
 				864D67741E83E08E001E8D9E /* CellWebViewHelper.swift in Sources */,
-				864D67751E83E08E001E8D9E /* ControllerQuizWebViewHelper.swift in Sources */,
 				864D67761E83E08E001E8D9E /* QuizControllerDelegate.swift in Sources */,
 				864D67771E83E08E001E8D9E /* QuizViewController.swift in Sources */,
 				864D67791E83E08E001E8D9E /* UnknownTypeQuizViewController.swift in Sources */,
 				864D677B1E83E08E001E8D9E /* ChoiceQuizViewController.swift in Sources */,
 				864D677C1E83E08E001E8D9E /* ChoiceQuizTableViewCell.swift in Sources */,
 				08E3A3BB1E93C27000E9C2EF /* LastStep+CoreDataProperties.swift in Sources */,
-				864D677E1E83E08E001E8D9E /* TextHeightDependentCellProtocol.swift in Sources */,
 				864D677F1E83E08E001E8D9E /* StringQuizViewController.swift in Sources */,
 				864D67801E83E08E001E8D9E /* NumberQuizViewController.swift in Sources */,
 				864D67811E83E08E001E8D9E /* FreeAnswerQuizViewController.swift in Sources */,
@@ -5304,7 +5257,6 @@
 				864D67831E83E08E001E8D9E /* SortingQuizViewController.swift in Sources */,
 				864D67841E83E08E001E8D9E /* SortingQuizTableViewCell.swift in Sources */,
 				864D67861E83E08E001E8D9E /* MatchingQuizViewController.swift in Sources */,
-				864D67871E83E08E001E8D9E /* MatchingQuizTableViewCell.swift in Sources */,
 				864D67891E83E08E001E8D9E /* FillBlanksTextTableViewCell.swift in Sources */,
 				864D678B1E83E08E001E8D9E /* FillBlanksInputTableViewCell.swift in Sources */,
 				864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */,

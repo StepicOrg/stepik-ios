@@ -88,14 +88,6 @@ class ChoiceQuizViewController: QuizViewController {
         didReload = false
         tableView.reloadData()
     }
-    
-//    var isSubview: Bool = false
-//    func updatesEnded() {
-//        guard isSubview == false else { return }
-//        self.containerView.addSubview(tableView)
-//        tableView.align(to: self.containerView)
-//        isSubview = true
-//    }
 }
 
 extension ChoiceQuizViewController : UITableViewDelegate {
@@ -115,9 +107,6 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         let indexPaths = (0..<self.tableView.numberOfRows(inSection: 0)).map({return IndexPath(row: $0, section: 0)})
         for indexPath in indexPaths {
             if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
-                cell.checkBox.on = false
-            }
-            if let cell = tableView.cellForRow(at: indexPath) as? TextChoiceQuizTableViewCell {
                 cell.checkBox.on = false
             }
         }
@@ -193,7 +182,6 @@ extension ChoiceQuizViewController : UITableViewDataSource {
                 s.tableView.contentSize = CGSize(width: s.tableView.contentSize.width, height: sum)
                 s.tableView.beginUpdates()
                 s.tableView.endUpdates()
-//                s.updatesEnded()
             }
         })
         

@@ -49,8 +49,6 @@ class MatchingQuizViewController: QuizViewController {
         
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
-        firstTableView.register(UINib(nibName: "MatchingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchingQuizTableViewCell")
-        secondTableView.register(UINib(nibName: "MatchingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchingQuizTableViewCell")
         
         secondTableView.isEditing = true
         firstTableView.isUserInteractionEnabled = false
@@ -77,15 +75,6 @@ class MatchingQuizViewController: QuizViewController {
         return false
     }
     
-    var countedNoLatexMaxHeight : CGFloat = 0
-    
-    fileprivate func countNoLatexMaxHeight(dataset: MatchingDataset) -> CGFloat {
-        return dataset.pairs.map({
-            pair in
-            let width = self.view.bounds.width / 2
-            return max(MatchingQuizTableViewCell.getHeightForText(text: pair.first, sortable: false, width: width), MatchingQuizTableViewCell.getHeightForText(text: pair.second, sortable: true, width: width))
-        }).max() ?? 0
-    }
     
     override func updateQuizAfterAttemptUpdate() {
         guard let _ = attempt?.dataset as? MatchingDataset else {

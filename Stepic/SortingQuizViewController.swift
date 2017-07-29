@@ -68,7 +68,6 @@ class SortingQuizViewController: QuizViewController {
             if let dataset = attempt?.dataset as? SortingDataset {
                 var o = [String](repeating: "", count: dataset.options.count)
                 if let r = submission?.reply as? SortingReply {
-                    print("attempt dataset -> \(dataset.options), \nsubmission ordering -> \(r.ordering)")
                     for (index, order) in r.ordering.enumerated() {
                         o[index] = dataset.options[order]
                     }
