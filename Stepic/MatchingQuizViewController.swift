@@ -66,16 +66,6 @@ class MatchingQuizViewController: QuizViewController {
         return (self.attempt?.dataset as? MatchingDataset)?.pairs.count ?? 0
     }
     
-    fileprivate func hasTagsInDataset(dataset: MatchingDataset) -> Bool {
-        for pair in dataset.pairs {
-            if TagDetectionUtil.isWebViewSupportNeeded(pair.first) || TagDetectionUtil.isWebViewSupportNeeded(pair.second) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    
     override func updateQuizAfterAttemptUpdate() {
         guard let _ = attempt?.dataset as? MatchingDataset else {
             return
@@ -140,12 +130,17 @@ class MatchingQuizViewController: QuizViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        self.firstCellHeights = Array(repeating: nil, count: optionsCount)
-        self.secondCellHeights = Array(repeating: nil, count: optionsCount)
-        firstUpdateFinished = false
-        secondUpdateFinished = false
-        firstTableView.reloadData()
-        secondTableView.reloadData()
+        coordinator.animate(alongsideTransition: nil) {
+            [weak self]
+            _ in
+            guard let s = self else { return }
+            s.firstCellHeights = Array(repeating: nil, count: s.optionsCount)
+            s.secondCellHeights = Array(repeating: nil, count: s.optionsCount)
+            s.firstUpdateFinished = false
+            s.secondUpdateFinished = false
+            s.firstTableView.reloadData()
+            s.secondTableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {

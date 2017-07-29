@@ -83,10 +83,15 @@ class ChoiceQuizViewController: QuizViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        self.cellHeights = Array(repeating: nil, count: optionsCount)
-        didReload = false
-        tableView.reloadData()
+
+        coordinator.animate(alongsideTransition: nil) {
+            [weak self]
+            _ in
+            guard let s = self else { return }
+            s.cellHeights = Array(repeating: nil, count: s.optionsCount)
+            s.didReload = false
+            s.tableView.reloadData()
+        }
     }
 }
 
