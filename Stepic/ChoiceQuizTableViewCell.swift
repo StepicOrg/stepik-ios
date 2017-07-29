@@ -63,7 +63,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     }
     
     class func getHeightForText(text: String, width: CGFloat) -> CGFloat {
-        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 52)) + 17
+        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68)) + 17
     }
 }
 

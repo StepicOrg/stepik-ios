@@ -115,7 +115,7 @@ extension SortingQuizViewController : UITableViewDelegate {
         if let height = cellHeights[indexPath.row] {
             return height
         } else {
-            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.view.bounds.width, sortable: true)
+            return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.tableView.bounds.width, sortable: true)
         }
     }
     
@@ -152,7 +152,7 @@ extension SortingQuizViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
         
-        cell.setHTMLText(dataset.options[indexPath.row], width: self.view.bounds.width, finishedBlock: {
+        cell.setHTMLText(dataset.options[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
             

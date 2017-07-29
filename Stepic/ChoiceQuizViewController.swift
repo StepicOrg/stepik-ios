@@ -107,7 +107,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
         if let height = cellHeights[indexPath.row] {
             return height
         } else {
-            return ChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.view.bounds.width)
+            return ChoiceQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: tableView.bounds.width)
         }
     }
     
@@ -172,7 +172,7 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceQuizTableViewCell", for:indexPath) as! ChoiceQuizTableViewCell
-        cell.setHTMLText(dataset.options[indexPath.row], width: self.view.bounds.width, finishedBlock: {
+        cell.setHTMLText(dataset.options[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
             

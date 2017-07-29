@@ -248,7 +248,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
         
         switch tableView.tag {
         case 1:
-            cell.setHTMLText(dataset.firstValues[indexPath.row], width: self.view.bounds.width / 2, finishedBlock: {
+            cell.setHTMLText(dataset.firstValues[indexPath.row], width: self.firstTableView.bounds.width, finishedBlock: {
                 [weak self]
                 newHeight in
                 
@@ -272,7 +272,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
             })
         case 2:
             cell.sortable = true
-            cell.setHTMLText(dataset.secondValues[indexPath.row], width: self.view.bounds.width / 2, finishedBlock: {
+            cell.setHTMLText(dataset.secondValues[indexPath.row], width: self.secondTableView.bounds.width, finishedBlock: {
                 [weak self]
                 newHeight in
                 
