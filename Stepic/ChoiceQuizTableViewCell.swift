@@ -61,12 +61,16 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    class func getHeightForText(text: String, width: CGFloat) -> CGFloat {
+        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 52)) + 17
+    }
 }
 
-extension ChoiceQuizTableViewCell { //: TextHeightDependentCellProtocol {
+extension ChoiceQuizTableViewCell {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(_ text: String, finishedBlock: ((CGFloat) -> Void)? = nil){
+    func setHTMLText(_ text: String, width: CGFloat, finishedBlock: ((CGFloat) -> Void)? = nil){
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
             initWebView()
             choiceWebView?.isHidden = false
@@ -83,8 +87,7 @@ extension ChoiceQuizTableViewCell { //: TextHeightDependentCellProtocol {
             initLabel()
             choiceLabel?.isHidden = false
             choiceLabel?.setTextWithHTMLString(text)
-            let w = UIScreen.main.bounds.width - 52
-            let height = max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w)) + 17
+            let height = max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 52)) + 17
             finishedBlock?(height)
         }
     }
