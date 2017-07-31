@@ -19,6 +19,9 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     @IBOutlet weak var bestStreakLabel: UILabel!
     @IBOutlet weak var currentLevelLabel: UILabel!
     
+    @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
+        tableView.reloadData()
+    }
     
     @IBAction func onCancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -64,6 +67,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         tableView.dataSource = self
     
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "AchievementTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementTableViewCell.reuseId)
     }
     
     fileprivate func setUpChart() {
@@ -100,15 +104,28 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.progressByWeek.count ?? 0
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return presenter?.progressByWeek.count ?? 0
+        } else {
+            return presenter?.achievements.count ?? 0
+        }
+        
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! ProgressTableViewCell
-        if let weekProgress = presenter?.progressByWeek[indexPath.item] {
-            cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+        if segmentedControl.selectedSegmentIndex == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell
+            if let weekProgress = presenter?.progressByWeek[indexPath.item] {
+                cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
+            if let achievement = presenter?.achievements[indexPath.item] {
+                cell.achievementNameLabel.text = achievement.slug
+            }
+            return cell
         }
-        return cell
     }
 
 }

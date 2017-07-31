@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="achievementCell" rowHeight="86" id="KGk-i7-Jjw" customClass="AchievementTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="85.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-AA-5xM">
+                        <rect key="frame" x="8" y="4" width="304" height="77.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHH-B6-0fr">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="77.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-vr-Ely">
+                                        <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hy6-vr-Ely" firstAttribute="leading" secondItem="fHH-B6-0fr" secondAttribute="leading" constant="8" id="Uc5-8i-xCq"/>
+                                    <constraint firstItem="hy6-vr-Ely" firstAttribute="top" secondItem="fHH-B6-0fr" secondAttribute="top" constant="8" id="XcP-iP-8cx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="KBl-AA-5xM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Mro-G5-Wme"/>
+                    <constraint firstItem="fHH-B6-0fr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Sog-L6-d7P"/>
+                    <constraint firstAttribute="bottom" secondItem="KBl-AA-5xM" secondAttribute="bottom" constant="4" id="Ygn-66-GXA"/>
+                    <constraint firstItem="fHH-B6-0fr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Yh5-g7-0dD"/>
+                    <constraint firstAttribute="bottom" secondItem="fHH-B6-0fr" secondAttribute="bottom" constant="4" id="g9F-gm-Lmr"/>
+                    <constraint firstAttribute="trailing" secondItem="fHH-B6-0fr" secondAttribute="trailing" constant="8" id="lK3-d3-ctV"/>
+                    <constraint firstAttribute="trailing" secondItem="KBl-AA-5xM" secondAttribute="trailing" constant="8" id="wwz-5l-t26"/>
+                    <constraint firstItem="KBl-AA-5xM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zfd-Wo-1Eb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="achievementNameLabel" destination="hy6-vr-Ely" id="wSc-Yk-G8Y"/>
+                <outlet property="cardPadView" destination="fHH-B6-0fr" id="Ikr-Ke-IeH"/>
+                <outlet property="cellContentView" destination="KBl-AA-5xM" id="QZW-ea-kd4"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="75"/>
+        </tableViewCell>
+    </objects>
+</document>

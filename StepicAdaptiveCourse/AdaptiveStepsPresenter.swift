@@ -498,6 +498,8 @@ class AdaptiveStepsPresenter {
                             StatsHelper.updateMaxStreak(with: curStreak)
                             
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
+                                AchievementManager.shared.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
+                                
                                 self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
                             }
                             self?.streak = RatingHelper.incrementStreak()

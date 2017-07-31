@@ -27,6 +27,8 @@ class AdaptiveStatsPresenter {
     typealias WeekProgress = (weekBegin: Date, progress: Int, isRecord: Bool)
     private(set) var progressByWeek: [WeekProgress] = []
     
+    private(set) var achievements: [Achievement] = AchievementManager.shared.storedAchievements
+    
     init(view: AdaptiveStatsView) {
         self.view = view
         

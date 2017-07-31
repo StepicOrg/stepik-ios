@@ -247,6 +247,9 @@
                                                 <segment title="Достижения"/>
                                             </segments>
                                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="onSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="CBg-7X-fF5"/>
+                                            </connections>
                                         </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние 7 дней" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwa-eW-FQd">
                                             <rect key="frame" x="8" y="149" width="124" height="17"/>

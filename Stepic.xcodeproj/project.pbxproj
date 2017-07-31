@@ -880,6 +880,11 @@
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
 		2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
+		2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
+		2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
+		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
+		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
+		2C6640D51F2F7AFD0033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640D31F2F7AFD0033A274 /* AchievementTableViewCell.xib */; };
 		2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */; };
 		2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsHelper.swift */; };
 		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
@@ -1868,6 +1873,11 @@
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
+		2C6640C91F2F35E60033A274 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		2C6640CE1F2F47A90033A274 /* AchievementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
+		2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
+		2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementTableViewCell.swift; sourceTree = "<group>"; };
+		2C6640D31F2F7AFD0033A274 /* AchievementTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementTableViewCell.xib; sourceTree = "<group>"; };
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
 		2C733C391F29E090000E7FAF /* StatsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
@@ -3510,10 +3520,12 @@
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C6640CB1F2F36E80033A274 /* Achievements */,
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */,
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
 				2C733C391F29E090000E7FAF /* StatsHelper.swift */,
+				2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3553,6 +3565,24 @@
 				2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */,
 			);
 			name = Congratulation;
+			sourceTree = "<group>";
+		};
+		2C6640CB1F2F36E80033A274 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				2C6640C91F2F35E60033A274 /* Achievement.swift */,
+				2C6640CE1F2F47A90033A274 /* AchievementManager.swift */,
+			);
+			name = Achievements;
+			sourceTree = "<group>";
+		};
+		2C6640D61F2F7B010033A274 /* AchievementTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */,
+				2C6640D31F2F7AFD0033A274 /* AchievementTableViewCell.xib */,
+			);
+			name = AchievementTableViewCell;
 			sourceTree = "<group>";
 		};
 		2C6ABA611F1E009E005A3BCF /* Alerts */ = {
@@ -3664,6 +3694,7 @@
 				868BC6E31EA0276500E204EE /* StepControlButton.swift */,
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
+				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -4200,6 +4231,7 @@
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
+				2C6640D51F2F7AFD0033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
@@ -5237,6 +5269,7 @@
 				0888D0FF1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
 				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
+				2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
 				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
 				2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */,
@@ -5375,6 +5408,7 @@
 				864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */,
 				864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */,
 				864D67B91E83E08E001E8D9E /* CourseTableViewCell.swift in Sources */,
+				2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */,
 				864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */,
 				864D67BC1E83E08E001E8D9E /* MyCoursesViewController.swift in Sources */,
 				864D67BD1E83E08E001E8D9E /* CoursesViewController.swift in Sources */,
@@ -5444,6 +5478,7 @@
 				864D66B31E83DE03001E8D9E /* WebControllerManager.swift in Sources */,
 				864D66B41E83DE03001E8D9E /* CacheManager.swift in Sources */,
 				864D66B61E83DE03001E8D9E /* WKWebViewPanelManager.m in Sources */,
+				2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */,
 				864D66B71E83DE03001E8D9E /* CoursesJoinManager.swift in Sources */,
 				864D66B81E83DE03001E8D9E /* RemoteVersionManager.swift in Sources */,
 				864D66B91E83DE03001E8D9E /* UpdateChecker.swift in Sources */,
@@ -5508,6 +5543,7 @@
 				864D66EC1E83DE03001E8D9E /* Video+CoreDataProperties.swift in Sources */,
 				864D66ED1E83DE03001E8D9E /* Video.swift in Sources */,
 				864D66EE1E83DE03001E8D9E /* VideoURL+CoreDataProperties.swift in Sources */,
+				2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */,
 				864D66EF1E83DE03001E8D9E /* VideoURL.swift in Sources */,
 				864D66F01E83DE03001E8D9E /* Block+CoreDataProperties.swift in Sources */,
 				864D66F11E83DE03001E8D9E /* Block.swift in Sources */,
