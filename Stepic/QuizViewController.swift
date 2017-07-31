@@ -83,18 +83,19 @@ class QuizViewController: UIViewController {
     
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
-    //Activity view here
-    lazy var activityView : UIView = self.initActivityView()
+    var activityView : UIView?
     
-    lazy var warningView : UIView = self.initWarningView()
+    var warningView : UIView?
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.align(to: self.view)
+        v.constrainHeight("150")
         v.delegate = self
         v.datasource = self
+        v.setContentCompressionResistancePriority(1000.0, for: UILayoutConstraintAxis.vertical)
         v.backgroundColor = UIColor.white
         return v
     }
@@ -120,12 +121,14 @@ class QuizViewController: UIViewController {
             if doesPresentActivityIndicatorView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.activityView.isHidden = false
+                    self?.activityView = self?.initActivityView()
+                    self?.activityView?.isHidden = false
                 }
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.activityView.isHidden = true
+                    self?.activityView?.removeFromSuperview()
+                    self?.activityView = nil
                 }
             }
         }
@@ -136,13 +139,15 @@ class QuizViewController: UIViewController {
             if doesPresentWarningView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.warningView.isHidden = false
+                    self?.warningView = self?.initWarningView()
+                    self?.warningView?.isHidden = false
                 }
                 self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.warningView.isHidden = true
+                    self?.warningView?.removeFromSuperview()
+                    self?.warningView = nil
                 }
             }
         }

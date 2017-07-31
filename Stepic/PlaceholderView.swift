@@ -191,6 +191,7 @@ class PlaceholderView: UIView {
         setNeedsLayout()
         layoutIfNeeded()
         middleView.layoutSubviews()
+        invalidateIntrinsicContentSize()
         print("middle view height -> \(middleView.bounds.height)")
         print("image view height -> \(String(describing: imageView?.bounds.height))")
     }
@@ -236,5 +237,8 @@ class PlaceholderView: UIView {
         setup()
     } 
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIViewNoIntrinsicMetric, height: 250)
+    }
     
 }
