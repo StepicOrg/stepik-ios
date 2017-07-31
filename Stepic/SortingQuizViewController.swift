@@ -156,7 +156,7 @@ extension SortingQuizViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
         
-        cell.setHTMLText(dataset.options[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
+        cell.setHTMLText(orderedOptions[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
             

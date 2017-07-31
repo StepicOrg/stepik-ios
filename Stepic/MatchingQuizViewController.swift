@@ -256,7 +256,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
             })
         case 2:
             cell.sortable = true
-            cell.setHTMLText(dataset.secondValues[indexPath.row], width: self.secondTableView.bounds.width, finishedBlock: {
+            cell.setHTMLText(orderedOptions[indexPath.row], width: self.secondTableView.bounds.width, finishedBlock: {
                 [weak self]
                 newHeight in
                 
