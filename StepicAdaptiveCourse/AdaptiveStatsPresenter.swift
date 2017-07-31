@@ -15,10 +15,6 @@ protocol AdaptiveStatsView: class {
 class AdaptiveStatsPresenter {
     weak var view: AdaptiveStatsView?
     
-    var recordsCount: Int {
-        return 0
-    }
-    
     var currentXP: Int = 0
     var currentLevel: Int = 0
     var currentWeekXP: Int = 0
@@ -28,8 +24,8 @@ class AdaptiveStatsPresenter {
     
     private var stats: [Int: Int]?
     
-    typealias WeekProgress = (weekBegin: Date, progress: Int)
-    private var progressByWeek: [WeekProgress] = []
+    typealias WeekProgress = (weekBegin: Date, progress: Int, isRecord: Bool)
+    private(set) var progressByWeek: [WeekProgress] = []
     
     init(view: AdaptiveStatsView) {
         self.view = view
@@ -65,19 +61,33 @@ class AdaptiveStatsPresenter {
             return
         }
         
-        var weekXP = 0
-        var lastDayBegin: Date = getWeekBeginByDate(StatsHelper.dateByDay(stats.first!.key))
+        var weekXP: [Int: Int] = [:]
+        var weeks: Set<Date> = Set<Date>()
+        var weekRecordBeginHash: Int? = nil
         for (day, progress) in stats {
             let weekBeginForCurrentDay = getWeekBeginByDate(StatsHelper.dateByDay(day))
+            let weekHash = weekBeginForCurrentDay.hashValue
+            weeks.insert(weekBeginForCurrentDay)
             
-            if lastDayBegin != weekBeginForCurrentDay {
-                progressByWeek.append((weekBegin: lastDayBegin, progress: weekXP))
-                lastDayBegin = weekBeginForCurrentDay
-                weekXP = 0
+            if weekXP[weekHash] == nil {
+                if weekRecordBeginHash == nil {
+                    weekRecordBeginHash = weekHash
+                }
+                weekXP[weekHash] = progress
+            } else {
+                weekXP[weekHash]! += progress
             }
             
-            weekXP += progress
+            if weekXP[weekRecordBeginHash!]! < weekXP[weekHash]! {
+                weekRecordBeginHash = weekHash
+            }
         }
+        
+        for firstDayOfWeek in weeks {
+            progressByWeek.append((weekBegin: firstDayOfWeek, progress: weekXP[firstDayOfWeek.hashValue] ?? 0, isRecord: firstDayOfWeek.hashValue == weekRecordBeginHash && weeks.count > 1))
+        }
+        
+        progressByWeek.reverse()
     }
     
 }

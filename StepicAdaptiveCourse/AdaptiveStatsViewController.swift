@@ -92,6 +92,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.drawCirclesEnabled = true
         dataSet.setCircleColor(StepicApplicationsInfo.adaptiveMainColor)
+        dataSet.valueFormatter = DefaultValueFormatter(decimals: 0)
         
         return dataSet
     }
@@ -99,12 +100,14 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.recordsCount ?? 0
+        return presenter?.progressByWeek.count ?? 0
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! ProgressTableViewCell
-        cell.updateInfo(expCount: 222, begin: Date(), end: Date(), isRecord: true)
+        if let weekProgress = presenter?.progressByWeek[indexPath.item] {
+            cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+        }
         return cell
     }
 
