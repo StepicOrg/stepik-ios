@@ -63,7 +63,7 @@ class AchievementTableViewCell: UITableViewCell {
         }
         
         if isChallenge {
-            progressChallengeLabel.text = isUnlocked ? "получено" : "ещё не получено"
+            progressChallengeLabel.text = isUnlocked ? NSLocalizedString("AchievementUnlocked", comment: "") : NSLocalizedString("AchievementLocked", comment: "")
         }
         
         if isUnlocked {
