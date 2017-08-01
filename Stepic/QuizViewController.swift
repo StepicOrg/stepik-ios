@@ -289,7 +289,7 @@ class QuizViewController: UIViewController {
                                             }
                                         }
                                     }
-                                    s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
+                                    s.hintHeightWebViewHelper.setTextWithTeX(hint, color: UIColor.white)
                                     s.hintTextView.isHidden = true
                                     s.hintWebView.isHidden = false
                                 } else {
