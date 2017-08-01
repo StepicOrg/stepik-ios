@@ -493,6 +493,8 @@ class AdaptiveStepsPresenter {
                             let newRating = curRating + curStreak
                             self?.rating = RatingHelper.incrementRating(curStreak)
                             
+                            AchievementManager.shared.fireEvent(.exp(value: curStreak))
+                            
                             // Update stats
                             StatsHelper.incrementRating(curStreak)
                             StatsHelper.updateMaxStreak(with: curStreak)

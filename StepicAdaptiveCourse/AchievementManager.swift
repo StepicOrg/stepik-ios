@@ -17,11 +17,25 @@ class AchievementManager {
     static func createAndRegisterAchievements() -> AchievementManager {
         let mgr = AchievementManager()
         
-        let simpleAchievement = ChallengeAchievement(slug: "sample_ac", name: "Sample achievement", info: nil, cover: nil)
-        simpleAchievement.conditions = { value in return (value as? Int ?? 0) > 3 }
+        let achievement1 = ChallengeAchievement(slug: "level6", name: "Шестой уровень", info: "Достичь шестого уровня", cover: #imageLiteral(resourceName: "badge1"))
+        achievement1.preConditions = { _, _, value in return (value as? Int ?? 0) >= 6 }
+        mgr.addSubscriber(for: AchievementEvent.events.level, observer: achievement1)
+        mgr.storedAchievements.append(achievement1)
         
-        mgr.addSubscriber(for: AchievementEvent.events.level, observer: simpleAchievement)
-        mgr.storedAchievements.append(simpleAchievement)
+        let achievement2 = ProgressAchievement(slug: "exp100", name: "100 опыта", info: "Получить 100 опыта", cover: #imageLiteral(resourceName: "badge2"), maxProgressValue: 100)
+        achievement2.value = { value in return (value as? Int) ?? 0 }
+        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement2)
+        mgr.storedAchievements.append(achievement2)
+        
+        let achievement3 = ProgressAchievement(slug: "exp110", name: "110 опыта", info: "Получить 110 опыта", cover: #imageLiteral(resourceName: "badge2"), maxProgressValue: 110)
+        achievement3.value = { value in return (value as? Int) ?? 0 }
+        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement3)
+        mgr.storedAchievements.append(achievement3)
+        
+        let achievement4 = ProgressAchievement(slug: "exp10", name: "10 опыта", info: "Получить 10 опыта", cover: #imageLiteral(resourceName: "badge1"), maxProgressValue: 10)
+        achievement4.value = { value in return (value as? Int) ?? 0 }
+        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement4)
+        mgr.storedAchievements.append(achievement4)
         
         return mgr
     }
@@ -36,9 +50,8 @@ class AchievementManager {
     func fireEvent(_ event: AchievementEvent) {
         print("achievements: fired event \(event)")
         (subscribers[event.slug] ?? []).forEach { observer in
-            if observer.notify(event: event) {
+            if !observer.attachedAchievement.isUnlocked && observer.notify(event: event) {
                 print("\(observer.attachedAchievement.slug) unlocked!")
-                //let achievement = observer.attachedAchievement
             }
         }
     }

@@ -12,17 +12,23 @@ protocol Achievement: class, AchievementObserver {
     var slug: String { get set }
     var name: String { get set }
     var info: String? { get set }
-    var cover: String? { get set }
+    var cover: UIImage? { get set }
     
     var hasProgress: Bool { get set }
     var progressValue: Int { get set }
     var maxProgressValue: Int { get set }
     
     var completed: (() -> ())? { get set }
-    var conditions: ((Any) -> Bool)? { get set }
+    
+    // (currentProgress, maxProgress, valueFromEvent) -> isUnlocked
+    var preConditions: ((Int, Int, Any) -> Bool)? { get set }
+    // valueFromEvent -> progressValue delta
+    var value: ((Any) -> Int)? { get set }
+    
+    var isUnlocked: Bool { get }
     
     init()
-    init(slug: String, name: String, info: String?, cover: String?, hasProgress: Bool, maxProgressValue: Int)
+    init(slug: String, name: String, info: String?, cover: UIImage?, hasProgress: Bool, maxProgressValue: Int)
     
     func restore()
     func save()
@@ -33,7 +39,11 @@ extension Achievement {
         return self
     }
     
-    init(slug: String, name: String, info: String?, cover: String?, hasProgress: Bool, maxProgressValue: Int = 1) {
+    var isUnlocked: Bool {
+        return maxProgressValue == progressValue
+    }
+    
+    init(slug: String, name: String, info: String?, cover: UIImage?, hasProgress: Bool, maxProgressValue: Int = 1) {
         self.init()
         
         self.slug = slug
@@ -66,23 +76,23 @@ final class ChallengeAchievement: Achievement {
     var slug = ""
     var name = ""
     var info: String? = ""
-    var cover: String? = nil
+    var cover: UIImage? = nil
     
     var hasProgress = false
     var maxProgressValue: Int = 1
     var progressValue: Int = 0
     
     var completed: (() -> ())? = nil
-    var conditions: ((Any) -> Bool)? = nil
+    var preConditions: ((Int, Int, Any) -> Bool)? = nil
+    var value: ((Any) -> Int)? = nil
     
-    convenience init(slug: String, name: String, info: String?, cover: String?) {
+    convenience init(slug: String, name: String, info: String?, cover: UIImage?) {
         self.init(slug: slug, name: name, info: info, cover: cover, hasProgress: false, maxProgressValue: 1)
     }
     
     func notify(event: AchievementEvent) -> Bool {
-        let cond = (conditions?(event.value) ?? true) && progressValue == 0
+        let cond = (preConditions?(progressValue, maxProgressValue, event.value) ?? true) && progressValue == 0
         if cond {
-            completed?()
             progressValue += 1
             save()
         }
@@ -94,29 +104,29 @@ final class ProgressAchievement: Achievement {
     var slug = ""
     var name = ""
     var info: String? = ""
-    var cover: String? = nil
+    var cover: UIImage? = nil
     
     var hasProgress = false
     var maxProgressValue: Int = 1
     var progressValue: Int = 0
     
     var completed: (() -> ())? = nil
-    var conditions: ((Any) -> Bool)? = nil
+    var preConditions: ((Int, Int, Any) -> Bool)? = nil
+    var value: ((Any) -> Int)? = nil
     
-    convenience init(slug: String, name: String, info: String?, cover: String?, maxProgressValue: Int) {
+    convenience init(slug: String, name: String, info: String?, cover: UIImage?, maxProgressValue: Int) {
         self.init(slug: slug, name: name, info: info, cover: cover, hasProgress: true, maxProgressValue: maxProgressValue)
     }
     
     func notify(event: AchievementEvent) -> Bool {
-        var cond = conditions?(event.value) ?? true
+        var cond = preConditions?(progressValue, maxProgressValue, event.value) ?? true
         if cond {
-            if progressValue == maxProgressValue {
-                completed?()
-                cond = true
-            } else {
-                cond = false
-                progressValue += 1
-            }
+            let val = value?(event.value) ?? 1
+            
+            cond = progressValue + val >= maxProgressValue
+            
+            progressValue += value?(event.value) ?? 1
+            progressValue = min(maxProgressValue, progressValue)
             save()
         }
         return cond

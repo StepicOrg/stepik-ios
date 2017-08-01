@@ -65,6 +65,9 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     fileprivate func setUpTable() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 112
     
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
         tableView.register(UINib(nibName: "AchievementTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementTableViewCell.reuseId)
@@ -122,7 +125,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
             if let achievement = presenter?.achievements[indexPath.item] {
-                cell.achievementNameLabel.text = achievement.slug
+                cell.updateInfo(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover, isUnlocked: achievement.isUnlocked, isChallenge: !achievement.hasProgress, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue)
             }
             return cell
         }
