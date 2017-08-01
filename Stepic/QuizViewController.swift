@@ -259,8 +259,7 @@ class QuizViewController: UIViewController {
                         s.buttonStateSubmit = true
                         s.view.backgroundColor = UIColor.white
                         s.statusViewHeight.constant = 0
-                        s.hintHeight.constant = 0
-                        s.hintView.isHidden = true
+                        s.hideHintView()
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
                         s.setStatusElements(visible: false)
@@ -277,7 +276,6 @@ class QuizViewController: UIViewController {
                         
                         if let hint = s.submission?.hint {
                             if hint != "" {
-                                s.hintView.isHidden = false
                                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
                                     s.hintHeightWebViewHelper?.mathJaxFinishedBlock = {
                                         [weak self] in
@@ -285,6 +283,8 @@ class QuizViewController: UIViewController {
                                             webView.invalidateIntrinsicContentSize()
                                             UIThread.performUI {
                                                 [weak self] in
+                                                self?.view.layoutIfNeeded()
+                                                self?.hintView.isHidden = false
                                                 self?.hintHeight.constant = webView.contentHeight
                                             }
                                         }
@@ -293,16 +293,16 @@ class QuizViewController: UIViewController {
                                     s.hintTextView.isHidden = true
                                     s.hintWebView.isHidden = false
                                 } else {
-                                    s.hintWebView.isHidden = true
+                                    s.hintView.isHidden = false
                                     s.hintTextView.isHidden = false
                                     s.hintTextView.text = hint
                                     s.hintHeight.constant = s.getHintHeightFor(hint: hint)
                                 }
                             } else {
-                                s.hintHeight.constant = 0
+                                s.hideHintView()
                             }
                         } else {
-                            s.hintHeight.constant = 0
+                            s.hideHintView()
                         }
                         
                         switch s.submission!.status! {
@@ -409,7 +409,7 @@ class QuizViewController: UIViewController {
         self.hintTextView.font = UIFont(name: "ArialMT", size: 16)
         self.hintTextView.isEditable = false
         self.hintTextView.dataDetectorTypes = .all
-
+        self.hideHintView()
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
@@ -440,6 +440,11 @@ class QuizViewController: UIViewController {
             
             WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
         }
+    }
+    
+    fileprivate func hideHintView() {
+        self.hintHeight.constant = 1
+        self.hintView.isHidden = true
     }
     
     fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int)->Void), error: @escaping ((String) -> Void)) {

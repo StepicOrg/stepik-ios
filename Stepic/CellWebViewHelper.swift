@@ -31,7 +31,7 @@ class CellWebViewHelper : NSObject {
     //Method sets text and returns the method which returns current cell height according to the webview content height
     func setTextWithTeX(_ text: String, color: UIColor = UIColor.black)  {
         let scriptsString = "\(Scripts.localTexScript)\(Scripts.mathJaxFinishedScript)"
-        let textColorHex = "#\(color.hexString ?? "000000")"
+        let textColorHex = "#\(color.hexString)"
         let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, addStyle: true, textColorHex: textColorHex)
         webView?.delegate = self
         webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))

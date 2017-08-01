@@ -23,13 +23,24 @@ extension UIColor {
     
     
     //default color is black
-    var hexString: String? {
-        guard let components = self.cgColor.components else { return nil }
+    var hexString: String {
+        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 1
+        
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        
+//        if self.ciColor.colorSpace != CGColorSpace.genericRGBLinear {
+////            let color = self.c
+//        }
         
         let hexString = String(format: "%02X%02X%02X",
-                               Int(components[0] * 255.0),
-                               Int(components[1] * 255.0),
-                               Int(components[2] * 255.0))
+                               Int(red * 255.0),
+                               Int(green * 255.0),
+                               Int(blue * 255.0))
         return hexString
     }
     
