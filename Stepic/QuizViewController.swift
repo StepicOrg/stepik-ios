@@ -121,7 +121,9 @@ class QuizViewController: UIViewController {
             if doesPresentActivityIndicatorView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.activityView = self?.initActivityView()
+                    if self?.activityView == nil {
+                        self?.activityView = self?.initActivityView()
+                    }
                     self?.activityView?.isHidden = false
                 }
             } else {
@@ -139,7 +141,9 @@ class QuizViewController: UIViewController {
             if doesPresentWarningView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.warningView = self?.initWarningView()
+                    if self?.warningView == nil {
+                        self?.warningView = self?.initWarningView()
+                    }
                     self?.warningView?.isHidden = false
                 }
                 self.delegate?.didWarningPlaceholderShow()
