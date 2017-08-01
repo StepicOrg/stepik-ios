@@ -13,6 +13,8 @@ class NumberQuizViewController: QuizViewController {
 
     var textField = UITextField()
     
+    let textFieldHeight = 32
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +22,7 @@ class NumberQuizViewController: QuizViewController {
         textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
         textField.borderStyle = UITextBorderStyle.roundedRect
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
-        textField.constrainHeight("32")
+        textField.constrainHeight("\(textFieldHeight)")
         
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)

@@ -10,6 +10,8 @@ import UIKit
 
 class FreeAnswerQuizViewController: QuizViewController {
 
+    let textViewHeight = 64
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,7 +19,7 @@ class FreeAnswerQuizViewController: QuizViewController {
         textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
         
-        textView.constrainHeight("64")
+        textView.constrainHeight("\(textViewHeight)")
         
         textView.font = UIFont.systemFont(ofSize: 16)
         // Do any additional setup after loading the view.
