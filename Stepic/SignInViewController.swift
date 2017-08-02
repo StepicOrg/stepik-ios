@@ -17,6 +17,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    var prefilledEmail: String?
+    
     fileprivate func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
@@ -59,6 +61,8 @@ class SignInViewController: UIViewController {
         setupLocalizations()
         
         setupTextFields()
+        
+        prefill()
                 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
@@ -79,6 +83,13 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    fileprivate func prefill() {
+        guard let email = self.prefilledEmail, email != "" else { return }
+        
+        emailTextField.text = email
+        passwordTextField.becomeFirstResponder()
+    }
     
     fileprivate func signIn() {
         SVProgressHUD.show(withStatus: "")

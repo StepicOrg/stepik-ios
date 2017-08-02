@@ -31,6 +31,8 @@ class WebViewController: UIViewController {
     var allowsToOpenInSafari = true
     var backButtonStyle : BackButtonStyle = .done
     
+    var onDismiss: (() -> ())?
+    
     /// Returns the web view for the controller.
     final var webView: WKWebView {
         get {
@@ -75,6 +77,7 @@ class WebViewController: UIViewController {
         webView.allowsBackForwardNavigationGestures = true
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = true
+            webView.customUserAgent = "Mozilla/5.0"
         }
         return webView
         }()
@@ -141,17 +144,6 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         title = urlRequest.url?.host
         
-        if presentingViewController?.presentedViewController != nil {
-            let doneItem = backButtonStyle.barButtonItem
-            doneItem.target = self
-            doneItem.action = #selector(WebViewController.didTapDoneButton(_:))
-            navigationItem.leftBarButtonItem = doneItem
-//            navigationItem.leftBarButtonItem = UIBarButtonItem(
-//                barButtonSystemItem: .Done,
-//                target: self,
-//                action: Selector("didTapDoneButton:"))
-        }
-        
         if allowsToOpenInSafari {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: Images.safariBarButtonItemImage, 
@@ -173,6 +165,17 @@ class WebViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         assert(navigationController != nil, "\(WebViewController.self) must be presented in a \(UINavigationController.self)")
         super.viewWillAppear(animated)
+        
+        if presentingViewController?.presentedViewController != nil {
+            let doneItem = backButtonStyle.barButtonItem
+            doneItem.target = self
+            doneItem.action = #selector(WebViewController.didTapDoneButton(_:))
+            navigationItem.leftBarButtonItem = doneItem
+            //            navigationItem.leftBarButtonItem = UIBarButtonItem(
+            //                barButtonSystemItem: .Done,
+            //                target: self,
+            //                action: Selector("didTapDoneButton:"))
+        }
     }
     
     /// :nodoc:
@@ -202,7 +205,7 @@ class WebViewController: UIViewController {
     // MARK: Actions
     
     final func didTapDoneButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        onDismiss?()
     }
     
     final func didTapSafariButton(_ sender: UIBarButtonItem) {

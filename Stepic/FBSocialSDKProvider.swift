@@ -19,7 +19,7 @@ class FBSocialSDKProvider : NSObject, SocialSDKProvider {
         super.init()
     }
     
-    func getAccessToken(success successHandler: @escaping (String) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
+    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["email"], from: nil, handler: {
             result, error in
@@ -37,7 +37,7 @@ class FBSocialSDKProvider : NSObject, SocialSDKProvider {
                 return
             }
             if let t = res.token.tokenString {
-                successHandler(t)
+                successHandler(t, nil)
                 return
             }
         })
