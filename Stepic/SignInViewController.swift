@@ -61,8 +61,6 @@ class SignInViewController: UIViewController {
         setupLocalizations()
         
         setupTextFields()
-        
-        prefill()
                 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
@@ -78,6 +76,12 @@ class SignInViewController: UIViewController {
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        prefill()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -88,7 +92,13 @@ class SignInViewController: UIViewController {
         guard let email = self.prefilledEmail, email != "" else { return }
         
         emailTextField.text = email
-        passwordTextField.becomeFirstResponder()
+        
+        let alert = UIAlertController(title: nil, message: NSLocalizedString("SocialSignupWithExistingEmail", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
+            action in
+            self.passwordTextField.becomeFirstResponder()
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     fileprivate func signIn() {
