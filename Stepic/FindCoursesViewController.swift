@@ -34,7 +34,10 @@ class FindCoursesViewController: CoursesViewController {
     }
     
     override func didSetCourses() {
-        tableView.tableHeaderView = signInView
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.tableView.tableHeaderView = self?.signInView
+        }
     }
     
     var topConstraint : NSLayoutConstraint?
