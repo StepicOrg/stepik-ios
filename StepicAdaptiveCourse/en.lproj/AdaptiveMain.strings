@@ -6,7 +6,7 @@
 "8WM-do-txJ.segmentTitles[1]" = "Achievements";
 
 /* Class = "UILabel"; text = "13 подряд"; ObjectID = "PXK-7E-juQ"; */
-"PXK-7E-juQ.text" = "13 in a row";
+"PXK-7E-juQ.text" = "";
 
 /* Class = "UILabel"; text = "Опыта за неделю"; ObjectID = "dBw-fs-I37"; */
 "dBw-fs-I37.text" = "XP per week";
@@ -15,10 +15,10 @@
 "fHA-QV-uv3.text" = "Best streak";
 
 /* Class = "UILabel"; text = "10"; ObjectID = "hDy-C2-aQe"; */
-"hDy-C2-aQe.text" = "10";
+"hDy-C2-aQe.text" = "";
 
 /* Class = "UILabel"; text = "228"; ObjectID = "rZI-nf-aeP"; */
-"rZI-nf-aeP.text" = "228";
+"rZI-nf-aeP.text" = "";
 
 /* Class = "UILabel"; text = "уровень"; ObjectID = "u4D-X0-j8V"; */
 "u4D-X0-j8V.text" = "level";

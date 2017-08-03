@@ -39,6 +39,13 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         setUpTable()
         setUpChart()
         
+        presenter?.reloadStats()
+    }
+    
+    func reload() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         currentLevelLabel.text = "\(presenter?.currentLevel ?? 0)"
         bestStreakLabel.text = "\(presenter?.bestStreak ?? 0)"
         currentWeekXPLabel.text = "\(presenter?.currentWeekXP ?? 0)"
@@ -63,9 +70,6 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     }
     
     fileprivate func setUpTable() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 112
     
@@ -125,7 +129,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
             if let achievement = presenter?.achievements[indexPath.item] {
-                cell.updateInfo(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover, isUnlocked: achievement.isUnlocked, isChallenge: achievement.type == .challenge, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue)
+                cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
             }
             return cell
         }

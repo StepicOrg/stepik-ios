@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AdaptiveStatsView: class {
-
+    func reload()
 }
 
 class AdaptiveStatsPresenter {
@@ -27,11 +27,12 @@ class AdaptiveStatsPresenter {
     typealias WeekProgress = (weekBegin: Date, progress: Int, isRecord: Bool)
     private(set) var progressByWeek: [WeekProgress] = []
     
+    typealias AchievementRecord = (name: String, info: String, type: AchievementType, cover: UIImage?, isUnlocked: Bool, currentProgress: Int, maxProgress: Int)
+    private(set) var achievements: [AchievementRecord] = []
+    
     fileprivate var ratingManager: RatingManager?
     fileprivate var statsManager: StatsManager?
     fileprivate var achievementsManager: AchievementManager?
-    
-    private(set) var achievements: [Achievement] = []
     
     init(statsManager: StatsManager, ratingManager: RatingManager, achievementsManager: AchievementManager, view: AdaptiveStatsView) {
         self.view = view
@@ -39,13 +40,12 @@ class AdaptiveStatsPresenter {
         self.statsManager = statsManager
         self.ratingManager = ratingManager
         self.achievementsManager = achievementsManager
-        
-        achievements = achievementsManager.storedAchievements
-        
-        loadStats()
     }
     
-    fileprivate func loadStats() {
+    func reloadStats() {
+        achievements.removeAll()
+        progressByWeek.removeAll()
+        
         currentXP = ratingManager?.retrieveRating() ?? 0
         currentLevel = RatingHelper.getLevel(for: currentXP)
         bestStreak = statsManager?.getMaxStreak() ?? 1
@@ -100,6 +100,13 @@ class AdaptiveStatsPresenter {
         }
         
         progressByWeek.reverse()
+        
+        // Achievements
+        achievementsManager?.storedAchievements.forEach({ achievement in
+            achievements.append((name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
+        })
+        
+        view?.reload()
     }
     
 }

@@ -47,22 +47,22 @@ class AchievementTableViewCell: UITableViewCell {
         coverOverlayView.isHidden = false
     }
     
-    func updateInfo(name: String, info: String, cover: UIImage?, isUnlocked: Bool = false, isChallenge: Bool = true, currentProgress: Int = 0, maxProgress: Int = 1) {
+    func updateInfo(name: String, info: String, cover: UIImage?, isUnlocked: Bool = false, type: AchievementType = .challenge, currentProgress: Int = 0, maxProgress: Int = 1) {
         achievementNameLabel.text = name
         achievementInfoLabel.text = info
         
         coverImageView.image = cover
         
-        progressBar.isHidden = isChallenge
-        progressCounterLabel.isHidden = isChallenge
-        progressChallengeLabel.isHidden = !isChallenge
+        progressBar.isHidden = type == .challenge
+        progressCounterLabel.isHidden = type == .challenge
+        progressChallengeLabel.isHidden = type != .challenge
         
-        if !isChallenge && maxProgress > 0 {
+        if type != .challenge && maxProgress > 0 {
             progressBar.setProgress(Float(currentProgress) / Float(maxProgress), animated: true)
             progressCounterLabel.text = "\(currentProgress) ⁄ \(maxProgress)"
         }
         
-        if isChallenge {
+        if type == .challenge {
             progressChallengeLabel.text = isUnlocked ? NSLocalizedString("AchievementUnlocked", comment: "") : NSLocalizedString("AchievementLocked", comment: "")
         }
         
