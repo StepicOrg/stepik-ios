@@ -322,7 +322,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let signInViewController = ControllerHelper.instantiateViewController(identifier: "SignInViewController", storyboardName: "Auth") as! SignInViewController
             signInViewController.prefilledEmail = email
-            ControllerHelper.getTopViewController()?.present(signInViewController, animated: true)
+            
+            if let topViewController = ControllerHelper.getTopViewController() as? UINavigationController {
+                topViewController.pushViewController(signInViewController, animated: true)
+            }
         } else {
             // Other actions
             handleOpenedFromDeepLink(url)

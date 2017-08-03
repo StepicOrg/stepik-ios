@@ -120,7 +120,9 @@ extension WebControllerManager : WKNavigationDelegate {
                     UIApplication.shared.openURL(url)
                 } else if url.absoluteString.contains("social_signup_with_existing_email") {
                     if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?\(url.query ?? "")") {
-                        UIApplication.shared.openURL(url)
+                        self.dismissWebControllerWithKey("social auth", animated: false, completion: {
+                            UIApplication.shared.openURL(url)
+                        }, error: nil)
                     }
                 }
             }
