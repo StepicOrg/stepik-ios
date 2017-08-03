@@ -1,5 +1,5 @@
 //
-//  StatsHelper.swift
+//  StatsManager.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 27.07.2017.
@@ -8,26 +8,28 @@
 
 import Foundation
 
-class StatsHelper {
-    private static let statsKey = "stats"
-    private static let maxStreakKey = "max_streak"
-    static let defaults = UserDefaults.standard
+class StatsManager {
+    static let shared = StatsManager()
     
-    private static let secondsInDay: TimeInterval = 24 * 60 * 60
+    private let statsKey = "stats"
+    private let maxStreakKey = "max_streak"
+    let defaults = UserDefaults.standard
     
-    static func dayByDate(_ date: Date) -> Int {
+    private let secondsInDay: TimeInterval = 24 * 60 * 60
+    
+    func dayByDate(_ date: Date) -> Int {
         // Day num (01.01.1970 - 0, 02.01.1970 - 1, ...)
         let dayNum = Int(date.timeIntervalSince1970 / secondsInDay)
         return dayNum
     }
     
-    static func dateByDay(_ day: Int) -> Date {
+    func dateByDay(_ day: Int) -> Date {
         // 00:00 am target day
         let date = Date(timeIntervalSince1970: secondsInDay * Double(day))
         return date
     }
     
-    private static func stringDictToIntDict(_ dict: [String: String]) -> [Int: Int] {
+    private func stringDictToIntDict(_ dict: [String: String]) -> [Int: Int] {
         var intDict: [Int: Int] = [:]
         for (key, value) in dict {
             if let intKey = Int(key), let intVal = Int(value) {
@@ -37,7 +39,7 @@ class StatsHelper {
         return intDict
     }
     
-    private static func intDictToStringDict(_ dict: [Int: Int]) -> [String: String] {
+    private func intDictToStringDict(_ dict: [Int: Int]) -> [String: String] {
         var stringDict: [String: String] = [:]
         for (key, value) in dict {
             stringDict[String(key)] = String(value)
@@ -45,7 +47,7 @@ class StatsHelper {
         return stringDict
     }
     
-    static func loadStats() -> [Int: Int]? {
+    func loadStats() -> [Int: Int]? {
         guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {
             return nil
         }
@@ -53,19 +55,19 @@ class StatsHelper {
         return stringDictToIntDict(savedStats)
     }
     
-    static func saveStats(_ value: [Int: Int]) {
+    func saveStats(_ value: [Int: Int]) {
         defaults.set(intDictToStringDict(value), forKey: statsKey)
     }
     
-    static func getMaxStreak() -> Int {
+    func getMaxStreak() -> Int {
         return defaults.value(forKey: maxStreakKey) as? Int ?? 1
     }
     
-    static func updateMaxStreak(with value: Int) {
+    func updateMaxStreak(with value: Int) {
         defaults.set(max(getMaxStreak(), value), forKey: maxStreakKey)
     }
     
-    static func incrementRating(_ value: Int, for date: Date = Date()) {
+    func incrementRating(_ value: Int, for date: Date = Date()) {
         var stats = loadStats()
         if stats == nil {
             stats = [:]

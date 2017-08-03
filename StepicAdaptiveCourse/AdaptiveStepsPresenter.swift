@@ -38,15 +38,18 @@ class AdaptiveStepsPresenter {
     var currentStepViewController: AdaptiveStepViewController?
     
     // TODO: optimize DI
-    private var coursesAPI: CoursesAPI?
-    private var stepsAPI: StepsAPI?
-    private var lessonsAPI: LessonsAPI?
-    private var progressesAPI: ProgressesAPI?
-    private var stepicsAPI: StepicsAPI?
-    private var recommendationsAPI: RecommendationsAPI?
-    private var profilesAPI: ProfilesAPI?
-    private var unitsAPI: UnitsAPI?
-    private var viewsAPI: ViewsAPI?
+    fileprivate var coursesAPI: CoursesAPI?
+    fileprivate var stepsAPI: StepsAPI?
+    fileprivate var lessonsAPI: LessonsAPI?
+    fileprivate var progressesAPI: ProgressesAPI?
+    fileprivate var stepicsAPI: StepicsAPI?
+    fileprivate var recommendationsAPI: RecommendationsAPI?
+    fileprivate var profilesAPI: ProfilesAPI?
+    fileprivate var unitsAPI: UnitsAPI?
+    fileprivate var viewsAPI: ViewsAPI?
+    fileprivate var ratingManager: RatingManager?
+    fileprivate var statsManager: StatsManager?
+    fileprivate var achievementsManager: AchievementManager?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
@@ -68,7 +71,7 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
@@ -78,15 +81,18 @@ class AdaptiveStepsPresenter {
         self.profilesAPI = profilesAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
+        self.ratingManager = ratingManager
+        self.statsManager = statsManager
+        self.achievementsManager = achievementsManager
         self.view = view
     }
     
     func refreshContent() {
         if !isKolodaPresented {
-            rating = RatingHelper.retrieveRating()
+            rating = ratingManager?.retrieveRating() ?? 0
             
-            streak = RatingHelper.retrieveStreak()
-            streak = streak == 0 ? RatingHelper.incrementStreak() : streak
+            streak = ratingManager?.retrieveStreak() ?? 1
+            streak = streak == 0 ? (ratingManager?.incrementStreak() ?? streak) : streak
             
             view?.updateProgress(for: self.rating)
             
@@ -482,32 +488,32 @@ class AdaptiveStepsPresenter {
                     }
                     
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
+                        guard let s = self else { return }
+                        
                         // Update rating only after reaction was sent
-                        if (self?.currentStepPresenter?.state ?? .unsolved) == .successful {
-                            guard let curStreak = self?.streak,
-                                let curRating = self?.rating else {
-                                    return
-                            }
+                        if (s.currentStepPresenter?.state ?? .unsolved) == .successful {
+                            let curStreak = s.streak
+                            let curRating = s.rating
                             
                             let oldRating = curRating
                             let newRating = curRating + curStreak
-                            self?.rating = RatingHelper.incrementRating(curStreak)
+                            s.rating = s.ratingManager?.incrementRating(curStreak) ?? curRating
                             
                             AchievementManager.shared.fireEvent(.exp(value: curStreak))
                             
                             // Update stats
-                            StatsHelper.incrementRating(curStreak)
-                            StatsHelper.updateMaxStreak(with: curStreak)
+                            s.statsManager?.incrementRating(curStreak)
+                            s.statsManager?.updateMaxStreak(with: curStreak)
                             
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
                                 AchievementManager.shared.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
                                 
-                                self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
+                                s.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
                             }
-                            self?.streak = RatingHelper.incrementStreak()
+                            s.streak = s.ratingManager?.incrementStreak() ?? curStreak
                         }
                         
-                        self?.getNewRecommendation(for: course, success: successHandler)
+                        s.getNewRecommendation(for: course, success: successHandler)
                     })
                 }
             }
@@ -581,7 +587,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
         
         // Drop streak
         if streak > 1 {
-            streak = RatingHelper.incrementStreak(-streak + 1)
+            streak = ratingManager?.incrementStreak(-streak + 1) ?? 1
         }
         
         view?.updateTopCardControl(stepState: .wrong)

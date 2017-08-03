@@ -8,13 +8,17 @@
 
 import Foundation
 
+enum AchievementType {
+    case challenge, progress
+}
+
 protocol Achievement: class, AchievementObserver {
     var slug: String { get set }
     var name: String { get set }
     var info: String? { get set }
     var cover: UIImage? { get set }
     
-    var hasProgress: Bool { get set }
+    var type: AchievementType { get set }
     var progressValue: Int { get set }
     var maxProgressValue: Int { get set }
     
@@ -28,7 +32,7 @@ protocol Achievement: class, AchievementObserver {
     var isUnlocked: Bool { get }
     
     init()
-    init(slug: String, name: String, info: String?, cover: UIImage?, hasProgress: Bool, maxProgressValue: Int)
+    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int)
     
     func restore()
     func save()
@@ -43,14 +47,14 @@ extension Achievement {
         return maxProgressValue == progressValue
     }
     
-    init(slug: String, name: String, info: String?, cover: UIImage?, hasProgress: Bool, maxProgressValue: Int = 1) {
+    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int = 1) {
         self.init()
         
         self.slug = slug
         self.name = name
         self.info = info
         self.cover = cover
-        self.hasProgress = hasProgress
+        self.type = type
         self.maxProgressValue = maxProgressValue
         
         restore()
@@ -78,7 +82,7 @@ final class ChallengeAchievement: Achievement {
     var info: String? = ""
     var cover: UIImage? = nil
     
-    var hasProgress = false
+    var type: AchievementType = .challenge
     var maxProgressValue: Int = 1
     var progressValue: Int = 0
     
@@ -87,7 +91,7 @@ final class ChallengeAchievement: Achievement {
     var value: ((Any) -> Int)? = nil
     
     convenience init(slug: String, name: String, info: String?, cover: UIImage?) {
-        self.init(slug: slug, name: name, info: info, cover: cover, hasProgress: false, maxProgressValue: 1)
+        self.init(slug: slug, name: name, info: info, cover: cover, type: .challenge, maxProgressValue: 1)
     }
     
     func notify(event: AchievementEvent) -> Bool {
@@ -106,7 +110,7 @@ final class ProgressAchievement: Achievement {
     var info: String? = ""
     var cover: UIImage? = nil
     
-    var hasProgress = false
+    var type: AchievementType = .progress
     var maxProgressValue: Int = 1
     var progressValue: Int = 0
     
@@ -115,7 +119,7 @@ final class ProgressAchievement: Achievement {
     var value: ((Any) -> Int)? = nil
     
     convenience init(slug: String, name: String, info: String?, cover: UIImage?, maxProgressValue: Int) {
-        self.init(slug: slug, name: name, info: info, cover: cover, hasProgress: true, maxProgressValue: maxProgressValue)
+        self.init(slug: slug, name: name, info: info, cover: cover, type: .progress, maxProgressValue: maxProgressValue)
     }
     
     func notify(event: AchievementEvent) -> Bool {

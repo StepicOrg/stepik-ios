@@ -27,25 +27,35 @@ class AdaptiveStatsPresenter {
     typealias WeekProgress = (weekBegin: Date, progress: Int, isRecord: Bool)
     private(set) var progressByWeek: [WeekProgress] = []
     
-    private(set) var achievements: [Achievement] = AchievementManager.shared.storedAchievements
+    fileprivate var ratingManager: RatingManager?
+    fileprivate var statsManager: StatsManager?
+    fileprivate var achievementsManager: AchievementManager?
     
-    init(view: AdaptiveStatsView) {
+    private(set) var achievements: [Achievement] = []
+    
+    init(statsManager: StatsManager, ratingManager: RatingManager, achievementsManager: AchievementManager, view: AdaptiveStatsView) {
         self.view = view
+        
+        self.statsManager = statsManager
+        self.ratingManager = ratingManager
+        self.achievementsManager = achievementsManager
+        
+        achievements = achievementsManager.storedAchievements
         
         loadStats()
     }
     
     fileprivate func loadStats() {
-        currentXP = RatingHelper.retrieveRating()
+        currentXP = ratingManager?.retrieveRating() ?? 0
         currentLevel = RatingHelper.getLevel(for: currentXP)
-        bestStreak = StatsHelper.getMaxStreak()
+        bestStreak = statsManager?.getMaxStreak() ?? 1
         
-        stats = StatsHelper.loadStats()
-        guard let stats = stats else {
+        stats = statsManager?.loadStats()
+        guard let stats = stats, let statsManager = statsManager else {
             return
         }
         
-        let curDayNum = StatsHelper.dayByDate(Date())
+        let curDayNum = statsManager.dayByDate(Date())
         last7DaysProgress.removeAll()
         for i in 0..<7 {
             currentWeekXP += stats[curDayNum - i] ?? 0
@@ -67,7 +77,7 @@ class AdaptiveStatsPresenter {
         var weeks: Set<Date> = Set<Date>()
         var weekRecordBeginHash: Int? = nil
         for (day, progress) in stats {
-            let weekBeginForCurrentDay = getWeekBeginByDate(StatsHelper.dateByDay(day))
+            let weekBeginForCurrentDay = getWeekBeginByDate(statsManager.dateByDay(day))
             let weekHash = weekBeginForCurrentDay.hashValue
             weeks.insert(weekBeginForCurrentDay)
             

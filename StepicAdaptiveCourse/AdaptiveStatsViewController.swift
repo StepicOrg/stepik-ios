@@ -30,7 +30,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveStatsPresenter(view: self)
+        presenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, achievementsManager: AchievementManager.shared, view: self)
     }
     
     override func viewDidLoad() {
@@ -125,7 +125,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
             if let achievement = presenter?.achievements[indexPath.item] {
-                cell.updateInfo(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover, isUnlocked: achievement.isUnlocked, isChallenge: !achievement.hasProgress, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue)
+                cell.updateInfo(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover, isUnlocked: achievement.isUnlocked, isChallenge: achievement.type == .challenge, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue)
             }
             return cell
         }
