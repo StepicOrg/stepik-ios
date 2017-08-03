@@ -250,5 +250,5 @@ NewLevelCongratulationShareText = "Я достиг %@ уровня в прило
 NewLevelCongratulationText = "Вы достигли %@ уровня!";
 RatingCongratulationText = "Правильно! +%@ опыта";
 ShareAchievement = "Поделиться достижением";
-AchievementLocked = "ещё не открытото";
+AchievementLocked = "ещё не открыто";
 AchievementUnlocked = "открыто";
