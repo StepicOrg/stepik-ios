@@ -10,4 +10,5 @@ import Foundation
 
 protocol SearchQueriesView: class {
     func updateSuggestions(suggestions: [String])
+    func setState(state: SearchQueriesState)
 }

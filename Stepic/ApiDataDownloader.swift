@@ -34,6 +34,7 @@ class ApiDataDownloader {
     static let assignments = AssignmentsAPI()
     static let certificates = CertificatesAPI()
     static let profiles = ProfilesAPI()
+    static let queries = QueriesAPI()
 }
 
 enum RefreshMode {

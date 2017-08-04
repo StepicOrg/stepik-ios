@@ -795,6 +795,15 @@
 		08E8F96C1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */; };
 		08E8F96D1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */; };
 		08E8F96E1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */; };
+		08E8F9741F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
+		08E8F9751F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
+		08E8F9761F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
+		08E8F97A1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */; };
+		08E8F97B1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */; };
+		08E8F97C1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */; };
+		08E8F97D1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
+		08E8F97E1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
+		08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
 		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E01D0F192A00E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -1810,6 +1819,9 @@
 		08E6BB6A1DC8EB45006622EC /* UserActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActivity.swift; sourceTree = "<group>"; };
 		08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesPresenter.swift; sourceTree = "<group>"; };
 		08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesView.swift; sourceTree = "<group>"; };
+		08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesViewController.swift; sourceTree = "<group>"; };
+		08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionUpdateDelegate.swift; sourceTree = "<group>"; };
@@ -3282,8 +3294,19 @@
 			children = (
 				08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */,
 				08E8F96B1F34DD48008CF4A1 /* SearchQueriesView.swift */,
+				08E8F9771F34E624008CF4A1 /* SearchQueries View */,
 			);
 			name = "Search Queries";
+			sourceTree = "<group>";
+		};
+		08E8F9771F34E624008CF4A1 /* SearchQueries View */ = {
+			isa = PBXGroup;
+			children = (
+				08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */,
+				08E8F9781F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift */,
+				08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */,
+			);
+			name = "SearchQueries View";
 			sourceTree = "<group>";
 		};
 		08EF9A0B1C91D12700433E4A /* Video Player */ = {
@@ -4080,6 +4103,7 @@
 				08D1211C1C937B2200A54ABC /* SectionTableViewCell.xib in Resources */,
 				08D1211D1C937B2200A54ABC /* SortingQuizTableViewCell.xib in Resources */,
 				084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
+				08E8F97E1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08D1211E1C937B2200A54ABC /* StepicVideoPlayerViewController.xib in Resources */,
 				086494A11E8C7A060083E0BE /* SberbankUniversity.xcassets in Resources */,
 				08FF752D1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
@@ -4109,6 +4133,7 @@
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
 				08FF752C1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 				2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */,
+				08E8F97D1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
@@ -4210,6 +4235,7 @@
 				0808527B1ED752DE007C0877 /* GoogleService-Info.plist in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				080852791ED74C35007C0877 /* Tokens.plist in Resources */,
+				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
@@ -4607,6 +4633,7 @@
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
 				083879781E4B918F00B40BE8 /* MatchingQuizTableViewCell.swift in Sources */,
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
+				08E8F9751F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
 				08D1209B1C937B2200A54ABC /* PlaceholderViewDataSource.swift in Sources */,
 				080CE1561E95635A0089A27F /* ProgressesAPI.swift in Sources */,
 				084F7AA81E76EF690088368A /* LastStep.swift in Sources */,
@@ -4803,6 +4830,7 @@
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
 				085E9E6D1F138C2800D6A4BC /* CodeLanguagePickerViewController.swift in Sources */,
 				082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
+				08E8F97B1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				08D120F61C937B2200A54ABC /* Sorter.swift in Sources */,
 				082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				0805FE451F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
@@ -4969,6 +4997,7 @@
 				08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */,
 				0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */,
+				08E8F9741F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
 				08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
@@ -5042,6 +5071,7 @@
 				080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
+				08E8F97A1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
 				087B67221EB3CDA700D14D64 /* TextChoiceQuizTableViewCell.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
@@ -5375,6 +5405,7 @@
 				864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */,
 				864D67BC1E83E08E001E8D9E /* MyCoursesViewController.swift in Sources */,
 				864D67BD1E83E08E001E8D9E /* CoursesViewController.swift in Sources */,
+				08E8F9761F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
 				864D67BE1E83E08E001E8D9E /* SearchResultsCoursesViewController.swift in Sources */,
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
@@ -5460,6 +5491,7 @@
 				864D66C61E83DE03001E8D9E /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				864D66C71E83DE03001E8D9E /* DeleteDeviceExecutableTask.swift in Sources */,
 				864D66C81E83DE03001E8D9E /* Tasks.plist in Sources */,
+				08E8F97C1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				864D66C91E83DE03001E8D9E /* PersistentTaskRecoveryManager.swift in Sources */,
 				085E9E771F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */,
