@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FLKAutoLayout
 
 protocol SearchQueriesViewControllerDelegate: class {
     func didSelectSuggestion(suggestion: String)
@@ -21,7 +22,11 @@ class SearchQueriesViewController: UIViewController {
     weak var delegate: SearchQueriesViewControllerDelegate?
     
     var suggestions: [String] = []
-    var query: String = ""
+    var query: String = "" {
+        didSet {
+            presenter?.getSuggestions(query: query)
+        }
+    }
     
     lazy var updatingView : LoadingPaginationView = {
         let paginationView = LoadingPaginationView()
@@ -42,8 +47,10 @@ class SearchQueriesViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        self.view.addSubview(tableView)
+        tableView.align(to: self.view)
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
+        presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries)
     }
 }
 
@@ -86,17 +93,20 @@ extension SearchQueriesViewController : SearchQueriesView {
                 self?.updatingView.setError()
                 self?.tableView.tableFooterView = self?.updatingView
             }
+            break
         case .updating:
             DispatchQueue.main.async {
                 [weak self] in
                 self?.updatingView.setLoading()
                 self?.tableView.tableFooterView = self?.updatingView
             }
+            break
         case.ok:
             DispatchQueue.main.async {
                 [weak self] in
                 self?.tableView.tableFooterView = nil
             }
+            break
         }
     }
     

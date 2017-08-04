@@ -8,6 +8,7 @@
 
 import UIKit
 import FLKAutoLayout
+
 class FindCoursesViewController: CoursesViewController {
     
     var searchResultsVC : SearchResultsCoursesViewController! 

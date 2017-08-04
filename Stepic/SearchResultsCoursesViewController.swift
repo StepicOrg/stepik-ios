@@ -11,16 +11,39 @@ import DZNEmptyDataSet
 import FLKAutoLayout
 import Alamofire
 
+enum SearchResultsState {
+    case suggestions, courses
+}
+
 class SearchResultsCoursesViewController: CoursesViewController {
     
     var parentVC : UIViewController?
     
+    lazy var suggestionsVC: SearchQueriesViewController = {
+        let vc = SearchQueriesViewController()
+        vc.delegate = self
+        self.addChildViewController(vc)
+        self.view.addSubview(vc.view)
+        vc.view.align(to: self.view)
+        vc.view.isHidden = true
+        return vc
+    }()
+    
+    var state = SearchResultsState.suggestions
+    
     var query : String = "" {
         didSet {
-            if self.query != oldValue {
+            switch state {
+            case .suggestions:
+                suggestionsVC.view.isHidden = false
+                suggestionsVC.query = query
+                break
+            case .courses:
+                suggestionsVC.view.isHidden = true
                 self.isLoadingMore = false
                 self.currentRequest?.cancel()
                 refreshCourses()
+                break
             }
         }
     }
@@ -329,5 +352,12 @@ extension SearchResultsCoursesViewController {
     func emptyDataSetDidTapView(_ scrollView: UIScrollView!) {
         let pvc = parentVC as? FindCoursesViewController
         pvc?.hideKeyboardIfNeeded()
+    }
+}
+
+extension SearchResultsCoursesViewController: SearchQueriesViewControllerDelegate {
+    func didSelectSuggestion(suggestion: String) {
+        self.state = .courses
+        self.query = suggestion
     }
 }

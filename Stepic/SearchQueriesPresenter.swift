@@ -15,8 +15,9 @@ class SearchQueriesPresenter {
     
     var currentRequest: Request?
     
-    init(queriesAPI: QueriesAPI) {
+    init(view: SearchQueriesView, queriesAPI: QueriesAPI) {
         self.queriesAPI = queriesAPI
+        self.view = view
     }
     
     func getSuggestions(query: String) {
