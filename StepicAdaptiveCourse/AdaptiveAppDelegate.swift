@@ -28,12 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DefaultsContainer.launch.didLaunch = true
         }
         
+        LocalNotificationsHelper.registerNotifications()
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        let todayXP = StatsHelper.loadStats()?[StatsHelper.dayByDate(Date())]
+        LocalNotificationsHelper.schedule(notification: .tomorrow(todayXP: todayXP))
+        LocalNotificationsHelper.schedule(notification: .weekly)
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -46,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        LocalNotificationsHelper.cancelAllNotifications()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
