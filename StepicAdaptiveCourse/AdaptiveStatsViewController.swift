@@ -19,6 +19,9 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     @IBOutlet weak var bestStreakLabel: UILabel!
     @IBOutlet weak var currentLevelLabel: UILabel!
     
+    fileprivate var achievements: [AchievementViewData] = []
+    fileprivate var progressByWeek: [WeekProgressViewData] = []
+    
     @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
         tableView.reloadData()
     }
@@ -46,12 +49,23 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         tableView.delegate = self
         tableView.dataSource = self
         
-        currentLevelLabel.text = "\(presenter?.currentLevel ?? 0)"
-        bestStreakLabel.text = "\(presenter?.bestStreak ?? 0)"
-        currentWeekXPLabel.text = "\(presenter?.currentWeekXP ?? 0)"
+        tableView.reloadData()
+    }
+    
+    func setProgress(records: [WeekProgressViewData]) {
+        progressByWeek = records
+    }
+    
+    func setAchievements(records: [AchievementViewData]) {
+        achievements = records
+    }
+    
+    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]) {
+        currentLevelLabel.text = "\(currentLevel)"
+        bestStreakLabel.text = "\(bestStreak)"
+        currentWeekXPLabel.text = "\(currentWeekXP)"
         
-        // Load data
-        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: presenter?.last7DaysProgress.reversed() ?? []), label: ""))
+        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
         let data = LineChartData(dataSet: dataSet)
         progressChart.data = data
         progressChart.data?.highlightEnabled = true
@@ -112,9 +126,9 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
-            return presenter?.progressByWeek.count ?? 0
+            return progressByWeek.count
         } else {
-            return presenter?.achievements.count ?? 0
+            return achievements.count
         }
         
     }
@@ -122,15 +136,13 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if segmentedControl.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell
-            if let weekProgress = presenter?.progressByWeek[indexPath.item] {
-                cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
-            }
+            let weekProgress = progressByWeek[indexPath.item]
+            cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
-            if let achievement = presenter?.achievements[indexPath.item] {
-                cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
-            }
+            let achievement = achievements[indexPath.item]
+            cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
             return cell
         }
     }

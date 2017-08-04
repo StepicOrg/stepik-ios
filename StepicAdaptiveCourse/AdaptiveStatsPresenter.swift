@@ -10,25 +10,31 @@ import Foundation
 
 protocol AdaptiveStatsView: class {
     func reload()
+    func setProgress(records: [WeekProgressViewData])
+    func setAchievements(records: [AchievementViewData])
+    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int])
+}
+
+struct WeekProgressViewData {
+    let weekBegin: Date
+    let progress: Int
+    let isRecord: Bool
+}
+
+struct AchievementViewData {
+    let name: String
+    let info: String
+    let type: AchievementType
+    let cover: UIImage?
+    let isUnlocked: Bool
+    let currentProgress: Int
+    let maxProgress: Int
 }
 
 class AdaptiveStatsPresenter {
     weak var view: AdaptiveStatsView?
     
-    var currentXP: Int = 0
-    var currentLevel: Int = 0
-    var currentWeekXP: Int = 0
-    var bestStreak: Int = 0
-    
-    var last7DaysProgress: [Int] = []
-    
     private var stats: [Int: Int]?
-    
-    typealias WeekProgress = (weekBegin: Date, progress: Int, isRecord: Bool)
-    private(set) var progressByWeek: [WeekProgress] = []
-    
-    typealias AchievementRecord = (name: String, info: String, type: AchievementType, cover: UIImage?, isUnlocked: Bool, currentProgress: Int, maxProgress: Int)
-    private(set) var achievements: [AchievementRecord] = []
     
     fileprivate var ratingManager: RatingManager?
     fileprivate var statsManager: StatsManager?
@@ -43,24 +49,27 @@ class AdaptiveStatsPresenter {
     }
     
     func reloadStats() {
-        achievements.removeAll()
-        progressByWeek.removeAll()
+        var achievements: [AchievementViewData] = []
+        var progressByWeek: [WeekProgressViewData] = []
         
-        currentXP = ratingManager?.retrieveRating() ?? 0
-        currentLevel = RatingHelper.getLevel(for: currentXP)
-        bestStreak = statsManager?.getMaxStreak() ?? 1
+        let currentXP = ratingManager?.retrieveRating() ?? 0
+        let currentLevel = RatingHelper.getLevel(for: currentXP)
+        let bestStreak = statsManager?.getMaxStreak() ?? 1
         
         stats = statsManager?.loadStats()
         guard let stats = stats, let statsManager = statsManager else {
             return
         }
         
+        var currentWeekXP = 0
         let curDayNum = statsManager.dayByDate(Date())
-        last7DaysProgress.removeAll()
+        var last7DaysProgress: [Int] = []
         for i in 0..<7 {
             currentWeekXP += stats[curDayNum - i] ?? 0
             last7DaysProgress.append(stats[curDayNum - i] ?? 0)
         }
+        
+        view?.setGeneralStats(currentLevel: currentLevel, bestStreak: bestStreak, currentWeekXP: currentWeekXP, last7DaysProgress: last7DaysProgress)
         
         // Calculate progress by week
         func getWeekBeginByDate(_ date: Date) -> Date {
@@ -96,15 +105,17 @@ class AdaptiveStatsPresenter {
         }
         
         for firstDayOfWeek in weeks {
-            progressByWeek.append((weekBegin: firstDayOfWeek, progress: weekXP[firstDayOfWeek.hashValue] ?? 0, isRecord: firstDayOfWeek.hashValue == weekRecordBeginHash && weeks.count > 1))
+            progressByWeek.append(WeekProgressViewData(weekBegin: firstDayOfWeek, progress: weekXP[firstDayOfWeek.hashValue] ?? 0, isRecord: firstDayOfWeek.hashValue == weekRecordBeginHash && weeks.count > 1))
         }
         
-        progressByWeek.reverse()
+        view?.setProgress(records: progressByWeek.reversed())
         
         // Achievements
         achievementsManager?.storedAchievements.forEach({ achievement in
-            achievements.append((name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
+            achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
         })
+        
+        view?.setAchievements(records: achievements)
         
         view?.reload()
     }
