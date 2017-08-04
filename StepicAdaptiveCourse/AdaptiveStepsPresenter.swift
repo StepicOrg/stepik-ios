@@ -25,7 +25,7 @@ protocol AdaptiveStepsView: class {
     func initCards()
     func updateProgress(for rating: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())?)
-    func showLevelUpCongratulation(level: Int, completion: (() -> ())?)
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> ())?)
     func presentShareDialog(for link: String)
 }
 
@@ -83,7 +83,10 @@ class AdaptiveStepsPresenter {
         self.viewsAPI = viewsAPI
         self.ratingManager = ratingManager
         self.statsManager = statsManager
+        
         self.achievementsManager = achievementsManager
+        self.achievementsManager?.delegate = self
+        
         self.view = view
     }
     
@@ -508,7 +511,7 @@ class AdaptiveStepsPresenter {
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
                                 AchievementManager.shared.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
                                 
-                                s.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
+                                s.view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
                             }
                             s.streak = s.ratingManager?.incrementStreak() ?? curStreak
                         }
@@ -605,5 +608,11 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func contentLoadingDidComplete() {
         isContentLoaded = true
         view?.updateTopCard(cardState: .normal)
+    }
+}
+
+extension AdaptiveStepsPresenter: AchievementManagerDelegate {
+    func achievementUnlocked(for achievement: Achievement) {
+        view?.showCongratulationPopup(type: .achievement(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover ?? Images.placeholders.coursePassed), completion: nil)
     }
 }

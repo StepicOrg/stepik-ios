@@ -10,14 +10,15 @@ import UIKit
 
 class AchievementNotificationView: UIView {
 
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var tapToShareLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     
     func updateInfo(name: String, cover: UIImage) {
-        nameLabel.text = NSLocalizedString("AchievementUnlockedTitle", comment: "")
         infoLabel.text = name
         coverImageView.image = cover
+        
+        tapToShareLabel.text = NSLocalizedString("TapToShareAchievement", comment: "")
     }
 
 }

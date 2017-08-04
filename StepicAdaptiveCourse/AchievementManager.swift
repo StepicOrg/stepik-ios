@@ -9,8 +9,14 @@
 import Foundation
 import NotificationBannerSwift
 
+protocol AchievementManagerDelegate: class {
+    func achievementUnlocked(for achievement: Achievement)
+}
+
 class AchievementManager {
     static let shared = AchievementManager.createAndRegisterAchievements()
+    
+    weak var delegate: AchievementManagerDelegate?
     
     var storedAchievements: [Achievement] = []
     private var subscribers: [String: [AchievementObserver]] = [:]
@@ -62,6 +68,9 @@ class AchievementManager {
         notificationView.updateInfo(name: achievement.name, cover: achievement.cover ?? Images.boundedStepicIcon)
         
         let banner = NotificationBanner(customView: notificationView)
+        banner.onTap = { [weak self] in
+            self?.delegate?.achievementUnlocked(for: achievement)
+        }
         banner.onSwipeUp = {
             banner.dismiss()
         }

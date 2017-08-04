@@ -15,40 +15,40 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DjU-6P-O6G">
-                    <rect key="frame" x="8" y="8" width="50" height="50"/>
+                    <rect key="frame" x="8" y="7" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="eeh-Hw-sX8"/>
                         <constraint firstAttribute="width" constant="50" id="iOP-Do-y78"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achievement unlocked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xD3-6z-drs">
-                    <rect key="frame" x="66" y="10" width="181" height="21"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBc-di-X5R">
+                    <rect key="frame" x="66" y="7" width="101" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBc-di-X5R">
-                    <rect key="frame" x="66" y="33" width="81" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нажмите, чтобы поделиться" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EG-qB-yQb">
+                    <rect key="frame" x="66" y="33" width="185.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="DjU-6P-O6G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="9ld-KL-P4m"/>
-                <constraint firstItem="aBc-di-X5R" firstAttribute="top" secondItem="xD3-6z-drs" secondAttribute="bottom" constant="2" id="DQm-dv-d0U"/>
+                <constraint firstItem="DjU-6P-O6G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="9ld-KL-P4m"/>
                 <constraint firstItem="aBc-di-X5R" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="IML-3O-8Ao"/>
-                <constraint firstItem="xD3-6z-drs" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="UW9-6D-c3f"/>
+                <constraint firstItem="aBc-di-X5R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="W3n-oQ-T3d"/>
+                <constraint firstItem="8EG-qB-yQb" firstAttribute="top" secondItem="aBc-di-X5R" secondAttribute="bottom" constant="2" id="X32-cP-C78"/>
                 <constraint firstItem="DjU-6P-O6G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="eIE-bZ-DFg"/>
-                <constraint firstItem="xD3-6z-drs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="lnV-XB-8EK"/>
+                <constraint firstItem="8EG-qB-yQb" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="j9g-uK-MRh"/>
             </constraints>
             <connections>
                 <outlet property="coverImageView" destination="DjU-6P-O6G" id="ZSt-kb-Q8M"/>
                 <outlet property="infoLabel" destination="aBc-di-X5R" id="tSz-fb-DfC"/>
-                <outlet property="nameLabel" destination="xD3-6z-drs" id="kzF-w5-8Fb"/>
+                <outlet property="tapToShareLabel" destination="8EG-qB-yQb" id="SZW-8I-nxS"/>
             </connections>
-            <point key="canvasLocation" x="-122.5" y="-188.5"/>
+            <point key="canvasLocation" x="-122.5" y="-493"/>
         </view>
     </objects>
 </document>

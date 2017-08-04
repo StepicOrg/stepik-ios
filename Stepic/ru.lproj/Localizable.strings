@@ -252,4 +252,6 @@ RatingCongratulationText = "Правильно! +%@ опыта";
 ShareAchievement = "Поделиться достижением";
 AchievementLocked = "ещё не открыто";
 AchievementUnlocked = "открыто";
-AchievementUnlockedTitle = "Получено достижение";
+TapToShareAchievement = "Нажмите, чтобы поделиться достижением";
+AchievementCongratulationShareText = "Я получил достижение «%@» в приложении %@. Присоединяйся и попытайся побить мой рекорд!";
+AchievementCongratulationText = "Получено достижение «%@»";

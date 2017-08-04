@@ -127,8 +127,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         }
     }
     
-    func showLevelUpCongratulation(level: Int, completion: (() -> ())? = nil) {
-        let controller = Alerts.congratulation.construct(congratulationType: .level(level: level), continueHandler: { [weak self] in
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> ())? = nil) {
+        let controller = Alerts.congratulation.construct(congratulationType: type, continueHandler: { [weak self] in
             self?.state = .normal
             completion?()
         })

@@ -13,8 +13,9 @@ extension Alerts {
     static let congratulation = CongratulationAlertManager()
 }
 
+typealias CongratulationType = CongratulationViewController.CongratulationType
+
 class CongratulationAlertManager: AlertManager {
-    typealias CongratulationType = CongratulationViewController.CongratulationType
     
     func present(alert: UIViewController, inController controller: UIViewController)  {
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
