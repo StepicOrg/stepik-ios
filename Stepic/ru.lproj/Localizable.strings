@@ -252,3 +252,4 @@ RatingCongratulationText = "Правильно! +%@ опыта";
 ShareAchievement = "Поделиться достижением";
 AchievementLocked = "ещё не открыто";
 AchievementUnlocked = "открыто";
+AchievementUnlockedTitle = "Получено достижение";

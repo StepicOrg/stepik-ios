@@ -251,3 +251,4 @@ RatingCongratulationText = "Correct! +%@ XP";
 ShareAchievement = "Share achievement";
 AchievementLocked = "locked";
 AchievementUnlocked = "unlocked";
+AchievementUnlockedTitle = "Achievement unlocked";

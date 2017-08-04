@@ -871,6 +871,8 @@
 		2C04C1031F160643006B69B3 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
+		2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
+		2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -1870,6 +1872,8 @@
 		2C04C10A1F16075D006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step2.html; sourceTree = "<group>"; };
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
+		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
+		2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
@@ -3541,6 +3545,15 @@
 			name = AdaptiveStats;
 			sourceTree = "<group>";
 		};
+		2C2544071F348085004DB3D9 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */,
+				2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
 			isa = PBXGroup;
 			children = (
@@ -3572,6 +3585,7 @@
 		2C6640CB1F2F36E80033A274 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				2C2544071F348085004DB3D9 /* Notification */,
 				2C6640C91F2F35E60033A274 /* Achievement.swift */,
 				2C6640CE1F2F47A90033A274 /* AchievementManager.swift */,
 			);
@@ -4285,6 +4299,7 @@
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
+				2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
 				86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */,
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
@@ -5437,6 +5452,7 @@
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
 				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
+				2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */,
 				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
@@ -6153,7 +6169,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6177,7 +6193,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";

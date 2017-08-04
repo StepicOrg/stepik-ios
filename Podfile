@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+install! 'cocoapods', :deterministic_uuids => false
 source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
@@ -52,6 +52,7 @@ def testing_pods
 end
 
 target 'Stepic' do
+    platform :ios, '8.0'
     all_pods
     target 'StepicTests' do
         inherit! :search_paths
@@ -61,13 +62,16 @@ target 'Stepic' do
 end
 
 target 'SberbankUniversity' do 
+    platform :ios, '8.0'
     all_pods
 end
 
 target 'Adaptive 1838' do
+    platform :ios, '9.0'
     all_pods
     
     pod 'Koloda', '4.0'
     pod 'SDWebImage/GIF'
     pod 'Charts', '3.0.2'
+    pod 'NotificationBannerSwift', '1.4.1'
 end

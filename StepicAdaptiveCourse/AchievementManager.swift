@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NotificationBannerSwift
 
 class AchievementManager {
     static let shared = AchievementManager.createAndRegisterAchievements()
@@ -51,9 +52,20 @@ class AchievementManager {
         print("achievements: fired event \(event)")
         (subscribers[event.slug] ?? []).forEach { observer in
             if !observer.attachedAchievement.isUnlocked && observer.notify(event: event) {
-                print("\(observer.attachedAchievement.slug) unlocked!")
+                showNotification(for: observer.attachedAchievement)
             }
         }
+    }
+    
+    func showNotification(for achievement: Achievement) {
+        let notificationView = UINib(nibName: "AchievementNotificationView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AchievementNotificationView
+        notificationView.updateInfo(name: achievement.name, cover: achievement.cover ?? Images.boundedStepicIcon)
+        
+        let banner = NotificationBanner(customView: notificationView)
+        banner.onSwipeUp = {
+            banner.dismiss()
+        }
+        banner.show()
     }
 }
 
