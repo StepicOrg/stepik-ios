@@ -32,7 +32,7 @@ class QueriesAPI {
             let response = response.response
             
             if let e = error as NSError? {
-                print("RETRIEVE \(name)/\(query): error \(e.domain) \(e.code): \(e.localizedDescription)")
+                print("RETRIEVE \(self.name)/\(query): error \(e.domain) \(e.code): \(e.localizedDescription)")
                 if e.code == -999 {
                     errorHandler(.cancelled)
                     return
@@ -43,7 +43,7 @@ class QueriesAPI {
             }
             
             if response?.statusCode != 200 {
-                print("RETRIEVE \(name)/\(query): bad response status code \(String(describing: response?.statusCode))")
+                print("RETRIEVE \(self.name)/\(query): bad response status code \(String(describing: response?.statusCode))")
                 errorHandler(.badStatus)
                 return
             }
