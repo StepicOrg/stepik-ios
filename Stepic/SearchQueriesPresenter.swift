@@ -25,7 +25,7 @@ class SearchQueriesPresenter {
         self.view?.updateSuggestions(suggestions: localSuggestions)
         currentRequest?.cancel()
         self.view?.setState(state: .updating)
-        currentRequest = queriesAPI?.retrieve(query: query, success: {
+        self.currentRequest = self.queriesAPI?.retrieve(query: query, success: {
             [weak self]
             suggestions in
             self?.view?.updateSuggestions(suggestions: localSuggestions + suggestions)

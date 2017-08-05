@@ -20,17 +20,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aer-63-xtx">
-                        <rect key="frame" x="8" y="8" width="304" height="28"/>
+                        <rect key="frame" x="16" y="8" width="296" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="leadingMargin" secondItem="aer-63-xtx" secondAttribute="leading" id="Jsr-Z8-Iem"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="aer-63-xtx" secondAttribute="leading" constant="-8" id="Jsr-Z8-Iem"/>
                     <constraint firstAttribute="topMargin" secondItem="aer-63-xtx" secondAttribute="top" id="MOv-8x-kcc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aer-63-xtx" secondAttribute="trailing" id="bfz-Dr-5Ap"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="aer-63-xtx" secondAttribute="bottom" constant="-0.5" id="lsY-28-ElR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="aer-63-xtx" secondAttribute="bottom" id="lsY-28-ElR"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

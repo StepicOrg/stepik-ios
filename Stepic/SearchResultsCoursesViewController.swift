@@ -19,6 +19,9 @@ class SearchResultsCoursesViewController: CoursesViewController {
     
     var parentVC : UIViewController?
     
+    var updateSearchBarBlock: ((String) -> Void)?
+    var hideKeyboardBlock: ((Void) -> Void)?
+
     lazy var suggestionsVC: SearchQueriesViewController = {
         let vc = SearchQueriesViewController()
         vc.delegate = self
@@ -26,6 +29,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         self.view.addSubview(vc.view)
         vc.view.align(to: self.view)
         vc.view.isHidden = true
+        vc.hideKeyboardBlock = self.hideKeyboardBlock
         return vc
     }()
     
@@ -35,9 +39,11 @@ class SearchResultsCoursesViewController: CoursesViewController {
         didSet {
             switch state {
             case .suggestions:
-                suggestionsVC.view.isHidden = false
-                suggestionsVC.query = query
-                break
+                if query != "" {
+                    suggestionsVC.query = query
+                    suggestionsVC.view.isHidden = false
+                    break
+                }
             case .courses:
                 suggestionsVC.view.isHidden = true
                 self.isLoadingMore = false
@@ -96,7 +102,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countTopOffset()
@@ -300,8 +306,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
 
 extension SearchResultsCoursesViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let pvc = parentVC as? FindCoursesViewController
-        pvc?.hideKeyboardIfNeeded()
+        hideKeyboardBlock?()
     }
 }
 
@@ -319,27 +324,11 @@ extension SearchResultsCoursesViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    //    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-    //        
-    //        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-    //        
-    //        let paragraph = NSMutableParagraphStyle()
-    //        paragraph.lineBreakMode = .ByWordWrapping
-    //        paragraph.alignment = .Center
-    //        
-    //        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-    //            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-    //            NSParagraphStyleAttributeName: paragraph]
-    //        
-    //        return NSAttributedString(string: text, attributes: attributes)
-    //    }
-    
     func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
         return UIColor.white
     }
     
     func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
-        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 0
     }
 }
@@ -350,14 +339,14 @@ extension SearchResultsCoursesViewController {
     }
     
     func emptyDataSetDidTapView(_ scrollView: UIScrollView!) {
-        let pvc = parentVC as? FindCoursesViewController
-        pvc?.hideKeyboardIfNeeded()
+        hideKeyboardBlock?()
     }
 }
 
 extension SearchResultsCoursesViewController: SearchQueriesViewControllerDelegate {
     func didSelectSuggestion(suggestion: String) {
         self.state = .courses
+        updateSearchBarBlock?(suggestion)
         self.query = suggestion
     }
 }

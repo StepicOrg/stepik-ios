@@ -19,6 +19,8 @@ class SearchQueriesViewController: UIViewController {
     
     var presenter: SearchQueriesPresenter?
     
+    var hideKeyboardBlock: ((Void) -> Void)?
+    
     weak var delegate: SearchQueriesViewControllerDelegate?
     
     var suggestions: [String] = []
@@ -29,7 +31,7 @@ class SearchQueriesViewController: UIViewController {
     }
     
     lazy var updatingView : LoadingPaginationView = {
-        let paginationView = LoadingPaginationView()
+        let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         paginationView.refreshAction = {
             [weak self] in
             
@@ -51,6 +53,16 @@ class SearchQueriesViewController: UIViewController {
         tableView.align(to: self.view)
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
         presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries)
+        tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        suggestions = []
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideKeyboardBlock?()
     }
 }
 
@@ -81,8 +93,11 @@ extension SearchQueriesViewController: UITableViewDataSource {
 
 extension SearchQueriesViewController : SearchQueriesView {
     func updateSuggestions(suggestions: [String]) {
-        self.suggestions = suggestions
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.suggestions = suggestions
+            self?.tableView.reloadData()
+        }
     }
     
     func setState(state: SearchQueriesState) {
@@ -104,7 +119,7 @@ extension SearchQueriesViewController : SearchQueriesView {
         case.ok:
             DispatchQueue.main.async {
                 [weak self] in
-                self?.tableView.tableFooterView = nil
+                self?.tableView.tableFooterView = UIView()
             }
             break
         }
