@@ -52,7 +52,7 @@ class SearchQueriesViewController: UIViewController {
         self.view.addSubview(tableView)
         tableView.align(to: self.view)
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
-        presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries)
+        presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries, persistentManager: SearchQueriesPersistentManager())
         tableView.tableFooterView = UIView()
     }
     
@@ -68,6 +68,7 @@ class SearchQueriesViewController: UIViewController {
 
 extension SearchQueriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didSelect(suggestion: suggestions[indexPath.row])
         delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row])
     }
 }

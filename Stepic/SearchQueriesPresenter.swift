@@ -11,24 +11,29 @@ import Alamofire
 
 class SearchQueriesPresenter {
     weak var view : SearchQueriesView?
-    var queriesAPI: QueriesAPI?
+    var queriesAPI: QueriesAPI
     
     var currentRequest: Request?
+    var persistentManager: SearchQueriesPersistentManager
     
-    init(view: SearchQueriesView, queriesAPI: QueriesAPI) {
+    let localSuggestionsMaxCount = 3
+    
+    init(view: SearchQueriesView, queriesAPI: QueriesAPI, persistentManager: SearchQueriesPersistentManager) {
         self.queriesAPI = queriesAPI
         self.view = view
+        self.persistentManager = persistentManager
     }
     
     func getSuggestions(query: String) {
-        let localSuggestions = [query]
+        let localSuggestions = [query.lowercased()] + persistentManager.getTop(for: query, count: localSuggestionsMaxCount)
         self.view?.updateSuggestions(suggestions: localSuggestions)
         currentRequest?.cancel()
         self.view?.setState(state: .updating)
-        self.currentRequest = self.queriesAPI?.retrieve(query: query, success: {
+        self.currentRequest = self.queriesAPI.retrieve(query: query.lowercased(), success: {
             [weak self]
             suggestions in
-            self?.view?.updateSuggestions(suggestions: localSuggestions + suggestions)
+            let uniqueSuggestions = NSOrderedSet(array: localSuggestions + suggestions.map({$0.lowercased()})).array as? [String] ?? (localSuggestions + suggestions)
+            self?.view?.updateSuggestions(suggestions: uniqueSuggestions)
             self?.view?.setState(state: .ok)
         }, error: {
             [weak self]
@@ -39,6 +44,10 @@ class SearchQueriesPresenter {
                 self?.view?.setState(state: .ok)
             }
         })
+    }
+    
+    func didSelect(suggestion: String) {
+        persistentManager.didSearch(query: suggestion)
     }
 }
 
