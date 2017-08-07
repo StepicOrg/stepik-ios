@@ -11,8 +11,8 @@ import DZNEmptyDataSet
 import FLKAutoLayout
 import Alamofire
 
-enum SearchResultsState {
-    case suggestions, courses
+enum SearchResultsState: String {
+    case suggestions = "suggestions", courses = "courses"
 }
 
 class SearchResultsCoursesViewController: CoursesViewController {
@@ -344,7 +344,8 @@ extension SearchResultsCoursesViewController {
 }
 
 extension SearchResultsCoursesViewController: SearchQueriesViewControllerDelegate {
-    func didSelectSuggestion(suggestion: String) {
+    func didSelectSuggestion(suggestion: String, position: Int) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.selected, parameters: ["query": self.query.lowercased(), "position": position, "suggestion": suggestion])
         self.state = .courses
         updateSearchBarBlock?(suggestion)
         self.query = suggestion

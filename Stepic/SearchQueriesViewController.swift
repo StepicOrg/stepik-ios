@@ -11,7 +11,7 @@ import UIKit
 import FLKAutoLayout
 
 protocol SearchQueriesViewControllerDelegate: class {
-    func didSelectSuggestion(suggestion: String)
+    func didSelectSuggestion(suggestion: String, position: Int)
 }
 
 class SearchQueriesViewController: UIViewController {
@@ -69,7 +69,7 @@ class SearchQueriesViewController: UIViewController {
 extension SearchQueriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelect(suggestion: suggestions[indexPath.row])
-        delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row])
+        delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row], position: indexPath.row)
     }
 }
 

@@ -143,6 +143,13 @@ extension FindCoursesViewController : UISearchResultsUpdating {
         }
         results?.countTopOffset()
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let results = searchController.searchResultsController as? SearchResultsCoursesViewController else {
+            return
+        }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled, parameters: ["context" : results.state.rawValue])
+    }
 }
 
 extension FindCoursesViewController {
