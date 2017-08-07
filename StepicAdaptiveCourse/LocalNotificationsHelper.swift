@@ -9,6 +9,26 @@
 import UIKit
 
 enum LocalNotification {
+    case tomorrow, weekly
+    
+    var fireDate: Date {
+        switch self {
+        case .tomorrow:
+            return Date(timeIntervalSinceNow: 24 * 60 * 60)
+        case .weekly:
+            return Date(timeIntervalSinceNow: 2 * 24 * 60 * 60)
+        }
+    }
+    
+    var repeatInterval: NSCalendar.Unit {
+        switch self {
+        case .tomorrow:
+            return NSCalendar.Unit(rawValue: 0)
+        case .weekly:
+            return NSCalendar.Unit.weekOfYear
+        }
+    }
+    
     var notification: UILocalNotification {
         let localNotification = UILocalNotification()
         localNotification.soundName = UILocalNotificationDefaultSoundName
@@ -17,15 +37,7 @@ enum LocalNotification {
         
         switch self {
         case .tomorrow:
-            var curDay = StatsHelper.dayByDate(Date())
-            while curDay > 0 {
-                if let todayXP = StatsHelper.loadStats()?[curDay], todayXP != 0 {
-                    curDay -= 1
-                } else {
-                    break
-                }
-            }
-            let streak = StatsHelper.dayByDate(Date()) - curDay
+            let streak = StatsHelper.currentDayStreak
             if streak == 0 {
                 // 0 points today, 0 points prev
                 localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
@@ -55,27 +67,6 @@ enum LocalNotification {
         
         return localNotification
     }
-    
-    var fireDate: Date {
-        switch self {
-        case .tomorrow:
-            return Date(timeIntervalSinceNow: 24 * 60 * 60)
-        case .weekly:
-            return Date(timeIntervalSinceNow: 2 * 24 * 60 * 60)
-        }
-    }
-    
-    var repeatInterval: NSCalendar.Unit {
-        switch self {
-        case .tomorrow:
-            return NSCalendar.Unit(rawValue: 0)
-        case .weekly:
-            return NSCalendar.Unit.weekOfYear
-        }
-    }
-    
-    case tomorrow
-    case weekly
 }
 
 class LocalNotificationsHelper {
