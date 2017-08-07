@@ -10,18 +10,17 @@ import UIKit
 
 extension UILabel {
     func setTextWithHTMLString(_ htmlText: String) {
-//        Time.tick(htmlText)
-        let descData = htmlText.data(using: String.Encoding.unicode) ?? Data()
+        guard let encodedData = htmlText.data(using: .unicode) else {
+            self.text = ""
+            return
+        }
         
+        guard let attributedDescription = try? NSMutableAttributedString(data: encodedData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) else {
+            self.text = ""
+            return
+        }
         
-        //        courseDescriptionLabel.text = "some text"
-        //        var range : NSRange? = NSMakeRange(0, 1)
-        //        var attributes = courseDescriptionLabel.attributedText.attributesAtIndex(0, effectiveRange: &range!)
-        //        attributes.merge([NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType])
-        
-        let attributedDescription = try? NSAttributedString(data: descData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil) 
-        self.text = attributedDescription?.string ?? ""
-//        Time.tock(htmlText)
+        self.text = attributedDescription.string
     }
     
     class func heightForLabelWithText(_ text: String, lines: Int, fontName: String, fontSize: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
@@ -42,10 +41,7 @@ extension UILabel {
         label.textAlignment = alignment
         label.sizeToFit()
         
-        //        print(label.bounds.height)
         return label.bounds.height
-
-        
     }
     
     class func heightForLabelWithText(_ text: String, lines: Int, standardFontOfSize size: CGFloat, width : CGFloat, html : Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {

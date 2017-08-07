@@ -12,13 +12,16 @@ class MathQuizViewController: QuizViewController {
 
     var textField = UITextField()
     
+    let textFieldHeight = 32
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.containerView.addSubview(textField)
         textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
         textField.borderStyle = UITextBorderStyle.roundedRect
-        
+        textField.constrainHeight("\(textFieldHeight)")
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
         
@@ -63,12 +66,7 @@ class MathQuizViewController: QuizViewController {
         //            textField.text = ""
         //        }
     }
-    
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 38
-    }
-    
+        
     //Override this in the subclass
     override func getReply() -> Reply {
         return MathReply(formula: textField.text ?? "")

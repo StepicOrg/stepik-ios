@@ -13,22 +13,23 @@ class SortingQuizTableViewCell: UITableViewCell {
     
     @IBOutlet weak var textContainerView: UIView!
         
-    var webViewHelper : CellWebViewHelper!
-    var optionLabel: UILabel! = UILabel()
-    var optionWebView: UIWebView! = UIWebView()
+    var optionLabel: UILabel?
+    var optionWebView: FullHeightWebView?
+    
+    var webViewHelper : CellWebViewHelper?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = UITableViewCellSelectionStyle.none
-        
-        initLabel()
-        initWebView()
 
         contentView.backgroundColor = UIColor.clear
-        webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
     }
 
     func initLabel() {
+        guard optionLabel == nil else { return }
+        optionLabel = UILabel()
+        guard let optionLabel = optionLabel else { return }
+
         optionLabel.numberOfLines = 0
         optionLabel.font = UIFont(name: "ArialMT", size: 16)
         optionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
@@ -41,16 +42,20 @@ class SortingQuizTableViewCell: UITableViewCell {
     }
     
     func initWebView() {
+        guard optionWebView == nil else { return }
+        optionWebView = FullHeightWebView()
+        guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.align(to: textContainerView)
-        webViewHelper = CellWebViewHelper(webView: optionWebView, heightWithoutWebView: 17)
+        webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
     
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        optionWebView.isHidden = true
-        optionLabel.isHidden = true
+        optionWebView?.isHidden = true
+        optionLabel?.isHidden = true
     }
 
     var sortable: Bool = true
@@ -58,27 +63,36 @@ class SortingQuizTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
+    class func getHeightForText(text: String, width: CGFloat, sortable: Bool) -> CGFloat {
+        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - (sortable  ? 60 : 16))) + 17
+    }
 }
 
-extension SortingQuizTableViewCell : TextHeightDependentCellProtocol {
+extension SortingQuizTableViewCell {
     
     //All optimization logics is now encapsulated here
-    func setHTMLText(_ text: String) -> ((Void) -> Int) {
+    func setHTMLText(_ text: String, width: CGFloat, finishedBlock: @escaping (CGFloat) -> Void) {
+        initLabel()
+        optionLabel?.isHidden = false
+        optionLabel?.setTextWithHTMLString(text)
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
-            optionWebView.isHidden = false
-            return webViewHelper.setTextWithTeX(text)
-        } else {
-            optionLabel.isHidden = false
-            optionLabel.setTextWithHTMLString(text)
-            return {
+            initWebView()
+            optionWebView?.isHidden = true
+            webViewHelper?.mathJaxFinishedBlock = {
                 [weak self] in
-                if let w = self?.textContainerView.bounds.width {
-                    return max(27, Int(UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - ((self?.sortable ?? true) ? 60 : 16)))) + 17
-                } else {
-                    return 0
+                self?.layoutIfNeeded()
+                if let webView = self?.optionWebView {
+                    webView.invalidateIntrinsicContentSize()
+                    self?.optionLabel?.isHidden = true
+                    self?.optionWebView?.isHidden = false
+                    finishedBlock(17 + webView.contentHeight)
                 }
             }
+            webViewHelper?.setTextWithTeX(text)
+        } else {
+            let height = SortingQuizTableViewCell.getHeightForText(text: text, width: width, sortable: self.sortable)
+            finishedBlock(height)
         }
     }
 }

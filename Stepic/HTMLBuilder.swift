@@ -55,7 +55,6 @@ class HTMLBuilder: NSObject {
         var res = "<html>\n"
         
         res += "<head>\n\(stepicStyleString + stepicBaseURLString + head)\n</head>\n"
-//        print(body)
         res += "<body style=\"width:\(width))px;\">\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
         
         res += "</html>"
@@ -82,7 +81,6 @@ class HTMLBuilder: NSObject {
         } else {
             res += "<head>\n\(head)\n</head>\n"
         }
-        //        print(body)
         let bodyOpenTag = "<body text=\"\(textColorHex)\">"
         res += "\(bodyOpenTag)\n\(addStepikURLWhereNeeded(body: body))\n</body>\n"
         
@@ -96,7 +94,6 @@ class HTMLBuilder: NSObject {
         var linkMap = [String:String]()
         
         for link in links {
-//            print("found link:")
             if link.characters.first == Character("/") {
                 linkMap[link] = "\(StepicApplicationsInfo.stepicURL)/\(link)"
             }
@@ -106,10 +103,6 @@ class HTMLBuilder: NSObject {
         for (key, val) in linkMap {
             newBody = newBody.replacingOccurrences(of: key, with: val)
         }
-        
-        print("BODYYYY/n/n")
-        print(body)
-        print(newBody)
         
         return newBody
     }

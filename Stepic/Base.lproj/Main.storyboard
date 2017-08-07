@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0uJ-IX-W04">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0uJ-IX-W04">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -15,7 +15,7 @@
         <!--Search Results Courses View Controller-->
         <scene sceneID="hZW-z6-kvK">
             <objects>
-                <viewController storyboardIdentifier="SearchResultsCoursesViewController" id="TeQ-C0-k1P" customClass="SearchResultsCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultsCoursesViewController" id="TeQ-C0-k1P" customClass="SearchResultsCoursesViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h7K-bd-Bih"/>
                         <viewControllerLayoutGuide type="bottom" id="E0Q-Xw-4UH"/>
@@ -57,7 +57,7 @@
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="taR-j4-5Jv" customClass="FindCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="taR-j4-5Jv" customClass="FindCoursesViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CHk-No-T5F"/>
                         <viewControllerLayoutGuide type="bottom" id="lea-1q-JQL"/>
@@ -108,7 +108,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Courses" image="tab-find-courses" selectedImage="tab-find-courses" id="D6B-Zy-xmi"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -126,7 +126,7 @@
             <objects>
                 <navigationController id="NxB-SA-EGM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My courses" image="tab-my-courses" selectedImage="tab-my-courses" id="I8C-zf-fZb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nen-ML-6eo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nen-ML-6eo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -141,7 +141,7 @@
         <!--Downloads-->
         <scene sceneID="B6E-0I-IzT">
             <objects>
-                <viewController id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Trn-kM-JDC"/>
                         <viewControllerLayoutGuide type="bottom" id="MtY-Xf-AK1"/>
@@ -191,7 +191,7 @@
         <!--Preferences-->
         <scene sceneID="nPr-nK-TwN">
             <objects>
-                <tableViewController storyboardIdentifier="oldPreferences" id="5ay-8c-nL7" customClass="UserPreferencesTableViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="oldPreferences" id="5ay-8c-nL7" customClass="UserPreferencesTableViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="HpV-RX-ZGv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -477,7 +477,7 @@
         <!--Video quality-->
         <scene sceneID="Cfp-YU-Kun">
             <objects>
-                <tableViewController id="oOn-LT-rBa" customClass="VideoQualityTableViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oOn-LT-rBa" customClass="VideoQualityTableViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IDO-Br-jyj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -592,7 +592,7 @@
         <!--Course-->
         <scene sceneID="wHU-ZO-zC9">
             <objects>
-                <viewController storyboardIdentifier="CoursePreviewViewController" id="D75-Zh-Yxy" customClass="CoursePreviewViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CoursePreviewViewController" id="D75-Zh-Yxy" customClass="CoursePreviewViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Obs-4e-zpG"/>
                         <viewControllerLayoutGuide type="bottom" id="fnF-gK-n8t"/>
@@ -643,7 +643,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralInfoTableViewCell" rowHeight="119" id="b6J-rC-ibi" customClass="GeneralInfoTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GeneralInfoTableViewCell" rowHeight="119" id="b6J-rC-ibi" customClass="GeneralInfoTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="213" width="383" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6J-rC-ibi" id="oqz-ov-022">
@@ -702,7 +702,7 @@
                                             <outlet property="typeSegmentedControl" destination="uiF-lQ-kcC" id="dDW-dO-eRK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeachersTableViewCell" rowHeight="167" id="abo-eS-oYO" customClass="TeachersTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeachersTableViewCell" rowHeight="167" id="abo-eS-oYO" customClass="TeachersTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="332" width="383" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="abo-eS-oYO" id="XH4-7K-rzd">
@@ -786,7 +786,7 @@
         <!--Syllabus-->
         <scene sceneID="9kw-Mv-ATb">
             <objects>
-                <viewController storyboardIdentifier="SectionsViewController" id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SectionsViewController" id="Zo1-Oj-Hsk" customClass="SectionsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0cz-24-l3w"/>
                         <viewControllerLayoutGuide type="bottom" id="L7p-o7-VTy"/>
@@ -838,7 +838,7 @@
         <!--Units-->
         <scene sceneID="fwV-16-Q11">
             <objects>
-                <viewController storyboardIdentifier="UnitsViewController" id="8ik-tt-HOc" customClass="UnitsViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UnitsViewController" id="8ik-tt-HOc" customClass="UnitsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R3Q-gr-8aW"/>
                         <viewControllerLayoutGuide type="bottom" id="dbc-fW-0PT"/>
@@ -868,7 +868,7 @@
                     <connections>
                         <outlet property="tableView" destination="Q7F-3H-ipp" id="hgP-ev-Cu6"/>
                         <segue destination="7LO-Mv-R4f" kind="show" identifier="showSteps" id="oyz-px-1HN"/>
-                        <segue destination="7LO-Mv-R4f" kind="custom" identifier="replaceSteps" customClass="ReplaceLastSegue" customModule="SberbankUniversity" customModuleProvider="target" id="n0y-oT-VBo"/>
+                        <segue destination="7LO-Mv-R4f" kind="custom" identifier="replaceSteps" customClass="ReplaceLastSegue" customModule="Adaptive_1838" customModuleProvider="target" id="n0y-oT-VBo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hEh-qF-PcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -878,7 +878,7 @@
         <!--Lesson-->
         <scene sceneID="LMh-2U-yNH">
             <objects>
-                <viewController storyboardIdentifier="LessonViewController" id="7LO-Mv-R4f" customClass="LessonViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LessonViewController" id="7LO-Mv-R4f" customClass="LessonViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HYg-fo-je8"/>
                         <viewControllerLayoutGuide type="bottom" id="bDn-so-91T"/>
@@ -897,7 +897,7 @@
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
             <objects>
-                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y0P-ZE-fOO"/>
                         <viewControllerLayoutGuide type="bottom" id="SdS-Qz-hnr"/>
@@ -923,7 +923,7 @@
                                     <action selector="playButtonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="kVm-QE-2Cq"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="SberbankUniversity" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="Adaptive_1838" customModuleProvider="target">
                                 <rect key="frame" x="-4" y="559" width="383" height="46"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -998,66 +998,9 @@
             <point key="canvasLocation" x="5778.2608695652179" y="1928.8"/>
         </scene>
         <!--Web Step View Controller-->
-        <scene sceneID="Iip-iO-Bhn">
-            <objects>
-                <viewController storyboardIdentifier="WebStepViewController2" id="MzH-NU-yyp" customClass="WebStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="f9i-ks-CuU"/>
-                        <viewControllerLayoutGuide type="bottom" id="cls-Jl-RZZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0uX-EE-d78">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCA-ca-prT">
-                                <rect key="frame" x="0.0" y="621" width="375" height="46"/>
-                                <color key="backgroundColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="hT0-Hg-5OS"/>
-                                </constraints>
-                                <state key="normal" title="Solve on the website">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="solveOnTheWebsitePressed:" destination="MzH-NU-yyp" eventType="touchUpInside" id="Aty-Rj-NOm"/>
-                                </connections>
-                            </button>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bh8-ur-IoY">
-                                <rect key="frame" x="0.0" y="43" width="375" height="578"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Bh8-ur-IoY" secondAttribute="trailing" id="1Xu-fO-mMQ"/>
-                            <constraint firstItem="uCA-ca-prT" firstAttribute="bottom" secondItem="cls-Jl-RZZ" secondAttribute="top" id="8xi-s9-aYr"/>
-                            <constraint firstItem="uCA-ca-prT" firstAttribute="leading" secondItem="Bh8-ur-IoY" secondAttribute="leading" id="BWM-vw-OxU"/>
-                            <constraint firstItem="uCA-ca-prT" firstAttribute="top" secondItem="Bh8-ur-IoY" secondAttribute="bottom" id="GPB-ar-aja"/>
-                            <constraint firstItem="uCA-ca-prT" firstAttribute="trailing" secondItem="Bh8-ur-IoY" secondAttribute="trailing" id="K9Y-3c-jXO"/>
-                            <constraint firstItem="cls-Jl-RZZ" firstAttribute="top" secondItem="Bh8-ur-IoY" secondAttribute="bottom" id="THj-Sy-Xce"/>
-                            <constraint firstItem="Bh8-ur-IoY" firstAttribute="top" secondItem="0uX-EE-d78" secondAttribute="top" constant="43" id="ZoV-jQ-LbI"/>
-                            <constraint firstItem="Bh8-ur-IoY" firstAttribute="leading" secondItem="0uX-EE-d78" secondAttribute="leading" id="udy-6u-q2W"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="THj-Sy-Xce"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="solveButton" destination="uCA-ca-prT" id="und-cK-51d"/>
-                        <outlet property="solveButtonHeight" destination="hT0-Hg-5OS" id="kjC-O3-ukO"/>
-                        <outlet property="stepWebView" destination="Bh8-ur-IoY" id="h8L-HI-MzB"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fh1-8B-1lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4970" y="3444"/>
-        </scene>
-        <!--Web Step View Controller-->
         <scene sceneID="bJt-5m-7H3">
             <objects>
-                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oaa-Og-jEd"/>
                         <viewControllerLayoutGuide type="bottom" id="Dnu-MQ-f7B"/>
@@ -1082,10 +1025,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY6-uB-D81" userLabel="QuizPlaceholderView">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="fD4-kU-l4I"/>
+                                                    <constraint firstAttribute="height" constant="32" placeholder="YES" id="fD4-kU-l4I"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-jp-jJZ" customClass="DiscussionCountView" customModule="SberbankUniversity" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-jp-jJZ" customClass="DiscussionCountView" customModule="Adaptive_1838" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="32" width="375" height="46"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1163,7 +1106,6 @@
                         <outlet property="prevLessonButtonHeight" destination="1JA-3y-zzS" id="mIU-Fi-KcN"/>
                         <outlet property="prevToBottomDistance" destination="r28-jl-19e" id="kZI-zU-C8O"/>
                         <outlet property="quizPlaceholderView" destination="cY6-uB-D81" id="2LX-s0-szN"/>
-                        <outlet property="quizPlaceholderViewHeight" destination="fD4-kU-l4I" id="Jmx-0a-DZb"/>
                         <outlet property="stepWebView" destination="emi-b6-GHx" id="YHK-7Z-rBj"/>
                         <outlet property="stepWebViewHeight" destination="vIx-sL-U1Q" id="UJJ-me-Eyb"/>
                     </connections>
@@ -1175,7 +1117,7 @@
         <!--My courses-->
         <scene sceneID="Qyk-4b-RfK">
             <objects>
-                <viewController id="wRW-Xr-pb6" customClass="MyCoursesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wRW-Xr-pb6" customClass="MyCoursesViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fg2-eF-38F"/>
                         <viewControllerLayoutGuide type="bottom" id="tY7-f0-H8c"/>
@@ -1256,7 +1198,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="W60-es-dLX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1275,7 +1217,7 @@
                 <navigationController id="4bs-eV-3LS" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Certificates" image="tab-certificates" selectedImage="tab-certificates" id="mwm-pG-FxV"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E6m-D0-KUL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E6m-D0-KUL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1290,7 +1232,7 @@
         <!--Certificates-->
         <scene sceneID="47F-vv-gBJ">
             <objects>
-                <viewController id="Jgo-IS-dmc" customClass="CertificatesViewController" customModule="SberbankUniversity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Jgo-IS-dmc" customClass="CertificatesViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bOo-fc-ILW"/>
                         <viewControllerLayoutGuide type="bottom" id="30u-pL-bXu"/>
