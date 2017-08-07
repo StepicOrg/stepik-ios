@@ -19,9 +19,10 @@ $(document).ready(function() {
 	<key>MetaViewport</key>
 	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0&quot; /&gt;</string>
 	<key>MathJaxFinishScript</key>
-	<string>&lt;script&gt;
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;
 MathJax.Hub.Queue(function () {
-alert(&apos;WKWebView JS Call!&apos;)});
+window.location= &quot;mathjaxfinish://finished&quot;;
+});
 &lt;/script&gt;</string>
 	<key>LocalTexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;

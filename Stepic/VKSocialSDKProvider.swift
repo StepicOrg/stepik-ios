@@ -23,16 +23,17 @@ class VKSocialSDKProvider : NSObject, SocialSDKProvider {
         sdkInstance.register(self)
     }
     
-    func getAccessToken(success successHandler: @escaping (String) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
+    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
         self.successHandler = successHandler
         self.errorHandler = errorHandler
+        
         if VKSdk.isLoggedIn() {
             VKSdk.forceLogout()
         }
         VKSdk.authorize(["email"])
     }
     
-    fileprivate var successHandler : ((String) -> Void)? = nil
+    fileprivate var successHandler : ((String, String?) -> Void)? = nil
     fileprivate var errorHandler : ((SocialSDKError) -> Void)? = nil
 }
 
@@ -46,13 +47,13 @@ extension VKSocialSDKProvider : VKSdkDelegate {
     }
 
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
-        if (result.error) != nil {
+        if result.error != nil {
             print(result.error)
             errorHandler?(SocialSDKError.connectionError)
             return
         }
         if let token = result.token.accessToken {
-            successHandler?(token)
+            successHandler?(token, result.token.email)
             return
         } 
     }

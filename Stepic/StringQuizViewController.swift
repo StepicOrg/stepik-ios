@@ -12,6 +12,8 @@ class StringQuizViewController: QuizViewController {
 
     var textView = UITextView()
     
+    let textViewHeight = 64
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +22,8 @@ class StringQuizViewController: QuizViewController {
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
-
+        _ = textView.constrainHeight("\(textViewHeight)")
+        
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
         
@@ -63,11 +66,6 @@ class StringQuizViewController: QuizViewController {
         }
     }
     
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 72
-    }
-
     //Override this in the subclass
     override func getReply() -> Reply {
         return TextReply(text: textView.text ?? "")

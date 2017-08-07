@@ -16,14 +16,14 @@ enum SocialNetworks : Int {
         switch self {
         case .vk: 
             return SocialNetwork(name: self.name, image: UIImage(named: "vk_filled")!, 
-                                 registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!, 
+                registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                                  socialSDKProvider : VKSocialSDKProvider.instance)
         case .google: 
             return SocialNetwork(name: self.name, image: UIImage(named: "google_filled")!, 
                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         case .facebook:
             return SocialNetwork(name: self.name, image: UIImage(named: "facebook_filled")!, 
-                                 registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
+                registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                                  socialSDKProvider: FBSocialSDKProvider.instance)
         case .twitter:
             return SocialNetwork(name: self.name, image: UIImage(named: "twitter_filled")!, 

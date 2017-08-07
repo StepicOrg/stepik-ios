@@ -12,7 +12,7 @@ import Presentr
 
 class FillBlanksQuizViewController: QuizViewController {
 
-    var tableView = UITableView()
+    var tableView = FullHeightTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,11 +92,6 @@ class FillBlanksQuizViewController: QuizViewController {
             [weak self] in 
             selectedBlock(vc.selectedData)
             self?.tableView.reloadData()
-            if let exp = self?.expectedQuizHeight, 
-                let without = self?.heightWithoutQuiz {
-                self?.delegate?.needsHeightUpdate(exp + without, animated: true, breaksSynchronizationControl: false)
-
-            }
         }
         customPresentViewController(fillBlanksPickerPresenter, viewController: vc, animated: true, completion: nil)
     }
@@ -130,7 +125,6 @@ class FillBlanksQuizViewController: QuizViewController {
         self.tableView.isUserInteractionEnabled = true
         answerForComponent = [:]
         self.tableView.reloadData()
-        self.delegate?.needsHeightUpdate(expectedQuizHeight + heightWithoutQuiz, animated: true, breaksSynchronizationControl: false)
     }
 
     override func updateQuizAfterSubmissionUpdate(reload: Bool) {
@@ -154,11 +148,6 @@ class FillBlanksQuizViewController: QuizViewController {
         
         self.tableView.reloadData()
     }
-    
-    override var expectedQuizHeight : CGFloat {
-        return self.tableView.contentSize.height
-    }
-
 }
 
 extension FillBlanksQuizViewController : UITableViewDelegate {

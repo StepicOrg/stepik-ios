@@ -26,7 +26,6 @@ class WebViewHorizontalScrollHelper : NSObject {
     
     init(webView: UIWebView, onView: UIView, pagerPanRecognizer: UIPanGestureRecognizer) {
         super.init()
-
         self.webView = webView
         self.pagerPanRecognizer = pagerPanRecognizer
         self.underlyingView = onView
