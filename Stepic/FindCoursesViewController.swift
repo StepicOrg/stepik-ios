@@ -8,6 +8,7 @@
 
 import UIKit
 import FLKAutoLayout
+
 class FindCoursesViewController: CoursesViewController {
     
     var searchResultsVC : SearchResultsCoursesViewController! 
@@ -51,6 +52,10 @@ class FindCoursesViewController: CoursesViewController {
         
         searchResultsVC = ControllerHelper.instantiateViewController(identifier: "SearchResultsCoursesViewController") as! SearchResultsCoursesViewController
         searchResultsVC.parentVC = self
+        searchResultsVC.hideKeyboardBlock = {
+            [weak self] in
+            self?.hideKeyboardIfNeeded()
+        }
         searchController = UISearchController(searchResultsController: searchResultsVC)
         
         searchController.searchBar.searchBarStyle = UISearchBarStyle.default
@@ -64,7 +69,11 @@ class FindCoursesViewController: CoursesViewController {
         UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
 
         definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = true
+        } else {
+            searchController.dimsBackgroundDuringPresentation = true
+        }
         
         searchController.searchBar.scopeButtonTitles = []
         
@@ -107,6 +116,8 @@ class FindCoursesViewController: CoursesViewController {
         }
         return cell
     }
+    
+    var isDisplayingFromSuggestions: Bool = false
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
@@ -117,9 +128,27 @@ extension FindCoursesViewController : UISearchBarDelegate {
 
 extension FindCoursesViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        guard !isDisplayingFromSuggestions else {
+            isDisplayingFromSuggestions = false
+            return
+        }
         let results = searchController.searchResultsController as? SearchResultsCoursesViewController
+        results?.state = .suggestions
         results?.query = searchController.searchBar.text!
+        results?.updateSearchBarBlock = {
+            [weak self]
+            newQuery in
+            self?.isDisplayingFromSuggestions = true
+            self?.searchController.searchBar.text = newQuery
+        }
         results?.countTopOffset()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        guard let results = searchController.searchResultsController as? SearchResultsCoursesViewController else {
+            return
+        }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled, parameters: ["context" : results.state.rawValue])
     }
 }
 
