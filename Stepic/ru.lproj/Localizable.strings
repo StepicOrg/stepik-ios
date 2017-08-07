@@ -250,3 +250,4 @@ NewLevelCongratulationShareText = "Я достиг %@ уровня в прило
 NewLevelCongratulationText = "Вы достигли %@ уровня!";
 RatingCongratulationText = "Правильно! +%@ опыта";
 ShareAchievement = "Поделиться достижением";
+SocialSignupWithExistingEmail = "Указанный email привязан к другому аккаунту. Чтобы входить через эту социальную сеть, необходимо войти, используя email и пароль";

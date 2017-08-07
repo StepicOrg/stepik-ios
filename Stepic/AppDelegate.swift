@@ -312,10 +312,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
-        let codeOpt = Parser.sharedParser.codeFromURL(url)
-        if let code = codeOpt {
+        
+        if let code = Parser.sharedParser.codeFromURL(url) {
+            // Auth token
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])            
+        } else if let queryDict = url.getKeyVals(), let error = queryDict["error"], error == "social_signup_with_existing_email" {
+            // Auth redirect with registered email
+            let email = (queryDict["email"] ?? "").removingPercentEncoding
+            
+            let signInViewController = ControllerHelper.instantiateViewController(identifier: "SignInViewController", storyboardName: "Auth") as! SignInViewController
+            signInViewController.prefilledEmail = email
+            
+            if let topViewController = ControllerHelper.getTopViewController() as? UINavigationController {
+                topViewController.pushViewController(signInViewController, animated: true)
+            }
         } else {
+            // Other actions
             handleOpenedFromDeepLink(url)
         }
         return true

@@ -17,6 +17,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    var prefilledEmail: String?
+    
     fileprivate func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
@@ -74,11 +76,30 @@ class SignInViewController: UIViewController {
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        prefill()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    fileprivate func prefill() {
+        guard let email = self.prefilledEmail, email != "" else { return }
+        
+        emailTextField.text = email
+        
+        let alert = UIAlertController(title: nil, message: NSLocalizedString("SocialSignupWithExistingEmail", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
+            action in
+            self.passwordTextField.becomeFirstResponder()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
     
     fileprivate func signIn() {
         SVProgressHUD.show(withStatus: "")

@@ -55,7 +55,7 @@ class AuthManager : NSObject {
             }
             
             if let r = response {
-                if !r.statusCode.isSuccess() {
+                if r.statusCode < 200 || r.statusCode > 299 {
                     failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
                     return
                 }
@@ -108,7 +108,7 @@ class AuthManager : NSObject {
             }
             
             if let r = response {
-                if !r.statusCode.isSuccess() {
+                if r.statusCode < 200 || r.statusCode > 299 {
                     failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
                     return
                 }
@@ -243,7 +243,7 @@ class AuthManager : NSObject {
                 let response = response.response
 
                 if let r = response {
-                    if r.statusCode.isSuccess() {
+                    if r.statusCode >= 200 && r.statusCode <= 299 {
                         success()
                     } else {
                         let s = NSLocalizedString("TryJoinFromWeb", comment: "")
@@ -270,7 +270,7 @@ class AuthManager : NSObject {
                 let response = response.response
 
                 if let r = response {
-                    if r.statusCode.isSuccess() {
+                    if r.statusCode >= 200 && r.statusCode <= 299 {
                         success()
                         return
                     }
@@ -320,7 +320,7 @@ class AuthManager : NSObject {
                     }
                     
                     if let r = response {
-                        if r.statusCode.isSuccess() {
+                        if r.statusCode >= 200 && r.statusCode <= 299 {
                             success()
                         } else if r.statusCode == 400 {
                             errorHandler(nil, RegistrationErrorInfo(json: json))
@@ -337,11 +337,6 @@ enum TokenRefreshError: Error {
 enum SignInError : Error {
     case tooManyTries
     case noAppWithCredentials
+    case existingEmail(provider: String?, email: String?)
     case other(error: Error?, code: Int?, message: String?)
-}
-
-extension Int {
-    func isSuccess() -> Bool {
-        return "\(self)".characters.first == "2"
-    }
 }

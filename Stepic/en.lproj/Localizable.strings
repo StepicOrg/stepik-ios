@@ -249,3 +249,4 @@ NewLevelCongratulationShareText = "I've reached level %@ in %@ app. Join and bea
 NewLevelCongratulationText = "You've reached level %@!";
 RatingCongratulationText = "Correct! +%@ XP";
 ShareAchievement = "Share achievement";
+SocialSignupWithExistingEmail = "This email is already used. To log in using this social account you have to log in via email and password";
