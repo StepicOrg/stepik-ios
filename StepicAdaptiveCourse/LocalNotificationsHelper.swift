@@ -16,11 +16,34 @@ enum LocalNotification {
         localNotification.fireDate = self.fireDate
         
         switch self {
-        case .tomorrow(let todayXP):
-            if let todayXP = todayXP, todayXP != 0 {
-                localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
-            } else {
+        case .tomorrow:
+            var curDay = StatsHelper.dayByDate(Date())
+            while curDay > 0 {
+                if let todayXP = StatsHelper.loadStats()?[curDay], todayXP != 0 {
+                    curDay -= 1
+                } else {
+                    break
+                }
+            }
+            let streak = StatsHelper.dayByDate(Date()) - curDay
+            if streak == 0 {
+                // 0 points today, 0 points prev
                 localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
+            } else if streak == 1 {
+                // X points today, 0 points prev
+                if let todayXP = StatsHelper.loadStats()?[StatsHelper.dayByDate(Date())] {
+                    localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
+                }
+            } else {
+                // X points today, X points prev
+                var streakDays = "\(streak) "
+                switch (streak % 10) {
+                case 1: streakDays += NSLocalizedString("days1", comment: "")
+                case 2, 3, 4: streakDays += NSLocalizedString("days234", comment: "")
+                default: streakDays += NSLocalizedString("days567890", comment: "")
+                }
+                
+                localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterdayStreak", comment: ""), "\(streakDays)")
             }
         case .weekly:
             localNotification.alertBody = NSLocalizedString("RetentionNotificationWeekly", comment: "")
@@ -31,7 +54,7 @@ enum LocalNotification {
     
     var fireDate: Date {
         switch self {
-        case .tomorrow(_):
+        case .tomorrow:
             return Date(timeIntervalSinceNow: 24 * 60 * 60)
         case .weekly:
             return Date(timeIntervalSinceNow: 2 * 24 * 60 * 60)
@@ -40,14 +63,14 @@ enum LocalNotification {
     
     var repeatInterval: NSCalendar.Unit {
         switch self {
-        case .tomorrow(_):
+        case .tomorrow:
             return NSCalendar.Unit(rawValue: 0)
         case .weekly:
             return NSCalendar.Unit.weekOfYear
         }
     }
     
-    case tomorrow(todayXP: Int?)
+    case tomorrow
     case weekly
 }
 
@@ -66,6 +89,5 @@ class LocalNotificationsHelper {
         let settings: UIUserNotificationSettings =
             UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
         UIApplication.shared.registerUserNotificationSettings(settings)
-        UIApplication.shared.registerForRemoteNotifications()
     }
 }

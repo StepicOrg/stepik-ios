@@ -34,8 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        let todayXP = StatsHelper.loadStats()?[StatsHelper.dayByDate(Date())]
-        LocalNotificationsHelper.schedule(notification: .tomorrow(todayXP: todayXP))
+        LocalNotificationsHelper.schedule(notification: .tomorrow)
         LocalNotificationsHelper.schedule(notification: .weekly)
     }
 
