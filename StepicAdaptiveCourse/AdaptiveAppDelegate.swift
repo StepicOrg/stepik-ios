@@ -30,12 +30,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LocalNotificationsHelper.registerNotifications()
         
+        if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
+            if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+            }
+        }
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         LocalNotificationsHelper.schedule(notification: .tomorrow)
         LocalNotificationsHelper.schedule(notification: .weekly)
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

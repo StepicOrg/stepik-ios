@@ -29,10 +29,12 @@ enum LocalNotification {
             if streak == 0 {
                 // 0 points today, 0 points prev
                 localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
+                localNotification.userInfo = ["type": "yesterday_zero"]
             } else if streak == 1 {
                 // X points today, 0 points prev
                 if let todayXP = StatsHelper.loadStats()?[StatsHelper.dayByDate(Date())] {
                     localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
+                    localNotification.userInfo = ["type": "yesterday"]
                 }
             } else {
                 // X points today, X points prev
@@ -44,9 +46,11 @@ enum LocalNotification {
                 }
                 
                 localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterdayStreak", comment: ""), "\(streakDays)")
+                localNotification.userInfo = ["type": "yesterday_streak"]
             }
         case .weekly:
             localNotification.alertBody = NSLocalizedString("RetentionNotificationWeekly", comment: "")
+            localNotification.userInfo = ["type": "weekly"]
         }
         
         return localNotification
