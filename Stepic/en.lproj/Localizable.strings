@@ -249,3 +249,6 @@ NewLevelCongratulationShareText = "I've reached level %@ in %@ app. Join and bea
 NewLevelCongratulationText = "You've reached level %@!";
 RatingCongratulationText = "Correct! +%@ XP";
 ShareAchievement = "Share achievement";
+RetentionNotificationYesterday = "You scored %@ points yesterday. Go back and improve your score!";
+RetentionNotificationYesterdayZero = "You didn't score any points for yesterday. Improve your score today!";
+RetentionNotificationWeekly = "You haven't done it for a long time. Go back and keep learning!";

@@ -18,12 +18,12 @@ enum LocalNotification {
         switch self {
         case .tomorrow(let todayXP):
             if let todayXP = todayXP, todayXP != 0 {
-                localNotification.alertBody = "Вчера Вы набрали \(todayXP) очков. Возвращайтесь и улучшите свой результат!"
+                localNotification.alertBody = String(format: NSLocalizedString("RetentionNotificationYesterday", comment: ""), "\(todayXP)")
             } else {
-                localNotification.alertBody = "За вчерашний день Вы ничего не решили. Улучшите свой результат сегодня!"
+                localNotification.alertBody = NSLocalizedString("RetentionNotificationYesterdayZero", comment: "")
             }
         case .weekly:
-            localNotification.alertBody = "Вы давно не занимались. Возвращайтесь и продолжайте учиться!"
+            localNotification.alertBody = NSLocalizedString("RetentionNotificationWeekly", comment: "")
         }
         
         return localNotification

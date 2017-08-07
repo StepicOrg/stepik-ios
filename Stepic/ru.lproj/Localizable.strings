@@ -250,3 +250,6 @@ NewLevelCongratulationShareText = "Я достиг %@ уровня в прило
 NewLevelCongratulationText = "Вы достигли %@ уровня!";
 RatingCongratulationText = "Правильно! +%@ опыта";
 ShareAchievement = "Поделиться достижением";
+RetentionNotificationYesterday = "Вчера Вы набрали %@ очков. Возвращайтесь и улучшите свой результат!";
+RetentionNotificationYesterdayZero = "За вчерашний день Вы ничего не решили. Улучшите свой результат сегодня!";
+RetentionNotificationWeekly = "Вы давно не занимались. Возвращайтесь и продолжайте учиться!";
