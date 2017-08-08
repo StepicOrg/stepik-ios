@@ -885,6 +885,9 @@
 		2C04C1001F160631006B69B3 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1021F160631006B69B3 /* step1.html */; };
 		2C04C1031F160643006B69B3 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
+		2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
+		2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
+		2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
@@ -895,14 +898,24 @@
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
 		2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
+		2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
+		2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
+		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
+		2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */; };
+		2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
+		2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */; };
-		2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsHelper.swift */; };
-		2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */; };
+		2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* StatsManager.swift */; };
+		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C8D08151F1CB77B000E8F32 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step4.html */; };
+		2C8D08151F1CB77B000E8F32 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step5.html */; };
+		2C9704081F39F18700C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97040A1F39F18700C36F0A /* step4.html */; };
+		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
+		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
+		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C071F1E519B00FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
@@ -916,6 +929,7 @@
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD8464C1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
 		2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5D1F14C89900CD0A4C /* icon.png */; };
@@ -1249,7 +1263,6 @@
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
-		868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BC6E31EA0276500E204EE /* StepControlButton.swift */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
@@ -1872,26 +1885,46 @@
 		2C04C1091F16075A006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step3.html; sourceTree = "<group>"; };
 		2C04C10A1F16075D006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step2.html; sourceTree = "<group>"; };
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
+		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
+		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
+		2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
+		2C6640C91F2F35E60033A274 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		2C6640CE1F2F47A90033A274 /* AchievementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
+		2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
+		2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementTableViewCell.swift; sourceTree = "<group>"; };
+		2C6640D81F30BC4D0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
+		2C6640DA1F30BC4E0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
+		2C6640DC1F30BCCB0033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProgressTableViewCell.xib; sourceTree = "<group>"; };
+		2C6640DF1F30BCCD0033A274 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ProgressTableViewCell.strings; sourceTree = "<group>"; };
+		2C6640E11F30BCCE0033A274 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ProgressTableViewCell.strings; sourceTree = "<group>"; };
+		2C6640E31F30BCE60033A274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AchievementTableViewCell.xib; sourceTree = "<group>"; };
 		2C6ABA621F1E00B5005A3BCF /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
-		2C733C391F29E090000E7FAF /* StatsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
-		2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
+		2C733C391F29E090000E7FAF /* StatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsManager.swift; sourceTree = "<group>"; };
+		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
-		2C8D08161F1CB77B000E8F32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
-		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
+		2C8D08161F1CB77B000E8F32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step5.html; sourceTree = "<group>"; };
+		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step5.html; sourceTree = "<group>"; };
+		2C9704091F39F18700C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
+		2C97040B1F39F18E00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
+		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
+		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
+		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CBC4C071F1E519B00FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
+		2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
 		2CFB1C5D1F14C89900CD0A4C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = OnboardingContent/icon.png; sourceTree = "<group>"; };
@@ -1919,12 +1952,9 @@
 		8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingStep.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
-		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
 		86ABC66B1E96867A0012E8A6 /* StepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
 		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
-		86B56E981EC0E11A00CFE4A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
-		86B56E9A1EC0E11F00CFE4A3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AdaptiveMain.strings; sourceTree = "<group>"; };
 		86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepDelegate.swift; sourceTree = "<group>"; };
 		86EF29341E83CEA900F8D214 /* Adaptive 1838.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 1838.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveAppDelegate.swift; sourceTree = "<group>"; };
@@ -3515,6 +3545,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
 				08E16F201BDBA495004822E1 /* Reachability */,
@@ -3533,13 +3564,31 @@
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */,
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
-				2C76ACCC1F16496C0077D9D7 /* RatingHelper.swift */,
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
-				2C733C391F29E090000E7FAF /* StatsHelper.swift */,
+				2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */,
 				2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
+			isa = PBXGroup;
+			children = (
+				2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */,
+				2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */,
+			);
+			name = AdaptiveStats;
+			sourceTree = "<group>";
+		};
+		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */,
+				2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */,
+			);
+			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
@@ -3570,6 +3619,24 @@
 			name = Congratulation;
 			sourceTree = "<group>";
 		};
+		2C6640CB1F2F36E80033A274 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				2C6640C91F2F35E60033A274 /* Achievement.swift */,
+				2C6640CE1F2F47A90033A274 /* AchievementManager.swift */,
+			);
+			name = Achievements;
+			sourceTree = "<group>";
+		};
+		2C6640D61F2F7B010033A274 /* AchievementTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C6640D21F2F7AFD0033A274 /* AchievementTableViewCell.swift */,
+				2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */,
+			);
+			name = AchievementTableViewCell;
+			sourceTree = "<group>";
+		};
 		2C6ABA611F1E009E005A3BCF /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -3588,6 +3655,15 @@
 			name = AdaptiveOnboarding;
 			sourceTree = "<group>";
 		};
+		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */,
+				2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */,
+			);
+			name = ProgressTableViewCell;
+			sourceTree = "<group>";
+		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -3595,6 +3671,25 @@
 				2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		2CEDA35D1F336EFD005F4A5D /* Rating & Stats */ = {
+			isa = PBXGroup;
+			children = (
+				2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */,
+				2C733C391F29E090000E7FAF /* StatsManager.swift */,
+			);
+			name = "Rating & Stats";
+			sourceTree = "<group>";
+		};
+		2CEDA35E1F336F0E005F4A5D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */,
+				2CEDA35D1F336EFD005F4A5D /* Rating & Stats */,
+				2C6640CB1F2F36E80033A274 /* Achievements */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
@@ -3614,7 +3709,8 @@
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
 				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
-				2C8D08171F1CB77B000E8F32 /* step4.html */,
+				2C8D08171F1CB77B000E8F32 /* step5.html */,
+				2C97040A1F39F18700C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
 			sourceTree = "<group>";
@@ -3650,6 +3746,7 @@
 		86795EF41E85322B00A985C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C1649651F2A0823002C9F99 /* AdaptiveStats */,
 				2C5F6BA61F20B25100C251D3 /* Congratulation */,
 				2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */,
 				2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */,
@@ -3661,13 +3758,15 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C2544071F348085004DB3D9 /* AchievementNotificationView */,
+				2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */,
 				866DDDC41EA8060400BAD48E /* CardOverlayView */,
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
 				86ABC6661E9685F80012E8A6 /* StepCardView */,
-				868BC6E31EA0276500E204EE /* StepControlButton.swift */,
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
+				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -3692,6 +3791,7 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
+				2CEDA35E1F336F0E005F4A5D /* Managers */,
 				2C6ABA611F1E009E005A3BCF /* Alerts */,
 				2CFB1C521F14C7EA00CD0A4C /* Supporting Files */,
 				2C03B2A21F0CD84900005383 /* Helpers */,
@@ -4201,6 +4301,7 @@
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
+				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
@@ -4223,8 +4324,9 @@
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
+				2C9704081F39F18700C36F0A /* step4.html in Resources */,
 				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
-				2C8D08151F1CB77B000E8F32 /* step4.html in Resources */,
+				2C8D08151F1CB77B000E8F32 /* step5.html in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
@@ -4233,11 +4335,13 @@
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
+				2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
 				86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */,
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
+				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
@@ -5244,6 +5348,7 @@
 				0888D0FF1F1E3CFC00A16863 /* CodeInputAccessoryView.swift in Sources */,
 				860BC3411EAA1E520058F440 /* PresentationContainer.swift in Sources */,
 				080C5E691EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
+				2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */,
 				860BC3421EAA1E520058F440 /* CertificatesPresentationContainer.swift in Sources */,
 				860BC3431EAA1E520058F440 /* Certificate.swift in Sources */,
 				2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */,
@@ -5257,7 +5362,6 @@
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
 				864514EA1E9FD4F6007F73BE /* SectionsAPI.swift in Sources */,
-				868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */,
 				864514EB1E9FD4F6007F73BE /* LessonsAPI.swift in Sources */,
 				864514EC1E9FD4F6007F73BE /* UsersAPI.swift in Sources */,
 				864514ED1E9FD4F6007F73BE /* StepsAPI.swift in Sources */,
@@ -5279,7 +5383,7 @@
 				864D67471E83E08E001E8D9E /* PlaceholderStyleExtensions.swift in Sources */,
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
-				2C76ACCD1F16496C0077D9D7 /* RatingHelper.swift in Sources */,
+				2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */,
 				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
@@ -5350,7 +5454,7 @@
 				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
-				2C733C3A1F29E090000E7FAF /* StatsHelper.swift in Sources */,
+				2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
 				864D679F1E83E08E001E8D9E /* GeneralInfoTableViewCell.swift in Sources */,
@@ -5375,18 +5479,22 @@
 				864D67B41E83E08E001E8D9E /* LaunchViewController.swift in Sources */,
 				864D67B51E83E08E001E8D9E /* SignInTableViewController.swift in Sources */,
 				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
+				2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */,
 				864D67B61E83E08E001E8D9E /* RegistrationViewController.swift in Sources */,
 				864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */,
 				864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */,
 				864D67B91E83E08E001E8D9E /* CourseTableViewCell.swift in Sources */,
+				2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */,
 				864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */,
 				864D67BC1E83E08E001E8D9E /* MyCoursesViewController.swift in Sources */,
 				864D67BD1E83E08E001E8D9E /* CoursesViewController.swift in Sources */,
+				2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */,
 				08E8F9761F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
 				864D67BE1E83E08E001E8D9E /* SearchResultsCoursesViewController.swift in Sources */,
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
 				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
+				2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */,
 				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
 				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
@@ -5409,6 +5517,7 @@
 				864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */,
 				864D668F1E83DE03001E8D9E /* HTMLBuilder.swift in Sources */,
 				864D66901E83DE03001E8D9E /* UICustomizer.swift in Sources */,
+				2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */,
 				864D66911E83DE03001E8D9E /* CoreDataHelper.swift in Sources */,
 				864D66921E83DE03001E8D9E /* ConnectionHelper.swift in Sources */,
 				864D66931E83DE03001E8D9E /* Sorter.swift in Sources */,
@@ -5421,6 +5530,7 @@
 				864D669A1E83DE03001E8D9E /* GCDThings.swift in Sources */,
 				864D669B1E83DE03001E8D9E /* GlobalFunctions.swift in Sources */,
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
+				2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */,
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
@@ -5449,6 +5559,7 @@
 				864D66B31E83DE03001E8D9E /* WebControllerManager.swift in Sources */,
 				864D66B41E83DE03001E8D9E /* CacheManager.swift in Sources */,
 				864D66B61E83DE03001E8D9E /* WKWebViewPanelManager.m in Sources */,
+				2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */,
 				864D66B71E83DE03001E8D9E /* CoursesJoinManager.swift in Sources */,
 				864D66B81E83DE03001E8D9E /* RemoteVersionManager.swift in Sources */,
 				864D66B91E83DE03001E8D9E /* UpdateChecker.swift in Sources */,
@@ -5516,6 +5627,7 @@
 				864D66EC1E83DE03001E8D9E /* Video+CoreDataProperties.swift in Sources */,
 				864D66ED1E83DE03001E8D9E /* Video.swift in Sources */,
 				864D66EE1E83DE03001E8D9E /* VideoURL+CoreDataProperties.swift in Sources */,
+				2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */,
 				864D66EF1E83DE03001E8D9E /* VideoURL.swift in Sources */,
 				864D66F01E83DE03001E8D9E /* Block+CoreDataProperties.swift in Sources */,
 				864D66F11E83DE03001E8D9E /* Block.swift in Sources */,
@@ -5536,6 +5648,7 @@
 				864D66FF1E83DE03001E8D9E /* StepicToken.swift in Sources */,
 				864D67001E83DE03001E8D9E /* AuthInfo.swift in Sources */,
 				08E3A3B91E93C25900E9C2EF /* APIEndpoint.swift in Sources */,
+				2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */,
 				08E3A3BC1E93C35800E9C2EF /* AuthRoutingManager.swift in Sources */,
 				080E80F71F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
 				864D67011E83DE03001E8D9E /* Session.swift in Sources */,
@@ -5726,11 +5839,38 @@
 			path = OnboardingContent;
 			sourceTree = "<group>";
 		};
-		2C8D08171F1CB77B000E8F32 /* step4.html */ = {
+		2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C6640DC1F30BCCB0033A274 /* Base */,
+				2C6640DF1F30BCCD0033A274 /* en */,
+				2C6640E11F30BCCE0033A274 /* ru */,
+			);
+			name = ProgressTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C6640E31F30BCE60033A274 /* Base */,
+			);
+			name = AchievementTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		2C8D08171F1CB77B000E8F32 /* step5.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2C8D08161F1CB77B000E8F32 /* ru */,
 				2C8D08181F1CB786000E8F32 /* en */,
+			);
+			name = step5.html;
+			sourceTree = "<group>";
+		};
+		2C97040A1F39F18700C36F0A /* step4.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C9704091F39F18700C36F0A /* en */,
+				2C97040B1F39F18E00C36F0A /* ru */,
 			);
 			name = step4.html;
 			sourceTree = "<group>";
@@ -5767,8 +5907,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				86EF293B1E83CEA900F8D214 /* Base */,
-				86B56E981EC0E11A00CFE4A3 /* en */,
-				86B56E9A1EC0E11F00CFE4A3 /* ru */,
+				2C6640D81F30BC4D0033A274 /* en */,
+				2C6640DA1F30BC4E0033A274 /* ru */,
 			);
 			name = AdaptiveMain.storyboard;
 			sourceTree = "<group>";
@@ -6087,7 +6227,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -6111,7 +6251,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -25,7 +25,7 @@ protocol AdaptiveStepsView: class {
     func initCards()
     func updateProgress(for rating: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())?)
-    func showLevelUpCongratulation(level: Int, completion: (() -> ())?)
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> ())?)
     func presentShareDialog(for link: String)
 }
 
@@ -38,28 +38,48 @@ class AdaptiveStepsPresenter {
     var currentStepViewController: AdaptiveStepViewController?
     
     // TODO: optimize DI
-    private var coursesAPI: CoursesAPI?
-    private var stepsAPI: StepsAPI?
-    private var lessonsAPI: LessonsAPI?
-    private var progressesAPI: ProgressesAPI?
-    private var stepicsAPI: StepicsAPI?
-    private var recommendationsAPI: RecommendationsAPI?
-    private var profilesAPI: ProfilesAPI?
-    private var unitsAPI: UnitsAPI?
-    private var viewsAPI: ViewsAPI?
+    fileprivate var coursesAPI: CoursesAPI?
+    fileprivate var stepsAPI: StepsAPI?
+    fileprivate var lessonsAPI: LessonsAPI?
+    fileprivate var progressesAPI: ProgressesAPI?
+    fileprivate var stepicsAPI: StepicsAPI?
+    fileprivate var recommendationsAPI: RecommendationsAPI?
+    fileprivate var profilesAPI: ProfilesAPI?
+    fileprivate var unitsAPI: UnitsAPI?
+    fileprivate var viewsAPI: ViewsAPI?
+    fileprivate var ratingManager: RatingManager?
+    fileprivate var statsManager: StatsManager?
+    fileprivate var achievementsManager: AchievementManager?
+    fileprivate var defaultsStorageManager: DefaultsStorageManager?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
     var isRecommendationLoaded = false
     var isOnboardingPassed = false
     var isContentLoaded = false
+    var isSolvedToday = false
     
     var canSwipeCard: Bool {
         return isContentLoaded
     }
     
-    var rating: Int = 0
-    var streak: Int = 1
+    var rating: Int {
+        get {
+            return self.ratingManager?.rating ?? 0
+        }
+        set(newValue) {
+            self.ratingManager?.rating = newValue
+        }
+    }
+    
+    var streak: Int {
+        get {
+            return self.ratingManager?.streak ?? 1
+        }
+        set(newValue) {
+            self.ratingManager?.streak = newValue
+        }
+    }
     
     var lastReaction: Reaction?
     
@@ -68,7 +88,7 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
@@ -78,17 +98,21 @@ class AdaptiveStepsPresenter {
         self.profilesAPI = profilesAPI
         self.unitsAPI = unitsAPI
         self.viewsAPI = viewsAPI
+        self.ratingManager = ratingManager
+        self.statsManager = statsManager
+        self.defaultsStorageManager = defaultsStorageManager
+        
+        self.achievementsManager = achievementsManager
+        self.achievementsManager?.delegate = self
+        
         self.view = view
     }
     
     func refreshContent() {
         if !isKolodaPresented {
-            rating = RatingHelper.retrieveRating()
-            
-            streak = RatingHelper.retrieveStreak()
-            streak = streak == 0 ? RatingHelper.incrementStreak() : streak
-            
-            view?.updateProgress(for: self.rating)
+            isSolvedToday = (statsManager?.getLastDays(count: 1)[0] ?? 0) > 0
+                
+            view?.updateProgress(for: rating)
             
             // Show cards (empty or not)
             view?.initCards()
@@ -276,9 +300,8 @@ class AdaptiveStepsPresenter {
                 print("new user registered: \(email):\(password)")
                 
                 // Save account to defaults
-                UserDefaults.standard.set("account_email", forKey: email)
-                UserDefaults.standard.set("account_password", forKey: password)
-                UserDefaults.standard.synchronize()
+                self.defaultsStorageManager?.accountEmail = email
+                self.defaultsStorageManager?.accountPassword = password
                 
                 success(email, password)
             }, error: { error, registrationErrorInfo in
@@ -349,16 +372,27 @@ class AdaptiveStepsPresenter {
     }
     
     fileprivate func launchOnboarding() {
-        let isOnboardingNeeded = !UserDefaults.standard.bool(forKey: "isOnboardingShown")
+        if isOnboardingPassed {
+            return
+        }
         
-        if !isOnboardingPassed && isOnboardingNeeded {
+        let isFullOnboardingNeeded = !(defaultsStorageManager?.isOnboardingFinished ?? false)
+        let isRatingOnboardingNeeded = !(defaultsStorageManager?.isRatingOnboardingFinished ?? false)
+        
+        if isFullOnboardingNeeded || isRatingOnboardingNeeded {
             let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveOnboardingViewController", storyboardName: "AdaptiveMain") as! AdaptiveOnboardingViewController
-            vc.presenter = AdaptiveOnboardingPresenter(view: vc)
+            vc.presenter = AdaptiveOnboardingPresenter(achievementManager: achievementsManager, view: vc)
+            
+            if isRatingOnboardingNeeded && !isFullOnboardingNeeded {
+                vc.presenter?.onboardingStepIndex = 3
+            }
             
             (view as? UIViewController)?.present(vc, animated: false, completion: {
                 self.isOnboardingPassed = true
             })
-            UserDefaults.standard.set(true, forKey: "isOnboardingShown")
+            
+            defaultsStorageManager?.isOnboardingFinished = true
+            defaultsStorageManager?.isRatingOnboardingFinished = true
         } else {
             isOnboardingPassed = true
         }
@@ -411,8 +445,26 @@ class AdaptiveStepsPresenter {
         
         recommendedLessons = []
         
-        let savedEmail = UserDefaults.standard.string(forKey: "account_email")
-        let savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        var savedEmail = defaultsStorageManager?.accountEmail
+        var savedPassword = defaultsStorageManager?.accountPassword
+        
+        // Fallback code
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            guard let value = value as? String else {
+                continue
+            }
+            
+            if value == "account_password" {
+                savedPassword = key
+                defaultsStorageManager?.accountPassword = key
+            }
+            
+            if value == "account_email" {
+                savedEmail = key
+                defaultsStorageManager?.accountEmail = key
+            }
+        }
+        
         print("saved account: \(savedEmail ?? "<empty>");\(savedPassword ?? "<empty>")")
         
         if savedEmail != nil && savedPassword != nil {
@@ -482,28 +534,39 @@ class AdaptiveStepsPresenter {
                     }
                     
                     self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
+                        guard let s = self else { return }
+                        
                         // Update rating only after reaction was sent
-                        if (self?.currentStepPresenter?.state ?? .unsolved) == .successful {
-                            guard let curStreak = self?.streak,
-                                let curRating = self?.rating else {
-                                    return
-                            }
+                        if (s.currentStepPresenter?.state ?? .unsolved) == .successful {
+                            let curStreak = s.streak
+                            let curRating = s.rating
                             
                             let oldRating = curRating
                             let newRating = curRating + curStreak
-                            self?.rating = RatingHelper.incrementRating(curStreak)
+                            s.rating += curStreak
+                            
+                            s.achievementsManager?.fireEvent(.exp(value: curStreak))
+                            s.achievementsManager?.fireEvent(.streak(value: curStreak))
                             
                             // Update stats
-                            StatsHelper.incrementRating(curStreak)
-                            StatsHelper.updateMaxStreak(with: curStreak)
+                            s.statsManager?.incrementRating(curStreak)
+                            s.statsManager?.maxStreak = curStreak
+                            
+                            // Days streak achievement
+                            if !s.isSolvedToday {
+                                s.isSolvedToday = true
+                                s.achievementsManager?.fireEvent(.days(value: s.statsManager?.currentDayStreak ?? 1))
+                            }
                             
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
-                                self?.view?.showLevelUpCongratulation(level: RatingHelper.getLevel(for: newRating), completion: nil)
+                                s.achievementsManager?.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
+                                
+                                s.view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
                             }
-                            self?.streak = RatingHelper.incrementStreak()
+                            s.streak += 1
                         }
                         
-                        self?.getNewRecommendation(for: course, success: successHandler)
+                        s.getNewRecommendation(for: course, success: successHandler)
                     })
                 }
             }
@@ -577,7 +640,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
         
         // Drop streak
         if streak > 1 {
-            streak = RatingHelper.incrementStreak(-streak + 1)
+            streak = 1
         }
         
         view?.updateTopCardControl(stepState: .wrong)
@@ -595,5 +658,11 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func contentLoadingDidComplete() {
         isContentLoaded = true
         view?.updateTopCard(cardState: .normal)
+    }
+}
+
+extension AdaptiveStepsPresenter: AchievementManagerDelegate {
+    func achievementUnlocked(for achievement: Achievement) {
+        view?.showCongratulationPopup(type: .achievement(name: achievement.name, info: achievement.info ?? "", cover: achievement.cover ?? Images.placeholders.coursePassed), completion: nil)
     }
 }

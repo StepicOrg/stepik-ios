@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CongratulationViewController" customModule="Adaptive_1838" customModuleProvider="target">
             <connections>
                 <outlet property="continueButton" destination="8cm-cx-8c1" id="EIN-7a-ZwT"/>
+                <outlet property="coverImageView" destination="v6n-cL-0i5" id="FAt-NR-cGu"/>
                 <outlet property="shareButton" destination="ZON-ww-xr8" id="Ijq-XL-XXg"/>
                 <outlet property="textLabel" destination="qOD-Bp-2ir" id="B3d-Ax-gqU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

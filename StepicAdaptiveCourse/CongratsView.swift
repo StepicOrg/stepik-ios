@@ -22,16 +22,6 @@ class CongratsView: UIView {
     private var padView: UIView?
     private var shapeLayer: CAShapeLayer?
     
-    override var isHidden: Bool {
-        willSet {
-            self.shapeLayer?.isHidden = !self.isHidden
-            UIView.animate(withDuration: AnimationDuration.hiding, animations: {
-                self.blurView?.alpha = self.isHidden ? 1.0 : 0.0
-                self.padView?.alpha = self.isHidden ? self.padOpacity : 0.0
-            })
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -68,6 +58,7 @@ class CongratsView: UIView {
         shapeLayer?.position = CGPoint(x: center.x, y: center.y)
         shapeLayer?.path = path
         shapeLayer?.fillColor = backgroundAnimationColor.cgColor
+        shapeLayer?.isHidden = false
         layer.addSublayer(shapeLayer ?? CAShapeLayer())
         
         // Add rotation
@@ -81,8 +72,8 @@ class CongratsView: UIView {
         animation.fillMode = kCAFillModeForwards
         shapeLayer?.add(animation, forKey: animation.keyPath)
         
-        padView?.alpha = 0.0
-        blurView?.alpha = 0.0
+        padView?.alpha = padOpacity
+        blurView?.alpha = 1.0
     }
     
     required init?(coder aDecoder: NSCoder) {

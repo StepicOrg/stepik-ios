@@ -16,16 +16,20 @@ protocol AdaptiveOnboardingView: class {
 class AdaptiveOnboardingPresenter {
     weak var view: AdaptiveOnboardingView?
     
-    private var onboardingSteps: [AdaptiveOnboardingStep] = []
-    private var onboardingStepIndex = 0
+    private var achievementManager: AchievementManager?
     
-    init(view: AdaptiveOnboardingView) {
+    private var onboardingSteps: [AdaptiveOnboardingStep] = []
+    var onboardingStepIndex = 0
+    
+    init(achievementManager: AchievementManager?, view: AdaptiveOnboardingView) {
         self.view = view
+        self.achievementManager = achievementManager
         
         onboardingSteps = [AdaptiveOnboardingStep(title: NSLocalizedString("WelcomeTitle", comment: ""), content: loadOnboardingStep(from: "step1"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("NextTask", comment: ""), isButtonHidden: false),
         AdaptiveOnboardingStep(title: NSLocalizedString("SwipeLeftTitle", comment: ""), content: loadOnboardingStep(from: "step2"), requiredActions: [.swipeLeft], buttonTitle: "", isButtonHidden: true),
         AdaptiveOnboardingStep(title: NSLocalizedString("SwipeRightTitle", comment: ""), content: loadOnboardingStep(from: "step3"), requiredActions: [.swipeRight], buttonTitle: "", isButtonHidden: true),
-        AdaptiveOnboardingStep(title: NSLocalizedString("ProgressTitle", comment: ""), content: loadOnboardingStep(from: "step4"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("FinishOnboarding", comment: ""), isButtonHidden: false)
+        AdaptiveOnboardingStep(title: NSLocalizedString("ProgressTitle", comment: ""), content: loadOnboardingStep(from: "step4"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("NextTask", comment: ""), isButtonHidden: false),
+        AdaptiveOnboardingStep(title: NSLocalizedString("ProgressTitle", comment: ""), content: loadOnboardingStep(from: "step5"), requiredActions: [.clickButton], buttonTitle: NSLocalizedString("FinishOnboarding", comment: ""), isButtonHidden: false)
         ]
     }
     
@@ -36,6 +40,12 @@ class AdaptiveOnboardingPresenter {
         
         view?.updateProgress(for: onboardingStepIndex, count: onboardingSteps.count)
         let step = onboardingSteps[onboardingStepIndex]
+        
+        // 4 – num of step about progress, rating and achievements
+        if onboardingStepIndex == 4 {
+            achievementManager?.fireEvent(.onboarding)
+        }
+        
         onboardingStepIndex += 1
         return step
     }
@@ -51,7 +61,6 @@ class AdaptiveOnboardingPresenter {
     
         do {
             let contents = try String(contentsOfFile: filePath, encoding: .utf8)
-            print(contents)
             let baseUrl = URL(fileURLWithPath: filePath)
             return (text: contents, baseURL: baseUrl)
         } catch {
