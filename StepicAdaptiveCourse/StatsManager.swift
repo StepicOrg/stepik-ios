@@ -17,6 +17,44 @@ class StatsManager {
     
     private let secondsInDay: TimeInterval = 24 * 60 * 60
     
+    var stats: [Int: Int]? {
+        get {
+            guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {
+                return nil
+            }
+            
+            return stringDictToIntDict(savedStats)
+        }
+        set(newValue) {
+            defaults.set(newValue == nil ? nil : intDictToStringDict(newValue!), forKey: statsKey)
+        }
+    }
+    
+    var maxStreak: Int {
+        get {
+            return defaults.value(forKey: maxStreakKey) as? Int ?? 1
+        }
+        set(newValue) {
+            defaults.set(max(maxStreak, newValue), forKey: maxStreakKey)
+        }
+    }
+    
+    var currentDayStreak: Int {
+        get {
+            let _stats = stats
+            var curDay = dayByDate(Date())
+            while curDay > 0 {
+                if let todayXP = _stats?[curDay], todayXP != 0 {
+                    curDay -= 1
+                } else {
+                    break
+                }
+            }
+            
+            return dayByDate(Date()) - curDay
+        }
+    }
+    
     func dayByDate(_ date: Date) -> Int {
         // Day num (01.01.1970 - 0, 02.01.1970 - 1, ...)
         let dayNum = Int(date.timeIntervalSince1970 / secondsInDay)
@@ -47,39 +85,31 @@ class StatsManager {
         return stringDict
     }
     
-    func loadStats() -> [Int: Int]? {
-        guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {
-            return nil
-        }
-        
-        return stringDictToIntDict(savedStats)
-    }
-    
-    func saveStats(_ value: [Int: Int]) {
-        defaults.set(intDictToStringDict(value), forKey: statsKey)
-    }
-    
-    func getMaxStreak() -> Int {
-        return defaults.value(forKey: maxStreakKey) as? Int ?? 1
-    }
-    
-    func updateMaxStreak(with value: Int) {
-        defaults.set(max(getMaxStreak(), value), forKey: maxStreakKey)
-    }
-    
     func incrementRating(_ value: Int, for date: Date = Date()) {
-        var stats = loadStats()
-        if stats == nil {
-            stats = [:]
+        var _stats = stats
+        if _stats == nil {
+            _stats = [:]
         }
         
         let day = dayByDate(date)
-        if stats![day] == nil {
-            stats![day] = value
+        if _stats![day] == nil {
+            _stats![day] = value
         } else {
-            stats![day]! += value
+            _stats![day]! += value
         }
         
-        saveStats(stats!)
+        stats = _stats
+    }
+    
+    func getLastDays(count: Int) -> [Int] {
+        let _stats = stats
+        
+        let curDayNum = dayByDate(Date())
+        var lastDaysProgress: [Int] = []
+        for i in 0..<count {
+            lastDaysProgress.append(_stats?[curDayNum - i] ?? 0)
+        }
+        
+        return lastDaysProgress
     }
 }

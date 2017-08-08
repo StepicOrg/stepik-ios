@@ -34,11 +34,9 @@ struct AchievementViewData {
 class AdaptiveStatsPresenter {
     weak var view: AdaptiveStatsView?
     
-    private var stats: [Int: Int]?
-    
-    fileprivate var ratingManager: RatingManager?
-    fileprivate var statsManager: StatsManager?
-    fileprivate var achievementsManager: AchievementManager?
+    fileprivate var ratingManager: RatingManager
+    fileprivate var statsManager: StatsManager
+    fileprivate var achievementsManager: AchievementManager
     
     init(statsManager: StatsManager, ratingManager: RatingManager, achievementsManager: AchievementManager, view: AdaptiveStatsView) {
         self.view = view
@@ -52,23 +50,17 @@ class AdaptiveStatsPresenter {
         var achievements: [AchievementViewData] = []
         var progressByWeek: [WeekProgressViewData] = []
         
-        let currentXP = ratingManager?.retrieveRating() ?? 0
+        let currentXP = ratingManager.rating
         let currentLevel = RatingHelper.getLevel(for: currentXP)
-        let bestStreak = statsManager?.getMaxStreak() ?? 1
+        let bestStreak = min(1, statsManager.maxStreak)
         
-        stats = statsManager?.loadStats()
-        guard let stats = stats, let statsManager = statsManager else {
+        guard let stats = statsManager.stats else {
             view?.setGeneralStats(currentLevel: currentLevel, bestStreak: bestStreak, currentWeekXP: 0, last7DaysProgress: nil)
             return
         }
         
-        var currentWeekXP = 0
-        let curDayNum = statsManager.dayByDate(Date())
-        var last7DaysProgress: [Int] = []
-        for i in 0..<7 {
-            currentWeekXP += stats[curDayNum - i] ?? 0
-            last7DaysProgress.append(stats[curDayNum - i] ?? 0)
-        }
+        let last7DaysProgress = statsManager.getLastDays(count: 7)
+        var currentWeekXP = last7DaysProgress.reduce(0, +)
         
         view?.setGeneralStats(currentLevel: currentLevel, bestStreak: bestStreak, currentWeekXP: currentWeekXP, last7DaysProgress: last7DaysProgress)
         
@@ -112,7 +104,7 @@ class AdaptiveStatsPresenter {
         view?.setProgress(records: progressByWeek.reversed())
         
         // Achievements
-        achievementsManager?.storedAchievements.forEach({ achievement in
+        achievementsManager.storedAchievements.forEach({ achievement in
             achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
         })
         

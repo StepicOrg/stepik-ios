@@ -61,8 +61,23 @@ class AdaptiveStepsPresenter {
         return isContentLoaded
     }
     
-    var rating: Int = 0
-    var streak: Int = 1
+    var rating: Int {
+        get {
+            return self.ratingManager?.rating ?? 0
+        }
+        set(newValue) {
+            self.ratingManager?.rating = newValue
+        }
+    }
+    
+    var streak: Int {
+        get {
+            return self.ratingManager?.streak ?? 0
+        }
+        set(newValue) {
+            self.ratingManager?.streak = newValue
+        }
+    }
     
     var lastReaction: Reaction?
     
@@ -92,11 +107,6 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
-            rating = ratingManager?.retrieveRating() ?? 0
-            
-            streak = ratingManager?.retrieveStreak() ?? 1
-            streak = streak == 0 ? (ratingManager?.incrementStreak() ?? streak) : streak
-            
             view?.updateProgress(for: self.rating)
             
             // Show cards (empty or not)
@@ -518,21 +528,21 @@ class AdaptiveStepsPresenter {
                             
                             let oldRating = curRating
                             let newRating = curRating + curStreak
-                            s.rating = s.ratingManager?.incrementRating(curStreak) ?? curRating
+                            s.rating += curStreak
                             
                             AchievementManager.shared.fireEvent(.exp(value: curStreak))
                             AchievementManager.shared.fireEvent(.streak(value: curStreak))
                             
                             // Update stats
                             s.statsManager?.incrementRating(curStreak)
-                            s.statsManager?.updateMaxStreak(with: curStreak)
+                            s.statsManager?.maxStreak = curStreak
                             
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
                                 AchievementManager.shared.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
                                 
                                 s.view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
                             }
-                            s.streak = s.ratingManager?.incrementStreak() ?? curStreak
+                            s.streak += 1
                         }
                         
                         s.getNewRecommendation(for: course, success: successHandler)
@@ -609,7 +619,7 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
         
         // Drop streak
         if streak > 1 {
-            streak = ratingManager?.incrementStreak(-streak + 1) ?? 1
+            streak = 1
         }
         
         view?.updateTopCardControl(stepState: .wrong)

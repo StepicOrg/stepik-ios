@@ -15,26 +15,26 @@ class RatingManager {
     private let streakKey = "streak"
     let defaults = UserDefaults.standard
     
-    private func incrementValue(_ value: Int, for key: String) -> Int {
-        let lastValue = defaults.integer(forKey: key)
-        defaults.set(lastValue + value, forKey: key)
-        
-        return lastValue + value
+    var rating: Int {
+        get {
+            return defaults.integer(forKey: ratingKey)
+        }
+        set(newValue) {
+            updateValue(newValue, for: ratingKey)
+        }
     }
     
-    func incrementRating(_ value: Int) -> Int {
-        return incrementValue(value, for: ratingKey)
+    var streak: Int {
+        get {
+            return defaults.integer(forKey: streakKey)
+        }
+        set(newValue) {
+            updateValue(newValue, for: streakKey)
+        }
     }
     
-    func incrementStreak(_ value: Int = 1) -> Int {
-        return incrementValue(value, for: streakKey)
-    }
-    
-    func retrieveRating() -> Int {
-        return defaults.integer(forKey: ratingKey)
-    }
-    
-    func retrieveStreak() -> Int {
-        return defaults.integer(forKey: streakKey)
+    private func updateValue(_ newValue: Int, for key: String) {
+        defaults.set(newValue, forKey: key)
+        defaults.synchronize()
     }
 }

@@ -102,8 +102,8 @@ extension AchievementManager {
         let mgr = AchievementManager()
         
         let isOnboardingPassed = UserDefaults.standard.bool(forKey: "isOnboardingShown")
-        let curRating = RatingManager.shared.retrieveRating()
-        let curStreak = StatsManager.shared.getMaxStreak()
+        let curRating = RatingManager.shared.rating
+        let curStreak = StatsManager.shared.maxStreak
         let curLevel = RatingHelper.getLevel(for: curRating)
         
         typealias ChallengeAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, pre: ((Int, Int, Int) -> (Bool))?, migration: (() -> Int)?, event: String)
