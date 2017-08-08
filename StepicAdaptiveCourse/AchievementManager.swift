@@ -14,38 +14,10 @@ protocol AchievementManagerDelegate: class {
 }
 
 class AchievementManager {
-    static let shared = AchievementManager.createAndRegisterAchievements()
-    
     weak var delegate: AchievementManagerDelegate?
     
     var storedAchievements: [Achievement] = []
-    private var subscribers: [String: [AchievementObserver]] = [:]
-    
-    static func createAndRegisterAchievements() -> AchievementManager {
-        let mgr = AchievementManager()
-        
-        let achievement1 = ChallengeAchievement(slug: "level6", name: "Шестой уровень", info: "Достичь шестого уровня", cover: #imageLiteral(resourceName: "badge1"))
-        achievement1.preConditions = { _, _, value in return (value as? Int ?? 0) >= 6 }
-        mgr.addSubscriber(for: AchievementEvent.events.level, observer: achievement1)
-        mgr.storedAchievements.append(achievement1)
-        
-        let achievement2 = ProgressAchievement(slug: "exp100", name: "100 опыта", info: "Получить 100 опыта", cover: #imageLiteral(resourceName: "badge2"), maxProgressValue: 100)
-        achievement2.value = { value in return (value as? Int) ?? 0 }
-        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement2)
-        mgr.storedAchievements.append(achievement2)
-        
-        let achievement3 = ProgressAchievement(slug: "exp110", name: "110 опыта", info: "Получить 110 опыта", cover: #imageLiteral(resourceName: "badge2"), maxProgressValue: 110)
-        achievement3.value = { value in return (value as? Int) ?? 0 }
-        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement3)
-        mgr.storedAchievements.append(achievement3)
-        
-        let achievement4 = ProgressAchievement(slug: "exp10", name: "10 опыта", info: "Получить 10 опыта", cover: #imageLiteral(resourceName: "badge1"), maxProgressValue: 10)
-        achievement4.value = { value in return (value as? Int) ?? 0 }
-        mgr.addSubscriber(for: AchievementEvent.events.exp, observer: achievement4)
-        mgr.storedAchievements.append(achievement4)
-        
-        return mgr
-    }
+    fileprivate var subscribers: [String: [AchievementObserver]] = [:]
     
     func addSubscriber(for event: String, observer: AchievementObserver) {
         if subscribers[event] == nil {
@@ -87,26 +59,143 @@ enum AchievementEvent {
     struct events {
         static let level = "level"
         static let exp = "exp"
+        static let onboarding = "onboarding"
+        static let streak = "streak"
+        static let days = "days"
+        static let share = "share"
     }
     
     var slug: String {
         switch self {
-        case .level(_):
-            return events.level
-        case .exp(_):
-            return events.exp
+        case .level(_): return events.level
+        case .exp(_): return events.exp
+        case .onboarding: return events.onboarding
+        case .streak(_): return events.streak
+        case .days(_): return events.days
+        case .share: return events.share
         }
     }
     
-    var value: Any {
+    var value: Int {
         switch self {
-        case .level(let value):
-            return value
-        case .exp(let value):
-            return value
+        case .level(let value): return value
+        case .exp(let value): return value
+        case .onboarding: return 0
+        case .streak(let value): return value
+        case .days(let value): return value
+        case .share: return 0
         }
     }
     
     case level(value: Int)
     case exp(value: Int)
+    case onboarding
+    case streak(value: Int)
+    case days(value: Int)
+    case share
+}
+
+extension AchievementManager {
+    static let shared = AchievementManager.createAndRegisterAchievements()
+    
+    static func createAndRegisterAchievements() -> AchievementManager {
+        let mgr = AchievementManager()
+        
+        let isOnboardingPassed = UserDefaults.standard.bool(forKey: "isOnboardingShown")
+        let curRating = RatingManager.shared.retrieveRating()
+        let curStreak = StatsManager.shared.getMaxStreak()
+        let curLevel = RatingHelper.getLevel(for: curRating)
+        
+        typealias ChallengeAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, pre: ((Int, Int, Int) -> (Bool))?, migration: (() -> Int)?, event: String)
+        typealias ProgressAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, maxValue: Int, pre: ((Int, Int, Int) -> (Bool))?, value: ((Int, Int, Int) -> Int)?, migration: (() -> Int)?, event: String)
+        
+        let challengeAchievements: [ChallengeAchievementDescription] = [
+            (slug: "onboarding", name: "Первые шаги", info: "Пройти обучение", cover: #imageLiteral(resourceName: "badge1"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding),
+            (slug: "share", name: "Общительный", info: "Поделиться любым своим достижением", cover: #imageLiteral(resourceName: "badge1"), pre: nil, migration: nil, event: AchievementEvent.events.share),
+        ]
+        
+        func createExpAchievement(name: String, exp: Int, cover: UIImage) -> ProgressAchievementDescription {
+            return (slug: "exp\(exp)",
+                    name: "\(name)",
+                    info: "Получить \(exp) опыта",
+                    cover: cover,
+                    maxValue: exp,
+                    pre: nil,
+                    value: { cur, _, value in return cur + value },
+                    migration: { return curRating },
+                    event: AchievementEvent.events.exp)
+        }
+        
+        func createStreakAchievement(name: String, streak: Int, cover: UIImage) -> ProgressAchievementDescription {
+            return (slug: "streak\(streak)",
+                name: "\(name)",
+                info: "Решить \(streak) заданий с первой попытки",
+                cover: cover,
+                maxValue: streak,
+                pre: { cur, _, value in return value > cur },
+                value: { cur, _, value in return max(cur, value) },
+                migration: { return curStreak },
+                event: AchievementEvent.events.streak)
+        }
+        
+        func createDaysAchievement(name: String, streak: Int, cover: UIImage) -> ProgressAchievementDescription {
+            return (slug: "days\(streak)",
+                name: "\(name)",
+                info: "Решать \(streak) дней подряд",
+                cover: cover,
+                maxValue: streak,
+                pre: { cur, _, value in return value > cur },
+                value: { cur, _, value in return max(cur, value) },
+                migration: { return 0 },
+                event: AchievementEvent.events.days)
+        }
+        
+        func createLevelAchievement(name: String, level: Int, cover: UIImage) -> ProgressAchievementDescription {
+            return (slug: "level\(level)",
+                name: "\(name)",
+                info: "Достигнуть \(level) уровня",
+                cover: cover,
+                maxValue: level,
+                pre: { cur, _, value in return value > cur },
+                value: { cur, _, value in return max(cur, value) },
+                migration: { return curLevel },
+                event: AchievementEvent.events.level)
+        }
+        
+        let progressAchievements: [ProgressAchievementDescription] = [
+            createExpAchievement(name: "Ученик", exp: 10, cover: #imageLiteral(resourceName: "badge1")),
+            createExpAchievement(name: "Студент", exp: 100, cover: #imageLiteral(resourceName: "badge1")),
+            createExpAchievement(name: "Опытный", exp: 500, cover: #imageLiteral(resourceName: "badge1")),
+            createExpAchievement(name: "Профессионал", exp: 5000, cover: #imageLiteral(resourceName: "badge1")),
+            createExpAchievement(name: "Гуру", exp: 10000, cover: #imageLiteral(resourceName: "badge1")),
+            createStreakAchievement(name: "Комбо", streak: 5, cover: #imageLiteral(resourceName: "badge1")),
+            createStreakAchievement(name: "Было просто", streak: 15, cover: #imageLiteral(resourceName: "badge1")),
+            createStreakAchievement(name: "В точку", streak: 30, cover: #imageLiteral(resourceName: "badge1")),
+            createStreakAchievement(name: "Ясновидящий", streak: 60, cover: #imageLiteral(resourceName: "badge1")),
+            createDaysAchievement(name: "Работяга", streak: 2, cover: #imageLiteral(resourceName: "badge1")),
+            createDaysAchievement(name: "Трудовая неделя", streak: 5, cover: #imageLiteral(resourceName: "badge1")),
+            createDaysAchievement(name: "Зависимый", streak: 10, cover: #imageLiteral(resourceName: "badge1")),
+            createDaysAchievement(name: "Стахановец", streak: 14, cover: #imageLiteral(resourceName: "badge1")),
+            createDaysAchievement(name: "Герой труда", streak: 30, cover: #imageLiteral(resourceName: "badge1")),
+            createLevelAchievement(name: "Знаток", level: 5, cover: #imageLiteral(resourceName: "badge1")),
+            createLevelAchievement(name: "Лидер", level: 10, cover: #imageLiteral(resourceName: "badge1"))
+        ]
+        
+        for achievementDescription in challengeAchievements {
+            let achievement = ChallengeAchievement(slug: achievementDescription.slug, name: achievementDescription.name, info: achievementDescription.info, cover: achievementDescription.cover, migration: achievementDescription.migration)
+            mgr.addSubscriber(for: achievementDescription.event, observer: achievement)
+            mgr.storedAchievements.append(achievement)
+        }
+        
+        for achievementDescription in progressAchievements {
+            let achievement = ProgressAchievement(slug: achievementDescription.slug, name: achievementDescription.name, info: achievementDescription.info, cover: achievementDescription.cover, maxProgressValue: achievementDescription.maxValue, migration: achievementDescription.migration)
+            achievement.preConditions = achievementDescription.pre
+            achievement.migration = achievementDescription.migration
+            achievement.value = achievementDescription.value
+            mgr.addSubscriber(for: achievementDescription.event, observer: achievement)
+            mgr.storedAchievements.append(achievement)
+        }
+        
+        return mgr
+    }
 }

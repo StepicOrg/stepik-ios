@@ -58,7 +58,7 @@ class AchievementTableViewCell: UITableViewCell {
         progressChallengeLabel.isHidden = type != .challenge
         
         if type != .challenge && maxProgress > 0 {
-            progressBar.setProgress(Float(currentProgress) / Float(maxProgress), animated: true)
+            progressBar.setProgress(Float(currentProgress) / Float(maxProgress), animated: false)
             progressCounterLabel.text = "\(currentProgress) ⁄ \(maxProgress)"
         }
         

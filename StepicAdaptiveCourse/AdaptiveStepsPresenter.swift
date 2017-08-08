@@ -521,6 +521,7 @@ class AdaptiveStepsPresenter {
                             s.rating = s.ratingManager?.incrementRating(curStreak) ?? curRating
                             
                             AchievementManager.shared.fireEvent(.exp(value: curStreak))
+                            AchievementManager.shared.fireEvent(.streak(value: curStreak))
                             
                             // Update stats
                             s.statsManager?.incrementRating(curStreak)

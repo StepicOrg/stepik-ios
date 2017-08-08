@@ -69,6 +69,8 @@ class CongratulationViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
     
     @IBAction func onShareButtonClick(_ sender: Any) {
+        AchievementManager.shared.fireEvent(.share)
+        
         guard let url = URL(string: "https://itunes.apple.com/app/id\(StepicApplicationsInfo.appId)") else {
             return
         }

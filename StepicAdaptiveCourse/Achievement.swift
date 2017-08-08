@@ -24,15 +24,17 @@ protocol Achievement: class, AchievementObserver {
     
     var completed: (() -> ())? { get set }
     
-    // (currentProgress, maxProgress, valueFromEvent) -> isUnlocked
-    var preConditions: ((Int, Int, Any) -> Bool)? { get set }
-    // valueFromEvent -> progressValue delta
-    var value: ((Any) -> Int)? { get set }
+    // (currentProgress, maxProgress, valueFromEvent) -> should update
+    var preConditions: ((Int, Int, Int) -> Bool)? { get set }
+    // (currentProgress, maxProgress, valueFromEvent) -> new value
+    var value: ((Int, Int, Int) -> Int)? { get set }
+    // _ -> newProgressValue
+    var migration: (() -> Int)? { get set }
     
     var isUnlocked: Bool { get }
     
     init()
-    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int)
+    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int, migration: (() -> Int)?)
     
     func restore()
     func save()
@@ -47,7 +49,7 @@ extension Achievement {
         return maxProgressValue == progressValue
     }
     
-    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int = 1) {
+    init(slug: String, name: String, info: String?, cover: UIImage?, type: AchievementType, maxProgressValue: Int = 1, migration: (() -> Int)? = nil) {
         self.init()
         
         self.slug = slug
@@ -56,6 +58,7 @@ extension Achievement {
         self.cover = cover
         self.type = type
         self.maxProgressValue = maxProgressValue
+        self.migration = migration
         
         restore()
     }
@@ -66,8 +69,12 @@ extension Achievement {
     }
     
     func restore() {
-        if let params = AchievementsHelper.restore(for: self.slug) {
-            self.progressValue = params.progressValue
+        if let params = AchievementsHelper.restore(for: slug) {
+            progressValue = params.progressValue
+        } else {
+            progressValue = migration?() ?? 0
+            progressValue = min(progressValue, maxProgressValue)
+            save()
         }
     }
     
@@ -87,11 +94,12 @@ final class ChallengeAchievement: Achievement {
     var progressValue: Int = 0
     
     var completed: (() -> ())? = nil
-    var preConditions: ((Int, Int, Any) -> Bool)? = nil
-    var value: ((Any) -> Int)? = nil
+    var preConditions: ((Int, Int, Int) -> Bool)? = nil
+    var value: ((Int, Int, Int) -> Int)? = nil
+    var migration: (() -> (Int))? = nil
     
-    convenience init(slug: String, name: String, info: String?, cover: UIImage?) {
-        self.init(slug: slug, name: name, info: info, cover: cover, type: .challenge, maxProgressValue: 1)
+    convenience init(slug: String, name: String, info: String?, cover: UIImage?, migration: (() -> Int)?) {
+        self.init(slug: slug, name: name, info: info, cover: cover, type: .challenge, maxProgressValue: 1, migration: migration)
     }
     
     func notify(event: AchievementEvent) -> Bool {
@@ -115,21 +123,22 @@ final class ProgressAchievement: Achievement {
     var progressValue: Int = 0
     
     var completed: (() -> ())? = nil
-    var preConditions: ((Int, Int, Any) -> Bool)? = nil
-    var value: ((Any) -> Int)? = nil
+    var preConditions: ((Int, Int, Int) -> Bool)? = nil
+    var value: ((Int, Int, Int) -> Int)? = nil
+    var migration: (() -> (Int))? = nil
     
-    convenience init(slug: String, name: String, info: String?, cover: UIImage?, maxProgressValue: Int) {
-        self.init(slug: slug, name: name, info: info, cover: cover, type: .progress, maxProgressValue: maxProgressValue)
+    convenience init(slug: String, name: String, info: String?, cover: UIImage?, maxProgressValue: Int, migration: (() -> Int)?) {
+        self.init(slug: slug, name: name, info: info, cover: cover, type: .progress, maxProgressValue: maxProgressValue, migration: migration)
     }
     
     func notify(event: AchievementEvent) -> Bool {
         var cond = preConditions?(progressValue, maxProgressValue, event.value) ?? true
         if cond {
-            let val = value?(event.value) ?? 1
+            let val = value?(progressValue, maxProgressValue, event.value) ?? 1
             
             cond = progressValue + val >= maxProgressValue
             
-            progressValue += value?(event.value) ?? 1
+            progressValue += value?(progressValue, maxProgressValue, event.value) ?? 1
             progressValue = min(maxProgressValue, progressValue)
             save()
         }
