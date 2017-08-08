@@ -22,13 +22,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBc-di-X5R">
-                    <rect key="frame" x="66" y="7" width="101" height="24"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <rect key="frame" x="66" y="7" width="95.5" height="23"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нажмите, чтобы поделиться" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EG-qB-yQb">
-                    <rect key="frame" x="66" y="33" width="185.5" height="16"/>
+                    <rect key="frame" x="66" y="32" width="185.5" height="16"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                     <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -36,6 +36,8 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8EG-qB-yQb" secondAttribute="trailing" constant="8" id="2l2-TK-DOp"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aBc-di-X5R" secondAttribute="trailing" constant="8" id="6bR-PK-5Oa"/>
                 <constraint firstItem="DjU-6P-O6G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="9ld-KL-P4m"/>
                 <constraint firstItem="aBc-di-X5R" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="IML-3O-8Ao"/>
                 <constraint firstItem="aBc-di-X5R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="W3n-oQ-T3d"/>

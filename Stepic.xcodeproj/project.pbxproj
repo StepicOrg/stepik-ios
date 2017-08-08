@@ -3545,13 +3545,13 @@
 			name = AdaptiveStats;
 			sourceTree = "<group>";
 		};
-		2C2544071F348085004DB3D9 /* Notification */ = {
+		2C2544071F348085004DB3D9 /* AchievementNotificationView */ = {
 			isa = PBXGroup;
 			children = (
 				2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */,
 				2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */,
 			);
-			name = Notification;
+			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
@@ -3585,7 +3585,6 @@
 		2C6640CB1F2F36E80033A274 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
-				2C2544071F348085004DB3D9 /* Notification */,
 				2C6640C91F2F35E60033A274 /* Achievement.swift */,
 				2C6640CE1F2F47A90033A274 /* AchievementManager.swift */,
 			);
@@ -3720,6 +3719,7 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C2544071F348085004DB3D9 /* AchievementNotificationView */,
 				2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */,
 				866DDDC41EA8060400BAD48E /* CardOverlayView */,
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
