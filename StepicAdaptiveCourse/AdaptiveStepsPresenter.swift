@@ -285,8 +285,8 @@ class AdaptiveStepsPresenter {
                 print("new user registered: \(email):\(password)")
                 
                 // Save account to defaults
-                UserDefaults.standard.set("account_email", forKey: email)
-                UserDefaults.standard.set("account_password", forKey: password)
+                UserDefaults.standard.set(email, forKey: "account_email")
+                UserDefaults.standard.set(password, forKey: "account_password")
                 UserDefaults.standard.synchronize()
                 
                 success(email, password)
@@ -420,8 +420,26 @@ class AdaptiveStepsPresenter {
         
         recommendedLessons = []
         
-        let savedEmail = UserDefaults.standard.string(forKey: "account_email")
-        let savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        var savedEmail = UserDefaults.standard.string(forKey: "account_email")
+        var savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        
+        // Fallback code
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            guard let value = value as? String else {
+                continue
+            }
+            
+            if value == "account_password" {
+                savedPassword = key
+                UserDefaults.standard.set(key, forKey: "account_password")
+            }
+            
+            if value == "account_email" {
+                savedEmail = key
+                UserDefaults.standard.set(key, forKey: "account_email")
+            }
+        }
+        
         print("saved account: \(savedEmail ?? "<empty>");\(savedPassword ?? "<empty>")")
         
         if savedEmail != nil && savedPassword != nil {
