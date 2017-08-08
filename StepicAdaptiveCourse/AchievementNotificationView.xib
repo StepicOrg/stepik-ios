@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AchievementNotificationView" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DjU-6P-O6G">
+                    <rect key="frame" x="8" y="7" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="eeh-Hw-sX8"/>
+                        <constraint firstAttribute="width" constant="50" id="iOP-Do-y78"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBc-di-X5R">
+                    <rect key="frame" x="66" y="7" width="95.5" height="23"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нажмите, чтобы поделиться" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EG-qB-yQb">
+                    <rect key="frame" x="66" y="32" width="185.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8EG-qB-yQb" secondAttribute="trailing" constant="8" id="2l2-TK-DOp"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aBc-di-X5R" secondAttribute="trailing" constant="8" id="6bR-PK-5Oa"/>
+                <constraint firstItem="DjU-6P-O6G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="9ld-KL-P4m"/>
+                <constraint firstItem="aBc-di-X5R" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="IML-3O-8Ao"/>
+                <constraint firstItem="aBc-di-X5R" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="W3n-oQ-T3d"/>
+                <constraint firstItem="8EG-qB-yQb" firstAttribute="top" secondItem="aBc-di-X5R" secondAttribute="bottom" constant="2" id="X32-cP-C78"/>
+                <constraint firstItem="DjU-6P-O6G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="eIE-bZ-DFg"/>
+                <constraint firstItem="8EG-qB-yQb" firstAttribute="leading" secondItem="DjU-6P-O6G" secondAttribute="trailing" constant="8" symbolic="YES" id="j9g-uK-MRh"/>
+            </constraints>
+            <connections>
+                <outlet property="coverImageView" destination="DjU-6P-O6G" id="ZSt-kb-Q8M"/>
+                <outlet property="infoLabel" destination="aBc-di-X5R" id="tSz-fb-DfC"/>
+                <outlet property="tapToShareLabel" destination="8EG-qB-yQb" id="SZW-8I-nxS"/>
+            </connections>
+            <point key="canvasLocation" x="-122.5" y="-493"/>
+        </view>
+    </objects>
+</document>

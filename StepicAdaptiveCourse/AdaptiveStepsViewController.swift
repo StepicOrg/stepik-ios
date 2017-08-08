@@ -26,15 +26,11 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
             case .normal:
                 self.placeholderView.isHidden = true
                 self.kolodaView.isHidden = false
-                self.congratsView.isHidden = true
-            case .congratulation:
-                self.placeholderView.isHidden = true
-                self.kolodaView.isHidden = true
-                self.congratsView.isHidden = false
             case .connectionError:
                 self.placeholderView.isHidden = false
                 self.kolodaView.isHidden = true
-                self.congratsView.isHidden = true
+            default:
+                break
             }
         }
     }
@@ -49,21 +45,16 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         return v
     }()
     
-    lazy var congratsView: UIView = {
-        let congratsView = CongratsView(frame: self.view.bounds)
-        congratsView.isHidden = true
-        self.view.addSubview(congratsView)
-        return congratsView
-    }()
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, profilesAPI: ApiDataDownloader.profiles, view: self)
+        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, profilesAPI: ApiDataDownloader.profiles, ratingManager: RatingManager.shared, statsManager: StatsManager.shared, achievementsManager: AchievementManager.shared, defaultsStorageManager: DefaultsStorageManager.shared, view: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        levelProgress.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,13 +116,18 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
         }
     }
     
-    func showLevelUpCongratulation(level: Int, completion: (() -> ())? = nil) {
-        let controller = Alerts.congratulation.construct(congratulationType: .level(level: level), continueHandler: { [weak self] in
+    func showCongratulationPopup(type: CongratulationType, completion: (() -> ())? = nil) {
+        if state == .congratulation {
+            completion?()
+            return
+        }
+        
+        let controller = Alerts.congratulation.construct(congratulationType: type, continueHandler: { [weak self] in
             self?.state = .normal
             completion?()
         })
         state = .congratulation
-        Alerts.congratulation.present(alert: controller, inController: self)
+        Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
     }
     
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> ())? = nil) {
@@ -252,5 +248,11 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         default:
             return
         }
+    }
+}
+
+extension AdaptiveStepsViewController: RatingProgressViewDelegate {
+    func onClick() {
+        self.performSegue(withIdentifier: "openStats", sender: nil)
     }
 }
