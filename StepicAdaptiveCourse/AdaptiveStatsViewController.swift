@@ -60,10 +60,14 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         achievements = records
     }
     
-    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]) {
+    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
         currentLevelLabel.text = "\(currentLevel)"
         bestStreakLabel.text = "\(bestStreak)"
         currentWeekXPLabel.text = "\(currentWeekXP)"
+        
+        guard let last7DaysProgress = last7DaysProgress else {
+            return
+        }
         
         let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
         let data = LineChartData(dataSet: dataSet)

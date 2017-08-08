@@ -12,7 +12,7 @@ protocol AdaptiveStatsView: class {
     func reload()
     func setProgress(records: [WeekProgressViewData])
     func setAchievements(records: [AchievementViewData])
-    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int])
+    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?)
 }
 
 struct WeekProgressViewData {
@@ -58,6 +58,7 @@ class AdaptiveStatsPresenter {
         
         stats = statsManager?.loadStats()
         guard let stats = stats, let statsManager = statsManager else {
+            view?.setGeneralStats(currentLevel: currentLevel, bestStreak: bestStreak, currentWeekXP: 0, last7DaysProgress: nil)
             return
         }
         
