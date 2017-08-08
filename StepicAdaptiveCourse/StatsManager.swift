@@ -86,19 +86,19 @@ class StatsManager {
     }
     
     func incrementRating(_ value: Int, for date: Date = Date()) {
-        var _stats = stats
-        if _stats == nil {
-            _stats = [:]
+        var allStats = stats
+        if allStats == nil {
+            allStats = [:]
         }
         
         let day = dayByDate(date)
-        if _stats![day] == nil {
-            _stats![day] = value
+        if allStats![day] == nil {
+            allStats![day] = value
         } else {
-            _stats![day]! += value
+            allStats![day]! += value
         }
         
-        stats = _stats
+        stats = allStats
     }
     
     func getLastDays(count: Int) -> [Int] {
