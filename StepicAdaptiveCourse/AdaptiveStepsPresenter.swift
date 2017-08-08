@@ -56,6 +56,7 @@ class AdaptiveStepsPresenter {
     var isRecommendationLoaded = false
     var isOnboardingPassed = false
     var isContentLoaded = false
+    var isSolvedToday = false
     
     var canSwipeCard: Bool {
         return isContentLoaded
@@ -72,7 +73,7 @@ class AdaptiveStepsPresenter {
     
     var streak: Int {
         get {
-            return self.ratingManager?.streak ?? 0
+            return self.ratingManager?.streak ?? 1
         }
         set(newValue) {
             self.ratingManager?.streak = newValue
@@ -107,7 +108,9 @@ class AdaptiveStepsPresenter {
     
     func refreshContent() {
         if !isKolodaPresented {
-            view?.updateProgress(for: self.rating)
+            isSolvedToday = (statsManager?.getLastDays(count: 1)[0] ?? 0) > 0
+                
+            view?.updateProgress(for: rating)
             
             // Show cards (empty or not)
             view?.initCards()
@@ -530,15 +533,21 @@ class AdaptiveStepsPresenter {
                             let newRating = curRating + curStreak
                             s.rating += curStreak
                             
-                            AchievementManager.shared.fireEvent(.exp(value: curStreak))
-                            AchievementManager.shared.fireEvent(.streak(value: curStreak))
+                            s.achievementsManager?.fireEvent(.exp(value: curStreak))
+                            s.achievementsManager?.fireEvent(.streak(value: curStreak))
                             
                             // Update stats
                             s.statsManager?.incrementRating(curStreak)
                             s.statsManager?.maxStreak = curStreak
                             
+                            // Days streak achievement
+                            if !s.isSolvedToday {
+                                s.isSolvedToday = true
+                                s.achievementsManager?.fireEvent(.days(value: s.statsManager?.currentDayStreak ?? 1))
+                            }
+                            
                             if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
-                                AchievementManager.shared.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
+                                s.achievementsManager?.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
                                 
                                 s.view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
                             }
