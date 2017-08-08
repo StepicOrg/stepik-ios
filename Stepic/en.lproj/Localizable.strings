@@ -251,6 +251,6 @@ RatingCongratulationText = "Correct! +%@ XP";
 ShareAchievement = "Share achievement";
 AchievementLocked = "locked";
 AchievementUnlocked = "unlocked";
-TapToShareAchievement = "Tap share your achievement";
+TapToShareAchievement = "Tap to share your achievement";
 AchievementCongratulationShareText = "I've unlocked achievement \"%@\" in %@ app. Join and beat my record!";
 AchievementCongratulationText = "Achievement \"%@\" unlocked";

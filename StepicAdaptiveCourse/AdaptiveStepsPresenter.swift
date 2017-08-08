@@ -50,6 +50,7 @@ class AdaptiveStepsPresenter {
     fileprivate var ratingManager: RatingManager?
     fileprivate var statsManager: StatsManager?
     fileprivate var achievementsManager: AchievementManager?
+    fileprivate var defaultsStorageManager: DefaultsStorageManager?
     
     var isKolodaPresented = false
     var isJoinedCourse = false
@@ -87,7 +88,7 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
     
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
@@ -99,6 +100,7 @@ class AdaptiveStepsPresenter {
         self.viewsAPI = viewsAPI
         self.ratingManager = ratingManager
         self.statsManager = statsManager
+        self.defaultsStorageManager = defaultsStorageManager
         
         self.achievementsManager = achievementsManager
         self.achievementsManager?.delegate = self
@@ -298,9 +300,8 @@ class AdaptiveStepsPresenter {
                 print("new user registered: \(email):\(password)")
                 
                 // Save account to defaults
-                UserDefaults.standard.set(email, forKey: "account_email")
-                UserDefaults.standard.set(password, forKey: "account_password")
-                UserDefaults.standard.synchronize()
+                self.defaultsStorageManager?.accountEmail = email
+                self.defaultsStorageManager?.accountPassword = password
                 
                 success(email, password)
             }, error: { error, registrationErrorInfo in
@@ -371,16 +372,27 @@ class AdaptiveStepsPresenter {
     }
     
     fileprivate func launchOnboarding() {
-        let isOnboardingNeeded = !UserDefaults.standard.bool(forKey: "isOnboardingShown")
+        if isOnboardingPassed {
+            return
+        }
         
-        if !isOnboardingPassed && isOnboardingNeeded {
+        let isFullOnboardingNeeded = !(defaultsStorageManager?.isOnboardingFinished ?? false)
+        let isRatingOnboardingNeeded = !(defaultsStorageManager?.isRatingOnboardingFinished ?? false)
+        
+        if isFullOnboardingNeeded || isRatingOnboardingNeeded {
             let vc = ControllerHelper.instantiateViewController(identifier: "AdaptiveOnboardingViewController", storyboardName: "AdaptiveMain") as! AdaptiveOnboardingViewController
-            vc.presenter = AdaptiveOnboardingPresenter(view: vc)
+            vc.presenter = AdaptiveOnboardingPresenter(achievementManager: achievementsManager, view: vc)
+            
+            if isRatingOnboardingNeeded && !isFullOnboardingNeeded {
+                vc.presenter?.onboardingStepIndex = 3
+            }
             
             (view as? UIViewController)?.present(vc, animated: false, completion: {
                 self.isOnboardingPassed = true
             })
-            UserDefaults.standard.set(true, forKey: "isOnboardingShown")
+            
+            defaultsStorageManager?.isOnboardingFinished = true
+            defaultsStorageManager?.isRatingOnboardingFinished = true
         } else {
             isOnboardingPassed = true
         }
@@ -433,8 +445,8 @@ class AdaptiveStepsPresenter {
         
         recommendedLessons = []
         
-        var savedEmail = UserDefaults.standard.string(forKey: "account_email")
-        var savedPassword = UserDefaults.standard.string(forKey: "account_password")
+        var savedEmail = defaultsStorageManager?.accountEmail
+        var savedPassword = defaultsStorageManager?.accountPassword
         
         // Fallback code
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
@@ -444,12 +456,12 @@ class AdaptiveStepsPresenter {
             
             if value == "account_password" {
                 savedPassword = key
-                UserDefaults.standard.set(key, forKey: "account_password")
+                defaultsStorageManager?.accountPassword = key
             }
             
             if value == "account_email" {
                 savedEmail = key
-                UserDefaults.standard.set(key, forKey: "account_email")
+                defaultsStorageManager?.accountEmail = key
             }
         }
         

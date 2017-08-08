@@ -134,12 +134,10 @@ final class ProgressAchievement: Achievement {
     func notify(event: AchievementEvent) -> Bool {
         var cond = preConditions?(progressValue, maxProgressValue, event.value) ?? true
         if cond {
-            let val = value?(progressValue, maxProgressValue, event.value) ?? 1
+            let val = value?(progressValue, maxProgressValue, event.value) ?? progressValue
             
-            cond = progressValue + val >= maxProgressValue
-            
-            progressValue += value?(progressValue, maxProgressValue, event.value) ?? 1
-            progressValue = min(maxProgressValue, progressValue)
+            cond = val >= maxProgressValue
+            progressValue = min(maxProgressValue, val)
             save()
         }
         return cond

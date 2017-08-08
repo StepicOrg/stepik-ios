@@ -101,7 +101,7 @@ extension AchievementManager {
     static func createAndRegisterAchievements() -> AchievementManager {
         let mgr = AchievementManager()
         
-        let isOnboardingPassed = UserDefaults.standard.bool(forKey: "isOnboardingShown")
+        let isOnboardingPassed = DefaultsStorageManager.shared.isRatingOnboardingFinished
         let curRating = RatingManager.shared.rating
         let curStreak = StatsManager.shared.maxStreak
         let curLevel = RatingHelper.getLevel(for: curRating)
@@ -129,7 +129,7 @@ extension AchievementManager {
         func createStreakAchievement(name: String, streak: Int, cover: UIImage) -> ProgressAchievementDescription {
             return (slug: "streak\(streak)",
                 name: "\(name)",
-                info: "Решить \(streak) заданий с первой попытки",
+                info: "Решить \(streak) заданий подряд с первой попытки",
                 cover: cover,
                 maxValue: streak,
                 pre: { cur, _, value in return value > cur },

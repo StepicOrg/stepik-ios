@@ -893,7 +893,9 @@
 		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C8D08151F1CB77B000E8F32 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step4.html */; };
+		2C8D08151F1CB77B000E8F32 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step5.html */; };
+		2C9704081F39F18700C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97040A1F39F18700C36F0A /* step4.html */; };
+		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
@@ -1250,7 +1252,6 @@
 		868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0867D82E1E8531F700B13285 /* CurrentBestStreakViewController.xib */; };
-		868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BC6E31EA0276500E204EE /* StepControlButton.swift */; };
 		869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
@@ -1893,8 +1894,11 @@
 		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
-		2C8D08161F1CB77B000E8F32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
-		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
+		2C8D08161F1CB77B000E8F32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step5.html; sourceTree = "<group>"; };
+		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step5.html; sourceTree = "<group>"; };
+		2C9704091F39F18700C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
+		2C97040B1F39F18E00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
+		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -1934,7 +1938,6 @@
 		8677B3B51F126BE300A02490 /* AdaptiveOnboardingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingStep.swift; sourceTree = "<group>"; };
 		86795EF21E85265C00A985C2 /* AdaptiveStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepViewController.swift; sourceTree = "<group>"; };
 		86795EF61E85325000A985C2 /* RecommendationsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommendationsAPI.swift; path = StepicAdaptiveCourse/RecommendationsAPI.swift; sourceTree = SOURCE_ROOT; };
-		868BC6E31EA0276500E204EE /* StepControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepControlButton.swift; sourceTree = "<group>"; };
 		86ABC66B1E96867A0012E8A6 /* StepCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
 		86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
 		86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsViewController.swift; sourceTree = "<group>"; };
@@ -3528,9 +3531,9 @@
 		2C03B2A21F0CD84900005383 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */,
 				2C03B2A31F0CD87600005383 /* StringHelper.swift */,
 				2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */,
-				2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */,
 				2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */,
 			);
 			name = Helpers;
@@ -3648,6 +3651,7 @@
 		2CEDA35E1F336F0E005F4A5D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */,
 				2CEDA35D1F336EFD005F4A5D /* Rating & Stats */,
 				2C6640CB1F2F36E80033A274 /* Achievements */,
 			);
@@ -3671,7 +3675,8 @@
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
 				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
-				2C8D08171F1CB77B000E8F32 /* step4.html */,
+				2C8D08171F1CB77B000E8F32 /* step5.html */,
+				2C97040A1F39F18700C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
 			sourceTree = "<group>";
@@ -3725,7 +3730,6 @@
 				8618E3E21EA0061000FB3D0F /* StepReversedCardView */,
 				86ABC6681E96861F0012E8A6 /* LoadingAnimationView */,
 				86ABC6661E9685F80012E8A6 /* StepCardView */,
-				868BC6E31EA0276500E204EE /* StepControlButton.swift */,
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
 				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
@@ -4288,9 +4292,10 @@
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
+				2C9704081F39F18700C36F0A /* step4.html in Resources */,
 				86AE94821E84511A00F67691 /* MatchingQuizTableViewCell.xib in Resources */,
 				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
-				2C8D08151F1CB77B000E8F32 /* step4.html in Resources */,
+				2C8D08151F1CB77B000E8F32 /* step5.html in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
@@ -5319,7 +5324,6 @@
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
 				864514EA1E9FD4F6007F73BE /* SectionsAPI.swift in Sources */,
-				868BC6E41EA0276500E204EE /* StepControlButton.swift in Sources */,
 				864514EB1E9FD4F6007F73BE /* LessonsAPI.swift in Sources */,
 				864514EC1E9FD4F6007F73BE /* UsersAPI.swift in Sources */,
 				864514ED1E9FD4F6007F73BE /* StepsAPI.swift in Sources */,
@@ -5448,6 +5452,7 @@
 				864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */,
 				864D67BC1E83E08E001E8D9E /* MyCoursesViewController.swift in Sources */,
 				864D67BD1E83E08E001E8D9E /* CoursesViewController.swift in Sources */,
+				2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */,
 				864D67BE1E83E08E001E8D9E /* SearchResultsCoursesViewController.swift in Sources */,
 				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
@@ -5808,11 +5813,20 @@
 			name = AchievementTableViewCell.xib;
 			sourceTree = "<group>";
 		};
-		2C8D08171F1CB77B000E8F32 /* step4.html */ = {
+		2C8D08171F1CB77B000E8F32 /* step5.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2C8D08161F1CB77B000E8F32 /* ru */,
 				2C8D08181F1CB786000E8F32 /* en */,
+			);
+			name = step5.html;
+			sourceTree = "<group>";
+		};
+		2C97040A1F39F18700C36F0A /* step4.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C9704091F39F18700C36F0A /* en */,
+				2C97040B1F39F18E00C36F0A /* ru */,
 			);
 			name = step4.html;
 			sourceTree = "<group>";

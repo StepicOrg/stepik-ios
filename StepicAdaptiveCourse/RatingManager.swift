@@ -26,7 +26,7 @@ class RatingManager {
     
     var streak: Int {
         get {
-            return defaults.integer(forKey: streakKey)
+            return max(1, defaults.integer(forKey: streakKey))
         }
         set(newValue) {
             updateValue(newValue, for: streakKey)

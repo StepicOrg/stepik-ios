@@ -21,7 +21,7 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        presenter = AdaptiveOnboardingPresenter(view: self)
+        presenter = AdaptiveOnboardingPresenter(achievementManager: AchievementManager.shared, view: self)
     }
     
     override func viewDidLoad() {
@@ -29,12 +29,12 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
+        
+        levelProgress.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        levelProgress.setProgress(value: 0.0, animated: false)
     }
     
     func finishOnboarding() {
@@ -118,5 +118,11 @@ extension AdaptiveOnboardingViewController: StepCardViewDelegate {
         canSwipeCurrentCardUp = true
         kolodaView.swipe(.up)
         canSwipeCurrentCardUp = false
+    }
+}
+
+extension AdaptiveOnboardingViewController: RatingProgressViewDelegate {
+    func onClick() {
+        self.performSegue(withIdentifier: "openStats", sender: nil)
     }
 }

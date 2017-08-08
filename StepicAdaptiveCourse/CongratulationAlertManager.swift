@@ -18,6 +18,7 @@ typealias CongratulationType = CongratulationViewController.CongratulationType
 class CongratulationAlertManager: AlertManager {
     
     func present(alert: UIViewController, inController controller: UIViewController)  {
+        presenter.customBackgroundView = CongratsView(frame: controller.view.bounds)
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
     }
     

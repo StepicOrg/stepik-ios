@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjP-XU-kDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3663" y="140"/>
+            <point key="canvasLocation" x="3674" y="209"/>
         </scene>
         <!--Adaptive Stats View Controller-->
         <scene sceneID="I5g-b8-7et">
@@ -429,6 +428,7 @@
                     <connections>
                         <outlet property="kolodaView" destination="B1X-yL-kd2" id="6vc-nJ-ldz"/>
                         <outlet property="levelProgress" destination="CWK-Ty-R0K" id="n69-1K-Myj"/>
+                        <segue destination="j4X-Xb-iib" kind="presentation" identifier="openStats" id="PWn-nl-Wjd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SeO-eB-quk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -455,4 +455,7 @@
             <point key="canvasLocation" x="4576.8000000000002" y="34.632683658170919"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PWn-nl-Wjd"/>
+    </inferredMetricsTieBreakers>
 </document>

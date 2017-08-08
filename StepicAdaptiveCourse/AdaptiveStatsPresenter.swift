@@ -52,10 +52,18 @@ class AdaptiveStatsPresenter {
         
         let currentXP = ratingManager.rating
         let currentLevel = RatingHelper.getLevel(for: currentXP)
-        let bestStreak = min(1, statsManager.maxStreak)
+        let bestStreak = max(1, statsManager.maxStreak)
+        
+        // Achievements
+        achievementsManager.storedAchievements.forEach({ achievement in
+            achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
+        })
+        
+        view?.setAchievements(records: achievements)
         
         guard let stats = statsManager.stats else {
             view?.setGeneralStats(currentLevel: currentLevel, bestStreak: bestStreak, currentWeekXP: 0, last7DaysProgress: nil)
+            view?.reload()
             return
         }
         
@@ -102,13 +110,6 @@ class AdaptiveStatsPresenter {
         }
         
         view?.setProgress(records: progressByWeek.reversed())
-        
-        // Achievements
-        achievementsManager.storedAchievements.forEach({ achievement in
-            achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
-        })
-        
-        view?.setAchievements(records: achievements)
         
         view?.reload()
     }
