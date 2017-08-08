@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,7 +41,7 @@
                                         <rect key="frame" x="0.0" y="10" width="375" height="5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="LY2-WB-yMw"/>
+                                            <constraint firstAttribute="height" constant="5" placeholder="YES" id="LY2-WB-yMw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -70,7 +70,6 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="quizPlaceholderView" destination="Lbp-Hw-f8f" id="iJ0-0Z-Zve"/>
-                        <outlet property="quizPlaceholderViewHeight" destination="LY2-WB-yMw" id="Fdf-FI-MxF"/>
                         <outlet property="scrollView" destination="1Am-VA-FTv" id="z2z-6Y-8PD"/>
                         <outlet property="stepWebView" destination="5eX-H9-4P6" id="ORF-cp-ZMN"/>
                         <outlet property="stepWebViewHeight" destination="blu-xZ-KpD" id="miR-yw-cQp"/>

@@ -10,7 +10,7 @@ import Foundation
 
 protocol SocialSDKProvider {
     var name: String { get }
-    func getAccessToken(success successHandler: @escaping (String) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void)
+    func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void)
 }
 
 enum SocialSDKError : Error {

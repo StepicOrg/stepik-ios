@@ -26,5 +26,6 @@ extension AnalyticsEvents {
             static let easy = "adaptive_reaction_easy"
             static let hard = "adaptive_reaction_hard"
         }
+        static let localNotification = "adaptive_opened_by_local_notification"
     }
 }

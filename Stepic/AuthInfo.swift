@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MagicalRecord
 
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
@@ -21,15 +20,6 @@ class AuthInfo: NSObject {
         if let id = userId {
             if let users = User.fetchById(id) {
                 let c = users.count
-//                if c > 1 {
-//                    print("users count > 1, deleting all")
-//                    for user in users {
-//                        user.MR_deleteEntity()
-//                    }
-//                    c = 0
-//                    CoreDataHelper.instance.save()
-//                }
-                
                 if c == 0 {
                     print("No user with such id found, downloading")
                     ApiDataDownloader.users.retrieve(ids: [id], existing: [], refreshMode: .update, success: {
@@ -86,7 +76,7 @@ class AuthInfo: NSObject {
 
                         AuthInfo.shared.user = nil
                         
-                        self.setTokenValue(newToken)
+                        self.setTokenValue(nil)
                     }
                 })
             } else {

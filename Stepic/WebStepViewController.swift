@@ -20,8 +20,6 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var quizPlaceholderView: UIView!
     @IBOutlet weak var stepWebViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var quizPlaceholderViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var discussionCountView: DiscussionCountView!
     @IBOutlet weak var discussionCountViewHeight: NSLayoutConstraint!
     
@@ -66,7 +64,6 @@ class WebStepViewController: UIViewController {
             
         stepWebView.delegate = self
         
-        stepWebView.scrollView.delegate = self
         stepWebView.scrollView.backgroundColor = UIColor.white
 //        stepWebView.backgroundColor = UIColor.white
         
@@ -160,21 +157,22 @@ class WebStepViewController: UIViewController {
         if htmlText == stepText {
             return
         }
+        
+        htmlText = htmlText.replacingOccurrences(of: "audio controls src=\"//", with: "audio controls src=\"http://")
+        
         if step.block.name == "code" {
             for (index, sample) in (step.options?.samples ?? []).enumerated() {
                 htmlText += "<h4>Sample input \(index + 1)</h4>\(sample.input)<h4>Sample output \(index + 1)</h4>\(sample.output)"
             }
         }
+        
         let scriptsString = "\(Scripts.localTexScript)\(Scripts.clickableImagesScript)"
         var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: htmlText, width: Int(UIScreen.main.bounds.width))
         html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        print("\(Bundle.main.bundlePath)")
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-        
     }
     
     func initQuizController(_ quizController : QuizViewController) {
-        quizController.delegate = self
         quizController.step = self.step
         if self.step.hasReview {
             quizController.stepUrl = self.stepUrl
@@ -232,7 +230,6 @@ class WebStepViewController: UIViewController {
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             print("unknown type \(step.block.name)")
             quizController.stepUrl = self.stepUrl
-            quizController.delegate = self
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
             quizController.view.align(to: quizPlaceholderView)
@@ -255,8 +252,6 @@ class WebStepViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
         
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.opened, parameters: ["item_name": step.block.name as NSObject, "stepId": step.id])
         
@@ -356,9 +351,6 @@ class WebStepViewController: UIViewController {
     }
     
     @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
-        //        print(stepUrl)
-        //        print(NSURL(string: stepUrl))
-        
         let url = URL(string: stepUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
         
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
@@ -366,7 +358,6 @@ class WebStepViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillLayoutSubviews() {
@@ -385,34 +376,8 @@ class WebStepViewController: UIViewController {
             return
         }
         
-        if needsQuizUpdateAttention {
-            if isCurrentlyUpdatingHeight {
-                print("STEPID: \(self.stepId) Currently updating height in resetWebViewHeight")
-                webViewUpdatingHeight = height
-                return
-            }
-            
-            isCurrentlyUpdatingHeight = true
-        }
         stepWebViewHeight.constant = CGFloat(height)
-        UIView.animate(withDuration: 0.2, animations: { 
-            [weak self] in
-            self?.view.layoutIfNeeded() 
-        }, completion: {
-            [weak self] 
-            completed in
-            if (self?.needsQuizUpdateAttention ?? false) {
-                self?.isCurrentlyUpdatingHeight = false
-                
-                if self?.webViewUpdatingHeight == height {
-                    self?.webViewUpdatingHeight = nil
-                }
-
-                if let h = self?.webViewUpdatingHeight {
-                    self?.resetWebViewHeight(h)
-                }
-            }
-        })
+        self.view.layoutIfNeeded()
     }
     
     var additionalOffsetXValue : CGFloat = 0.0
@@ -524,11 +489,7 @@ extension WebStepViewController : UIWebViewDelegate {
     
     func getContentHeight(_ webView : UIWebView) -> Int {
         let h = Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
-//        if h != 0 {
-//            return h + 8
-//        } 
         return h
-        //        return Int(webView.scrollView.contentSize.height)
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
@@ -538,91 +499,8 @@ extension WebStepViewController : UIWebViewDelegate {
         self.reloadWithCount(0)
     }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if isCurrentlyUpdatingHeight && needsQuizUpdateAttention {
-            delay(0.2, closure: {
-                [weak self] in
-                if let s = self {
-                    s.resetWebViewHeight(Float(s.getContentHeight(s.stepWebView)))
-                }
-            })
-            return
-        }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
-    }
-    
-    var needsQuizUpdateAttention: Bool {
-        return step.block.name == "matching"
-    }
-}
-
-extension WebStepViewController : UIScrollViewDelegate {
-}
-
-extension WebStepViewController : QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
-//        if quizPlaceholderViewHeight.constant == newHeight {
-//            return
-//        }
-        
-        if needsQuizUpdateAttention && !breaksSynchronizationControl {
-            if newHeight <= self.quizPlaceholderViewHeight.constant {
-                print("STEPID: \(self.stepId)  \n\nNot changing equal or less height \(newHeight), return\n\n")
-                return
-            }
-        
-            if isCurrentlyUpdatingHeight {
-                print("STEPID: \(self.stepId) \n\nIs currently updating height, queuing & returning\n\n")
-                if let last = lastUpdatingQuizHeight {
-                    if newHeight > last {
-                        lastUpdatingQuizHeight = newHeight
-                    }
-                } else {
-                    lastUpdatingQuizHeight = newHeight
-                }
-                return
-            }
-        
-            isCurrentlyUpdatingHeight = true
-            print("STEPID: \(self.stepId) \n\nChanging height to \(newHeight)\n\n")
-        }
-        
-        DispatchQueue.main.async {
-            [weak self] in
-            self?.quizPlaceholderViewHeight.constant = newHeight
-//        view.setNeedsLayout()
-            if animated { 
-                UIView.animate(withDuration: 0.2, animations: {
-                    [weak self] in
-                    self?.view.layoutIfNeeded()
-                }, completion: {
-                    [weak self] 
-                    completed in
-                    if (self?.needsQuizUpdateAttention ?? false) {
-                        self?.isCurrentlyUpdatingHeight = false
-                        if self?.lastUpdatingQuizHeight == newHeight {
-                            self?.lastUpdatingQuizHeight = nil
-                        }
-                        if let h = self?.lastUpdatingQuizHeight {
-                            self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
-                        }
-                    }
-                })
-            } else {
-                self?.view.layoutIfNeeded()
-                if (self?.needsQuizUpdateAttention ?? false) {
-
-                    self?.isCurrentlyUpdatingHeight = false
-                    if self?.lastUpdatingQuizHeight == newHeight {
-                        self?.lastUpdatingQuizHeight = nil
-                    }
-                    if let h = self?.lastUpdatingQuizHeight {
-                        self?.needsHeightUpdate(h, animated: animated, breaksSynchronizationControl: false)
-                    }
-                }
-            }
-            
-        }
-    
     }
 }

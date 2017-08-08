@@ -20,7 +20,7 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var hintHeight: NSLayoutConstraint!
     @IBOutlet weak var hintView: UIView!
-    @IBOutlet weak var hintWebView: UIWebView!
+    @IBOutlet weak var hintWebView: FullHeightWebView!
     @IBOutlet weak var hintTextView: UITextView!
     
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
@@ -40,8 +40,6 @@ class QuizViewController: UIViewController {
                 isSubmitButtonHidden = false
             } else {
                 sendButton.isEnabled = false
-//                sendButton.setTitle("No submissions left", for: .normal)
-//                isSubmitButtonHidden = true
             }
             submissionsLeft = left
         }
@@ -85,18 +83,19 @@ class QuizViewController: UIViewController {
     
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
     
-    //Activity view here
-    lazy var activityView : UIView = self.initActivityView()
+    var activityView : UIView?
     
-    lazy var warningView : UIView = self.initWarningView()
+    var warningView : UIView?
     
     func initWarningView() -> UIView {
         //TODO: change warning image!
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
         v.align(to: self.view)
+        v.constrainHeight("150")
         v.delegate = self
         v.datasource = self
+        v.setContentCompressionResistancePriority(1000.0, for: UILayoutConstraintAxis.vertical)
         v.backgroundColor = UIColor.white
         return v
     }
@@ -122,15 +121,17 @@ class QuizViewController: UIViewController {
             if doesPresentActivityIndicatorView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.activityView.isHidden = false
+                    if self?.activityView == nil {
+                        self?.activityView = self?.initActivityView()
+                    }
+                    self?.activityView?.isHidden = false
                 }
-                self.delegate?.needsHeightUpdate(150, animated: true, breaksSynchronizationControl: false)
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.activityView.isHidden = true
+                    self?.activityView?.removeFromSuperview()
+                    self?.activityView = nil
                 }
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
         }
     }
@@ -140,16 +141,18 @@ class QuizViewController: UIViewController {
             if doesPresentWarningView {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.warningView.isHidden = false
+                    if self?.warningView == nil {
+                        self?.warningView = self?.initWarningView()
+                    }
+                    self?.warningView?.isHidden = false
                 }
-                self.delegate?.needsHeightUpdate(200, animated: true, breaksSynchronizationControl: false)
                 self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
-                    self?.warningView.isHidden = true
+                    self?.warningView?.removeFromSuperview()
+                    self?.warningView = nil
                 }
-                self.delegate?.needsHeightUpdate(self.heightWithoutQuiz + self.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
             }
         }
     }
@@ -168,15 +171,10 @@ class QuizViewController: UIViewController {
                     
                     //TODO: Implement in subclass, then it may need a height update
                     s.updateQuizAfterAttemptUpdate()
-                    s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
                 }
 //                self.view.layoutIfNeeded()
             }
         }
-    }
-    
-    var heightWithoutQuiz : CGFloat {
-        return 40 + sendButtonHeight.constant + statusViewHeight.constant + hintHeight.constant + peerReviewHeight.constant
     }
     
     override func viewDidLayoutSubviews() {
@@ -215,12 +213,7 @@ class QuizViewController: UIViewController {
     //Override this in subclass
     func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
     }
-    
-    //Override this in subclass
-    var expectedQuizHeight : CGFloat {
-        return 0
-    }
-    
+        
     var needPeerReview : Bool {
         return stepUrl != nil
     }
@@ -240,8 +233,6 @@ class QuizViewController: UIViewController {
     }
     
     fileprivate var didGetErrorWhileSendingSubmission = false
-    
-    fileprivate var hintHeightUpdateBlock : ((Void) -> Int)?
     
     fileprivate func setStatusElements(visible: Bool) {
         statusLabel.isHidden = !visible
@@ -267,11 +258,8 @@ class QuizViewController: UIViewController {
                         s.statusImageView.image = nil
                         s.buttonStateSubmit = true
                         s.view.backgroundColor = UIColor.white
-//                        s.sendButton.setTitle(s.submitTitle, for: UIControlState())
                         s.statusViewHeight.constant = 0
-                        s.hintHeight.constant = 0
-                        s.hintHeightUpdateBlock = nil
-                        s.hintView.isHidden = true
+                        s.hideHintView()
                         s.peerReviewHeight.constant = 0
                         s.peerReviewButton.isHidden = true
                         s.setStatusElements(visible: false)
@@ -288,23 +276,33 @@ class QuizViewController: UIViewController {
                         
                         if let hint = s.submission?.hint {
                             if hint != "" {
-                                s.hintView.isHidden = false
                                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
-                                    s.hintHeightUpdateBlock = s.hintHeightWebViewHelper.setTextWithTeX(hint, textColorHex: "#FFFFFF")
-                                    s.performHeightUpdates()
+                                    s.hintHeightWebViewHelper?.mathJaxFinishedBlock = {
+                                        [weak self] in
+                                        if let webView = self?.hintWebView {
+                                            webView.invalidateIntrinsicContentSize()
+                                            UIThread.performUI {
+                                                [weak self] in
+                                                self?.view.layoutIfNeeded()
+                                                self?.hintView.isHidden = false
+                                                self?.hintHeight.constant = webView.contentHeight
+                                            }
+                                        }
+                                    }
+                                    s.hintHeightWebViewHelper.setTextWithTeX(hint, color: UIColor.white)
                                     s.hintTextView.isHidden = true
                                     s.hintWebView.isHidden = false
                                 } else {
-                                    s.hintWebView.isHidden = true
+                                    s.hintView.isHidden = false
                                     s.hintTextView.isHidden = false
                                     s.hintTextView.text = hint
                                     s.hintHeight.constant = s.getHintHeightFor(hint: hint)
                                 }
                             } else {
-                                s.hintHeight.constant = 0
+                                s.hideHintView()
                             }
                         } else {
-                            s.hintHeight.constant = 0
+                            s.hideHintView()
                         }
                         
                         switch s.submission!.status! {
@@ -329,6 +327,7 @@ class QuizViewController: UIViewController {
                                 }
                             }
                             
+                            s.view.layoutIfNeeded()
                             self?.delegate?.submissionDidCorrect()
                             
                             break
@@ -348,6 +347,7 @@ class QuizViewController: UIViewController {
                             s.statusLabel.text = s.wrongTitle
                             s.setStatusElements(visible: true)
 
+                            s.view.layoutIfNeeded()
                             self?.delegate?.submissionDidWrong()
                             
                             break
@@ -376,8 +376,6 @@ class QuizViewController: UIViewController {
 
                         s.updateQuizAfterSubmissionUpdate()
                     }
-                    s.delegate?.needsHeightUpdate(s.heightWithoutQuiz + s.expectedQuizHeight, animated: true, breaksSynchronizationControl: false)
-//                self.view.layoutIfNeeded()
                 }
             }
         }
@@ -393,54 +391,6 @@ class QuizViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.setNeedsLayout()
-//        self.view.layoutIfNeeded()
-    }
-    
-    //Measured in seconds
-    let reloadTimeStandardInterval = 0.5
-    let reloadTimeout = 5.0
-    let noReloadTimeout = 1.0
-    
-    fileprivate func reloadWithCount(_ count: Int, noReloadCount: Int) {
-        if Double(count) * reloadTimeStandardInterval > reloadTimeout {
-            return
-        }
-        if Double(noReloadCount) * reloadTimeStandardInterval > noReloadTimeout {
-            return 
-        }
-        delay(reloadTimeStandardInterval * Double(count), closure: {
-            [weak self] in
-            if self?.countHeight() == true {
-                DispatchQueue.main.async {
-                    [weak self] in
-                    if let expectedHeight = self?.expectedQuizHeight, 
-                        let noQuizHeight = self?.heightWithoutQuiz {
-                        self?.delegate?.needsHeightUpdate(expectedHeight + noQuizHeight, animated: true, breaksSynchronizationControl: false) 
-                    }
-                }
-                self?.reloadWithCount(count + 1, noReloadCount: 0)
-            } else {
-                self?.reloadWithCount(count + 1, noReloadCount: noReloadCount + 1)
-            }
-            })  
-    }    
-    
-    fileprivate func countHeight() -> Bool {
-        var index = 0
-        var didChangeHeight = false
-        if let h = hintHeightUpdateBlock?() {
-            if abs(hintHeight.constant - CGFloat(h)) > 1 { 
-                //                print("changed height of cell \(index) from \(cellHeights[index]) to \(h)")
-                hintHeight.constant = CGFloat(h)
-                didChangeHeight = true
-            }
-            index += 1
-        }
-        return didChangeHeight
-    }
-    
-    fileprivate func performHeightUpdates() {
-        self.reloadWithCount(0, noReloadCount: 0)
     }
     
     var hintHeightWebViewHelper : CellWebViewHelper!
@@ -449,7 +399,7 @@ class QuizViewController: UIViewController {
         super.viewDidLoad()
         
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
-        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView, heightWithoutWebView: 0)
+        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView)
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true
         self.hintWebView.delegate = self
@@ -459,7 +409,7 @@ class QuizViewController: UIViewController {
         self.hintTextView.font = UIFont(name: "ArialMT", size: 16)
         self.hintTextView.isEditable = false
         self.hintTextView.dataDetectorTypes = .all
-
+        self.hideHintView()
         
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor()
@@ -490,6 +440,11 @@ class QuizViewController: UIViewController {
             
             WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
         }
+    }
+    
+    fileprivate func hideHintView() {
+        self.hintHeight.constant = 1
+        self.hintView.isHidden = true
     }
     
     fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int)->Void), error: @escaping ((String) -> Void)) {
