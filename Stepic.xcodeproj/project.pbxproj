@@ -912,6 +912,7 @@
 		2C8D08151F1CB77B000E8F32 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step5.html */; };
 		2C9704081F39F18700C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97040A1F39F18700C36F0A /* step4.html */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
+		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
@@ -1913,6 +1914,7 @@
 		2C9704091F39F18700C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97040B1F39F18E00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
+		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -3767,6 +3769,7 @@
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
 				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
+				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -5473,6 +5476,7 @@
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
 				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
+				2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */,
 				864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */,
 				864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */,
 				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,

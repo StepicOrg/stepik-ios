@@ -14,6 +14,8 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
     
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var levelProgress: RatingProgressView!
+    @IBOutlet weak var tapProxyView: TapProxyView!
+    @IBOutlet weak var trophyButton: UIButton!
     
     fileprivate var requiredActions: [AdaptiveOnboardingAction] = []
     fileprivate var canSwipeCurrentCardUp = false
@@ -30,11 +32,9 @@ class AdaptiveOnboardingViewController: UIViewController, AdaptiveOnboardingView
         kolodaView.dataSource = self
         kolodaView.delegate = self
         
-        levelProgress.delegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        tapProxyView.targetView = trophyButton
+        
+        trophyButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
     }
     
     func finishOnboarding() {
@@ -118,11 +118,5 @@ extension AdaptiveOnboardingViewController: StepCardViewDelegate {
         canSwipeCurrentCardUp = true
         kolodaView.swipe(.up)
         canSwipeCurrentCardUp = false
-    }
-}
-
-extension AdaptiveOnboardingViewController: RatingProgressViewDelegate {
-    func onClick() {
-        self.performSegue(withIdentifier: "openStats", sender: nil)
     }
 }
