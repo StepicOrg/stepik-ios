@@ -910,6 +910,7 @@
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
+		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
 		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
@@ -1909,6 +1910,7 @@
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
+		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
 		2C97041E1F3B0B7600C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step4.html; sourceTree = "<group>"; };
@@ -3767,6 +3769,7 @@
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
 				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
+				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -5473,6 +5476,7 @@
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
 				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
+				2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */,
 				864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */,
 				864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */,
 				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,

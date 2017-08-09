@@ -15,6 +15,8 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     @IBOutlet weak var kolodaView: KolodaView!
     @IBOutlet weak var levelProgress: RatingProgressView!
+    @IBOutlet weak var tapProxyView: TapProxyView!
+    @IBOutlet weak var trophyButton: UIButton!
     
     var canSwipeCurrentCardUp = false
     
@@ -53,8 +55,9 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tapProxyView.targetView = trophyButton
         
-        levelProgress.delegate = self
+        trophyButton.tintColor = StepicApplicationsInfo.adaptiveMainColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,11 +251,5 @@ extension AdaptiveStepsViewController: PlaceholderViewDelegate {
         default:
             return
         }
-    }
-}
-
-extension AdaptiveStepsViewController: RatingProgressViewDelegate {
-    func onClick() {
-        self.performSegue(withIdentifier: "openStats", sender: nil)
     }
 }

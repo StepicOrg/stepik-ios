@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -322,8 +322,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bt4-JM-9U1" customClass="RatingProgressView" customModule="Adaptive_1838" customModuleProvider="target">
-                                <rect key="frame" x="10" y="30" width="300" height="25"/>
+                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bt4-JM-9U1" customClass="RatingProgressView" customModule="Adaptive_1838" customModuleProvider="target">
+                                <rect key="frame" x="10" y="30" width="266" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="WGD-AT-6Tw"/>
@@ -346,6 +346,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nR-Ez-br8">
+                                <rect key="frame" x="284" y="31" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="IoP-ed-WvJ"/>
+                                    <constraint firstAttribute="width" constant="24" id="Kbf-g6-Eot"/>
+                                </constraints>
+                                <state key="normal" image="trophy"/>
+                                <connections>
+                                    <segue destination="j4X-Xb-iib" kind="presentation" identifier="openStats" id="4ET-bd-E5d"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1l-r5-IKr" userLabel="Tap view" customClass="TapProxyView" customModule="Adaptive_1838" customModuleProvider="target">
+                                <rect key="frame" x="270" y="20" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6G8-J6-JDB"/>
+                                    <constraint firstAttribute="width" constant="50" id="t0V-zn-uPT"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHb-6A-jG0" customClass="KolodaView" customModule="Koloda">
                                 <rect key="frame" x="10" y="67" width="300" height="497"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -354,23 +373,29 @@
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Bt4-JM-9U1" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" constant="10" id="Bgs-Rk-daW"/>
-                            <constraint firstAttribute="trailing" secondItem="Bt4-JM-9U1" secondAttribute="trailing" constant="10" id="EHC-7u-xbW"/>
+                            <constraint firstItem="8nR-Ez-br8" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" constant="11" id="CO8-Xh-WAp"/>
                             <constraint firstAttribute="trailing" secondItem="AHb-6A-jG0" secondAttribute="trailing" constant="10" id="GBl-LW-BUV"/>
                             <constraint firstItem="N8f-j4-uap" firstAttribute="top" secondItem="AHb-6A-jG0" secondAttribute="bottom" constant="4" id="Goz-Jl-rP3"/>
                             <constraint firstItem="AHb-6A-jG0" firstAttribute="leading" secondItem="pQd-fo-zuT" secondAttribute="leading" constant="10" id="JRs-Dn-iJZ"/>
+                            <constraint firstItem="AHb-6A-jG0" firstAttribute="top" secondItem="8nR-Ez-br8" secondAttribute="bottom" constant="12" id="M6R-oh-ECt"/>
                             <constraint firstItem="AHb-6A-jG0" firstAttribute="top" secondItem="Bt4-JM-9U1" secondAttribute="bottom" constant="12.5" id="NSF-or-zL2"/>
                             <constraint firstItem="Bt4-JM-9U1" firstAttribute="leading" secondItem="pQd-fo-zuT" secondAttribute="leading" constant="10" id="Psb-bA-1wL"/>
+                            <constraint firstItem="8nR-Ez-br8" firstAttribute="leading" secondItem="Bt4-JM-9U1" secondAttribute="trailing" constant="8" id="hc5-4p-0lz"/>
+                            <constraint firstItem="r1l-r5-IKr" firstAttribute="top" secondItem="hF7-0Z-sGm" secondAttribute="bottom" id="p1C-0T-aHm"/>
+                            <constraint firstAttribute="trailing" secondItem="r1l-r5-IKr" secondAttribute="trailing" id="pqz-iK-56k"/>
+                            <constraint firstAttribute="trailing" secondItem="8nR-Ez-br8" secondAttribute="trailing" constant="12" id="t5Q-2O-2hC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="kolodaView" destination="AHb-6A-jG0" id="hFz-AB-TRu"/>
                         <outlet property="levelProgress" destination="Bt4-JM-9U1" id="J9S-NX-JCh"/>
-                        <segue destination="j4X-Xb-iib" kind="presentation" identifier="openStats" id="B05-wU-6tv"/>
+                        <outlet property="tapProxyView" destination="r1l-r5-IKr" id="Wtc-Yc-Yhp"/>
+                        <outlet property="trophyButton" destination="8nR-Ez-br8" id="cFK-a6-Bmw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy2-Bl-v5s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="34.632683658170919"/>
+            <point key="canvasLocation" x="2700" y="33.802816901408448"/>
         </scene>
         <!--Adaptive Onboarding View Controller-->
         <scene sceneID="VpM-KK-F0t">
@@ -384,8 +409,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWK-Ty-R0K" customClass="RatingProgressView" customModule="Adaptive_1838" customModuleProvider="target">
-                                <rect key="frame" x="10" y="30" width="300" height="25"/>
+                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWK-Ty-R0K" customClass="RatingProgressView" customModule="Adaptive_1838" customModuleProvider="target">
+                                <rect key="frame" x="10" y="30" width="266" height="25"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="BKq-h3-QzF"/>
@@ -408,6 +433,27 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxM-Lf-CAg">
+                                <rect key="frame" x="284" y="31" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="7MS-1S-nBa"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="9M8-in-Isz"/>
+                                    <constraint firstAttribute="height" constant="24" id="Lv4-Ny-w7A"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="V6j-n2-Njz"/>
+                                </constraints>
+                                <state key="normal" image="trophy"/>
+                                <connections>
+                                    <segue destination="j4X-Xb-iib" kind="presentation" id="1jw-M0-gxG"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cP7-Wl-iAP" userLabel="Tap view" customClass="TapProxyView" customModule="Adaptive_1838" customModuleProvider="target">
+                                <rect key="frame" x="270" y="20" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Xcr-k9-T17"/>
+                                    <constraint firstAttribute="width" constant="50" id="eex-VR-Kzm"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1X-yL-kd2" customClass="KolodaView" customModule="Koloda">
                                 <rect key="frame" x="10" y="67" width="300" height="497"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -417,22 +463,28 @@
                         <constraints>
                             <constraint firstItem="Xe6-Xf-dRZ" firstAttribute="top" secondItem="B1X-yL-kd2" secondAttribute="bottom" constant="4" id="17i-N3-Gge"/>
                             <constraint firstAttribute="trailing" secondItem="B1X-yL-kd2" secondAttribute="trailing" constant="10" id="920-GI-3pD"/>
-                            <constraint firstAttribute="trailing" secondItem="CWK-Ty-R0K" secondAttribute="trailing" constant="10" id="FrQ-0x-0mH"/>
+                            <constraint firstAttribute="trailing" secondItem="PxM-Lf-CAg" secondAttribute="trailing" constant="12" id="923-OJ-efb"/>
+                            <constraint firstItem="B1X-yL-kd2" firstAttribute="top" secondItem="PxM-Lf-CAg" secondAttribute="bottom" constant="12" id="NXC-xy-K3l"/>
+                            <constraint firstItem="PxM-Lf-CAg" firstAttribute="leading" secondItem="CWK-Ty-R0K" secondAttribute="trailing" constant="8" id="Nyg-By-IbG"/>
                             <constraint firstItem="CWK-Ty-R0K" firstAttribute="top" secondItem="BYL-NN-bsx" secondAttribute="bottom" constant="10" id="ORY-vi-mNA"/>
                             <constraint firstItem="B1X-yL-kd2" firstAttribute="leading" secondItem="pp9-Pd-ItG" secondAttribute="leading" constant="10" id="OWx-uO-76O"/>
+                            <constraint firstItem="cP7-Wl-iAP" firstAttribute="top" secondItem="BYL-NN-bsx" secondAttribute="bottom" id="OzK-m2-owP"/>
                             <constraint firstItem="B1X-yL-kd2" firstAttribute="top" secondItem="CWK-Ty-R0K" secondAttribute="bottom" constant="12.5" id="P27-Ej-FUo"/>
                             <constraint firstItem="CWK-Ty-R0K" firstAttribute="leading" secondItem="pp9-Pd-ItG" secondAttribute="leading" constant="10" id="R5O-FZ-oKu"/>
+                            <constraint firstItem="PxM-Lf-CAg" firstAttribute="top" secondItem="BYL-NN-bsx" secondAttribute="bottom" constant="11" id="THo-OJ-2V7"/>
+                            <constraint firstAttribute="trailing" secondItem="cP7-Wl-iAP" secondAttribute="trailing" id="Xyr-im-tPQ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="kolodaView" destination="B1X-yL-kd2" id="6vc-nJ-ldz"/>
                         <outlet property="levelProgress" destination="CWK-Ty-R0K" id="n69-1K-Myj"/>
-                        <segue destination="j4X-Xb-iib" kind="presentation" identifier="openStats" id="PWn-nl-Wjd"/>
+                        <outlet property="tapProxyView" destination="cP7-Wl-iAP" id="djc-6K-eev"/>
+                        <outlet property="trophyButton" destination="PxM-Lf-CAg" id="s7q-pj-GA0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SeO-eB-quk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="-700"/>
+            <point key="canvasLocation" x="2700" y="-700.35211267605632"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="73v-2g-46D">
@@ -454,7 +506,10 @@
             <point key="canvasLocation" x="4576.8000000000002" y="34.632683658170919"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="trophy" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PWn-nl-Wjd"/>
+        <segue reference="4ET-bd-E5d"/>
     </inferredMetricsTieBreakers>
 </document>
