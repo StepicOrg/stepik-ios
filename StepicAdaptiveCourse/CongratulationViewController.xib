@@ -29,8 +29,11 @@
                         <constraint firstAttribute="width" constant="120" id="Qlu-10-uRN"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы достигли 5 уровня!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOD-Bp-2ir">
-                    <rect key="frame" x="105" y="148" width="165.5" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы достигли 5 уровня!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOD-Bp-2ir">
+                    <rect key="frame" x="48.5" y="148" width="280" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="uvX-2V-pFc"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
