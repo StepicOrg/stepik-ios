@@ -135,7 +135,6 @@ class RatingProgressView: UIView {
         let tapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(tap(_:)))
         tapRecognizer.minimumPressDuration = 0
         self.addGestureRecognizer(tapRecognizer)
-        self.isUserInteractionEnabled = true
     }
     
     func tap(_ gestureRecognizer: UITapGestureRecognizer) {

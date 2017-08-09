@@ -909,9 +909,10 @@
 		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
-		2C8D08151F1CB77B000E8F32 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D08171F1CB77B000E8F32 /* step5.html */; };
-		2C9704081F39F18700C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97040A1F39F18700C36F0A /* step4.html */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
+		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
+		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
+		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
@@ -1908,11 +1909,12 @@
 		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
-		2C8D08161F1CB77B000E8F32 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step5.html; sourceTree = "<group>"; };
-		2C8D08181F1CB786000E8F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step5.html; sourceTree = "<group>"; };
-		2C9704091F39F18700C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step4.html; sourceTree = "<group>"; };
-		2C97040B1F39F18E00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step4.html; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
+		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
+		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
+		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
+		2C97041E1F3B0B7600C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step4.html; sourceTree = "<group>"; };
+		2C97041F1F3B0B7A00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step5.html; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -3703,14 +3705,14 @@
 		2CFB1C531F14C81100CD0A4C /* Onboarding content */ = {
 			isa = PBXGroup;
 			children = (
+				2C9704181F3B0B7200C36F0A /* step4.html */,
+				2C97041A1F3B0B7200C36F0A /* step5.html */,
 				2C04C1021F160631006B69B3 /* step1.html */,
 				2C04C1051F160643006B69B3 /* step2.html */,
 				2C04C1081F160650006B69B3 /* step3.html */,
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
 				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
-				2C8D08171F1CB77B000E8F32 /* step5.html */,
-				2C97040A1F39F18700C36F0A /* step4.html */,
 			);
 			name = "Onboarding content";
 			sourceTree = "<group>";
@@ -3767,6 +3769,7 @@
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
 				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
+				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -4319,14 +4322,13 @@
 				0808527B1ED752DE007C0877 /* GoogleService-Info.plist in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				080852791ED74C35007C0877 /* Tokens.plist in Resources */,
+				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				86AE94801E84511A00F67691 /* ChoiceQuizTableViewCell.xib in Resources */,
 				86AE94811E84511A00F67691 /* SortingQuizTableViewCell.xib in Resources */,
-				2C9704081F39F18700C36F0A /* step4.html in Resources */,
 				080C5E741EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
-				2C8D08151F1CB77B000E8F32 /* step5.html in Resources */,
 				86AE94831E84511A00F67691 /* FillBlanksTextTableViewCell.xib in Resources */,
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
@@ -4334,6 +4336,7 @@
 				2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */,
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
+				2C9704211F3B0B7F00C36F0A /* step4.html in Resources */,
 				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
 				2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
@@ -5473,6 +5476,7 @@
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
 				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
+				2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */,
 				864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */,
 				864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */,
 				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,
@@ -5857,22 +5861,22 @@
 			name = AchievementTableViewCell.xib;
 			sourceTree = "<group>";
 		};
-		2C8D08171F1CB77B000E8F32 /* step5.html */ = {
+		2C9704181F3B0B7200C36F0A /* step4.html */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2C8D08161F1CB77B000E8F32 /* ru */,
-				2C8D08181F1CB786000E8F32 /* en */,
-			);
-			name = step5.html;
-			sourceTree = "<group>";
-		};
-		2C97040A1F39F18700C36F0A /* step4.html */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C9704091F39F18700C36F0A /* en */,
-				2C97040B1F39F18E00C36F0A /* ru */,
+				2C9704191F3B0B7200C36F0A /* en */,
+				2C97041E1F3B0B7600C36F0A /* ru */,
 			);
 			name = step4.html;
+			sourceTree = "<group>";
+		};
+		2C97041A1F3B0B7200C36F0A /* step5.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C97041B1F3B0B7200C36F0A /* en */,
+				2C97041F1F3B0B7A00C36F0A /* ru */,
+			);
+			name = step5.html;
 			sourceTree = "<group>";
 		};
 		860DB7911EB8DC13001E3E42 /* StepCardView.xib */ = {
