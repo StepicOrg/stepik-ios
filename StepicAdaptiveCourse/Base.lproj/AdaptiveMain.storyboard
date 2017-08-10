@@ -79,7 +79,7 @@
             </objects>
             <point key="canvasLocation" x="3674" y="209"/>
         </scene>
-        <!--Adaptive Stats View Controller-->
+        <!--Статистика-->
         <scene sceneID="I5g-b8-7et">
             <objects>
                 <viewController id="RWM-r2-N4c" customClass="AdaptiveStatsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
@@ -289,7 +289,7 @@
                             <constraint firstAttribute="trailing" secondItem="Pr8-hh-W1f" secondAttribute="trailing" id="zKZ-6Q-5kA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="y86-yn-TzS">
+                    <navigationItem key="navigationItem" title="Статистика" id="y86-yn-TzS">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="7Jz-yc-Cai">
                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -495,6 +495,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

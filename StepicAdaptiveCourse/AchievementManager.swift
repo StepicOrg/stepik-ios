@@ -43,6 +43,7 @@ class AchievementManager {
         banner.onTap = { [weak self] in
             self?.delegate?.achievementUnlocked(for: achievement)
         }
+        banner.duration = 3.5
         banner.onSwipeUp = {
             banner.dismiss()
         }

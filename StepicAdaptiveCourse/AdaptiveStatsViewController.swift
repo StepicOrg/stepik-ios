@@ -53,7 +53,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     }
     
     func setProgress(records: [WeekProgressViewData]) {
-        progressByWeek = records
+        progressByWeek = records.reversed()
     }
     
     func setAchievements(records: [AchievementViewData]) {
