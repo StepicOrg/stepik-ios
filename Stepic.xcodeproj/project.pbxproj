@@ -887,12 +887,12 @@
 		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
 		2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
-		2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
+		2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */; };
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
@@ -910,9 +910,9 @@
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
-		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
 		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
+		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
@@ -1888,7 +1888,7 @@
 		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
-		2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
+		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
@@ -1910,11 +1910,11 @@
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
-		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
 		2C97041E1F3B0B7600C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041F1F3B0B7A00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step5.html; sourceTree = "<group>"; };
+		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -3588,7 +3588,7 @@
 			isa = PBXGroup;
 			children = (
 				2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */,
-				2C25440A1F348211004DB3D9 /* AchievementNotificationView.xib */,
+				2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */,
 			);
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
@@ -4338,7 +4338,6 @@
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				2C9704211F3B0B7F00C36F0A /* step4.html in Resources */,
 				86AE94881E84511A00F67691 /* UserPreferences.storyboard in Resources */,
-				2C25440B1F348211004DB3D9 /* AchievementNotificationView.xib in Resources */,
 				86AE94891E84511A00F67691 /* RefreshTableViewCell.xib in Resources */,
 				86AE948A1E84511A00F67691 /* CourseTableViewCell.xib in Resources */,
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
@@ -4347,6 +4346,7 @@
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
+				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,

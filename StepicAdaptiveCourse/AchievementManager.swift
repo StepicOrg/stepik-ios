@@ -43,6 +43,7 @@ class AchievementManager {
         banner.onTap = { [weak self] in
             self?.delegate?.achievementUnlocked(for: achievement)
         }
+        banner.duration = 3.5
         banner.onSwipeUp = {
             banner.dismiss()
         }
@@ -110,8 +111,8 @@ extension AchievementManager {
         typealias ProgressAchievementDescription = (slug: String, name: String, info: String, cover: UIImage, maxValue: Int, pre: ((Int, Int, Int) -> (Bool))?, value: ((Int, Int, Int) -> Int)?, migration: (() -> Int)?, event: String)
         
         let challengeAchievements: [ChallengeAchievementDescription] = [
-            (slug: "onboarding", name: "Первые шаги", info: "Пройти обучение", cover: #imageLiteral(resourceName: "badge1"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding),
-            (slug: "share", name: "Общительный", info: "Поделиться любым своим достижением", cover: #imageLiteral(resourceName: "badge1"), pre: nil, migration: nil, event: AchievementEvent.events.share),
+            (slug: "onboarding", name: "Первые шаги", info: "Пройти обучение", cover: #imageLiteral(resourceName: "onboarding"), pre: nil, migration: { return isOnboardingPassed ? 1 : 0 }, event: AchievementEvent.events.onboarding),
+            (slug: "share", name: "Общительный", info: "Поделиться любым своим достижением", cover: #imageLiteral(resourceName: "ashare"), pre: nil, migration: nil, event: AchievementEvent.events.share),
         ]
         
         func createExpAchievement(name: String, exp: Int, cover: UIImage) -> ProgressAchievementDescription {
@@ -163,22 +164,22 @@ extension AchievementManager {
         }
         
         let progressAchievements: [ProgressAchievementDescription] = [
-            createExpAchievement(name: "Ученик", exp: 10, cover: #imageLiteral(resourceName: "badge1")),
-            createExpAchievement(name: "Студент", exp: 100, cover: #imageLiteral(resourceName: "badge1")),
-            createExpAchievement(name: "Опытный", exp: 500, cover: #imageLiteral(resourceName: "badge1")),
-            createExpAchievement(name: "Профессионал", exp: 5000, cover: #imageLiteral(resourceName: "badge1")),
-            createExpAchievement(name: "Гуру", exp: 10000, cover: #imageLiteral(resourceName: "badge1")),
-            createStreakAchievement(name: "Комбо", streak: 5, cover: #imageLiteral(resourceName: "badge1")),
-            createStreakAchievement(name: "Было просто", streak: 15, cover: #imageLiteral(resourceName: "badge1")),
-            createStreakAchievement(name: "В точку", streak: 30, cover: #imageLiteral(resourceName: "badge1")),
-            createStreakAchievement(name: "Ясновидящий", streak: 60, cover: #imageLiteral(resourceName: "badge1")),
-            createDaysAchievement(name: "Работяга", streak: 2, cover: #imageLiteral(resourceName: "badge1")),
-            createDaysAchievement(name: "Трудовая неделя", streak: 5, cover: #imageLiteral(resourceName: "badge1")),
-            createDaysAchievement(name: "Зависимый", streak: 10, cover: #imageLiteral(resourceName: "badge1")),
-            createDaysAchievement(name: "Стахановец", streak: 14, cover: #imageLiteral(resourceName: "badge1")),
-            createDaysAchievement(name: "Герой труда", streak: 30, cover: #imageLiteral(resourceName: "badge1")),
-            createLevelAchievement(name: "Знаток", level: 5, cover: #imageLiteral(resourceName: "badge1")),
-            createLevelAchievement(name: "Лидер", level: 10, cover: #imageLiteral(resourceName: "badge1"))
+            createExpAchievement(name: "Ученик", exp: 10, cover: #imageLiteral(resourceName: "exp1")),
+            createExpAchievement(name: "Студент", exp: 100, cover: #imageLiteral(resourceName: "exp2")),
+            createExpAchievement(name: "Опытный", exp: 500, cover: #imageLiteral(resourceName: "exp3")),
+            createExpAchievement(name: "Профессионал", exp: 5000, cover: #imageLiteral(resourceName: "exp4")),
+            createExpAchievement(name: "Гуру", exp: 10000, cover: #imageLiteral(resourceName: "exp5")),
+            createStreakAchievement(name: "Комбо", streak: 5, cover: #imageLiteral(resourceName: "streak1")),
+            createStreakAchievement(name: "Было просто", streak: 15, cover: #imageLiteral(resourceName: "streak2")),
+            createStreakAchievement(name: "В точку", streak: 30, cover: #imageLiteral(resourceName: "streak3")),
+            createStreakAchievement(name: "Ясновидящий", streak: 60, cover: #imageLiteral(resourceName: "streak4")),
+            createDaysAchievement(name: "Работяга", streak: 2, cover: #imageLiteral(resourceName: "days1")),
+            createDaysAchievement(name: "Трудовая неделя", streak: 5, cover: #imageLiteral(resourceName: "days2")),
+            createDaysAchievement(name: "Зависимый", streak: 10, cover: #imageLiteral(resourceName: "days3")),
+            createDaysAchievement(name: "Стахановец", streak: 14, cover: #imageLiteral(resourceName: "days4")),
+            createDaysAchievement(name: "Герой труда", streak: 30, cover: #imageLiteral(resourceName: "days5")),
+            createLevelAchievement(name: "Знаток", level: 5, cover: #imageLiteral(resourceName: "level1")),
+            createLevelAchievement(name: "Лидер", level: 10, cover: #imageLiteral(resourceName: "level2"))
         ]
         
         for achievementDescription in challengeAchievements {

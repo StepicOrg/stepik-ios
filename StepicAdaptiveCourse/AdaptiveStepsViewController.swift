@@ -28,7 +28,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
             case .normal:
                 self.placeholderView.isHidden = true
                 self.kolodaView.isHidden = false
-            case .connectionError:
+            case .connectionError, .coursePassed:
                 self.placeholderView.isHidden = false
                 self.kolodaView.isHidden = true
             default:
@@ -204,6 +204,8 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return Images.placeholders.connectionError
+        case .coursePassed:
+            return Images.placeholders.coursePassed
         default:
             return nil
         }
@@ -222,6 +224,8 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return nil
+        case .coursePassed:
+            return NSLocalizedString("NoRecommendations", comment: "")
         default:
             return nil
         }
@@ -237,6 +241,8 @@ extension AdaptiveStepsViewController: PlaceholderViewDataSource {
         switch state {
         case .connectionError:
             return NSLocalizedString("ConnectionErrorText", comment: "")
+        case .coursePassed:
+            return NSLocalizedString("CoursePassed", comment: "")
         default:
             return nil
         }
