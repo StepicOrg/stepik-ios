@@ -25,3 +25,6 @@
 
 /* Class = "UILabel"; text = "Последние 7 дней"; ObjectID = "vwa-eW-FQd"; */
 "vwa-eW-FQd.text" = "Last 7 days";
+
+/* Class = "UINavigationItem"; text = "Статистика"; ObjectID = "y86-yn-TzS"; */
+"y86-yn-TzS.title" = "Stats";
