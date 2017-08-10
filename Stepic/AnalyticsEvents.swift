@@ -50,6 +50,11 @@ struct AnalyticsEvents {
         static let shared = "share_units_clicked"
     }
     
+    struct Search {
+        static let selected = "search_selected"
+        static let cancelled = "search_cancelled"
+    }
+    
     struct Section {
         static let cache = "clicked_cache_section"
         static let cancel = "clicked_cancel_section"

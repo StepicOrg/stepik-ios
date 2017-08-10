@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AchievementNotificationView" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMh-cD-R4Z">
+                    <rect key="frame" x="8" y="8" width="359" height="67"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нажмите, чтобы поделиться" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIr-oq-sYe">
+                            <rect key="frame" x="66" y="38" width="285" height="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                            <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSf-Mh-jB3">
+                            <rect key="frame" x="66" y="9" width="285" height="23"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="0.96999999999999997" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fXF-Qk-hTh">
+                            <rect key="frame" x="8" y="8" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="658-Rg-HL3"/>
+                                <constraint firstAttribute="height" constant="50" id="IU8-Id-lSo"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.54398012823611119" blue="0.28385799636666664" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="fXF-Qk-hTh" firstAttribute="leading" secondItem="BMh-cD-R4Z" secondAttribute="leading" constant="8" id="98e-QP-eMx"/>
+                        <constraint firstItem="MIr-oq-sYe" firstAttribute="top" secondItem="CSf-Mh-jB3" secondAttribute="bottom" constant="6" id="C2B-KN-Uno"/>
+                        <constraint firstItem="CSf-Mh-jB3" firstAttribute="leading" secondItem="fXF-Qk-hTh" secondAttribute="trailing" constant="8" id="Cb4-B3-B2r"/>
+                        <constraint firstAttribute="trailing" secondItem="MIr-oq-sYe" secondAttribute="trailing" constant="8" id="J9b-dk-aUS"/>
+                        <constraint firstItem="MIr-oq-sYe" firstAttribute="leading" secondItem="fXF-Qk-hTh" secondAttribute="trailing" constant="8" id="SZx-0A-1j9"/>
+                        <constraint firstItem="fXF-Qk-hTh" firstAttribute="top" secondItem="BMh-cD-R4Z" secondAttribute="top" constant="8" id="eFZ-QC-yCG"/>
+                        <constraint firstAttribute="height" constant="67" id="nBj-Re-5ER"/>
+                        <constraint firstItem="CSf-Mh-jB3" firstAttribute="top" secondItem="BMh-cD-R4Z" secondAttribute="top" constant="9" id="s6u-ha-C8c"/>
+                        <constraint firstAttribute="trailing" secondItem="CSf-Mh-jB3" secondAttribute="trailing" constant="8" id="yS4-7y-QgJ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BMh-cD-R4Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="JcY-je-wrJ"/>
+                <constraint firstAttribute="trailing" secondItem="BMh-cD-R4Z" secondAttribute="trailing" constant="8" id="Tbk-To-4XO"/>
+                <constraint firstItem="BMh-cD-R4Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="bgK-W2-GTj"/>
+            </constraints>
+            <connections>
+                <outlet property="coverImageView" destination="fXF-Qk-hTh" id="isY-zN-diW"/>
+                <outlet property="infoLabel" destination="CSf-Mh-jB3" id="mDk-4v-ccA"/>
+                <outlet property="tapToShareLabel" destination="MIr-oq-sYe" id="Z4P-Zu-AB6"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+</document>

@@ -8,8 +8,6 @@
 
 import UIKit
 import SafariServices
-//import JSQWebViewController
-//import DZNWebViewController
 import WebKit
 
 class WebControllerManager: NSObject {
@@ -43,38 +41,33 @@ class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
     
-    fileprivate func presentJSQWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+    fileprivate func presentCustomWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         let controller = WebViewController(url: url)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
-        let nav = UINavigationController(rootViewController: controller)
-        self.currentWebController = nav
-        //        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "webControllerDonePressed")
-        c.present(nav, animated: animated, completion: nil)
         controller.webView.navigationDelegate = self
         controller.webView.uiDelegate = self
-    }
-    
-    func webControllerDonePressed() {
-        currentWebController?.dismiss(animated: true, completion: nil)
-        currentWebController = nil
-        currentWebControllerKey = nil
-    }
-    
-    func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+        controller.onDismiss = { [weak self] in
+            self?.currentWebController?.dismiss(animated: true, completion: nil)
+            self?.currentWebController = nil
+            self?.currentWebControllerKey = nil
+        }
         
-        if #available(iOS 9.0, *) {
+        let nav = UINavigationController(rootViewController: controller)
+        self.currentWebController = nav
+        c.present(nav, animated: animated, completion: nil)
+    }
+    
+    func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true, forceCustom: Bool = false) {
+        
+        if #available(iOS 9.0, *), !forceCustom {
             let svc = SFSafariViewController(url: url)
-//            if let nav = c.navigationController {
-//                nav.pushViewController(svc, animated: true)
-//            } else {
-                c.present(svc, animated: true, completion: nil)
-                self.currentWebControllerKey = key
-                self.currentWebController = svc
-//            }
+            c.present(svc, animated: true, completion: nil)
+            self.currentWebControllerKey = key
+            self.currentWebController = svc
         } else {
             self.currentWebControllerKey = key
-            presentJSQWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
+            presentCustomWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
         }
     }
     
@@ -119,12 +112,18 @@ enum BackButtonStyle {
 
 extension WebControllerManager : WKNavigationDelegate {    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if (navigationAction.targetFrame != nil) {
+        if navigationAction.targetFrame != nil {
             let rurl = navigationAction.request.url
-            //            print(rurl)
+            
             if let url = rurl {
                 if url.scheme == StepicApplicationsInfo.urlScheme {
                     UIApplication.shared.openURL(url)
+                } else if url.absoluteString.contains("social_signup_with_existing_email") {
+                    if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?\(url.query ?? "")") {
+                        self.dismissWebControllerWithKey("social auth", animated: false, completion: {
+                            UIApplication.shared.openURL(url)
+                        }, error: nil)
+                    }
                 }
             }
         }

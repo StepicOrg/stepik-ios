@@ -70,24 +70,20 @@ class SocialNetworksViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name!)" as NSObject])
             let socialNetwork = getSocialNetworkByIndexPath(indexPath)
             if let provider = socialNetwork.socialSDKProvider {
-                provider.getAccessToken(success: {
-                    token in
+                provider.getAccessInfo(success: {
+                    token, email in
                     SVProgressHUD.show(withStatus: "")
-                    AuthManager.oauth.signUpWith(socialToken: token, provider: provider.name, success: {
-                        t in
+                    AuthManager.oauth.signUpWith(socialToken: token, email: email, provider: provider.name, success: { t in
                         AuthInfo.shared.token = t
                         NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        ApiDataDownloader.stepics.retrieveCurrentUser(success: {
-                            user in
+                        ApiDataDownloader.stepics.retrieveCurrentUser(success: { user in
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                            UIThread.performUI { 
-                                [weak self] in
+                            UIThread.performUI { [weak self] in
                                 self?.dismissBlock?()
                             }
-                        }, error: {
-                            e in
+                        }, error: { e in
                             print("successfully signed in, but could not get user")
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                             UIThread.performUI { 
@@ -95,18 +91,25 @@ class SocialNetworksViewController: UIViewController {
                                 self?.dismissBlock?()
                             }
                         })
-                    }, failure: {
-                        e in
-                        SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+                    }, failure: { e in
+                        switch e {
+                        case .existingEmail(_, let email):
+                            if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?error=social_signup_with_existing_email&email=\(email ?? "")") {
+                                UIApplication.shared.openURL(url)
+                                SVProgressHUD.dismiss()
+                            } else {
+                                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+                            }
+                        default:
+                            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+                        }
                     })                        
-                }, error: {
-                    error in
+                }, error: { error in
                     print("error while social auth")
                     SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                 })
             } else {
-                WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self,  
-                                                                               withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close)
+                WebControllerManager.sharedManager.presentWebControllerWithURL(getSocialNetworkByIndexPath(indexPath).registerURL, inController: self, withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close, forceCustom: true)
             }
         }
     }

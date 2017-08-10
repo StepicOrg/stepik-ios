@@ -20,8 +20,7 @@ protocol AdaptiveStepView: class {
     func updateProblem(with htmlText: String)
     func updateQuiz(with view: UIView)
     
-    func scrollToQuizBottom(quizHintHeight: CGFloat, quizHintTop: CGPoint)
-    func updateQuizHeight(newHeight: CGFloat, animated: Bool, completion: (() -> ())?)
+    func scrollToQuizBottom()
 }
 
 class AdaptiveStepPresenter {
@@ -65,12 +64,6 @@ class AdaptiveStepPresenter {
         delegate?.contentLoadingDidComplete()
     }
     
-    // :(
-    func needsQuizHeightUpdate() {
-        // Maybe quiz vc should update its height itself ???
-        needsHeightUpdate((quizViewController?.expectedQuizHeight ?? 0) + (quizViewController?.heightWithoutQuiz ?? 0), animated: true, breaksSynchronizationControl: false)
-    }
-    
     func submit() {
         // TODO: this check only for choices
         var isSelected = false
@@ -86,29 +79,26 @@ class AdaptiveStepPresenter {
             quizViewController?.retrySubmission()
         }
     }
+    
+    func calculateQuizHintSize() -> (height: CGFloat, top: CGPoint) {
+        let sPoint = quizViewController?.statusLabel.superview?.convert(quizViewController?.statusLabel.frame.origin ?? CGPoint.zero, to: view?.baseScrollView)
+        return (height: quizViewController?.hintView.frame.height ?? 0, top: sPoint ?? CGPoint.zero)
+    }
 }
 
-extension AdaptiveStepPresenter: QuizControllerDelegate {
-    func needsHeightUpdate(_ newHeight: CGFloat, animated: Bool, breaksSynchronizationControl: Bool) {
-        view?.updateQuizHeight(newHeight: newHeight, animated: animated) { [weak self] in
-            if self?.quizViewController?.submission?.status != nil {
-                // :(
-                let sPoint = self?.quizViewController?.statusLabel.superview?.convert(self?.quizViewController?.statusLabel.frame.origin ?? CGPoint.zero, to: self?.view?.baseScrollView)
-                self?.view?.scrollToQuizBottom(quizHintHeight: self?.quizViewController?.hintView.frame.height ?? 0, quizHintTop: sPoint ?? CGPoint.zero)
-            }
-        }
-    }
-    
+extension AdaptiveStepPresenter: QuizControllerDelegate {    
     func submissionDidCorrect() {
         state = .successful
         delegate?.stepSubmissionDidCorrect()
         quizViewController?.isSubmitButtonHidden = true
+        view?.scrollToQuizBottom()
     }
     
     func submissionDidWrong() {
         state = .wrong
         delegate?.stepSubmissionDidWrong()
         quizViewController?.isSubmitButtonHidden = true
+        view?.scrollToQuizBottom()
     }
     
     func submissionDidRetry() {

@@ -11,16 +11,45 @@ import DZNEmptyDataSet
 import FLKAutoLayout
 import Alamofire
 
+enum SearchResultsState: String {
+    case suggestions = "suggestions", courses = "courses"
+}
+
 class SearchResultsCoursesViewController: CoursesViewController {
     
     var parentVC : UIViewController?
     
+    var updateSearchBarBlock: ((String) -> Void)?
+    var hideKeyboardBlock: ((Void) -> Void)?
+
+    lazy var suggestionsVC: SearchQueriesViewController = {
+        let vc = SearchQueriesViewController()
+        vc.delegate = self
+        self.addChildViewController(vc)
+        self.view.addSubview(vc.view)
+        vc.view.align(to: self.view)
+        vc.view.isHidden = true
+        vc.hideKeyboardBlock = self.hideKeyboardBlock
+        return vc
+    }()
+    
+    var state = SearchResultsState.suggestions
+    
     var query : String = "" {
         didSet {
-            if self.query != oldValue {
+            switch state {
+            case .suggestions:
+                if query != "" {
+                    suggestionsVC.query = query
+                    suggestionsVC.view.isHidden = false
+                    break
+                }
+            case .courses:
+                suggestionsVC.view.isHidden = true
                 self.isLoadingMore = false
                 self.currentRequest?.cancel()
                 refreshCourses()
+                break
             }
         }
     }
@@ -73,7 +102,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countTopOffset()
@@ -277,8 +306,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
 
 extension SearchResultsCoursesViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        let pvc = parentVC as? FindCoursesViewController
-        pvc?.hideKeyboardIfNeeded()
+        hideKeyboardBlock?()
     }
 }
 
@@ -296,27 +324,11 @@ extension SearchResultsCoursesViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
-    //    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-    //        
-    //        let text = NSLocalizedString("EmptyMyCoursesDescription", comment: "")
-    //        
-    //        let paragraph = NSMutableParagraphStyle()
-    //        paragraph.lineBreakMode = .ByWordWrapping
-    //        paragraph.alignment = .Center
-    //        
-    //        let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(14.0),
-    //            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-    //            NSParagraphStyleAttributeName: paragraph]
-    //        
-    //        return NSAttributedString(string: text, attributes: attributes)
-    //    }
-    
     func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
         return UIColor.white
     }
     
     func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
-        //        print("offset -> \((self.navigationController?.navigationBar.bounds.height) ?? 0 + UIApplication.sharedApplication().statusBarFrame.height)")
         return 0
     }
 }
@@ -327,7 +339,15 @@ extension SearchResultsCoursesViewController {
     }
     
     func emptyDataSetDidTapView(_ scrollView: UIScrollView!) {
-        let pvc = parentVC as? FindCoursesViewController
-        pvc?.hideKeyboardIfNeeded()
+        hideKeyboardBlock?()
+    }
+}
+
+extension SearchResultsCoursesViewController: SearchQueriesViewControllerDelegate {
+    func didSelectSuggestion(suggestion: String, position: Int) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Search.selected, parameters: ["query": self.query.lowercased(), "position": position, "suggestion": suggestion])
+        self.state = .courses
+        updateSearchBarBlock?(suggestion)
+        self.query = suggestion
     }
 }

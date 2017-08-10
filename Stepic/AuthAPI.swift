@@ -11,14 +11,18 @@ import Alamofire
 import SwiftyJSON
 
 class AuthAPI {
-    @discardableResult func signUpWith(socialToken: String, provider: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : Error) -> Void) -> Request? {
-        let params: Parameters = [
+    @discardableResult func signUpWith(socialToken: String, email: String?, provider: String, success : @escaping (_ token: StepicToken) -> Void, failure : @escaping (_ error : SignInError) -> Void) -> Request? {
+        var params: Parameters = [
             "provider": provider,
             "code": socialToken,
             "grant_type": "authorization_code",
             "redirect_uri": "\(StepicApplicationsInfo.social!.redirectUri)",
-            "code_type": "access_token"
+            "code_type": "access_token",
         ]
+        
+        if email != nil {
+            params["email"] = email!
+        }
         
         let headers = [
             "Authorization" : "Basic \(StepicApplicationsInfo.social!.credentials)"
@@ -37,19 +41,19 @@ class AuthAPI {
                 json = response.result.value!
             }
             let response = response.response
-            
-            print("\(String(describing: response?.statusCode))")
-            print(json)
 
             if let e = error {
-                failure(e)
+                failure(SignInError.other(error: e, code: nil, message: nil))
                 return
             }
             
             if json["error"] != JSON.null {
-                print(json["error_description"].stringValue)
-                let e = NSError(domain: NSCocoaErrorDomain, code: 1488, userInfo: [NSLocalizedDescriptionKey : json["error_description"].stringValue])
-                failure(e)
+                switch json["error"].stringValue {
+                case "social_signup_with_existing_email":
+                    failure(SignInError.existingEmail(provider: json["provider"].string, email: json["email"].string))
+                default:
+                    failure(SignInError.other(error: nil, code: response?.statusCode, message: json["error"].string))
+                }
                 return
             }
             

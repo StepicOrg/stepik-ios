@@ -8,7 +8,17 @@
 
 import UIKit
 
+protocol RatingProgressViewDelegate: class {
+    func onClick()
+}
+
+extension RatingProgressViewDelegate {
+    func onClick() { }
+}
+
 class RatingProgressView: UIView {
+    weak var delegate: RatingProgressViewDelegate?
+    
     @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
@@ -44,6 +54,7 @@ class RatingProgressView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        addGestures()
     }
     
     func setProgress(value: Float, animated: Bool, completion: (() -> ())? = nil) {
@@ -117,6 +128,41 @@ class RatingProgressView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        addGestures()
+    }
+    
+    fileprivate func addGestures() {
+        let tapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(tap(_:)))
+        tapRecognizer.minimumPressDuration = 0
+        self.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func tap(_ gestureRecognizer: UITapGestureRecognizer) {
+        func showPressed() {
+            frontViewShadowLayer.isHidden = true
+            label.textColor = backLabelColor?.withAlphaComponent(0.4)
+            frontLabel.textColor = frontLabelColor?.withAlphaComponent(0.4)
+        }
+        
+        func showDefault() {
+            frontViewShadowLayer.isHidden = false
+            label.textColor = backLabelColor
+            frontLabel.textColor = frontLabelColor
+        }
+        
+        if gestureRecognizer.state == .began {
+            showPressed()
+        } else if gestureRecognizer.state == .ended {
+            showDefault()
+            delegate?.onClick()
+        } else if gestureRecognizer.state == .changed {
+            if !bounds.contains(gestureRecognizer.location(in: self)) {
+                // Cancel current gesture
+                gestureRecognizer.isEnabled = false
+                gestureRecognizer.isEnabled = true
+                showDefault()
+            }
+        }
     }
     
     fileprivate func initView() {

@@ -1,48 +1,30 @@
 
-/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "0iw-z3-Xp8"; */
-"0iw-z3-Xp8.text" = "Adaptive learning";
+/* Class = "UISegmentedControl"; 8WM-do-txJ.segmentTitles[0] = "Прогресс"; ObjectID = "8WM-do-txJ"; */
+"8WM-do-txJ.segmentTitles[0]" = "Progress";
 
-/* Class = "UILabel"; text = "Решайте задания, которые Вам предлагает система"; ObjectID = "Ggs-a8-mwe"; */
-"Ggs-a8-mwe.text" = "Solve the problems that the system recommends you";
+/* Class = "UISegmentedControl"; 8WM-do-txJ.segmentTitles[1] = "Достижения"; ObjectID = "8WM-do-txJ"; */
+"8WM-do-txJ.segmentTitles[1]" = "Achievements";
 
-/* Class = "UILabel"; text = "Смахните карточку вправо, если задание кажется Вам слишком простым"; ObjectID = "KI5-nN-kWq"; */
-"KI5-nN-kWq.text" = "Swipe the card to the right if the problem is too easy for you";
+/* Class = "UILabel"; text = "13 подряд"; ObjectID = "PXK-7E-juQ"; */
+"PXK-7E-juQ.text" = "";
 
-/* Class = "UIBarButtonItem"; title = "Закрыть"; ObjectID = "Sxi-w0-PgC"; */
-"Sxi-w0-PgC.title" = "Cancel";
+/* Class = "UILabel"; text = "Опыта за неделю"; ObjectID = "dBw-fs-I37"; */
+"dBw-fs-I37.text" = "XP per week";
 
-/* Class = "UINavigationItem"; title = "О курсе"; ObjectID = "TBo-4r-wN7"; */
-"TBo-4r-wN7.title" = "About course";
+/* Class = "UILabel"; text = "Лучшая серия"; ObjectID = "fHA-QV-uv3"; */
+"fHA-QV-uv3.text" = "Best streak";
 
-/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "Tjp-nj-PEr"; */
-"Tjp-nj-PEr.text" = "Adaptive learning";
+/* Class = "UILabel"; text = "10"; ObjectID = "hDy-C2-aQe"; */
+"hDy-C2-aQe.text" = "";
 
-/* Class = "UILabel"; text = "- / -"; ObjectID = "W29-0c-Mlf"; */
-"W29-0c-Mlf.text" = "- / -";
+/* Class = "UILabel"; text = "228"; ObjectID = "rZI-nf-aeP"; */
+"rZI-nf-aeP.text" = "";
 
-/* Class = "UILabel"; text = "Прогресс по курсу"; ObjectID = "YAS-eb-RDu"; */
-"YAS-eb-RDu.text" = "Course progress";
+/* Class = "UILabel"; text = "уровень"; ObjectID = "u4D-X0-j8V"; */
+"u4D-X0-j8V.text" = "level";
 
-/* Class = "UILabel"; text = "Course name"; ObjectID = "eRe-BV-APm"; */
-"eRe-BV-APm.text" = "Course name";
+/* Class = "UILabel"; text = "Последние 7 дней"; ObjectID = "vwa-eW-FQd"; */
+"vwa-eW-FQd.text" = "Last 7 days";
 
-/* Class = "UIButton"; normalTitle = "Начать обучение"; ObjectID = "fJE-sh-DRy"; */
-"fJE-sh-DRy.normalTitle" = "Start learning";
-
-/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "feD-eT-U7I"; */
-"feD-eT-U7I.text" = "Adaptive learning";
-
-/* Class = "UILabel"; text = "Course summary"; ObjectID = "p0o-q2-aUC"; */
-"p0o-q2-aUC.text" = "Course summary";
-
-/* Class = "UILabel"; text = "Смахните карточку влево, если задание кажется Вам слишком сложным"; ObjectID = "pgL-k5-S5d"; */
-"pgL-k5-S5d.text" = "Swipe the card to the left if the problem is too hard for you";
-
-/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "s3F-AI-k5h"; */
-"s3F-AI-k5h.text" = "Adaptive learning";
-
-/* Class = "UILabel"; text = "Адаптивное обучение"; ObjectID = "ZLf-c9-5Rm"; */
-"ZLf-c9-5Rm.text" = "Adaptive learning";
-
-/* Class = "UILabel"; text = "Перейдите к следующему заданию или смахните карточку с решенным заданием"; ObjectID = "DcR-3J-IFa"; */
-"DcR-3J-IFa.text" = "Move to the next task or swipe the card with solved task";
+/* Class = "UINavigationItem"; text = "Статистика"; ObjectID = "y86-yn-TzS"; */
+"y86-yn-TzS.title" = "Stats";

@@ -28,12 +28,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DefaultsContainer.launch.didLaunch = true
         }
         
+        LocalNotificationsHelper.registerNotifications()
+        
+        if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
+            if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+            }
+        }
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        LocalNotificationsHelper.schedule(notification: .tomorrow)
+        LocalNotificationsHelper.schedule(notification: .weekly)
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -46,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        LocalNotificationsHelper.cancelAllNotifications()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

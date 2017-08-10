@@ -10,12 +10,16 @@ import UIKit
 
 class FreeAnswerQuizViewController: QuizViewController {
 
+    let textViewHeight = 64
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
         textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
+        
+        textView.constrainHeight("\(textViewHeight)")
         
         textView.font = UIFont.systemFont(ofSize: 16)
         // Do any additional setup after loading the view.
@@ -65,12 +69,7 @@ class FreeAnswerQuizViewController: QuizViewController {
             textView.isEditable = true
         }
     }
-    
-    //Override this in subclass
-    override var expectedQuizHeight : CGFloat {
-        return 72
-    }
-    
+        
     //Override this in the subclass
     override func getReply() -> Reply {
         if let d = dataset {
