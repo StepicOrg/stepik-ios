@@ -19,20 +19,17 @@ public enum TCBlobDownloadError: Int {
     case tcBlobDownloadHTTPError = 1
 }
 
-open class TCBlobDownloadManager {
+open class TCBlobDownloadManager: NSObject {
     /**
         A shared instance of `TCBlobDownloadManager`.
     */
     open static let sharedInstance = TCBlobDownloadManager()
 
-    /// Instance of the underlying class implementing `NSURLSessionDownloadDelegate`.
-    fileprivate let delegate: DownloadDelegate
-
     /// If `true`, downloads will start immediatly after being created. `true` by default.
     open var startImmediatly = true
 
     /// The underlying `NSURLSession`.
-    open let session: URLSession
+    open var session: URLSession
 
     /**
         Custom `NSURLSessionConfiguration` init.
@@ -40,15 +37,16 @@ open class TCBlobDownloadManager {
         - parameter config: The configuration used to manage the underlying session.
     */
     public init(config: URLSessionConfiguration) {
-        self.delegate = DownloadDelegate()
-        self.session = URLSession(configuration: config, delegate: self.delegate, delegateQueue: nil)
+        self.session = URLSession()
+        super.init()
+        self.session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
         self.session.sessionDescription = "TCBlobDownloadManger session"
     }
 
     /**
         Default `NSURLSessionConfiguration` init.
     */
-    public convenience init() {
+    public convenience override init() {
         let config = URLSessionConfiguration.default
 
         config.timeoutIntervalForRequest = 10000
@@ -70,7 +68,7 @@ open class TCBlobDownloadManager {
         - parameter download: Download to start.
     */
     fileprivate func downloadWithDownload(_ download: TCBlobDownload) -> TCBlobDownload {
-        self.delegate.downloads[download.downloadTask.taskIdentifier] = download
+        self.downloads[download.downloadTask.taskIdentifier] = download
 
         if self.startImmediatly {
             download.downloadTask.resume()
@@ -144,7 +142,7 @@ open class TCBlobDownloadManager {
         var downloads = [TCBlobDownload]()
 
         // TODO: make functional as soon as Dictionary supports reduce/filter.
-        for download in self.delegate.downloads.values {
+        for download in self.downloads.values {
             if state == nil || download.downloadTask.state == state {
                 downloads.append(download)
             }
@@ -152,11 +150,12 @@ open class TCBlobDownloadManager {
 
         return downloads
     }
-}
-
-class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
+    
     var downloads: [Int: TCBlobDownload] = [:]
     let acceptableStatusCodes = 200...299
+}
+
+extension TCBlobDownloadManager: URLSessionDownloadDelegate {
 
     func validateResponse(_ response: HTTPURLResponse) -> Bool {
         return self.acceptableStatusCodes.contains(response.statusCode)
@@ -164,11 +163,11 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
 
     // MARK: NSURLSessionDownloadDelegate
 
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
         print("Resume at offset: \(fileOffset) total expected: \(expectedTotalBytes)")
     }
 
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         guard let download = self.downloads[downloadTask.taskIdentifier] else {
             return
         }
@@ -183,7 +182,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         guard let download = self.downloads[downloadTask.taskIdentifier] else {
             return
         }
@@ -199,7 +198,7 @@ class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError sessionError: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError sessionError: Error?) {
         guard let download = self.downloads[task.taskIdentifier] else {
             return
         }
