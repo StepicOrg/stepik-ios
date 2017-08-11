@@ -11,7 +11,7 @@ import UIKit
 class UnknownTypeQuizViewController: UIViewController {
 
     var stepUrl: String!
-    var delegate: QuizControllerDelegate?
+    weak var delegate: QuizControllerDelegate?
 
     @IBOutlet weak var solveOnTheWebsiteButton: UIButton!
 

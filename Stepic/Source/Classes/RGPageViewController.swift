@@ -34,7 +34,7 @@ open class RGPageViewController: UIViewController {
   // MARK: - Protocols
   public weak var datasource: RGPageViewControllerDataSource?
   public weak var delegate: RGPageViewControllerDelegate?
-  internal var pageViewScrollDelegate: UIScrollViewDelegate?
+  internal weak var pageViewScrollDelegate: UIScrollViewDelegate?
 
   // MARK: - Variables
   private var needsSetup: Bool = true

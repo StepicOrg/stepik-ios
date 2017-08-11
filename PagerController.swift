@@ -69,7 +69,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     // MARK: - Tab and content stuff
     internal var tabsView: UIScrollView?
     open var pageViewController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-    internal var actualDelegate: UIScrollViewDelegate?
+    internal weak var actualDelegate: UIScrollViewDelegate?
     internal var contentView: UIView {
         let contentView = self.pageViewController.view
         contentView!.autoresizingMask = [.flexibleHeight, .flexibleWidth]
