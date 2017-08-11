@@ -3945,6 +3945,7 @@
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
+				08983F241F3E4112008199B1 /* ShellScript */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				DBFB6C2236F1DDC3A26B2D6D /* [CP] Embed Pods Frameworks */,
@@ -3970,6 +3971,7 @@
 				86EF29311E83CEA900F8D214 /* Frameworks */,
 				86EF29321E83CEA900F8D214 /* Resources */,
 				08A947FE1EB2B1A5001EC02D /* ShellScript */,
+				08983F251F3E4131008199B1 /* ShellScript */,
 				ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */,
 				636FB71D73F67F013B7E27D6 /* [CP] Copy Pods Resources */,
 			);
@@ -4405,6 +4407,32 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
+		};
+		08983F241F3E4112008199B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+		};
+		08983F251F3E4131008199B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
 		};
 		08A947FE1EB2B1A5001EC02D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
