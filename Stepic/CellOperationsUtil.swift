@@ -29,7 +29,7 @@ class CellOperationsUtil {
 
     //Returns the removeSelection block
     class func animateViewSelection(_ view: UIView) -> (() -> Void) {
-        let selectedColor = UIColor(red: 217/255.0, green: 217/255.0, blue: 217/255.0, alpha: 1).cgColor
+        let selectedColor = UIColor(red: 217 / 255.0, green: 217 / 255.0, blue: 217 / 255.0, alpha: 1).cgColor
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.backgroundColor = selectedColor
         })

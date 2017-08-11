@@ -151,11 +151,11 @@ class SearchResultsCoursesViewController: CoursesViewController {
             () -> Void in
             if let s = self {
                 s.currentRequest = ApiDataDownloader.search.search(query: s.query, type: "course", page: 1, success: {
-                    (searchResults, meta) -> Void in
+                    searchResults, meta -> Void in
                     let ids = searchResults.flatMap({return $0.courseId})
 
                     s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
-                        (newCourses) -> Void in
+                        newCourses -> Void in
 
                         s.courses = Sorter.sort(newCourses, byIds: ids)
                         s.meta = meta
@@ -166,7 +166,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         }
                         s.isRefreshing = false
                         }, error: {
-                            (error) -> Void in
+                            error -> Void in
                             print("failed downloading courses data in refresh")
                             if error != .cancelled {
                                 s.handleRefreshError()
@@ -174,7 +174,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     })
 
                     }, error: {
-                        (error) -> Void in
+                        error -> Void in
                         print("failed refreshing course ids in refresh")
                         if error.code != s.cancelErrorCode {
                             s.handleRefreshError()
@@ -238,7 +238,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
                     }, error: {
-                        (error) -> Void in
+                        error -> Void in
                         print("failed downloading courses data in Next")
                         if error != .cancelled {
                             s.handleLoadMoreError()
@@ -246,7 +246,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                 })
 
                 }, error: {
-                    (error) -> Void in
+                    error -> Void in
                     print("failed refreshing course ids in Next")
                     if error.code != s.cancelErrorCode {
                         s.handleLoadMoreError()

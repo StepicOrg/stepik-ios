@@ -53,7 +53,7 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
     class func getHeight(text: String, width w: CGFloat) -> CGFloat {
         let buttonWidth: CGFloat = 62
         let buttonToLabelDistance: CGFloat = 8
-        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w -  24 - buttonWidth - buttonToLabelDistance)) + 17
+        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w - 24 - buttonWidth - buttonToLabelDistance)) + 17
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

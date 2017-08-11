@@ -215,7 +215,7 @@ class VideoStepViewController: UIViewController {
                         self?.animateTabSelection()
                         print("initializing post views task")
                         print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
-                        if let userId =  AuthInfo.shared.userId,
+                        if let userId = AuthInfo.shared.userId,
                             let token = AuthInfo.shared.token {
 
                             let task = PostViewsExecutableTask(stepId: stepid, assignmentId: self?.assignment?.id, userId: userId)

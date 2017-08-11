@@ -49,7 +49,7 @@ class DeepLinkRouter {
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
 
                 if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems {
-                    if let module = queryItems.filter({ (item) in item.name == "module" }).first?.value! {
+                    if let module = queryItems.filter({ item in item.name == "module" }).first?.value! {
                         if let moduleInt = Int(module) {
                             AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.section, parameters: ["course": courseId as NSObject, "module": module as NSObject])
                             routeToSyllabusWithId(courseId, moduleId: moduleInt, completion: completion)

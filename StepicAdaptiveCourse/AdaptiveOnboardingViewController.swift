@@ -96,7 +96,7 @@ extension AdaptiveOnboardingViewController: KolodaViewDataSource {
                 // Add small top padding
                 var html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: "<style>\nbody{padding-top: 8px;}</style>\n", body: cardData.content.text ?? "", width: Int(UIScreen.main.bounds.width))
                 html = html.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                webview.loadHTMLString(html, baseURL: cardData.content.baseURL ?? nil)
+                webview.loadHTMLString(html, baseURL: cardData.content.baseURL)
 
                 card?.controlButton.setTitle(cardData.buttonTitle, for: .normal)
                 card?.controlButton.isHidden = cardData.isButtonHidden

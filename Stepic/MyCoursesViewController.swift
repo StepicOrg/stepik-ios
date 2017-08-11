@@ -41,9 +41,9 @@ class MyCoursesViewController: CoursesViewController {
     fileprivate func getExistingIndexPathsFromCourses(_ newCourses: [Course]) -> [IndexPath] {
         return newCourses.flatMap {
             newCourse in
-            return courses.index {$0 == newCourse}
+            courses.index {$0 == newCourse}
             }.map {
-                return IndexPath(row: $0, section: 0)
+                IndexPath(row: $0, section: 0)
         }
     }
 

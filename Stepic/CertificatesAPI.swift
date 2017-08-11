@@ -51,7 +51,7 @@ class CertificatesAPI: APIEndpoint {
                 //Collect all retrieved ids
 
                 let ids = json["certificates"].arrayValue.flatMap {
-                    return $0["id"].int
+                    $0["id"].int
                 }
 
                 //Fetch certificates data for all retrieved ids

@@ -18,7 +18,7 @@ struct ControllerHelper {
     }
 
     static func instantiateViewController(identifier id: String, storyboardName: String = "Main") -> UIViewController {
-        let storyboard = UIStoryboard.init(name: storyboardName, bundle: nil)
+        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: id)
     }
 }

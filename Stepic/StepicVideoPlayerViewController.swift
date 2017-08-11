@@ -381,9 +381,9 @@ class StepicVideoPlayerViewController: UIViewController {
             [unowned self]
             time, bufferedTime in
             self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
-            self.topTimeSlider.value = Float(time/Double(self.player.maximumDuration))
+            self.topTimeSlider.value = Float(time / Double(self.player.maximumDuration))
             if let bTime = bufferedTime {
-                self.topTimeProgressView.progress = Float(bTime/Double(self.player.maximumDuration))
+                self.topTimeProgressView.progress = Float(bTime / Double(self.player.maximumDuration))
             }
         }
     }

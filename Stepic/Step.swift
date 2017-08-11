@@ -77,7 +77,7 @@ class Step: NSManagedObject, JSONInitializable {
             }
 
             if let unitId = unitId {
-                if let step = results.filter({ return $0.lesson?.unit?.id == unitId }).first {
+                if let step = results.filter({ $0.lesson?.unit?.id == unitId }).first {
                     return step
                 } else {
                     return results.first

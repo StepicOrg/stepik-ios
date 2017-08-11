@@ -42,7 +42,7 @@ class Certificate: NSManagedObject, JSONInitializable {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
 
         let idPredicates = ids.map {
-            return NSPredicate(format: "managedId == %@", $0 as NSNumber)
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
         let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         let userPredicate = NSPredicate(format: "managedUserId == %@", userId as NSNumber)

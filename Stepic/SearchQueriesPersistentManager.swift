@@ -30,7 +30,7 @@ class SearchQueriesPersistentManager {
 
         let arr = [String](queriesDict.filter({
             key, _ in
-            return key.indexOf(query.lowercased()) != nil
+            key.indexOf(query.lowercased()) != nil
         }).sorted(by: {
             (first: (key: String, value: Int), second: (key: String, value: Int))  in
             if first.value == second.value {
@@ -40,7 +40,7 @@ class SearchQueriesPersistentManager {
             }
         }).map({
             key, _ in
-            return key
+            key
         }).prefix(count))
 
         return arr

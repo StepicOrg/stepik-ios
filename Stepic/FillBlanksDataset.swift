@@ -13,7 +13,7 @@ class FillBlanksDataset: Dataset {
     var components: [FillBlanksComponent] = []
     required init(json: JSON) {
         components = json["components"].arrayValue.map({
-            return FillBlanksComponent(json: $0)
+            FillBlanksComponent(json: $0)
         })
     }
 }
@@ -37,7 +37,7 @@ struct FillBlanksComponent {
         text = json["text"].stringValue
         type = FillBlanksComponentType(rawValue: json["type"].stringValue) ?? .text
         options = json["options"].arrayValue.map({
-            return $0.stringValue
+            $0.stringValue
         })
         self.removeEmptyLine()
     }

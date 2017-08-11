@@ -137,7 +137,7 @@ class UserPreferencesTableViewController: UITableViewController {
         if (indexPath as NSIndexPath).section == 3 && (indexPath as NSIndexPath).row == 0 {
             signOut()
         }
-        if (indexPath as NSIndexPath).section  == 2 && (indexPath as NSIndexPath).row == 1 {
+        if (indexPath as NSIndexPath).section == 2 && (indexPath as NSIndexPath).row == 1 {
             checkForUpdates()
         }
     }

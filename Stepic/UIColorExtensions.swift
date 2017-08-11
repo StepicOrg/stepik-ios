@@ -15,9 +15,9 @@ extension UIColor {
     }
 
     public convenience init(hex: Int, alpha: CGFloat) {
-        let red   = CGFloat((0xff0000 & hex) >> 16) / 255.0
-        let green = CGFloat((0xff00   & hex) >> 8)  / 255.0
-        let blue  = CGFloat(0xff      & hex)        / 255.0
+        let red = CGFloat((0xff0000 & hex) >> 16) / 255.0
+        let green = CGFloat((0xff00 & hex) >> 8) / 255.0
+        let blue = CGFloat(0xff & hex) / 255.0
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 

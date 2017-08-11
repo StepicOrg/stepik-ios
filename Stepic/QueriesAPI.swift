@@ -49,7 +49,7 @@ class QueriesAPI {
             }
 
             let queries = json["queries"].arrayValue.flatMap {
-                return $0["text"].string
+                $0["text"].string
             }
 
             success(queries)

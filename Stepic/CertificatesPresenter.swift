@@ -68,7 +68,7 @@ class CertificatesPresenter {
             return index1 < index2
         }).flatMap {
             [weak self] in
-            return self?.certificateViewData(fromCertificate: $0)
+            self?.certificateViewData(fromCertificate: $0)
         }
 
         view?.setCertificates(certificates: localCertificates, hasNextPage: false)
@@ -76,7 +76,7 @@ class CertificatesPresenter {
 
     fileprivate func updatePersistentPresentationData() {
         presentationContainer?.certificatesIds = certificates.map({
-            return $0.id
+            $0.id
         })
     }
 
@@ -106,7 +106,7 @@ class CertificatesPresenter {
                 }
                 s.view?.setCertificates(certificates: s.certificates.flatMap({
                     [weak self] in
-                    return self?.certificateViewData(fromCertificate: $0)
+                    self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
                 s.view?.displayEmpty()
                 CoreDataHelper.instance.save()
@@ -128,7 +128,7 @@ class CertificatesPresenter {
         }
 
         let courseIds = certificates.map {
-            return $0.courseId
+            $0.courseId
         }
 
         let localCourses = try! Course.getCourses(courseIds)
@@ -193,7 +193,7 @@ class CertificatesPresenter {
                 }
                 s.view?.setCertificates(certificates: s.certificates.flatMap({
                     [weak self] in
-                    return self?.certificateViewData(fromCertificate: $0)
+                    self?.certificateViewData(fromCertificate: $0)
                 }), hasNextPage: meta.hasNext)
                 CoreDataHelper.instance.save()
                 self?.isGettingNextPage = false

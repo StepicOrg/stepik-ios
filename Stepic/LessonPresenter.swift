@@ -84,7 +84,7 @@ class LessonPresenter {
             }
 
             var localLesson: Lesson? = nil
-            localLesson =  Lesson.getLesson(step.lessonId)
+            localLesson = Lesson.getLesson(step.lessonId)
 
             _ = ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
@@ -175,7 +175,7 @@ class LessonPresenter {
             }
             let newStepsSet = Set(s.lesson!.stepsArray)
             let prevStepsSet = Set(prevStepsIds)
-            var reloadBlock : (()->Void) = {
+            var reloadBlock : (() -> Void) = {
                 [weak self] in
                 self?.view?.reload()
             }

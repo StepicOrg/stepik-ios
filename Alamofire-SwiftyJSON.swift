@@ -25,7 +25,7 @@ extension DataRequest {
         options: JSONSerialization.ReadingOptions = .allowFragments)
         -> DataResponseSerializer<JSON> {
             return DataResponseSerializer { _, response, data, error in
-                return Request.serializeResponseSwiftyJSON(options: options,
+                Request.serializeResponseSwiftyJSON(options: options,
                                                            response: response,
                                                            data: data,
                                                            error: error)

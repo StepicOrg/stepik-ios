@@ -10,7 +10,7 @@ import Foundation
 
 extension ControllerHelper {
     static func getAuthController() -> UIViewController {
-        let storyboard = UIStoryboard.init(name: "Auth", bundle: nil)
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AuthNavigation")
 
         return vc

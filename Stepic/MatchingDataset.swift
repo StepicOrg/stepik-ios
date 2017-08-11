@@ -24,7 +24,7 @@ class MatchingDataset: Dataset {
     required init(json: JSON) {
         pairs = json["pairs"].arrayValue.map({
             pairJSON in
-            return (first: pairJSON["first"].stringValue, second: pairJSON["second"].stringValue)
+            (first: pairJSON["first"].stringValue, second: pairJSON["second"].stringValue)
         })
     }
 }

@@ -203,7 +203,7 @@ class AuthManager: NSObject {
         }
 
         return refreshTokenWith(AuthInfo.shared.token!.refreshToken, success: {
-            (t) in
+            t in
 
             AuthInfo.shared.token = t
             success?()

@@ -50,7 +50,7 @@ class Comment: JSONInitializable {
         isDeleted = json["is_deleted"].boolValue
         targetStepId = json["target"].intValue
         repliesIds = json["replies"].arrayValue.flatMap {
-            return $0.int
+            $0.int
         }
         isPinned = json["is_pinned"].boolValue
         voteId = json["vote"].stringValue
@@ -70,7 +70,7 @@ class Comment: JSONInitializable {
         isDeleted = json["is_deleted"].boolValue
         targetStepId = json["target"].intValue
         repliesIds = json["replies"].arrayValue.flatMap {
-            return $0.int
+            $0.int
         }
         isPinned = json["is_pinned"].boolValue
         voteId = json["vote"].stringValue

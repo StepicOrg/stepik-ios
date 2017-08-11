@@ -67,7 +67,7 @@ class ConnectionHelper: NSObject {
                 if completed + errors != 0 {
                     UIThread.performUI({Messages.sharedManager.showCancelledDownloadMessage(count: completed)})
                 }
-                if errors != 0 { print("Cancelled \(completed+errors) dowloads with \(errors) errors") }
+                if errors != 0 { print("Cancelled \(completed + errors) dowloads with \(errors) errors") }
             })
             callReachabilityhandlers(false)
             print("Service unavaliable!!!")

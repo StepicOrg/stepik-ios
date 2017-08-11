@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
             "current": userActivity.currentStreak,
             "longest": userActivity.longestStreak,
-            "percentage": String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+            "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
             ])
 
         guard let nav = currentNavigation else {
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.LocalNotification.shown, parameters: [
                     "current": userActivity.currentStreak,
                     "longest": userActivity.longestStreak,
-                    "percentage": String(format: "%.02f", Double(userActivity.currentStreak)/Double(userActivity.longestStreak))
+                    "percentage": String(format: "%.02f", Double(userActivity.currentStreak) / Double(userActivity.longestStreak))
                     ])
             }
         }, error: {

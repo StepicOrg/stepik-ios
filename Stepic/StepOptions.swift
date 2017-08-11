@@ -71,7 +71,7 @@ class StepOptions: NSManagedObject {
 
     var languages: [CodeLanguage] {
         return limits.flatMap({
-            return $0.language
+            $0.language
         })
     }
 

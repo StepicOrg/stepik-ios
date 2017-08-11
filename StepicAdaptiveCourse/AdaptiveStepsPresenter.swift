@@ -146,7 +146,7 @@ class AdaptiveStepsPresenter {
     fileprivate func getStep(for recommendedLesson: Lesson, success: @escaping (Step) -> Void) {
         if let stepId = recommendedLesson.stepsArray.first {
             // Get steps in recommended lesson
-            stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { (newStepsImmutable) -> Void in
+            stepsAPI?.retrieve(ids: [stepId], existing: [], refreshMode: .update, success: { newStepsImmutable -> Void in
                 let step = newStepsImmutable.first
                 if let step = step {
                     self.isRecommendationLoaded = true
@@ -172,7 +172,7 @@ class AdaptiveStepsPresenter {
                     return
                 }
 
-                self.lessonsAPI?.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                self.lessonsAPI?.retrieve(ids: recommendations, existing: [], refreshMode: .update, success: { newLessonsImmutable -> Void in
                     success(newLessonsImmutable)
                 }, error: { (_) -> Void in
                     print("failed downloading lessons data in Next")
@@ -201,7 +201,7 @@ class AdaptiveStepsPresenter {
                 print("recommendations: loaded lessons: \(recommendedLessons.map {$0.id})")
 
                 let lessonsIds = self.recommendedLessons.map { $0.id }
-                self.lessonsAPI?.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { (newLessonsImmutable) -> Void in
+                self.lessonsAPI?.retrieve(ids: lessonsIds, existing: [], refreshMode: .update, success: { newLessonsImmutable -> Void in
                     self.recommendedLessons = newLessonsImmutable
 
                     guard let lesson = self.recommendedLessons.first else {
@@ -406,7 +406,7 @@ class AdaptiveStepsPresenter {
 
     fileprivate func joinAndLoadCourse(completion: @escaping () -> Void) {
         performRequest({
-            self.coursesAPI?.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { (coursesImmutable) -> Void in
+            self.coursesAPI?.retrieve(ids: [StepicApplicationsInfo.adaptiveCourseId], existing: [], refreshMode: .update, success: { coursesImmutable -> Void in
                 self.course = coursesImmutable.first
 
                 guard let course = self.course else {

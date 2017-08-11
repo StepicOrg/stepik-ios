@@ -77,7 +77,7 @@ class NotificationRegistrator: NSObject {
                         if e != nil {
                             print("initializing delete device task")
                             print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
-                            if let userId =  AuthInfo.shared.userId,
+                            if let userId = AuthInfo.shared.userId,
                                 let token = AuthInfo.shared.token {
 
                                 let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)

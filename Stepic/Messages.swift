@@ -44,7 +44,7 @@ class Messages: NSObject {
     }
 
     func showCancelledDownloadMessage(count: Int) {
-        TSMessage.showNotification(withTitle: NSLocalizedString("ConnectionLost", comment: ""), subtitle: "\(NSLocalizedString("CancelledDownload", comment: "")) \(count) \(NSLocalizedString((count%10 == 1 && count != 11) ? "Video" : "Videos", comment: ""))", type: .error)
+        TSMessage.showNotification(withTitle: NSLocalizedString("ConnectionLost", comment: ""), subtitle: "\(NSLocalizedString("CancelledDownload", comment: "")) \(count) \(NSLocalizedString((count % 10 == 1 && count != 11) ? "Video" : "Videos", comment: ""))", type: .error)
     }
 }
 

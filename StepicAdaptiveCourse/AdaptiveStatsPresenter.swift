@@ -56,7 +56,7 @@ class AdaptiveStatsPresenter {
 
         // Achievements
         achievementsManager.storedAchievements.forEach({ achievement in
-            achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover ?? nil, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
+            achievements.append(AchievementViewData(name: achievement.name, info: achievement.info ?? "", type: achievement.type, cover: achievement.cover, isUnlocked: achievement.isUnlocked, currentProgress: achievement.progressValue, maxProgress: achievement.maxProgressValue))
         })
 
         view?.setAchievements(records: achievements)

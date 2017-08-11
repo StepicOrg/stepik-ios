@@ -239,7 +239,7 @@ class Course: NSManagedObject, JSONInitializable {
 
 //        print("progress ids array -> \(progressIds)")
         _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-            (newProgresses) -> Void in
+            newProgresses -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
 
             if progresses.count == 0 {
@@ -272,7 +272,7 @@ class Course: NSManagedObject, JSONInitializable {
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
         let idPredicates = ids.map {
-            return NSPredicate(format: "managedId == %@", $0 as NSNumber)
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
         let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
 

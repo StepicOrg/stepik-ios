@@ -155,7 +155,7 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
 
             var localLesson: Lesson? = nil
-            localLesson =  Lesson.getLesson(step.lessonId)
+            localLesson = Lesson.getLesson(step.lessonId)
 
             _ = ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
@@ -249,7 +249,7 @@ class StepsViewController: RGPageViewController, ShareableController {
             let prevStepsSet = Set(prevStepsIds)
 
             //To view
-            var reloadBlock : (()->Void) = {
+            var reloadBlock : (() -> Void) = {
                 [weak self] in
                 self?.reloadData()
             }
@@ -331,7 +331,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
-            if !didSelectTab && l.steps.count != 0  && startStepId < l.steps.count && didInitSteps {
+            if !didSelectTab && l.steps.count != 0 && startStepId < l.steps.count && didInitSteps {
                 print("\nselected tab for step with id -> \(startStepId)\n")
                 didSelectTab = true
                 self.selectTabAtIndex(startStepId, updatePage: true)

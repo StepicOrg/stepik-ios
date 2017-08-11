@@ -101,7 +101,7 @@ class Lesson: NSManagedObject, JSONInitializable {
         }
 
         _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-            (newProgresses) -> Void in
+            newProgresses -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
             for i in 0 ..< min(self.steps.count, progresses.count) {
                 self.steps[i].progress = progresses[i]

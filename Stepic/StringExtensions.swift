@@ -15,14 +15,14 @@ extension String {
         var str = ""
         if let idx = self.characters.index(of: "?") {
             let pos: Int = self.characters.distance(from: self.startIndex, to: idx)
-            str = self.substring(from: self.characters.index(self.startIndex, offsetBy: pos+1))
+            str = self.substring(from: self.characters.index(self.startIndex, offsetBy: pos + 1))
         }
         let arr: [String] = str.components(separatedBy: CharacterSet(charactersIn: "&="))
 //        let arr : [AnyObject] = str.characters.split(whereSeparator: {$0 == "&" || $0 == "="})
 //        let arr : [AnyObject] = str.characters.split(whereSeparator: { $0 == "&" || $0 == "="}).map(String.init)
 
-        for i in 0..<arr.count/2 {
-            res[arr[i*2] as! String] = arr[i*2+1] as AnyObject
+        for i in 0..<arr.count / 2 {
+            res[arr[i * 2] as! String] = arr[i * 2 + 1] as AnyObject
         }
         return res
     }

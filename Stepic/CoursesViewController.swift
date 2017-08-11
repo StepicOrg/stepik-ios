@@ -130,7 +130,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         refreshBegan()
         performRequest({
             _ = ApiDataDownloader.courses.retrieveDisplayedIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: 1, success: {
-                (ids, meta) -> Void in
+                ids, meta -> Void in
                 _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
                     [weak self]
                     (newCourses) -> Void in
@@ -175,7 +175,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     }
 
                     _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-                        (newProgresses) -> Void in
+                        newProgresses -> Void in
                         progresses = Sorter.sort(newProgresses, byIds: progressIds)
                         for i in 0 ..< min(newCourses.count, progresses.count) {
                             newCourses[i].progress = progresses[i]
@@ -305,7 +305,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         performRequest({
             () -> Void in
             _ = ApiDataDownloader.courses.retrieveDisplayedIds(featured: self.loadFeatured, enrolled: self.loadEnrolled, isPublic: self.loadPublic, order: self.loadOrder, page: self.currentPage + 1, success: {
-                (idsImmutable, meta) -> Void in
+                idsImmutable, meta -> Void in
                 var ids = idsImmutable
                 _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
                     [weak self]
@@ -315,7 +315,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     newCourses = s.getNonExistingCourses(newCourses)
                     ids = ids.flatMap {
                         id in
-                        return newCourses.index {$0.id == id} != nil ? id : nil
+                        newCourses.index {$0.id == id} != nil ? id : nil
                     }
 
                     s.currentPage += 1

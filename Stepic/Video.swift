@@ -50,7 +50,7 @@ class Video: NSManagedObject, JSONInitializable {
         var minDifference = 10000
         var res: String = "270"
         for defaultQuality in qualities {
-            if abs(Int(defaultQuality)! - Int(quality)!) <  minDifference {
+            if abs(Int(defaultQuality)! - Int(quality)!) < minDifference {
                 minDifference = abs(Int(defaultQuality)! - Int(quality)!)
                 res = defaultQuality
             }
@@ -62,7 +62,7 @@ class Video: NSManagedObject, JSONInitializable {
         var minDifference = 10000
         var res: String = "270"
         for url in urls {
-            if abs(Int(url.quality)! - Int(quality)!) <  minDifference {
+            if abs(Int(url.quality)! - Int(quality)!) < minDifference {
                 minDifference = abs(Int(url.quality)! - Int(quality)!)
                 res = url.quality
             }
@@ -74,7 +74,7 @@ class Video: NSManagedObject, JSONInitializable {
         var urlToReturn: VideoURL? = nil
         var minDifference = 10000
         for url in urls {
-            if abs(Int(url.quality)! - Int(quality)!) <  minDifference {
+            if abs(Int(url.quality)! - Int(quality)!) < minDifference {
                 minDifference = abs(Int(url.quality)! - Int(quality)!)
                 urlToReturn = url
             }

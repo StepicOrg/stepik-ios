@@ -56,7 +56,7 @@ class CertificateSpec: QuickSpec {
                 }
                 fit("gets correct certificates") {
                     let expectedGrades = (10...19).map({return $0})
-                    expect(view.grades).to(equal(expectedGrades))
+                    expect(view.grades) == expectedGrades
                 }
 
                 context("logs out") {
@@ -71,7 +71,7 @@ class CertificateSpec: QuickSpec {
                         }
                     }
                     it("sets anonymous and cleans certificates") {
-                        expect(view.grades).to(equal([]))
+                        expect(view.grades) == []
                     }
                 }
 
@@ -90,7 +90,7 @@ class CertificateSpec: QuickSpec {
 
                         it("does not drop certificates") {
                             let expectedGrades = (10...19).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
                     }
                 }
@@ -109,7 +109,7 @@ class CertificateSpec: QuickSpec {
                         }
                         it("does not drop certificates") {
                             let expectedGrades = (10...19).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
                     }
 
@@ -125,13 +125,13 @@ class CertificateSpec: QuickSpec {
                             }                        }
                         it("gets correct certificates") {
                             let expectedGrades = (10...29).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
 
                         describe("refresh") {
                             it("gets next certificates") {
                                 let expectedGrades = (10...19).map({return $0})
-                                expect(view.grades).to(equal(expectedGrades))
+                                expect(view.grades) == expectedGrades
                             }
                         }
                     }

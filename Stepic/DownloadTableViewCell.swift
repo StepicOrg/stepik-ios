@@ -60,7 +60,7 @@ class DownloadTableViewCell: UITableViewCell {
 
         video.getSize({
             size in
-            self.sizeLabel.text = "\(size/1024/1024) \(NSLocalizedString("Mb", comment: ""))"
+            self.sizeLabel.text = "\(size / 1024 / 1024) \(NSLocalizedString("Mb", comment: ""))"
         })
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
@@ -68,7 +68,7 @@ class DownloadTableViewCell: UITableViewCell {
 
     func updateButton() {
 //        video.downloadDelegate = self.downloadDelegate
-        if video.state ==  VideoState.cached {
+        if video.state == VideoState.cached {
             downloadButton.state = .downloaded
             self.quality = self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
             return

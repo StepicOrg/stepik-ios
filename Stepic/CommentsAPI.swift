@@ -40,7 +40,7 @@ class CommentsAPI {
                 }
 
                 let comments: [Comment] = json["comments"].arrayValue.flatMap {
-                    return Comment(json: $0)
+                    Comment(json: $0)
                 }
 
                 var usersDict: [Int : UserInfo] = [Int: UserInfo]()

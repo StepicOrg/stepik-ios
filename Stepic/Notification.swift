@@ -14,7 +14,7 @@ class Notification: DictionarySerializable {
 
     required init?(dictionary: [String : Any]) {
         if let typeString = dictionary["type"] as? String {
-            if let type =  NotificationType(rawValue: typeString) {
+            if let type = NotificationType(rawValue: typeString) {
                 self.type = type
             } else {
                 return nil

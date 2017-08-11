@@ -75,15 +75,15 @@ class StreaksView: UIView {
 
         //If there is an error - return green
         guard index >= 0 && index < colorsInt.count else {
-            return UIColor(red: CGFloat(colorsInt[colorsInt.count - 1].0)/255.0,
-                           green: CGFloat(colorsInt[colorsInt.count - 1].1)/255.0,
-                           blue: CGFloat(colorsInt[colorsInt.count - 1].2)/255.0,
+            return UIColor(red: CGFloat(colorsInt[colorsInt.count - 1].0) / 255.0,
+                           green: CGFloat(colorsInt[colorsInt.count - 1].1) / 255.0,
+                           blue: CGFloat(colorsInt[colorsInt.count - 1].2) / 255.0,
                            alpha: 1)
         }
 
-        return UIColor(red: CGFloat(colorsInt[index].0)/255.0,
-                       green: CGFloat(colorsInt[index].1)/255.0,
-                       blue: CGFloat(colorsInt[index].2)/255.0,
+        return UIColor(red: CGFloat(colorsInt[index].0) / 255.0,
+                       green: CGFloat(colorsInt[index].1) / 255.0,
+                       blue: CGFloat(colorsInt[index].2) / 255.0,
                        alpha: 1)
     }
 

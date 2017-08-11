@@ -16,7 +16,7 @@ class DiscussionProxy {
 
     init(json: JSON) {
         discussionIds = json["discussions"].arrayValue.flatMap {
-            return $0.int
+            $0.int
         }
         id = json["id"].stringValue
     }

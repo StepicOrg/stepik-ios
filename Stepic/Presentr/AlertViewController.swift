@@ -78,9 +78,9 @@ private enum Font: String {
 
 private struct ColorPalette {
 
-    static let grayColor = UIColor(red: 151.0/255.0, green: 151.0/255.0, blue: 151.0/255.0, alpha: 1)
-    static let greenColor = UIColor(red: 58.0/255.0, green: 213.0/255.0, blue: 91.0/255.0, alpha: 1)
-    static let redColor = UIColor(red: 255.0/255.0, green: 103.0/255.0, blue: 100.0/255.0, alpha: 1)
+    static let grayColor = UIColor(red: 151.0 / 255.0, green: 151.0 / 255.0, blue: 151.0 / 255.0, alpha: 1)
+    static let greenColor = UIColor(red: 58.0 / 255.0, green: 213.0 / 255.0, blue: 91.0 / 255.0, alpha: 1)
+    static let redColor = UIColor(red: 255.0 / 255.0, green: 103.0 / 255.0, blue: 100.0 / 255.0, alpha: 1)
 
 }
 
