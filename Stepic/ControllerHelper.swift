@@ -11,14 +11,14 @@ import Foundation
 struct ControllerHelper {
     static func getTopViewController() -> UIViewController? {
         var topVC = UIApplication.shared.keyWindow?.rootViewController
-        while((topVC!.presentedViewController) != nil){
+        while((topVC!.presentedViewController) != nil) {
             topVC = topVC!.presentedViewController
         }
         return topVC
     }
-    
+
     static func instantiateViewController(identifier id: String, storyboardName: String = "Main") -> UIViewController {
         let storyboard = UIStoryboard.init(name: storyboardName, bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: id) 
+        return storyboard.instantiateViewController(withIdentifier: id)
     }
 }

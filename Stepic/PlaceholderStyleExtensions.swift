@@ -33,17 +33,17 @@ extension UILabel {
         self.textAlignment = style.textAlignment
         self.lineBreakMode = style.lineBreakMode
     }
-    
+
     class func heightForLabelWithText(_ text: String, style: PlaceholderStyle.LabelStyle, width: CGFloat) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
-        
+
         label.numberOfLines = 0
-        
+
         label.text = text
-        
+
         label.implementStyle(style)
         label.sizeToFit()
-        
+
         //        print(label.bounds.height)
         return label.bounds.height
     }

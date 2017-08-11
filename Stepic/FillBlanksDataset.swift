@@ -10,21 +10,19 @@ import UIKit
 import SwiftyJSON
 
 class FillBlanksDataset: Dataset {
-    var components : [FillBlanksComponent] = []
-    required init(json: JSON) {  
+    var components: [FillBlanksComponent] = []
+    required init(json: JSON) {
         components = json["components"].arrayValue.map({
             return FillBlanksComponent(json: $0)
         })
     }
 }
 
-
-
 struct FillBlanksComponent {
     var text: String
     var type: FillBlanksComponentType
     var options: [String]
-    
+
     fileprivate mutating func removeEmptyLine() {
         let emptyTags = ["<br>", "<br/>", "<br />"]
         for tag in emptyTags {
@@ -34,7 +32,7 @@ struct FillBlanksComponent {
             }
         }
     }
-    
+
     init(json: JSON) {
         text = json["text"].stringValue
         type = FillBlanksComponentType(rawValue: json["type"].stringValue) ?? .text
@@ -45,7 +43,7 @@ struct FillBlanksComponent {
     }
 }
 
-enum FillBlanksComponentType : String {
+enum FillBlanksComponentType: String {
     case text = "text"
     case input = "input"
     case select = "select"

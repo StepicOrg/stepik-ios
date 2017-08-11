@@ -9,10 +9,10 @@
 import Foundation
 
 struct AutocompleteWords {
-    
+
     static func autocompleteFor(_ text: String, language: CodeLanguage) -> [String] {
         var suggestions: [String] = []
-        
+
         switch language {
         case .python:
             suggestions = python
@@ -36,12 +36,12 @@ struct AutocompleteWords {
             suggestions = []
             break
         }
-        
-        return suggestions.filter{
+
+        return suggestions.filter {
             $0.indexOf(text) == 0 && $0.characters.count > text.characters.count
         }
     }
-    
+
     static let python = [
         "False",
         "class",
@@ -78,7 +78,7 @@ struct AutocompleteWords {
         "in",
         "raise"
     ]
-    
+
     static let cpp = [
         "bool",
         "break",
@@ -138,7 +138,7 @@ struct AutocompleteWords {
         "void",
         "while"
     ]
-    
+
     static let cs = [
         "abstract",
         "base",
@@ -218,7 +218,7 @@ struct AutocompleteWords {
         "get",
         "var"
     ]
-    
+
     static let java = [
         "abstract",
         "assert",
@@ -290,7 +290,7 @@ struct AutocompleteWords {
         "Formatter",
         "Exception"
     ]
-    
+
     static let js = [
         "abstract",
         "arguments",
@@ -370,7 +370,7 @@ struct AutocompleteWords {
         "prompt",
         "confirm"
     ]
-    
+
     static let ruby = [
         "and",
         "begin",

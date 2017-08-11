@@ -10,10 +10,10 @@ import Foundation
 
 class CertificatesPresentationContainer {
     fileprivate let defaults = UserDefaults.standard
-    
+
     fileprivate let certificatesStoredKey = "certificatesStoredIdsKey"
-    
-    var certificatesIds : [Int] {
+
+    var certificatesIds: [Int] {
         get {
             if let ids = defaults.object(forKey: certificatesStoredKey) as? [Int] {
                 return ids

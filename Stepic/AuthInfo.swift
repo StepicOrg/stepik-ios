@@ -10,12 +10,12 @@ import UIKit
 
 class AuthInfo: NSObject {
     static var shared = AuthInfo()
-    
+
     fileprivate let defaults = UserDefaults.standard
-        
+
     fileprivate override init() {
         super.init()
-        
+
         print("initializing AuthInfo with userId \(String(describing: userId))")
         if let id = userId {
             if let users = User.fetchById(id) {
@@ -39,15 +39,15 @@ class AuthInfo: NSObject {
                             self?.userId = nil
                     })
                 }
-                
+
                 if c >= 1 {
                     user = users.first
                 }
-                
+
             }
         }
     }
-        
+
     fileprivate func setTokenValue(_ newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
@@ -55,27 +55,27 @@ class AuthInfo: NSObject {
         defaults.setValue(newToken?.expireDate.timeIntervalSince1970, forKey: "expire_date")
         defaults.synchronize()
     }
-    
-    var token : StepicToken? {
+
+    var token: StepicToken? {
         set(newToken) {
-            if newToken == nil || newToken?.accessToken == ""  {
+            if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
-                
+
                 //Unregister from notifications
                 NotificationRegistrator.sharedInstance.unregisterFromNotifications(completion: {
-                    UIThread.performUI{
+                    UIThread.performUI {
                         //Delete enrolled information
                         TabsInfo.myCoursesIds = []
                         let c = Course.getAllCourses(enrolled: true)
                         for course in c {
                             course.enrolled = false
                         }
-                        
+
                         Progress.deleteAllStoredProgresses()
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil
-                        
+
                         self.setTokenValue(nil)
                     }
                 })
@@ -86,7 +86,7 @@ class AuthInfo: NSObject {
                 Session.delete()
             }
         }
-        
+
         get {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
             let refreshToken = defaults.value(forKey: "refresh_token") as? String,
@@ -99,15 +99,15 @@ class AuthInfo: NSObject {
             }
         }
     }
-    
-    var isAuthorized : Bool {
+
+    var isAuthorized: Bool {
         return token != nil
     }
-    
-    var hasUser : Bool {
+
+    var hasUser: Bool {
         return user != nil
     }
-    
+
     var needsToRefreshToken: Bool {
         //TODO: Fix this
         if let token = token {
@@ -116,8 +116,8 @@ class AuthInfo: NSObject {
             return false
         }
     }
-    
-    var authorizationType : AuthorizationType {
+
+    var authorizationType: AuthorizationType {
         get {
             if let typeRaw = defaults.value(forKey: "authorization_type") as? Int {
                 return AuthorizationType(rawValue: typeRaw)!
@@ -125,18 +125,18 @@ class AuthInfo: NSObject {
                 return AuthorizationType.none
             }
         }
-        
+
         set(type) {
             defaults.setValue(type.rawValue, forKey: "authorization_type")
             defaults.synchronize()
         }
     }
-    
-    var didRefresh : Bool = false
-    
-    var anonymousUserId : Int?
-    
-    var userId : Int? {
+
+    var didRefresh: Bool = false
+
+    var anonymousUserId: Int?
+
+    var userId: Int? {
         set(id) {
             if let user = user {
                 if user.isGuest {
@@ -164,15 +164,15 @@ class AuthInfo: NSObject {
             }
         }
     }
-    
-    var user : User? {
+
+    var user: User? {
         didSet {
             print("\n\ndid set user with id \(String(describing: user?.id))\n\n")
             userId = user?.id
         }
     }
-    
-    var initialHTTPHeaders : [String: String] {
+
+    var initialHTTPHeaders: [String: String] {
         if !AuthInfo.shared.isAuthorized {
             return Session.cookieHeaders
         } else {

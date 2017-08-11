@@ -17,7 +17,7 @@ enum AdaptiveOnboardingAction {
 struct AdaptiveOnboardingStep {
     // We load html, so we should know base url
     typealias TextContent = (text: String?, baseURL: URL?)
-    
+
     let title: String
     let content: TextContent
     let requiredActions: [AdaptiveOnboardingAction]

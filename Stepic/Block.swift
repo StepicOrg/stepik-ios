@@ -13,18 +13,18 @@ import SwiftyJSON
 class Block: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-    convenience required init(json: JSON){
+    convenience required init(json: JSON) {
         self.init()
         initialize(json)
         video = Video(json: json["video"])
     }
-    
+
     func initialize(_ json: JSON) {
         name = json["name"].stringValue
         text = json["text"].string
         animation = json["animation"].string
     }
-    
+
     func update(json: JSON) {
         initialize(json)
         if let v = video {

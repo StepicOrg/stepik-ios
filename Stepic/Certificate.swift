@@ -12,12 +12,12 @@ import SwiftyJSON
 
 class Certificate: NSManagedObject, JSONInitializable {
     typealias idType = Int
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         self.id = json["id"].intValue
         self.userId = json["user"].intValue
@@ -29,31 +29,30 @@ class Certificate: NSManagedObject, JSONInitializable {
         self.urlString = json["url"].string
         self.isPublic = json["is_public"].bool
     }
-    
+
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].int
     }
-    
+
     class func fetch(_ ids: [Int], user userId: Int) -> [Certificate] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
-        
-        let idPredicates = ids.map{
+
+        let idPredicates = ids.map {
             return NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
         let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         let userPredicate = NSPredicate(format: "managedUserId == %@", userId as NSNumber)
-        
+
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, userPredicate])
-        
+
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Certificate]
-        }
-        catch {
+        } catch {
             return []
         }
     }

@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 
 extension CoursesInterfaceController: WatchSessionDataObserver {
-    
+
   var keysForObserving: [WatchSessionSender.Name] {
     return [.Courses, .Metainfo]
   }
@@ -32,8 +32,7 @@ extension CoursesInterfaceController: WatchSessionDataObserver {
 class CoursesInterfaceController: WKInterfaceController {
 
   @IBOutlet var table: WKInterfaceTable!
-    
-    
+
   var courses: [CoursePlainEntity] = [] {
     didSet {
       updateCourses()
@@ -86,8 +85,6 @@ class CoursesInterfaceController: WKInterfaceController {
     super.willActivate()
   }
 
-
-
   @IBAction func controlPlaybackAction() {
     self.pushController(withName: "Playback", context: nil)
   }
@@ -117,14 +114,14 @@ public extension WKInterfaceImage {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
 
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, _, _) in
           if let imageData = data as Data? {
             DispatchQueue.main.async {
               self.setImageData(imageData)
             }
           }
-        });
-        
+        })
+
         task.resume()
       }
     }

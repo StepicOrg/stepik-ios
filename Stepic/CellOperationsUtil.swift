@@ -8,13 +8,13 @@
 
 import Foundation
 import UIKit
-import FLKAutoLayout 
+import FLKAutoLayout
 
 /*
  Some custom cell operation util functions
  */
 class CellOperationsUtil {
-    
+
     class func addRefreshView(_ view: UIView, backgroundColor: UIColor = UIColor.white) -> UIView {
         let v = UIView()
         v.backgroundColor = backgroundColor
@@ -26,14 +26,14 @@ class CellOperationsUtil {
         v.align(to: view)
         return v
     }
-    
+
     //Returns the removeSelection block
-    class func animateViewSelection(_ view: UIView) -> ((Void)->Void) {
+    class func animateViewSelection(_ view: UIView) -> (() -> Void) {
         let selectedColor = UIColor(red: 217/255.0, green: 217/255.0, blue: 217/255.0, alpha: 1).cgColor
         UIView.animate(withDuration: 0.5, animations: {
             view.layer.backgroundColor = selectedColor
         })
-        
+
         return {
             UIView.animate(withDuration: 0.5, animations: {
                 view.layer.backgroundColor = UIColor.white.cgColor

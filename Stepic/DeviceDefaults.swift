@@ -14,13 +14,13 @@ import Foundation
 class DeviceDefaults {
     fileprivate init() {}
     static let sharedDefaults = DeviceDefaults()
-    
+
     fileprivate let defaults = UserDefaults.standard
     fileprivate let deviceIdKey = "nofiticationsDeviceId"
-    
-    var deviceId : Int? {
+
+    var deviceId: Int? {
         get {
-            return defaults.value(forKey: deviceIdKey) as? Int 
+            return defaults.value(forKey: deviceIdKey) as? Int
         }
         set(id) {
             defaults.setValue(id, forKey: deviceIdKey)

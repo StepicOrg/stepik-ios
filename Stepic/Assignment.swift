@@ -13,18 +13,18 @@ import SwiftyJSON
 class Assignment: NSManagedObject, JSONInitializable {
 
     typealias idType = Int
-    
-    convenience required init(json: JSON){
+
+    convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         id = json["id"].intValue
         stepId = json["step"].intValue
         unitId = json["unit"].intValue
     }
-    
+
     func update(json: JSON) {
         initialize(json)
     }

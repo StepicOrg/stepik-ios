@@ -16,7 +16,7 @@ import Foundation
   ///
   /// - returns: the total number of pages
   func numberOfPages(for pageViewController: RGPageViewController) -> Int
-  
+
   /// Asks the dataSource for a view to display as a tab item.
   ///
   /// - parameter pageViewController: the `RGPageViewController` instance.
@@ -24,7 +24,7 @@ import Foundation
   ///
   /// - returns: a `UIView` instance that will be shown as tab at the given index.
   func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView
-  
+
   /// Asks the datasource to give a ViewController to display as a page.
   ///
   /// - parameter pageViewController: the `RGPageViewController` instance.

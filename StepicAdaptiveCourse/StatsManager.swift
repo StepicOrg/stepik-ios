@@ -10,26 +10,26 @@ import Foundation
 
 class StatsManager {
     static let shared = StatsManager()
-    
+
     private let statsKey = "stats"
     private let maxStreakKey = "max_streak"
     let defaults = UserDefaults.standard
-    
+
     private let secondsInDay: TimeInterval = 24 * 60 * 60
-    
+
     var stats: [Int: Int]? {
         get {
             guard let savedStats = defaults.value(forKey: statsKey) as? [String: String] else {
                 return nil
             }
-            
+
             return stringDictToIntDict(savedStats)
         }
         set(newValue) {
             defaults.set(newValue == nil ? nil : intDictToStringDict(newValue!), forKey: statsKey)
         }
     }
-    
+
     var maxStreak: Int {
         get {
             return defaults.value(forKey: maxStreakKey) as? Int ?? 1
@@ -38,7 +38,7 @@ class StatsManager {
             defaults.set(max(maxStreak, newValue), forKey: maxStreakKey)
         }
     }
-    
+
     var currentDayStreak: Int {
         get {
             let _stats = stats
@@ -50,23 +50,23 @@ class StatsManager {
                     break
                 }
             }
-            
+
             return dayByDate(Date()) - curDay
         }
     }
-    
+
     func dayByDate(_ date: Date) -> Int {
         // Day num (01.01.1970 - 0, 02.01.1970 - 1, ...)
         let dayNum = Int(date.timeIntervalSince1970 / secondsInDay)
         return dayNum
     }
-    
+
     func dateByDay(_ day: Int) -> Date {
         // 00:00 am target day
         let date = Date(timeIntervalSince1970: secondsInDay * Double(day))
         return date
     }
-    
+
     private func stringDictToIntDict(_ dict: [String: String]) -> [Int: Int] {
         var intDict: [Int: Int] = [:]
         for (key, value) in dict {
@@ -76,7 +76,7 @@ class StatsManager {
         }
         return intDict
     }
-    
+
     private func intDictToStringDict(_ dict: [Int: Int]) -> [String: String] {
         var stringDict: [String: String] = [:]
         for (key, value) in dict {
@@ -84,32 +84,32 @@ class StatsManager {
         }
         return stringDict
     }
-    
+
     func incrementRating(_ value: Int, for date: Date = Date()) {
         var allStats = stats
         if allStats == nil {
             allStats = [:]
         }
-        
+
         let day = dayByDate(date)
         if allStats![day] == nil {
             allStats![day] = value
         } else {
             allStats![day]! += value
         }
-        
+
         stats = allStats
     }
-    
+
     func getLastDays(count: Int) -> [Int] {
         let _stats = stats
-        
+
         let curDayNum = dayByDate(Date())
         var lastDaysProgress: [Int] = []
         for i in 0..<count {
             lastDaysProgress.append(_stats?[curDayNum - i] ?? 0)
         }
-        
+
         return lastDaysProgress
     }
 }

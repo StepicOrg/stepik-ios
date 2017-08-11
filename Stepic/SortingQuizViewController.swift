@@ -12,14 +12,14 @@ import FLKAutoLayout
 class SortingQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
-    
+
     var cellHeights: [CGFloat?] = []
-    
+
     var didReload: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.tableFooterView = UIView()
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
@@ -30,15 +30,14 @@ class SortingQuizViewController: QuizViewController {
         tableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         tableView.isEditing = true
     }
-    
-    
-    fileprivate var orderedOptions : [String] = []
-    fileprivate var positionForOptionInAttempt : [String : Int] = [:]
+
+    fileprivate var orderedOptions: [String] = []
+    fileprivate var positionForOptionInAttempt: [String : Int] = [:]
 
     var optionsCount: Int {
         return (self.attempt?.dataset as? SortingDataset)?.options.count ?? 0
     }
-    
+
     override func updateQuizAfterAttemptUpdate() {
         resetOptionsToAttempt()
 
@@ -46,7 +45,7 @@ class SortingQuizViewController: QuizViewController {
         didReload = false
         tableView.reloadData()
     }
-    
+
     fileprivate func resetOptionsToAttempt() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
@@ -57,7 +56,7 @@ class SortingQuizViewController: QuizViewController {
             }
         }
     }
-    
+
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if self.submission == nil {
             if reload {
@@ -78,7 +77,7 @@ class SortingQuizViewController: QuizViewController {
         }
         self.tableView.reloadData()
     }
-    
+
     override func getReply() -> Reply {
         let r = SortingReply(ordering: orderedOptions.flatMap({return positionForOptionInAttempt[$0]}))
         return r
@@ -86,7 +85,7 @@ class SortingQuizViewController: QuizViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
         coordinator.animate(alongsideTransition: nil) {
             [weak self]
             _ in
@@ -97,7 +96,6 @@ class SortingQuizViewController: QuizViewController {
         }
     }
 
-    
     /*
     // MARK: - Navigation
 
@@ -111,7 +109,7 @@ class SortingQuizViewController: QuizViewController {
 }
 
 extension SortingQuizViewController : UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let dataset = attempt?.dataset as? SortingDataset else {
             return 0
@@ -122,15 +120,15 @@ extension SortingQuizViewController : UITableViewDelegate {
             return SortingQuizTableViewCell.getHeightForText(text: dataset.options[indexPath.row], width: self.tableView.bounds.width, sortable: true)
         }
     }
-    
+
     @objc(tableView:canMoveRowAtIndexPath:) func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.none
     }
-    
+
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
@@ -144,25 +142,25 @@ extension SortingQuizViewController : UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderedOptions.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let dataset = attempt?.dataset as? SortingDataset else {
             return UITableViewCell()
         }
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
-        
+
         cell.setHTMLText(orderedOptions[indexPath.row], width: self.tableView.bounds.width, finishedBlock: {
             [weak self]
             newHeight in
-            
+
             guard let s = self else { return }
             if s.didReload { return }
-            
+
             s.cellHeights[indexPath.row] = newHeight
             var sum: CGFloat = 0
             for height in s.cellHeights {
@@ -179,10 +177,10 @@ extension SortingQuizViewController : UITableViewDataSource {
                 s.tableView.endUpdates()
             }
         })
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movingOption = orderedOptions[(sourceIndexPath as NSIndexPath).row]
         orderedOptions.remove(at: (sourceIndexPath as NSIndexPath).row)

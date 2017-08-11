@@ -13,17 +13,17 @@ extension CodeTemplate {
     @NSManaged var managedLanguage: String?
     @NSManaged var managedTemplateString: String?
     @NSManaged var managedIsUserGenerated: NSNumber?
-    
+
     @NSManaged var managedOptions: StepOptions?
-    
-    class var oldEntity : NSEntityDescription {
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: CodeTemplate.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
+
     var languageString: String {
         get {
             return managedLanguage ?? ""
@@ -32,7 +32,7 @@ extension CodeTemplate {
             managedLanguage = value
         }
     }
-    
+
     var templateString: String {
         get {
             return managedTemplateString ?? ""
@@ -41,7 +41,7 @@ extension CodeTemplate {
             managedTemplateString = value
         }
     }
-    
+
     var isUserGenerated: Bool {
         get {
             return managedIsUserGenerated?.boolValue ?? true

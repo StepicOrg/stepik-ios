@@ -16,11 +16,11 @@ import SwiftyJSON
 class RemoteVersionManager: NSObject {
     fileprivate override init() {}
     static let sharedManager = RemoteVersionManager()
-    
+
     fileprivate func isVersion(_ v1: String, olderThan v2: String) -> Bool {
         return v1.compare(v2, options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
     }
-    
+
     func checkRemoteVersionChange(needUpdateHandler update: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
         let local = getLocalVersion()
         _ = getRemoteVersion(
@@ -34,23 +34,23 @@ class RemoteVersionManager: NSObject {
                 }
                 update(nil)
                 return
-            }, 
+            },
             error: {
                 error in
                 errorHandler(error)
         })
     }
-    
+
     fileprivate func getLocalVersion() -> String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
-    
+
     fileprivate func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
-        return Alamofire.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({ 
+        return Alamofire.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({
             response in
-            
+
             var error = response.result.error
-            var json : JSON = [:]
+            var json: JSON = [:]
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
@@ -59,13 +59,12 @@ class RemoteVersionManager: NSObject {
                 json = response.result.value!
             }
 //            let response = response.response
-            
-            
+
             if let e = error as NSError? {
                 errorHandler(e)
                 return
             }
-            
+
             if let version = json["version"].string,
             let url = json["url"].string {
                 success(version, url)

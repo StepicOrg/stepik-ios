@@ -17,20 +17,20 @@ extension Block {
     @NSManaged var managedAnimation: String?
     @NSManaged var managedName: String?
     @NSManaged var managedText: String?
-    
+
     @NSManaged var managedVideo: Video?
-    
+
     @NSManaged var managedStep: Step?
 
-    class var oldEntity : NSEntityDescription {
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var name : String {
+
+    var name: String {
         get {
             return managedName ?? "no name"
         }
@@ -38,8 +38,8 @@ extension Block {
             managedName = value
         }
     }
-    
-    var text : String? {
+
+    var text: String? {
         get {
             return managedText
         }
@@ -47,8 +47,8 @@ extension Block {
             managedText = value
         }
     }
-    
-    var video : Video? {
+
+    var video: Video? {
         get {
             return managedVideo
         }
@@ -56,24 +56,24 @@ extension Block {
             managedVideo = value
         }
     }
-    
-    var animation : String? {
+
+    var animation: String? {
         get {
-            return managedAnimation 
+            return managedAnimation
         }
-        
+
         set(value) {
             managedAnimation = value
         }
     }
-    
-    var type : BlockTypes {
+
+    var type: BlockTypes {
         get {
             return BlockTypes(rawValue: name) ?? .Text
         }
     }
-    
-    var image : UIImage {
+
+    var image: UIImage {
         var resultName = "ic_theory"
         switch (name) {
         case "animation" : resultName = "ic_animation"
@@ -82,7 +82,7 @@ extension Block {
         case "code", "dataset", "admin" : resultName = "ic_admin"
         default: resultName = "easy_quiz"
         }
-        
+
         if let img = UIImage(named: resultName) {
             return img
         } else {
@@ -90,7 +90,7 @@ extension Block {
             return UIImage(named: "ic_theory")!
         }
     }
-    
+
 //    var image : UIImage {
 //        var resultName = "ic_theory"
 //        switch (name) {
@@ -108,6 +108,6 @@ extension Block {
 //    }
 }
 
-enum BlockTypes : String {
+enum BlockTypes: String {
     case Text = "text", Video = "video", Animation = "animation"
 }

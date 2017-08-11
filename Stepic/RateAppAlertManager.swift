@@ -9,18 +9,18 @@
 import Foundation
 import Presentr
 
-class RateAppAlertManager : AlertManager {
-    func present(alert: UIViewController, inController controller: UIViewController)  {
+class RateAppAlertManager: AlertManager {
+    func present(alert: UIViewController, inController controller: UIViewController) {
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
     }
-    
+
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.roundCorners = true
         presenter.dismissOnTap = false
         return presenter
     }()
-    
+
     func construct(lessonProgress: String? = nil) -> RateAppViewController {
         let alert = RateAppViewController(nibName: "RateAppViewController", bundle: nil)
         alert.lessonProgress = lessonProgress

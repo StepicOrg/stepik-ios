@@ -10,31 +10,31 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ViewsAPI : APIEndpoint {
+class ViewsAPI: APIEndpoint {
     let name = "views"
-    
-    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Void)->Void, error errorHandler: @escaping (ViewsCreateError)->Void) -> Request? {
-        var params : Parameters = [:]
-        
+
+    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
+        var params: Parameters = [:]
+
         if let assignment = assignment {
             params = [
-                "view" : [
-                    "step" : "\(id)", 
-                    "assignment" : "\(assignment)"
+                "view": [
+                    "step": "\(id)",
+                    "assignment": "\(assignment)"
                 ]
             ]
         } else {
             params = [
-                "view" : [
-                    "step" : "\(id)", 
-                    "assignment" : NSNull()
+                "view": [
+                    "step": "\(id)",
+                    "assignment": NSNull()
                 ]
             ]
         }
-                
+
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/views", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
-            
+
             var error = response.result.error
 //            var json : JSON = [:]
             if response.result.value == nil {
@@ -45,18 +45,18 @@ class ViewsAPI : APIEndpoint {
 //                json = response.result.value!
             }
             let response = response.response
-            
+
             if let e = error {
                 errorHandler(.other(error: e, code: nil, message: nil))
                 return
             }
-            
+
             guard let code = response?.statusCode else {
                 errorHandler(.other(error: nil, code: nil, message: nil))
                 return
             }
-            
-            switch code{
+
+            switch code {
             case 200..<300:
                 success()
                 return
@@ -71,6 +71,6 @@ class ViewsAPI : APIEndpoint {
     }
 }
 
-enum ViewsCreateError : Error {
+enum ViewsCreateError: Error {
     case notAuthorized, other(error: Error?, code: Int?, message: String?)
 }

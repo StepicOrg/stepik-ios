@@ -8,10 +8,10 @@
 
 import Foundation
 
-class Notification : DictionarySerializable {
-    var type : NotificationType
+class Notification: DictionarySerializable {
+    var type: NotificationType
     var htmlText: String
-    
+
     required init?(dictionary: [String : Any]) {
         if let typeString = dictionary["type"] as? String {
             if let type =  NotificationType(rawValue: typeString) {
@@ -22,21 +22,21 @@ class Notification : DictionarySerializable {
         } else {
             return nil
         }
-        
+
         if let htmlText = dictionary["html_text"] as? String {
             self.htmlText = htmlText
         } else {
             return nil
         }
     }
-    
+
     init(type: NotificationType, htmlText: String) {
         self.type = type
         self.htmlText = htmlText
     }
-    
+
     func serializeToDictionary() -> [String : Any] {
         return [String: Any]()
     }
-    
+
 }

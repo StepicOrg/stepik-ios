@@ -14,9 +14,9 @@ import SwiftyJSON
 class Course: NSManagedObject, JSONInitializable {
 
 // Insert code here to add functionality to your managed object subclass
-    
+
     typealias idType = Int
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
@@ -27,10 +27,10 @@ class Course: NSManagedObject, JSONInitializable {
         title = json["title"].stringValue
         courseDescription = json["description"].stringValue
         coverURLString = "\(StepicApplicationsInfo.stepicURL)" + json["cover"].stringValue
-        
+
         beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
         endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
-        
+
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
         isPublic = json["is_public"].boolValue
@@ -53,15 +53,15 @@ class Course: NSManagedObject, JSONInitializable {
             introVideo = Video(json: json["intro_video"])
         }
     }
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].intValue
     }
-    
-    var metaInfo : String {
+
+    var metaInfo: String {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {
-            
+
             let percentage = p.numberOfSteps != 0 ? Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100) : 100
             return "\(NSLocalizedString("PassedPercent", comment: "")) \(percentage)%"
 //            return "Выполнение курса: " + "\(percentage)%"
@@ -69,10 +69,10 @@ class Course: NSManagedObject, JSONInitializable {
             return ""
         }
     }
-    
-    var metaInfoContainer : CourseMetainfoContainer {
+
+    var metaInfoContainer: CourseMetainfoContainer {
         var metaArr = [CourseMetainfoEntity]()
-        
+
 //        if summary != "" {
 //            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Summary", comment: ""), subtitle: summary)]
 //        }
@@ -80,7 +80,7 @@ class Course: NSManagedObject, JSONInitializable {
 //            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Description", comment: ""), subtitle: courseDescription)]
 //        }
         if workload != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""),subtitle: workload)]
+            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""), subtitle: workload)]
         }
         if certificate != "" {
             metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Certificate", comment: ""), subtitle: certificate)]
@@ -97,12 +97,12 @@ class Course: NSManagedObject, JSONInitializable {
 //        
         return CourseMetainfoContainer(courseId: id, metainfo: metaArr)
     }
-    
+
     var nearestDeadlines: (nearest: Date?, second: Date?)? {
         guard sections.count > 0 else {
             return nil
         }
-        
+
         var deadlinesSet = Set<TimeInterval>()
         for section in sections {
             if let soft = section.softDeadline {
@@ -112,9 +112,9 @@ class Course: NSManagedObject, JSONInitializable {
                 deadlinesSet.insert(hard.timeIntervalSince1970)
             }
         }
-        
+
         let deadlines = deadlinesSet.sorted()
-        
+
         for (index, deadline) in deadlines.enumerated() {
             if deadline > Date().timeIntervalSince1970 {
                 if index + 1 < deadlines.count {
@@ -124,16 +124,14 @@ class Course: NSManagedObject, JSONInitializable {
                 }
             }
         }
-        
+
         return (nearest: nil, second: nil)
     }
-    
-    
+
     func update(json: JSON) {
         initialize(json)
     }
-    
-        
+
 //    func loadLastStep(success: @escaping ((Void) -> Void)) {
 //        guard let id = self.lastStepId else { 
 //            return 
@@ -149,26 +147,26 @@ class Course: NSManagedObject, JSONInitializable {
 //            print("error while loading last step")
 //        })
 //    }
-    
-    func loadAllInstructors(success: @escaping ((Void) -> Void)) {
+
+    func loadAllInstructors(success: @escaping (() -> Void)) {
         _ = ApiDataDownloader.users.retrieve(ids: self.instructorsArray, existing: self.instructors, refreshMode: .update, success: {
             users in
             self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
             CoreDataHelper.instance.save()
-            success()  
+            success()
             }, error : {
-                error in
+                _ in
                 print("error while loading section")
         })
     }
-    
-    func loadAllSections(success: @escaping ((Void) -> Void), error errorHandler : @escaping ((Void) -> Void), withProgresses: Bool = true) {
-        
+
+    func loadAllSections(success: @escaping (() -> Void), error errorHandler : @escaping (() -> Void), withProgresses: Bool = true) {
+
         if sectionsArray.count == 0 {
             success()
             return
         }
-        
+
         let requestSectionsCount = 50
         var dimCount = 0
         var idsArray = Array<Array<Int>>()
@@ -179,11 +177,11 @@ class Course: NSManagedObject, JSONInitializable {
             }
             idsArray[dimCount - 1].append(sectionId)
         }
-        
+
 //            let sectionsToDownload = idsArray.count
         var downloadedSections = [Section]()
-        
-        let idsDownloaded : ([Section]) -> (Void) = {
+
+        let idsDownloaded: ([Section]) -> Void = {
             secs in
             downloadedSections.append(contentsOf: secs)
             if downloadedSections.count == self.sectionsArray.count {
@@ -192,39 +190,38 @@ class Course: NSManagedObject, JSONInitializable {
                 success()
             }
         }
-        
+
         var wasError = false
-        let errorWhileDownloading : (Void) -> (Void) = {
+        let errorWhileDownloading : () -> Void = {
             if !wasError {
                 wasError = true
                 errorHandler()
             }
         }
-        
+
         for ids in idsArray {
             _ = ApiDataDownloader.sections.retrieve(ids: ids, existing: self.sections, refreshMode: .update, success: {
                 secs in
-                if withProgresses { 
+                if withProgresses {
                     self.loadProgressesForSections(sections: secs, success: {
                         idsDownloaded(secs)
                     }, error: {
                         errorWhileDownloading()
-                    }) 
+                    })
                 } else {
                     idsDownloaded(secs)
                 }
             }, error : {
-                error in
+                _ in
                 print("error while loading section")
                 errorWhileDownloading()
             })
         }
     }
-    
-        
-    func loadProgressesForSections(sections: [Section], success completion: @escaping ((Void)->Void), error errorHandler : @escaping ((Void)->Void)) {
-        var progressIds : [String] = []
-        var progresses : [Progress] = []
+
+    func loadProgressesForSections(sections: [Section], success completion: @escaping (() -> Void), error errorHandler : @escaping (() -> Void)) {
+        var progressIds: [String] = []
+        var progresses: [Progress] = []
         for section in sections {
             if let progressId = section.progressId {
                 progressIds += [progressId]
@@ -234,23 +231,23 @@ class Course: NSManagedObject, JSONInitializable {
                 progresses += [progress]
             }
         }
-        
+
         if progressIds.count == 0 {
             completion()
             return
         }
-        
+
 //        print("progress ids array -> \(progressIds)")
-        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: { 
+        _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
             (newProgresses) -> Void in
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
-            
+
             if progresses.count == 0 {
                 CoreDataHelper.instance.save()
                 completion()
                 return
             }
-            
+
             var progressCnt = 0
             for i in 0 ..< sections.count {
                 if sections[i].progressId == progresses[progressCnt].id {
@@ -263,18 +260,18 @@ class Course: NSManagedObject, JSONInitializable {
             }
             CoreDataHelper.instance.save()
             completion()
-        }, error: { 
-            (error) -> Void in
+        }, error: {
+            (_) -> Void in
             print("Error while downloading progresses")
             errorHandler()
         })
     }
-    
+
     class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) throws -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
-        
-        let idPredicates = ids.map{
+
+        let idPredicates = ids.map {
             return NSPredicate(format: "managedId == %@", $0 as NSNumber)
         }
         let idCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
@@ -283,33 +280,30 @@ class Course: NSManagedObject, JSONInitializable {
         if let f = featured {
             nonIdPredicates += [NSPredicate(format: "managedFeatured == %@", f as NSNumber)]
         }
-        
+
         if let e = enrolled {
             nonIdPredicates += [NSPredicate(format: "managedEnrolled == %@", e as NSNumber)]
         }
-        
+
         if let p = isPublic {
             nonIdPredicates += [NSPredicate(format: "managedPublic == %@", p as NSNumber)]
         }
-        
+
         let nonIdCompoundPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: nonIdPredicates)
-        
+
         let predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, nonIdCompoundPredicate])
         request.predicate = predicate
         request.sortDescriptors = [descriptor]
-        
+
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Course]
-        }
-        catch {
+        } catch {
             throw FetchError.requestExecution
         }
     }
-    
-    
-    
-    class func getAllCourses(enrolled : Bool? = nil) -> [Course] {
+
+    class func getAllCourses(enrolled: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
 
@@ -317,19 +311,18 @@ class Course: NSManagedObject, JSONInitializable {
             let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
             predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicate, p])
         }
-        
+
         request.predicate = predicate
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Course]
-        }
-        catch {
+        } catch {
             print("Error while getting courses")
             return []
 //            throw FetchError.RequestExecution
         }
     }
-    
+
 //    func changeLastStepTo(lastStep: LastStep?) {
 //        let objectToDelete = self.lastStep
 //        self.lastStep = lastStep

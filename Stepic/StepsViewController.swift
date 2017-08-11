@@ -14,36 +14,36 @@ enum StepsControllerPresentationContext {
 }
 
 class StepsViewController: RGPageViewController, ShareableController {
-    
+
     /*
      There are two ways of initializing the StepsViewController
      1) a Lesson object
      2) a Step id , which is used to load the lesson data
      */
-    var lesson : Lesson?
-    var stepId : Int?
-    var unitId : Int?
-    
-    var parentShareBlock : ((UIActivityViewController) -> (Void))? = nil
-    
-    var startStepId : Int = 0
-        
+    var lesson: Lesson?
+    var stepId: Int?
+    var unitId: Int?
+
+    var parentShareBlock: ((UIActivityViewController) -> Void)?
+
+    var startStepId: Int = 0
+
     var canSendViews: Bool = false
-    
+
     //By default presentation context is unit
-    var context : StepsControllerPresentationContext = .unit
-    
-    lazy var activityView : UIView = self.initActivityView()
-    
-    lazy var warningView : UIView = self.initWarningView()
-    
+    var context: StepsControllerPresentationContext = .unit
+
+    lazy var activityView: UIView = self.initActivityView()
+
+    lazy var warningView: UIView = self.initWarningView()
+
     let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
-    
-    weak var sectionNavigationDelegate : SectionNavigationDelegate?
-    
+
+    weak var sectionNavigationDelegate: SectionNavigationDelegate?
+
     var shouldNavigateToPrev: Bool = false
     var shouldNavigateToNext: Bool = false
-    
+
     func initWarningView() -> UIView {
         //TODO: change warning image!
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
@@ -51,7 +51,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
         return v
     }
-    
+
     func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
@@ -67,65 +67,64 @@ class StepsViewController: RGPageViewController, ShareableController {
         v.isHidden = false
         return v
     }
-    
-    var doesPresentActivityIndicatorView : Bool = false {
+
+    var doesPresentActivityIndicatorView: Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     self?.activityView.isHidden = false
                 }
             } else {
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     self?.activityView.isHidden = true
                 }
             }
         }
     }
-    
-    var doesPresentWarningView : Bool = false {
+
+    var doesPresentWarningView: Bool = false {
         didSet {
             if doesPresentWarningView {
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     self?.warningView.isHidden = false
                 }
             } else {
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     self?.warningView.isHidden = true
                 }
             }
         }
     }
-    
+
     fileprivate func updateTitle() {
         self.navigationItem.title = lesson?.title ?? NSLocalizedString("Lesson", comment: "")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTitle()
-        
+
         LastStepGlobalContext.context.unitId = unitId // To presenter
-        
+
         datasource = self
         delegate = self
-        
+
         if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false
         }
-                
+
         refreshSteps() //To presenter
     }
-    
+
     static let stepUpdatedNotification = "StepUpdatedNotification" //To presenter
-    
+
     fileprivate var tabViewsForStepId = [Int: UIView]() //To presenter
-    
-    
+
     //To presenter
     func loadLesson() {
         guard let stepId = stepId else {
@@ -136,9 +135,9 @@ class StepsViewController: RGPageViewController, ShareableController {
         self.view.isUserInteractionEnabled = false //To view
         self.doesPresentWarningView = false
         self.doesPresentActivityIndicatorView = true
-        
-        var step : Step? = nil
-        
+
+        var step: Step? = nil
+
         if let localStep = Step.getStepWithId(stepId, unitId: unitId) {
             step = localStep
             if let localLesson = localStep.lesson {
@@ -147,33 +146,33 @@ class StepsViewController: RGPageViewController, ShareableController {
                 return
             }
         }
-                
+
         _ = ApiDataDownloader.steps.retrieve(ids: [stepId], existing: (step != nil) ? [step!] : [], refreshMode: .update, success: {
             steps in
-            
-            guard let step = steps.first else { 
-                return 
+
+            guard let step = steps.first else {
+                return
             }
-            
+
             var localLesson: Lesson? = nil
             localLesson =  Lesson.getLesson(step.lessonId)
-            
+
             _ = ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
                 lessons in
                 guard let lesson = lessons.first else {
                     return
                 }
-                
+
                 self?.lesson = lesson
                 step.lesson = lesson
                 self?.refreshSteps()
                 return
-                
+
             }, error: {
-                error in
+                _ in
                 print("Error while downloading lesson")
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     if let s = self {
                         s.view.isUserInteractionEnabled = true //To view
@@ -185,9 +184,9 @@ class StepsViewController: RGPageViewController, ShareableController {
                 }
             })
         }, error: {
-            error in
+            _ in
             print("Error while downloading step")
-            DispatchQueue.main.async{
+            DispatchQueue.main.async {
                 [weak self] in
                 if let s = self {
                     s.view.isUserInteractionEnabled = true //To view
@@ -199,27 +198,26 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
         })
     }
-    
+
     //TODO: Обновлять шаги только тогда, когда это нужно
     //  Делегировать обновление контента самим контроллерам со степами. Возможно, стоит использовать механизм нотификаций.
     fileprivate func refreshSteps() {
-        
+
         guard lesson != nil else {
             loadLesson()
             return
         }
-        
-        if let section = lesson?.unit?.section, 
+
+        if let section = lesson?.unit?.section,
             let unitId = unitId {
             if let index = section.unitsArray.index(of: unitId) {
                 shouldNavigateToPrev = index != 0
                 shouldNavigateToNext = index < section.unitsArray.count - 1
             }
         }
-        
+
         updateTitle() //To view
 
-    
         if let stepId = stepId {
             if let index = lesson?.stepsArray.index(of: stepId) {
                 startStepId = index
@@ -227,7 +225,6 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
         }
 
-        
         var prevStepsIds = [Int]()
         if numberOfPages(for: self) == 0 {
             self.view.isUserInteractionEnabled = false //To view
@@ -242,8 +239,7 @@ class StepsViewController: RGPageViewController, ShareableController {
                 self.doesPresentActivityIndicatorView = true //To view
             }
         }
-        
-        
+
         lesson?.loadSteps(completion: {
             [weak self] in
             guard let s = self else {
@@ -251,13 +247,13 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
             let newStepsSet = Set(s.lesson!.stepsArray)
             let prevStepsSet = Set(prevStepsIds)
-            
+
             //To view
-            var reloadBlock : ((Void)->Void) = {
-                [weak self] in 
+            var reloadBlock : (()->Void) = {
+                [weak self] in
                 self?.reloadData()
             }
-            
+
             if newStepsSet.symmetricDifference(prevStepsSet).count == 0 {
                 //need to reload one by one
                 reloadBlock = {
@@ -269,15 +265,15 @@ class StepsViewController: RGPageViewController, ShareableController {
                     print("did send step updated notification")
                     //update tab views
                     //To view
-                    for index in 0 ..< s.lesson!.steps.count { 
+                    for index in 0 ..< s.lesson!.steps.count {
                         let tabView = s.pageViewController(s, tabViewForPageAt: index) as? StepTabView
                         if let progress = s.lesson!.steps[index].progress {
                             tabView?.setTab(selected: progress.isPassed, animated: true)
                         }
                     }
                 }
-            } 
-            
+            }
+
             DispatchQueue.main.async {
                 [weak self] in
                 guard let s = self else {
@@ -287,7 +283,7 @@ class StepsViewController: RGPageViewController, ShareableController {
                 reloadBlock()
                 s.doesPresentWarningView = false //To view
                 s.doesPresentActivityIndicatorView = false //To view
-                
+
                 if s.startStepId < s.lesson!.steps.count {
                     if !s.didSelectTab {
                         s.selectTabAtIndex(s.startStepId, updatePage: true) //To view
@@ -298,12 +294,12 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
             }, error: {
                 [weak self]
-                errorText in
+                _ in
                 guard self != nil else {
                     return
                 }
                 print("error while loading steps in stepsviewcontroller")
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     [weak self] in
                     guard let s = self else {
                         return
@@ -324,13 +320,13 @@ class StepsViewController: RGPageViewController, ShareableController {
                 }
             }, onlyLesson: context == .lesson)
     }
-    
+
     var didSelectTab = false
     var didInitSteps = false
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -339,89 +335,87 @@ class StepsViewController: RGPageViewController, ShareableController {
                 print("\nselected tab for step with id -> \(startStepId)\n")
                 didSelectTab = true
                 self.selectTabAtIndex(startStepId, updatePage: true)
-            } 
+            }
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
     }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
     override var pagerOrientation: UIPageViewControllerNavigationOrientation {
         get {
             return .horizontal
         }
     }
-    
+
     override var tabbarPosition: RGTabbarPosition {
         get {
             return .top
         }
     }
-    
+
     override var tabbarStyle: RGTabbarStyle {
         get {
             return RGTabbarStyle.solid
         }
     }
-    
+
     override var tabIndicatorColor: UIColor {
         get {
             return UIColor.white
         }
     }
-    
+
     override var barTintColor: UIColor? {
         get {
             return UIColor.navigationColor
         }
     }
-    
+
     override var tabStyle: RGTabStyle {
         get {
             return .inactiveFaded
         }
     }
-    
+
     override var tabbarWidth: CGFloat {
         get {
             return 44.0
         }
     }
-    
-    override var tabbarHeight : CGFloat {
+
+    override var tabbarHeight: CGFloat {
         get {
             return 44.0
         }
     }
-    
+
     override var tabMargin: CGFloat {
         get {
             return 8.0
         }
     }
-    
+
     var pagesCount = 0
-    
+
     deinit {
         print("deinit StepsViewController")
     }
-    
+
     func share(popoverSourceItem: UIBarButtonItem?, popoverView: UIView?, fromParent: Bool) {
         guard let lesson = self.lesson else {
             return
         }
         let url = "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/1?from_mobile_app=true"
-        
-        let shareBlock: ((UIActivityViewController) -> (Void))? = parentShareBlock
-        
+
+        let shareBlock: ((UIActivityViewController) -> Void)? = parentShareBlock
+
         DispatchQueue.global(qos: .background).async {
             [weak self] in
             let shareVC = SharingHelper.getSharingController(url)
@@ -437,12 +431,12 @@ class StepsViewController: RGPageViewController, ShareableController {
             }
         }
     }
-    
+
     @available(iOS 9.0, *)
     override var previewActionItems: [UIPreviewActionItem] {
         let shareItem = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default, handler: {
             [weak self]
-            action, vc in
+            _, _ in
             self?.share(popoverSourceItem: nil, popoverView: nil, fromParent: true)
         })
         return [shareItem]
@@ -457,21 +451,20 @@ extension StepsViewController : RGPageViewControllerDataSource {
     ///
     /// - returns: a `UIView` instance that will be shown as tab at the given index.
     public func pageViewController(_ pageViewController: RGPageViewController, tabViewForPageAt index: Int) -> UIView {
-        
+
         guard lesson != nil else {
             return UIView()
         }
-        
+
         //Just a try to fix a strange bug
         if index >= lesson!.steps.count {
             return UIView()
         }
-        
-        
+
         if let step = lesson?.steps[index] {
             print("initializing tab view for step id \(step.id), progress is \(String(describing: step.progress)))")
             tabViewsForStepId[step.id] = StepTabView(frame: CGRect(x: 0, y: 0, width: 25, height: 25), image: step.block.image, stepId: step.id, passed: step.progress?.isPassed ?? false)
-            
+
             return tabViewsForStepId[step.id]!
         } else {
             return UIView()
@@ -488,7 +481,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
         return pagesCount
 
     }
-    
+
     /// Asks the datasource to give a ViewController to display as a page.
     ///
     /// - parameter pageViewController: the `RGPageViewController` instance.
@@ -501,7 +494,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
             if index >= lesson.steps.count {
                 return nil
             }
-            
+
             if lesson.steps[index].block.name == "video" {
                 let stepController = storyboard?.instantiateViewController(withIdentifier: "VideoStepViewController") as! VideoStepViewController
                 stepController.video = lesson.steps[index].block.video!
@@ -517,7 +510,7 @@ extension StepsViewController : RGPageViewControllerDataSource {
                         stepController.assignment = assignments[index]
                     }
                 }
-                
+
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -526,25 +519,25 @@ extension StepsViewController : RGPageViewControllerDataSource {
                     [weak self] in
                     return self?.canSendViews ?? false
                 }
-                
+
                 if context == .unit {
                     //                    stepController.assignment = lesson.unit?.assignments[index]
-                    
+
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
                             [weak self] in
                             self?.sectionNavigationDelegate?.displayPrev()
-                        } 
+                        }
                     }
-                    
+
                     if index == lesson.steps.count - 1 && shouldNavigateToNext {
                         stepController.nextLessonHandler = {
                             [weak self] in
                             self?.sectionNavigationDelegate?.displayNext()
-                        } 
+                        }
                     }
                 }
-                
+
                 return stepController
             } else {
                 let stepController = storyboard?.instantiateViewController(withIdentifier: "WebStepViewController") as! WebStepViewController
@@ -554,13 +547,13 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.stepId = index + 1
                 stepController.nItem = self.navigationItem
                 stepController.startStepId = startStepId
-                
+
                 if let assignments = lesson.unit?.assignments {
                     if index < assignments.count {
                         stepController.assignment = assignments[index]
                     }
                 }
-                
+
                 stepController.startStepBlock = {
                     [weak self] in
                     self?.canSendViews = true
@@ -572,34 +565,32 @@ extension StepsViewController : RGPageViewControllerDataSource {
                 stepController.lessonSlug = lesson.slug
                 if context == .unit {
                     //                    stepController.assignment = lesson.unit?.assignments[index]
-                    
+
                     if index == 0 && shouldNavigateToPrev {
                         stepController.prevLessonHandler = {
                             [weak self] in
                             self?.sectionNavigationDelegate?.displayPrev()
-                        } 
+                        }
                     }
-                    
+
                     if index == lesson.steps.count - 1 && shouldNavigateToNext {
                         stepController.nextLessonHandler = {
                             [weak self] in
                             self?.sectionNavigationDelegate?.displayNext()
-                        } 
+                        }
                     }
                 }
-                
+
                 return stepController
             }
         }
         return nil
     }
-    
-    
-    
+
 }
 
 extension StepsViewController : RGPageViewControllerDelegate {
-    
+
     /// Delegate objects can implement this method if tabs use dynamic width or to overwrite the default width for tabs.
     ///
     /// - parameter pageViewController: the `RGPageViewController` instance.
@@ -607,9 +598,9 @@ extension StepsViewController : RGPageViewControllerDelegate {
     ///
     /// - returns: the width for the tab at the given index.
     func pageViewController(_ pageViewController: RGPageViewController, widthForTabAt index: Int) -> CGFloat {
-        return 44.0 
+        return 44.0
     }
-    
+
     /// Delegate objects can implement this method if tabs use dynamic height or to overwrite the default height for tabs.
     ///
     /// - parameter pageViewController: the `RGPageViewController` instance.
@@ -618,7 +609,7 @@ extension StepsViewController : RGPageViewControllerDelegate {
     /// - returns: the height for the tab at the given index.
     func pageViewController(_ pageViewController: RGPageViewController, heightForTabAt index: Int) -> CGFloat {
         return 44.0
-    }    
+    }
 }
 
 extension StepsViewController : WarningViewDelegate {

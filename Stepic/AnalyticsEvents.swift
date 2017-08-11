@@ -9,11 +9,11 @@
 import Foundation
 
 struct AnalyticsEvents {
-    
+
     struct Logout {
         static let clicked = "clicked_logout"
     }
-        
+
     struct SignIn {
         static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
         static let onSignInScreen = "click_sign_in_with_interaction_type"
@@ -27,7 +27,7 @@ struct AnalyticsEvents {
             static let codeReceived = "Api:auth with social account"
         }
     }
-    
+
     struct SignUp {
         static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
         static let onSignUpScreen = "click_registration_with_interaction_type"
@@ -37,41 +37,41 @@ struct AnalyticsEvents {
             static let typing = "typing_text_fields_registration"
         }
     }
-    
+
     struct Login {
         static let success = "success_login"
     }
-    
+
     struct Syllabus {
         static let shared = "share_syllabus_clicked"
     }
-    
+
     struct Units {
         static let shared = "share_units_clicked"
     }
-    
+
     struct Search {
         static let selected = "search_selected"
         static let cancelled = "search_cancelled"
     }
-    
+
     struct Section {
         static let cache = "clicked_cache_section"
         static let cancel = "clicked_cancel_section"
         static let delete = "clicked_delete_cached_section"
     }
-    
+
     struct Unit {
         static let cache = "clicked_cache_unit"
         static let cancel = "clicked_cancel_unit"
         static let delete = "clicked_delete_cached_unit"
     }
-    
+
     struct Downloads {
         static let clear = "clicked_clear_cache"
         static let acceptedClear = "clicked_accepted_clear_cache"
     }
-    
+
     struct CourseOverview {
         static let shared = "share_course_clicked"
         struct JoinPressed {
@@ -79,44 +79,44 @@ struct AnalyticsEvents {
             static let signed = "join_course_signed"
         }
     }
-    
-    struct Step {        
+
+    struct Step {
         struct Submission {
             static let submit = "clicked_submit"
             static let newAttempt = "clicked_generate_new_attempt"
             static let solveInWebPressed = "clicked_solve_in_web"
         }
-        
+
         static let hasRestrictions = "step_with_submission_restriction"
         static let opened = "step_type_opened"
     }
-    
+
     struct VideoPlayer {
         static let opened = "video_player_opened"
         static let rateChanged = "video_rate_changed"
         static let qualityChanged = "video_quality_changed"
     }
-    
+
     struct Discussion {
         static let liked = "discussion_liked"
         static let unliked = "discussion_unliked"
         static let abused = "discussion_abused"
     }
-    
+
     struct DeepLink {
         static let step = "deeplink_step"
         static let syllabus = "deeplink_syllabus"
         static let course = "deeplink_course"
         static let section = "deeplink_section"
     }
-    
+
     struct Tabs {
         static let myCoursesClicked = "main_choice_my_courses"
         static let findCoursesClicked = "main_choice_find_courses"
         static let downloadsClicked = "main_choice_downloads"
         static let certificatesClicked = "main_choice_certificates"
     }
-   
+
     struct Streaks {
         static let preferencesOn = "streak_notification_pref_on"
         static let preferencesOff = "streak_notification_pref_off"
@@ -129,7 +129,7 @@ struct AnalyticsEvents {
             }
         }
         static let notificationOpened = "streak_notification_opened"
-        
+
         struct LocalNotification {
             static let shown = "streak_local_notification_shown"
             static let clicked = "streak_local_notification_clicked"
@@ -140,21 +140,21 @@ struct AnalyticsEvents {
             static let timeCancelled = "streak_improve_alert_time_cancelled"
         }
     }
-    
+
     struct App {
         static let opened = "app_opened"
         static let firstLaunch = "first_launch_after_install"
     }
-    
+
     struct Errors {
         static let tokenRefresh = "error_token_refresh"
     }
-    
+
     struct Continue {
         static let sectionsOpened = "continue_section_opened"
         static let stepOpened = "continue_step_opened"
     }
-    
+
     struct Rate {
         static let rated = "app_rate"
         struct Positive {
@@ -170,32 +170,32 @@ struct AnalyticsEvents {
             }
         }
     }
-    
+
     struct Certificates {
         static let opened = "certificates_opened_certificate"
         static let shared = "certificates_pressed_share_certificate"
     }
-    
+
     struct PeekNPop {
         struct Course {
             static let peeked = "3dtouch_course_peeked"
             static let popped = "3dtouch_course_popped"
             static let shared = "3dtouch_course_shared"
         }
-        
+
         struct Section {
             static let peeked = "3dtouch_section_peeked"
             static let popped = "3dtouch_section_popped"
             static let shared = "3dtouch_section_shared"
         }
-        
+
         struct Lesson {
             static let peeked = "3dtouch_lesson_peeked"
             static let popped = "3dtouch_lesson_popped"
             static let shared = "3dtouch_lesson_shared"
         }
     }
-    
+
     struct Code {
         static let languageChosen = "code_language_chosen"
         static let fullscreenPressed = "code_fullscreen_pressed"

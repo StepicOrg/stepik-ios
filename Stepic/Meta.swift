@@ -13,13 +13,13 @@ struct Meta {
     var hasNext: Bool
     var hasPrev: Bool
     var page: Int
-    
+
     init(hasNext: Bool, hasPrev: Bool, page: Int) {
         self.hasNext = hasNext
         self.hasPrev = hasPrev
         self.page = page
     }
-    
+
     init(json: JSON) {
         hasNext = json["has_next"].boolValue
         hasPrev = json["has_previous"].boolValue

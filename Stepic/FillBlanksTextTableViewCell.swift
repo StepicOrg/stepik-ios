@@ -11,11 +11,11 @@ import UIKit
 class FillBlanksTextTableViewCell: UITableViewCell {
 
     @IBOutlet weak var optionLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+
         contentView.backgroundColor = UIColor.clear
         backgroundColor = UIColor.clear
         optionLabel.numberOfLines = 0
@@ -31,11 +31,11 @@ class FillBlanksTextTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     class func getHeight(htmlText text: String, width w: CGFloat) -> CGFloat {
         return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: w -  24, html: true)) + 17
     }
-    
+
     func setHTMLText(_ text: String) {
         self.optionLabel.setTextWithHTMLString(text)
     }

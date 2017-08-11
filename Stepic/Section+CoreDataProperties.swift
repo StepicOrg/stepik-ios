@@ -21,26 +21,26 @@ extension Section {
     @NSManaged var managedSoftDeadline: Date?
     @NSManaged var managedHardDeadline: Date?
     @NSManaged var managedActive: NSNumber?
-    @NSManaged var managedProgressId : String?
+    @NSManaged var managedProgressId: String?
     @NSManaged var managedTestSectionAction: String?
     @NSManaged var managedIsExam: NSNumber?
-    
-    @NSManaged var managedUnitsArray : NSObject?
 
-    @NSManaged var managedUnits : NSOrderedSet?
-    @NSManaged var managedCourse : Course?
-    @NSManaged var managedProgress : Progress?
-    
-    class var oldEntity : NSEntityDescription {
+    @NSManaged var managedUnitsArray: NSObject?
+
+    @NSManaged var managedUnits: NSOrderedSet?
+    @NSManaged var managedCourse: Course?
+    @NSManaged var managedProgress: Progress?
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
@@ -48,7 +48,7 @@ extension Section {
         }
     }
 
-    var progressId : String? {
+    var progressId: String? {
         get {
             return managedProgressId
         }
@@ -56,8 +56,8 @@ extension Section {
             managedProgressId = value
         }
     }
-    
-    var testSectionAction : String? {
+
+    var testSectionAction: String? {
         get {
             return managedTestSectionAction
         }
@@ -65,9 +65,9 @@ extension Section {
             managedTestSectionAction = value
         }
     }
-    
-    var position : Int {
-        set(value){
+
+    var position: Int {
+        set(value) {
             self.managedPosition = value as NSNumber?
         }
         get {
@@ -75,65 +75,65 @@ extension Section {
         }
     }
 
-    var title : String {
-        set(value){
+    var title: String {
+        set(value) {
             self.managedTitle = value
         }
         get {
             return managedTitle ?? "No title"
         }
     }
-    
-    var beginDate : Date? {
-        set(date){
+
+    var beginDate: Date? {
+        set(date) {
             self.managedBeginDate = date
         }
         get {
             return managedBeginDate
         }
     }
-    
+
     var softDeadline: Date? {
-        set(date){ 
+        set(date) {
             self.managedSoftDeadline = date
         }
-        get{
+        get {
             return managedSoftDeadline
         }
     }
-    
+
     var hardDeadline: Date? {
-        set(date){ 
+        set(date) {
             self.managedHardDeadline = date
         }
-        get{
+        get {
             return managedHardDeadline
         }
     }
 
-    var isActive : Bool {
-        set(value){
+    var isActive: Bool {
+        set(value) {
             self.managedActive = value as NSNumber?
         }
         get {
             return managedActive?.boolValue ?? false
         }
     }
-    
-    var isExam : Bool {
-        set(value){
+
+    var isExam: Bool {
+        set(value) {
             self.managedIsExam = value as NSNumber?
         }
         get {
             return managedIsExam?.boolValue ?? false
         }
     }
-    
-    var course : Course? {
+
+    var course: Course? {
         return managedCourse
     }
-    
-    var progress : Progress? {
+
+    var progress: Progress? {
         get {
             return managedProgress
         }
@@ -141,8 +141,8 @@ extension Section {
             managedProgress = value
         }
     }
-    
-    var units : [Unit] {
+
+    var units: [Unit] {
         get {
             return (managedUnits?.array as? [Unit]) ?? []
         }
@@ -150,15 +150,14 @@ extension Section {
             managedUnits = NSOrderedSet(array: value)
         }
     }
-    
-    
+
     var unitsArray: [Int] {
-        set(value){
+        set(value) {
             self.managedUnitsArray = value as NSObject?
         }
         get {
             return (self.managedUnitsArray as? [Int]) ?? []
         }
     }
-    
+
 }

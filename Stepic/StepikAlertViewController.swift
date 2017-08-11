@@ -12,9 +12,9 @@ import FLKAutoLayout
 struct StepikAlertAction {
     var title: String
     var style: UIAlertActionStyle
-    var handler : ((Void) -> Void)?
-    
-    init(title: String, style: UIAlertActionStyle, handler: ((Void)->Void)?) {
+    var handler : (() -> Void)?
+
+    init(title: String, style: UIAlertActionStyle, handler: (() -> Void)?) {
         self.title = title
         self.style = style
         self.handler = handler
@@ -27,13 +27,13 @@ class StepikAlertViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionsView: UIView!
-    
+
     var actions = [StepikAlertAction]()
-    
+
     var titleText: String = ""
     var message: String = ""
-    var img: UIImage? = nil
-    
+    var img: UIImage?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = titleText
@@ -49,11 +49,11 @@ class StepikAlertViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     private func setup(action: StepikAlertAction, leftView: inout UIView?) {
         let b = UIButton(type: .system)
         b.setTitle(action.title, for: .normal)
-        
+
         switch action.style {
         case .cancel:
             b.setTitleColor(UIColor.blue, for: .normal)
@@ -62,7 +62,7 @@ class StepikAlertViewController: UIViewController {
         case .destructive:
             b.setTitleColor(UIColor.red, for: .normal)
         }
-        
+
         actionsView.addSubview(b)
         b.addTarget(self, action: #selector(StepikAlertViewController.actionTriggered(button:)), for: .touchUpInside)
 //        b.tag = actions.index(where: {
@@ -80,27 +80,27 @@ class StepikAlertViewController: UIViewController {
             leftView = b
         }
     }
-    
-    var leftView : UIView? = nil
+
+    var leftView: UIView?
 
     func layoutActions() {
-        
+
         let destructives = actions.filter({$0.style == .destructive})
         for destructive in destructives {
             setup(action: destructive, leftView: &leftView)
         }
-        
+
         let cancels = actions.filter({$0.style == .cancel})
         for cancel in cancels {
             setup(action: cancel, leftView: &leftView)
         }
-        
+
         let defaults = actions.filter({$0.style == .default})
         for action in defaults {
             setup(action: action, leftView: &leftView)
         }
     }
-    
+
     func actionTriggered(button: UIButton) {
         if button.tag < actions.count {
             if let h = actions[button.tag].handler {
@@ -112,7 +112,6 @@ class StepikAlertViewController: UIViewController {
             print("triggered some strange action with id \(button.tag) in stepikAlertViewController with actions count \(actions.count)")
         }
     }
-    
 
     /*
     // MARK: - Navigation

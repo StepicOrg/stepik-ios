@@ -15,12 +15,12 @@ import MagicalRecord
 class User: NSManagedObject, JSONInitializable {
 
     typealias idType = Int
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         id = json["id"].intValue
         profile = json["profile"].intValue
@@ -32,31 +32,30 @@ class User: NSManagedObject, JSONInitializable {
         avatarURL = json["avatar"].stringValue
         level = json["level"].intValue
     }
-    
+
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].intValue
     }
-    
-    var isGuest : Bool {
+
+    var isGuest: Bool {
         return level == 0
     }
-    
+
     static func fetchById(_ id: Int) -> [User]? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        
-        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)        
-        
+
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
+
         request.predicate = predicate
-        
+
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) 
+            let results = try CoreDataHelper.instance.context.fetch(request)
             return results as? [User]
-        }
-        catch {
+        } catch {
             return nil
         }
     }

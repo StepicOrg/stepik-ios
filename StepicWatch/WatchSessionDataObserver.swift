@@ -11,7 +11,7 @@ import Foundation
 @available(iOS 9.0, *)
 protocol WatchSessionDataObserver: class {
 	var identifier: String { get }
-	
+
 	var keysForObserving: [WatchSessionSender.Name] { get }
 	func recieved(data: Any, forKey key: WatchSessionSender.Name)
 }

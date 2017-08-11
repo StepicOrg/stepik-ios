@@ -18,14 +18,14 @@ extension RatingProgressViewDelegate {
 
 class RatingProgressView: UIView {
     weak var delegate: RatingProgressViewDelegate?
-    
+
     @IBInspectable var mainColor: UIColor? = StepicApplicationsInfo.adaptiveMainColor
     @IBInspectable var congratulationColor: UIColor? = UIColor(red: 0, green: 128 / 255, blue: 64 / 255, alpha: 1.0)
     @IBInspectable var backLabelColor: UIColor? = UIColor.darkGray.withAlphaComponent(0.6)
     @IBInspectable var frontLabelColor: UIColor? = UIColor.white
     @IBInspectable var congratulationLabelColor: UIColor? = UIColor.white
     @IBInspectable var labelFont: UIFont? = UIFont.systemFont(ofSize: 15)
-    
+
     struct AnimationDuration {
         static let progress: TimeInterval = 1.5
         static let congratulationSpecial: TimeInterval = 0.3
@@ -33,7 +33,7 @@ class RatingProgressView: UIView {
         static let congratulationScaling: TimeInterval = 0.25
         static let hiding: TimeInterval = 0.2
     }
-    
+
     private var label: UILabel!
     private var frontView: UIView!
     private var frontLabel: UILabel!
@@ -41,23 +41,23 @@ class RatingProgressView: UIView {
     private var congratulationView: UIView!
     private var frontViewShadowLayer: CAGradientLayer!
     private var congratsShadowLayer: CAGradientLayer!
-    
+
     var text: String = "" {
         didSet {
             label.text = text
             frontLabel.text = text
         }
     }
-    
+
     var progress: Float = 0
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
         addGestures()
     }
-    
-    func setProgress(value: Float, animated: Bool, completion: (() -> ())? = nil) {
+
+    func setProgress(value: Float, animated: Bool, completion: (() -> Void)? = nil) {
         if value < progress {
             // Animate from value to 1.0
             setProgress(value: 1.0, animated: true) {
@@ -70,7 +70,7 @@ class RatingProgressView: UIView {
             }
             return
         }
-        
+
         progress = value
         if animated {
             self.frontViewShadowLayer.frame.size.width = self.bounds.width * CGFloat(value)
@@ -86,12 +86,12 @@ class RatingProgressView: UIView {
             completion?()
         }
     }
-    
-    func showCongratulation(text: String, duration: TimeInterval, isSpecial: Bool = false, completion: (() -> ())? = nil) {
+
+    func showCongratulation(text: String, duration: TimeInterval, isSpecial: Bool = false, completion: (() -> Void)? = nil) {
         congratulationLabel.text = text
         UIView.transition(with: congratulationView, duration: isSpecial ? AnimationDuration.congratulationSpecial : AnimationDuration.congratulationDefault, options: [.transitionCrossDissolve, .curveEaseIn], animations: {
             self.congratulationView.alpha = 1.0
-            
+
             if isSpecial {
                 let animation = CABasicAnimation(keyPath: "transform.scale")
                 animation.duration = AnimationDuration.congratulationScaling
@@ -112,8 +112,8 @@ class RatingProgressView: UIView {
             })
         })
     }
-    
-    func hideCongratulation(force: Bool, completion: (() -> ())? = nil) {
+
+    func hideCongratulation(force: Bool, completion: (() -> Void)? = nil) {
         if force {
             self.congratulationView.alpha = 0.0
             completion?()
@@ -124,32 +124,32 @@ class RatingProgressView: UIView {
             })
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
         addGestures()
     }
-    
+
     fileprivate func addGestures() {
         let tapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(tap(_:)))
         tapRecognizer.minimumPressDuration = 0
         self.addGestureRecognizer(tapRecognizer)
     }
-    
+
     func tap(_ gestureRecognizer: UITapGestureRecognizer) {
         func showPressed() {
             frontViewShadowLayer.isHidden = true
             label.textColor = backLabelColor?.withAlphaComponent(0.4)
             frontLabel.textColor = frontLabelColor?.withAlphaComponent(0.4)
         }
-        
+
         func showDefault() {
             frontViewShadowLayer.isHidden = false
             label.textColor = backLabelColor
             frontLabel.textColor = frontLabelColor
         }
-        
+
         if gestureRecognizer.state == .began {
             showPressed()
         } else if gestureRecognizer.state == .ended {
@@ -164,33 +164,33 @@ class RatingProgressView: UIView {
             }
         }
     }
-    
+
     fileprivate func initView() {
         autoresizingMask = .flexibleWidth
         autoresizesSubviews = true
-        
+
         // Font
         if #available(iOS 8.2, *) {
             labelFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
         }
-        
+
         // Make bg with light color (back)
         self.backgroundColor = mainColor?.withAlphaComponent(0.1)
-        
+
         // Make main label (back)
         label = UILabel(frame: self.bounds)
         label.font = labelFont
         label.textAlignment = .center
         label.textColor = backLabelColor
         self.addSubview(label)
-        
+
         // Make progress view (front)
         var frontFrame = self.bounds
         frontFrame.size.width = 0
         frontView = UIView(frame: frontFrame)
         frontView.backgroundColor = mainColor
         frontView.autoresizingMask = .flexibleWidth
-        
+
         // Make main label (front)
         frontLabel = UILabel(frame: self.bounds)
         frontLabel.font = labelFont
@@ -198,7 +198,7 @@ class RatingProgressView: UIView {
         frontLabel.textColor = frontLabelColor
         frontView.addSubview(frontLabel)
         frontView.clipsToBounds = true
-        
+
         // Make front gradient
         frontViewShadowLayer = CAGradientLayer()
         frontViewShadowLayer.cornerRadius = self.layer.cornerRadius
@@ -209,7 +209,7 @@ class RatingProgressView: UIView {
         ]
         frontView.layer.addSublayer(frontViewShadowLayer)
         self.addSubview(frontView)
-        
+
         // Congratulation view
         congratulationView = UIView(frame: self.bounds)
         congratulationView.alpha = 0.0
@@ -220,7 +220,7 @@ class RatingProgressView: UIView {
         congratulationLabel.textAlignment = label.textAlignment
         congratulationLabel.textColor = congratulationLabelColor
         congratulationView.addSubview(congratulationLabel)
-        
+
         congratsShadowLayer = CAGradientLayer()
         congratsShadowLayer.cornerRadius = self.layer.cornerRadius
         congratsShadowLayer.frame = congratulationView.bounds
@@ -231,15 +231,15 @@ class RatingProgressView: UIView {
         congratulationView.layer.addSublayer(congratsShadowLayer)
         self.addSubview(congratulationView)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // Recenter (maybe constraints?)
         label.center.x = center.x
         frontLabel.center.x = center.x
         congratulationLabel.center.x = center.x
-        
+
         // Recalculate progress
         frontView.frame.size.width = bounds.width * CGFloat(progress)
         frontViewShadowLayer.frame.size.width = bounds.width * CGFloat(progress)

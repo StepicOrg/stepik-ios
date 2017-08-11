@@ -8,31 +8,29 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON 
+import SwiftyJSON
 
 class StepicsAPI {
-    
-    
+
     init() {}
-    
+
     let manager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         return SessionManager(configuration: configuration)
     }()
 
-    
     @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (String) -> Void) -> Request {
-        
+
         let params = Parameters()
-        
+
         print("headers while retrieving user before: \(AuthInfo.shared.initialHTTPHeaders)")
 
         return manager.request("\(StepicApplicationsInfo.apiURL)/stepics/1", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
-            
+
             var error = response.result.error
-            var json : JSON = [:]
+            var json: JSON = [:]
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
@@ -42,18 +40,17 @@ class StepicsAPI {
             }
             let request = response.request
 //            let response = response.response
-            
-            
+
             print("headers while retrieving user: \(String(describing: request?.allHTTPHeaderFields)), retrieved user: \(json)")
-            
+
             if let e = error as NSError? {
                 print(e.localizedDescription)
-                
+
                 errorHandler(e.localizedDescription)
                 return
             }
 
-            let user : User = User(json: json["users"].arrayValue[0])
+            let user: User = User(json: json["users"].arrayValue[0])
             success(user)
         })
 

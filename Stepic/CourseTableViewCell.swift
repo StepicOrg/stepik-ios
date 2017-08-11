@@ -1,4 +1,4 @@
- //
+//
 //  CourseTableViewCell.swift
 //  Stepic
 //
@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
- 
+
 class CourseTableViewCell: UITableViewCell {
 
     @IBOutlet weak var courseImageView: UIImageView!
@@ -18,13 +18,13 @@ class CourseTableViewCell: UITableViewCell {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var deadlineLabelHeight: NSLayoutConstraint! //14
     @IBOutlet weak var continueButtonHeight: NSLayoutConstraint! //32
-    
-    var continueAction : ((Void) -> Void)? = nil
-    
+
+    var continueAction : (() -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+
         continueButton.setStepicWhiteStyle()
         continueButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
     }
@@ -34,29 +34,29 @@ class CourseTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     fileprivate func getTextFromDates(_ course: Course) -> String {
-        
+
         if course.beginDate == nil && course.endDate == nil {
             return ""
         }
-        
+
         if course.beginDate == nil && course.endDate != nil {
             return "\(NSLocalizedString("until", comment: "")) \(course.endDate!.getStepicFormatString())"
         }
-        
+
         if course.beginDate != nil && course.endDate == nil {
             return "\(NSLocalizedString("from", comment: "")) \(course.beginDate!.getStepicFormatString())"
         }
-        
+
         return "\(course.beginDate!.getStepicFormatString()) - \(course.endDate!.getStepicFormatString())"
     }
-    
+
     func initWithCourse(_ course: Course) {
         courseNameLabel.text = course.title
-        
+
         courseDescriptionLabel.setTextWithHTMLString(course.summary)
-    
+
         let deadlinesText = getTextFromDates(course)
         if deadlinesText == "" {
             deadlineLabelHeight.constant = 0
@@ -64,20 +64,19 @@ class CourseTableViewCell: UITableViewCell {
             deadlinesLabel.text = deadlinesText
             deadlineLabelHeight.constant = 14
         }
-        
+
         if course.enrolled {
             continueButtonHeight.constant = 32
         } else {
             continueButtonHeight.constant = 0
         }
-        
+
         courseImageView.sd_setImage(with: URL(string: course.coverURLString), placeholderImage: Constants.placeholderImage)
-        
+
     }
-    
+
     @IBAction func continueButtonPressed(_ sender: UIButton) {
         continueAction?()
     }
-    
-    
+
 }

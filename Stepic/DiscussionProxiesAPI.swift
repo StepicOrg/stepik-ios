@@ -12,14 +12,13 @@ import SwiftyJSON
 
 class DiscussionProxiesAPI {
     let name = "discussion-proxies"
-    
+
     @discardableResult func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((DiscussionProxy) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON(
-            {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/\(id)", headers: headers).responseSwiftyJSON({
                 response in
-                
+
                 var error = response.result.error
-                var json : JSON = [:]
+                var json: JSON = [:]
                 if response.result.value == nil {
                     if error == nil {
                         error = NSError()
@@ -28,13 +27,12 @@ class DiscussionProxiesAPI {
                     json = response.result.value!
                 }
                 let response = response.response
-                
-                
+
                 if let e = error as NSError? {
                     errorHandler("RETRIEVE discussion-proxies/\(id): error \(e.domain) \(e.code): \(e.localizedDescription)")
                     return
                 }
-                
+
                 if response?.statusCode != 200 {
                     errorHandler("RETRIEVE discussion-proxies/\(id): bad response status code \(String(describing: response?.statusCode))")
                     return
@@ -42,7 +40,7 @@ class DiscussionProxiesAPI {
 
                 let discussionProxy = DiscussionProxy(json: json["discussion-proxies"].arrayValue[0])
                 success(discussionProxy)
-                
+
                 return
             }
         )

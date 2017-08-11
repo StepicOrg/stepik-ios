@@ -15,6 +15,6 @@ class ReplaceLastSegue: UIStoryboardSegue {
             controllers.popLast()
             controllers.append(destination)
             source.navigationController?.setViewControllers(controllers, animated: true)
-        } 
+        }
     }
 }

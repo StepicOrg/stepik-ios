@@ -16,12 +16,12 @@ extension Alerts {
 typealias CongratulationType = CongratulationViewController.CongratulationType
 
 class CongratulationAlertManager: AlertManager {
-    
-    func present(alert: UIViewController, inController controller: UIViewController)  {
+
+    func present(alert: UIViewController, inController controller: UIViewController) {
         presenter.customBackgroundView = CongratsView(frame: controller.view.bounds)
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
     }
-    
+
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.backgroundOpacity = 0.0
@@ -33,8 +33,8 @@ class CongratulationAlertManager: AlertManager {
         presenter.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.3, shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: 1.2)
         return presenter
     }()
-    
-    func construct(congratulationType: CongratulationType, continueHandler: (() -> ())? = nil) -> CongratulationViewController {
+
+    func construct(congratulationType: CongratulationType, continueHandler: (() -> Void)? = nil) -> CongratulationViewController {
         let controller = CongratulationViewController(nibName: "CongratulationViewController", bundle: nil)
         controller.continueHandler = continueHandler
         controller.congratulationType = congratulationType

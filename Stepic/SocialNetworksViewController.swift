@@ -13,22 +13,22 @@ import SVProgressHUD
 class SocialNetworksViewController: UIViewController {
 
     @IBOutlet weak var socialNetworksCollectionView: UICollectionView!
-    
+
     var cellSize: CGFloat = 50
     let cellSpacing: CGFloat = 10
-    
+
     let socialNetworks = SocialNetworks.all
 
-    var dismissBlock : ((Void)->Void)?
-    
+    var dismissBlock : (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         socialNetworksCollectionView.delegate = self
         socialNetworksCollectionView.dataSource = self
-    
+
         socialNetworksCollectionView.register(UINib(nibName: "SocialNetworkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SocialNetworkCollectionViewCell")
-        
+
 //        print("collection view cancels touches -> \(socialNetworksCollectionView.panGestureRecognizer.cancelsTouchesInView)")
         initializeTapRecognizer()
         // Do any additional setup after loading the view.
@@ -38,12 +38,11 @@ class SocialNetworksViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         socialNetworksCollectionView.performBatchUpdates(nil, completion: nil)
     }
-    
 
     /*
     // MARK: - Navigation
@@ -54,15 +53,15 @@ class SocialNetworksViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
     func initializeTapRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SocialNetworksViewController.handleTap(_:)))
         tapGesture.numberOfTapsRequired = 1
         tapGesture.cancelsTouchesInView = true
         socialNetworksCollectionView.addGestureRecognizer(tapGesture)
     }
-    
-    func handleTap(_ sender: UITapGestureRecognizer!) { 
+
+    func handleTap(_ sender: UITapGestureRecognizer!) {
         let location = sender.location(ofTouch: 0, in: socialNetworksCollectionView)
         let locationInCollection = CGPoint(x: location.x, y: location.y)
         let indexPathOptional = socialNetworksCollectionView.indexPathForItem(at: locationInCollection)
@@ -83,10 +82,10 @@ class SocialNetworksViewController: UIViewController {
                             UIThread.performUI { [weak self] in
                                 self?.dismissBlock?()
                             }
-                        }, error: { e in
+                        }, error: { _ in
                             print("successfully signed in, but could not get user")
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                            UIThread.performUI { 
+                            UIThread.performUI {
                                 [weak self] in
                                 self?.dismissBlock?()
                             }
@@ -103,8 +102,8 @@ class SocialNetworksViewController: UIViewController {
                         default:
                             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                         }
-                    })                        
-                }, error: { error in
+                    })
+                }, error: { _ in
                     print("error while social auth")
                     SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                 })
@@ -124,11 +123,11 @@ extension SocialNetworksViewController : UICollectionViewDelegate {
     func getSocialNetworkByIndexPath(_ indexPath: IndexPath) -> SocialNetwork {
         return socialNetworks[(indexPath as NSIndexPath).item]
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: cellSize, height: cellSize)
     }
-    
+
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 //        UIApplication.sharedApplication().openURL(getSocialNetworkByIndexPath(indexPath).registerURL)
 //    }
@@ -138,11 +137,11 @@ extension SocialNetworksViewController : UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return socialNetworks.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialNetworkCollectionViewCell", for: indexPath) as! SocialNetworkCollectionViewCell
         cell.imageView.image = socialNetworks[(indexPath as NSIndexPath).item].image
@@ -152,10 +151,10 @@ extension SocialNetworksViewController : UICollectionViewDataSource {
 
 extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let usedWidth : CGFloat = CGFloat(socialNetworks.count) * cellSize + CGFloat(socialNetworks.count - 1) * cellSpacing
+        let usedWidth: CGFloat = CGFloat(socialNetworks.count) * cellSize + CGFloat(socialNetworks.count - 1) * cellSpacing
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
-        
-        return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets);
+
+        return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets)
 
     }
 }

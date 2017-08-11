@@ -19,7 +19,7 @@ class PlaceholderTestViewController: UIViewController {
         placeholderView.alignTop("16", leading: "16", bottom: "-16", trailing: "-16", to: self.view)
         placeholderView.delegate = self
         placeholderView.datasource = self
-        
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -41,19 +41,19 @@ extension PlaceholderTestViewController : PlaceholderViewDataSource {
         return nil
 //        return "Try again"
     }
-    
+
     func placeholderStyle() -> PlaceholderStyle {
         return stepicPlaceholderStyle
     }
-    
+
     func placeholderDescription() -> String? {
         return "Failed to connect to the Internet. Press the button to retry or go fuck yourself"
     }
-    
+
     func placeholderImage() -> UIImage? {
         return nil
     }
-    
+
     func placeholderTitle() -> String? {
         return "Connection error!"
     }

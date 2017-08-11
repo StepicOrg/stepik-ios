@@ -9,15 +9,15 @@
 import UIKit
 
 class SearchSuggestionTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var suggestionLabel: UILabel!
-    
+
     var suggestion: String = "" {
         didSet {
             suggestionLabel.text = suggestion
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

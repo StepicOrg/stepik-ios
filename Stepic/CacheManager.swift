@@ -11,9 +11,9 @@ import UIKit
 class CacheManager: NSObject {
     fileprivate override init() {}
     static let sharedManager = CacheManager()
-    
+
     //Returns (successful, failed)
-    func clearCache(completion: @escaping (Int, Int)->Void) {
+    func clearCache(completion: @escaping (Int, Int) -> Void) {
         DispatchQueue.global(qos: .default).async {
             let videos = Video.getAllVideos()
             var completed = 0
@@ -37,14 +37,14 @@ class CacheManager: NSObject {
             completion(completed, errors)
         }
     }
-    
-    var connectionCancelled : [Video] = []
-    
-    func cancelAll(completion: @escaping (Int, Int)->Void) {
+
+    var connectionCancelled: [Video] = []
+
+    func cancelAll(completion: @escaping (Int, Int) -> Void) {
         var completed = 0
         var errors = 0
         if connectionCancelled != [] {
-            completed += connectionCancelled.count 
+            completed += connectionCancelled.count
         }
         connectionCancelled = []
         DispatchQueue.global(qos: .default).async {
@@ -61,5 +61,5 @@ class CacheManager: NSObject {
             completion(completed, errors)
         }
     }
-    
+
 }

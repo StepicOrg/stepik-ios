@@ -23,7 +23,7 @@ extension Course {
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
-    
+
     @NSManaged var managedSummary: String?
     @NSManaged var managedWorkload: String?
     @NSManaged var managedIntroURL: String?
@@ -34,37 +34,37 @@ extension Course {
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
     @NSManaged var managedLastStepId: String?
-    
-    @NSManaged var managedInstructors : NSOrderedSet?
-    @NSManaged var managedSections : NSOrderedSet?
-    
-    @NSManaged var managedSectionsArray : NSObject?
-    @NSManaged var managedInstructorsArray : NSObject?
-    
-    @NSManaged var managedIntroVideo : Video?
-    
+
+    @NSManaged var managedInstructors: NSOrderedSet?
+    @NSManaged var managedSections: NSOrderedSet?
+
+    @NSManaged var managedSectionsArray: NSObject?
+    @NSManaged var managedInstructorsArray: NSObject?
+
+    @NSManaged var managedIntroVideo: Video?
+
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedLastStep: LastStep?
     @NSManaged var managedCertificateEntity: Certificate?
-    
-    class var oldEntity : NSEntityDescription {
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
             return managedId?.intValue ?? -1
         }
     }
-    
-    var beginDate : Date? {
+
+    var beginDate: Date? {
         set(date) {
             self.managedBeginDate = date
         }
@@ -72,8 +72,8 @@ extension Course {
             return managedBeginDate
         }
     }
-    
-    var courseDescription : String {
+
+    var courseDescription: String {
         set(description) {
             self.managedCourseDescription = description
         }
@@ -81,35 +81,35 @@ extension Course {
             return managedCourseDescription ?? ""
         }
     }
-    
-    var title : String {
+
+    var title: String {
         set(title) {
             self.managedTitle = title
         }
         get {
-            return managedTitle ?? "" 
+            return managedTitle ?? ""
         }
     }
-    
+
     var endDate: Date? {
-        set(date){ 
+        set(date) {
             self.managedEndDate = date
         }
-        get{
+        get {
             return managedEndDate
         }
     }
-    
-    var coverURLString : String {
-        set(url){
+
+    var coverURLString: String {
+        set(url) {
             self.managedImageURL = url
         }
-        get{
+        get {
             return managedImageURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
         }
     }
-    
-    var progressId : String? {
+
+    var progressId: String? {
         get {
             return managedProgressId
         }
@@ -117,26 +117,26 @@ extension Course {
             managedProgressId = value
         }
     }
-    
-    var slug : String? {
-        set(slug){
+
+    var slug: String? {
+        set(slug) {
             self.managedSlug = slug
         }
-        get{
+        get {
             return managedSlug
         }
     }
-    
+
     var lastStepId: String? {
-        set(id){
+        set(id) {
             self.managedLastStepId = id
         }
-        get{
+        get {
             return managedLastStepId
         }
     }
-    
-    var enrolled : Bool {
+
+    var enrolled: Bool {
         set(enrolled) {
             self.managedEnrolled = enrolled as NSNumber?
         }
@@ -144,45 +144,45 @@ extension Course {
             return managedEnrolled?.boolValue ?? false
         }
     }
-    
-    var featured : Bool {
-        set(featured){
+
+    var featured: Bool {
+        set(featured) {
             self.managedFeatured = featured as NSNumber?
         }
         get {
             return managedFeatured?.boolValue ?? false
         }
     }
-    
-    var isPublic : Bool {
-        set(isPublic){
+
+    var isPublic: Bool {
+        set(isPublic) {
             self.managedPublic = isPublic as NSNumber?
         }
         get {
             return managedPublic?.boolValue ?? false
         }
     }
-    
-    var summary : String {
-        set(value){
+
+    var summary: String {
+        set(value) {
             self.managedSummary = value
         }
         get {
             return managedSummary ?? ""
         }
     }
-    
-    var workload : String {
-        set(value){
+
+    var workload: String {
+        set(value) {
             self.managedWorkload = value
         }
         get {
             return managedWorkload ?? ""
         }
     }
-    
-    var introURL : String {
-        set(value){
+
+    var introURL: String {
+        set(value) {
             self.managedIntroURL = value
         }
         get {
@@ -191,44 +191,44 @@ extension Course {
             return (managedIntroURL != nil && managedIntroURL != "") ? managedIntroURL! : ""
         }
     }
-    
-    var format : String {
-        set(value){
+
+    var format: String {
+        set(value) {
             self.managedFormat = value
         }
         get {
             return managedFormat ?? ""
         }
     }
-    
-    var audience : String {
-        set(value){
+
+    var audience: String {
+        set(value) {
             self.managedAudience = value
         }
         get {
             return managedAudience ?? ""
         }
     }
-    
-    var certificate : String {
-        set(value){
+
+    var certificate: String {
+        set(value) {
             self.managedCertificate = value
         }
         get {
             return managedCertificate ?? ""
         }
     }
-    
-    var requirements : String {
-        set(value){
+
+    var requirements: String {
+        set(value) {
             self.managedRequirements = value
         }
         get {
             return managedRequirements ?? ""
         }
     }
-    
-    var progress : Progress? {
+
+    var progress: Progress? {
         get {
             return managedProgress
         }
@@ -236,8 +236,8 @@ extension Course {
             managedProgress = value
         }
     }
-    
-    var lastStep : LastStep? {
+
+    var lastStep: LastStep? {
         get {
             return managedLastStep
         }
@@ -245,8 +245,8 @@ extension Course {
             managedLastStep = value
         }
     }
-    
-    var instructors : [User] {
+
+    var instructors: [User] {
         get {
             return (managedInstructors?.array as? [User]) ?? []
         }
@@ -254,42 +254,42 @@ extension Course {
             managedInstructors = NSOrderedSet(array: instructors)
         }
     }
-    
-    func addInstructor(_ instructor : User) {
+
+    func addInstructor(_ instructor: User) {
         let mutableItems = managedInstructors?.mutableCopy() as! NSMutableOrderedSet
         mutableItems.add(instructor)
         managedInstructors = mutableItems.copy() as? NSOrderedSet
     }
-    
+
     var sectionsArray: [Int] {
-        set(value){
+        set(value) {
             self.managedSectionsArray = value as NSObject?
         }
         get {
             return (self.managedSectionsArray as? [Int]) ?? []
         }
     }
-    
+
     var instructorsArray: [Int] {
-        set(value){
+        set(value) {
             self.managedInstructorsArray = value as NSObject?
         }
         get {
             return (self.managedInstructorsArray as? [Int]) ?? []
         }
     }
-    
-    var sections : [Section] {
+
+    var sections: [Section] {
         get {
             return (managedSections?.array as? [Section]) ?? []
         }
-        
+
         set(sections) {
             managedSections = NSOrderedSet(array: sections)
         }
     }
-    
-    var introVideo : Video? {
+
+    var introVideo: Video? {
         get {
             return managedIntroVideo
         }
@@ -297,11 +297,11 @@ extension Course {
             managedIntroVideo = value
         }
     }
-    
+
     func addSection(_ section: Section) {
         let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet
         mutableItems.add(section)
         managedSections = mutableItems.copy() as? NSOrderedSet
     }
-    
+
 }

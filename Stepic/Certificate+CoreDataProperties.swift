@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Certificate {
 
     @NSManaged var managedId: NSNumber?
@@ -23,35 +22,34 @@ extension Certificate {
     @NSManaged var managedisPublic: NSNumber?
     @NSManaged var managedCourse: Course?
 
-    
-    class var oldEntity : NSEntityDescription {
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Certificate.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
-    var id : Int {
-        set(newId){
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
             return managedId?.intValue ?? -1
         }
     }
-    
+
     var courseId: Int {
-        set(newId){
+        set(newId) {
             self.managedCourseId = newId as NSNumber?
         }
         get {
             return managedCourseId?.intValue ?? -1
         }
     }
-    
+
     var userId: Int {
-        set(newId){
+        set(newId) {
             self.managedUserId = newId as NSNumber?
         }
         get {
@@ -59,8 +57,7 @@ extension Certificate {
         }
     }
 
-    
-    var issueDate : Date? {
+    var issueDate: Date? {
         set(date) {
             self.managedIssueDate = date
         }
@@ -68,8 +65,8 @@ extension Certificate {
             return managedIssueDate
         }
     }
-    
-    var updateDate : Date? {
+
+    var updateDate: Date? {
         set(date) {
             self.managedUpdateDate = date
         }
@@ -77,12 +74,12 @@ extension Certificate {
             return managedUpdateDate
         }
     }
-    
-    enum CertificateType : String {
+
+    enum CertificateType: String {
         case distinction = "distinction", regular = "regular"
     }
-    
-    var type : CertificateType {
+
+    var type: CertificateType {
         set(type) {
             self.managedType = type.rawValue
         }
@@ -90,17 +87,17 @@ extension Certificate {
             return CertificateType(rawValue: self.managedType ?? "regular") ?? .regular
         }
     }
-    
-    var grade : Int {
-        set(newGrade){
+
+    var grade: Int {
+        set(newGrade) {
             self.managedGrade = newGrade as NSNumber?
         }
         get {
             return managedGrade?.intValue ?? 0
         }
     }
-    
-    var urlString : String? {
+
+    var urlString: String? {
         set(newUrlString) {
             self.managedURL = newUrlString
         }
@@ -108,8 +105,8 @@ extension Certificate {
             return self.managedURL
         }
     }
-    
-    var isPublic : Bool? {
+
+    var isPublic: Bool? {
         get {
             return self.managedisPublic?.boolValue ?? false
         }
@@ -117,8 +114,8 @@ extension Certificate {
             self.managedisPublic = value as NSNumber?
         }
     }
-    
-    var course : Course? {
+
+    var course: Course? {
         get {
             return self.managedCourse
         }
@@ -127,4 +124,3 @@ extension Certificate {
         }
     }
 }
-

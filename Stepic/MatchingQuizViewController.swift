@@ -16,7 +16,7 @@ class MatchingQuizViewController: QuizViewController {
 
     var firstUpdateFinished: Bool = false
     var secondUpdateFinished: Bool = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,10 +24,10 @@ class MatchingQuizViewController: QuizViewController {
         secondTableView.tableFooterView = UIView()
         firstTableView.tag = 1
         secondTableView.tag = 2
-        
+
         firstTableView.isScrollEnabled = false
         secondTableView.isScrollEnabled = false
-        
+
         firstTableView.backgroundColor = UIColor.clear
         secondTableView.backgroundColor = UIColor.clear
 
@@ -38,48 +38,48 @@ class MatchingQuizViewController: QuizViewController {
 
         self.containerView.addSubview(firstTableView)
         self.containerView.addSubview(secondTableView)
-        
+
         firstTableView.alignTop("0", bottom: "0", to: self.containerView)
         firstTableView.alignLeadingEdge(with: self.containerView, predicate: "0")
         firstTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
-        
+
         secondTableView.alignTop("0", bottom: "0", to: self.containerView)
         secondTableView.alignTrailingEdge(with: self.containerView, predicate: "0")
         secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
-        
+
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
-        
+
         secondTableView.isEditing = true
         firstTableView.isUserInteractionEnabled = false
-        
+
         // Do any additional setup after loading the view.
     }
-    
-    fileprivate var orderedOptions : [String] = []
-    fileprivate var optionsPermutation : [Int] = []
-    fileprivate var positionForOptionInAttempt : [String : Int] = [:]
+
+    fileprivate var orderedOptions: [String] = []
+    fileprivate var optionsPermutation: [Int] = []
+    fileprivate var positionForOptionInAttempt: [String : Int] = [:]
     fileprivate var firstCellHeights: [CGFloat?] = []
     fileprivate var secondCellHeights: [CGFloat?] = []
-    
+
     var optionsCount: Int {
         return (self.attempt?.dataset as? MatchingDataset)?.pairs.count ?? 0
     }
-    
+
     override func updateQuizAfterAttemptUpdate() {
         guard let _ = attempt?.dataset as? MatchingDataset else {
             return
         }
-        
+
         resetOptionsToAttempt()
-        
+
         self.firstCellHeights = Array(repeating: nil, count: optionsCount)
         self.secondCellHeights = Array(repeating: nil, count: optionsCount)
 
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
     }
-    
+
     //TODO: Something strange is happening here, check this
     fileprivate func resetOptionsToAttempt() {
         orderedOptions = []
@@ -93,7 +93,7 @@ class MatchingQuizViewController: QuizViewController {
             }
         }
     }
-    
+
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         if self.submission == nil {
             if reload {
@@ -114,22 +114,22 @@ class MatchingQuizViewController: QuizViewController {
             }
             self.secondTableView.isUserInteractionEnabled = false
         }
-        
+
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
     }
-    
+
     var updatingWithReload = false
-    
+
     override func getReply() -> Reply {
         let r = MatchingReply(ordering: optionsPermutation)
         print(r.ordering)
         return r
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
         coordinator.animate(alongsideTransition: nil) {
             [weak self]
             _ in
@@ -142,16 +142,16 @@ class MatchingQuizViewController: QuizViewController {
             s.secondTableView.reloadData()
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func maxCellHeight(options: [String], heights: [CGFloat?], sortable: Bool) -> CGFloat {
-        
-        var max : CGFloat = 0
-        
+
+        var max: CGFloat = 0
+
         for (index, height) in heights.enumerated() {
             if let h = height {
                 if h > max {
@@ -164,11 +164,11 @@ class MatchingQuizViewController: QuizViewController {
                 }
             }
         }
-        
+
         return max
     }
-    
-    var maxHeight : CGFloat {
+
+    var maxHeight: CGFloat {
         guard let dataset = attempt?.dataset as? MatchingDataset else {
             return 0
         }
@@ -177,39 +177,39 @@ class MatchingQuizViewController: QuizViewController {
 }
 
 extension MatchingQuizViewController : UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return maxHeight
     }
-    
+
     @objc(tableView:canMoveRowAtIndexPath:) func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         switch tableView.tag {
-        case 1: 
+        case 1:
             return false
         case 2:
             return true
-        default: 
+        default:
             return false
         }
     }
-    
+
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.none
     }
-    
+
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
 
 extension MatchingQuizViewController : UITableViewDataSource {
-    
+
     fileprivate func updateTableHeight(table: UITableView) {
         table.contentSize = CGSize(width: table.contentSize.width, height: maxHeight * CGFloat(optionsCount))
         table.beginUpdates()
         table.endUpdates()
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         if attempt != nil {
             return 1
@@ -217,28 +217,28 @@ extension MatchingQuizViewController : UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderedOptions.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let dataset = attempt?.dataset as? MatchingDataset else {
             return UITableViewCell()
         }
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
-        
+
         switch tableView.tag {
         case 1:
             cell.setHTMLText(dataset.firstValues[indexPath.row], width: self.firstTableView.bounds.width, finishedBlock: {
                 [weak self]
                 newHeight in
-                
+
                 guard let s = self else { return }
                 if s.firstUpdateFinished { return }
-                
+
                 s.firstCellHeights[indexPath.row] = newHeight
                 var sum: CGFloat = 0
                 for height in s.firstCellHeights {
@@ -259,10 +259,10 @@ extension MatchingQuizViewController : UITableViewDataSource {
             cell.setHTMLText(orderedOptions[indexPath.row], width: self.secondTableView.bounds.width, finishedBlock: {
                 [weak self]
                 newHeight in
-                
+
                 guard let s = self else { return }
                 if s.secondUpdateFinished { return }
-                
+
                 s.secondCellHeights[indexPath.row] = newHeight
                 var sum: CGFloat = 0
                 for height in s.secondCellHeights {
@@ -281,7 +281,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
         default:
             break
         }
-        
+
         return cell
     }
 
@@ -294,4 +294,3 @@ extension MatchingQuizViewController : UITableViewDataSource {
         orderedOptions.insert(movingOption, at: (destinationIndexPath as NSIndexPath).row)
     }
 }
-

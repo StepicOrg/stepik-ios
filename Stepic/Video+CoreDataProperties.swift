@@ -16,23 +16,23 @@ extension Video {
 
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedThumbnailURL: String?
-    @NSManaged var managedStatus: String?    
+    @NSManaged var managedStatus: String?
     @NSManaged var managedPlayTime: NSNumber?
     @NSManaged var managedURLs: NSOrderedSet?
     @NSManaged var managedBlock: Block?
 //    @NSManaged var managedCachedPath: String?
-    @NSManaged var managedCachedQuality : NSNumber?
-    
-    class var oldEntity : NSEntityDescription {
+    @NSManaged var managedCachedQuality: NSNumber?
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Video.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
@@ -40,25 +40,25 @@ extension Video {
         }
     }
 
-    var thumbnailURL : String {
-        set(value){
+    var thumbnailURL: String {
+        set(value) {
             self.managedThumbnailURL = value
         }
         get {
             return managedThumbnailURL ?? ""
         }
     }
-    
-    var status : String {
-        set(value){
+
+    var status: String {
+        set(value) {
             self.managedStatus = value
         }
         get {
             return managedStatus ?? ""
         }
     }
-    
-    var urls : [VideoURL] {
+
+    var urls: [VideoURL] {
         get {
             return (managedURLs?.array as? [VideoURL]) ?? []
         }
@@ -66,8 +66,8 @@ extension Video {
             managedURLs = NSOrderedSet(array: value)
         }
     }
-    
-    var cachedQuality : String? {
+
+    var cachedQuality: String? {
         get {
             if let cq = managedCachedQuality {
                 return String(describing: cq)
@@ -89,7 +89,7 @@ extension Video {
             loadingQuality = value
         }
     }
-    
+
     var playTime: TimeInterval {
         get {
             if let time = managedPlayTime {
@@ -98,18 +98,18 @@ extension Video {
                 return 0.0
             }
         }
-        
+
         set(time) {
             managedPlayTime = time as NSNumber?
         }
     }
-    
+
 //    var cachedPath : String? {
 //        get {
 //            return managedCachedPath
 //        }
 //    }
-    
+
 //    var isCached : Bool {
 //        return self.state == VideoState.Cached
 //    }

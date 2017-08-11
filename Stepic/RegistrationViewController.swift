@@ -11,20 +11,20 @@ import TextFieldEffects
 import SVProgressHUD
 
 class RegistrationViewController: UIViewController {
-    
+
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var closeBarButtonItem: UIBarButtonItem!
-    
+
     @IBOutlet weak var firstNameTextField: HoshiTextField!
-    
+
     @IBOutlet weak var lastNameTextField: HoshiTextField!
-    
+
     @IBOutlet weak var emailTextField: HoshiTextField!
-    
+
     @IBOutlet weak var passwordTextField: HoshiTextField!
-    
+
     @IBOutlet weak var visiblePasswordButton: UIButton!
-    
+
     @IBOutlet weak var firstNameErrorViewHeight: NSLayoutConstraint!
     @IBOutlet weak var lastNameErrorViewHeight: NSLayoutConstraint!
     @IBOutlet weak var emailErrorViewHeight: NSLayoutConstraint!
@@ -33,14 +33,14 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var lastNameErrorLabel: UILabel!
     @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
-    
+
     var passwordSecure = false {
         didSet {
             visiblePasswordButton.setImage(passwordSecure ? Images.visibleImage : Images.visibleFilledImage, for: UIControlState())
             passwordTextField.isSecureTextEntry = passwordSecure
         }
     }
-    
+
     fileprivate func setupLocalizations() {
         title = NSLocalizedString("SignUp", comment: "")
         firstNameTextField.placeholder = NSLocalizedString("FirstName", comment: "")
@@ -50,25 +50,24 @@ class RegistrationViewController: UIViewController {
         signUpButton.setTitle(NSLocalizedString("SignUpAction", comment: ""), for: UIControlState())
     }
 
-    
     fileprivate func setupTextFields() {
         firstNameTextField.returnKeyType = .next
         lastNameTextField.returnKeyType = .next
         emailTextField.returnKeyType = .next
         passwordTextField.returnKeyType = .send
-        
+
         emailTextField.delegate = self
         passwordTextField.delegate = self
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
-                
+
         firstNameTextField.autocapitalizationType = .words
         lastNameTextField.autocapitalizationType = .words
-        
+
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-        emailTextField.keyboardType = .emailAddress     
-        
+        emailTextField.keyboardType = .emailAddress
+
         firstNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
         lastNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
         emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
@@ -79,42 +78,42 @@ class RegistrationViewController: UIViewController {
     func textFieldDidChange(textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-        
+
         setupLocalizations()
         setupTextFields()
-        
+
         visiblePasswordButton.isHidden = true
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func signUpPressed(_ sender: AnyObject) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
         signUp()
     }
-    
-    var success : ((String)->Void)? {
+
+    var success: ((String) -> Void)? {
         return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
-    
+
     func signUp() {
         let email = emailTextField.text ?? ""
         let firstName = firstNameTextField.text ?? ""
         let lastName = lastNameTextField.text ?? ""
         let password = passwordTextField.text ?? ""
-        
+
         SVProgressHUD.show(withStatus: "")
-        performRequest({        
+        performRequest({
             AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
-                _ = AuthManager.sharedManager.logInWithUsername(email, password: password, 
+                _ = AuthManager.sharedManager.logInWithUsername(email, password: password,
                     success: {
                         t in
                         AuthInfo.shared.token = t
@@ -124,17 +123,17 @@ class RegistrationViewController: UIViewController {
                             AuthInfo.shared.user = user
                             User.removeAllExcept(user)
                             SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                            UIThread.performUI { 
+                            UIThread.performUI {
                                 self.navigationController?.dismiss(animated: true, completion: {
                                     [weak self] in
                                     self?.success?("registered")
                                     })
                             }
                             }, error: {
-                                e in
+                                _ in
                                 print("successfully signed in, but could not get user")
                                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                UIThread.performUI { 
+                                UIThread.performUI {
                                     self.navigationController?.dismiss(animated: true, completion: {
                                         [weak self] in
                                         self?.success?("registered")
@@ -142,21 +141,21 @@ class RegistrationViewController: UIViewController {
                                 }
                         })
                     }, failure: {
-                        e in
+                        _ in
                         SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
                 })
                 }, error: {
                     errormsg, registrationErrorInfo in
                     //TODO: Add localized data
-                    UIThread.performUI{SVProgressHUD.showError(withStatus: errormsg ?? NSLocalizedString("WrongFields", comment: "") )} 
+                    UIThread.performUI {SVProgressHUD.showError(withStatus: errormsg ?? NSLocalizedString("WrongFields", comment: "") )}
                     if let info = registrationErrorInfo {
                         self.showEmailErrorWith(message: info.email)
-                        self.showPasswordErrorWith(message: info.password)                    
+                        self.showPasswordErrorWith(message: info.password)
                         self.showFirstNameErrorWith(message: info.firstName)
                         self.showLastNameErrorWith(message: info.lastName)
                     }
             })
-            }, error: { 
+            }, error: {
                 [weak self]
                 error in
                 guard let s = self else { return }
@@ -165,10 +164,10 @@ class RegistrationViewController: UIViewController {
                     //TODO: Think about success & cancel closures here
                     RoutingManager.auth.routeFrom(controller: s, success: nil, cancel: nil)
                 }
-                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: "")) 
+                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
-    
+
     func showEmailErrorWith(message msg: String?) {
         changeHeightConstraint(emailErrorViewHeight, label: emailErrorLabel, text: msg)
     }
@@ -181,7 +180,7 @@ class RegistrationViewController: UIViewController {
     func showLastNameErrorWith(message msg: String?) {
         changeHeightConstraint(lastNameErrorViewHeight, label: lastNameErrorLabel, text: msg)
     }
-    
+
     func changeHeightConstraint(_ constraint: NSLayoutConstraint, label: UILabel, text: String?) {
         if let msg = text {
             let height = UILabel.heightForLabelWithText(msg, lines: 0, standardFontOfSize: 12, width: UIScreen.main.bounds.width - 32)
@@ -195,13 +194,13 @@ class RegistrationViewController: UIViewController {
         constraint.constant = value
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
-        }) 
+        })
     }
-    
+
     @IBAction func visiblePasswordButtonPressed(_ sender: AnyObject) {
         passwordSecure = !passwordSecure
     }
-    
+
     /*
      // MARK: - Navigation
      
@@ -211,46 +210,46 @@ class RegistrationViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
+
 }
 
 extension RegistrationViewController : UITextFieldDelegate {
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("did begin")
         passwordSecure = true
         if textField == passwordTextField {
             visiblePasswordButton.isHidden = false
         }
-       
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("did end")
         passwordSecure = true
         if textField == passwordTextField && textField.text == "" {
             visiblePasswordButton.isHidden = true
         }
-    }    
-    
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         if textField == firstNameTextField {
             lastNameTextField.becomeFirstResponder()
             return true
         }
-        
+
         if textField == lastNameTextField {
             emailTextField.becomeFirstResponder()
             return true
         }
-        
+
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
             return true
         }
-        
+
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
@@ -258,7 +257,7 @@ extension RegistrationViewController : UITextFieldDelegate {
             signUp()
             return true
         }
-        
+
         return true
     }
 }

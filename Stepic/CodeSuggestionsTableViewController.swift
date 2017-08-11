@@ -14,7 +14,7 @@ protocol CodeSuggestionDelegate: class {
 }
 
 class CodeSuggestionsTableViewController: UITableViewController {
-    
+
     var suggestions: [String] = [] {
         didSet {
             tableView.reloadData()
@@ -25,8 +25,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-    
-    
+
     fileprivate var suggestionHeight: CGFloat {
         if let size = delegate?.suggestionsSize {
             return size.realSizes.suggestionHeight
@@ -35,14 +34,13 @@ class CodeSuggestionsTableViewController: UITableViewController {
         }
     }
     fileprivate let maxSuggestionCount = 4
-    
+
     weak var delegate: CodeSuggestionDelegate?
-    
+
     var suggestionsHeight: CGFloat {
         return suggestionHeight * CGFloat(min(maxSuggestionCount, suggestions.count))
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,7 +49,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
         tableView.allowsSelection = false
         self.clearsSelectionOnViewWillAppear = false
         tableView.rowHeight = suggestionHeight
-        
+
         //Adding tap gesture recognizer to catch selection to avoid resignFirstResponder call and keyboard disappearance 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(CodeSuggestionsTableViewController.didTap(recognizer:)))
         tableView.addGestureRecognizer(tapG)
@@ -64,7 +62,7 @@ class CodeSuggestionsTableViewController: UITableViewController {
             delegate?.didSelectSuggestion(suggestion: suggestions[row], prefix: prefix)
         }
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,21 +78,20 @@ class CodeSuggestionsTableViewController: UITableViewController {
         return suggestions.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CodeSuggestionTableViewCell", for: indexPath) as? CodeSuggestionTableViewCell else {
             return UITableViewCell()
         }
-        
+
         cell.setSuggestion(suggestions[indexPath.row], prefixLength: prefix.characters.count, size: delegate?.suggestionsSize)
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return suggestionHeight
     }
-    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -139,5 +136,5 @@ class CodeSuggestionsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+
 }

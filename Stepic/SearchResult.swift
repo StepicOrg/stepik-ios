@@ -10,13 +10,13 @@ import UIKit
 import SwiftyJSON
 
 class SearchResult: NSObject {
-    
-    var score : Float
-    var courseId : Int?
-    var lessonId : Int?
-    var stepId : Int?
-    var commentId : Int?
-    
+
+    var score: Float
+    var courseId: Int?
+    var lessonId: Int?
+    var stepId: Int?
+    var commentId: Int?
+
     init(json: JSON) {
         self.score = json["score"].floatValue
         self.courseId = json["course"].int

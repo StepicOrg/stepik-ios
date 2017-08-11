@@ -11,8 +11,8 @@ import CoreData
 import SwiftyJSON
 
 class CodeLimit: NSManagedObject {
-    
-    var language : CodeLanguage {
+
+    var language: CodeLanguage {
         return CodeLanguage(rawValue: languageString) ?? CodeLanguage.unsupported
     }
 
@@ -20,13 +20,13 @@ class CodeLimit: NSManagedObject {
         self.init()
         initialize(language: language, json: json)
     }
-    
+
     func initialize(language: String, json: JSON) {
         languageString = language
         time = json["time"].doubleValue
         memory = json["memory"].doubleValue
     }
-    
+
     func update(language: String, json: JSON) {
         initialize(language: language, json: json)
     }

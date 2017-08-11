@@ -12,17 +12,17 @@ import FLKAutoLayout
 class UserPreferencesContainerViewController: RGPageViewController {
 
     let tabNames = [
-        NSLocalizedString("Profile", comment: ""), 
+        NSLocalizedString("Profile", comment: ""),
         NSLocalizedString("Preferences", comment: "")
     ]
     let numberOfTabs = 2
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         datasource = self
         delegate = self
-                
+
         // Do any additional setup after loading the view.
     }
 
@@ -31,16 +31,15 @@ class UserPreferencesContainerViewController: RGPageViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -57,49 +56,49 @@ class UserPreferencesContainerViewController: RGPageViewController {
             return .horizontal
         }
     }
-    
+
     override var tabbarPosition: RGTabbarPosition {
         get {
             return .top
         }
     }
-    
+
     override var tabbarStyle: RGTabbarStyle {
         get {
             return RGTabbarStyle.solid
         }
     }
-    
+
     override var tabIndicatorColor: UIColor {
         get {
             return UIColor.white
         }
     }
-    
+
     override var barTintColor: UIColor? {
         get {
             return UIColor.navigationColor
         }
     }
-    
+
     override var tabStyle: RGTabStyle {
         get {
             return .inactiveFaded
         }
     }
-    
+
 //    override var tabbarWidth: CGFloat {
 //        get {
 //            return 44.0
 //        }
 //    }
-    
-    override var tabbarHeight : CGFloat {
+
+    override var tabbarHeight: CGFloat {
         get {
             return 44.0
         }
     }
-    
+
     override var tabMargin: CGFloat {
         get {
             return 8.0
@@ -109,12 +108,12 @@ class UserPreferencesContainerViewController: RGPageViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil, completion: {
-            [weak self] 
+            [weak self]
             _ in
             self?.tabScrollView.reloadData()
         })
     }
-    
+
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDelegate {
@@ -126,7 +125,7 @@ extension UserPreferencesContainerViewController : RGPageViewControllerDelegate 
     /// - returns: the width for the tab at the given index.
     func pageViewController(_ pageViewController: RGPageViewController, widthForTabAt index: Int) -> CGFloat {
         return (UIScreen.main.bounds.width - 16) / CGFloat(numberOfTabs)
-    }    
+    }
 }
 
 extension UserPreferencesContainerViewController : RGPageViewControllerDataSource {
@@ -152,7 +151,7 @@ extension UserPreferencesContainerViewController : RGPageViewControllerDataSourc
     public func numberOfPages(for pageViewController: RGPageViewController) -> Int {
         return numberOfTabs
     }
-    
+
     /// Asks the datasource to give a ViewController to display as a page.
     ///
     /// - parameter pageViewController: the `RGPageViewController` instance.

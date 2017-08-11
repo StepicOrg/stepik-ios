@@ -14,16 +14,16 @@ import UIKit
 class UpdateChecker: NSObject {
     fileprivate override init() {}
     static let sharedChecker = UpdateChecker()
-    
+
     fileprivate func isCheckNeeded() -> Bool {
-        
+
         let lastUpdate = UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime
-        
+
         let isMoreThanDayBetweenChecks = (Date().timeIntervalSince1970 - lastUpdate) > 86400
-        
+
         return UpdatePreferencesContainer.sharedContainer.allowsUpdateChecks && isMoreThanDayBetweenChecks
     }
-    
+
     func checkForUpdatesIfNeeded(_ needUpdateHandler: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
         if isCheckNeeded() {
             RemoteVersionManager.sharedManager.checkRemoteVersionChange(needUpdateHandler: needUpdateHandler, error: errorHandler)

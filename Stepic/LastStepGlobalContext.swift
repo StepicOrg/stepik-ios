@@ -10,9 +10,9 @@ import Foundation
 
 class LastStepGlobalContext {
     private init() {}
-    
+
     static let context = LastStepGlobalContext()
-    
+
     var course: Course?
     var unitId: Int?
     var stepId: Int?

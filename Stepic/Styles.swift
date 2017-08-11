@@ -10,26 +10,26 @@ import UIKit
 
 struct PlaceholderStyle {
     struct LabelStyle {
-        var font : UIFont = UIFont.systemFont(ofSize: 14)
-        var textColor : UIColor = UIColor.lightGray
-        var textAlignment : NSTextAlignment = NSTextAlignment.center
-        var lineBreakMode : NSLineBreakMode = NSLineBreakMode.byWordWrapping
+        var font: UIFont = UIFont.systemFont(ofSize: 14)
+        var textColor: UIColor = UIColor.lightGray
+        var textAlignment: NSTextAlignment = NSTextAlignment.center
+        var lineBreakMode: NSLineBreakMode = NSLineBreakMode.byWordWrapping
     }
-    
+
     struct ButtonStyle {
-        var font : UIFont = UIFont.systemFont(ofSize: 17)
-        var borderType : BorderType = .none
-        var borderColor : UIColor = UIColor.clear
-        var backgroundColor : UIColor = UIColor.clear
-        var textColor : UIColor = UIColor.blue
+        var font: UIFont = UIFont.systemFont(ofSize: 17)
+        var borderType: BorderType = .none
+        var borderColor: UIColor = UIColor.clear
+        var backgroundColor: UIColor = UIColor.clear
+        var textColor: UIColor = UIColor.blue
     }
-    
+
     var title = LabelStyle()
     var description = LabelStyle()
     var button = ButtonStyle()
 }
 
-var stepicPlaceholderStyle : PlaceholderStyle {
+var stepicPlaceholderStyle: PlaceholderStyle {
     var style = PlaceholderStyle()
     style.title.font = UIFont.boldSystemFont(ofSize: 18)
     style.button.borderType = .none

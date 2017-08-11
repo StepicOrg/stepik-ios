@@ -14,28 +14,28 @@ import DZNEmptyDataSet
 class DownloadsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var downloading : [Video] = []
-    var stored : [Video] = []
-    
+
+    var downloading: [Video] = []
+    var stored: [Video] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+
         tableView.register(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
-        
-        self.tableView.emptyDataSetDelegate = self 
+
+        self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
-        
+
         self.tableView.tableFooterView = UIView()
-        
+
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchVideos()
     }
-    
+
     func fetchVideos() {
         stored = []
         downloading = []
@@ -57,9 +57,7 @@ class DownloadsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -70,11 +68,11 @@ class DownloadsViewController: UIViewController {
             let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
         }
-        
+
         if segue.identifier == "showSteps" {
             let dvc = segue.destination as! LessonViewController
             dvc.hidesBottomBarWhenPushed = true
-            
+
             let step = sender as! Step
             if let lesson = step.managedLesson {
                 //TODO : pass unit here!
@@ -82,39 +80,36 @@ class DownloadsViewController: UIViewController {
             }
         }
     }
-    
 
     func isSectionDownloading(_ section: Int) -> Bool {
         if downloading != [] && stored != [] {
-            return section == 0 
+            return section == 0
         }
         return downloading != []
     }
-    
-    
-    func askForClearCache(remove: @escaping ((Void)->Void)) {
+
+    func askForClearCache(remove: @escaping (() -> Void)) {
         let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.destructive, handler: {
-            action in
+            _ in
             remove()
         }))
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: {
-            action in
+            _ in
         }))
-        
+
         self.present(alert, animated: true, completion: nil)
     }
-    
-    
+
     @IBAction func clearCachePressed(_ sender: UIBarButtonItem) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.clear, parameters: nil)
         askForClearCache(remove: {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Downloads.acceptedClear, parameters: nil)
             SVProgressHUD.show()
             CacheManager.sharedManager.clearCache(completion: {
-                completed, errors in 
+                completed, errors in
                 if errors != 0 {
                     UIThread.performUI({SVProgressHUD.showError(withStatus: "\(NSLocalizedString("FailedToRemoveMessage", comment: "")) \(errors)/\(completed+errors) \(NSLocalizedString((completed%10 == 1 && completed != 11) ? "Video" : "Videos", comment: ""))")})
                 } else {
@@ -124,34 +119,34 @@ class DownloadsViewController: UIViewController {
             })
         })
     }
-    
+
 }
 
 extension DownloadsViewController : UITableViewDelegate {
-    
+
     func showLessonControllerWith(step: Step) {
         self.performSegue(withIdentifier: "showSteps", sender: step)
     }
-    
-    func showNotAbleToOpenLessonAlert(lesson: Lesson, enroll: @escaping ((Void)->Void)) {
+
+    func showNotAbleToOpenLessonAlert(lesson: Lesson, enroll: @escaping (() -> Void)) {
         let alert = UIAlertController(title: NSLocalizedString("NoAccess", comment: ""), message: "\(NSLocalizedString("NotEnrolledToCourseMessage", comment: "")) \"\(lesson.managedUnit!.managedSection!.managedCourse!.title)\". \(NSLocalizedString("JoinCourse", comment: ""))?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("JoinCourse", comment: ""), style: .default, handler: {
-            action in
+            _ in
             enroll()
         }))
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedVideo : Video!
+        let selectedVideo: Video!
         if isSectionDownloading((indexPath as NSIndexPath).section) {
             selectedVideo = downloading[(indexPath as NSIndexPath).row]
         } else {
             selectedVideo = stored[(indexPath as NSIndexPath).row]
         }
-        
+
         if let course = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse {
             let enterDownloadBlock = {
                 [weak self] in
@@ -161,8 +156,8 @@ extension DownloadsViewController : UITableViewDelegate {
                     if selectedVideo.managedBlock!.managedStep!.managedLesson!.isPublic {
                         self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
                     } else {
-                        self?.showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll:  {
-                            let joinBlock : ((Void) -> Void) = {
+                        self?.showNotAbleToOpenLessonAlert(lesson: selectedVideo.managedBlock!.managedStep!.managedLesson!, enroll: {
+                            let joinBlock : (() -> Void) = {
                                 [weak self] in
                                 UIThread.performUI({
                                     SVProgressHUD.show()
@@ -170,7 +165,7 @@ extension DownloadsViewController : UITableViewDelegate {
                                 AuthManager.sharedManager.joinCourseWithId(course.id, delete: false, success: {
                                     UIThread.performUI({SVProgressHUD.showSuccess(withStatus: "")})
                                     self?.showLessonControllerWith(step: selectedVideo.managedBlock!.managedStep!)
-                                    }, error: { 
+                                    }, error: {
                                         status in
                                         UIThread.performUI({SVProgressHUD.showError(withStatus: status)})
                                         UIThread.performUI({
@@ -178,7 +173,7 @@ extension DownloadsViewController : UITableViewDelegate {
                                                 Messages.sharedManager.showConnectionErrorMessage(inController: navigation)
                                             }
                                         })
-                                }) 
+                                })
                             }
                             if AuthInfo.shared.isAuthorized {
                                 joinBlock()
@@ -217,7 +212,7 @@ extension DownloadsViewController : UITableViewDelegate {
         } else {
             print("Something bad happened")
         }
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -230,18 +225,18 @@ extension DownloadsViewController : UITableViewDataSource {
             return stored.count
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         if downloading == [] && stored == [] {
             return 0
         }
-        
+
         if downloading != [] && stored != [] {
             return 2
         }
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isSectionDownloading(section) {
             return NSLocalizedString("Downloading", comment: "")
@@ -249,10 +244,10 @@ extension DownloadsViewController : UITableViewDataSource {
             return NSLocalizedString("Completed", comment: "")
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadTableViewCell", for: indexPath) as! DownloadTableViewCell
-        
+
         if isSectionDownloading((indexPath as NSIndexPath).section) {
             cell.initWith(downloading[(indexPath as NSIndexPath).row], buttonDelegate: self, downloadDelegate: self)
             cell.downloadButton.tag = downloading[(indexPath as NSIndexPath).row].id
@@ -260,15 +255,13 @@ extension DownloadsViewController : UITableViewDataSource {
             cell.initWith(stored[(indexPath as NSIndexPath).row], buttonDelegate: self, downloadDelegate: self)
             cell.downloadButton.tag = stored[(indexPath as NSIndexPath).row].id
         }
-        
-        
-        
+
         return cell
     }
 }
 
 extension DownloadsViewController : VideoDownloadDelegate {
-    
+
     func removeFromDownloading(_ video: Video) {
         if let index = downloading.index(of: video) {
             downloading.remove(at: index)
@@ -282,19 +275,19 @@ extension DownloadsViewController : VideoDownloadDelegate {
             self.tableView.reloadEmptyDataSet()
         }
     }
-    
+
     func addToStored(_ video: Video) {
         stored += [video]
         self.tableView.beginUpdates()
         if tableView.numberOfSections == 1 && isSectionDownloading(0) {
             tableView.insertSections(IndexSet(integer: 1), with: .automatic)
         }
-        
+
         tableView.insertRows(at: [IndexPath(row: stored.count - 1, section: (isSectionDownloading(0) ? 1 : 0))], with: .automatic)
         self.tableView.endUpdates()
 
     }
-    
+
     func removeFromStored(_ video: Video) {
         if let index = stored.index(of: video) {
             stored.remove(at: index)
@@ -308,15 +301,15 @@ extension DownloadsViewController : VideoDownloadDelegate {
             self.tableView.reloadEmptyDataSet()
         }
     }
-    
-    func didDownload(_ video: Video, cancelled : Bool) {
+
+    func didDownload(_ video: Video, cancelled: Bool) {
         removeFromDownloading(video)
         if !cancelled {
             addToStored(video)
         }
         video.downloadDelegate = nil
     }
-    
+
     func didGetError(_ video: Video) {
         removeFromDownloading(video)
         video.downloadDelegate = nil
@@ -324,7 +317,7 @@ extension DownloadsViewController : VideoDownloadDelegate {
 }
 
 extension DownloadsViewController : PKDownloadButtonDelegate {
-    
+
     func getVideoById(_ array: [Video], id: Int) -> Video? {
         let filtered = array.filter({return $0.id == id})
         if filtered.count != 1 {
@@ -334,7 +327,7 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
         }
         return nil
     }
-    
+
     func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
         switch downloadButton.state {
         case .downloaded:
@@ -363,36 +356,36 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
 }
 
 extension DownloadsViewController : DZNEmptyDataSetSource {
-    
+
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return Images.emptyDownloadsPlaceholder
     }
-    
+
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        
+
         let text = NSLocalizedString("EmptyDownloadsTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
             NSForegroundColorAttributeName: UIColor.darkGray]
-        
+
         return NSAttributedString(string: text, attributes: attributes)
     }
-    
+
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.white
     }
-    
+
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        
+
         let text = NSLocalizedString("EmptyDownloadsDescription", comment: "")
-        
+
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
-        
+
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
             NSForegroundColorAttributeName: UIColor.lightGray,
             NSParagraphStyleAttributeName: paragraph]
-        
+
         return NSAttributedString(string: text, attributes: attributes)
     }
 }
@@ -401,7 +394,7 @@ extension DownloadsViewController : DZNEmptyDataSetDelegate {
     func emptyDataSetWillAppear(_ scrollView: UIScrollView!) {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
-    
+
     func emptyDataSetWillDisappear(_ scrollView: UIScrollView!) {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }

@@ -9,17 +9,17 @@
 import UIKit
 import TUSafariActivity
 
-class CyrillicURLActivityItemSource : NSObject, UIActivityItemSource {
-    
+class CyrillicURLActivityItemSource: NSObject, UIActivityItemSource {
+
     var link: String
-    var url : URL? {
+    var url: URL? {
         return URL(string: link.addingPercentEscapes(using: String.Encoding.utf8)!)
     }
-    
+
     init(link: String) {
         self.link = link
     }
-    
+
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         if let url = self.url {
             return url
@@ -27,19 +27,18 @@ class CyrillicURLActivityItemSource : NSObject, UIActivityItemSource {
             return link
         }
     }
-    
+
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
         print("\(activityType)")
         switch activityType.rawValue {
-        case "TUSafariActivity" : 
+        case "TUSafariActivity" :
             if let url = self.url {
                 return url
             } else {
                 return link
             }
-        default: 
+        default:
             return link
         }
     }
 }
-

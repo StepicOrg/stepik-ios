@@ -50,7 +50,7 @@ open class TCBlobDownloadManager {
     */
     public convenience init() {
         let config = URLSessionConfiguration.default
-        
+
         config.timeoutIntervalForRequest = 10000
         //config.HTTPMaximumConnectionsPerHost = 1
         self.init(config: config)
@@ -60,10 +60,10 @@ open class TCBlobDownloadManager {
         let config = URLSessionConfiguration.background(withIdentifier: taskIdentifier)
         config.sessionSendsLaunchEvents = true
         config.timeoutIntervalForRequest = 100000
-        
+
         self.init(config: config)
     }
-    
+
     /**
         Base method to start a download, called by other download methods.
     
@@ -153,7 +153,6 @@ open class TCBlobDownloadManager {
         return downloads
     }
 }
-
 
 class DownloadDelegate: NSObject, URLSessionDownloadDelegate {
     var downloads: [Int: TCBlobDownload] = [:]

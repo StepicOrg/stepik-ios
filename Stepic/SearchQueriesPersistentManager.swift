@@ -11,7 +11,7 @@ import Foundation
 class SearchQueriesPersistentManager {
     private let key = "searchqueries"
     private let defaults = UserDefaults.standard
-    
+
     func didSearch(query: String) {
         var queries = defaults.value(forKey: key) as? [String: Int] ?? [String: Int]()
         if let count = queries[query] {
@@ -22,14 +22,14 @@ class SearchQueriesPersistentManager {
         defaults.set(queries, forKey: key)
         defaults.synchronize()
     }
-    
+
     func getTop(for query: String, count: Int) -> [String] {
         guard let queriesDict = defaults.value(forKey: key) as? [String: Int] else {
             return []
         }
-        
+
         let arr = [String](queriesDict.filter({
-            key, value in
+            key, _ in
             return key.indexOf(query.lowercased()) != nil
         }).sorted(by: {
             (first: (key: String, value: Int), second: (key: String, value: Int))  in
@@ -39,10 +39,10 @@ class SearchQueriesPersistentManager {
                 return first.value > second.value
             }
         }).map({
-            key, value in
+            key, _ in
             return key
         }).prefix(count))
-        
+
         return arr
     }
 }

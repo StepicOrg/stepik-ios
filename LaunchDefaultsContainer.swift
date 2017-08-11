@@ -10,10 +10,10 @@ import Foundation
 
 class LaunchDefaultsContainer {
     fileprivate let defaults = UserDefaults.standard
-    
+
     fileprivate let didLaunchKey = "didLaunchKey"
-    
-    var didLaunch : Bool {
+
+    var didLaunch: Bool {
         get {
             if let did = defaults.value(forKey: didLaunchKey) as? Bool {
                 return did
@@ -21,7 +21,7 @@ class LaunchDefaultsContainer {
                 return false
             }
         }
-        
+
         set(value) {
             defaults.set(value, forKey: didLaunchKey)
             defaults.synchronize()

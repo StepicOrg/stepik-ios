@@ -26,24 +26,24 @@ extension Progress {
     @NSManaged var managedUnit: Unit?
     @NSManaged var managedCourse: Course?
 
-    class var oldEntity : NSEntityDescription {
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Progress.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : String {
-        set(newId){
+
+    var id: String {
+        set(newId) {
             self.managedId = newId
         }
         get {
             return managedId ?? ""
         }
     }
-    
-    var isPassed : Bool {
+
+    var isPassed: Bool {
         get {
             return managedIsPassed?.boolValue ?? false
         }
@@ -51,8 +51,8 @@ extension Progress {
             managedIsPassed = value as NSNumber?
         }
     }
-    
-    var score : Int {
+
+    var score: Int {
         get {
             return managedScore?.intValue ?? 0
         }
@@ -60,8 +60,8 @@ extension Progress {
             managedScore = value as NSNumber?
         }
     }
-    
-    var numberOfSteps : Int {
+
+    var numberOfSteps: Int {
         get {
             return managedNumberOfSteps?.intValue ?? 0
         }
@@ -69,8 +69,8 @@ extension Progress {
             managedNumberOfSteps = value as NSNumber?
         }
     }
-    
-    var numberOfStepsPassed : Int {
+
+    var numberOfStepsPassed: Int {
         get {
             return managedNumberOfStepsPassed?.intValue ?? 0
         }
@@ -78,8 +78,8 @@ extension Progress {
             managedNumberOfStepsPassed = value as NSNumber?
         }
     }
-    
-    var cost : Int {
+
+    var cost: Int {
         get {
             return managedCost?.intValue ?? 0
         }

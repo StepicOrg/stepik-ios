@@ -15,26 +15,25 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var datesLabel: UILabel!
     @IBOutlet weak var scoreProgressView: UIProgressView!
     @IBOutlet weak var scoreLabel: UILabel!
-    
+
     @IBOutlet weak var downloadButton: PKDownloadButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
         // Initialization code
     }
 
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    
+
     fileprivate class func getTextFromSection(_ section: Section) -> String {
         var text = ""
-        if section.beginDate != nil { 
+        if section.beginDate != nil {
             text = "\n\(NSLocalizedString("BeginDate", comment: "")): \n\t\(section.beginDate!.getStepicFormatString(withTime: true))"
         }
         if section.softDeadline != nil {
@@ -45,28 +44,27 @@ class SectionTableViewCell: UITableViewCell {
         }
         return text
     }
-    
+
     class func heightForCellInSection(_ section: Section) -> CGFloat {
         let titleText = "\(section.position). \(section.title)"
         let datesText = SectionTableViewCell.getTextFromSection(section)
         return 46 + UILabel.heightForLabelWithText(titleText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107) + (datesText == "" ? 0 : 8 + UILabel.heightForLabelWithText(datesText, lines: 0, standardFontOfSize: 14, width: UIScreen.main.bounds.width - 107))
     }
-    
+
     func updateDownloadButton(_ section: Section) {
-        if section.isCached { 
+        if section.isCached {
             self.downloadButton.state = .downloaded
-        } else if section.isDownloading { 
-            
+        } else if section.isDownloading {
+
 //            print("update download button while downloading")
             self.downloadButton.state = .downloading
             self.downloadButton.stopDownloadButton?.progress = CGFloat(section.goodProgress)
-        
-            
+
             section.storeProgress = {
                 prog in
                 UIThread.performUI({self.downloadButton.stopDownloadButton?.progress = CGFloat(prog)})
             }
-            
+
             section.storeCompletion = {
                 if section.isCached {
                     UIThread.performUI({self.downloadButton.state = .downloaded})
@@ -74,17 +72,17 @@ class SectionTableViewCell: UITableViewCell {
                     UIThread.performUI({self.downloadButton.state = .startDownload})
                 }
             }
-            
+
         } else {
             self.downloadButton.state = .startDownload
         }
     }
-    
-    func initWithSection(_ section: Section, delegate : PKDownloadButtonDelegate) {
+
+    func initWithSection(_ section: Section, delegate: PKDownloadButtonDelegate) {
         titleLabel.text = "\(section.position). \(section.title)"
-        
+
         datesLabel.text = SectionTableViewCell.getTextFromSection(section)
-        
+
         if let progress = section.progress {
             if progress.cost == 0 {
                 scoreProgressView.isHidden = true
@@ -99,13 +97,13 @@ class SectionTableViewCell: UITableViewCell {
             scoreProgressView.isHidden = true
             scoreLabel.isHidden = true
         }
-                
+
         updateDownloadButton(section)
-        
+
         downloadButton.tag = section.position - 1
         downloadButton.delegate = delegate
-        
-        if (!section.isActive && section.testSectionAction == nil) || (section.progressId == nil && !section.isExam)  {
+
+        if (!section.isActive && section.testSectionAction == nil) || (section.progressId == nil && !section.isExam) {
             titleLabel.isEnabled = false
             datesLabel.isEnabled = false
             downloadButton.isHidden = true
@@ -114,7 +112,7 @@ class SectionTableViewCell: UITableViewCell {
             datesLabel.isEnabled = true
             downloadButton.isHidden = false
         }
-        
+
     }
-    
+
 }

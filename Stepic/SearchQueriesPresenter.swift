@@ -10,20 +10,20 @@ import Foundation
 import Alamofire
 
 class SearchQueriesPresenter {
-    weak var view : SearchQueriesView?
+    weak var view: SearchQueriesView?
     var queriesAPI: QueriesAPI
-    
+
     var currentRequest: Request?
     var persistentManager: SearchQueriesPersistentManager
-    
+
     let localSuggestionsMaxCount = 3
-    
+
     init(view: SearchQueriesView, queriesAPI: QueriesAPI, persistentManager: SearchQueriesPersistentManager) {
         self.queriesAPI = queriesAPI
         self.view = view
         self.persistentManager = persistentManager
     }
-    
+
     func getSuggestions(query: String) {
         let localSuggestions = [query.lowercased()] + persistentManager.getTop(for: query, count: localSuggestionsMaxCount)
         self.view?.updateSuggestions(suggestions: localSuggestions)
@@ -45,7 +45,7 @@ class SearchQueriesPresenter {
             }
         })
     }
-    
+
     func didSelect(suggestion: String) {
         persistentManager.didSearch(query: suggestion)
     }

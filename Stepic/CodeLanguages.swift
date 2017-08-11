@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CodeLanguage : String {
+enum CodeLanguage: String {
     case python = "python3"
     case cpp11 = "c++11"
     case cpp = "c++"
@@ -33,8 +33,8 @@ enum CodeLanguage : String {
     case go = "go"
     case pascal = "pascalabc"
     case unsupported = "UNSUPPORTED_LANGUAGE"
-    
-    var highlightr : String {
+
+    var highlightr: String {
         switch self {
         case .python:
             return "python"
@@ -46,7 +46,7 @@ enum CodeLanguage : String {
             return "java"
         case .octave:
             return "octave"
-        case .asm32,.asm64:
+        case .asm32, .asm64:
             return "asmarm"
         case .shell:
             return "shell"
@@ -74,10 +74,9 @@ enum CodeLanguage : String {
             return "cpp"
         }
     }
-    
-    var displayName : String {
+
+    var displayName: String {
         return rawValue
     }
 
 }
-    

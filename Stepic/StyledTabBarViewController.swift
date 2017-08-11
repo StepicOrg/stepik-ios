@@ -10,14 +10,13 @@ import UIKit
 
 class StyledTabBarViewController: UITabBarController {
 
-    
     let titles = [
         NSLocalizedString("MyCourses", comment: ""),
         NSLocalizedString("FindCourses", comment: ""),
         NSLocalizedString("Downloads", comment: ""),
         NSLocalizedString("Certificates", comment: "")
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         UICustomizer.sharedCustomizer.setStepicTabBar(tabBar)
@@ -27,7 +26,7 @@ class StyledTabBarViewController: UITabBarController {
             }
         }
         delegate = self
-        
+
         if !AuthInfo.shared.isAuthorized {
             selectedIndex = 1
         }
@@ -38,8 +37,7 @@ class StyledTabBarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
     /*
     // MARK: - Navigation
 
@@ -64,7 +62,7 @@ class StyledTabBarViewController: UITabBarController {
             return nil
         }
     }
-    
+
 }
 
 extension StyledTabBarViewController : UITabBarControllerDelegate {

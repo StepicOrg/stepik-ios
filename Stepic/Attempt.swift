@@ -10,16 +10,16 @@ import UIKit
 import SwiftyJSON
 
 class Attempt: NSObject {
-    
+
     var id: Int?
-    var dataset : Dataset?
+    var dataset: Dataset?
     var datasetUrl: String?
     var time: String?
-    var status : String?
-    var step : Int
-    var timeLeft : String?
-    var user : Int?
-    
+    var status: String?
+    var step: Int
+    var timeLeft: String?
+    var user: Int?
+
     init(json: JSON, stepName: String) {
         id = json["id"].intValue
         dataset = nil
@@ -32,14 +32,14 @@ class Attempt: NSObject {
         super.init()
         dataset = getDatasetFromJSON(json["dataset"], stepName: stepName)
     }
-    
+
     fileprivate func getDatasetFromJSON(_ json: JSON, stepName: String) -> Dataset? {
         switch stepName {
-        case "choice" : 
+        case "choice" :
             return ChoiceDataset(json: json)
-        case "math", "string", "number", "code" : 
+        case "math", "string", "number", "code" :
             return String(json: json)
-        case "sorting" : 
+        case "sorting" :
             return SortingDataset(json: json)
         case "free-answer":
             return FreeAnswerDataset(json: json)
@@ -47,7 +47,7 @@ class Attempt: NSObject {
             return MatchingDataset(json: json)
         case "fill-blanks":
             return FillBlanksDataset(json: json)
-        default: 
+        default:
             return nil
         }
     }

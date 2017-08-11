@@ -14,31 +14,30 @@ import Foundation
 class ExecutionQueues {
     fileprivate init() {}
     static let sharedQueues = ExecutionQueues()
-    
+
     var connectionAvailableExecutionQueue = ExecutionQueue()
     var connectionAvailableExecutionQueueKey = "connectionAvailableExecutionQueueKey"
-    
-    
+
     func setUpQueueObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(ExecutionQueues.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
     }
-    
+
     @objc func reachabilityChanged(_ notification: Foundation.Notification) {
         if ConnectionHelper.shared.isReachable {
             executeConnectionAvailableQueue()
         }
     }
-    
+
     func executeConnectionAvailableQueue() {
-        connectionAvailableExecutionQueue.executeAll { 
-            newQueue in 
+        connectionAvailableExecutionQueue.executeAll {
+            newQueue in
             print("could not execute \(newQueue.count) tasks, rewriting the queue")
             self.connectionAvailableExecutionQueue = newQueue
             let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
         }
     }
-    
+
     func recoverQueuesFromPersistentStore() {
         let queueRecoveryManager = PersistentQueueRecoveryManager(baseName: "Queues")
         if let recoveredConnectionAvailableExecutionQueue = queueRecoveryManager.recoverQueue(connectionAvailableExecutionQueueKey) {
@@ -47,5 +46,5 @@ class ExecutionQueues {
             print("failed to recover connection available queue from persistent store")
         }
     }
-    
+
 }

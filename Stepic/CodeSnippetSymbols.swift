@@ -9,12 +9,12 @@
 import Foundation
 
 struct CodeSnippetSymbols {
-    static let python : [String] = ["self", ":", "=", ".", "_", ",", "(", ")", "[", "]", "'", "*", "/", "+", "%", ">", "<", "and", "or", "not", "&", "|", "#", "\\", "{", "}", "@", "^", "~", ";"]
-    static let cpp : [String] = ["=", ".", "_", ";", ",", "{", "}", "(", ")", "[", "]", "'", "\"", "*", "+", "/", "%", ">", "<", "&", "|", ":", "@", "^", "\\", "~"]
-    static var java : [String] {
+    static let python: [String] = ["self", ":", "=", ".", "_", ",", "(", ")", "[", "]", "'", "*", "/", "+", "%", ">", "<", "and", "or", "not", "&", "|", "#", "\\", "{", "}", "@", "^", "~", ";"]
+    static let cpp: [String] = ["=", ".", "_", ";", ",", "{", "}", "(", ")", "[", "]", "'", "\"", "*", "+", "/", "%", ">", "<", "&", "|", ":", "@", "^", "\\", "~"]
+    static var java: [String] {
         return cpp
     }
-    
+
     static func snippets(language: CodeLanguage) -> [String] {
         switch language {
         case .python :

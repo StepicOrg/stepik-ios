@@ -12,19 +12,19 @@ import Presentr
 /*
  AlertManager class for streaks alert
  */
-class StreaksStepikAlertManager : AlertManager {
+class StreaksStepikAlertManager: AlertManager {
     func present(alert: UIViewController, inController controller: UIViewController) {
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
 //        controller.present(alert, animated: true, completion: nil)
     }
-    
+
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.roundCorners = true
         return presenter
     }()
-    
-    func construct(notify notifyHandler : @escaping (Void)->Void) -> StreakAlertViewController {
+
+    func construct(notify notifyHandler : @escaping () -> Void) -> StreakAlertViewController {
         let alert = StreakAlertViewController(nibName: "StreakAlertViewController", bundle: nil)
         alert.yesAction = notifyHandler
         return alert

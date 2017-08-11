@@ -10,8 +10,8 @@ import UIKit
 import SwiftyJSON
 
 class SortingDataset: NSObject, Dataset {
-    var options : [String]
-    
+    var options: [String]
+
     required init(json: JSON) {
         options = json["options"].arrayValue.map({return $0.stringValue})
         super.init()

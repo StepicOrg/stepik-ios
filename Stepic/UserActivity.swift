@@ -10,31 +10,31 @@ import Foundation
 import SwiftyJSON
 
 class UserActivity {
-    
+
     var id: Int
     var pins: [Int]
-    
+
     init(json: JSON) {
         self.id = json["id"].intValue
         self.pins = json["pins"].arrayValue.map({return $0.intValue})
     }
-    
-    var currentStreak : Int {
+
+    var currentStreak: Int {
         var res = 0
         for (index, pin) in pins.enumerated() {
             if pin == 0 && index == 0 {
                 continue
             }
             if pin == 0 {
-                return res 
+                return res
             } else {
                 res += 1
             }
         }
         return res
     }
-    
-    var longestStreak : Int {
+
+    var longestStreak: Int {
         var cStreak = 0
         var lStreak = 0
         for pin in pins {
@@ -50,11 +50,11 @@ class UserActivity {
         if cStreak > lStreak {
             lStreak = cStreak
         }
-        
+
         return lStreak
     }
-    
-    var needsToSolveToday : Bool {
+
+    var needsToSolveToday: Bool {
         guard pins.count > 1 else {
             return false
         }

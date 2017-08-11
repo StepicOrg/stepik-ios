@@ -30,7 +30,7 @@ class RGTabView: UIView {
             alpha = 0.566
           }
         }
-        
+
         setNeedsDisplay()
       }
     }
@@ -39,38 +39,38 @@ class RGTabView: UIView {
   var indicatorColor: UIColor = UIColor.lightGray
   var orientation: RGTabOrientation = .horizontalTop
   var style: RGTabStyle = .none
-  
+
   init(frame: CGRect, indicatorColor: UIColor, indicatorHW: CGFloat, style: RGTabStyle, orientation: RGTabOrientation) {
     super.init(frame: frame)
-    
+
     self.indicatorColor = indicatorColor
     self.orientation = orientation
     self.indicatorHW = indicatorHW
     self.style = style
-    
+
     initSelf()
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    
+
     initSelf()
   }
-  
+
   func initSelf() {
     backgroundColor = UIColor.clear
-    
+
     if style == .inactiveFaded {
       alpha = 0.566
     }
   }
-  
+
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    
+
     if !(subviews[0] is RGTabBarItem) {
       let bezierPath: UIBezierPath = UIBezierPath()
-      
+
       switch orientation {
       case .horizontalTop:
         bezierPath.move(to: CGPoint(x: 0, y: rect.height - indicatorHW / 2))
@@ -89,13 +89,13 @@ class RGTabView: UIView {
         bezierPath.addLine(to: CGPoint(x: rect.width - (indicatorHW / 2), y: rect.height))
         bezierPath.lineWidth = indicatorHW
       }
-      
+
       if selected {
         indicatorColor.setStroke()
       } else {
         UIColor(white: 0, alpha: 0).setStroke()
       }
-      
+
       bezierPath.stroke()
     }
   }
