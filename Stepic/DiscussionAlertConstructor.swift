@@ -17,7 +17,7 @@ class DiscussionAlertConstructor {
         for link in links {
             alert.addAction(UIAlertAction(title: link.text, style: .default, handler: {
                     _ in
-                    if let url = URL(string: link.link.addingPercentEscapes(using: String.Encoding.utf8)!) {
+                    if let url = URL(string: link.link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) {
                         openURLBlock(url)
                     }
                 })

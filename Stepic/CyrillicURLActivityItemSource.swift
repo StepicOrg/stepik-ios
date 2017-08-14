@@ -13,7 +13,7 @@ class CyrillicURLActivityItemSource: NSObject, UIActivityItemSource {
 
     var link: String
     var url: URL? {
-        return URL(string: link.addingPercentEscapes(using: String.Encoding.utf8)!)
+        return URL(string: link.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
     }
 
     init(link: String) {
