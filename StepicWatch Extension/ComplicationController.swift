@@ -17,9 +17,7 @@ extension String {
   }
 }
 
-
 class ComplicationController: NSObject, CLKComplicationDataSource {
-
 
   var dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -29,9 +27,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     // I ASSUME IT'S SORTED BY DATE
     var deadlines = [Date: String]() // time: topic
-  
+
     let NoDeadlines = Localizables.noDeadlines
-  
+
     func fetchDeadlinesFromUD() -> [Date: String] {
 
       var dealines: [Date: String] = [:]
@@ -55,31 +53,31 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
       return dealines
     }
-  
+
     // MARK: - Timeline Configuration
-    
+
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([.forward])
     }
-    
+
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
       let currentDate = Date()
       handler(currentDate)
     }
-    
+
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
       let currentDate = Date()
       let endDate =
         currentDate.addingTimeInterval(TimeInterval(2 * 24 * 60 * 60))
       handler(endDate)
     }
-  
+
     func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationPrivacyBehavior) -> Void) {
         handler(.showOnLockScreen)
     }
-    
+
     // MARK: - Timeline Population
-    
+
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
         deadlines = fetchDeadlinesFromUD()
@@ -101,28 +99,28 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
   func createEmptyTimeLineEntity(date: Date = Date()) -> CLKComplicationTimelineEntry {
     return createTimeLineEntry(headerText: "--:--", bodyText: NoDeadlines, date: date)
   }
-  
+
   func createTimeLineEntry(headerText: String, bodyText: String, date: Date) -> CLKComplicationTimelineEntry {
-    
+
     let template = CLKComplicationTemplateModularLargeStandardBody()
     let clock = UIImage(named: "clock")
-    
+
     template.headerImageProvider =
       CLKImageProvider(onePieceImage: clock!)
     template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
     template.body1TextProvider = CLKSimpleTextProvider(text: bodyText)
-    
+
     let entry = CLKComplicationTimelineEntry(date: date,
                                              complicationTemplate: template)
-    
+
     return(entry)
   }
-  
+
     func getTimelineEntries(for complication: CLKComplication, before date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries prior to the given date
         handler(nil)
     }
-    
+
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
       deadlines = fetchDeadlinesFromUD()
@@ -136,10 +134,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         }
 
         let timeString = dateFormatter.string(from: key)
-        
+
         let entry = createTimeLineEntry(headerText: timeString, bodyText: deadlines[key] ?? NoDeadlines, date: key)
         lastDate = key.addingTimeInterval(1)
-        
+
         timeLineEntryArray.append(entry)
       }
 
@@ -150,23 +148,23 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
       handler(timeLineEntryArray)
     }
-    
+
     // MARK: - Placeholder Templates
-    
+
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
       let template = CLKComplicationTemplateModularLargeStandardBody()
       let clock = UIImage(named: "clock")
-      
+
       template.headerImageProvider =
         CLKImageProvider(onePieceImage: clock!)
-      
+
       template.headerTextProvider =
         CLKSimpleTextProvider(text: Localizables.coursesStepik)
       template.body1TextProvider =
         CLKSimpleTextProvider(text: Localizables.deadlines)
-      
+
       handler(template)
     }
-  
+
 }

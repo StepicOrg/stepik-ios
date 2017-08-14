@@ -19,7 +19,7 @@ extension DataConvertable {
 		let dic = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String: AnyObject]
 		self.init(dictionary: dic)
 	}
-	
+
 	func toData() -> Data {
 		return NSKeyedArchiver.archivedData(withRootObject: self.toDictionary())
 	}
@@ -33,7 +33,7 @@ extension Array where Element: DataConvertable {
 		}
 		return NSKeyedArchiver.archivedData(withRootObject: result)
 	}
-	
+
 	static func fromData(data: Data) -> [Element] {
 		var result: [Element] = []
 		let input = NSKeyedUnarchiver.unarchiveObject(with: data) as! [Data]
@@ -42,5 +42,5 @@ extension Array where Element: DataConvertable {
 		}
 		return result
 	}
-	
+
 }

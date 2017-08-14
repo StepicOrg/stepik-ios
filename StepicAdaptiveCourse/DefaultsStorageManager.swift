@@ -10,13 +10,13 @@ import Foundation
 
 class DefaultsStorageManager {
     static let shared = DefaultsStorageManager()
-    
+
     private let onboardingFinishedKey = "isOnboardingShown"
     private let onboardingRatingFinishedKey = "isRatingOnboardingShown"
     private let accountEmailKey = "account_email"
     private let accountPasswordKey = "account_password"
     let defaults = UserDefaults.standard
-    
+
     var isOnboardingFinished: Bool {
         get {
             return defaults.bool(forKey: onboardingFinishedKey)
@@ -25,7 +25,7 @@ class DefaultsStorageManager {
             defaults.set(newValue, forKey: onboardingFinishedKey)
         }
     }
-    
+
     var isRatingOnboardingFinished: Bool {
         get {
             return defaults.bool(forKey: onboardingRatingFinishedKey)
@@ -34,7 +34,7 @@ class DefaultsStorageManager {
             defaults.set(newValue, forKey: onboardingRatingFinishedKey)
         }
     }
-    
+
     var accountEmail: String? {
         get {
             return defaults.string(forKey: accountEmailKey)
@@ -43,7 +43,7 @@ class DefaultsStorageManager {
             return defaults.set(newValue, forKey: accountEmailKey)
         }
     }
-    
+
     var accountPassword: String? {
         get {
             return defaults.string(forKey: accountPasswordKey)

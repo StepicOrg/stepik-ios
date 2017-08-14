@@ -13,13 +13,13 @@ class LocalNotificationManager {
         if cancelPrevious {
             cancelStreakLocalNotifications()
         }
-        
+
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
         var localStartHour = UTCStartHour + timeZoneDiff
         if localStartHour < 0 {
             localStartHour = 24 + localStartHour
         }
-        
+
         if localStartHour > 23 {
             localStartHour = localStartHour - 24
         }
@@ -34,10 +34,10 @@ class LocalNotificationManager {
         notification.fireDate = date
         notification.repeatInterval = NSCalendar.Unit.day
         notification.soundName = "default_sound.wav"
-            
+
         UIApplication.shared.scheduleLocalNotification(notification)
     }
-    
+
     static func cancelStreakLocalNotifications() {
         UIApplication.shared.cancelAllLocalNotifications()
     }

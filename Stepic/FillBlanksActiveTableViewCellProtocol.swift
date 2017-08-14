@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FillBlanksActiveTableViewCellProtocol {
-    var result : String {
+    var result: String {
         get
     }
 }

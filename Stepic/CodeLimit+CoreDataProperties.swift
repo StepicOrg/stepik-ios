@@ -13,17 +13,17 @@ extension CodeLimit {
     @NSManaged var managedLanguage: String?
     @NSManaged var managedMemory: NSNumber?
     @NSManaged var managedTime: NSNumber?
-    
+
     @NSManaged var managedOptions: StepOptions?
-    
-    class var oldEntity : NSEntityDescription {
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: CodeLimit.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
+
     var languageString: String {
         get {
             return managedLanguage ?? ""
@@ -32,7 +32,7 @@ extension CodeLimit {
             managedLanguage = value
         }
     }
-    
+
     var memory: Double {
         get {
             return managedMemory?.doubleValue ?? 0.0
@@ -41,7 +41,7 @@ extension CodeLimit {
             managedMemory = value as NSNumber?
         }
     }
-    
+
     var time: Double {
         get {
             return managedTime?.doubleValue ?? 0.0

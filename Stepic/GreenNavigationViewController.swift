@@ -15,7 +15,7 @@ class GreenNavigationViewController: UINavigationController {
 
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
@@ -26,7 +26,6 @@ class GreenNavigationViewController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

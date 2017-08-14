@@ -10,13 +10,13 @@ import Foundation
 import SwiftyJSON
 
 class DiscussionProxy {
-    
-    var discussionIds : [Int]
+
+    var discussionIds: [Int]
     var id: String
-    
+
     init(json: JSON) {
-        discussionIds = json["discussions"].arrayValue.flatMap{
-            return $0.int
+        discussionIds = json["discussions"].arrayValue.flatMap {
+            $0.int
         }
         id = json["id"].stringValue
     }

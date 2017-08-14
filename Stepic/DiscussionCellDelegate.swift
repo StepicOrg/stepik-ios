@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DiscussionCellDelegate : class {
-    func didSelect(_ indexPath: IndexPath, deselectBlock: ((Void) -> Void))
+    func didSelect(_ indexPath: IndexPath, deselectBlock: (() -> Void))
 }

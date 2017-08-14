@@ -10,19 +10,19 @@ import UIKit
 import SwiftyJSON
 
 class FreeAnswerReply: NSObject, Reply {
-    var text : String
+    var text: String
     //TODO: further implementations should possibly contain attachments!
-    
+
     init(text: String) {
         self.text = text
     }
-    
+
     required init(json: JSON) {
         text = json["text"].stringValue
         super.init()
     }
-    
-    var dictValue : [String : Any] {
-        return ["text" : text as NSObject, "attachments" : []]
+
+    var dictValue: [String : Any] {
+        return ["text": text as NSObject, "attachments": []]
     }
 }

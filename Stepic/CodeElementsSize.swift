@@ -11,10 +11,10 @@ import Foundation
 enum CodeInputAccessorySize {
     case small
     case big
-    
+
     typealias SizeParams = (textSize: CGFloat, viewHeight: CGFloat, minAccessoryWidth: CGFloat)
-    
-    var realSizes : SizeParams {
+
+    var realSizes: SizeParams {
         switch self {
         case .small:
             return (textSize: 17, viewHeight: 50, minAccessoryWidth: 25)
@@ -27,10 +27,10 @@ enum CodeInputAccessorySize {
 enum CodeSuggestionsSize {
     case small
     case big
-    
+
     typealias SizeParams = (suggestionHeight: CGFloat, fontSize: CGFloat)
-    
-    var realSizes : SizeParams {
+
+    var realSizes: SizeParams {
         switch self {
         case .small:
             return (suggestionHeight: 24, fontSize: 13)
@@ -43,10 +43,10 @@ enum CodeSuggestionsSize {
 enum EditorSize {
     case small
     case big
-    
+
     typealias SizeParams = (editorHeight: CGFloat, fontSize: CGFloat)
-    
-    var realSizes : SizeParams {
+
+    var realSizes: SizeParams {
         switch self {
         case .small:
             return (editorHeight: 200, fontSize: 13)
@@ -59,7 +59,7 @@ enum EditorSize {
 enum CodeQuizElementsSize {
     case small
     case big
-    
+
     typealias SizeParams = (toolbar: CodeInputAccessorySize, suggestions: CodeSuggestionsSize, editor: EditorSize)
     var elements: SizeParams {
         switch self {
@@ -69,6 +69,5 @@ enum CodeQuizElementsSize {
             return (toolbar: .big, suggestions: .big, editor: .big)
         }
     }
-    
-    
+
 }

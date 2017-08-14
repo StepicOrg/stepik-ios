@@ -12,12 +12,12 @@ struct DeviceInfo {
     static func isIPad() -> Bool {
         return UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
     }
-    
-    static var deviceInfoString : String {
+
+    static var deviceInfoString: String {
         let d = UIDevice.current
         return "\(d.model) \(d.name) \(d.systemName) \(d.systemVersion)"
     }
-    
+
     static var deviceModelString: String {
         let d = UIDevice.current
         return "\(d.model)"

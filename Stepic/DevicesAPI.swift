@@ -11,23 +11,23 @@ import Alamofire
 import SwiftyJSON
 
 class DevicesAPI: NSObject {
-    
+
     let name = "devices"
-    let manager : Alamofire.SessionManager
-    
+    let manager: Alamofire.SessionManager
+
     override init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5
         manager = Alamofire.SessionManager(configuration: configuration)
     }
-    
-    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)->Void)) -> Request {
+
+    @discardableResult func create(_ device: Device, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         let params = ["device": device.getJSON()]
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
-            
+
             var error = response.result.error
-            var json : JSON = [:]
+            var json: JSON = [:]
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
@@ -36,38 +36,37 @@ class DevicesAPI: NSObject {
                 json = response.result.value!
             }
             let response = response.response
-            
-            
+
             print(json)
-            
+
             if let e = error as NSError? {
                 errorHandler("CREATE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
-            
+
             if response?.statusCode != 201 {
                 errorHandler("CREATE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
-            
+
             let device = Device(json: json["devices"].arrayValue[0])
             success(device)
-            
+
             return
         })
     }
-    
-    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Void)->Void), error errorHandler: @escaping ((DeleteDeviceError)->Void)) -> Request {
-        
+
+    @discardableResult func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping (() -> Void), error errorHandler: @escaping ((DeleteDeviceError) -> Void)) -> Request {
+
         return manager.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", method: .delete, headers: headers).response {
             response in
 //            _, response, data, error in
-            
+
             if let e = response.error as NSError? {
                 errorHandler(.other(error: e, code: nil, message: "DESTROY device: error \(e.domain) \(e.code): \(e.localizedDescription)"))
                 return
             }
-            
+
             if let code = response.response?.statusCode {
                 if code != 204 && code != 404 {
                     errorHandler(.other(error: nil, code: code, message: "DESTROY device: bad response status code \(String(describing: response.response?.statusCode))"))
@@ -77,19 +76,19 @@ class DevicesAPI: NSObject {
                     errorHandler(.notFound)
                 }
             }
-            
+
             success()
-            
+
             return
         }
     }
-    
-    func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device)->Void), error errorHandler: @escaping ((String)-> Void)) -> Request {
+
+    func retrieve(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer, success: @escaping ((Device) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request {
         return Alamofire.request("\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)", headers: headers).responseSwiftyJSON({
             response in
-            
+
             var error = response.result.error
-            var json : JSON = [:]
+            var json: JSON = [:]
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
@@ -98,26 +97,25 @@ class DevicesAPI: NSObject {
                 json = response.result.value!
             }
             let response = response.response
-            
-            
+
             if let e = error as NSError? {
                 errorHandler("RETRIEVE device: error \(e.domain) \(e.code): \(e.localizedDescription)")
                 return
             }
-            
+
             if response?.statusCode != 200 {
                 errorHandler("RETRIEVE device: bad response status code \(String(describing: response?.statusCode))")
                 return
             }
-            
+
             let device = Device(json: json["devices"].arrayValue[0])
             success(device)
-            
+
             return
         })
     }
 }
 
-enum DeleteDeviceError : Error {
+enum DeleteDeviceError: Error {
     case notFound, other(error: Error?, code: Int?, message: String?)
 }

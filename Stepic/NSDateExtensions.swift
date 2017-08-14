@@ -16,10 +16,10 @@ extension Date {
         if withTime {
             formatter.timeStyle = .short
         }
-        
+
         return formatter.string(from: self)
     }
-    
+
 }
 
 extension TimeInterval {
@@ -30,7 +30,7 @@ extension TimeInterval {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         if (formatter.date(from: timeString)?.timeIntervalSince1970) == nil {
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        } 
+        }
         self = formatter.date(from: timeString)!.timeIntervalSince1970
     }
 }

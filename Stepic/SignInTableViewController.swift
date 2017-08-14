@@ -18,7 +18,7 @@ class SignInTableViewController: UITableViewController {
     @IBOutlet weak var passwordTextField: HoshiTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var socialLabel: UILabel!
-    
+
     func setupLocalizations() {
         emailTextField.placeholder = NSLocalizedString("Email", comment: "")
         passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
@@ -26,40 +26,40 @@ class SignInTableViewController: UITableViewController {
         socialLabel.text = NSLocalizedString("SocialSignIn", comment: "")
         forgotPasswordButton.setTitle(NSLocalizedString("ForgotPassword", comment: ""), for: UIControlState())
     }
-    
-    var success : ((Void)->Void)? {
+
+    var success : (() -> Void)? {
         return (navigationController as? AuthNavigationViewController)?.success
     }
-    
+
     @IBAction func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLocalizations()
         passwordTextField.isSecureTextEntry = true
-        
+
         emailTextField.keyboardType = .emailAddress
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-        
+
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
         signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
-        
+
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.clear
-        
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(SignInTableViewController.tap))
         self.view.addGestureRecognizer(tapG)
-        
+
         tableView.panGestureRecognizer.cancelsTouchesInView = false
         tableView.delaysContentTouches = false
 
 //        print("table view cancels touches -> \(tableView.panGestureRecognizer.cancelsTouchesInView)")
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(SignInTableViewController.didGetAuthentificationCode(_:)), name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -72,19 +72,19 @@ class SignInTableViewController: UITableViewController {
         print("entered didGetAuthentificationCode")
 
         //TODO: Implement WebControllerManager
-        
+
         WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
             self.authentificateWithCode((notification as NSNotification).userInfo?["code"] as? String ?? "")
         }, error: {
             errorMessage in
             print(errorMessage)
-        })        
+        })
     }
-    
+
     func tap() {
         self.view.endEditing(true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -102,7 +102,6 @@ class SignInTableViewController: UITableViewController {
         return 1
     }
 
-    
     func authentificateWithCode(_ code: String) {
         SVProgressHUD.show()
         AuthManager.sharedManager.logInWithCode(code,
@@ -115,17 +114,17 @@ class SignInTableViewController: UITableViewController {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI { 
+                    UIThread.performUI {
                         self.navigationController?.dismiss(animated: true, completion: {
                             [weak self] in
                             self?.success?()
                         })
                     }
                     }, error: {
-                        e in
+                        _ in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI { 
+                        UIThread.performUI {
                             self.navigationController?.dismiss(animated: true, completion: {
                                 [weak self] in
                                 self?.success?()
@@ -133,15 +132,15 @@ class SignInTableViewController: UITableViewController {
                         }
                 })
             }, failure: {
-                e in
+                _ in
                 SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
-    
+
     @IBAction func signInPressed(_ sender: UIButton) {
-        
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: nil)
-        
+
         SVProgressHUD.show()
         _ = AuthManager.sharedManager.logInWithUsername(emailTextField.text!, password: passwordTextField.text!,
             success: {
@@ -153,17 +152,17 @@ class SignInTableViewController: UITableViewController {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
                     SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                    UIThread.performUI { 
+                    UIThread.performUI {
                         self.navigationController?.dismiss(animated: true, completion: {
                             [weak self] in
                             self?.success?()
                         })
                     }
                     }, error: {
-                        e in
+                        _ in
                         print("successfully signed in, but could not get user")
                         SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                        UIThread.performUI{ 
+                        UIThread.performUI {
                             self.navigationController?.dismiss(animated: true, completion: {
                                 [weak self] in
                                 self?.success?()
@@ -171,17 +170,17 @@ class SignInTableViewController: UITableViewController {
                         }
                 })
             }, failure: {
-                e in
+                _ in
                 SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
-        
+
     @IBAction func forgotPasswordPressed(_ sender: UIButton) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self, 
-            withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)        
+        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self,
+            withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
 //        UIApplication.sharedApplication().openURL(NSURL(string: "https://stepic.org/accounts/password/reset/")!)
     }
-    
+
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
@@ -227,7 +226,6 @@ class SignInTableViewController: UITableViewController {
     }
     */
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -246,7 +244,5 @@ class SignInTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    
 
 }
-

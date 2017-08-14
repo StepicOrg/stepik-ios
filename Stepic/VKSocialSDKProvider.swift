@@ -9,32 +9,32 @@
 import Foundation
 import VK_ios_sdk
 
-class VKSocialSDKProvider : NSObject, SocialSDKProvider {
-    
+class VKSocialSDKProvider: NSObject, SocialSDKProvider {
+
     public static let instance = VKSocialSDKProvider()
-    
+
     let name = "vk"
-    
-    private var sdkInstance : VKSdk
-    
+
+    private var sdkInstance: VKSdk
+
     private override init() {
         sdkInstance = VKSdk.initialize(withAppId: StepicApplicationsInfo.SocialInfo.AppIds.vk)
         super.init()
         sdkInstance.register(self)
     }
-    
+
     func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
         self.successHandler = successHandler
         self.errorHandler = errorHandler
-        
+
         if VKSdk.isLoggedIn() {
             VKSdk.forceLogout()
         }
         VKSdk.authorize(["email"])
     }
-    
-    fileprivate var successHandler : ((String, String?) -> Void)? = nil
-    fileprivate var errorHandler : ((SocialSDKError) -> Void)? = nil
+
+    fileprivate var successHandler: ((String, String?) -> Void)?
+    fileprivate var errorHandler: ((SocialSDKError) -> Void)?
 }
 
 extension VKSocialSDKProvider : VKSdkDelegate {
@@ -55,6 +55,6 @@ extension VKSocialSDKProvider : VKSdkDelegate {
         if let token = result.token.accessToken {
             successHandler?(token, result.token.email)
             return
-        } 
+        }
     }
 }

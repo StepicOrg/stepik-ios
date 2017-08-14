@@ -20,17 +20,17 @@ struct PlaybackCommandEntity: DataConvertable {
 		case forward
 		case backward
 	}
-	
+
 	var command: Command
-	
+
 	init(command: Command) {
 		self.command = command
 	}
-	
+
 	init(dictionary: [String: AnyObject]) {
 		self.command = Command(rawValue: dictionary["command"] as! Int)!
 	}
-	
+
 	func toDictionary() -> [String: AnyObject] {
 		return ["command": command.rawValue as AnyObject]
 	}

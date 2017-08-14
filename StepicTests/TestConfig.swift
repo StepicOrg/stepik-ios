@@ -9,9 +9,9 @@
 import Foundation
 
 class TestConfig {
-    
+
     static let sharedConfig = TestConfig()
-    
+
     private init() {
         let bundle = Bundle(for: type(of: self) as AnyClass)
         if let path = bundle.path(forResource: "TestInfo", ofType: "plist") {
@@ -24,7 +24,7 @@ class TestConfig {
             }
         }
     }
-    
+
     var username = ""
     var password = ""
 }

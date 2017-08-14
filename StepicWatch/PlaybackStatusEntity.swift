@@ -21,17 +21,17 @@ struct PlaybackStatusEntity: DataConvertable {
 		case pause
 		case play
 	}
-	
+
 	var status: Status
-	
+
 	init(status: Status) {
 		self.status = status
 	}
-	
+
 	init(dictionary: [String: AnyObject]) {
 		self.status = Status(rawValue: dictionary["status"] as! Int)!
 	}
-	
+
 	func toDictionary() -> [String: AnyObject] {
 		return ["status": status.rawValue as AnyObject]
 	}

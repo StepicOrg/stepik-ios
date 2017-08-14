@@ -10,13 +10,12 @@ import UIKit
 
 class SortingQuizTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var textContainerView: UIView!
-        
+
     var optionLabel: UILabel?
     var optionWebView: FullHeightWebView?
-    
-    var webViewHelper : CellWebViewHelper?
+
+    var webViewHelper: CellWebViewHelper?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +39,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", to: textContainerView)
         optionLabel.isHidden = true
     }
-    
+
     func initWebView() {
         guard optionWebView == nil else { return }
         optionWebView = FullHeightWebView()
@@ -50,8 +49,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
-    
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         optionWebView?.isHidden = true
@@ -59,18 +57,18 @@ class SortingQuizTableViewCell: UITableViewCell {
     }
 
     var sortable: Bool = true
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     class func getHeightForText(text: String, width: CGFloat, sortable: Bool) -> CGFloat {
         return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - (sortable  ? 60 : 16))) + 17
     }
 }
 
 extension SortingQuizTableViewCell {
-    
+
     //All optimization logics is now encapsulated here
     func setHTMLText(_ text: String, width: CGFloat, finishedBlock: @escaping (CGFloat) -> Void) {
         initLabel()

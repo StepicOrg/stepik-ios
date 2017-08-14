@@ -14,7 +14,7 @@ import Kanna
  */
 class HTMLParsingUtil {
     fileprivate init() {}
-    
+
     static func getLink(_ htmlString: String, index: Int) -> String? {
 //        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
 //            if index < doc.css("a").count {
@@ -30,11 +30,11 @@ class HTMLParsingUtil {
             return nil
         }
     }
-    
+
     static func getAllLinksWithText(_ htmlString: String, onlyTags: Bool = true) -> [(link: String, text: String)] {
         var res = [(link: String, text: String)]()
         if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
-            res += doc.css("a").flatMap{
+            res += doc.css("a").flatMap {
                 if let link = $0["href"],
                     let text = $0.text {
                     return (link: link, text: text)
@@ -43,17 +43,17 @@ class HTMLParsingUtil {
                 }
             }
         }
-        
+
         if !onlyTags {
             let types: NSTextCheckingResult.CheckingType = .link
             let detector = try? NSDataDetector(types: types.rawValue)
-            
+
             guard let detect = detector else {
                 return res
             }
-            
-            let matches = detect.matches(in: htmlString, options: .reportCompletion, range: NSMakeRange(0, htmlString.characters.count))
-            
+
+            let matches = detect.matches(in: htmlString, options: .reportCompletion, range: NSRange(location: 0, length: htmlString.characters.count))
+
             for match in matches {
                 if let urlString = match.url?.absoluteString {
                     if res.index(where: {$0.link == urlString}) == nil {
@@ -62,14 +62,14 @@ class HTMLParsingUtil {
                 }
             }
         }
-        
+
         return res
     }
-    
+
     static func getAlliFrameLinks(_ htmlString: String) -> [String] {
         var res = [String]()
         if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
-            res += doc.css("iframe").flatMap{
+            res += doc.css("iframe").flatMap {
                 if let link = $0["src"] {
                     return link
                 } else {
@@ -79,7 +79,7 @@ class HTMLParsingUtil {
         }
         return res
     }
-    
+
     static func getImageSrcLinks(_ htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let imgNodes = doc.css("img")
@@ -88,7 +88,7 @@ class HTMLParsingUtil {
             return []
         }
     }
-    
+
     static func getCodeStrings(_ htmlString: String) -> [String] {
         if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
             let codeNodes = doc.css("code")

@@ -9,17 +9,17 @@
 import UIKit
 
 class VideoDownload: NSObject {
-    
-    var download : TCBlobDownload
-    var videoId : Int
-    var lessonId : Int?
-    var sectionId : Int?
-    
-    var progress : Float {
+
+    var download: TCBlobDownload
+    var videoId: Int
+    var lessonId: Int?
+    var sectionId: Int?
+
+    var progress: Float {
         return download.progress
     }
-    
-    init(download : TCBlobDownload, videoId : Int) {
+
+    init(download: TCBlobDownload, videoId: Int) {
         self.download = download
         self.videoId = videoId
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -19,7 +19,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -28,20 +28,19 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class Parser: NSObject {
     static var sharedParser = Parser()
-    
+
     fileprivate override init() {}
-    
+
     func dateFromTimedateJSON(_ json: JSON) -> Date? {
-        if let date = json.string { 
+        if let date = json.string {
             return Date(timeIntervalSince1970: TimeInterval(timeString: date))
         } else {
             return nil
         }
     }
-    
+
     func codeFromURL(_ url: URL) -> String? {
         return url.getKeyVals()?["code"]
     }
@@ -49,7 +48,7 @@ class Parser: NSObject {
 
 extension URL {
     func getKeyVals() -> Dictionary<String, String>? {
-        var results = [String:String]()
+        var results = [String: String]()
         let keyValues = self.query?.components(separatedBy: "&")
         if keyValues?.count > 0 {
             for pair in keyValues! {
@@ -58,7 +57,7 @@ extension URL {
                     results.updateValue(kv[1], forKey: kv[0])
                 }
             }
-            
+
         }
         return results
     }

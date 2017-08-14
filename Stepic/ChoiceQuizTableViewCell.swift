@@ -14,11 +14,11 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var checkBox: BEMCheckBox!
-    
+
     var optionLabel: UILabel?
     var optionWebView: FullHeightWebView?
-    
-    var webViewHelper : CellWebViewHelper?
+
+    var webViewHelper: CellWebViewHelper?
 
     func initLabel() {
         guard optionLabel == nil else { return }
@@ -44,7 +44,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         checkBox.onAnimationType = .fill
@@ -57,18 +57,18 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         optionWebView?.isHidden = true
         optionLabel?.isHidden = true
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     class func getHeightForText(text: String, width: CGFloat) -> CGFloat {
         return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68)) + 17
     }
 }
 
 extension ChoiceQuizTableViewCell {
-    
+
     //All optimization logics is now encapsulated here
     func setHTMLText(_ text: String, width: CGFloat, finishedBlock: @escaping (CGFloat) -> Void) {
         initLabel()

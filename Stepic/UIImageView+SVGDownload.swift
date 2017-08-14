@@ -13,12 +13,12 @@ import Alamofire
 
 extension UIImageView {
     func setImageWithURL(url optionalURL: URL?, placeholder: UIImage) {
-        
+
         guard let url = optionalURL else {
             self.image = placeholder
-            return 
+            return
         }
-        
+
         if url.pathExtension != "svg" {
             self.sd_setImage(with: url, placeholderImage: placeholder)
         } else {
@@ -27,15 +27,15 @@ extension UIImageView {
                 response in
                 if response.result.error != nil {
                     return
-                } 
-                
+                }
+
                 guard let data = response.result.value else {
                     return
                 }
-                
+
                 DispatchQueue.global(qos: .userInitiated).async {
                     let svgImage = SVGKImage(data: data)
-                    if !(svgImage?.hasSize() ?? true)  {
+                    if !(svgImage?.hasSize() ?? true) {
                         svgImage?.size = CGSize(width: 200, height: 200)
                     }
                     let img = svgImage?.uiImage ?? placeholder

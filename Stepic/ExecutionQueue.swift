@@ -11,17 +11,17 @@ import Foundation
 /*
  Contains and runs a queue of Executable objects 
  */
-class ExecutionQueue : DictionarySerializable {
-    fileprivate var queue : [Executable] = []
-    
-    var count : Int {
+class ExecutionQueue: DictionarySerializable {
+    fileprivate var queue: [Executable] = []
+
+    var count: Int {
         return queue.count
     }
-    
+
     func push(_ task: Executable) {
         queue += [task]
     }
-    
+
     func executeAll(_ completion : @escaping ((ExecutionQueue) -> Void)) {
         print("executing all count -> \(count)")
         var notCompletedExecutionQueue = ExecutionQueue()
@@ -30,22 +30,22 @@ class ExecutionQueue : DictionarySerializable {
         func didExecuteAll() -> Bool {
             return notCompletedExecutionQueue.count + executedCount == queue.count
         }
-        
+
         func completeIfAllExecuted() {
             if didExecuteAll() {
                 completion(notCompletedExecutionQueue)
             }
         }
-        
-        func executeTasks(completion: @escaping (Void) -> Void) {
+
+        func executeTasks(completion: @escaping () -> Void) {
             guard queue.count > 0 else {
                 completion()
                 return
             }
             executeTask(id: 0, completion: completion)
         }
-        
-        func executeTask(id: Int, completion: @escaping (Void) -> Void) {
+
+        func executeTask(id: Int, completion: @escaping () -> Void) {
             guard id < queue.count else {
                 completion()
                 return
@@ -61,15 +61,15 @@ class ExecutionQueue : DictionarySerializable {
                 executeTask(id: id + 1, completion: completion)
             })
         }
-        
+
         executeTasks {
             completion(notCompletedExecutionQueue)
         }
-        
+
     }
-    
+
     init() {}
-    
+
     required init?(dictionary: [String : Any]) {
         let taskRecoveryManager = PersistentTaskRecoveryManager(baseName: "Tasks")
         if let ids = dictionary["task_ids"] as? [String] {
@@ -80,17 +80,17 @@ class ExecutionQueue : DictionarySerializable {
             }
         }
     }
-    
+
     func serializeToDictionary() -> [String : Any] {
         var ids = [String]()
         for executable in queue {
             ids += [executable.id]
         }
-        let res : [String: Any] = ["task_ids" : ids]
-        
+        let res: [String: Any] = ["task_ids": ids]
+
         print(res)
-        
+
         return res
     }
-    
+
 }

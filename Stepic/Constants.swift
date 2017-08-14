@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct Constants {    
+struct Constants {
     static let placeholderImage = UIImage(named: "stepic_logo_black_and_white")!
-    
+
     static let joinCourseButtonText = NSLocalizedString("JoinCourse", comment: "")
     static let alreadyJoinedCourseButtonText = NSLocalizedString("Studying", comment: "")
 }

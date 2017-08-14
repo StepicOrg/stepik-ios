@@ -150,20 +150,20 @@ extension TCBlobDownload: CustomStringConvertible {
     public var description: String {
         var parts: [String] = []
         var state: String
-        
+
         switch self.downloadTask.state {
             case .running: state = "running"
             case .completed: state = "completed"
             case .canceling: state = "canceling"
             case .suspended: state = "suspended"
         }
-        
+
         parts.append("TCBlobDownload")
         parts.append("URL: \(self.downloadTask.originalRequest!.url)")
         parts.append("Download task state: \(state)")
         parts.append("destinationPath: \(self.directory)")
         parts.append("fileName: \(self.fileName)")
-        
+
         return parts.joined(separator: " | ")
     }
 }

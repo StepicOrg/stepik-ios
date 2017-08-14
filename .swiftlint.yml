@@ -1,0 +1,49 @@
+excluded: 
+  - Pods
+
+disabled_rules:
+  - block_based_kvo
+  - closure_parameter_position
+  - compiler_protocol_init
+  - control_statement
+  - custom_rules
+  - cyclomatic_complexity
+  - discarded_notification_center_observer
+  - discouraged_direct_init
+  - dynamic_inline
+  - file_length
+  - for_where
+  - force_cast
+  - force_try
+  - function_body_length
+  - function_parameter_count
+  - generic_type_name
+  - identifier_name
+  - implicit_getter
+  - large_tuple
+  - line_length
+  - notification_center_detachment
+  - private_unit_test
+  - redundant_string_enum_value
+  - shorthand_operator
+  - syntactic_sugar
+  - type_body_length
+  - type_name
+  - unused_enumerated
+  - unused_optional_binding
+  - valid_ibinspectable
+  - vertical_parameter_alignment
+  - todo
+  - nesting
+  - empty_enum_arguments
+
+opt_in_rules:
+  - explicit_init 
+  - implicit_return
+  - joined_default_parameter
+  - nimble_operator
+  - operator_usage_whitespace
+  - redundant_nil_coalescing
+  - unneeded_parentheses_in_closure_argument
+
+

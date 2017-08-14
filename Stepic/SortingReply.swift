@@ -10,18 +10,18 @@ import UIKit
 import SwiftyJSON
 
 class SortingReply: NSObject, Reply {
-    var ordering : [Int]
-    
+    var ordering: [Int]
+
     init(ordering: [Int]) {
         self.ordering = ordering
     }
-    
+
     required init(json: JSON) {
         ordering = json["ordering"].arrayValue.map({return $0.intValue})
         super.init()
     }
-    
-    var dictValue : [String : Any] {
-        return ["ordering" : ordering]
+
+    var dictValue: [String : Any] {
+        return ["ordering": ordering]
     }
 }

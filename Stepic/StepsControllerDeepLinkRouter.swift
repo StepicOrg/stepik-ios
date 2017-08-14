@@ -8,48 +8,43 @@
 
 import Foundation
 
-
 //Tip: Inherited from NSObject in order to be able to find a selector
-class StepsControllerDeepLinkRouter : NSObject {
+class StepsControllerDeepLinkRouter: NSObject {
     func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, success successHandler : @escaping ((UIViewController) -> Void), error errorHandler : @escaping ((String) -> Void)) {
         //Download lesson and pass stepId to StepsViewController
-        
-        if let lesson = Lesson.getLesson(lessonId) {        
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: 
-                {
+
+        if let lesson = Lesson.getLesson(lessonId) {
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: {
                     lessons in
                     if let lesson = lessons.first {
                         self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-                
-                }, error: 
-                {
-                    error in 
+
+                }, error: {
+                    error in
                     self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                 }
             )
         } else {
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: 
-                {
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: {
                     lessons in
                     if let lesson = lessons.first {
                         self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-                    
-                }, error: 
-                {
-                    error in 
+
+                }, error: {
+                    _ in
                     errorHandler("Could not get lesson for deep link")
                 }
             )
         }
     }
-    
-    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler : ((UIViewController) -> Void), error errorHandler : ((String) -> Void)) {
+
+    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler: ((UIViewController) -> Void), error errorHandler: ((String) -> Void)) {
         let enrolled = lesson.unit?.section?.course?.enrolled ?? false
         if lesson.isPublic || enrolled {
             guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
@@ -67,9 +62,9 @@ class StepsControllerDeepLinkRouter : NSObject {
             errorHandler("No access")
         }
     }
-    
-    var vc : UIViewController?
-    
+
+    var vc: UIViewController?
+
     func dismissPressed(_ item: UIBarButtonItem) {
         vc?.dismiss(animated: true, completion: nil)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    class func loadFromNibNamed(_ nibNamed: String, bundle : Bundle? = nil) -> UIView? {
+    class func loadFromNibNamed(_ nibNamed: String, bundle: Bundle? = nil) -> UIView? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle

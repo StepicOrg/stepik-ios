@@ -19,7 +19,7 @@ class CongratulationViewController: UIViewController {
                 return Images.placeholders.coursePassed
             }
         }
-        
+
         var congratulationText: String {
             switch self {
             case .level(let level):
@@ -52,49 +52,49 @@ class CongratulationViewController: UIViewController {
                 return ["name": name]
             }
         }
-        
+
         case level(level: Int)
         case achievement(name: String, info: String, cover: UIImage)
     }
-    
+
     private static let shareAppName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Stepik"
-    
-    var continueHandler: (() -> ())?
-    
+
+    var continueHandler: (() -> Void)?
+
     var congratulationType: CongratulationType!
-    
+
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
-    
+
     @IBAction func onShareButtonClick(_ sender: Any) {
         AchievementManager.shared.fireEvent(.share)
-        
+
         guard let url = URL(string: "https://itunes.apple.com/app/id\(StepicApplicationsInfo.appId)") else {
             return
         }
-        
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Achievement.shareClicked)
         let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
         activityVC.popoverPresentationController?.sourceView = shareButton
         present(activityVC, animated: true)
     }
-    
+
     @IBAction func onContinueButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: { [weak self] in
             self?.continueHandler?()
         })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         colorize()
 
         AnalyticsReporter.reportEvent(congratulationType.analyticsKey, parameters: congratulationType.analyticsParameters)
-        
+
         localize()
         textLabel.text = congratulationType.congratulationText
         coverImageView.image = congratulationType.image

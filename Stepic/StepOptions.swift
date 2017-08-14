@@ -11,12 +11,12 @@ import CoreData
 import SwiftyJSON
 
 class StepOptions: NSManagedObject {
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         guard let templatesJSON = json["code_templates"].dictionary,
             let limitsJSON = json["limits"].dictionary else {
@@ -31,7 +31,7 @@ class StepOptions: NSManagedObject {
                 }
             }
         }
-        
+
         for (key, value) in limitsJSON {
             if let limit = limit(language: key) {
                 limit.update(language: key, json: value)
@@ -39,7 +39,7 @@ class StepOptions: NSManagedObject {
                 limits += [CodeLimit(language: key, json: value)]
             }
         }
-        
+
         let oldSamples = samples
         oldSamples.forEach({
             CoreDataHelper.instance.deleteFromStore($0)
@@ -53,34 +53,34 @@ class StepOptions: NSManagedObject {
             }
         }
     }
-    
+
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     fileprivate func limit(language: String) -> CodeLimit? {
         return limits.filter({
             $0.languageString == language
         }).first
     }
-    
+
     func limit(language: CodeLanguage) -> CodeLimit? {
         let lan = language.rawValue
         return limit(language: lan)
     }
-    
-    var languages : [CodeLanguage] {
+
+    var languages: [CodeLanguage] {
         return limits.flatMap({
-            return $0.language
+            $0.language
         })
     }
-    
+
     fileprivate func template(language: String, userGenerated: Bool) -> CodeTemplate? {
         return templates.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first
     }
-    
+
     func template(language: CodeLanguage, userGenerated: Bool) -> CodeTemplate? {
         let lan = language.rawValue
         return template(language: lan, userGenerated: userGenerated)

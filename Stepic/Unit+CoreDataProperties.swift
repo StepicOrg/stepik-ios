@@ -21,45 +21,44 @@ extension Unit {
     @NSManaged var managedHardDeadline: Date?
     @NSManaged var managedActive: NSNumber?
     @NSManaged var managedLessonId: NSNumber?
-    @NSManaged var managedProgressId : String?
-    @NSManaged var managedSectionId : NSNumber?
-    
-    @NSManaged var managedAssignmentsArray : NSObject?
+    @NSManaged var managedProgressId: String?
+    @NSManaged var managedSectionId: NSNumber?
 
-    
+    @NSManaged var managedAssignmentsArray: NSObject?
+
     @NSManaged var managedSection: Section?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
-    
-    @NSManaged var managedAssignments : NSOrderedSet?
-    
-    class var oldEntity : NSEntityDescription {
+
+    @NSManaged var managedAssignments: NSOrderedSet?
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Unit.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
             return managedId?.intValue ?? -1
         }
     }
-    
-    var sectionId : Int {
-        set(newId){
+
+    var sectionId: Int {
+        set(newId) {
             self.managedSectionId = newId as NSNumber?
         }
         get {
             return managedSectionId?.intValue ?? -1
         }
     }
-    
-    var progressId : String? {
+
+    var progressId: String? {
         get {
             return managedProgressId
         }
@@ -67,18 +66,18 @@ extension Unit {
             managedProgressId = value
         }
     }
-    
-    var lessonId : Int {
-        set(newId){
+
+    var lessonId: Int {
+        set(newId) {
             self.managedLessonId = newId as NSNumber?
         }
         get {
             return managedLessonId?.intValue ?? -1
         }
     }
-    
-    var position : Int {
-        set(value){
+
+    var position: Int {
+        set(value) {
             self.managedPosition = value as NSNumber?
         }
         get {
@@ -86,44 +85,43 @@ extension Unit {
         }
     }
 
-    
-    var beginDate : Date? {
-        set(date){
+    var beginDate: Date? {
+        set(date) {
             self.managedBeginDate = date
         }
         get {
             return managedBeginDate
         }
     }
-    
+
     var softDeadline: Date? {
-        set(date){ 
+        set(date) {
             self.managedSoftDeadline = date
         }
-        get{
+        get {
             return managedSoftDeadline
         }
     }
-    
+
     var hardDeadline: Date? {
-        set(date){ 
+        set(date) {
             self.managedHardDeadline = date
         }
-        get{
+        get {
             return managedHardDeadline
         }
     }
-    
-    var isActive : Bool {
-        set(value){
+
+    var isActive: Bool {
+        set(value) {
             self.managedActive = value as NSNumber?
         }
         get {
             return managedActive?.boolValue ?? false
         }
     }
-    
-    var progress : Progress? {
+
+    var progress: Progress? {
         get {
             return managedProgress
         }
@@ -131,8 +129,8 @@ extension Unit {
             managedProgress = value
         }
     }
-    
-    var lesson : Lesson? {
+
+    var lesson: Lesson? {
         get {
             return managedLesson
         }
@@ -140,28 +138,28 @@ extension Unit {
             self.managedLesson = value
         }
     }
-    
-    var assignmentsArray : [Int] {
-        set(value){
+
+    var assignmentsArray: [Int] {
+        set(value) {
             self.managedAssignmentsArray = value as NSObject?
         }
-        
+
         get {
             return (self.managedAssignmentsArray as? [Int]) ?? []
         }
-        
+
     }
-    
-    var assignments : [Assignment] {
+
+    var assignments: [Assignment] {
         get {
             return (managedAssignments?.array as? [Assignment]) ?? []
         }
-        
+
         set(value) {
             managedAssignments = NSOrderedSet(array: value)
         }
     }
-    
+
     var section: Section? {
         get {
             return managedSection
@@ -170,5 +168,5 @@ extension Unit {
             self.managedSection = value
         }
     }
-    
+
 }

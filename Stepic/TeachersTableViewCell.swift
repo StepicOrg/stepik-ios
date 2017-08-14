@@ -9,22 +9,22 @@
 import UIKit
 
 class TeachersTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     @IBOutlet weak var teachersTitleLabel: UILabel!
-    
-    var instructors : [User] = []
-    
+
+    var instructors: [User] = []
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.collectionView?.register(UINib(nibName: "TeacherCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TeacherCollectionViewCell")
         collectionView.dataSource = self
         collectionView.delegate = self
-        
+
         teachersTitleLabel.text = NSLocalizedString("Teachers", comment: "")
-        
+
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
@@ -51,40 +51,39 @@ class TeachersTableViewCell: UITableViewCell {
 //        }
 //        collectionView.reloadData()
     }
-    
+
     func didRotate() {
         collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
 extension TeachersTableViewCell : UICollectionViewDataSource {
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return instructors.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeacherCollectionViewCell", for: indexPath) as! TeacherCollectionViewCell
         cell.initWithUser(instructors[(indexPath as NSIndexPath).item])
         return cell
     }
-    
+
 }
 
 extension TeachersTableViewCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let usedWidth : CGFloat = CGFloat(instructors.count) * 120 + CGFloat(instructors.count - 1) * 10
+        let usedWidth: CGFloat = CGFloat(instructors.count) * 120 + CGFloat(instructors.count - 1) * 10
         let edgeInsets = max((collectionView.frame.size.width - usedWidth) / 2, 0)
-        
-        return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+
+        return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets)
     }
 }
 
-
 extension TeachersTableViewCell : UICollectionViewDelegate {
-    
+
 }

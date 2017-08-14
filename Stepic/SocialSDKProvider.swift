@@ -13,6 +13,6 @@ protocol SocialSDKProvider {
     func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void)
 }
 
-enum SocialSDKError : Error {
+enum SocialSDKError: Error {
     case connectionError, accessDenied
 }

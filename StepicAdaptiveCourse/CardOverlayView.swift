@@ -13,18 +13,18 @@ private let overlayRightImageName = "overlay_simple"
 private let overlayLeftImageName = "overlay_hard"
 
 class CardOverlayView: OverlayView {
-    
+
     @IBOutlet lazy var overlayImageView: UIImageView! = {
         [unowned self] in
-        
+
         var imageView = UIImageView(frame: self.bounds)
         self.addSubview(imageView)
-        
+
         return imageView
     }()
     @IBOutlet var trailingConstraint: NSLayoutConstraint!
     @IBOutlet var leadingConstraint: NSLayoutConstraint!
-    
+
     override var overlayState: SwipeResultDirection? {
         didSet {
             switch overlayState {
@@ -43,7 +43,7 @@ class CardOverlayView: OverlayView {
             default:
                 overlayImageView.image = nil
             }
-            
+
         }
     }
 

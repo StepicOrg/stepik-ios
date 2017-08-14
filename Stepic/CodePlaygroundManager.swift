@@ -11,26 +11,25 @@ import Foundation
 class CodePlaygroundManager {
     init() {}
 
-    let closers : [String: String] = ["{" : "}", "[" : "]", "(" : ")", "\"" : "\"", "'" : "'"]
-    
+    let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
+
     typealias Autocomplete = (suggestions: [String], prefix: String)
     typealias AnalysisResult = (text: String, position: Int, autocomplete: Autocomplete?)
     typealias Changes = (isInsertion: Bool, changes: String)
-    
-    var suggestionsController: CodeSuggestionsTableViewController? = nil
-    var isSuggestionsViewPresented : Bool {
+
+    var suggestionsController: CodeSuggestionsTableViewController?
+    var isSuggestionsViewPresented: Bool {
         return suggestionsController != nil
     }
 
-    
     //Detects the changes string between currentText and previousText
     //!!!All changes should be a substring inserted somewhere into the string
     func getChangesSubstring(currentText: String, previousText: String) -> Changes {
-        
+
         var maxString: String = ""
         var minString: String = ""
         var isInsertion: Bool = true
-        
+
         //Understand, if something was deleted or inserted
         if currentText.characters.count > previousText.characters.count {
             maxString = currentText
@@ -41,7 +40,7 @@ class CodePlaygroundManager {
             minString = currentText
             isInsertion = false
         }
-        
+
         //Searching for the beginning of the changed substring
         var changesBeginningOffset = 0
         while (changesBeginningOffset < minString.characters.count) && (minString.characters[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)] == maxString.characters[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)]) {
@@ -55,7 +54,7 @@ class CodePlaygroundManager {
         while (changesEndingOffset < minString.characters.count) && (minString.characters[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)] == maxString.characters[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)]) {
             changesEndingOffset += 1
         }
-        
+
         if minString != "" {
             minString.removeSubrange(minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset + 1)..<minString.endIndex)
         }
@@ -65,7 +64,7 @@ class CodePlaygroundManager {
 
         return (isInsertion: isInsertion, changes: maxString)
     }
-    
+
     //Detects, if there should be made a new line after tab
     fileprivate func shouldMakeTabLineAfter(symbol: Character, language: CodeLanguage) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
@@ -77,31 +76,31 @@ class CodePlaygroundManager {
             return (shouldMakeNewLine: false, paired: false)
         }
     }
-    
+
     let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
-    
+
     //Gets current token for text
     fileprivate func getCurrentToken(text: String, cursorPosition: Int) -> String {
-        
+
         var offsetBefore = 0
         while (text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore) &&
             allowedCharacters.indexOf("\(text.characters[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])") != nil) {
             offsetBefore += 1
         }
-        
+
         var offsetAfter = 0
         while (text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter) &&
             allowedCharacters.indexOf("\(text.characters[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])") != nil) {
                 offsetAfter += 1
         }
-        
+
         let token = text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)) + text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter))
-        
+
         return token
     }
-    
+
     fileprivate func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
-        
+
         if changes.isInsertion && changes.changes == "\n" {
             var text = currentText
 
@@ -111,7 +110,7 @@ class CodePlaygroundManager {
             if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
                 //extracting previous line before \n
                 let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
-                
+
                 //counting spaces in the beginning to know the offset
                 var spacesCount = 0
                 for character in line.characters {
@@ -122,9 +121,9 @@ class CodePlaygroundManager {
                     }
                 }
                 let offset = spacesCount
-                
+
                 //searching for the last non-space symbol in the string to know if we need to do more than just return
-                var characterBeforeEndline : Character? = nil
+                var characterBeforeEndline: Character? = nil
                 for character in line.characters.reversed() {
                     if character == " " {
                         continue
@@ -133,7 +132,7 @@ class CodePlaygroundManager {
                         break
                     }
                 }
-                
+
                 //Checking if there is any character before endline (it's not an empty or all-spaces line)
                 if let char = characterBeforeEndline {
                     let shouldTab = shouldMakeTabLineAfter(symbol: char, language: language)
@@ -149,7 +148,7 @@ class CodePlaygroundManager {
                         }
                     }
                 }
-                
+
                 // returning with just the spaces and offset
                 let spacesString = String(repeating: " ", count: offset)
                 text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
@@ -158,10 +157,10 @@ class CodePlaygroundManager {
                 return (text: text, position: cursorPosition, autocomplete: nil)
             }
         }
-        
+
         return nil
     }
-    
+
     fileprivate func checkPaired(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
         if changes.isInsertion {
             if let closer = closers[changes.changes] {
@@ -180,7 +179,7 @@ class CodePlaygroundManager {
                                 break
                             }
                         }
-                        
+
                         if onlySpaces {
                             text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
                             return (text: text, position: cursorPosition, autocomplete: nil)
@@ -194,18 +193,18 @@ class CodePlaygroundManager {
         }
         return nil
     }
-    
+
     fileprivate func getAutocompleteSuggestions(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage) -> AnalysisResult? {
         //Getting current token of a string
         let token = getCurrentToken(text: currentText, cursorPosition: cursorPosition)
-        
+
         if token != "" {
             let suggestions = AutocompleteWords.autocompleteFor(token, language: language)
             return (text: currentText, position: cursorPosition, autocomplete: (suggestions: suggestions, prefix: token))
         }
         return nil
     }
-    
+
     //Analyzes given text using parameters
     func analyze(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int) -> AnalysisResult {
         let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
@@ -219,10 +218,10 @@ class CodePlaygroundManager {
         if let autocompleteSuggestionsResult = getAutocompleteSuggestions(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language) {
             return autocompleteSuggestionsResult
         }
-        
+
         return (text: currentText, position: cursorPosition, autocomplete: nil)
     }
-    
+
     func countTabSize(text: String) -> Int {
         var minTabSize = 100
         text.enumerateLines {
@@ -244,14 +243,14 @@ class CodePlaygroundManager {
         }
         return minTabSize
     }
-    
+
     fileprivate func hideSuggestions() {
         //TODO: hide suggestions view here
         suggestionsController?.view.removeFromSuperview()
         suggestionsController?.removeFromParentViewController()
         suggestionsController = nil
     }
-    
+
     fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {
@@ -260,40 +259,40 @@ class CodePlaygroundManager {
             textView.addSubview(suggestionsController!.view)
             suggestionsController?.delegate = suggestionsDelegate
         }
-        
+
         suggestionsController?.suggestions = suggestions
         suggestionsController?.prefix = prefix
-        
+
         if let selectedRange = textView.selectedTextRange {
             // `caretRect` is in the `textView` coordinate space.
             let caretRect = textView.caretRect(for: selectedRange.end)
-            
+
             var suggestionsFrameMinX = caretRect.minX
             var suggestionsFrameMinY = caretRect.maxY
-            
+
             let suggestionsHeight = suggestionsController!.suggestionsHeight
-            
+
             //check if we need to move suggestionsFrame
             if suggestionsFrameMinY + suggestionsHeight > (textView.frame.maxY - textView.frame.origin.y) {
                 suggestionsFrameMinY = caretRect.minY - suggestionsHeight
             }
-            
+
             if suggestionsFrameMinX + 100 > (textView.frame.maxX - textView.frame.origin.x) {
                 suggestionsFrameMinX = (textView.frame.maxX - textView.frame.origin.x - 102)
             }
-            
+
             let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 100, height: suggestionsHeight)
             suggestionsController?.view.frame = rect
         }
     }
-    
+
     func textRangeFrom(position: Int, textView: UITextView) -> UITextRange {
         let firstCharacterPosition = textView.beginningOfDocument
         let characterPosition = textView.position(from: firstCharacterPosition, offset: position)!
         let characterRange = textView.textRange(from: characterPosition, to: characterPosition)!
         return characterRange
     }
-    
+
     func insertAtCurrentPosition(symbols: String, textView: UITextView) {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
@@ -303,13 +302,13 @@ class CodePlaygroundManager {
             textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.characters.count, textView: textView)
         }
     }
-    
+
     func analyzeAndComplete(textView: UITextView, previousText: String, language: CodeLanguage, tabSize: Int, inViewController vc: UIViewController, suggestionsDelegate: CodeSuggestionDelegate) {
         if let selectedRange = textView.selectedTextRange {
             let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-            
+
             let analyzed = analyze(currentText: textView.text, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
-            
+
             textView.text = analyzed.text
             textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
             if let autocomplete = analyzed.autocomplete {

@@ -20,32 +20,31 @@ extension Lesson {
     @NSManaged var managedTitle: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedCoverURL: String?
-    
-    @NSManaged var managedStepsArray : NSObject?
 
-    @NSManaged var managedSteps : NSOrderedSet?
-    
-    @NSManaged var managedUnit : Unit?
+    @NSManaged var managedStepsArray: NSObject?
+
+    @NSManaged var managedSteps: NSOrderedSet?
+
+    @NSManaged var managedUnit: Unit?
 //    @NSManaged var managedIsCached : NSNumber?
-    
-    class var oldEntity : NSEntityDescription {
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
             return managedId?.intValue ?? -1
         }
     }
-    
-    
+
 //    var isCached : Bool {
 //        set(value){
 //            self.managedIsCached = value
@@ -55,26 +54,26 @@ extension Lesson {
 //            return managedIsCached?.boolValue ?? false
 //        }
 //    }
-    
-    var title : String {
-        set(value){
+
+    var title: String {
+        set(value) {
             self.managedTitle = value
         }
         get {
             return managedTitle ?? "No title"
         }
     }
-    
-    var slug : String {
-        set(value){
+
+    var slug: String {
+        set(value) {
             self.managedSlug = value
         }
         get {
             return managedSlug ?? ""
         }
     }
-    
-    var coverURL : String? {
+
+    var coverURL: String? {
         set(value) {
             managedCoverURL = value
         }
@@ -82,46 +81,46 @@ extension Lesson {
             return managedCoverURL
         }
     }
-    
-    var isFeatured : Bool {
-        set(value){
+
+    var isFeatured: Bool {
+        set(value) {
             self.managedFeatured = value as NSNumber?
         }
         get {
             return managedFeatured?.boolValue ?? false
         }
     }
-    
-    var isPublic : Bool {
-        set(value){
+
+    var isPublic: Bool {
+        set(value) {
             self.managedPublic = value as NSNumber?
         }
         get {
             return managedPublic?.boolValue ?? false
         }
     }
-    
-    var stepsArray : [Int] {
-        set(value){
+
+    var stepsArray: [Int] {
+        set(value) {
             self.managedStepsArray = value as NSObject?
         }
-        
+
         get {
             return (self.managedStepsArray as? [Int]) ?? []
         }
 
     }
-    
-    var steps : [Step] {
+
+    var steps: [Step] {
         get {
             return (managedSteps?.array as? [Step]) ?? []
         }
-        
+
         set(value) {
             managedSteps = NSOrderedSet(array: value)
         }
     }
-    
+
     var unit: Unit? {
         return managedUnit
     }

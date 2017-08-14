@@ -15,18 +15,18 @@ class CodeQuizViewController: QuizViewController {
     var limitsLabel: UILabel = UILabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
-    
-    let toolbarHeight : CGFloat = 44
-    let limitsLabelHeight : CGFloat = 40
-    
+
+    let toolbarHeight: CGFloat = 44
+    let limitsLabelHeight: CGFloat = 40
+
     let languagePicker = CodeLanguagePickerViewController(nibName: "PickerViewController", bundle: nil) as CodeLanguagePickerViewController
-    
-    var highlightr : Highlightr!
+
+    var highlightr: Highlightr!
     let textStorage = CodeAttributedString()
     let size: CodeQuizElementsSize = DeviceInfo.isIPad() ? .big : .small
-    
+
     let playgroundManager = CodePlaygroundManager()
-    var currentCode : String = "" {
+    var currentCode: String = "" {
         didSet {
             guard let options = step.options else { return }
             if let userTemplate = options.template(language: language, userGenerated: true) {
@@ -38,9 +38,9 @@ class CodeQuizViewController: QuizViewController {
             }
         }
     }
-    
+
     var tabSize: Int = 0
-    
+
     fileprivate func setupAccessoryView(editable: Bool) {
         if editable {
             codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(size: size.elements.toolbar, language: language, tabAction: {
@@ -64,22 +64,22 @@ class CodeQuizViewController: QuizViewController {
         }
         codeTextView.reloadInputViews()
     }
-    
+
     var language: CodeLanguage = CodeLanguage.unsupported {
         didSet {
             textStorage.language = language.highlightr
             if let limit = step.options?.limit(language: language) {
                 setLimits(time: limit.time, memory: limit.memory)
             }
-            
+
             if let template = step.options?.template(language: language, userGenerated: false) {
                 tabSize = playgroundManager.countTabSize(text: template.templateString)
             }
-            
+
             toolbarView.language = language.displayName
-            
+
             setupAccessoryView(editable: submission?.status != "correct")
-            
+
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
                 currentCode = userTemplate.templateString
@@ -92,20 +92,20 @@ class CodeQuizViewController: QuizViewController {
             }
         }
     }
-    
+
     override var submissionAnalyticsParams: [String : Any]? {
         guard let step = step else {
             return nil
         }
-        var params: [String: Any]? = ["stepId" : step.id, "language": language.rawValue]
-        
-        if let course = step.lesson?.unit?.section?.course?.id  {
+        var params: [String: Any]? = ["stepId": step.id, "language": language.rawValue]
+
+        if let course = step.lesson?.unit?.section?.course?.id {
             params?["course"] = course
         }
-        
+
         return params
     }
-    
+
     fileprivate func setupConstraints() {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
@@ -121,9 +121,9 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
         codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
     }
-    
+
     fileprivate func setLimits(time: Double, memory: Double) {
-        
+
         let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
         let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15)])
         let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15)])
@@ -136,10 +136,10 @@ class CodeQuizViewController: QuizViewController {
         limitsLabel.numberOfLines = 2
         limitsLabel.attributedText = result
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
         let textContainer = NSTextContainer()
@@ -156,23 +156,23 @@ class CodeQuizViewController: QuizViewController {
         highlightr.theme = theme
         codeTextView.backgroundColor = highlightr.theme.themeBackgroundColor
         setupConstraints()
-        
+
         toolbarView.delegate = self
-        
+
         guard let options = step.options else {
             return
         }
-        
+
         languagePicker.languages = options.languages.map({return $0.displayName}).sorted()
 
         codeTextView.delegate = self
-        
+
         submissionPressedBlock = {
             [weak self] in
             self?.codeTextView.resignFirstResponder()
         }
     }
-    
+
     func showPicker() {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
@@ -182,11 +182,11 @@ class CodeQuizViewController: QuizViewController {
         languagePicker.selectedBlock = {
             [weak self] in
             guard let s = self else { return }
-            
+
             guard let selectedLanguage = s.step.options?.languages.filter({$0.displayName == s.languagePicker.selectedData}).first else {
                 return
             }
-            
+
             s.language = selectedLanguage
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language.rawValue])
             s.languagePicker.removeFromParentViewController()
@@ -194,14 +194,14 @@ class CodeQuizViewController: QuizViewController {
             s.isSubmitButtonHidden = false
         }
     }
-    
+
     override func updateQuizAfterAttemptUpdate() {
         guard step.options != nil else {
             return
         }
         setQuizControls(enabled: true)
     }
-    
+
     fileprivate func setQuizControls(enabled: Bool) {
         guard let options = step.options else {
             return
@@ -213,19 +213,19 @@ class CodeQuizViewController: QuizViewController {
             toolbarView.languageButton.isEnabled = enabled
         }
     }
-    
+
     override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
         guard let options = step.options else {
             return
         }
-        
+
         if submission?.status == "correct" {
             setQuizControls(enabled: false)
             setupAccessoryView(editable: false)
         } else {
             setQuizControls(enabled: true)
         }
-        
+
         guard let reply = submission?.reply as? CodeReply else {
             if options.languages.count > 1 {
                 showPicker()
@@ -235,25 +235,24 @@ class CodeQuizViewController: QuizViewController {
             }
             return
         }
-        
+
         language = reply.language
         codeTextView.text = reply.code
         currentCode = reply.code
     }
-    
-    override var needsToRefreshAttemptWhenWrong : Bool {
+
+    override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
-    
+
     override func getReply() -> Reply {
         return CodeReply(code: codeTextView.text ?? "", language: language)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -271,19 +270,19 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
         guard let options = step.options else {
             return
         }
-        
+
         if options.languages.count > 1 {
             showPicker()
         }
     }
-    
+
     func fullscreenPressed() {
         guard let options = step.options else {
             return
         }
-        
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.Code.fullscreenPressed, parameters: ["size": "standard"])
-        
+
         let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
         fullscreen.options = options
         if submission?.status == "correct" {
@@ -299,24 +298,24 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
             s.playgroundManager.analyzeAndComplete(textView: s.codeTextView, previousText: s.currentCode, language: s.language, tabSize: s.tabSize, inViewController: s, suggestionsDelegate: s)
             s.currentCode = newText
         }
-        
+
         present(fullscreen, animated: true, completion: nil)
     }
-    
+
     func resetPressed() {
         guard let options = step.options else {
             return
         }
-        
+
         let alert = UIAlertController(title: nil, message: NSLocalizedString("ResetAlertDescription", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: {
             [weak self]
-            action in
+            _ in
             guard let s = self else { return }
-            
+
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.resetPressed, parameters: ["size": "standard"])
-            
+
             if let userTemplate = options.template(language: s.language, userGenerated: true) {
                 CoreDataHelper.instance.deleteFromStore(userTemplate)
             }
@@ -335,11 +334,11 @@ extension CodeQuizViewController : UITextViewDelegate {
         guard step.options != nil else {
             return
         }
-        
+
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
-        
+
         currentCode = textView.text
-        
+
         CoreDataHelper.instance.save()
     }
 }
@@ -351,7 +350,7 @@ extension CodeQuizViewController: CodeSuggestionDelegate {
         playgroundManager.analyzeAndComplete(textView: codeTextView, previousText: currentCode, language: language, tabSize: tabSize, inViewController: self, suggestionsDelegate: self)
         currentCode = codeTextView.text
     }
-    
+
     var suggestionsSize: CodeSuggestionsSize {
         return self.size.elements.suggestions
     }

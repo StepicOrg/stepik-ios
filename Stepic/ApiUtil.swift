@@ -14,8 +14,8 @@ class ApiUtil {
         for element in arr {
             result += "ids[]=\(element)&"
         }
-        if result != "" { 
-            result.remove(at: result.characters.index(before: result.endIndex)) 
+        if result != "" {
+            result.remove(at: result.characters.index(before: result.endIndex))
         }
         return result
     }

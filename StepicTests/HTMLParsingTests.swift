@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import XCTest 
+import XCTest
 @testable import Stepic
 
-class HTMLParsingTests : XCTestCase {
-    
+class HTMLParsingTests: XCTestCase {
+
     struct HTMLStrings {
         static let latex = "Square of x is $x^2$"
         static let nonLatex = "Wow! I have won 100$!"
@@ -21,28 +21,28 @@ class HTMLParsingTests : XCTestCase {
         static let code = "Isn't this code perfect? <code> I'm perfect! </code>"
         static let noCode = "Your code is worse than code of my grandmother"
     }
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testLatexDetection() {
         XCTAssert(TagDetectionUtil.detectLaTeX(HTMLStrings.latex))
         XCTAssertFalse(TagDetectionUtil.detectLaTeX(HTMLStrings.nonLatex))
     }
-    
+
     func testImageDetection() {
         XCTAssert(TagDetectionUtil.detectImage(HTMLStrings.imageSimple))
         XCTAssert(TagDetectionUtil.detectImage(HTMLStrings.imageWithStyle))
         XCTAssertFalse(TagDetectionUtil.detectImage(HTMLStrings.noImage))
     }
-    
+
     func testCodeDetection() {
         XCTAssert(TagDetectionUtil.detectCode(HTMLStrings.code))
         XCTAssertFalse(TagDetectionUtil.detectCode(HTMLStrings.noCode))

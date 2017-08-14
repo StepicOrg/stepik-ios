@@ -9,23 +9,23 @@
 import Foundation
 
 class Tokens {
-    
+
     var mixpanelToken: String = ""
     var appMetricaToken: String = ""
     var firebaseId: UInt = 0
-    
+
     static let shared = Tokens()
-    
+
     private convenience init() {
         self.init(plist: "Tokens")!
     }
-    
+
     private init(mixpanelToken: String, appMetricaToken: String, firebaseId: UInt) {
         self.mixpanelToken = mixpanelToken
         self.appMetricaToken = appMetricaToken
         self.firebaseId = firebaseId
     }
-    
+
     private convenience init?(plist: String) {
         let bundle = Bundle(for: type(of: self) as AnyClass)
         guard let path = bundle.path(forResource: plist, ofType: "plist") else {
@@ -41,7 +41,5 @@ class Tokens {
         }
         self.init(mixpanelToken: mp, appMetricaToken: appm, firebaseId: firebase)
     }
-    
-    
 
 }

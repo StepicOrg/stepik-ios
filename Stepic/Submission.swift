@@ -10,12 +10,12 @@ import UIKit
 import SwiftyJSON
 
 class Submission: NSObject {
-    var id : Int?
-    var status : String?
-    var reply : Reply?
-    var attempt : Int?
-    var hint : String?
-    
+    var id: Int?
+    var status: String?
+    var reply: Reply?
+    var attempt: Int?
+    var hint: String?
+
     init(json: JSON, stepName: String) {
         id = json["id"].int
         status = json["status"].string
@@ -25,7 +25,7 @@ class Submission: NSObject {
         super.init()
         reply = getReplyFromJSON(json["reply"], stepName: stepName)
     }
-    
+
     fileprivate func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
         switch stepName {
         case "choice" : return ChoiceReply(json: json)
@@ -40,5 +40,5 @@ class Submission: NSObject {
         default: return nil
         }
     }
-    
+
 }

@@ -214,5 +214,5 @@ import WebKit
 //}
 //
 struct TextStyle {
-    
+
 }

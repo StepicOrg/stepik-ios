@@ -11,90 +11,90 @@ import Charts
 
 class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     var presenter: AdaptiveStatsPresenter?
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var progressChart: LineChartView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var currentWeekXPLabel: UILabel!
     @IBOutlet weak var bestStreakLabel: UILabel!
     @IBOutlet weak var currentLevelLabel: UILabel!
-    
+
     fileprivate var achievements: [AchievementViewData] = []
     fileprivate var progressByWeek: [WeekProgressViewData] = []
-    
+
     @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
         tableView.reloadData()
     }
-    
+
     @IBAction func onCancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         presenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, achievementsManager: AchievementManager.shared, view: self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpTable()
         setUpChart()
-        
+
         presenter?.reloadStats()
     }
-    
+
     func reload() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         tableView.reloadData()
     }
-    
+
     func setProgress(records: [WeekProgressViewData]) {
         progressByWeek = records.reversed()
     }
-    
+
     func setAchievements(records: [AchievementViewData]) {
         achievements = records
     }
-    
+
     func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
         currentLevelLabel.text = "\(currentLevel)"
         bestStreakLabel.text = "\(bestStreak)"
         currentWeekXPLabel.text = "\(currentWeekXP)"
-        
+
         guard let last7DaysProgress = last7DaysProgress else {
             return
         }
-        
+
         let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
         let data = LineChartData(dataSet: dataSet)
         progressChart.data = data
         progressChart.data?.highlightEnabled = true
         progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
     }
-    
+
     fileprivate func valuesToDataEntries(values: [Int]) -> [ChartDataEntry] {
         var dataEntries: [ChartDataEntry] = []
-        
+
         for i in 0..<values.count {
             let dataEntry = ChartDataEntry(x: Double(i), y: Double(values[i]))
             dataEntries.append(dataEntry)
         }
-        
+
         return dataEntries
     }
-    
+
     fileprivate func setUpTable() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 112
-    
+
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
         tableView.register(UINib(nibName: "AchievementTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementTableViewCell.reuseId)
     }
-    
+
     fileprivate func setUpChart() {
         progressChart.chartDescription?.enabled = false
         progressChart.isUserInteractionEnabled = false
@@ -107,7 +107,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         progressChart.rightAxis.enabled = false
         progressChart.legend.enabled = false
     }
-    
+
     fileprivate func updateDataSet(_ dataSet: LineChartDataSet) -> LineChartDataSet {
         dataSet.setColor(StepicApplicationsInfo.adaptiveMainColor)
         dataSet.mode = .horizontalBezier
@@ -122,7 +122,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         dataSet.drawCirclesEnabled = true
         dataSet.setCircleColor(StepicApplicationsInfo.adaptiveMainColor)
         dataSet.valueFormatter = DefaultValueFormatter(decimals: 0)
-        
+
         return dataSet
     }
 }
@@ -134,7 +134,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             return achievements.count
         }
-        
+
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

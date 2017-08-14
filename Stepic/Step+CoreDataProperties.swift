@@ -25,74 +25,73 @@ extension Step {
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedOptions: StepOptions?
-    
+
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionsCount: NSNumber?
-    
-    class var oldEntity : NSEntityDescription {
+
+    class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
         self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
-    var id : Int {
-        set(newId){
+
+    var id: Int {
+        set(newId) {
             self.managedId = newId as NSNumber?
         }
         get {
             return managedId?.intValue ?? -1
         }
     }
-    
-    var lessonId : Int {
-        set(newId){
+
+    var lessonId: Int {
+        set(newId) {
             self.managedLessonId = newId as NSNumber?
         }
         get {
             return managedLessonId?.intValue ?? -1
         }
     }
-    
-    var position : Int {
-        set(value){
+
+    var position: Int {
+        set(value) {
             self.managedPosition = value as NSNumber?
         }
         get {
             return managedPosition?.intValue ?? -1
         }
     }
-    
-    
-    var hasSubmissionRestrictions : Bool {
-        set(value){
+
+    var hasSubmissionRestrictions: Bool {
+        set(value) {
             self.managedHasSubmissionRestrictions = value as NSNumber?
         }
         get {
             return managedHasSubmissionRestrictions?.boolValue ?? false
         }
     }
-    
-    var status : String {
-        set(value){
+
+    var status: String {
+        set(value) {
             self.managedStatus = value
         }
         get {
             return managedStatus ?? "no status"
         }
     }
-    
-    var block : Block {
+
+    var block: Block {
         get {
             return managedBlock!
         }
-        
+
         set(value) {
             managedBlock = value
         }
     }
-    
+
     var progressId: String? {
         get {
             return managedProgressId
@@ -101,8 +100,8 @@ extension Step {
             managedProgressId = value
         }
     }
-    
-    var progress : Progress? {
+
+    var progress: Progress? {
         get {
             return managedProgress
         }
@@ -110,7 +109,7 @@ extension Step {
             managedProgress = value
         }
     }
-    
+
     var discussionProxyId: String? {
         get {
             return managedDiscussionProxy
@@ -119,8 +118,8 @@ extension Step {
             managedDiscussionProxy = value
         }
     }
-    
-    var discussionsCount : Int? {
+
+    var discussionsCount: Int? {
         get {
             return managedDiscussionsCount?.intValue
         }
@@ -128,8 +127,8 @@ extension Step {
             managedDiscussionsCount = value as NSNumber?
         }
     }
-    
-    var lesson : Lesson? {
+
+    var lesson: Lesson? {
         get {
             return managedLesson
         }
@@ -137,7 +136,7 @@ extension Step {
             managedLesson = value
         }
     }
-    
+
     var options: StepOptions? {
         get {
             return managedOptions
@@ -146,7 +145,7 @@ extension Step {
             managedOptions = value
         }
     }
-    
+
     var maxSubmissionsCount: Int? {
         get {
             return managedMaxSubmissionsCount?.intValue
@@ -155,5 +154,5 @@ extension Step {
             managedMaxSubmissionsCount = value as NSNumber?
         }
     }
-    
+
 }
