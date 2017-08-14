@@ -2131,6 +2131,7 @@
 		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
+				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
 				0888D1081F1E42A000A16863 /* CodeElementsSize.swift */,
 				0860D9101F10BE5C0087D61B /* Input Accessory */,
 				0805FE3E1F0D38C5001226B4 /* Code Analysis */,
@@ -2434,12 +2435,8 @@
 			isa = PBXGroup;
 			children = (
 				082CB1AD1D088B6900C79A27 /* Discussions */,
-				0891424C1BCEED6F0000BCB0 /* Step Content Controllers */,
-				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
-				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
-				089984281ECDE188005C0B27 /* LessonViewController.swift */,
-				0899842B1ECDE194005C0B27 /* LessonPresenter.swift */,
-				0899842E1ECDE19E005C0B27 /* LessonView.swift */,
+				0891424C1BCEED6F0000BCB0 /* Step */,
+				085E6A0E1F41E55900639979 /* Lesson */,
 			);
 			name = Steps;
 			sourceTree = "<group>";
@@ -2693,6 +2690,17 @@
 			name = Test;
 			sourceTree = "<group>";
 		};
+		085E6A0E1F41E55900639979 /* Lesson */ = {
+			isa = PBXGroup;
+			children = (
+				0841569C1BCC09F2006B8C73 /* StepsViewController.swift */,
+				089984281ECDE188005C0B27 /* LessonViewController.swift */,
+				0899842B1ECDE194005C0B27 /* LessonPresenter.swift */,
+				0899842E1ECDE19E005C0B27 /* LessonView.swift */,
+			);
+			name = Lesson;
+			sourceTree = "<group>";
+		};
 		0860D9101F10BE5C0087D61B /* Input Accessory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2938,13 +2946,14 @@
 			name = "In-app version control";
 			sourceTree = "<group>";
 		};
-		0891424C1BCEED6F0000BCB0 /* Step Content Controllers */ = {
+		0891424C1BCEED6F0000BCB0 /* Step */ = {
 			isa = PBXGroup;
 			children = (
-				08D565C81C5F7CE800DE2B6A /* Theory */,
-				08D565C91C5F7CF000DE2B6A /* Practice */,
+				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
+				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
+				08D565C91C5F7CF000DE2B6A /* Quizzes */,
 			);
-			name = "Step Content Controllers";
+			name = Step;
 			sourceTree = "<group>";
 		};
 		08970EC91C6A325600846119 /* PlaceholderView */ = {
@@ -2993,6 +3002,7 @@
 				08AF59D31E6D9BE800423EFF /* Source */,
 			);
 			name = RGPageViewController;
+			path = Stepic;
 			sourceTree = "<group>";
 		};
 		08AF59D31E6D9BE800423EFF /* Source */ = {
@@ -3186,21 +3196,15 @@
 			name = Sb;
 			sourceTree = "<group>";
 		};
-		08D565C81C5F7CE800DE2B6A /* Theory */ = {
+		08D565C91C5F7CF000DE2B6A /* Quizzes */ = {
 			isa = PBXGroup;
 			children = (
-				0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */,
+				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
+				081A7DA81C56625F00583728 /* QuizViewController.swift */,
+				081A7DF21C56A09300583728 /* QuizViewController.xib */,
+				08F555611C4FE2D200C877E8 /* Quiz Types */,
 			);
-			name = Theory;
-			sourceTree = "<group>";
-		};
-		08D565C91C5F7CF000DE2B6A /* Practice */ = {
-			isa = PBXGroup;
-			children = (
-				0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */,
-				08F555611C4FE2D200C877E8 /* Quizzes */,
-			);
-			name = Practice;
+			name = Quizzes;
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -3483,14 +3487,11 @@
 			name = Datasets;
 			sourceTree = "<group>";
 		};
-		08F555611C4FE2D200C877E8 /* Quizzes */ = {
+		08F555611C4FE2D200C877E8 /* Quiz Types */ = {
 			isa = PBXGroup;
 			children = (
 				080C5E641EFC078F0036EB3D /* CodeQuizViewController */,
 				085514E91CFB09170080CB88 /* WebViewHelpers */,
-				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
-				081A7DA81C56625F00583728 /* QuizViewController.swift */,
-				081A7DF21C56A09300583728 /* QuizViewController.xib */,
 				08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */,
 				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				08F4859D1C5786E6000165AA /* StringQuizViewController */,
@@ -3500,9 +3501,8 @@
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
-				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
 			);
-			name = Quizzes;
+			name = "Quiz Types";
 			sourceTree = "<group>";
 		};
 		08F5556A1C50009000C877E8 /* ChoiceQuizViewController */ = {
@@ -3547,6 +3547,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08AF59CC1E6D9A8100423EFF /* RGPageViewController */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				08E16F241BDBA539004822E1 /* SystemConfiguration.framework */,
