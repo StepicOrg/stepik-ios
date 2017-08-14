@@ -150,7 +150,7 @@ open class TCBlobDownloadManager: NSObject {
 
         return downloads
     }
-    
+
     var downloads: [Int: TCBlobDownload] = [:]
     let acceptableStatusCodes = 200...299
 }

@@ -68,11 +68,11 @@ class WatchSessionSender {
 			return rawValue.hash
 		}
 
-		static func <(lhs: Name, rhs: Name) -> Bool {
+		static func < (lhs: Name, rhs: Name) -> Bool {
 			return lhs.rawValue < rhs.rawValue
 		}
 
-		static func ==(lhs: Name, rhs: Name) -> Bool {
+		static func == (lhs: Name, rhs: Name) -> Bool {
 			return lhs.rawValue == rhs.rawValue
 		}
 
