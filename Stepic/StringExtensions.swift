@@ -22,7 +22,7 @@ extension String {
 //        let arr : [AnyObject] = str.characters.split(whereSeparator: { $0 == "&" || $0 == "="}).map(String.init)
 
         for i in 0..<arr.count / 2 {
-            res[arr[i * 2] as! String] = arr[i * 2 + 1] as AnyObject
+            res[arr[i * 2]] = arr[i * 2 + 1] as AnyObject
         }
         return res
     }

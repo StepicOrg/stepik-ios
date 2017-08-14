@@ -25,7 +25,7 @@ class CookieTests: XCTestCase {
     func testAnonymousAttempt() {
         let expectation = self.expectation(description: "testAnonymousAttempt")
 
-        Session.refresh(completion: {
+        _ = Session.refresh(completion: {
                 _ in
                 print("successfully refreshed session data")
                 ApiDataDownloader.stepics.retrieveCurrentUser(success: {
@@ -33,7 +33,9 @@ class CookieTests: XCTestCase {
                         print("retrieved user \(user.id) \(user.firstName) \(user.lastName)")
                         ApiDataDownloader.attempts.create(stepName: "choice", stepId: 115260, success: {
                                 attempt in
-                                print("created attempt \(attempt.id)")
+                                if let id = attempt.id {
+                                    print("created attempt \(id)")
+                                }
                                 expectation.fulfill()
                             }, error: {
                                 errorMsg in
