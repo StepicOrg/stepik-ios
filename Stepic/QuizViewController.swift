@@ -26,6 +26,8 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
 
+    var submissionsAPI: SubmissionsAPI = ApiDataDownloader.submissions
+
     weak var delegate: QuizControllerDelegate?
 
     var submissionsCount: Int? {
@@ -447,7 +449,7 @@ class QuizViewController: UIViewController {
     }
 
     fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int) -> Void), error: @escaping ((String) -> Void)) {
-        _ = ApiDataDownloader.submissions.retrieve(stepName: step.block.name, stepId: step.id, page: page, success: {
+        _ = submissionsAPI.retrieve(stepName: step.block.name, stepId: step.id, page: page, success: {
             [weak self]
             submissions, meta in
             guard let s = self else { return }
@@ -505,7 +507,7 @@ class QuizViewController: UIViewController {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]
                     s.attempt = currentAttempt
-                    _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
+                    _ = s.submissionsAPI.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
                         submissions, _ in
                         if submissions.count == 0 {
                             s.submission = nil
@@ -704,7 +706,7 @@ class QuizViewController: UIViewController {
             performRequest({
                 [weak self] in
                 guard let s = self else { return }
-                _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
+                _ = s.submissionsAPI.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     submission in
                     print("did get submission id \(id), with status \(String(describing: submission.status))")
                     if submission.status == "evaluation" {
@@ -754,7 +756,7 @@ class QuizViewController: UIViewController {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
+            _ = s.submissionsAPI.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
                 submission in
                 s.submission = submission
                 s.checkSubmission(submission.id!, time: 0, completion: completion)

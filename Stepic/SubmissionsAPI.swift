@@ -12,6 +12,14 @@ import SwiftyJSON
 
 class SubmissionsAPI: APIEndpoint {
     let name = "submissions"
+    var url = StepicApplicationsInfo.apiURL
+    var additionalParams: [String: Any] = [:]
+
+    var isAdaptive: Bool = false {
+        didSet {
+            additionalParams = isAdaptive ? ["course": StepicApplicationsInfo.adaptiveCourseId, "user": AuthInfo.shared.userId ?? 0] : [:]
+        }
+    }
 
     @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
@@ -27,8 +35,9 @@ class SubmissionsAPI: APIEndpoint {
         if let user = userId {
             params["user"] = user
         }
+        additionalParams.forEach { key, value in params[key] = value }
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(url)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
@@ -71,9 +80,10 @@ class SubmissionsAPI: APIEndpoint {
 
     @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-        let params: Parameters = [:]
+        var params: Parameters = [:]
+        additionalParams.forEach { key, value in params[key] = value }
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(url)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
@@ -107,14 +117,15 @@ class SubmissionsAPI: APIEndpoint {
 
     @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-        let params: Parameters = [
+        var params: Parameters = [
             "submission": [
                 "attempt": "\(attemptId)",
                 "reply": reply.dictValue
             ]
         ]
+        additionalParams.forEach { key, value in params[key] = value }
 
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(url)/submissions", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error

@@ -52,6 +52,14 @@ class AdaptiveStepPresenter {
             delegate?.contentLoadingDidFail()
             return
         }
+
+        // Override API
+        // TODO: pass API to init?
+        let submissionsAPI = SubmissionsAPI()
+        submissionsAPI.url = StepicApplicationsInfo.adaptiveRatingURL
+        submissionsAPI.isAdaptive = true
+        quizViewController.submissionsAPI = submissionsAPI
+
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true
