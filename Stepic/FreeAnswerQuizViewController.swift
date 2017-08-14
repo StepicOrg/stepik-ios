@@ -56,7 +56,7 @@ class FreeAnswerQuizViewController: QuizViewController {
                 if d.isHTMLEnabled {
                     let attributed = try! NSAttributedString(data: (r.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                     let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
+                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
                     textView.attributedText = mutableAttributed
                 } else {
                     return textView.text = r.text

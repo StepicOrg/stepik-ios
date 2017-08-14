@@ -160,7 +160,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         let info = aNotification.userInfo
         let infoNSValue = info![UIKeyboardFrameBeginUserInfoKey] as! NSValue
         let kbSize = infoNSValue.cgRectValue.size
-        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0)
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
         codeTextView.contentInset = contentInsets
         codeTextView.scrollIndicatorInsets = contentInsets
     }
