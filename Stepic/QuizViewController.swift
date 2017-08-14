@@ -28,6 +28,7 @@ class QuizViewController: UIViewController {
 
     weak var delegate: QuizControllerDelegate?
 
+    //To presenter
     var submissionsCount: Int? {
         didSet {
             guard let maxSubmissionsCount = step.maxSubmissionsCount, let submissionsCount = submissionsCount else {
@@ -36,15 +37,18 @@ class QuizViewController: UIViewController {
             }
             let left = maxSubmissionsCount - submissionsCount
             if (left > 0 && self.submission?.status != "correct") || step.canEdit {
+                //view: enable submission
                 sendButton.isEnabled = true
                 isSubmitButtonHidden = false
             } else {
+                //view: disable submission
                 sendButton.isEnabled = false
             }
             submissionsLeft = left
         }
     }
 
+    //To presenter
     var submissionsLeft: Int? {
         didSet {
             guard buttonStateSubmit else {
@@ -52,8 +56,10 @@ class QuizViewController: UIViewController {
             }
             if let count = submissionsLeft {
                 if count > 0 || step.canEdit {
+                    //SetLimitedSubmissionButtonTitle
                     self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: count)))", for: UIControlState())
                 } else {
+                    //SetNoSubmissionsLeft
                     self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
                     self.sendButton.backgroundColor = UIColor.gray
                 }
@@ -146,6 +152,7 @@ class QuizViewController: UIViewController {
                     }
                     self?.warningView?.isHidden = false
                 }
+                //To presenter ?
                 self.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
@@ -157,6 +164,7 @@ class QuizViewController: UIViewController {
         }
     }
 
+    //To presenter
     var attempt: Attempt? {
         didSet {
             if attempt == nil {
@@ -167,11 +175,8 @@ class QuizViewController: UIViewController {
                 [weak self] in
                 if let s = self {
                     print("did set attempt id \(String(describing: self?.attempt?.id))")
-
-                    //TODO: Implement in subclass, then it may need a height update
                     s.updateQuizAfterAttemptUpdate()
                 }
-//                self.view.layoutIfNeeded()
             }
         }
     }
@@ -189,8 +194,10 @@ class QuizViewController: UIViewController {
             if buttonStateSubmit {
                 self.sendButton.setStepicGreenStyle()
                 if submissionsLeft != nil && step.hasSubmissionRestrictions {
+                    //SetLimitedSubmissionButtonTitle
                     self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: submissionsLeft!)))", for: UIControlState())
                 } else {
+                    //SetSubmitTitle
                     self.sendButton.setTitle(self.submitTitle, for: UIControlState())
                 }
             } else {
@@ -318,7 +325,9 @@ class QuizViewController: UIViewController {
                                 s.peerReviewHeight.constant = 40
                                 s.peerReviewButton.isHidden = false
                             } else {
-                                //TODO: Refactor this!!!!! 
+                                //TODO: Refactor this!!!!!
+                                
+                                //To presenter
                                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": s.step.id])
                                 DispatchQueue.main.async {
                                     s.step.progress?.isPassed = true
@@ -327,6 +336,8 @@ class QuizViewController: UIViewController {
                             }
 
                             s.view.layoutIfNeeded()
+                            
+                            //To presenter
                             self?.delegate?.submissionDidCorrect()
 
                             break
@@ -347,6 +358,8 @@ class QuizViewController: UIViewController {
                             s.setStatusElements(visible: true)
 
                             s.view.layoutIfNeeded()
+                            
+                            //To presenter
                             self?.delegate?.submissionDidWrong()
 
                             break
