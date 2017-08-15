@@ -13,6 +13,7 @@ protocol AdaptiveStatsView: class {
     func setProgress(records: [WeekProgressViewData])
     func setAchievements(records: [AchievementViewData])
     func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?)
+    func setRatings(records: [RatingViewData])
 }
 
 struct WeekProgressViewData {
@@ -29,6 +30,13 @@ struct AchievementViewData {
     let isUnlocked: Bool
     let currentProgress: Int
     let maxProgress: Int
+}
+
+struct RatingViewData {
+    let position: Int
+    let exp: Int
+    let name: String
+    let me: Bool
 }
 
 class AdaptiveStatsPresenter {
@@ -114,4 +122,20 @@ class AdaptiveStatsPresenter {
         view?.reload()
     }
 
+    func reloadRatings(days: Int) {
+        RatingsAPI().retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: {
+            ratings in
+            var pos = 0
+            var scoreboard: [RatingViewData] = []
+            ratings.forEach { record in
+                pos += 1
+                scoreboard.append(RatingViewData(position: pos, exp: record.exp, name: "User \(record.userId)", me: AuthInfo.shared.userId == record.userId))
+            }
+
+            self.view?.setRatings(records: scoreboard)
+            self.view?.reload()
+        }, error: { err in
+            print(err)
+        })
+    }
 }

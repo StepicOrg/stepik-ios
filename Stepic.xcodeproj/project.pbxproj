@@ -916,6 +916,8 @@
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CAACA551F42EE7300AB0EAA /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */; };
+		2CAACA591F42FD5000AB0EAA /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA571F42FD5000AB0EAA /* LeaderboardTableViewCell.swift */; };
+		2CAACA5A1F42FD5000AB0EAA /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1919,6 +1921,8 @@
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
+		2CAACA571F42FD5000AB0EAA /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -3659,6 +3663,15 @@
 			name = AdaptiveOnboarding;
 			sourceTree = "<group>";
 		};
+		2CAACA561F42FD2400AB0EAA /* LeaderboardTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CAACA571F42FD5000AB0EAA /* LeaderboardTableViewCell.swift */,
+				2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */,
+			);
+			name = LeaderboardTableViewCell;
+			sourceTree = "<group>";
+		};
 		2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3763,6 +3776,7 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CAACA561F42FD2400AB0EAA /* LeaderboardTableViewCell */,
 				2C2544071F348085004DB3D9 /* AchievementNotificationView */,
 				2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */,
 				866DDDC41EA8060400BAD48E /* CardOverlayView */,
@@ -4348,6 +4362,7 @@
 				86AE948B1E84511A00F67691 /* SectionTableViewCell.xib in Resources */,
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
+				2CAACA5A1F42FD5000AB0EAA /* LeaderboardTableViewCell.xib in Resources */,
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
@@ -5443,6 +5458,7 @@
 				864D67651E83E08E001E8D9E /* HTMLStringWrapperUtil.swift in Sources */,
 				864D67661E83E08E001E8D9E /* HTMLContentViewInteractionDelegate.swift in Sources */,
 				2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */,
+				2CAACA591F42FD5000AB0EAA /* LeaderboardTableViewCell.swift in Sources */,
 				864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */,
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
 				864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */,
