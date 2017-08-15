@@ -915,6 +915,7 @@
 		2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */; };
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
+		2CAACA551F42EE7300AB0EAA /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1917,6 +1918,7 @@
 		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
 		2CA50B9D1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingPresenter.swift; sourceTree = "<group>"; };
 		2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -3690,6 +3692,7 @@
 				2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */,
 				2CEDA35D1F336EFD005F4A5D /* Rating & Stats */,
 				2C6640CB1F2F36E80033A274 /* Achievements */,
+				2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -5365,6 +5368,7 @@
 				2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */,
 				2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */,
 				869927D61ECFA9D9007D65A5 /* ShareableController.swift in Sources */,
+				2CAACA551F42EE7300AB0EAA /* RatingsAPI.swift in Sources */,
 				86B56EAD1EC38F7500CFE4A3 /* PostViewsExecutableTask.swift in Sources */,
 				86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */,
 				860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */,
