@@ -40,11 +40,9 @@ class AdaptiveRatingsPresenter {
 
             ratingsAPI.retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: {
                 ratings in
-                var pos = 0
                 var curScoreboard: [RatingViewData] = []
                 ratings.forEach { record in
-                    pos += 1
-                    curScoreboard.append(RatingViewData(position: pos, exp: record.exp, name: "User \(record.userId)", me: currentUser == record.userId))
+                    curScoreboard.append(RatingViewData(position: record.rank, exp: record.exp, name: "User \(record.userId)", me: currentUser == record.userId))
                 }
 
                 self.scoreboard[days ?? 0] = curScoreboard

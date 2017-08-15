@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class RatingsAPI {
 
-    typealias RatingRecord = (userId: Int, exp: Int)
+    typealias RatingRecord = (userId: Int, exp: Int, rank: Int)
 
     @discardableResult func retrieve(courseId: Int, count: Int = 10, days: Int? = 7, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([RatingRecord]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
@@ -22,6 +22,9 @@ class RatingsAPI {
         ]
         if let days = days {
             params["days"] = days
+        }
+        if let userId = AuthInfo.shared.userId {
+            params["user"] = userId
         }
 
         return Alamofire.request("\(StepicApplicationsInfo.adaptiveRatingURL)/rating", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
@@ -46,7 +49,7 @@ class RatingsAPI {
             }
 
             if response?.statusCode == 200 {
-                let leaders = json.arrayValue.map({return RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue)})
+                let leaders = json.arrayValue.map({return RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue)})
                 success(leaders)
                 return
             } else {
