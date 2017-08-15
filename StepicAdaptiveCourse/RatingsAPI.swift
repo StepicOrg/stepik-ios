@@ -11,16 +11,18 @@ import Alamofire
 import SwiftyJSON
 
 class RatingsAPI {
-    
-    typealias RatingRecord = (userId: Int, exp: Int)
-    
-    @discardableResult func retrieve(courseId: Int, count: Int = 10, days: Int = 7, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([RatingRecord]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-        let params: Parameters = [
+    typealias RatingRecord = (userId: Int, exp: Int)
+
+    @discardableResult func retrieve(courseId: Int, count: Int = 10, days: Int? = 7, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([RatingRecord]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+
+        var params: Parameters = [
             "course": courseId,
-            "count": count,
-            "days": days
+            "count": count
         ]
+        if let days = days {
+            params["days"] = days
+        }
 
         return Alamofire.request("\(StepicApplicationsInfo.adaptiveRatingURL)/rating", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
@@ -35,7 +37,7 @@ class RatingsAPI {
                 json = response.result.value!
             }
             let response = response.response
-            
+
             if let e = error {
                 let d = (e as NSError).localizedDescription
                 print(d)

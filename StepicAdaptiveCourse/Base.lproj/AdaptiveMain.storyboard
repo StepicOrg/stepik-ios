@@ -260,6 +260,9 @@
                                                         <segment title="Последние 7 дней"/>
                                                     </segments>
                                                     <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="onRatingSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="u1n-rh-Ury"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </stackView>

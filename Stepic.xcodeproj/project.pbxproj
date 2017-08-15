@@ -918,6 +918,8 @@
 		2CAACA551F42EE7300AB0EAA /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */; };
 		2CAACA591F42FD5000AB0EAA /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA571F42FD5000AB0EAA /* LeaderboardTableViewCell.swift */; };
 		2CAACA5A1F42FD5000AB0EAA /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */; };
+		2CAACA5E1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA5D1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift */; };
+		2CAACA601F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA5F1F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1923,6 +1925,8 @@
 		2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
 		2CAACA571F42FD5000AB0EAA /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 		2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2CAACA5D1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
+		2CAACA5F1F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -3586,6 +3590,8 @@
 			children = (
 				2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */,
 				2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */,
+				2CAACA5D1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift */,
+				2CAACA5F1F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift */,
 			);
 			name = AdaptiveStats;
 			sourceTree = "<group>";
@@ -5489,6 +5495,7 @@
 				864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */,
 				08E3A3BD1E93C40800E9C2EF /* LastStepGlobalContext.swift in Sources */,
 				864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */,
+				2CAACA5E1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift in Sources */,
 				0846B1121EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
@@ -5644,6 +5651,7 @@
 				864D66CE1E83DE03001E8D9E /* NotificationAlertConstructor.swift in Sources */,
 				864D66CF1E83DE03001E8D9E /* DeviceDefaults.swift in Sources */,
 				864D66D01E83DE03001E8D9E /* NotificationReactionHandler.swift in Sources */,
+				2CAACA601F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift in Sources */,
 				864D66D11E83DE03001E8D9E /* NotificationType.swift in Sources */,
 				864D66D21E83DE03001E8D9E /* Notification.swift in Sources */,
 				864D66D31E83DE03001E8D9E /* NotificationDataExtractor.swift in Sources */,
