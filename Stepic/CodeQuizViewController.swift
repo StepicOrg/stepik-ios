@@ -233,10 +233,6 @@ class CodeQuizViewController: QuizViewController {
         self.reply = reply
         self.submissionStatus = status
 
-        guard let dataset = dataset else {
-            return
-        }
-
         if status == .correct {
             setQuizControls(enabled: false)
             setupAccessoryView(editable: false)

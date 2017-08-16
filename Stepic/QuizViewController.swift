@@ -477,11 +477,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func submitPresed() {
-        sendButton.isEnabled = false
         submissionPressedBlock?()
         presenter?.submitPressed()
     }
-    
+
     @IBAction func sendButtonPressed(_ sender: UIButton) {
         submitPresed()
     }
