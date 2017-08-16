@@ -430,13 +430,7 @@ class QuizPresenter {
             if submissionLimit?.canSubmit ?? true {
                 if showsTryAgain {
                     self.view?.showLoading(visible: true)
-                    createNewAttempt(completion: {
-                        [weak self] in
-                        self?.view?.showLoading(visible: false)
-                    }, error: {
-                        [weak self] in
-                        self?.view?.showLoading(visible: false)
-                    })
+                    retrySubmission()
                 } else {
                     submit()
                 }
