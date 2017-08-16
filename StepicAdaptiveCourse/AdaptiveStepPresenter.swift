@@ -75,7 +75,7 @@ class AdaptiveStepPresenter {
     }
 
     func retry() {
-        submit()
+        quizViewController?.submitPresed()
     }
 
     func calculateQuizHintSize() -> (height: CGFloat, top: CGPoint) {
