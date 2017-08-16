@@ -21,3 +21,8 @@ extension QuizControllerDelegate {
     func submissionDidRetry() { }
     func didWarningPlaceholderShow() { }
 }
+
+protocol QuizControllerDataSource: class {
+    var needsToRefreshAttemptWhenWrong: Bool { get }
+    func getReply() -> Reply?
+}

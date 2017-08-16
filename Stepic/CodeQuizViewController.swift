@@ -12,6 +12,9 @@ import Highlightr
 
 class CodeQuizViewController: QuizViewController {
 
+    var dataset: String?
+    var reply: CodeReply?
+
     var limitsLabel: UILabel = UILabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
@@ -78,7 +81,7 @@ class CodeQuizViewController: QuizViewController {
 
             toolbarView.language = language.displayName
 
-            setupAccessoryView(editable: submission?.status != "correct")
+            setupAccessoryView(editable: submissionStatus != .correct)
 
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
                 codeTextView.text = userTemplate.templateString
@@ -195,11 +198,51 @@ class CodeQuizViewController: QuizViewController {
         }
     }
 
-    override func updateQuizAfterAttemptUpdate() {
-        guard step.options != nil else {
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? String else {
             return
         }
+
+        self.dataset = dataset
+
+        guard let options = step.options else {
+            return
+        }
+
         setQuizControls(enabled: true)
+
+        if options.languages.count > 1 {
+            showPicker()
+        } else {
+            language = options.languages[0]
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language.rawValue])
+        }
+    }
+
+    var submissionStatus: SubmissionStatus?
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? CodeReply else {
+            return
+        }
+
+        self.reply = reply
+        self.submissionStatus = status
+
+        guard let dataset = dataset else {
+            return
+        }
+
+        if status == .correct {
+            setQuizControls(enabled: false)
+            setupAccessoryView(editable: false)
+        } else {
+            setQuizControls(enabled: true)
+        }
+
+        language = reply.language
+        codeTextView.text = reply.code
+        currentCode = reply.code
     }
 
     fileprivate func setQuizControls(enabled: Bool) {
@@ -214,38 +257,11 @@ class CodeQuizViewController: QuizViewController {
         }
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        guard let options = step.options else {
-            return
-        }
-
-        if submission?.status == "correct" {
-            setQuizControls(enabled: false)
-            setupAccessoryView(editable: false)
-        } else {
-            setQuizControls(enabled: true)
-        }
-
-        guard let reply = submission?.reply as? CodeReply else {
-            if options.languages.count > 1 {
-                showPicker()
-            } else {
-                language = options.languages[0]
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": language.rawValue])
-            }
-            return
-        }
-
-        language = reply.language
-        codeTextView.text = reply.code
-        currentCode = reply.code
-    }
-
     override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
 
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         return CodeReply(code: codeTextView.text ?? "", language: language)
     }
 
@@ -285,7 +301,7 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
 
         let fullscreen = FullscreenCodeQuizViewController(nibName: "FullscreenCodeQuizViewController", bundle: nil)
         fullscreen.options = options
-        if submission?.status == "correct" {
+        if submissionStatus == .correct {
             fullscreen.isSolved = true
         }
         fullscreen.language = language

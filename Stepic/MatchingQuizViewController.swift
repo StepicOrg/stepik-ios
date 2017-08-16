@@ -11,6 +11,9 @@ import FLKAutoLayout
 
 class MatchingQuizViewController: QuizViewController {
 
+    var dataset: MatchingDataset?
+    var reply: MatchingReply?
+
     var firstTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
     var secondTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
 
@@ -63,29 +66,57 @@ class MatchingQuizViewController: QuizViewController {
     fileprivate var secondCellHeights: [CGFloat?] = []
 
     var optionsCount: Int {
-        return (self.attempt?.dataset as? MatchingDataset)?.pairs.count ?? 0
+        return dataset?.pairs.count ?? 0
     }
 
-    override func updateQuizAfterAttemptUpdate() {
-        guard let _ = attempt?.dataset as? MatchingDataset else {
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? MatchingDataset else {
             return
         }
 
-        resetOptionsToAttempt()
+        self.dataset = dataset
+        resetOptionsToDataset()
 
         self.firstCellHeights = Array(repeating: nil, count: optionsCount)
         self.secondCellHeights = Array(repeating: nil, count: optionsCount)
 
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
+
+        self.secondTableView.isUserInteractionEnabled = true
+    }
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? MatchingReply else {
+            return
+        }
+
+        self.reply = reply
+
+        guard let dataset = dataset else {
+            return
+        }
+
+        var o = [String](repeating: "", count: dataset.pairs.count)
+//            print("attempt dataset -> \(dataset.pairs), \nsubmission ordering -> \(reply.ordering)")
+        for (index, order) in reply.ordering.enumerated() {
+            o[index] = dataset.secondValues[order]
+        }
+        optionsPermutation = reply.ordering
+        orderedOptions = o
+
+        self.secondTableView.isUserInteractionEnabled = false
+
+        self.firstTableView.reloadData()
+        self.secondTableView.reloadData()
     }
 
     //TODO: Something strange is happening here, check this
-    fileprivate func resetOptionsToAttempt() {
+    fileprivate func resetOptionsToDataset() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
         optionsPermutation = []
-        if let dataset = attempt?.dataset as? MatchingDataset {
+        if let dataset = dataset {
             self.orderedOptions = dataset.secondValues
             for (index, option) in dataset.secondValues.enumerated() {
                 optionsPermutation += [index]
@@ -94,36 +125,9 @@ class MatchingQuizViewController: QuizViewController {
         }
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if self.submission == nil {
-            if reload {
-                resetOptionsToAttempt()
-            }
-            self.secondTableView.isUserInteractionEnabled = true
-        } else {
-            if let dataset = attempt?.dataset as? MatchingDataset {
-                var o = [String](repeating: "", count: dataset.pairs.count)
-                if let r = submission?.reply as? MatchingReply {
-                    print("attempt dataset -> \(dataset.pairs), \nsubmission ordering -> \(r.ordering)")
-                    for (index, order) in r.ordering.enumerated() {
-                        o[index] = dataset.secondValues[order]
-                    }
-                    optionsPermutation = r.ordering
-                }
-                orderedOptions = o
-            }
-            self.secondTableView.isUserInteractionEnabled = false
-        }
-
-        self.firstTableView.reloadData()
-        self.secondTableView.reloadData()
-    }
-
-    var updatingWithReload = false
-
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         let r = MatchingReply(ordering: optionsPermutation)
-        print(r.ordering)
+//        print(r.ordering)
         return r
     }
 
@@ -169,7 +173,7 @@ class MatchingQuizViewController: QuizViewController {
     }
 
     var maxHeight: CGFloat {
-        guard let dataset = attempt?.dataset as? MatchingDataset else {
+        guard let dataset = dataset else {
             return 0
         }
         return max(maxCellHeight(options: dataset.firstValues, heights: firstCellHeights, sortable: false), maxCellHeight(options: dataset.secondValues, heights: secondCellHeights, sortable: true))
@@ -211,7 +215,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if attempt != nil {
+        if dataset != nil {
             return 1
         } else {
             return 0
@@ -224,7 +228,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let dataset = attempt?.dataset as? MatchingDataset else {
+        guard let dataset = dataset else {
             return UITableViewCell()
         }
 

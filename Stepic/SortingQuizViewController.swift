@@ -13,6 +13,9 @@ class SortingQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
 
+    var dataset: SortingDataset?
+    var reply: SortingReply?
+
     var cellHeights: [CGFloat?] = []
 
     var didReload: Bool = false
@@ -35,21 +38,49 @@ class SortingQuizViewController: QuizViewController {
     fileprivate var positionForOptionInAttempt: [String : Int] = [:]
 
     var optionsCount: Int {
-        return (self.attempt?.dataset as? SortingDataset)?.options.count ?? 0
+        return dataset?.options.count ?? 0
     }
 
-    override func updateQuizAfterAttemptUpdate() {
-        resetOptionsToAttempt()
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? SortingDataset else {
+            return
+        }
+
+        self.dataset = dataset
+
+        resetOptionsToDataset()
 
         self.cellHeights = Array(repeating: nil, count: optionsCount)
         didReload = false
         tableView.reloadData()
+        self.tableView.isUserInteractionEnabled = true
     }
 
-    fileprivate func resetOptionsToAttempt() {
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? SortingReply else {
+            return
+        }
+
+        self.reply = reply
+
+        guard let dataset = dataset else {
+            return
+        }
+
+        var o = [String](repeating: "", count: dataset.options.count)
+        for (index, order) in reply.ordering.enumerated() {
+            o[index] = dataset.options[order]
+        }
+        orderedOptions = o
+        self.tableView.isUserInteractionEnabled = false
+        self.tableView.reloadData()
+    }
+
+    fileprivate func resetOptionsToDataset() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
-        if let dataset = attempt?.dataset as? SortingDataset {
+
+        if let dataset = dataset {
             self.orderedOptions = dataset.options
             for (index, option) in dataset.options.enumerated() {
                 positionForOptionInAttempt[option] = index
@@ -57,28 +88,7 @@ class SortingQuizViewController: QuizViewController {
         }
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if self.submission == nil {
-            if reload {
-                resetOptionsToAttempt()
-            }
-            self.tableView.isUserInteractionEnabled = true
-        } else {
-            if let dataset = attempt?.dataset as? SortingDataset {
-                var o = [String](repeating: "", count: dataset.options.count)
-                if let r = submission?.reply as? SortingReply {
-                    for (index, order) in r.ordering.enumerated() {
-                        o[index] = dataset.options[order]
-                    }
-                }
-                orderedOptions = o
-            }
-            self.tableView.isUserInteractionEnabled = false
-        }
-        self.tableView.reloadData()
-    }
-
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         let r = SortingReply(ordering: orderedOptions.flatMap({return positionForOptionInAttempt[$0]}))
         return r
     }
@@ -111,7 +121,7 @@ class SortingQuizViewController: QuizViewController {
 extension SortingQuizViewController : UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let dataset = attempt?.dataset as? SortingDataset else {
+        guard let dataset = dataset else {
             return 0
         }
         if let height = cellHeights[indexPath.row] {
@@ -136,7 +146,7 @@ extension SortingQuizViewController : UITableViewDelegate {
 
 extension SortingQuizViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if attempt != nil {
+        if dataset != nil {
             return 1
         } else {
             return 0
@@ -148,7 +158,7 @@ extension SortingQuizViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataset = attempt?.dataset as? SortingDataset else {
+        guard let dataset = dataset else {
             return UITableViewCell()
         }
 

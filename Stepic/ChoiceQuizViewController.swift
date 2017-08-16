@@ -15,6 +15,9 @@ class ChoiceQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
 
+    var dataset: ChoiceDataset?
+    var reply: ChoiceReply?
+
     var cellHeights: [CGFloat?] = []
 
     var didReload: Bool = false
@@ -51,29 +54,32 @@ class ChoiceQuizViewController: QuizViewController {
     var choices: [Bool] = []
 
     var optionsCount: Int {
-        return (self.attempt?.dataset as? ChoiceDataset)?.options.count ?? 0
+        return dataset?.options.count ?? 0
     }
 
-    override func updateQuizAfterAttemptUpdate() {
-        guard let _ = attempt?.dataset as? ChoiceDataset else {
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? ChoiceDataset else {
             return
         }
+
+        self.dataset = dataset
 
         self.choices = [Bool](repeating: false, count: optionsCount)
         self.cellHeights = Array(repeating: nil, count: optionsCount)
         didReload = false
         tableView.reloadData()
+        self.tableView.isUserInteractionEnabled = true
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if self.submission == nil {
-            if reload {
-                self.choices = [Bool](repeating: false, count: optionsCount)
-            }
-            self.tableView.isUserInteractionEnabled = true
-        } else {
-            self.tableView.isUserInteractionEnabled = false
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? ChoiceReply else {
+            return
         }
+
+        self.reply = reply
+
+        self.choices = reply.choices
+        self.tableView.isUserInteractionEnabled = false
         self.tableView.reloadData()
     }
 
@@ -98,7 +104,7 @@ class ChoiceQuizViewController: QuizViewController {
 extension ChoiceQuizViewController : UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let dataset = attempt?.dataset as? ChoiceDataset else {
+        guard let dataset = dataset else {
             return 0
         }
         if let height = cellHeights[indexPath.row] {
@@ -124,7 +130,7 @@ extension ChoiceQuizViewController : UITableViewDelegate {
     fileprivate func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
 
         if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
-            if let dataset = attempt?.dataset as? ChoiceDataset {
+            if let dataset = dataset {
                 if dataset.isMultipleChoice {
                     choices[indexPath.row] = !cell.checkBox.on
                     cell.checkBox.setOn(!cell.checkBox.on, animated: true)
@@ -147,21 +153,21 @@ extension ChoiceQuizViewController : BEMCheckBoxDelegate {
 
 extension ChoiceQuizViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let _ = attempt?.dataset as? ChoiceDataset {
+        if let _ = dataset {
             return 1
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let dataset = attempt?.dataset as? ChoiceDataset {
+        if let dataset = dataset {
             return dataset.options.count
         }
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let dataset = attempt?.dataset as? ChoiceDataset else {
+        guard let dataset = dataset else {
             return UITableViewCell()
         }
 
@@ -198,11 +204,8 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         cell.checkBox.tag = indexPath.row
         cell.checkBox.delegate = self
         cell.checkBox.isUserInteractionEnabled = false
-        if let reply = submission?.reply as? ChoiceReply {
-            cell.checkBox.on = reply.choices[indexPath.row]
-        } else {
-            cell.checkBox.on = self.choices[indexPath.row]
-        }
+        
+        cell.checkBox.on = self.choices[indexPath.row]
         return cell
     }
 }

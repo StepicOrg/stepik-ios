@@ -14,6 +14,9 @@ class MathQuizViewController: QuizViewController {
 
     let textFieldHeight = 32
 
+    var dataset: String?
+    var reply: MathReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,8 +32,13 @@ class MathQuizViewController: QuizViewController {
     }
 
     func textFieldTextDidChange(textField: UITextField) {
-        if submission != nil {
-            submission = nil
+        switch presenter?.state ?? .nothing {
+        case .attempt:
+            break
+        case .submission:
+            presenter?.state = .attempt
+        default:
+            break
         }
     }
 
@@ -47,28 +55,32 @@ class MathQuizViewController: QuizViewController {
         return false
     }
 
-    //Override this in subclass
-    override func updateQuizAfterAttemptUpdate() {
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? String else {
+            return
+        }
+
+        self.dataset = dataset
         textField.text = ""
+        textField.isEnabled = true
     }
 
-    //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if let r = submission?.reply as? MathReply {
-            textField.text = r.formula
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? MathReply else {
+            return
         }
-        if submission?.status == "correct" {
+
+        self.reply = reply
+        textField.text = reply.formula
+        if status == .correct {
             textField.isEnabled = false
         } else {
             textField.isEnabled = true
         }
-        //        if reload {
-        //            textField.text = ""
-        //        }
     }
 
     //Override this in the subclass
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         return MathReply(formula: textField.text ?? "")
     }
 

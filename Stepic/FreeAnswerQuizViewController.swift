@@ -12,6 +12,9 @@ class FreeAnswerQuizViewController: QuizViewController {
 
     let textViewHeight = 64
 
+    var dataset: FreeAnswerDataset?
+    var reply: FreeAnswerReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,30 +43,37 @@ class FreeAnswerQuizViewController: QuizViewController {
         return false
     }
 
-    //Override this in subclass
-    override func updateQuizAfterAttemptUpdate() {
-        textView.text = ""
-    }
-
-    var dataset: FreeAnswerDataset? {
-        return attempt?.dataset as? FreeAnswerDataset
-    }
-
-    //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if let r = submission?.reply as? FreeAnswerReply {
-            if let d = dataset {
-                if d.isHTMLEnabled {
-                    let attributed = try! NSAttributedString(data: (r.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-                    let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
-                    textView.attributedText = mutableAttributed
-                } else {
-                    return textView.text = r.text
-                }
-            }
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? FreeAnswerDataset else {
+            return
         }
-        if submission?.status == "correct" {
+
+        self.dataset = dataset
+        textView.text = ""
+        textView.isEditable = true
+    }
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? FreeAnswerReply else {
+            return
+        }
+
+        self.reply = reply
+
+        guard let dataset = dataset else {
+            return
+        }
+
+        if dataset.isHTMLEnabled {
+            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
+            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
+            textView.attributedText = mutableAttributed
+        } else {
+            return textView.text = reply.text
+        }
+
+        if status == .correct {
             textView.isEditable = false
         } else {
             textView.isEditable = true
@@ -71,7 +81,7 @@ class FreeAnswerQuizViewController: QuizViewController {
     }
 
     //Override this in the subclass
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         if let d = dataset {
             if d.isHTMLEnabled {
                 return FreeAnswerReply(text: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
