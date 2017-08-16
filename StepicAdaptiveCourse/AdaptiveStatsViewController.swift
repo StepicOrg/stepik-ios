@@ -225,6 +225,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
             if let user = data?[indexPath.item] as? RatingViewData {
                 cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
+                cell.cellPosition = indexPath.item == (data!.count - 1) ? .bottom : (indexPath.item == 0 ? .top : .middle)
             }
             return cell
         }

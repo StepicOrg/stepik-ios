@@ -95,7 +95,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="bGU-v4-wqH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="433"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSc-Ls-wSS" userLabel="Main stat">
@@ -280,6 +280,7 @@
                                         <constraint firstItem="FSc-Ls-wSS" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="H5K-65-ySV"/>
                                         <constraint firstAttribute="trailing" secondItem="FSc-Ls-wSS" secondAttribute="trailing" constant="8" id="HAY-Ff-yO1"/>
                                         <constraint firstItem="DF1-VD-wAL" firstAttribute="top" secondItem="og5-H2-0O7" secondAttribute="bottom" constant="6" id="LfD-U5-xXT"/>
+                                        <constraint firstAttribute="bottom" secondItem="DF1-VD-wAL" secondAttribute="bottom" constant="8" id="QqQ-XC-O3N"/>
                                         <constraint firstItem="3yr-V2-vlJ" firstAttribute="top" secondItem="vwa-eW-FQd" secondAttribute="bottom" id="W7R-MN-PhB"/>
                                         <constraint firstItem="FSc-Ls-wSS" firstAttribute="top" secondItem="bGU-v4-wqH" secondAttribute="top" id="XPe-lF-fAi"/>
                                         <constraint firstItem="vaD-vX-JZn" firstAttribute="top" secondItem="FSc-Ls-wSS" secondAttribute="bottom" constant="4" id="bPJ-5k-cpS"/>
@@ -289,14 +290,13 @@
                                         <constraint firstItem="og5-H2-0O7" firstAttribute="top" secondItem="3yr-V2-vlJ" secondAttribute="bottom" constant="8" id="pAT-Hc-c9q"/>
                                         <constraint firstItem="vwa-eW-FQd" firstAttribute="top" secondItem="vaD-vX-JZn" secondAttribute="bottom" constant="4" id="pZz-fz-Hdi"/>
                                         <constraint firstAttribute="trailing" secondItem="og5-H2-0O7" secondAttribute="trailing" constant="8" id="riv-kh-CLU"/>
-                                        <constraint firstAttribute="bottom" secondItem="DF1-VD-wAL" secondAttribute="bottom" constant="5" id="vCu-T2-dsW"/>
                                         <constraint firstItem="3yr-V2-vlJ" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="vEr-lR-lAX"/>
                                         <constraint firstItem="vaD-vX-JZn" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="xc1-Ar-v9l"/>
                                         <constraint firstItem="DF1-VD-wAL" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="z6S-vN-2RI"/>
                                     </constraints>
                                 </view>
                                 <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="U3H-cx-6JY">
-                                    <rect key="frame" x="0.0" y="430" width="320" height="20"/>
+                                    <rect key="frame" x="0.0" y="433" width="320" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </activityIndicatorView>
