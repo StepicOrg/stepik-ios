@@ -38,12 +38,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         }
     }
 
-    weak var dataSource: QuizControllerDataSource? {
-        didSet {
-            presenter?.dataSource = dataSource
-        }
-    }
-
     var submissionPressedBlock : (() -> Void)?
 
     private let submitTitle: String = NSLocalizedString("Submit", comment: "")
@@ -167,6 +161,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
             NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
         self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt)
+        presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }
 
@@ -481,10 +476,14 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.selectStreakNotificationTime()
     }
 
-    @IBAction func sendButtonPressed(_ sender: UIButton) {
+    func submitPresed() {
         sendButton.isEnabled = false
         submissionPressedBlock?()
         presenter?.submitPressed()
+    }
+    
+    @IBAction func sendButtonPressed(_ sender: UIButton) {
+        submitPresed()
     }
 
     var isSubmitButtonHidden: Bool = false {

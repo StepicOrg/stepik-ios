@@ -143,7 +143,14 @@ class QuizPresenter {
 
             if forceCreate {
                 print("force create new attempt")
-                s.createNewAttempt()
+                s.createNewAttempt(completion: {
+                    [weak self] in
+                    self?.view?.showLoading(visible: false)
+                }, error: {
+                    [weak self] in
+                    self?.view?.showLoading(visible: false)
+                    self?.view?.showConnectionError()
+                })
                 return
             }
 
@@ -153,7 +160,14 @@ class QuizPresenter {
                 guard let s = self else { return }
                 if attempts.count == 0 || attempts[0].status != "active" {
                     //Create attempt
-                    s.createNewAttempt()
+                    s.createNewAttempt(completion: {
+                        [weak self] in
+                        self?.view?.showLoading(visible: false)
+                    }, error: {
+                        [weak self] in
+                        self?.view?.showLoading(visible: false)
+                        self?.view?.showConnectionError()
+                    })
                 } else {
                     //Get submission for attempt
                     let currentAttempt = attempts[0]

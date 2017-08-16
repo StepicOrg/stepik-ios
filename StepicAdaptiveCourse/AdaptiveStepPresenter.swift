@@ -69,15 +69,13 @@ class AdaptiveStepPresenter {
         var isSelected = false
         quizViewController?.choices.forEach { isSelected = isSelected || $0 }
 
-        if quizViewController?.attempt != nil && isSelected {
-            quizViewController?.submitAttempt()
+        if isSelected {
+            quizViewController?.submitPresed()
         }
     }
 
     func retry() {
-        if quizViewController?.attempt != nil {
-            quizViewController?.retrySubmission()
-        }
+        submit()
     }
 
     func calculateQuizHintSize() -> (height: CGFloat, top: CGPoint) {
