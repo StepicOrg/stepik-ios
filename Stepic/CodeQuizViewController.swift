@@ -176,6 +176,12 @@ class CodeQuizViewController: QuizViewController {
         }
     }
 
+    func hidePicker() {
+        languagePicker.removeFromParentViewController()
+        languagePicker.view.removeFromSuperview()
+        isSubmitButtonHidden = false
+    }
+
     func showPicker() {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
@@ -192,9 +198,7 @@ class CodeQuizViewController: QuizViewController {
 
             s.language = selectedLanguage
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.languageChosen, parameters: ["size": "standard", "language": s.language.rawValue])
-            s.languagePicker.removeFromParentViewController()
-            s.languagePicker.view.removeFromSuperview()
-            s.isSubmitButtonHidden = false
+            s.hidePicker()
         }
     }
 
@@ -243,6 +247,7 @@ class CodeQuizViewController: QuizViewController {
         language = reply.language
         codeTextView.text = reply.code
         currentCode = reply.code
+        hidePicker()
     }
 
     fileprivate func setQuizControls(enabled: Bool) {

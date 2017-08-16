@@ -260,6 +260,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
                 } else {
                     hintView.isHidden = false
                     hintTextView.isHidden = false
+                    hintWebView.isHidden = true
                     hintTextView.text = hint
                     hintHeight.constant = getHintHeightFor(hint: hint)
                 }

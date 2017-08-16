@@ -204,7 +204,6 @@ extension ChoiceQuizViewController : UITableViewDataSource {
         cell.checkBox.tag = indexPath.row
         cell.checkBox.delegate = self
         cell.checkBox.isUserInteractionEnabled = false
-        
         cell.checkBox.on = self.choices[indexPath.row]
         return cell
     }
