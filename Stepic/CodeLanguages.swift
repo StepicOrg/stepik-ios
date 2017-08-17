@@ -32,7 +32,7 @@ enum CodeLanguage: String {
     case kotlin = "kotlin"
     case go = "go"
     case pascal = "pascalabc"
-    case unsupported = "UNSUPPORTED_LANGUAGE"
+    case perl = "perl"
 
     var highlightr: String {
         switch self {
@@ -70,8 +70,8 @@ enum CodeLanguage: String {
             return "go"
         case .pascal:
             return "delphi"
-        case .unsupported:
-            return "cpp"
+        case .perl:
+            return "perl"
         }
     }
 
