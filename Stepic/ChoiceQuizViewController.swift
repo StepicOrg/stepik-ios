@@ -153,10 +153,7 @@ extension ChoiceQuizViewController : BEMCheckBoxDelegate {
 
 extension ChoiceQuizViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let _ = dataset {
-            return 1
-        }
-        return 0
+        return dataset != nil ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -72,11 +72,7 @@ class MathQuizViewController: QuizViewController {
 
         self.reply = reply
         textField.text = reply.formula
-        if status == .correct {
-            textField.isEnabled = false
-        } else {
-            textField.isEnabled = true
-        }
+        textField.isEnabled = status != .correct
     }
 
     //Override this in the subclass

@@ -74,11 +74,7 @@ class NumberQuizViewController: QuizViewController {
 
         self.reply = reply
         textField.text = reply.number
-        if status == .correct {
-            textField.isEnabled = false
-        } else {
-            textField.isEnabled = true
-        }
+        textField.isEnabled = status != .correct
     }
 
     //Override this in the subclass

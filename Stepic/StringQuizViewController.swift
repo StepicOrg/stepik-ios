@@ -61,11 +61,7 @@ class StringQuizViewController: QuizViewController {
 
         self.reply = reply
         textView.text = reply.text
-        if status == .correct {
-            textView.isEditable = false
-        } else {
-            textView.isEditable = true
-        }
+        textView.isEditable = status != .correct
     }
 
     func tap() {

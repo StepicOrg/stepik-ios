@@ -146,11 +146,7 @@ extension SortingQuizViewController : UITableViewDelegate {
 
 extension SortingQuizViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        if dataset != nil {
-            return 1
-        } else {
-            return 0
-        }
+        return dataset != nil ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

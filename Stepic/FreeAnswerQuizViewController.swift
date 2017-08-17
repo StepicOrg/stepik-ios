@@ -73,11 +73,7 @@ class FreeAnswerQuizViewController: QuizViewController {
             return textView.text = reply.text
         }
 
-        if status == .correct {
-            textView.isEditable = false
-        } else {
-            textView.isEditable = true
-        }
+        textView.isEditable = status != .correct
     }
 
     //Override this in the subclass

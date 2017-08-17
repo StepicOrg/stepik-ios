@@ -491,13 +491,13 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.selectStreakNotificationTime()
     }
 
-    func submitPresed() {
+    func submitPressed() {
         submissionPressedBlock?()
         presenter?.submitPressed()
     }
 
     @IBAction func sendButtonPressed(_ sender: UIButton) {
-        submitPresed()
+        submitPressed()
     }
 
     var isSubmitButtonHidden: Bool = false {

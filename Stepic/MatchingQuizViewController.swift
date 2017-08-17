@@ -55,8 +55,6 @@ class MatchingQuizViewController: QuizViewController {
 
         secondTableView.isEditing = true
         firstTableView.isUserInteractionEnabled = false
-
-        // Do any additional setup after loading the view.
     }
 
     fileprivate var orderedOptions: [String] = []
@@ -98,7 +96,6 @@ class MatchingQuizViewController: QuizViewController {
         }
 
         var o = [String](repeating: "", count: dataset.pairs.count)
-//            print("attempt dataset -> \(dataset.pairs), \nsubmission ordering -> \(reply.ordering)")
         for (index, order) in reply.ordering.enumerated() {
             o[index] = dataset.secondValues[order]
         }
@@ -111,7 +108,6 @@ class MatchingQuizViewController: QuizViewController {
         self.secondTableView.reloadData()
     }
 
-    //TODO: Something strange is happening here, check this
     fileprivate func resetOptionsToDataset() {
         orderedOptions = []
         positionForOptionInAttempt = [:]
@@ -126,9 +122,7 @@ class MatchingQuizViewController: QuizViewController {
     }
 
     override func getReply() -> Reply? {
-        let r = MatchingReply(ordering: optionsPermutation)
-//        print(r.ordering)
-        return r
+        return MatchingReply(ordering: optionsPermutation)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -215,11 +209,7 @@ extension MatchingQuizViewController : UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if dataset != nil {
-            return 1
-        } else {
-            return 0
-        }
+        return dataset != nil ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
