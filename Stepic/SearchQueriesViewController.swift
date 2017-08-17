@@ -89,7 +89,7 @@ extension SearchQueriesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.suggestion = suggestions[indexPath.row]
+        cell.set(suggestion: suggestions[indexPath.row], query: query)
         return cell
     }
 }
