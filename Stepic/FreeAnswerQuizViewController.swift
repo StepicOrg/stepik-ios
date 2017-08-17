@@ -59,6 +59,14 @@ class FreeAnswerQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        display(reply: reply)
+        textView.isEditable = status != .correct
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? FreeAnswerReply else {
+            return
+        }
 
         guard let dataset = dataset else {
             return
@@ -70,10 +78,8 @@ class FreeAnswerQuizViewController: QuizViewController {
             mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
             textView.attributedText = mutableAttributed
         } else {
-            return textView.text = reply.text
+            textView.text = reply.text
         }
-
-        textView.isEditable = status != .correct
     }
 
     //Override this in the subclass

@@ -151,6 +151,9 @@
 		082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
+		082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		082E5E0F1F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		082E5E101F46379100F41426 /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		082EDED31D881562006B51DC /* StepsControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepsControllerRouter.swift */; };
 		082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082EDED21D881562006B51DC /* StepsControllerRouter.swift */; };
 		082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
@@ -1512,6 +1515,7 @@
 		082BE3B11E67686B006BC60F /* RoutingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingManager.swift; sourceTree = "<group>"; };
 		082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsViewController.swift; sourceTree = "<group>"; };
 		082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionsViewController.xib; sourceTree = "<group>"; };
+		082E5E0D1F46379100F41426 /* ReplyCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCache.swift; sourceTree = "<group>"; };
 		082EDED21D881562006B51DC /* StepsControllerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControllerRouter.swift; sourceTree = "<group>"; };
 		082EDED51D88871F006B51DC /* Model_v9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v9.xcdatamodel; sourceTree = "<group>"; };
 		082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceLastSegue.swift; sourceTree = "<group>"; };
@@ -2264,6 +2268,7 @@
 				0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */,
 				0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */,
 				0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */,
+				082E5E0D1F46379100F41426 /* ReplyCache.swift */,
 			);
 			name = Sections;
 			sourceTree = "<group>";
@@ -4978,6 +4983,7 @@
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
+				082E5E0F1F46379100F41426 /* ReplyCache.swift in Sources */,
 				08D035221D65A252003515C6 /* AnalyticsEvents.swift in Sources */,
 				083F2B1E1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				085514EC1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
@@ -5240,6 +5246,7 @@
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
+				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
@@ -5606,6 +5613,7 @@
 				080C5E861EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				864D66BA1E83DE03001E8D9E /* UpdatePreferencesContainer.swift in Sources */,
 				864D66BB1E83DE03001E8D9E /* VersionUpdateAlertConstructor.swift in Sources */,
+				082E5E101F46379100F41426 /* ReplyCache.swift in Sources */,
 				864D66BC1E83DE03001E8D9E /* Version.swift in Sources */,
 				864D66BD1E83DE03001E8D9E /* SubmissonManager.swift in Sources */,
 				864D66BE1E83DE03001E8D9E /* QuizDataManager.swift in Sources */,

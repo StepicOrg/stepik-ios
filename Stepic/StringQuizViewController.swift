@@ -60,8 +60,16 @@ class StringQuizViewController: QuizViewController {
         }
 
         self.reply = reply
-        textView.text = reply.text
+        display(reply: reply)
         textView.isEditable = status != .correct
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? TextReply else {
+            return
+        }
+
+        textView.text = reply.text
     }
 
     func tap() {
