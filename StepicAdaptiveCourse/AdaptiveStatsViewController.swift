@@ -242,7 +242,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
         case .ratings(_):
             let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
 
-            let separatorAfterIndex = (separatorPosition ?? -1)
+            let separatorAfterIndex = (separatorPosition ?? Int.max - 1)
 
             if separatorAfterIndex + 1 == indexPath.item {
                 cell.cellPosition = .separator
