@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol AdaptiveRatingsView: class {
     func reload()
@@ -26,6 +27,8 @@ class AdaptiveRatingsPresenter {
     fileprivate var ratingsAPI: RatingsAPI
 
     private var scoreboard: [Int: [RatingViewData]] = [:]
+    
+    private var currentRequest: Request?
 
     // Names (word + grammatical gender)
     private var nouns: [(String, String)] = []
@@ -44,7 +47,8 @@ class AdaptiveRatingsPresenter {
         if downloadedScoreboard == nil || force {
             let currentUser = AuthInfo.shared.userId
 
-            ratingsAPI.retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: {
+            currentRequest?.cancel()
+            currentRequest = ratingsAPI.retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: {
                 ratings in
                 var curScoreboard: [RatingViewData] = []
                 ratings.forEach { record in
