@@ -9,7 +9,7 @@
 import UIKit
 import Presentr
 
-class QuizViewController: UIViewController {
+class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
@@ -26,68 +26,33 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var peerReviewHeight: NSLayoutConstraint!
     @IBOutlet weak var peerReviewButton: UIButton!
 
-    weak var delegate: QuizControllerDelegate?
+    var presenter: QuizPresenter?
 
-    var submissionsCount: Int? {
+    var state = QuizState.nothing
+
+    var step: Step!
+
+    weak var delegate: QuizControllerDelegate? {
         didSet {
-            guard let maxSubmissionsCount = step.maxSubmissionsCount, let submissionsCount = submissionsCount else {
-                submissionsLeft = nil
-                return
-            }
-            let left = maxSubmissionsCount - submissionsCount
-            if (left > 0 && self.submission?.status != "correct") || step.canEdit {
-                sendButton.isEnabled = true
-                isSubmitButtonHidden = false
-            } else {
-                sendButton.isEnabled = false
-            }
-            submissionsLeft = left
+            presenter?.delegate = delegate
         }
     }
 
-    var submissionsLeft: Int? {
-        didSet {
-            guard buttonStateSubmit else {
-                return
-            }
-            if let count = submissionsLeft {
-                if count > 0 || step.canEdit {
-                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: count)))", for: UIControlState())
-                } else {
-                    self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
-                    self.sendButton.backgroundColor = UIColor.gray
-                }
-            }
-        }
-    }
+    var submissionPressedBlock : (() -> Void)?
 
-    var submitTitle: String {
-        return NSLocalizedString("Submit", comment: "")
-    }
+    var displayingHint: String?
 
-    var tryAgainTitle: String {
-        return NSLocalizedString("TryAgain", comment: "")
-    }
-
+    private let submitTitle: String = NSLocalizedString("Submit", comment: "")
+    private let tryAgainTitle: String = NSLocalizedString("TryAgain", comment: "")
     var correctTitle: String {
-        return NSLocalizedString("Correct", comment: "")
+        return  NSLocalizedString("Correct", comment: "")
     }
+    private let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
+    private let peerReviewText: String = NSLocalizedString("PeerReviewText", comment: "")
+    fileprivate let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
 
-    var wrongTitle: String {
-        return NSLocalizedString("Wrong", comment: "")
-    }
-
-    var peerReviewText: String {
-        return NSLocalizedString("PeerReviewText", comment: "")
-    }
-
-    let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
-
-    var activityView: UIView?
-
-    var warningView: UIView?
-
-    func initWarningView() -> UIView {
+    private var warningView: UIView?
+    private func initWarningView() -> UIView {
         //TODO: change warning image!
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
@@ -100,7 +65,8 @@ class QuizViewController: UIViewController {
         return v
     }
 
-    func initActivityView() -> UIView {
+    private var activityView: UIView?
+    private func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
@@ -116,7 +82,7 @@ class QuizViewController: UIViewController {
         return v
     }
 
-    var doesPresentActivityIndicatorView: Bool = false {
+    private var doesPresentActivityIndicatorView: Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
                 DispatchQueue.main.async {
@@ -136,7 +102,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    var doesPresentWarningView: Bool = false {
+    private var doesPresentWarningView: Bool = false {
         didSet {
             if doesPresentWarningView {
                 DispatchQueue.main.async {
@@ -146,7 +112,7 @@ class QuizViewController: UIViewController {
                     }
                     self?.warningView?.isHidden = false
                 }
-                self.delegate?.didWarningPlaceholderShow()
+                self.presenter?.delegate?.didWarningPlaceholderShow()
             } else {
                 DispatchQueue.main.async {
                     [weak self] in
@@ -157,69 +123,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    var attempt: Attempt? {
-        didSet {
-            if attempt == nil {
-                print("ATTEMPT SHOULD NEVER BE SET TO NIL")
-                return
-            }
-            DispatchQueue.main.async {
-                [weak self] in
-                if let s = self {
-                    print("did set attempt id \(String(describing: self?.attempt?.id))")
-
-                    //TODO: Implement in subclass, then it may need a height update
-                    s.updateQuizAfterAttemptUpdate()
-                }
-//                self.view.layoutIfNeeded()
-            }
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-
-    var buttonStateSubmit: Bool = true {
-        didSet {
-            if buttonStateSubmit {
-                self.sendButton.setStepicGreenStyle()
-                if submissionsLeft != nil && step.hasSubmissionRestrictions {
-                    self.sendButton.setTitle(self.submitTitle + " (\(submissionsLeftLocalizable(count: submissionsLeft!)))", for: UIControlState())
-                } else {
-                    self.sendButton.setTitle(self.submitTitle, for: UIControlState())
-                }
-            } else {
-                self.sendButton.setStepicWhiteStyle()
-                self.sendButton.setTitle(self.tryAgainTitle, for: UIControlState())
-            }
-        }
-    }
-
-    //Override this in subclass if needed
-    var needsToRefreshAttemptWhenWrong: Bool {
-        return true
-    }
-
-    //Override this in subclass
-    func updateQuizAfterAttemptUpdate() {
-    }
-
-    //Override this in subclass
-    func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-    }
-
-    var needPeerReview: Bool {
-        return stepUrl != nil
-    }
-
-    var stepUrl: String?
-
-    fileprivate func submissionsLeftLocalizable(count: Int) -> String {
+    private func submissionsLeftLocalizable(count: Int) -> String {
         func triesLocalizableFor(count: Int) -> String {
             switch (abs(count) % 10) {
             case 1: return NSLocalizedString("triesLeft1", comment: "")
@@ -230,169 +134,6 @@ class QuizViewController: UIViewController {
 
         return String(format: triesLocalizableFor(count: count), "\(count)")
     }
-
-    fileprivate var didGetErrorWhileSendingSubmission = false
-
-    fileprivate func setStatusElements(visible: Bool) {
-        statusLabel.isHidden = !visible
-        statusImageView.isHidden = !visible
-    }
-
-    fileprivate func getHintHeightFor(hint: String) -> CGFloat {
-        let textView = UITextView()
-        textView.text = hint
-        textView.font = UIFont(name: "ArialMT", size: 16)
-        let fixedWidth = hintTextView.bounds.width
-        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        return newSize.height
-    }
-
-    var submission: Submission? {
-        didSet {
-            DispatchQueue.main.async {
-                [weak self] in
-                if let s = self {
-                    if s.submission == nil {
-                        print("did set submission to nil")
-                        s.statusImageView.image = nil
-                        s.buttonStateSubmit = true
-                        s.view.backgroundColor = UIColor.white
-                        s.statusViewHeight.constant = 0
-                        s.hideHintView()
-                        s.peerReviewHeight.constant = 0
-                        s.peerReviewButton.isHidden = true
-                        s.setStatusElements(visible: false)
-
-                        if s.didGetErrorWhileSendingSubmission {
-                            s.updateQuizAfterSubmissionUpdate(reload: false)
-                            s.didGetErrorWhileSendingSubmission = false
-                        } else {
-                            s.updateQuizAfterSubmissionUpdate()
-                        }
-                    } else {
-                        print("did set submission id \(String(describing: s.submission?.id))")
-                        s.buttonStateSubmit = false
-
-                        if let hint = s.submission?.hint {
-                            if hint != "" {
-                                if TagDetectionUtil.isWebViewSupportNeeded(hint) {
-                                    s.hintHeightWebViewHelper?.mathJaxFinishedBlock = {
-                                        [weak self] in
-                                        if let webView = self?.hintWebView {
-                                            webView.invalidateIntrinsicContentSize()
-                                            UIThread.performUI {
-                                                [weak self] in
-                                                self?.view.layoutIfNeeded()
-                                                self?.hintView.isHidden = false
-                                                self?.hintHeight.constant = webView.contentHeight
-                                            }
-                                        }
-                                    }
-                                    s.hintHeightWebViewHelper.setTextWithTeX(hint, color: UIColor.white)
-                                    s.hintTextView.isHidden = true
-                                    s.hintWebView.isHidden = false
-                                } else {
-                                    s.hintView.isHidden = false
-                                    s.hintTextView.isHidden = false
-                                    s.hintTextView.text = hint
-                                    s.hintHeight.constant = s.getHintHeightFor(hint: hint)
-                                }
-                            } else {
-                                s.hideHintView()
-                            }
-                        } else {
-                            s.hideHintView()
-                        }
-
-                        switch s.submission!.status! {
-                        case "correct":
-                            s.buttonStateSubmit = false
-                            s.statusViewHeight.constant = 48
-                            s.doesPresentActivityIndicatorView = false
-                            s.view.backgroundColor = UIColor.correctQuizBackgroundColor()
-                            s.statusImageView.image = Images.correctQuizImage
-                            s.statusLabel.text = s.correctTitle
-                            s.setStatusElements(visible: true)
-
-                            if s.needPeerReview {
-                                s.peerReviewHeight.constant = 40
-                                s.peerReviewButton.isHidden = false
-                            } else {
-                                //TODO: Refactor this!!!!! 
-                                NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: StepDoneNotificationKey), object: nil, userInfo: ["id": s.step.id])
-                                DispatchQueue.main.async {
-                                    s.step.progress?.isPassed = true
-                                    CoreDataHelper.instance.save()
-                                }
-                            }
-
-                            s.view.layoutIfNeeded()
-                            self?.delegate?.submissionDidCorrect()
-
-                            break
-
-                        case "wrong":
-                            if s.needsToRefreshAttemptWhenWrong {
-                                s.buttonStateSubmit = false
-                            } else {
-                                s.buttonStateSubmit = true
-                            }
-                            s.statusViewHeight.constant = 48
-                            s.peerReviewHeight.constant = 0
-                            s.peerReviewButton.isHidden = true
-                            s.doesPresentActivityIndicatorView = false
-                            s.view.backgroundColor = UIColor.wrongQuizBackgroundColor()
-                            s.statusImageView.image = Images.wrongQuizImage
-                            s.statusLabel.text = s.wrongTitle
-                            s.setStatusElements(visible: true)
-
-                            s.view.layoutIfNeeded()
-                            self?.delegate?.submissionDidWrong()
-
-                            break
-
-                        case "evaluation":
-                            s.statusViewHeight.constant = 0
-                            s.peerReviewHeight.constant = 0
-                            s.peerReviewButton.isHidden = true
-                            s.doesPresentActivityIndicatorView = true
-                            s.statusLabel.text = ""
-                            break
-
-                        default:
-                            break
-                        }
-
-                        if s.step.hasSubmissionRestrictions {
-                            if ((s.submissionsLeft ?? 0) > 0 && s.submission?.status != "correct") || s.step.canEdit {
-                                s.sendButton.isEnabled = true
-                                s.isSubmitButtonHidden = false
-                            } else {
-                                s.sendButton.isEnabled = true
-                                s.isSubmitButtonHidden = true
-                            }
-                        }
-
-                        s.updateQuizAfterSubmissionUpdate()
-                    }
-                }
-            }
-        }
-    }
-
-    func handleErrorWhileGettingSubmission() {
-    }
-
-    var step: Step!
-
-    var needNewAttempt: Bool = false
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.view.setNeedsLayout()
-    }
-
-    var hintHeightWebViewHelper: CellWebViewHelper!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -415,10 +156,15 @@ class QuizViewController: UIViewController {
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
-        refreshAttempt(step.id, forceCreate: needNewAttempt)
+
+        //        refreshAttempt(step.id, forceCreate: needNewAttempt)
 
         NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
             NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt)
+        presenter?.delegate = self.delegate
+        presenter?.refreshAttempt()
     }
 
     deinit {
@@ -433,132 +179,267 @@ class QuizViewController: UIViewController {
         }
     }
 
-    @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
-        if let stepurl = stepUrl {
-            let url = URL(string: stepurl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+    func set(state: QuizState) {
+        self.state = state
 
-            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+        switch state {
+        case .attempt:
+            statusImageView.image = nil
+            view.backgroundColor = UIColor.white
+            statusViewHeight.constant = 0
+            hideHintView()
+            peerReviewHeight.constant = 0
+            peerReviewButton.isHidden = true
+            setStatusElements(visible: false)
+            break
+        case .submission:
+            break
+        default:
+            break
+        }
+
+        updateSendButtonWithoutLimit()
+    }
+
+    func display(dataset: Dataset) {
+
+    }
+
+    func display(reply: Reply, hint: String?, status: SubmissionStatus) {
+        display(reply: reply, withStatus: status)
+        display(hint: hint)
+        display(status: status)
+    }
+
+    func display(status: SubmissionStatus) {
+        switch status {
+        case .correct:
+            statusViewHeight.constant = 48
+            view.backgroundColor = UIColor.correctQuizBackgroundColor()
+            statusImageView.image = Images.correctQuizImage
+            statusLabel.text = correctTitle
+            setStatusElements(visible: true)
+        case .wrong:
+            statusViewHeight.constant = 48
+            peerReviewHeight.constant = 0
+            peerReviewButton.isHidden = true
+            view.backgroundColor = UIColor.wrongQuizBackgroundColor()
+            statusImageView.image = Images.wrongQuizImage
+            statusLabel.text = wrongTitle
+            setStatusElements(visible: true)
+        case .evaluation:
+            statusViewHeight.constant = 0
+            peerReviewHeight.constant = 0
+            peerReviewButton.isHidden = true
+            statusLabel.text = ""
         }
     }
 
-    fileprivate func hideHintView() {
+    func display(hint: String?) {
+        self.displayingHint = hint
+        if let hint = hint {
+            if hint != "" {
+                if TagDetectionUtil.isWebViewSupportNeeded(hint) {
+                    hintHeightWebViewHelper?.mathJaxFinishedBlock = {
+                        [weak self] in
+                        if let webView = self?.hintWebView {
+                            webView.invalidateIntrinsicContentSize()
+                            UIThread.performUI {
+                                [weak self] in
+                                self?.view.layoutIfNeeded()
+                                self?.hintView.isHidden = false
+                                self?.hintHeight.constant = webView.contentHeight
+                            }
+                        }
+                    }
+                    hintHeightWebViewHelper.setTextWithTeX(hint, color: UIColor.white)
+                    hintTextView.isHidden = true
+                    hintWebView.isHidden = false
+                } else {
+                    hintView.isHidden = false
+                    hintTextView.isHidden = false
+                    hintWebView.isHidden = true
+                    hintTextView.text = hint
+                    hintHeight.constant = getHintHeightFor(hint: hint)
+                }
+            } else {
+                hideHintView()
+            }
+        } else {
+            hideHintView()
+        }
+    }
+
+    func display(reply: Reply, withStatus status: SubmissionStatus) {
+    }
+
+    func showPeerReviewWarning() {
+        peerReviewHeight.constant = 40
+        peerReviewButton.isHidden = false
+    }
+
+    func showPeerReview(urlString: String) {
+        guard
+            let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let url = URL(string: encodedUrl)
+        else {
+            return
+        }
+
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+    }
+
+    private func updateSendButtonWithoutLimit() {
+        switch state {
+        case .attempt:
+            self.sendButton.isEnabled = true
+            self.sendButton.setTitle(self.submitTitle, for: .normal)
+            self.sendButton.setStepicGreenStyle()
+        case let .submission(showsTryAgain):
+            if showsTryAgain {
+                self.sendButton.setTitle(self.tryAgainTitle, for: .normal)
+                self.sendButton.setStepicWhiteStyle()
+            } else {
+                self.sendButton.setTitle(self.submitTitle, for: .normal)
+                self.sendButton.setStepicGreenStyle()
+            }
+            self.sendButton.isEnabled = true
+        default:
+            break
+        }
+    }
+
+    private func disableSendButton() {
+        self.sendButton.setStepicGreenStyle()
+        self.sendButton.backgroundColor = UIColor.gray
+        self.sendButton.isEnabled = false
+    }
+
+    func update(limit: SubmissionLimitation?) {
+        guard let limit = limit else {
+            updateSendButtonWithoutLimit()
+            return
+        }
+
+        // Handle submission limitations
+        if let count = limit.count {
+            if limit.canSubmit {
+                let title = self.sendButton.title(for: .normal) ?? ""
+                self.sendButton.setTitle(title + " (\(submissionsLeftLocalizable(count: count)))", for: .normal)
+                self.sendButton.isEnabled = true
+            } else {
+                self.sendButton.setTitle(NSLocalizedString("NoSubmissionsLeft", comment: ""), for: .normal)
+                disableSendButton()
+            }
+        } else {
+            disableSendButton()
+        }
+    }
+
+    func showError(visible: Bool) {
+        if visible {
+            self.doesPresentActivityIndicatorView = false
+            self.doesPresentWarningView = true
+        } else {
+            self.doesPresentWarningView = false
+        }
+    }
+
+    func showLoading(visible: Bool) {
+        if visible {
+            self.doesPresentWarningView = false
+            self.doesPresentActivityIndicatorView = true
+        } else {
+            self.doesPresentActivityIndicatorView = false
+        }
+    }
+
+    func showConnectionError() {
+        if let vc = navigationController {
+            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
+        }
+    }
+
+    func suggestStreak(streak: Int) {
+        let alert = Alerts.streaks.construct(notify: {
+            [weak self] in
+            self?.notifyPressed(fromPreferences: false)
+        })
+        alert.currentStreak = streak
+
+        Alerts.streaks.present(alert: alert, inController: self)
+    }
+
+    func showRateAlert() {
+        if let cnt = step.lesson?.stepsArray.count {
+            let positionPercentageString = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
+            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
+        }
+    }
+
+    func logout(onClose: (() -> Void)?) {
+        AuthInfo.shared.token = nil
+        RoutingManager.auth.routeFrom(controller: self, success: {
+            onClose?()
+        }, cancel: {
+            onClose?()
+        })
+    }
+
+    var submissionAnalyticsParams: [String: Any]? {
+        return nil
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: nil) {
+            [weak self]
+            _ in
+            guard let s = self else { return }
+            s.display(hint: s.displayingHint)
+        }
+
+    }
+
+    private func setStatusElements(visible: Bool) {
+        statusLabel.isHidden = !visible
+        statusImageView.isHidden = !visible
+    }
+
+    private func getHintHeightFor(hint: String) -> CGFloat {
+        let textView = UITextView()
+        textView.text = hint
+        textView.font = UIFont(name: "ArialMT", size: 16)
+        let fixedWidth = hintTextView.bounds.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        return newSize.height
+    }
+
+    var needNewAttempt: Bool = false
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.setNeedsLayout()
+    }
+
+    private var hintHeightWebViewHelper: CellWebViewHelper!
+
+    @IBAction func peerReviewButtonPressed(_ sender: AnyObject) {
+        presenter?.peerReviewPressed()
+    }
+
+    private func hideHintView() {
         self.hintHeight.constant = 1
         self.hintView.isHidden = true
-    }
-
-    fileprivate func retrieveSubmissionsCount(page: Int, success: @escaping ((Int) -> Void), error: @escaping ((String) -> Void)) {
-        _ = ApiDataDownloader.submissions.retrieve(stepName: step.block.name, stepId: step.id, page: page, success: {
-            [weak self]
-            submissions, meta in
-            guard let s = self else { return }
-
-            let count = submissions.count
-            if meta.hasNext {
-                s.retrieveSubmissionsCount(page: page + 1, success: {
-                    nextPagesCnt in
-                    success(count + nextPagesCnt)
-                    return
-                }, error: {
-                    errorMsg in
-                    error(errorMsg)
-                    return
-                })
-            } else {
-                success(count)
-                return
-            }
-        }, error: {
-            errorMsg in
-            error(errorMsg)
-            return
-        })
-    }
-
-    func refreshAttempt(_ stepId: Int, forceCreate: Bool = false) {
-        self.doesPresentActivityIndicatorView = true
-        performRequest({
-            [weak self] in
-            guard let s = self else { return }
-
-            if forceCreate {
-                print("force create new attempt")
-                s.createNewAttempt(completion: {
-                    s.doesPresentActivityIndicatorView = false
-                }, error: {
-                    s.doesPresentActivityIndicatorView = false
-                    s.doesPresentWarningView = true
-                })
-                return
-            }
-
-            _ = ApiDataDownloader.attempts.retrieve(stepName: s.step.block.name, stepId: stepId, success: {
-                attempts, _ in
-                if attempts.count == 0 || attempts[0].status != "active" {
-                    //Create attempt
-                    s.createNewAttempt(completion: {
-                        s.doesPresentActivityIndicatorView = false
-                        }, error: {
-                            s.doesPresentActivityIndicatorView = false
-                            s.doesPresentWarningView = true
-                    })
-                } else {
-                    //Get submission for attempt
-                    let currentAttempt = attempts[0]
-                    s.attempt = currentAttempt
-                    _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, attemptId: currentAttempt.id!, success: {
-                        submissions, _ in
-                        if submissions.count == 0 {
-                            s.submission = nil
-                            //There are no current submissions for attempt
-                        } else {
-                            //Displaying the last submission
-                            s.submission = submissions[0]
-                        }
-                        s.doesPresentActivityIndicatorView = false
-                        }, error: {
-                            _ in
-                            s.doesPresentActivityIndicatorView = false
-                            print("failed to get submissions")
-                            //TODO: Test this
-                    })
-                }
-                s.checkSubmissionRestrictions()
-                }, error: {
-                    _ in
-                    s.doesPresentActivityIndicatorView = false
-                    s.doesPresentWarningView = true
-                    //TODO: Test this
-            })
-        }, error: {
-            [weak self]
-            error in
-            guard let s = self else { return }
-            if error == PerformRequestError.noAccessToRefreshToken {
-                AuthInfo.shared.token = nil
-                RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in
-                    guard let s = self else { return }
-                    s.refreshAttempt(s.step.id)
-                }, cancel: {
-                    [weak self] in
-                    guard let s = self else { return }
-                    s.refreshAttempt(s.step.id)
-                })
-            }
-        })
-    }
-
-    fileprivate func checkSubmissionRestrictions() {
-        if step.hasSubmissionRestrictions {
-            retrieveSubmissionsCount(page: 1, success: {
-                [weak self]
-                count in
-                self?.submissionsCount = count
-            }, error: {
-                _ in
-                print("failed to get submissions count")
-            })
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -566,66 +447,25 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    fileprivate func createNewAttempt(completion: (() -> Void)? = nil, error: (() -> Void)? = nil) {
-        print("creating attempt for step id -> \(self.step.id) name -> \(self.step.block.name)")
-        performRequest({
-            [weak self] in
-            guard let s = self else { return }
-            _ = ApiDataDownloader.attempts.create(stepName: s.step.block.name, stepId: s.step.id, success: {
-                [weak self]
-                attempt in
-                guard let s = self else { return }
-                s.attempt = attempt
-                s.submission = nil
-                completion?()
-                }, error: {
-                    errorText in
-                    print(errorText)
-                    error?()
-                    //TODO: Test this
-            })
-            }, error: {
-                [weak self]
-                error in
-                guard let s = self else { return }
-                if error == PerformRequestError.noAccessToRefreshToken {
-                    AuthInfo.shared.token = nil
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
-                        guard let s = self else { return }
-                        s.refreshAttempt(s.step.id)
-                        }, cancel: {
-                            [weak self] in
-                            guard let s = self else { return }
-                            s.refreshAttempt(s.step.id)
-                    })
-                }
-        })
-
-    }
-
-    let streakTimePickerPresenter: Presentr = {
+    private let streakTimePickerPresenter: Presentr = {
         let streakTimePickerPresenter = Presentr(presentationType: .popup)
         return streakTimePickerPresenter
     }()
 
-    func selectStreakNotificationTime() {
+    private func selectStreakNotificationTime() {
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
         vc.startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         vc.selectedBlock = {
             [weak self] in
             if self != nil {
-//                s.notificationTimeLabel.text = s.getDisplayingStreakTimeInterval(startHour: PreferencesContainer.notifications.streaksNotificationStartHour)
             }
         }
         customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
 
-    private let maxAlertCount = 3
-
     private var didTransitionToSettings = false
 
-    fileprivate func showStreaksSettingsNotificationAlert() {
+    private func showStreaksSettingsNotificationAlert() {
         let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
             [weak self]
@@ -639,7 +479,7 @@ class QuizViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    fileprivate func notifyPressed(fromPreferences: Bool) {
+    private func notifyPressed(fromPreferences: Bool) {
 
         guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
             if !fromPreferences {
@@ -651,213 +491,13 @@ class QuizViewController: UIViewController {
         self.selectStreakNotificationTime()
     }
 
-    fileprivate var positionPercentageString: String? {
-        if let cnt = step.lesson?.stepsArray.count {
-            let res = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
-            print(res)
-            return res
-        }
-        return nil
-    }
-
-    func checkCorrect() {
-        if RoutingManager.rate.submittedCorrect() {
-            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
-            return
-        }
-
-        guard QuizDataManager.submission.canShowAlert else {
-            return
-        }
-
-        let alert = Alerts.streaks.construct(notify: {
-            [weak self] in
-            self?.notifyPressed(fromPreferences: false)
-        })
-
-        guard let user = AuthInfo.shared.user else {
-            return
-        }
-        _ = ApiDataDownloader.userActivities.retrieve(user: user.id, success: {
-            [weak self]
-            activity in
-            guard activity.currentStreak > 0 else {
-                return
-            }
-            if let s = self {
-                QuizDataManager.submission.didShowStreakAlert()
-                alert.currentStreak = activity.currentStreak
-                Alerts.streaks.present(alert: alert, inController: s)
-            }
-            }, error: {
-                _ in
-        })
-    }
-
-    //Measured in seconds
-    fileprivate let checkTimeStandardInterval = 0.5
-
-    fileprivate func checkSubmission(_ id: Int, time: Int, completion: (() -> Void)? = nil) {
-        delay(checkTimeStandardInterval * Double(time), closure: {
-            [weak self] in
-            guard self != nil else { return }
-            performRequest({
-                [weak self] in
-                guard let s = self else { return }
-                _ = ApiDataDownloader.submissions.retrieve(stepName: s.step.block.name, submissionId: id, success: {
-                    submission in
-                    print("did get submission id \(id), with status \(String(describing: submission.status))")
-                    if submission.status == "evaluation" {
-                        s.checkSubmission(id, time: time + 1, completion: completion)
-                    } else {
-                        s.submission = submission
-                        if submission.status == "correct" {
-                            s.checkCorrect()
-                            if s.step.hasSubmissionRestrictions && !s.step.canEdit {
-                                s.isSubmitButtonHidden = true
-                            } else {
-                                s.isSubmitButtonHidden = false
-                            }
-                        }
-                        completion?()
-                    }
-                    }, error: {
-                        _ in
-                        s.didGetErrorWhileSendingSubmission = true
-                        s.submission = nil
-                        completion?()
-                        //TODO: test this
-                })
-            }, error: {
-                [weak self]
-                error in
-                guard let s = self else { return }
-                if error == PerformRequestError.noAccessToRefreshToken {
-                    AuthInfo.shared.token = nil
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
-                        guard let s = self else { return }
-                        s.refreshAttempt(s.step.id)
-                        }, cancel: {
-                            [weak self] in
-                            guard let s = self else { return }
-                            s.refreshAttempt(s.step.id)
-                    })
-                }
-            })
-        })
-    }
-
-    fileprivate func submitReply(completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        let r = getReply()
-        let id = attempt!.id!
-        performRequest({
-            [weak self] in
-            guard let s = self else { return }
-            _ = ApiDataDownloader.submissions.create(stepName: s.step.block.name, attemptId: id, reply: r, success: {
-                submission in
-                s.submission = submission
-                s.checkSubmission(submission.id!, time: 0, completion: completion)
-                }, error: {
-                    errorText in
-                    errorHandler(errorText)
-                    //TODO: test this
-            })
-        }, error: {
-            [weak self]
-            error in
-            guard let s = self else { return }
-            if error == PerformRequestError.noAccessToRefreshToken {
-                AuthInfo.shared.token = nil
-                RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in
-                    guard let s = self else { return }
-                    s.refreshAttempt(s.step.id)
-                    }, cancel: {
-                        [weak self] in
-                        guard let s = self else { return }
-                        s.refreshAttempt(s.step.id)
-                })
-            }
-        })
-    }
-
-    //Override this in the subclass
-    func getReply() -> Reply {
-        return ChoiceReply(choices: [])
-    }
-
-    //Override this in the subclass if needed
-    func checkReplyReady() -> Bool {
-        return true
+    func submitPressed() {
+        submissionPressedBlock?()
+        presenter?.submitPressed()
     }
 
     @IBAction func sendButtonPressed(_ sender: UIButton) {
-        sendButton.isEnabled = false
-        if buttonStateSubmit {
-            submitAttempt()
-        } else {
-            retrySubmission()
-        }
-    }
-
-    var submissionAnalyticsParams: [String: Any]? {
-        return nil
-    }
-
-    var submissionPressedBlock : (() -> Void)?
-
-    public func submitAttempt() {
-        submissionPressedBlock?()
-        doesPresentActivityIndicatorView = true
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: submissionAnalyticsParams)
-        if checkReplyReady() {
-            submitReply(completion: {
-                [weak self] in
-                DispatchQueue.main.async {
-                    self?.sendButton.isEnabled = true
-                    self?.doesPresentActivityIndicatorView = false
-                }
-                }, error: {
-                    [weak self]
-                    _ in
-                    DispatchQueue.main.async {
-                        self?.sendButton.isEnabled = true
-                        self?.doesPresentActivityIndicatorView = false
-                        if let vc = self?.navigationController {
-                            Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-                        }
-                    }
-            })
-        } else {
-            doesPresentActivityIndicatorView = false
-            sendButton.isEnabled = true
-        }
-    }
-
-    public func retrySubmission() {
-        doesPresentActivityIndicatorView = true
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
-
-        self.delegate?.submissionDidRetry()
-
-        createNewAttempt(completion: {
-            [weak self] in
-            DispatchQueue.main.async {
-                self?.sendButton.isEnabled = true
-                self?.doesPresentActivityIndicatorView = false
-            }
-            self?.checkSubmissionRestrictions()
-        }, error: {
-            [weak self] in
-            DispatchQueue.main.async {
-                self?.sendButton.isEnabled = true
-                self?.doesPresentActivityIndicatorView = false
-            }
-            if let vc = self?.navigationController {
-                Messages.sharedManager.showConnectionErrorMessage(inController: vc)
-            }
-        })
+        submitPressed()
     }
 
     var isSubmitButtonHidden: Bool = false {
@@ -865,6 +505,14 @@ class QuizViewController: UIViewController {
             self.sendButton.isHidden = isSubmitButtonHidden
             self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 40
         }
+    }
+
+    var needsToRefreshAttemptWhenWrong: Bool {
+        return true
+    }
+
+    func getReply() -> Reply? {
+        return nil
     }
 }
 
@@ -892,8 +540,7 @@ extension QuizViewController : PlaceholderViewDataSource {
 
 extension QuizViewController : PlaceholderViewDelegate {
     func placeholderButtonDidPress() {
-        self.doesPresentWarningView = false
-        self.refreshAttempt(step.id)
+        self.presenter?.refreshAttempt()
     }
 }
 

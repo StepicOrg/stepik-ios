@@ -12,6 +12,9 @@ class StringQuizViewController: QuizViewController {
 
     var textView = UITextView()
 
+    var dataset: String?
+    var reply: TextReply?
+
     let textViewHeight = 64
 
     override func viewDidLoad() {
@@ -31,9 +34,34 @@ class StringQuizViewController: QuizViewController {
     }
 
     func textViewTextDidChange(textView: UITextView) {
-        if submission != nil {
-            submission = nil
+        switch presenter?.state ?? .nothing {
+        case .attempt:
+            break
+        case .submission:
+            presenter?.state = .attempt
+        default:
+            break
         }
+    }
+
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? String else {
+            return
+        }
+
+        self.dataset = dataset
+        textView.text = ""
+        textView.isEditable = true
+    }
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? TextReply else {
+            return
+        }
+
+        self.reply = reply
+        textView.text = reply.text
+        textView.isEditable = status != .correct
     }
 
     func tap() {
@@ -49,25 +77,8 @@ class StringQuizViewController: QuizViewController {
         return false
     }
 
-    //Override this in subclass
-    override func updateQuizAfterAttemptUpdate() {
-        textView.text = ""
-    }
-
-    //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if let r = submission?.reply as? TextReply {
-            textView.text = r.text
-        }
-        if submission?.status == "correct" {
-            textView.isEditable = false
-        } else {
-            textView.isEditable = true
-        }
-    }
-
     //Override this in the subclass
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         return TextReply(text: textView.text ?? "")
     }
 
