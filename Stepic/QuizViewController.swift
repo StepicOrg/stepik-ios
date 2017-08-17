@@ -40,6 +40,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
     var submissionPressedBlock : (() -> Void)?
 
+    var displayingHint: String?
+
     private let submitTitle: String = NSLocalizedString("Submit", comment: "")
     private let tryAgainTitle: String = NSLocalizedString("TryAgain", comment: "")
     var correctTitle: String {
@@ -234,6 +236,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func display(hint: String?) {
+        self.displayingHint = hint
         if let hint = hint {
             if hint != "" {
                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
@@ -393,6 +396,18 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: nil) {
+            [weak self]
+            _ in
+            guard let s = self else { return }
+            s.display(hint: s.displayingHint)
+        }
+
     }
 
     private func setStatusElements(visible: Bool) {
