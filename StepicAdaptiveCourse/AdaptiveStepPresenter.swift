@@ -18,7 +18,7 @@ protocol AdaptiveStepView: class {
     var baseScrollView: UIScrollView { get }
 
     func updateProblem(with htmlText: String)
-    func updateQuiz(with view: UIView)
+    func updateQuiz(with controller: UIViewController)
 
     func scrollToQuizBottom()
 }
@@ -55,7 +55,7 @@ class AdaptiveStepPresenter {
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true
-        view?.updateQuiz(with: quizViewController.view)
+        view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true
     }
