@@ -23,14 +23,18 @@ class AdaptiveStatsViewController: UIViewController {
             case .progress:
                 statsPresenter?.reloadData(force: data == nil)
                 ratingSegmentedControl.isHidden = true
+                tableView.tableFooterView?.isHidden = true
                 break
             case .achievements:
                 achievementsPresenter?.reloadData(force: data == nil)
                 ratingSegmentedControl.isHidden = true
+                tableView.tableFooterView?.isHidden = true
                 break
             case .ratings(let days):
                 ratingsPresenter?.reloadData(days: days, force: data == nil)
                 ratingSegmentedControl.isHidden = false
+                tableView.tableFooterView?.isHidden = false
+                allCountLabel.isHidden = true
             }
         }
     }
@@ -44,12 +48,14 @@ class AdaptiveStatsViewController: UIViewController {
     @IBOutlet weak var currentWeekXPLabel: UILabel!
     @IBOutlet weak var bestStreakLabel: UILabel!
     @IBOutlet weak var currentLevelLabel: UILabel!
+    @IBOutlet weak var allCountLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var ratingSegmentedControl: UISegmentedControl!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     fileprivate var data: [Any]?
+    fileprivate var scoreboardData: ScoreboardViewData?
 
     @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
         if ratingSegmentedControl.selectedSegmentIndex == 0 {
@@ -169,19 +175,21 @@ class AdaptiveStatsViewController: UIViewController {
 }
 
 extension AdaptiveStatsViewController: AdaptiveRatingsView {
-    func setRatings(records: [RatingViewData]) {
-        data = records
+    func setRatings(data: ScoreboardViewData) {
+        scoreboardData = data
+        allCountLabel.text = "\(scoreboardData?.allCount ?? 0) пользователей в рейтинге"
+        allCountLabel.isHidden = false
     }
 
     var separatorPosition: Int? {
-        guard let data = data as? [RatingViewData] else {
+        guard let scoreboardData = scoreboardData else {
             return nil
         }
 
         switch state {
         case .ratings(_):
-            for i in 0..<(data.count - 1) {
-                if data[i].position + 1 != data[i + 1].position {
+            for i in 0..<(scoreboardData.leaders.count - 1) {
+                if scoreboardData.leaders[i].position + 1 != scoreboardData.leaders[i + 1].position {
                     return i
                 }
             }
@@ -222,7 +230,12 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
+        switch state {
+        case .progress, .achievements:
+            return data?.count ?? 0
+        case .ratings(_):
+            return (scoreboardData?.leaders.count ?? 0) + (separatorPosition != nil ? 1 : 0)
+        }
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -249,7 +262,7 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
             } else {
                 let dataIndex = separatorAfterIndex < indexPath.item ? indexPath.item - 1 : indexPath.item
 
-                if let user = data?[dataIndex] as? RatingViewData {
+                if let user = scoreboardData?.leaders[dataIndex] {
                     cell.cellPosition = indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 ? .bottom : (indexPath.item == 0 ? .top : .middle)
 
                     if dataIndex == separatorAfterIndex {

@@ -296,11 +296,29 @@
                                         <constraint firstItem="DF1-VD-wAL" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="z6S-vN-2RI"/>
                                     </constraints>
                                 </view>
-                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" id="U3H-cx-6JY">
-                                    <rect key="frame" x="0.0" y="433" width="320" height="20"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="frr-Vy-22T">
+                                    <rect key="frame" x="0.0" y="433" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </activityIndicatorView>
+                                    <subviews>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tpH-7N-qeU">
+                                            <rect key="frame" x="150" y="12" width="20" height="20"/>
+                                            <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 пользователей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-JZ-kGb">
+                                            <rect key="frame" x="100.5" y="13" width="120" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="tpH-7N-qeU" firstAttribute="centerX" secondItem="frr-Vy-22T" secondAttribute="centerX" id="6bL-WC-OFE"/>
+                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="centerX" secondItem="frr-Vy-22T" secondAttribute="centerX" id="8eh-6B-PJa"/>
+                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="FYH-AU-8OZ"/>
+                                        <constraint firstItem="tpH-7N-qeU" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="HP9-pD-b7w"/>
+                                    </constraints>
+                                </view>
                                 <sections/>
                             </tableView>
                         </subviews>
@@ -321,10 +339,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="allCountLabel" destination="ycc-JZ-kGb" id="6Rw-RX-4yO"/>
                         <outlet property="bestStreakLabel" destination="PXK-7E-juQ" id="TIk-1T-hYf"/>
                         <outlet property="currentLevelLabel" destination="hDy-C2-aQe" id="L5o-Rk-lXt"/>
                         <outlet property="currentWeekXPLabel" destination="rZI-nf-aeP" id="RRJ-Xa-TCt"/>
-                        <outlet property="loadingIndicator" destination="U3H-cx-6JY" id="x0t-cg-PHT"/>
+                        <outlet property="loadingIndicator" destination="tpH-7N-qeU" id="ddU-oC-6zw"/>
                         <outlet property="progressChart" destination="3yr-V2-vlJ" id="NZL-Jf-Zdd"/>
                         <outlet property="ratingSegmentedControl" destination="KpV-Qn-80f" id="Dcd-4m-O0l"/>
                         <outlet property="segmentedControl" destination="8WM-do-txJ" id="E9H-vs-7Xy"/>

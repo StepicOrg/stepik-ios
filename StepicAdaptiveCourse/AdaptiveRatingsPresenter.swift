@@ -11,7 +11,7 @@ import Alamofire
 
 protocol AdaptiveRatingsView: class {
     func reload()
-    func setRatings(records: [RatingViewData])
+    func setRatings(data: ScoreboardViewData)
 }
 
 struct RatingViewData {
@@ -21,13 +21,18 @@ struct RatingViewData {
     let me: Bool
 }
 
+struct ScoreboardViewData {
+    let allCount: Int
+    let leaders: [RatingViewData]
+}
+
 class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
     fileprivate var ratingsAPI: RatingsAPI
 
-    private var scoreboard: [Int: [RatingViewData]] = [:]
-    
+    private var scoreboard: [Int: ScoreboardViewData] = [:]
+
     private var currentRequest: Request?
 
     // Names (word + grammatical gender)
@@ -48,23 +53,23 @@ class AdaptiveRatingsPresenter {
             let currentUser = AuthInfo.shared.userId
 
             currentRequest?.cancel()
-            currentRequest = ratingsAPI.retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: {
-                ratings in
-                var curScoreboard: [RatingViewData] = []
-                ratings.forEach { record in
-                    curScoreboard.append(RatingViewData(position: record.rank, exp: record.exp, name: self.generateNameBy(userId: record.userId), me: currentUser == record.userId))
+            currentRequest = ratingsAPI.retrieve(courseId: StepicApplicationsInfo.adaptiveCourseId, count: 10, days: days, success: { scoreboard in
+                var curLeaders: [RatingViewData] = []
+                scoreboard.leaders.forEach { record in
+                    curLeaders.append(RatingViewData(position: record.rank, exp: record.exp, name: self.generateNameBy(userId: record.userId), me: currentUser == record.userId))
                 }
 
+                let curScoreboard = ScoreboardViewData(allCount: scoreboard.allCount, leaders: curLeaders)
                 self.scoreboard[days ?? 0] = curScoreboard
-                self.view?.setRatings(records: curScoreboard)
+                self.view?.setRatings(data: curScoreboard)
                 self.view?.reload()
             }, error: { err in
                 print(err)
-                self.view?.setRatings(records: [])
+                self.view?.setRatings(data: ScoreboardViewData(allCount: 0, leaders: []))
                 self.view?.reload()
             })
         } else {
-            view?.setRatings(records: downloadedScoreboard!)
+            view?.setRatings(data: downloadedScoreboard!)
             view?.reload()
         }
     }

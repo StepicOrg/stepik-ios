@@ -13,8 +13,9 @@ import SwiftyJSON
 class RatingsAPI {
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int)
+    typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])
 
-    @discardableResult func retrieve(courseId: Int, count: Int = 10, days: Int? = 7, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([RatingRecord]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult func retrieve(courseId: Int, count: Int = 10, days: Int? = 7, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Scoreboard) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
         var params: Parameters = [
             "course": courseId,
@@ -49,8 +50,8 @@ class RatingsAPI {
             }
 
             if response?.statusCode == 200 {
-                let leaders = json.arrayValue.map({return RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue)})
-                success(leaders)
+                let leaders = json["users"].arrayValue.map({return RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue)})
+                success(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
                 return
             } else {
                 errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
