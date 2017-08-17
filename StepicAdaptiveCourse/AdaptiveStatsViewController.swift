@@ -172,6 +172,24 @@ extension AdaptiveStatsViewController: AdaptiveRatingsView {
     func setRatings(records: [RatingViewData]) {
         data = records
     }
+
+    var separatorPosition: Int? {
+        guard let data = data as? [RatingViewData] else {
+            return nil
+        }
+
+        switch state {
+        case .ratings(_):
+            for i in 0..<(data.count - 1) {
+                if data[i].position + 1 != data[i + 1].position {
+                    return i
+                }
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
 }
 
 extension AdaptiveStatsViewController: AdaptiveAchievementsView {
@@ -204,7 +222,7 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.count ?? 0
+        return (data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,9 +241,25 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         case .ratings(_):
             let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
-            if let user = data?[indexPath.item] as? RatingViewData {
-                cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
-                cell.cellPosition = indexPath.item == (data!.count - 1) ? .bottom : (indexPath.item == 0 ? .top : .middle)
+
+            let separatorAfterIndex = (separatorPosition ?? -1)
+
+            if separatorAfterIndex + 1 == indexPath.item {
+                cell.cellPosition = .separator
+            } else {
+                let dataIndex = separatorAfterIndex < indexPath.item ? indexPath.item - 1 : indexPath.item
+
+                if let user = data?[dataIndex] as? RatingViewData {
+                    cell.cellPosition = indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 ? .bottom : (indexPath.item == 0 ? .top : .middle)
+
+                    if dataIndex == separatorAfterIndex {
+                        cell.cellPosition = .bottom
+                    } else if dataIndex - 1 == separatorAfterIndex {
+                        cell.cellPosition = .top
+                    }
+
+                    cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
+                }
             }
             return cell
         }

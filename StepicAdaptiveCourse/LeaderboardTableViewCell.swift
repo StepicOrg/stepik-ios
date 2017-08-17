@@ -10,7 +10,7 @@ import UIKit
 
 class LeaderboardTableViewCell: UITableViewCell {
     enum CellPosition {
-        case top, middle, bottom
+        case top, middle, bottom, separator
     }
 
     static let reuseId = "LeaderboardTableViewCell"
@@ -20,11 +20,22 @@ class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet weak var expLabel: UILabel!
     @IBOutlet weak var medalImageView: UIImageView!
     @IBOutlet weak var positionLabel: UILabel!
-
-    private let meColor = UIColor(hex: 0xFFCC66)
+    @IBOutlet weak var separatorImageView: UIImageView!
     @IBOutlet weak var shadowPadView: UIView!
 
-    var cellPosition: CellPosition = .middle
+    private let meColor = UIColor(hex: 0xFFDCA5)
+
+    var cellPosition: CellPosition = .middle {
+        didSet {
+            separatorImageView.isHidden = cellPosition != .separator
+            userLabel.isHidden = cellPosition == .separator
+            expLabel.isHidden = cellPosition == .separator
+            medalImageView.isHidden = cellPosition == .separator
+            positionLabel.isHidden = cellPosition == .separator
+            cardPadView.isHidden = cellPosition == .separator
+            shadowPadView.isHidden = cellPosition == .separator
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,6 +73,7 @@ class LeaderboardTableViewCell: UITableViewCell {
 
     fileprivate func updatePosition(_ position: Int) {
         medalImageView.isHidden = false
+        positionLabel.isHidden = true
         switch position {
         case 1:
             medalImageView.image = #imageLiteral(resourceName: "medal1")
@@ -115,6 +127,7 @@ class LeaderboardTableViewCell: UITableViewCell {
             path.addArc(withCenter: CGPoint(x: 10, y: height - 10), radius: 10, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
             path.close()
             shadowPadView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        default: break
         }
         shadowPadView.layer.shadowPath = path.cgPath
 

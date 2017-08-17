@@ -17,6 +17,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="40.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="FUM-uG-df4">
+                        <rect key="frame" x="145" y="5" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="FKD-DQ-7Nx"/>
+                            <constraint firstAttribute="height" constant="30" id="qDW-w6-7Kn"/>
+                        </constraints>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-mx-L0b">
                         <rect key="frame" x="8" y="0.0" width="304" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,10 +86,12 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="FUM-uG-df4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5VA-Tm-JYn"/>
                     <constraint firstAttribute="bottom" secondItem="zOG-mx-L0b" secondAttribute="bottom" id="8Jw-7t-cWE"/>
                     <constraint firstItem="CC2-Xu-wML" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="J0S-1P-WxT"/>
                     <constraint firstItem="zOG-mx-L0b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JMd-iW-b8J"/>
                     <constraint firstItem="zOG-mx-L0b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NIT-ph-oYe"/>
+                    <constraint firstItem="FUM-uG-df4" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RnE-93-iFQ"/>
                     <constraint firstAttribute="trailing" secondItem="CC2-Xu-wML" secondAttribute="trailing" constant="8" id="Rtr-UB-2wP"/>
                     <constraint firstAttribute="bottom" secondItem="CC2-Xu-wML" secondAttribute="bottom" id="Tcb-HJ-xga"/>
                     <constraint firstAttribute="leading" secondItem="CC2-Xu-wML" secondAttribute="leading" constant="-8" id="cZM-Ah-QVq"/>
@@ -96,6 +105,7 @@
                 <outlet property="expLabel" destination="1Bf-3X-o6S" id="Acj-2z-gOc"/>
                 <outlet property="medalImageView" destination="ir6-nv-fhN" id="S4Q-mg-ndh"/>
                 <outlet property="positionLabel" destination="lho-PN-aNW" id="6jf-bk-JsI"/>
+                <outlet property="separatorImageView" destination="FUM-uG-df4" id="YZM-0d-Jtm"/>
                 <outlet property="shadowPadView" destination="zOG-mx-L0b" id="L3C-hT-1b4"/>
                 <outlet property="userLabel" destination="pCk-xP-Xd0" id="Zp5-j1-Kae"/>
             </connections>
@@ -104,5 +114,6 @@
     </objects>
     <resources>
         <image name="medal1" width="25" height="25"/>
+        <image name="more" width="32" height="32"/>
     </resources>
 </document>
