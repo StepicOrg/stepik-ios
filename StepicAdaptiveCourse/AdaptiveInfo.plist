@@ -36,16 +36,6 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>FB</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb171127739724012</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
 			<string>stepikAuth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
