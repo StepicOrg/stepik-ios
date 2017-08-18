@@ -69,6 +69,10 @@ class SocialNetworksViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name!)" as NSObject])
             let socialNetwork = getSocialNetworkByIndexPath(indexPath)
             if let provider = socialNetwork.socialSDKProvider {
+                if provider is VKSocialSDKProvider {
+                    (provider as! VKSocialSDKProvider).delegate = self
+                }
+
                 provider.getAccessInfo(success: {
                     token, email in
                     SVProgressHUD.show(withStatus: "")
@@ -156,5 +160,11 @@ extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
 
         return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets)
 
+    }
+}
+
+extension SocialNetworksViewController: VKSocialSDKProviderDelegate {
+    func presentAuthController(_ controller: UIViewController) {
+        present(controller, animated: true, completion: nil)
     }
 }

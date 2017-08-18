@@ -9,7 +9,12 @@
 import Foundation
 import VK_ios_sdk
 
+protocol VKSocialSDKProviderDelegate: class {
+    func presentAuthController(_ controller: UIViewController)
+}
+
 class VKSocialSDKProvider: NSObject, SocialSDKProvider {
+    weak var delegate: VKSocialSDKProviderDelegate?
 
     public static let instance = VKSocialSDKProvider()
 
@@ -21,6 +26,7 @@ class VKSocialSDKProvider: NSObject, SocialSDKProvider {
         sdkInstance = VKSdk.initialize(withAppId: StepicApplicationsInfo.SocialInfo.AppIds.vk)
         super.init()
         sdkInstance.register(self)
+        sdkInstance.uiDelegate = self
     }
 
     func getAccessInfo(success successHandler: @escaping (String, String?) -> Void, error errorHandler: @escaping (SocialSDKError) -> Void) {
@@ -56,5 +62,15 @@ extension VKSocialSDKProvider : VKSdkDelegate {
             successHandler?(token, result.token.email)
             return
         }
+    }
+}
+
+extension VKSocialSDKProvider: VKSdkUIDelegate {
+    public func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
+
+    }
+
+    func vkSdkShouldPresent(_ controller: UIViewController) {
+        delegate?.presentAuthController(controller)
     }
 }
