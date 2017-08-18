@@ -173,7 +173,7 @@ class AdaptiveStatsViewController: UIViewController {
 extension AdaptiveStatsViewController: AdaptiveRatingsView {
     func setRatings(data: ScoreboardViewData) {
         self.data = data.leaders
-        allCountLabel.text = "\(data.allCount) пользователей в рейтинге"
+        allCountLabel.text = String(format: NSLocalizedString("AdaptiveRatingFooterText", comment: ""), "\(data.allCount)")
         allCountLabel.isHidden = false
     }
 

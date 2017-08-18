@@ -67,7 +67,7 @@ class LeaderboardTableViewCell: UITableViewCell {
 
         if isMe {
             cardPadView.backgroundColor = meColor
-            userLabel.text = "Вы"
+            userLabel.text = NSLocalizedString("AdaptiveRatingYou", comment: "")
         }
     }
 

@@ -260,3 +260,5 @@ RetentionNotificationYesterdayZero = "За вчерашний день Вы ни
 RetentionNotificationYesterdayStreak = "Вы занимаетесь уже %@ подряд. Возвращайтесь и продолжайте учиться!";
 RetentionNotificationWeekly = "Вы давно не занимались. Возвращайтесь и продолжайте учиться!";
 SocialSignupWithExistingEmail = "Указанный email привязан к другому аккаунту. Чтобы входить через эту социальную сеть, необходимо войти, используя email и пароль";
+AdaptiveRatingFooterText = "%@ пользователей в рейтинге";
+AdaptiveRatingYou = "Вы";
