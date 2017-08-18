@@ -32,8 +32,11 @@ class AdaptiveStepPresenter {
 
     var quizViewController: ChoiceQuizViewController?
 
-    init(view: AdaptiveStepView, step: Step) {
+    private var submissionsAPI: SubmissionsAPI
+
+    init(view: AdaptiveStepView, submissionsAPI: SubmissionsAPI, step: Step) {
         self.step = step
+        self.submissionsAPI = submissionsAPI
         self.view = view
     }
 
@@ -53,16 +56,10 @@ class AdaptiveStepPresenter {
             return
         }
 
-        // Override API
-        // TODO: pass API to init?
-        let submissionsAPI = SubmissionsAPI()
-        submissionsAPI.url = StepicApplicationsInfo.adaptiveRatingURL
-        submissionsAPI.isAdaptive = true
-        quizViewController.submissionsAPI = submissionsAPI
-
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true
+        quizViewController.submissionsAPI = submissionsAPI
         view?.updateQuiz(with: quizViewController.view)
 
         quizViewController.isSubmitButtonHidden = true

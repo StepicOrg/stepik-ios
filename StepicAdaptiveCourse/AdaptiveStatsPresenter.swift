@@ -49,7 +49,7 @@ class AdaptiveStatsPresenter {
     func reloadData(force: Bool = false) {
         if progressByWeek == nil || force {
             progressByWeek = []
-            
+
             guard let stats = statsManager.stats else {
                 return
             }

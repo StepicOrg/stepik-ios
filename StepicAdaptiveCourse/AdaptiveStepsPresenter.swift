@@ -52,6 +52,7 @@ class AdaptiveStepsPresenter {
     fileprivate var statsManager: StatsManager?
     fileprivate var achievementsManager: AchievementManager?
     fileprivate var defaultsStorageManager: DefaultsStorageManager?
+    fileprivate var ratingsAPI: RatingsAPI?
 
     var isKolodaPresented = false
     var isJoinedCourse = false
@@ -89,7 +90,7 @@ class AdaptiveStepsPresenter {
     var recommendedLessons: [Lesson] = []
     var step: Step?
 
-    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, view: AdaptiveStepsView) {
+    init(coursesAPI: CoursesAPI, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, progressesAPI: ProgressesAPI, stepicsAPI: StepicsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, profilesAPI: ProfilesAPI, ratingManager: RatingManager, statsManager: StatsManager, achievementsManager: AchievementManager, defaultsStorageManager: DefaultsStorageManager, ratingsAPI: RatingsAPI, view: AdaptiveStepsView) {
         self.coursesAPI = coursesAPI
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
@@ -102,6 +103,7 @@ class AdaptiveStepsPresenter {
         self.ratingManager = ratingManager
         self.statsManager = statsManager
         self.defaultsStorageManager = defaultsStorageManager
+        self.ratingsAPI = ratingsAPI
 
         self.achievementsManager = achievementsManager
         self.achievementsManager?.delegate = self
@@ -378,6 +380,20 @@ class AdaptiveStepsPresenter {
     }
 
     fileprivate func launchOnboarding() {
+        if !(defaultsStorageManager?.isMigrationCompleted ?? false) {
+            if self.rating == 0 {
+                // First launch -> no need migration
+                self.defaultsStorageManager?.isMigrationCompleted = true
+            } else {
+                ratingsAPI?.migrate(courseId: StepicApplicationsInfo.adaptiveCourseId, exp: self.rating, streak: self.streak - 1, success: { _ in
+                    self.defaultsStorageManager?.isMigrationCompleted = true
+                    print("rating migration completed: rating = \(self.rating), streak = \(self.streak - 1)")
+                }, error: { err in
+                    print("error while rating migration: \(err)")
+                })
+            }
+        }
+
         if isOnboardingPassed {
             return
         }
@@ -506,7 +522,12 @@ class AdaptiveStepsPresenter {
                             return
                     }
 
-                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, step: step)
+                    // Override API
+                    let submissionsAPI = SubmissionsAPI()
+                    submissionsAPI.url = StepicApplicationsInfo.adaptiveRatingURL
+                    submissionsAPI.isAdaptive = true
+
+                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, submissionsAPI: submissionsAPI, step: step)
                     adaptiveStepPresenter.delegate = self
                     stepViewController.presenter = adaptiveStepPresenter
                     self?.currentStepPresenter = adaptiveStepPresenter

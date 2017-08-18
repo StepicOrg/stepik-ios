@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+extension ApiDataDownloader {
+    static let adaptiveRatings = RatingsAPI()
+}
+
 class RatingsAPI {
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int)
@@ -52,6 +56,45 @@ class RatingsAPI {
             if response?.statusCode == 200 {
                 let leaders = json["users"].arrayValue.map({return RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue)})
                 success(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
+                return
+            } else {
+                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
+                return
+            }
+        })
+    }
+
+    @discardableResult func migrate(courseId: Int, exp: Int, streak: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Bool) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+
+        var params: Parameters = [
+            "course": courseId,
+            "exp": exp,
+            "streak": streak
+        ]
+        if let userId = AuthInfo.shared.userId {
+            params["user"] = userId
+        }
+
+        return Alamofire.request("\(StepicApplicationsInfo.adaptiveRatingURL)/migrate", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+            response in
+
+            var error = response.result.error
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError()
+                }
+            }
+            let response = response.response
+
+            if let e = error {
+                let d = (e as NSError).localizedDescription
+                print(d)
+                errorHandler(d)
+                return
+            }
+
+            if response?.statusCode == 200 || response?.statusCode == 201 {
+                success(response?.statusCode == 201)
                 return
             } else {
                 errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")

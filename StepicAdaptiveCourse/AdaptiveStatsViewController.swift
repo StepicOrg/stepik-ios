@@ -79,7 +79,7 @@ class AdaptiveStatsViewController: UIViewController {
 
         statsPresenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, view: self)
         achievementsPresenter = AdaptiveAchievementsPresenter(achievementsManager: AchievementManager.shared, view: self)
-        ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: RatingsAPI(), view: self)
+        ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: ApiDataDownloader.adaptiveRatings, view: self)
     }
 
     override func viewDidLoad() {
