@@ -165,6 +165,8 @@ extension SocialNetworksViewController : UICollectionViewDelegateFlowLayout {
 
 extension SocialNetworksViewController: VKSocialSDKProviderDelegate {
     func presentAuthController(_ controller: UIViewController) {
-        present(controller, animated: true, completion: nil)
+        if let registerURL = SocialNetworks.vk.object.registerURL {
+            WebControllerManager.sharedManager.presentWebControllerWithURL(registerURL, inController: self, withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close, forceCustom: true)
+        }
     }
 }
