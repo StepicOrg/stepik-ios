@@ -30,6 +30,9 @@ class LessonPresenter {
     fileprivate var unitId: Int?
     fileprivate var context: StepsControllerPresentationContext = .unit
 
+    var stepsAPI = ApiDataDownloader.steps
+    var lessonsAPI = ApiDataDownloader.lessons
+
     var shouldNavigateToPrev: Bool = false
     var shouldNavigateToNext: Bool = false
 
@@ -38,7 +41,7 @@ class LessonPresenter {
 
     fileprivate var canSendViews: Bool = false
 
-    init(objects: LessonInitObjects?, ids: LessonInitIds?) {
+    init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI = ApiDataDownloader.steps, lessonsAPI: LessonsAPI = ApiDataDownloader.lessons) {
         if let objects = objects {
             self.lesson = objects.lesson
             self.startStepId = objects.startStepId
@@ -50,6 +53,8 @@ class LessonPresenter {
             self.context = .unit
         }
         LastStepGlobalContext.context.unitId = unitId
+        self.stepsAPI = stepsAPI
+        self.lessonsAPI = lessonsAPI
     }
 
     var url: String {
@@ -76,7 +81,8 @@ class LessonPresenter {
             }
         }
 
-        _ = ApiDataDownloader.steps.retrieve(ids: [stepId], existing: (step != nil) ? [step!] : [], refreshMode: .update, success: {
+        _ = stepsAPI.retrieve(ids: [stepId], existing: (step != nil) ? [step!] : [], refreshMode: .update, success: {
+            [weak self]
             steps in
 
             guard let step = steps.first else {
@@ -86,7 +92,7 @@ class LessonPresenter {
             var localLesson: Lesson? = nil
             localLesson = Lesson.getLesson(step.lessonId)
 
-            _ = ApiDataDownloader.lessons.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
+            _ = self?.lessonsAPI.retrieve(ids: [step.lessonId], existing: (localLesson != nil) ? [localLesson!] : [], refreshMode: .update, success: {
                 [weak self]
                 lessons in
                 guard let lesson = lessons.first else {
@@ -242,7 +248,6 @@ class LessonPresenter {
             stepController.lessonSlug = lesson.slug
             stepController.nItem = self.view?.nItem
             stepController.nController = self.view?.nController
-
             if let assignments = lesson.unit?.assignments {
                 if index < assignments.count {
                     stepController.assignment = assignments[index]
@@ -252,6 +257,7 @@ class LessonPresenter {
             stepController.startStepBlock = {
                 [weak self] in
                 self?.canSendViews = true
+                self?.didSelectTab = true
             }
             stepController.shouldSendViewsBlock = {
                 [weak self] in
@@ -294,6 +300,7 @@ class LessonPresenter {
             stepController.startStepBlock = {
                 [weak self] in
                 self?.canSendViews = true
+                self?.didSelectTab = true
             }
             stepController.shouldSendViewsBlock = {
                 [weak self] in
