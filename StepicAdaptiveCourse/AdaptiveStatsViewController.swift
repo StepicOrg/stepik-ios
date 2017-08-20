@@ -9,6 +9,24 @@
 import UIKit
 import Charts
 
+class OverlapTableView: UITableView {
+    private var previousCellsStateHash: Int = 0
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        guard let wrapper = subviews.first else {
+            return
+        }
+
+        let currentHash = visibleCells.description.hashValue
+        if currentHash != previousCellsStateHash {
+            visibleCells.reversed().forEach { wrapper.bringSubview(toFront: $0) }
+            previousCellsStateHash = currentHash
+        }
+    }
+}
+
 class AdaptiveStatsViewController: UIViewController {
     enum State {
         case progress
@@ -40,7 +58,7 @@ class AdaptiveStatsViewController: UIViewController {
     var achievementsPresenter: AdaptiveAchievementsPresenter?
     var ratingsPresenter: AdaptiveRatingsPresenter?
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: OverlapTableView!
     @IBOutlet weak var progressChart: LineChartView!
     @IBOutlet weak var currentWeekXPLabel: UILabel!
     @IBOutlet weak var bestStreakLabel: UILabel!
@@ -268,5 +286,4 @@ extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         }
     }
-
 }
