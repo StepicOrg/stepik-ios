@@ -191,7 +191,13 @@ class AdaptiveStatsViewController: UIViewController {
 extension AdaptiveStatsViewController: AdaptiveRatingsView {
     func setRatings(data: ScoreboardViewData) {
         self.data = data.leaders
-        allCountLabel.text = String(format: NSLocalizedString("AdaptiveRatingFooterText", comment: ""), "\(data.allCount)")
+
+        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
+            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
+        ])
+        allCountLabel.text = String(format: pluralizedString, "\(data.allCount)")
         allCountLabel.isHidden = false
     }
 
