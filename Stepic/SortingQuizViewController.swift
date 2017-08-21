@@ -62,6 +62,14 @@ class SortingQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        self.display(reply: reply)
+        self.tableView.isUserInteractionEnabled = false
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? SortingReply else {
+            return
+        }
 
         guard let dataset = dataset else {
             return
@@ -72,7 +80,6 @@ class SortingQuizViewController: QuizViewController {
             o[index] = dataset.options[order]
         }
         orderedOptions = o
-        self.tableView.isUserInteractionEnabled = false
         self.tableView.reloadData()
     }
 

@@ -231,6 +231,7 @@ class CodeQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        display(reply: reply)
         self.submissionStatus = status
 
         if status == .correct {
@@ -238,6 +239,12 @@ class CodeQuizViewController: QuizViewController {
             setupAccessoryView(editable: false)
         } else {
             setQuizControls(enabled: true)
+        }
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? CodeReply else {
+            return
         }
 
         if let l = reply.language {

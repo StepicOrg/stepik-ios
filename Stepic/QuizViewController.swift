@@ -167,6 +167,11 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         presenter?.refreshAttempt()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter?.onDisappear()
+    }
+
     deinit {
         print("deinit quiz controller for step \(step.id)")
         NotificationCenter.default.removeObserver(self)
@@ -271,6 +276,9 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func display(reply: Reply, withStatus status: SubmissionStatus) {
+    }
+
+    func display(reply: Reply) {
     }
 
     func showPeerReviewWarning() {

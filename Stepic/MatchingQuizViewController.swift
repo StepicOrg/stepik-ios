@@ -90,6 +90,14 @@ class MatchingQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        display(reply: reply)
+        self.secondTableView.isUserInteractionEnabled = false
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? MatchingReply else {
+            return
+        }
 
         guard let dataset = dataset else {
             return
@@ -101,8 +109,6 @@ class MatchingQuizViewController: QuizViewController {
         }
         optionsPermutation = reply.ordering
         orderedOptions = o
-
-        self.secondTableView.isUserInteractionEnabled = false
 
         self.firstTableView.reloadData()
         self.secondTableView.reloadData()
