@@ -228,7 +228,7 @@ extension AdaptiveStatsViewController: AdaptiveAchievementsView {
 
 extension AdaptiveStatsViewController: AdaptiveStatsView {
     func setProgress(records: [WeekProgressViewData]) {
-        data = records.reversed()
+        data = records
     }
 
     func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
