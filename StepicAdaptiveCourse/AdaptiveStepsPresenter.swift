@@ -83,7 +83,23 @@ class AdaptiveStepsPresenter {
         }
     }
 
-    var lastReaction: Reaction?
+    var lastReaction: Reaction? {
+        didSet {
+            if let curState = self.currentStepPresenter?.state,
+               let reaction = self.lastReaction {
+                self.sendReaction(reaction: lastReaction!, success: { _ in
+                    // Analytics
+                    switch reaction {
+                    case .maybeLater:
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
+                    case .neverAgain:
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
+                    default: break
+                    }
+                })
+            }
+        }
+    }
 
     var course: Course?
     var currentLesson: Lesson?
@@ -267,6 +283,7 @@ class AdaptiveStepsPresenter {
 
         performRequest({
             self.recommendationsAPI?.sendRecommendationReaction(user: userId, lesson: lessonId, reaction: reaction, success: {
+                print("reaction sent: reaction = \(reaction)")
                 success()
             }, error: { error in
                 print("failed sending reaction: \(error)")
@@ -543,54 +560,7 @@ class AdaptiveStepsPresenter {
                 } else {
                     // Next recommendation -> send reaction before
                     print("last reaction: \((self?.lastReaction)!), getting new recommendation...")
-
-                    // Analytics
-                    if let curState = self?.currentStepPresenter?.state,
-                        let reaction = self?.lastReaction {
-                        switch reaction {
-                        case .maybeLater:
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
-                        case .neverAgain:
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
-                        default: break
-                        }
-                    }
-
-                    self?.sendReaction(reaction: (self?.lastReaction)!, success: { [weak self] in
-                        guard let s = self else { return }
-
-                        // Update rating only after reaction was sent
-                        if (s.currentStepPresenter?.state ?? .unsolved) == .successful {
-                            let curStreak = s.streak
-                            let curRating = s.rating
-
-                            let oldRating = curRating
-                            let newRating = curRating + curStreak
-                            s.rating += curStreak
-
-                            s.achievementsManager?.fireEvent(.exp(value: curStreak))
-                            s.achievementsManager?.fireEvent(.streak(value: curStreak))
-
-                            // Update stats
-                            s.statsManager?.incrementRating(curStreak)
-                            s.statsManager?.maxStreak = curStreak
-
-                            // Days streak achievement
-                            if !s.isSolvedToday {
-                                s.isSolvedToday = true
-                                s.achievementsManager?.fireEvent(.days(value: s.statsManager?.currentDayStreak ?? 1))
-                            }
-
-                            if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
-                                s.achievementsManager?.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
-
-                                s.view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
-                            }
-                            s.streak += 1
-                        }
-
-                        s.getNewRecommendation(for: course, success: successHandler)
-                    })
+                    self?.getNewRecommendation(for: course, success: successHandler)
                 }
             }
         }
@@ -627,8 +597,16 @@ extension AdaptiveStepsPresenter: StepCardViewDelegate {
             currentStepPresenter?.retry()
             break
         case .successful:
-            lastReaction = .solved
             view?.swipeCardUp()
+
+            // updated rating here
+            let newRating = rating
+            let oldRating = newRating - streak + 1
+            if RatingHelper.getLevel(for: oldRating) != RatingHelper.getLevel(for: newRating) {
+                achievementsManager?.fireEvent(.level(value: RatingHelper.getLevel(for: newRating)))
+
+                view?.showCongratulationPopup(type: .level(level: RatingHelper.getLevel(for: newRating)), completion: nil)
+            }
 
             break
         }
@@ -647,12 +625,30 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
     func stepSubmissionDidCorrect() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Step.correctAnswer)
 
-        // Update rating and streak
-        let newRating = rating + streak
+        lastReaction = .solved
+
+        let curStreak = streak
+        let oldRating = rating
+        let newRating = oldRating + curStreak
+        achievementsManager?.fireEvent(.exp(value: curStreak))
+        achievementsManager?.fireEvent(.streak(value: curStreak))
+
+        // Update stats
+        statsManager?.incrementRating(curStreak)
+        statsManager?.maxStreak = curStreak
+
+        // Days streak achievement
+        if !isSolvedToday {
+            isSolvedToday = true
+            achievementsManager?.fireEvent(.days(value: statsManager?.currentDayStreak ?? 1))
+        }
 
         view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
             self.view?.updateProgress(for: newRating)
         })
+
+        rating = newRating
+        streak += 1
 
         view?.updateTopCardControl(stepState: .successful)
     }
