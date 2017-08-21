@@ -909,6 +909,10 @@
 		2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */; };
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
+		2C8650591F4ADEF900D51654 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86505B1F4ADEF900D51654 /* adjectives_m.plist */; };
+		2C86505D1F4ADF3C00D51654 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86505F1F4ADF3C00D51654 /* nouns_m.plist */; };
+		2C8650611F4ADF4300D51654 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8650631F4ADF4300D51654 /* adjectives_f.plist */; };
+		2C8650651F4ADF4900D51654 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8650671F4ADF4900D51654 /* nouns_f.plist */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
 		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
@@ -920,10 +924,6 @@
 		2CAACA5A1F42FD5000AB0EAA /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */; };
 		2CAACA5E1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA5D1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift */; };
 		2CAACA601F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAACA5F1F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift */; };
-		2CAACA6A1F44796300AB0EAA /* adjectives_m.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA6C1F44796300AB0EAA /* adjectives_m.txt */; };
-		2CAACA6F1F4479B500AB0EAA /* nouns_m.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA711F4479B500AB0EAA /* nouns_m.txt */; };
-		2CAACA731F447C9E00AB0EAA /* adjectives_f.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA751F447C9E00AB0EAA /* adjectives_f.txt */; };
-		2CAACA761F447CA300AB0EAA /* nouns_f.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2CAACA781F447CA300AB0EAA /* nouns_f.txt */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
@@ -1918,6 +1918,14 @@
 		2C76ACCC1F16496C0077D9D7 /* RatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
+		2C86505A1F4ADEF900D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
+		2C86505C1F4ADEFC00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/adjectives_m.plist; sourceTree = "<group>"; };
+		2C86505E1F4ADF3C00D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/nouns_m.plist; sourceTree = "<group>"; };
+		2C8650601F4ADF3E00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/nouns_m.plist; sourceTree = "<group>"; };
+		2C8650621F4ADF4300D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
+		2C8650641F4ADF4400D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/adjectives_f.plist; sourceTree = "<group>"; };
+		2C8650661F4ADF4900D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/nouns_f.plist; sourceTree = "<group>"; };
+		2C8650681F4ADF4A00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/nouns_f.plist; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
@@ -1931,14 +1939,6 @@
 		2CAACA581F42FD5000AB0EAA /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
 		2CAACA5D1F43357C00AB0EAA /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2CAACA5F1F4335AA00AB0EAA /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
-		2CAACA6D1F44796900AB0EAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = ru.lproj/adjectives_m.txt; sourceTree = "<group>"; };
-		2CAACA6E1F44796D00AB0EAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/adjectives_m.txt; sourceTree = "<group>"; };
-		2CAACA701F4479B500AB0EAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = ru.lproj/nouns_m.txt; sourceTree = "<group>"; };
-		2CAACA721F4479B900AB0EAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/nouns_m.txt; sourceTree = "<group>"; };
-		2CAACA741F447C9E00AB0EAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = ru.lproj/adjectives_f.txt; sourceTree = "<group>"; };
-		2CAACA771F447CA300AB0EAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = ru.lproj/nouns_f.txt; sourceTree = "<group>"; };
-		2CAACA791F44A01200AB0EAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/nouns_f.txt; sourceTree = "<group>"; };
-		2CAACA7A1F44A11C00AB0EAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/adjectives_f.txt; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
@@ -3693,10 +3693,10 @@
 		2CAACA611F44777300AB0EAA /* Leaderboard names */ = {
 			isa = PBXGroup;
 			children = (
-				2CAACA6C1F44796300AB0EAA /* adjectives_m.txt */,
-				2CAACA711F4479B500AB0EAA /* nouns_m.txt */,
-				2CAACA751F447C9E00AB0EAA /* adjectives_f.txt */,
-				2CAACA781F447CA300AB0EAA /* nouns_f.txt */,
+				2C86505B1F4ADEF900D51654 /* adjectives_m.plist */,
+				2C86505F1F4ADF3C00D51654 /* nouns_m.plist */,
+				2C8650631F4ADF4300D51654 /* adjectives_f.plist */,
+				2C8650671F4ADF4900D51654 /* nouns_f.plist */,
 			);
 			name = "Leaderboard names";
 			sourceTree = "<group>";
@@ -4328,11 +4328,13 @@
 				2C04C1061F160650006B69B3 /* step3.html in Resources */,
 				08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */,
 				08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */,
+				2C8650611F4ADF4300D51654 /* adjectives_f.plist in Resources */,
 				86B56EAF1EC38F9600CFE4A3 /* Auth.plist in Resources */,
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
 				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
+				2C8650651F4ADF4900D51654 /* nouns_f.plist in Resources */,
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
 				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				860DB7A61EB90555001E3E42 /* overlay_hard.png in Resources */,
@@ -4340,11 +4342,9 @@
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
 				860DB7A31EB9054B001E3E42 /* overlay_simple.png in Resources */,
 				08A7B0E61EB32E3F00C1BA71 /* Auth.plist in Resources */,
-				2CAACA6A1F44796300AB0EAA /* adjectives_m.txt in Resources */,
 				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				860DB78F1EB8DC13001E3E42 /* StepCardView.xib in Resources */,
-				2CAACA731F447C9E00AB0EAA /* adjectives_f.txt in Resources */,
 				085E9E711F138C3F00D6A4BC /* CodeSuggestionsTableViewController.xib in Resources */,
 				86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */,
 				86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */,
@@ -4367,14 +4367,13 @@
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
+				2C86505D1F4ADF3C00D51654 /* nouns_m.plist in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
-				2CAACA6F1F4479B500AB0EAA /* nouns_m.txt in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
 				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
 				0808527B1ED752DE007C0877 /* GoogleService-Info.plist in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				080852791ED74C35007C0877 /* Tokens.plist in Resources */,
-				2CAACA761F447CA300AB0EAA /* nouns_f.txt in Resources */,
 				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -4398,6 +4397,7 @@
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
 				2CAACA5A1F42FD5000AB0EAA /* LeaderboardTableViewCell.xib in Resources */,
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
+				2C8650591F4ADEF900D51654 /* adjectives_m.plist in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
@@ -5945,6 +5945,46 @@
 			name = AchievementTableViewCell.xib;
 			sourceTree = "<group>";
 		};
+		2C86505B1F4ADEF900D51654 /* adjectives_m.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C86505A1F4ADEF900D51654 /* ru */,
+				2C86505C1F4ADEFC00D51654 /* en */,
+			);
+			name = adjectives_m.plist;
+			path = LeaderboardNames;
+			sourceTree = "<group>";
+		};
+		2C86505F1F4ADF3C00D51654 /* nouns_m.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C86505E1F4ADF3C00D51654 /* ru */,
+				2C8650601F4ADF3E00D51654 /* en */,
+			);
+			name = nouns_m.plist;
+			path = LeaderboardNames;
+			sourceTree = "<group>";
+		};
+		2C8650631F4ADF4300D51654 /* adjectives_f.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C8650621F4ADF4300D51654 /* ru */,
+				2C8650641F4ADF4400D51654 /* en */,
+			);
+			name = adjectives_f.plist;
+			path = LeaderboardNames;
+			sourceTree = "<group>";
+		};
+		2C8650671F4ADF4900D51654 /* nouns_f.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C8650661F4ADF4900D51654 /* ru */,
+				2C8650681F4ADF4A00D51654 /* en */,
+			);
+			name = nouns_f.plist;
+			path = LeaderboardNames;
+			sourceTree = "<group>";
+		};
 		2C9704181F3B0B7200C36F0A /* step4.html */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5961,42 +6001,6 @@
 				2C97041F1F3B0B7A00C36F0A /* ru */,
 			);
 			name = step5.html;
-			sourceTree = "<group>";
-		};
-		2CAACA6C1F44796300AB0EAA /* adjectives_m.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CAACA6D1F44796900AB0EAA /* ru */,
-				2CAACA6E1F44796D00AB0EAA /* en */,
-			);
-			name = adjectives_m.txt;
-			sourceTree = "<group>";
-		};
-		2CAACA711F4479B500AB0EAA /* nouns_m.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CAACA701F4479B500AB0EAA /* ru */,
-				2CAACA721F4479B900AB0EAA /* en */,
-			);
-			name = nouns_m.txt;
-			sourceTree = "<group>";
-		};
-		2CAACA751F447C9E00AB0EAA /* adjectives_f.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CAACA741F447C9E00AB0EAA /* ru */,
-				2CAACA7A1F44A11C00AB0EAA /* en */,
-			);
-			name = adjectives_f.txt;
-			sourceTree = "<group>";
-		};
-		2CAACA781F447CA300AB0EAA /* nouns_f.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2CAACA771F447CA300AB0EAA /* ru */,
-				2CAACA791F44A01200AB0EAA /* en */,
-			);
-			name = nouns_f.txt;
 			sourceTree = "<group>";
 		};
 		860DB7911EB8DC13001E3E42 /* StepCardView.xib */ = {

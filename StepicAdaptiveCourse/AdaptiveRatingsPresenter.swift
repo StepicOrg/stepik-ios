@@ -75,23 +75,18 @@ class AdaptiveRatingsPresenter {
     }
 
     fileprivate func loadNamesFromFiles() {
-        func readTxtFile(name: String) -> [String] {
-            var result: [String] = []
-            do {
-                if let path = Bundle.main.path(forResource: name, ofType: "txt") {
-                    let data = try String(contentsOfFile:path, encoding: String.Encoding.utf8)
-                    result = data.components(separatedBy: ", ")
-                }
-            } catch let err as NSError {
-                print("error while reading file \(name).txt: \(err)")
+        func readFile(name: String) -> [String] {
+            if let path = Bundle.main.path(forResource: name, ofType: "plist"),
+                let words = NSArray(contentsOfFile: path) as? [String] {
+                return words
             }
-            return result
+            return []
         }
 
-        readTxtFile(name: "adjectives_m").forEach { adjs.append(($0.trimmingCharacters(in: .whitespacesAndNewlines), "m")) }
-        readTxtFile(name: "adjectives_f").forEach { adjs.append(($0.trimmingCharacters(in: .whitespacesAndNewlines), "f")) }
-        readTxtFile(name: "nouns_m").forEach { nouns.append(($0.trimmingCharacters(in: .whitespacesAndNewlines), "m")) }
-        readTxtFile(name: "nouns_f").forEach { nouns.append(($0.trimmingCharacters(in: .whitespacesAndNewlines), "f")) }
+        readFile(name: "adjectives_m").forEach { adjs.append(($0, "m")) }
+        readFile(name: "adjectives_f").forEach { adjs.append(($0, "f")) }
+        readFile(name: "nouns_m").forEach { nouns.append(($0, "m")) }
+        readFile(name: "nouns_f").forEach { nouns.append(($0, "f")) }
 
         assert(adjs.count % 2 == 0)
     }

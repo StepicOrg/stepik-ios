@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+    <string>крокодил</string>
+    <string>муравьед</string>
+    <string>броненосец</string>
+    <string>зубр</string>
+    <string>аксолотль</string>
+    <string>барсук</string>
+    <string>бобр</string>
+    <string>бизон</string>
+    <string>верблюд</string>
+    <string>хамелеон</string>
+    <string>гепард</string>
+    <string>бурундук</string>
+    <string>койот</string>
+    <string>ворон</string>
+    <string>динго</string>
+    <string>динозавр</string>
+    <string>дельфин</string>
+    <string>слон</string>
+    <string>хорек</string>
+    <string>лис</string>
+    <string>жираф</string>
+    <string>суслик</string>
+    <string>гризли</string>
+    <string>ёжик</string>
+    <string>бегемот</string>
+    <string>кракен</string>
+    <string>лемур</string>
+    <string>леопард</string>
+    <string>нарвал</string>
+    <string>кот</string>
+    <string>пингвин</string>
+    <string>утконос</string>
+    <string>питон</string>
+    <string>квагги</string>
+    <string>кролик</string>
+    <string>енот</string>
+    <string>носорог</string>
+    <string>морж</string>
+    <string>волк</string>
+    <string>вомбат</string>
+    <string>медведь</string>
+</array>
+</plist>
