@@ -31,8 +31,6 @@
 		0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FE471F0E584B001226B4 /* CodePlaygroundTest.swift */; };
 		0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
 		0806B2C31EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
-		080852791ED74C35007C0877 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 080852781ED74C35007C0877 /* Tokens.plist */; };
-		0808527B1ED752DE007C0877 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0808527A1ED752DE007C0877 /* GoogleService-Info.plist */; };
 		080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA22F1EA017FB0079272F /* CertificateSpec.swift */; };
 		080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
 		080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */; };
@@ -494,7 +492,6 @@
 		08A500501F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
 		08A500511F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
 		08A500521F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
-		08A7B0E61EB32E3F00C1BA71 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E51EB32E3F00C1BA71 /* Auth.plist */; };
 		08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth.plist */; };
 		08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
 		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
@@ -885,7 +882,6 @@
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
-		2C04C1001F160631006B69B3 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1021F160631006B69B3 /* step1.html */; };
 		2C04C1031F160643006B69B3 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C04C1061F160650006B69B3 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
@@ -913,6 +909,14 @@
 		2C76ACCF1F1653E60077D9D7 /* CongratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */; };
 		2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
+		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
+		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
+		2C8652611F4B2F7D00D51654 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525B1F4B2F7D00D51654 /* AdaptiveInfo.plist */; };
+		2C8652621F4B2F7D00D51654 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525C1F4B2F7D00D51654 /* Auth.plist */; };
+		2C8652631F4B2F7D00D51654 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525D1F4B2F7D00D51654 /* icon.png */; };
+		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
+		2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525F1F4B2F7D00D51654 /* Tokens.plist */; };
+		2C8652681F4B2FA500D51654 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652661F4B2FA500D51654 /* step1.html */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
 		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
@@ -922,7 +926,6 @@
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
-		2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C071F1E519B00FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
@@ -937,7 +940,6 @@
 		2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
-		2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5D1F14C89900CD0A4C /* icon.png */; };
 		53CE540C11629B4C8BF58C65 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
@@ -1344,6 +1346,7 @@
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		AAAC55F99ECDE7DBFC3FF35D /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E58BF3E157733699F0FF27A /* Pods_SberbankUniversity.framework */; };
+		C83BD1423AD58CE6D50A486D /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
 		D5796C1AD2371343DA2B632F /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3621099E65F0E7807AAC606F /* Pods_Stepic.framework */; };
 /* End PBXBuildFile section */
 
@@ -1434,8 +1437,6 @@
 		0805FE471F0E584B001226B4 /* CodePlaygroundTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePlaygroundTest.swift; sourceTree = "<group>"; };
 		0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewsExecutableTask.swift; sourceTree = "<group>"; };
 		080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_submission_count_v16.xcdatamodel; sourceTree = "<group>"; };
-		080852781ED74C35007C0877 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
-		0808527A1ED752DE007C0877 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
 		080AA2311EA024290079272F /* CoursesAPIPaginatedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesAPIPaginatedMock.swift; sourceTree = "<group>"; };
 		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
@@ -1724,7 +1725,6 @@
 		08A1257D1BDEBCD60066B2B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullHeightWebView.swift; sourceTree = "<group>"; };
-		08A7B0E51EB32E3F00C1BA71 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
 		08A7B0E71EB340F500C1BA71 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
 		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegistrationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
@@ -1885,12 +1885,10 @@
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
-		2C04C1011F160631006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step1.html; sourceTree = "<group>"; };
 		2C04C1041F160643006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step2.html; sourceTree = "<group>"; };
 		2C04C1071F160650006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step3.html; sourceTree = "<group>"; };
 		2C04C1091F16075A006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step3.html; sourceTree = "<group>"; };
 		2C04C10A1F16075D006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step2.html; sourceTree = "<group>"; };
-		2C04C10B1F16075F006B69B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/step1.html; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
@@ -1915,6 +1913,15 @@
 		2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsView.swift; sourceTree = "<group>"; };
 		2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingProgressView.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
+		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
+		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
+		2C86525B1F4B2F7D00D51654 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/1838/AdaptiveInfo.plist; sourceTree = "<group>"; };
+		2C86525C1F4B2F7D00D51654 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/1838/Auth.plist; sourceTree = "<group>"; };
+		2C86525D1F4B2F7D00D51654 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1838/icon.png; sourceTree = "<group>"; };
+		2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/1838/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C86525F1F4B2F7D00D51654 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/1838/Tokens.plist; sourceTree = "<group>"; };
+		2C8652671F4B2FA500D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/1838/ru.lproj/step1.html; sourceTree = "<group>"; };
+		2C8652691F4B2FAA00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1838/en.lproj/step1.html; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
@@ -1927,7 +1934,6 @@
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		2CBC4C071F1E519B00FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -1935,14 +1941,13 @@
 		2CEDA35F1F336FEC005F4A5D /* RatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingHelper.swift; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
-		2CFB1C5D1F14C89900CD0A4C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = OnboardingContent/icon.png; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E58BF3E157733699F0FF27A /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		569D1D3077698001684C6057 /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
+		5F0EC0DE791B7E8C50F74B8A /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
+		62B176F8ECEA96A919ADABF6 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		76A555AD4AAA736F43C1336F /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
@@ -1969,7 +1974,6 @@
 		86EF293B1E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveMain.storyboard; sourceTree = "<group>"; };
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
-		86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdaptiveInfo.plist; sourceTree = "<group>"; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -2037,6 +2041,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */,
+				C83BD1423AD58CE6D50A486D /* Pods_Adaptive_1838.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3656,6 +3661,37 @@
 			name = Alerts;
 			sourceTree = "<group>";
 		};
+		2C8652561F4B2C2300D51654 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				2C8652591F4B2D3F00D51654 /* 1838 */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		2C8652591F4B2D3F00D51654 /* 1838 */ = {
+			isa = PBXGroup;
+			children = (
+				2C86526A1F4B2FC400D51654 /* Onboarding first step */,
+				2C86525A1F4B2F7D00D51654 /* Config.plist */,
+				2C86525B1F4B2F7D00D51654 /* AdaptiveInfo.plist */,
+				2C86525C1F4B2F7D00D51654 /* Auth.plist */,
+				2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */,
+				2C86525F1F4B2F7D00D51654 /* Tokens.plist */,
+				2C8652571F4B2C8200D51654 /* Icons.xcassets */,
+			);
+			name = 1838;
+			sourceTree = "<group>";
+		};
+		2C86526A1F4B2FC400D51654 /* Onboarding first step */ = {
+			isa = PBXGroup;
+			children = (
+				2C8652661F4B2FA500D51654 /* step1.html */,
+				2C86525D1F4B2F7D00D51654 /* icon.png */,
+			);
+			name = "Onboarding first step";
+			sourceTree = "<group>";
+		};
 		2CA50B9C1F0FE63600418E7D /* AdaptiveOnboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -3716,12 +3752,10 @@
 			children = (
 				2C9704181F3B0B7200C36F0A /* step4.html */,
 				2C97041A1F3B0B7200C36F0A /* step5.html */,
-				2C04C1021F160631006B69B3 /* step1.html */,
 				2C04C1051F160643006B69B3 /* step2.html */,
 				2C04C1081F160650006B69B3 /* step3.html */,
 				2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */,
 				2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */,
-				2CFB1C5D1F14C89900CD0A4C /* icon.png */,
 			);
 			name = "Onboarding content";
 			sourceTree = "<group>";
@@ -3803,11 +3837,11 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
+				2C8652561F4B2C2300D51654 /* Content */,
 				2CEDA35E1F336F0E005F4A5D /* Managers */,
 				2C6ABA611F1E009E005A3BCF /* Alerts */,
 				2CFB1C521F14C7EA00CD0A4C /* Supporting Files */,
 				2C03B2A21F0CD84900005383 /* Helpers */,
-				0808527A1ED752DE007C0877 /* GoogleService-Info.plist */,
 				860DB79E1EB90505001E3E42 /* Images */,
 				86ABC6651E9685E70012E8A6 /* Views */,
 				86795EF41E85322B00A985C2 /* Controllers */,
@@ -3815,10 +3849,6 @@
 				86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */,
 				86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */,
 				86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */,
-				86EF29421E83CEA900F8D214 /* AdaptiveInfo.plist */,
-				08A7B0E51EB32E3F00C1BA71 /* Auth.plist */,
-				080852781ED74C35007C0877 /* Tokens.plist */,
-				2CBC4C071F1E519B00FE96C4 /* Config.plist */,
 			);
 			name = "Adaptive Course";
 			path = StepicAdaptiveCourse;
@@ -3827,14 +3857,14 @@
 		93EE41550923F78C1EE6A42B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */,
-				569D1D3077698001684C6057 /* Pods-Adaptive 1838.release.xcconfig */,
 				E3812B96D3F0D7EF9CEAB046 /* Pods-SberbankUniversity.debug.xcconfig */,
 				F30DCCF141C0245FB07E9048 /* Pods-SberbankUniversity.release.xcconfig */,
 				3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */,
 				76A555AD4AAA736F43C1336F /* Pods-Stepic.release.xcconfig */,
 				B60EBA966EADB90035E8122A /* Pods-StepicTests.debug.xcconfig */,
 				D3F6A77F6E770AFE3655D36F /* Pods-StepicTests.release.xcconfig */,
+				62B176F8ECEA96A919ADABF6 /* Pods-Adaptive 1838.debug.xcconfig */,
+				5F0EC0DE791B7E8C50F74B8A /* Pods-Adaptive 1838.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4298,10 +4328,10 @@
 				860BC3461EAA1F540058F440 /* CertificatesStoryboard.storyboard in Resources */,
 				868BC6E01EA0263300E204EE /* StreaksView.xib in Resources */,
 				860DB7A61EB90555001E3E42 /* overlay_hard.png in Resources */,
-				2CFB1C691F14CCAD00CD0A4C /* icon.png in Resources */,
 				868BC6E11EA0263300E204EE /* RateAppViewController.xib in Resources */,
+				2C8652631F4B2F7D00D51654 /* icon.png in Resources */,
 				860DB7A31EB9054B001E3E42 /* overlay_simple.png in Resources */,
-				08A7B0E61EB32E3F00C1BA71 /* Auth.plist in Resources */,
+				2C8652601F4B2F7D00D51654 /* Config.plist in Resources */,
 				868BC6E21EA0263300E204EE /* CurrentBestStreakViewController.xib in Resources */,
 				86795EF11E84AA1400A985C2 /* Main.storyboard in Resources */,
 				860DB78F1EB8DC13001E3E42 /* StepCardView.xib in Resources */,
@@ -4315,6 +4345,7 @@
 				86AE94731E84511A00F67691 /* PickerViewController.xib in Resources */,
 				86AE94741E84511A00F67691 /* StepikAlertViewController.xib in Resources */,
 				080E81031F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
+				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
@@ -4322,17 +4353,17 @@
 				0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
-				2C04C1001F160631006B69B3 /* step1.html in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
 				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
+				2C8652681F4B2FA500D51654 /* step1.html in Resources */,
+				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
 				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
-				0808527B1ED752DE007C0877 /* GoogleService-Info.plist in Resources */,
+				2C8652611F4B2F7D00D51654 /* AdaptiveInfo.plist in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
-				080852791ED74C35007C0877 /* Tokens.plist in Resources */,
 				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -4344,7 +4375,7 @@
 				86AE94841E84511A00F67691 /* FillBlanksInputTableViewCell.xib in Resources */,
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
 				86AE94851E84511A00F67691 /* FillBlanksChoiceTableViewCell.xib in Resources */,
-				2CBC4C081F1E519B00FE96C4 /* Config.plist in Resources */,
+				2C8652621F4B2F7D00D51654 /* Auth.plist in Resources */,
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				2C9704211F3B0B7F00C36F0A /* step4.html in Resources */,
@@ -4357,6 +4388,7 @@
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
+				2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */,
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -5854,16 +5886,6 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		2C04C1021F160631006B69B3 /* step1.html */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C04C1011F160631006B69B3 /* ru */,
-				2C04C10B1F16075F006B69B3 /* en */,
-			);
-			name = step1.html;
-			path = OnboardingContent;
-			sourceTree = "<group>";
-		};
 		2C04C1051F160643006B69B3 /* step2.html */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5900,6 +5922,15 @@
 				2C6640E31F30BCE60033A274 /* Base */,
 			);
 			name = AchievementTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		2C8652661F4B2FA500D51654 /* step1.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C8652671F4B2FA500D51654 /* ru */,
+				2C8652691F4B2FAA00D51654 /* en */,
+			);
+			name = step1.html;
 			sourceTree = "<group>";
 		};
 		2C9704181F3B0B7200C36F0A /* step4.html */ = {
@@ -6261,7 +6292,7 @@
 		};
 		86EF29431E83CEA900F8D214 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4287601F8A47906ADD150820 /* Pods-Adaptive 1838.debug.xcconfig */;
+			baseConfigurationReference = 62B176F8ECEA96A919ADABF6 /* Pods-Adaptive 1838.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1838;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -6271,7 +6302,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Karpov (X767B24B99)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
@@ -6286,7 +6317,7 @@
 		};
 		86EF29441E83CEA900F8D214 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 569D1D3077698001684C6057 /* Pods-Adaptive 1838.release.xcconfig */;
+			baseConfigurationReference = 5F0EC0DE791B7E8C50F74B8A /* Pods-Adaptive 1838.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon1838;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -6295,7 +6326,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = StepicAdaptiveCourse/AdaptiveInfo.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
