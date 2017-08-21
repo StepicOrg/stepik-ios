@@ -259,3 +259,4 @@ RetentionNotificationYesterdayZero = "You didn't score any points for yesterday.
 RetentionNotificationYesterdayStreak = "You have been learning %@ in a row. Go back and keep learning!";
 RetentionNotificationWeekly = "You haven't done it for a long time. Go back and keep learning!";
 SocialSignupWithExistingEmail = "This email is already used. To log in using this social account you have to log in via email and password";
+NotSupportedLanguage = "The language is not supported in the application yet";
