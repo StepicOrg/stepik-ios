@@ -523,11 +523,7 @@ class AdaptiveStepsPresenter {
                     }
 
                     // Override API
-                    let submissionsAPI = SubmissionsAPI()
-                    submissionsAPI.url = StepicApplicationsInfo.adaptiveRatingURL
-                    submissionsAPI.isAdaptive = true
-
-                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, submissionsAPI: submissionsAPI, step: step)
+                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, submissionsAPI: AdaptiveSubmissionsAPI(), step: step)
                     adaptiveStepPresenter.delegate = self
                     stepViewController.presenter = adaptiveStepPresenter
                     self?.currentStepPresenter = adaptiveStepPresenter

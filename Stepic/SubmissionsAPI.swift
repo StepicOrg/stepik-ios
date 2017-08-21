@@ -12,13 +12,13 @@ import SwiftyJSON
 
 class SubmissionsAPI: APIEndpoint {
     let name = "submissions"
-    var url = StepicApplicationsInfo.apiURL
-    var additionalParams: [String: Any] = [:]
 
-    var isAdaptive: Bool = false {
-        didSet {
-            additionalParams = isAdaptive ? ["course": StepicApplicationsInfo.adaptiveCourseId, "user": AuthInfo.shared.userId ?? 0] : [:]
-        }
+    var url: String {
+        return StepicApplicationsInfo.apiURL
+    }
+
+    var additionalParams: [String: Any] {
+        return [:]
     }
 
     @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
