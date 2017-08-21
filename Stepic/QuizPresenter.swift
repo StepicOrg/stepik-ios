@@ -15,9 +15,9 @@ class QuizPresenter {
     weak var view: QuizView?
 
     var step: Step
-    var submissionsAPI: SubmissionsAPI = ApiDataDownloader.submissions
-    var attemptsAPI: AttemptsAPI = ApiDataDownloader.attempts
-    var userActivitiesAPI: UserActivitiesAPI = ApiDataDownloader.userActivities
+    var submissionsAPI: SubmissionsAPI
+    var attemptsAPI: AttemptsAPI
+    var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
 
     var state: QuizState = .nothing {
@@ -33,7 +33,7 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI = ApiDataDownloader.submissions, attemptsAPI: AttemptsAPI = ApiDataDownloader.attempts, userActivitiesAPI: UserActivitiesAPI = ApiDataDownloader.userActivities) {
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
