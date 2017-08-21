@@ -84,6 +84,12 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             self.refreshControl.beginRefreshing()
             self.tableView.contentOffset = offset
         }
+        if didRefresh {
+            course.loadProgressesForSections(sections: course.sections, success: {
+                [weak self] in
+                self?.tableView.reloadData()
+            }, error: {})
+        }
     }
 
     var emptyDatasetState: EmptyDatasetState = .empty {

@@ -52,9 +52,10 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
-    func updateQuiz(with view: UIView) {
-        quizView = view
+    func updateQuiz(with controller: UIViewController) {
+        quizView = controller.view
 
+        self.addChildViewController(controller)
         quizPlaceholderView.addSubview(quizView!)
         quizView!.align(to: quizPlaceholderView)
 

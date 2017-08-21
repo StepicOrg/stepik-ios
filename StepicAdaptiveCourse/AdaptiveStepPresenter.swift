@@ -18,7 +18,7 @@ protocol AdaptiveStepView: class {
     var baseScrollView: UIScrollView { get }
 
     func updateProblem(with htmlText: String)
-    func updateQuiz(with view: UIView)
+    func updateQuiz(with controller: UIViewController)
 
     func scrollToQuizBottom()
 }
@@ -59,8 +59,8 @@ class AdaptiveStepPresenter {
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true
-        quizViewController.submissionsAPI = submissionsAPI
-        view?.updateQuiz(with: quizViewController.view)
+        quizViewController.submissionsAPI = AdaptiveSubmissionsAPI()
+        view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true
     }
@@ -74,15 +74,13 @@ class AdaptiveStepPresenter {
         var isSelected = false
         quizViewController?.choices.forEach { isSelected = isSelected || $0 }
 
-        if quizViewController?.attempt != nil && isSelected {
-            quizViewController?.submitAttempt()
+        if isSelected {
+            quizViewController?.submitPressed()
         }
     }
 
     func retry() {
-        if quizViewController?.attempt != nil {
-            quizViewController?.retrySubmission()
-        }
+        quizViewController?.submitPressed()
     }
 
     func calculateQuizHintSize() -> (height: CGFloat, top: CGPoint) {

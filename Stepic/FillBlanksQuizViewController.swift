@@ -14,6 +14,9 @@ class FillBlanksQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
 
+    var dataset: FillBlanksDataset?
+    var reply: FillBlanksReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +52,7 @@ class FillBlanksQuizViewController: QuizViewController {
     */
 
     func getAnswerForComponent(atIndex index: Int) -> String? {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return nil
         }
 
@@ -60,8 +63,8 @@ class FillBlanksQuizViewController: QuizViewController {
         return answerForComponent[index] ?? ""
     }
 
-    override func getReply() -> Reply {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+    override func getReply() -> Reply? {
+        guard let dataset = dataset else {
             return FillBlanksReply(blanks: [])
         }
 
@@ -96,7 +99,7 @@ class FillBlanksQuizViewController: QuizViewController {
     }
 
     func heightForComponentRow(index: Int) -> CGFloat {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return 0
         }
 
@@ -120,18 +123,26 @@ class FillBlanksQuizViewController: QuizViewController {
 
     var answerForComponent: [Int: String] = [:]
 
-    override func updateQuizAfterAttemptUpdate() {
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? FillBlanksDataset else {
+            return
+        }
+
+        self.dataset = dataset
+
         self.tableView.isUserInteractionEnabled = true
         answerForComponent = [:]
         self.tableView.reloadData()
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool) {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? FillBlanksReply else {
             return
         }
 
-        guard let reply = submission?.reply as? FillBlanksReply else {
+        self.reply = reply
+
+        guard let dataset = dataset else {
             return
         }
 
@@ -161,7 +172,7 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("cell for row at indexPath \(indexPath.row)")
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return UITableViewCell()
         }
 
@@ -210,15 +221,11 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if attempt != nil {
-            return 1
-        } else {
-            return 0
-        }
+        return dataset != nil ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return 0
         }
 
