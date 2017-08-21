@@ -162,7 +162,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
             NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt)
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities)
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }

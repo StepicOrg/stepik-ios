@@ -30,8 +30,8 @@ class LessonPresenter {
     fileprivate var unitId: Int?
     fileprivate var context: StepsControllerPresentationContext = .unit
 
-    var stepsAPI = ApiDataDownloader.steps
-    var lessonsAPI = ApiDataDownloader.lessons
+    var stepsAPI: StepsAPI
+    var lessonsAPI: LessonsAPI
 
     var shouldNavigateToPrev: Bool = false
     var shouldNavigateToNext: Bool = false
@@ -41,7 +41,7 @@ class LessonPresenter {
 
     fileprivate var canSendViews: Bool = false
 
-    init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI = ApiDataDownloader.steps, lessonsAPI: LessonsAPI = ApiDataDownloader.lessons) {
+    init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI) {
         if let objects = objects {
             self.lesson = objects.lesson
             self.startStepId = objects.startStepId
