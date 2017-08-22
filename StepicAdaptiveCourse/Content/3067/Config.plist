@@ -7,7 +7,7 @@
 		<key>appId</key>
 		<string>1239082208</string>
 		<key>scheme</key>
-		<string>adaptive1906</string>
+		<string>adaptive3067</string>
 		<key>api</key>
 		<string>https://stepik.org/api</string>
 		<key>oauth</key>
@@ -40,7 +40,7 @@
 		<key>isAdaptive</key>
 		<true/>
 		<key>courseId</key>
-		<integer>1906</integer>
+		<integer>3067</integer>
 	</dict>
 	<key>rateApp</key>
 	<dict>
