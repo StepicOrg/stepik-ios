@@ -283,3 +283,4 @@ AdaptiveAchievementDaysStreak5 = "Hero";
 AdaptiveAchievementLevelDesc = "Reach %@ level";
 AdaptiveAchievementLevel1 = "Expert";
 AdaptiveAchievementLevel2 = "Leader";
+NotSupportedLanguage = "The language is not supported in the application yet";

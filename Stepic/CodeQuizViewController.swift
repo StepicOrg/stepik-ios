@@ -68,7 +68,7 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.reloadInputViews()
     }
 
-    var language: CodeLanguage = CodeLanguage.unsupported {
+    var language: CodeLanguage! {
         didSet {
             textStorage.language = language.highlightr
             if let limit = step.options?.limit(language: language) {
@@ -231,6 +231,7 @@ class CodeQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        display(reply: reply)
         self.submissionStatus = status
 
         if status == .correct {
@@ -239,11 +240,36 @@ class CodeQuizViewController: QuizViewController {
         } else {
             setQuizControls(enabled: true)
         }
+    }
 
-        language = reply.language
-        codeTextView.text = reply.code
-        currentCode = reply.code
+    override func display(reply: Reply) {
+        guard let reply = reply as? CodeReply else {
+            return
+        }
+
+        if let l = reply.language {
+            language = l
+            codeTextView.text = reply.code
+            currentCode = reply.code
+        } else {
+            setUnsupportedQuizView()
+        }
         hidePicker()
+    }
+
+    func setUnsupportedQuizView() {
+        let v = UIView()
+        v.backgroundColor = UIColor.groupTableViewBackground
+        let unsupportedLabel = UILabel()
+        unsupportedLabel.text = NSLocalizedString("NotSupportedLanguage", comment: "")
+        unsupportedLabel.textAlignment = .center
+        unsupportedLabel.numberOfLines = 0
+        unsupportedLabel.font = UIFont.systemFont(ofSize: 15)
+        unsupportedLabel.textColor = UIColor.gray
+        v.addSubview(unsupportedLabel)
+        unsupportedLabel.align(to: v)
+        self.containerView.addSubview(v)
+        v.align(to: self.containerView)
     }
 
     fileprivate func setQuizControls(enabled: Bool) {

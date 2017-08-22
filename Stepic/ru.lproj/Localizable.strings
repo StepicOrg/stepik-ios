@@ -284,3 +284,4 @@ AdaptiveAchievementDaysStreak5 = "Герой труда";
 AdaptiveAchievementLevelDesc = "Достигнуть %@ уровня";
 AdaptiveAchievementLevel1 = "Знаток";
 AdaptiveAchievementLevel2 = "Лидер";
+NotSupportedLanguage = "Язык не поддерживается в приложении";

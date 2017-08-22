@@ -158,8 +158,6 @@ class WebStepViewController: UIViewController {
             return
         }
 
-        htmlText = htmlText.replacingOccurrences(of: "audio controls src=\"//", with: "audio controls src=\"http://")
-
         if step.block.name == "code" {
             for (index, sample) in (step.options?.samples ?? []).enumerated() {
                 htmlText += "<h4>Sample input \(index + 1)</h4>\(sample.input)<h4>Sample output \(index + 1)</h4>\(sample.output)"

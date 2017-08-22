@@ -78,8 +78,16 @@ class ChoiceQuizViewController: QuizViewController {
 
         self.reply = reply
 
-        self.choices = reply.choices
+        display(reply: reply)
         self.tableView.isUserInteractionEnabled = false
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? ChoiceReply else {
+            return
+        }
+
+        self.choices = reply.choices
         self.tableView.reloadData()
     }
 

@@ -15,9 +15,9 @@ class QuizPresenter {
     weak var view: QuizView?
 
     var step: Step
-    var submissionsAPI: SubmissionsAPI = ApiDataDownloader.submissions
-    var attemptsAPI: AttemptsAPI = ApiDataDownloader.attempts
-    var userActivitiesAPI: UserActivitiesAPI = ApiDataDownloader.userActivities
+    var submissionsAPI: SubmissionsAPI
+    var attemptsAPI: AttemptsAPI
+    var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
 
     var state: QuizState = .nothing {
@@ -33,7 +33,7 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI = ApiDataDownloader.submissions, attemptsAPI: AttemptsAPI = ApiDataDownloader.attempts, userActivitiesAPI: UserActivitiesAPI = ApiDataDownloader.userActivities) {
+    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
@@ -58,10 +58,15 @@ class QuizPresenter {
             }
 
             guard let submission = submission else {
-                self.state = .attempt
-                self.view?.update(limit: submissionLimit)
-                view?.display(dataset: dataset)
-                return
+                switch self.state {
+                case .attempt:
+                    return
+                default:
+                    self.state = .attempt
+                    self.view?.update(limit: submissionLimit)
+                    view?.display(dataset: dataset)
+                    return
+                }
             }
 
             switch (submission.status ?? "evaluation") {
@@ -105,7 +110,9 @@ class QuizPresenter {
 
     var attempt: Attempt? {
         didSet {
-            guard let dataset = attempt?.dataset else {
+            guard let attempt = attempt,
+                let dataset = attempt.dataset,
+                let id = attempt.id else {
                 print("Attempt should never be nil")
                 return
             }
@@ -113,6 +120,9 @@ class QuizPresenter {
             self.state = .attempt
             self.view?.update(limit: submissionLimit)
             view?.display(dataset: dataset)
+            if let cachedReply = ReplyCache.shared.getReply(forStepId: step.id, attemptId: id) {
+                view?.display(reply: cachedReply)
+            }
             checkSubmissionRestrictions()
         }
     }
@@ -443,6 +453,17 @@ class QuizPresenter {
     func peerReviewPressed() {
         view?.showPeerReview(urlString: stepUrl)
     }
+
+    func onDisappear() {
+        switch state {
+        case .attempt:
+            if let attemptId = attempt?.id {
+                ReplyCache.shared.set(reply: dataSource?.getReply(), forStepId: step.id, attemptId: attemptId)
+            }
+        default:
+            break
+        }
+    }
 }
 
 struct SubmissionLimitation {
@@ -475,6 +496,7 @@ protocol QuizView: class {
     //Quiz content
     func display(dataset: Dataset)
     func display(reply: Reply, hint: String?, status: SubmissionStatus)
+    func display(reply: Reply)
     func set(state: QuizState)
     func update(limit: SubmissionLimitation?)
     func showError(visible: Bool)
