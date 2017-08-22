@@ -1283,16 +1283,13 @@
 		2C1B62491F4C4AEF00236804 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C1B624A1F4C4AEF00236804 /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		2C1B624B1F4C4AEF00236804 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
-		2C1B624F1F4C4AEF00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F61F4C391900AC9301 /* icon.png */; };
 		2C1B62501F4C4AEF00236804 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C1B62511F4C4AEF00236804 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		2C1B62521F4C4AEF00236804 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		2C1B62531F4C4AEF00236804 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		2C1B62541F4C4AEF00236804 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
-		2C1B62551F4C4AEF00236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F31F4C391900AC9301 /* Auth.plist */; };
 		2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
-		2C1B62581F4C4AEF00236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
 		2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
 		2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B625B1F4C4AEF00236804 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7A81EB90555001E3E42 /* overlay_hard.png */; };
@@ -1304,9 +1301,7 @@
 		2C1B62611F4C4AEF00236804 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
-		2C1B62641F4C4AEF00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654781F4B39A500D51654 /* Icons.xcassets */; };
 		2C1B62651F4C4AEF00236804 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
-		2C1B62661F4C4AEF00236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F21F4C391900AC9301 /* AdaptiveInfo.plist */; };
 		2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		2C1B62681F4C4AEF00236804 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
 		2C1B62691F4C4AEF00236804 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
@@ -1315,47 +1310,35 @@
 		2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
-		2C1B626F1F4C4AEF00236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C86547A1F4B39A500D51654 /* ru.lproj */; };
 		2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
-		2C1B62711F4C4AEF00236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
 		2C1B62721F4C4AEF00236804 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B62741F4C4AEF00236804 /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
-		2C1B62761F4C4AEF00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B62781F4C4AEF00236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654771F4B39A500D51654 /* Tokens.plist */; };
-		2C1B62791F4C4AEF00236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F81F4C391900AC9301 /* ru.lproj */; };
 		2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B627B1F4C4AEF00236804 /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
-		2C1B627C1F4C4AEF00236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654731F4B39A500D51654 /* AdaptiveInfo.plist */; };
 		2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		2C1B62801F4C4AEF00236804 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		2C1B62811F4C4AEF00236804 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		2C1B62821F4C4AEF00236804 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
-		2C1B62831F4C4AEF00236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
 		2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
-		2C1B62851F4C4AEF00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		2C1B62871F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
-		2C1B62881F4C4AEF00236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F41F4C391900AC9301 /* en.lproj */; };
 		2C1B62891F4C4AEF00236804 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		2C1B628A1F4C4AEF00236804 /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
 		2C1B628B1F4C4AEF00236804 /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
 		2C1B628C1F4C4AEF00236804 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
 		2C1B628D1F4C4AEF00236804 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
-		2C1B628E1F4C4AEF00236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C1B628F1F4C4AEF00236804 /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
 		2C1B62901F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
 		2C1B62911F4C4AEF00236804 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		2C1B62921F4C4AEF00236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654791F4B39A500D51654 /* en.lproj */; };
 		2C1B62931F4C4AEF00236804 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		2C1B62941F4C4AEF00236804 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2C1B62951F4C4AEF00236804 /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		2C1B62961F4C4AEF00236804 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
-		2C1B62971F4C4AEF00236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
 		2C1B62981F4C4AEF00236804 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		2C1B62991F4C4AEF00236804 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
@@ -1363,7 +1346,6 @@
 		2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C1B629D1F4C4AEF00236804 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		2C1B629E1F4C4AEF00236804 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
-		2C1B629F1F4C4AEF00236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F11F4C391900AC9301 /* Config.plist */; };
 		2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -1375,7 +1357,6 @@
 		2C1B62C61F4C4B6800236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B81F4C4B4300236804 /* en.lproj */; };
 		2C1B62C71F4C4B6C00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B71F4C4B4300236804 /* icon.png */; };
 		2C1B62C81F4C516D00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B61F4C4B4300236804 /* Icons.xcassets */; };
-		2C1B62C91F4C517100236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62BA1F4C4B4300236804 /* AdaptiveInfo.plist */; };
 		2C1B62CA1F4C517500236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B51F4C4B4300236804 /* Config.plist */; };
 		2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B41F4C4B4300236804 /* Tokens.plist */; };
 		2C1B62CC1F4C517D00236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B31F4C4B4300236804 /* GoogleService-Info.plist */; };
@@ -1776,16 +1757,13 @@
 		2C1B645A1F4C590700236804 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C1B645B1F4C590700236804 /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
 		2C1B645C1F4C590700236804 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
-		2C1B64601F4C590700236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F61F4C391900AC9301 /* icon.png */; };
 		2C1B64611F4C590700236804 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1081F160650006B69B3 /* step3.html */; };
 		2C1B64621F4C590700236804 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		2C1B64631F4C590700236804 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		2C1B64641F4C590700236804 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		2C1B64651F4C590700236804 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
-		2C1B64661F4C590700236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F31F4C391900AC9301 /* Auth.plist */; };
 		2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B251E9EC10A00714173 /* LoadingPaginationView.xib */; };
 		2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B201E9E645000714173 /* CertificateTableViewCell.xib */; };
-		2C1B64691F4C590700236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F91F4C391900AC9301 /* Tokens.plist */; };
 		2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */; };
 		2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F4761D1E82C11C0018E82C /* StreaksView.xib */; };
 		2C1B646C1F4C590700236804 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 860DB7A81EB90555001E3E42 /* overlay_hard.png */; };
@@ -1797,83 +1775,58 @@
 		2C1B64721F4C590700236804 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
-		2C1B64751F4C590700236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654781F4B39A500D51654 /* Icons.xcassets */; };
 		2C1B64761F4C590700236804 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
-		2C1B64771F4C590700236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F21F4C391900AC9301 /* AdaptiveInfo.plist */; };
 		2C1B64781F4C590700236804 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		2C1B64791F4C590700236804 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
 		2C1B647A1F4C590700236804 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
 		2C1B647B1F4C590700236804 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08263D6F1DE5F230002E5B7F /* PickerViewController.xib */; };
 		2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */; };
 		2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
-		2C1B647E1F4C590700236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62BA1F4C4B4300236804 /* AdaptiveInfo.plist */; };
 		2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
-		2C1B64811F4C590700236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C86547A1F4B39A500D51654 /* ru.lproj */; };
-		2C1B64821F4C590700236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B41F4C4B4300236804 /* Tokens.plist */; };
 		2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
-		2C1B64841F4C590700236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
 		2C1B64851F4C590700236804 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B64871F4C590700236804 /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
-		2C1B64891F4C590700236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B648B1F4C590700236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654771F4B39A500D51654 /* Tokens.plist */; };
-		2C1B648C1F4C590700236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F81F4C391900AC9301 /* ru.lproj */; };
 		2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B648E1F4C590700236804 /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
-		2C1B648F1F4C590700236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654731F4B39A500D51654 /* AdaptiveInfo.plist */; };
 		2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		2C1B64941F4C590700236804 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
-		2C1B64951F4C590700236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B51F4C4B4300236804 /* Config.plist */; };
 		2C1B64961F4C590700236804 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
-		2C1B64971F4C590700236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
 		2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
-		2C1B64991F4C590700236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
 		2C1B649A1F4C590700236804 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		2C1B649B1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
-		2C1B649C1F4C590700236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B91F4C4B4300236804 /* ru.lproj */; };
-		2C1B649D1F4C590700236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F41F4C391900AC9301 /* en.lproj */; };
 		2C1B649E1F4C590700236804 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		2C1B649F1F4C590700236804 /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
 		2C1B64A01F4C590700236804 /* CodeQuizToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */; };
 		2C1B64A11F4C590700236804 /* FillBlanksTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA71E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib */; };
 		2C1B64A21F4C590700236804 /* FillBlanksInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AEA01E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib */; };
-		2C1B64A31F4C590700236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B21F4C4B4300236804 /* Auth.plist */; };
-		2C1B64A41F4C590700236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C1B64A51F4C590700236804 /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
 		2C1B64A61F4C590700236804 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
 		2C1B64A71F4C590700236804 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		2C1B64A81F4C590700236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654791F4B39A500D51654 /* en.lproj */; };
 		2C1B64A91F4C590700236804 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		2C1B64AA1F4C590700236804 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2C1B64AB1F4C590700236804 /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		2C1B64AC1F4C590700236804 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
-		2C1B64AD1F4C590700236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
 		2C1B64AE1F4C590700236804 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		2C1B64AF1F4C590700236804 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C1B64B11F4C590700236804 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
-		2C1B64B21F4C590700236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B71F4C4B4300236804 /* icon.png */; };
 		2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
 		2C1B64B41F4C590700236804 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
 		2C1B64B51F4C590700236804 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
-		2C1B64B61F4C590700236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F11F4C391900AC9301 /* Config.plist */; };
 		2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
-		2C1B64BA1F4C590700236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B31F4C4B4300236804 /* GoogleService-Info.plist */; };
-		2C1B64BB1F4C590700236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B61F4C4B4300236804 /* Icons.xcassets */; };
 		2C1B64BC1F4C590700236804 /* AdaptiveAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */; };
 		2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		2C1B64BE1F4C590700236804 /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
-		2C1B64BF1F4C590700236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B62B81F4C4B4300236804 /* en.lproj */; };
 		2C1B64C01F4C590700236804 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
-		2C1B64D91F4C595F00236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D01F4C595F00236804 /* en.lproj */; };
 		2C1B64DD1F4C596500236804 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CB1F4C595F00236804 /* Auth.plist */; };
 		2C1B64DE1F4C596500236804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CC1F4C595F00236804 /* GoogleService-Info.plist */; };
 		2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CD1F4C595F00236804 /* Tokens.plist */; };
@@ -1881,7 +1834,6 @@
 		2C1B64E11F4C597700236804 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CF1F4C595F00236804 /* ru.lproj */; };
 		2C1B64E21F4C597700236804 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D01F4C595F00236804 /* en.lproj */; };
 		2C1B64E31F4C597F00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D31F4C595F00236804 /* icon.png */; };
-		2C1B64E41F4C598300236804 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D11F4C595F00236804 /* AdaptiveInfo.plist */; };
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
 		2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
@@ -1909,7 +1861,6 @@
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
-		2C8652611F4B2F7D00D51654 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525B1F4B2F7D00D51654 /* AdaptiveInfo.plist */; };
 		2C8652621F4B2F7D00D51654 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525C1F4B2F7D00D51654 /* Auth.plist */; };
 		2C8652631F4B2F7D00D51654 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525D1F4B2F7D00D51654 /* icon.png */; };
 		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
@@ -2381,7 +2332,6 @@
 		2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
 		2C86544B1F4B33DE00D51654 /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
 		2C86544C1F4B33DE00D51654 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
-		2C8654861F4B3A4C00D51654 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654731F4B39A500D51654 /* AdaptiveInfo.plist */; };
 		2C8654871F4B3A5000D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
 		2C8654881F4B3A5200D51654 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
 		2C8654891F4B3A5400D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
@@ -2804,7 +2754,6 @@
 		2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
-		2C89AAF51F4C289900227C3B /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654781F4B39A500D51654 /* Icons.xcassets */; };
 		2C89AAF61F4C289900227C3B /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C89AAF71F4C289900227C3B /* MathJax in Resources */ = {isa = PBXBuildFile; fileRef = 08E542001C6A76E100DEC38E /* MathJax */; };
 		2C89AAF81F4C289900227C3B /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
@@ -2815,26 +2764,20 @@
 		2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C89AAFE1F4C289900227C3B /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C89AAFF1F4C289900227C3B /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
-		2C89AB001F4C289900227C3B /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C86547A1F4B39A500D51654 /* ru.lproj */; };
 		2C89AB011F4C289900227C3B /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
-		2C89AB021F4C289900227C3B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
 		2C89AB031F4C289900227C3B /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C89AB051F4C289900227C3B /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
-		2C89AB071F4C289900227C3B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C89AB091F4C289900227C3B /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654771F4B39A500D51654 /* Tokens.plist */; };
 		2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C89AB0B1F4C289900227C3B /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
-		2C89AB0C1F4C289900227C3B /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654731F4B39A500D51654 /* AdaptiveInfo.plist */; };
 		2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		2C89AB101F4C289900227C3B /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		2C89AB111F4C289900227C3B /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		2C89AB121F4C289900227C3B /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
-		2C89AB131F4C289900227C3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
 		2C89AB141F4C289900227C3B /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
 		2C89AB151F4C289900227C3B /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		2C89AB161F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
@@ -2846,12 +2789,10 @@
 		2C89AB1C1F4C289900227C3B /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
 		2C89AB1D1F4C289900227C3B /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
 		2C89AB1E1F4C289900227C3B /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		2C89AB1F1F4C289900227C3B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654791F4B39A500D51654 /* en.lproj */; };
 		2C89AB201F4C289900227C3B /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		2C89AB211F4C289900227C3B /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2C89AB221F4C289900227C3B /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		2C89AB231F4C289900227C3B /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
-		2C89AB241F4C289900227C3B /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
 		2C89AB251F4C289900227C3B /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
@@ -2869,7 +2810,6 @@
 		2C89AB3C1F4C28EE00227C3B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9411F4C285B00227C3B /* en.lproj */; };
 		2C89AB3D1F4C28F200227C3B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9431F4C285B00227C3B /* icon.png */; };
 		2C89AB3E1F4C28F400227C3B /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9451F4C285B00227C3B /* ru.lproj */; };
-		2C89AB3F1F4C28F900227C3B /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A93E1F4C285B00227C3B /* AdaptiveInfo.plist */; };
 		2C89AB401F4C28FB00227C3B /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A93F1F4C285B00227C3B /* Auth.plist */; };
 		2C89AB411F4C28FE00227C3B /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9401F4C285B00227C3B /* Config.plist */; };
 		2C89AB421F4C290200227C3B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C89A9421F4C285B00227C3B /* GoogleService-Info.plist */; };
@@ -3293,7 +3233,6 @@
 		2C9732A61F4C38F600AC9301 /* CodeSuggestionsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */; };
 		2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
-		2C9732A91F4C38F600AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654781F4B39A500D51654 /* Icons.xcassets */; };
 		2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
 		2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083622DB1CD1FA6700CD8915 /* StepTabView.xib */; };
 		2C9732AD1F4C38F600AC9301 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
@@ -3303,26 +3242,20 @@
 		2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080E80FD1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib */; };
 		2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640E41F30BCE60033A274 /* AchievementTableViewCell.xib */; };
 		2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* StreakAlertViewController.xib */; };
-		2C9732B41F4C38F600AC9301 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C86547A1F4B39A500D51654 /* ru.lproj */; };
 		2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
-		2C9732B61F4C38F600AC9301 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654741F4B39A500D51654 /* Config.plist */; };
 		2C9732B71F4C38F600AC9301 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C04C1051F160643006B69B3 /* step2.html */; };
 		2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C9732B91F4C38F600AC9301 /* SignInCoursesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085E9E741F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib */; };
 		2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
-		2C9732BB1F4C38F600AC9301 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C9732BD1F4C38F600AC9301 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654771F4B39A500D51654 /* Tokens.plist */; };
 		2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C9732BF1F4C38F600AC9301 /* CardOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 866DDDC51EA8076D00BAD48E /* CardOverlayView.xib */; };
-		2C9732C01F4C38F600AC9301 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654731F4B39A500D51654 /* AdaptiveInfo.plist */; };
 		2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		2C9732C51F4C38F600AC9301 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		2C9732C61F4C38F600AC9301 /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
-		2C9732C71F4C38F600AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654761F4B39A500D51654 /* GoogleService-Info.plist */; };
 		2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
 		2C9732C91F4C38F600AC9301 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		2C9732CA1F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
@@ -3334,12 +3267,10 @@
 		2C9732D01F4C38F600AC9301 /* StepReversedCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8618E3E51EA0065100FB3D0F /* StepReversedCardView.xib */; };
 		2C9732D11F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0859AE981E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib */; };
 		2C9732D21F4C38F600AC9301 /* TeacherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CA59DB1BBC00B9008DC44D /* TeacherCollectionViewCell.xib */; };
-		2C9732D31F4C38F600AC9301 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654791F4B39A500D51654 /* en.lproj */; };
 		2C9732D41F4C38F600AC9301 /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		2C9732D51F4C38F600AC9301 /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
 		2C9732D61F4C38F600AC9301 /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		2C9732D71F4C38F600AC9301 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
-		2C9732D81F4C38F600AC9301 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8654751F4B39A500D51654 /* Auth.plist */; };
 		2C9732D91F4C38F600AC9301 /* CourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */; };
 		2C9732DA1F4C38F600AC9301 /* SectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */; };
 		2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
@@ -3358,7 +3289,6 @@
 		2C9733061F4C393C00AC9301 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F61F4C391900AC9301 /* icon.png */; };
 		2C9733071F4C394000AC9301 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F81F4C391900AC9301 /* ru.lproj */; };
 		2C9733081F4C394A00AC9301 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F11F4C391900AC9301 /* Config.plist */; };
-		2C9733091F4C394A00AC9301 /* AdaptiveInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F21F4C391900AC9301 /* AdaptiveInfo.plist */; };
 		2C97330A1F4C394A00AC9301 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F31F4C391900AC9301 /* Auth.plist */; };
 		2C97330B1F4C394A00AC9301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F51F4C391900AC9301 /* GoogleService-Info.plist */; };
 		2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9732F71F4C391900AC9301 /* Icons.xcassets */; };
@@ -7121,7 +7051,6 @@
 				0859AE9B1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
-				2C1B64D91F4C595F00236804 /* en.lproj in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
@@ -7142,16 +7071,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1B624F1F4C4AEF00236804 /* icon.png in Resources */,
 				2C1B62501F4C4AEF00236804 /* step3.html in Resources */,
 				2C1B62511F4C4AEF00236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B62521F4C4AEF00236804 /* wysiwyg.css in Resources */,
 				2C1B62531F4C4AEF00236804 /* Localizable.strings in Resources */,
 				2C1B62541F4C4AEF00236804 /* arrow_left.svg in Resources */,
-				2C1B62551F4C4AEF00236804 /* Auth.plist in Resources */,
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B62571F4C4AEF00236804 /* CertificateTableViewCell.xib in Resources */,
-				2C1B62581F4C4AEF00236804 /* Tokens.plist in Resources */,
 				2C1B62591F4C4AEF00236804 /* CertificatesStoryboard.storyboard in Resources */,
 				2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */,
 				2C1B625B1F4C4AEF00236804 /* overlay_hard.png in Resources */,
@@ -7163,33 +7089,24 @@
 				2C1B62611F4C4AEF00236804 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */,
-				2C1B62641F4C4AEF00236804 /* Icons.xcassets in Resources */,
 				2C1B62651F4C4AEF00236804 /* WarningView.xib in Resources */,
-				2C1B62661F4C4AEF00236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */,
 				2C1B62681F4C4AEF00236804 /* DiscussionCountView.xib in Resources */,
 				2C1B62691F4C4AEF00236804 /* CongratulationViewController.xib in Resources */,
 				2C1B626A1F4C4AEF00236804 /* PickerViewController.xib in Resources */,
 				2C1B626B1F4C4AEF00236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
-				2C1B62C91F4C517100236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
-				2C1B626F1F4C4AEF00236804 /* ru.lproj in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
-				2C1B62711F4C4AEF00236804 /* Config.plist in Resources */,
 				2C1B62721F4C4AEF00236804 /* step2.html in Resources */,
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62741F4C4AEF00236804 /* SignInCoursesTableViewCell.xib in Resources */,
 				2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */,
-				2C1B62761F4C4AEF00236804 /* icon.png in Resources */,
 				2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B62781F4C4AEF00236804 /* Tokens.plist in Resources */,
-				2C1B62791F4C4AEF00236804 /* ru.lproj in Resources */,
 				2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B627B1F4C4AEF00236804 /* CardOverlayView.xib in Resources */,
-				2C1B627C1F4C4AEF00236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */,
 				2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */,
@@ -7197,29 +7114,23 @@
 				2C1B62811F4C4AEF00236804 /* QuizViewController.xib in Resources */,
 				2C1B62CA1F4C517500236804 /* Config.plist in Resources */,
 				2C1B62821F4C4AEF00236804 /* step5.html in Resources */,
-				2C1B62831F4C4AEF00236804 /* GoogleService-Info.plist in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
-				2C1B62851F4C4AEF00236804 /* Icons.xcassets in Resources */,
 				2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C1B62871F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C1B62C51F4C4B6400236804 /* ru.lproj in Resources */,
-				2C1B62881F4C4AEF00236804 /* en.lproj in Resources */,
 				2C1B62891F4C4AEF00236804 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C1B628A1F4C4AEF00236804 /* SortingQuizTableViewCell.xib in Resources */,
 				2C1B628B1F4C4AEF00236804 /* CodeQuizToolbarView.xib in Resources */,
 				2C1B628C1F4C4AEF00236804 /* FillBlanksTextTableViewCell.xib in Resources */,
 				2C1B628D1F4C4AEF00236804 /* FillBlanksInputTableViewCell.xib in Resources */,
 				2C1B62CD1F4C518100236804 /* Auth.plist in Resources */,
-				2C1B628E1F4C4AEF00236804 /* GoogleService-Info.plist in Resources */,
 				2C1B628F1F4C4AEF00236804 /* StepReversedCardView.xib in Resources */,
 				2C1B62901F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C1B62911F4C4AEF00236804 /* TeacherCollectionViewCell.xib in Resources */,
-				2C1B62921F4C4AEF00236804 /* en.lproj in Resources */,
 				2C1B62931F4C4AEF00236804 /* TitleTextTableViewCell.xib in Resources */,
 				2C1B62941F4C4AEF00236804 /* step4.html in Resources */,
 				2C1B62951F4C4AEF00236804 /* UserPreferences.storyboard in Resources */,
 				2C1B62961F4C4AEF00236804 /* RefreshTableViewCell.xib in Resources */,
-				2C1B62971F4C4AEF00236804 /* Auth.plist in Resources */,
 				2C1B62981F4C4AEF00236804 /* CourseTableViewCell.xib in Resources */,
 				2C1B62991F4C4AEF00236804 /* SectionTableViewCell.xib in Resources */,
 				2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */,
@@ -7228,7 +7139,6 @@
 				2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */,
 				2C1B629D1F4C4AEF00236804 /* Auth.storyboard in Resources */,
 				2C1B629E1F4C4AEF00236804 /* SocialNetworkCollectionViewCell.xib in Resources */,
-				2C1B629F1F4C4AEF00236804 /* Config.plist in Resources */,
 				2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */,
 				2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -7246,16 +7156,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1B64601F4C590700236804 /* icon.png in Resources */,
 				2C1B64611F4C590700236804 /* step3.html in Resources */,
 				2C1B64621F4C590700236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B64631F4C590700236804 /* wysiwyg.css in Resources */,
 				2C1B64641F4C590700236804 /* Localizable.strings in Resources */,
 				2C1B64651F4C590700236804 /* arrow_left.svg in Resources */,
-				2C1B64661F4C590700236804 /* Auth.plist in Resources */,
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
 				2C1B64681F4C590700236804 /* CertificateTableViewCell.xib in Resources */,
-				2C1B64691F4C590700236804 /* Tokens.plist in Resources */,
 				2C1B646A1F4C590700236804 /* CertificatesStoryboard.storyboard in Resources */,
 				2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */,
 				2C1B646C1F4C590700236804 /* overlay_hard.png in Resources */,
@@ -7267,90 +7174,65 @@
 				2C1B64721F4C590700236804 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */,
-				2C1B64751F4C590700236804 /* Icons.xcassets in Resources */,
 				2C1B64761F4C590700236804 /* WarningView.xib in Resources */,
-				2C1B64771F4C590700236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B64781F4C590700236804 /* StepTabView.xib in Resources */,
 				2C1B64791F4C590700236804 /* DiscussionCountView.xib in Resources */,
 				2C1B647A1F4C590700236804 /* CongratulationViewController.xib in Resources */,
 				2C1B647B1F4C590700236804 /* PickerViewController.xib in Resources */,
 				2C1B647C1F4C590700236804 /* StepikAlertViewController.xib in Resources */,
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
-				2C1B647E1F4C590700236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
-				2C1B64811F4C590700236804 /* ru.lproj in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
-				2C1B64821F4C590700236804 /* Tokens.plist in Resources */,
 				2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */,
-				2C1B64841F4C590700236804 /* Config.plist in Resources */,
 				2C1B64851F4C590700236804 /* step2.html in Resources */,
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B64871F4C590700236804 /* SignInCoursesTableViewCell.xib in Resources */,
 				2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */,
-				2C1B64891F4C590700236804 /* icon.png in Resources */,
 				2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B648B1F4C590700236804 /* Tokens.plist in Resources */,
-				2C1B648C1F4C590700236804 /* ru.lproj in Resources */,
 				2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B648E1F4C590700236804 /* CardOverlayView.xib in Resources */,
-				2C1B648F1F4C590700236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */,
 				2C1B64E31F4C597F00236804 /* icon.png in Resources */,
 				2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */,
 				2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C1B64941F4C590700236804 /* QuizViewController.xib in Resources */,
-				2C1B64951F4C590700236804 /* Config.plist in Resources */,
 				2C1B64961F4C590700236804 /* step5.html in Resources */,
-				2C1B64971F4C590700236804 /* GoogleService-Info.plist in Resources */,
 				2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */,
-				2C1B64991F4C590700236804 /* Icons.xcassets in Resources */,
 				2C1B649A1F4C590700236804 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C1B649B1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
-				2C1B649C1F4C590700236804 /* ru.lproj in Resources */,
-				2C1B649D1F4C590700236804 /* en.lproj in Resources */,
 				2C1B649E1F4C590700236804 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C1B649F1F4C590700236804 /* SortingQuizTableViewCell.xib in Resources */,
 				2C1B64A01F4C590700236804 /* CodeQuizToolbarView.xib in Resources */,
 				2C1B64A11F4C590700236804 /* FillBlanksTextTableViewCell.xib in Resources */,
 				2C1B64A21F4C590700236804 /* FillBlanksInputTableViewCell.xib in Resources */,
-				2C1B64A31F4C590700236804 /* Auth.plist in Resources */,
-				2C1B64A41F4C590700236804 /* GoogleService-Info.plist in Resources */,
-				2C1B64E41F4C598300236804 /* AdaptiveInfo.plist in Resources */,
 				2C1B64A51F4C590700236804 /* StepReversedCardView.xib in Resources */,
 				2C1B64A61F4C590700236804 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C1B64A71F4C590700236804 /* TeacherCollectionViewCell.xib in Resources */,
-				2C1B64A81F4C590700236804 /* en.lproj in Resources */,
 				2C1B64A91F4C590700236804 /* TitleTextTableViewCell.xib in Resources */,
 				2C1B64DE1F4C596500236804 /* GoogleService-Info.plist in Resources */,
 				2C1B64AA1F4C590700236804 /* step4.html in Resources */,
 				2C1B64E21F4C597700236804 /* en.lproj in Resources */,
 				2C1B64AB1F4C590700236804 /* UserPreferences.storyboard in Resources */,
 				2C1B64AC1F4C590700236804 /* RefreshTableViewCell.xib in Resources */,
-				2C1B64AD1F4C590700236804 /* Auth.plist in Resources */,
 				2C1B64AE1F4C590700236804 /* CourseTableViewCell.xib in Resources */,
 				2C1B64AF1F4C590700236804 /* SectionTableViewCell.xib in Resources */,
 				2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B64B11F4C590700236804 /* Images.xcassets in Resources */,
-				2C1B64B21F4C590700236804 /* icon.png in Resources */,
 				2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */,
 				2C1B64B41F4C590700236804 /* Auth.storyboard in Resources */,
 				2C1B64B51F4C590700236804 /* SocialNetworkCollectionViewCell.xib in Resources */,
-				2C1B64B61F4C590700236804 /* Config.plist in Resources */,
 				2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
 				2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C1B64E11F4C597700236804 /* ru.lproj in Resources */,
-				2C1B64BA1F4C590700236804 /* GoogleService-Info.plist in Resources */,
-				2C1B64BB1F4C590700236804 /* Icons.xcassets in Resources */,
 				2C1B64BC1F4C590700236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */,
 				2C1B64BE1F4C590700236804 /* arrow_right.svg in Resources */,
-				2C1B64BF1F4C590700236804 /* en.lproj in Resources */,
 				2C1B64C01F4C590700236804 /* loading_robot.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7400,7 +7282,6 @@
 				2C86548A1F4B3A5F00D51654 /* Tokens.plist in Resources */,
 				2C8654231F4B33DE00D51654 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C8654241F4B33DE00D51654 /* CardOverlayView.xib in Resources */,
-				2C8654861F4B3A4C00D51654 /* AdaptiveInfo.plist in Resources */,
 				2C8654251F4B33DE00D51654 /* DiscussionTableViewCell.xib in Resources */,
 				2C8654261F4B33DE00D51654 /* DiscussionsViewController.xib in Resources */,
 				2C8654291F4B33DE00D51654 /* LoadMoreTableViewCell.xib in Resources */,
@@ -7466,7 +7347,6 @@
 				2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */,
 				2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */,
-				2C89AAF51F4C289900227C3B /* Icons.xcassets in Resources */,
 				2C89AAF61F4C289900227C3B /* WarningView.xib in Resources */,
 				2C89AAF71F4C289900227C3B /* MathJax in Resources */,
 				2C89AAF81F4C289900227C3B /* StepTabView.xib in Resources */,
@@ -7477,29 +7357,22 @@
 				2C89AAFD1F4C289900227C3B /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C89AAFE1F4C289900227C3B /* AchievementTableViewCell.xib in Resources */,
 				2C89AAFF1F4C289900227C3B /* StreakAlertViewController.xib in Resources */,
-				2C89AB3F1F4C28F900227C3B /* AdaptiveInfo.plist in Resources */,
-				2C89AB001F4C289900227C3B /* ru.lproj in Resources */,
 				2C89AB011F4C289900227C3B /* StepicVideoPlayerViewController.xib in Resources */,
-				2C89AB021F4C289900227C3B /* Config.plist in Resources */,
 				2C89AB031F4C289900227C3B /* step2.html in Resources */,
 				2C89AB401F4C28FB00227C3B /* Auth.plist in Resources */,
 				2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */,
 				2C89AB051F4C289900227C3B /* SignInCoursesTableViewCell.xib in Resources */,
 				2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */,
-				2C89AB071F4C289900227C3B /* icon.png in Resources */,
 				2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */,
-				2C89AB091F4C289900227C3B /* Tokens.plist in Resources */,
 				2C89AB3E1F4C28F400227C3B /* ru.lproj in Resources */,
 				2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */,
 				2C89AB0B1F4C289900227C3B /* CardOverlayView.xib in Resources */,
-				2C89AB0C1F4C289900227C3B /* AdaptiveInfo.plist in Resources */,
 				2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */,
 				2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */,
 				2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */,
 				2C89AB101F4C289900227C3B /* DiscussionsStoryboard.storyboard in Resources */,
 				2C89AB111F4C289900227C3B /* QuizViewController.xib in Resources */,
 				2C89AB121F4C289900227C3B /* step5.html in Resources */,
-				2C89AB131F4C289900227C3B /* GoogleService-Info.plist in Resources */,
 				2C89AB141F4C289900227C3B /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C89AB431F4C290500227C3B /* Icons.xcassets in Resources */,
 				2C89AB411F4C28FE00227C3B /* Config.plist in Resources */,
@@ -7515,12 +7388,10 @@
 				2C89AB1C1F4C289900227C3B /* StepReversedCardView.xib in Resources */,
 				2C89AB1D1F4C289900227C3B /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C89AB1E1F4C289900227C3B /* TeacherCollectionViewCell.xib in Resources */,
-				2C89AB1F1F4C289900227C3B /* en.lproj in Resources */,
 				2C89AB201F4C289900227C3B /* TitleTextTableViewCell.xib in Resources */,
 				2C89AB211F4C289900227C3B /* step4.html in Resources */,
 				2C89AB221F4C289900227C3B /* UserPreferences.storyboard in Resources */,
 				2C89AB231F4C289900227C3B /* RefreshTableViewCell.xib in Resources */,
-				2C89AB241F4C289900227C3B /* Auth.plist in Resources */,
 				2C89AB251F4C289900227C3B /* CourseTableViewCell.xib in Resources */,
 				2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */,
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
@@ -7563,9 +7434,7 @@
 				2C9732A61F4C38F600AC9301 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */,
 				2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */,
-				2C9732A91F4C38F600AC9301 /* Icons.xcassets in Resources */,
 				2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */,
-				2C9733091F4C394A00AC9301 /* AdaptiveInfo.plist in Resources */,
 				2C9732AC1F4C38F600AC9301 /* StepTabView.xib in Resources */,
 				2C9732AD1F4C38F600AC9301 /* DiscussionCountView.xib in Resources */,
 				2C9732AE1F4C38F600AC9301 /* CongratulationViewController.xib in Resources */,
@@ -7574,27 +7443,21 @@
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
 				2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */,
-				2C9732B41F4C38F600AC9301 /* ru.lproj in Resources */,
 				2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */,
-				2C9732B61F4C38F600AC9301 /* Config.plist in Resources */,
 				2C9732B71F4C38F600AC9301 /* step2.html in Resources */,
 				2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */,
 				2C9732B91F4C38F600AC9301 /* SignInCoursesTableViewCell.xib in Resources */,
 				2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */,
-				2C9732BB1F4C38F600AC9301 /* icon.png in Resources */,
 				2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */,
-				2C9732BD1F4C38F600AC9301 /* Tokens.plist in Resources */,
 				2C9733071F4C394000AC9301 /* ru.lproj in Resources */,
 				2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C9732BF1F4C38F600AC9301 /* CardOverlayView.xib in Resources */,
-				2C9732C01F4C38F600AC9301 /* AdaptiveInfo.plist in Resources */,
 				2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
 				2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C9732C51F4C38F600AC9301 /* QuizViewController.xib in Resources */,
 				2C9732C61F4C38F600AC9301 /* step5.html in Resources */,
-				2C9732C71F4C38F600AC9301 /* GoogleService-Info.plist in Resources */,
 				2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */,
 				2C9732C91F4C38F600AC9301 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -7609,12 +7472,10 @@
 				2C9732D01F4C38F600AC9301 /* StepReversedCardView.xib in Resources */,
 				2C9732D11F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C9732D21F4C38F600AC9301 /* TeacherCollectionViewCell.xib in Resources */,
-				2C9732D31F4C38F600AC9301 /* en.lproj in Resources */,
 				2C9732D41F4C38F600AC9301 /* TitleTextTableViewCell.xib in Resources */,
 				2C9732D51F4C38F600AC9301 /* step4.html in Resources */,
 				2C9732D61F4C38F600AC9301 /* UserPreferences.storyboard in Resources */,
 				2C9732D71F4C38F600AC9301 /* RefreshTableViewCell.xib in Resources */,
-				2C9732D81F4C38F600AC9301 /* Auth.plist in Resources */,
 				2C9732D91F4C38F600AC9301 /* CourseTableViewCell.xib in Resources */,
 				2C9732DA1F4C38F600AC9301 /* SectionTableViewCell.xib in Resources */,
 				2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */,
@@ -7682,7 +7543,6 @@
 				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
 				86AE947D1E84511A00F67691 /* DiscussionsStoryboard.storyboard in Resources */,
-				2C8652611F4B2F7D00D51654 /* AdaptiveInfo.plist in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
