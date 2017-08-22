@@ -102,3 +102,10 @@ target 'Adaptive 3149' do
     all_pods
     adaptive_pods
 end
+
+target 'Adaptive 3124' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
