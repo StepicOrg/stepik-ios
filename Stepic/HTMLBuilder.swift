@@ -89,6 +89,9 @@ class HTMLBuilder: NSObject {
     }
 
     func addStepikURLWhereNeeded(body: String) -> String {
+        var body = body
+        body = fixProtocolRelativeURLs(html: body)
+
         var links = HTMLParsingUtil.getAllLinksWithText(body).map({return $0.link})
         links += HTMLParsingUtil.getImageSrcLinks(body)
         var linkMap = [String: String]()
@@ -105,5 +108,9 @@ class HTMLBuilder: NSObject {
         }
 
         return newBody
+    }
+
+    func fixProtocolRelativeURLs(html: String) -> String {
+        return html.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
     }
 }
