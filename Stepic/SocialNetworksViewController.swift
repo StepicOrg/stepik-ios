@@ -69,8 +69,8 @@ class SocialNetworksViewController: UIViewController {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": "\(getSocialNetworkByIndexPath(indexPath).name!)" as NSObject])
             let socialNetwork = getSocialNetworkByIndexPath(indexPath)
             if let provider = socialNetwork.socialSDKProvider {
-                if provider is VKSocialSDKProvider {
-                    (provider as! VKSocialSDKProvider).delegate = self
+                if let provider = provider as? VKSocialSDKProvider {
+                    provider.delegate = self
                 }
 
                 provider.getAccessInfo(success: {
