@@ -29,17 +29,7 @@
 			<string>vkAuth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>vk5995451</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>FB</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb171127739724012</string>
+				<string>vk6157821</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,7 +39,7 @@
 			<string>stepikAuth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>adaptive1838</string>
+				<string>adaptive3149</string>
 			</array>
 		</dict>
 	</array>
@@ -72,7 +62,7 @@
 	<key>FacebookAppID</key>
 	<string>171127739724012</string>
 	<key>FacebookDisplayName</key>
-	<string>GMAT DS</string>
+	<string>English Adj</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>vkauthorize</string>

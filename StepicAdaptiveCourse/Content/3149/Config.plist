@@ -7,7 +7,7 @@
 		<key>appId</key>
 		<string>1239082208</string>
 		<key>scheme</key>
-		<string>adaptive1906</string>
+		<string>adaptive3149</string>
 		<key>api</key>
 		<string>https://stepik.org/api</string>
 		<key>oauth</key>
@@ -52,7 +52,7 @@
 	<key>socialProviders</key>
 	<dict>
 		<key>vk</key>
-		<string>5995451</string>
+		<string>6157821</string>
 		<key>facebook</key>
 		<string>171127739724012</string>
 	</dict>
