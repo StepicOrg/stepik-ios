@@ -162,9 +162,14 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         NotificationCenter.default.addObserver(self, selector: #selector(QuizViewController.becameActive), name:
             NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt)
+        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities)
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter?.onDisappear()
     }
 
     deinit {
@@ -273,6 +278,9 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     func display(reply: Reply, withStatus status: SubmissionStatus) {
     }
 
+    func display(reply: Reply) {
+    }
+
     func showPeerReviewWarning() {
         peerReviewHeight.constant = 40
         peerReviewButton.isHidden = false
@@ -316,8 +324,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func update(limit: SubmissionLimitation?) {
+        updateSendButtonWithoutLimit()
         guard let limit = limit else {
-            updateSendButtonWithoutLimit()
             return
         }
 
