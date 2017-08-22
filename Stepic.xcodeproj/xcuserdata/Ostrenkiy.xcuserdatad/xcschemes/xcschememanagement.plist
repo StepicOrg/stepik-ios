@@ -7,7 +7,32 @@
 		<key>Adaptive 1838.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>45</integer>
+			<integer>1</integer>
+		</dict>
+		<key>Adaptive 1906.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>79</integer>
+		</dict>
+		<key>Adaptive 3067.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>80</integer>
+		</dict>
+		<key>Adaptive 3124.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>83</integer>
+		</dict>
+		<key>Adaptive 3149.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>82</integer>
+		</dict>
+		<key>Adaptive 3150.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>81</integer>
 		</dict>
 		<key>SberbankUniversity.xcscheme</key>
 		<dict>
@@ -17,7 +42,7 @@
 		<key>Stepic.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>33</integer>
+			<integer>0</integer>
 		</dict>
 		<key>StepicTests.xcscheme</key>
 		<dict>
@@ -53,6 +78,31 @@
 			<true/>
 		</dict>
 		<key>08DE94101B8C58AC00D278AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C1B60BD1F4C4AEF00236804</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C1B62CE1F4C590700236804</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C86526B1F4B33DE00D51654</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C89A9511F4C289900227C3B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C9731051F4C38F600AC9301</key>
 		<dict>
 			<key>primary</key>
 			<true/>

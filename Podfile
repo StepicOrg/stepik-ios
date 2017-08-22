@@ -51,6 +51,13 @@ def testing_pods
     pod 'Nimble'
 end
 
+def adaptive_pods
+    pod 'Koloda', '4.0'
+    pod 'SDWebImage/GIF'
+    pod 'Charts', '3.0.2'
+    pod 'NotificationBannerSwift', '1.4.1' 
+end
+
 target 'Stepic' do
     platform :ios, '8.0'
     all_pods
@@ -69,9 +76,36 @@ end
 target 'Adaptive 1838' do
     platform :ios, '9.0'
     all_pods
-    
-    pod 'Koloda', '4.0'
-    pod 'SDWebImage/GIF'
-    pod 'Charts', '3.0.2'
-    pod 'NotificationBannerSwift', '1.4.1'
+    adaptive_pods    
 end
+
+target 'Adaptive 1906' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 3067' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 3150' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 3149' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
+target 'Adaptive 3124' do
+    platform :ios, '9.0'
+    all_pods
+    adaptive_pods
+end
+
