@@ -12,6 +12,7 @@ class ProgressTableViewCell: UITableViewCell {
 
     static var reuseId = "progressCell"
 
+    @IBOutlet weak var bracketLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var firstDateLabel: UILabel!
     @IBOutlet weak var secondDateLabel: UILabel!
@@ -22,12 +23,17 @@ class ProgressTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         cellContentView.layer.cornerRadius = 10
+        colorize()
     }
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
         drawShadow()
+    }
+
+    fileprivate func colorize() {
+        bracketLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
     }
 
     func updateInfo(expCount: Int, begin: Date, end: Date, isRecord: Bool = false) {
