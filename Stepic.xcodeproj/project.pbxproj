@@ -1311,7 +1311,6 @@
 		86B457041E9F98BC00D31850 /* RecommendationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86795EF61E85325000A985C2 /* RecommendationsAPI.swift */; };
 		86B56EAD1EC38F7500CFE4A3 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
 		86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087D96BA1EBB7F5500059408 /* Tokens.swift */; };
-		86B56EAF1EC38F9600CFE4A3 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth.plist */; };
 		86CAFD411EBBB6DF00AF6E2A /* AdaptiveStepDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CAFD3F1EBBB66F00AF6E2A /* AdaptiveStepDelegate.swift */; };
 		86EF29371E83CEA900F8D214 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293A1E83CEA900F8D214 /* AdaptiveMain.storyboard */; };
@@ -4292,7 +4291,6 @@
 				2C04C1061F160650006B69B3 /* step3.html in Resources */,
 				08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */,
 				08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */,
-				86B56EAF1EC38F9600CFE4A3 /* Auth.plist in Resources */,
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
 				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
