@@ -324,8 +324,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func update(limit: SubmissionLimitation?) {
+        updateSendButtonWithoutLimit()
         guard let limit = limit else {
-            updateSendButtonWithoutLimit()
             return
         }
 
