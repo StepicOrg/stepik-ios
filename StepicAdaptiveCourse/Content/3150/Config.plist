@@ -5,7 +5,7 @@
 	<key>url</key>
 	<dict>
 		<key>appId</key>
-		<string>1239082208</string>
+		<string>1274227392</string>
 		<key>scheme</key>
 		<string>adaptive3150</string>
 		<key>api</key>
@@ -47,7 +47,7 @@
 		<key>submissionsThreshold</key>
 		<integer>13</integer>
 		<key>appStoreLink</key>
-		<string>itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1239082208&amp;onlyLatestVersion=true&amp;pageNumber=0&amp;sortOrdering=1&amp;type=Purple+Software&amp;action=write-review</string>
+		<string>itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1274227392&amp;onlyLatestVersion=true&amp;pageNumber=0&amp;sortOrdering=1&amp;type=Purple+Software&amp;action=write-review</string>
 	</dict>
 	<key>socialProviders</key>
 	<dict>
