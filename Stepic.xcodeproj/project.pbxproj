@@ -862,6 +862,11 @@
 		08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
 		08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555681C50007800C877E8 /* ChoiceQuizViewController.swift */; };
 		08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5556B1C5267A600C877E8 /* GCDThings.swift */; };
+		08F8FEB61F4D07B5009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		08F8FEB71F4D07B5009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		08F8FEB81F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		08F8FEB91F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
+		08F8FEBA1F4D07B6009F21BA /* ReplyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E5E0D1F46379100F41426 /* ReplyCache.swift */; };
 		08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */; };
 		08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
@@ -9229,6 +9234,7 @@
 				2C1B61D71F4C4AEF00236804 /* Submission.swift in Sources */,
 				2C1B61D81F4C4AEF00236804 /* SearchQueriesPersistentManager.swift in Sources */,
 				2C1B61D91F4C4AEF00236804 /* Reply.swift in Sources */,
+				08F8FEB91F4D07B6009F21BA /* ReplyCache.swift in Sources */,
 				2C1B61DA1F4C4AEF00236804 /* ChoiceReply.swift in Sources */,
 				2C1B61DB1F4C4AEF00236804 /* TextReply.swift in Sources */,
 				2C1B61DC1F4C4AEF00236804 /* NumberReply.swift in Sources */,
@@ -9632,6 +9638,7 @@
 				2C1B63E81F4C590700236804 /* Submission.swift in Sources */,
 				2C1B63E91F4C590700236804 /* SearchQueriesPersistentManager.swift in Sources */,
 				2C1B63EA1F4C590700236804 /* Reply.swift in Sources */,
+				08F8FEBA1F4D07B6009F21BA /* ReplyCache.swift in Sources */,
 				2C1B63EB1F4C590700236804 /* ChoiceReply.swift in Sources */,
 				2C1B63EC1F4C590700236804 /* TextReply.swift in Sources */,
 				2C1B63ED1F4C590700236804 /* NumberReply.swift in Sources */,
@@ -10035,6 +10042,7 @@
 				2C8653851F4B33DE00D51654 /* Submission.swift in Sources */,
 				2C8653861F4B33DE00D51654 /* SearchQueriesPersistentManager.swift in Sources */,
 				2C8653871F4B33DE00D51654 /* Reply.swift in Sources */,
+				08F8FEB61F4D07B5009F21BA /* ReplyCache.swift in Sources */,
 				2C8653881F4B33DE00D51654 /* ChoiceReply.swift in Sources */,
 				2C8653891F4B33DE00D51654 /* TextReply.swift in Sources */,
 				2C86538A1F4B33DE00D51654 /* NumberReply.swift in Sources */,
@@ -10438,6 +10446,7 @@
 				2C89AA6B1F4C289900227C3B /* Submission.swift in Sources */,
 				2C89AA6C1F4C289900227C3B /* SearchQueriesPersistentManager.swift in Sources */,
 				2C89AA6D1F4C289900227C3B /* Reply.swift in Sources */,
+				08F8FEB71F4D07B5009F21BA /* ReplyCache.swift in Sources */,
 				2C89AA6E1F4C289900227C3B /* ChoiceReply.swift in Sources */,
 				2C89AA6F1F4C289900227C3B /* TextReply.swift in Sources */,
 				2C89AA701F4C289900227C3B /* NumberReply.swift in Sources */,
@@ -10841,6 +10850,7 @@
 				2C97321F1F4C38F600AC9301 /* Submission.swift in Sources */,
 				2C9732201F4C38F600AC9301 /* SearchQueriesPersistentManager.swift in Sources */,
 				2C9732211F4C38F600AC9301 /* Reply.swift in Sources */,
+				08F8FEB81F4D07B6009F21BA /* ReplyCache.swift in Sources */,
 				2C9732221F4C38F600AC9301 /* ChoiceReply.swift in Sources */,
 				2C9732231F4C38F600AC9301 /* TextReply.swift in Sources */,
 				2C9732241F4C38F600AC9301 /* NumberReply.swift in Sources */,
