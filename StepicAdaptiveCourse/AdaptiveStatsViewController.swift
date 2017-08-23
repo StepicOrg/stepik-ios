@@ -119,6 +119,8 @@ class AdaptiveStatsViewController: UIViewController {
         bestStreakLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
         currentLevelLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
         segmentedControl.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        loadingIndicator.color = StepicApplicationsInfo.adaptiveMainColor
+        ratingSegmentedControl.tintColor = StepicApplicationsInfo.adaptiveMainColor
         navigationItem.leftBarButtonItem?.tintColor = StepicApplicationsInfo.adaptiveMainColor
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StepicApplicationsInfo.adaptiveMainColor]
     }
