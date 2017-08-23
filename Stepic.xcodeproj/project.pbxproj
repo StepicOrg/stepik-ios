@@ -6151,6 +6151,8 @@
 		2C1649651F2A0823002C9F99 /* AdaptiveStats */ = {
 			isa = PBXGroup;
 			children = (
+				2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */,
+				2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */,
 				2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */,
 				2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */,
 			);
@@ -6253,8 +6255,6 @@
 		2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */ = {
 			isa = PBXGroup;
 			children = (
-				2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */,
-				2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */,
 				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
 				2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */,
 			);

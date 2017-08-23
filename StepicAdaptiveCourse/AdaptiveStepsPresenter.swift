@@ -59,7 +59,8 @@ class AdaptiveStepsPresenter {
     var isRecommendationLoaded = false
     var isOnboardingPassed = false
     var isContentLoaded = false
-    var isSolvedToday = false
+
+    var lastSolvedDay = 0
 
     var canSwipeCard: Bool {
         return isContentLoaded
@@ -129,7 +130,7 @@ class AdaptiveStepsPresenter {
 
     func refreshContent() {
         if !isKolodaPresented {
-            isSolvedToday = (statsManager?.getLastDays(count: 1)[0] ?? 0) > 0
+            lastSolvedDay = (statsManager?.getLastDays(count: 1)[0] ?? 0) > 0 ? statsManager?.dayByDate(Date()) ?? 0 : 0
 
             view?.updateProgress(for: rating)
 
@@ -639,9 +640,11 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
         })
 
         // Days streak achievement
-        if !isSolvedToday {
-            isSolvedToday = true
-            achievementsManager?.fireEvent(.days(value: statsManager?.currentDayStreak ?? 1))
+        if let curDay = statsManager?.dayByDate(Date()) {
+            if lastSolvedDay != curDay {
+                lastSolvedDay = curDay
+                achievementsManager?.fireEvent(.days(value: statsManager?.currentDayStreak ?? 1))
+            }
         }
 
         view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
