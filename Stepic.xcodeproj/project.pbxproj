@@ -1849,6 +1849,60 @@
 		2C315E6F1F0A947D0039E4F0 /* LessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842B1ECDE194005C0B27 /* LessonPresenter.swift */; };
 		2C315E701F0A947D0039E4F0 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0899842E1ECDE19E005C0B27 /* LessonView.swift */; };
 		2C315E711F0A947D0039E4F0 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
+		2C35C4A41F4DA3E8002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4A51F4DA3E9002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4A61F4DA3E9002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4A71F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4A81F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4A91F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */; };
+		2C35C4AA1F4DA3EF002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4AB1F4DA3F0002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4AC1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4AD1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4AE1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4AF1F4DA3F2002F3BF4 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */; };
+		2C35C4B01F4DA3FE002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B11F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B31F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B41F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B51F4DA401002F3BF4 /* LeaderboardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */; };
+		2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4B71F4DA413002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4B91F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4BA1F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4BB1F4DA417002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */; };
+		2C35C4BC1F4DA41A002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4BD1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4BE1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4BF1F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4C01F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4C11F4DA41D002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */; };
+		2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4D61F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4D71F4DA478002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4D81F4DA479002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4D91F4DA479002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4DA1F4DA47A002F3BF4 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */; };
+		2C35C4DB1F4DA47E002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4DC1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4DD1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4DE1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4DF1F4DA480002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4E01F4DA481002F3BF4 /* adjectives_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */; };
+		2C35C4E11F4DA486002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E21F4DA486002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E31F4DA487002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E41F4DA487002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E51F4DA488002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E61F4DA488002F3BF4 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */; };
+		2C35C4E71F4DA48D002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2C35C4E81F4DA48E002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2C35C4E91F4DA48E002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2C35C4EA1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2C35C4EB1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
+		2C35C4EC1F4DA48F002F3BF4 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */; };
@@ -4296,6 +4350,19 @@
 		2C1B64D31F4C595F00236804 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3124/icon.png; sourceTree = "<group>"; };
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
+		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
+		2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
+		2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
+		2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaderboardTableViewCell.xib; sourceTree = "<group>"; };
+		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
+		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
+		2C35C4CA1F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/nouns_f.plist; sourceTree = "<group>"; };
+		2C35C4CC1F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/nouns_m.plist; sourceTree = "<group>"; };
+		2C35C4D11F4DA467002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/adjectives_f.plist; sourceTree = "<group>"; };
+		2C35C4D21F4DA46A002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/adjectives_m.plist; sourceTree = "<group>"; };
+		2C35C4D31F4DA46E002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_f.plist; sourceTree = "<group>"; };
+		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C5F48D51F0F6ED800C3A398 /* AdaptiveStepPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepPresenter.swift; sourceTree = "<group>"; };
@@ -6152,6 +6219,34 @@
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
+		2C35C49C1F4DA3BD002F3BF4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2C35C49D1F4DA3CA002F3BF4 /* RatingsAPI.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		2C35C49F1F4DA3D2002F3BF4 /* LeaderboardTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C35C4A01F4DA3E1002F3BF4 /* LeaderboardTableViewCell.swift */,
+				2C35C4A11F4DA3E1002F3BF4 /* LeaderboardTableViewCell.xib */,
+			);
+			name = LeaderboardTableViewCell;
+			sourceTree = "<group>";
+		};
+		2C35C4C21F4DA43D002F3BF4 /* Leaderboard names */ = {
+			isa = PBXGroup;
+			children = (
+				2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */,
+				2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */,
+				2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */,
+				2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */,
+			);
+			name = "Leaderboard names";
+			sourceTree = "<group>";
+		};
 		2C5F48D41F0F6EB700C3A398 /* AdaptiveStep */ = {
 			isa = PBXGroup;
 			children = (
@@ -6165,6 +6260,8 @@
 		2C5F48D81F0FA01C00C3A398 /* AdaptiveSteps */ = {
 			isa = PBXGroup;
 			children = (
+				2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */,
+				2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */,
 				86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */,
 				2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */,
 			);
@@ -6365,6 +6462,7 @@
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C35C4C21F4DA43D002F3BF4 /* Leaderboard names */,
 				2CFB1C531F14C81100CD0A4C /* Onboarding content */,
 			);
 			name = "Supporting Files";
@@ -6426,6 +6524,7 @@
 		86ABC6651E9685E70012E8A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C35C49F1F4DA3D2002F3BF4 /* LeaderboardTableViewCell */,
 				2C2544071F348085004DB3D9 /* AchievementNotificationView */,
 				2CB425751F2B3BBE00D15D93 /* ProgressTableViewCell */,
 				866DDDC41EA8060400BAD48E /* CardOverlayView */,
@@ -6460,6 +6559,7 @@
 		86EF29351E83CEA900F8D214 /* Adaptive Course */ = {
 			isa = PBXGroup;
 			children = (
+				2C35C49C1F4DA3BD002F3BF4 /* API */,
 				2C8652561F4B2C2300D51654 /* Content */,
 				2CEDA35E1F336F0E005F4A5D /* Managers */,
 				2C6ABA611F1E009E005A3BCF /* Alerts */,
@@ -7088,6 +7188,7 @@
 				2C1B62501F4C4AEF00236804 /* step3.html in Resources */,
 				2C1B62511F4C4AEF00236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B62521F4C4AEF00236804 /* wysiwyg.css in Resources */,
+				2C35C4D91F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
 				2C1B62531F4C4AEF00236804 /* Localizable.strings in Resources */,
 				2C1B62541F4C4AEF00236804 /* arrow_left.svg in Resources */,
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
@@ -7096,6 +7197,7 @@
 				2C1B625A1F4C4AEF00236804 /* StreaksView.xib in Resources */,
 				2C1B625B1F4C4AEF00236804 /* overlay_hard.png in Resources */,
 				2C1B625C1F4C4AEF00236804 /* RateAppViewController.xib in Resources */,
+				2C35C4B41F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C1B625D1F4C4AEF00236804 /* overlay_simple.png in Resources */,
 				2C1B625E1F4C4AEF00236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B625F1F4C4AEF00236804 /* Main.storyboard in Resources */,
@@ -7104,6 +7206,7 @@
 				2C1B62621F4C4AEF00236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B62631F4C4AEF00236804 /* VideoDownloadView.xib in Resources */,
 				2C1B62651F4C4AEF00236804 /* WarningView.xib in Resources */,
+				2C35C4EB1F4DA48F002F3BF4 /* nouns_m.plist in Resources */,
 				2C1B62671F4C4AEF00236804 /* StepTabView.xib in Resources */,
 				2C1B62681F4C4AEF00236804 /* DiscussionCountView.xib in Resources */,
 				2C1B62691F4C4AEF00236804 /* CongratulationViewController.xib in Resources */,
@@ -7114,6 +7217,7 @@
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
+				2C35C4DE1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C1B62721F4C4AEF00236804 /* step2.html in Resources */,
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62741F4C4AEF00236804 /* SignInCoursesTableViewCell.xib in Resources */,
@@ -7149,6 +7253,7 @@
 				2C1B62991F4C4AEF00236804 /* SectionTableViewCell.xib in Resources */,
 				2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B629B1F4C4AEF00236804 /* Images.xcassets in Resources */,
+				2C35C4E61F4DA488002F3BF4 /* nouns_f.plist in Resources */,
 				2C1B62C71F4C4B6C00236804 /* icon.png in Resources */,
 				2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */,
 				2C1B629D1F4C4AEF00236804 /* Auth.storyboard in Resources */,
@@ -7173,6 +7278,7 @@
 				2C1B64611F4C590700236804 /* step3.html in Resources */,
 				2C1B64621F4C590700236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B64631F4C590700236804 /* wysiwyg.css in Resources */,
+				2C35C4DA1F4DA47A002F3BF4 /* adjectives_f.plist in Resources */,
 				2C1B64641F4C590700236804 /* Localizable.strings in Resources */,
 				2C1B64651F4C590700236804 /* arrow_left.svg in Resources */,
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
@@ -7181,6 +7287,7 @@
 				2C1B646B1F4C590700236804 /* StreaksView.xib in Resources */,
 				2C1B646C1F4C590700236804 /* overlay_hard.png in Resources */,
 				2C1B646D1F4C590700236804 /* RateAppViewController.xib in Resources */,
+				2C35C4B51F4DA401002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C1B646E1F4C590700236804 /* overlay_simple.png in Resources */,
 				2C1B646F1F4C590700236804 /* CurrentBestStreakViewController.xib in Resources */,
 				2C1B64701F4C590700236804 /* Main.storyboard in Resources */,
@@ -7189,6 +7296,7 @@
 				2C1B64731F4C590700236804 /* PlaceholderView.storyboard in Resources */,
 				2C1B64741F4C590700236804 /* VideoDownloadView.xib in Resources */,
 				2C1B64761F4C590700236804 /* WarningView.xib in Resources */,
+				2C35C4EC1F4DA48F002F3BF4 /* nouns_m.plist in Resources */,
 				2C1B64781F4C590700236804 /* StepTabView.xib in Resources */,
 				2C1B64791F4C590700236804 /* DiscussionCountView.xib in Resources */,
 				2C1B647A1F4C590700236804 /* CongratulationViewController.xib in Resources */,
@@ -7199,6 +7307,7 @@
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
+				2C35C4DF1F4DA480002F3BF4 /* adjectives_m.plist in Resources */,
 				2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C1B64851F4C590700236804 /* step2.html in Resources */,
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
@@ -7234,6 +7343,7 @@
 				2C1B64AC1F4C590700236804 /* RefreshTableViewCell.xib in Resources */,
 				2C1B64AE1F4C590700236804 /* CourseTableViewCell.xib in Resources */,
 				2C1B64AF1F4C590700236804 /* SectionTableViewCell.xib in Resources */,
+				2C35C4E51F4DA488002F3BF4 /* nouns_f.plist in Resources */,
 				2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B64B11F4C590700236804 /* Images.xcassets in Resources */,
 				2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */,
@@ -7259,9 +7369,11 @@
 				2C8653FF1F4B33DE00D51654 /* jquery-3.2.1.min.js in Resources */,
 				2C8654001F4B33DE00D51654 /* wysiwyg.css in Resources */,
 				2C8654021F4B33DE00D51654 /* Localizable.strings in Resources */,
+				2C35C4D61F4DA478002F3BF4 /* adjectives_f.plist in Resources */,
 				2C8654031F4B33DE00D51654 /* arrow_left.svg in Resources */,
 				2C8654041F4B33DE00D51654 /* LoadingPaginationView.xib in Resources */,
 				2C8654051F4B33DE00D51654 /* CertificateTableViewCell.xib in Resources */,
+				2C35C4DC1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */,
 				2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */,
 				2C8654081F4B33DE00D51654 /* overlay_hard.png in Resources */,
@@ -7272,6 +7384,7 @@
 				2C86540F1F4B33DE00D51654 /* StepCardView.xib in Resources */,
 				2C8654101F4B33DE00D51654 /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C8654111F4B33DE00D51654 /* PlaceholderView.storyboard in Resources */,
+				2C35C4E21F4DA486002F3BF4 /* nouns_f.plist in Resources */,
 				2C8654121F4B33DE00D51654 /* VideoDownloadView.xib in Resources */,
 				2C86548B1F4B3A6200D51654 /* Icons.xcassets in Resources */,
 				2C8654131F4B33DE00D51654 /* WarningView.xib in Resources */,
@@ -7294,6 +7407,7 @@
 				2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */,
 				2C8654221F4B33DE00D51654 /* DownloadTableViewCell.xib in Resources */,
 				2C86548A1F4B3A5F00D51654 /* Tokens.plist in Resources */,
+				2C35C4E81F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C8654231F4B33DE00D51654 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C8654241F4B33DE00D51654 /* CardOverlayView.xib in Resources */,
 				2C8654251F4B33DE00D51654 /* DiscussionTableViewCell.xib in Resources */,
@@ -7308,6 +7422,7 @@
 				2C8654301F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C8654311F4B33DE00D51654 /* ChoiceQuizTableViewCell.xib in Resources */,
 				2C8654321F4B33DE00D51654 /* SortingQuizTableViewCell.xib in Resources */,
+				2C35C4B01F4DA3FE002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C8654331F4B33DE00D51654 /* CodeQuizToolbarView.xib in Resources */,
 				2C8654341F4B33DE00D51654 /* FillBlanksTextTableViewCell.xib in Resources */,
 				2C8654351F4B33DE00D51654 /* FillBlanksInputTableViewCell.xib in Resources */,
@@ -7345,9 +7460,11 @@
 				2C89AAE31F4C289900227C3B /* step3.html in Resources */,
 				2C89AAE41F4C289900227C3B /* jquery-3.2.1.min.js in Resources */,
 				2C89AAE51F4C289900227C3B /* wysiwyg.css in Resources */,
+				2C35C4D71F4DA478002F3BF4 /* adjectives_f.plist in Resources */,
 				2C89AAE61F4C289900227C3B /* Localizable.strings in Resources */,
 				2C89AAE71F4C289900227C3B /* arrow_left.svg in Resources */,
 				2C89AAE81F4C289900227C3B /* LoadingPaginationView.xib in Resources */,
+				2C35C4DD1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */,
 				2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */,
 				2C89AB441F4C290800227C3B /* Tokens.plist in Resources */,
@@ -7358,6 +7475,7 @@
 				2C89AAEF1F4C289900227C3B /* CurrentBestStreakViewController.xib in Resources */,
 				2C89AAF01F4C289900227C3B /* Main.storyboard in Resources */,
 				2C89AAF11F4C289900227C3B /* StepCardView.xib in Resources */,
+				2C35C4E31F4DA487002F3BF4 /* nouns_f.plist in Resources */,
 				2C89AAF21F4C289900227C3B /* CodeSuggestionsTableViewController.xib in Resources */,
 				2C89AAF31F4C289900227C3B /* PlaceholderView.storyboard in Resources */,
 				2C89AAF41F4C289900227C3B /* VideoDownloadView.xib in Resources */,
@@ -7380,6 +7498,7 @@
 				2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */,
 				2C89AB3E1F4C28F400227C3B /* ru.lproj in Resources */,
 				2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */,
+				2C35C4E91F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C89AB0B1F4C289900227C3B /* CardOverlayView.xib in Resources */,
 				2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */,
 				2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */,
@@ -7394,6 +7513,7 @@
 				2C89AB161F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C89AB3C1F4C28EE00227C3B /* en.lproj in Resources */,
 				2C89AB171F4C289900227C3B /* ChoiceQuizTableViewCell.xib in Resources */,
+				2C35C4B11F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C89AB181F4C289900227C3B /* SortingQuizTableViewCell.xib in Resources */,
 				2C89AB191F4C289900227C3B /* CodeQuizToolbarView.xib in Resources */,
 				2C89AB1A1F4C289900227C3B /* FillBlanksTextTableViewCell.xib in Resources */,
@@ -7430,6 +7550,7 @@
 				2C9733061F4C393C00AC9301 /* icon.png in Resources */,
 				2C9732971F4C38F600AC9301 /* step3.html in Resources */,
 				2C9732981F4C38F600AC9301 /* jquery-3.2.1.min.js in Resources */,
+				2C35C4D81F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
 				2C9732991F4C38F600AC9301 /* wysiwyg.css in Resources */,
 				2C97329A1F4C38F600AC9301 /* Localizable.strings in Resources */,
 				2C97329B1F4C38F600AC9301 /* arrow_left.svg in Resources */,
@@ -7438,6 +7559,7 @@
 				2C97329D1F4C38F600AC9301 /* CertificateTableViewCell.xib in Resources */,
 				2C97330D1F4C394A00AC9301 /* Tokens.plist in Resources */,
 				2C97329E1F4C38F600AC9301 /* CertificatesStoryboard.storyboard in Resources */,
+				2C35C4B31F4DA400002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				2C97329F1F4C38F600AC9301 /* StreaksView.xib in Resources */,
 				2C9732A01F4C38F600AC9301 /* overlay_hard.png in Resources */,
 				2C9732A11F4C38F600AC9301 /* RateAppViewController.xib in Resources */,
@@ -7446,6 +7568,7 @@
 				2C9732A41F4C38F600AC9301 /* Main.storyboard in Resources */,
 				2C9732A51F4C38F600AC9301 /* StepCardView.xib in Resources */,
 				2C9732A61F4C38F600AC9301 /* CodeSuggestionsTableViewController.xib in Resources */,
+				2C35C4EA1F4DA48F002F3BF4 /* nouns_m.plist in Resources */,
 				2C9732A71F4C38F600AC9301 /* PlaceholderView.storyboard in Resources */,
 				2C9732A81F4C38F600AC9301 /* VideoDownloadView.xib in Resources */,
 				2C9732AA1F4C38F600AC9301 /* WarningView.xib in Resources */,
@@ -7456,6 +7579,7 @@
 				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
+				2C35C4E01F4DA481002F3BF4 /* adjectives_m.plist in Resources */,
 				2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */,
 				2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C9732B71F4C38F600AC9301 /* step2.html in Resources */,
@@ -7491,6 +7615,7 @@
 				2C9732D61F4C38F600AC9301 /* UserPreferences.storyboard in Resources */,
 				2C9732D71F4C38F600AC9301 /* RefreshTableViewCell.xib in Resources */,
 				2C9732D91F4C38F600AC9301 /* CourseTableViewCell.xib in Resources */,
+				2C35C4E41F4DA487002F3BF4 /* nouns_f.plist in Resources */,
 				2C9732DA1F4C38F600AC9301 /* SectionTableViewCell.xib in Resources */,
 				2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */,
 				2C9732DC1F4C38F600AC9301 /* Images.xcassets in Resources */,
@@ -7552,6 +7677,7 @@
 				866DDDC61EA8076D00BAD48E /* CardOverlayView.xib in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
+				2C35C4D51F4DA477002F3BF4 /* adjectives_f.plist in Resources */,
 				2C8652681F4B2FA500D51654 /* step1.html in Resources */,
 				2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */,
 				86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */,
@@ -7569,6 +7695,7 @@
 				8618E3E61EA0065100FB3D0F /* StepReversedCardView.xib in Resources */,
 				86AE94851E84511A00F67691 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				2C8652621F4B2F7D00D51654 /* Auth.plist in Resources */,
+				2C35C4DB1F4DA47E002F3BF4 /* adjectives_m.plist in Resources */,
 				86AE94861E84511A00F67691 /* TeacherCollectionViewCell.xib in Resources */,
 				86AE94871E84511A00F67691 /* TitleTextTableViewCell.xib in Resources */,
 				2C9704211F3B0B7F00C36F0A /* step4.html in Resources */,
@@ -7579,14 +7706,17 @@
 				86AE948C1E84511A00F67691 /* UnitTableViewCell.xib in Resources */,
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
+				2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
 				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
 				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
+				2C35C4E71F4DA48D002F3BF4 /* nouns_m.plist in Resources */,
 				2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */,
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
+				2C35C4E11F4DA486002F3BF4 /* nouns_f.plist in Resources */,
 				2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */,
 				863262FA1ECFC5E2007A20B3 /* loading_robot.gif in Resources */,
 			);
@@ -9135,6 +9265,7 @@
 				2C1B61741F4C4AEF00236804 /* StepReversedCardView.swift in Sources */,
 				2C1B61751F4C4AEF00236804 /* WatchSessionDataObserver.swift in Sources */,
 				2C1B61761F4C4AEF00236804 /* WatchSessionSender.swift in Sources */,
+				2C35C4A81F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */,
 				2C1B61771F4C4AEF00236804 /* DataConvertable.swift in Sources */,
 				2C1B61781F4C4AEF00236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */,
@@ -9271,6 +9402,7 @@
 				2C1B61FB1F4C4AEF00236804 /* User+CoreDataProperties.swift in Sources */,
 				2C1B61FC1F4C4AEF00236804 /* User.swift in Sources */,
 				2C1B61FD1F4C4AEF00236804 /* CongratulationAlertManager.swift in Sources */,
+				2C35C4BB1F4DA417002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C1B61FE1F4C4AEF00236804 /* Parser.swift in Sources */,
 				2C1B61FF1F4C4AEF00236804 /* StepicToken.swift in Sources */,
 				2C1B62001F4C4AEF00236804 /* AuthInfo.swift in Sources */,
@@ -9293,6 +9425,7 @@
 				2C1B62111F4C4AEF00236804 /* DevicesAPI.swift in Sources */,
 				2C1B62121F4C4AEF00236804 /* APIDefaults.swift in Sources */,
 				2C1B62131F4C4AEF00236804 /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AD1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				2C1B62141F4C4AEF00236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B62151F4C4AEF00236804 /* SearchQueriesView.swift in Sources */,
 				2C1B62161F4C4AEF00236804 /* LastStepsAPI.swift in Sources */,
@@ -9324,6 +9457,7 @@
 				2C1B62301F4C4AEF00236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B62311F4C4AEF00236804 /* PreferencesContainer.swift in Sources */,
 				2C1B62321F4C4AEF00236804 /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4C01F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C1B62331F4C4AEF00236804 /* LocalNotificationManager.swift in Sources */,
 				2C1B62341F4C4AEF00236804 /* UIColorExtensions.swift in Sources */,
 				2C1B62351F4C4AEF00236804 /* StandardsExtensions.swift in Sources */,
@@ -9539,6 +9673,7 @@
 				2C1B63851F4C590700236804 /* StepReversedCardView.swift in Sources */,
 				2C1B63861F4C590700236804 /* WatchSessionDataObserver.swift in Sources */,
 				2C1B63871F4C590700236804 /* WatchSessionSender.swift in Sources */,
+				2C35C4A91F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */,
 				2C1B63881F4C590700236804 /* DataConvertable.swift in Sources */,
 				2C1B63891F4C590700236804 /* CoursePlainEntity.swift in Sources */,
 				2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */,
@@ -9675,6 +9810,7 @@
 				2C1B640C1F4C590700236804 /* User+CoreDataProperties.swift in Sources */,
 				2C1B640D1F4C590700236804 /* User.swift in Sources */,
 				2C1B640E1F4C590700236804 /* CongratulationAlertManager.swift in Sources */,
+				2C35C4BA1F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C1B640F1F4C590700236804 /* Parser.swift in Sources */,
 				2C1B64101F4C590700236804 /* StepicToken.swift in Sources */,
 				2C1B64111F4C590700236804 /* AuthInfo.swift in Sources */,
@@ -9697,6 +9833,7 @@
 				2C1B64221F4C590700236804 /* DevicesAPI.swift in Sources */,
 				2C1B64231F4C590700236804 /* APIDefaults.swift in Sources */,
 				2C1B64241F4C590700236804 /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AF1F4DA3F2002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				2C1B64251F4C590700236804 /* DiscussionProxiesAPI.swift in Sources */,
 				2C1B64261F4C590700236804 /* SearchQueriesView.swift in Sources */,
 				2C1B64271F4C590700236804 /* LastStepsAPI.swift in Sources */,
@@ -9728,6 +9865,7 @@
 				2C1B64411F4C590700236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B64421F4C590700236804 /* PreferencesContainer.swift in Sources */,
 				2C1B64431F4C590700236804 /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4C11F4DA41D002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C1B64441F4C590700236804 /* LocalNotificationManager.swift in Sources */,
 				2C1B64451F4C590700236804 /* UIColorExtensions.swift in Sources */,
 				2C1B64461F4C590700236804 /* StandardsExtensions.swift in Sources */,
@@ -9943,6 +10081,7 @@
 				2C8653221F4B33DE00D51654 /* StepReversedCardView.swift in Sources */,
 				2C8653231F4B33DE00D51654 /* WatchSessionDataObserver.swift in Sources */,
 				2C8653241F4B33DE00D51654 /* WatchSessionSender.swift in Sources */,
+				2C35C4A51F4DA3E9002F3BF4 /* RatingsAPI.swift in Sources */,
 				2C8653251F4B33DE00D51654 /* DataConvertable.swift in Sources */,
 				2C8653261F4B33DE00D51654 /* CoursePlainEntity.swift in Sources */,
 				2C8653271F4B33DE00D51654 /* CourseMetainfoEntity.swift in Sources */,
@@ -10079,6 +10218,7 @@
 				2C8653A91F4B33DE00D51654 /* User+CoreDataProperties.swift in Sources */,
 				2C8653AA1F4B33DE00D51654 /* User.swift in Sources */,
 				2C8653AB1F4B33DE00D51654 /* CongratulationAlertManager.swift in Sources */,
+				2C35C4B71F4DA413002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C8653AC1F4B33DE00D51654 /* Parser.swift in Sources */,
 				2C8653AD1F4B33DE00D51654 /* StepicToken.swift in Sources */,
 				2C8653AE1F4B33DE00D51654 /* AuthInfo.swift in Sources */,
@@ -10101,6 +10241,7 @@
 				2C8653BF1F4B33DE00D51654 /* DevicesAPI.swift in Sources */,
 				2C8653C01F4B33DE00D51654 /* APIDefaults.swift in Sources */,
 				2C8653C11F4B33DE00D51654 /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AB1F4DA3F0002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				2C8653C21F4B33DE00D51654 /* DiscussionProxiesAPI.swift in Sources */,
 				2C8653C31F4B33DE00D51654 /* SearchQueriesView.swift in Sources */,
 				2C8653C41F4B33DE00D51654 /* LastStepsAPI.swift in Sources */,
@@ -10132,6 +10273,7 @@
 				2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */,
 				2C8653E01F4B33DE00D51654 /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4BD1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C8653E11F4B33DE00D51654 /* LocalNotificationManager.swift in Sources */,
 				2C8653E21F4B33DE00D51654 /* UIColorExtensions.swift in Sources */,
 				2C8653E31F4B33DE00D51654 /* StandardsExtensions.swift in Sources */,
@@ -10347,6 +10489,7 @@
 				2C89AA081F4C289900227C3B /* StepReversedCardView.swift in Sources */,
 				2C89AA091F4C289900227C3B /* WatchSessionDataObserver.swift in Sources */,
 				2C89AA0A1F4C289900227C3B /* WatchSessionSender.swift in Sources */,
+				2C35C4A61F4DA3E9002F3BF4 /* RatingsAPI.swift in Sources */,
 				2C89AA0B1F4C289900227C3B /* DataConvertable.swift in Sources */,
 				2C89AA0C1F4C289900227C3B /* CoursePlainEntity.swift in Sources */,
 				2C89AA0D1F4C289900227C3B /* CourseMetainfoEntity.swift in Sources */,
@@ -10483,6 +10626,7 @@
 				2C89AA8F1F4C289900227C3B /* User+CoreDataProperties.swift in Sources */,
 				2C89AA901F4C289900227C3B /* User.swift in Sources */,
 				2C89AA911F4C289900227C3B /* CongratulationAlertManager.swift in Sources */,
+				2C35C4B81F4DA415002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C89AA921F4C289900227C3B /* Parser.swift in Sources */,
 				2C89AA931F4C289900227C3B /* StepicToken.swift in Sources */,
 				2C89AA941F4C289900227C3B /* AuthInfo.swift in Sources */,
@@ -10505,6 +10649,7 @@
 				2C89AAA51F4C289900227C3B /* DevicesAPI.swift in Sources */,
 				2C89AAA61F4C289900227C3B /* APIDefaults.swift in Sources */,
 				2C89AAA71F4C289900227C3B /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AC1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				2C89AAA81F4C289900227C3B /* DiscussionProxiesAPI.swift in Sources */,
 				2C89AAA91F4C289900227C3B /* SearchQueriesView.swift in Sources */,
 				2C89AAAA1F4C289900227C3B /* LastStepsAPI.swift in Sources */,
@@ -10536,6 +10681,7 @@
 				2C89AAC41F4C289900227C3B /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C89AAC51F4C289900227C3B /* PreferencesContainer.swift in Sources */,
 				2C89AAC61F4C289900227C3B /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4BE1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C89AAC71F4C289900227C3B /* LocalNotificationManager.swift in Sources */,
 				2C89AAC81F4C289900227C3B /* UIColorExtensions.swift in Sources */,
 				2C89AAC91F4C289900227C3B /* StandardsExtensions.swift in Sources */,
@@ -10751,6 +10897,7 @@
 				2C9731BC1F4C38F600AC9301 /* StepReversedCardView.swift in Sources */,
 				2C9731BD1F4C38F600AC9301 /* WatchSessionDataObserver.swift in Sources */,
 				2C9731BE1F4C38F600AC9301 /* WatchSessionSender.swift in Sources */,
+				2C35C4A71F4DA3EA002F3BF4 /* RatingsAPI.swift in Sources */,
 				2C9731BF1F4C38F600AC9301 /* DataConvertable.swift in Sources */,
 				2C9731C01F4C38F600AC9301 /* CoursePlainEntity.swift in Sources */,
 				2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */,
@@ -10887,6 +11034,7 @@
 				2C9732431F4C38F600AC9301 /* User+CoreDataProperties.swift in Sources */,
 				2C9732441F4C38F600AC9301 /* User.swift in Sources */,
 				2C9732451F4C38F600AC9301 /* CongratulationAlertManager.swift in Sources */,
+				2C35C4B91F4DA416002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				2C9732461F4C38F600AC9301 /* Parser.swift in Sources */,
 				2C9732471F4C38F600AC9301 /* StepicToken.swift in Sources */,
 				2C9732481F4C38F600AC9301 /* AuthInfo.swift in Sources */,
@@ -10909,6 +11057,7 @@
 				2C9732591F4C38F600AC9301 /* DevicesAPI.swift in Sources */,
 				2C97325A1F4C38F600AC9301 /* APIDefaults.swift in Sources */,
 				2C97325B1F4C38F600AC9301 /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AE1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				2C97325C1F4C38F600AC9301 /* DiscussionProxiesAPI.swift in Sources */,
 				2C97325D1F4C38F600AC9301 /* SearchQueriesView.swift in Sources */,
 				2C97325E1F4C38F600AC9301 /* LastStepsAPI.swift in Sources */,
@@ -10940,6 +11089,7 @@
 				2C9732781F4C38F600AC9301 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C9732791F4C38F600AC9301 /* PreferencesContainer.swift in Sources */,
 				2C97327A1F4C38F600AC9301 /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4BF1F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C97327B1F4C38F600AC9301 /* LocalNotificationManager.swift in Sources */,
 				2C97327C1F4C38F600AC9301 /* UIColorExtensions.swift in Sources */,
 				2C97327D1F4C38F600AC9301 /* StandardsExtensions.swift in Sources */,
@@ -11155,6 +11305,7 @@
 				8618E3E41EA0063D00FB3D0F /* StepReversedCardView.swift in Sources */,
 				864D67361E83DE76001E8D9E /* WatchSessionDataObserver.swift in Sources */,
 				864D67371E83DE76001E8D9E /* WatchSessionSender.swift in Sources */,
+				2C35C4A41F4DA3E8002F3BF4 /* RatingsAPI.swift in Sources */,
 				864D67381E83DE76001E8D9E /* DataConvertable.swift in Sources */,
 				864D67391E83DE76001E8D9E /* CoursePlainEntity.swift in Sources */,
 				864D673A1E83DE76001E8D9E /* CourseMetainfoEntity.swift in Sources */,
@@ -11291,6 +11442,7 @@
 				864D66FC1E83DE03001E8D9E /* User+CoreDataProperties.swift in Sources */,
 				864D66FD1E83DE03001E8D9E /* User.swift in Sources */,
 				2C6ABA631F1E00B5005A3BCF /* CongratulationAlertManager.swift in Sources */,
+				2C35C4B61F4DA411002F3BF4 /* AdaptiveAchievementsPresenter.swift in Sources */,
 				864D66FE1E83DE03001E8D9E /* Parser.swift in Sources */,
 				864D66FF1E83DE03001E8D9E /* StepicToken.swift in Sources */,
 				864D67001E83DE03001E8D9E /* AuthInfo.swift in Sources */,
@@ -11313,6 +11465,7 @@
 				864D670B1E83DE03001E8D9E /* DevicesAPI.swift in Sources */,
 				864D670C1E83DE03001E8D9E /* APIDefaults.swift in Sources */,
 				2CA50B9E1F0FE66B00418E7D /* AdaptiveOnboardingPresenter.swift in Sources */,
+				2C35C4AA1F4DA3EF002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				864D670D1E83DE03001E8D9E /* DiscussionProxiesAPI.swift in Sources */,
 				08E8F96E1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
 				08E3A3B81E93C22200E9C2EF /* LastStepsAPI.swift in Sources */,
@@ -11344,6 +11497,7 @@
 				085E9E6F1F138C3800D6A4BC /* CodeSuggestionTableViewCell.swift in Sources */,
 				864D67231E83DE03001E8D9E /* PreferencesContainer.swift in Sources */,
 				864D67241E83DE03001E8D9E /* NotificationPreferencesContainer.swift in Sources */,
+				2C35C4BC1F4DA41A002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				864D67251E83DE03001E8D9E /* LocalNotificationManager.swift in Sources */,
 				864D67261E83DE03001E8D9E /* UIColorExtensions.swift in Sources */,
 				864D67271E83DE03001E8D9E /* StandardsExtensions.swift in Sources */,
@@ -11475,6 +11629,42 @@
 			);
 			name = step3.html;
 			path = OnboardingContent;
+			sourceTree = "<group>";
+		};
+		2C35C4C51F4DA462002F3BF4 /* adjectives_f.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35C4C61F4DA462002F3BF4 /* ru */,
+				2C35C4D11F4DA467002F3BF4 /* en */,
+			);
+			name = adjectives_f.plist;
+			sourceTree = "<group>";
+		};
+		2C35C4C71F4DA462002F3BF4 /* adjectives_m.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35C4C81F4DA462002F3BF4 /* ru */,
+				2C35C4D21F4DA46A002F3BF4 /* en */,
+			);
+			name = adjectives_m.plist;
+			sourceTree = "<group>";
+		};
+		2C35C4C91F4DA462002F3BF4 /* nouns_f.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35C4CA1F4DA462002F3BF4 /* ru */,
+				2C35C4D31F4DA46E002F3BF4 /* en */,
+			);
+			name = nouns_f.plist;
+			sourceTree = "<group>";
+		};
+		2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C35C4CC1F4DA462002F3BF4 /* ru */,
+				2C35C4D41F4DA471002F3BF4 /* en */,
+			);
+			name = nouns_m.plist;
 			sourceTree = "<group>";
 		};
 		2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */ = {

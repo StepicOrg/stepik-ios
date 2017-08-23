@@ -290,8 +290,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         guard
             let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: encodedUrl)
-        else {
-            return
+            else {
+                return
         }
 
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
