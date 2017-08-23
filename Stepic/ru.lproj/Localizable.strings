@@ -264,3 +264,4 @@ AdaptiveRatingFooterText1 = "%@ пользователь в рейтинге";
 AdaptiveRatingFooterText234 = "%@ пользователя в рейтинге";
 AdaptiveRatingFooterText567890 = "%@ пользователей в рейтинге";
 AdaptiveRatingYou = "Вы";
+AdaptiveRatingLoadError = "Рейтинг недоступен";

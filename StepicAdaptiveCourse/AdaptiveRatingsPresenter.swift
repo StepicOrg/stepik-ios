@@ -12,6 +12,7 @@ import Alamofire
 protocol AdaptiveRatingsView: class {
     func reload()
     func setRatings(data: ScoreboardViewData)
+    func showError()
 }
 
 struct RatingViewData {
@@ -30,6 +31,7 @@ class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
     fileprivate var ratingsAPI: RatingsAPI
+    fileprivate var ratingManager: RatingManager
 
     private var scoreboard: [Int: ScoreboardViewData] = [:]
 
@@ -39,15 +41,37 @@ class AdaptiveRatingsPresenter {
     private var nouns: [(String, String)] = []
     private var adjs: [(String, String)] = []
 
-    init(ratingsAPI: RatingsAPI, view: AdaptiveRatingsView) {
+    init(ratingsAPI: RatingsAPI, ratingManager: RatingManager, view: AdaptiveRatingsView) {
         self.view = view
-
+        self.ratingManager = ratingManager
         self.ratingsAPI = ratingsAPI
 
         loadNamesFromFiles()
     }
 
     func reloadData(days: Int? = nil, force: Bool = false) {
+        // Send rating first, then get rating
+        currentRequest?.cancel()
+        currentRequest = ratingsAPI.update(courseId: StepicApplicationsInfo.adaptiveCourseId, exp: ratingManager.rating, success: { _ in
+            print("remote rating updated -> reload rating")
+            self.reloadRating(days: days, force: force)
+        }, error: { responseStatus in
+            switch responseStatus {
+            case .serverError:
+                print("remote rating update failed: server error")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.ratingServerError)
+            case .connectionError(let error):
+                print("remote rating update failed: \(error)")
+            default:
+                print("remote rating update failed: \(responseStatus)")
+            }
+            self.view?.setRatings(data: ScoreboardViewData(allCount: 0, leaders: []))
+            self.view?.reload()
+            self.view?.showError()
+        })
+    }
+
+    fileprivate func reloadRating(days: Int? = nil, force: Bool = false) {
         let downloadedScoreboard = scoreboard[days ?? 0] // 0 when 'days' == nil
         if downloadedScoreboard == nil || force {
             let currentUser = AuthInfo.shared.userId
@@ -67,6 +91,7 @@ class AdaptiveRatingsPresenter {
                 print(err)
                 self.view?.setRatings(data: ScoreboardViewData(allCount: 0, leaders: []))
                 self.view?.reload()
+                self.view?.showError()
             })
         } else {
             view?.setRatings(data: downloadedScoreboard!)

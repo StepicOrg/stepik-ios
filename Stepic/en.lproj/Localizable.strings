@@ -263,3 +263,4 @@ AdaptiveRatingFooterText1 = "%@ user in the table";
 AdaptiveRatingFooterText234 = "%@ users in the table";
 AdaptiveRatingFooterText567890 = "%@ users in the table";
 AdaptiveRatingYou = "You";
+AdaptiveRatingLoadError = "Rating is unavailable now";

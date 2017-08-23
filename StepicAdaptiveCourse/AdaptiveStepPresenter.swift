@@ -32,11 +32,8 @@ class AdaptiveStepPresenter {
 
     var quizViewController: ChoiceQuizViewController?
 
-    private var submissionsAPI: SubmissionsAPI
-
-    init(view: AdaptiveStepView, submissionsAPI: SubmissionsAPI, step: Step) {
+    init(view: AdaptiveStepView, step: Step) {
         self.step = step
-        self.submissionsAPI = submissionsAPI
         self.view = view
     }
 
@@ -59,7 +56,6 @@ class AdaptiveStepPresenter {
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true
-        quizViewController.submissionsAPI = AdaptiveSubmissionsAPI()
         view?.updateQuiz(with: quizViewController)
 
         quizViewController.isSubmitButtonHidden = true

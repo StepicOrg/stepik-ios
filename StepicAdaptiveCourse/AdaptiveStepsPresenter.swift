@@ -397,20 +397,6 @@ class AdaptiveStepsPresenter {
     }
 
     fileprivate func launchOnboarding() {
-        if !(defaultsStorageManager?.isMigrationCompleted ?? false) {
-            if self.rating == 0 {
-                // First launch -> no need migration
-                self.defaultsStorageManager?.isMigrationCompleted = true
-            } else {
-                ratingsAPI?.migrate(courseId: StepicApplicationsInfo.adaptiveCourseId, exp: self.rating, streak: self.streak - 1, success: { _ in
-                    self.defaultsStorageManager?.isMigrationCompleted = true
-                    print("rating migration completed: rating = \(self.rating), streak = \(self.streak - 1)")
-                }, error: { err in
-                    print("error while rating migration: \(err)")
-                })
-            }
-        }
-
         if isOnboardingPassed {
             return
         }
@@ -540,7 +526,7 @@ class AdaptiveStepsPresenter {
                     }
 
                     // Override API
-                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, submissionsAPI: AdaptiveSubmissionsAPI(), step: step)
+                    let adaptiveStepPresenter = AdaptiveStepPresenter(view: stepViewController, step: step)
                     adaptiveStepPresenter.delegate = self
                     stepViewController.presenter = adaptiveStepPresenter
                     self?.currentStepPresenter = adaptiveStepPresenter
@@ -636,6 +622,21 @@ extension AdaptiveStepsPresenter: AdaptiveStepDelegate {
         // Update stats
         statsManager?.incrementRating(curStreak)
         statsManager?.maxStreak = curStreak
+
+        // Send rating
+        ratingsAPI?.update(courseId: StepicApplicationsInfo.adaptiveCourseId, exp: newRating, success: { _ in
+            print("remote rating updated")
+        }, error: { responseStatus in
+            switch responseStatus {
+            case .serverError:
+                print("remote rating update failed: server error")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.ratingServerError)
+            case .connectionError(let error):
+                print("remote rating update failed: \(error)")
+            default:
+                print("remote rating update failed: \(responseStatus)")
+            }
+        })
 
         // Days streak achievement
         if !isSolvedToday {

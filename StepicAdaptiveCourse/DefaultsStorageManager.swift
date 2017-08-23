@@ -13,7 +13,6 @@ class DefaultsStorageManager {
 
     private let onboardingFinishedKey = "isOnboardingShown"
     private let onboardingRatingFinishedKey = "isRatingOnboardingShown"
-    private let migrationCompletedKey = "migrationCompletedKey"
     private let accountEmailKey = "account_email"
     private let accountPasswordKey = "account_password"
     let defaults = UserDefaults.standard
@@ -33,15 +32,6 @@ class DefaultsStorageManager {
         }
         set {
             defaults.set(newValue, forKey: onboardingRatingFinishedKey)
-        }
-    }
-
-    var isMigrationCompleted: Bool {
-        get {
-            return defaults.bool(forKey: migrationCompletedKey)
-        }
-        set {
-            defaults.set(newValue, forKey: migrationCompletedKey)
         }
     }
 

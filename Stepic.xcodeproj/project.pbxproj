@@ -916,7 +916,6 @@
 		2C86505D1F4ADF3C00D51654 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86505F1F4ADF3C00D51654 /* nouns_m.plist */; };
 		2C8650611F4ADF4300D51654 /* adjectives_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8650631F4ADF4300D51654 /* adjectives_f.plist */; };
 		2C8650651F4ADF4900D51654 /* nouns_f.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8650671F4ADF4900D51654 /* nouns_f.plist */; };
-		2C86506B1F4AE4C300D51654 /* AdaptiveSubmissionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506A1F4AE4C300D51654 /* AdaptiveSubmissionsAPI.swift */; };
 		2C97040D1F3A0DCF00C36F0A /* DefaultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */; };
 		2C9704201F3B0B7C00C36F0A /* step5.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C97041A1F3B0B7200C36F0A /* step5.html */; };
 		2C9704211F3B0B7F00C36F0A /* step4.html in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704181F3B0B7200C36F0A /* step4.html */; };
@@ -1931,7 +1930,6 @@
 		2C8650641F4ADF4400D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C8650661F4ADF4900D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/nouns_f.plist; sourceTree = "<group>"; };
 		2C8650681F4ADF4A00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/nouns_f.plist; sourceTree = "<group>"; };
-		2C86506A1F4AE4C300D51654 /* AdaptiveSubmissionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveSubmissionsAPI.swift; sourceTree = "<group>"; };
 		2C97040C1F3A0DCF00C36F0A /* DefaultsStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorageManager.swift; sourceTree = "<group>"; };
 		2C9704191F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
@@ -3683,7 +3681,6 @@
 			isa = PBXGroup;
 			children = (
 				2CAACA541F42EE7300AB0EAA /* RatingsAPI.swift */,
-				2C86506A1F4AE4C300D51654 /* AdaptiveSubmissionsAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -5691,7 +5688,6 @@
 				085E9E771F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */,
 				864D66CB1E83DE03001E8D9E /* DictionarySerializable.swift in Sources */,
-				2C86506B1F4AE4C300D51654 /* AdaptiveSubmissionsAPI.swift in Sources */,
 				864D66CC1E83DE03001E8D9E /* PersistentTaskManagerProtocol.swift in Sources */,
 				08E8F9691F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08E3A3B71E93C21300E9C2EF /* RoutingManager.swift in Sources */,

@@ -97,7 +97,7 @@ class AdaptiveStatsViewController: UIViewController {
 
         statsPresenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, view: self)
         achievementsPresenter = AdaptiveAchievementsPresenter(achievementsManager: AchievementManager.shared, view: self)
-        ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: ApiDataDownloader.adaptiveRatings, view: self)
+        ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: ApiDataDownloader.adaptiveRatings, ratingManager: RatingManager.shared, view: self)
     }
 
     override func viewDidLoad() {
@@ -201,6 +201,11 @@ extension AdaptiveStatsViewController: AdaptiveRatingsView {
         allCountLabel.isHidden = false
     }
 
+    func showError() {
+        allCountLabel.text = NSLocalizedString("AdaptiveRatingLoadError", comment: "")
+        allCountLabel.isHidden = false
+    }
+
     var separatorPosition: Int? {
         guard let data = data as? [RatingViewData] else {
             return nil
@@ -208,7 +213,7 @@ extension AdaptiveStatsViewController: AdaptiveRatingsView {
 
         switch state {
         case .ratings(_):
-            for i in 0..<(data.count - 1) {
+            for i in 0..<max(0, data.count - 1) {
                 if data[i].position + 1 != data[i + 1].position {
                     return i
                 }

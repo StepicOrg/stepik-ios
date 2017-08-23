@@ -38,12 +38,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         }
     }
 
-    var submissionsAPI: SubmissionsAPI? {
-        didSet {
-            presenter?.submissionsAPI = submissionsAPI ?? ApiDataDownloader.submissions
-        }
-    }
-
     var submissionPressedBlock : (() -> Void)?
 
     var displayingHint: String?
@@ -170,7 +164,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
 
         self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt)
         presenter?.delegate = self.delegate
-        presenter?.submissionsAPI = self.submissionsAPI ?? ApiDataDownloader.submissions
         presenter?.refreshAttempt()
     }
 

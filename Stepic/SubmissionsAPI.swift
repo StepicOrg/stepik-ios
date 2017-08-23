@@ -13,25 +13,22 @@ import SwiftyJSON
 class SubmissionsAPI: APIEndpoint {
     let name = "submissions"
 
-    var url: String {
-        return StepicApplicationsInfo.apiURL
-    }
+    @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-    @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, params: Parameters = [:], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        var params: Parameters = [:]
 
-        var mutableParams = params
-        mutableParams[objectName] = objectId
+        params[objectName] = objectId
         if let desc = isDescending {
-            mutableParams["order"] = desc ? "desc" : "asc"
+            params["order"] = desc ? "desc" : "asc"
         }
         if let p = page {
-            mutableParams["page"] = p
+            params["page"] = p
         }
         if let user = userId {
-            mutableParams["user"] = user
+            params["user"] = user
         }
 
-        return Alamofire.request("\(url)/submissions", method: .get, parameters: mutableParams, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
@@ -64,17 +61,19 @@ class SubmissionsAPI: APIEndpoint {
         })
     }
 
-    @discardableResult func retrieve(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, params: Parameters = [:], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        return retrieve(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, params: params, headers: headers, success: success, error: errorHandler)
+    @discardableResult func retrieve(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        return retrieve(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
     }
 
-    @discardableResult func retrieve(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, params: Parameters = [:], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        return retrieve(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, params: params, headers: headers, success: success, error: errorHandler)
+    @discardableResult func retrieve(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+        return retrieve(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
     }
 
-    @discardableResult func retrieve(stepName: String, submissionId: Int, params: Parameters = [:], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-        return Alamofire.request("\(url)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
+        let params: Parameters = [:]
+
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
@@ -106,15 +105,16 @@ class SubmissionsAPI: APIEndpoint {
         })
     }
 
-    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, params: Parameters = [:], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
-        var mutableParams = params
-        mutableParams["submission"] = [
-            "attempt": "\(attemptId)",
-            "reply": reply.dictValue
+        let params: Parameters = [
+            "submission": [
+                "attempt": "\(attemptId)",
+                "reply": reply.dictValue
+            ]
         ]
 
-        return Alamofire.request("\(url)/submissions", method: .post, parameters: mutableParams, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/submissions", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
             response in
 
             var error = response.result.error
