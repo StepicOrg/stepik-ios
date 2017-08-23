@@ -51,6 +51,7 @@ class AdaptiveStatsPresenter {
             progressByWeek = []
 
             guard let stats = statsManager.stats else {
+                view?.reload()
                 return
             }
 
@@ -62,6 +63,7 @@ class AdaptiveStatsPresenter {
 
             // Empty stats
             if stats.first == nil {
+                view?.reload()
                 return
             }
 
