@@ -103,6 +103,8 @@ class AdaptiveStatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        colorize()
+
         setUpTable()
         setUpChart()
 
@@ -110,6 +112,15 @@ class AdaptiveStatsViewController: UIViewController {
 
         // Default state
         state = .progress
+    }
+
+    fileprivate func colorize() {
+        currentWeekXPLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
+        bestStreakLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
+        currentLevelLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
+        segmentedControl.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        navigationItem.leftBarButtonItem?.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StepicApplicationsInfo.adaptiveMainColor]
     }
 
     override func viewDidLayoutSubviews() {

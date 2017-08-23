@@ -71,24 +71,22 @@ extension ChoiceQuizTableViewCell {
 
     //All optimization logics is now encapsulated here
     func setHTMLText(_ text: String, width: CGFloat, finishedBlock: @escaping (CGFloat) -> Void) {
-        initLabel()
-        optionLabel?.isHidden = false
-        optionLabel?.setTextWithHTMLString(text)
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
             initWebView()
-            optionWebView?.isHidden = true
+            optionWebView?.isHidden = false
             webViewHelper?.mathJaxFinishedBlock = {
                 [weak self] in
                 self?.layoutIfNeeded()
                 if let webView = self?.optionWebView {
                     webView.invalidateIntrinsicContentSize()
-                    self?.optionLabel?.isHidden = true
-                    self?.optionWebView?.isHidden = false
                     finishedBlock(17 + webView.contentHeight)
                 }
             }
             webViewHelper?.setTextWithTeX(text)
         } else {
+            initLabel()
+            optionLabel?.setTextWithHTMLString(text)
+            optionLabel?.isHidden = false
             let height = ChoiceQuizTableViewCell.getHeightForText(text: text, width: width)
             finishedBlock(height)
         }

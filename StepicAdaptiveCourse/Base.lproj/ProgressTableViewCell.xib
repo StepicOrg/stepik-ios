@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -87,6 +86,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="bracketLabel" destination="HzF-7K-i5D" id="3Ee-C4-uvw"/>
                 <outlet property="cardPadView" destination="3MM-zY-WXM" id="d6S-4o-sxj"/>
                 <outlet property="cellContentView" destination="veb-k2-zTx" id="sL4-Me-ONG"/>
                 <outlet property="firstDateLabel" destination="NiV-zm-iZK" id="m2k-MT-ALX"/>

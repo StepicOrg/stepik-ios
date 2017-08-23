@@ -141,12 +141,18 @@ class FillBlanksQuizViewController: QuizViewController {
         }
 
         self.reply = reply
+        display(reply: reply)
+        self.tableView.isUserInteractionEnabled = false
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? FillBlanksReply else {
+            return
+        }
 
         guard let dataset = dataset else {
             return
         }
-
-        self.tableView.isUserInteractionEnabled = false
 
         var activeComponentIndex = 0
         for (index, component) in dataset.components.enumerated() {

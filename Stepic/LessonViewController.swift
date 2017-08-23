@@ -95,7 +95,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
 
-        presenter = LessonPresenter(objects: initObjects, ids: initIds)
+        presenter = LessonPresenter(objects: initObjects, ids: initIds, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons)
         presenter?.view = self
         presenter?.sectionNavigationDelegate = sectionNavigationDelegate
         if let rules = navigationRules {

@@ -26,6 +26,8 @@ class AchievementTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         cellContentView.layer.cornerRadius = 10
+
+        colorize()
     }
 
     override func draw(_ rect: CGRect) {
@@ -73,7 +75,7 @@ class AchievementTableViewCell: UITableViewCell {
 
     fileprivate func colorize() {
         progressBar.trackTintColor = StepicApplicationsInfo.adaptiveMainColor.withAlphaComponent(0.3)
-        progressBar.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        progressBar.progressTintColor = StepicApplicationsInfo.adaptiveMainColor
     }
 
     fileprivate func drawShadow(shouldRedraw: Bool = false) {

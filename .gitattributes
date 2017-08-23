@@ -11,8 +11,8 @@ Stepic/Auth.plist filter=git-crypt diff=git-crypt
 Stepic/GoogleService-Info.plist filter=git-crypt diff=git-crypt
 Stepic/Tokens.plist filter=git-crypt diff=git-crypt
 
-StepicAdaptiveCourse/Auth.plist filter=git-crypt diff=git-crypt
-StepicAdaptiveCourse/Tokens.plist filter=git-crypt diff=git-crypt
-StepicAdaptiveCourse/GoogleService-Info.plist filter=git-crypt diff=git-crypt
+StepicAdaptiveCourse/Content/**/Auth.plist filter=git-crypt diff=git-crypt
+StepicAdaptiveCourse/Content/**/Tokens.plist filter=git-crypt diff=git-crypt
+StepicAdaptiveCourse/Content/**/GoogleService-Info.plist filter=git-crypt diff=git-crypt
 
 .gitattributes !filter !diff

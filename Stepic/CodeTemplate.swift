@@ -12,8 +12,8 @@ import SwiftyJSON
 
 class CodeTemplate: NSManagedObject {
 
-    var language: CodeLanguage {
-        return CodeLanguage(rawValue: languageString) ?? CodeLanguage.unsupported
+    var language: CodeLanguage? {
+        return CodeLanguage(rawValue: languageString)
     }
 
     convenience required init(language: CodeLanguage, template: String) {

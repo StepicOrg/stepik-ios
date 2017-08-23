@@ -73,8 +73,16 @@ class NumberQuizViewController: QuizViewController {
         }
 
         self.reply = reply
-        textField.text = reply.number
+        display(reply: reply)
         textField.isEnabled = status != .correct
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? NumberReply else {
+            return
+        }
+
+        textField.text = reply.number
     }
 
     //Override this in the subclass

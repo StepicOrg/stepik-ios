@@ -68,7 +68,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.reloadInputViews()
     }
 
-    var language: CodeLanguage = .unsupported {
+    var language: CodeLanguage! {
         didSet {
             textStorage.language = language.highlightr
 
