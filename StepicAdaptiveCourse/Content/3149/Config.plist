@@ -35,6 +35,8 @@
 	</dict>
 	<key>adaptive</key>
 	<dict>
+		<key>ratingURL</key>
+		<string>http://82.202.236.70:9000</string>
 		<key>mainColor</key>
 		<integer>27826</integer>
 		<key>isAdaptive</key>
