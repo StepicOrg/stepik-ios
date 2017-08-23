@@ -148,6 +148,11 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        if direction == .right {
+            presenter?.lastReaction = .neverAgain
+        } else if direction == .left {
+            presenter?.lastReaction = .maybeLater
+        }
         kolodaView.resetCurrentCardIndex()
     }
 
@@ -158,12 +163,6 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
         if !(presenter?.canSwipeCard ?? false) {
             return false
-        }
-
-        if direction == .right {
-            presenter?.lastReaction = .neverAgain
-        } else if direction == .left {
-            presenter?.lastReaction = .maybeLater
         }
 
         return true
