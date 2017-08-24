@@ -13165,7 +13165,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3149;
@@ -13189,7 +13189,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3149;
@@ -13213,7 +13213,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3124;
@@ -13237,7 +13237,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3124;
@@ -13261,7 +13261,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1906;
@@ -13285,7 +13285,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1906;
@@ -13309,7 +13309,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3067;
@@ -13333,7 +13333,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3067;
@@ -13357,7 +13357,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3150;
@@ -13381,7 +13381,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3150;
@@ -13665,7 +13665,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Karpov (X767B24B99)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
@@ -13689,7 +13689,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
