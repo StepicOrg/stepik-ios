@@ -7274,8 +7274,8 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
-				86EF29331E83CEA900F8D214 /* Adaptive 1838 */,
 				086538341EB02715003A8415 /* StickerPackExtension */,
+				86EF29331E83CEA900F8D214 /* Adaptive 1838 */,
 				2C86526B1F4B33DE00D51654 /* Adaptive 1906 */,
 				2C89A9511F4C289900227C3B /* Adaptive 3067 */,
 				2C9731051F4C38F600AC9301 /* Adaptive 3150 */,
@@ -13235,6 +13235,7 @@
 				2CD12B8D1F4ED1F4001D3C82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2CD12BA21F4F348C001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 1906 Screenshots" */ = {
 			isa = XCConfigurationList;
