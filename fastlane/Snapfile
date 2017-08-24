@@ -1,0 +1,15 @@
+devices([
+	"iPhone 5s"
+])
+
+languages([
+	"en-US"
+])
+
+clear_previous_screenshots true
+workspace "./Stepic.xcworkspace"
+
+# For adaptive apps: pretty rating & onboarding skip
+launch_arguments([
+  "-isOnboardingShown YES -isRatingOnboardingShown YES -rating 128"
+])
