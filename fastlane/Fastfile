@@ -86,10 +86,10 @@ platform :ios do
 
     # Add a git tag for this build. This will automatically
     # use an appropriate git tag name
-      add_git_tag
+      # add_git_tag
 
     # Push the new commit and tag back to your git remote
-      push_to_git_remote
+      # push_to_git_remote
     end
 
     for scheme in all_schemes do
