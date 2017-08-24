@@ -93,7 +93,7 @@ platform :ios do
     end
 
     for scheme in all_schemes do
-      beta(scheme: scheme, git_change: false)
+      betascheme(scheme: scheme, git_change: false)
     end
   end
 
