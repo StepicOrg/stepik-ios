@@ -8059,13 +8059,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1838-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
@@ -8154,13 +8157,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3149-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B62A71F4C4AEF00236804 /* ShellScript */ = {
@@ -8195,9 +8201,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8225,13 +8306,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3124-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B64C11F4C590700236804 /* ShellScript */ = {
@@ -8266,9 +8350,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8296,13 +8455,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1906-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C86544D1F4B33DE00D51654 /* ShellScript */ = {
@@ -8337,9 +8499,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8367,13 +8604,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3067-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C89AB331F4C289900227C3B /* ShellScript */ = {
@@ -8408,9 +8648,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8438,13 +8753,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3150-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C9732E71F4C38F600AC9301 /* ShellScript */ = {
@@ -8479,9 +8797,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8524,9 +8917,74 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8569,9 +9027,70 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8584,13 +9103,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StepicTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DBFB6C2236F1DDC3A26B2D6D /* [CP] Embed Pods Frameworks */ = {
@@ -8599,9 +9121,70 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8614,13 +9197,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stepic-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E030AAE96051BB02D324B16F /* [CP] Check Pods Manifest.lock */ = {
@@ -8629,13 +9215,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SberbankUniversity-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */ = {
@@ -8644,9 +9233,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
