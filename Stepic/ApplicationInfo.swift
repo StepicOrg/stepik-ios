@@ -30,6 +30,7 @@ class ApplicationInfo {
             static let isAdaptive = "adaptive.isAdaptive"
             static let courseId = "adaptive.courseId"
             static let mainColor = "adaptive.mainColor"
+            static let ratingURL = "adaptive.ratingURL"
         }
         struct RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"

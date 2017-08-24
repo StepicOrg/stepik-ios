@@ -52,6 +52,7 @@ class AdaptiveStepPresenter {
             delegate?.contentLoadingDidFail()
             return
         }
+
         quizViewController.step = step
         quizViewController.delegate = self
         quizViewController.needNewAttempt = true

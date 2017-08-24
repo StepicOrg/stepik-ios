@@ -50,7 +50,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, profilesAPI: ApiDataDownloader.profiles, ratingManager: RatingManager.shared, statsManager: StatsManager.shared, achievementsManager: AchievementManager.shared, defaultsStorageManager: DefaultsStorageManager.shared, view: self)
+        presenter = AdaptiveStepsPresenter(coursesAPI: ApiDataDownloader.courses, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons, progressesAPI: ApiDataDownloader.progresses, stepicsAPI: ApiDataDownloader.stepics, recommendationsAPI: ApiDataDownloader.recommendations, unitsAPI: ApiDataDownloader.units, viewsAPI: ApiDataDownloader.views, profilesAPI: ApiDataDownloader.profiles, ratingManager: RatingManager.shared, statsManager: StatsManager.shared, achievementsManager: AchievementManager.shared, defaultsStorageManager: DefaultsStorageManager.shared, ratingsAPI: ApiDataDownloader.adaptiveRatings, view: self)
     }
 
     override func viewDidLoad() {
@@ -148,6 +148,11 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
 
 extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        if direction == .right {
+            presenter?.lastReaction = .neverAgain
+        } else if direction == .left {
+            presenter?.lastReaction = .maybeLater
+        }
         kolodaView.resetCurrentCardIndex()
     }
 
@@ -158,12 +163,6 @@ extension AdaptiveStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
         if !(presenter?.canSwipeCard ?? false) {
             return false
-        }
-
-        if direction == .right {
-            presenter?.lastReaction = .neverAgain
-        } else if direction == .left {
-            presenter?.lastReaction = .maybeLater
         }
 
         return true

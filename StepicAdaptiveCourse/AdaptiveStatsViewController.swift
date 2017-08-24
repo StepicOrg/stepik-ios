@@ -9,21 +9,83 @@
 import UIKit
 import Charts
 
-class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
-    var presenter: AdaptiveStatsPresenter?
+class OverlapTableView: UITableView {
+    private var previousCellsStateHash: Int = 0
 
-    @IBOutlet weak var tableView: UITableView!
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        guard let wrapper = subviews.first else {
+            return
+        }
+
+        let currentHash = visibleCells.description.hashValue
+        if currentHash != previousCellsStateHash {
+            visibleCells.reversed().forEach { wrapper.bringSubview(toFront: $0) }
+            previousCellsStateHash = currentHash
+        }
+    }
+}
+
+class AdaptiveStatsViewController: UIViewController {
+    enum State {
+        case progress
+        case achievements
+        case ratings(days: Int?)
+    }
+
+    fileprivate var state: State = .progress {
+        didSet {
+            allCountLabel.isHidden = true
+            loadingIndicator.startAnimating()
+            switch state {
+            case .progress:
+                statsPresenter?.reloadData(force: data == nil)
+                ratingSegmentedControl.isHidden = true
+                break
+            case .achievements:
+                achievementsPresenter?.reloadData(force: data == nil)
+                ratingSegmentedControl.isHidden = true
+                break
+            case .ratings(let days):
+                ratingsPresenter?.reloadData(days: days, force: data == nil)
+                ratingSegmentedControl.isHidden = false
+            }
+        }
+    }
+
+    var statsPresenter: AdaptiveStatsPresenter?
+    var achievementsPresenter: AdaptiveAchievementsPresenter?
+    var ratingsPresenter: AdaptiveRatingsPresenter?
+
+    @IBOutlet weak var tableView: OverlapTableView!
     @IBOutlet weak var progressChart: LineChartView!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var currentWeekXPLabel: UILabel!
     @IBOutlet weak var bestStreakLabel: UILabel!
     @IBOutlet weak var currentLevelLabel: UILabel!
+    @IBOutlet weak var allCountLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
-    fileprivate var achievements: [AchievementViewData] = []
-    fileprivate var progressByWeek: [WeekProgressViewData] = []
+    @IBOutlet weak var ratingSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+
+    fileprivate var data: [Any]?
+
+    @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
+        if ratingSegmentedControl.selectedSegmentIndex == 0 {
+            state = .ratings(days: nil)
+        } else {
+            state = .ratings(days: 7)
+        }
+    }
 
     @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
-        tableView.reloadData()
+        let states: [Int: State] = [
+            0: .progress,
+            1: .achievements,
+            2: .ratings(days: 7)
+        ]
+        state = states[segmentedControl.selectedSegmentIndex] ?? .progress
     }
 
     @IBAction func onCancelButtonClick(_ sender: Any) {
@@ -33,7 +95,9 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        presenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, achievementsManager: AchievementManager.shared, view: self)
+        statsPresenter = AdaptiveStatsPresenter(statsManager: StatsManager.shared, ratingManager: RatingManager.shared, view: self)
+        achievementsPresenter = AdaptiveAchievementsPresenter(achievementsManager: AchievementManager.shared, view: self)
+        ratingsPresenter = AdaptiveRatingsPresenter(ratingsAPI: ApiDataDownloader.adaptiveRatings, ratingManager: RatingManager.shared, view: self)
     }
 
     override func viewDidLoad() {
@@ -44,7 +108,10 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         setUpTable()
         setUpChart()
 
-        presenter?.reloadStats()
+        statsPresenter?.reloadStats()
+
+        // Default state
+        state = .progress
     }
 
     fileprivate func colorize() {
@@ -52,39 +119,34 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
         bestStreakLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
         currentLevelLabel.textColor = StepicApplicationsInfo.adaptiveMainColor
         segmentedControl.tintColor = StepicApplicationsInfo.adaptiveMainColor
+        loadingIndicator.color = StepicApplicationsInfo.adaptiveMainColor
+        ratingSegmentedControl.tintColor = StepicApplicationsInfo.adaptiveMainColor
         navigationItem.leftBarButtonItem?.tintColor = StepicApplicationsInfo.adaptiveMainColor
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: StepicApplicationsInfo.adaptiveMainColor]
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        guard let headerView = tableView.tableHeaderView else {
+            return
+        }
+
+        let size = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        if headerView.frame.size.height != size.height {
+            headerView.frame.size.height = size.height
+            tableView.tableHeaderView = headerView
+            tableView.layoutIfNeeded()
+        }
+    }
+
     func reload() {
+        loadingIndicator.stopAnimating()
+
         tableView.delegate = self
         tableView.dataSource = self
 
         tableView.reloadData()
-    }
-
-    func setProgress(records: [WeekProgressViewData]) {
-        progressByWeek = records.reversed()
-    }
-
-    func setAchievements(records: [AchievementViewData]) {
-        achievements = records
-    }
-
-    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
-        currentLevelLabel.text = "\(currentLevel)"
-        bestStreakLabel.text = "\(bestStreak)"
-        currentWeekXPLabel.text = "\(currentWeekXP)"
-
-        guard let last7DaysProgress = last7DaysProgress else {
-            return
-        }
-
-        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
-        let data = LineChartData(dataSet: dataSet)
-        progressChart.data = data
-        progressChart.data?.highlightEnabled = true
-        progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
     }
 
     fileprivate func valuesToDataEntries(values: [Int]) -> [ChartDataEntry] {
@@ -104,6 +166,7 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
 
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
         tableView.register(UINib(nibName: "AchievementTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
     }
 
     fileprivate func setUpChart() {
@@ -138,28 +201,113 @@ class AdaptiveStatsViewController: UIViewController, AdaptiveStatsView {
     }
 }
 
-extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentedControl.selectedSegmentIndex == 0 {
-            return progressByWeek.count
-        } else {
-            return achievements.count
+extension AdaptiveStatsViewController: AdaptiveRatingsView {
+    func setRatings(data: ScoreboardViewData) {
+        self.data = data.leaders
+
+        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
+            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
+        ])
+        allCountLabel.text = String(format: pluralizedString, "\(data.allCount)")
+        allCountLabel.isHidden = false
+    }
+
+    func showError() {
+        allCountLabel.text = NSLocalizedString("AdaptiveRatingLoadError", comment: "")
+        allCountLabel.isHidden = false
+    }
+
+    var separatorPosition: Int? {
+        guard let data = data as? [RatingViewData] else {
+            return nil
         }
 
+        switch state {
+        case .ratings(_):
+            for i in 0..<max(0, data.count - 1) {
+                if data[i].position + 1 != data[i + 1].position {
+                    return i
+                }
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
+}
+
+extension AdaptiveStatsViewController: AdaptiveAchievementsView {
+    func setAchievements(records: [AchievementViewData]) {
+        data = records
+    }
+}
+
+extension AdaptiveStatsViewController: AdaptiveStatsView {
+    func setProgress(records: [WeekProgressViewData]) {
+        data = records
+    }
+
+    func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
+        currentLevelLabel.text = "\(currentLevel)"
+        bestStreakLabel.text = "\(bestStreak)"
+        currentWeekXPLabel.text = "\(currentWeekXP)"
+
+        guard let last7DaysProgress = last7DaysProgress else {
+            return
+        }
+
+        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
+        let data = LineChartData(dataSet: dataSet)
+        progressChart.data = data
+        progressChart.data?.highlightEnabled = true
+        progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
+    }
+}
+
+extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return(data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if segmentedControl.selectedSegmentIndex == 0 {
+        switch state {
+        case .progress:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell
-            let weekProgress = progressByWeek[indexPath.item]
-            cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+            if let weekProgress = data?[indexPath.item] as? WeekProgressViewData {
+                cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+            }
             return cell
-        } else {
+        case .achievements:
             let cell = tableView.dequeueReusableCell(withIdentifier: AchievementTableViewCell.reuseId, for: indexPath) as! AchievementTableViewCell
-            let achievement = achievements[indexPath.item]
-            cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
+            if let achievement = data?[indexPath.item] as? AchievementViewData {
+                cell.updateInfo(name: achievement.name, info: achievement.info, cover: achievement.cover, isUnlocked: achievement.isUnlocked, type: achievement.type, currentProgress: achievement.currentProgress, maxProgress: achievement.maxProgress)
+            }
+            return cell
+        case .ratings(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
+
+            let separatorAfterIndex = (separatorPosition ?? Int.max - 1)
+
+            if separatorAfterIndex + 1 == indexPath.item {
+                cell.cellPosition = .separator
+            } else {
+                let dataIndex = separatorAfterIndex < indexPath.item ? indexPath.item - 1 : indexPath.item
+
+                if let user = data?[dataIndex] as? RatingViewData {
+                    cell.cellPosition = indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 ? .bottom : (indexPath.item == 0 ? .top : .middle)
+
+                    if dataIndex == separatorAfterIndex {
+                        cell.cellPosition = .bottom
+                    } else if dataIndex - 1 == separatorAfterIndex {
+                        cell.cellPosition = .top
+                    }
+
+                    cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
+                }
+            }
             return cell
         }
     }
-
 }
