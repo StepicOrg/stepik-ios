@@ -8196,7 +8196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		08983F251F3E4131008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8210,7 +8210,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		08A947FE1EB2B1A5001EC02D /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8352,7 +8352,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C1B62A91F4C4AEF00236804 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8503,7 +8503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C1B64C31F4C590700236804 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8654,7 +8654,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C86544F1F4B33DE00D51654 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8805,7 +8805,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C89AB351F4C289900227C3B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8956,7 +8956,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C9732E91F4C38F600AC9301 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
