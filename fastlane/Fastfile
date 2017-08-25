@@ -127,6 +127,7 @@ platform :ios do
 
     # match(type: "appstore") # more information: https://codesigning.guide
     gym(scheme: scheme,
+      clean: true,
       output_directory: "artefacts",
       output_name: "#{scheme}.ipa",
       include_bitcode: true,
@@ -198,6 +199,7 @@ platform :ios do
     matchrelease(scheme: scheme)
 
     gym(scheme: "#{scheme}",
+      clean: true,
       output_directory: "artefacts",
       output_name: "#{scheme}.ipa",
       include_bitcode: true,
