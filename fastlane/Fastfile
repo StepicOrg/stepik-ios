@@ -198,6 +198,7 @@ platform :ios do
     # snapshot
     matchrelease(scheme: scheme)
 
+    clear_derived_data
     gym(scheme: "#{scheme}",
       clean: true,
       output_directory: "artefacts",
