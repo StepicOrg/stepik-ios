@@ -109,3 +109,27 @@ target 'Adaptive 3124' do
     adaptive_pods
 end
 
+target 'Adaptive 1838 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+target 'Adaptive 1906 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+target 'Adaptive 3067 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+target 'Adaptive 3124 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+target 'Adaptive 3149 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+target 'Adaptive 3150 Screenshots' do
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SimulatorStatusMagic
 
 class XCTestCaseSwizzledIdle: XCTestCase {
     static var swizzledOutIdle = false
@@ -34,6 +35,8 @@ class Adaptive_Screenshots_UITests: XCTestCaseSwizzledIdle {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
+
+        SDStatusBarManager.sharedInstance().enableOverrides()
     }
 
     func testTakeScreenshots() {
