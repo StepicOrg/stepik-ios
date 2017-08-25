@@ -104,7 +104,7 @@ platform :ios do
 
     scheme = options[:scheme]
     git_change = options[:git_change]
-  	matchadhoc(scheme: scheme)
+  	matchscheme(scheme: scheme)
 
   	# Ensure that your git status is not dirty
     if git_change
@@ -196,7 +196,7 @@ platform :ios do
 
     # match(type: "appstore")
     # snapshot
-    matchrelease(scheme: scheme)
+    matchscheme(scheme: scheme)
 
     clear_derived_data
     gym(scheme: "#{scheme}",
