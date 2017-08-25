@@ -6890,8 +6890,8 @@
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
-				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
-				08983F241F3E4112008199B1 /* ShellScript */,
+				08343B1A1BF5EC7F00370FC1 /* Fabric Script */,
+				08983F241F3E4112008199B1 /* SwiftLint Script */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				DBFB6C2236F1DDC3A26B2D6D /* [CP] Embed Pods Frameworks */,
@@ -6916,8 +6916,8 @@
 				2C1B60BF1F4C4AEF00236804 /* Sources */,
 				2C1B624C1F4C4AEF00236804 /* Frameworks */,
 				2C1B624E1F4C4AEF00236804 /* Resources */,
-				2C1B62A71F4C4AEF00236804 /* ShellScript */,
-				2C1B62A81F4C4AEF00236804 /* ShellScript */,
+				2C1B62A71F4C4AEF00236804 /* Fabric Script */,
+				2C1B62A81F4C4AEF00236804 /* SwiftLint Script */,
 				2C1B62A91F4C4AEF00236804 /* [CP] Embed Pods Frameworks */,
 				2C1B62AA1F4C4AEF00236804 /* [CP] Copy Pods Resources */,
 			);
@@ -6938,8 +6938,8 @@
 				2C1B62D01F4C590700236804 /* Sources */,
 				2C1B645D1F4C590700236804 /* Frameworks */,
 				2C1B645F1F4C590700236804 /* Resources */,
-				2C1B64C11F4C590700236804 /* ShellScript */,
-				2C1B64C21F4C590700236804 /* ShellScript */,
+				2C1B64C11F4C590700236804 /* Fabric Script */,
+				2C1B64C21F4C590700236804 /* SwiftLint Script */,
 				2C1B64C31F4C590700236804 /* [CP] Embed Pods Frameworks */,
 				2C1B64C41F4C590700236804 /* [CP] Copy Pods Resources */,
 			);
@@ -6960,8 +6960,8 @@
 				2C86526D1F4B33DE00D51654 /* Sources */,
 				2C8653FA1F4B33DE00D51654 /* Frameworks */,
 				2C8653FD1F4B33DE00D51654 /* Resources */,
-				2C86544D1F4B33DE00D51654 /* ShellScript */,
-				2C86544E1F4B33DE00D51654 /* ShellScript */,
+				2C86544D1F4B33DE00D51654 /* Fabric Script */,
+				2C86544E1F4B33DE00D51654 /* SwiftLint Script */,
 				2C86544F1F4B33DE00D51654 /* [CP] Embed Pods Frameworks */,
 				2C8654501F4B33DE00D51654 /* [CP] Copy Pods Resources */,
 			);
@@ -6982,8 +6982,8 @@
 				2C89A9531F4C289900227C3B /* Sources */,
 				2C89AAE01F4C289900227C3B /* Frameworks */,
 				2C89AAE21F4C289900227C3B /* Resources */,
-				2C89AB331F4C289900227C3B /* ShellScript */,
-				2C89AB341F4C289900227C3B /* ShellScript */,
+				2C89AB331F4C289900227C3B /* Fabric Script */,
+				2C89AB341F4C289900227C3B /* SwiftLint Script */,
 				2C89AB351F4C289900227C3B /* [CP] Embed Pods Frameworks */,
 				2C89AB361F4C289900227C3B /* [CP] Copy Pods Resources */,
 			);
@@ -7004,8 +7004,8 @@
 				2C9731071F4C38F600AC9301 /* Sources */,
 				2C9732941F4C38F600AC9301 /* Frameworks */,
 				2C9732961F4C38F600AC9301 /* Resources */,
-				2C9732E71F4C38F600AC9301 /* ShellScript */,
-				2C9732E81F4C38F600AC9301 /* ShellScript */,
+				2C9732E71F4C38F600AC9301 /* Fabric Script */,
+				2C9732E81F4C38F600AC9301 /* SwiftLint Script */,
 				2C9732E91F4C38F600AC9301 /* [CP] Embed Pods Frameworks */,
 				2C9732EA1F4C38F600AC9301 /* [CP] Copy Pods Resources */,
 			);
@@ -7152,8 +7152,8 @@
 				86EF29301E83CEA900F8D214 /* Sources */,
 				86EF29311E83CEA900F8D214 /* Frameworks */,
 				86EF29321E83CEA900F8D214 /* Resources */,
-				08A947FE1EB2B1A5001EC02D /* ShellScript */,
-				08983F251F3E4131008199B1 /* ShellScript */,
+				08A947FE1EB2B1A5001EC02D /* Fabric Script */,
+				08983F251F3E4131008199B1 /* SwiftLint Script */,
 				ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */,
 				636FB71D73F67F013B7E27D6 /* [CP] Copy Pods Resources */,
 			);
@@ -8170,52 +8170,56 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
+		08343B1A1BF5EC7F00370FC1 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		08983F241F3E4112008199B1 /* ShellScript */ = {
+		08983F241F3E4112008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
 		};
-		08983F251F3E4131008199B1 /* ShellScript */ = {
+		08983F251F3E4131008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\n";
 		};
-		08A947FE1EB2B1A5001EC02D /* ShellScript */ = {
+		08A947FE1EB2B1A5001EC02D /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8322,26 +8326,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C1B62A71F4C4AEF00236804 /* ShellScript */ = {
+		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C1B62A81F4C4AEF00236804 /* ShellScript */ = {
+		2C1B62A81F4C4AEF00236804 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8471,26 +8477,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C1B64C11F4C590700236804 /* ShellScript */ = {
+		2C1B64C11F4C590700236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C1B64C21F4C590700236804 /* ShellScript */ = {
+		2C1B64C21F4C590700236804 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8620,26 +8628,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C86544D1F4B33DE00D51654 /* ShellScript */ = {
+		2C86544D1F4B33DE00D51654 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C86544E1F4B33DE00D51654 /* ShellScript */ = {
+		2C86544E1F4B33DE00D51654 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8769,26 +8779,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C89AB331F4C289900227C3B /* ShellScript */ = {
+		2C89AB331F4C289900227C3B /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C89AB341F4C289900227C3B /* ShellScript */ = {
+		2C89AB341F4C289900227C3B /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8918,26 +8930,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C9732E71F4C38F600AC9301 /* ShellScript */ = {
+		2C9732E71F4C38F600AC9301 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C9732E81F4C38F600AC9301 /* ShellScript */ = {
+		2C9732E81F4C38F600AC9301 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
