@@ -64,14 +64,14 @@ platform :ios do
 
   #TEST
 
-  lane :testscheme do 
+  lane :test do 
   	for scheme in all_schemes
   		testscheme(scheme: scheme)
   	end
   end
   
   desc "Runs all the tests for scheme"
-  lane :test do |options|
+  lane :testscheme do |options|
     scheme = options[:scheme]
     scan(scheme:scheme)
   end
