@@ -28,17 +28,48 @@ class OverlapTableView: UITableView {
 }
 
 class AdaptiveStatsViewController: UIViewController {
-    enum State {
+    enum Section {
         case progress
         case achievements
         case ratings(days: Int?)
     }
 
-    fileprivate var state: State = .progress {
+    enum State {
+        case empty(message: String)
+        case error(message: String)
+        case loading
+        case normal(message: String?)
+    }
+
+    fileprivate var state: State = .loading {
         didSet {
-            allCountLabel.isHidden = true
-            loadingIndicator.startAnimating()
             switch state {
+            case .loading:
+                data = nil
+                tableView.reloadData()
+                loadingIndicator.startAnimating()
+                allCountLabel.isHidden = true
+            case .empty(let message), .error(let message):
+                loadingIndicator.stopAnimating()
+                allCountLabel.text = message
+                allCountLabel.isHidden = false
+            case .normal(let message):
+                loadingIndicator.stopAnimating()
+                tableView.reloadData()
+                if let message = message {
+                    allCountLabel.text = message
+                    allCountLabel.isHidden = false
+                } else {
+                    allCountLabel.isHidden = true
+                }
+            }
+        }
+    }
+
+    fileprivate var section: Section = .progress {
+        didSet {
+            state = .loading
+            switch section {
             case .progress:
                 statsPresenter?.reloadData(force: data == nil)
                 ratingSegmentedControl.isHidden = true
@@ -72,21 +103,21 @@ class AdaptiveStatsViewController: UIViewController {
     fileprivate var data: [Any]?
 
     @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
-        let states: [Int: State] = [
+        let sections: [Int: Section] = [
             0: .ratings(days: nil),
             1: .ratings(days: 7),
             2: .ratings(days: 1)
         ]
-        state = states[ratingSegmentedControl.selectedSegmentIndex] ?? .ratings(days: 1)
+        section = sections[ratingSegmentedControl.selectedSegmentIndex] ?? .ratings(days: 1)
     }
 
     @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
-        let states: [Int: State] = [
+        let sections: [Int: Section] = [
             0: .progress,
             1: .achievements,
             2: .ratings(days: 1)
         ]
-        state = states[segmentedControl.selectedSegmentIndex] ?? .progress
+        section = sections[segmentedControl.selectedSegmentIndex] ?? .progress
     }
 
     @IBAction func onCancelButtonClick(_ sender: Any) {
@@ -111,8 +142,8 @@ class AdaptiveStatsViewController: UIViewController {
 
         statsPresenter?.reloadStats()
 
-        // Default state
-        state = .progress
+        // Default section
+        section = .progress
     }
 
     fileprivate func colorize() {
@@ -142,12 +173,16 @@ class AdaptiveStatsViewController: UIViewController {
     }
 
     func reload() {
-        loadingIndicator.stopAnimating()
-
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        tableView.reloadData()
+        if data == nil {
+            state = .empty(message: NSLocalizedString("AdaptiveProgressWeeksEmpty", comment: ""))
+        } else {
+            switch state {
+            case .normal(let message):
+                state = .normal(message: message)
+            default:
+                state = .normal(message: nil)
+            }
+        }
     }
 
     fileprivate func valuesToDataEntries(values: [Int]) -> [ChartDataEntry] {
@@ -162,6 +197,9 @@ class AdaptiveStatsViewController: UIViewController {
     }
 
     fileprivate func setUpTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 112
 
@@ -211,13 +249,11 @@ extension AdaptiveStatsViewController: AdaptiveRatingsView {
             NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
             NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
         ])
-        allCountLabel.text = String(format: pluralizedString, "\(data.allCount)")
-        allCountLabel.isHidden = false
+        state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
     }
 
     func showError() {
-        allCountLabel.text = NSLocalizedString("AdaptiveRatingLoadError", comment: "")
-        allCountLabel.isHidden = false
+        state = .error(message: NSLocalizedString("AdaptiveRatingLoadError", comment: ""))
     }
 
     var separatorPosition: Int? {
@@ -225,7 +261,7 @@ extension AdaptiveStatsViewController: AdaptiveRatingsView {
             return nil
         }
 
-        switch state {
+        switch section {
         case .ratings(_):
             for i in 0..<max(0, data.count - 1) {
                 if data[i].position + 1 != data[i + 1].position {
@@ -269,11 +305,11 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
+        return (data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch state {
+        switch section {
         case .progress:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell
             if let weekProgress = data?[indexPath.item] as? WeekProgressViewData {

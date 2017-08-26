@@ -243,7 +243,7 @@
                                             <rect key="frame" x="8" y="361" width="304" height="64"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8WM-do-txJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="29"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="65"/>
                                                     <segments>
                                                         <segment title="Прогресс"/>
                                                         <segment title="Достижения"/>
@@ -255,7 +255,7 @@
                                                     </connections>
                                                 </segmentedControl>
                                                 <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-Qn-80f">
-                                                    <rect key="frame" x="0.0" y="36" width="304" height="29"/>
+                                                    <rect key="frame" x="0.0" y="64" width="304" height="1"/>
                                                     <segments>
                                                         <segment title="Всё время"/>
                                                         <segment title="7 дней"/>
@@ -305,8 +305,8 @@
                                             <rect key="frame" x="150" y="12" width="20" height="20"/>
                                             <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 пользователей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-JZ-kGb">
-                                            <rect key="frame" x="100.5" y="13" width="120" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 пользователей" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-JZ-kGb">
+                                            <rect key="frame" x="8" y="13" width="304" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -314,10 +314,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="leading" secondItem="frr-Vy-22T" secondAttribute="leading" constant="8" id="0pD-YF-F1f"/>
                                         <constraint firstItem="tpH-7N-qeU" firstAttribute="centerX" secondItem="frr-Vy-22T" secondAttribute="centerX" id="6bL-WC-OFE"/>
-                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="centerX" secondItem="frr-Vy-22T" secondAttribute="centerX" id="8eh-6B-PJa"/>
                                         <constraint firstItem="ycc-JZ-kGb" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="FYH-AU-8OZ"/>
                                         <constraint firstItem="tpH-7N-qeU" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="HP9-pD-b7w"/>
+                                        <constraint firstAttribute="trailing" secondItem="ycc-JZ-kGb" secondAttribute="trailing" constant="8" id="SNs-Hz-fRk"/>
                                     </constraints>
                                 </view>
                                 <sections/>
