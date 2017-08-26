@@ -72,18 +72,19 @@ class AdaptiveStatsViewController: UIViewController {
     fileprivate var data: [Any]?
 
     @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
-        if ratingSegmentedControl.selectedSegmentIndex == 0 {
-            state = .ratings(days: nil)
-        } else {
-            state = .ratings(days: 7)
-        }
+        let states: [Int: State] = [
+            0: .ratings(days: nil),
+            1: .ratings(days: 7),
+            2: .ratings(days: 1)
+        ]
+        state = states[ratingSegmentedControl.selectedSegmentIndex] ?? .ratings(days: 1)
     }
 
     @IBAction func onSegmentedControlValueChanged(_ sender: Any) {
         let states: [Int: State] = [
             0: .progress,
             1: .achievements,
-            2: .ratings(days: 7)
+            2: .ratings(days: 1)
         ]
         state = states[segmentedControl.selectedSegmentIndex] ?? .progress
     }

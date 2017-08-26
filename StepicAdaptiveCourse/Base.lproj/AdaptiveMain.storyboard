@@ -254,11 +254,12 @@
                                                         <action selector="onSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="CBg-7X-fF5"/>
                                                     </connections>
                                                 </segmentedControl>
-                                                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-Qn-80f">
+                                                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-Qn-80f">
                                                     <rect key="frame" x="0.0" y="36" width="304" height="29"/>
                                                     <segments>
                                                         <segment title="Всё время"/>
-                                                        <segment title="Последние 7 дней"/>
+                                                        <segment title="7 дней"/>
+                                                        <segment title="Сегодня"/>
                                                     </segments>
                                                     <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
