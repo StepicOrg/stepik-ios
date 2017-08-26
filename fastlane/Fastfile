@@ -21,12 +21,6 @@ platform :ios do
     cocoapods
   end
 
-  desc "Runs all the tests"
-  lane :test do |options|
-    scheme = options[:scheme]
-    scan(scheme:scheme)
-  end
-
   def version_string(version_number, build_number)
     "v. #{version_number} (#{build_number})"
   end
@@ -67,6 +61,20 @@ platform :ios do
     "Adaptive 3124",
     "Adaptive 3067"
   ]
+
+  #TEST
+
+  lane :testscheme do 
+  	for scheme in all_schemes
+  		testscheme(scheme: scheme)
+  	end
+  end
+  
+  desc "Runs all the tests for scheme"
+  lane :test do |options|
+    scheme = options[:scheme]
+    scan(scheme:scheme)
+  end
 
   #BETA
 
@@ -126,6 +134,7 @@ platform :ios do
     end
 
     unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
+    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
     gym(scheme: scheme,
       clean: true,
       output_directory: "artefacts",
@@ -200,6 +209,7 @@ platform :ios do
 
     clear_derived_data
     unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
+    sh "security set-keychain-settings -t 3600 -l ~/Library/Keychains/login.keychain"
     gym(scheme: "#{scheme}",
       clean: true,
       output_directory: "artefacts",
