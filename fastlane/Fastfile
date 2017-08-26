@@ -62,10 +62,14 @@ platform :ios do
     "Adaptive 3067"
   ]
 
+  test_schemes = [
+  	"Stepic"
+  ]
+
   #TEST
 
   lane :test do 
-  	for scheme in all_schemes
+  	for scheme in test_schemes
   		testscheme(scheme: scheme)
   	end
   end
