@@ -125,7 +125,7 @@ platform :ios do
       push_to_git_remote
     end
 
-    # match(type: "appstore") # more information: https://codesigning.guide
+    unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
     gym(scheme: scheme,
       clean: true,
       output_directory: "artefacts",
@@ -199,6 +199,7 @@ platform :ios do
     matchscheme(scheme: scheme)
 
     clear_derived_data
+    unlock_keychain(path: "login.keychain", password: ENV["KEYCHAIN_PASSWORD"])
     gym(scheme: "#{scheme}",
       clean: true,
       output_directory: "artefacts",
