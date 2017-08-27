@@ -13,22 +13,19 @@ class TeacherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization codex
     }
 
     func initWithUser(_ user: User) {
-    
-        
+
 //        avatarImageView.sd_setImage(with: URL(string: user.avatarURL)!, placeholderImage: Constants.placeholderImage, completed: )
-        
-        
+
         avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
         self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.white)
 
-        
 //        avatarImageView.sd_setImage(with: URL(string: user.avatarURL), placeholderImage: Constants.placeholderImage, options: []) {
 //            _, _, _, _ in
 //            self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.white)
@@ -39,5 +36,5 @@ class TeacherCollectionViewCell: UICollectionViewCell {
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         infoLabel.text = user.bio
     }
-    
+
 }

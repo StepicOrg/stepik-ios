@@ -9,7 +9,7 @@
 import UIKit
 
 class TitleTextTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
@@ -23,7 +23,7 @@ class TitleTextTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     class func heightForCellWith(title: String, text: String) -> CGFloat {
 //        Time.tick("height \(title)")
         let constrainHeight: CGFloat = 32
@@ -33,12 +33,12 @@ class TitleTextTableViewCell: UITableViewCell {
 //        Time.tock("height \(title)")
         return constrainHeight + titleHeight + textHeight
     }
-    
+
     func initWith(title: String, text: String) {
 //        Time.tick(title)
         titleLabel.text = title
         descriptionLabel.setTextWithHTMLString(text)
 //        Time.tock(title)
     }
-    
+
 }

@@ -18,24 +18,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
+
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
         if !DefaultsContainer.launch.didLaunch {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.firstOpen, parameters: nil)
             DefaultsContainer.launch.didLaunch = true
         }
-        
+
         LocalNotificationsHelper.registerNotifications()
-        
+
         if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.localNotification] as? UILocalNotification {
             if let userInfo = launchNotification.userInfo as? [String: String], let notificationType = userInfo["type"] {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
             }
         }
-        
+
         return true
     }
 
@@ -43,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalNotificationsHelper.schedule(notification: .tomorrow)
         LocalNotificationsHelper.schedule(notification: .weekly)
     }
-    
+
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         if let userInfo = notification.userInfo as? [String: String], let notificationType = userInfo["type"] {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.localNotification, parameters: ["type": notificationType])
@@ -87,4 +86,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

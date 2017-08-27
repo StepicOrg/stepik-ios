@@ -20,7 +20,7 @@ struct CourseMetainfoContainer: DataConvertable {
   var courseId: Int
   var metainfo: [CourseMetainfoEntity]
 
-  init(courseId: Int,  metainfo: [CourseMetainfoEntity] = []) {
+  init(courseId: Int, metainfo: [CourseMetainfoEntity] = []) {
     self.courseId = courseId
     self.metainfo = metainfo
   }

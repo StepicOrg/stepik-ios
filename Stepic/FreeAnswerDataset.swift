@@ -10,12 +10,11 @@ import UIKit
 import SwiftyJSON
 
 class FreeAnswerDataset: Dataset {
-    var isHTMLEnabled : Bool
+    var isHTMLEnabled: Bool
     var isAttachmentsEnabled: Bool
-    
+
     required init(json: JSON) {
         isHTMLEnabled = json["is_html_enabled"].boolValue
         isAttachmentsEnabled = json["is_attachments_enabled"].boolValue
     }
 }
-

@@ -7,25 +7,25 @@
 //
 
 import Foundation
-import Alamofire 
+import Alamofire
 
 class RequestChain {
     typealias CompletionHandler = (_ success: Bool, _ errorResult: ErrorResult?) -> Void
-    
+
     struct ErrorResult {
         let request: URLRequest?
         let error: Error?
     }
-    
-    fileprivate var requests:[Request] = []
-    
+
+    fileprivate var requests: [Request] = []
+
     init(requests: [Request]) {
         self.requests = requests
     }
-    
+
     func start(_ completionHandler: @escaping CompletionHandler) {
         if let request = requests.first {
-            Alamofire.request(request as! URLRequestConvertible).response { 
+            Alamofire.request(request as! URLRequestConvertible).response {
                 response in
                 if response.error != nil {
                     completionHandler(false, ErrorResult(request: response.request, error: response.error))
@@ -39,6 +39,6 @@ class RequestChain {
             completionHandler(true, nil)
             return
         }
-        
+
     }
 }

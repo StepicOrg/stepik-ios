@@ -25,10 +25,9 @@ import Foundation
  Deadlines = "Deadlines";
  */
 
-
 struct Localizables {
     static let noAvailableCourses = NSLocalizedString("NoAvailableCourses", comment: "")
-    static let connectDeviceForSetup = NSLocalizedString("PlugDeviceForSettingUp", comment: "")    
+    static let connectDeviceForSetup = NSLocalizedString("PlugDeviceForSettingUp", comment: "")
     static let nextDeadline = NSLocalizedString("NextDeadline", comment: "")
     static let nearestDeadline = NSLocalizedString("NearestDeadline", comment: "")
     static let courseFinish = NSLocalizedString("CourseFinish", comment: "")

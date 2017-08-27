@@ -63,7 +63,7 @@ extension PresentrAnimation {
 
             animatingView?.frame = finalFrame
 
-            }, completion: { (value: Bool) in
+            }, completion: { (_: Bool) in
 
                 if !isPresenting {
                     fromView?.removeFromSuperview()

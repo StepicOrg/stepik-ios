@@ -11,18 +11,18 @@ import SwiftyJSON
 
 class NumberReply: NSObject, Reply {
 
-    var number : String
-    
+    var number: String
+
     init(number: String) {
         self.number = number
     }
-    
+
     required init(json: JSON) {
         number = json["number"].stringValue
         super.init()
     }
-    
-    var dictValue : [String : Any] {
-        return ["number" : number]
+
+    var dictValue: [String : Any] {
+        return ["number": number]
     }
 }

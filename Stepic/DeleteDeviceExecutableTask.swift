@@ -13,19 +13,19 @@ import SwiftyJSON
 /*
  ExecutableTask for deleting device on the server 
  */
-class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
-    
-    var id : String {
+class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
+
+    var id: String {
         get {
             return description
         }
     }
-    
+
     init(userId: Int, deviceId: Int) {
         self.userId = userId
         self.deviceId = deviceId
     }
-    
+
     convenience required init?(dictionary dict: [String: Any]) {
         let taskDict = dict["task"] as? [String: Any]
         let typeString = dict["type"] as? String
@@ -33,8 +33,7 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
         let deviceId = taskDict?["device"] as? Int
         if let user = userId,
             let device = deviceId,
-            let typeS = typeString
-        {
+            let typeS = typeString {
             if ExecutableTaskType(rawValue: typeS) != ExecutableTaskType.deleteDevice {
                 return nil
             }
@@ -43,54 +42,50 @@ class DeleteDeviceExecutableTask : Executable, DictionarySerializable {
             return nil
         }
     }
-    
+
     func serializeToDictionary() -> [String : Any] {
-        let res : [String: Any] = 
+        let res: [String: Any] =
             [
-                "type" : type.rawValue, 
+                "type": type.rawValue,
                 "task": [
-                    "user" : userId,
-                    "device" : deviceId
+                    "user": userId,
+                    "device": deviceId
                 ]
             ]
         print(res)
         return res
     }
 
-    
-    var type : ExecutableTaskType {
+    var type: ExecutableTaskType {
         return .deleteDevice
     }
-    
-    var userId : Int
-    var deviceId : Int
-    
+
+    var userId: Int
+    var deviceId: Int
+
     var description: String {
         return "\(type.rawValue) \(userId) \(deviceId)"
     }
-    
-    func execute(success: @escaping ((Void) -> Void), failure: @escaping ((ExecutionError) -> Void)) {
+
+    func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void)) {
         let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")
         if let token = recoveryManager.recoverStepicToken(userId: userId) {
             let device = deviceId
             let user = userId
-            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
-                {
+            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: {
                     print("user \(user) successfully deleted device with id \(device)")
                     success()
                 }, error: {
                     error in
                     print("error \(error) while removing device, trying to refresh token and retry")
-                    AuthManager.sharedManager.refreshTokenWith(token.refreshToken, success: 
-                        {
+                    AuthManager.sharedManager.refreshTokenWith(token.refreshToken, success: {
                             token in
                             print("successfully refreshed token")
                             if AuthInfo.shared.userId == user {
                                 AuthInfo.shared.token = token
                             }
                             recoveryManager.writeStepicToken(token, userId: user)
-                            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: 
-                                {
+                            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: {
                                     print("user \(user) successfully deleted device with id \(device) after refreshing the token")
                                     success()
                                 }, error: {

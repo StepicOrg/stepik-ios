@@ -13,5 +13,5 @@ import Foundation
  Defines the presentation pattern
  */
 protocol AlertManager {
-    func present(alert: UIViewController, inController controller: UIViewController) 
+    func present(alert: UIViewController, inController controller: UIViewController)
 }

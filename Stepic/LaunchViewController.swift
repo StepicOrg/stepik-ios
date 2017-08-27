@@ -17,14 +17,13 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var continueWithLabel: UILabel!
     @IBOutlet weak var orLabel: UILabel!
-    
+
     @IBOutlet weak var logotypeTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var logotypeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var logotypeImageView: UIImageView!
-    
-    
-    var signInController : SignInViewController?
-    
+
+    var signInController: SignInViewController?
+
     func setupLocalizations() {
         signInButton.setTitle(NSLocalizedString("SignInByEmail", comment: ""), for: .normal)
         signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: UIControlState())
@@ -32,33 +31,33 @@ class LaunchViewController: UIViewController {
         continueWithLabel.text = NSLocalizedString("SocialSignIn", comment: "")
         orLabel.text = NSLocalizedString("or", comment: "")
     }
-    
-    var cancel : ((Void)->Void)? {
+
+    var cancel : (() -> Void)? {
         return (navigationController as? AuthNavigationViewController)?.cancel
     }
-    
+
     var canDismiss: Bool {
         return (navigationController as? AuthNavigationViewController)?.canDismiss ?? true
     }
 
-    var success : ((String)->Void)? {
+    var success: ((String) -> Void)? {
         return (navigationController as? AuthNavigationViewController)?.loggedSuccess
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLocalizations()
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-        
+
         navigationController?.navigationBar.isOpaque = true
         navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
         navigationController?.navigationBar.barTintColor = UIColor.white
-        
+
         dismissButton.isHidden = !canDismiss
         signInButton.setStepicGreenStyle()
         signUpButton.setStepicWhiteStyle()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(LaunchViewController.didGetAuthCode(_:)), name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
     }
 
@@ -66,21 +65,21 @@ class LaunchViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func signInPressed(_ sender: UIButton) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onLaunchScreen, parameters: nil)
     }
-    
+
     @IBAction func signUpPressed(_ sender: UIButton) {
         self.performSegue(withIdentifier: "registrationSegue", sender: self)
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onLaunchScreen, parameters: nil)
@@ -94,7 +93,7 @@ class LaunchViewController: UIViewController {
             })
         }
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if size.height <= 320 {
@@ -103,10 +102,10 @@ class LaunchViewController: UIViewController {
             logotypeImageView.isHidden = false
         }
     }
-    
+
     func didGetAuthCode(_ notification: Foundation.Notification) {
         print("entered didGetAuthentificationCode")
-        
+
         WebControllerManager.sharedManager.dismissWebControllerWithKey("social auth", animated: true, completion: {
             self.auth(code: (notification as NSNotification).userInfo?["code"] as? String ?? "")
         }, error: {
@@ -114,7 +113,7 @@ class LaunchViewController: UIViewController {
             print(errorMessage)
         })
     }
-    
+
     func auth(code: String) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.codeReceived, parameters: nil)
         SVProgressHUD.show(withStatus: "")
@@ -135,7 +134,7 @@ class LaunchViewController: UIViewController {
                     })
                 }
             }, error: {
-                e in
+                _ in
                 print("successfully signed in, but could not get user")
                 SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
                 UIThread.performUI {
@@ -147,11 +146,11 @@ class LaunchViewController: UIViewController {
                 }
             })
         }, failure: {
-            e in
+            _ in
             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         })
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "socialNetworksEmbedSegue" {
             let dvc = segue.destination as? SocialNetworksViewController
@@ -164,7 +163,7 @@ class LaunchViewController: UIViewController {
             }
         }
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
         print("did deinit SignInViewController")

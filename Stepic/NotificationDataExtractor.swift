@@ -12,14 +12,12 @@ import Foundation
  Extracts information from the given notification
  */
 class NotificationDataExtractor {
-    var notification : Notification
-    
-    
-    init(notification : Notification) {
+    var notification: Notification
+
+    init(notification: Notification) {
         self.notification = notification
     }
-    
-    
+
     //gets course id if it is available for the given notification type
     func getCourseId() -> Int? {
         if notification.type != .Learn {
@@ -29,14 +27,14 @@ class NotificationDataExtractor {
                 if let courseIdStartIndex = courseLink.lastIndexOf("-") {
                     let start = courseLink.characters.index(courseLink.startIndex, offsetBy: courseIdStartIndex + 1)
                     let end = courseLink.characters.index(courseLink.startIndex, offsetBy: courseLink.characters.count - 1)
-                    let courseIdString = courseLink.substring(with: start ..< end ) 
+                    let courseIdString = courseLink.substring(with: start ..< end )
                     return Int(courseIdString)
                 }
             }
             return nil
         }
     }
-    
+
     //gets the comments URL if it is available for the given notification type
     func getCommentsURL() -> URL? {
         if notification.type != .Comments {

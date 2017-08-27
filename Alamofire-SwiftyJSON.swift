@@ -25,13 +25,13 @@ extension DataRequest {
         options: JSONSerialization.ReadingOptions = .allowFragments)
         -> DataResponseSerializer<JSON> {
             return DataResponseSerializer { _, response, data, error in
-                return Request.serializeResponseSwiftyJSON(options: options,
+                Request.serializeResponseSwiftyJSON(options: options,
                                                            response: response,
                                                            data: data,
                                                            error: error)
             }
     }
-    
+
     /// Adds a handler to be called once the request has finished.
     ///
     /// - parameter options:
@@ -73,18 +73,18 @@ extension Request {
         error: Error?)
         -> Result<JSON> {
             guard error == nil else { return .failure(error!) }
-            
+
             if let response = response, emptyDataStatusCodes.contains(response.statusCode) {
                 return .success(JSON.null)
             }
-            
+
             guard let validData = data, !validData.isEmpty else {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength))
             }
-            
+
             do {
                 let json = try JSONSerialization.jsonObject(with: validData, options: options)
-                
+
                 return .success(JSON(json))
             } catch {
                 return .failure(AFError.responseSerializationFailed(

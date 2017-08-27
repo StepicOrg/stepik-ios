@@ -10,36 +10,36 @@ import Foundation
 import FLKAutoLayout
 
 class CodeInputAccessoryView: UIView {
-    
+
     @IBOutlet weak var hideKeyboardImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var hideKeyboardAction: ((Void)->(Void))?
-    
-    var buttons : [CodeInputAccessoryButtonData] = [] {
+    var hideKeyboardAction: (() -> Void)?
+
+    var buttons: [CodeInputAccessoryButtonData] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
     var size: CodeInputAccessorySize = .small
-    
+
     fileprivate func initialize() {
         collectionView.register(UINib(nibName: "CodeInputAccessoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CodeInputAccessoryCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(CodeInputAccessoryView.didTapHideKeyboardImageView(recognizer:)))
         hideKeyboardImageView.addGestureRecognizer(tapG)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         hideKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     func didTapHideKeyboardImageView(recognizer: UIGestureRecognizer) {
         hideKeyboardAction?()
     }
-    
+
     fileprivate var view: UIView!
-    
+
     fileprivate func setup() {
         view = loadViewFromNib()
         view.frame = bounds
@@ -47,38 +47,37 @@ class CodeInputAccessoryView: UIView {
         addSubview(view)
         initialize()
     }
-    
+
     fileprivate func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "CodeInputAccessoryView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }
-    
+
 //    override var intrinsicContentSize: CGSize {
 //        return CGSize(width: self.bounds.width, height: size.realSizes.viewHeight)
 //    }
 
-    
     override init(frame: CGRect) {
         // 1. setup any properties here
-        
+
         // 2. call super.init(frame:)
         super.init(frame: frame)
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         // 1. setup any properties here
-        
+
         // 2. call super.init(coder:)
         super.init(coder: aDecoder)
-        
+
         // 3. Setup view from .xib file
         setup()
     }
-    
-    convenience init(frame: CGRect, buttons: [CodeInputAccessoryButtonData], size: CodeInputAccessorySize, hideKeyboardAction: @escaping (Void)->(Void)) {
+
+    convenience init(frame: CGRect, buttons: [CodeInputAccessoryButtonData], size: CodeInputAccessorySize, hideKeyboardAction: @escaping () -> Void) {
         self.init(frame: frame)
         self.size = size
         self.hideKeyboardAction = hideKeyboardAction
@@ -92,7 +91,7 @@ extension CodeInputAccessoryView : UICollectionViewDelegateFlowLayout {
         let width = CodeInputAccessoryCollectionViewCell.width(for: buttons[indexPath.item].title, size: size)
         return CGSize(width: width, height: collectionView.bounds.height)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         buttons[indexPath.item].action()
     }
@@ -102,26 +101,26 @@ extension CodeInputAccessoryView : UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return buttons.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CodeInputAccessoryCollectionViewCell", for: indexPath) as? CodeInputAccessoryCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+
         cell.initialize(text: buttons[indexPath.item].title, size: size)
-        
+
         return cell
     }
 }
 
 struct CodeInputAccessoryButtonData {
     var title: String
-    var action: (Void) -> (Void)
-    init(title: String, action: @escaping (Void) -> (Void)) {
+    var action: () -> Void
+    init(title: String, action: @escaping () -> Void) {
         self.title = title
         self.action = action
     }

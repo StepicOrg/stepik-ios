@@ -12,8 +12,8 @@ class RefreshTableViewCell: UITableViewCell {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var refreshButton: UIButton!
-    
-    var isRefreshing : Bool = true {
+
+    var isRefreshing: Bool = true {
         didSet(value) {
             if value {
                 activityIndicator.isHidden = false
@@ -27,27 +27,27 @@ class RefreshTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     @IBAction func refreshPressed(_ sender: UIButton) {
         isRefreshing = true
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    fileprivate var refresh : ((Void)->Void)?
-    
-    func initWithMessage(_ message : String, isRefreshing: Bool, refreshAction : @escaping (Void)->Void) {
+
+    fileprivate var refresh : (() -> Void)?
+
+    func initWithMessage(_ message: String, isRefreshing: Bool, refreshAction : @escaping () -> Void) {
         refresh = refreshAction
         self.isRefreshing = isRefreshing
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    
+
 }

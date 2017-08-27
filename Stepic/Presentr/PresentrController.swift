@@ -15,7 +15,7 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
 
     /// Should the presented controller's view have rounded corners.
     let roundCorners: Bool
-    
+
     /// Radius of rounded corners if roundCorners is true.
     let cornerRadius: CGFloat
 
@@ -63,7 +63,7 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
     fileprivate var chromeView = UIView()
     fileprivate var keyboardIsShowing: Bool = false
     private var translationStart: CGPoint = CGPoint.zero
-    
+
     private var presentedViewIsBeingDissmissed: Bool = false
 
     // MARK: Init
@@ -100,13 +100,13 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
         } else {
             removeCornerRadiusFromPresentedView()
         }
-        
+
         if dropShadow != nil {
             addDropShadowToPresentedView()
         } else {
             removeDropShadowFromPresentedView()
         }
-        
+
         if dismissOnSwipe {
             setupDismissOnSwipe()
         }
@@ -144,7 +144,7 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
     private func removeCornerRadiusFromPresentedView() {
         presentedViewController.view.layer.cornerRadius = 0
     }
-    
+
     private func addDropShadowToPresentedView() {
         guard let shadow = self.dropShadow else { return }
         presentedViewController.view.layer.masksToBounds = false
@@ -161,12 +161,12 @@ class PresentrController: UIPresentationController, UIAdaptivePresentationContro
             presentedViewController.view.layer.shadowRadius = shadowRadius
         }
     }
-    
+
     private func removeDropShadowFromPresentedView() {
         presentedViewController.view.layer.masksToBounds = true
         presentedViewController.view.layer.shadowOpacity = 0
     }
-    
+
     private func registerKeyboardObserver() {
 //        NotificationCenter.default.addObserver(self, selector: #selector(PresentrController.keyboardWasShown(notification:)), name: .UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(PresentrController.keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
@@ -331,7 +331,7 @@ extension PresentrController {
         chromeView.frame = containerView!.bounds
         presentedView!.frame = frameOfPresentedViewInContainerView
     }
-    
+
     // MARK: Animation
 
     override func presentationTransitionWillBegin() {
@@ -341,7 +341,7 @@ extension PresentrController {
 
         if let coordinator = presentedViewController.transitionCoordinator {
 
-            coordinator.animate(alongsideTransition: { context in
+            coordinator.animate(alongsideTransition: { _ in
                 self.chromeView.alpha = 1.0
                 }, completion: nil)
 
@@ -353,7 +353,7 @@ extension PresentrController {
     override func dismissalTransitionWillBegin() {
         if let coordinator = presentedViewController.transitionCoordinator {
 
-            coordinator.animate(alongsideTransition: { context in
+            coordinator.animate(alongsideTransition: { _ in
                 self.chromeView.alpha = 0.0
                 }, completion: nil)
 

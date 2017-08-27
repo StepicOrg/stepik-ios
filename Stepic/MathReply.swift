@@ -10,19 +10,19 @@ import UIKit
 import SwiftyJSON
 
 class MathReply: NSObject, Reply {
-    var formula : String
-    
+    var formula: String
+
     init(formula: String) {
         self.formula = formula
     }
-    
+
     required init(json: JSON) {
         formula = json["formula"].stringValue
         super.init()
     }
-    
-    var dictValue : [String : Any] {
-        return ["formula" : formula]
+
+    var dictValue: [String : Any] {
+        return ["formula": formula]
     }
 
 }

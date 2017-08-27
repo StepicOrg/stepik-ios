@@ -10,21 +10,24 @@ import UIKit
 import SwiftyJSON
 
 class CodeReply: Reply {
-    
+
     var code: String
-    var language: CodeLanguage
-    
+    var language: CodeLanguage?
+    var languageName: String
+
     init(code: String, language: CodeLanguage) {
         self.code = code
         self.language = language
+        self.languageName = language.rawValue
     }
-    
+
     required init(json: JSON) {
         code = json["code"].stringValue
-        language = CodeLanguage(rawValue: json["language"].stringValue) ?? .unsupported
+        languageName = json["language"].stringValue
+        language = CodeLanguage(rawValue: languageName)
     }
-    
-    var dictValue : [String : Any] {
-        return ["code" : code, "language": language.rawValue]
+
+    var dictValue: [String : Any] {
+        return ["code": code, "language": languageName]
     }
 }

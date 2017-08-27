@@ -12,15 +12,15 @@ import Nimble
 
 @testable import Stepic
 
-class CertificateSpec : QuickSpec {
-    
+class CertificateSpec: QuickSpec {
+
     override func spec() {
         describe("certificates") {
-            var view : CertificatesViewTestMock!
-            var presenter : CertificatesPresenter!
-            var coursesAPI : CoursesAPIPaginatedMock!
-            var certificatesAPI : CertificatesAPIPaginatedMock!
-  
+            var view: CertificatesViewTestMock!
+            var presenter: CertificatesPresenter!
+            var coursesAPI: CoursesAPIPaginatedMock!
+            var certificatesAPI: CertificatesAPIPaginatedMock!
+
             beforeEach {
                 waitUntil {
                     done in
@@ -29,7 +29,7 @@ class CertificateSpec : QuickSpec {
                         AuthInfo.shared.token = token
                         done()
                     }, failure: {
-                        error in
+                        _ in
                         print("error")
                         done()
                     })
@@ -39,7 +39,7 @@ class CertificateSpec : QuickSpec {
                 certificatesAPI = CertificatesAPIPaginatedMock()
                 presenter = CertificatesPresenter(certificatesAPI: certificatesAPI, coursesAPI: coursesAPI, presentationContainer: PresentationContainer.certificates, view: view)
             }
-        
+
             describe("refreshing") {
                 beforeEach {
                     presenter.certificates = []
@@ -56,11 +56,11 @@ class CertificateSpec : QuickSpec {
                 }
                 fit("gets correct certificates") {
                     let expectedGrades = (10...19).map({return $0})
-                    expect(view.grades).to(equal(expectedGrades))
+                    expect(view.grades) == expectedGrades
                 }
-                
+
                 context("logs out") {
-                    beforeEach{
+                    beforeEach {
                         AuthInfo.shared.token = nil
                         waitUntil {
                             done in
@@ -71,10 +71,10 @@ class CertificateSpec : QuickSpec {
                         }
                     }
                     it("sets anonymous and cleans certificates") {
-                        expect(view.grades).to(equal([]))
+                        expect(view.grades) == []
                     }
                 }
-                
+
                 describe("refresh again") {
                     context("error") {
                         beforeEach {
@@ -87,14 +87,14 @@ class CertificateSpec : QuickSpec {
                                 presenter.refreshCertificates()
                             }
                         }
-                        
+
                         it("does not drop certificates") {
                             let expectedGrades = (10...19).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
                     }
                 }
-                
+
                 describe("load next page") {
                     context("error") {
                         beforeEach {
@@ -109,10 +109,10 @@ class CertificateSpec : QuickSpec {
                         }
                         it("does not drop certificates") {
                             let expectedGrades = (10...19).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
                     }
-                    
+
                     context("success") {
                         beforeEach {
                             certificatesAPI.reportErrorOnNextRequest = false
@@ -125,20 +125,19 @@ class CertificateSpec : QuickSpec {
                             }                        }
                         it("gets correct certificates") {
                             let expectedGrades = (10...29).map({return $0})
-                            expect(view.grades).to(equal(expectedGrades))
+                            expect(view.grades) == expectedGrades
                         }
-                        
+
                         describe("refresh") {
                             it("gets next certificates") {
                                 let expectedGrades = (10...19).map({return $0})
-                                expect(view.grades).to(equal(expectedGrades))
+                                expect(view.grades) == expectedGrades
                             }
                         }
                     }
-                    
+
                 }
-                
-                
+
             }
         }
     }

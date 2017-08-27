@@ -13,14 +13,14 @@ import SwiftyJSON
 class VideoURL: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-    convenience required init(json: JSON){
+    convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         quality = json["quality"].stringValue
 //        print(quality)
-        url = json["url"].stringValue        
+        url = json["url"].stringValue
     }
 }

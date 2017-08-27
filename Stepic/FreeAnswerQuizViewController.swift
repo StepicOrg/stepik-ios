@@ -11,77 +11,89 @@ import UIKit
 class FreeAnswerQuizViewController: QuizViewController {
 
     let textViewHeight = 64
-    
+
+    var dataset: FreeAnswerDataset?
+    var reply: FreeAnswerReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
         textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
-        
+
         textView.constrainHeight("\(textViewHeight)")
-        
+
         textView.font = UIFont.systemFont(ofSize: 16)
         // Do any additional setup after loading the view.
     }
 
     var textView = UITextView()
-    
-    override var correctTitle : String {
+
+    override var correctTitle: String {
         return NSLocalizedString("CorrectFreeResponse", comment: "")
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override var needsToRefreshAttemptWhenWrong : Bool {
+
+    override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
-    
-    //Override this in subclass
-    override func updateQuizAfterAttemptUpdate() {
+
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? FreeAnswerDataset else {
+            return
+        }
+
+        self.dataset = dataset
         textView.text = ""
+        textView.isEditable = true
     }
-    
-    var dataset : FreeAnswerDataset? {
-        return attempt?.dataset as? FreeAnswerDataset
-    }
-    
-    //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if let r = submission?.reply as? FreeAnswerReply { 
-            if let d = dataset {
-                if d.isHTMLEnabled {
-                    let attributed = try! NSAttributedString(data: (r.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType], documentAttributes: nil)
-                    let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
-                    mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(0, mutableAttributed.string.characters.count))
-                    textView.attributedText = mutableAttributed
-                } else {
-                    return textView.text = r.text
-                }
-            }
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? FreeAnswerReply else {
+            return
         }
-        if submission?.status == "correct" {
-            textView.isEditable = false
+
+        self.reply = reply
+        display(reply: reply)
+        textView.isEditable = status != .correct
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? FreeAnswerReply else {
+            return
+        }
+
+        guard let dataset = dataset else {
+            return
+        }
+
+        if dataset.isHTMLEnabled {
+            let attributed = try! NSAttributedString(data: (reply.text as NSString).data(using: String.Encoding.unicode.rawValue, allowLossyConversion: false)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+            let mutableAttributed = NSMutableAttributedString(attributedString: attributed)
+            mutableAttributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: mutableAttributed.string.characters.count))
+            textView.attributedText = mutableAttributed
         } else {
-            textView.isEditable = true
+            textView.text = reply.text
         }
     }
-        
+
     //Override this in the subclass
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         if let d = dataset {
             if d.isHTMLEnabled {
                 return FreeAnswerReply(text: textView.text.replacingOccurrences(of: "\n", with: "<br>"))
             } else {
                 return FreeAnswerReply(text: textView.text)
             }
-        } 
+        }
         return FreeAnswerReply(text: textView.text)
     }
-    
+
     /*
     // MARK: - Navigation
 

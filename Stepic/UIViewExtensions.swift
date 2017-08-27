@@ -16,7 +16,7 @@ extension UIView {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
-    
+
     func setRoundedCorners(cornerRadius radius: CGFloat, borderWidth: CGFloat? = nil, borderColor: UIColor? = nil ) {
         self.layer.cornerRadius = radius
         if let bw = borderWidth {

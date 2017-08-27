@@ -7,7 +7,7 @@
 //
 
 class ApplicationInfo {
-    
+
     struct Path {
         struct URL {
             static let appId = "url.appId"
@@ -30,6 +30,7 @@ class ApplicationInfo {
             static let isAdaptive = "adaptive.isAdaptive"
             static let courseId = "adaptive.courseId"
             static let mainColor = "adaptive.mainColor"
+            static let ratingURL = "adaptive.ratingURL"
         }
         struct RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"
@@ -54,9 +55,9 @@ class ApplicationInfo {
             }
         }
     }
-    
+
     private var settings: NSDictionary?
-    
+
     convenience init?(plist: String) {
         self.init()
         let bundle = Bundle(for: type(of: self) as AnyClass)
@@ -68,14 +69,14 @@ class ApplicationInfo {
         }
         self.settings = dic
     }
-    
+
     func get(for path: String) -> Any? {
         guard let dic = settings else {
             return nil
         }
         return dic.value(forKeyPath: path)
     }
-    
+
     func has(path: String) -> Bool {
         guard let dic = settings else {
             return false

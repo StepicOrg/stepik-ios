@@ -16,11 +16,11 @@ enum SearchResultsState: String {
 }
 
 class SearchResultsCoursesViewController: CoursesViewController {
-    
-    var parentVC : UIViewController?
-    
+
+    var parentVC: UIViewController?
+
     var updateSearchBarBlock: ((String) -> Void)?
-    var hideKeyboardBlock: ((Void) -> Void)?
+    var hideKeyboardBlock: (() -> Void)?
 
     lazy var suggestionsVC: SearchQueriesViewController = {
         let vc = SearchQueriesViewController()
@@ -32,10 +32,10 @@ class SearchResultsCoursesViewController: CoursesViewController {
         vc.hideKeyboardBlock = self.hideKeyboardBlock
         return vc
     }()
-    
+
     var state = SearchResultsState.suggestions
-    
-    var query : String = "" {
+
+    var query: String = "" {
         didSet {
             switch state {
             case .suggestions:
@@ -53,7 +53,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
             }
         }
     }
-    
+
     override func refreshingChangedTo(_ refreshing: Bool) {
         if refreshing {
             doesPresentActivityIndicatorView = true
@@ -62,9 +62,9 @@ class SearchResultsCoursesViewController: CoursesViewController {
             doesPresentActivityIndicatorView = false
         }
     }
-    
-    lazy var activityView : UIView = self.initActivityView()
-    
+
+    lazy var activityView: UIView = self.initActivityView()
+
     func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
@@ -80,43 +80,43 @@ class SearchResultsCoursesViewController: CoursesViewController {
         v.isHidden = false
         return v
     }
-    
-    var doesPresentActivityIndicatorView : Bool = false {
+
+    var doesPresentActivityIndicatorView: Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
                 print("present activity indicator view")
-                UIThread.performUI{self.activityView.isHidden = false}
+                UIThread.performUI {self.activityView.isHidden = false}
             } else {
                 print("dismiss activity indicator view")
-                UIThread.performUI{self.activityView.isHidden = true}
+                UIThread.performUI {self.activityView.isHidden = true}
             }
         }
     }
-    
+
     override func viewDidLoad() {
         refreshEnabled = false
-        
+
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
-        
+
         super.viewDidLoad()
         // Do any additional setup after loading the view.        
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countTopOffset()
     }
-    
-    var viewTopHeight : CGFloat?
-    
+
+    var viewTopHeight: CGFloat?
+
     func countTopOffset() {
         guard let navigationHeight = parentVC?.navigationController?.navigationBar.bounds.height else {
             return
         }
-        
+
         let topHeight = UIApplication.shared.statusBarFrame.height + navigationHeight
-        
+
         if let currentHeight = viewTopHeight {
             let topOffset = currentHeight - topHeight
             if topOffset != 0 {
@@ -125,38 +125,38 @@ class SearchResultsCoursesViewController: CoursesViewController {
         }
         viewTopHeight = topHeight
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         countTopOffset()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewTopHeight = nil
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
     }
-    
-    var currentRequest : Request?
-    
-    let cancelErrorCode : Int = -999
-    
+
+    var currentRequest: Request?
+
+    let cancelErrorCode: Int = -999
+
     override func refreshCourses() {
         isRefreshing = true
-        performRequest({ 
+        performRequest({
             [weak self]
             () -> Void in
             if let s = self {
-                s.currentRequest = ApiDataDownloader.search.search(query: s.query, type: "course", page: 1, success: { 
-                    (searchResults, meta) -> Void in
+                s.currentRequest = ApiDataDownloader.search.search(query: s.query, type: "course", page: 1, success: {
+                    searchResults, meta -> Void in
                     let ids = searchResults.flatMap({return $0.courseId})
-                    
-                    s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: { 
-                        (newCourses) -> Void in
-                        
+
+                    s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
+                        newCourses -> Void in
+
                         s.courses = Sorter.sort(newCourses, byIds: ids)
                         s.meta = meta
                         s.currentPage = 1
@@ -165,42 +165,42 @@ class SearchResultsCoursesViewController: CoursesViewController {
                             s.tableView.reloadData()
                         }
                         s.isRefreshing = false
-                        }, error: { 
-                            (error) -> Void in
+                        }, error: {
+                            error -> Void in
                             print("failed downloading courses data in refresh")
                             if error != .cancelled {
                                 s.handleRefreshError()
                             }
                     })
-                    
-                    }, error: { 
-                        (error) -> Void in
+
+                    }, error: {
+                        error -> Void in
                         print("failed refreshing course ids in refresh")
                         if error.code != s.cancelErrorCode {
                             s.handleRefreshError()
                         }
                 })
             }
-            }, error:  {
-                [weak self] 
+            }, error: {
+                [weak self]
                 error in
                 guard let s = self else { return }
                 if error == PerformRequestError.noAccessToRefreshToken {
                     AuthInfo.shared.token = nil
                     RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in 
+                        [weak self] in
                         self?.refreshCourses()
                         }, cancel: nil)
                 }
                 self?.handleRefreshError()
         })
     }
-    
+
     override func loadNextPage() {
         if isRefreshing || isLoadingMore {
             return
         }
-        
+
         isLoadingMore = true
         performRequest({
             [weak self]
@@ -211,87 +211,85 @@ class SearchResultsCoursesViewController: CoursesViewController {
             _ = ApiDataDownloader.search.search(query: s.query, type: "course", page: s.currentPage + 1, success: {
                 [weak self]
                 (searchResults, meta) -> Void in
-                
+
                 guard let s = self else {
                     return
                 }
-                
+
                 let ids = searchResults.flatMap({return $0.courseId})
                 _ = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
                     [weak self]
                     (newCourses) -> Void in
-                    
+
                     guard let s = self else {
                         return
                     }
 
-                    
                     if !s.isLoadingMore {
                         return
                     }
-                    
+
                     s.currentPage += 1
                     s.courses += Sorter.sort(newCourses, byIds: ids)
                     s.meta = meta
                     //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI{s.tableView.reloadData()}
-                    
-                    
+                    UIThread.performUI {s.tableView.reloadData()}
+
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
-                    }, error: { 
-                        (error) -> Void in
+                    }, error: {
+                        error -> Void in
                         print("failed downloading courses data in Next")
                         if error != .cancelled {
                             s.handleLoadMoreError()
                         }
                 })
-                
-                }, error: { 
-                    (error) -> Void in
+
+                }, error: {
+                    error -> Void in
                     print("failed refreshing course ids in Next")
                     if error.code != s.cancelErrorCode {
                         s.handleLoadMoreError()
                     }
             })
-        }, error:  {
-            [weak self] 
+        }, error: {
+            [weak self]
             error in
             guard let s = self else { return }
             if error == PerformRequestError.noAccessToRefreshToken {
                 AuthInfo.shared.token = nil
                 RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in 
+                    [weak self] in
                     self?.refreshCourses()
                     }, cancel: nil)
             }
             self?.handleLoadMoreError()
         })
     }
-    
+
     override func handleRefreshError() {
         self.isRefreshing = false
         courses = []
-        UIThread.performUI{ self.tableView.reloadData() }
-        if let vc = parentVC { 
-            UIThread.performUI{ Messages.sharedManager.showConnectionErrorMessage(inController: vc.navigationController!) }
+        UIThread.performUI { self.tableView.reloadData() }
+        if let vc = parentVC {
+            UIThread.performUI { Messages.sharedManager.showConnectionErrorMessage(inController: vc.navigationController!) }
         }
-        
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func performSegue(withIdentifier identifier: String, sender: Any?) {
-        if identifier == "showCourse" || identifier == "showSections" { 
+        if identifier == "showCourse" || identifier == "showSections" {
             parentVC?.performSegue(withIdentifier: identifier, sender: sender)
         } else {
             super.performSegue(withIdentifier: identifier, sender: sender)
         }
     }
-    
+
     /*
      // MARK: - Navigation
      
@@ -301,7 +299,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
+
 }
 
 extension SearchResultsCoursesViewController {
@@ -314,20 +312,20 @@ extension SearchResultsCoursesViewController {
     func imageForEmptyDataSet(_ scrollView: UIScrollView!) -> UIImage! {
         return Images.emptyCoursesPlaceholder
     }
-    
+
     func titleForEmptyDataSet(_ scrollView: UIScrollView!) -> NSAttributedString! {
-        
+
         let text = NSLocalizedString("NoSearchResultsTitle", comment: "")
         let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
                           NSForegroundColorAttributeName: UIColor.darkGray]
-        
+
         return NSAttributedString(string: text, attributes: attributes)
     }
-    
+
     func backgroundColorForEmptyDataSet(_ scrollView: UIScrollView!) -> UIColor! {
         return UIColor.white
     }
-    
+
     func verticalOffsetForEmptyDataSet(_ scrollView: UIScrollView!) -> CGFloat {
         return 0
     }
@@ -337,7 +335,7 @@ extension SearchResultsCoursesViewController {
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return false
     }
-    
+
     func emptyDataSetDidTapView(_ scrollView: UIScrollView!) {
         hideKeyboardBlock?()
     }

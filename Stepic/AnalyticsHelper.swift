@@ -16,13 +16,13 @@ import Crashlytics
 class AnalyticsHelper: NSObject {
     static var sharedHelper = AnalyticsHelper()
     fileprivate override init() {super.init()}
-    
+
     func setupAnalytics() {
         Fabric.with([Crashlytics.self])
         FIRApp.configure()
-        
+
         Mixpanel.initialize(token: Tokens.shared.mixpanelToken)
-        
+
         YMMYandexMetrica.activate(withApiKey: Tokens.shared.appMetricaToken)
     }
 }

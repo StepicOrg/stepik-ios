@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum FetchError : Error {
+enum FetchError: Error {
     case requestExecution
 }
 
-enum ConnectionError : Error {
+enum ConnectionError: Error {
     case noDataRecievedError, parsingError, tokenRefreshError
 }

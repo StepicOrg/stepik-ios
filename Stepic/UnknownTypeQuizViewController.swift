@@ -10,18 +10,18 @@ import UIKit
 
 class UnknownTypeQuizViewController: UIViewController {
 
-    var stepUrl : String!
-    var delegate : QuizControllerDelegate?
-    
+    var stepUrl: String!
+    weak var delegate: QuizControllerDelegate?
+
     @IBOutlet weak var solveOnTheWebsiteButton: UIButton!
-    
+
     @IBAction func solveOnTheWebsitePressed(_ sender: UIButton) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed, parameters: nil)
         let url = URL(string: stepUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
-        
+
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         solveOnTheWebsiteButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
@@ -32,7 +32,7 @@ class UnknownTypeQuizViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         view.layoutIfNeeded()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

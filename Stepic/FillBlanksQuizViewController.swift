@@ -13,7 +13,10 @@ import Presentr
 class FillBlanksQuizViewController: QuizViewController {
 
     var tableView = FullHeightTableView()
-    
+
+    var dataset: FillBlanksDataset?
+    var reply: FillBlanksReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,12 +35,12 @@ class FillBlanksQuizViewController: QuizViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     /*
     // MARK: - Navigation
 
@@ -49,24 +52,24 @@ class FillBlanksQuizViewController: QuizViewController {
     */
 
     func getAnswerForComponent(atIndex index: Int) -> String? {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return nil
         }
-        
+
         guard index < dataset.components.count else {
             return nil
         }
-        
+
         return answerForComponent[index] ?? ""
     }
-    
-    override func getReply() -> Reply {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+
+    override func getReply() -> Reply? {
+        guard let dataset = dataset else {
             return FillBlanksReply(blanks: [])
         }
-        
-        var blanks : [String] = []
-        
+
+        var blanks: [String] = []
+
         for (index, component) in dataset.components.enumerated() {
             if component.type != .text {
                 if let ans = getAnswerForComponent(atIndex: index) {
@@ -74,37 +77,36 @@ class FillBlanksQuizViewController: QuizViewController {
                 }
             }
         }
-        
+
         return FillBlanksReply(blanks: blanks)
     }
-    
-    let fillBlanksPickerPresenter : Presentr = {
+
+    let fillBlanksPickerPresenter: Presentr = {
         let fillBlanksPickerPresenter = Presentr(presentationType: .bottomHalf)
         return fillBlanksPickerPresenter
     }()
 
-    
-    func presentPicker(data: [String], selectedBlock: @escaping (String)->Void) {
-        let vc = PickerViewController(nibName: "PickerViewController", bundle: nil) 
+    func presentPicker(data: [String], selectedBlock: @escaping (String) -> Void) {
+        let vc = PickerViewController(nibName: "PickerViewController", bundle: nil)
         vc.data = data
-        vc.pickerTitle = NSLocalizedString("FillBlankOptionTitle", comment: "") 
+        vc.pickerTitle = NSLocalizedString("FillBlankOptionTitle", comment: "")
         vc.selectedBlock = {
-            [weak self] in 
+            [weak self] in
             selectedBlock(vc.selectedData)
             self?.tableView.reloadData()
         }
         customPresentViewController(fillBlanksPickerPresenter, viewController: vc, animated: true, completion: nil)
     }
-    
+
     func heightForComponentRow(index: Int) -> CGFloat {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return 0
         }
-        
+
         guard index < dataset.components.count else {
             return 0
         }
-        
+
         switch dataset.components[index].type {
         case .input :
             return FillBlanksInputTableViewCell.defaultHeight
@@ -118,26 +120,40 @@ class FillBlanksQuizViewController: QuizViewController {
             }
         }
     }
-    
+
     var answerForComponent: [Int: String] = [:]
-    
-    override func updateQuizAfterAttemptUpdate() {        
+
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? FillBlanksDataset else {
+            return
+        }
+
+        self.dataset = dataset
+
         self.tableView.isUserInteractionEnabled = true
         answerForComponent = [:]
         self.tableView.reloadData()
     }
 
-    override func updateQuizAfterSubmissionUpdate(reload: Bool) {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? FillBlanksReply else {
             return
         }
-        
-        guard let reply = submission?.reply as? FillBlanksReply else {
-            return
-        }
-        
+
+        self.reply = reply
+        display(reply: reply)
         self.tableView.isUserInteractionEnabled = false
-        
+    }
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? FillBlanksReply else {
+            return
+        }
+
+        guard let dataset = dataset else {
+            return
+        }
+
         var activeComponentIndex = 0
         for (index, component) in dataset.components.enumerated() {
             if component.type != .text {
@@ -145,7 +161,7 @@ class FillBlanksQuizViewController: QuizViewController {
                 activeComponentIndex += 1
             }
         }
-        
+
         self.tableView.reloadData()
     }
 }
@@ -155,23 +171,23 @@ extension FillBlanksQuizViewController : UITableViewDelegate {
         print("height for row at indexPath \(indexPath.row)")
         return heightForComponentRow(index: indexPath.row)
     }
-    
+
 }
 
 extension FillBlanksQuizViewController : UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("cell for row at indexPath \(indexPath.row)")
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return UITableViewCell()
         }
-        
+
         guard indexPath.row < dataset.components.count else {
             return UITableViewCell()
         }
-        
+
         let component = dataset.components[indexPath.row]
-                
+
         switch component.type {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksTextTableViewCell", for: indexPath) as! FillBlanksTextTableViewCell
@@ -179,13 +195,13 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
             return cell
         case .input:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FillBlanksInputTableViewCell", for: indexPath) as! FillBlanksInputTableViewCell
-            if let ans = answerForComponent[indexPath.row]  {
+            if let ans = answerForComponent[indexPath.row] {
                 cell.answer = ans
             } else {
                 cell.answer = ""
             }
             cell.answerDidChange = {
-                [weak self] 
+                [weak self]
                 answer in
                 self?.answerForComponent[indexPath.row] = answer
             }
@@ -209,23 +225,17 @@ extension FillBlanksQuizViewController : UITableViewDataSource {
             return cell
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        if attempt != nil {
-            return 1
-        } else {
-            return 0
-        }
+        return dataset != nil ? 1 : 0
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let dataset = attempt?.dataset as? FillBlanksDataset else {
+        guard let dataset = dataset else {
             return 0
         }
-        
+
         return dataset.components.count
     }
-    
-    
-    
+
 }

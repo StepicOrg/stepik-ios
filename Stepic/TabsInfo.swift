@@ -9,27 +9,27 @@
 import Foundation
 
 struct TabsInfo {
-    
+
     fileprivate static let allCoursesKey = "AllCoursesInfo"
     fileprivate static let myCoursesKey = "MyCoursesInfo"
 
     fileprivate static let defaults = UserDefaults.standard
-    
-    static var allCoursesIds : [Int] {
+
+    static var allCoursesIds: [Int] {
         get {
             if let ids = defaults.object(forKey: allCoursesKey) as? [Int] {
                 return ids
             } else {
                 return []
             }
-        }    
+        }
         set(value) {
             defaults.set(value, forKey: allCoursesKey)
             defaults.synchronize()
         }
     }
-    
-    static var myCoursesIds : [Int] {
+
+    static var myCoursesIds: [Int] {
         get {
             if let ids = defaults.object(forKey: myCoursesKey) as? [Int] {
                 return ids
@@ -37,7 +37,7 @@ struct TabsInfo {
                 return []
             }
         }
-        
+
         set(value) {
             defaults.set(value, forKey: myCoursesKey)
             defaults.synchronize()

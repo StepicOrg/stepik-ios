@@ -12,76 +12,95 @@ import FLKAutoLayout
 class NumberQuizViewController: QuizViewController {
 
     var textField = UITextField()
-    
+
     let textFieldHeight = 32
-    
+
+    var dataset: String?
+    var reply: NumberReply?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.containerView.addSubview(textField)
         textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
         textField.borderStyle = UITextBorderStyle.roundedRect
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
         textField.constrainHeight("\(textFieldHeight)")
-        
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
-        
+
         textField.addTarget(self, action: #selector(NumberQuizViewController.textFieldTextDidChange(textField:)), for: UIControlEvents.editingChanged)
     }
-    
+
     func textFieldTextDidChange(textField: UITextField) {
-        if submission != nil {
-            submission = nil
+        switch presenter?.state ?? .nothing {
+        case .attempt:
+            break
+        case .submission:
+            presenter?.state = .attempt
+        default:
+            break
         }
     }
-    
+
     func tap() {
         self.view.endEditing(true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override var needsToRefreshAttemptWhenWrong : Bool {
+
+    override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
-    
-    //Override this in subclass
-    override func updateQuizAfterAttemptUpdate() {
+
+    override func display(dataset: Dataset) {
+        guard let dataset = dataset as? String else {
+            return
+        }
+
+        self.dataset = dataset
         textField.text = ""
+        textField.isEnabled = true
     }
-    
-    //Override this in subclass
-    override func updateQuizAfterSubmissionUpdate(reload: Bool = true) {
-        if let r = submission?.reply as? NumberReply {
-            textField.text = r.number
+
+    override func display(reply: Reply, withStatus status: SubmissionStatus) {
+        guard let reply = reply as? NumberReply else {
+            return
         }
-        if submission?.status == "correct" {
-            textField.isEnabled = false
-        } else {
-            textField.isEnabled = true
-        }
+
+        self.reply = reply
+        display(reply: reply)
+        textField.isEnabled = status != .correct
     }
-        
+
+    override func display(reply: Reply) {
+        guard let reply = reply as? NumberReply else {
+            return
+        }
+
+        textField.text = reply.number
+    }
+
     //Override this in the subclass
-    override func getReply() -> Reply {
+    override func getReply() -> Reply? {
         return NumberReply(number: textField.text ?? "")
     }
-    
+
     fileprivate func presentWrongFormatAlert() {
         let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertControllerStyle.alert)
-        
+
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            action in
-            
+            _ in
+
         }))
-        
+
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     /*
     // MARK: - Navigation
     
@@ -91,6 +110,5 @@ class NumberQuizViewController: QuizViewController {
     // Pass the selected object to the new view controller.
     }
     */
-
 
 }

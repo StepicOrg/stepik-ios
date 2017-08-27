@@ -10,21 +10,21 @@ import UIKit
 import SwiftyJSON
 
 class MatchingDataset: Dataset {
-    typealias Pair = (first: String, second: String) 
-    var pairs : [Pair]
-    
-    var firstValues : [String] {
+    typealias Pair = (first: String, second: String)
+    var pairs: [Pair]
+
+    var firstValues: [String] {
         return pairs.map({return $0.first})
     }
-    
-    var secondValues : [String] {
+
+    var secondValues: [String] {
         return pairs.map({return $0.second})
     }
-    
+
     required init(json: JSON) {
         pairs = json["pairs"].arrayValue.map({
             pairJSON in
-            return (first: pairJSON["first"].stringValue, second: pairJSON["second"].stringValue)
+            (first: pairJSON["first"].stringValue, second: pairJSON["second"].stringValue)
         })
     }
 }

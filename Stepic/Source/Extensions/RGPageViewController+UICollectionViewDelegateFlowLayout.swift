@@ -11,7 +11,7 @@ import Foundation
 // MARK: - UICollectionViewDelegateFlowLayout
 extension RGPageViewController: UICollectionViewDelegateFlowLayout {
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+
     switch tabbarPosition {
     case .top, .bottom:
       if let theWidth = delegate?.pageViewController?(self, widthForTabAt: indexPath.row) {
@@ -27,15 +27,15 @@ extension RGPageViewController: UICollectionViewDelegateFlowLayout {
       }
     }
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return tabMargin
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return tabMargin
   }
-  
+
   public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     switch tabbarPosition {
     case .top, .bottom:

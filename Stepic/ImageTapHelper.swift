@@ -9,10 +9,10 @@
 import Foundation
 
 class ImageTapHelper {
-    
-    var imageView : UIImageView!
+
+    var imageView: UIImageView!
     var action: ((UITapGestureRecognizer) -> Void)!
-    
+
     init(imageView: UIImageView, action: @escaping ((UITapGestureRecognizer) -> Void)) {
         self.imageView = imageView
         self.action = action
@@ -21,12 +21,11 @@ class ImageTapHelper {
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapRecognizer)
     }
-    
+
     @objc func didTapOnImageView(_ recognizer: UITapGestureRecognizer) {
         action(recognizer)
     }
 
-    
     deinit {
         print("did deinit image tap helper")
     }

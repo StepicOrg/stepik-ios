@@ -11,25 +11,25 @@ import CoreData
 import SwiftyJSON
 
 class LastStep: NSManagedObject, JSONInitializable {
-    
+
     typealias idType = String
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         id = json["id"].stringValue
         unitId = json["unit"].int
         stepId = json["step"].int
     }
-    
+
     func update(unitId: Int?, stepId: Int?) {
         self.unitId = unitId
         self.stepId = stepId
     }
-    
+
     convenience init(id: String, unitId: Int?, stepId: Int?) {
         self.init()
         self.unitId = unitId
@@ -37,13 +37,12 @@ class LastStep: NSManagedObject, JSONInitializable {
         self.id = ""
     }
 
-    
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].stringValue
     }
-    
+
 }

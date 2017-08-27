@@ -10,20 +10,19 @@ import UIKit
 import SwiftyJSON
 
 class TextReply: NSObject, Reply {
-    
-    var text : String
-    
+
+    var text: String
+
     init(text: String) {
         self.text = text
     }
-    
+
     required init(json: JSON) {
         text = json["text"].stringValue
         super.init()
     }
-    
-    var dictValue : [String : Any] {
-        return ["text" : text]
+
+    var dictValue: [String : Any] {
+        return ["text": text]
     }
 }
-

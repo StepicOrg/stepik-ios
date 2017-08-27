@@ -12,14 +12,14 @@ class LoadMoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var showMoreLabel: UILabel!
     @IBOutlet weak var showMoreActivityIndicator: UIActivityIndicatorView!
-    
-    var tapG : UITapGestureRecognizer!
+
+    var tapG: UITapGestureRecognizer!
     var section: Int?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+
         showMoreActivityIndicator.isHidden = true
     }
 
@@ -36,15 +36,15 @@ class LoadMoreTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
+
     override func prepareForReuse() {
 //        showMoreActivityIndicator.hidden = true
         showMoreLabel.isHidden = false
     }
-    
+
 }

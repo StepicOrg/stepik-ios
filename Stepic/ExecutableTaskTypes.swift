@@ -11,7 +11,7 @@ import Foundation
 /*
  Enum, which contains executable tasks types
  */
-enum ExecutableTaskType : String {
+enum ExecutableTaskType: String {
     case deleteDevice = "deleteDeviceTask"
     case postViews = "postViewsTask"
     static let allValues = [deleteDevice, postViews]

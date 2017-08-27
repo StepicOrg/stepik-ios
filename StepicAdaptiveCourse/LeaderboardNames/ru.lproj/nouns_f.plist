@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+    <string>шиншилла</string>
+    <string>чупакабра</string>
+    <string>утка</string>
+    <string>лягушка</string>
+    <string>гиена</string>
+    <string>игуана</string>
+    <string>коала</string>
+    <string>лама</string>
+    <string>норка</string>
+    <string>выдра</string>
+    <string>панда</string>
+    <string>тыква</string>
+    <string>землеройка</string>
+    <string>белка</string>
+    <string>черепаха</string>
+    <string>росомаха</string>
+</array>
+</plist>

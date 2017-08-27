@@ -18,21 +18,21 @@ class DiscussionWebTableViewCell: UITableViewCell {
 
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
-    
+
     @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var webViewLeadingConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var webContainerView: UIView!
     @IBOutlet weak var webContainerViewHeight: NSLayoutConstraint!
-    
+
     var hasSeparator: Bool = false {
         didSet {
             separatorView?.isHidden = !hasSeparator
         }
     }
-    
+
     var separatorType: SeparatorType = .none {
         didSet {
             switch separatorType {
@@ -54,11 +54,11 @@ class DiscussionWebTableViewCell: UITableViewCell {
             updateConstraints()
         }
     }
-    
+
     var comment: Comment?
-    var heightUpdateBlock : ((CGFloat, CGFloat)->Void)?
+    var heightUpdateBlock: ((CGFloat, CGFloat) -> Void)?
     var commentWebView: WKWebView?
-    
+
     fileprivate func constructWebView() {
         let theConfiguration = WKWebViewConfiguration()
         let contentController = theConfiguration.userContentController
@@ -67,11 +67,11 @@ class DiscussionWebTableViewCell: UITableViewCell {
             injectionTime: WKUserScriptInjectionTime.atDocumentStart,
             forMainFrameOnly: false
             ))
-        
+
         contentController.add(self, name: "sizeNotification")
-        
+
         commentWebView = WKWebView(frame: CGRect.zero, configuration: theConfiguration)
-        
+
         commentWebView?.scrollView.isScrollEnabled = false
         commentWebView?.backgroundColor = UIColor.clear
         commentWebView?.scrollView.backgroundColor = UIColor.clear
@@ -79,38 +79,38 @@ class DiscussionWebTableViewCell: UITableViewCell {
         self.commentWebView?.autoresizingMask = UIViewAutoresizing.flexibleHeight
         commentWebView?.translatesAutoresizingMaskIntoConstraints = true
         contentView.translatesAutoresizingMaskIntoConstraints = true
-        
+
         webContainerView.addSubview(commentWebView!)
         _ = commentWebView?.align(to: webContainerView)
     }
-    
-    func initWithComment(_ comment: Comment, separatorType: SeparatorType)  {
+
+    func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
         userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL))
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
-        
+
         timeLabel.text = comment.lastTime.getStepicFormatString()
         loadWebView(comment.text)
     }
-    
+
     fileprivate func loadWebView(_ htmlString: String) {
         let wrapped = HTMLStringWrapperUtil.wrap(htmlString)
         commentWebView?.loadHTMLString(wrapped, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
-    
+
     fileprivate func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         webViewLeadingConstraint.constant = constant
         switch self.separatorType {
-        case .small: 
+        case .small:
             separatorLeadingConstraint.constant = -constant + 8
             break
-        default: 
+        default:
             break
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
@@ -118,23 +118,23 @@ class DiscussionWebTableViewCell: UITableViewCell {
         userAvatarImageView.setRoundedBounds(width: 0)
         constructWebView()
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         comment = nil
         webContainerViewHeight.constant = 23
         updateConstraints()
     }
-    
+
     override func updateConstraints() {
         super.updateConstraints()
         setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
 }
 
 extension DiscussionWebTableViewCell : WKScriptMessageHandler {

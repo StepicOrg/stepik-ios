@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 enum EmptyDatasetState {
     case empty, connectionError, refreshing
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Dd-WV-Z8n">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -91,12 +91,13 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pr8-hh-W1f">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pr8-hh-W1f" customClass="OverlapTableView" customModule="Adaptive_1838" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" red="1" green="0.86274509803921573" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="bGU-v4-wqH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="395"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="433"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSc-Ls-wSS" userLabel="Main stat">
                                             <rect key="frame" x="8" y="0.0" width="304" height="140"/>
@@ -238,17 +239,35 @@
                                                 <constraint firstAttribute="height" constant="1" id="Xvy-jY-W0r"/>
                                             </constraints>
                                         </view>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8WM-do-txJ">
-                                            <rect key="frame" x="8" y="361" width="304" height="31"/>
-                                            <segments>
-                                                <segment title="Прогресс"/>
-                                                <segment title="Достижения"/>
-                                            </segments>
-                                            <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="onSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="CBg-7X-fF5"/>
-                                            </connections>
-                                        </segmentedControl>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DF1-VD-wAL">
+                                            <rect key="frame" x="8" y="361" width="304" height="64"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8WM-do-txJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="65"/>
+                                                    <segments>
+                                                        <segment title="Прогресс"/>
+                                                        <segment title="Достижения"/>
+                                                        <segment title="Рейтинг"/>
+                                                    </segments>
+                                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="onSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="CBg-7X-fF5"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="KpV-Qn-80f">
+                                                    <rect key="frame" x="0.0" y="64" width="304" height="1"/>
+                                                    <segments>
+                                                        <segment title="Всё время"/>
+                                                        <segment title="7 дней"/>
+                                                        <segment title="Сегодня"/>
+                                                    </segments>
+                                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="onRatingSegmentedControlValueChanged:" destination="RWM-r2-N4c" eventType="valueChanged" id="u1n-rh-Ury"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                        </stackView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние 7 дней" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwa-eW-FQd">
                                             <rect key="frame" x="8" y="149" width="124" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -258,24 +277,48 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="8WM-do-txJ" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="4VA-t4-Ba2"/>
                                         <constraint firstItem="og5-H2-0O7" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="4Vi-3W-qvE"/>
-                                        <constraint firstAttribute="trailing" secondItem="8WM-do-txJ" secondAttribute="trailing" constant="8" id="DNP-kV-TUl"/>
                                         <constraint firstAttribute="trailing" secondItem="3yr-V2-vlJ" secondAttribute="trailing" constant="8" id="GYa-LY-YOh"/>
                                         <constraint firstItem="FSc-Ls-wSS" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="H5K-65-ySV"/>
                                         <constraint firstAttribute="trailing" secondItem="FSc-Ls-wSS" secondAttribute="trailing" constant="8" id="HAY-Ff-yO1"/>
-                                        <constraint firstAttribute="bottom" secondItem="8WM-do-txJ" secondAttribute="bottom" constant="4" id="Qc2-xr-RV0"/>
+                                        <constraint firstItem="DF1-VD-wAL" firstAttribute="top" secondItem="og5-H2-0O7" secondAttribute="bottom" constant="6" id="LfD-U5-xXT"/>
+                                        <constraint firstAttribute="bottom" secondItem="DF1-VD-wAL" secondAttribute="bottom" constant="8" id="QqQ-XC-O3N"/>
                                         <constraint firstItem="3yr-V2-vlJ" firstAttribute="top" secondItem="vwa-eW-FQd" secondAttribute="bottom" id="W7R-MN-PhB"/>
                                         <constraint firstItem="FSc-Ls-wSS" firstAttribute="top" secondItem="bGU-v4-wqH" secondAttribute="top" id="XPe-lF-fAi"/>
-                                        <constraint firstItem="8WM-do-txJ" firstAttribute="top" secondItem="og5-H2-0O7" secondAttribute="bottom" constant="6" id="bOC-bu-ZVn"/>
                                         <constraint firstItem="vaD-vX-JZn" firstAttribute="top" secondItem="FSc-Ls-wSS" secondAttribute="bottom" constant="4" id="bPJ-5k-cpS"/>
                                         <constraint firstAttribute="trailing" secondItem="vaD-vX-JZn" secondAttribute="trailing" constant="8" id="gfN-RA-x61"/>
                                         <constraint firstItem="vwa-eW-FQd" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="iaF-NZ-fem"/>
+                                        <constraint firstAttribute="trailing" secondItem="DF1-VD-wAL" secondAttribute="trailing" constant="8" id="ks8-2h-T7P"/>
                                         <constraint firstItem="og5-H2-0O7" firstAttribute="top" secondItem="3yr-V2-vlJ" secondAttribute="bottom" constant="8" id="pAT-Hc-c9q"/>
                                         <constraint firstItem="vwa-eW-FQd" firstAttribute="top" secondItem="vaD-vX-JZn" secondAttribute="bottom" constant="4" id="pZz-fz-Hdi"/>
                                         <constraint firstAttribute="trailing" secondItem="og5-H2-0O7" secondAttribute="trailing" constant="8" id="riv-kh-CLU"/>
                                         <constraint firstItem="3yr-V2-vlJ" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="vEr-lR-lAX"/>
                                         <constraint firstItem="vaD-vX-JZn" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="xc1-Ar-v9l"/>
+                                        <constraint firstItem="DF1-VD-wAL" firstAttribute="leading" secondItem="bGU-v4-wqH" secondAttribute="leading" constant="8" id="z6S-vN-2RI"/>
+                                    </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="frr-Vy-22T">
+                                    <rect key="frame" x="0.0" y="433" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tpH-7N-qeU">
+                                            <rect key="frame" x="150" y="12" width="20" height="20"/>
+                                            <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 пользователей" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-JZ-kGb">
+                                            <rect key="frame" x="8" y="13" width="304" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="leading" secondItem="frr-Vy-22T" secondAttribute="leading" constant="8" id="0pD-YF-F1f"/>
+                                        <constraint firstItem="tpH-7N-qeU" firstAttribute="centerX" secondItem="frr-Vy-22T" secondAttribute="centerX" id="6bL-WC-OFE"/>
+                                        <constraint firstItem="ycc-JZ-kGb" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="FYH-AU-8OZ"/>
+                                        <constraint firstItem="tpH-7N-qeU" firstAttribute="centerY" secondItem="frr-Vy-22T" secondAttribute="centerY" id="HP9-pD-b7w"/>
+                                        <constraint firstAttribute="trailing" secondItem="ycc-JZ-kGb" secondAttribute="trailing" constant="8" id="SNs-Hz-fRk"/>
                                     </constraints>
                                 </view>
                                 <sections/>
@@ -298,10 +341,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="allCountLabel" destination="ycc-JZ-kGb" id="6Rw-RX-4yO"/>
                         <outlet property="bestStreakLabel" destination="PXK-7E-juQ" id="TIk-1T-hYf"/>
                         <outlet property="currentLevelLabel" destination="hDy-C2-aQe" id="L5o-Rk-lXt"/>
                         <outlet property="currentWeekXPLabel" destination="rZI-nf-aeP" id="RRJ-Xa-TCt"/>
+                        <outlet property="loadingIndicator" destination="tpH-7N-qeU" id="ddU-oC-6zw"/>
                         <outlet property="progressChart" destination="3yr-V2-vlJ" id="NZL-Jf-Zdd"/>
+                        <outlet property="ratingSegmentedControl" destination="KpV-Qn-80f" id="Dcd-4m-O0l"/>
                         <outlet property="segmentedControl" destination="8WM-do-txJ" id="E9H-vs-7Xy"/>
                         <outlet property="tableView" destination="Pr8-hh-W1f" id="Tje-h4-5pd"/>
                     </connections>
