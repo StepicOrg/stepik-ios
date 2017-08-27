@@ -65,8 +65,6 @@ class AdaptiveRatingsPresenter {
             default:
                 print("remote rating update failed: \(responseStatus)")
             }
-            self.view?.setRatings(data: ScoreboardViewData(allCount: 0, leaders: []))
-            self.view?.reload()
             self.view?.showError()
         })
     }
@@ -89,8 +87,6 @@ class AdaptiveRatingsPresenter {
                 self.view?.reload()
             }, error: { err in
                 print(err)
-                self.view?.setRatings(data: ScoreboardViewData(allCount: 0, leaders: []))
-                self.view?.reload()
                 self.view?.showError()
             })
         } else {
