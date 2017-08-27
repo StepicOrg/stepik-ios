@@ -37,3 +37,6 @@
 
 /* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[1] = "Последние 7 дней"; ObjectID = "KpV-Qn-80f"; */
 "KpV-Qn-80f.segmentTitles[1]" = "Последние 7 дней";
+
+/* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[2] = "Сегодня"; ObjectID = "KpV-Qn-80f"; */
+"KpV-Qn-80f.segmentTitles[2]" = "Сегодня";
