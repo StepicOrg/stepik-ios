@@ -556,6 +556,13 @@
 		08BC470A1CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		08BC47151CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
+		08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DB51F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DB61F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DB81F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DB91F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
+		08C02DBA1F53201A00F848F5 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */; };
 		08C0A4341BF1276C0010F049 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
 		08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1943F1ED0A05D00A41B72 /* PagerController.swift */; };
@@ -4193,6 +4200,7 @@
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
+		08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		08C0A4331BF1276C0010F049 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CustomMessagesDesign.json; sourceTree = "<group>"; };
 		08C1943F1ED0A05D00A41B72 /* PagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerController.swift; sourceTree = "<group>"; };
@@ -5620,6 +5628,7 @@
 				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
 				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
+				08C02DBB1F53202600F848F5 /* new */,
 			);
 			name = "User Preferences";
 			sourceTree = "<group>";
@@ -5698,6 +5707,14 @@
 				08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */,
 			);
 			name = "Delete Device";
+			sourceTree = "<group>";
+		};
+		08C02DBB1F53202600F848F5 /* new */ = {
+			isa = PBXGroup;
+			children = (
+				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
+			);
+			name = new;
 			sourceTree = "<group>";
 		};
 		08CA59D71BBC0067008DC44D /* Course preview */ = {
@@ -8711,6 +8728,7 @@
 				08EB85E91D0F649700E4F345 /* CellOperationsUtil.swift in Sources */,
 				08AF59F21E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				0846B1101EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
+				08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				0846B10C1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthManager.swift in Sources */,
@@ -9123,6 +9141,7 @@
 				2C1B60F51F4C4AEF00236804 /* VideoDownloadView.swift in Sources */,
 				2C1B60F61F4C4AEF00236804 /* CodeSample.swift in Sources */,
 				2C1B60F71F4C4AEF00236804 /* RatingManager.swift in Sources */,
+				08C02DB91F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C1B60F81F4C4AEF00236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B60F91F4C4AEF00236804 /* WarningView.swift in Sources */,
 				2C1B60FA1F4C4AEF00236804 /* UIViewLoadExtension.swift in Sources */,
@@ -9531,6 +9550,7 @@
 				2C1B63061F4C590700236804 /* VideoDownloadView.swift in Sources */,
 				2C1B63071F4C590700236804 /* CodeSample.swift in Sources */,
 				2C1B63081F4C590700236804 /* RatingManager.swift in Sources */,
+				08C02DBA1F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C1B63091F4C590700236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B630A1F4C590700236804 /* WarningView.swift in Sources */,
 				2C1B630B1F4C590700236804 /* UIViewLoadExtension.swift in Sources */,
@@ -9939,6 +9959,7 @@
 				2C8652A31F4B33DE00D51654 /* VideoDownloadView.swift in Sources */,
 				2C8652A41F4B33DE00D51654 /* CodeSample.swift in Sources */,
 				2C8652A51F4B33DE00D51654 /* RatingManager.swift in Sources */,
+				08C02DB61F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C8652A61F4B33DE00D51654 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */,
 				2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */,
@@ -10347,6 +10368,7 @@
 				2C89A9891F4C289900227C3B /* VideoDownloadView.swift in Sources */,
 				2C89A98A1F4C289900227C3B /* CodeSample.swift in Sources */,
 				2C89A98B1F4C289900227C3B /* RatingManager.swift in Sources */,
+				08C02DB71F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C89A98C1F4C289900227C3B /* AdaptiveOnboardingStep.swift in Sources */,
 				2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */,
 				2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */,
@@ -10755,6 +10777,7 @@
 				2C97313D1F4C38F600AC9301 /* VideoDownloadView.swift in Sources */,
 				2C97313E1F4C38F600AC9301 /* CodeSample.swift in Sources */,
 				2C97313F1F4C38F600AC9301 /* RatingManager.swift in Sources */,
+				08C02DB81F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				2C9731401F4C38F600AC9301 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C9731411F4C38F600AC9301 /* WarningView.swift in Sources */,
 				2C9731421F4C38F600AC9301 /* UIViewLoadExtension.swift in Sources */,
@@ -11163,6 +11186,7 @@
 				864D67481E83E08E001E8D9E /* VideoDownloadView.swift in Sources */,
 				080C5E7D1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				2C76ACCD1F16496C0077D9D7 /* RatingManager.swift in Sources */,
+				08C02DB51F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
