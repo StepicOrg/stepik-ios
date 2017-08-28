@@ -194,6 +194,23 @@ platform :ios do
       app_identifier: identifiers)
   end
 
+  # dSYM files
+
+  lane :refresh_dsyms_all do
+    for scheme in all_schemes do
+      refresh_dsyms(app_identifier: app_identifiers[scheme][0])
+    end
+  end
+
+  desc "Download all dSYM files from App Store and upload to the Crashlytics"
+  lane :refresh_dsyms do |options|
+    app_identifier = options[:app_identifier]
+
+    download_dsyms(app_identifier: app_identifier)
+    upload_symbols_to_crashlytics
+    clean_build_artifacts
+  end
+
   # RELEASE
 
   lane :release do 
@@ -206,6 +223,7 @@ platform :ios do
   lane :releasescheme do |options|
 
     scheme = options[:scheme]
+    app_identifier = app_identifiers[scheme][0]
 
     # match(type: "appstore")
     # snapshot
@@ -222,7 +240,8 @@ platform :ios do
       export_method: "app-store")        
     metapath = "./fastlane/metadata/#{scheme}"
     screenpath = "./fastlane/screenshots/#{scheme}"
-    deliver(metadata_path: metapath, screenshots_path: screenpath, app_identifier: app_identifiers[scheme][0])
+    deliver(metadata_path: metapath, screenshots_path: screenpath, app_identifier: app_identifier)
+    refresh_dsyms(app_identifier: app_identifier)
     slack(
       message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}", 
       channel: "#ios-ci"
