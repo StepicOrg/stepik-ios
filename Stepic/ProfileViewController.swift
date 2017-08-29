@@ -15,7 +15,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var signInNameDistance: NSLayoutConstraint!
 
     @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: AvatarImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
     @IBOutlet weak var signOutButton: UIButton!
@@ -99,7 +99,10 @@ class ProfileViewController: UITableViewController {
 //            heightForRows[1][0] = 0
             signInButton.isHidden = true
             avatarImageView.contentMode = UIViewContentMode.scaleAspectFill
-            avatarImageView.setImageWithURL(url: URL(string: user.avatarURL), placeholder: Constants.placeholderImage)
+
+            if let url = URL(string: user.avatarURL) {
+                avatarImageView.set(with: url)
+            }
             userNameLabel.text = "\(user.firstName) \(user.lastName)"
         }
 
