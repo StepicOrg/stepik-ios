@@ -10,42 +10,39 @@ import Foundation
 
 class MenuBlock {
     var hasSeparatorOnBottom = false
+    let id: String
     var title: String
     var onAppearance: ((Void) -> Void)?
     
-    init(title: String, hasSeparatorOnBottom: Bool = false, onAppearance: ((Void) -> Void)? = nil) {
+    init(id: String, title: String) {
         self.title = title
-        self.hasSeparatorOnBottom = hasSeparatorOnBottom
+        self.id = id
     }
 }
 
 class ExpandableMenuBlock: MenuBlock {
-    var expandedText: String
-    var onExpansion: ((Bool) -> Void)?
-    
-    init(title: String, hasSeparatorOnBottom: Bool = false, onAppearance: ((Void) -> Void)? = nil, expandedText: String, onExpansion: ((Bool) -> Void)? = nil) {
-        super.init(title: title, hasSeparatorOnBottom: hasSeparatorOnBottom, onAppearance: onAppearance)
-        self.expandedText = expandedText
-        self.onExpansion = onExpansion
-    }
+    var onExpanded: ((Bool) -> Void)?
+}
+
+class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
+    typealias TitleContent = (title: String, content: String)
+    var content: [TitleContent] = []
+    var substitutesTitle: Bool = false
 }
 
 class TransitionMenuBlock: MenuBlock {
     var subtitle: String?
     var onTouch: ((UIViewController) -> Void)?
-    
-    init(title: String, hasSeparatorOnBottom: Bool = false, onAppearance: ((Void) -> Void)? = nil, subtitle: String? = nil, onTouch: ((UIViewController) -> Void)?) {
-        super.init(title: title, hasSeparatorOnBottom: hasSeparatorOnBottom, onAppearance: onAppearance)
-        self.subtitle = subtitle
-        self.onTouch = onTouch
-    }
+    var onCameBack: ((Void) -> Void)?
 }
 
 class SwitchMenuBlock: MenuBlock {
     var onSwitch: ((Bool) -> Void)?
+    var isOn: Bool
     
-    init(title: String, hasSeparatorOnBottom: Bool = false, onAppearance: ((Void) -> Void)? = nil, onSwitch: (() -> Void)?) {
-        super.init(title: title, hasSeparatorOnBottom: hasSeparatorOnBottom, onAppearance: onAppearance)
+    init(id: String, title: String, isOn: Bool, onSwitch: ((Bool) -> Void)? = nil) {
         self.onSwitch = onSwitch
+        self.isOn = isOn
+        super.init(id: id, title: title)
     }
 }
