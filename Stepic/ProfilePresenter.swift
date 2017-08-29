@@ -21,8 +21,13 @@ class ProfilePresenter {
     
     weak var view: ProfileView?
     
+    var menu: [MenuBlock] = []
+    
     init(view: ProfileView) {
         self.view = view
+        self.menu = [
+            //TODO: Init menu blocks here
+        ]
     }
     
     func updateStreaks(user: User) {
@@ -70,6 +75,11 @@ class ProfilePresenter {
             self.view?.set(state: .anonymous)
         }
     }
+    
+    func sharePressed(inViewController vc: UIViewController) {
+        //TODO: Add implementation
+    }
+    
 }
 
 enum ProfileState {
