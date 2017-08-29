@@ -142,7 +142,6 @@ class DiscussionTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        userAvatarImageView.setRoundedBounds(width: 0)
         constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
     }

@@ -118,7 +118,6 @@ class DiscussionWebTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
         contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 999999.0, height: 999999.0)
-        userAvatarImageView.setRoundedBounds(width: 0)
         constructWebView()
     }
 
