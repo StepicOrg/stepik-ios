@@ -9,6 +9,7 @@
 import Foundation
 
 protocol ProfileView: class {
+    //State setting
     func set(profile: ProfileData?)
     func set(state: ProfileState)
     func set(streaks: StreakData?)
@@ -17,17 +18,19 @@ protocol ProfileView: class {
     //Alerts
     func showNotificationSettingsAlert(completion: ((Void)->Void)?)
     func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: ((Void)->Void)?)
+    func showShareProfileAlert(url: URL)
     
     //Navigation
     func logout(onBack:(()->Void)?)
     func navigateToSettings()
+    func navigateToDownloads()
 }
 
 class ProfilePresenter {
     
     weak var view: ProfileView?
-    var userActivitiesAPI: UserActivitiesAPI
-    var usersAPI: UsersAPI
+    private var userActivitiesAPI: UserActivitiesAPI
+    private var usersAPI: UsersAPI
     var menu: Menu = Menu(blocks: [])
     
     init(view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI) {
@@ -38,17 +41,23 @@ class ProfilePresenter {
     
     // MARK: - Menu initialization
     
-    let notificationsSwitchBlockId = "notifications_switch"
-    let notificationsTimeSelectionBlockId = "notifications_time_selection"
-    let infoExpandableBlockId = "info"
+    private let notificationsSwitchBlockId = "notifications_switch"
+    private let notificationsTimeSelectionBlockId = "notifications_time_selection"
+    private let infoBlockId = "info"
+    private let settingsBlockId = "settings"
+    private let downloadsBlockId = "downloads"
+    private let logoutBlockId = "logout"
     
     private func buildMenu(user: User) -> Menu {
         var blocks: [MenuBlock] = []
-        blocks += [buildNotificationsSwitchBlock()]
-        if let block = buildNotificationsTimeSelectionBlock() {
-            blocks += [block]
-        }
-        blocks += [buildInfoExpandableBlock(user: user)]
+        blocks = [
+            buildNotificationsSwitchBlock(),
+            buildNotificationsTimeSelectionBlock(),
+            buildInfoExpandableBlock(user: user),
+            buildSettingsTransitionBlock(),
+            buildDownloadsTransitionBlock(),
+            buildLogoutBlock()
+        ].flatMap{ $0 }
         return Menu(blocks: blocks)
     }
     
@@ -81,8 +90,7 @@ class ProfilePresenter {
         block.subtitle = notificationTimeSubtitle
         
         block.onTouch = {
-            [weak self]
-            vc in
+            [weak self] in
             self?.presentStreakTimeSelection(forBlock: block)
             self?.menu.update(block: block)
         }
@@ -99,13 +107,46 @@ class ProfilePresenter {
     }
     
     private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock {
-        let block : TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: infoExpandableBlockId, title: "Short bio & Info")
+        let block : TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: infoBlockId, title: "Short bio & Info")
         
         block.content = [
             (title: "Short bio", content: user.bio),
             (title: "Info", content: user.details)
         ]
         block.substitutesTitle = true
+    
+        return block
+    }
+    
+    private func buildSettingsTransitionBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: settingsBlockId, title: "Settings")
+        
+        block.onTouch = {
+            [weak self] in
+            self?.view?.navigateToSettings()
+        }
+        
+        return block
+    }
+    
+    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: downloadsBlockId, title: "Downloads")
+        
+        block.onTouch = {
+            [weak self] in
+            self?.view?.navigateToDownloads()
+        }
+        
+        return block
+    }
+    
+    private func buildLogoutBlock() -> TransitionMenuBlock {
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: logoutBlockId, title: "Logout")
+        
+        block.onTouch = {
+            [weak self] in
+            self?.logout()
+        }
         
         return block
     }
@@ -172,7 +213,7 @@ class ProfilePresenter {
     
     // MARK: - Update methods
     
-    func updateStreaks(user: User) {
+    private func updateStreaks(user: User) {
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
             activity in
@@ -190,7 +231,7 @@ class ProfilePresenter {
             guard let s = self, let user = users.first else {
                 return
             }
-            if let bioBlock = s.menu.getBlock(id: s.infoExpandableBlockId) as? TitleContentExpandableMenuBlock {
+            if let bioBlock = s.menu.getBlock(id: s.infoBlockId) as? TitleContentExpandableMenuBlock {
                 bioBlock.content = [
                     (title: "Short bio", content: user.bio),
                     (title: "Info", content: user.details)
@@ -203,40 +244,40 @@ class ProfilePresenter {
         })
     }
     
+    private func setUser(user: User) {
+        self.menu = buildMenu(user: user)
+        self.view?.set(menu: menu)
+        self.view?.set(profile: ProfileData(user: user))
+        self.view?.set(state: .authorized)
+        self.updateStreaks(user: user)
+    }
+    
+    private func setError() {
+        self.view?.set(profile: nil)
+        self.view?.set(state: .error)
+    }
+    
     func updateProfile() {
         if AuthInfo.shared.isAuthorized {
             if let user = AuthInfo.shared.user {
-                self.view?.set(profile: ProfileData(user: user))
-                self.view?.set(state: .authorized)
-                self.menu = buildMenu(user: user)
-                self.view?.set(menu: menu)
+                self.setUser(user: user)
                 self.updateUser(user: user)
             } else {
                 self.view?.set(state: .refreshing)
                 performRequest({
                     [weak self] in
                     if let user = AuthInfo.shared.user {
-                        self?.view?.set(profile: ProfileData(user: user))
-                        self?.view?.set(state: .authorized)
-                        if let menu = self?.buildMenu(user: user) {
-                            self?.menu = menu
-                            self?.view?.set(menu: menu)
-                        }
+                        self?.setUser(user: user)
                     } else {
-                        self?.view?.set(profile: nil)
-                        self?.view?.set(state: .error)
+                        self?.setError()
                     }
                 }, error: {
                     [weak self]
                     error in
                     if error == PerformRequestError.noAccessToRefreshToken {
-                        self?.view?.logout(onBack: {
-                            [weak self] in
-                            self?.updateProfile()
-                        })
+                        self?.logout()
                     } else {
-                        self?.view?.set(profile: nil)
-                        self?.view?.set(state: .error)
+                        self?.setError()
                     }
                 })
             }
@@ -245,10 +286,23 @@ class ProfilePresenter {
         }
     }
     
+    private func logout() {
+        self.view?.logout(onBack: {
+            [weak self] in
+            self?.updateProfile()
+        })
+    }
+    
     //MARK: - Other actions
     
-    func sharePressed(inViewController vc: UIViewController) {
-        //TODO: Add implementation
+    func sharePressed() {
+        guard let user = AuthInfo.shared.user else {
+            return
+        }
+        let urlString = StepicApplicationsInfo.stepicURL + "/\(user.id)"
+        if let url = URL(string: urlString) {
+            self.view?.showShareProfileAlert(url: url)
+        }
     }
 }
 

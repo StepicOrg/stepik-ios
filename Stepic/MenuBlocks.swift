@@ -32,7 +32,7 @@ class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
 
 class TransitionMenuBlock: MenuBlock {
     var subtitle: String?
-    var onTouch: ((UIViewController) -> Void)?
+    var onTouch: ((Void) -> Void)?
     var onCameBack: ((Void) -> Void)?
 }
 
