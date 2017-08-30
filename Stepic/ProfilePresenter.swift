@@ -12,13 +12,14 @@ protocol ProfileView: class {
     func set(profile: ProfileData?)
     func set(state: ProfileState)
     func set(streaks: StreakData?)
-    func logout(onBack:(()->Void)?)
     func set(menu: Menu)
+    
+    //Alerts
     func showNotificationSettingsAlert(completion: ((Void)->Void)?)
     func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: ((Void)->Void)?)
     
     //Navigation
-    
+    func logout(onBack:(()->Void)?)
     func navigateToSettings()
 }
 
