@@ -23,7 +23,6 @@ class TeacherCollectionViewCell: UICollectionViewCell {
         if let url = URL(string: user.avatarURL) {
             avatarImageView.set(with: url)
         }
-        self.avatarImageView.setRoundedBounds(width: 1, color: UIColor.white)
 
         nameLabel.text = "\(user.firstName) \(user.lastName)"
         infoLabel.text = user.bio
