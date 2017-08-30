@@ -12,8 +12,8 @@ class MenuBlock {
     var hasSeparatorOnBottom = false
     let id: String
     var title: String
-    var onAppearance: ((Void) -> Void)?
-    
+    var onAppearance: (() -> Void)?
+
     init(id: String, title: String) {
         self.title = title
         self.id = id
@@ -32,14 +32,14 @@ class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
 
 class TransitionMenuBlock: MenuBlock {
     var subtitle: String?
-    var onTouch: ((Void) -> Void)?
-    var onCameBack: ((Void) -> Void)?
+    var onTouch: (() -> Void)?
+    var onCameBack: (() -> Void)?
 }
 
 class SwitchMenuBlock: MenuBlock {
     var onSwitch: ((Bool) -> Void)?
     var isOn: Bool
-    
+
     init(id: String, title: String, isOn: Bool, onSwitch: ((Bool) -> Void)? = nil) {
         self.onSwitch = onSwitch
         self.isOn = isOn
