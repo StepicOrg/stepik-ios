@@ -12,7 +12,7 @@ import SDWebImage
 
 class DiscussionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userAvatarImageView: UIImageView!
+    @IBOutlet weak var userAvatarImageView: AvatarImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
     @IBOutlet weak var badgeLabel: WiderLabel!
@@ -65,8 +65,9 @@ class DiscussionTableViewCell: UITableViewCell {
     var heightUpdateBlock : (() -> Void)?
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
-//        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL))
-        userAvatarImageView.setImageWithURL(url: URL(string: comment.userInfo.avatarURL), placeholder: Constants.placeholderImage)
+        if let url = URL(string: comment.userInfo.avatarURL) {
+            userAvatarImageView.set(with: url)
+        }
 
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
@@ -141,7 +142,6 @@ class DiscussionTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        userAvatarImageView.setRoundedBounds(width: 0)
         constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
     }

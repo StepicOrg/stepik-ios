@@ -3370,6 +3370,7 @@
 		2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
+		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		53CE540C11629B4C8BF58C65 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */; };
 		56F0BD1C7C966809F0064196 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB7D6C546C79FC5AA9CE0B7 /* Pods_Adaptive_3124.framework */; };
 		58487B942884748775938761 /* Pods_Adaptive_1906.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52E2601D6CFA0D0A0F005D3 /* Pods_Adaptive_1906.framework */; };
@@ -4438,6 +4439,7 @@
 		2CF44FF11F4B4F0400C19012 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1906/icon.png; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
+		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5355,6 +5357,7 @@
 				089F58871D22BD44000CD540 /* DiscussionCountView */,
 				083F11761E54DB09006EF4F1 /* Picker View Controller */,
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
+				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -8746,6 +8749,7 @@
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
+				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
