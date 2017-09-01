@@ -77,7 +77,7 @@ platform :ios do
   desc "Runs all the tests for scheme"
   lane :testscheme do |options|
     scheme = options[:scheme]
-    scan(scheme:scheme)
+    scan(scheme:scheme, slack_only_on_failure: true)
   end
 
   #BETA
