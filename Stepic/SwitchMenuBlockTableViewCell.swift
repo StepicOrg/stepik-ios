@@ -9,6 +9,8 @@
 import UIKit
 
 class SwitchMenuBlockTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var blockSwitch: UISwitch!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +24,8 @@ class SwitchMenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: SwitchMenuBlock) {
-
+        titleLabel.text = block.title
+        blockSwitch.isOn = block.isOn
     }
 
 }

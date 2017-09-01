@@ -9,6 +9,7 @@
 import UIKit
 
 class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,6 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: TitleContentExpandableMenuBlock) {
-
+        titleLabel.text = block.title
     }
 }
