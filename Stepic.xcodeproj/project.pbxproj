@@ -686,6 +686,22 @@
 		08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
 		08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
 		08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA35E1F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA35F1F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3601F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3611F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3621F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3631F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3641F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3651F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */; };
+		08CBA3671F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA3681F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA3691F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA36A1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA36B1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA36C1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA36D1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
+		08CBA36E1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */; };
 		08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		08D035221D65A252003515C6 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
@@ -4331,6 +4347,8 @@
 		08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08CBA34A1F57734900302154 /* NewProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		08CBA3531F5A2D9400302154 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileStreaksView.xib; sourceTree = "<group>"; };
+		08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStreaksView.swift; sourceTree = "<group>"; };
 		08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		08D035201D65A252003515C6 /* AnalyticsEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvents.swift; sourceTree = "<group>"; };
 		08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
@@ -5820,6 +5838,7 @@
 		08C02DBB1F53202600F848F5 /* new */ = {
 			isa = PBXGroup;
 			children = (
+				08CBA35C1F5AFD8500302154 /* ProfileStreaksView */,
 				08CBA3491F57574F00302154 /* Menu */,
 				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
 				08CBA34A1F57734900302154 /* NewProfileViewController.swift */,
@@ -5880,6 +5899,15 @@
 				08CBA3001F57459800302154 /* MenuUIManager.swift */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		08CBA35C1F5AFD8500302154 /* ProfileStreaksView */ = {
+			isa = PBXGroup;
+			children = (
+				08CBA35D1F5AFDCF00302154 /* ProfileStreaksView.xib */,
+				08CBA3661F5B2B8800302154 /* ProfileStreaksView.swift */,
+			);
+			name = ProfileStreaksView;
 			sourceTree = "<group>";
 		};
 		08D035231D65B5C5003515C6 /* Analytics */ = {
@@ -7255,6 +7283,7 @@
 				0859AEAB1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
 				084C9AF91EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				0888D1061F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
+				08CBA35F1F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7278,6 +7307,7 @@
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				08AC21391CDD34C300FBB9CD /* Tasks.plist in Resources */,
+				08CBA35E1F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				08FF752C1DF993BF00D656C4 /* StepikAlertViewController.xib in Resources */,
 				2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */,
 				08E8F97D1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
@@ -7367,6 +7397,7 @@
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
+				08CBA3641F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C35C4DE1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C1B62721F4C4AEF00236804 /* step2.html in Resources */,
@@ -7460,6 +7491,7 @@
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
+				08CBA3651F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
 				2C35C4DF1F4DA480002F3BF4 /* adjectives_m.plist in Resources */,
 				2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */,
@@ -7530,6 +7562,7 @@
 				2C8654031F4B33DE00D51654 /* arrow_left.svg in Resources */,
 				2C8654041F4B33DE00D51654 /* LoadingPaginationView.xib in Resources */,
 				2C8654051F4B33DE00D51654 /* CertificateTableViewCell.xib in Resources */,
+				08CBA3611F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C35C4DC1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */,
 				2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */,
@@ -7624,6 +7657,7 @@
 				2C89AAE61F4C289900227C3B /* Localizable.strings in Resources */,
 				2C89AAE71F4C289900227C3B /* arrow_left.svg in Resources */,
 				2C89AAE81F4C289900227C3B /* LoadingPaginationView.xib in Resources */,
+				08CBA3621F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C35C4DD1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
 				2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */,
 				2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */,
@@ -7741,6 +7775,7 @@
 				2C9732AF1F4C38F600AC9301 /* PickerViewController.xib in Resources */,
 				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
+				08CBA3631F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
 				2C35C4E01F4DA481002F3BF4 /* adjectives_m.plist in Resources */,
 				2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */,
@@ -7834,6 +7869,7 @@
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
+				08CBA3601F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
 				0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
 				085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
@@ -8723,6 +8759,7 @@
 				08D120BD1C937B2200A54ABC /* CoreDataHelper.swift in Sources */,
 				08FEFC221F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				083F2B181E9D8F1D00714173 /* CertificatesView.swift in Sources */,
+				08CBA3681F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				08D120BE1C937B2200A54ABC /* UnitsViewController.swift in Sources */,
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
@@ -9235,6 +9272,7 @@
 				086B7F071D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
 				084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */,
 				087387DA1BB9B768003CFAD1 /* ErrorEnums.swift in Sources */,
+				08CBA3671F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				080C9A2C1BAC88E2001BE326 /* UICustomizer.swift in Sources */,
 				2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				0885F8521BA9D64400F2A188 /* Constants.swift in Sources */,
@@ -9329,6 +9367,7 @@
 				2C1B60F81F4C4AEF00236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B60F91F4C4AEF00236804 /* WarningView.swift in Sources */,
 				2C1B60FA1F4C4AEF00236804 /* UIViewLoadExtension.swift in Sources */,
+				08CBA36D1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				2C1B60FB1F4C4AEF00236804 /* StepTabView.swift in Sources */,
 				2C1B60FC1F4C4AEF00236804 /* DiscussionCountView.swift in Sources */,
 				2C1B60FD1F4C4AEF00236804 /* ProfilesAPI.swift in Sources */,
@@ -9746,6 +9785,7 @@
 				2C1B63091F4C590700236804 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C1B630A1F4C590700236804 /* WarningView.swift in Sources */,
 				2C1B630B1F4C590700236804 /* UIViewLoadExtension.swift in Sources */,
+				08CBA36E1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				2C1B630C1F4C590700236804 /* StepTabView.swift in Sources */,
 				2C1B630D1F4C590700236804 /* DiscussionCountView.swift in Sources */,
 				2C1B630E1F4C590700236804 /* ProfilesAPI.swift in Sources */,
@@ -10163,6 +10203,7 @@
 				2C8652A61F4B33DE00D51654 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */,
 				2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */,
+				08CBA36A1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				2C8652A91F4B33DE00D51654 /* StepTabView.swift in Sources */,
 				2C8652AA1F4B33DE00D51654 /* DiscussionCountView.swift in Sources */,
 				2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */,
@@ -10580,6 +10621,7 @@
 				2C89A98C1F4C289900227C3B /* AdaptiveOnboardingStep.swift in Sources */,
 				2C89A98D1F4C289900227C3B /* WarningView.swift in Sources */,
 				2C89A98E1F4C289900227C3B /* UIViewLoadExtension.swift in Sources */,
+				08CBA36B1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				2C89A98F1F4C289900227C3B /* StepTabView.swift in Sources */,
 				2C89A9901F4C289900227C3B /* DiscussionCountView.swift in Sources */,
 				2C89A9911F4C289900227C3B /* ProfilesAPI.swift in Sources */,
@@ -10997,6 +11039,7 @@
 				2C9731401F4C38F600AC9301 /* AdaptiveOnboardingStep.swift in Sources */,
 				2C9731411F4C38F600AC9301 /* WarningView.swift in Sources */,
 				2C9731421F4C38F600AC9301 /* UIViewLoadExtension.swift in Sources */,
+				08CBA36C1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				2C9731431F4C38F600AC9301 /* StepTabView.swift in Sources */,
 				2C9731441F4C38F600AC9301 /* DiscussionCountView.swift in Sources */,
 				2C9731451F4C38F600AC9301 /* ProfilesAPI.swift in Sources */,
@@ -11414,6 +11457,7 @@
 				8677B3B71F126BF800A02490 /* AdaptiveOnboardingStep.swift in Sources */,
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
+				08CBA3691F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
 				2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,

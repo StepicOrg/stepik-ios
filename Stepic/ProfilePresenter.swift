@@ -70,12 +70,6 @@ class ProfilePresenter {
             self?.setStreakNotifications(on: isOn, forBlock: block)
         }
 
-        block.onAppearance = {
-            [weak self] in
-            block.isOn = self?.hasPermissionToSendStreakNotifications == true
-            self?.menu.update(block: block)
-        }
-
         return block
     }
 

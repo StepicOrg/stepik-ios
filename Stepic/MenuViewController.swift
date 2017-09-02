@@ -24,10 +24,10 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         view.addSubview(tableView)
         tableView.align(to: view)
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         interfaceManager = MenuUIManager(tableView: tableView)
@@ -54,19 +54,19 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: MenuDelegate {
-    
+
     func getMenuIndexPath(from index: Int) -> IndexPath {
         return IndexPath(row: index, section: 0)
     }
-    
+
     func update(at index: Int) {
         tableView.reloadRows(at: [getMenuIndexPath(from: index)], with: .automatic)
     }
-    
+
     func insert(at index: Int) {
         tableView.insertRows(at: [getMenuIndexPath(from: index)], with: .automatic)
     }
-    
+
     func remove(at index: Int) {
         tableView.deleteRows(at: [getMenuIndexPath(from: index)], with: .automatic)
     }

@@ -17,7 +17,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
 
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
         // Do any additional setup after loading the view.
-        presenter?.updateProfile()
+//        presenter?.updateProfile()
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +76,8 @@ class NewProfileViewController: MenuViewController, ProfileView {
 
     func logout(onBack: (() -> Void)?) {
         print("Logout pressed")
-        //TODO: Add implementation
+        AuthInfo.shared.token = nil
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 
     func navigateToSettings() {
@@ -87,6 +88,11 @@ class NewProfileViewController: MenuViewController, ProfileView {
     func navigateToDownloads() {
         print("Navigate to downloads")
         //TODO: Add implementation
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.presenter?.updateProfile()
     }
 
     /*
