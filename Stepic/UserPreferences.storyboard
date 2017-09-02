@@ -343,7 +343,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" image="stepic_logo_black_and_white" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-gQ-g1O">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" image="stepic_logo_black_and_white" translatesAutoresizingMaskIntoConstraints="NO" id="PBJ-gQ-g1O" customClass="AvatarImageView" customModule="Stepic">
                                                     <rect key="frame" x="114" y="16" width="148" height="148"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
