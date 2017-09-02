@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1258,7 +1257,7 @@
                     <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW">
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="djw-nQ-n4l">
                             <connections>
-                                <segue destination="jbH-Jk-mjZ" kind="show" identifier="showPreferences" id="wpv-Oi-Qbe"/>
+                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="bJP-cn-CC7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1270,6 +1269,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoH-0z-dYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="164" y="2588"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="Kzn-kf-eMk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="gu5-mc-VZM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgf-Uu-lLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="619" y="2656"/>
         </scene>
     </scenes>
     <resources>
@@ -1283,9 +1290,9 @@
         <image name="tab-my-courses" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wpv-Oi-Qbe"/>
+        <segue reference="Rsc-H2-2rN"/>
         <segue reference="gVj-jL-WXR"/>
-        <segue reference="LaP-cg-j2K"/>
         <segue reference="Ymm-um-wgY"/>
+        <segue reference="LaP-cg-j2K"/>
     </inferredMetricsTieBreakers>
 </document>

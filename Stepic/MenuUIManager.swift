@@ -102,7 +102,7 @@ enum SupportedMenuBlockType {
     }
 
     init?(block: MenuBlock) {
-        if block is ExpandableMenuBlock {
+        if block is SwitchMenuBlock {
             self = .switchBlock
             return
         }

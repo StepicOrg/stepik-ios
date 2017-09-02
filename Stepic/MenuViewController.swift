@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class MenuViewController: UIViewController {
 
@@ -23,6 +24,10 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        view.addSubview(tableView)
+        tableView.align(to: view)
+        
         tableView.delegate = self
         tableView.dataSource = self
         interfaceManager = MenuUIManager(tableView: tableView)

@@ -17,6 +17,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
 
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
         // Do any additional setup after loading the view.
+        presenter?.updateProfile()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,41 +28,64 @@ class NewProfileViewController: MenuViewController, ProfileView {
     // MARK: - ProfileView
     func set(profile: ProfileData?) {
         //TODO: Add implementation
+        print("did set profile with name \(String(describing: profile?.firstName)) \(String(describing: profile?.lastName))")
     }
 
     func set(state: ProfileState) {
         //TODO: Add implementation
+        switch state {
+        case .anonymous:
+            self.menu = Menu(blocks: [])
+            break
+        case .authorized:
+            self.menu = presenter?.menu
+            break
+        case .error:
+            self.menu = Menu(blocks: [])
+            break
+        case .refreshing:
+            self.menu = Menu(blocks: [])
+            break
+        }
     }
 
     func set(streaks: StreakData?) {
+        print("did set streaks \(String(describing: streaks?.currentStreak))")
         //TODO: Add implementation
     }
 
     func set(menu: Menu) {
+        self.menu = menu
         //TODO: Add implementation
     }
 
     func showNotificationSettingsAlert(completion: (() -> Void)?) {
+        print("need to show notification settings alert")
         //TODO: Add implementation
     }
 
     func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?) {
+        print("need to set showStreakTimeSelectionAlert")
         //TODO: Add implementation
     }
 
     func showShareProfileAlert(url: URL) {
+        print("Share profile")
         //TODO: Add implementation
     }
 
     func logout(onBack: (() -> Void)?) {
+        print("Logout pressed")
         //TODO: Add implementation
     }
 
     func navigateToSettings() {
+        print("Navigate to settings")
         //TODO: Add implementation
     }
 
     func navigateToDownloads() {
+        print("Navigate to downloads")
         //TODO: Add implementation
     }
 

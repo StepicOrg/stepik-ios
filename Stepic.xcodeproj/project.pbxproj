@@ -678,6 +678,14 @@
 		08CBA3501F57734900302154 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* NewProfileViewController.swift */; };
 		08CBA3511F57734900302154 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* NewProfileViewController.swift */; };
 		08CBA3521F57734900302154 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA34A1F57734900302154 /* NewProfileViewController.swift */; };
+		08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA3551F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA3571F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA3581F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
+		08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CBA3531F5A2D9400302154 /* Profile.storyboard */; };
 		08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		08D035211D65A252003515C6 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		08D035221D65A252003515C6 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
@@ -4322,6 +4330,7 @@
 		08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleContentExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08CBA34A1F57734900302154 /* NewProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
+		08CBA3531F5A2D9400302154 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		08D035201D65A252003515C6 /* AnalyticsEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvents.swift; sourceTree = "<group>"; };
 		08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
@@ -5814,6 +5823,7 @@
 				08CBA3491F57574F00302154 /* Menu */,
 				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
 				08CBA34A1F57734900302154 /* NewProfileViewController.swift */,
+				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 			);
 			name = new;
 			sourceTree = "<group>";
@@ -7191,6 +7201,7 @@
 				08AC213D1CDD35DF00FBB9CD /* Users.plist in Resources */,
 				0859AE9C1E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.xib in Resources */,
 				089F588A1D22BD59000CD540 /* DiscussionCountView.xib in Resources */,
+				08CBA3551F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08263D731DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				08D1210E1C937B2200A54ABC /* CourseTableViewCell.xib in Resources */,
 				08D1210F1C937B2200A54ABC /* UnitTableViewCell.xib in Resources */,
@@ -7288,6 +7299,7 @@
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
+				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
 				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -7372,6 +7384,7 @@
 				08CBA3471F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B62CA1F4C517500236804 /* Config.plist in Resources */,
 				2C1B62821F4C4AEF00236804 /* step5.html in Resources */,
+				08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -7464,6 +7477,7 @@
 				08CBA3481F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C1B64931F4C590700236804 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C1B64941F4C590700236804 /* QuizViewController.xib in Resources */,
+				08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B64961F4C590700236804 /* step5.html in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */,
@@ -7592,6 +7606,7 @@
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C8654491F4B33DE00D51654 /* AdaptiveAssets.xcassets in Resources */,
 				2C86544A1F4B33DE00D51654 /* AdaptiveMain.storyboard in Resources */,
+				08CBA3571F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C86544B1F4B33DE00D51654 /* arrow_right.svg in Resources */,
 				2C86544C1F4B33DE00D51654 /* loading_robot.gif in Resources */,
 			);
@@ -7685,6 +7700,7 @@
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C89AB2F1F4C289900227C3B /* AdaptiveAssets.xcassets in Resources */,
 				2C89AB301F4C289900227C3B /* AdaptiveMain.storyboard in Resources */,
+				08CBA3581F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C89AB311F4C289900227C3B /* arrow_right.svg in Resources */,
 				2C89AB321F4C289900227C3B /* loading_robot.gif in Resources */,
 			);
@@ -7742,6 +7758,7 @@
 				08CBA3461F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C9732C41F4C38F600AC9301 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C9732C51F4C38F600AC9301 /* QuizViewController.xib in Resources */,
+				08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C9732C61F4C38F600AC9301 /* step5.html in Resources */,
 				08CBA3221F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */,
@@ -7834,6 +7851,7 @@
 				08CBA3431F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				86AE947E1E84511A00F67691 /* QuizViewController.xib in Resources */,
 				2C9704201F3B0B7C00C36F0A /* step5.html in Resources */,
+				08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA31F1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
