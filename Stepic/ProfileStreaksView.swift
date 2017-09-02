@@ -10,7 +10,41 @@ import Foundation
 
 class ProfileStreaksView: UIView {
 
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var avatarImageView: AvatarImageView!
+
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var lightningImageView: UIImageView!
+    @IBOutlet weak var currentDaysCountLabel: UILabel!
+    @IBOutlet weak var maxDayCountLabel: UILabel!
+    @IBOutlet weak var currentStreakLabel: UILabel!
+    @IBOutlet weak var maxStreakLabel: UILabel!
+
+    var profile: ProfileData? {
+        didSet {
+            guard let profile = profile, let url = URL(string: profile.avatarURLString) else {
+                return
+            }
+            avatarImageView.set(with: url)
+            firstNameLabel.text = profile.firstName
+            lastNameLabel.text = profile.lastName
+        }
+    }
+
+    var streaks: StreakData? {
+        didSet {
+            guard let streaks = streaks else {
+                return
+            }
+            currentDaysCountLabel.text = "\(streaks.currentStreak) days"
+            maxDayCountLabel.text = "\(streaks.longestStreak) days"
+            lightningImageView.image = streaks.didSolveToday ? #imageLiteral(resourceName: "lightning_green") : #imageLiteral(resourceName: "lightning_gray")
+        }
+    }
+
     fileprivate func initialize() {
+        containerView.setRoundedCorners(cornerRadius: 10)
     }
 
     fileprivate var view: UIView!

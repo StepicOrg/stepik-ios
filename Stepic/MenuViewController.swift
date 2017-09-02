@@ -28,6 +28,7 @@ class MenuViewController: UIViewController {
         view.addSubview(tableView)
         tableView.align(to: view)
 
+        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         interfaceManager = MenuUIManager(tableView: tableView)

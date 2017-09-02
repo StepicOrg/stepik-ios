@@ -25,38 +25,61 @@ class NewProfileViewController: MenuViewController, ProfileView {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - ProfileView
-    func set(profile: ProfileData?) {
-        //TODO: Add implementation
-        print("did set profile with name \(String(describing: profile?.firstName)) \(String(describing: profile?.lastName))")
+    var profile: ProfileData? {
+        didSet {
+            profileStreaksView?.profile = profile
+        }
+    }
+    var streaks: StreakData? {
+        didSet {
+            profileStreaksView?.streaks = streaks
+        }
     }
 
+    var profileStreaksView: ProfileStreaksView?
+
+    func refreshProfileStreaksView() {
+        profileStreaksView = ProfileStreaksView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 300, height: 278)))
+        profileStreaksView?.profile = profile
+        profileStreaksView?.streaks = streaks
+    }
+
+    func setEmpty() {
+        self.tableView.tableHeaderView = nil
+        self.menu = Menu(blocks: [])
+        self.profile = nil
+        self.streaks = nil
+    }
+
+    // MARK: - ProfileView
+
     func set(state: ProfileState) {
-        //TODO: Add implementation
         switch state {
-        case .anonymous:
-            self.menu = Menu(blocks: [])
-            break
         case .authorized:
             self.menu = presenter?.menu
+            refreshProfileStreaksView()
+            tableView.tableHeaderView = profileStreaksView
+            profileStreaksView?.invalidateIntrinsicContentSize()
             break
-        case .error:
-            self.menu = Menu(blocks: [])
-            break
-        case .refreshing:
-            self.menu = Menu(blocks: [])
+        default:
+            setEmpty()
             break
         }
     }
 
+    func set(profile: ProfileData?) {
+        //TODO: Add implementation
+        print("did set profile with name \(String(describing: profile?.firstName)) \(String(describing: profile?.lastName))")
+        self.profile = profile
+    }
+
     func set(streaks: StreakData?) {
         print("did set streaks \(String(describing: streaks?.currentStreak))")
-        //TODO: Add implementation
+        self.streaks = streaks
     }
 
     func set(menu: Menu) {
         self.menu = menu
-        //TODO: Add implementation
     }
 
     func showNotificationSettingsAlert(completion: (() -> Void)?) {
@@ -75,7 +98,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func logout(onBack: (() -> Void)?) {
-        print("Logout pressed")
         AuthInfo.shared.token = nil
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }

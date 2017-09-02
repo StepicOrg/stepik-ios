@@ -8,20 +8,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileStreaksView" customModule="Adaptive_1838" customModuleProvider="target">
+            <connections>
+                <outlet property="avatarImageView" destination="3Oh-cT-dOF" id="DcX-va-OMD"/>
+                <outlet property="containerView" destination="ECP-UP-U74" id="X0a-Wl-3wS"/>
+                <outlet property="currentDaysCountLabel" destination="MEK-pa-lwi" id="A46-yO-pHg"/>
+                <outlet property="currentStreakLabel" destination="Tvp-fT-4hc" id="935-5g-XZW"/>
+                <outlet property="firstNameLabel" destination="2vX-eo-8NP" id="kAn-ae-8ex"/>
+                <outlet property="lastNameLabel" destination="5g2-c6-WyB" id="FeF-5J-DhG"/>
+                <outlet property="lightningImageView" destination="wD9-xU-iGl" id="c3V-k0-2nd"/>
+                <outlet property="maxDayCountLabel" destination="k2D-m5-L2a" id="8kF-e0-4HZ"/>
+                <outlet property="maxStreakLabel" destination="o9X-4V-4rV" id="smR-1L-B0g"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="278"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Oh-cT-dOF">
-                    <rect key="frame" x="142.5" y="24" width="90" height="90"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="90" id="Ttk-Po-85z"/>
-                        <constraint firstAttribute="width" constant="90" id="x0W-1J-4Wz"/>
-                    </constraints>
-                </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-UP-U74">
+                <view contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-UP-U74">
                     <rect key="frame" x="24" y="69" width="327" height="185"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Augustine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-eo-8NP">
@@ -30,7 +35,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solarson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-c6-WyB">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="748" text="Solarson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-c6-WyB">
                             <rect key="frame" x="8" y="88" width="311" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
@@ -92,6 +97,13 @@
                         <constraint firstAttribute="trailing" secondItem="5g2-c6-WyB" secondAttribute="trailing" constant="8" id="yz2-n5-kjG"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Oh-cT-dOF" customClass="AvatarImageView" customModule="Stepic">
+                    <rect key="frame" x="142" y="24" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="Ttk-Po-85z"/>
+                        <constraint firstAttribute="width" constant="90" id="x0W-1J-4Wz"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
