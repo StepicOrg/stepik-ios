@@ -62,7 +62,7 @@ class ProfilePresenter {
     }
 
     private func buildNotificationsSwitchBlock() -> SwitchMenuBlock {
-        let block: SwitchMenuBlock = SwitchMenuBlock(id: notificationsSwitchBlockId, title: "Notifications about learning", isOn: self.hasPermissionToSendStreakNotifications == true)
+        let block: SwitchMenuBlock = SwitchMenuBlock(id: notificationsSwitchBlockId, title: "Notifications about learning", isOn: self.hasPermissionToSendStreakNotifications)
 
         block.onSwitch = {
             [weak self]
@@ -180,13 +180,13 @@ class ProfilePresenter {
                 })
                 return
             }
-            LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
-
+            PreferencesContainer.notifications.allowStreaksNotifications = true
             guard let timeSelectionBlock = buildNotificationsTimeSelectionBlock() else {
+                PreferencesContainer.notifications.allowStreaksNotifications = false
                 return
             }
+            LocalNotificationManager.scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
             menu.insert(block: timeSelectionBlock, afterBlockWithId: notificationsSwitchBlockId)
-            PreferencesContainer.notifications.allowStreaksNotifications = true
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         } else {
             LocalNotificationManager.cancelStreakLocalNotifications()

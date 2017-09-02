@@ -71,13 +71,10 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func set(profile: ProfileData?) {
-        //TODO: Add implementation
-        print("did set profile with name \(String(describing: profile?.firstName)) \(String(describing: profile?.lastName))")
         self.profile = profile
     }
 
     func set(streaks: StreakData?) {
-        print("did set streaks \(String(describing: streaks?.currentStreak))")
         self.streaks = streaks
     }
 

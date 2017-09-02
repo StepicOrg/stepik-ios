@@ -12,6 +12,8 @@ class SwitchMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var blockSwitch: UISwitch!
 
+    var block: SwitchMenuBlock?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,6 +28,10 @@ class SwitchMenuBlockTableViewCell: UITableViewCell {
     func initWithBlock(block: SwitchMenuBlock) {
         titleLabel.text = block.title
         blockSwitch.isOn = block.isOn
+        self.block = block
     }
 
+    @IBAction func switchChanged(_ sender: Any) {
+        block?.onSwitch?(blockSwitch.isOn)
+    }
 }
