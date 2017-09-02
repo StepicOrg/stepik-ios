@@ -39,9 +39,13 @@ class NewProfileViewController: MenuViewController, ProfileView {
     var profileStreaksView: ProfileStreaksView?
 
     func refreshProfileStreaksView() {
-        profileStreaksView = ProfileStreaksView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 300, height: 278)))
-        profileStreaksView?.profile = profile
-        profileStreaksView?.streaks = streaks
+        profileStreaksView = ProfileStreaksView(frame: CGRect.zero)
+        guard let profileStreaksView = profileStreaksView else {
+            return
+        }
+        profileStreaksView.profile = profile
+        profileStreaksView.streaks = streaks
+        profileStreaksView.frame.size = profileStreaksView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
     }
 
     func setEmpty() {
@@ -59,7 +63,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
             self.menu = presenter?.menu
             refreshProfileStreaksView()
             tableView.tableHeaderView = profileStreaksView
-            profileStreaksView?.invalidateIntrinsicContentSize()
             break
         default:
             setEmpty()
