@@ -44,7 +44,7 @@ class ProfileStreaksView: UIView {
     }
 
     fileprivate func initialize() {
-        containerView.setRoundedCorners(cornerRadius: 10)
+        containerView.setRoundedCorners(cornerRadius: 12)
     }
 
     fileprivate var view: UIView!

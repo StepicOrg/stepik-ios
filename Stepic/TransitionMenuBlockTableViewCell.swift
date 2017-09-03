@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class TransitionMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+
+    var titleBottomSpaceConstraint: NSLayoutConstraint?
+    var subtitleBottomSpaceConstraint: NSLayoutConstraint?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-12").first as? NSLayoutConstraint
+        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(with: self.contentView, predicate: "-12").first as? NSLayoutConstraint
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +30,16 @@ class TransitionMenuBlockTableViewCell: UITableViewCell {
 
     func initWithBlock(block: TransitionMenuBlock) {
         titleLabel.text = block.title
+        if let subtitle = block.subtitle {
+            subtitleLabel.text = subtitle
+            subtitleLabel.isHidden = false
+            titleBottomSpaceConstraint?.isActive = false
+            subtitleBottomSpaceConstraint?.isActive = true
+        } else {
+            subtitleBottomSpaceConstraint?.isActive = false
+            titleBottomSpaceConstraint?.isActive = true
+            subtitleLabel.isHidden = true
+        }
     }
 
 }

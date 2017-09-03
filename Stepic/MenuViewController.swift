@@ -28,9 +28,14 @@ class MenuViewController: UIViewController {
         view.addSubview(tableView)
         tableView.align(to: view)
 
+        tableView.separatorStyle = .none
+
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
         interfaceManager = MenuUIManager(tableView: tableView)
     }
 

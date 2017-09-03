@@ -55,7 +55,7 @@ class ProfilePresenter {
             buildNotificationsTimeSelectionBlock(),
             buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
-            buildDownloadsTransitionBlock(),
+//            buildDownloadsTransitionBlock(),
             buildLogoutBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)
@@ -77,7 +77,7 @@ class ProfilePresenter {
         guard let notificationTimeString = notificationTimeString else {
             return nil
         }
-        let notificationTimeSubtitle = "Streaks are updated at 03:00 (Moscow Standard Time)"
+        let notificationTimeSubtitle = "Streaks are updated at 03:00\nMoscow Standard Time"
 
         let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsTimeSelectionBlockId, title: notificationTimeString)
 
@@ -107,7 +107,6 @@ class ProfilePresenter {
             (title: "Short bio", content: user.bio),
             (title: "Info", content: user.details)
         ]
-        block.substitutesTitle = true
 
         return block
     }

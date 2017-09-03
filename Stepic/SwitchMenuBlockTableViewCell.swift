@@ -13,7 +13,7 @@ class SwitchMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var blockSwitch: UISwitch!
 
     var block: SwitchMenuBlock?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -22,12 +22,12 @@ class MenuBlock {
 
 class ExpandableMenuBlock: MenuBlock {
     var onExpanded: ((Bool) -> Void)?
+    var isExpanded: Bool = false
 }
 
 class TitleContentExpandableMenuBlock: ExpandableMenuBlock {
     typealias TitleContent = (title: String, content: String)
     var content: [TitleContent] = []
-    var substitutesTitle: Bool = false
 }
 
 class TransitionMenuBlock: MenuBlock {

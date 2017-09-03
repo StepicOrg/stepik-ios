@@ -25,4 +25,6 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     func initWithBlock(block: TitleContentExpandableMenuBlock) {
         titleLabel.text = block.title
     }
+    
+    
 }
