@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Presentr
 
 class NewProfileViewController: MenuViewController, ProfileView {
 
@@ -83,13 +84,31 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func showNotificationSettingsAlert(completion: (() -> Void)?) {
-        print("need to show notification settings alert")
-        //TODO: Add implementation
+        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+            _ in
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: {
+            completion?()
+        })
     }
 
+    private let streakTimePickerPresenter: Presentr = {
+        let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
+        return streakTimePickerPresenter
+    }()
+    
     func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?) {
-        print("need to set showStreakTimeSelectionAlert")
-        //TODO: Add implementation
+        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
+        vc.startHour = startHour
+        vc.selectedBlock = {
+            selectedBlock?()
+        }
+        customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
     }
 
     func showShareProfileAlert(url: URL) {

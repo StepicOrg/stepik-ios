@@ -65,9 +65,9 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
                 return UIFont.systemFont(ofSize: 17)
             case .content:
                 if #available(iOS 8.2, *) {
-                    return UIFont.systemFont(ofSize: 17, weight: UIFontWeightThin)
+                    return UIFont.systemFont(ofSize: 15, weight: UIFontWeightThin)
                 } else {
-                    return UIFont.systemFont(ofSize: 17)
+                    return UIFont.systemFont(ofSize: 15)
                 }
             }
         }
