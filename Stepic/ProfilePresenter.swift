@@ -73,11 +73,20 @@ class ProfilePresenter {
         return block
     }
 
+    private var currentZone00UTC: String {
+        let date = Date(timeIntervalSince1970: 0)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.timeZone = TimeZone.current
+        return dateFormatter.string(from: date)
+    }
+
     private func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
         guard let notificationTimeString = notificationTimeString else {
             return nil
         }
-        let notificationTimeSubtitle = "Streaks are updated at 03:00\nMoscow Standard Time"
+
+        let notificationTimeSubtitle = "Streaks are updated at \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
 
         let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsTimeSelectionBlockId, title: notificationTimeString)
 
