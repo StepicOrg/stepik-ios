@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_arrow_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="yVT-JN-gFM">
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_arrow_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="yVT-JN-gFM">
                         <rect key="frame" x="281" y="17" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="COq-Dc-tgR"/>
@@ -33,15 +33,16 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="eIR-zG-AdZ" secondAttribute="bottom" constant="4" id="CsT-Wd-mos"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eIR-zG-AdZ" secondAttribute="bottom" constant="4" placeholder="YES" id="CsT-Wd-mos"/>
                     <constraint firstItem="yVT-JN-gFM" firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="trailing" constant="8" id="ShU-uo-N41"/>
                     <constraint firstAttribute="trailingMargin" secondItem="yVT-JN-gFM" secondAttribute="trailing" constant="16" id="SoJ-rh-xCz"/>
                     <constraint firstItem="eIR-zG-AdZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="V27-wL-E9l"/>
-                    <constraint firstItem="yVT-JN-gFM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vYu-HC-7Wt"/>
+                    <constraint firstItem="yVT-JN-gFM" firstAttribute="centerY" secondItem="eIR-zG-AdZ" secondAttribute="centerY" id="lvJ-Xy-Gvd"/>
                     <constraint firstAttribute="leadingMargin" secondItem="eIR-zG-AdZ" secondAttribute="leading" constant="-16" id="vrL-qL-f1a"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageView" destination="yVT-JN-gFM" id="av0-OA-ysS"/>
                 <outlet property="titleLabel" destination="eIR-zG-AdZ" id="scd-r2-4RJ"/>
             </connections>
             <point key="canvasLocation" x="34" y="56.5"/>
