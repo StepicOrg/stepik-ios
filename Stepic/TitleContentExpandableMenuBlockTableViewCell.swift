@@ -16,7 +16,6 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     var bottomTitleConstraint: NSLayoutConstraint?
 
     var labels: [UILabel] = []
-
     var block: TitleContentExpandableMenuBlock?
 
     var isExpanded: Bool = false
@@ -33,6 +32,9 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     func expandPressed() {
         guard let block = block else {
             return
+        }
+        for label in labels {
+            label.isHidden = true
         }
         block.onExpanded?(!block.isExpanded)
     }
@@ -90,12 +92,25 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
         labels += [l]
     }
 
+    private func cleanLabels() {
+        for label in labels {
+            DispatchQueue.main.async {
+                label.isHidden = true
+                label.removeFromSuperview()
+            }
+        }
+        labels = []
+    }
+
     func expand(block: TitleContentExpandableMenuBlock) {
         guard block.content.count > 0 else {
             return
         }
 
-        labels = []
+        if labels.count != 0 {
+            cleanLabels()
+        }
+
         let firstContent = block.content[0]
         titleLabel.text = firstContent.title
         addLabel(type: .content, text: firstContent.content, after: titleLabel)
@@ -108,15 +123,13 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
             }
         }
         _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-12")
+        arrowImageView.image = #imageLiteral(resourceName: "menu_arrow_top")
     }
 
     func shrink(block: TitleContentExpandableMenuBlock) {
-        for label in labels {
-            label.removeFromSuperview()
-        }
-        labels = []
-        self.layoutIfNeeded()
+        cleanLabels()
         bottomTitleConstraint?.isActive = true
+        arrowImageView.image = #imageLiteral(resourceName: "menu_arrow_bottom")
     }
 
 }
