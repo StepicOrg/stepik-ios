@@ -307,7 +307,7 @@ class ProfilePresenter {
         guard let user = AuthInfo.shared.user else {
             return
         }
-        let urlString = StepicApplicationsInfo.stepicURL + "/\(user.id)"
+        let urlString = StepicApplicationsInfo.stepicURL + "/users/\(user.id)"
         if let url = URL(string: urlString) {
             self.view?.showShareProfileAlert(url: url)
         }
