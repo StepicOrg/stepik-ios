@@ -54,7 +54,7 @@ platform :ios do
 
   all_schemes = [
     "Stepic",
-    "Adaptive 1838"
+    "Adaptive 1838",
     "Adaptive 1906",
     "Adaptive 3150",
     "Adaptive 3149",
