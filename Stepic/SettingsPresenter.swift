@@ -22,7 +22,7 @@ class SettingsPresenter {
         view.setMenu(menu: self.menu)
     }
     
-    func buildSettingsMenu() -> Menu {
+    private func buildSettingsMenu() -> Menu {
         let blocks = [
             buildTitleMenuBlock(id: videoHeaderBlockId, title: "Video"),
             buildOnlyWifiSwitchBlock(),
