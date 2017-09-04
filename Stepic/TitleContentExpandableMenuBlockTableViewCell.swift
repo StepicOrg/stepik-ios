@@ -11,8 +11,8 @@ import FLKAutoLayout
 
 class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var arrowImageView: UIImageView!
-
+    @IBOutlet weak var arrowButton: UIButton!
+    
     var bottomTitleConstraint: NSLayoutConstraint?
 
     var labels: [UILabel] = []
@@ -24,12 +24,9 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         bottomTitleConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-12").first as? NSLayoutConstraint
-        let tapG = UITapGestureRecognizer(target: self, action: #selector(TitleContentExpandableMenuBlockTableViewCell.expandPressed))
-        arrowImageView.isUserInteractionEnabled = true
-        arrowImageView.addGestureRecognizer(tapG)
     }
 
-    func expandPressed() {
+    @IBAction func arrowButtonPressed(_ sender: UIButton) {
         guard let block = block else {
             return
         }
@@ -37,6 +34,10 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
             label.isHidden = true
         }
         block.onExpanded?(!block.isExpanded)
+    }
+    
+    
+    func expandPressed() {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -123,13 +124,13 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
             }
         }
         _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-12")
-        arrowImageView.image = #imageLiteral(resourceName: "menu_arrow_top")
+        arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 
     func shrink(block: TitleContentExpandableMenuBlock) {
         cleanLabels()
         bottomTitleConstraint?.isActive = true
-        arrowImageView.image = #imageLiteral(resourceName: "menu_arrow_bottom")
+        arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_bottom"), for: .normal)
     }
 
 }

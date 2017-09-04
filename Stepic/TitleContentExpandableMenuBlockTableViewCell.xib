@@ -18,31 +18,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="48.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_arrow_bottom" translatesAutoresizingMaskIntoConstraints="NO" id="yVT-JN-gFM">
-                        <rect key="frame" x="281" y="17" width="15" height="15"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="COq-Dc-tgR"/>
-                            <constraint firstAttribute="width" constant="15" id="uLc-bm-8Tn"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title + content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-zG-AdZ">
-                        <rect key="frame" x="24" y="12" width="249" height="24.5"/>
+                        <rect key="frame" x="24" y="12" width="233" height="25"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktK-VW-1Ci">
+                        <rect key="frame" x="265" y="8.5" width="31" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="bUi-Xq-cmf"/>
+                            <constraint firstAttribute="width" constant="31" id="ioE-MN-4ll"/>
+                        </constraints>
+                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                        <state key="normal" image="menu_arrow_bottom"/>
+                        <connections>
+                            <action selector="arrowButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OnQ-KP-VEs"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="ktK-VW-1Ci" firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="trailing" constant="8" id="1Su-qe-4V1"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eIR-zG-AdZ" secondAttribute="bottom" constant="4" placeholder="YES" id="CsT-Wd-mos"/>
-                    <constraint firstItem="yVT-JN-gFM" firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="trailing" constant="8" id="ShU-uo-N41"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="yVT-JN-gFM" secondAttribute="trailing" constant="16" id="SoJ-rh-xCz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ktK-VW-1Ci" secondAttribute="trailing" constant="16" id="SlO-Q5-Fxu"/>
                     <constraint firstItem="eIR-zG-AdZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="V27-wL-E9l"/>
-                    <constraint firstItem="yVT-JN-gFM" firstAttribute="centerY" secondItem="eIR-zG-AdZ" secondAttribute="centerY" id="lvJ-Xy-Gvd"/>
                     <constraint firstAttribute="leadingMargin" secondItem="eIR-zG-AdZ" secondAttribute="leading" constant="-16" id="vrL-qL-f1a"/>
+                    <constraint firstItem="ktK-VW-1Ci" firstAttribute="centerY" secondItem="eIR-zG-AdZ" secondAttribute="centerY" id="yyz-rf-CCP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="arrowImageView" destination="yVT-JN-gFM" id="av0-OA-ysS"/>
+                <outlet property="arrowButton" destination="ktK-VW-1Ci" id="0K7-oH-LSJ"/>
                 <outlet property="titleLabel" destination="eIR-zG-AdZ" id="scd-r2-4RJ"/>
             </connections>
             <point key="canvasLocation" x="34" y="56.5"/>
