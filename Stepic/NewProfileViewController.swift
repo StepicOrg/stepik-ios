@@ -13,7 +13,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
 
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,11 +25,10 @@ class NewProfileViewController: MenuViewController, ProfileView {
 //        presenter?.updateProfile()
     }
 
-    
     func shareButtonPressed() {
         presenter?.sharePressed()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -98,9 +97,9 @@ class NewProfileViewController: MenuViewController, ProfileView {
             _ in
             UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
         }))
-        
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-        
+
         self.present(alert, animated: true, completion: {
             completion?()
         })
@@ -110,7 +109,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
         let streakTimePickerPresenter = Presentr(presentationType: .bottomHalf)
         return streakTimePickerPresenter
     }()
-    
+
     func showStreakTimeSelectionAlert(startHour: Int, selectedBlock: (() -> Void)?) {
         let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
         vc.startHour = startHour

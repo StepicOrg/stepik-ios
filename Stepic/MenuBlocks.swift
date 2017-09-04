@@ -13,6 +13,7 @@ class MenuBlock {
     let id: String
     var title: String
     var onAppearance: (() -> Void)?
+    var selectable = false
 
     init(id: String, title: String) {
         self.title = title
@@ -34,6 +35,11 @@ class TransitionMenuBlock: MenuBlock {
     var subtitle: String?
     var onTouch: (() -> Void)?
     var onCameBack: (() -> Void)?
+
+    override init(id: String, title: String) {
+        super.init(id: id, title: title)
+        selectable = true
+    }
 }
 
 class SwitchMenuBlock: MenuBlock {
