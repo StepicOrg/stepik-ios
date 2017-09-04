@@ -918,6 +918,30 @@
 		08DF789A1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
 		08DF789B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
 		08DF789C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF789E1F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF789F1F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A01F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A11F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A21F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A31F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A41F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A51F5DE64300AEEA85 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
+		08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78A91F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AA1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AB1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AC1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AD1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AE1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78AF1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
+		08DF78B11F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B21F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B31F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B41F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B51F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B61F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B71F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B81F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -4417,6 +4441,9 @@
 		08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLBuilder.swift; sourceTree = "<group>"; };
 		08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
+		08DF789D1F5DE64300AEEA85 /* ArtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
+		08DF78A71F5DE66200AEEA85 /* ArtView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtView.xib; sourceTree = "<group>"; };
+		08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoIntrinsicSizeImageView.swift; sourceTree = "<group>"; };
 		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -5895,11 +5922,13 @@
 		08C02DBB1F53202600F848F5 /* new */ = {
 			isa = PBXGroup;
 			children = (
-				08448FFE1F5CE13D00D01940 /* Settings */,
+				08DF78A61F5DE64B00AEEA85 /* ArtView */,
 				08CBA35C1F5AFD8500302154 /* ProfileStreaksView */,
+				08448FFE1F5CE13D00D01940 /* Settings */,
 				08CBA3491F57574F00302154 /* Menu */,
 				08448FFD1F5CE13100D01940 /* Profile */,
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
+				08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */,
 			);
 			name = new;
 			sourceTree = "<group>";
@@ -6083,6 +6112,15 @@
 				2CBC4C051F1E4A1300FE96C4 /* Config.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		08DF78A61F5DE64B00AEEA85 /* ArtView */ = {
+			isa = PBXGroup;
+			children = (
+				08DF789D1F5DE64300AEEA85 /* ArtView.swift */,
+				08DF78A71F5DE66200AEEA85 /* ArtView.xib */,
+			);
+			name = ArtView;
 			sourceTree = "<group>";
 		};
 		08E16F201BDBA495004822E1 /* Reachability */ = {
@@ -7318,6 +7356,7 @@
 				08D121181C937B2200A54ABC /* Localizable.strings in Resources */,
 				08DB8CBC1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				085E9E791F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
+				08DF78A91F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				08EB85E21D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				08D121191C937B2200A54ABC /* PlaceholderView.storyboard in Resources */,
 				083622DD1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -7385,6 +7424,7 @@
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
+				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
@@ -7431,6 +7471,7 @@
 				2C1B62511F4C4AEF00236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B62521F4C4AEF00236804 /* wysiwyg.css in Resources */,
 				2C35C4D91F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
+				08DF78AE1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C1B62531F4C4AEF00236804 /* Localizable.strings in Resources */,
 				2C1B62541F4C4AEF00236804 /* arrow_left.svg in Resources */,
 				2C1B62561F4C4AEF00236804 /* LoadingPaginationView.xib in Resources */,
@@ -7526,6 +7567,7 @@
 				2C1B64621F4C590700236804 /* jquery-3.2.1.min.js in Resources */,
 				2C1B64631F4C590700236804 /* wysiwyg.css in Resources */,
 				2C35C4DA1F4DA47A002F3BF4 /* adjectives_f.plist in Resources */,
+				08DF78AF1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C1B64641F4C590700236804 /* Localizable.strings in Resources */,
 				2C1B64651F4C590700236804 /* arrow_left.svg in Resources */,
 				2C1B64671F4C590700236804 /* LoadingPaginationView.xib in Resources */,
@@ -7671,6 +7713,7 @@
 				2C86542A1F4B33DE00D51654 /* DiscussionsStoryboard.storyboard in Resources */,
 				2C86542C1F4B33DE00D51654 /* QuizViewController.xib in Resources */,
 				2C86542D1F4B33DE00D51654 /* step5.html in Resources */,
+				08DF78AB1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C8654891F4B3A5400D51654 /* GoogleService-Info.plist in Resources */,
 				2C86542E1F4B33DE00D51654 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C86542F1F4B33DE00D51654 /* UnknownTypeQuizViewController.xib in Resources */,
@@ -7767,6 +7810,7 @@
 				2C89AB111F4C289900227C3B /* QuizViewController.xib in Resources */,
 				2C89AB121F4C289900227C3B /* step5.html in Resources */,
 				2C89AB141F4C289900227C3B /* SearchSuggestionTableViewCell.xib in Resources */,
+				08DF78AC1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C89AB431F4C290500227C3B /* Icons.xcassets in Resources */,
 				2C89AB411F4C28FE00227C3B /* Config.plist in Resources */,
 				2C89AB151F4C289900227C3B /* UnknownTypeQuizViewController.xib in Resources */,
@@ -7813,6 +7857,7 @@
 				2C9732971F4C38F600AC9301 /* step3.html in Resources */,
 				2C9732981F4C38F600AC9301 /* jquery-3.2.1.min.js in Resources */,
 				2C35C4D81F4DA479002F3BF4 /* adjectives_f.plist in Resources */,
+				08DF78AD1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2C9732991F4C38F600AC9301 /* wysiwyg.css in Resources */,
 				2C97329A1F4C38F600AC9301 /* Localizable.strings in Resources */,
 				2C97329B1F4C38F600AC9301 /* arrow_left.svg in Resources */,
@@ -7908,6 +7953,7 @@
 				08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */,
 				08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */,
 				860DB79D1EB8FE9E001E3E42 /* Localizable.strings in Resources */,
+				08DF78AA1F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */,
 				860BC3471EAA1F5E0058F440 /* LoadingPaginationView.xib in Resources */,
 				860BC3481EAA1F5E0058F440 /* CertificateTableViewCell.xib in Resources */,
@@ -8651,6 +8697,7 @@
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */,
+				08DF78B21F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
@@ -8710,6 +8757,7 @@
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
 				08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
+				08DF789F1F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				08AF59FD1E6D9BE800423EFF /* RGPageViewControllerDelegate.swift in Sources */,
 				084F7AAB1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */,
 				086A8B291D21796800F45C45 /* VotesAPI.swift in Sources */,
@@ -9114,6 +9162,7 @@
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
+				08DF78B11F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
@@ -9190,6 +9239,7 @@
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				080C5E841EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
+				08DF789E1F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
@@ -9447,6 +9497,7 @@
 				2C1B60FD1F4C4AEF00236804 /* ProfilesAPI.swift in Sources */,
 				2C1B60FE1F4C4AEF00236804 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C1B60FF1F4C4AEF00236804 /* CodeElementsSize.swift in Sources */,
+				08DF78B71F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C1B61001F4C4AEF00236804 /* PickerViewController.swift in Sources */,
 				2C1B61011F4C4AEF00236804 /* StepikAlertViewController.swift in Sources */,
 				2C1B61021F4C4AEF00236804 /* AdaptiveStepViewController.swift in Sources */,
@@ -9656,6 +9707,7 @@
 				2C1B61C71F4C4AEF00236804 /* NotificationAlertConstructor.swift in Sources */,
 				2C1B61C81F4C4AEF00236804 /* DeviceDefaults.swift in Sources */,
 				2C1B61C91F4C4AEF00236804 /* NotificationReactionHandler.swift in Sources */,
+				08DF78A41F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C1B61CA1F4C4AEF00236804 /* NotificationType.swift in Sources */,
 				2C1B61CB1F4C4AEF00236804 /* Notification.swift in Sources */,
 				2C1B61CC1F4C4AEF00236804 /* NotificationDataExtractor.swift in Sources */,
@@ -9868,6 +9920,7 @@
 				2C1B630E1F4C590700236804 /* ProfilesAPI.swift in Sources */,
 				2C1B630F1F4C590700236804 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C1B63101F4C590700236804 /* CodeElementsSize.swift in Sources */,
+				08DF78B81F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C1B63111F4C590700236804 /* PickerViewController.swift in Sources */,
 				2C1B63121F4C590700236804 /* StepikAlertViewController.swift in Sources */,
 				2C1B63131F4C590700236804 /* AdaptiveStepViewController.swift in Sources */,
@@ -10077,6 +10130,7 @@
 				2C1B63D81F4C590700236804 /* NotificationAlertConstructor.swift in Sources */,
 				2C1B63D91F4C590700236804 /* DeviceDefaults.swift in Sources */,
 				2C1B63DA1F4C590700236804 /* NotificationReactionHandler.swift in Sources */,
+				08DF78A51F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C1B63DB1F4C590700236804 /* NotificationType.swift in Sources */,
 				2C1B63DC1F4C590700236804 /* Notification.swift in Sources */,
 				2C1B63DD1F4C590700236804 /* NotificationDataExtractor.swift in Sources */,
@@ -10289,6 +10343,7 @@
 				2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */,
 				2C8652AC1F4B33DE00D51654 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C8652AD1F4B33DE00D51654 /* CodeElementsSize.swift in Sources */,
+				08DF78B41F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C8652AE1F4B33DE00D51654 /* PickerViewController.swift in Sources */,
 				2C8652AF1F4B33DE00D51654 /* StepikAlertViewController.swift in Sources */,
 				2C8652B01F4B33DE00D51654 /* AdaptiveStepViewController.swift in Sources */,
@@ -10498,6 +10553,7 @@
 				2C8653751F4B33DE00D51654 /* NotificationAlertConstructor.swift in Sources */,
 				2C8653761F4B33DE00D51654 /* DeviceDefaults.swift in Sources */,
 				2C8653771F4B33DE00D51654 /* NotificationReactionHandler.swift in Sources */,
+				08DF78A11F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C8653781F4B33DE00D51654 /* NotificationType.swift in Sources */,
 				2C8653791F4B33DE00D51654 /* Notification.swift in Sources */,
 				2C86537A1F4B33DE00D51654 /* NotificationDataExtractor.swift in Sources */,
@@ -10710,6 +10766,7 @@
 				2C89A9911F4C289900227C3B /* ProfilesAPI.swift in Sources */,
 				2C89A9921F4C289900227C3B /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C89A9931F4C289900227C3B /* CodeElementsSize.swift in Sources */,
+				08DF78B51F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C89A9941F4C289900227C3B /* PickerViewController.swift in Sources */,
 				2C89A9951F4C289900227C3B /* StepikAlertViewController.swift in Sources */,
 				2C89A9961F4C289900227C3B /* AdaptiveStepViewController.swift in Sources */,
@@ -10919,6 +10976,7 @@
 				2C89AA5B1F4C289900227C3B /* NotificationAlertConstructor.swift in Sources */,
 				2C89AA5C1F4C289900227C3B /* DeviceDefaults.swift in Sources */,
 				2C89AA5D1F4C289900227C3B /* NotificationReactionHandler.swift in Sources */,
+				08DF78A21F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C89AA5E1F4C289900227C3B /* NotificationType.swift in Sources */,
 				2C89AA5F1F4C289900227C3B /* Notification.swift in Sources */,
 				2C89AA601F4C289900227C3B /* NotificationDataExtractor.swift in Sources */,
@@ -11131,6 +11189,7 @@
 				2C9731451F4C38F600AC9301 /* ProfilesAPI.swift in Sources */,
 				2C9731461F4C38F600AC9301 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C9731471F4C38F600AC9301 /* CodeElementsSize.swift in Sources */,
+				08DF78B61F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C9731481F4C38F600AC9301 /* PickerViewController.swift in Sources */,
 				2C9731491F4C38F600AC9301 /* StepikAlertViewController.swift in Sources */,
 				2C97314A1F4C38F600AC9301 /* AdaptiveStepViewController.swift in Sources */,
@@ -11340,6 +11399,7 @@
 				2C97320F1F4C38F600AC9301 /* NotificationAlertConstructor.swift in Sources */,
 				2C9732101F4C38F600AC9301 /* DeviceDefaults.swift in Sources */,
 				2C9732111F4C38F600AC9301 /* NotificationReactionHandler.swift in Sources */,
+				08DF78A31F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C9732121F4C38F600AC9301 /* NotificationType.swift in Sources */,
 				2C9732131F4C38F600AC9301 /* Notification.swift in Sources */,
 				2C9732141F4C38F600AC9301 /* NotificationDataExtractor.swift in Sources */,
@@ -11552,6 +11612,7 @@
 				2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				0846B1091EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
+				08DF78B31F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67531E83E08E001E8D9E /* StepikAlertViewController.swift in Sources */,
 				86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */,
@@ -11761,6 +11822,7 @@
 				864D66CD1E83DE03001E8D9E /* NotificationRegistrator.swift in Sources */,
 				864D66CE1E83DE03001E8D9E /* NotificationAlertConstructor.swift in Sources */,
 				864D66CF1E83DE03001E8D9E /* DeviceDefaults.swift in Sources */,
+				08DF78A01F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				864D66D01E83DE03001E8D9E /* NotificationReactionHandler.swift in Sources */,
 				864D66D11E83DE03001E8D9E /* NotificationType.swift in Sources */,
 				864D66D21E83DE03001E8D9E /* Notification.swift in Sources */,

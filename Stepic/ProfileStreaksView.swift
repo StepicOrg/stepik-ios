@@ -35,21 +35,32 @@ class ProfileStreaksView: UIView {
     var streaks: StreakData? {
         didSet {
             guard let streaks = streaks else {
+                setStreaks(hidden: true)
                 return
             }
             currentDaysCountLabel.text = "\(streaks.currentStreak) days"
             maxDayCountLabel.text = "\(streaks.longestStreak) days"
             lightningImageView.image = streaks.didSolveToday ? #imageLiteral(resourceName: "lightning_green") : #imageLiteral(resourceName: "lightning_gray")
+            setStreaks(hidden: false)
         }
     }
 
-    fileprivate func initialize() {
-        containerView.setRoundedCorners(cornerRadius: 12)
+    private func setStreaks(hidden: Bool) {
+        currentStreakLabel.isHidden = hidden
+        maxStreakLabel.isHidden = hidden
+        maxDayCountLabel.isHidden = hidden
+        currentDaysCountLabel.isHidden = hidden
+//        lightningImageView.isHidden = hidden
     }
 
-    fileprivate var view: UIView!
+    private func initialize() {
+        containerView.setRoundedCorners(cornerRadius: 12)
+        setStreaks(hidden: true)
+    }
 
-    fileprivate func setup() {
+    private var view: UIView!
+
+    private func setup() {
         view = loadViewFromNib()
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -57,7 +68,7 @@ class ProfileStreaksView: UIView {
         initialize()
     }
 
-    fileprivate func loadViewFromNib() -> UIView {
+    private func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "ProfileStreaksView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView

@@ -15,7 +15,16 @@ class NewSettingsViewController: MenuViewController, SettingsView {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = SettingsPresenter(view: self)
+        tableView.tableHeaderView = artView
     }
+
+    lazy var artView: ArtView = {
+        let artView = ArtView(frame: CGRect.zero)
+        artView.art = #imageLiteral(resourceName: "art_customize_learning_process_en")
+        artView.width = UIScreen.main.bounds.width
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        return artView
+    }()
 
     func setMenu(menu: Menu) {
         self.menu = menu
@@ -29,5 +38,12 @@ class NewSettingsViewController: MenuViewController, SettingsView {
         vc.action = action
 
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        artView.width = size.width
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: size.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
     }
 }
