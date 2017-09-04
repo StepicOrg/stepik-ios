@@ -54,7 +54,7 @@ platform :ios do
 
   all_schemes = [
     "Stepic",
-    "Adaptive 1838",
+    "Adaptive 1838"
     "Adaptive 1906",
     "Adaptive 3150",
     "Adaptive 3149",
@@ -65,6 +65,16 @@ platform :ios do
   test_schemes = [
   	"Stepic"
   ]
+
+  screenshots_schemes = {
+    "Stepic" => "Stepic Screenshots",
+    "Adaptive 1838" => "Adaptive 1838 Screenshots",
+    "Adaptive 1906" => "Adaptive 1906 Screenshots",
+    "Adaptive 3150" => "Adaptive 3150 Screenshots",
+    "Adaptive 3149" => "Adaptive 3149 Screenshots",
+    "Adaptive 3124" => "Adaptive 3124 Screenshots",
+    "Adaptive 3067" => "Adaptive 3067 Screenshots"
+  }
 
   #TEST
 
@@ -197,7 +207,34 @@ platform :ios do
   # Screenshots
 
   lane :customise_screenshots do |options|
-    customize_screenshots(path: options[:path])
+    scheme = options[:scheme]
+    screenshots_scheme = screenshots_schemes[scheme]
+
+    # Make absolute path for screenshots generator
+    # Current dir – ./fastlane
+    screenpath = Dir.pwd + "/screenshots/#{scheme}"
+
+    customize_screenshots(path: screenpath)
+  end
+
+  lane :create_screenshots do |options|
+    scheme = options[:scheme]
+    screenshots_scheme = screenshots_schemes[scheme]
+    screenpath = "./fastlane/screenshots/#{scheme}"
+
+    snapshot(scheme: screenshots_scheme, output_directory: screenpath)
+  end
+
+  lane :create_screenshots_all do |options|
+    customise = options[:customise]
+
+    for scheme in all_schemes do
+      create_screenshots(scheme: scheme)
+
+      if customise
+        scustomise_screenshots(scheme: scheme)
+      end
+    end
   end
 
   # dSYM files

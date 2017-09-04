@@ -12,7 +12,7 @@ module Fastlane
             sh 'pip3 install -r requirements.txt'
 
             UI.message "Working directory: #{params[:path]}"
-            sh "python3 process.py #{params[:path]}"
+            sh "python3 process.py '#{params[:path]}'"
           end
         end
       end

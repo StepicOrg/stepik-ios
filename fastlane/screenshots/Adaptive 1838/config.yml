@@ -1,0 +1,140 @@
+-
+  name: 1card
+  caption:
+    text:
+      - default:
+        - default: 'Изучайте ПДД с помощью карточек'
+    size:
+      - 5.5: 
+        - default: 75
+      - default: 
+        - default: 0
+    font: 
+      - default: 
+        - default: HelveticaNeue-Medium.ttf
+    color:
+      - default:
+        - default: 'white'
+    offsets:
+      - 12.9:
+        - default:
+            left: 200
+            right: 200
+            top: 120
+            bottom: 60
+      - default:
+        - default:
+            left: 65
+            right: 65
+            top: 60
+            bottom: 20
+  background: 
+    - 12.9: 
+      - default: bg_ipad.png
+    - default: 
+      - default: bg.png
+-
+  name: 2hard
+  caption:
+    text:
+      - default:
+        - default: 'Смахните влево, если слишком сложно'
+    size:
+      - 5.5: 
+        - default: 75
+      - default: 
+        - default: 0
+    font: 
+      - default: 
+        - default: HelveticaNeue-Medium.ttf
+    color:
+      - default:
+        - default: 'white'
+    offsets:
+      - 12.9:
+        - default:
+            left: 200
+            right: 200
+            top: 120
+            bottom: 60
+      - default:
+        - default:
+            left: 65
+            right: 65
+            top: 60
+            bottom: 20
+  background: 
+    - 12.9: 
+      - default: bg_ipad.png
+    - default: 
+      - default: bg.png
+-
+  name: 3simple
+  caption:
+    text:
+      - default:
+        - default: 'Смахните вправо, если слишком просто'
+    size:
+      - 5.5: 
+        - default: 75
+      - default: 
+        - default: 0
+    font: 
+      - default: 
+        - default: HelveticaNeue-Medium.ttf
+    color:
+      - default:
+        - default: 'white'
+    offsets:
+      - 12.9:
+        - default:
+            left: 200
+            right: 200
+            top: 120
+            bottom: 60
+      - default:
+        - default:
+            left: 65
+            right: 65
+            top: 60
+            bottom: 20
+  background: 
+    - 12.9: 
+      - default: bg_ipad.png
+    - default: 
+      - default: bg.png
+-
+  name: 4stats
+  caption:
+    text:
+      - default:
+        - default: 'Следите за своим прогрессом'
+    size:
+      - 5.5: 
+        - default: 75
+      - default: 
+        - default: 0
+    font: 
+      - default: 
+        - default: HelveticaNeue-Medium.ttf
+    color:
+      - default:
+        - default: 'white'
+    offsets:
+      - 12.9:
+        - default:
+            left: 200
+            right: 200
+            top: 120
+            bottom: 60
+      - default:
+        - default:
+            left: 65
+            right: 65
+            top: 60
+            bottom: 20
+  background: 
+    - 12.9: 
+      - default: bg_ipad.png
+    - default: 
+      - default: bg.png
