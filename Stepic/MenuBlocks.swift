@@ -21,6 +21,10 @@ class MenuBlock {
     }
 }
 
+class HeaderMenuBlock: MenuBlock {
+    
+}
+
 class ExpandableMenuBlock: MenuBlock {
     var onExpanded: ((Bool) -> Void)?
     var isExpanded: Bool = false

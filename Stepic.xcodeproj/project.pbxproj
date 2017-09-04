@@ -259,6 +259,14 @@
 		084472071D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
 		084472091D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
+		084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490011F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490021F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490041F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
 		0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1041EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1051EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
@@ -4128,6 +4136,7 @@
 		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
+		08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		0846B1021EDDED1000D64D77 /* StepOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepOptions.swift; sourceTree = "<group>"; };
 		0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StepOptions+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLimit.swift; sourceTree = "<group>"; };
@@ -5138,6 +5147,23 @@
 			name = Steps;
 			sourceTree = "<group>";
 		};
+		08448FFD1F5CE13100D01940 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
+				08CBA34A1F57734900302154 /* NewProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		08448FFE1F5CE13D00D01940 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		0846B0F41EDDEC9E00D64D77 /* Certificate */ = {
 			isa = PBXGroup;
 			children = (
@@ -5841,10 +5867,10 @@
 		08C02DBB1F53202600F848F5 /* new */ = {
 			isa = PBXGroup;
 			children = (
+				08448FFE1F5CE13D00D01940 /* Settings */,
 				08CBA35C1F5AFD8500302154 /* ProfileStreaksView */,
 				08CBA3491F57574F00302154 /* Menu */,
-				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
-				08CBA34A1F57734900302154 /* NewProfileViewController.swift */,
+				08448FFD1F5CE13100D01940 /* Profile */,
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
 			);
 			name = new;
@@ -8770,6 +8796,7 @@
 				08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */,
 				080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
+				084490011F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
 				08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */,
@@ -9112,6 +9139,7 @@
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
+				084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				08F485A71C57B023000165AA /* FreeAnswerQuizViewController.swift in Sources */,
@@ -9522,6 +9550,7 @@
 				2C1B618A1F4C4AEF00236804 /* CongratulationViewController.swift in Sources */,
 				2C1B618B1F4C4AEF00236804 /* RatingHelper.swift in Sources */,
 				2C1B618C1F4C4AEF00236804 /* TimeFormatHelper.swift in Sources */,
+				084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B618D1F4C4AEF00236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				2C1B618E1F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B618F1F4C4AEF00236804 /* ImageTapHelper.swift in Sources */,
@@ -9940,6 +9969,7 @@
 				2C1B639B1F4C590700236804 /* CongratulationViewController.swift in Sources */,
 				2C1B639C1F4C590700236804 /* RatingHelper.swift in Sources */,
 				2C1B639D1F4C590700236804 /* TimeFormatHelper.swift in Sources */,
+				084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B639E1F4C590700236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				2C1B639F1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B63A01F4C590700236804 /* ImageTapHelper.swift in Sources */,
@@ -10358,6 +10388,7 @@
 				2C8653381F4B33DE00D51654 /* CongratulationViewController.swift in Sources */,
 				2C8653391F4B33DE00D51654 /* RatingHelper.swift in Sources */,
 				2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */,
+				084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C86533D1F4B33DE00D51654 /* ImageTapHelper.swift in Sources */,
@@ -10776,6 +10807,7 @@
 				2C89AA1E1F4C289900227C3B /* CongratulationViewController.swift in Sources */,
 				2C89AA1F1F4C289900227C3B /* RatingHelper.swift in Sources */,
 				2C89AA201F4C289900227C3B /* TimeFormatHelper.swift in Sources */,
+				084490041F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C89AA211F4C289900227C3B /* WebViewHorizontalScrollHelper.swift in Sources */,
 				2C89AA221F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C89AA231F4C289900227C3B /* ImageTapHelper.swift in Sources */,
@@ -11194,6 +11226,7 @@
 				2C9731D21F4C38F600AC9301 /* CongratulationViewController.swift in Sources */,
 				2C9731D31F4C38F600AC9301 /* RatingHelper.swift in Sources */,
 				2C9731D41F4C38F600AC9301 /* TimeFormatHelper.swift in Sources */,
+				084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C9731D51F4C38F600AC9301 /* WebViewHorizontalScrollHelper.swift in Sources */,
 				2C9731D61F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C9731D71F4C38F600AC9301 /* ImageTapHelper.swift in Sources */,
@@ -11612,6 +11645,7 @@
 				2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */,
 				2CEDA3601F336FEC005F4A5D /* RatingHelper.swift in Sources */,
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
+				084490021F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
