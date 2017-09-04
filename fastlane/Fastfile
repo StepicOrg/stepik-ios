@@ -194,6 +194,12 @@ platform :ios do
       app_identifier: identifiers)
   end
 
+  # Screenshots
+
+  lane :customise_screenshots do |options|
+    customize_screenshots(path: options[:path])
+  end
+
   # dSYM files
 
   lane :refresh_dsyms_all do
