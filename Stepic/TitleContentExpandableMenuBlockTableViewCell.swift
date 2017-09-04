@@ -12,7 +12,7 @@ import FLKAutoLayout
 class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
-    
+
     var bottomTitleConstraint: NSLayoutConstraint?
 
     var labels: [UILabel] = []
@@ -35,8 +35,7 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
         }
         block.onExpanded?(!block.isExpanded)
     }
-    
-    
+
     func expandPressed() {
     }
 
