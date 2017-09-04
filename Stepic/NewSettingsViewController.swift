@@ -39,10 +39,10 @@ class NewSettingsViewController: MenuViewController, SettingsView {
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
         artView.width = size.width
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: size.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
     }

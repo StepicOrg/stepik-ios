@@ -24,7 +24,7 @@ class ArtView: UIView {
             artImageViewWidth.constant = width - 48
         }
     }
-    
+
     private func initialize() {
         artImageView.image = art
     }
