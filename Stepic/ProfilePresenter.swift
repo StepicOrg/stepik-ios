@@ -100,6 +100,9 @@ class ProfilePresenter {
 
         block.onAppearance = {
             [weak self] in
+            guard AuthInfo.shared.isAuthorized else {
+                return
+            }
             if let newTitle = self?.notificationTimeString {
                 block.title = newTitle
             }

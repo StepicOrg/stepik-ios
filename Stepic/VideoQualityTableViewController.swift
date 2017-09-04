@@ -10,7 +10,7 @@ import UIKit
 
 enum VideoQualityChoiceAction: Int {
     case downloading = 0, watching
-    
+
     var title: String {
         switch self {
         case .downloading:
@@ -20,7 +20,6 @@ enum VideoQualityChoiceAction: Int {
         }
     }
 }
-
 
 class VideoQualityTableViewController: UITableViewController {
 

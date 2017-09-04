@@ -8,11 +8,14 @@
 
 import UIKit
 import Presentr
+import DZNEmptyDataSet
 
 class NewProfileViewController: MenuViewController, ProfileView {
 
     var presenter: ProfilePresenter?
     var shareBarButtonItem: UIBarButtonItem?
+
+    var state: ProfileState = .refreshing
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,9 @@ class NewProfileViewController: MenuViewController, ProfileView {
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
         shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(NewProfileViewController.shareButtonPressed))
         self.navigationItem.rightBarButtonItem = shareBarButtonItem!
+
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
 
         // Do any additional setup after loading the view.
 //        presenter?.updateProfile()
@@ -67,6 +73,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
     // MARK: - ProfileView
 
     func set(state: ProfileState) {
+        self.state = state
         switch state {
         case .authorized:
             self.menu = presenter?.menu
@@ -138,8 +145,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
 
     func navigateToSettings() {
         self.performSegue(withIdentifier: "showSettings", sender: nil)
-//        print("Navigate to settings")
-        //TODO: Add implementation
     }
 
     func navigateToDownloads() {
@@ -162,4 +167,115 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
     */
 
+}
+
+extension NewProfileViewController : DZNEmptyDataSetDelegate {
+    @objc func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return false
+    }
+
+    @objc func emptyDataSetDidTapButton(_ scrollView: UIScrollView!) {
+        switch state {
+        case .anonymous:
+            let vc = ControllerHelper.getAuthController()
+            self.present(vc, animated: true, completion: nil)
+            break
+        case .error:
+            presenter?.updateProfile()
+            break
+        default:
+            break
+        }
+    }
+}
+
+extension NewProfileViewController : DZNEmptyDataSetSource {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        switch state {
+        case .anonymous:
+            return Images.placeholders.anonymous
+        case .error:
+            return Images.placeholders.connectionError
+        case .refreshing:
+            return Images.placeholders.anonymous
+        default:
+            return UIImage()
+        }
+    }
+
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        var text: String = ""
+
+        switch state {
+        case .anonymous:
+            text = "Hey, anonymous user"
+        case .error:
+            text = NSLocalizedString("ConnectionErrorTitle", comment: "")
+            break
+        case .refreshing:
+            text = NSLocalizedString("Refreshing", comment: "")
+            break
+        default:
+            break
+        }
+
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0),
+                          NSForegroundColorAttributeName: UIColor.darkGray]
+
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        var text: String = ""
+
+        switch state {
+        case .anonymous:
+            text = "Sign in to access more features"
+            break
+        case .error:
+            text = ""
+            break
+        case .refreshing:
+            text = NSLocalizedString("RefreshingDescription", comment: "")
+            break
+        default:
+            break
+        }
+
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
+
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+                          NSForegroundColorAttributeName: UIColor.lightGray,
+                          NSParagraphStyleAttributeName: paragraph]
+
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+
+    func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
+        var text: String = ""
+
+        switch self.state {
+        case .anonymous:
+            text = NSLocalizedString("SignIn", comment: "")
+        case .error:
+            text = NSLocalizedString("Retry", comment: "")
+            break
+        case .refreshing:
+            text = ""
+            break
+        default:
+            break
+        }
+
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
+                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.groupTableViewBackground
+    }
 }
