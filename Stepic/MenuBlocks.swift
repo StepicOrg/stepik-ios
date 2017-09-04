@@ -22,7 +22,6 @@ class MenuBlock {
 }
 
 class HeaderMenuBlock: MenuBlock {
-    
 }
 
 class ExpandableMenuBlock: MenuBlock {

@@ -137,7 +137,8 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func navigateToSettings() {
-        print("Navigate to settings")
+        self.performSegue(withIdentifier: "showSettings", sender: nil)
+//        print("Navigate to settings")
         //TODO: Add implementation
     }
 

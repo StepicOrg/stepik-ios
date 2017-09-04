@@ -267,6 +267,14 @@
 		084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
 		084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
 		084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
+		084490091F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900A1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900B1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900C1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900D1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900E1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		0844900F1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
+		084490101F5D67E300D01940 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084490081F5D67E300D01940 /* NewSettingsViewController.swift */; };
 		0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1041EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
 		0846B1051EDDED1000D64D77 /* StepOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1021EDDED1000D64D77 /* StepOptions.swift */; };
@@ -894,6 +902,22 @@
 		08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
 		08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
 		08DF1D981BDAE11500BA35EA /* HTMLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */; };
+		08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF788E1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF788F1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78901F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78921F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78931F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78941F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
+		08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF78961F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF78971F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF78981F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF78991F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF789A1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF789B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
+		08DF789C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -4137,6 +4161,7 @@
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
 		08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		084490081F5D67E300D01940 /* NewSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSettingsViewController.swift; sourceTree = "<group>"; };
 		0846B1021EDDED1000D64D77 /* StepOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepOptions.swift; sourceTree = "<group>"; };
 		0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StepOptions+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0846B10B1EDDEE7F00D64D77 /* CodeLimit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLimit.swift; sourceTree = "<group>"; };
@@ -4390,6 +4415,8 @@
 		08DF1D931BDADB2D00BA35EA /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		08DF1D951BDADB7A00BA35EA /* Scripts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scripts.plist; sourceTree = "<group>"; };
 		08DF1D971BDAE11500BA35EA /* HTMLBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLBuilder.swift; sourceTree = "<group>"; };
+		08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
+		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -5160,6 +5187,7 @@
 			isa = PBXGroup;
 			children = (
 				08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */,
+				084490081F5D67E300D01940 /* NewSettingsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -5914,6 +5942,8 @@
 				08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */,
 				08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */,
 				08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */,
+				08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */,
+				08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */,
 			);
 			name = MenuBlockCells;
 			sourceTree = "<group>";
@@ -7252,6 +7282,7 @@
 				08F4761F1E82C11C0018E82C /* StreaksView.xib in Resources */,
 				08FB30DB1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
 				087854F61DF6EE0D00368A50 /* wysiwyg.css in Resources */,
+				08DF78961F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				082CB1B91D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */,
 				08D1210C1C937B2200A54ABC /* MathJax in Resources */,
@@ -7350,6 +7381,7 @@
 				087854F51DF6EE0D00368A50 /* wysiwyg.css in Resources */,
 				08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */,
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
+				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
@@ -7429,6 +7461,7 @@
 				08CBA3641F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C35C4DE1F4DA47F002F3BF4 /* adjectives_m.plist in Resources */,
+				08DF789B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C1B62721F4C4AEF00236804 /* step2.html in Resources */,
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62741F4C4AEF00236804 /* SignInCoursesTableViewCell.xib in Resources */,
@@ -7523,6 +7556,7 @@
 				08CBA3651F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
 				2C35C4DF1F4DA480002F3BF4 /* adjectives_m.plist in Resources */,
+				08DF789C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C1B64831F4C590700236804 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C1B64851F4C590700236804 /* step2.html in Resources */,
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
@@ -7626,6 +7660,7 @@
 				2C8654211F4B33DE00D51654 /* PlayerTestStoryboard.storyboard in Resources */,
 				2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */,
 				2C8654221F4B33DE00D51654 /* DownloadTableViewCell.xib in Resources */,
+				08DF78981F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C86548A1F4B3A5F00D51654 /* Tokens.plist in Resources */,
 				2C35C4E81F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C8654231F4B33DE00D51654 /* DiscussionWebTableViewCell.xib in Resources */,
@@ -7721,6 +7756,7 @@
 				2C89AB051F4C289900227C3B /* SignInCoursesTableViewCell.xib in Resources */,
 				2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */,
 				2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */,
+				08DF78991F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */,
 				2C35C4E91F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C89AB0B1F4C289900227C3B /* CardOverlayView.xib in Resources */,
@@ -7807,6 +7843,7 @@
 				08CBA3631F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
 				2C35C4E01F4DA481002F3BF4 /* adjectives_m.plist in Resources */,
+				08DF789A1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C9732B31F4C38F600AC9301 /* StreakAlertViewController.xib in Resources */,
 				2C9732B51F4C38F600AC9301 /* StepicVideoPlayerViewController.xib in Resources */,
 				2C9732B71F4C38F600AC9301 /* step2.html in Resources */,
@@ -7901,6 +7938,7 @@
 				08CBA3601F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
 				0888D0FB1F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
+				08DF78971F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				085E9E7A1F18ED7000D6A4BC /* SignInCoursesTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
@@ -8758,6 +8796,7 @@
 				08D120AE1C937B2200A54ABC /* Unit.swift in Sources */,
 				0802177B1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				08D120AF1C937B2200A54ABC /* VideoDownload.swift in Sources */,
+				0844900A1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				080C5E811EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				083749271DE5AE0400144C14 /* Alerts.swift in Sources */,
 				08AC21491CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
@@ -8931,6 +8970,7 @@
 				08901E6E1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */,
 				086B7F081D194D4B00055B4E /* NSAttributedStringExtensions.swift in Sources */,
+				08DF788E1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
@@ -9223,6 +9263,7 @@
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
 				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
+				08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				0841569D1BCC09F2006B8C73 /* StepsViewController.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
@@ -9311,6 +9352,7 @@
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
+				084490091F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
@@ -9560,6 +9602,7 @@
 				2C1B61931F4C4AEF00236804 /* AnalyticsReporter.swift in Sources */,
 				2C1B61941F4C4AEF00236804 /* WatchDataHelper.swift in Sources */,
 				2C1B61951F4C4AEF00236804 /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF78931F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C1B61961F4C4AEF00236804 /* HTMLParsingUtil.swift in Sources */,
 				2C1B61971F4C4AEF00236804 /* TagDetectionUtil.swift in Sources */,
 				2C1B61981F4C4AEF00236804 /* UIImageView+SVGDownload.swift in Sources */,
@@ -9707,6 +9750,7 @@
 				08CBA3511F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C1B62201F4C4AEF00236804 /* JSONInitializable.swift in Sources */,
 				2C1B62211F4C4AEF00236804 /* TabsInfo.swift in Sources */,
+				0844900F1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				2C1B62221F4C4AEF00236804 /* VideosInfo.swift in Sources */,
 				2C1B62231F4C4AEF00236804 /* VideoDownload.swift in Sources */,
 				2C1B62241F4C4AEF00236804 /* SearchResult.swift in Sources */,
@@ -9979,6 +10023,7 @@
 				2C1B63A41F4C590700236804 /* AnalyticsReporter.swift in Sources */,
 				2C1B63A51F4C590700236804 /* WatchDataHelper.swift in Sources */,
 				2C1B63A61F4C590700236804 /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF78941F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C1B63A71F4C590700236804 /* HTMLParsingUtil.swift in Sources */,
 				2C1B63A81F4C590700236804 /* TagDetectionUtil.swift in Sources */,
 				2C1B63A91F4C590700236804 /* UIImageView+SVGDownload.swift in Sources */,
@@ -10126,6 +10171,7 @@
 				08CBA3521F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C1B64311F4C590700236804 /* JSONInitializable.swift in Sources */,
 				2C1B64321F4C590700236804 /* TabsInfo.swift in Sources */,
+				084490101F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				2C1B64331F4C590700236804 /* VideosInfo.swift in Sources */,
 				2C1B64341F4C590700236804 /* VideoDownload.swift in Sources */,
 				2C1B64351F4C590700236804 /* SearchResult.swift in Sources */,
@@ -10398,6 +10444,7 @@
 				2C8653411F4B33DE00D51654 /* AnalyticsReporter.swift in Sources */,
 				2C8653421F4B33DE00D51654 /* WatchDataHelper.swift in Sources */,
 				2C8653431F4B33DE00D51654 /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF78901F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C8653441F4B33DE00D51654 /* HTMLParsingUtil.swift in Sources */,
 				2C8653451F4B33DE00D51654 /* TagDetectionUtil.swift in Sources */,
 				2C8653461F4B33DE00D51654 /* UIImageView+SVGDownload.swift in Sources */,
@@ -10545,6 +10592,7 @@
 				08CBA34E1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C8653CE1F4B33DE00D51654 /* JSONInitializable.swift in Sources */,
 				2C8653CF1F4B33DE00D51654 /* TabsInfo.swift in Sources */,
+				0844900C1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				2C8653D01F4B33DE00D51654 /* VideosInfo.swift in Sources */,
 				2C8653D11F4B33DE00D51654 /* VideoDownload.swift in Sources */,
 				2C8653D21F4B33DE00D51654 /* SearchResult.swift in Sources */,
@@ -10817,6 +10865,7 @@
 				2C89AA271F4C289900227C3B /* AnalyticsReporter.swift in Sources */,
 				2C89AA281F4C289900227C3B /* WatchDataHelper.swift in Sources */,
 				2C89AA291F4C289900227C3B /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C89AA2A1F4C289900227C3B /* HTMLParsingUtil.swift in Sources */,
 				2C89AA2B1F4C289900227C3B /* TagDetectionUtil.swift in Sources */,
 				2C89AA2C1F4C289900227C3B /* UIImageView+SVGDownload.swift in Sources */,
@@ -10964,6 +11013,7 @@
 				08CBA34F1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C89AAB41F4C289900227C3B /* JSONInitializable.swift in Sources */,
 				2C89AAB51F4C289900227C3B /* TabsInfo.swift in Sources */,
+				0844900D1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				2C89AAB61F4C289900227C3B /* VideosInfo.swift in Sources */,
 				2C89AAB71F4C289900227C3B /* VideoDownload.swift in Sources */,
 				2C89AAB81F4C289900227C3B /* SearchResult.swift in Sources */,
@@ -11236,6 +11286,7 @@
 				2C9731DB1F4C38F600AC9301 /* AnalyticsReporter.swift in Sources */,
 				2C9731DC1F4C38F600AC9301 /* WatchDataHelper.swift in Sources */,
 				2C9731DD1F4C38F600AC9301 /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF78921F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C9731DE1F4C38F600AC9301 /* HTMLParsingUtil.swift in Sources */,
 				2C9731DF1F4C38F600AC9301 /* TagDetectionUtil.swift in Sources */,
 				2C9731E01F4C38F600AC9301 /* UIImageView+SVGDownload.swift in Sources */,
@@ -11383,6 +11434,7 @@
 				08CBA3501F57734900302154 /* NewProfileViewController.swift in Sources */,
 				2C9732681F4C38F600AC9301 /* JSONInitializable.swift in Sources */,
 				2C9732691F4C38F600AC9301 /* TabsInfo.swift in Sources */,
+				0844900E1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				2C97326A1F4C38F600AC9301 /* VideosInfo.swift in Sources */,
 				2C97326B1F4C38F600AC9301 /* VideoDownload.swift in Sources */,
 				2C97326C1F4C38F600AC9301 /* SearchResult.swift in Sources */,
@@ -11655,6 +11707,7 @@
 				864D66A21E83DE03001E8D9E /* AnalyticsReporter.swift in Sources */,
 				864D66A31E83DE03001E8D9E /* WatchDataHelper.swift in Sources */,
 				864D66A41E83DE03001E8D9E /* WatchCoursesDisplayingHelper.swift in Sources */,
+				08DF788F1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				864D66A51E83DE03001E8D9E /* HTMLParsingUtil.swift in Sources */,
 				864D66A61E83DE03001E8D9E /* TagDetectionUtil.swift in Sources */,
 				864D66A71E83DE03001E8D9E /* UIImageView+SVGDownload.swift in Sources */,
@@ -11802,6 +11855,7 @@
 				08CBA34D1F57734900302154 /* NewProfileViewController.swift in Sources */,
 				864D67151E83DE03001E8D9E /* JSONInitializable.swift in Sources */,
 				864D67161E83DE03001E8D9E /* TabsInfo.swift in Sources */,
+				0844900B1F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				864D67171E83DE03001E8D9E /* VideosInfo.swift in Sources */,
 				864D67181E83DE03001E8D9E /* VideoDownload.swift in Sources */,
 				864D67191E83DE03001E8D9E /* SearchResult.swift in Sources */,
