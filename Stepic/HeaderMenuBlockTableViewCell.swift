@@ -11,7 +11,7 @@ import UIKit
 class HeaderMenuBlockTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +22,7 @@ class HeaderMenuBlockTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func initWithBlock(block: HeaderMenuBlock) {
         titleLabel.text = block.title
     }

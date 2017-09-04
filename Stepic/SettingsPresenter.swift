@@ -51,7 +51,7 @@ class SettingsPresenter {
             [weak self] in
             self?.view?.changeVideoQuality(action: .downloading)
         }
-        
+
         return block
     }
 

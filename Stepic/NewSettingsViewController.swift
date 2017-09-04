@@ -20,14 +20,14 @@ class NewSettingsViewController: MenuViewController, SettingsView {
     func setMenu(menu: Menu) {
         self.menu = menu
     }
-    
+
     func changeVideoQuality(action: VideoQualityChoiceAction) {
         guard let vc = ControllerHelper.instantiateViewController(identifier: "VideoQualityTableViewController", storyboardName: "Profile") as? VideoQualityTableViewController else {
             return
         }
-        
+
         vc.action = action
-        
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
