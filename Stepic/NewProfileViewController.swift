@@ -12,15 +12,24 @@ import Presentr
 class NewProfileViewController: MenuViewController, ProfileView {
 
     var presenter: ProfilePresenter?
-
+    var shareBarButtonItem: UIBarButtonItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         presenter = ProfilePresenter(view: self, userActivitiesAPI: ApiDataDownloader.userActivities, usersAPI: ApiDataDownloader.users)
+        shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(NewProfileViewController.shareButtonPressed))
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem!
+
         // Do any additional setup after loading the view.
 //        presenter?.updateProfile()
     }
 
+    
+    func shareButtonPressed() {
+        presenter?.sharePressed()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -112,8 +121,15 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func showShareProfileAlert(url: URL) {
-        print("Share profile")
-        //TODO: Add implementation
+        DispatchQueue.global(qos: .background).async {
+            [weak self] in
+            let shareVC = SharingHelper.getSharingController(url.absoluteString)
+            shareVC.popoverPresentationController?.barButtonItem = self?.shareBarButtonItem
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.present(shareVC, animated: true, completion: nil)
+            }
+        }
     }
 
     func logout(onBack: (() -> Void)?) {
