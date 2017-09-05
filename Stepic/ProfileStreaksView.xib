@@ -63,13 +63,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Current streak" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-fT-4hc">
-                            <rect key="frame" x="22.5" y="171.5" width="86" height="16"/>
+                            <rect key="frame" x="20.5" y="171.5" width="86" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="755" text="Best streak" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9X-4V-4rV">
-                            <rect key="frame" x="188.5" y="171.5" width="67.5" height="16"/>
+                            <rect key="frame" x="190.5" y="171.5" width="67.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                         <constraint firstItem="Tvp-fT-4hc" firstAttribute="top" secondItem="MEK-pa-lwi" secondAttribute="bottom" constant="1" id="EMh-6Z-Lcf"/>
                         <constraint firstItem="5g2-c6-WyB" firstAttribute="leading" secondItem="ECP-UP-U74" secondAttribute="leading" constant="8" id="Eie-Uw-Onx"/>
                         <constraint firstAttribute="bottom" secondItem="wD9-xU-iGl" secondAttribute="bottom" constant="45" id="IGr-Em-tbe"/>
-                        <constraint firstItem="wD9-xU-iGl" firstAttribute="leading" secondItem="Tvp-fT-4hc" secondAttribute="trailing" priority="998" constant="30" id="NWH-6A-KQf"/>
+                        <constraint firstItem="wD9-xU-iGl" firstAttribute="leading" secondItem="Tvp-fT-4hc" secondAttribute="trailing" priority="998" constant="32" id="NWH-6A-KQf"/>
                         <constraint firstItem="o9X-4V-4rV" firstAttribute="top" secondItem="k2D-m5-L2a" secondAttribute="bottom" id="QpD-sU-a47"/>
                         <constraint firstAttribute="trailing" secondItem="2vX-eo-8NP" secondAttribute="trailing" constant="8" id="ROe-gD-Si6"/>
                         <constraint firstItem="k2D-m5-L2a" firstAttribute="centerY" secondItem="wD9-xU-iGl" secondAttribute="centerY" id="Zdv-tT-eeb"/>
@@ -94,7 +94,7 @@
                         <constraint firstItem="Tvp-fT-4hc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ECP-UP-U74" secondAttribute="leading" constant="8" id="cWL-VD-LJ3"/>
                         <constraint firstItem="MEK-pa-lwi" firstAttribute="centerY" secondItem="wD9-xU-iGl" secondAttribute="centerY" id="gH5-nl-8le"/>
                         <constraint firstItem="MEK-pa-lwi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ECP-UP-U74" secondAttribute="leading" constant="8" id="lHv-if-1XR"/>
-                        <constraint firstItem="o9X-4V-4rV" firstAttribute="leading" secondItem="wD9-xU-iGl" secondAttribute="trailing" priority="998" constant="30" id="mbh-0k-NFA"/>
+                        <constraint firstItem="o9X-4V-4rV" firstAttribute="leading" secondItem="wD9-xU-iGl" secondAttribute="trailing" priority="998" constant="32" id="mbh-0k-NFA"/>
                         <constraint firstItem="wD9-xU-iGl" firstAttribute="leading" secondItem="MEK-pa-lwi" secondAttribute="trailing" priority="998" constant="30" id="moX-R6-dgu"/>
                         <constraint firstItem="5g2-c6-WyB" firstAttribute="top" secondItem="2vX-eo-8NP" secondAttribute="bottom" constant="2" id="qRB-pg-JcW"/>
                         <constraint firstItem="wD9-xU-iGl" firstAttribute="centerX" secondItem="ECP-UP-U74" secondAttribute="centerX" id="vok-C9-iL4"/>
