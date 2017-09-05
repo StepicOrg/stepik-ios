@@ -206,6 +206,7 @@ platform :ios do
 
   # Screenshots
 
+  desc "Add frame, background and caption to screenshot"
   lane :customise_screenshots do |options|
     scheme = options[:scheme]
     screenshots_scheme = screenshots_schemes[scheme]
@@ -217,6 +218,7 @@ platform :ios do
     customize_screenshots(path: screenpath)
   end
 
+  desc "Create screenshots"
   lane :create_screenshots do |options|
     scheme = options[:scheme]
     screenshots_scheme = screenshots_schemes[scheme]
@@ -225,6 +227,7 @@ platform :ios do
     snapshot(scheme: screenshots_scheme, output_directory: screenpath)
   end
 
+  desc "Create screenshots for all schemes"
   lane :create_screenshots_all do |options|
     customise = options[:customise]
 
@@ -232,13 +235,27 @@ platform :ios do
       create_screenshots(scheme: scheme)
 
       if customise
-        scustomise_screenshots(scheme: scheme)
+        customise_screenshots(scheme: scheme)
       end
     end
   end
 
+  # update version/build
+
+  desc "Increment build number"
+  lane :increment_build do
+    increment_build_number
+  end
+
+  desc "Set version"
+  lane :set_version do |options|
+    version = options[:version]
+    increment_version_number(version_number: version)
+  end
+
   # dSYM files
 
+  desc "Refresh dSYMs in Crashlytics for all schemes"
   lane :refresh_dsyms_all do
     for scheme in all_schemes do
       refresh_dsyms(app_identifier: app_identifiers[scheme][0])
