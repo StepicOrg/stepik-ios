@@ -49,12 +49,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
     var streaks: StreakData? {
         didSet {
-            guard let profileStreaksView = profileStreaksView else {
-                return
-            }
-            profileStreaksView.streaks = streaks
-            profileStreaksView.frame.size = profileStreaksView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-            tableView.tableHeaderView = profileStreaksView
+            profileStreaksView?.streaks = streaks
         }
     }
 

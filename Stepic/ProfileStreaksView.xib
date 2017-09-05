@@ -24,26 +24,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="309" height="297"/>
+            <rect key="frame" x="0.0" y="0.0" width="345" height="308"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-UP-U74">
-                    <rect key="frame" x="24" y="69" width="261" height="204"/>
+                    <rect key="frame" x="24" y="69" width="297" height="215"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Augustine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-eo-8NP">
-                            <rect key="frame" x="8" y="57" width="245" height="23"/>
+                            <rect key="frame" x="8" y="57" width="281" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" text="Solarson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-c6-WyB">
-                            <rect key="frame" x="8" y="82" width="245" height="23"/>
+                            <rect key="frame" x="8" y="82" width="281" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightning_gray" translatesAutoresizingMaskIntoConstraints="NO" id="wD9-xU-iGl">
-                            <rect key="frame" x="120.5" y="139" width="20" height="20"/>
+                            <rect key="frame" x="138.5" y="150" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" priority="999" constant="20" id="Fig-0n-kmt"/>
                                 <constraint firstAttribute="width" secondItem="wD9-xU-iGl" secondAttribute="height" multiplier="1:1" id="Uvx-RU-Bx6"/>
@@ -51,25 +51,25 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEK-pa-lwi">
-                            <rect key="frame" x="37" y="138" width="53.5" height="21.5"/>
+                            <rect key="frame" x="55" y="149.5" width="53.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="12 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2D-m5-L2a">
-                            <rect key="frame" x="170.5" y="138.5" width="61" height="21.5"/>
+                            <rect key="frame" x="188.5" y="150" width="61" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Current streak" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-fT-4hc">
-                            <rect key="frame" x="41.5" y="160.5" width="49" height="31.5"/>
+                            <rect key="frame" x="22.5" y="171.5" width="86" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="755" text="Best streak" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9X-4V-4rV">
-                            <rect key="frame" x="170.5" y="160" width="67.5" height="16"/>
+                            <rect key="frame" x="188.5" y="171.5" width="67.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -82,9 +82,9 @@
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Tvp-fT-4hc" secondAttribute="bottom" priority="999" constant="12" id="9bk-W0-lSO"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o9X-4V-4rV" secondAttribute="trailing" constant="8" id="A3Z-HA-TXg"/>
                         <constraint firstItem="k2D-m5-L2a" firstAttribute="leading" secondItem="wD9-xU-iGl" secondAttribute="trailing" priority="998" constant="30" id="Cpb-PT-B1M"/>
-                        <constraint firstAttribute="bottom" secondItem="Tvp-fT-4hc" secondAttribute="bottom" priority="998" constant="12" id="D78-2N-cbf"/>
                         <constraint firstItem="Tvp-fT-4hc" firstAttribute="top" secondItem="MEK-pa-lwi" secondAttribute="bottom" constant="1" id="EMh-6Z-Lcf"/>
                         <constraint firstItem="5g2-c6-WyB" firstAttribute="leading" secondItem="ECP-UP-U74" secondAttribute="leading" constant="8" id="Eie-Uw-Onx"/>
+                        <constraint firstAttribute="bottom" secondItem="wD9-xU-iGl" secondAttribute="bottom" constant="45" id="IGr-Em-tbe"/>
                         <constraint firstItem="wD9-xU-iGl" firstAttribute="leading" secondItem="Tvp-fT-4hc" secondAttribute="trailing" priority="998" constant="30" id="NWH-6A-KQf"/>
                         <constraint firstItem="o9X-4V-4rV" firstAttribute="top" secondItem="k2D-m5-L2a" secondAttribute="bottom" id="QpD-sU-a47"/>
                         <constraint firstAttribute="trailing" secondItem="2vX-eo-8NP" secondAttribute="trailing" constant="8" id="ROe-gD-Si6"/>
@@ -102,7 +102,7 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="3Oh-cT-dOF" customClass="AvatarImageView" customModule="Stepic">
-                    <rect key="frame" x="110.5" y="24" width="89.5" height="90"/>
+                    <rect key="frame" x="128" y="24" width="89.5" height="90"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="3Oh-cT-dOF" secondAttribute="height" multiplier="1:1" id="Jsq-1N-TPz"/>
                         <constraint firstAttribute="height" priority="900" constant="90" id="Ttk-Po-85z"/>
@@ -122,7 +122,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="0.5" y="15.5"/>
+            <point key="canvasLocation" x="87.5" y="49"/>
         </view>
     </objects>
     <resources>
