@@ -379,10 +379,11 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     }
 
     func showRateAlert() {
+        var positionPercentageString: String? = nil
         if let cnt = step.lesson?.stepsArray.count {
-            let positionPercentageString = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
-            Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
+            positionPercentageString = String(format: "%.02f", cnt != 0 ? Double(step.position) / Double(cnt) : -1)
         }
+        Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: positionPercentageString), inController: self)
     }
 
     func logout(onClose: (() -> Void)?) {

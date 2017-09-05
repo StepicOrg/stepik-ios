@@ -9,10 +9,6 @@
 import UIKit
 import Presentr
 
-enum VideoQualityChoiceAction: Int {
-    case downloading = 0, watching
-}
-
 class PreferencesViewController: UITableViewController {
 
     @IBOutlet weak var onlyWiFiSwitch: UISwitch!

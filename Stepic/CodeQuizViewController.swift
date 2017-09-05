@@ -289,7 +289,10 @@ class CodeQuizViewController: QuizViewController {
     }
 
     override func getReply() -> Reply? {
-        return CodeReply(code: codeTextView.text ?? "", language: language)
+        guard let language = language, let code = codeTextView.text else {
+            return nil
+        }
+        return CodeReply(code: code, language: language)
     }
 
     override func didReceiveMemoryWarning() {
