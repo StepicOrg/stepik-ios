@@ -48,6 +48,7 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     func initWithBlock(block: TitleContentExpandableMenuBlock) {
         self.block = block
         titleLabel.text = block.title
+        titleLabel.textColor = block.titleColor
         if block.isExpanded {
             expand(block: block)
         } else {

@@ -14,9 +14,9 @@ enum VideoQualityChoiceAction: Int {
     var title: String {
         switch self {
         case .downloading:
-            return "Downloading video quality"
+            return NSLocalizedString("LoadingVideoQualityPreference", comment: "")
         case .watching:
-            return "Online video quality"
+            return NSLocalizedString("WatchingVideoQualityPreference", comment: "")
         }
     }
 }

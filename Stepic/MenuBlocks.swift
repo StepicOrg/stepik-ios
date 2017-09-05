@@ -14,6 +14,7 @@ class MenuBlock {
     var title: String
     var onAppearance: (() -> Void)?
     var selectable = false
+    var titleColor: UIColor = UIColor.black
 
     init(id: String, title: String) {
         self.title = title

@@ -154,6 +154,7 @@ class ProfilePresenter {
     private func buildLogoutBlock() -> TransitionMenuBlock {
         let block: TransitionMenuBlock = TransitionMenuBlock(id: logoutBlockId, title: NSLocalizedString("Logout", comment: ""))
 
+        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
         block.onTouch = {
             [weak self] in
             self?.logout()
