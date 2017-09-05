@@ -72,7 +72,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
                 }
             case .content:
                 if #available(iOS 8.2, *) {
-                    return UIFont.systemFont(ofSize: 15, weight: UIFontWeightThin)
+                    return UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
                 } else {
                     return UIFont.systemFont(ofSize: 15)
                 }
@@ -84,7 +84,12 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         let label = UILabel(frame: CGRect.zero)
         label.text = text
         label.font = type.font
-        label.textColor = UIColor(hex: 0x535366)
+        switch type {
+        case .title:
+            label.textColor = block?.titleColor
+        case .content:
+            label.textColor = UIColor.newTextColor
+        }
         return label
     }
 
@@ -94,7 +99,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         }
         let l = buildLabel(type: type, text: text)
         self.contentView.addSubview(l)
-        _ = l.constrainTopSpace(to: topView, predicate: "4")
+        _ = l.constrainTopSpace(to: topView, predicate: type == .content ? "8" : "16")
         l.alignLeading("24", trailing: "-24", to: self.contentView)
         l.numberOfLines = 0
         labels += [l]
@@ -130,7 +135,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
                 addLabel(type: .content, text: labelText.content, after: labels.last)
             }
         }
-        _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-12")
+        _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-26")
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 

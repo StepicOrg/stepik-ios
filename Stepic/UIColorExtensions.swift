@@ -69,4 +69,6 @@ extension UIColor {
     class func peerReviewYellowColor() -> UIColor {
         return UIColor(hex: 0xFFFAE9)
     }
+
+    static let newTextColor: UIColor = UIColor(hex: 0x535366)
 }

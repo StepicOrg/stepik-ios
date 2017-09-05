@@ -33,6 +33,7 @@ class MenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: MenuBlock) {
+        separator.isHidden = !block.hasSeparatorOnBottom
     }
 
     override func prepareForReuse() {

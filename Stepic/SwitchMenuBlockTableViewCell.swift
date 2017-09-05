@@ -34,6 +34,10 @@ class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
     }
 
     @IBAction func switchChanged(_ sender: Any) {
-        block?.onSwitch?(blockSwitch.isOn)
+        guard let block = block else {
+            return
+        }
+        block.onSwitch?(blockSwitch.isOn)
+        separator.isHidden = !block.hasSeparatorOnBottom
     }
 }

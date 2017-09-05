@@ -64,10 +64,13 @@ class ProfilePresenter {
     private func buildNotificationsSwitchBlock() -> SwitchMenuBlock {
         let block: SwitchMenuBlock = SwitchMenuBlock(id: notificationsSwitchBlockId, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: self.hasPermissionToSendStreakNotifications)
 
+//        block.hasSeparatorOnBottom = !self.hasPermissionToSendStreakNotifications
+
         block.onSwitch = {
             [weak self]
             isOn in
             self?.setStreakNotifications(on: isOn, forBlock: block)
+//            block.hasSeparatorOnBottom = !isOn
         }
 
         return block
@@ -221,6 +224,7 @@ class ProfilePresenter {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOff, parameters: nil)
             menu.remove(id: notificationsTimeSelectionBlockId)
         }
+        block.isOn = allowNotifications
     }
 
     private func presentStreakTimeSelection(forBlock block: TransitionMenuBlock) {

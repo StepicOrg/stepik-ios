@@ -9,12 +9,12 @@
 import Foundation
 
 class MenuBlock {
-    var hasSeparatorOnBottom = false
+    var hasSeparatorOnBottom = true
     let id: String
     var title: String
     var onAppearance: (() -> Void)?
     var isSelectable = false
-    var titleColor: UIColor = UIColor(hex: 0x535366)
+    var titleColor: UIColor = UIColor.black
 
     init(id: String, title: String) {
         self.title = title
