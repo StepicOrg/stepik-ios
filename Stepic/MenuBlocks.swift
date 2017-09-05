@@ -13,7 +13,7 @@ class MenuBlock {
     let id: String
     var title: String
     var onAppearance: (() -> Void)?
-    var selectable = false
+    var isSelectable = false
     var titleColor: UIColor = UIColor.black
 
     init(id: String, title: String) {
@@ -42,7 +42,7 @@ class TransitionMenuBlock: MenuBlock {
 
     override init(id: String, title: String) {
         super.init(id: id, title: title)
-        selectable = true
+        isSelectable = true
     }
 }
 

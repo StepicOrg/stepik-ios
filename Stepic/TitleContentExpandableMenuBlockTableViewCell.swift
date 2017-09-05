@@ -27,6 +27,10 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     }
 
     @IBAction func arrowButtonPressed(_ sender: UIButton) {
+        expandPressed()
+    }
+
+    func expandPressed() {
         guard let block = block else {
             return
         }
@@ -34,9 +38,6 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
             label.isHidden = true
         }
         block.onExpanded?(!block.isExpanded)
-    }
-
-    func expandPressed() {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -55,11 +55,17 @@ class MenuUIManager {
         return cell
     }
 
-    private func select(block: MenuBlock, type: SupportedMenuBlockType) {
+    private func select(block: MenuBlock, type: SupportedMenuBlockType, indexPath: IndexPath) {
         switch type {
         case .transition:
             if let block = block as? TransitionMenuBlock {
                 block.onTouch?()
+            }
+        case .titleContentExpandable:
+            if let block = block as? TitleContentExpandableMenuBlock {
+                if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
+                    cell.expandPressed()
+                }
             }
         default:
             break
@@ -75,7 +81,23 @@ class MenuUIManager {
             return
         }
 
-        select(block: block, type: blockType)
+        select(block: block, type: blockType, indexPath: indexPath)
+    }
+    
+    func shouldSelect(block: MenuBlock, indexPath: IndexPath) -> Bool {
+        guard let type = SupportedMenuBlockType(block: block) else {
+            return false
+        }
+        switch type {
+        case .titleContentExpandable:
+            if let block = block as? TitleContentExpandableMenuBlock {
+                return !block.isExpanded
+            } else {
+                return false
+            }
+        default:
+            return block.isSelectable
+        }
     }
 }
 

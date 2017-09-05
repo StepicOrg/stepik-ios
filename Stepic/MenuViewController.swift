@@ -86,8 +86,12 @@ extension MenuViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        guard let interfaceManager = interfaceManager else {
+            return false
+        }
+        
         if let block = menu?.blocks[indexPath.row] {
-            return block.selectable
+            return interfaceManager.shouldSelect(block: block, indexPath: indexPath)
         } else {
             return false
         }
