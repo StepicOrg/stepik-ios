@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Presentr
 
 class NewSettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?

@@ -23,7 +23,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        bottomTitleConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-12").first as? NSLayoutConstraint
+        bottomTitleConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-26").first as? NSLayoutConstraint
     }
 
     @IBAction func arrowButtonPressed(_ sender: UIButton) {
