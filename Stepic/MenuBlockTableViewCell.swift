@@ -7,14 +7,23 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class MenuBlockTableViewCell: UITableViewCell {
 
     var hidingView: UIView = UIView()
+    var separator: UIView = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        separator.isHidden = false
+        separator.backgroundColor = UIColor(hex: 0x535366).withAlphaComponent(0.05)
+        self.contentView.addSubview(separator)
+        _ = separator.alignBottomEdge(with: self.contentView, predicate: "0")
+        _ = separator.constrainHeight("1")
+        _ = separator.alignLeadingEdge(with: self.contentView, predicate: "24")
+        _ = separator.alignTrailingEdge(with: self.contentView, predicate: "-24")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,6 +38,7 @@ class MenuBlockTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         hidingView.removeFromSuperview()
+        separator.isHidden = false
     }
 
     func animateHide() {
