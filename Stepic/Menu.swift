@@ -27,16 +27,16 @@ class Menu {
             block.onAppearance?()
         }
     }
-    
+
     // MARK: - Insert
-    
+
     @discardableResult func insert(block: MenuBlock, beforeBlockWithId id: String) -> Bool {
         guard let beforeBlock = getBlock(id: id) else {
             return false
         }
         return insert(block: block, before: beforeBlock)
     }
-    
+
     @discardableResult func insert(block: MenuBlock, afterBlockWithId id: String) -> Bool {
         guard let afterBlock = getBlock(id: id) else {
             return false
@@ -61,7 +61,7 @@ class Menu {
         }
         return false
     }
-    
+
     @discardableResult func insert(block: MenuBlock, after: MenuBlock) -> Bool {
         if let index = blocks.find({
             $0 === after
@@ -70,9 +70,7 @@ class Menu {
         }
         return false
     }
-    
-    
-    
+
     // MARK: - Update
 
     @discardableResult func update(id: String) -> Bool {
@@ -100,7 +98,7 @@ class Menu {
     }
 
     // MARK: - Remove
-    
+
     @discardableResult func remove(id: String) -> Bool {
         guard let block = getBlock(id: id) else {
             return false

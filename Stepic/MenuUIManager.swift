@@ -83,7 +83,7 @@ class MenuUIManager {
 
         select(block: block, type: blockType, indexPath: indexPath)
     }
-    
+
     func shouldSelect(block: MenuBlock, indexPath: IndexPath) -> Bool {
         guard let type = SupportedMenuBlockType(block: block) else {
             return false

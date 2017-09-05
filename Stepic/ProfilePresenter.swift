@@ -113,29 +113,28 @@ class ProfilePresenter {
     }
 
     private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock? {
-        var content : [TitleContentExpandableMenuBlock.TitleContent] = []
+        var content: [TitleContentExpandableMenuBlock.TitleContent] = []
         if user.bio.characters.count > 0 {
             content += [(title: NSLocalizedString("ShortBio", comment: ""), content: user.bio)]
         }
         if user.details.characters.count > 0 {
             content += [(title: NSLocalizedString("Info", comment: ""), content: user.details)]
         }
-        
+
         guard content.count > 0 else {
             return nil
         }
-        
+
         let block: TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: infoBlockId, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))")
 
         block.content = content
-        
+
         block.onExpanded = {
             [weak self]
             isExpanded in
             block.isExpanded = isExpanded
             self?.menu.update(block: block)
         }
-        
         return block
     }
 

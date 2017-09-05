@@ -89,7 +89,7 @@ extension MenuViewController: UITableViewDelegate {
         guard let interfaceManager = interfaceManager else {
             return false
         }
-        
+
         if let block = menu?.blocks[indexPath.row] {
             return interfaceManager.shouldSelect(block: block, indexPath: indexPath)
         } else {
