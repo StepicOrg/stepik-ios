@@ -13,7 +13,7 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
 
-    var bottomTitleConstraint: NSLayoutConstraint?
+    @IBOutlet weak var defaultTitleBottomConstraint: NSLayoutConstraint!
 
     var labels: [UILabel] = []
     var block: TitleContentExpandableMenuBlock?

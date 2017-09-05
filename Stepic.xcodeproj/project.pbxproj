@@ -942,6 +942,8 @@
 		08DF78B61F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
 		08DF78B71F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
 		08DF78B81F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
+		08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		08DF78BA1F5E0C9300AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -8786,6 +8788,7 @@
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
+				08DF78BA1F5E0C9300AEEA85 /* StringHelper.swift in Sources */,
 				08A500511F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				08AF59F71E6D9BE800423EFF /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				08E8F9751F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
@@ -9378,6 +9381,7 @@
 				0859AEA11E4F22B500A0D206 /* FillBlanksInputTableViewCell.swift in Sources */,
 				0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
 				080AA2321EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
+				08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */,
 				083F2B141E9D8EF800714173 /* CertificatesViewController.swift in Sources */,
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,

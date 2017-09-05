@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1331" height="487"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="500" verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="art_customize_learning_process_en" translatesAutoresizingMaskIntoConstraints="NO" id="YYB-GJ-TeG" customClass="NoIntrinsicSizeImageView" customModule="Adaptive_1838" customModuleProvider="target">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="500" verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="art_customize_learning_process_en" translatesAutoresizingMaskIntoConstraints="NO" id="YYB-GJ-TeG">
                     <rect key="frame" x="79" y="43.5" width="1173" height="400"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="YYB-GJ-TeG" secondAttribute="height" multiplier="569:200" priority="999" id="93j-VD-ANd"/>

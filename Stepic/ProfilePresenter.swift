@@ -62,7 +62,7 @@ class ProfilePresenter {
     }
 
     private func buildNotificationsSwitchBlock() -> SwitchMenuBlock {
-        let block: SwitchMenuBlock = SwitchMenuBlock(id: notificationsSwitchBlockId, title: "Notifications about learning", isOn: self.hasPermissionToSendStreakNotifications)
+        let block: SwitchMenuBlock = SwitchMenuBlock(id: notificationsSwitchBlockId, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: self.hasPermissionToSendStreakNotifications)
 
         block.onSwitch = {
             [weak self]
@@ -86,7 +86,7 @@ class ProfilePresenter {
             return nil
         }
 
-        let notificationTimeSubtitle = "Streaks are updated at \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
+        let notificationTimeSubtitle = "\(NSLocalizedString("StreaksAreUpdated", comment: "")) \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
 
         let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsTimeSelectionBlockId, title: notificationTimeString)
 
@@ -113,11 +113,11 @@ class ProfilePresenter {
     }
 
     private func buildInfoExpandableBlock(user: User) -> TitleContentExpandableMenuBlock {
-        let block: TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: infoBlockId, title: "Short bio & Info")
+        let block: TitleContentExpandableMenuBlock = TitleContentExpandableMenuBlock(id: infoBlockId, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))")
 
         block.content = [
-            (title: "Short bio", content: user.bio),
-            (title: "Info", content: user.details)
+            (title: NSLocalizedString("ShortBio", comment: ""), content: user.bio),
+            (title: NSLocalizedString("Info", comment: ""), content: user.details)
         ]
 
         block.onExpanded = {
@@ -130,7 +130,7 @@ class ProfilePresenter {
     }
 
     private func buildSettingsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: settingsBlockId, title: "Settings")
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: settingsBlockId, title: NSLocalizedString("Settings", comment: ""))
 
         block.onTouch = {
             [weak self] in
@@ -141,7 +141,7 @@ class ProfilePresenter {
     }
 
     private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: downloadsBlockId, title: "Downloads")
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: downloadsBlockId, title: NSLocalizedString("Downloads", comment: ""))
 
         block.onTouch = {
             [weak self] in
@@ -152,7 +152,7 @@ class ProfilePresenter {
     }
 
     private func buildLogoutBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: logoutBlockId, title: "Logout")
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: logoutBlockId, title: NSLocalizedString("Logout", comment: ""))
 
         block.onTouch = {
             [weak self] in
@@ -244,8 +244,8 @@ class ProfilePresenter {
             }
             if let bioBlock = s.menu.getBlock(id: s.infoBlockId) as? TitleContentExpandableMenuBlock {
                 bioBlock.content = [
-                    (title: "Short bio", content: user.bio),
-                    (title: "Info", content: user.details)
+                    (title: NSLocalizedString("ShortBio", comment: ""), content: user.bio),
+                    (title: NSLocalizedString("Info", comment: ""), content: user.details)
                 ]
                 self?.menu.update(block: bioBlock)
             }

@@ -25,7 +25,7 @@ class SettingsPresenter {
 
     private func buildSettingsMenu() -> Menu {
         let blocks = [
-            buildTitleMenuBlock(id: videoHeaderBlockId, title: "Video"),
+            buildTitleMenuBlock(id: videoHeaderBlockId, title: NSLocalizedString("Video", comment: "")),
             buildOnlyWifiSwitchBlock(),
             buildLoadedVideoQualityBlock(),
             buildOnlineVideoQualityBlock()
@@ -45,7 +45,7 @@ class SettingsPresenter {
     }
 
     private func buildLoadedVideoQualityBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: loadedVideoQualityBlockId, title: "Downloaded video quality")
+        let block = TransitionMenuBlock(id: loadedVideoQualityBlockId, title: NSLocalizedString("LoadingVideoQualityPreference", comment: ""))
 
         block.onTouch = {
             [weak self] in
@@ -56,7 +56,7 @@ class SettingsPresenter {
     }
 
     private func buildOnlineVideoQualityBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: onlineVideoQualityBlockId, title: "Online video quality")
+        let block = TransitionMenuBlock(id: onlineVideoQualityBlockId, title: NSLocalizedString("WatchingVideoQualityPreference", comment: ""))
 
         block.onTouch = {
             [weak self] in
@@ -67,7 +67,7 @@ class SettingsPresenter {
     }
 
     private func buildOnlyWifiSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: onlyWifiSwitchBlockId, title: "Only wi-fi download", isOn: !ConnectionHelper.shared.reachableOnWWAN)
+        let block = SwitchMenuBlock(id: onlyWifiSwitchBlockId, title: NSLocalizedString("WiFiLoadPreference", comment: ""), isOn: !ConnectionHelper.shared.reachableOnWWAN)
 
         block.onSwitch = {
             isOn in

@@ -20,7 +20,7 @@ class NewSettingsViewController: MenuViewController, SettingsView {
 
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
-        artView.art = #imageLiteral(resourceName: "art_customize_learning_process_en")
+        artView.art = Images.arts.customizeLearningProcess
         artView.width = UIScreen.main.bounds.width
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
         return artView

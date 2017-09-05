@@ -10,7 +10,7 @@ import Foundation
 
 class ArtView: UIView {
 
-    @IBOutlet weak var artImageView: NoIntrinsicSizeImageView!
+    @IBOutlet weak var artImageView: UIImageView!
     @IBOutlet weak var artImageViewWidth: NSLayoutConstraint!
 
     var art: UIImage? {

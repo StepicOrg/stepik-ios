@@ -38,11 +38,15 @@ class ProfileStreaksView: UIView {
                 setStreaks(hidden: true)
                 return
             }
-            currentDaysCountLabel.text = "\(streaks.currentStreak) days"
-            maxDayCountLabel.text = "\(streaks.longestStreak) days"
+            currentDaysCountLabel.text = "\(streaks.currentStreak) \(pluralizedDays(count: streaks.currentStreak))"
+            maxDayCountLabel.text = "\(streaks.longestStreak) \(pluralizedDays(count: streaks.longestStreak))"
             lightningImageView.image = streaks.didSolveToday ? #imageLiteral(resourceName: "lightning_green") : #imageLiteral(resourceName: "lightning_gray")
             setStreaks(hidden: false)
         }
+    }
+
+    private func pluralizedDays(count: Int) -> String {
+        return StringHelper.pluralize(number: count, forms: [NSLocalizedString("days1", comment: ""), NSLocalizedString("days234", comment: ""), NSLocalizedString("days567890", comment: "")])
     }
 
     private func setStreaks(hidden: Bool) {
@@ -53,9 +57,15 @@ class ProfileStreaksView: UIView {
 //        lightningImageView.isHidden = hidden
     }
 
+    private func localize() {
+        currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
+        maxStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
+    }
+
     private func initialize() {
         containerView.setRoundedCorners(cornerRadius: 12)
         setStreaks(hidden: true)
+        localize()
     }
 
     private var view: UIView!

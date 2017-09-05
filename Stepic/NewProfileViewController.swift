@@ -27,6 +27,8 @@ class NewProfileViewController: MenuViewController, ProfileView {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
 
+        self.title = NSLocalizedString("Profile", comment: "")
+
         // Do any additional setup after loading the view.
 //        presenter?.updateProfile()
     }
@@ -47,7 +49,12 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
     var streaks: StreakData? {
         didSet {
-            profileStreaksView?.streaks = streaks
+            guard let profileStreaksView = profileStreaksView else {
+                return
+            }
+            profileStreaksView.streaks = streaks
+            profileStreaksView.frame.size = profileStreaksView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            tableView.tableHeaderView = profileStreaksView
         }
     }
 
@@ -208,7 +215,7 @@ extension NewProfileViewController : DZNEmptyDataSetSource {
 
         switch state {
         case .anonymous:
-            text = "Hey, anonymous user"
+            text = NSLocalizedString("ProfileAnonymousTitle", comment: "")
         case .error:
             text = NSLocalizedString("ConnectionErrorTitle", comment: "")
             break
@@ -230,7 +237,7 @@ extension NewProfileViewController : DZNEmptyDataSetSource {
 
         switch state {
         case .anonymous:
-            text = "Sign in to access more features"
+            text = NSLocalizedString("ProfileAnonymousSubtitle", comment: "")
             break
         case .error:
             text = ""
@@ -260,7 +267,7 @@ extension NewProfileViewController : DZNEmptyDataSetSource {
         case .anonymous:
             text = NSLocalizedString("SignIn", comment: "")
         case .error:
-            text = NSLocalizedString("Retry", comment: "")
+            text = NSLocalizedString("TryAgain", comment: "")
             break
         case .refreshing:
             text = ""
