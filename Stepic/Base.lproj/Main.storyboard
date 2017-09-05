@@ -45,14 +45,6 @@
             </objects>
             <point key="canvasLocation" x="3587" y="536"/>
         </scene>
-        <!--UserPreferences-->
-        <scene sceneID="YAT-jo-emi">
-            <objects>
-                <viewControllerPlaceholder storyboardName="UserPreferences" id="jbH-Jk-mjZ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4lS-w7-ZlN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2163" y="1729"/>
-        </scene>
         <!--Courses-->
         <scene sceneID="6CA-cz-mrF">
             <objects>
@@ -86,7 +78,7 @@
                     <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0">
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="845-TM-ZHx">
                             <connections>
-                                <segue destination="jbH-Jk-mjZ" kind="show" identifier="showPreferences" id="Rsc-H2-2rN"/>
+                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="kYc-bQ-CAq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -107,7 +99,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Courses" image="tab-find-courses" selectedImage="tab-find-courses" id="D6B-Zy-xmi"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wyf-cv-uU2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -125,7 +117,7 @@
             <objects>
                 <navigationController id="NxB-SA-EGM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My courses" image="tab-my-courses" selectedImage="tab-my-courses" id="I8C-zf-fZb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nen-ML-6eo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nen-ML-6eo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -169,7 +161,7 @@
                     <navigationItem key="navigationItem" title="Downloads" id="9Ja-ap-5iY">
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="ILG-Tj-y37">
                             <connections>
-                                <segue destination="jbH-Jk-mjZ" kind="show" identifier="showPreferences" id="22V-K9-ItS"/>
+                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="ZDY-RC-coT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Clear cache" id="WWT-xn-H4f">
@@ -601,7 +593,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mgq-Q2-Hep">
-                                <rect key="frame" x="-4" y="0.0" width="383" height="603"/>
+                                <rect key="frame" x="-4" y="0.0" width="383" height="554"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="zgu-O5-Qtl">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="185"/>
@@ -795,7 +787,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L6O-ow-pfW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <navigationBar key="tableFooterView" contentMode="scaleToFill" id="OA9-cU-ctc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -847,7 +839,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q7F-3H-ipp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="8ik-tt-HOc" id="d6o-oi-Nnu"/>
@@ -1145,7 +1137,7 @@
                     <navigationItem key="navigationItem" title="My courses" id="g7g-TI-yPj">
                         <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="4JT-qM-oPW">
                             <connections>
-                                <segue destination="jbH-Jk-mjZ" kind="show" identifier="showPreferences" id="g7N-Ic-LtU"/>
+                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="xi1-KY-CSU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1197,7 +1189,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="W60-es-dLX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1216,7 +1208,7 @@
                 <navigationController id="4bs-eV-3LS" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Certificates" image="tab-certificates" selectedImage="tab-certificates" id="mwm-pG-FxV"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E6m-D0-KUL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E6m-D0-KUL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1276,7 +1268,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" id="gu5-mc-VZM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgf-Uu-lLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="619" y="2656"/>
+            <point key="canvasLocation" x="2378" y="856"/>
         </scene>
     </scenes>
     <resources>
@@ -1290,9 +1282,9 @@
         <image name="tab-my-courses" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rsc-H2-2rN"/>
+        <segue reference="Had-eU-CRB"/>
+        <segue reference="ste-Lr-Bip"/>
+        <segue reference="bJP-cn-CC7"/>
         <segue reference="gVj-jL-WXR"/>
-        <segue reference="Ymm-um-wgY"/>
-        <segue reference="LaP-cg-j2K"/>
     </inferredMetricsTieBreakers>
 </document>
