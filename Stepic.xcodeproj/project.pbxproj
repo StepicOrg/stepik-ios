@@ -934,14 +934,6 @@
 		08DF78AD1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
 		08DF78AE1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
 		08DF78AF1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
-		08DF78B11F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B21F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B31F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B41F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B51F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B61F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B71F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
-		08DF78B81F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */; };
 		08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		08DF78BA1F5E0C9300AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
@@ -4445,7 +4437,6 @@
 		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08DF789D1F5DE64300AEEA85 /* ArtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		08DF78A71F5DE66200AEEA85 /* ArtView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtView.xib; sourceTree = "<group>"; };
-		08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoIntrinsicSizeImageView.swift; sourceTree = "<group>"; };
 		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -5930,7 +5921,6 @@
 				08CBA3491F57574F00302154 /* Menu */,
 				08448FFD1F5CE13100D01940 /* Profile */,
 				08CBA3531F5A2D9400302154 /* Profile.storyboard */,
-				08DF78B01F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift */,
 			);
 			name = new;
 			sourceTree = "<group>";
@@ -8699,7 +8689,6 @@
 				083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				088CB1ED1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */,
-				08DF78B21F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
@@ -9165,7 +9154,6 @@
 				08FB30E01DC385A900E4684F /* PreferencesViewController.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
-				08DF78B11F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
@@ -9501,7 +9489,6 @@
 				2C1B60FD1F4C4AEF00236804 /* ProfilesAPI.swift in Sources */,
 				2C1B60FE1F4C4AEF00236804 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C1B60FF1F4C4AEF00236804 /* CodeElementsSize.swift in Sources */,
-				08DF78B71F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C1B61001F4C4AEF00236804 /* PickerViewController.swift in Sources */,
 				2C1B61011F4C4AEF00236804 /* StepikAlertViewController.swift in Sources */,
 				2C1B61021F4C4AEF00236804 /* AdaptiveStepViewController.swift in Sources */,
@@ -9924,7 +9911,6 @@
 				2C1B630E1F4C590700236804 /* ProfilesAPI.swift in Sources */,
 				2C1B630F1F4C590700236804 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C1B63101F4C590700236804 /* CodeElementsSize.swift in Sources */,
-				08DF78B81F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C1B63111F4C590700236804 /* PickerViewController.swift in Sources */,
 				2C1B63121F4C590700236804 /* StepikAlertViewController.swift in Sources */,
 				2C1B63131F4C590700236804 /* AdaptiveStepViewController.swift in Sources */,
@@ -10347,7 +10333,6 @@
 				2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */,
 				2C8652AC1F4B33DE00D51654 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C8652AD1F4B33DE00D51654 /* CodeElementsSize.swift in Sources */,
-				08DF78B41F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C8652AE1F4B33DE00D51654 /* PickerViewController.swift in Sources */,
 				2C8652AF1F4B33DE00D51654 /* StepikAlertViewController.swift in Sources */,
 				2C8652B01F4B33DE00D51654 /* AdaptiveStepViewController.swift in Sources */,
@@ -10770,7 +10755,6 @@
 				2C89A9911F4C289900227C3B /* ProfilesAPI.swift in Sources */,
 				2C89A9921F4C289900227C3B /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C89A9931F4C289900227C3B /* CodeElementsSize.swift in Sources */,
-				08DF78B51F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C89A9941F4C289900227C3B /* PickerViewController.swift in Sources */,
 				2C89A9951F4C289900227C3B /* StepikAlertViewController.swift in Sources */,
 				2C89A9961F4C289900227C3B /* AdaptiveStepViewController.swift in Sources */,
@@ -11193,7 +11177,6 @@
 				2C9731451F4C38F600AC9301 /* ProfilesAPI.swift in Sources */,
 				2C9731461F4C38F600AC9301 /* StepOptions+CoreDataProperties.swift in Sources */,
 				2C9731471F4C38F600AC9301 /* CodeElementsSize.swift in Sources */,
-				08DF78B61F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				2C9731481F4C38F600AC9301 /* PickerViewController.swift in Sources */,
 				2C9731491F4C38F600AC9301 /* StepikAlertViewController.swift in Sources */,
 				2C97314A1F4C38F600AC9301 /* AdaptiveStepViewController.swift in Sources */,
@@ -11616,7 +11599,6 @@
 				2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				0846B1091EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				0888D10B1F1E42A000A16863 /* CodeElementsSize.swift in Sources */,
-				08DF78B31F5DF37800AEEA85 /* NoIntrinsicSizeImageView.swift in Sources */,
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67531E83E08E001E8D9E /* StepikAlertViewController.swift in Sources */,
 				86795EF31E85265C00A985C2 /* AdaptiveStepViewController.swift in Sources */,
