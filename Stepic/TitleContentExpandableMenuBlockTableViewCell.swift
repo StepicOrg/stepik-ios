@@ -65,7 +65,11 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         var font: UIFont {
             switch self {
             case .title:
-                return UIFont.systemFont(ofSize: 17)
+                if #available(iOS 8.2, *) {
+                    return UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
+                } else {
+                    return UIFont.systemFont(ofSize: 17)
+                }
             case .content:
                 if #available(iOS 8.2, *) {
                     return UIFont.systemFont(ofSize: 15, weight: UIFontWeightThin)
@@ -80,6 +84,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         let label = UILabel(frame: CGRect.zero)
         label.text = text
         label.font = type.font
+        label.textColor = UIColor(hex: 0x535366)
         return label
     }
 
