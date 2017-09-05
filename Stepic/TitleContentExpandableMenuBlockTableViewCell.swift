@@ -9,7 +9,7 @@
 import UIKit
 import FLKAutoLayout
 
-class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
+class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
 
@@ -47,6 +47,7 @@ class TitleContentExpandableMenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: TitleContentExpandableMenuBlock) {
+        super.initWithBlock(block: block)
         self.block = block
         titleLabel.text = block.title
         titleLabel.textColor = block.titleColor

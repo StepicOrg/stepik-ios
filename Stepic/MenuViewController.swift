@@ -74,6 +74,7 @@ extension MenuViewController: MenuDelegate {
     }
 
     func remove(at index: Int) {
+        interfaceManager?.prepareToRemove(at: getMenuIndexPath(from: index))
         tableView.deleteRows(at: [getMenuIndexPath(from: index)], with: .automatic)
     }
 }

@@ -936,6 +936,14 @@
 		08DF78AF1F5DE66200AEEA85 /* ArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF78A71F5DE66200AEEA85 /* ArtView.xib */; };
 		08DF78B91F5E0C9000AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		08DF78BA1F5E0C9300AEEA85 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78BD1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78BE1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78BF1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78C11F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78C21F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78C31F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -4437,6 +4445,7 @@
 		08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		08DF789D1F5DE64300AEEA85 /* ArtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		08DF78A71F5DE66200AEEA85 /* ArtView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtView.xib; sourceTree = "<group>"; };
+		08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -5957,14 +5966,11 @@
 		08CBA3091F57558200302154 /* MenuBlockCells */ = {
 			isa = PBXGroup;
 			children = (
-				08CBA3131F57562A00302154 /* SwitchMenuBlockTableViewCell.swift */,
-				08CBA3141F57562A00302154 /* SwitchMenuBlockTableViewCell.xib */,
-				08CBA3251F57563C00302154 /* TransitionMenuBlockTableViewCell.swift */,
-				08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */,
-				08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */,
-				08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */,
-				08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */,
-				08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */,
+				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
+				08DF78C41F5EF02300AEEA85 /* Switch */,
+				08DF78C51F5EF02900AEEA85 /* Transition */,
+				08DF78C61F5EF02F00AEEA85 /* TitleContentExpandable */,
+				08DF78C71F5EF03B00AEEA85 /* Header */,
 			);
 			name = MenuBlockCells;
 			sourceTree = "<group>";
@@ -6113,6 +6119,42 @@
 				08DF78A71F5DE66200AEEA85 /* ArtView.xib */,
 			);
 			name = ArtView;
+			sourceTree = "<group>";
+		};
+		08DF78C41F5EF02300AEEA85 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				08CBA3131F57562A00302154 /* SwitchMenuBlockTableViewCell.swift */,
+				08CBA3141F57562A00302154 /* SwitchMenuBlockTableViewCell.xib */,
+			);
+			name = Switch;
+			sourceTree = "<group>";
+		};
+		08DF78C51F5EF02900AEEA85 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				08CBA3251F57563C00302154 /* TransitionMenuBlockTableViewCell.swift */,
+				08CBA3261F57563C00302154 /* TransitionMenuBlockTableViewCell.xib */,
+			);
+			name = Transition;
+			sourceTree = "<group>";
+		};
+		08DF78C61F5EF02F00AEEA85 /* TitleContentExpandable */ = {
+			isa = PBXGroup;
+			children = (
+				08CBA3371F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift */,
+				08CBA3381F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib */,
+			);
+			name = TitleContentExpandable;
+			sourceTree = "<group>";
+		};
+		08DF78C71F5EF03B00AEEA85 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */,
+				08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 		08E16F201BDBA495004822E1 /* Reachability */ = {
@@ -8980,6 +9022,7 @@
 				08D120F01C937B2200A54ABC /* UIColorExtensions.swift in Sources */,
 				082799491E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
+				08DF78BD1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0859AEA91E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				08D120F11C937B2200A54ABC /* Meta.swift in Sources */,
 				08D120F31C937B2200A54ABC /* StepicToken.swift in Sources */,
@@ -9079,6 +9122,7 @@
 				9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
+				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
@@ -9449,6 +9493,7 @@
 				2C1B60D71F4C4AEF00236804 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				2C1B60D81F4C4AEF00236804 /* Certificate+CoreDataProperties.swift in Sources */,
 				2C1B60D91F4C4AEF00236804 /* CertificatesAPI.swift in Sources */,
+				08DF78C21F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */,
 				2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */,
 				2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */,
@@ -9871,6 +9916,7 @@
 				2C1B62E81F4C590700236804 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				2C1B62E91F4C590700236804 /* Certificate+CoreDataProperties.swift in Sources */,
 				2C1B62EA1F4C590700236804 /* CertificatesAPI.swift in Sources */,
+				08DF78C31F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */,
 				2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */,
 				2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */,
@@ -10293,6 +10339,7 @@
 				2C8652851F4B33DE00D51654 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				2C8652861F4B33DE00D51654 /* Certificate+CoreDataProperties.swift in Sources */,
 				2C8652871F4B33DE00D51654 /* CertificatesAPI.swift in Sources */,
+				08DF78BF1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C8652881F4B33DE00D51654 /* RatingProgressView.swift in Sources */,
 				2C8652891F4B33DE00D51654 /* StreaksView.swift in Sources */,
 				2C86528A1F4B33DE00D51654 /* RateAppViewController.swift in Sources */,
@@ -10715,6 +10762,7 @@
 				2C89A96B1F4C289900227C3B /* AnalyticsEvents+Adaptive.swift in Sources */,
 				2C89A96C1F4C289900227C3B /* Certificate+CoreDataProperties.swift in Sources */,
 				2C89A96D1F4C289900227C3B /* CertificatesAPI.swift in Sources */,
+				08DF78C01F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
@@ -11137,6 +11185,7 @@
 				2C97311F1F4C38F600AC9301 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				2C9731201F4C38F600AC9301 /* Certificate+CoreDataProperties.swift in Sources */,
 				2C9731211F4C38F600AC9301 /* CertificatesAPI.swift in Sources */,
+				08DF78C11F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */,
 				2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */,
 				2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */,
@@ -11559,6 +11608,7 @@
 				2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */,
 				860BC3441EAA1E520058F440 /* Certificate+CoreDataProperties.swift in Sources */,
 				860BC3451EAA1E520058F440 /* CertificatesAPI.swift in Sources */,
+				08DF78BE1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
 				864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,

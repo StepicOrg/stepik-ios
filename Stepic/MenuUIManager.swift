@@ -99,6 +99,12 @@ class MenuUIManager {
             return block.isSelectable
         }
     }
+
+    func prepareToRemove(at indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? MenuBlockTableViewCell {
+            cell.animateHide()
+        }
+    }
 }
 
 enum SupportedMenuBlockType {

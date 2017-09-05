@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
-class HeaderMenuBlockTableViewCell: UITableViewCell {
+class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
 

@@ -9,7 +9,7 @@
 import UIKit
 import FLKAutoLayout
 
-class TransitionMenuBlockTableViewCell: UITableViewCell {
+class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
 
@@ -29,6 +29,7 @@ class TransitionMenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: TransitionMenuBlock) {
+        super.initWithBlock(block: block)
         titleLabel.text = block.title
         titleLabel.textColor = block.titleColor
         if let subtitle = block.subtitle {

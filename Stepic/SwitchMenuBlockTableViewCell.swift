@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwitchMenuBlockTableViewCell: UITableViewCell {
+class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var blockSwitch: UISwitch!
 
@@ -26,6 +26,7 @@ class SwitchMenuBlockTableViewCell: UITableViewCell {
     }
 
     func initWithBlock(block: SwitchMenuBlock) {
+        super.initWithBlock(block: block)
         titleLabel.text = block.title
         titleLabel.textColor = block.titleColor
         blockSwitch.isOn = block.isOn
