@@ -104,7 +104,7 @@ class HTMLBuilder: NSObject {
 
         var newBody = body
         for (key, val) in linkMap {
-            newBody = newBody.replacingOccurrences(of: key, with: val)
+            newBody = newBody.replacingOccurrences(of: "\"\(key)", with: "\"\(val)")
         }
 
         return newBody
