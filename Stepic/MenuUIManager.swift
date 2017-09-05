@@ -62,10 +62,8 @@ class MenuUIManager {
                 block.onTouch?()
             }
         case .titleContentExpandable:
-            if let block = block as? TitleContentExpandableMenuBlock {
-                if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
-                    cell.expandPressed()
-                }
+            if let cell = tableView.cellForRow(at: indexPath) as? TitleContentExpandableMenuBlockTableViewCell {
+                cell.expandPressed()
             }
         default:
             break
