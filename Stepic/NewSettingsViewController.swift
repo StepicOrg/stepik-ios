@@ -15,6 +15,7 @@ class NewSettingsViewController: MenuViewController, SettingsView {
         super.viewDidLoad()
         presenter = SettingsPresenter(view: self)
         tableView.tableHeaderView = artView
+        self.title = NSLocalizedString("Settings", comment: "")
     }
 
     lazy var artView: ArtView = {
