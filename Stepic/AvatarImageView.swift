@@ -12,7 +12,7 @@ import SVGKit
 
 class AvatarImageView: UIImageView {
 
-    private let colors: [Int] = [0x005b96, 0xe39e54, 0xd64d4d, 0x4d7358, 0x885159, 0x886451]
+    private let colors: [Int] = [0x69A1E5, 0xFFD19F, 0xE8B9B9, 0x85C096, 0xE1B3EA, 0xABE5D8]
 
     override func layoutSubviews() {
         super.layoutSubviews()
