@@ -291,7 +291,6 @@ AdaptiveAchievementLevelDesc = "Reach %@ level";
 AdaptiveAchievementLevel1 = "Expert";
 AdaptiveAchievementLevel2 = "Leader";
 NotSupportedLanguage = "The language is not supported in the application yet";
-ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 StreaksAreUpdated = "Streaks are updated at";
 Settings = "Settings";
 Logout = "Logout";
@@ -299,3 +298,6 @@ ShortBio = "Short bio";
 Info = "Info";
 ProfileAnonymousTitle = "Seems like you have no profile";
 ProfileAnonymousSubtitle = "Sign in to access more features";
+
+/* Arts */
+ArtCustomizeLearningProcess = "art_customize_learning_process_en";
