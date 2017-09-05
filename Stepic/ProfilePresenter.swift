@@ -91,7 +91,7 @@ class ProfilePresenter {
 
         let notificationTimeSubtitle = "\(NSLocalizedString("StreaksAreUpdated", comment: "")) \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
 
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsTimeSelectionBlockId, title: notificationTimeString)
+        let block: TransitionMenuBlock = TransitionMenuBlock(id: notificationsTimeSelectionBlockId, title: "\(NSLocalizedString("NotificationTime", comment: "")): \(notificationTimeString)")
 
         block.subtitle = notificationTimeSubtitle
 
