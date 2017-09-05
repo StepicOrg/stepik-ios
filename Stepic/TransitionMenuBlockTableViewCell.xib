@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRI-Xv-qOd">
-                        <rect key="frame" x="24" y="22" width="249" height="20.5"/>
+                        <rect key="frame" x="24" y="21" width="249" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="748" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBn-ex-A8Q">
-                        <rect key="frame" x="24" y="46.5" width="249" height="16"/>
+                        <rect key="frame" x="24" y="45.5" width="249" height="16"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,7 @@
                 <constraints>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0aW-H7-DGS"/>
                     <constraint firstAttribute="leadingMargin" secondItem="oRI-Xv-qOd" secondAttribute="leading" constant="-16" id="8Go-0Y-HUA"/>
-                    <constraint firstItem="oRI-Xv-qOd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="VNv-C9-xMM"/>
+                    <constraint firstItem="oRI-Xv-qOd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="VNv-C9-xMM"/>
                     <constraint firstItem="hBn-ex-A8Q" firstAttribute="top" secondItem="oRI-Xv-qOd" secondAttribute="bottom" priority="999" constant="4" id="c0V-fi-e0x"/>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="leading" secondItem="hBn-ex-A8Q" secondAttribute="trailing" constant="8" id="eUy-kp-vrT"/>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="leading" secondItem="oRI-Xv-qOd" secondAttribute="trailing" constant="8" id="j3Y-fj-NfD"/>
