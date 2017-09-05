@@ -28,9 +28,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
         tableView.emptyDataSetDelegate = self
 
         self.title = NSLocalizedString("Profile", comment: "")
-
-        // Do any additional setup after loading the view.
-//        presenter?.updateProfile()
     }
 
     func shareButtonPressed() {
@@ -158,17 +155,6 @@ class NewProfileViewController: MenuViewController, ProfileView {
         super.viewWillAppear(animated)
         self.presenter?.updateProfile()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension NewProfileViewController : DZNEmptyDataSetDelegate {
