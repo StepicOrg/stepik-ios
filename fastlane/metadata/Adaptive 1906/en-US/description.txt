@@ -8,8 +8,6 @@ E. Statements (1) and (2) TOGETHER are NOT sufficient to answer the question ask
 
 Note that it is not necessary to solve the problem. It is enough to answer the question on data sufficiency.
 
-The course is adaptive what means that you can not follow a linear pre-set structure of the course, the adaptive engine generates a unique path for each student.
-
 Learning in the app is really simple! If the problem seems too difficult or too easy, you can just swipe the card with the question, the engine will take into account the knowledge level for future content recommendations.
 
 Enjoy learning and have fun!
