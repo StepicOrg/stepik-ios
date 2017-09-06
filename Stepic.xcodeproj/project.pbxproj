@@ -1066,6 +1066,7 @@
 		08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		08FF75311DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */; };
 		207F1E55946F133142DA2BF1 /* Pods_Adaptive_3149.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0F540BCF7121EE2F4F7096 /* Pods_Adaptive_3149.framework */; };
+		2588302783218B5D9C351EF8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263160F292630B64B35FDFF6 /* Pods_Adaptive_3124_Screenshots.framework */; };
 		2AA8452275FCE60702A26FE8 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC75989BD2FB0C1C4ACD5423 /* Pods_Adaptive_3150.framework */; };
 		2AB0C5B809FB5CC644D5B147 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
@@ -3534,6 +3535,24 @@
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
+		2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12B961F4F3374001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
+		2CD12B981F4F33E2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12B9D1F4F348C001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12B9E1F4F348C001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12BA11F4F348C001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
+		2CD12BAE1F4F34A2001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12BAF1F4F34A2001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12BB21F4F34A2001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
+		2CD12BBD1F4F34AE001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12BBE1F4F34AE001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12BC11F4F34AE001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
+		2CD12BCC1F4F34BD001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12BCD1F4F34BD001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12BD01F4F34BD001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
+		2CD12BDB1F4F34CC001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
+		2CD12BDC1F4F34CC001D3C82 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */; };
+		2CD12BDF1F4F34CC001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846401F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846411F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
@@ -3547,10 +3566,14 @@
 		2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
+		367EC696CA67B03B10B77F52 /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095DED1CFDF7266696024865 /* Pods_Adaptive_3149_Screenshots.framework */; };
+		3718577341E9A2A5F1BF5FE8 /* Pods_Adaptive_3150_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6BC4D805843053E1E7D9CF /* Pods_Adaptive_3150_Screenshots.framework */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		53CE540C11629B4C8BF58C65 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */; };
 		56F0BD1C7C966809F0064196 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB7D6C546C79FC5AA9CE0B7 /* Pods_Adaptive_3124.framework */; };
 		58487B942884748775938761 /* Pods_Adaptive_1906.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52E2601D6CFA0D0A0F005D3 /* Pods_Adaptive_1906.framework */; };
+		702880184F0A27B3278D484A /* Pods_Adaptive_1838_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9BFEF90C9479750FC778FF /* Pods_Adaptive_1838_Screenshots.framework */; };
+		7F1C96211956F82118DA3665 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FDEC56D58417EE20B06E080 /* Pods_Adaptive_3067_Screenshots.framework */; };
 		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
 		860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B2C1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift */; };
@@ -3955,6 +3978,7 @@
 		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		AAAC55F99ECDE7DBFC3FF35D /* Pods_SberbankUniversity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E58BF3E157733699F0FF27A /* Pods_SberbankUniversity.framework */; };
+		AC8041D9623F1005382203E4 /* Pods_Adaptive_1906_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE50CB18C65138293CAE3FA3 /* Pods_Adaptive_1906_Screenshots.framework */; };
 		D5796C1AD2371343DA2B632F /* Pods_Stepic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3621099E65F0E7807AAC606F /* Pods_Stepic.framework */; };
 		EAF5B80958ACCDE7A762EC82 /* Pods_Adaptive_3067.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C87C5A3E742BCBE58A0E5D /* Pods_Adaptive_3067.framework */; };
 /* End PBXBuildFile section */
@@ -3973,6 +3997,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = 086538341EB02715003A8415;
 			remoteInfo = StickerPackExtension;
+		};
+		2CD12B8A1F4ED1F4001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86EF29331E83CEA900F8D214;
+			remoteInfo = "Adaptive 1838";
+		};
+		2CD12BA61F4F3493001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C86526B1F4B33DE00D51654;
+			remoteInfo = "Adaptive 1906";
+		};
+		2CD12BE41F4F34DB001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C89A9511F4C289900227C3B;
+			remoteInfo = "Adaptive 3067";
+		};
+		2CD12BE61F4F34E0001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C9731051F4C38F600AC9301;
+			remoteInfo = "Adaptive 3150";
+		};
+		2CD12BE81F4F34E3001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C1B60BD1F4C4AEF00236804;
+			remoteInfo = "Adaptive 3149";
+		};
+		2CD12BEA1F4F34E6001D3C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C1B62CE1F4C590700236804;
+			remoteInfo = "Adaptive 3124";
 		};
 		9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -4516,7 +4582,11 @@
 		08FF75281DF993BF00D656C4 /* StepikAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikAlertViewController.swift; sourceTree = "<group>"; };
 		08FF75291DF993BF00D656C4 /* StepikAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikAlertViewController.xib; sourceTree = "<group>"; };
 		08FF752F1DF9B89000D656C4 /* StreaksStepikAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreaksStepikAlertManager.swift; sourceTree = "<group>"; };
+		095DED1CFDF7266696024865 /* Pods_Adaptive_3149_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FDEC56D58417EE20B06E080 /* Pods_Adaptive_3067_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2462303B382D8C218A045A48 /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
+		2505BBB5DA7CB64D553E7AAC /* Pods-Adaptive 3124 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
+		263160F292630B64B35FDFF6 /* Pods_Adaptive_3124_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		296A559046B6AD139351E645 /* Pods-Adaptive 1906.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.release.xcconfig"; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C04C1041F160643006B69B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = ru.lproj/step2.html; sourceTree = "<group>"; };
@@ -4631,6 +4701,15 @@
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
+		2CD12B851F4ED1F4001D3C82 /* Adaptive 1838 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 1838 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Adaptive_Screenshots_UITests.swift; path = UITests/Screenshots/Adaptive_Screenshots_UITests.swift; sourceTree = "<group>"; };
+		2CD12B941F4F3374001D3C82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = UITests/Screenshots/Info.plist; sourceTree = "<group>"; };
+		2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = UITests/Screenshots/SnapshotHelper.swift; sourceTree = "<group>"; };
+		2CD12BA51F4F348C001D3C82 /* Adaptive 1906 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 1906 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD12BB61F4F34A2001D3C82 /* Adaptive 3067 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3067 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD12BC51F4F34AE001D3C82 /* Adaptive 3150 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3150 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD12BD41F4F34BD001D3C82 /* Adaptive 3149 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3149 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CD12BE31F4F34CC001D3C82 /* Adaptive 3124 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 3124 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -4638,9 +4717,13 @@
 		2CF44FF11F4B4F0400C19012 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1906/icon.png; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
+		2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
+		3EF8F85CE7F8244BE448FB54 /* Pods-Adaptive 3067 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
+		4046C299E76957A827CD16BA /* Pods-Adaptive 1906 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		428488D9EEB19B76C0C81274 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A190A1A19081A8DE47B4C07 /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E58BF3E157733699F0FF27A /* Pods_SberbankUniversity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SberbankUniversity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4648,6 +4731,8 @@
 		5F0EC0DE791B7E8C50F74B8A /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
 		62B176F8ECEA96A919ADABF6 /* Pods-Adaptive 1838.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.debug.xcconfig"; sourceTree = "<group>"; };
 		76A555AD4AAA736F43C1336F /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
+		7AE1013010D86324012E97A9 /* Pods-Adaptive 3150 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		7C6BC4D805843053E1E7D9CF /* Pods_Adaptive_3150_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		860DB7901EB8DC13001E3E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StepCardView.xib; sourceTree = "<group>"; };
 		860DB7A41EB9054B001E3E42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
@@ -4674,6 +4759,7 @@
 		86EF293D1E83CEA900F8D214 /* AdaptiveAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AdaptiveAssets.xcassets; sourceTree = "<group>"; };
 		86EF29401E83CEA900F8D214 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AdaptiveLaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A9DEBF6A6A06E535122558A /* Pods-Adaptive 3067.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.debug.xcconfig"; sourceTree = "<group>"; };
+		9B9BFEF90C9479750FC778FF /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -4696,9 +4782,12 @@
 		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
 		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
 		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
+		9FB16946DB0DDFB5C5E68399 /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		A03ADA66DCD8E72C33C83365 /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		A3CDAD5A8D9C22943544B477 /* Pods-Adaptive 3150.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.debug.xcconfig"; sourceTree = "<group>"; };
+		AEE24F582CF07800DD67A688 /* Pods-Adaptive 1906 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		B26679E8907141759FA3B9A5 /* Pods-Adaptive 3150.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.release.xcconfig"; sourceTree = "<group>"; };
+		B32C3A88E6B424CC1FF3AF15 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		B33A8684929E60EE0B322EBA /* Pods-Adaptive 3067.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067.release.xcconfig"; sourceTree = "<group>"; };
 		B60EBA966EADB90035E8122A /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6C87C5A3E742BCBE58A0E5D /* Pods_Adaptive_3067.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3067.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4707,10 +4796,14 @@
 		D3F6A77F6E770AFE3655D36F /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB5046B3305332793242D21C /* Pods-Adaptive 1906.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1906.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906.debug.xcconfig"; sourceTree = "<group>"; };
 		DC75989BD2FB0C1C4ACD5423 /* Pods_Adaptive_3150.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEE2CA30C5F94890FF82C28C /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		E3812B96D3F0D7EF9CEAB046 /* Pods-SberbankUniversity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.debug.xcconfig"; sourceTree = "<group>"; };
+		E988DA6BD27E164014E95D37 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		ECB7D6C546C79FC5AA9CE0B7 /* Pods_Adaptive_3124.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3124.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB2F5A492F9D28FB84F903F /* Pods-Adaptive 3149.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.release.xcconfig"; sourceTree = "<group>"; };
 		F30DCCF141C0245FB07E9048 /* Pods-SberbankUniversity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SberbankUniversity.release.xcconfig"; path = "Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity.release.xcconfig"; sourceTree = "<group>"; };
+		FC090FBDE6F2EE80A528D432 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
+		FE50CB18C65138293CAE3FA3 /* Pods_Adaptive_1906_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1906_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4777,6 +4870,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AA8452275FCE60702A26FE8 /* Pods_Adaptive_3150.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12B821F4ED1F4001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				702880184F0A27B3278D484A /* Pods_Adaptive_1838_Screenshots.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12B9F1F4F348C001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC8041D9623F1005382203E4 /* Pods_Adaptive_1906_Screenshots.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BB01F4F34A2001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F1C96211956F82118DA3665 /* Pods_Adaptive_3067_Screenshots.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BBF1F4F34AE001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3718577341E9A2A5F1BF5FE8 /* Pods_Adaptive_3150_Screenshots.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BCE1F4F34BD001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				367EC696CA67B03B10B77F52 /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BDD1F4F34CC001D3C82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2588302783218B5D9C351EF8 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6039,6 +6180,7 @@
 		08DE94081B8C58AC00D278AB = {
 			isa = PBXGroup;
 			children = (
+				2CD12B911F4F3357001D3C82 /* UITests */,
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
 				9F9C71481E076B3200EC8DA3 /* Shared */,
@@ -6068,6 +6210,12 @@
 				2C9732EE1F4C38F600AC9301 /* Adaptive 3150.app */,
 				2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */,
 				2C1B64C81F4C590700236804 /* Adaptive 3124.app */,
+				2CD12B851F4ED1F4001D3C82 /* Adaptive 1838 Screenshots.xctest */,
+				2CD12BA51F4F348C001D3C82 /* Adaptive 1906 Screenshots.xctest */,
+				2CD12BB61F4F34A2001D3C82 /* Adaptive 3067 Screenshots.xctest */,
+				2CD12BC51F4F34AE001D3C82 /* Adaptive 3150 Screenshots.xctest */,
+				2CD12BD41F4F34BD001D3C82 /* Adaptive 3149 Screenshots.xctest */,
+				2CD12BE31F4F34CC001D3C82 /* Adaptive 3124 Screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6444,6 +6592,12 @@
 				DC75989BD2FB0C1C4ACD5423 /* Pods_Adaptive_3150.framework */,
 				5B0F540BCF7121EE2F4F7096 /* Pods_Adaptive_3149.framework */,
 				ECB7D6C546C79FC5AA9CE0B7 /* Pods_Adaptive_3124.framework */,
+				9B9BFEF90C9479750FC778FF /* Pods_Adaptive_1838_Screenshots.framework */,
+				FE50CB18C65138293CAE3FA3 /* Pods_Adaptive_1906_Screenshots.framework */,
+				0FDEC56D58417EE20B06E080 /* Pods_Adaptive_3067_Screenshots.framework */,
+				263160F292630B64B35FDFF6 /* Pods_Adaptive_3124_Screenshots.framework */,
+				095DED1CFDF7266696024865 /* Pods_Adaptive_3149_Screenshots.framework */,
+				7C6BC4D805843053E1E7D9CF /* Pods_Adaptive_3150_Screenshots.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -6733,6 +6887,24 @@
 			name = ProgressTableViewCell;
 			sourceTree = "<group>";
 		};
+		2CD12B911F4F3357001D3C82 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				2CD12B921F4F335E001D3C82 /* Screenshots */,
+			);
+			name = UITests;
+			sourceTree = "<group>";
+		};
+		2CD12B921F4F335E001D3C82 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				2CD12B971F4F33E2001D3C82 /* SnapshotHelper.swift */,
+				2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */,
+				2CD12B941F4F3374001D3C82 /* Info.plist */,
+			);
+			name = Screenshots;
+			sourceTree = "<group>";
+		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -6900,6 +7072,18 @@
 				EEB2F5A492F9D28FB84F903F /* Pods-Adaptive 3149.release.xcconfig */,
 				A03ADA66DCD8E72C33C83365 /* Pods-Adaptive 3124.debug.xcconfig */,
 				CF536E8B8F094FC5C72C2724 /* Pods-Adaptive 3124.release.xcconfig */,
+				9FB16946DB0DDFB5C5E68399 /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */,
+				2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */,
+				4046C299E76957A827CD16BA /* Pods-Adaptive 1906 Screenshots.debug.xcconfig */,
+				AEE24F582CF07800DD67A688 /* Pods-Adaptive 1906 Screenshots.release.xcconfig */,
+				FC090FBDE6F2EE80A528D432 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */,
+				3EF8F85CE7F8244BE448FB54 /* Pods-Adaptive 3067 Screenshots.release.xcconfig */,
+				B32C3A88E6B424CC1FF3AF15 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */,
+				2505BBB5DA7CB64D553E7AAC /* Pods-Adaptive 3124 Screenshots.release.xcconfig */,
+				428488D9EEB19B76C0C81274 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */,
+				E988DA6BD27E164014E95D37 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */,
+				7AE1013010D86324012E97A9 /* Pods-Adaptive 3150 Screenshots.debug.xcconfig */,
+				DEE2CA30C5F94890FF82C28C /* Pods-Adaptive 3150 Screenshots.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -7018,8 +7202,8 @@
 				08DE940D1B8C58AC00D278AB /* Sources */,
 				08DE940E1B8C58AC00D278AB /* Frameworks */,
 				08DE940F1B8C58AC00D278AB /* Resources */,
-				08343B1A1BF5EC7F00370FC1 /* ShellScript */,
-				08983F241F3E4112008199B1 /* ShellScript */,
+				08343B1A1BF5EC7F00370FC1 /* Fabric Script */,
+				08983F241F3E4112008199B1 /* SwiftLint Script */,
 				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				DBFB6C2236F1DDC3A26B2D6D /* [CP] Embed Pods Frameworks */,
@@ -7044,8 +7228,8 @@
 				2C1B60BF1F4C4AEF00236804 /* Sources */,
 				2C1B624C1F4C4AEF00236804 /* Frameworks */,
 				2C1B624E1F4C4AEF00236804 /* Resources */,
-				2C1B62A71F4C4AEF00236804 /* ShellScript */,
-				2C1B62A81F4C4AEF00236804 /* ShellScript */,
+				2C1B62A71F4C4AEF00236804 /* Fabric Script */,
+				2C1B62A81F4C4AEF00236804 /* SwiftLint Script */,
 				2C1B62A91F4C4AEF00236804 /* [CP] Embed Pods Frameworks */,
 				2C1B62AA1F4C4AEF00236804 /* [CP] Copy Pods Resources */,
 			);
@@ -7066,8 +7250,8 @@
 				2C1B62D01F4C590700236804 /* Sources */,
 				2C1B645D1F4C590700236804 /* Frameworks */,
 				2C1B645F1F4C590700236804 /* Resources */,
-				2C1B64C11F4C590700236804 /* ShellScript */,
-				2C1B64C21F4C590700236804 /* ShellScript */,
+				2C1B64C11F4C590700236804 /* Fabric Script */,
+				2C1B64C21F4C590700236804 /* SwiftLint Script */,
 				2C1B64C31F4C590700236804 /* [CP] Embed Pods Frameworks */,
 				2C1B64C41F4C590700236804 /* [CP] Copy Pods Resources */,
 			);
@@ -7088,8 +7272,8 @@
 				2C86526D1F4B33DE00D51654 /* Sources */,
 				2C8653FA1F4B33DE00D51654 /* Frameworks */,
 				2C8653FD1F4B33DE00D51654 /* Resources */,
-				2C86544D1F4B33DE00D51654 /* ShellScript */,
-				2C86544E1F4B33DE00D51654 /* ShellScript */,
+				2C86544D1F4B33DE00D51654 /* Fabric Script */,
+				2C86544E1F4B33DE00D51654 /* SwiftLint Script */,
 				2C86544F1F4B33DE00D51654 /* [CP] Embed Pods Frameworks */,
 				2C8654501F4B33DE00D51654 /* [CP] Copy Pods Resources */,
 			);
@@ -7110,8 +7294,8 @@
 				2C89A9531F4C289900227C3B /* Sources */,
 				2C89AAE01F4C289900227C3B /* Frameworks */,
 				2C89AAE21F4C289900227C3B /* Resources */,
-				2C89AB331F4C289900227C3B /* ShellScript */,
-				2C89AB341F4C289900227C3B /* ShellScript */,
+				2C89AB331F4C289900227C3B /* Fabric Script */,
+				2C89AB341F4C289900227C3B /* SwiftLint Script */,
 				2C89AB351F4C289900227C3B /* [CP] Embed Pods Frameworks */,
 				2C89AB361F4C289900227C3B /* [CP] Copy Pods Resources */,
 			);
@@ -7132,8 +7316,8 @@
 				2C9731071F4C38F600AC9301 /* Sources */,
 				2C9732941F4C38F600AC9301 /* Frameworks */,
 				2C9732961F4C38F600AC9301 /* Resources */,
-				2C9732E71F4C38F600AC9301 /* ShellScript */,
-				2C9732E81F4C38F600AC9301 /* ShellScript */,
+				2C9732E71F4C38F600AC9301 /* Fabric Script */,
+				2C9732E81F4C38F600AC9301 /* SwiftLint Script */,
 				2C9732E91F4C38F600AC9301 /* [CP] Embed Pods Frameworks */,
 				2C9732EA1F4C38F600AC9301 /* [CP] Copy Pods Resources */,
 			);
@@ -7146,6 +7330,132 @@
 			productReference = 2C9732EE1F4C38F600AC9301 /* Adaptive 3150.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2CD12B841F4ED1F4001D3C82 /* Adaptive 1838 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12B8E1F4ED1F4001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 1838 Screenshots" */;
+			buildPhases = (
+				840532CB5E3383BD6B9B8427 /* [CP] Check Pods Manifest.lock */,
+				2CD12B811F4ED1F4001D3C82 /* Sources */,
+				2CD12B821F4ED1F4001D3C82 /* Frameworks */,
+				2CD12B831F4ED1F4001D3C82 /* Resources */,
+				28BC352F3FA1C5C45DBEC003 /* [CP] Embed Pods Frameworks */,
+				05540BDA73F922C4BA137231 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12B8B1F4ED1F4001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 1838 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12B851F4ED1F4001D3C82 /* Adaptive 1838 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2CD12B991F4F348C001D3C82 /* Adaptive 1906 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12BA21F4F348C001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 1906 Screenshots" */;
+			buildPhases = (
+				F84550BE7EBD51DEDE4255B2 /* [CP] Check Pods Manifest.lock */,
+				2CD12B9C1F4F348C001D3C82 /* Sources */,
+				2CD12B9F1F4F348C001D3C82 /* Frameworks */,
+				2CD12BA01F4F348C001D3C82 /* Resources */,
+				127CD2D5CF3B3B94820CB2F7 /* [CP] Embed Pods Frameworks */,
+				6E54E2DE09CCDDA28E1E94DF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12BA71F4F3493001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 1906 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12BA51F4F348C001D3C82 /* Adaptive 1906 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2CD12BA81F4F34A2001D3C82 /* Adaptive 3067 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12BB31F4F34A2001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3067 Screenshots" */;
+			buildPhases = (
+				4ECC311153D7658C5D573336 /* [CP] Check Pods Manifest.lock */,
+				2CD12BAD1F4F34A2001D3C82 /* Sources */,
+				2CD12BB01F4F34A2001D3C82 /* Frameworks */,
+				2CD12BB11F4F34A2001D3C82 /* Resources */,
+				6A20E9FB2293700B9EC2205A /* [CP] Embed Pods Frameworks */,
+				82166DF2FAFD2292D88FA2CF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12BE51F4F34DB001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 3067 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12BB61F4F34A2001D3C82 /* Adaptive 3067 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2CD12BB71F4F34AE001D3C82 /* Adaptive 3150 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12BC21F4F34AE001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3150 Screenshots" */;
+			buildPhases = (
+				B6706518AF5335843300F1B0 /* [CP] Check Pods Manifest.lock */,
+				2CD12BBC1F4F34AE001D3C82 /* Sources */,
+				2CD12BBF1F4F34AE001D3C82 /* Frameworks */,
+				2CD12BC01F4F34AE001D3C82 /* Resources */,
+				07DE52DC97B5C3EF2BF821CF /* [CP] Embed Pods Frameworks */,
+				4B736D7C1BFEB4FFFD8BB70A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12BE71F4F34E0001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 3150 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12BC51F4F34AE001D3C82 /* Adaptive 3150 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2CD12BC61F4F34BD001D3C82 /* Adaptive 3149 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12BD11F4F34BD001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3149 Screenshots" */;
+			buildPhases = (
+				44D032115951FB062CD7AE79 /* [CP] Check Pods Manifest.lock */,
+				2CD12BCB1F4F34BD001D3C82 /* Sources */,
+				2CD12BCE1F4F34BD001D3C82 /* Frameworks */,
+				2CD12BCF1F4F34BD001D3C82 /* Resources */,
+				81B6CC693A0C365FC14EEE57 /* [CP] Embed Pods Frameworks */,
+				57A21D35DAB158DC23EDF3F4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12BE91F4F34E3001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 3149 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12BD41F4F34BD001D3C82 /* Adaptive 3149 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		2CD12BD51F4F34CC001D3C82 /* Adaptive 3124 Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2CD12BE01F4F34CC001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3124 Screenshots" */;
+			buildPhases = (
+				656504DD26D8C072D4A19146 /* [CP] Check Pods Manifest.lock */,
+				2CD12BDA1F4F34CC001D3C82 /* Sources */,
+				2CD12BDD1F4F34CC001D3C82 /* Frameworks */,
+				2CD12BDE1F4F34CC001D3C82 /* Resources */,
+				0E0738FA93C5059EB093CEAE /* [CP] Embed Pods Frameworks */,
+				C5EE6932485CCC67F33ECF96 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2CD12BEB1F4F34E6001D3C82 /* PBXTargetDependency */,
+			);
+			name = "Adaptive 3124 Screenshots";
+			productName = "Adaptive 1838 UITests";
+			productReference = 2CD12BE31F4F34CC001D3C82 /* Adaptive 3124 Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		86EF29331E83CEA900F8D214 /* Adaptive 1838 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86EF29451E83CEA900F8D214 /* Build configuration list for PBXNativeTarget "Adaptive 1838" */;
@@ -7154,8 +7464,8 @@
 				86EF29301E83CEA900F8D214 /* Sources */,
 				86EF29311E83CEA900F8D214 /* Frameworks */,
 				86EF29321E83CEA900F8D214 /* Resources */,
-				08A947FE1EB2B1A5001EC02D /* ShellScript */,
-				08983F251F3E4131008199B1 /* ShellScript */,
+				08A947FE1EB2B1A5001EC02D /* Fabric Script */,
+				08983F251F3E4131008199B1 /* SwiftLint Script */,
 				ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */,
 				636FB71D73F67F013B7E27D6 /* [CP] Copy Pods Resources */,
 			);
@@ -7210,7 +7520,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Alex Karpov";
 				TargetAttributes = {
@@ -7275,6 +7585,32 @@
 						DevelopmentTeam = E9KER42773;
 						ProvisioningStyle = Manual;
 					};
+					2CD12B841F4ED1F4001D3C82 = {
+						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Manual;
+						TestTargetID = 86EF29331E83CEA900F8D214;
+					};
+					2CD12B991F4F348C001D3C82 = {
+						ProvisioningStyle = Manual;
+						TestTargetID = 2C86526B1F4B33DE00D51654;
+					};
+					2CD12BA81F4F34A2001D3C82 = {
+						DevelopmentTeam = E9KER42773;
+						TestTargetID = 2C89A9511F4C289900227C3B;
+					};
+					2CD12BB71F4F34AE001D3C82 = {
+						DevelopmentTeam = E9KER42773;
+						TestTargetID = 2C9731051F4C38F600AC9301;
+					};
+					2CD12BC61F4F34BD001D3C82 = {
+						DevelopmentTeam = E9KER42773;
+						TestTargetID = 2C1B60BD1F4C4AEF00236804;
+					};
+					2CD12BD51F4F34CC001D3C82 = {
+						DevelopmentTeam = E9KER42773;
+						TestTargetID = 2C1B62CE1F4C590700236804;
+					};
 					86EF29331E83CEA900F8D214 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = E9KER42773;
@@ -7316,13 +7652,19 @@
 				085D5CD81D007F2100092060 /* StepicTests */,
 				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
 				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
-				86EF29331E83CEA900F8D214 /* Adaptive 1838 */,
 				086538341EB02715003A8415 /* StickerPackExtension */,
+				86EF29331E83CEA900F8D214 /* Adaptive 1838 */,
 				2C86526B1F4B33DE00D51654 /* Adaptive 1906 */,
 				2C89A9511F4C289900227C3B /* Adaptive 3067 */,
 				2C9731051F4C38F600AC9301 /* Adaptive 3150 */,
 				2C1B60BD1F4C4AEF00236804 /* Adaptive 3149 */,
 				2C1B62CE1F4C590700236804 /* Adaptive 3124 */,
+				2CD12B841F4ED1F4001D3C82 /* Adaptive 1838 Screenshots */,
+				2CD12B991F4F348C001D3C82 /* Adaptive 1906 Screenshots */,
+				2CD12BA81F4F34A2001D3C82 /* Adaptive 3067 Screenshots */,
+				2CD12BB71F4F34AE001D3C82 /* Adaptive 3150 Screenshots */,
+				2CD12BC61F4F34BD001D3C82 /* Adaptive 3149 Screenshots */,
+				2CD12BD51F4F34CC001D3C82 /* Adaptive 3124 Screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -7979,6 +8321,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2CD12B831F4ED1F4001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12B961F4F3374001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BA01F4F348C001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BA11F4F348C001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BB11F4F34A2001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BB21F4F34A2001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BC01F4F34AE001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BC11F4F34AE001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BCF1F4F34BD001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BD01F4F34BD001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BDE1F4F34CC001D3C82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BDF1F4F34CC001D3C82 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86EF29321E83CEA900F8D214 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8097,67 +8487,107 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05540BDA73F922C4BA137231 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		06C5761D353F9E55B250018F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1838-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		08343B1A1BF5EC7F00370FC1 /* ShellScript */ = {
+		07DE52DC97B5C3EF2BF821CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		08343B1A1BF5EC7F00370FC1 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}\"/Fabric/run d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		08983F241F3E4112008199B1 /* ShellScript */ = {
+		08983F241F3E4112008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
-		08983F251F3E4131008199B1 /* ShellScript */ = {
+		08983F251F3E4131008199B1 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
-		08A947FE1EB2B1A5001EC02D /* ShellScript */ = {
+		08A947FE1EB2B1A5001EC02D /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8192,46 +8622,105 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		0E0738FA93C5059EB093CEAE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		127CD2D5CF3B3B94820CB2F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28BC352F3FA1C5C45DBEC003 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2C1B60BE1F4C4AEF00236804 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3149-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C1B62A71F4C4AEF00236804 /* ShellScript */ = {
+		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C1B62A81F4C4AEF00236804 /* ShellScript */ = {
+		2C1B62A81F4C4AEF00236804 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C1B62A91F4C4AEF00236804 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8239,9 +8728,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8269,40 +8833,45 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3124-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C1B64C11F4C590700236804 /* ShellScript */ = {
+		2C1B64C11F4C590700236804 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C1B64C21F4C590700236804 /* ShellScript */ = {
+		2C1B64C21F4C590700236804 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C1B64C31F4C590700236804 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8310,9 +8879,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8340,40 +8984,45 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1906-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C86544D1F4B33DE00D51654 /* ShellScript */ = {
+		2C86544D1F4B33DE00D51654 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C86544E1F4B33DE00D51654 /* ShellScript */ = {
+		2C86544E1F4B33DE00D51654 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C86544F1F4B33DE00D51654 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8381,9 +9030,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906/Pods-Adaptive 1906-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8411,40 +9135,45 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3067-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C89AB331F4C289900227C3B /* ShellScript */ = {
+		2C89AB331F4C289900227C3B /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C89AB341F4C289900227C3B /* ShellScript */ = {
+		2C89AB341F4C289900227C3B /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C89AB351F4C289900227C3B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8452,9 +9181,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067/Pods-Adaptive 3067-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8482,40 +9286,45 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3150-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2C9732E71F4C38F600AC9301 /* ShellScript */ = {
+		2C9732E71F4C38F600AC9301 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Fabric Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" d4016589326f6f7814080b7ff9017e18711a1959 7b8ab6e85a0ca84908f6cd82f195f1b24ffad778e69b5bce1105ce078d1255f8";
 		};
-		2C9732E81F4C38F600AC9301 /* ShellScript */ = {
+		2C9732E81F4C38F600AC9301 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n    exit 1\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nfi";
 		};
 		2C9732E91F4C38F600AC9301 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8523,9 +9332,84 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8568,13 +9452,144 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44D032115951FB062CD7AE79 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3149 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B736D7C1BFEB4FFFD8BB70A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4ECC311153D7658C5D573336 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3067 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57A21D35DAB158DC23EDF3F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		636FB71D73F67F013B7E27D6 /* [CP] Copy Pods Resources */ = {
@@ -8592,6 +9607,42 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		656504DD26D8C072D4A19146 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3124 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A20E9FB2293700B9EC2205A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6DD7DE5CE923F1B7D96EFA06 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -8607,19 +9658,164 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8C8BB6790B996375C756FA85 /* [CP] Embed Pods Frameworks */ = {
+		6E54E2DE09CCDDA28E1E94DF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1906 Screenshots/Pods-Adaptive 1906 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81B6CC693A0C365FC14EEE57 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82166DF2FAFD2292D88FA2CF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		840532CB5E3383BD6B9B8427 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1838 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C8BB6790B996375C756FA85 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SberbankUniversity/Pods-SberbankUniversity-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6706518AF5335843300F1B0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 3150 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7CE161AA042FFACE2B0167F /* [CP] Check Pods Manifest.lock */ = {
@@ -8628,13 +9824,31 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StepicTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5EE6932485CCC67F33ECF96 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DBFB6C2236F1DDC3A26B2D6D /* [CP] Embed Pods Frameworks */ = {
@@ -8643,9 +9857,70 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS8.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS8.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS8.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS8.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS8.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS8.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS8.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS8.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS8.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS8.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS8.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS8.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS8.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS8.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS8.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS8.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS8.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS8.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS8.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS8.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS8.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS8.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS8.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS8.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS8.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS8.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS8.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS8.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -8658,13 +9933,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stepic-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E030AAE96051BB02D324B16F /* [CP] Check Pods Manifest.lock */ = {
@@ -8673,13 +9951,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SberbankUniversity-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */ = {
@@ -8688,13 +9969,106 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Agrume-iOS9.0/Agrume.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS9.0/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox-iOS9.0/BEMCheckBox.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts-iOS9.0/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CRToast-iOS9.0/CRToast.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS9.0/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet-iOS9.0/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton-iOS9.0/DownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit-iOS9.0/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit-iOS9.0/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout-iOS9.0/FLKAutoLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS9.0/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HexColors-iOS9.0/HexColors.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS9.0/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-iOS9.0/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kanna-iOS9.0/Kanna.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord-iOS9.0/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift-iOS9.0/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr-iOS9.0/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS9.0/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar-iOS9.0/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS9.0/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD-iOS9.0/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS9.0/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TSMessages-iOS9.0/TSMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TUSafariActivity-iOS9.0/TUSafariActivity.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects-iOS9.0/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk-iOS9.0/VK_ios_sdk.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Agrume.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HexColors.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TSMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TUSafariActivity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F84550BE7EBD51DEDE4255B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adaptive 1906 Screenshots-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -11578,6 +12952,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2CD12B811F4ED1F4001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12B981F4F33E2001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12B9C1F4F348C001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12B9D1F4F348C001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12B9E1F4F348C001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BAD1F4F34A2001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BAE1F4F34A2001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12BAF1F4F34A2001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BBC1F4F34AE001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BBD1F4F34AE001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12BBE1F4F34AE001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BCB1F4F34BD001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BCC1F4F34BD001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12BCD1F4F34BD001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2CD12BDA1F4F34CC001D3C82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CD12BDB1F4F34CC001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */,
+				2CD12BDC1F4F34CC001D3C82 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86EF29301E83CEA900F8D214 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -12037,6 +13465,36 @@
 			target = 086538341EB02715003A8415 /* StickerPackExtension */;
 			targetProxy = 0865383A1EB02716003A8415 /* PBXContainerItemProxy */;
 		};
+		2CD12B8B1F4ED1F4001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86EF29331E83CEA900F8D214 /* Adaptive 1838 */;
+			targetProxy = 2CD12B8A1F4ED1F4001D3C82 /* PBXContainerItemProxy */;
+		};
+		2CD12BA71F4F3493001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C86526B1F4B33DE00D51654 /* Adaptive 1906 */;
+			targetProxy = 2CD12BA61F4F3493001D3C82 /* PBXContainerItemProxy */;
+		};
+		2CD12BE51F4F34DB001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C89A9511F4C289900227C3B /* Adaptive 3067 */;
+			targetProxy = 2CD12BE41F4F34DB001D3C82 /* PBXContainerItemProxy */;
+		};
+		2CD12BE71F4F34E0001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C9731051F4C38F600AC9301 /* Adaptive 3150 */;
+			targetProxy = 2CD12BE61F4F34E0001D3C82 /* PBXContainerItemProxy */;
+		};
+		2CD12BE91F4F34E3001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C1B60BD1F4C4AEF00236804 /* Adaptive 3149 */;
+			targetProxy = 2CD12BE81F4F34E3001D3C82 /* PBXContainerItemProxy */;
+		};
+		2CD12BEB1F4F34E6001D3C82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C1B62CE1F4C590700236804 /* Adaptive 3124 */;
+			targetProxy = 2CD12BEA1F4F34E6001D3C82 /* PBXContainerItemProxy */;
+		};
 		9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */;
@@ -12385,7 +13843,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ANO Sberbank University";
 				ENABLE_BITCODE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Sb/SberbankUniversity-Info.plist";
+				INFOPLIST_FILE = "Sb/SberbankUniversity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sberbank-school.stepic";
@@ -12406,7 +13864,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ANO Sberbank University";
 				ENABLE_BITCODE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Sb/SberbankUniversity-Info.plist";
+				INFOPLIST_FILE = "Sb/SberbankUniversity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sberbank-school.stepic";
@@ -12526,7 +13984,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -12554,7 +14012,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -12583,7 +14041,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3149;
@@ -12607,7 +14065,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3149/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3149;
@@ -12631,7 +14089,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3124;
@@ -12655,7 +14113,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3124/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3124;
@@ -12679,7 +14137,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1906;
@@ -12703,7 +14161,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1906/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1906;
@@ -12727,7 +14185,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3067;
@@ -12751,7 +14209,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3067/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3067;
@@ -12775,7 +14233,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3150;
@@ -12799,7 +14257,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/3150/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.3150;
@@ -12808,6 +14266,278 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.stepik.ios.adaptive.3150";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2CD12B8C1F4ED1F4001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB16946DB0DDFB5C5E68399 /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 1838";
+			};
+			name = Debug;
+		};
+		2CD12B8D1F4ED1F4001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 1838";
+			};
+			name = Release;
+		};
+		2CD12BA31F4F348C001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4046C299E76957A827CD16BA /* Pods-Adaptive 1906 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 1906";
+			};
+			name = Debug;
+		};
+		2CD12BA41F4F348C001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEE24F582CF07800DD67A688 /* Pods-Adaptive 1906 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 1906";
+			};
+			name = Release;
+		};
+		2CD12BB41F4F34A2001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC090FBDE6F2EE80A528D432 /* Pods-Adaptive 3067 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9f115c19-4b1a-45f2-834e-bcd4bcb25297";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3067";
+			};
+			name = Debug;
+		};
+		2CD12BB51F4F34A2001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF8F85CE7F8244BE448FB54 /* Pods-Adaptive 3067 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9f115c19-4b1a-45f2-834e-bcd4bcb25297";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3067";
+			};
+			name = Release;
+		};
+		2CD12BC31F4F34AE001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AE1013010D86324012E97A9 /* Pods-Adaptive 3150 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0d094cdb-1fe5-4f26-b795-5ee271ec1f46";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3150";
+			};
+			name = Debug;
+		};
+		2CD12BC41F4F34AE001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEE2CA30C5F94890FF82C28C /* Pods-Adaptive 3150 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0d094cdb-1fe5-4f26-b795-5ee271ec1f46";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3150";
+			};
+			name = Release;
+		};
+		2CD12BD21F4F34BD001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 428488D9EEB19B76C0C81274 /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f8cd98c6-a38d-463a-9d41-3524a4c47acc";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3149";
+			};
+			name = Debug;
+		};
+		2CD12BD31F4F34BD001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E988DA6BD27E164014E95D37 /* Pods-Adaptive 3149 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f8cd98c6-a38d-463a-9d41-3524a4c47acc";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3149";
+			};
+			name = Release;
+		};
+		2CD12BE11F4F34CC001D3C82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B32C3A88E6B424CC1FF3AF15 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b413f20-d483-42b0-a95e-1ed895edd2c0";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3124";
+			};
+			name = Debug;
+		};
+		2CD12BE21F4F34CC001D3C82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2505BBB5DA7CB64D553E7AAC /* Pods-Adaptive 3124 Screenshots.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = E9KER42773;
+				INFOPLIST_FILE = UITests/Screenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stepik.ios.adaptive.Adaptive-1838-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b413f20-d483-42b0-a95e-1ed895edd2c0";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Adaptive 3124";
 			};
 			name = Release;
 		};
@@ -12823,7 +14553,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Karpov (X767B24B99)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
@@ -12847,7 +14577,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: STEPIK, OOO (E9KER42773)";
 				DEVELOPMENT_TEAM = E9KER42773;
-				INFOPLIST_FILE = "$(SRCROOT)/StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist";
+				INFOPLIST_FILE = StepicAdaptiveCourse/Content/1838/AdaptiveInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
@@ -13046,6 +14776,60 @@
 			buildConfigurations = (
 				2C9732EC1F4C38F600AC9301 /* Debug */,
 				2C9732ED1F4C38F600AC9301 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12B8E1F4ED1F4001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 1838 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12B8C1F4ED1F4001D3C82 /* Debug */,
+				2CD12B8D1F4ED1F4001D3C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12BA21F4F348C001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 1906 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12BA31F4F348C001D3C82 /* Debug */,
+				2CD12BA41F4F348C001D3C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12BB31F4F34A2001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3067 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12BB41F4F34A2001D3C82 /* Debug */,
+				2CD12BB51F4F34A2001D3C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12BC21F4F34AE001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3150 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12BC31F4F34AE001D3C82 /* Debug */,
+				2CD12BC41F4F34AE001D3C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12BD11F4F34BD001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3149 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12BD21F4F34BD001D3C82 /* Debug */,
+				2CD12BD31F4F34BD001D3C82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2CD12BE01F4F34CC001D3C82 /* Build configuration list for PBXNativeTarget "Adaptive 3124 Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CD12BE11F4F34CC001D3C82 /* Debug */,
+				2CD12BE21F4F34CC001D3C82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
