@@ -944,6 +944,13 @@
 		08DF78C11F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		08DF78C21F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
 		08DF78C31F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */; };
+		08DF78C81F60118E00AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78C91F60118F00AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78CA1F60119000AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78CB1F60119000AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78CC1F60119100AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78CD1F60119100AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78CE1F60119200AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -3566,9 +3573,9 @@
 		2CF44FF31F4B4F3E00C19012 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF44FF11F4B4F0400C19012 /* icon.png */; };
 		2CFB1C671F14CCA500CD0A4C /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */; };
 		2CFB1C681F14CCA800CD0A4C /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */; };
+		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		367EC696CA67B03B10B77F52 /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095DED1CFDF7266696024865 /* Pods_Adaptive_3149_Screenshots.framework */; };
 		3718577341E9A2A5F1BF5FE8 /* Pods_Adaptive_3150_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6BC4D805843053E1E7D9CF /* Pods_Adaptive_3150_Screenshots.framework */; };
-		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		53CE540C11629B4C8BF58C65 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4423F357A654BF830A0FAED9 /* Pods_StepicTests.framework */; };
 		56F0BD1C7C966809F0064196 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB7D6C546C79FC5AA9CE0B7 /* Pods_Adaptive_3124.framework */; };
 		58487B942884748775938761 /* Pods_Adaptive_1906.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C52E2601D6CFA0D0A0F005D3 /* Pods_Adaptive_1906.framework */; };
@@ -4717,8 +4724,8 @@
 		2CF44FF11F4B4F0400C19012 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/1906/icon.png; sourceTree = "<group>"; };
 		2CFB1C5B1F14C89900CD0A4C /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_left.svg; path = OnboardingContent/arrow_left.svg; sourceTree = "<group>"; };
 		2CFB1C5C1F14C89900CD0A4C /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = arrow_right.svg; path = OnboardingContent/arrow_right.svg; sourceTree = "<group>"; };
-		2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		2E06BB2CF5969B39FD62E964 /* Pods-Adaptive 1838 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
 		3621099E65F0E7807AAC606F /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5B8785B3A4246B90C69531 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF8F85CE7F8244BE448FB54 /* Pods-Adaptive 3067 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3067 Screenshots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3067 Screenshots/Pods-Adaptive 3067 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
@@ -10352,6 +10359,7 @@
 				08D120DD1C937B2200A54ABC /* TCBlobDownload.swift in Sources */,
 				08D120DE1C937B2200A54ABC /* User+CoreDataProperties.swift in Sources */,
 				083F2B2E1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				08DF78C81F60118E00AEEA85 /* AvatarImageView.swift in Sources */,
 				083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0846B1081EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08E8F96D1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
@@ -11231,6 +11239,7 @@
 				2C1B62301F4C4AEF00236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B62311F4C4AEF00236804 /* PreferencesContainer.swift in Sources */,
 				2C1B62321F4C4AEF00236804 /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78CD1F60119100AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4C01F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C1B62331F4C4AEF00236804 /* LocalNotificationManager.swift in Sources */,
 				2C1B62341F4C4AEF00236804 /* UIColorExtensions.swift in Sources */,
@@ -11654,6 +11663,7 @@
 				2C1B64411F4C590700236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B64421F4C590700236804 /* PreferencesContainer.swift in Sources */,
 				2C1B64431F4C590700236804 /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78CE1F60119200AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4C11F4DA41D002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C1B64441F4C590700236804 /* LocalNotificationManager.swift in Sources */,
 				2C1B64451F4C590700236804 /* UIColorExtensions.swift in Sources */,
@@ -12077,6 +12087,7 @@
 				2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */,
 				2C8653E01F4B33DE00D51654 /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78CA1F60119000AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4BD1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C8653E11F4B33DE00D51654 /* LocalNotificationManager.swift in Sources */,
 				2C8653E21F4B33DE00D51654 /* UIColorExtensions.swift in Sources */,
@@ -12500,6 +12511,7 @@
 				2C89AAC41F4C289900227C3B /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C89AAC51F4C289900227C3B /* PreferencesContainer.swift in Sources */,
 				2C89AAC61F4C289900227C3B /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78CB1F60119000AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4BE1F4DA41B002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C89AAC71F4C289900227C3B /* LocalNotificationManager.swift in Sources */,
 				2C89AAC81F4C289900227C3B /* UIColorExtensions.swift in Sources */,
@@ -12923,6 +12935,7 @@
 				2C9732781F4C38F600AC9301 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C9732791F4C38F600AC9301 /* PreferencesContainer.swift in Sources */,
 				2C97327A1F4C38F600AC9301 /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78CC1F60119100AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4BF1F4DA41C002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C97327B1F4C38F600AC9301 /* LocalNotificationManager.swift in Sources */,
 				2C97327C1F4C38F600AC9301 /* UIColorExtensions.swift in Sources */,
@@ -13400,6 +13413,7 @@
 				085E9E6F1F138C3800D6A4BC /* CodeSuggestionTableViewCell.swift in Sources */,
 				864D67231E83DE03001E8D9E /* PreferencesContainer.swift in Sources */,
 				864D67241E83DE03001E8D9E /* NotificationPreferencesContainer.swift in Sources */,
+				08DF78C91F60118F00AEEA85 /* AvatarImageView.swift in Sources */,
 				2C35C4BC1F4DA41A002F3BF4 /* AdaptiveRatingsPresenter.swift in Sources */,
 				864D67251E83DE03001E8D9E /* LocalNotificationManager.swift in Sources */,
 				864D67261E83DE03001E8D9E /* UIColorExtensions.swift in Sources */,
@@ -13984,7 +13998,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -14012,7 +14026,7 @@
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = E9KER42773;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
