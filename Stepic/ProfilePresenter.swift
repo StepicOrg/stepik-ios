@@ -146,6 +146,7 @@ class ProfilePresenter {
 
         block.onTouch = {
             [weak self] in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.clickSettings)
             self?.view?.navigateToSettings()
         }
 

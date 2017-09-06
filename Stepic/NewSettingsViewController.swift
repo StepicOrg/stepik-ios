@@ -23,6 +23,9 @@ class NewSettingsViewController: MenuViewController, SettingsView {
         artView.art = Images.arts.customizeLearningProcess
         artView.width = UIScreen.main.bounds.width
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        artView.onTap = {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
+        }
         return artView
     }()
 

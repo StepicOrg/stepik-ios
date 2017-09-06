@@ -13,6 +13,8 @@ class ArtView: UIView {
     @IBOutlet weak var artImageView: UIImageView!
     @IBOutlet weak var artImageViewWidth: NSLayoutConstraint!
 
+    var onTap : ((Void) -> Void)?
+    
     var art: UIImage? {
         didSet {
             artImageView.image = art
@@ -27,8 +29,15 @@ class ArtView: UIView {
 
     private func initialize() {
         artImageView.image = art
+        artImageView.isUserInteractionEnabled = true
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(ArtView.didTap))
+        self.artImageView.addGestureRecognizer(tapG)
     }
 
+    func didTap() {
+        onTap?()
+    }
+    
     private var view: UIView!
 
     private func setup() {
