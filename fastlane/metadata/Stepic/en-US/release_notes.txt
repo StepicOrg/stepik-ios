@@ -1,9 +1,9 @@
 Hi!
 In the new version of the Stepik iOS app:
-• Now you can continue learning from the courses screen! Also, the screen itself changed a bit.
-• You can learn from the courses overview screen.
-• We fixed a bug, when some courses could not be opened in the application
-• We added some inner improvements, which positively affect the performance
+• There is a brand new profile!
+• Letters on the userpics look better
+• We fixed a bug, which sometimes caused a crash after solving a Code Challenge
+• We fixed multiple bugs and improved stability
 
 Enjoy learning,
 Stepik team
