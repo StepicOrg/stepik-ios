@@ -371,7 +371,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             dvc.hidesBottomBarWhenPushed = true
         }
 
-        if segue.identifier == "showPreferences" {
+        if segue.identifier == "showProfile" {
             let dvc = segue.destination
             dvc.hidesBottomBarWhenPushed = true
         }

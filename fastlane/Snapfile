@@ -1,0 +1,16 @@
+devices([
+        "iPhone 5s",
+        "iPhone 7",
+        "iPhone 7 Plus",
+        "iPad Pro (12.9-inch)"
+])
+
+languages([
+        "en-US",
+        "ru-RU"
+])
+
+reinstall_app true
+clear_previous_screenshots true
+skip_open_summary true
+workspace "./Stepic.xcworkspace"

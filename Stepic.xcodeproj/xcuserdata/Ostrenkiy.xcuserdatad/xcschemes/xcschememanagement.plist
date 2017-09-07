@@ -4,32 +4,32 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Adaptive 1838.xcscheme</key>
+		<key>Adaptive 1838.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Adaptive 1906.xcscheme</key>
+		<key>Adaptive 1906.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>79</integer>
 		</dict>
-		<key>Adaptive 3067.xcscheme</key>
+		<key>Adaptive 3067.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>80</integer>
 		</dict>
-		<key>Adaptive 3124.xcscheme</key>
+		<key>Adaptive 3124.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>83</integer>
 		</dict>
-		<key>Adaptive 3149.xcscheme</key>
+		<key>Adaptive 3149.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>82</integer>
 		</dict>
-		<key>Adaptive 3150.xcscheme</key>
+		<key>Adaptive 3150.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>81</integer>
@@ -39,7 +39,7 @@
 			<key>orderHint</key>
 			<integer>30</integer>
 		</dict>
-		<key>Stepic.xcscheme</key>
+		<key>Stepic.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -103,6 +103,36 @@
 			<true/>
 		</dict>
 		<key>2C9731051F4C38F600AC9301</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12B841F4ED1F4001D3C82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12B991F4F348C001D3C82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12BA81F4F34A2001D3C82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12BB71F4F34AE001D3C82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12BC61F4F34BD001D3C82</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD12BD51F4F34CC001D3C82</key>
 		<dict>
 			<key>primary</key>
 			<true/>

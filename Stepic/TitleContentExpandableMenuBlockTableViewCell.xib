@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="84" id="KGk-i7-Jjw" customClass="TitleContentExpandableMenuBlockTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title + content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-zG-AdZ">
+                        <rect key="frame" x="24" y="21" width="241" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktK-VW-1Ci">
+                        <rect key="frame" x="273" y="15.5" width="31" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="bUi-Xq-cmf"/>
+                            <constraint firstAttribute="width" constant="31" id="ioE-MN-4ll"/>
+                        </constraints>
+                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                        <state key="normal" image="menu_arrow_bottom"/>
+                        <connections>
+                            <action selector="arrowButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OnQ-KP-VEs"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ktK-VW-1Ci" firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="trailing" constant="8" id="1Su-qe-4V1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ktK-VW-1Ci" secondAttribute="trailing" constant="8" id="SlO-Q5-Fxu"/>
+                    <constraint firstItem="eIR-zG-AdZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="V27-wL-E9l"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="eIR-zG-AdZ" secondAttribute="leading" constant="-16" id="vrL-qL-f1a"/>
+                    <constraint firstItem="ktK-VW-1Ci" firstAttribute="centerY" secondItem="eIR-zG-AdZ" secondAttribute="centerY" id="yyz-rf-CCP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="arrowButton" destination="ktK-VW-1Ci" id="0K7-oH-LSJ"/>
+                <outlet property="titleLabel" destination="eIR-zG-AdZ" id="scd-r2-4RJ"/>
+            </connections>
+            <point key="canvasLocation" x="-124" y="78"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="menu_arrow_bottom" width="44" height="44"/>
+    </resources>
+</document>

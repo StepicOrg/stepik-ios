@@ -1,0 +1,9 @@
+Hi!
+In the new version of the Stepik iOS app:
+• There is a brand new profile!
+• Letters on the userpics look better
+• We fixed a bug, which sometimes caused a crash after solving a Code Challenge
+• We fixed multiple bugs and improved stability
+
+Enjoy learning,
+Stepik team

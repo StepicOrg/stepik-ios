@@ -35,7 +35,7 @@
 /* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[0] = "Всё время"; ObjectID = "KpV-Qn-80f"; */
 "KpV-Qn-80f.segmentTitles[0]" = "All time";
 
-/* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[1] = "Последние 7 дней"; ObjectID = "KpV-Qn-80f"; */
+/* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[1] = "7 дней"; ObjectID = "KpV-Qn-80f"; */
 "KpV-Qn-80f.segmentTitles[1]" = "7 days";
 
 /* Class = "UISegmentedControl"; KpV-Qn-80f.segmentTitles[2] = "Сегодня"; ObjectID = "KpV-Qn-80f"; */

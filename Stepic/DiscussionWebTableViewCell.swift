@@ -13,7 +13,7 @@ import WebKit
 
 class DiscussionWebTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userAvatarImageView: UIImageView!
+    @IBOutlet weak var userAvatarImageView: AvatarImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
     @IBOutlet weak var separatorView: UIView!
@@ -85,7 +85,10 @@ class DiscussionWebTableViewCell: UITableViewCell {
     }
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
-        userAvatarImageView.sd_setImage(with: URL(string: comment.userInfo.avatarURL))
+        if let url = URL(string: comment.userInfo.avatarURL) {
+            userAvatarImageView.set(with: url)
+        }
+
         nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
         self.separatorType = separatorType
@@ -115,7 +118,6 @@ class DiscussionWebTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
         contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 999999.0, height: 999999.0)
-        userAvatarImageView.setRoundedBounds(width: 0)
         constructWebView()
     }
 

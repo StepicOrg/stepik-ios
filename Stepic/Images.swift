@@ -104,4 +104,8 @@ struct Images {
     struct patterns {
         static let gray = #imageLiteral(resourceName: "stepic-pattern-grey")
     }
+
+    struct arts {
+        static let customizeLearningProcess = UIImage(named: NSLocalizedString("ArtCustomizeLearningProcess", comment: ""))!
+    }
 }

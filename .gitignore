@@ -25,7 +25,7 @@ DerivedData
 #
 Pods/
 artefacts/
-fastlane/screenshots/
+#fastlane/screenshots/
 fastlane/test_output/
 fastlane/report.xml
 fastlane/Readme.md

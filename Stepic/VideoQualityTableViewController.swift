@@ -8,6 +8,19 @@
 
 import UIKit
 
+enum VideoQualityChoiceAction: Int {
+    case downloading = 0, watching
+
+    var title: String {
+        switch self {
+        case .downloading:
+            return NSLocalizedString("LoadingVideoQualityPreference", comment: "")
+        case .watching:
+            return NSLocalizedString("WatchingVideoQualityPreference", comment: "")
+        }
+    }
+}
+
 class VideoQualityTableViewController: UITableViewController {
 
     @IBOutlet var qualityCells: [UITableViewCell]!
@@ -40,7 +53,7 @@ class VideoQualityTableViewController: UITableViewController {
 
         localize()
         tableView.tableFooterView = UIView()
-
+        self.title = action.title
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
