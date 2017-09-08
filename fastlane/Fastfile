@@ -290,7 +290,6 @@ platform :ios do
     metapath = "./fastlane/metadata/#{scheme}"
     screenpath = "./fastlane/screenshots/#{scheme}"
     deliver(metadata_path: metapath, screenshots_path: screenpath, app_identifier: app_identifier)
-    refresh_dsyms(app_identifier: app_identifier)
     slack(
           message: "Successfully released iOS RELEASE #{scheme} #{version_string(get_version_number, get_build_number)}", 
           channel: "#ios-ci")
