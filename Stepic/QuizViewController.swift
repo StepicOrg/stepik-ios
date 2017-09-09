@@ -15,7 +15,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
     @IBOutlet weak var sendButton: UIButton!
 
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusLabel: StepikLabel!
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var hintHeight: NSLayoutConstraint!

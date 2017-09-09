@@ -10,7 +10,7 @@ import UIKit
 
 class FillBlanksChoiceTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var optionLabel: UILabel!
+    @IBOutlet weak var optionLabel: StepikLabel!
     @IBOutlet weak var selectButton: UIButton!
 
     let selectAnswerString: String = NSLocalizedString("FillBlanksSelectAnswerString", comment: "")
@@ -37,16 +37,16 @@ class FillBlanksChoiceTableViewCell: UITableViewCell {
         optionLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
         optionLabel.textAlignment = NSTextAlignment.natural
         optionLabel.backgroundColor = UIColor.clear
-        optionLabel.textColor = UIColor.gray
+        optionLabel.isGray = true
     }
 
     func setOption(text: String?) {
         if text != nil {
             optionLabel.text = text
-            optionLabel.textColor = UIColor.black
+            optionLabel.isGray = false
         } else {
             optionLabel.text = selectAnswerString
-            optionLabel.textColor = UIColor.gray
+            optionLabel.isGray = true
         }
     }
 
