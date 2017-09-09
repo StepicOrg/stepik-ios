@@ -204,7 +204,7 @@ struct AnalyticsEvents {
         static let toolbarSelected = "code_toolbar_selected"
         static let hideKeyboard = "code_hide_keyboard"
     }
-    
+
     struct Profile {
         static let clickSettings = "main_choice_settings"
         struct Settings {

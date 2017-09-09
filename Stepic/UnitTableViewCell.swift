@@ -12,11 +12,11 @@ import SDWebImage
 
 class UnitTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var scoreProgressView: UIProgressView!
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var scoreLabel: StepikLabel!
     @IBOutlet weak var coverImageView: UIImageView!
 
     override func awakeFromNib() {

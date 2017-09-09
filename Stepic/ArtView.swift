@@ -13,8 +13,8 @@ class ArtView: UIView {
     @IBOutlet weak var artImageView: UIImageView!
     @IBOutlet weak var artImageViewWidth: NSLayoutConstraint!
 
-    var onTap : ((Void) -> Void)?
-    
+    var onTap : (() -> Void)?
+
     var art: UIImage? {
         didSet {
             artImageView.image = art
@@ -37,7 +37,7 @@ class ArtView: UIView {
     func didTap() {
         onTap?()
     }
-    
+
     private var view: UIView!
 
     private func setup() {

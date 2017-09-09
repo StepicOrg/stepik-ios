@@ -10,7 +10,7 @@ import UIKit
 
 enum StepikLabelStyle {
     case thin, light, regular
-    
+
     var weight: CGFloat {
         switch self {
         case .thin:
@@ -24,19 +24,31 @@ enum StepikLabelStyle {
 }
 
 class StepikLabel: UILabel {
-    
-    func applyStyles() {
+
+    var isGray: Bool = false {
+        didSet {
+            if isGray {
+                self.textColor = UIColor.lightGray
+            } else {
+                self.textColor = UIColor.mainDarkColor
+            }
+        }
+    }
+
+    private func applyStyles() {
         self.textColor = UIColor.mainDarkColor
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        applyStyles()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        applyStyles()
     }
-    
+
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
