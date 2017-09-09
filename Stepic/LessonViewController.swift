@@ -112,7 +112,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         tabOffset = 8.0
         centerCurrentTab = true
         indicatorColor = UIColor.white
-        tabsViewBackgroundColor = UIColor.navigationColor
+        tabsViewBackgroundColor = UIColor.mainLightColor
     }
 
     override func viewWillAppear(_ animated: Bool) {

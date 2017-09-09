@@ -13,23 +13,6 @@ class UICustomizer: NSObject {
     static var sharedCustomizer = UICustomizer()
     fileprivate override init() {}
 
-    func setStepicNavigationBar(_ navigationBar: UINavigationBar?) {
-        if let bar = navigationBar {
-//            bar.barTintColor = UIColor.stepicGreenColor()
-            bar.barTintColor = UIColor.navigationColor
-            bar.isTranslucent = false
-            bar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-            bar.tintColor = UIColor.white
-        }
-    }
-
-    func setStepicTabBar(_ tabBar: UITabBar?) {
-        if let bar = tabBar {
-            bar.tintColor = UIColor.navigationColor
-            bar.isTranslucent = false
-        }
-    }
-
     func setCustomDownloadButton(_ button: PKDownloadButton, white: Bool = false) {
         button.startDownloadButton?.cleanDefaultAppearance()
         button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, for: UIControlState())

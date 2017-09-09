@@ -19,7 +19,10 @@ class StyledTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UICustomizer.sharedCustomizer.setStepicTabBar(tabBar)
+        
+        tabBar.tintColor = UIColor.mainDarkColor
+        tabBar.isTranslucent = false
+        
         if let items = tabBar.items {
             for (index, item) in items.enumerated() {
                 item.title = titles[index]

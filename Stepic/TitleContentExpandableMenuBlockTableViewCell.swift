@@ -88,7 +88,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         case .title:
             label.textColor = block?.titleColor
         case .content:
-            label.textColor = UIColor.newTextColor
+            label.textColor = UIColor.mainDarkColor
         }
         return label
     }

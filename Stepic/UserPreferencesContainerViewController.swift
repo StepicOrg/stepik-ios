@@ -77,7 +77,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
 
     override var barTintColor: UIColor? {
         get {
-            return UIColor.navigationColor
+            return UIColor.mainLightColor
         }
     }
 

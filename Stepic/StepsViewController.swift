@@ -374,7 +374,7 @@ class StepsViewController: RGPageViewController, ShareableController {
 
     override var barTintColor: UIColor? {
         get {
-            return UIColor.navigationColor
+            return UIColor.mainLightColor
         }
     }
 

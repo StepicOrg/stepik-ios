@@ -1,5 +1,5 @@
 //
-//  GreenNavigationViewController.swift
+//  StyledNavigationViewController.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 03.09.16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GreenNavigationViewController: UINavigationController {
+class StyledNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +18,16 @@ class GreenNavigationViewController: UINavigationController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        UICustomizer.sharedCustomizer.setStepicNavigationBar(navigationBar)
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        navigationBar.barTintColor = UIColor.mainLightColor
+        navigationBar.isTranslucent = false
+        let fontSize: CGFloat = 17.0
+        var titleFont: UIFont = UIFont.systemFont(ofSize: fontSize)
+        if #available(iOS 8.2, *) {
+            titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+        }
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDarkColor, NSFontAttributeName: titleFont]
+        navigationBar.tintColor = UIColor.mainDarkColor
     }
 
     override func didReceiveMemoryWarning() {

@@ -64,7 +64,7 @@ class FindCoursesViewController: CoursesViewController {
         searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.barTintColor = UIColor.navigationColor
+        searchController.searchBar.barTintColor = UIColor.mainLightColor
         searchController.searchBar.tintColor = UIColor.white
         UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
 

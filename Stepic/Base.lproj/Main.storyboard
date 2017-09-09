@@ -96,10 +96,10 @@
         <!--All Courses-->
         <scene sceneID="Xcs-LO-Ogd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRS-2a-8JM" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Courses" image="tab-find-courses" selectedImage="tab-find-courses" id="D6B-Zy-xmi"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wyf-cv-uU2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wyf-cv-uU2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -115,9 +115,9 @@
         <!--My courses-->
         <scene sceneID="Eot-ep-83N">
             <objects>
-                <navigationController id="NxB-SA-EGM" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                <navigationController id="NxB-SA-EGM" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My courses" image="tab-my-courses" selectedImage="tab-my-courses" id="I8C-zf-fZb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nen-ML-6eo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nen-ML-6eo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1186,10 +1186,10 @@
         <!--Downloads-->
         <scene sceneID="Laj-7g-BZD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="W60-es-dLX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1200,15 +1200,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcB-yW-iiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="917" y="2163"/>
+            <point key="canvasLocation" x="916" y="2163"/>
         </scene>
         <!--Certificates-->
         <scene sceneID="3uD-23-Gsy">
             <objects>
-                <navigationController id="4bs-eV-3LS" customClass="GreenNavigationViewController" customModule="Stepic" sceneMemberID="viewController">
+                <navigationController id="4bs-eV-3LS" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Certificates" image="tab-certificates" selectedImage="tab-certificates" id="mwm-pG-FxV"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E6m-D0-KUL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="E6m-D0-KUL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1282,8 +1282,8 @@
         <image name="tab-my-courses" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Had-eU-CRB"/>
-        <segue reference="ste-Lr-Bip"/>
+        <segue reference="nf5-of-tUO"/>
+        <segue reference="WuO-Je-0sX"/>
         <segue reference="bJP-cn-CC7"/>
         <segue reference="gVj-jL-WXR"/>
     </inferredMetricsTieBreakers>

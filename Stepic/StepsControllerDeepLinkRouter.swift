@@ -53,7 +53,7 @@ class StepsControllerDeepLinkRouter: NSObject {
             }
             lessonVC.initObjects = (lesson: lesson, startStepId: stepId - 1, context: .lesson)
             lessonVC.hidesBottomBarWhenPushed = true
-//            let navigation : UINavigationController = GreenNavigationViewController(rootViewController: stepsVC)
+//            let navigation : UINavigationController = StyledNavigationViewController(rootViewController: stepsVC)
 //            navigation.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(StepsControllerDeepLinkRouter.dismissPressed(_:)))
 //            navigation.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 
