@@ -14,7 +14,7 @@ enum DisplayingInfoType: Int {
 
 class GeneralInfoTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var courseNameLabel: UILabel!
+    @IBOutlet weak var courseNameLabel: StepikLabel!
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
 
     @IBOutlet weak var joinButton: UIButton!

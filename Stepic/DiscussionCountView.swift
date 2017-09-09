@@ -10,7 +10,7 @@ import UIKit
 
 class DiscussionCountView: UIView {
 
-    @IBOutlet weak var showCommentsLabel: UILabel!
+    @IBOutlet weak var showCommentsLabel: StepikLabel!
 
     var commentsCount: Int = 0 {
         didSet {

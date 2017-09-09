@@ -482,6 +482,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
                 }
                 cell?.textLabel?.text = "\(indexPath.row + 1). \(sectionTitles[indexPath.row])"
                 cell?.textLabel?.numberOfLines = 0
+                cell?.textLabel?.textColor = UIColor.mainDarkColor
                 return cell ?? UITableViewCell()
             } else {
                 return UITableViewCell()

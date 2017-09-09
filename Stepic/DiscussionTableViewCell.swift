@@ -13,12 +13,12 @@ import SDWebImage
 class DiscussionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameLabel: StepikLabel!
 
     @IBOutlet weak var badgeLabel: WiderLabel!
 
     @IBOutlet weak var separatorView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeLabel: StepikLabel!
 
     @IBOutlet weak var labelLeadingConstraint: NSLayoutConstraint!
 
@@ -27,11 +27,11 @@ class DiscussionTableViewCell: UITableViewCell {
     @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var likesLabel: StepikLabel!
     @IBOutlet weak var likesImageView: UIImageView!
 
     @IBOutlet weak var labelContainerView: UIView!
-    var commentLabel: UILabel?
+    var commentLabel: StepikLabel?
 
     var hasSeparator: Bool = false {
         didSet {
@@ -88,7 +88,7 @@ class DiscussionTableViewCell: UITableViewCell {
         switch comment.userRole {
         case .Student:
             badgeLabel.text = ""
-            badgeLabel.backgroundColor = UIColor.white
+            badgeLabel.backgroundColor = UIColor.clear
         case .Teacher:
             badgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
             badgeLabel.backgroundColor = UIColor.lightGray
@@ -99,7 +99,7 @@ class DiscussionTableViewCell: UITableViewCell {
     }
 
     fileprivate func constructLabel() {
-        commentLabel = UILabel()
+        commentLabel = StepikLabel()
         labelContainerView.addSubview(commentLabel!)
         _ = commentLabel?.alignTop("0", leading: "0", bottom: "0", trailing: "0", to: labelContainerView)
         commentLabel?.numberOfLines = 0
@@ -113,6 +113,7 @@ class DiscussionTableViewCell: UITableViewCell {
                 commentLabel?.attributedText = attributedString
                 layoutSubviews()
                 updateConstraints()
+                commentLabel?.textColor = UIColor.mainDarkColor
             } catch {
                 //TODO: throw an exception here, or pass an error
             }
@@ -144,6 +145,7 @@ class DiscussionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
+        timeLabel.isGray = true
     }
 
     override func prepareForReuse() {
