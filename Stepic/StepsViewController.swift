@@ -328,7 +328,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         super.viewWillAppear(animated)
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
             if !didSelectTab && l.steps.count != 0 && startStepId < l.steps.count && didInitSteps {

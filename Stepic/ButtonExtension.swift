@@ -33,14 +33,14 @@ extension UIButton {
 //    }
 
     func setStepicGreenStyle() {
-        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.stepicGreenColor())
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.mainDarkColor)
         self.setTitleColor(UIColor.white, for: UIControlState())
-        self.backgroundColor = UIColor.stepicGreenColor()
+        self.backgroundColor = UIColor.mainDarkColor
     }
 
     func setStepicWhiteStyle() {
-        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.stepicGreenColor())
-        self.setTitleColor(UIColor.stepicGreenColor(), for: UIControlState())
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.mainDarkColor)
+        self.setTitleColor(UIColor.mainDarkColor, for: UIControlState())
         self.backgroundColor = UIColor.white
     }
 

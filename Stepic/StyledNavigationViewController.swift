@@ -18,16 +18,16 @@ class StyledNavigationViewController: UINavigationController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-        navigationBar.barTintColor = UIColor.mainLightColor
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        navigationBar.barTintColor = UIColor.mainDarkColor
         navigationBar.isTranslucent = false
         let fontSize: CGFloat = 17.0
         var titleFont: UIFont = UIFont.systemFont(ofSize: fontSize)
         if #available(iOS 8.2, *) {
             titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         }
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDarkColor, NSFontAttributeName: titleFont]
-        navigationBar.tintColor = UIColor.mainDarkColor
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: titleFont]
+        navigationBar.tintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {

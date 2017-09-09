@@ -92,7 +92,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         initTabs()
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
 
         presenter = LessonPresenter(objects: initObjects, ids: initIds, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons)
@@ -112,11 +112,18 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         tabOffset = 8.0
         centerCurrentTab = true
         indicatorColor = UIColor.white
-        tabsViewBackgroundColor = UIColor.mainLightColor
+        tabsViewBackgroundColor = UIColor.mainDarkColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        self.navigationController?.navigationBar.clipsToBounds = true
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+//        navigationController?.navigationBar.shadowImage = nil
     }
 
     func setRefreshing(refreshing: Bool) {

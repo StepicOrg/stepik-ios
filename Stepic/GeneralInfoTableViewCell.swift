@@ -32,7 +32,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
 
         typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
-
+        typeSegmentedControl.tintColor = UIColor.mainDarkColor
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
@@ -55,7 +55,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
             joinButton.setStepicWhiteStyle()
             joinButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         } else {
-            joinButton.setStepicWhiteStyle()
+            joinButton.setStepicGreenStyle()
             joinButton.setTitle(Constants.joinCourseButtonText, for: .normal)
         }
     }
