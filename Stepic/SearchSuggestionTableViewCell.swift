@@ -15,9 +15,7 @@ class SearchSuggestionTableViewCell: UITableViewCell {
     func set(suggestion: String, query: String) {
         let fontSize: CGFloat = 17
         var bold = UIFont.boldSystemFont(ofSize: fontSize)
-        if #available(iOS 8.2, *) {
-            bold = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightMedium)
-        }
+        bold = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightMedium)
         let regular = UIFont.systemFont(ofSize: fontSize)
         let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSFontAttributeName: regular, NSForegroundColorAttributeName: UIColor.gray])
         if let queryLocation = suggestion.indexOf(query.lowercased()) {

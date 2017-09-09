@@ -60,7 +60,7 @@ class WebControllerManager: NSObject {
 
     func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true, forceCustom: Bool = false) {
 
-        if #available(iOS 9.0, *), !forceCustom {
+        if !forceCustom {
             let svc = SFSafariViewController(url: url)
             c.present(svc, animated: true, completion: nil)
             self.currentWebControllerKey = key

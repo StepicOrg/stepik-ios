@@ -51,10 +51,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
 
-        if #available(iOS 9.0, *) {
-            if(traitCollection.forceTouchCapability == .available) {
-                registerForPreviewing(with: self, sourceView: view)
-            }
+        if(traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: view)
         }
     }
 
@@ -244,11 +242,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             return nil
         }
 
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        } else {
-            return nil
-        }
+        previewingContext.sourceRect = cell.frame
 
         guard let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController else {
             return nil

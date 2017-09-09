@@ -70,10 +70,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
         lastUser = AuthInfo.shared.user
 
-        if #available(iOS 9.0, *) {
-            if(traitCollection.forceTouchCapability == .available) {
-                registerForPreviewing(with: self, sourceView: view)
-            }
+        if(traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: view)
         }
     }
 
@@ -480,11 +478,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             return nil
         }
 
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        } else {
-            return nil
-        }
+        previewingContext.sourceRect = cell.frame
 
         if !courses[indexPath.row].enrolled {
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {

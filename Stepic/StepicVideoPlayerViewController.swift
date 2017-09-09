@@ -209,9 +209,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
 	fileprivate var isPlaying: Bool = false {
 		didSet {
-			if #available(iOS 9.0, *) {
-				WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
-			}
+            WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
 		}
 	}
 
@@ -236,10 +234,8 @@ class StepicVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if #available(iOS 9.0, *) {
-			WatchSessionManager.sharedManager.addObserver(self)
-			WatchSessionSender.sendPlaybackStatus(.available)
-		}
+        WatchSessionManager.sharedManager.addObserver(self)
+        WatchSessionSender.sendPlaybackStatus(.available)
 
         NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: NSNotification.Name.AVAudioSessionRouteChange, object: nil)
 
@@ -290,10 +286,8 @@ class StepicVideoPlayerViewController: UIViewController {
     }
 
     deinit {
-		if #available(iOS 9.0, *) {
-			WatchSessionSender.sendPlaybackStatus(.noVideo)
-			WatchSessionManager.sharedManager.removeObserver(self)
-		}
+        WatchSessionSender.sendPlaybackStatus(.noVideo)
+        WatchSessionManager.sharedManager.removeObserver(self)
         print("did deinit")
         saveCurrentPlayerTime()
     }

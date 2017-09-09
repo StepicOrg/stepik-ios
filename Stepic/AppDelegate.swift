@@ -28,9 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsHelper.sharedHelper.setupAnalytics()
 
-		if #available(iOS 9.0, *) {
-			WatchSessionManager.sharedManager.startSession()
-		}
+        WatchSessionManager.sharedManager.startSession()
 
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStore(at: CoreDataHelper.instance.storeURL as URL)
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
