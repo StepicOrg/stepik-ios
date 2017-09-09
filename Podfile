@@ -59,7 +59,7 @@ def adaptive_pods
 end
 
 target 'Stepic' do
-    platform :ios, '8.0'
+    platform :ios, '9.0'
     all_pods
     target 'StepicTests' do
         inherit! :search_paths
@@ -69,7 +69,7 @@ target 'Stepic' do
 end
 
 target 'SberbankUniversity' do 
-    platform :ios, '8.0'
+    platform :ios, '9.0'
     all_pods
 end
 
