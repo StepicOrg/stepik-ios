@@ -951,6 +951,14 @@
 		08DF78CC1F60119100AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		08DF78CD1F60119100AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		08DF78CE1F60119200AEEA85 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D31F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D41F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D51F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D71F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
+		08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
 		08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08E16F251BDBA539004822E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
 		08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -4519,6 +4527,7 @@
 		08DF789D1F5DE64300AEEA85 /* ArtView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtView.swift; sourceTree = "<group>"; };
 		08DF78A71F5DE66200AEEA85 /* ArtView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtView.xib; sourceTree = "<group>"; };
 		08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBlockTableViewCell.swift; sourceTree = "<group>"; };
+		08DF78D11F64059900AEEA85 /* StepikLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikLabel.swift; sourceTree = "<group>"; };
 		08E16F211BDBA4AF004822E1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		08E16F221BDBA4AF004822E1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		08E16F241BDBA539004822E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -6230,6 +6239,7 @@
 		08DE94131B8C58AC00D278AB /* Stepic */ = {
 			isa = PBXGroup;
 			children = (
+				08DF78D01F64056B00AEEA85 /* UI Elements */,
 				08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */,
 				086E965C1BF6682000AB952D /* Views */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
@@ -6310,6 +6320,14 @@
 				08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */,
 			);
 			name = Header;
+			sourceTree = "<group>";
+		};
+		08DF78D01F64056B00AEEA85 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
+			);
+			name = "UI Elements";
 			sourceTree = "<group>";
 		};
 		08E16F201BDBA495004822E1 /* Reachability */ = {
@@ -10413,6 +10431,7 @@
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
 				085E9E6D1F138C2800D6A4BC /* CodeLanguagePickerViewController.swift in Sources */,
 				082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
+				08DF78D31F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				08E8F97B1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				08D120F61C937B2200A54ABC /* Sorter.swift in Sources */,
 				082CB1B71D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
@@ -10805,6 +10824,7 @@
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
+				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
@@ -10879,6 +10899,7 @@
 				2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */,
 				2C1B60DB1F4C4AEF00236804 /* StreaksView.swift in Sources */,
 				2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */,
+				08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C1B60DD1F4C4AEF00236804 /* CurrentBestStreakViewController.swift in Sources */,
 				2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */,
@@ -11303,6 +11324,7 @@
 				2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */,
 				2C1B62EC1F4C590700236804 /* StreaksView.swift in Sources */,
 				2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */,
+				08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C1B62EE1F4C590700236804 /* CurrentBestStreakViewController.swift in Sources */,
 				2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */,
@@ -11727,6 +11749,7 @@
 				2C8652881F4B33DE00D51654 /* RatingProgressView.swift in Sources */,
 				2C8652891F4B33DE00D51654 /* StreaksView.swift in Sources */,
 				2C86528A1F4B33DE00D51654 /* RateAppViewController.swift in Sources */,
+				08DF78D51F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C86528B1F4B33DE00D51654 /* CurrentBestStreakViewController.swift in Sources */,
 				2C86528C1F4B33DE00D51654 /* LaunchDefaultsContainer.swift in Sources */,
 				2C86528D1F4B33DE00D51654 /* DefaultsContainer.swift in Sources */,
@@ -12151,6 +12174,7 @@
 				2C89A96E1F4C289900227C3B /* RatingProgressView.swift in Sources */,
 				2C89A96F1F4C289900227C3B /* StreaksView.swift in Sources */,
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
+				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C89A9711F4C289900227C3B /* CurrentBestStreakViewController.swift in Sources */,
 				2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */,
 				2C89A9731F4C289900227C3B /* DefaultsContainer.swift in Sources */,
@@ -12575,6 +12599,7 @@
 				2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */,
 				2C9731231F4C38F600AC9301 /* StreaksView.swift in Sources */,
 				2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */,
+				08DF78D71F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C9731251F4C38F600AC9301 /* CurrentBestStreakViewController.swift in Sources */,
 				2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */,
 				2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */,
@@ -13053,6 +13078,7 @@
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
 				864514E41E9FD4F6007F73BE /* StreaksView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,
+				08DF78D41F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				864514E61E9FD4F6007F73BE /* CurrentBestStreakViewController.swift in Sources */,
 				864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */,
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
