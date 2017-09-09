@@ -65,6 +65,9 @@ class WebControllerManager: NSObject {
             c.present(svc, animated: true, completion: nil)
             self.currentWebControllerKey = key
             self.currentWebController = svc
+        } else {
+            self.currentWebControllerKey = key
+            presentCustomWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
         }
     }
 
