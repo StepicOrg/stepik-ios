@@ -10,12 +10,12 @@ import UIKit
 import FLKAutoLayout
 
 class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var arrowButton: UIButton!
 
     var bottomTitleConstraint: NSLayoutConstraint?
 
-    var labels: [UILabel] = []
+    var labels: [StepikLabel] = []
     var block: TitleContentExpandableMenuBlock?
 
     var isExpanded: Bool = false
@@ -50,7 +50,9 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         super.initWithBlock(block: block)
         self.block = block
         titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
+        if let titleColor = block.titleColor {
+            titleLabel.textColor = titleColor
+        }
         if block.isExpanded {
             expand(block: block)
         } else {
@@ -72,16 +74,14 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         }
     }
 
-    private func buildLabel(type: LabelType, text: String) -> UILabel {
-        let label = UILabel(frame: CGRect.zero)
+    private func buildLabel(type: LabelType, text: String) -> StepikLabel {
+        let label = StepikLabel(frame: CGRect.zero)
         label.text = text
         label.font = type.font
-        switch type {
-        case .title:
-            label.textColor = block?.titleColor
-        case .content:
-            label.textColor = UIColor.mainDarkColor
+        if let titleColor = block?.titleColor {
+            label.textColor = titleColor
         }
+
         return label
     }
 

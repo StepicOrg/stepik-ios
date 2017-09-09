@@ -11,7 +11,7 @@ import FLKAutoLayout
 
 class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +26,8 @@ class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     func initWithBlock(block: HeaderMenuBlock) {
         titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
+        if let titleColor = block.titleColor {
+            titleLabel.textColor = titleColor
+        }
     }
 }

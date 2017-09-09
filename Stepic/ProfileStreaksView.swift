@@ -13,13 +13,13 @@ class ProfileStreaksView: UIView {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatarImageView: AvatarImageView!
 
-    @IBOutlet weak var firstNameLabel: UILabel!
-    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: StepikLabel!
+    @IBOutlet weak var lastNameLabel: StepikLabel!
     @IBOutlet weak var lightningImageView: UIImageView!
-    @IBOutlet weak var currentDaysCountLabel: UILabel!
-    @IBOutlet weak var maxDayCountLabel: UILabel!
-    @IBOutlet weak var currentStreakLabel: UILabel!
-    @IBOutlet weak var maxStreakLabel: UILabel!
+    @IBOutlet weak var currentDaysCountLabel: StepikLabel!
+    @IBOutlet weak var maxDayCountLabel: StepikLabel!
+    @IBOutlet weak var currentStreakLabel: StepikLabel!
+    @IBOutlet weak var maxStreakLabel: StepikLabel!
 
     var profile: ProfileData? {
         didSet {

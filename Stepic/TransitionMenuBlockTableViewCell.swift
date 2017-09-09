@@ -10,8 +10,8 @@ import UIKit
 import FLKAutoLayout
 
 class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var subtitleLabel: StepikLabel!
 
     var titleBottomSpaceConstraint: NSLayoutConstraint?
     var subtitleBottomSpaceConstraint: NSLayoutConstraint?
@@ -31,7 +31,9 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
     func initWithBlock(block: TransitionMenuBlock) {
         super.initWithBlock(block: block)
         titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
+        if let titleColor = block.titleColor {
+            titleLabel.textColor = titleColor
+        }
         if let subtitle = block.subtitle {
             subtitleLabel.text = subtitle
             subtitleLabel.isHidden = false
