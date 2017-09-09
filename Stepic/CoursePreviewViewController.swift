@@ -168,9 +168,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                     c.enrolled = false
                     CoreDataHelper.instance.save()
                     CoursesJoinManager.sharedManager.deletedCourses += [c]
-                    if #available(iOS 9.0, *) {
-                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    }
+                    WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
                     self?.initBarButtonItems(dropAvailable: c.enrolled)
                     _ = self?.navigationController?.popToRootViewController(animated: true)
                     }, error: {
@@ -402,9 +400,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
                     self?.course?.enrolled = true
                     CoreDataHelper.instance.save()
                     CoursesJoinManager.sharedManager.addedCourses += [c]
-                    if #available(iOS 9.0, *) {
-                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    }
+                    WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
                     self?.performSegue(withIdentifier: "showSections", sender: nil)
                     self?.initBarButtonItems(dropAvailable: c.enrolled)
                     }, error: {

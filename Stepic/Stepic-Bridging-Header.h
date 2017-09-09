@@ -19,6 +19,4 @@
 
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-#import "UIAppearance+Swift.h"
-
 #import "WKWebViewPanelManager.h"

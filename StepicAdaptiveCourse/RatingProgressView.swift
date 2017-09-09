@@ -170,9 +170,7 @@ class RatingProgressView: UIView {
         autoresizesSubviews = true
 
         // Font
-        if #available(iOS 8.2, *) {
-            labelFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
-        }
+        labelFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
 
         // Make bg with light color (back)
         self.backgroundColor = mainColor?.withAlphaComponent(0.1)
