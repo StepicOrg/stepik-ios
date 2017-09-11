@@ -113,7 +113,7 @@ class DiscussionTableViewCell: UITableViewCell {
                 commentLabel?.attributedText = attributedString
                 layoutSubviews()
                 updateConstraints()
-                commentLabel?.textColor = UIColor.mainDarkColor
+                commentLabel?.textColor = UIColor.mainTextColor
             } catch {
                 //TODO: throw an exception here, or pass an error
             }

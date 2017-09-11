@@ -54,7 +54,8 @@ extension UIColor {
 
     static let mainLightColor: UIColor = UIColor(hex: 0xf6f6f6)
     static let mainDarkColor: UIColor = UIColor(hex: 0x535366)
-
+    static let mainTextColor: UIColor = UIColor(hex: 0x535366)
+    
     class func backgroundColor() -> UIColor {
         return UIColor(white: 0.9, alpha: 1)
     }

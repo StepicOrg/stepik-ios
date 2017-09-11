@@ -67,7 +67,7 @@ class FindCoursesViewController: CoursesViewController {
         searchController.searchBar.barTintColor = UIColor.mainDarkColor
         searchController.searchBar.tintColor = UIColor.white
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.mainDarkColor
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.mainDarkColor
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.mainTextColor
 
         definesPresentationContext = true
         if #available(iOS 9.1, *) {
