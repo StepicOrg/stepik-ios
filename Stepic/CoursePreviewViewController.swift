@@ -118,7 +118,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
     func shareButtonPressed(_ button: UIBarButtonItem) {

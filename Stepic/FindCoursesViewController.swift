@@ -64,10 +64,16 @@ class FindCoursesViewController: CoursesViewController {
         searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.barTintColor = UIColor.mainDarkColor
-        searchController.searchBar.tintColor = UIColor.white
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = UIColor.mainDarkColor
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.mainTextColor
+        searchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
+        searchController.searchBar.tintColor = navigationController?.navigationBar.tintColor
+
+        for s in searchController.searchBar.subviews[0].subviews {
+            if let textField = s as? UITextField {
+                textField.tintColor = UIColor.mainDarkColor
+                textField.textColor = UIColor.mainTextColor
+                textField.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
+            }
+        }
 
         definesPresentationContext = true
         if #available(iOS 9.1, *) {

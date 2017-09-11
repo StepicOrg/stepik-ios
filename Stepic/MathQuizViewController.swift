@@ -25,7 +25,7 @@ class MathQuizViewController: QuizViewController {
         textField.borderStyle = UITextBorderStyle.roundedRect
         textField.constrainHeight("\(textFieldHeight)")
         textField.textColor = UIColor.mainTextColor
-        
+
         let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
 
