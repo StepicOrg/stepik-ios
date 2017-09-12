@@ -62,9 +62,6 @@ class VideoDownloadView: UIView {
         self.init(frame: frame)
 
         self.video = video
-//        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
-
-//        print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
         self.downloadDelegate = downloadDelegate
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
