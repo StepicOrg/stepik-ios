@@ -29,7 +29,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
+        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.mainDarkColor)
 
         typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
         typeSegmentedControl.tintColor = UIColor.mainDarkColor

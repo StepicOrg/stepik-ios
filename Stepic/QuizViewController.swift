@@ -71,7 +71,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.stepicGreenColor()
+        ai.color = UIColor.mainDarkColor
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)

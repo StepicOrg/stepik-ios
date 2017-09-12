@@ -353,7 +353,7 @@ extension CertificatesViewController : DZNEmptyDataSetSource {
         }
 
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+                          NSForegroundColorAttributeName: UIColor.mainDarkColor]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

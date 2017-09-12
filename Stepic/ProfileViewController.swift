@@ -243,7 +243,7 @@ extension ProfileViewController : DZNEmptyDataSetSource {
         let text = NSLocalizedString("SignIn", comment: "")
 
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+                          NSForegroundColorAttributeName: UIColor.mainDarkColor]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

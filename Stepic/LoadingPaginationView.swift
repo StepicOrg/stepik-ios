@@ -38,6 +38,7 @@ class LoadingPaginationView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
+        activityIndicator.color = UIColor.mainDarkColor
     }
 
     fileprivate func loadViewFromNib() -> UIView {

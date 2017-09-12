@@ -11,7 +11,7 @@ import DownloadButton
 
 class VideoDownloadView: UIView {
 
-    @IBOutlet weak var qualityLabel: UILabel!
+    @IBOutlet weak var qualityLabel: StepikLabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
 
     var video: Video!

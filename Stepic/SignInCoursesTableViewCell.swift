@@ -29,7 +29,7 @@ class SignInCoursesTableViewCell: UITableViewCell {
 
         titleLabel.textColor = UIColor.darkGray
         descriptionLabel.textColor = UIColor.lightGray
-        signInButton.tintColor = UIColor.stepicGreenColor()
+        signInButton.tintColor = UIColor.mainDarkColor
     }
 
     @IBAction func signInPressed(_ sender: Any) {

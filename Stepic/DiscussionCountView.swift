@@ -37,6 +37,7 @@ class DiscussionCountView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
+        view.backgroundColor = UIColor.mainLightColor
     }
 
     func loadViewFromNib() -> UIView {
