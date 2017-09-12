@@ -12,10 +12,10 @@ import DownloadButton
 class DownloadTableViewCell: UITableViewCell {
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var lessonNameLabel: UILabel!
+    @IBOutlet weak var lessonNameLabel: StepikLabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
-    @IBOutlet weak var qualityLabel: UILabel!
-    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var qualityLabel: StepikLabel!
+    @IBOutlet weak var sizeLabel: StepikLabel!
 
     var video: Video!
     var quality: String! {
@@ -35,6 +35,8 @@ class DownloadTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        qualityLabel.isGray = true
+        sizeLabel.isGray = true
         // Initialization code
     }
 
