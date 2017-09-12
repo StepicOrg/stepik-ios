@@ -162,7 +162,7 @@ class WebViewController: UIViewController {
                 action: #selector(WebViewController.didTapSafariButton(_:)))
             navigationItem.rightBarButtonItem?.tintColor = UIColor.mainDarkColor
         }
-        
+
         if presentingViewController?.presentedViewController != nil {
             let doneItem = backButtonStyle.barButtonItem
             doneItem.target = self
