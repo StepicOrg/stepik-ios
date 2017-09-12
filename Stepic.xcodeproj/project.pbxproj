@@ -212,12 +212,6 @@
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
-		083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
-		083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
-		083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E1DA71C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
@@ -527,7 +521,6 @@
 		08A500511F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
 		08A500521F2B73C000140D25 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
 		08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08A7B0E71EB340F500C1BA71 /* Auth.plist */; };
-		08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
 		08AB82351D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		08AB82361D74926F00FDEADE /* StepicsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82341D74926F00FDEADE /* StepicsAPI.swift */; };
 		08AB82381D74C44100FDEADE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB82371D74C44100FDEADE /* Session.swift */; };
@@ -603,8 +596,6 @@
 		08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		08C21C4B1ED46B5900CE9345 /* wysiwyg.css in Resources */ = {isa = PBXBuildFile; fileRef = 087854F41DF6EE0D00368A50 /* wysiwyg.css */; };
 		08C21C4C1ED46B5E00CE9345 /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
-		08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
-		08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
 		08C6E31C1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
 		08C6E31D1DFB2691007F7E39 /* StreakAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6E31A1DFB2691007F7E39 /* StreakAlertViewController.swift */; };
@@ -727,7 +718,6 @@
 		08D120791C937B2200A54ABC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCEB631B9ED2AC00FC4F8B /* AuthManager.swift */; };
 		08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
-		08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
 		08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59E91BBD3D55008DC44D /* LabelExtension.swift */; };
 		08D1207E1C937B2200A54ABC /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		08D1207F1C937B2200A54ABC /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
@@ -793,7 +783,6 @@
 		08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080DCF141C45137400DE3E2E /* SearchResultsCoursesViewController.swift */; };
 		08D120C01C937B2200A54ABC /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555591C4FB0A300C877E8 /* Reply.swift */; };
 		08D120C11C937B2200A54ABC /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C5E4FC1C315272004AA626 /* AudioManager.swift */; };
-		08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
 		08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
 		08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
@@ -854,7 +843,6 @@
 		08D121011C937B2200A54ABC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
 		08D121021C937B2200A54ABC /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801BE1B1C37123900E4F046 /* CoursesViewController.swift */; };
 		08D121041C937B2200A54ABC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E16F241BDBA539004822E1 /* SystemConfiguration.framework */; };
-		08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */; };
 		08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08047E6D1BFDC0470071C875 /* TitleTextTableViewCell.xib */; };
 		08D1210B1C937B2200A54ABC /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
@@ -882,10 +870,7 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
-		08D674911D7880E200B60963 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
-		08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
@@ -1224,16 +1209,8 @@
 		2C1B614F1F4C4AEF00236804 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		2C1B61501F4C4AEF00236804 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		2C1B61511F4C4AEF00236804 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C1B61521F4C4AEF00236804 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		2C1B61531F4C4AEF00236804 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		2C1B61541F4C4AEF00236804 /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		2C1B61551F4C4AEF00236804 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		2C1B61561F4C4AEF00236804 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
 		2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C1B61581F4C4AEF00236804 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
-		2C1B61591F4C4AEF00236804 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		2C1B615A1F4C4AEF00236804 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2C1B615B1F4C4AEF00236804 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		2C1B615C1F4C4AEF00236804 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B615E1F4C4AEF00236804 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -1534,8 +1511,6 @@
 		2C1B629A1F4C4AEF00236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C1B629B1F4C4AEF00236804 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
-		2C1B629D1F4C4AEF00236804 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		2C1B629E1F4C4AEF00236804 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -1695,16 +1670,8 @@
 		2C1B63601F4C590700236804 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		2C1B63611F4C590700236804 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		2C1B63621F4C590700236804 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C1B63631F4C590700236804 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		2C1B63641F4C590700236804 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		2C1B63651F4C590700236804 /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		2C1B63661F4C590700236804 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		2C1B63671F4C590700236804 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
 		2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C1B63691F4C590700236804 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
-		2C1B636A1F4C590700236804 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		2C1B636B1F4C590700236804 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2C1B636C1F4C590700236804 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		2C1B636D1F4C590700236804 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		2C1B636E1F4C590700236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B636F1F4C590700236804 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -2005,8 +1972,6 @@
 		2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C1B64B11F4C590700236804 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
-		2C1B64B41F4C590700236804 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		2C1B64B51F4C590700236804 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -2256,16 +2221,8 @@
 		2C8652FD1F4B33DE00D51654 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		2C8652FE1F4B33DE00D51654 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C8653001F4B33DE00D51654 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		2C8653011F4B33DE00D51654 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		2C8653021F4B33DE00D51654 /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		2C8653031F4B33DE00D51654 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		2C8653041F4B33DE00D51654 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
 		2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C8653061F4B33DE00D51654 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
-		2C8653071F4B33DE00D51654 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		2C8653081F4B33DE00D51654 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2C8653091F4B33DE00D51654 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		2C86530A1F4B33DE00D51654 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C86530C1F4B33DE00D51654 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -2566,8 +2523,6 @@
 		2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
-		2C8654431F4B33DE00D51654 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		2C8654441F4B33DE00D51654 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -2727,16 +2682,8 @@
 		2C89A9E31F4C289900227C3B /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		2C89A9E41F4C289900227C3B /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C89A9E61F4C289900227C3B /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		2C89A9E71F4C289900227C3B /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		2C89A9E81F4C289900227C3B /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		2C89A9E91F4C289900227C3B /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		2C89A9EA1F4C289900227C3B /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
 		2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C89A9EC1F4C289900227C3B /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
-		2C89A9ED1F4C289900227C3B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		2C89A9EE1F4C289900227C3B /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2C89A9EF1F4C289900227C3B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		2C89A9F01F4C289900227C3B /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C89A9F21F4C289900227C3B /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -3038,8 +2985,6 @@
 		2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C89AB281F4C289900227C3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
-		2C89AB2A1F4C289900227C3B /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		2C89AB2B1F4C289900227C3B /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -3203,16 +3148,8 @@
 		2C9731971F4C38F600AC9301 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		2C9731981F4C38F600AC9301 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		2C9731991F4C38F600AC9301 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
-		2C97319A1F4C38F600AC9301 /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		2C97319B1F4C38F600AC9301 /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		2C97319C1F4C38F600AC9301 /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		2C97319D1F4C38F600AC9301 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		2C97319E1F4C38F600AC9301 /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
 		2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C9731A01F4C38F600AC9301 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1649661F2A0842002C9F99 /* AdaptiveStatsViewController.swift */; };
-		2C9731A11F4C38F600AC9301 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		2C9731A21F4C38F600AC9301 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		2C9731A31F4C38F600AC9301 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		2C9731A41F4C38F600AC9301 /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C9731A61F4C38F600AC9301 /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -3513,8 +3450,6 @@
 		2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2C9732DC1F4C38F600AC9301 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2C9732DD1F4C38F600AC9301 /* ProgressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6640DD1F30BCCB0033A274 /* ProgressTableViewCell.xib */; };
-		2C9732DE1F4C38F600AC9301 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		2C9732DF1F4C38F600AC9301 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C9732E11F4C38F600AC9301 /* AdaptiveLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86EF293F1E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard */; };
 		2C9732E21F4C38F600AC9301 /* CodeSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */; };
@@ -3534,6 +3469,15 @@
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
+		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
+		2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */; };
+		2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3518E1F682B6C004255B6 /* SocialAuthHeaderView.swift */; };
+		2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351901F682D47004255B6 /* SocialAuthViewController.swift */; };
+		2CC351971F683140004255B6 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */; };
+		2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
 		2CCEB4951F27755800B45D63 /* AnalyticsEvents+Adaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */; };
 		2CD12B951F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */; };
 		2CD12B961F4F3374001D3C82 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CD12B941F4F3374001D3C82 /* Info.plist */; };
@@ -3870,14 +3814,6 @@
 		864D67AB1E83E08E001E8D9E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30E21DC385B400E4684F /* ProfileViewController.swift */; };
 		864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
-		864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */; };
-		864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64A81C175498003222F0 /* SocialNetworks.swift */; };
-		864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */; };
-		864D67B41E83E08E001E8D9E /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649D1C174E61003222F0 /* LaunchViewController.swift */; };
-		864D67B51E83E08E001E8D9E /* SignInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649F1C175119003222F0 /* SignInTableViewController.swift */; };
-		864D67B61E83E08E001E8D9E /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */; };
-		864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
-		864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C454791E10306800134E24 /* SignInViewController.swift */; };
 		864D67B91E83E08E001E8D9E /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */; };
 		864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
 		864D67BC1E83E08E001E8D9E /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -3906,8 +3842,6 @@
 		86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66B1E96867A0012E8A6 /* StepCardView.swift */; };
 		86ABC66E1E9686A20012E8A6 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66D1E9686A20012E8A6 /* LoadingAnimationView.swift */; };
 		86ABC6701E9687A10012E8A6 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86ABC66F1E9687A10012E8A6 /* AdaptiveStepsViewController.swift */; };
-		86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08D674901D7880E200B60963 /* Auth.storyboard */; };
-		86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */; };
 		86AE946E1E84511A00F67691 /* PlaceholderView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08970ED61C6A36E500846119 /* PlaceholderView.storyboard */; };
 		86AE946F1E84511A00F67691 /* VideoDownloadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086E965D1BF6683800AB952D /* VideoDownloadView.xib */; };
 		86AE94701E84511A00F67691 /* WarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485941C574DAD000165AA /* WarningView.xib */; };
@@ -4403,7 +4337,7 @@
 		08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullHeightWebView.swift; sourceTree = "<group>"; };
 		08A7B0E71EB340F500C1BA71 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth.plist; sourceTree = "<group>"; };
-		08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegistrationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08AB0B901C240A6800BDB7E7 /* RegistrationViewController_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RegistrationViewController_.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08AB82341D74926F00FDEADE /* StepicsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicsAPI.swift; sourceTree = "<group>"; };
 		08AB82371D74C44100FDEADE /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08AB823A1D75AA9300FDEADE /* CookieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieTests.swift; sourceTree = "<group>"; };
@@ -4484,7 +4418,6 @@
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
-		08D674901D7880E200B60963 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
@@ -4697,6 +4630,14 @@
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
+		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialAuthCollectionViewCell.xib; sourceTree = "<group>"; };
+		2CC3518E1F682B6C004255B6 /* SocialAuthHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthHeaderView.swift; sourceTree = "<group>"; };
+		2CC351901F682D47004255B6 /* SocialAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthViewController.swift; sourceTree = "<group>"; };
+		2CC351961F683140004255B6 /* EmailAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthViewController.swift; sourceTree = "<group>"; };
+		2CC351991F68339A004255B6 /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2CCEB4941F27755800B45D63 /* AnalyticsEvents+Adaptive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnalyticsEvents+Adaptive.swift"; sourceTree = "<group>"; };
 		2CD12B851F4ED1F4001D3C82 /* Adaptive 1838 Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Adaptive 1838 Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD12B931F4F3374001D3C82 /* Adaptive_Screenshots_UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Adaptive_Screenshots_UITests.swift; path = UITests/Screenshots/Adaptive_Screenshots_UITests.swift; sourceTree = "<group>"; };
@@ -5167,13 +5108,13 @@
 		0828FF841BC81EA9000AFEA7 /* Registration & Sign in */ = {
 			isa = PBXGroup;
 			children = (
-				08D674901D7880E200B60963 /* Auth.storyboard */,
-				083D64A71C175463003222F0 /* Social networks */,
-				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
-				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
-				08AB0B901C240A6800BDB7E7 /* RegistrationViewController.swift */,
+				2CC351981F683385004255B6 /* Views */,
+				2CC351951F68311E004255B6 /* Registration */,
+				2CC351941F6830FF004255B6 /* Auth email */,
+				2CC351871F682979004255B6 /* Auth social */,
+				2CC351841F6827BE004255B6 /* Auth.storyboard */,
 				08D674921D78B46900B60963 /* AuthNavigationViewController.swift */,
-				08C454791E10306800134E24 /* SignInViewController.swift */,
+				2CC351831F682721004255B6 /* old */,
 			);
 			name = "Registration & Sign in";
 			sourceTree = "<group>";
@@ -5282,8 +5223,6 @@
 		083D64A11C17523E003222F0 /* Social network cell */ = {
 			isa = PBXGroup;
 			children = (
-				083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */,
-				083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */,
 			);
 			name = "Social network cell";
 			sourceTree = "<group>";
@@ -5291,9 +5230,6 @@
 		083D64A71C175463003222F0 /* Social networks */ = {
 			isa = PBXGroup;
 			children = (
-				083D64A11C17523E003222F0 /* Social network cell */,
-				083D64A81C175498003222F0 /* SocialNetworks.swift */,
-				083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */,
 			);
 			name = "Social networks";
 			sourceTree = "<group>";
@@ -6882,6 +6818,74 @@
 			name = ProgressTableViewCell;
 			sourceTree = "<group>";
 		};
+		2CC351831F682721004255B6 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				083D64A71C175463003222F0 /* Social networks */,
+				083D64A11C17523E003222F0 /* Social network cell */,
+				083D64A21C175266003222F0 /* SocialNetworkCollectionViewCell.swift */,
+				083D64A31C175266003222F0 /* SocialNetworkCollectionViewCell.xib */,
+				083D64A81C175498003222F0 /* SocialNetworks.swift */,
+				083D64AC1C17ABE4003222F0 /* SocialNetworksViewController.swift */,
+				083D649D1C174E61003222F0 /* LaunchViewController.swift */,
+				083D649F1C175119003222F0 /* SignInTableViewController.swift */,
+				08AB0B901C240A6800BDB7E7 /* RegistrationViewController_.swift */,
+				08C454791E10306800134E24 /* SignInViewController.swift */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
+		2CC351871F682979004255B6 /* Auth social */ = {
+			isa = PBXGroup;
+			children = (
+				2CC3518D1F682B29004255B6 /* SocialAuthHeaderView */,
+				2CC3518C1F682B20004255B6 /* SocialAuthCollectionViewCell */,
+				2CC351901F682D47004255B6 /* SocialAuthViewController.swift */,
+			);
+			name = "Auth social";
+			sourceTree = "<group>";
+		};
+		2CC3518C1F682B20004255B6 /* SocialAuthCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */,
+				2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */,
+			);
+			name = SocialAuthCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		2CC3518D1F682B29004255B6 /* SocialAuthHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				2CC3518E1F682B6C004255B6 /* SocialAuthHeaderView.swift */,
+			);
+			name = SocialAuthHeaderView;
+			sourceTree = "<group>";
+		};
+		2CC351941F6830FF004255B6 /* Auth email */ = {
+			isa = PBXGroup;
+			children = (
+				2CC351961F683140004255B6 /* EmailAuthViewController.swift */,
+			);
+			name = "Auth email";
+			sourceTree = "<group>";
+		};
+		2CC351951F68311E004255B6 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2CC3519B1F6837B4004255B6 /* RegistrationViewController.swift */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
+		2CC351981F683385004255B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CC351991F68339A004255B6 /* AuthTextField.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		2CD12B911F4F3357001D3C82 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -7685,7 +7689,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08D121071C937B2200A54ABC /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08D121091C937B2200A54ABC /* CustomMessagesDesign.json in Resources */,
 				08D1210A1C937B2200A54ABC /* TitleTextTableViewCell.xib in Resources */,
 				08F4761F1E82C11C0018E82C /* StreaksView.xib in Resources */,
@@ -7763,7 +7766,6 @@
 			files = (
 				0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08CBA32F1F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
-				083D64A51C175266003222F0 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
 				084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */,
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
@@ -7784,6 +7786,7 @@
 				08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */,
 				08263D721DE5F230002E5B7F /* PickerViewController.xib in Resources */,
 				08CBA3411F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.xib in Resources */,
+				2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */,
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
 				0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */,
@@ -7804,6 +7807,7 @@
 				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
 				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				08FB30DA1DC384CC00E4684F /* UserPreferences.storyboard in Resources */,
+				2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
 				08970ED81C6A36E500846119 /* PlaceholderView.storyboard in Resources */,
 				08F485951C574DAD000165AA /* WarningView.xib in Resources */,
@@ -7819,7 +7823,6 @@
 				08C6E31E1DFB2691007F7E39 /* StreakAlertViewController.xib in Resources */,
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
-				08D674911D7880E200B60963 /* Auth.storyboard in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
@@ -7915,8 +7918,6 @@
 				2C35C4E61F4DA488002F3BF4 /* nouns_f.plist in Resources */,
 				2C1B62C71F4C4B6C00236804 /* icon.png in Resources */,
 				2C1B629C1F4C4AEF00236804 /* ProgressTableViewCell.xib in Resources */,
-				2C1B629D1F4C4AEF00236804 /* Auth.storyboard in Resources */,
-				2C1B629E1F4C4AEF00236804 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C1B62A01F4C4AEF00236804 /* AchievementNotificationView.xib in Resources */,
 				2C1B62A11F4C4AEF00236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C35C4F61F4DB8AC002F3BF4 /* step1.html in Resources */,
@@ -8012,8 +8013,6 @@
 				2C1B64B01F4C590700236804 /* UnitTableViewCell.xib in Resources */,
 				2C1B64B11F4C590700236804 /* Images.xcassets in Resources */,
 				2C1B64B31F4C590700236804 /* ProgressTableViewCell.xib in Resources */,
-				2C1B64B41F4C590700236804 /* Auth.storyboard in Resources */,
-				2C1B64B51F4C590700236804 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C1B64B71F4C590700236804 /* AchievementNotificationView.xib in Resources */,
 				2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
@@ -8110,8 +8109,6 @@
 				2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */,
 				2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */,
 				2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */,
-				2C8654431F4B33DE00D51654 /* Auth.storyboard in Resources */,
-				2C8654441F4B33DE00D51654 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
 				2C8654471F4B33DE00D51654 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C8654481F4B33DE00D51654 /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -8207,8 +8204,6 @@
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
 				2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */,
-				2C89AB2A1F4C289900227C3B /* Auth.storyboard in Resources */,
-				2C89AB2B1F4C289900227C3B /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
 				2C89AB2D1F4C289900227C3B /* AdaptiveLaunchScreen.storyboard in Resources */,
 				2C89AB2E1F4C289900227C3B /* CodeSuggestionTableViewCell.xib in Resources */,
@@ -8302,8 +8297,6 @@
 				2C9732DB1F4C38F600AC9301 /* UnitTableViewCell.xib in Resources */,
 				2C9732DC1F4C38F600AC9301 /* Images.xcassets in Resources */,
 				2C9732DD1F4C38F600AC9301 /* ProgressTableViewCell.xib in Resources */,
-				2C9732DE1F4C38F600AC9301 /* Auth.storyboard in Resources */,
-				2C9732DF1F4C38F600AC9301 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C9733081F4C394A00AC9301 /* Config.plist in Resources */,
 				2C35C4FB1F4DB8D4002F3BF4 /* step1.html in Resources */,
 				2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */,
@@ -8445,8 +8438,6 @@
 				86AE948D1E84511A00F67691 /* Images.xcassets in Resources */,
 				2C6640DB1F30BCCB0033A274 /* ProgressTableViewCell.xib in Resources */,
 				2C35C4B21F4DA3FF002F3BF4 /* LeaderboardTableViewCell.xib in Resources */,
-				86AE946C1E844EEF00F67691 /* Auth.storyboard in Resources */,
-				86AE946D1E844EEF00F67691 /* SocialNetworkCollectionViewCell.xib in Resources */,
 				2C35C4E71F4DA48D002F3BF4 /* nouns_m.plist in Resources */,
 				2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */,
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
@@ -8512,7 +8503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		07DE52DC97B5C3EF2BF821CF /* [CP] Embed Pods Frameworks */ = {
@@ -8686,7 +8677,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B62A71F4C4AEF00236804 /* Fabric Script */ = {
@@ -8837,7 +8828,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1B64C11F4C590700236804 /* Fabric Script */ = {
@@ -8988,7 +8979,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C86544D1F4B33DE00D51654 /* Fabric Script */ = {
@@ -9139,7 +9130,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C89AB331F4C289900227C3B /* Fabric Script */ = {
@@ -9290,7 +9281,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C9732E71F4C38F600AC9301 /* Fabric Script */ = {
@@ -9536,7 +9527,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4B736D7C1BFEB4FFFD8BB70A /* [CP] Copy Pods Resources */ = {
@@ -9569,7 +9560,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		57A21D35DAB158DC23EDF3F4 /* [CP] Copy Pods Resources */ = {
@@ -9617,7 +9608,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6A20E9FB2293700B9EC2205A /* [CP] Embed Pods Frameworks */ = {
@@ -9716,7 +9707,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8C8BB6790B996375C756FA85 /* [CP] Embed Pods Frameworks */ = {
@@ -9810,7 +9801,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B7CE161AA042FFACE2B0167F /* [CP] Check Pods Manifest.lock */ = {
@@ -9828,7 +9819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C5EE6932485CCC67F33ECF96 /* [CP] Copy Pods Resources */ = {
@@ -9937,7 +9928,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E030AAE96051BB02D324B16F /* [CP] Check Pods Manifest.lock */ = {
@@ -9955,7 +9946,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		ECA249F9E50E1B21A87F3BE8 /* [CP] Embed Pods Frameworks */ = {
@@ -10063,7 +10054,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -10105,7 +10096,6 @@
 				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
-				08D1207C1C937B2200A54ABC /* SocialNetworksViewController.swift in Sources */,
 				08407EC81DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				08D1207D1C937B2200A54ABC /* LabelExtension.swift in Sources */,
 				08E8F9681F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
@@ -10282,13 +10272,11 @@
 				08D120BF1C937B2200A54ABC /* SearchResultsCoursesViewController.swift in Sources */,
 				08D120C01C937B2200A54ABC /* Reply.swift in Sources */,
 				08D120C11C937B2200A54ABC /* AudioManager.swift in Sources */,
-				08D120C21C937B2200A54ABC /* SocialNetworkCollectionViewCell.swift in Sources */,
 				080AA2331EA024290079272F /* CoursesAPIPaginatedMock.swift in Sources */,
 				08D120C41C937B2200A54ABC /* VideosInfo.swift in Sources */,
 				084490011F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				08758A9C1CDB99C700159233 /* APIDefaults.swift in Sources */,
 				08D120C51C937B2200A54ABC /* MyCoursesViewController.swift in Sources */,
-				08C4547B1E10306800134E24 /* SignInViewController.swift in Sources */,
 				0837492E1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08D120C61C937B2200A54ABC /* Course+CoreDataProperties.swift in Sources */,
 				08AF59EF1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
@@ -10300,7 +10288,6 @@
 				08D120C81C937B2200A54ABC /* VideoURL.swift in Sources */,
 				08D120C91C937B2200A54ABC /* ChoiceReply.swift in Sources */,
 				08AF59FB1E6D9BE800423EFF /* RGPageViewControllerDataSource.swift in Sources */,
-				08DA79041DB780BD003491C4 /* AuthNavigationViewController.swift in Sources */,
 				0846B1111EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				0888D1031F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08D120CA1C937B2200A54ABC /* VideoQualityTableViewController.swift in Sources */,
@@ -10472,11 +10459,9 @@
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
-				083D64AD1C17ABE4003222F0 /* SocialNetworksViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
 				08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
-				08D674931D78B46A00B60963 /* AuthNavigationViewController.swift in Sources */,
 				08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				08E8F96C1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
@@ -10537,6 +10522,7 @@
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
 				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
+				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
@@ -10554,6 +10540,7 @@
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
+				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
 				0859AEAD1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
 				085C4FF31D89C86F00B27C95 /* UnitsAPI.swift in Sources */,
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
@@ -10585,7 +10572,6 @@
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
-				083D649E1C174E61003222F0 /* LaunchViewController.swift in Sources */,
 				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				088E58BD1DE33B410009B9CE /* AuthAPI.swift in Sources */,
@@ -10642,6 +10628,7 @@
 				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
 				089B370F1BFA210F003DC593 /* CacheManager.swift in Sources */,
 				080C5E841EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
+				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
 				08DF789E1F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
@@ -10658,19 +10645,19 @@
 				087387D81BB9A4BD003CFAD1 /* CoreDataHelper.swift in Sources */,
 				08E8F97A1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.swift in Sources */,
 				0828FF861BC81EEC000AFEA7 /* UnitsViewController.swift in Sources */,
+				2CC351971F683140004255B6 /* EmailAuthViewController.swift in Sources */,
 				0869530F1D747DC0003857A2 /* RequestChain.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080DCF151C45137400DE3E2E /* SearchResultsCoursesViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
-				08C4547A1E10306800134E24 /* SignInViewController.swift in Sources */,
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
+				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
+				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				08CBA3151F57562A00302154 /* SwitchMenuBlockTableViewCell.swift in Sources */,
 				085DF8D31C99A8F9006809D9 /* PlayerTestViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
-				083D64A41C175266003222F0 /* SocialNetworkCollectionViewCell.swift in Sources */,
-				083D64A01C175119003222F0 /* SignInTableViewController.swift in Sources */,
 				080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */,
 				08E8F9671F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */,
@@ -10703,12 +10690,12 @@
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				08C194401ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				082E5E0E1F46379100F41426 /* ReplyCache.swift in Sources */,
+				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				08B5E2981BF4FF5A00B875E6 /* UIImageExtension.swift in Sources */,
 				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
-				083D64A91C175498003222F0 /* SocialNetworks.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
 				08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
@@ -10774,7 +10761,6 @@
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
-				08AB0B911C240A6800BDB7E7 /* RegistrationViewController.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				0859AE991E4F1B8F00A0D206 /* FillBlanksChoiceTableViewCell.swift in Sources */,
@@ -10985,16 +10971,8 @@
 				2C1B614F1F4C4AEF00236804 /* RefreshTableViewCell.swift in Sources */,
 				2C1B61501F4C4AEF00236804 /* StepCardView.swift in Sources */,
 				2C1B61511F4C4AEF00236804 /* TapProxyView.swift in Sources */,
-				2C1B61521F4C4AEF00236804 /* SocialNetworkCollectionViewCell.swift in Sources */,
-				2C1B61531F4C4AEF00236804 /* SocialNetworks.swift in Sources */,
-				2C1B61541F4C4AEF00236804 /* SocialNetworksViewController.swift in Sources */,
-				2C1B61551F4C4AEF00236804 /* LaunchViewController.swift in Sources */,
-				2C1B61561F4C4AEF00236804 /* SignInTableViewController.swift in Sources */,
 				2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C1B61581F4C4AEF00236804 /* AdaptiveStatsViewController.swift in Sources */,
-				2C1B61591F4C4AEF00236804 /* RegistrationViewController.swift in Sources */,
-				2C1B615A1F4C4AEF00236804 /* AuthNavigationViewController.swift in Sources */,
-				2C1B615B1F4C4AEF00236804 /* SignInViewController.swift in Sources */,
 				2C1B615C1F4C4AEF00236804 /* CourseTableViewCell.swift in Sources */,
 				2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */,
 				2C1B615E1F4C4AEF00236804 /* FindCoursesViewController.swift in Sources */,
@@ -11408,16 +11386,8 @@
 				2C1B63601F4C590700236804 /* RefreshTableViewCell.swift in Sources */,
 				2C1B63611F4C590700236804 /* StepCardView.swift in Sources */,
 				2C1B63621F4C590700236804 /* TapProxyView.swift in Sources */,
-				2C1B63631F4C590700236804 /* SocialNetworkCollectionViewCell.swift in Sources */,
-				2C1B63641F4C590700236804 /* SocialNetworks.swift in Sources */,
-				2C1B63651F4C590700236804 /* SocialNetworksViewController.swift in Sources */,
-				2C1B63661F4C590700236804 /* LaunchViewController.swift in Sources */,
-				2C1B63671F4C590700236804 /* SignInTableViewController.swift in Sources */,
 				2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C1B63691F4C590700236804 /* AdaptiveStatsViewController.swift in Sources */,
-				2C1B636A1F4C590700236804 /* RegistrationViewController.swift in Sources */,
-				2C1B636B1F4C590700236804 /* AuthNavigationViewController.swift in Sources */,
-				2C1B636C1F4C590700236804 /* SignInViewController.swift in Sources */,
 				2C1B636D1F4C590700236804 /* CourseTableViewCell.swift in Sources */,
 				2C1B636E1F4C590700236804 /* Achievement.swift in Sources */,
 				2C1B636F1F4C590700236804 /* FindCoursesViewController.swift in Sources */,
@@ -11831,16 +11801,8 @@
 				2C8652FD1F4B33DE00D51654 /* RefreshTableViewCell.swift in Sources */,
 				2C8652FE1F4B33DE00D51654 /* StepCardView.swift in Sources */,
 				2C8652FF1F4B33DE00D51654 /* TapProxyView.swift in Sources */,
-				2C8653001F4B33DE00D51654 /* SocialNetworkCollectionViewCell.swift in Sources */,
-				2C8653011F4B33DE00D51654 /* SocialNetworks.swift in Sources */,
-				2C8653021F4B33DE00D51654 /* SocialNetworksViewController.swift in Sources */,
-				2C8653031F4B33DE00D51654 /* LaunchViewController.swift in Sources */,
-				2C8653041F4B33DE00D51654 /* SignInTableViewController.swift in Sources */,
 				2C8653051F4B33DE00D51654 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C8653061F4B33DE00D51654 /* AdaptiveStatsViewController.swift in Sources */,
-				2C8653071F4B33DE00D51654 /* RegistrationViewController.swift in Sources */,
-				2C8653081F4B33DE00D51654 /* AuthNavigationViewController.swift in Sources */,
-				2C8653091F4B33DE00D51654 /* SignInViewController.swift in Sources */,
 				2C86530A1F4B33DE00D51654 /* CourseTableViewCell.swift in Sources */,
 				2C86530B1F4B33DE00D51654 /* Achievement.swift in Sources */,
 				2C86530C1F4B33DE00D51654 /* FindCoursesViewController.swift in Sources */,
@@ -12254,16 +12216,8 @@
 				2C89A9E31F4C289900227C3B /* RefreshTableViewCell.swift in Sources */,
 				2C89A9E41F4C289900227C3B /* StepCardView.swift in Sources */,
 				2C89A9E51F4C289900227C3B /* TapProxyView.swift in Sources */,
-				2C89A9E61F4C289900227C3B /* SocialNetworkCollectionViewCell.swift in Sources */,
-				2C89A9E71F4C289900227C3B /* SocialNetworks.swift in Sources */,
-				2C89A9E81F4C289900227C3B /* SocialNetworksViewController.swift in Sources */,
-				2C89A9E91F4C289900227C3B /* LaunchViewController.swift in Sources */,
-				2C89A9EA1F4C289900227C3B /* SignInTableViewController.swift in Sources */,
 				2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C89A9EC1F4C289900227C3B /* AdaptiveStatsViewController.swift in Sources */,
-				2C89A9ED1F4C289900227C3B /* RegistrationViewController.swift in Sources */,
-				2C89A9EE1F4C289900227C3B /* AuthNavigationViewController.swift in Sources */,
-				2C89A9EF1F4C289900227C3B /* SignInViewController.swift in Sources */,
 				2C89A9F01F4C289900227C3B /* CourseTableViewCell.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				2C89A9F21F4C289900227C3B /* FindCoursesViewController.swift in Sources */,
@@ -12677,16 +12631,8 @@
 				2C9731971F4C38F600AC9301 /* RefreshTableViewCell.swift in Sources */,
 				2C9731981F4C38F600AC9301 /* StepCardView.swift in Sources */,
 				2C9731991F4C38F600AC9301 /* TapProxyView.swift in Sources */,
-				2C97319A1F4C38F600AC9301 /* SocialNetworkCollectionViewCell.swift in Sources */,
-				2C97319B1F4C38F600AC9301 /* SocialNetworks.swift in Sources */,
-				2C97319C1F4C38F600AC9301 /* SocialNetworksViewController.swift in Sources */,
-				2C97319D1F4C38F600AC9301 /* LaunchViewController.swift in Sources */,
-				2C97319E1F4C38F600AC9301 /* SignInTableViewController.swift in Sources */,
 				2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C9731A01F4C38F600AC9301 /* AdaptiveStatsViewController.swift in Sources */,
-				2C9731A11F4C38F600AC9301 /* RegistrationViewController.swift in Sources */,
-				2C9731A21F4C38F600AC9301 /* AuthNavigationViewController.swift in Sources */,
-				2C9731A31F4C38F600AC9301 /* SignInViewController.swift in Sources */,
 				2C9731A41F4C38F600AC9301 /* CourseTableViewCell.swift in Sources */,
 				2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */,
 				2C9731A61F4C38F600AC9301 /* FindCoursesViewController.swift in Sources */,
@@ -13154,16 +13100,8 @@
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
 				86ABC66C1E96867A0012E8A6 /* StepCardView.swift in Sources */,
 				2C9704231F3B1BFE00C36F0A /* TapProxyView.swift in Sources */,
-				864D67B01E83E08E001E8D9E /* SocialNetworkCollectionViewCell.swift in Sources */,
-				864D67B21E83E08E001E8D9E /* SocialNetworks.swift in Sources */,
-				864D67B31E83E08E001E8D9E /* SocialNetworksViewController.swift in Sources */,
-				864D67B41E83E08E001E8D9E /* LaunchViewController.swift in Sources */,
-				864D67B51E83E08E001E8D9E /* SignInTableViewController.swift in Sources */,
 				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C1649671F2A0842002C9F99 /* AdaptiveStatsViewController.swift in Sources */,
-				864D67B61E83E08E001E8D9E /* RegistrationViewController.swift in Sources */,
-				864D67B71E83E08E001E8D9E /* AuthNavigationViewController.swift in Sources */,
-				864D67B81E83E08E001E8D9E /* SignInViewController.swift in Sources */,
 				864D67B91E83E08E001E8D9E /* CourseTableViewCell.swift in Sources */,
 				2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */,
 				864D67BB1E83E08E001E8D9E /* FindCoursesViewController.swift in Sources */,
@@ -13682,6 +13620,14 @@
 				2C97041F1F3B0B7A00C36F0A /* ru */,
 			);
 			name = step5.html;
+			sourceTree = "<group>";
+		};
+		2CC351841F6827BE004255B6 /* Auth.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CC351851F6827BE004255B6 /* Base */,
+			);
+			name = Auth.storyboard;
 			sourceTree = "<group>";
 		};
 		860DB7911EB8DC13001E3E42 /* StepCardView.xib */ = {

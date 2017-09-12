@@ -1,5 +1,5 @@
 //
-//  RegistrationViewController.swift
+//  EmailAuthViewController.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 12.09.2017.
@@ -8,19 +8,17 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController {
-    @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
+class EmailAuthViewController: UIViewController {
+
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var alertLabel: UILabel!
     @IBOutlet weak var textFieldPassword: AuthTextField!
     @IBOutlet weak var inputGroupPad: UIView!
-
-    @IBOutlet weak var separatorFirstHeight: NSLayoutConstraint!
-    @IBOutlet weak var separatorSecondHeight: NSLayoutConstraint!
-
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tosLabel: UILabel!
+
+    @IBOutlet weak var separatorHeight: NSLayoutConstraint!
 
     var error: Bool = false {
         didSet {
@@ -53,21 +51,14 @@ class RegistrationViewController: UIViewController {
 
     private func setup() {
         // Title
-        var attributedString = NSMutableAttributedString(string: "Sign Up")
+        let attributedString = NSMutableAttributedString(string: "Sign In with e-mail")
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: 7))
         titleLabel.attributedText = attributedString
 
         // Input group
-        separatorFirstHeight.constant = 0.5
-        separatorSecondHeight.constant = 0.5
+        separatorHeight.constant = 0.5
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         textFieldPassword.fieldType = .password
-
-        // Term of service warning
-        attributedString = NSMutableAttributedString(string: "By registering you agree to the Terms of service and Privacy policy.")
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 32, length: 16))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 53, length: 14))
-        tosLabel.attributedText = attributedString
     }
 }

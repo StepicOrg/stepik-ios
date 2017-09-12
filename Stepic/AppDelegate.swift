@@ -311,12 +311,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Auth redirect with registered email
             let email = (queryDict["email"] ?? "").removingPercentEncoding
 
-            let signInViewController = ControllerHelper.instantiateViewController(identifier: "SignInViewController", storyboardName: "Auth") as! SignInViewController
-            signInViewController.prefilledEmail = email
-
-            if let topViewController = ControllerHelper.getTopViewController() as? UINavigationController {
-                topViewController.pushViewController(signInViewController, animated: true)
-            }
+//            let signInViewController = ControllerHelper.instantiateViewController(identifier: "SignInViewController", storyboardName: "Auth") as! SignInViewController
+//            signInViewController.prefilledEmail = email
+//
+//            if let topViewController = ControllerHelper.getTopViewController() as? UINavigationController {
+//                topViewController.pushViewController(signInViewController, animated: true)
+//            }
         } else {
             // Other actions
             handleOpenedFromDeepLink(url)
