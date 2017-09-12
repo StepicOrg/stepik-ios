@@ -50,9 +50,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         super.initWithBlock(block: block)
         self.block = block
         titleLabel.text = block.title
-        if let titleColor = block.titleColor {
-            titleLabel.textColor = titleColor
-        }
+        titleLabel.textColor = block.titleColor
         if block.isExpanded {
             expand(block: block)
         } else {

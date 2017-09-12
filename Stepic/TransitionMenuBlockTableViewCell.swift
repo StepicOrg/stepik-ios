@@ -31,9 +31,7 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
     func initWithBlock(block: TransitionMenuBlock) {
         super.initWithBlock(block: block)
         titleLabel.text = block.title
-        if let titleColor = block.titleColor {
-            titleLabel.textColor = titleColor
-        }
+        titleLabel.textColor = titleColor
         if let subtitle = block.subtitle {
             subtitleLabel.text = subtitle
             subtitleLabel.isHidden = false
