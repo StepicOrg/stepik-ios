@@ -97,7 +97,6 @@ class FindCoursesViewController: CoursesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.tableHeaderView = signInView
-        (navigationController as? StyledNavigationViewController)?.reloadShadowView()
     }
 
     fileprivate var signInView: UIView? {
@@ -129,6 +128,13 @@ class FindCoursesViewController: CoursesViewController {
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
+    func willPresentSearchController(_ searchController: UISearchController) {
+        //This is used to prevent strange bug in search bar width layout
+        delay(0.1) {
+            [weak self] in
+            self?.navigationController?.navigationBar.layoutSubviews()
+        }
+    }
 }
 
 extension FindCoursesViewController : UISearchBarDelegate {

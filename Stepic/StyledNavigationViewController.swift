@@ -50,7 +50,7 @@ class StyledNavigationViewController: UINavigationController {
         navigationBar.addSubview(v)
         v.backgroundColor = UIColor.lightGray
         _ = v.constrainHeight("0.5")
-        _ = v.alignBottomEdge(with: navigationBar, predicate: "0")
+        _ = v.alignBottomEdge(with: navigationBar, predicate: "0.5")
         _ = v.alignLeadingEdge(with: navigationBar, predicate: "0")
         self.customShadowTrailing = v.alignTrailingEdge(with: navigationBar, predicate: "0").first as? NSLayoutConstraint
         customShadowView = v
