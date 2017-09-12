@@ -19,8 +19,11 @@ class UICustomizer: NSObject {
 
         if white {
             button.stopDownloadButton?.tintColor = UIColor.white
+            button.pendingView.circleView.tintColor = UIColor.white
+        } else {
+            button.stopDownloadButton?.tintColor = UIColor.mainDarkColor
+            button.pendingView.circleView.tintColor = UIColor.mainDarkColor
         }
-
         button.downloadedButton?.cleanDefaultAppearance()
         button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, for: UIControlState())
     }
