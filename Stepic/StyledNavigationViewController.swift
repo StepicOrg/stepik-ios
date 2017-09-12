@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FLKAutoLayout
 
 class StyledNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupShadowView()
         // Do any additional setup after loading the view.
     }
 
@@ -20,18 +22,39 @@ class StyledNavigationViewController: UINavigationController {
         super.viewWillAppear(animated)
         setStatusBarStyle()
         navigationBar.barTintColor = UIColor.mainLightColor
+        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = false
         let fontSize: CGFloat = 17.0
-        var titleFont: UIFont = UIFont.systemFont(ofSize: fontSize)
-        if #available(iOS 8.2, *) {
-            titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
-        }
+        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDarkColor, NSFontAttributeName: titleFont]
         navigationBar.tintColor = UIColor.mainDarkColor
     }
 
+    func reloadShadowView() {
+        if let v = customShadowView {
+            v.removeFromSuperview()
+        }
+        setupShadowView()
+    }
+
     func setStatusBarStyle() {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+    }
+
+    var customShadowView: UIView?
+    var customShadowTrailing: NSLayoutConstraint?
+
+    func setupShadowView() {
+        let v = UIView()
+        navigationBar.addSubview(v)
+        v.backgroundColor = UIColor.lightGray
+        _ = v.constrainHeight("0.5")
+        _ = v.alignBottomEdge(with: navigationBar, predicate: "0")
+        _ = v.alignLeadingEdge(with: navigationBar, predicate: "0")
+        self.customShadowTrailing = v.alignTrailingEdge(with: navigationBar, predicate: "0").first as? NSLayoutConstraint
+        customShadowView = v
+        customShadowView?.alpha = 1
     }
 
     override func didReceiveMemoryWarning() {

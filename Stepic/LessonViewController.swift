@@ -91,6 +91,8 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         dataSource = self
         initTabs()
 
+        self.navigationController?.delegate = self
+
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -111,19 +113,16 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         indicatorHeight = 2.0
         tabOffset = 8.0
         centerCurrentTab = true
-        indicatorColor = UIColor.white
-        tabsViewBackgroundColor = UIColor.mainDarkColor
+        indicatorColor = UIColor.mainDarkColor
+        tabsViewBackgroundColor = UIColor.mainLightColor
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.clipsToBounds = true
-        navigationController?.navigationBar.shadowImage = UIImage()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-//        navigationController?.navigationBar.shadowImage = nil
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 
     func setRefreshing(refreshing: Bool) {
@@ -219,5 +218,26 @@ extension LessonViewController: PagerDataSource {
 extension LessonViewController: WarningViewDelegate {
     func didPressButton() {
         presenter?.refreshSteps()
+    }
+}
+
+extension LessonViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard let navigation = self.navigationController as? StyledNavigationViewController else {
+            return
+        }
+        var targetAlpha: CGFloat = 1
+        if viewController is LessonViewController {
+            targetAlpha = 0
+        }
+        guard let coordinator = navigationController.topViewController?.transitionCoordinator else {
+            return
+        }
+        navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width * (1 - targetAlpha)
+        coordinator.animate(alongsideTransition: {
+            _ in
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowView?.alpha = targetAlpha
+        }, completion: nil)
     }
 }

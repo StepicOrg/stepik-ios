@@ -97,6 +97,7 @@ class FindCoursesViewController: CoursesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.tableHeaderView = signInView
+        (navigationController as? StyledNavigationViewController)?.reloadShadowView()
     }
 
     fileprivate var signInView: UIView? {
