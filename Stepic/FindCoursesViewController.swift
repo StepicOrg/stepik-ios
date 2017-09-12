@@ -91,12 +91,15 @@ class FindCoursesViewController: CoursesViewController {
 
         self.navigationItem.titleView = self.searchController.searchBar
         tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.tableHeaderView = signInView
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.layoutSubviews()
+        navigationController?.navigationBar.layoutSubviews()
+        self.navigationController?.delegate = self
     }
 
     fileprivate var signInView: UIView? {
@@ -125,6 +128,14 @@ class FindCoursesViewController: CoursesViewController {
     }
 
     var isDisplayingFromSuggestions: Bool = false
+    
+    func layoutBarAfterDelay() {
+        delay(0.1) {
+            [weak self] in
+            self?.navigationController?.navigationBar.layoutSubviews()
+        }
+
+    }
 }
 
 extension FindCoursesViewController : UISearchControllerDelegate {
@@ -246,5 +257,29 @@ extension FindCoursesViewController {
 extension FindCoursesViewController {
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+}
+
+extension FindCoursesViewController : UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard self.navigationController is StyledNavigationViewController else {
+            return
+        }
+        guard viewController is FindCoursesViewController else {
+            return
+        }
+        guard let coordinator = navigationController.topViewController?.transitionCoordinator else {
+            return
+        }
+        self.searchController.searchBar.isHidden = true
+        coordinator.animate(alongsideTransition: nil, completion: {
+            [weak self]
+            _ in
+            self?.searchController.searchBar.isHidden = false
+            self?.searchController.searchBar.alpha = 0.0
+            UIView.animate(withDuration: 0.1, animations: {
+                self?.searchController.searchBar.alpha = 1.0
+            })
+        })
     }
 }
