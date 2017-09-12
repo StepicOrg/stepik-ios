@@ -26,6 +26,6 @@ class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     func initWithBlock(block: HeaderMenuBlock) {
         titleLabel.text = block.title
-        titleLabel.textColor = titleColor
+        titleLabel.textColor = block.titleColor
     }
 }

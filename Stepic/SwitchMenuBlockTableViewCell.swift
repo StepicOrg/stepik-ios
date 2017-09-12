@@ -28,7 +28,7 @@ class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
     func initWithBlock(block: SwitchMenuBlock) {
         super.initWithBlock(block: block)
         titleLabel.text = block.title
-        titleLabel.textColor = titleColor
+        titleLabel.textColor = block.titleColor
         blockSwitch.isOn = block.isOn
         self.block = block
     }
