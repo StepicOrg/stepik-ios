@@ -128,7 +128,7 @@ class FindCoursesViewController: CoursesViewController {
     }
 
     var isDisplayingFromSuggestions: Bool = false
-    
+
     func layoutBarAfterDelay() {
         delay(0.1) {
             [weak self] in
