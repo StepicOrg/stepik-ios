@@ -74,38 +74,13 @@ extension Block {
     }
 
     var image: UIImage {
-        var resultName = "ic_theory"
         switch (name) {
-        case "animation" : resultName = "ic_animation"
-        case "video" : resultName = "video"
-        case "text" : resultName = "ic_theory"
-        case "code", "dataset", "admin" : resultName = "ic_admin"
-        default: resultName = "easy_quiz"
-        }
-
-        if let img = UIImage(named: resultName) {
-            return img
-        } else {
-            print("Unknown image name -> \(resultName)")
-            return UIImage(named: "ic_theory")!
+        case "video" : return #imageLiteral(resourceName: "ic_video_dark")
+        case "text" : return #imageLiteral(resourceName: "ic_theory_dark")
+        case "code", "dataset", "admin" : return #imageLiteral(resourceName: "ic_hard_dark")
+        default: return #imageLiteral(resourceName: "ic_easy_dark")
         }
     }
-
-//    var image : UIImage {
-//        var resultName = "ic_theory"
-//        switch (name) {
-//        case "text" : resultName = "ic_theory"
-//        case "schulte" : resultName = "ic_table"
-//        default: resultName = "ic_\(name)"
-//        }
-//        
-//        if let img = UIImage(named: resultName) {
-//            return img
-//        } else {
-//            print("Unknown image name -> \(resultName)")
-//            return UIImage(named: "ic_theory")!
-//        }
-//    }
 }
 
 enum BlockTypes: String {

@@ -23,7 +23,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BRP-NV-byv">
                     <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_solved_task_dark" translatesAutoresizingMaskIntoConstraints="NO" id="rBL-j2-mum">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_solved_task_light" translatesAutoresizingMaskIntoConstraints="NO" id="rBL-j2-mum">
                     <rect key="frame" x="6" y="55" width="49" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" id="407-1j-jwZ"/>
@@ -47,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_solved_task_dark" width="56" height="56"/>
+        <image name="ic_solved_task_light" width="56" height="56"/>
     </resources>
 </document>
