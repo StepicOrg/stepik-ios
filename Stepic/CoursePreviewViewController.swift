@@ -75,7 +75,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
     fileprivate func initBarButtonItems(dropAvailable: Bool) {
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
         if dropAvailable {
-            let moreBarButtonItem = UIBarButtonItem(image: Images.points.vertical, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
+            let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "dots_dark"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
             self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
         } else {
             self.navigationItem.rightBarButtonItem = shareBarButtonItem

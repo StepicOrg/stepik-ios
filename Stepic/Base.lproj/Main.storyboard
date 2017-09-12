@@ -613,7 +613,7 @@
                                                 <constraint firstAttribute="height" constant="50" id="Etj-Uj-4eI"/>
                                                 <constraint firstAttribute="width" constant="50" id="ahh-oE-9Rq"/>
                                             </constraints>
-                                            <state key="normal" image="stepic_play"/>
+                                            <state key="normal" image="play_dark"/>
                                             <connections>
                                                 <action selector="playButtonPressed:" destination="D75-Zh-Yxy" eventType="touchUpInside" id="pJi-Xm-63s"/>
                                             </connections>
@@ -909,7 +909,7 @@
                                     <constraint firstAttribute="height" constant="50" id="5LT-2m-88H"/>
                                     <constraint firstAttribute="width" constant="50" id="Pvt-Ch-E4a"/>
                                 </constraints>
-                                <state key="normal" image="stepic_play"/>
+                                <state key="normal" image="play_dark"/>
                                 <connections>
                                     <action selector="playButtonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="kVm-QE-2Cq"/>
                                 </connections>
@@ -1274,7 +1274,7 @@
     <resources>
         <image name="Circled User Male" width="25" height="25"/>
         <image name="Info" width="25" height="25"/>
-        <image name="stepic_play" width="150" height="150"/>
+        <image name="play_dark" width="154" height="154"/>
         <image name="success" width="28" height="28"/>
         <image name="tab-certificates" width="25" height="25"/>
         <image name="tab-downloads" width="20" height="22"/>
