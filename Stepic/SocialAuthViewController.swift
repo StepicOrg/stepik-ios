@@ -19,17 +19,22 @@ class SocialAuthViewController: UIViewController {
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBAction func onCloseClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .social, to: nil)
+        }
+    }
+
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
-        if var vcs = navigationController?.viewControllers {
-            let vc = ControllerHelper.instantiateViewController(identifier: "EmailAuth", storyboardName: "Auth")
-            vcs[vcs.count - 1] = vc
-            navigationController?.setViewControllers(vcs, animated: true)
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .social, to: .email)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
-        let vc = ControllerHelper.instantiateViewController(identifier: "Registration", storyboardName: "Auth")
-        self.navigationController?.pushViewController(vc, animated: true)
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .social, to: .registration)
+        }
     }
 
     @IBAction func moreButtonClick(_ sender: Any) {

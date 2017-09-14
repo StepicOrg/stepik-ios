@@ -92,6 +92,17 @@
                                     <action selector="onSignUpClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIQ-0E-ayS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XcV-16-3Wj">
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="GjQ-52-0Ps"/>
+                                    <constraint firstAttribute="height" constant="44" id="oRy-Rv-gTJ"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="34f-V0-Xgf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,11 +113,13 @@
                             <constraint firstItem="xtI-yF-JBK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CMi-4V-LT0"/>
                             <constraint firstItem="UyI-UL-4R6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GoW-fY-RoV"/>
                             <constraint firstItem="gb0-7l-u82" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JkB-k9-S3c"/>
+                            <constraint firstItem="XcV-16-3Wj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Q1R-aN-Jdy"/>
                             <constraint firstAttribute="trailing" secondItem="xtI-yF-JBK" secondAttribute="trailing" id="SJn-MR-LGn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3e-7n-JkS" secondAttribute="bottom" constant="16" id="W9t-qf-1WH"/>
                             <constraint firstItem="xtI-yF-JBK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WlV-zC-UWM"/>
                             <constraint firstItem="xtI-yF-JBK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gb0-7l-u82" secondAttribute="bottom" constant="24" id="kIz-vR-HVq"/>
                             <constraint firstItem="o00-ed-SpF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-180" id="l5A-cT-1TG"/>
+                            <constraint firstItem="XcV-16-3Wj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nNk-Eb-66y"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="o00-ed-SpF" secondAttribute="bottom" constant="16" id="nuu-Nb-Ccd"/>
                             <constraint firstAttribute="trailing" secondItem="C3e-7n-JkS" secondAttribute="trailing" constant="24" id="xcD-X5-Vei"/>
                             <constraint firstItem="gb0-7l-u82" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" priority="999" constant="50" id="zAj-7G-ZFf"/>
@@ -167,6 +180,9 @@
                                 <state key="normal" title="Sign In with social">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSignInWithSocialClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="w96-HN-Xxv"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stepik_auth_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-dF-9x8">
                                 <rect key="frame" x="143.5" y="62.5" width="33" height="33"/>
@@ -181,6 +197,9 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onSignUpClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="Cg4-Hz-pNQ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Sign In with email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqj-F6-Q1k">
                                 <rect key="frame" x="24" y="119.5" width="272" height="24"/>
@@ -275,6 +294,17 @@
                                     <color key="titleColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.80784313725490198" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zQ-WS-dr9">
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="oAe-YO-ram"/>
+                                    <constraint firstAttribute="height" constant="44" id="qWg-JF-Ggd"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="skM-an-3gH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -294,6 +324,7 @@
                             <constraint firstItem="vQR-hv-GBW" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" constant="-180" id="TVj-yC-asN"/>
                             <constraint firstAttribute="trailing" secondItem="Rqj-F6-Q1k" secondAttribute="trailing" constant="24" id="UdF-XN-krz"/>
                             <constraint firstItem="vQR-hv-GBW" firstAttribute="leading" secondItem="ecb-mE-jfH" secondAttribute="leading" constant="24" id="VoM-Xq-0k5"/>
+                            <constraint firstItem="3zQ-WS-dr9" firstAttribute="top" secondItem="uc0-2G-M98" secondAttribute="bottom" id="YDX-UV-U4M"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="centerX" secondItem="ecb-mE-jfH" secondAttribute="centerX" id="Yca-hi-7J7"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="centerY" secondItem="ecb-mE-jfH" secondAttribute="centerY" priority="999" constant="-16" id="dHs-sh-0cn"/>
                             <constraint firstItem="Vrc-hu-CrF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cic-9n-m9H" secondAttribute="bottom" id="dzP-Qn-5d4"/>
@@ -304,6 +335,7 @@
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="trailing" secondItem="YSS-sQ-UuC" secondAttribute="trailing" id="gYx-Q5-B70"/>
                             <constraint firstItem="hcs-d4-W7U" firstAttribute="top" secondItem="YSS-sQ-UuC" secondAttribute="top" id="jVX-jM-0lt"/>
                             <constraint firstAttribute="trailing" secondItem="Vrc-hu-CrF" secondAttribute="trailing" constant="24" id="jaN-J0-Sil"/>
+                            <constraint firstItem="3zQ-WS-dr9" firstAttribute="leading" secondItem="ecb-mE-jfH" secondAttribute="leading" id="laK-Jf-u3A"/>
                             <constraint firstItem="55E-Yo-HFU" firstAttribute="width" secondItem="YSS-sQ-UuC" secondAttribute="width" id="mz1-I2-R9k"/>
                             <constraint firstItem="Fnt-qB-XZx" firstAttribute="width" secondItem="YSS-sQ-UuC" secondAttribute="width" id="n9m-XI-u9H"/>
                             <constraint firstItem="YSS-sQ-UuC" firstAttribute="top" secondItem="Rqj-F6-Q1k" secondAttribute="bottom" constant="20" id="oEI-BZ-KbG">
@@ -488,6 +520,17 @@
                                 <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYd-ZQ-kBt">
+                                <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Awz-Qh-9EK"/>
+                                    <constraint firstAttribute="height" constant="44" id="Oy0-A2-cGa"/>
+                                </constraints>
+                                <state key="normal" image="Cross"/>
+                                <connections>
+                                    <action selector="onCloseClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="y26-8R-rqT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -515,10 +558,12 @@
                             <constraint firstItem="KmT-i0-02l" firstAttribute="top" secondItem="BVN-Og-x3O" secondAttribute="bottom" constant="6" id="gbH-qE-AKo"/>
                             <constraint firstItem="1Cu-FO-mN5" firstAttribute="bottom" secondItem="3wd-if-3To" secondAttribute="bottom" id="h9s-RV-QVp"/>
                             <constraint firstItem="RZc-eQ-tE0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gfh-2r-iUJ" secondAttribute="bottom" constant="10" id="hJE-eN-5wR"/>
+                            <constraint firstItem="cYd-ZQ-kBt" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" id="hzJ-UT-4ll"/>
                             <constraint firstItem="KmT-i0-02l" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="i6Q-lc-ZkB"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Sks-5y-rKN" secondAttribute="trailing" constant="24" id="ktQ-a4-YSK"/>
                             <constraint firstAttribute="trailing" secondItem="3wd-if-3To" secondAttribute="trailing" priority="999" constant="24" id="pNd-cQ-Hmg"/>
                             <constraint firstItem="3wd-if-3To" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="qyE-9z-ZtB"/>
+                            <constraint firstItem="cYd-ZQ-kBt" firstAttribute="top" secondItem="BVN-Og-x3O" secondAttribute="bottom" id="tdn-pm-ufv"/>
                             <constraint firstItem="gfh-2r-iUJ" firstAttribute="centerX" secondItem="GB8-Gv-9Jd" secondAttribute="centerX" id="zKb-BF-Ip6"/>
                             <constraint firstItem="RZc-eQ-tE0" firstAttribute="leading" secondItem="GB8-Gv-9Jd" secondAttribute="leading" constant="24" id="zVb-Mj-TBL"/>
                         </constraints>
@@ -575,6 +620,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cross" width="25" height="25"/>
         <image name="stepik_auth_logo" width="33" height="33"/>
     </resources>
 </document>

@@ -44,6 +44,24 @@ class EmailAuthViewController: UIViewController {
         error = !error
     }
 
+    @IBAction func onCloseClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email, to: nil)
+        }
+    }
+
+    @IBAction func onSignInWithSocialClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email, to: .social)
+        }
+    }
+
+    @IBAction func onSignUpClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .email, to: .registration)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

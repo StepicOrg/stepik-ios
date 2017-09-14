@@ -42,6 +42,12 @@ class RegistrationViewController: UIViewController {
         }
     }
 
+    @IBAction func onCloseClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .registration, to: nil)
+        }
+    }
+
     @IBAction func onLogInClick(_ sender: Any) {
         error = !error
     }
