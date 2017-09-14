@@ -51,7 +51,7 @@ class LaunchViewController: UIViewController {
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
         navigationController?.navigationBar.isOpaque = true
-        navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor()
+        navigationController?.navigationBar.tintColor = UIColor.stepicGreenColor
         navigationController?.navigationBar.barTintColor = UIColor.white
 
         dismissButton.isHidden = !canDismiss

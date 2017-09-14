@@ -81,7 +81,7 @@ class UnitTableViewCell: UITableViewCell {
         progressView.backgroundColor = UIColor.white
         if let passed = unit.progress?.isPassed {
             if passed {
-                progressView.backgroundColor = UIColor.stepicGreenColor()
+                progressView.backgroundColor = UIColor.stepicGreenColor
             }
         }
 

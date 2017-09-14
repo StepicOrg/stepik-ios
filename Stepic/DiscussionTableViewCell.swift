@@ -77,7 +77,7 @@ class DiscussionTableViewCell: UITableViewCell {
         setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
         loadLabel(comment.text)
         if comment.isDeleted {
-            self.contentView.backgroundColor = UIColor.wrongQuizBackgroundColor()
+            self.contentView.backgroundColor = UIColor.wrongQuizBackgroundColor
             if comment.text == "" {
                 loadLabel(NSLocalizedString("DeletedComment", comment: ""))
             }

@@ -25,11 +25,11 @@ extension UIButton {
 //    }
 //    
 //    func setEnabledJoined() {
-//        let attributedTitle = NSAttributedString(string: Constants.joinCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.stepicGreenColor()])
+//        let attributedTitle = NSAttributedString(string: Constants.joinCourseButtonText, attributes: [NSForegroundColorAttributeName : UIColor.stepicGreenColor])
 //        setAttributedTitle(attributedTitle, for: UIControlState() )
 //        //enabled = false
-//        layer.borderColor = UIColor.stepicGreenColor().cgColor
-//        self.titleLabel?.textColor = UIColor.stepicGreenColor()
+//        layer.borderColor = UIColor.stepicGreenColor.cgColor
+//        self.titleLabel?.textColor = UIColor.stepicGreenColor
 //    }
 
     func setStepicGreenStyle() {
