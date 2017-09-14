@@ -52,7 +52,7 @@ class WriteCommentViewController: UIViewController {
         editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.sendPressed))
 
         let v = UIActivityIndicatorView()
-        v.color = UIColor.mainDarkColor
+        v.color = UIColor.mainDark
         v.startAnimating()
         sendingItem = UIBarButtonItem(customView: v)
 
@@ -72,8 +72,8 @@ class WriteCommentViewController: UIViewController {
         commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
         setupItems()
 
-        commentTextView.tintColor = UIColor.mainDarkColor
-        commentTextView.textColor = UIColor.mainTextColor
+        commentTextView.tintColor = UIColor.mainDark
+        commentTextView.textColor = UIColor.mainText
 
         state = .editing
     }

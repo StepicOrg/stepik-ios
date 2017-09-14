@@ -57,7 +57,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.mainDarkColor
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)
@@ -374,7 +374,7 @@ class StepsViewController: RGPageViewController, ShareableController {
 
     override var barTintColor: UIColor? {
         get {
-            return UIColor.mainLightColor
+            return UIColor.mainLight
         }
     }
 

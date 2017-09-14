@@ -33,9 +33,9 @@ var stepicPlaceholderStyle: PlaceholderStyle {
     var style = PlaceholderStyle()
     style.title.font = UIFont.boldSystemFont(ofSize: 18)
     style.button.borderType = .none
-    style.button.borderColor = UIColor.mainDarkColor
+    style.button.borderColor = UIColor.mainDark
     style.button.backgroundColor = UIColor.white
-    style.button.textColor = UIColor.mainDarkColor
+    style.button.textColor = UIColor.mainDark
     return style
 }
 

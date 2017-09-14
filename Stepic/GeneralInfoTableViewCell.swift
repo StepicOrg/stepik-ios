@@ -29,10 +29,10 @@ class GeneralInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.mainDarkColor)
+        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.mainDark)
 
         typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
-        typeSegmentedControl.tintColor = UIColor.mainDarkColor
+        typeSegmentedControl.tintColor = UIColor.mainDark
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }

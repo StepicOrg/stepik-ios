@@ -47,7 +47,7 @@ class SignInTableViewController: UITableViewController {
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
-        signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor)
+        signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreen)
 
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.clear

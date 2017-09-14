@@ -20,7 +20,7 @@ class StyledTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.tintColor = UIColor.mainDarkColor
+        tabBar.tintColor = UIColor.mainDark
         tabBar.isTranslucent = false
 
         if let items = tabBar.items {

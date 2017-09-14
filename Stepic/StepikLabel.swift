@@ -29,13 +29,13 @@ class StepikLabel: UILabel {
             if isGray {
                 self.textColor = UIColor.lightGray
             } else {
-                self.textColor = UIColor.mainTextColor
+                self.textColor = UIColor.mainText
             }
         }
     }
 
     private func applyStyles() {
-        self.textColor = UIColor.mainTextColor
+        self.textColor = UIColor.mainText
     }
 
     override init(frame: CGRect) {

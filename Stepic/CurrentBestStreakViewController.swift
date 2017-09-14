@@ -55,7 +55,7 @@ class CurrentBestStreakViewController: UIViewController {
         }
 
         localize()
-        okButton.setTitleColor(UIColor.stepicGreenColor, for: .normal)
+        okButton.setTitleColor(UIColor.stepicGreen, for: .normal)
         // Do any additional setup after loading the view.
     }
 

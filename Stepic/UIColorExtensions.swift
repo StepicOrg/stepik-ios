@@ -38,15 +38,15 @@ extension UIColor {
         return hexString
     }
 
-    static let errorRedColor: UIColor = UIColor(hex: 0xff0033)
-    static let stepicGreenColor: UIColor = UIColor(hex: 0x66CC66)
+    static let errorRed: UIColor = UIColor(hex: 0xff0033)
+    static let stepicGreen: UIColor = UIColor(hex: 0x66CC66)
 
-    static let mainLightColor: UIColor = UIColor(hex: 0xf6f6f6)
-    static let mainDarkColor: UIColor = UIColor(hex: 0x535366)
-    static let mainTextColor: UIColor = UIColor(hex: 0x535366)
+    static let mainLight: UIColor = UIColor(hex: 0xf6f6f6)
+    static let mainDark: UIColor = UIColor(hex: 0x535366)
+    static let mainText: UIColor = UIColor(hex: 0x535366)
 
-    static let correctQuizBackgroundColor: UIColor = UIColor(hex: 0xE9F9E9)
-    static let wrongQuizBackgroundColor: UIColor = UIColor(hex: 0xF5EBF2)
-    static let peerReviewYellowColor: UIColor = UIColor(hex: 0xFFFAE9)
+    static let correctQuizBackground: UIColor = UIColor(hex: 0xE9F9E9)
+    static let wrongQuizBackground: UIColor = UIColor(hex: 0xF5EBF2)
+    static let peerReviewYellow: UIColor = UIColor(hex: 0xFFFAE9)
 
 }

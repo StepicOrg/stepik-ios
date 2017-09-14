@@ -36,7 +36,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.mainDarkColor
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)
@@ -111,8 +111,8 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         indicatorHeight = 2.0
         tabOffset = 8.0
         centerCurrentTab = true
-        indicatorColor = UIColor.mainDarkColor
-        tabsViewBackgroundColor = UIColor.mainLightColor
+        indicatorColor = UIColor.mainDark
+        tabsViewBackgroundColor = UIColor.mainLight
     }
 
     override func viewWillAppear(_ animated: Bool) {

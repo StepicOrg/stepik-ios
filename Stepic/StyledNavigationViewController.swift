@@ -21,14 +21,14 @@ class StyledNavigationViewController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setStatusBarStyle()
-        navigationBar.barTintColor = UIColor.mainLightColor
+        navigationBar.barTintColor = UIColor.mainLight
         navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = false
         let fontSize: CGFloat = 17.0
         let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightRegular)
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDarkColor, NSFontAttributeName: titleFont]
-        navigationBar.tintColor = UIColor.mainDarkColor
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDark, NSFontAttributeName: titleFont]
+        navigationBar.tintColor = UIColor.mainDark
     }
 
     func setStatusBarStyle() {

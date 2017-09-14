@@ -58,7 +58,7 @@ class StepikAlertViewController: UIViewController {
         case .cancel:
             b.setTitleColor(UIColor.blue, for: .normal)
         case .default:
-            b.setTitleColor(UIColor.stepicGreenColor, for: .normal)
+            b.setTitleColor(UIColor.stepicGreen, for: .normal)
         case .destructive:
             b.setTitleColor(UIColor.red, for: .normal)
         }

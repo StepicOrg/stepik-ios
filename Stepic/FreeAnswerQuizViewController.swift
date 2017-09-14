@@ -21,7 +21,7 @@ class FreeAnswerQuizViewController: QuizViewController {
         self.containerView.addSubview(textView)
         textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
-        textView.textColor = UIColor.mainTextColor
+        textView.textColor = UIColor.mainText
 
         textView.constrainHeight("\(textViewHeight)")
 

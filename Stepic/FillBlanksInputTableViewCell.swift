@@ -26,7 +26,7 @@ class FillBlanksInputTableViewCell: UITableViewCell {
         inputTextField.placeholder = placeholderString
         inputTextField.returnKeyType = .done
         inputTextField.delegate = self
-        inputTextField.textColor = UIColor.mainTextColor
+        inputTextField.textColor = UIColor.mainText
         // Initialization code
     }
 

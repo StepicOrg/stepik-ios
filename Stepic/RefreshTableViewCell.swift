@@ -34,7 +34,7 @@ class RefreshTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        activityIndicator.color = UIColor.mainDarkColor
+        activityIndicator.color = UIColor.mainDark
         // Initialization code
     }
 

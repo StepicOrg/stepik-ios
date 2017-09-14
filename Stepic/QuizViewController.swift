@@ -71,7 +71,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.mainDarkColor
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)
@@ -152,7 +152,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         self.hideHintView()
 
         self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
-        self.peerReviewButton.backgroundColor = UIColor.peerReviewYellowColor
+        self.peerReviewButton.backgroundColor = UIColor.peerReviewYellow
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
@@ -220,7 +220,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         switch status {
         case .correct:
             statusViewHeight.constant = 48
-            view.backgroundColor = UIColor.correctQuizBackgroundColor
+            view.backgroundColor = UIColor.correctQuizBackground
             statusImageView.image = Images.correctQuizImage
             statusLabel.text = correctTitle
             setStatusElements(visible: true)
@@ -228,7 +228,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
             statusViewHeight.constant = 48
             peerReviewHeight.constant = 0
             peerReviewButton.isHidden = true
-            view.backgroundColor = UIColor.wrongQuizBackgroundColor
+            view.backgroundColor = UIColor.wrongQuizBackground
             statusImageView.image = Images.wrongQuizImage
             statusLabel.text = wrongTitle
             setStatusElements(visible: true)

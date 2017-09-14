@@ -73,8 +73,8 @@ class FindCoursesViewController: CoursesViewController {
         searchBar.mainColor = navigationController?.navigationBar.tintColor
         searchBar.placeholder = NSLocalizedString("SearchCourses", comment: "")
 
-        searchBar.textField.tintColor = UIColor.mainDarkColor
-        searchBar.textField.textColor = UIColor.mainTextColor
+        searchBar.textField.tintColor = UIColor.mainDark
+        searchBar.textField.textColor = UIColor.mainText
 
         self.view.addSubview(searchBar)
         searchBar.constrainHeight("44")
