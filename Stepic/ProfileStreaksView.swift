@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileStreaksView: UIView {
+class ProfileStreaksView: NibInitializableView {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatarImageView: AvatarImageView!
@@ -45,6 +45,16 @@ class ProfileStreaksView: UIView {
         }
     }
 
+    override var nibName: String {
+        return "ProfileStreaksView"
+    }
+
+    override func setupSubviews() {
+        containerView.setRoundedCorners(cornerRadius: 12)
+        setStreaks(hidden: true)
+        localize()
+    }
+
     private func pluralizedDays(count: Int) -> String {
         return StringHelper.pluralize(number: count, forms: [NSLocalizedString("days1", comment: ""), NSLocalizedString("days234", comment: ""), NSLocalizedString("days567890", comment: "")])
     }
@@ -61,46 +71,4 @@ class ProfileStreaksView: UIView {
         currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
         maxStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
     }
-
-    private func initialize() {
-        containerView.setRoundedCorners(cornerRadius: 12)
-        setStreaks(hidden: true)
-        localize()
-    }
-
-    private var view: UIView!
-
-    private func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        initialize()
-    }
-
-    private func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "ProfileStreaksView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
-    }
-
 }

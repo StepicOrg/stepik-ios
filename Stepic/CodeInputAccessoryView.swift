@@ -9,7 +9,7 @@
 import Foundation
 import FLKAutoLayout
 
-class CodeInputAccessoryView: UIView {
+class CodeInputAccessoryView: NibInitializableView {
 
     @IBOutlet weak var hideKeyboardImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -23,7 +23,11 @@ class CodeInputAccessoryView: UIView {
     }
     var size: CodeInputAccessorySize = .small
 
-    fileprivate func initialize() {
+    override var nibName: String {
+        return "CodeInputAccessoryView"
+    }
+
+    override func setupSubviews() {
         collectionView.register(UINib(nibName: "CodeInputAccessoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CodeInputAccessoryCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -36,45 +40,6 @@ class CodeInputAccessoryView: UIView {
 
     func didTapHideKeyboardImageView(recognizer: UIGestureRecognizer) {
         hideKeyboardAction?()
-    }
-
-    fileprivate var view: UIView!
-
-    fileprivate func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        initialize()
-    }
-
-    fileprivate func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "CodeInputAccessoryView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-//    override var intrinsicContentSize: CGSize {
-//        return CGSize(width: self.bounds.width, height: size.realSizes.viewHeight)
-//    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
     }
 
     convenience init(frame: CGRect, buttons: [CodeInputAccessoryButtonData], size: CodeInputAccessorySize, hideKeyboardAction: @escaping () -> Void) {
