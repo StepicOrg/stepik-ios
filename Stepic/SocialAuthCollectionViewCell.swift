@@ -11,10 +11,13 @@ import UIKit
 class SocialAuthCollectionViewCell: UICollectionViewCell {
     static let reuseId = "socialAuthCell"
 
-    @IBOutlet weak var socialButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        isUserInteractionEnabled = true
+        contentView.isUserInteractionEnabled = false
 
         contentView.layer.cornerRadius = layer.cornerRadius
         contentView.layer.masksToBounds = true
@@ -27,4 +30,9 @@ class SocialAuthCollectionViewCell: UICollectionViewCell {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
     }
 
+    override var isHighlighted: Bool {
+        didSet {
+            contentView.backgroundColor = isHighlighted ? UIColor.lightGray : UIColor.white
+        }
+    }
 }

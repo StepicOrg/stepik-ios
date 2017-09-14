@@ -17,22 +17,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="51" height="51"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vj1-5T-PVR">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vk" translatesAutoresizingMaskIntoConstraints="NO" id="xh3-9s-aAk">
                         <rect key="frame" x="1" y="1" width="48" height="48"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="48" id="XUV-uR-eEo"/>
-                            <constraint firstAttribute="height" constant="48" id="k2e-Ua-N0p"/>
+                            <constraint firstAttribute="width" constant="48" id="NSz-nf-2dt"/>
+                            <constraint firstAttribute="height" constant="48" id="wqV-Kd-Lnx"/>
                         </constraints>
-                        <state key="normal">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="vj1-5T-PVR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="48G-eK-1nn"/>
-                <constraint firstItem="vj1-5T-PVR" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="SxI-Tz-ed4"/>
+                <constraint firstItem="xh3-9s-aAk" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="CR8-bz-HTL"/>
+                <constraint firstItem="xh3-9s-aAk" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Qpk-Ga-tBd"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -40,9 +37,12 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="socialButton" destination="vj1-5T-PVR" id="JsR-EZ-32f"/>
+                <outlet property="imageView" destination="xh3-9s-aAk" id="gkU-Qu-nB5"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="54.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="vk" width="29" height="16"/>
+    </resources>
 </document>

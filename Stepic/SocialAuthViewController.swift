@@ -7,17 +7,71 @@
 //
 
 import UIKit
+import SVProgressHUD
+
+extension SocialAuthViewController: SocialAuthView {
+    func set(providers: [SocialProviderViewData]) {
+        self.providers = providers
+    }
+
+    func set(result: SocialAuthResult) {
+        guard let navigationController = self.navigationController as? AuthNavigationViewController else {
+            return
+        }
+
+        state = .normal
+
+        switch result {
+        case .success:
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+            navigationController.dismissAfterSuccess()
+        case .error:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+        case .existingEmail(let email):
+            if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?error=social_signup_with_existing_email&email=\(email)") {
+                UIApplication.shared.openURL(url)
+            } else {
+                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+            }
+        }
+    }
+
+    func presentWebController(with url: URL) {
+        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: webControllerKey, allowsSafari: false, backButtonStyle: BackButtonStyle.close, forceCustom: true)
+    }
+
+    func dismissWebController() {
+        WebControllerManager.sharedManager.dismissWebControllerWithKey(webControllerKey, animated: true, completion: nil, error: nil)
+    }
+}
 
 class SocialAuthViewController: UIViewController {
+    var presenter: SocialAuthPresenter?
+
     fileprivate let numberOfColumns = 3
     fileprivate let numberOfRows = 2
     fileprivate let headerHeight: CGFloat = 47.0
+
+    fileprivate let webControllerKey = "social auth"
 
     var isExpanded = false
 
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
+
+    fileprivate var providers: [SocialProviderViewData] = []
+
+    var state: SocialAuthState = .normal {
+        didSet {
+            switch state {
+            case .normal:
+                SVProgressHUD.dismiss()
+            case .loading:
+                SVProgressHUD.show()
+            }
+        }
+    }
 
     @IBAction func onCloseClick(_ sender: Any) {
         if let navigationController = self.navigationController as? AuthNavigationViewController {
@@ -51,6 +105,9 @@ class SocialAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        presenter = SocialAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+        presenter?.update()
 
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
@@ -92,35 +149,35 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let providerIndex = indexPath.section * numberOfColumns + indexPath.item
+        if providerIndex >= providers.count {
+            return UICollectionViewCell()
+        }
+
+        let provider = providers[providerIndex]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SocialAuthCollectionViewCell.reuseId, for: indexPath) as! SocialAuthCollectionViewCell
 
-        // Just for test
-        if indexPath.section == 0 {
-            switch indexPath.item {
-            case 0:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "vk"), for: .normal)
-            case 1:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "fb"), for: .normal)
-            case 2:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "google"), for: .normal)
-            default:
-                cell.socialButton.setImage(nil, for: .normal)
-            }
-        }
-        if indexPath.section == 1 {
-            switch indexPath.item {
-            case 0:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "twitter"), for: .normal)
-            case 1:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-            case 2:
-                cell.socialButton.setImage(#imageLiteral(resourceName: "mail"), for: .normal)
-            default:
-                cell.socialButton.setImage(nil, for: .normal)
-            }
-        }
+        cell.imageView.image = provider.image
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let providerIndex = indexPath.section * numberOfColumns + indexPath.item
+        if providerIndex >= providers.count {
+            return
+        }
+
+        let provider = providers[providerIndex]
+        presenter?.logIn(with: provider.id)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.isHighlighted = true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.isHighlighted = false
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -151,6 +208,15 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         // Add caption only for first section
         return section == 0 ? CGSize(width: collectionView.bounds.size.width, height: headerHeight) : CGSize.zero
+    }
+}
+
+extension SocialAuthViewController: VKSocialSDKProviderDelegate {
+    func presentAuthController(_ controller: UIViewController) {
+        // FIXME: register URL
+        if let registerURL = SocialProvider.vk.info.registerURL {
+            WebControllerManager.sharedManager.presentWebControllerWithURL(registerURL, inController: self, withKey: "social auth", allowsSafari: false, backButtonStyle: BackButtonStyle.close, forceCustom: true)
+        }
     }
 }
 

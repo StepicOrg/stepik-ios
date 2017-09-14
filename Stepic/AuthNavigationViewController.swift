@@ -19,16 +19,19 @@ class AuthNavigationViewController: UINavigationController {
 
     var canDismiss = true
 
-    lazy var loggedSuccess: ((String) -> Void)? = { [weak self] provider in
-        self?.success?()
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": provider as NSObject])
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // Maybe create Router layer?
+    func dismissAfterSuccess() {
+        self.dismiss(animated: true, completion: { [weak self] in
+            self?.success?()
+            // FIXME: provider
+            //AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": provider as NSObject])
+        })
+    }
+
     func route(from fromController: Controller, to toController: Controller?) {
         if toController == nil {
             // Close action
