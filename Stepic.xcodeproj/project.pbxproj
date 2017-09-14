@@ -514,6 +514,14 @@
 		08964BCD1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
 		08964BCE1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
 		08964BCF1F3072BA00DBBCCE /* QueriesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */; };
+		089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		089700971F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		089700991F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		0897009A1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
+		0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089700951F6B2A820041C24E /* NibInitializableView.swift */; };
 		08970ECF1C6A326900846119 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECA1C6A326900846119 /* PlaceholderView.swift */; };
 		08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */; };
 		08970ED11C6A326900846119 /* PlaceholderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */; };
@@ -4399,6 +4407,7 @@
 		0895A13A1E43836B00FE22DD /* FillBlanksReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBlanksReply.swift; sourceTree = "<group>"; };
 		089611031D52250500561AC1 /* DeepLinkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeepLinkRouter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueriesAPI.swift; sourceTree = "<group>"; };
+		089700951F6B2A820041C24E /* NibInitializableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializableView.swift; sourceTree = "<group>"; };
 		08970ECA1C6A326900846119 /* PlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		08970ECB1C6A326900846119 /* PlaceholderViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDataSource.swift; sourceTree = "<group>"; };
 		08970ECC1C6A326900846119 /* PlaceholderViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderViewDelegate.swift; sourceTree = "<group>"; };
@@ -5741,6 +5750,7 @@
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
 				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
 				081566231F69C39A0082B359 /* Search Bar */,
+				089700951F6B2A820041C24E /* NibInitializableView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10384,6 +10394,7 @@
 				86B457041E9F98BC00D31850 /* RecommendationsAPI.swift in Sources */,
 				08D120DB1C937B2200A54ABC /* JSQWebViewController.swift in Sources */,
 				08D120DC1C937B2200A54ABC /* Alamofire-SwiftyJSON.swift in Sources */,
+				089700971F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				084070881D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				083F2B1B1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				08D120DD1C937B2200A54ABC /* TCBlobDownload.swift in Sources */,
@@ -10549,6 +10560,7 @@
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
+				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
@@ -11097,6 +11109,7 @@
 				2C1B618C1F4C4AEF00236804 /* TimeFormatHelper.swift in Sources */,
 				084490061F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B618D1F4C4AEF00236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
+				0897009C1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B618E1F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B618F1F4C4AEF00236804 /* ImageTapHelper.swift in Sources */,
 				2C1B61901F4C4AEF00236804 /* DeepLinkRouter.swift in Sources */,
@@ -11521,6 +11534,7 @@
 				2C1B639D1F4C590700236804 /* TimeFormatHelper.swift in Sources */,
 				084490071F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C1B639E1F4C590700236804 /* WebViewHorizontalScrollHelper.swift in Sources */,
+				0897009D1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C1B639F1F4C590700236804 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C1B63A01F4C590700236804 /* ImageTapHelper.swift in Sources */,
 				2C1B63A11F4C590700236804 /* DeepLinkRouter.swift in Sources */,
@@ -11945,6 +11959,7 @@
 				2C86533A1F4B33DE00D51654 /* TimeFormatHelper.swift in Sources */,
 				084490031F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C86533B1F4B33DE00D51654 /* WebViewHorizontalScrollHelper.swift in Sources */,
+				089700991F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C86533C1F4B33DE00D51654 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C86533D1F4B33DE00D51654 /* ImageTapHelper.swift in Sources */,
 				2C86533E1F4B33DE00D51654 /* DeepLinkRouter.swift in Sources */,
@@ -12369,6 +12384,7 @@
 				2C89AA201F4C289900227C3B /* TimeFormatHelper.swift in Sources */,
 				084490041F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C89AA211F4C289900227C3B /* WebViewHorizontalScrollHelper.swift in Sources */,
+				0897009A1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C89AA221F4C289900227C3B /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C89AA231F4C289900227C3B /* ImageTapHelper.swift in Sources */,
 				2C89AA241F4C289900227C3B /* DeepLinkRouter.swift in Sources */,
@@ -12793,6 +12809,7 @@
 				2C9731D41F4C38F600AC9301 /* TimeFormatHelper.swift in Sources */,
 				084490051F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				2C9731D51F4C38F600AC9301 /* WebViewHorizontalScrollHelper.swift in Sources */,
+				0897009B1F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				2C9731D61F4C38F600AC9301 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				2C9731D71F4C38F600AC9301 /* ImageTapHelper.swift in Sources */,
 				2C9731D81F4C38F600AC9301 /* DeepLinkRouter.swift in Sources */,
@@ -13271,6 +13288,7 @@
 				864D669C1E83DE03001E8D9E /* TimeFormatHelper.swift in Sources */,
 				084490021F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				864D669D1E83DE03001E8D9E /* WebViewHorizontalScrollHelper.swift in Sources */,
+				089700981F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0888D1041F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				864D669E1E83DE03001E8D9E /* ImageTapHelper.swift in Sources */,
 				864D669F1E83DE03001E8D9E /* DeepLinkRouter.swift in Sources */,

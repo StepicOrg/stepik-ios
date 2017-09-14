@@ -16,8 +16,7 @@ protocol CustomSearchBarDelegate: class {
 }
 
 @IBDesignable
-class CustomSearchBar: UIView, UITextFieldDelegate {
-    var view: UIView!
+class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
 
     weak var delegate: CustomSearchBarDelegate?
     @IBOutlet weak var cancelButton: UIButton!
@@ -30,6 +29,10 @@ class CustomSearchBar: UIView, UITextFieldDelegate {
     let textFieldCancelDistance: CGFloat = 8
 
     private var isCancelActive: Bool = false
+
+    override var nibName: String {
+        return "CustomSearchBar"
+    }
 
     @IBInspectable
     var barTintColor: UIColor? = UIColor.white {
@@ -90,7 +93,7 @@ class CustomSearchBar: UIView, UITextFieldDelegate {
         return v
     }()
 
-    private func setupSubviews() {
+    override func setupSubviews() {
         textField.placeholder = placeholder
         backgroundColor = barTintColor
         cancelButton.setTitleColor(mainColor, for: .normal)
@@ -152,44 +155,5 @@ class CustomSearchBar: UIView, UITextFieldDelegate {
             setCancelButton(visible: true, animated: true)
         }
         delegate?.startedEditing(in: self)
-    }
-
-    // MARK: Standard View Setup
-
-    private func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        setupSubviews()
-    }
-
-    private func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "CustomSearchBar", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    convenience init() {
-        self.init(frame: CGRect.zero)
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
     }
 }
