@@ -13,8 +13,8 @@ import FLKAutoLayout
 
 class RateAppViewController: UIViewController {
 
-    @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var topLabel: StepikLabel!
+    @IBOutlet weak var bottomLabel: StepikLabel!
     @IBOutlet weak var laterButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
 

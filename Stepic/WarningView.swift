@@ -15,7 +15,7 @@ class WarningView: UIView {
     @IBOutlet weak var tryAgainButton: UIButton!
 
     var view: UIView!
-    var textLabel: UILabel!
+    var textLabel: StepikLabel!
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -81,7 +81,7 @@ class WarningView: UIView {
         self.delegate = delegate
         self.imageView.image = image
         self.imageView.contentMode = contentMode
-        textLabel = UILabel()
+        textLabel = StepikLabel()
         self.view.insertSubview(textLabel, belowSubview: tryAgainButton)
         textLabel.textAlignment = NSTextAlignment.center
         textLabel.numberOfLines = 0

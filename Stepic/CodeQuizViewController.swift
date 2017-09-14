@@ -15,7 +15,7 @@ class CodeQuizViewController: QuizViewController {
     var dataset: String?
     var reply: CodeReply?
 
-    var limitsLabel: UILabel = UILabel()
+    var limitsLabel: UILabel = StepikLabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
 
@@ -260,7 +260,7 @@ class CodeQuizViewController: QuizViewController {
     func setUnsupportedQuizView() {
         let v = UIView()
         v.backgroundColor = UIColor.groupTableViewBackground
-        let unsupportedLabel = UILabel()
+        let unsupportedLabel = StepikLabel()
         unsupportedLabel.text = NSLocalizedString("NotSupportedLanguage", comment: "")
         unsupportedLabel.textAlignment = .center
         unsupportedLabel.numberOfLines = 0

@@ -10,17 +10,17 @@ import Foundation
 
 class StreaksView: UIView {
 
-    @IBOutlet weak var currentStreakLabel: UILabel!
+    @IBOutlet weak var currentStreakLabel: StepikLabel!
 
     @IBOutlet weak var currentStreakCountLabel: UILabel!
 
-    @IBOutlet weak var currentStreakDaysInARowLabel: UILabel!
+    @IBOutlet weak var currentStreakDaysInARowLabel: StepikLabel!
 
-    @IBOutlet weak var bestStreakLabel: UILabel!
+    @IBOutlet weak var bestStreakLabel: StepikLabel!
 
     @IBOutlet weak var bestStreakCountLabel: UILabel!
 
-    @IBOutlet weak var bestStreakDaysInARowLabel: UILabel!
+    @IBOutlet weak var bestStreakDaysInARowLabel: StepikLabel!
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!

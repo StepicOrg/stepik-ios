@@ -12,11 +12,11 @@ import Presentr
 class CurrentBestStreakViewController: UIViewController {
 
     @IBOutlet weak var streaksView: StreaksView!
-    @IBOutlet weak var topTextLabel: UILabel!
-    @IBOutlet weak var bottomTextLabel: UILabel!
+    @IBOutlet weak var topTextLabel: StepikLabel!
+    @IBOutlet weak var bottomTextLabel: StepikLabel!
 
     @IBOutlet weak var notificationsViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var receiveNotificationsLabel: UILabel!
+    @IBOutlet weak var receiveNotificationsLabel: StepikLabel!
     @IBOutlet weak var receiveNotificationsSwitch: UISwitch!
 
     @IBOutlet weak var okButton: UIButton!

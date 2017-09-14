@@ -85,7 +85,7 @@ extension SearchQueriesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestionTableViewCell", for: indexPath) as? SearchSuggestionTableViewCell else {
+        guard suggestions.count > indexPath.row, let cell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestionTableViewCell", for: indexPath) as? SearchSuggestionTableViewCell else {
             return UITableViewCell()
         }
 
