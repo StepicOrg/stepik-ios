@@ -12,7 +12,17 @@ import FLKAutoLayout
 class FindCoursesViewController: CoursesViewController {
 
     var searchResultsVC: SearchResultsCoursesViewController!
-    var searchController: UISearchController!
+    lazy var searchBar: CustomSearchBar = {
+        CustomSearchBar()
+    }()
+
+    lazy var darkOverlayView: UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.black
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(FindCoursesViewController.didTapBlackView))
+        v.addGestureRecognizer(tapG)
+        return v
+    }()
 
     var filteredCourses = [Course]()
 
@@ -27,7 +37,7 @@ class FindCoursesViewController: CoursesViewController {
     }
 
     func hideKeyboardIfNeeded() {
-        self.searchController.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
 
     override func refreshBegan() {
@@ -41,8 +51,9 @@ class FindCoursesViewController: CoursesViewController {
         }
     }
 
-    var topConstraint: NSLayoutConstraint?
-
+    override var shouldAlignTop: Bool {
+        return false
+    }
     override func viewDidLoad() {
 
         loadEnrolled = nil
@@ -56,50 +67,55 @@ class FindCoursesViewController: CoursesViewController {
             [weak self] in
             self?.hideKeyboardIfNeeded()
         }
-        searchController = UISearchController(searchResultsController: searchResultsVC)
+        searchBar.delegate = self
+        searchBar.barTintColor = navigationController?.navigationBar.barTintColor
 
-        searchController.searchBar.searchBarStyle = UISearchBarStyle.default
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
-        searchController.searchBar.tintColor = navigationController?.navigationBar.tintColor
+        searchBar.mainColor = navigationController?.navigationBar.tintColor
+        searchBar.placeholder = NSLocalizedString("SearchCourses", comment: "")
 
-        for s in searchController.searchBar.subviews[0].subviews {
-            if let textField = s as? UITextField {
-                textField.tintColor = UIColor.mainDarkColor
-                textField.textColor = UIColor.mainTextColor
-                textField.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
-            }
-        }
+        searchBar.textField.tintColor = UIColor.mainDarkColor
+        searchBar.textField.textColor = UIColor.mainTextColor
 
-        definesPresentationContext = true
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = true
-        } else {
-            searchController.dimsBackgroundDuringPresentation = true
-        }
-
-        searchController.searchBar.scopeButtonTitles = []
-
+        self.view.addSubview(searchBar)
+        searchBar.constrainHeight("44")
+        searchBar.setContentCompressionResistancePriority(800, for: .vertical)
+        searchBar.alignTopEdge(with: self.view, predicate: "0")
+        searchBar.alignLeading("0", trailing: "0", to: self.view)
         super.viewDidLoad()
+        tableView.alignTopEdge(with: view, predicate: "44")
 
         self.tableView.backgroundView = UIView()
         self.tableView.backgroundColor = UIColor.lightText
 
-        self.navigationItem.titleView = self.searchController.searchBar
         tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
+
+        self.view.addSubview(darkOverlayView)
+        darkOverlayView.alignLeading("0", trailing: "0", to: self.view)
+        darkOverlayView.constrainTopSpace(to: searchBar, predicate: "0")
+        darkOverlayView.alignBottomEdge(with: self.view, predicate: "0")
+        darkOverlayView.isHidden = true
+
+        self.addChildViewController(searchResultsVC)
+        self.view.addSubview(searchResultsVC.view)
+        searchResultsVC.view.alignLeading("0", trailing: "0", to: self.view)
+        searchResultsVC.view.constrainTopSpace(to: searchBar, predicate: "0")
+        searchResultsVC.view.alignBottomEdge(with: self.view, predicate: "0")
+        searchResultsVC.view.isHidden = true
+
+        (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.tableHeaderView = signInView
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.layoutSubviews()
-        navigationController?.navigationBar.layoutSubviews()
-        self.navigationController?.delegate = self
+        navigationController?.delegate = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if navigationController?.delegate === self {
+            navigationController?.delegate = nil
+        }
     }
 
     fileprivate var signInView: UIView? {
@@ -129,51 +145,79 @@ class FindCoursesViewController: CoursesViewController {
 
     var isDisplayingFromSuggestions: Bool = false
 
-    func layoutBarAfterDelay() {
-        delay(0.1) {
-            [weak self] in
-            self?.navigationController?.navigationBar.layoutSubviews()
-        }
-
+    func didTapBlackView() {
+        searchBar.cancel()
     }
 }
 
-extension FindCoursesViewController : UISearchControllerDelegate {
-    func willPresentSearchController(_ searchController: UISearchController) {
-        //This is used to prevent strange bug in search bar width layout
-        delay(0.1) {
-            [weak self] in
-            self?.navigationController?.navigationBar.layoutSubviews()
+extension FindCoursesViewController : CustomSearchBarDelegate {
+    func changedText(in searchBar: CustomSearchBar, to text: String) {
+        guard let results = searchResultsVC else {
+            return
         }
-    }
-}
-
-extension FindCoursesViewController : UISearchBarDelegate {
-}
-
-extension FindCoursesViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
         guard !isDisplayingFromSuggestions else {
             isDisplayingFromSuggestions = false
             return
         }
-        let results = searchController.searchResultsController as? SearchResultsCoursesViewController
-        results?.state = .suggestions
-        results?.query = searchController.searchBar.text!
-        results?.updateSearchBarBlock = {
+        guard text != "" else {
+            results.view.isHidden = true
+            return
+        }
+        if results.view.isHidden {
+            results.view.isHidden = false
+            results.view.alpha = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                results.view.alpha = 1
+            })
+        }
+        results.state = .suggestions
+        results.query = text
+        results.updateSearchBarBlock = {
             [weak self]
             newQuery in
             self?.isDisplayingFromSuggestions = true
-            self?.searchController.searchBar.text = newQuery
+            self?.searchBar.text = newQuery
+            self?.searchBar.becomeFirstResponder()
         }
-        results?.countTopOffset()
+        results.countTopOffset()
     }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        guard let results = searchController.searchResultsController as? SearchResultsCoursesViewController else {
+    func cancelPressed(in searchBar: CustomSearchBar) {
+        searchBar.resignFirstResponder()
+        if searchBar.text == "" {
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in
+                self?.darkOverlayView.alpha = 0
+            }, completion: {
+                [weak self]
+                _ in
+                self?.darkOverlayView.isHidden = true
+            })
+        } else {
+            self.darkOverlayView.isHidden = true
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in
+                self?.searchResultsVC.view.alpha = 0
+                }, completion: {
+                    [weak self]
+                    _ in
+                    self?.searchResultsVC.view.isHidden = true
+            })
+        }
+
+        guard let results = searchResultsVC else {
             return
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled, parameters: ["context": results.state.rawValue])
+    }
+
+    func startedEditing(in searchBar: CustomSearchBar) {
+        darkOverlayView.isHidden = false
+        darkOverlayView.alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            [weak self] in
+            self?.darkOverlayView.alpha = 0.4
+        })
     }
 }
 
@@ -260,26 +304,67 @@ extension FindCoursesViewController {
     }
 }
 
-extension FindCoursesViewController : UINavigationControllerDelegate {
+extension FindCoursesViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard self.navigationController is StyledNavigationViewController else {
+        guard let navigation = self.navigationController as? StyledNavigationViewController, let coordinator = navigationController.topViewController?.transitionCoordinator else {
             return
         }
-        guard viewController is FindCoursesViewController else {
-            return
+
+        //Detect, if animation moves inside our controller
+        let inside: Bool = viewController is FindCoursesViewController
+
+        //Hide shadow view, if we are moving inside
+        var targetAlpha: CGFloat = 1
+        if inside {
+            targetAlpha = 0
         }
-        guard let coordinator = navigationController.topViewController?.transitionCoordinator else {
-            return
+
+        //Saving previous values in case animation is not completed
+        let prevTrailing: CGFloat = navigation.customShadowTrailing?.constant ?? 0
+        let prevLeading: CGFloat = navigation.customShadowLeading?.constant ?? 0
+
+        //Initializing animation values
+        if navigation.lastAction == .push && inside {
+            //leading: 0, <- trailing
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width
         }
-        self.searchController.searchBar.isHidden = true
-        coordinator.animate(alongsideTransition: nil, completion: {
-            [weak self]
+        if navigation.lastAction == .push && !inside {
+            // 0 <- leading, trailing: 0
+            navigation.customShadowLeading?.constant = navigation.navigationBar.frame.width
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowLeading?.constant = 0
+        }
+        if navigation.lastAction == .pop && inside {
+            //leading -> trailing: 0
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowLeading?.constant = navigation.navigationBar.frame.width
+        }
+        if navigation.lastAction == .pop && !inside {
+            //leading: 0, trailing -> 0
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowTrailing?.constant = 0
+        }
+
+        //Animate alongside push/pop transition
+        coordinator.animate(alongsideTransition: {
             _ in
-            self?.searchController.searchBar.isHidden = false
-            self?.searchController.searchBar.alpha = 0.0
-            UIView.animate(withDuration: 0.1, animations: {
-                self?.searchController.searchBar.alpha = 1.0
-            })
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowView?.alpha = targetAlpha
+        }, completion: {
+            coordinator in
+            if coordinator.isCancelled {
+                navigation.customShadowTrailing?.constant = prevTrailing
+                navigation.customShadowLeading?.constant = prevLeading
+                navigation.navigationBar.layoutSubviews()
+            }
         })
     }
 }

@@ -91,8 +91,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         dataSource = self
         initTabs()
 
-        self.navigationController?.delegate = self
-
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -117,12 +115,16 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         tabsViewBackgroundColor = UIColor.mainLightColor
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.delegate = self
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if navigationController?.delegate === self {
+            navigationController?.delegate = nil
+        }
     }
 
     func setRefreshing(refreshing: Bool) {
@@ -223,21 +225,65 @@ extension LessonViewController: WarningViewDelegate {
 
 extension LessonViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let navigation = self.navigationController as? StyledNavigationViewController else {
+        guard let navigation = self.navigationController as? StyledNavigationViewController, let coordinator = navigationController.topViewController?.transitionCoordinator else {
             return
         }
+
+        //Detect, if animation moves inside our controller
+        let inside: Bool = viewController is LessonViewController
+
+        //Hide shadow view, if we are moving inside
         var targetAlpha: CGFloat = 1
-        if viewController is LessonViewController {
+        if inside {
             targetAlpha = 0
         }
-        guard let coordinator = navigationController.topViewController?.transitionCoordinator else {
-            return
+
+        //Saving previous values in case animation is not completed
+        let prevTrailing: CGFloat = navigation.customShadowTrailing?.constant ?? 0
+        let prevLeading: CGFloat = navigation.customShadowLeading?.constant ?? 0
+
+        //Initializing animation values
+        if navigation.lastAction == .push && inside {
+            //leading: 0, <- trailing
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width
         }
-        navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width * (1 - targetAlpha)
+        if navigation.lastAction == .push && !inside {
+            // 0 <- leading, trailing: 0
+            navigation.customShadowLeading?.constant = navigation.navigationBar.frame.width
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowLeading?.constant = 0
+        }
+        if navigation.lastAction == .pop && inside {
+            //leading -> trailing: 0
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = 0
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowLeading?.constant = navigation.navigationBar.frame.width
+        }
+        if navigation.lastAction == .pop && !inside {
+            //leading: 0, trailing -> 0
+            navigation.customShadowLeading?.constant = 0
+            navigation.customShadowTrailing?.constant = -navigation.navigationBar.frame.width
+            navigation.navigationBar.layoutSubviews()
+            navigation.customShadowTrailing?.constant = 0
+        }
+
+        //Animate alongside push/pop transition
         coordinator.animate(alongsideTransition: {
             _ in
             navigation.navigationBar.layoutSubviews()
             navigation.customShadowView?.alpha = targetAlpha
-        }, completion: nil)
+        }, completion: {
+            coordinator in
+            if coordinator.isCancelled {
+                navigation.customShadowTrailing?.constant = prevTrailing
+                navigation.customShadowLeading?.constant = prevLeading
+                navigation.navigationBar.layoutSubviews()
+            }
+        })
     }
 }

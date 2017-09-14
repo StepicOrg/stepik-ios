@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Delete Bounded.png",
+      "filename" : "search_glass.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "search_glass@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "search_glass@3x.png",
       "scale" : "3x"
     }
   ],

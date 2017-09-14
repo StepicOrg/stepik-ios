@@ -26,16 +26,9 @@ class StyledNavigationViewController: UINavigationController {
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = false
         let fontSize: CGFloat = 17.0
-        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightRegular)
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.mainDarkColor, NSFontAttributeName: titleFont]
         navigationBar.tintColor = UIColor.mainDarkColor
-    }
-
-    func reloadShadowView() {
-        if let v = customShadowView {
-            v.removeFromSuperview()
-        }
-        setupShadowView()
     }
 
     func setStatusBarStyle() {
@@ -44,6 +37,7 @@ class StyledNavigationViewController: UINavigationController {
 
     var customShadowView: UIView?
     var customShadowTrailing: NSLayoutConstraint?
+    var customShadowLeading: NSLayoutConstraint?
 
     func setupShadowView() {
         let v = UIView()
@@ -51,7 +45,7 @@ class StyledNavigationViewController: UINavigationController {
         v.backgroundColor = UIColor.lightGray
         _ = v.constrainHeight("0.5")
         _ = v.alignBottomEdge(with: navigationBar, predicate: "0.5")
-        _ = v.alignLeadingEdge(with: navigationBar, predicate: "0")
+        self.customShadowLeading = v.alignLeadingEdge(with: navigationBar, predicate: "0").first as? NSLayoutConstraint
         self.customShadowTrailing = v.alignTrailingEdge(with: navigationBar, predicate: "0").first as? NSLayoutConstraint
         customShadowView = v
         customShadowView?.alpha = 1
@@ -62,14 +56,28 @@ class StyledNavigationViewController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: {
+            [weak self]
+            _ in
+            self?.navigationBar.layoutSubviews()
+            }, completion: nil)
     }
-    */
 
+    var lastAction: NavigationAction = .push
+
+    override func popViewController(animated: Bool) -> UIViewController? {
+        lastAction = .pop
+        return super.popViewController(animated: animated)
+    }
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        lastAction = .push
+        super.pushViewController(viewController, animated: animated)
+    }
+}
+
+enum NavigationAction {
+    case push, pop
 }

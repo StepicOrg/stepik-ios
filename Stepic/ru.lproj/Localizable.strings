@@ -299,6 +299,7 @@ ShortBio = "Краткая биография";
 Info = "Информация";
 ProfileAnonymousTitle = "Кажется, у вас нет профиля";
 ProfileAnonymousSubtitle = "Войдите, чтобы получить доступ к большему количеству функций";
+SearchCourses = "Поиск курсов";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
