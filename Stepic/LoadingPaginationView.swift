@@ -20,7 +20,7 @@ class LoadingPaginationView: NibInitializableView {
     override var nibName: String {
         return "LoadingPaginationView"
     }
-    
+
     var refreshAction : (() -> Void)?
 
     func setLoading() {

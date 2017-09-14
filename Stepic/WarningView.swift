@@ -21,7 +21,7 @@ class WarningView: NibInitializableView {
     override var nibName: String {
         return "WarningView"
     }
-    
+
     fileprivate func localize() {
         tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControlState())
     }

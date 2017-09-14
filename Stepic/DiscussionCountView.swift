@@ -16,13 +16,13 @@ class DiscussionCountView: NibInitializableView {
     override var nibName: String {
         return "DiscussionCountView"
     }
-    
+
     var commentsCount: Int = 0 {
         didSet {
             showCommentsLabel.text = "\(NSLocalizedString("ShowComments", comment: "")) (\(commentsCount))"
         }
     }
-    
+
     override func setupSubviews() {
         view.backgroundColor = UIColor.mainLight
     }

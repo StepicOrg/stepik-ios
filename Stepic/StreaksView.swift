@@ -24,7 +24,7 @@ class StreaksView: NibInitializableView {
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
-    
+
     fileprivate var currentStreak: Int = 0 {
         didSet {
             currentStreakCountLabel.text = "\(currentStreak)"
@@ -98,7 +98,7 @@ class StreaksView: NibInitializableView {
     override var nibName: String {
         return "StreaksView"
     }
-    
+
     override func setupSubviews() {
         currentStreakLabel.text = NSLocalizedString("CurrentStreakTitle", comment: "")
         currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreak)) \(NSLocalizedString("InARow", comment: ""))"
@@ -106,7 +106,7 @@ class StreaksView: NibInitializableView {
         bestStreakDaysInARowLabel.text = dayLocalizableFor(daysCnt: bestStreak)
         bestStreakCountLabel.textColor = color(index: colorsInt.count - 1)
     }
-    
+
     func setStreaks(current: Int, best: Int) {
         bestStreak = best
         currentStreak = current

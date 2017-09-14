@@ -13,13 +13,13 @@ class VideoDownloadView: NibInitializableView {
 
     @IBOutlet weak var qualityLabel: StepikLabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
-    
+
     override var nibName: String {
         return "VideoDownloadView"
     }
-    
+
     var video: Video!
-    
+
     var quality: String! {
         didSet {
             qualityLabel.text = "\(quality ?? "0")p"

@@ -23,7 +23,7 @@ class StepTabView: NibInitializableView {
     override var nibName: String {
         return "StepTabView"
     }
-    
+
     override func setupSubviews() {
         NotificationCenter.default.addObserver(self, selector: #selector(StepTabView.stepDone(_:)), name: NSNotification.Name(rawValue: StepDoneNotificationKey), object: nil)
     }
