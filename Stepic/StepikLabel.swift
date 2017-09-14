@@ -24,7 +24,6 @@ enum StepikLabelStyle {
 }
 
 class StepikLabel: UILabel {
-
     var isGray: Bool = false {
         didSet {
             if isGray {
@@ -48,13 +47,4 @@ class StepikLabel: UILabel {
         super.init(coder: aDecoder)
         applyStyles()
     }
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
