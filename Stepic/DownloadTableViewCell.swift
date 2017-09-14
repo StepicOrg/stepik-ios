@@ -35,8 +35,6 @@ class DownloadTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        qualityLabel.isGray = true
-        sizeLabel.isGray = true
         // Initialization code
     }
 

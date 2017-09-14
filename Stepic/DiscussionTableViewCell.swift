@@ -145,7 +145,6 @@ class DiscussionTableViewCell: UITableViewCell {
         super.awakeFromNib()
         constructLabel()
         badgeLabel.setRoundedCorners(cornerRadius: 10)
-        timeLabel.isGray = true
     }
 
     override func prepareForReuse() {

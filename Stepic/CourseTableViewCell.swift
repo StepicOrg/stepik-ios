@@ -27,7 +27,6 @@ class CourseTableViewCell: UITableViewCell {
 
         continueButton.setStepicWhiteStyle()
         continueButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
-        deadlinesLabel.isGray = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

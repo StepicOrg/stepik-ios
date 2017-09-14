@@ -15,6 +15,7 @@ protocol CustomSearchBarDelegate: class {
     func cancelPressed(in searchBar: CustomSearchBar)
 }
 
+@IBDesignable
 class CustomSearchBar: UIView, UITextFieldDelegate {
     var view: UIView!
 
@@ -30,18 +31,21 @@ class CustomSearchBar: UIView, UITextFieldDelegate {
 
     private var isCancelActive: Bool = false
 
+    @IBInspectable
     var barTintColor: UIColor? = UIColor.white {
         didSet {
             backgroundColor = barTintColor
         }
     }
 
+    @IBInspectable
     var text: String = "" {
         didSet {
             textField.text = text
         }
     }
 
+    @IBInspectable
     var mainColor: UIColor? = UIColor.blue {
         didSet {
             cancelButton.setTitleColor(mainColor, for: .normal)
@@ -49,12 +53,14 @@ class CustomSearchBar: UIView, UITextFieldDelegate {
         }
     }
 
+    @IBInspectable
     var placeholder: String = NSLocalizedString("Search", comment: "") {
         didSet {
             textField.placeholder = placeholder
         }
     }
 
+    @IBInspectable
     var hasShadowImage: Bool = true {
         didSet {
             shadowView.isHidden = !hasShadowImage

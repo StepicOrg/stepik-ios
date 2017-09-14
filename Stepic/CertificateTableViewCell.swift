@@ -23,7 +23,6 @@ class CertificateTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        certificateDescription.isGray = true
         shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
     }
 

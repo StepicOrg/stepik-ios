@@ -22,7 +22,6 @@ class SectionTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton)
-        datesLabel.isGray = true
         // Initialization code
     }
 

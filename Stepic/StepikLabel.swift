@@ -23,7 +23,10 @@ enum StepikLabelStyle {
     }
 }
 
+@IBDesignable
 class StepikLabel: UILabel {
+
+    @IBInspectable
     var isGray: Bool = false {
         didSet {
             if isGray {
