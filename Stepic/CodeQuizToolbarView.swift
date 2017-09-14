@@ -22,7 +22,7 @@ class CodeQuizToolbarView: NibInitializableView {
             languageButton.title = language
         }
     }
-    
+
     override var nibName: String {
         return "CodeQuizToolbarView"
     }
