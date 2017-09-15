@@ -503,7 +503,7 @@
                                 <color key="textColor" red="0.7843137255" green="0.15686274510000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-2r-iUJ" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
                                 <rect key="frame" x="24" y="331" width="272" height="40"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -513,13 +513,16 @@
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="onLogInClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="dDV-oS-zBl"/>
+                                    <action selector="onRegisterClick:" destination="Ezc-h0-bV3" eventType="touchUpInside" id="WNV-SG-ghE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="By registering you agree to the Terms of service and Privacy policy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZc-eQ-tE0">
@@ -595,10 +598,13 @@
                         <outlet property="alertBottomLabelConstraint" destination="KNy-3m-2zg" id="a4W-hk-6Bu"/>
                         <outlet property="alertLabel" destination="Sks-5y-rKN" id="1GS-vL-6fG"/>
                         <outlet property="alertLabelHeightConstraint" destination="y9u-6u-PKO" id="9eb-oW-oRe"/>
+                        <outlet property="emailTextField" destination="dPv-EY-XCL" id="JqY-E6-N67"/>
                         <outlet property="inputGroupPad" destination="1Cu-FO-mN5" id="wJ2-Jt-UJs"/>
+                        <outlet property="nameTextField" destination="c81-1U-sKd" id="vwh-oK-Dpb"/>
+                        <outlet property="passwordTextField" destination="gng-wJ-E02" id="lqp-gq-rqc"/>
+                        <outlet property="registerButton" destination="gfh-2r-iUJ" id="kf8-1A-SID"/>
                         <outlet property="separatorFirstHeight" destination="gRU-SW-zdr" id="cJI-Oq-dT5"/>
                         <outlet property="separatorSecondHeight" destination="ga1-FK-AYK" id="ubA-cq-B3z"/>
-                        <outlet property="textFieldPassword" destination="gng-wJ-E02" id="2TE-0l-29a"/>
                         <outlet property="titleLabel" destination="KmT-i0-02l" id="QdI-WC-E8d"/>
                         <outlet property="tosLabel" destination="RZc-eQ-tE0" id="a6A-ED-913"/>
                     </connections>

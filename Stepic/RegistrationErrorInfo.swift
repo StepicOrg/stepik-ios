@@ -21,4 +21,24 @@ struct RegistrationErrorInfo {
         firstName = json["first_name"].array?[0].string
         lastName = json["last_name"].array?[0].string
     }
+
+    var firstError: String? {
+        if email != nil {
+            return email
+        }
+
+        if firstName != nil {
+            return firstName
+        }
+
+        if lastName != nil {
+            return lastName
+        }
+
+        if password != nil {
+            return password
+        }
+
+        return nil
+    }
 }
