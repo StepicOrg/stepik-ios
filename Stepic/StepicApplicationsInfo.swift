@@ -77,6 +77,7 @@ struct StepicApplicationsInfo {
 
     // Section: Colors
     struct Colors {
-        static let mainTextHex = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainText) as? Int
+        static let mainText = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainText) as? Int ?? 0x000000)
+        static let mainDark = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainDark) as? Int ?? 0x000000)
     }
 }

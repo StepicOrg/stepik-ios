@@ -56,6 +56,7 @@ class ApplicationInfo {
         }
         struct Colors {
             static let mainText = "colors.mainText"
+            static let mainDark = "colors.mainDark"
         }
     }
 

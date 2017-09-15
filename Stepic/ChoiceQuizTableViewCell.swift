@@ -50,6 +50,9 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         checkBox.onAnimationType = .fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clear
+        checkBox.onTintColor = UIColor.mainDark
+        checkBox.onFillColor = UIColor.mainDark
+        checkBox.tintColor = UIColor.mainDark
     }
 
     override func prepareForReuse() {
