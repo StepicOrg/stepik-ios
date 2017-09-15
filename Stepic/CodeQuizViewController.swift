@@ -15,7 +15,7 @@ class CodeQuizViewController: QuizViewController {
     var dataset: String?
     var reply: CodeReply?
 
-    var limitsLabel: UILabel = StepikLabel()
+    var limitsLabel: StepikLabel = StepikLabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
 
