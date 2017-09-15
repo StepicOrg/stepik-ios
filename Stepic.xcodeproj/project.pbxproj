@@ -5748,8 +5748,6 @@
 				089F58871D22BD44000CD540 /* DiscussionCountView */,
 				083F11761E54DB09006EF4F1 /* Picker View Controller */,
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
-				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
-				081566231F69C39A0082B359 /* Search Bar */,
 				089700951F6B2A820041C24E /* NibInitializableView.swift */,
 			);
 			name = Views;
@@ -6344,6 +6342,8 @@
 		08DF78D01F64056B00AEEA85 /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
+				081566231F69C39A0082B359 /* Search Bar */,
 				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
 			);
 			name = "UI Elements";
