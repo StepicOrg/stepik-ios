@@ -10,7 +10,7 @@ import UIKit
 
 class CodeSuggestionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var suggestionLabel: UILabel!
+    @IBOutlet weak var suggestionLabel: StepikLabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

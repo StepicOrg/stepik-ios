@@ -36,7 +36,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.stepicGreenColor()
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)
@@ -92,7 +92,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         initTabs()
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
 
         presenter = LessonPresenter(objects: initObjects, ids: initIds, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons)
@@ -111,12 +111,20 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         indicatorHeight = 2.0
         tabOffset = 8.0
         centerCurrentTab = true
-        indicatorColor = UIColor.white
-        tabsViewBackgroundColor = UIColor.navigationColor
+        indicatorColor = UIColor.mainDark
+        tabsViewBackgroundColor = UIColor.mainLight
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.delegate = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if navigationController?.delegate === self {
+            navigationController?.delegate = nil
+        }
     }
 
     func setRefreshing(refreshing: Bool) {
@@ -212,5 +220,17 @@ extension LessonViewController: PagerDataSource {
 extension LessonViewController: WarningViewDelegate {
     func didPressButton() {
         presenter?.refreshSteps()
+    }
+}
+
+extension LessonViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard let navigation = self.navigationController as? StyledNavigationViewController else {
+            return
+        }
+        if navigation.topViewController != viewController {
+            print("wow")
+        }
+        navigation.animateShadowChange(for: self)
     }
 }

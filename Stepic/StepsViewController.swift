@@ -57,7 +57,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.stepicGreenColor()
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)
@@ -328,7 +328,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         super.viewWillAppear(animated)
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "
         if let l = lesson {
             if !didSelectTab && l.steps.count != 0 && startStepId < l.steps.count && didInitSteps {
@@ -374,7 +374,7 @@ class StepsViewController: RGPageViewController, ShareableController {
 
     override var barTintColor: UIColor? {
         get {
-            return UIColor.navigationColor
+            return UIColor.mainLight
         }
     }
 

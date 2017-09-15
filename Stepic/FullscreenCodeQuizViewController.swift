@@ -139,11 +139,13 @@ class FullscreenCodeQuizViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = true
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
 
     override func viewDidLayoutSubviews() {

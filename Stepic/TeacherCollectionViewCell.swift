@@ -11,12 +11,13 @@ import UIKit
 class TeacherCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarImageView: AvatarImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var nameLabel: StepikLabel!
+    @IBOutlet weak var infoLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization codex
+        infoLabel.isGray = true
     }
 
     func initWithUser(_ user: User) {

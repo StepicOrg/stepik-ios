@@ -9,53 +9,18 @@
 import UIKit
 import FLKAutoLayout
 
-class WarningView: UIView {
+class WarningView: NibInitializableView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var tryAgainButton: UIButton!
 
-    var view: UIView!
-    var textLabel: UILabel!
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-    func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-    }
-
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "WarningView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
-    }
+    var textLabel: StepikLabel!
 
     weak var delegate: WarningViewDelegate?
+
+    override var nibName: String {
+        return "WarningView"
+    }
 
     fileprivate func localize() {
         tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControlState())
@@ -81,7 +46,7 @@ class WarningView: UIView {
         self.delegate = delegate
         self.imageView.image = image
         self.imageView.contentMode = contentMode
-        textLabel = UILabel()
+        textLabel = StepikLabel()
         self.view.insertSubview(textLabel, belowSubview: tryAgainButton)
         textLabel.textAlignment = NSTextAlignment.center
         textLabel.numberOfLines = 0

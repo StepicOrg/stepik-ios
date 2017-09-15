@@ -70,7 +70,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.stepicGreenColor()
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
         ai.alignCenter(with: v)

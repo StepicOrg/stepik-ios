@@ -24,8 +24,8 @@ struct StepikAlertAction {
 class StepikAlertViewController: UIViewController {
 
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var descriptionLabel: StepikLabel!
     @IBOutlet weak var actionsView: UIView!
 
     var actions = [StepikAlertAction]()
@@ -58,7 +58,7 @@ class StepikAlertViewController: UIViewController {
         case .cancel:
             b.setTitleColor(UIColor.blue, for: .normal)
         case .default:
-            b.setTitleColor(UIColor.stepicGreenColor(), for: .normal)
+            b.setTitleColor(UIColor.stepicGreen, for: .normal)
         case .destructive:
             b.setTitleColor(UIColor.red, for: .normal)
         }

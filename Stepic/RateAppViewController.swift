@@ -13,8 +13,8 @@ import FLKAutoLayout
 
 class RateAppViewController: UIViewController {
 
-    @IBOutlet weak var topLabel: UILabel!
-    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var topLabel: StepikLabel!
+    @IBOutlet weak var bottomLabel: StepikLabel!
     @IBOutlet weak var laterButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
 
@@ -48,12 +48,12 @@ class RateAppViewController: UIViewController {
             case .appStore:
                 rightButton.titleLabel?.text = NSLocalizedString("AppStore", comment: "")
                 rightButton.setTitle(NSLocalizedString("AppStore", comment: ""), for: .normal)
-                rightButton.setTitleColor(UIColor.stepicGreenColor(), for: .normal)
+                rightButton.setTitleColor(UIColor.stepicGreen, for: .normal)
                 break
             case .email:
                 rightButton.titleLabel?.text = NSLocalizedString("Email", comment: "")
                 rightButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
-                rightButton.setTitleColor(UIColor.errorRedColor(), for: .normal)
+                rightButton.setTitleColor(UIColor.errorRed, for: .normal)
                 break
             }
         }

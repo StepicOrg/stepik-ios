@@ -298,6 +298,7 @@ ShortBio = "Short bio";
 Info = "Info";
 ProfileAnonymousTitle = "Seems like you have no profile";
 ProfileAnonymousSubtitle = "Sign in to access more features";
+SearchCourses = "Search courses";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

@@ -10,9 +10,9 @@ import UIKit
 
 class CertificateTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var courseTitle: UILabel!
-    @IBOutlet weak var certificateDescription: UILabel!
-    @IBOutlet weak var certificateResult: UILabel!
+    @IBOutlet weak var courseTitle: StepikLabel!
+    @IBOutlet weak var certificateDescription: StepikLabel!
+    @IBOutlet weak var certificateResult: StepikLabel!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var courseImage: UIImageView!
 
@@ -23,7 +23,6 @@ class CertificateTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
         shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
     }
 

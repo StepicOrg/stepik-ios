@@ -141,15 +141,6 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         title = urlRequest.url?.host
 
-        if allowsToOpenInSafari {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: Images.safariBarButtonItemImage,
-                style: UIBarButtonItemStyle.plain,
-                target: self,
-                action: #selector(WebViewController.didTapSafariButton(_:)))
-            navigationItem.rightBarButtonItem?.tintColor = UIColor.stepicGreenColor()
-        }
-
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(
 //            barButtonSystemItem: .Action,
 //            target: self,
@@ -162,6 +153,15 @@ class WebViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         assert(navigationController != nil, "\(WebViewController.self) must be presented in a \(UINavigationController.self)")
         super.viewWillAppear(animated)
+
+        if allowsToOpenInSafari {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: Images.safariBarButtonItemImage,
+                style: UIBarButtonItemStyle.plain,
+                target: self,
+                action: #selector(WebViewController.didTapSafariButton(_:)))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.mainDark
+        }
 
         if presentingViewController?.presentedViewController != nil {
             let doneItem = backButtonStyle.barButtonItem

@@ -92,7 +92,7 @@ class PreferencesViewController: UITableViewController {
         super.viewWillAppear(animated)
         downloadingVideoQualityLabel.text = "\(VideosInfo.downloadingVideoQuality)p"
         watchingVideoQualityLabel.text = "\(VideosInfo.watchingVideoQuality)p"
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
 
         initStreaksRows()
         tableView.reloadData()

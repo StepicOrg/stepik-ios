@@ -12,8 +12,8 @@ import FLKAutoLayout
 class StreakAlertViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var messageLabel: StepikLabel!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
     var currentStreak: Int = 0

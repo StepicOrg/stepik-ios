@@ -14,7 +14,7 @@ enum DisplayingInfoType: Int {
 
 class GeneralInfoTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var courseNameLabel: UILabel!
+    @IBOutlet weak var courseNameLabel: StepikLabel!
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
 
     @IBOutlet weak var joinButton: UIButton!
@@ -29,10 +29,10 @@ class GeneralInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.stepicGreenColor())
+        joinButton.setRoundedCorners(cornerRadius: 6, borderWidth: 1, borderColor: UIColor.mainDark)
 
         typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
-
+        typeSegmentedControl.tintColor = UIColor.mainDark
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
@@ -55,7 +55,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
             joinButton.setStepicWhiteStyle()
             joinButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         } else {
-            joinButton.setStepicWhiteStyle()
+            joinButton.setStepicGreenStyle()
             joinButton.setTitle(Constants.joinCourseButtonText, for: .normal)
         }
     }

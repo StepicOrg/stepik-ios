@@ -35,12 +35,19 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
     var refreshControl: UIRefreshControl? = UIRefreshControl()
 
+    var shouldAlignTop: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addSubview(tableView)
         self.tableView.alignLeading("0", trailing: "0", to: self.view)
-        self.tableView.alignTop("0", bottom: "0", to: self.view)
+        self.tableView.alignBottomEdge(with: self.view, predicate: "0")
+        if shouldAlignTop {
+            self.tableView.alignTopEdge(with: self.view, predicate: "0")
+        }
 
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")

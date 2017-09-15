@@ -73,7 +73,7 @@ class SignInViewController: UIViewController {
 
         navigationItem.titleView = titleView
 
-        signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
+        signInButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreen)
     }
 
     override func viewDidAppear(_ animated: Bool) {

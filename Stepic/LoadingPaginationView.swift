@@ -8,13 +8,17 @@
 
 import Foundation
 
-class LoadingPaginationView: UIView {
+class LoadingPaginationView: NibInitializableView {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var refreshButton: UIButton!
 
     @IBAction func refreshPressed(_ sender: UIButton) {
         refreshAction?()
+    }
+
+    override var nibName: String {
+        return "LoadingPaginationView"
     }
 
     var refreshAction : (() -> Void)?
@@ -31,38 +35,7 @@ class LoadingPaginationView: UIView {
         refreshButton.isHidden = false
     }
 
-    fileprivate var view: UIView!
-
-    fileprivate func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
+    override func setupSubviews() {
+        activityIndicator.color = UIColor.mainDark
     }
-
-    fileprivate func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "LoadingPaginationView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
-    }
-
 }

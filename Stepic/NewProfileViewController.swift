@@ -154,6 +154,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.presenter?.updateProfile()
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 }
 
@@ -258,7 +259,7 @@ extension NewProfileViewController : DZNEmptyDataSetSource {
         }
 
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+                          NSForegroundColorAttributeName: UIColor.mainDark]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

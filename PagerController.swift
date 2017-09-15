@@ -282,6 +282,14 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
         _ = self.tabsView?.alignTrailingEdge(with: self.view, predicate: "0")
         _ = self.tabsView?.constrainHeight("44")
 
+        let shadowView = UIView()
+        self.contentView.addSubview(shadowView)
+        shadowView.backgroundColor = UIColor.lightGray
+        _ = shadowView.constrainHeight("0.5")
+        _ = shadowView.alignTopEdge(with: contentView, predicate: "22")
+        _ = shadowView.alignLeadingEdge(with: contentView, predicate: "0")
+        _ = shadowView.alignTrailingEdge(with: contentView, predicate: "0")
+
         // Set setup done
         self.defaultSetupDone = true
     }
