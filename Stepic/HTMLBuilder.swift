@@ -14,12 +14,13 @@ class HTMLBuilder: NSObject {
 
     fileprivate var stepicStyleString: String {
         var res: String = ""
+        let colorHexString = UIColor.mainText.hexString
         res += "<style>"
         res += "\nhtml{-webkit-text-size-adjust: 100%;}"
-        res += "\nbody{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; color: #535366; }"
-        res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #535366;}"
-        res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #535366;}"
-        res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #535366;}"
+        res += "\nbody{font-size: 12pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; color: #\(colorHexString); }"
+        res += "\nh1{font-size: 20pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #\(colorHexString)}"
+        res += "\nh2{font-size: 17pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #\(colorHexString);}"
+        res += "\nh3{font-size: 14pt; font-family:Arial, Helvetica, sans-serif; line-height:1.6em; text-align: center; color: #\(colorHexString);}"
         res += "\nimg { max-width: 100%; }"
         res += "\niframe { max-width: 100%; }"
 
