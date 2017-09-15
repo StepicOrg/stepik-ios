@@ -54,6 +54,9 @@ class ApplicationInfo {
                 static let redirect = "password.redirect_uri"
             }
         }
+        struct Colors {
+            static let mainText = "colors.mainText"
+        }
     }
 
     private var settings: NSDictionary?

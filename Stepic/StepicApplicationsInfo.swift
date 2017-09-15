@@ -74,4 +74,9 @@ struct StepicApplicationsInfo {
             static let facebook = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.SocialProviders.facebookId) as? String ?? ""
         }
     }
+
+    // Section: Colors
+    struct Colors {
+        static let mainTextHex = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainText) as? Int
+    }
 }
