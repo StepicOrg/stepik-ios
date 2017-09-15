@@ -14,7 +14,7 @@ extension SocialAuthViewController: SocialAuthView {
         self.providers = providers
     }
 
-    func set(result: SocialAuthResult) {
+    func update(with result: SocialAuthResult) {
         guard let navigationController = self.navigationController as? AuthNavigationViewController else {
             return
         }

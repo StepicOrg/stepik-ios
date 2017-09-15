@@ -19,7 +19,7 @@ protocol SocialAuthView: class {
     var state: SocialAuthState { get set }
 
     func set(providers: [SocialProviderViewData])
-    func set(result: SocialAuthResult)
+    func update(with result: SocialAuthResult)
 
     func presentWebController(with url: URL)
     func dismissWebController()
@@ -60,7 +60,7 @@ class SocialAuthPresenter {
     func logIn(with providerId: Int) {
         guard let provider = SocialProvider(rawValue: providerId)?.info else {
             print("social auth: provider with id = \(providerId) not found")
-            self.view?.set(result: .error)
+            self.view?.update(with: .error)
             return
         }
 
@@ -80,22 +80,22 @@ class SocialAuthPresenter {
                     self.stepicsAPI.retrieveCurrentUser(success: { user in
                         AuthInfo.shared.user = user
                         User.removeAllExcept(user)
-                        self.view?.set(result: .success)
+                        self.view?.update(with: .success)
                     }, error: { _ in
                         print("social auth: successfully signed in, but could not get user")
-                        self.view?.set(result: .success)
+                        self.view?.update(with: .success)
                     })
                 }, failure: { error in
                     switch error {
                     case .existingEmail(_, let email):
-                        self.view?.set(result: .existingEmail(email: email ?? ""))
+                        self.view?.update(with: .existingEmail(email: email ?? ""))
                     default:
-                        self.view?.set(result: .error)
+                        self.view?.update(with: .error)
                     }
                 })
             }, error: { _ in
                 print("social auth: error while social auth")
-                self.view?.set(result: .error)
+                self.view?.update(with: .error)
             })
         } else {
             view?.presentWebController(with: provider.registerURL)
@@ -125,14 +125,14 @@ class SocialAuthPresenter {
                 User.removeAllExcept(user)
 
                 // TODO: Pass "social" to analytics
-                self.view?.set(result: .success)
+                self.view?.update(with: .success)
             }, error: { _ in
                 print("social auth: successfully signed in, but could not get user")
                 // TODO: Pass "social" to analytics
-                self.view?.set(result: .success)
+                self.view?.update(with: .success)
             })
         }, failure: { _ in
-            self.view?.set(result: .error)
+            self.view?.update(with: .error)
         })
     }
 }
