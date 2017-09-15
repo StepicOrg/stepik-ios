@@ -1987,6 +1987,8 @@
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
+		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2C2544091F3480BE004DB3D9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C315E6D1F0A947D0039E4F0 /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C315E6E1F0A947D0039E4F0 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -4544,6 +4546,8 @@
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
+		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
+		2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
 		2C35C4981F4DA3B6002F3BF4 /* AdaptiveAchievementsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsPresenter.swift; sourceTree = "<group>"; };
 		2C35C4991F4DA3B6002F3BF4 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -6872,6 +6876,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC351961F683140004255B6 /* EmailAuthViewController.swift */,
+				2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */,
 			);
 			name = "Auth email";
 			sourceTree = "<group>";
@@ -6888,6 +6893,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC351991F68339A004255B6 /* AuthTextField.swift */,
+				2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10532,6 +10538,7 @@
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
+				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				088AADAB1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
@@ -10766,6 +10773,7 @@
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
+				2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				087039301CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,

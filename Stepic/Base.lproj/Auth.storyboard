@@ -229,7 +229,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syM-4D-gnF">
                                         <rect key="frame" x="0.0" y="60" width="272" height="1"/>
@@ -264,7 +264,7 @@
                                 <color key="textColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnt-qB-XZx" customClass="AuthButton" customModule="Stepic" customModuleProvider="target">
                                 <rect key="frame" x="24" y="300.5" width="272" height="40"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -273,6 +273,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Log in">
                                     <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.40000000000000002" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -293,6 +296,9 @@
                                 <state key="normal" title="Remind the password">
                                     <color key="titleColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.80784313725490198" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onRemindPasswordClick:" destination="lqO-CD-A0H" eventType="touchUpInside" id="Wb8-7F-4s0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zQ-WS-dr9">
                                 <rect key="frame" x="0.0" y="20" width="44" height="44"/>
@@ -384,9 +390,11 @@
                         <outlet property="alertBottomLabelConstraint" destination="FMb-Ob-Zlz" id="wJp-re-UE1"/>
                         <outlet property="alertLabel" destination="55E-Yo-HFU" id="JuB-ib-Vs2"/>
                         <outlet property="alertLabelHeightConstraint" destination="cj6-hM-VuZ" id="vQ5-qk-ZN4"/>
+                        <outlet property="emailTextField" destination="NCY-px-UvI" id="3Pe-6B-cE7"/>
                         <outlet property="inputGroupPad" destination="hcs-d4-W7U" id="SZ8-5l-q8Q"/>
+                        <outlet property="logInButton" destination="Fnt-qB-XZx" id="hsv-ay-2vI"/>
+                        <outlet property="passwordTextField" destination="umg-9h-bV9" id="QP0-JZ-9bo"/>
                         <outlet property="separatorHeight" destination="baT-yf-3Zs" id="lpB-3y-RYz"/>
-                        <outlet property="textFieldPassword" destination="umg-9h-bV9" id="2k4-cd-pp9"/>
                         <outlet property="titleLabel" destination="Rqj-F6-Q1k" id="VYa-u8-tey"/>
                     </connections>
                 </viewController>
@@ -441,7 +449,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8c-XX-pMK">
                                         <rect key="frame" x="0.0" y="60" width="272" height="1"/>
@@ -460,7 +468,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPV-1V-faR">
                                         <rect key="frame" x="0.0" y="121" width="272" height="1"/>

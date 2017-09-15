@@ -107,7 +107,14 @@ class AuthManager: NSObject {
 
             if let r = response {
                 if r.statusCode < 200 || r.statusCode > 299 {
-                    failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                    switch r.statusCode {
+                    case 497:
+                        failure(SignInError.manyAttempts)
+                    case 401:
+                        failure(SignInError.invalidEmailAndPassword)
+                    default:
+                        failure(SignInError.other(error: nil, code: r.statusCode, message: json["error"].string))
+                    }
                     return
                 }
             }
@@ -331,8 +338,9 @@ enum TokenRefreshError: Error {
 }
 
 enum SignInError: Error {
-    case tooManyTries
+    case manyAttempts
     case noAppWithCredentials
+    case invalidEmailAndPassword
     case existingEmail(provider: String?, email: String?)
     case other(error: Error?, code: Int?, message: String?)
 }
