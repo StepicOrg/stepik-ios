@@ -77,6 +77,7 @@ enum TabController: String {
     case myCourses = "MyCourses"
     case findCourses = "FindCourses"
     case certificates = "Certificates"
+    case profile = "Profile"
 
     var itemInfo: TabBarItemInfo {
         switch self {
@@ -86,6 +87,8 @@ enum TabController: String {
             return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-find-courses"))
         case .certificates:
             return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"))
+        case .profile:
+            return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "Circled User Male Filled"))
         }
     }
 }

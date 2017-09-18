@@ -147,8 +147,8 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func navigateToDownloads() {
-        print("Navigate to downloads")
-        //TODO: Add implementation
+        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {

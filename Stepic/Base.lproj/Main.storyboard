@@ -75,13 +75,7 @@
                             <constraint firstAttribute="trailing" secondItem="xJl-BW-RIC" secondAttribute="trailing" id="jfG-vh-dn6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0">
-                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="845-TM-ZHx">
-                            <connections>
-                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="kYc-bQ-CAq"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Courses" id="Ai7-bS-YO0"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="tableView" destination="xJl-BW-RIC" id="f6Q-fZ-qqB"/>
@@ -91,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ss8-Ro-WpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="389"/>
+            <point key="canvasLocation" x="1686" y="707"/>
         </scene>
         <!--All Courses-->
         <scene sceneID="Xcs-LO-Ogd">
@@ -132,7 +126,7 @@
         <!--Downloads-->
         <scene sceneID="B6E-0I-IzT">
             <objects>
-                <viewController id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DownloadsViewController" id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Trn-kM-JDC"/>
                         <viewControllerLayoutGuide type="bottom" id="MtY-Xf-AK1"/>
@@ -159,11 +153,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Downloads" id="9Ja-ap-5iY">
-                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="ILG-Tj-y37">
-                            <connections>
-                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="ZDY-RC-coT"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Clear cache" id="WWT-xn-H4f">
                             <connections>
                                 <action selector="clearCachePressed:" destination="g7w-5Y-f4V" id="2ET-gg-F9K"/>
@@ -1134,13 +1123,7 @@
                             <constraint firstAttribute="trailing" secondItem="grI-00-Wn1" secondAttribute="trailing" id="zt0-cY-viO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My courses" id="g7g-TI-yPj">
-                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="4JT-qM-oPW">
-                            <connections>
-                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="xi1-KY-CSU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My courses" id="g7g-TI-yPj"/>
                     <connections>
                         <outlet property="tableView" destination="grI-00-Wn1" id="ExN-dj-CNu"/>
                         <segue destination="D75-Zh-Yxy" kind="show" identifier="showCourse" id="nf5-of-tUO"/>
@@ -1175,7 +1158,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rfW-xr-YVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22" y="2090"/>
+            <point key="canvasLocation" x="362" y="1998"/>
         </scene>
         <!--Downloads-->
         <scene sceneID="Laj-7g-BZD">
@@ -1212,7 +1195,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPA-0r-Ug7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="2588"/>
+            <point key="canvasLocation" x="916" y="2878"/>
         </scene>
         <!--Certificates-->
         <scene sceneID="47F-vv-gBJ">
@@ -1240,13 +1223,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW">
-                        <barButtonItem key="leftBarButtonItem" image="Circled User Male" id="djw-nQ-n4l">
-                            <connections>
-                                <segue destination="gu5-mc-VZM" kind="show" identifier="showProfile" id="bJP-cn-CC7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Certificates" id="NFT-Br-2RW"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="7Zk-g8-6bm" id="xI7-bT-N3B"/>
@@ -1254,7 +1231,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoH-0z-dYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="2588"/>
+            <point key="canvasLocation" x="1686" y="2879"/>
+        </scene>
+        <!--Styled Navigation View Controller-->
+        <scene sceneID="dHl-Iz-Z0Q">
+            <objects>
+                <navigationController storyboardIdentifier="ProfileNavigation" id="usg-zh-puE" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Hg-Ye-byR">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wq7-iz-5Bw" kind="relationship" relationship="rootViewController" id="ZbI-5w-i99"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FiZ-KX-0MA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="901" y="3575"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="eaY-rL-sMF">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Profile" storyboardName="Profile" id="wq7-iz-5Bw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mlk-9h-niE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3a-ey-gSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1443" y="3314"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Kzn-kf-eMk">
@@ -1266,7 +1269,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Circled User Male" width="25" height="25"/>
         <image name="Info" width="25" height="25"/>
         <image name="play_dark" width="50" height="50"/>
         <image name="success" width="28" height="28"/>
@@ -1276,7 +1278,6 @@
         <image name="tab-my-courses" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bJP-cn-CC7"/>
         <segue reference="gVj-jL-WXR"/>
         <segue reference="ste-Lr-Bip"/>
         <segue reference="Had-eU-CRB"/>
