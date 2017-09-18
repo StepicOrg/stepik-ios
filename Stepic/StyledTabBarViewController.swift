@@ -10,7 +10,7 @@ import UIKit
 
 class StyledTabBarViewController: UITabBarController {
 
-    let items = StepicApplicationsInfo.Modules.tabs?.flatMap{ TabController(rawValue: $0)?.itemInfo } ?? []
+    let items = StepicApplicationsInfo.Modules.tabs?.flatMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ enum TabController: String {
     case myCourses = "MyCourses"
     case findCourses = "FindCourses"
     case certificates = "Certificates"
-    
+
     var itemInfo: TabBarItemInfo {
         switch self {
         case .myCourses:
