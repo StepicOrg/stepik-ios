@@ -90,7 +90,11 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         let l = buildLabel(type: type, text: text)
         self.contentView.addSubview(l)
         _ = l.constrainTopSpace(to: topView, predicate: type == .content ? "8" : "16")
-        l.alignLeading("24", trailing: "-24", to: self.contentView)
+        if #available(iOS 11, *) {
+            l.alignLeading("32", trailing: "-32", to: self.contentView)
+        } else {
+            l.alignLeading("24", trailing: "-24", to: self.contentView)
+        }
         l.numberOfLines = 0
         labels += [l]
     }
