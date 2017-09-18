@@ -58,6 +58,9 @@ class ApplicationInfo {
             static let mainText = "colors.mainText"
             static let mainDark = "colors.mainDark"
         }
+        struct Modules {
+            static let tabs = "modules.tabs"
+        }
     }
 
     private var settings: NSDictionary?

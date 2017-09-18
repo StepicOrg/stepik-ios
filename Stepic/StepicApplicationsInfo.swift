@@ -80,4 +80,9 @@ struct StepicApplicationsInfo {
         static let mainText = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainText) as? Int ?? 0x000000)
         static let mainDark = UIColor(hex: StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainDark) as? Int ?? 0x000000)
     }
+    
+    // Section: Modules
+    struct Modules {
+        static let tabs = StepicApplicationsInfo.stepikConfigDic?.get(for: Root.Modules.tabs) as? [String]
+    }
 }
