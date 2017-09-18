@@ -45,7 +45,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var separatorSecondHeight: NSLayoutConstraint!
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tosLabel: UILabel!
+    @IBOutlet weak var tosTextView: UITextView!
 
     var errorMessage: NSMutableAttributedString? = nil {
         didSet {
@@ -137,9 +137,15 @@ class RegistrationViewController: UIViewController {
         passwordTextField.fieldType = .password
 
         // Term of service warning
-        attributedString = NSMutableAttributedString(string: "By registering you agree to the Terms of service and Privacy policy.")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        attributedString = NSMutableAttributedString(string: "By registering you agree to the Terms of service and Privacy policy.", attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0), range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: 32, length: 16))
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 32, length: 16))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: 53, length: 14))
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 53, length: 14))
-        tosLabel.attributedText = attributedString
+        tosTextView.attributedText = attributedString
     }
 }
