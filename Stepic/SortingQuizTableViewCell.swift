@@ -36,7 +36,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionLabel.textAlignment = NSTextAlignment.natural
         optionLabel.backgroundColor = UIColor.clear
         textContainerView.addSubview(optionLabel)
-        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", to: textContainerView)
+        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
         optionLabel.isHidden = true
     }
 
@@ -45,7 +45,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         optionWebView = FullHeightWebView()
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
-        optionWebView.align(to: textContainerView)
+        optionWebView.align(toView: textContainerView)
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }

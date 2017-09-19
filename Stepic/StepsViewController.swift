@@ -48,7 +48,7 @@ class StepsViewController: RGPageViewController, ShareableController {
         //TODO: change warning image!
         let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.isIPad() ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
         return v
     }
 
@@ -60,10 +60,10 @@ class StepsViewController: RGPageViewController, ShareableController {
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenter(with: v)
+        ai.alignCenter(withView: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", to: self.view)
+        v.alignTop("50", leading: "0", bottom: "0", trailing: "0", toView: self.view)
         v.isHidden = false
         return v
     }

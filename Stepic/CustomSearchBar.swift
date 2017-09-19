@@ -42,9 +42,12 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
     }
 
     @IBInspectable
-    var text: String = "" {
-        didSet {
-            textField.text = text
+    var text: String {
+        set(newText) {
+            textField.text = newText
+        }
+        get {
+            return textField.text ?? ""
         }
     }
 
@@ -74,8 +77,8 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         let v = UIView()
         self.view.addSubview(v)
         v.backgroundColor = UIColor.lightGray
-        v.alignLeading("0", trailing: "0", to: self.view)
-        v.alignBottomEdge(with: self.view, predicate: "0")
+        v.alignLeading("0", trailing: "0", toView: self.view)
+        v.alignBottomEdge(withView: self.view, predicate: "0")
         v.constrainHeight("0.5")
         return v
     }()
@@ -89,7 +92,7 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
         glassImage.contentMode = .scaleAspectFit
         v.addSubview(glassImage)
         glassImage.constrainWidth("\(imageSize)", height: "\(imageSize)")
-        glassImage.alignTop("0", leading: "\(horizontalInset)", bottom: "0", trailing: "-\(horizontalInset)", to: v)
+        glassImage.alignTop("0", leading: "\(horizontalInset)", bottom: "0", trailing: "-\(horizontalInset)", toView: v)
         return v
     }()
 
@@ -115,8 +118,8 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
             setCancelButton(visible: false, animated: true)
         }
         textField.resignFirstResponder()
-        textField.text = ""
         delegate?.cancelPressed(in: self)
+        textField.text = ""
     }
 
     func textFieldDidChange(textField: UITextField) {

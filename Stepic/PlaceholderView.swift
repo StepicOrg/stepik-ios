@@ -41,9 +41,9 @@ class PlaceholderView: UIView {
         middleView = UIView()
         self.addSubview(middleView)
         self.bringSubview(toFront: middleView)
-        middleView.alignLeading("0", trailing: "0", to: self)
-        middleView.alignCenterY(with: self, predicate: "0")
-        middleViewHeight = middleView.constrainHeight("0")[0] as! NSLayoutConstraint
+        middleView.alignLeading("0", trailing: "0", toView: self)
+        middleView.alignCenterY(withView: self, predicate: "0")
+        middleViewHeight = middleView.constrainHeight("0")
         middleView.setContentCompressionResistancePriority(999, for: .vertical)
         setNeedsLayout()
         layoutIfNeeded()
@@ -51,10 +51,10 @@ class PlaceholderView: UIView {
 
     fileprivate func setUpVerticalConstraints(_ view: UIView) {
         if let b = bottomElement {
-            view.constrainTopSpace(to: b, predicate: "16")
+            view.constrainTopSpace(toView: b, predicate: "16")
             middleViewHeight.constant += 16
         } else {
-            view.alignTopEdge(with: middleView, predicate: "0")
+            view.alignTopEdge(withView: middleView, predicate: "0")
         }
 
         bottomElement = view
@@ -66,9 +66,9 @@ class PlaceholderView: UIView {
         middleView.bringSubview(toFront: imageView!)
         setUpVerticalConstraints(imageView!)
         imageView?.image = image
-        imageViewHeight = imageView!.constrainHeight("\(image.size.height)")[0] as? NSLayoutConstraint
-        imageViewWidth = imageView!.constrainWidth("\(image.size.width)")[0] as? NSLayoutConstraint
-        _ = imageView?.alignCenterX(with: middleView, predicate: "0")
+        imageViewHeight = imageView!.constrainHeight("\(image.size.height)")
+        imageViewWidth = imageView!.constrainWidth("\(image.size.width)")
+        _ = imageView?.alignCenterX(withView: middleView, predicate: "0")
     }
 
     fileprivate func addTitle(_ title: String) {
@@ -79,13 +79,13 @@ class PlaceholderView: UIView {
         middleView.addSubview(titleLabel!)
         middleView.bringSubview(toFront: titleLabel!)
         setUpVerticalConstraints(titleLabel!)
-        _ = titleLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = titleLabel?.alignLeading("8", trailing: "-8", toView: middleView)
 
         if let style = datasource?.placeholderStyle() {
             titleLabel?.implementStyle(style.title)
-            titleLabelHeight = titleLabel?.constrainHeight("\(UILabel.heightForLabelWithText(title, style: style.title, width: middleView.bounds.width - 16))")[0] as? NSLayoutConstraint
+            titleLabelHeight = titleLabel?.constrainHeight("\(UILabel.heightForLabelWithText(title, style: style.title, width: middleView.bounds.width - 16))")
         } else {
-            titleLabelHeight = titleLabel?.constrainHeight("30")[0] as? NSLayoutConstraint
+            titleLabelHeight = titleLabel?.constrainHeight("30")
         }
 
         //TODO: Add title style implementation here
@@ -99,13 +99,13 @@ class PlaceholderView: UIView {
         middleView.addSubview(descriptionLabel!)
         middleView.bringSubview(toFront: descriptionLabel!)
         setUpVerticalConstraints(descriptionLabel!)
-        _ = descriptionLabel?.alignLeading("8", trailing: "-8", to: middleView)
+        _ = descriptionLabel?.alignLeading("8", trailing: "-8", toView: middleView)
 
         if let style = datasource?.placeholderStyle() {
             descriptionLabel?.implementStyle(style.description)
-            descriptionLabelHeight = descriptionLabel?.constrainHeight("\(UILabel.heightForLabelWithText(desc, style: style.description, width: middleView.bounds.width - 16))")[0] as? NSLayoutConstraint
+            descriptionLabelHeight = descriptionLabel?.constrainHeight("\(UILabel.heightForLabelWithText(desc, style: style.description, width: middleView.bounds.width - 16))")
         } else {
-            descriptionLabelHeight = descriptionLabel?.constrainHeight("30")[0] as? NSLayoutConstraint
+            descriptionLabelHeight = descriptionLabel?.constrainHeight("30")
         }
 
         //TODO: Add description style implementation here
@@ -128,8 +128,8 @@ class PlaceholderView: UIView {
         middleView.addSubview(button!)
         middleView.bringSubview(toFront: button!)
         setUpVerticalConstraints(button!)
-        _ = button?.alignCenterX(with: middleView, predicate: "0")
-        buttonHeight = button?.constrainHeight("30")[0] as? NSLayoutConstraint
+        _ = button?.alignCenterX(withView: middleView, predicate: "0")
+        buttonHeight = button?.constrainHeight("30")
     }
 
     func didPressButton() {

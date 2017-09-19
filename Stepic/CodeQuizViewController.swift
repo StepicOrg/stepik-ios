@@ -113,15 +113,15 @@ class CodeQuizViewController: QuizViewController {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
         self.containerView.addSubview(codeTextView)
-        limitsLabel.alignTopEdge(with: self.containerView, predicate: "8")
-        limitsLabel.alignLeading("8", trailing: "0", to: self.containerView)
+        limitsLabel.alignTopEdge(withView: self.containerView, predicate: "8")
+        limitsLabel.alignLeading("8", trailing: "0", toView: self.containerView)
         limitsLabel.constrainHeight("\(limitsLabelHeight)")
-        toolbarView.constrainTopSpace(to: self.limitsLabel, predicate: "8")
-        toolbarView.alignLeading("0", trailing: "0", to: self.containerView)
-        toolbarView.constrainBottomSpace(to: self.codeTextView, predicate: "8")
+        toolbarView.constrainTopSpace(toView: self.limitsLabel, predicate: "8")
+        toolbarView.alignLeading("0", trailing: "0", toView: self.containerView)
+        toolbarView.constrainBottomSpace(toView: self.codeTextView, predicate: "8")
         toolbarView.constrainHeight("\(toolbarHeight)")
-        codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
-        codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
+        codeTextView.alignLeading("0", trailing: "0", toView: self.containerView)
+        codeTextView.alignBottomEdge(withView: self.containerView, predicate: "0")
         codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
     }
 
@@ -186,7 +186,7 @@ class CodeQuizViewController: QuizViewController {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
         view.addSubview(languagePicker.view)
-        languagePicker.view.align(to: containerView)
+        languagePicker.view.align(toView: containerView)
         languagePicker.backButton.isHidden = true
         languagePicker.selectedBlock = {
             [weak self] in
@@ -267,9 +267,9 @@ class CodeQuizViewController: QuizViewController {
         unsupportedLabel.font = UIFont.systemFont(ofSize: 15)
         unsupportedLabel.textColor = UIColor.gray
         v.addSubview(unsupportedLabel)
-        unsupportedLabel.align(to: v)
+        unsupportedLabel.align(toView: v)
         self.containerView.addSubview(v)
-        v.align(to: self.containerView)
+        v.align(toView: self.containerView)
     }
 
     fileprivate func setQuizControls(enabled: Bool) {

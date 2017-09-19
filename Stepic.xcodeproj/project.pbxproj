@@ -5286,6 +5286,14 @@
 			name = StepTabView;
 			sourceTree = "<group>";
 		};
+		08368C061F6FFF7D00173F8C /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
+			);
+			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
 		083749281DE5AE1400144C14 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -5800,7 +5808,7 @@
 				0828FF731BC5E314000AFEA7 /* Sections */,
 				0828FF871BC81EF2000AFEA7 /* Units */,
 				081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */,
-				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
+				08368C061F6FFF7D00173F8C /* Tab Bar */,
 				082348381ECA264000D2CB40 /* ShareableController.swift */,
 				089504821F27C5C600EEC939 /* FullHeightTableView.swift */,
 				08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */,

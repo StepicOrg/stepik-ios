@@ -56,7 +56,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         //TODO: change warning image!
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(to: self.view)
+        v.align(toView: self.view)
         v.constrainHeight("150")
         v.delegate = self
         v.datasource = self
@@ -74,10 +74,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource {
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenter(with: v)
+        ai.alignCenter(withView: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(to: self.view)
+        v.align(toView: self.view)
         v.isHidden = false
         return v
     }

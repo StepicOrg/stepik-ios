@@ -81,7 +81,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         contentView.translatesAutoresizingMaskIntoConstraints = true
 
         webContainerView.addSubview(commentWebView!)
-        _ = commentWebView?.align(to: webContainerView)
+        _ = commentWebView?.align(toView: webContainerView)
     }
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {

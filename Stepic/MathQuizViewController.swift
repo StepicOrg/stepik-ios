@@ -21,7 +21,7 @@ class MathQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textField)
-        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", to: self.containerView)
+        textField.alignTop("8", leading: "16", bottom: "0", trailing: "-16", toView: self.containerView)
         textField.borderStyle = UITextBorderStyle.roundedRect
         textField.constrainHeight("\(textFieldHeight)")
         textField.textColor = UIColor.mainText

@@ -93,9 +93,9 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     fileprivate func setupConstraints() {
         self.view.addSubview(codeTextView)
-        codeTextView.alignLeading("0", trailing: "0", to: self.view)
-        codeTextView.alignBottomEdge(with: self.view, predicate: "0")
-        codeTextView.constrainTopSpace(to: self.toolbar, predicate: "0")
+        codeTextView.alignLeading("0", trailing: "0", toView: self.view)
+        codeTextView.alignBottomEdge(withView: self.view, predicate: "0")
+        codeTextView.constrainTopSpace(toView: self.toolbar, predicate: "0")
     }
 
     override func viewDidLoad() {

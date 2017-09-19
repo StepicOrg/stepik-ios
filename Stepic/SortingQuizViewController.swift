@@ -26,7 +26,7 @@ class SortingQuizViewController: QuizViewController {
         tableView.tableFooterView = UIView()
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
-        tableView.align(to: self.containerView)
+        tableView.align(toView: self.containerView)
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self

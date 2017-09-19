@@ -27,6 +27,9 @@ class NewProfileViewController: MenuViewController, ProfileView {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
 
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+//        }
         self.title = NSLocalizedString("Profile", comment: "")
     }
 
@@ -147,8 +150,8 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func navigateToDownloads() {
-        print("Navigate to downloads")
-        //TODO: Add implementation
+        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -71,12 +71,12 @@ class StepikAlertViewController: UIViewController {
 //        })
         b.tag = actions.index(where: {return $0.title == action.title}) ?? 0
 //        b.tag = actions.index(of: action) ?? 0
-        b.constrainWidth(to: actionsView, predicate: "*\(1.0 / Double(actions.count))")
-        b.alignTop("0", bottom: "0", to: actionsView)
+        b.constrainWidth(toView: actionsView, predicate: "*\(1.0 / Double(actions.count))")
+        b.alignTop("0", bottom: "0", toView: actionsView)
         if let lv = leftView {
-            b.constrainTrailingSpace(to: lv, predicate: "0")
+            b.constrainTrailingSpace(toView: lv, predicate: "0")
         } else {
-            b.constrainTrailingSpace(to: actionsView, predicate: "0")
+            b.constrainTrailingSpace(toView: actionsView, predicate: "0")
             leftView = b
         }
     }

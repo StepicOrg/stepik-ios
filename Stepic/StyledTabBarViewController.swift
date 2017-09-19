@@ -10,12 +10,7 @@ import UIKit
 
 class StyledTabBarViewController: UITabBarController {
 
-    let titles = [
-        NSLocalizedString("MyCourses", comment: ""),
-        NSLocalizedString("FindCourses", comment: ""),
-        NSLocalizedString("Downloads", comment: ""),
-        NSLocalizedString("Certificates", comment: "")
-    ]
+    let items = StepicApplicationsInfo.Modules.tabs?.flatMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +18,12 @@ class StyledTabBarViewController: UITabBarController {
         tabBar.tintColor = UIColor.mainDark
         tabBar.isTranslucent = false
 
-        if let items = tabBar.items {
-            for (index, item) in items.enumerated() {
-                item.title = titles[index]
-            }
-        }
+        self.setViewControllers(items.map {
+            let vc = $0.controller
+            vc.tabBarItem = $0.buildItem()
+            return vc
+        }, animated: false)
+
         delegate = self
 
         if !AuthInfo.shared.isAuthorized {
@@ -52,20 +48,49 @@ class StyledTabBarViewController: UITabBarController {
     */
 
     func getEventNameForTabIndex(index: Int) -> String? {
-        switch index {
-        case 0:
-            return AnalyticsEvents.Tabs.myCoursesClicked
-        case 1:
-            return AnalyticsEvents.Tabs.findCoursesClicked
-        case 2:
-            return AnalyticsEvents.Tabs.downloadsClicked
-        case 3:
-            return AnalyticsEvents.Tabs.certificatesClicked
-        default:
+        guard index < items.count else {
             return nil
         }
+        return items[index].clickEventName
+    }
+}
+
+struct TabBarItemInfo {
+    var clickEventName: String
+    var title: String
+    var controller: UIViewController
+    var image: UIImage
+
+    init(title: String, controller: UIViewController, clickEventName: String, image: UIImage) {
+        self.title = title
+        self.controller = controller
+        self.clickEventName = clickEventName
+        self.image = image
     }
 
+    func buildItem() -> UITabBarItem {
+        return UITabBarItem(title: title, image: image, tag: 0)
+    }
+}
+
+enum TabController: String {
+    case myCourses = "MyCourses"
+    case findCourses = "FindCourses"
+    case certificates = "Certificates"
+    case profile = "Profile"
+
+    var itemInfo: TabBarItemInfo {
+        switch self {
+        case .myCourses:
+            return TabBarItemInfo(title: NSLocalizedString("MyCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "MyCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.myCoursesClicked, image: #imageLiteral(resourceName: "tab-my-courses"))
+        case .findCourses:
+            return TabBarItemInfo(title: NSLocalizedString("FindCourses", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "FindCoursesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.findCoursesClicked, image: #imageLiteral(resourceName: "tab-find-courses"))
+        case .certificates:
+            return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"))
+        case .profile:
+            return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"))
+        }
+    }
 }
 
 extension StyledTabBarViewController : UITabBarControllerDelegate {

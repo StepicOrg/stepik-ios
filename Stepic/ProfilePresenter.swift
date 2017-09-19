@@ -55,7 +55,7 @@ class ProfilePresenter {
             buildNotificationsTimeSelectionBlock(),
             buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
-//            buildDownloadsTransitionBlock(),
+            buildDownloadsTransitionBlock(),
             buildLogoutBlock()
         ].flatMap { $0 }
         return Menu(blocks: blocks)

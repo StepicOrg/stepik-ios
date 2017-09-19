@@ -79,10 +79,10 @@ class FindCoursesViewController: CoursesViewController {
         self.view.addSubview(searchBar)
         searchBar.constrainHeight("44")
         searchBar.setContentCompressionResistancePriority(800, for: .vertical)
-        searchBar.alignTopEdge(with: self.view, predicate: "0")
-        searchBar.alignLeading("0", trailing: "0", to: self.view)
+        searchBar.alignTopEdge(withView: self.view, predicate: "0")
+        searchBar.alignLeading("0", trailing: "0", toView: self.view)
         super.viewDidLoad()
-        tableView.alignTopEdge(with: view, predicate: "44")
+        tableView.alignTopEdge(withView: view, predicate: "44")
 
         self.tableView.backgroundView = UIView()
         self.tableView.backgroundColor = UIColor.lightText
@@ -90,16 +90,16 @@ class FindCoursesViewController: CoursesViewController {
         tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
 
         self.view.addSubview(darkOverlayView)
-        darkOverlayView.alignLeading("0", trailing: "0", to: self.view)
-        darkOverlayView.constrainTopSpace(to: searchBar, predicate: "0")
-        darkOverlayView.alignBottomEdge(with: self.view, predicate: "0")
+        darkOverlayView.alignLeading("0", trailing: "0", toView: self.view)
+        darkOverlayView.constrainTopSpace(toView: searchBar, predicate: "0")
+        darkOverlayView.alignBottomEdge(withView: self.view, predicate: "0")
         darkOverlayView.isHidden = true
 
         self.addChildViewController(searchResultsVC)
         self.view.addSubview(searchResultsVC.view)
-        searchResultsVC.view.alignLeading("0", trailing: "0", to: self.view)
-        searchResultsVC.view.constrainTopSpace(to: searchBar, predicate: "0")
-        searchResultsVC.view.alignBottomEdge(with: self.view, predicate: "0")
+        searchResultsVC.view.alignLeading("0", trailing: "0", toView: self.view)
+        searchResultsVC.view.constrainTopSpace(toView: searchBar, predicate: "0")
+        searchResultsVC.view.alignBottomEdge(withView: self.view, predicate: "0")
         searchResultsVC.view.isHidden = true
 
         (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0

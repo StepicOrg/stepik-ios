@@ -42,13 +42,13 @@ class MatchingQuizViewController: QuizViewController {
         self.containerView.addSubview(firstTableView)
         self.containerView.addSubview(secondTableView)
 
-        firstTableView.alignTop("0", bottom: "0", to: self.containerView)
-        firstTableView.alignLeadingEdge(with: self.containerView, predicate: "0")
-        firstTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
+        firstTableView.alignTop("0", bottom: "0", toView: self.containerView)
+        firstTableView.alignLeadingEdge(withView: self.containerView, predicate: "0")
+        firstTableView.constrainWidth(toView: self.containerView, predicate: "*0.5")
 
-        secondTableView.alignTop("0", bottom: "0", to: self.containerView)
-        secondTableView.alignTrailingEdge(with: self.containerView, predicate: "0")
-        secondTableView.constrainWidth(to: self.containerView, predicate: "*0.5")
+        secondTableView.alignTop("0", bottom: "0", toView: self.containerView)
+        secondTableView.alignTrailingEdge(withView: self.containerView, predicate: "0")
+        secondTableView.constrainWidth(toView: self.containerView, predicate: "*0.5")
 
         firstTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
         secondTableView.register(UINib(nibName: "SortingQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "SortingQuizTableViewCell")
