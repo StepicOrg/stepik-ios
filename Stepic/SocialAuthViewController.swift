@@ -56,6 +56,8 @@ class SocialAuthViewController: UIViewController {
 
     var isExpanded = false
 
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -96,7 +98,7 @@ class SocialAuthViewController: UIViewController {
     @IBAction func moreButtonClick(_ sender: Any) {
         isExpanded = !isExpanded
 
-        moreButton.setTitle(isExpanded ? "Less" : "More", for: .normal)
+        moreButton.setTitle(isExpanded ? NSLocalizedString("SignInLessButton", comment: "") : NSLocalizedString("SignInMoreButton", comment: ""), for: .normal)
 
         collectionView.collectionViewLayout.invalidateLayout()
         self.updateCollectionViewHeight()
@@ -107,6 +109,8 @@ class SocialAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        localize()
 
         presenter = SocialAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
         presenter?.update()
@@ -138,6 +142,12 @@ class SocialAuthViewController: UIViewController {
 
         // Add additional offset for shadows
         collectionViewHeight.constant = isExpanded ? (2 * layout.itemSize.height + layout.minimumInteritemSpacing + headerHeight) + 10 : (layout.itemSize.height + headerHeight) + 5
+    }
+
+    private func localize() {
+        signInButton.setTitle(NSLocalizedString("SignInEmailButton", comment: ""), for: .normal)
+        signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)
+        moreButton.setTitle(NSLocalizedString("SignInMoreButton", comment: ""), for: .normal)
     }
 }
 

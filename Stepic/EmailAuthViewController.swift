@@ -24,8 +24,7 @@ extension EmailAuthViewController: EmailAuthView {
         case .error:
             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         case .manyAttempts:
-            // TODO: L10n
-            SVProgressHUD.showError(withStatus: "Too many attempts. Please, try later.")
+            SVProgressHUD.showError(withStatus: NSLocalizedString("TooManyAttemptsSignIn", comment: ""))
         }
     }
 }
@@ -44,6 +43,9 @@ class EmailAuthViewController: UIViewController {
     @IBOutlet weak var passwordTextField: AuthTextField!
     @IBOutlet weak var inputGroupPad: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var remindPasswordButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
 
     @IBOutlet weak var separatorHeight: NSLayoutConstraint!
 
@@ -57,16 +59,21 @@ class EmailAuthViewController: UIViewController {
             case .loading:
                 SVProgressHUD.show()
             case .validationError:
-                // TODO: L10n
-                let attributedString = NSMutableAttributedString(string: "Whoops! The e-mail address and/or password you specified are not correct.")
-                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: 7))
+                let head = NSLocalizedString("WhoopsHead", comment: "")
+                let error = NSLocalizedString("ValidationEmailAndPasswordError", comment: "")
+                let attributedString = NSMutableAttributedString(string: "\(head) \(error)")
+                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
                 errorMessage = attributedString
                 logInButton.isEnabled = false
 
                 SVProgressHUD.dismiss()
                 inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
             case .existingEmail:
-                errorMessage = NSMutableAttributedString(string: "Whoops! The e-mail address exists.")
+                let head = NSLocalizedString("WhoopsHead", comment: "")
+                let error = NSLocalizedString("SocialSignupWithExistingEmailError", comment: "")
+                let attributedString = NSMutableAttributedString(string: "\(head) \(error)")
+                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
+                errorMessage = attributedString
                 inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
             }
         }
@@ -127,6 +134,8 @@ class EmailAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        localize()
+
         presenter = EmailAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
         emailTextField.delegate = self
@@ -166,11 +175,6 @@ class EmailAuthViewController: UIViewController {
     }
 
     private func setup() {
-        // Title
-        let attributedString = NSMutableAttributedString(string: "Sign In with e-mail")
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: 7))
-        titleLabel.attributedText = attributedString
-
         // Input group
         separatorHeight.constant = 0.5
         inputGroupPad.layer.borderWidth = 0.5
@@ -183,6 +187,22 @@ class EmailAuthViewController: UIViewController {
 
         emailTextField.text = email
         state = .existingEmail
+    }
+
+    private func localize() {
+        // Title
+        let head = NSLocalizedString("SignInTitleHead", comment: "")
+        let tail = NSLocalizedString("SignInTitleEmailTail", comment: "")
+        let attributedString = NSMutableAttributedString(string: "\(head) \(tail)")
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
+        titleLabel.attributedText = attributedString
+
+        signInButton.setTitle(NSLocalizedString("SignInSocialButton", comment: ""), for: .normal)
+        signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)
+        remindPasswordButton.setTitle(NSLocalizedString("RemindThePassword", comment: ""), for: .normal)
+        logInButton.setTitle(NSLocalizedString("LogInButton", comment: ""), for: .normal)
+        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
     }
 }
 

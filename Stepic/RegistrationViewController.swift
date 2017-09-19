@@ -76,9 +76,9 @@ class RegistrationViewController: UIViewController {
             case .loading:
                 SVProgressHUD.show()
             case .validationError(let message):
-                // TODO: L10n
-                let attributedString = NSMutableAttributedString(string: "Whoops! \(message).")
-                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: 7))
+                let head = NSLocalizedString("WhoopsHead", comment: "")
+                let attributedString = NSMutableAttributedString(string: "\(head) \(message)")
+                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
                 errorMessage = attributedString
                 registerButton.isEnabled = false
 
@@ -106,6 +106,8 @@ class RegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        localize()
 
         presenter = RegistrationPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
@@ -144,29 +146,44 @@ class RegistrationViewController: UIViewController {
     }
 
     private func setup() {
-        // Title
-        var attributedString = NSMutableAttributedString(string: "Sign Up")
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: 7))
-        titleLabel.attributedText = attributedString
-
         // Input group
         separatorFirstHeight.constant = 0.5
         separatorSecondHeight.constant = 0.5
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         passwordTextField.fieldType = .password
+    }
+
+    private func localize() {
+        // Title
+        var head = NSLocalizedString("SignUpTitleHead", comment: "")
+        var attributedString = NSMutableAttributedString(string: head)
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
+        titleLabel.attributedText = attributedString
 
         // Term of service warning
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        attributedString = NSMutableAttributedString(string: "By registering you agree to the Terms of service and Privacy policy.", attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+
+        head = NSLocalizedString("AgreementLabelHead", comment: "")
+        let and = NSLocalizedString("And", comment: "")
+        let termsOfService = NSLocalizedString("AgreementLabelTermsOfService", comment: "")
+        let privacyPolicy = NSLocalizedString("AgreementLabelPrivacyPolicy", comment: "")
+        let string = "\(head) \(termsOfService) \(and) \(privacyPolicy)"
+        attributedString = NSMutableAttributedString(string: string, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: 32, length: 16))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 32, length: 16))
-        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: 53, length: 14))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 53, length: 14))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
         tosTextView.attributedText = attributedString
+
+        registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
+        nameTextField.placeholder = NSLocalizedString("Name", comment: "")
+        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        tosTextView.textContainerInset = UIEdgeInsets.zero
     }
 }
 
