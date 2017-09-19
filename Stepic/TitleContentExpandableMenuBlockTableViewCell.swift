@@ -23,7 +23,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        bottomTitleConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-26").first as? NSLayoutConstraint
+        bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
     }
 
     @IBAction func arrowButtonPressed(_ sender: UIButton) {
@@ -89,11 +89,11 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         }
         let l = buildLabel(type: type, text: text)
         self.contentView.addSubview(l)
-        _ = l.constrainTopSpace(to: topView, predicate: type == .content ? "8" : "16")
+        _ = l.constrainTopSpace(toView: topView, predicate: type == .content ? "8" : "16")
         if #available(iOS 11, *) {
-            l.alignLeading("32", trailing: "-32", to: self.contentView)
+            l.alignLeading("32", trailing: "-32", toView: self.contentView)
         } else {
-            l.alignLeading("24", trailing: "-24", to: self.contentView)
+            l.alignLeading("24", trailing: "-24", toView: self.contentView)
         }
         l.numberOfLines = 0
         labels += [l]
@@ -129,7 +129,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
                 addLabel(type: .content, text: labelText.content, after: labels.last)
             }
         }
-        _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-26")
+        _ = labels.last?.alignBottomEdge(withView: self.contentView, predicate: "-26")
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 

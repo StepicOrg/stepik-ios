@@ -43,10 +43,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         super.viewDidLoad()
 
         self.view.addSubview(tableView)
-        self.tableView.alignLeading("0", trailing: "0", to: self.view)
-        self.tableView.alignBottomEdge(with: self.view, predicate: "0")
+        self.tableView.alignLeading("0", trailing: "0", toView: self.view)
+        self.tableView.alignBottomEdge(withView: self.view, predicate: "0")
         if shouldAlignTop {
-            self.tableView.alignTopEdge(with: self.view, predicate: "0")
+            self.tableView.alignTopEdge(withView: self.view, predicate: "0")
         }
 
         self.automaticallyAdjustsScrollViewInsets = false

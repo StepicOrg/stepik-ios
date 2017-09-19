@@ -51,10 +51,10 @@ class WarningView: NibInitializableView {
         textLabel.textAlignment = NSTextAlignment.center
         textLabel.numberOfLines = 0
         textLabel.font = UIFont.systemFont(ofSize: 14)
-        textLabel.alignLeading("8", trailing: "-8", to: view)
-        textLabel.constrainTopSpace(to: centerView, predicate: "4")
+        textLabel.alignLeading("8", trailing: "-8", toView: view)
+        textLabel.constrainTopSpace(toView: centerView, predicate: "4")
         textLabel.attributedText = getAttributedDescription(text)
-        tryAgainButton.constrainTopSpace(to: textLabel, predicate: "8")
+        tryAgainButton.constrainTopSpace(toView: textLabel, predicate: "8")
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }

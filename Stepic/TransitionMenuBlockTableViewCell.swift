@@ -18,8 +18,8 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-25").first as? NSLayoutConstraint
-        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(with: self.contentView, predicate: "-25").first as? NSLayoutConstraint
+        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
+        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

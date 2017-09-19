@@ -29,7 +29,7 @@ class StreakAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)").first as? NSLayoutConstraint
+        messageLabelWidth = messageLabel.constrainWidth("<=\(UIScreen.main.bounds.width - 48)")
 
         localize()
         // Do any additional setup after loading the view.

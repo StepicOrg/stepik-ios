@@ -174,7 +174,7 @@ class WebStepViewController: UIViewController {
         quizController.step = self.step
         self.addChildViewController(quizController)
         quizPlaceholderView.addSubview(quizController.view)
-        quizController.view.align(to: quizPlaceholderView)
+        quizController.view.align(toView: quizPlaceholderView)
 //        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
@@ -182,7 +182,7 @@ class WebStepViewController: UIViewController {
     func handleQuizType() {
         switch step.block.name {
         case "text":
-            stepWebView.constrainBottomSpace(to: discussionCountView, predicate: "8")
+            stepWebView.constrainBottomSpace(toView: discussionCountView, predicate: "8")
             //            stepWebView.alignBottomEdgeWithView(contentView, predicate: "8")
             break
         case "choice":
@@ -227,7 +227,7 @@ class WebStepViewController: UIViewController {
             quizController.stepUrl = self.stepUrl
             self.addChildViewController(quizController)
             quizPlaceholderView.addSubview(quizController.view)
-            quizController.view.align(to: quizPlaceholderView)
+            quizController.view.align(toView: quizPlaceholderView)
             self.view.layoutIfNeeded()
         }
     }
