@@ -43,7 +43,7 @@ class AvatarImageView: UIImageView {
                        let letters = self.extractLetters(from: svgString) {
                         // Draw custom avatar
                         DispatchQueue.main.async {
-                            self.image = self.renderImage(with: letters)
+                            self.image = self.renderImage(with: letters) ?? self.image
                         }
                     } else {
                         // Render SVG
@@ -52,7 +52,7 @@ class AvatarImageView: UIImageView {
                             svgImage?.size = CGSize(width: 200, height: 200)
                         }
                         DispatchQueue.main.async {
-                            self.image = svgImage?.uiImage
+                            self.image = svgImage?.uiImage ?? self.image
                         }
                     }
                 }
