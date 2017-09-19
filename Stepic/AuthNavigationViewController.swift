@@ -11,7 +11,9 @@ import UIKit
 class AuthNavigationViewController: UINavigationController {
 
     enum Controller {
-        case social, email, registration
+        case social
+        case email(email: String?)
+        case registration
     }
 
     var success: (() -> Void)?
@@ -27,17 +29,16 @@ class AuthNavigationViewController: UINavigationController {
     func dismissAfterSuccess() {
         self.dismiss(animated: true, completion: { [weak self] in
             self?.success?()
-            // FIXME: provider
-            //AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": provider as NSObject])
         })
     }
 
     func route(from fromController: Controller, to toController: Controller?) {
         if toController == nil {
             // Close action
-            if fromController == .registration {
+            switch fromController {
+            case .registration:
                 popViewController(animated: true)
-            } else {
+            default:
                 if canDismiss {
                     dismiss(animated: true, completion: { [weak self] in
                         self?.cancel?()
@@ -48,15 +49,24 @@ class AuthNavigationViewController: UINavigationController {
             return
         }
 
-        if toController == .registration {
+        var vcs = viewControllers
+
+        switch toController! {
+        case .registration:
             // Push registration controller
             let vc = ControllerHelper.instantiateViewController(identifier: "Registration", storyboardName: "Auth")
             pushViewController(vc, animated: true)
-        } else {
+        case .email(let email):
             // Replace top view controller
-            let vcId = toController == .email ? "EmailAuth" : "SocialAuth"
-            var vcs = viewControllers
-            vcs[vcs.count - 1] = ControllerHelper.instantiateViewController(identifier: vcId, storyboardName: "Auth")
+            let vc = ControllerHelper.instantiateViewController(identifier: "EmailAuth", storyboardName: "Auth")
+            if let vc = vc as? EmailAuthViewController {
+                vc.prefilledEmail = email
+                vcs[vcs.count - 1] = vc
+                setViewControllers(vcs, animated: true)
+            }
+        case .social:
+            // Replace top view controller
+            vcs[vcs.count - 1] = ControllerHelper.instantiateViewController(identifier: "SocialAuth", storyboardName: "Auth")
             setViewControllers(vcs, animated: true)
         }
     }

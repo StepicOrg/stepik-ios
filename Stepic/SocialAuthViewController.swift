@@ -82,7 +82,7 @@ class SocialAuthViewController: UIViewController {
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSocialAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .social, to: .email)
+            navigationController.route(from: .social, to: .email(email: nil))
         }
     }
 

@@ -33,6 +33,8 @@ extension EmailAuthViewController: EmailAuthView {
 class EmailAuthViewController: UIViewController {
     var presenter: EmailAuthPresenter?
 
+    var prefilledEmail: String?
+
     @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
 
@@ -63,7 +65,9 @@ class EmailAuthViewController: UIViewController {
 
                 SVProgressHUD.dismiss()
                 inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
-            default: break
+            case .existingEmail:
+                errorMessage = NSMutableAttributedString(string: "Whoops! The e-mail address exists.")
+                inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
             }
         }
     }
@@ -98,21 +102,21 @@ class EmailAuthViewController: UIViewController {
 
     @IBAction func onCloseClick(_ sender: Any) {
         if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .email, to: nil)
+            navigationController.route(from: .email(email: nil), to: nil)
         }
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .email, to: .social)
+            navigationController.route(from: .email(email: nil), to: .social)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
-            navigationController.route(from: .email, to: .registration)
+            navigationController.route(from: .email(email: nil), to: .registration)
         }
     }
 
@@ -132,6 +136,11 @@ class EmailAuthViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
         setup()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        prefill()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -167,6 +176,13 @@ class EmailAuthViewController: UIViewController {
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         passwordTextField.fieldType = .password
+    }
+
+    private func prefill() {
+        guard let email = self.prefilledEmail, email != "" else { return }
+
+        emailTextField.text = email
+        state = .existingEmail
     }
 }
 
