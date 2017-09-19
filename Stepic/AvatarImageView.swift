@@ -39,23 +39,21 @@ class AvatarImageView: UIImageView {
                 }
 
                 DispatchQueue.global(qos: .userInitiated).async {
-                    var img: UIImage? = nil
-
                     if let svgString = String(data: data, encoding: String.Encoding.utf8),
                        let letters = self.extractLetters(from: svgString) {
                         // Draw custom avatar
-                        img = self.renderImage(with: letters)
+                        DispatchQueue.main.async {
+                            self.image = self.renderImage(with: letters)
+                        }
                     } else {
                         // Render SVG
                         let svgImage = SVGKImage(data: data)
                         if !(svgImage?.hasSize() ?? true) {
                             svgImage?.size = CGSize(width: 200, height: 200)
                         }
-                        img = svgImage?.uiImage
-                    }
-
-                    DispatchQueue.main.async {
-                        self.image = img ?? self.image
+                        DispatchQueue.main.async {
+                            self.image = svgImage?.uiImage
+                        }
                     }
                 }
 
