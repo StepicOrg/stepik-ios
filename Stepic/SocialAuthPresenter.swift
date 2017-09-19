@@ -73,8 +73,7 @@ class SocialAuthPresenter {
                 AuthManager.oauth.signUpWith(socialToken: socialToken, email: email, provider: provider.name, success: { token in
                     AuthInfo.shared.token = token
 
-                    // FIXME: we shouldn't have UI dependencies here...
-                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+                    NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
                     self.stepicsAPI.retrieveCurrentUser(success: { user in
                         AuthInfo.shared.user = user

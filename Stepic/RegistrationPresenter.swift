@@ -42,8 +42,7 @@ class RegistrationPresenter {
             self.authManager.logInWithUsername(email, password: password, success: { token in
                 AuthInfo.shared.token = token
 
-                // FIXME: UI dependency
-                NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
+                NotificationRegistrator.sharedInstance.registerForRemoteNotifications()
 
                 self.stepicsAPI.retrieveCurrentUser(success: { user in
                     AuthInfo.shared.user = user
