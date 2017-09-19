@@ -117,6 +117,7 @@ struct AnalyticsEvents {
         static let findCoursesClicked = "main_choice_find_courses"
         static let downloadsClicked = "main_choice_downloads"
         static let certificatesClicked = "main_choice_certificates"
+        static let profileClicked = "main_choice_profile"
     }
 
     struct Streaks {
@@ -206,7 +207,7 @@ struct AnalyticsEvents {
         static let toolbarSelected = "code_toolbar_selected"
         static let hideKeyboard = "code_hide_keyboard"
     }
-    
+
     struct Profile {
         static let clickSettings = "main_choice_settings"
         struct Settings {

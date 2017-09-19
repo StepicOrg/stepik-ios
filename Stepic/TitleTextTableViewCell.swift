@@ -10,8 +10,8 @@ import UIKit
 
 class TitleTextTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var descriptionLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -75,7 +75,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
     fileprivate func initBarButtonItems(dropAvailable: Bool) {
         let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(CoursePreviewViewController.shareButtonPressed(_:)))
         if dropAvailable {
-            let moreBarButtonItem = UIBarButtonItem(image: Images.points.vertical, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
+            let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "dots_dark"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(CoursePreviewViewController.moreButtonPressed(_:)))
             self.navigationItem.rightBarButtonItems = [moreBarButtonItem, shareBarButtonItem]
         } else {
             self.navigationItem.rightBarButtonItem = shareBarButtonItem
@@ -118,7 +118,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
     func shareButtonPressed(_ button: UIBarButtonItem) {
@@ -282,8 +282,8 @@ class CoursePreviewViewController: UIViewController, ShareableController {
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.willExitFullscreen), name: NSNotification.Name.MPMoviePlayerWillExitFullscreen, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(CoursePreviewViewController.didExitFullscreen), name: NSNotification.Name.MPMoviePlayerDidExitFullscreen, object: nil)
 
-            _ = self.moviePlayer?.view.alignLeading("0", trailing: "0", to: self.contentView)
-            _ = self.moviePlayer?.view.alignTop("0", bottom: "0", to: self.contentView)
+            _ = self.moviePlayer?.view.alignLeading("0", trailing: "0", toView: self.contentView)
+            _ = self.moviePlayer?.view.alignTop("0", bottom: "0", toView: self.contentView)
             self.moviePlayer?.view.isHidden = true
         }
     }
@@ -482,6 +482,7 @@ extension CoursePreviewViewController : UITableViewDataSource {
                 }
                 cell?.textLabel?.text = "\(indexPath.row + 1). \(sectionTitles[indexPath.row])"
                 cell?.textLabel?.numberOfLines = 0
+                cell?.textLabel?.textColor = UIColor.mainText
                 return cell ?? UITableViewCell()
             } else {
                 return UITableViewCell()

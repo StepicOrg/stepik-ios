@@ -25,10 +25,10 @@ class VideoQualityTableViewController: UITableViewController {
 
     @IBOutlet var qualityCells: [UITableViewCell]!
 
-    @IBOutlet weak var lowLabel: UILabel!
-    @IBOutlet weak var mediumLabel: UILabel!
-    @IBOutlet weak var highLabel: UILabel!
-    @IBOutlet weak var veryHighLabel: UILabel!
+    @IBOutlet weak var lowLabel: StepikLabel!
+    @IBOutlet weak var mediumLabel: StepikLabel!
+    @IBOutlet weak var highLabel: StepikLabel!
+    @IBOutlet weak var veryHighLabel: StepikLabel!
 
     var action: VideoQualityChoiceAction!
 
@@ -54,6 +54,9 @@ class VideoQualityTableViewController: UITableViewController {
         localize()
         tableView.tableFooterView = UIView()
         self.title = action.title
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+//        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

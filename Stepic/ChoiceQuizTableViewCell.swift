@@ -15,14 +15,14 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var checkBox: BEMCheckBox!
 
-    var optionLabel: UILabel?
+    var optionLabel: StepikLabel?
     var optionWebView: FullHeightWebView?
 
     var webViewHelper: CellWebViewHelper?
 
     func initLabel() {
         guard optionLabel == nil else { return }
-        optionLabel = UILabel()
+        optionLabel = StepikLabel()
         guard let optionLabel = optionLabel else { return }
         optionLabel.numberOfLines = 0
         optionLabel.font = UIFont(name: "ArialMT", size: 16)
@@ -31,7 +31,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         optionLabel.textAlignment = NSTextAlignment.natural
         optionLabel.backgroundColor = UIColor.clear
         textContainerView.addSubview(optionLabel)
-        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", to: textContainerView)
+        optionLabel.alignTop("0", leading: "8", bottom: "0", trailing: "-8", toView: textContainerView)
         optionLabel.isHidden = true
     }
 
@@ -40,7 +40,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         optionWebView = FullHeightWebView()
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
-        optionWebView.align(to: textContainerView)
+        optionWebView.align(toView: textContainerView)
         webViewHelper = CellWebViewHelper(webView: optionWebView)
         optionWebView.isHidden = true
     }
@@ -50,6 +50,9 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         checkBox.onAnimationType = .fill
         checkBox.animationDuration = 0.3
         contentView.backgroundColor = UIColor.clear
+        checkBox.onTintColor = UIColor.mainDark
+        checkBox.onFillColor = UIColor.mainDark
+        checkBox.tintColor = UIColor.mainDark
     }
 
     override func prepareForReuse() {
@@ -63,7 +66,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
     }
 
     class func getHeightForText(text: String, width: CGFloat) -> CGFloat {
-        return max(27, UILabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68)) + 17
+        return max(27, StepikLabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68)) + 17
     }
 }
 

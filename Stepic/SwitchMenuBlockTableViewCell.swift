@@ -9,7 +9,7 @@
 import UIKit
 
 class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var blockSwitch: UISwitch!
 
     var block: SwitchMenuBlock?

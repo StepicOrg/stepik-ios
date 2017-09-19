@@ -8,13 +8,13 @@
 
 import Foundation
 
-class ArtView: UIView {
+class ArtView: NibInitializableView {
 
     @IBOutlet weak var artImageView: UIImageView!
     @IBOutlet weak var artImageViewWidth: NSLayoutConstraint!
 
-    var onTap : ((Void) -> Void)?
-    
+    var onTap : (() -> Void)?
+
     var art: UIImage? {
         didSet {
             artImageView.image = art
@@ -27,7 +27,11 @@ class ArtView: UIView {
         }
     }
 
-    private func initialize() {
+    override var nibName: String {
+        return "ArtView"
+    }
+
+    override func setupSubviews() {
         artImageView.image = art
         artImageView.isUserInteractionEnabled = true
         let tapG = UITapGestureRecognizer(target: self, action: #selector(ArtView.didTap))
@@ -36,40 +40,5 @@ class ArtView: UIView {
 
     func didTap() {
         onTap?()
-    }
-    
-    private var view: UIView!
-
-    private func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        initialize()
-    }
-
-    private func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "ArtView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
     }
 }

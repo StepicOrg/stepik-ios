@@ -12,9 +12,9 @@ import SDWebImage
 class CourseTableViewCell: UITableViewCell {
 
     @IBOutlet weak var courseImageView: UIImageView!
-    @IBOutlet weak var courseNameLabel: UILabel!
-    @IBOutlet weak var courseDescriptionLabel: UILabel!
-    @IBOutlet weak var deadlinesLabel: UILabel!
+    @IBOutlet weak var courseNameLabel: StepikLabel!
+    @IBOutlet weak var courseDescriptionLabel: StepikLabel!
+    @IBOutlet weak var deadlinesLabel: StepikLabel!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var deadlineLabelHeight: NSLayoutConstraint! //14
     @IBOutlet weak var continueButtonHeight: NSLayoutConstraint! //32

@@ -10,16 +10,16 @@ import UIKit
 import FLKAutoLayout
 
 class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var subtitleLabel: StepikLabel!
 
     var titleBottomSpaceConstraint: NSLayoutConstraint?
     var subtitleBottomSpaceConstraint: NSLayoutConstraint?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-25").first as? NSLayoutConstraint
-        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(with: self.contentView, predicate: "-25").first as? NSLayoutConstraint
+        titleBottomSpaceConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
+        subtitleBottomSpaceConstraint = subtitleLabel.alignBottomEdge(withView: self.contentView, predicate: "-25")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -318,6 +318,7 @@ WhoopsHead = "Whoops!";
 TooManyAttemptsSignIn = "Too many attempts. Please, try later";
 ValidationEmailAndPasswordError = "The e-mail address and/or password you specified are not correct.";
 SocialSignupWithExistingEmailError = "This email is already used. Please, log in via email.";
+SearchCourses = "Search courses";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

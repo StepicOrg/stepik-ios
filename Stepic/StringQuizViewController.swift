@@ -21,11 +21,12 @@ class StringQuizViewController: QuizViewController {
         super.viewDidLoad()
 
         self.containerView.addSubview(textView)
-        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", to: self.containerView)
+        textView.alignTop("8", leading: "8", bottom: "0", trailing: "-8", toView: self.containerView)
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
 
         textView.font = UIFont.systemFont(ofSize: 16)
         _ = textView.constrainHeight("\(textViewHeight)")
+        textView.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)

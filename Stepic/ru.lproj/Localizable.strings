@@ -319,6 +319,7 @@ WhoopsHead = "Ой!";
 TooManyAttemptsSignIn = "Слишком много попыток. Повторите позднее";
 ValidationEmailAndPasswordError = "Указан неверный email или пароль.";
 SocialSignupWithExistingEmailError = "Этот email привязан к другому аккаунту. Войдите, используя пароль.";
+SearchCourses = "Поиск курсов";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

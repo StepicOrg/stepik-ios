@@ -26,7 +26,7 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         view.addSubview(tableView)
-        tableView.align(to: view)
+        tableView.align(toView: view)
 
         tableView.separatorStyle = .none
 

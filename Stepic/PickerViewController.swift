@@ -13,7 +13,7 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
 
     var selectedBlock: (() -> Void)?
     var pickerTitle: String = ""

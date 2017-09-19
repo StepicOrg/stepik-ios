@@ -69,11 +69,9 @@ class HTMLParsingUtil {
     static func getAlliFrameLinks(_ htmlString: String) -> [String] {
         var res = [String]()
         if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {
-            res += doc.css("iframe").flatMap {
-                if let link = $0["src"] {
-                    return link
-                } else {
-                    return ""
+            for element in doc.css("iframe") {
+                if let link = element["src"] {
+                    res += [link]
                 }
             }
         }

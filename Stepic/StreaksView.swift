@@ -8,19 +8,19 @@
 
 import Foundation
 
-class StreaksView: UIView {
+class StreaksView: NibInitializableView {
 
-    @IBOutlet weak var currentStreakLabel: UILabel!
+    @IBOutlet weak var currentStreakLabel: StepikLabel!
 
     @IBOutlet weak var currentStreakCountLabel: UILabel!
 
-    @IBOutlet weak var currentStreakDaysInARowLabel: UILabel!
+    @IBOutlet weak var currentStreakDaysInARowLabel: StepikLabel!
 
-    @IBOutlet weak var bestStreakLabel: UILabel!
+    @IBOutlet weak var bestStreakLabel: StepikLabel!
 
     @IBOutlet weak var bestStreakCountLabel: UILabel!
 
-    @IBOutlet weak var bestStreakDaysInARowLabel: UILabel!
+    @IBOutlet weak var bestStreakDaysInARowLabel: StepikLabel!
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
@@ -95,7 +95,11 @@ class StreaksView: UIView {
         }
     }
 
-    fileprivate func initialize() {
+    override var nibName: String {
+        return "StreaksView"
+    }
+
+    override func setupSubviews() {
         currentStreakLabel.text = NSLocalizedString("CurrentStreakTitle", comment: "")
         currentStreakDaysInARowLabel.text = "\(dayLocalizableFor(daysCnt: currentStreak)) \(NSLocalizedString("InARow", comment: ""))"
         bestStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
@@ -107,40 +111,4 @@ class StreaksView: UIView {
         bestStreak = best
         currentStreak = current
     }
-
-    fileprivate var view: UIView!
-
-    fileprivate func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        initialize()
-    }
-
-    fileprivate func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "StreaksView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
-    }
-
 }

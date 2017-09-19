@@ -9,10 +9,14 @@
 import UIKit
 import DownloadButton
 
-class VideoDownloadView: UIView {
+class VideoDownloadView: NibInitializableView {
 
-    @IBOutlet weak var qualityLabel: UILabel!
+    @IBOutlet weak var qualityLabel: StepikLabel!
     @IBOutlet weak var downloadButton: PKDownloadButton!
+
+    override var nibName: String {
+        return "VideoDownloadView"
+    }
 
     var video: Video!
 
@@ -22,52 +26,15 @@ class VideoDownloadView: UIView {
         }
     }
 
-    var view: UIView!
-
-    func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-    }
-
-    func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "VideoDownloadView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-
-        // 3. Setup view from .xib file
-        setup()
-    }
-
     weak var downloadDelegate: VideoDownloadDelegate?
 
     convenience init(frame: CGRect, video: Video, buttonDelegate: PKDownloadButtonDelegate, downloadDelegate: VideoDownloadDelegate) {
         self.init(frame: frame)
 
         self.video = video
-//        self.quality = video.cachedQuality ?? VideosInfo.videoQuality
-
-//        print("quality -> \(quality)")
         downloadButton.delegate = buttonDelegate
         self.downloadDelegate = downloadDelegate
-        UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: true)
+        UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
     }
 

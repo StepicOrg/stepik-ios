@@ -31,10 +31,6 @@ extension UIColor {
 
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
 
-//        if self.ciColor.colorSpace != CGColorSpace.genericRGBLinear {
-////            let color = self.c
-//        }
-
         let hexString = String(format: "%02X%02X%02X",
                                Int(red * 255.0),
                                Int(green * 255.0),
@@ -42,33 +38,15 @@ extension UIColor {
         return hexString
     }
 
-    class func errorRedColor() -> UIColor {
-        return UIColor(hex: 0xff0033)
-    }
+    static let errorRed: UIColor = UIColor(hex: 0xff0033)
+    static let stepicGreen: UIColor = UIColor(hex: 0x66CC66)
 
-    class func stepicGreenColor() -> UIColor {
-        return UIColor(hex: 0x66CC66)
-    }
+    static let mainLight: UIColor = UIColor(hex: 0xf6f6f6)
+    static let mainDark: UIColor = StepicApplicationsInfo.Colors.mainDark
+    static let mainText: UIColor = StepicApplicationsInfo.Colors.mainText
 
-    static let navigationBlackColor: UIColor = UIColor(hex: 0x222222)
+    static let correctQuizBackground: UIColor = UIColor(hex: 0xE9F9E9)
+    static let wrongQuizBackground: UIColor = UIColor(hex: 0xF5EBF2)
+    static let peerReviewYellow: UIColor = UIColor(hex: 0xFFFAE9)
 
-    static let navigationColor = stepicGreenColor()
-
-    class func backgroundColor() -> UIColor {
-        return UIColor(white: 0.9, alpha: 1)
-    }
-
-    class func correctQuizBackgroundColor() -> UIColor {
-        return UIColor(hex: 0xE9F9E9)
-    }
-
-    class func wrongQuizBackgroundColor() -> UIColor {
-        return UIColor(hex: 0xF5EBF2)
-    }
-
-    class func peerReviewYellowColor() -> UIColor {
-        return UIColor(hex: 0xFFFAE9)
-    }
-
-    static let newTextColor: UIColor = UIColor(hex: 0x535366)
 }
