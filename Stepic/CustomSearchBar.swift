@@ -42,9 +42,12 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
     }
 
     @IBInspectable
-    var text: String = "" {
-        didSet {
-            textField.text = text
+    var text: String {
+        set(newText) {
+            textField.text = newText
+        }
+        get {
+            return textField.text ?? ""
         }
     }
 
@@ -115,8 +118,8 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
             setCancelButton(visible: false, animated: true)
         }
         textField.resignFirstResponder()
-        textField.text = ""
         delegate?.cancelPressed(in: self)
+        textField.text = ""
     }
 
     func textFieldDidChange(textField: UITextField) {
