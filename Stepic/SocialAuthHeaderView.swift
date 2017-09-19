@@ -11,7 +11,7 @@ import UIKit
 class SocialAuthHeaderView: UICollectionReusableView {
     static let reuseId = "socialAuthHeaderView"
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

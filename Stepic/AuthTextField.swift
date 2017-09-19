@@ -37,7 +37,7 @@ class AuthTextField: UITextField {
 
         let rightButton = UIButton(type: .system)
         rightButton.setImage(#imageLiteral(resourceName: "eye_opened"), for: .normal)
-        rightButton.tintColor = UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0)
+        rightButton.tintColor = UIColor.mainText
         rightButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         rightButton.frame = CGRect(x: s.frame.size.width - s.eyeButtonSize.width, y: s.insetDelta, width: s.eyeButtonSize.width, height: s.eyeButtonSize.height)
         rightButton.addTarget(self, action: #selector(s.togglePasswordField), for: .touchUpInside)

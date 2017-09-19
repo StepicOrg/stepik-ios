@@ -44,7 +44,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var separatorFirstHeight: NSLayoutConstraint!
     @IBOutlet weak var separatorSecondHeight: NSLayoutConstraint!
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var tosTextView: UITextView!
 
     var errorMessage: NSMutableAttributedString? = nil {
@@ -172,11 +172,11 @@ class RegistrationViewController: UIViewController {
         let string = "\(head) \(termsOfService) \(and) \(privacyPolicy)"
         attributedString = NSMutableAttributedString(string: string, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.mainText, range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
         attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
         tosTextView.attributedText = attributedString
 
         registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
