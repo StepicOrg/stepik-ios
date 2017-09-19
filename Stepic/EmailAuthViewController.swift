@@ -88,6 +88,8 @@ class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onLogInClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
+
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
 
@@ -101,12 +103,14 @@ class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithSocialClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onEmailAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email, to: .social)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onEmailAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .email, to: .registration)
         }
@@ -143,6 +147,8 @@ class EmailAuthViewController: UIViewController {
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
+
         state = .normal
 
         let isEmptyEmail = emailTextField.text?.isEmpty ?? true
@@ -165,6 +171,10 @@ class EmailAuthViewController: UIViewController {
 }
 
 extension EmailAuthViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailTextField {
             passwordTextField.becomeFirstResponder()
@@ -173,6 +183,9 @@ extension EmailAuthViewController: UITextFieldDelegate {
 
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
+
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
 
             if logInButton.isEnabled {
                 self.onLogInClick(logInButton)

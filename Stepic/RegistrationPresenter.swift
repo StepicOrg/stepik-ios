@@ -49,11 +49,12 @@ class RegistrationPresenter {
                     AuthInfo.shared.user = user
                     User.removeAllExcept(user)
 
-                    // TODO: Pass "registered" to analytics
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
                     self.view?.update(with: .success)
                 }, error: { _ in
                     print("registration: successfully signed in, but could not get user")
-                    // TODO: Pass "registered" to analytics
+
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "registered"])
                     self.view?.update(with: .success)
                 })
             }, failure: { _ in

@@ -48,11 +48,12 @@ class EmailAuthPresenter {
                 AuthInfo.shared.user = user
                 User.removeAllExcept(user)
 
-                // TODO: Pass "password" to analytics
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
                 self.view?.update(with: .success)
             }, error: { _ in
                 print("email auth: successfully signed in, but could not get user")
-                // TODO: Pass "password" to analytics
+
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "password"])
                 self.view?.update(with: .success)
             })
         }, failure: { e in

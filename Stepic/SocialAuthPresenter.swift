@@ -10,9 +10,8 @@ import Foundation
 
 struct SocialProviderViewData {
     let image: UIImage!
-
-    // id in SocialProvider
-    let id: Int
+    let name: String
+    let id: Int // id in SocialProvider
 }
 
 protocol SocialAuthView: class {
@@ -53,7 +52,7 @@ class SocialAuthPresenter {
     }
 
     func update() {
-        let providersInfo = SocialProvider.all.map { SocialProviderViewData(image: $0.info.image, id: $0.rawValue) }
+        let providersInfo = SocialProvider.all.map { SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue) }
         view?.set(providers: providersInfo)
     }
 
@@ -124,11 +123,12 @@ class SocialAuthPresenter {
                 AuthInfo.shared.user = user
                 User.removeAllExcept(user)
 
-                // TODO: Pass "social" to analytics
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
             }, error: { _ in
                 print("social auth: successfully signed in, but could not get user")
-                // TODO: Pass "social" to analytics
+                
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
             })
         }, failure: { _ in

@@ -95,6 +95,8 @@ class RegistrationViewController: UIViewController {
     }
 
     @IBAction func onRegisterClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
+
         let name = nameTextField.text ?? ""
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
@@ -131,6 +133,8 @@ class RegistrationViewController: UIViewController {
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+
         state = .normal
 
         let isEmptyName = nameTextField.text?.isEmpty ?? true
@@ -167,6 +171,10 @@ class RegistrationViewController: UIViewController {
 }
 
 extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTextField {
             emailTextField.becomeFirstResponder()
@@ -180,6 +188,9 @@ extension RegistrationViewController: UITextFieldDelegate {
 
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
+
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
 
             if registerButton.isEnabled {
                 self.onRegisterClick(registerButton)

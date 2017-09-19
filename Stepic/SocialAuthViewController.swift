@@ -80,12 +80,14 @@ class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func onSignInWithEmailClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSocialAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .email)
         }
     }
 
     @IBAction func onSignUpClick(_ sender: Any) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSocialAuth, parameters: nil)
         if let navigationController = self.navigationController as? AuthNavigationViewController {
             navigationController.route(from: .social, to: .registration)
         }
@@ -169,6 +171,8 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         }
 
         let provider = providers[providerIndex]
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Social.clicked, parameters: ["social": provider.name])
+
         presenter?.logIn(with: provider.id)
     }
 
