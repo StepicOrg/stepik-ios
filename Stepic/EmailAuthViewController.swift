@@ -130,6 +130,18 @@ class EmailAuthViewController: UIViewController {
         setup()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        // Drop state after rotation to prevent layout issues on small screens
+        switch state {
+        case .validationError(_):
+            state = .normal
+        default:
+            break
+        }
+    }
+
     @objc private func textFieldDidChange(_ textField: UITextField) {
         state = .normal
 
