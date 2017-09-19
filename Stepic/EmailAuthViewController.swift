@@ -121,6 +121,9 @@ class EmailAuthViewController: UIViewController {
 
         presenter = EmailAuthPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+
         emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
@@ -146,5 +149,25 @@ class EmailAuthViewController: UIViewController {
         inputGroupPad.layer.borderWidth = 0.5
         inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
         passwordTextField.fieldType = .password
+    }
+}
+
+extension EmailAuthViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+            return true
+        }
+
+        if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+
+            if logInButton.isEnabled {
+                self.onLogInClick(logInButton)
+            }
+            return true
+        }
+
+        return true
     }
 }

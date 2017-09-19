@@ -73,7 +73,7 @@ class HTMLParsingUtil {
                 if let link = $0["src"] {
                     return link
                 } else {
-                    return nil
+                    return ""
                 }
             }
         }

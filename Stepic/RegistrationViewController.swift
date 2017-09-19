@@ -107,6 +107,10 @@ class RegistrationViewController: UIViewController {
 
         presenter = RegistrationPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
 
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+
         nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
@@ -141,11 +145,36 @@ class RegistrationViewController: UIViewController {
         paragraphStyle.alignment = .center
         attributedString = NSMutableAttributedString(string: "By registering you agree to the Terms of service and Privacy policy.", attributes: [NSParagraphStyleAttributeName: paragraphStyle])
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0), range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: 32, length: 16))
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 32, length: 16))
         attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: 53, length: 14))
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 102.0 / 255.0, green: 204.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0), range: NSRange(location: 53, length: 14))
         tosTextView.attributedText = attributedString
+    }
+}
+
+extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            emailTextField.becomeFirstResponder()
+            return true
+        }
+
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+            return true
+        }
+
+        if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+
+            if registerButton.isEnabled {
+                self.onRegisterClick(registerButton)
+            }
+            return true
+        }
+
+        return true
     }
 }
