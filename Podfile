@@ -11,7 +11,7 @@ def all_pods
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
-    pod 'FLKAutoLayout'
+    pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'Fabric'
     pod 'Crashlytics'

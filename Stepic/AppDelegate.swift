@@ -310,12 +310,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if let queryDict = url.getKeyVals(), let error = queryDict["error"], error == "social_signup_with_existing_email" {
             // Auth redirect with registered email
             let email = (queryDict["email"] ?? "").removingPercentEncoding
-
-            let signInViewController = ControllerHelper.instantiateViewController(identifier: "SignInViewController", storyboardName: "Auth") as! SignInViewController
-            signInViewController.prefilledEmail = email
-
-            if let topViewController = ControllerHelper.getTopViewController() as? UINavigationController {
-                topViewController.pushViewController(signInViewController, animated: true)
+            if let topViewController = ControllerHelper.getTopViewController() as? AuthNavigationViewController {
+                topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
             // Other actions
