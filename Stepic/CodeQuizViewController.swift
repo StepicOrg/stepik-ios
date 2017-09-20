@@ -70,7 +70,9 @@ class CodeQuizViewController: QuizViewController {
 
     var language: CodeLanguage! {
         didSet {
-            textStorage.language = language.highlightr
+            if language != oldValue {
+                textStorage.language = language.highlightr
+            }
             if let limit = step.options?.limit(language: language) {
                 setLimits(time: limit.time, memory: limit.memory)
             }
@@ -84,12 +86,16 @@ class CodeQuizViewController: QuizViewController {
             setupAccessoryView(editable: submissionStatus != .correct)
 
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
-                codeTextView.text = userTemplate.templateString
+                if codeTextView.text != userTemplate.templateString {
+                    codeTextView.text = userTemplate.templateString
+                }
                 currentCode = userTemplate.templateString
                 return
             }
             if let template = step.options?.template(language: language, userGenerated: false) {
-                codeTextView.text = template.templateString
+                if codeTextView.text != template.templateString {
+                    codeTextView.text = template.templateString
+                }
                 currentCode = template.templateString
                 return
             }
@@ -177,6 +183,11 @@ class CodeQuizViewController: QuizViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        toolbarView.layoutSubviews()
+    }
+
     func hidePicker() {
         languagePicker.removeFromParentViewController()
         languagePicker.view.removeFromSuperview()
@@ -214,6 +225,8 @@ class CodeQuizViewController: QuizViewController {
             return
         }
 
+        self.submissionStatus = nil
+
         setQuizControls(enabled: true)
 
         if options.languages.count > 1 {
@@ -232,8 +245,8 @@ class CodeQuizViewController: QuizViewController {
         }
 
         self.reply = reply
-        display(reply: reply)
         self.submissionStatus = status
+        display(reply: reply)
 
         if status == .correct {
             setQuizControls(enabled: false)
@@ -250,7 +263,9 @@ class CodeQuizViewController: QuizViewController {
 
         if let l = reply.language {
             language = l
-            codeTextView.text = reply.code
+            if codeTextView.text != reply.code {
+                codeTextView.text = reply.code
+            }
             currentCode = reply.code
         } else {
             setUnsupportedQuizView()
