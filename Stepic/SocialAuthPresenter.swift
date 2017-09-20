@@ -126,7 +126,7 @@ class SocialAuthPresenter {
                 self.view?.update(with: .success)
             }, error: { _ in
                 print("social auth: successfully signed in, but could not get user")
-                
+
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Login.success, parameters: ["provider": "social"])
                 self.view?.update(with: .success)
             })
