@@ -125,6 +125,13 @@ class RegistrationViewController: UIViewController {
         setup()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Reset to default value (see AppDelegate)
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
