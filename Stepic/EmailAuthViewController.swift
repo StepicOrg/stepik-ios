@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManagerSwift
 
 extension EmailAuthViewController: EmailAuthView {
     func update(with result: EmailAuthResult) {
@@ -99,6 +100,8 @@ class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onLogInClick(_ sender: Any) {
+        view.endEditing(true)
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "button"])
 
         let email = emailTextField.text ?? ""
@@ -209,6 +212,8 @@ class EmailAuthViewController: UIViewController {
 extension EmailAuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
+        // 24 - default value in app (see AppDelegate), 60 - offset with button
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
