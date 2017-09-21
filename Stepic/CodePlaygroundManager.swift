@@ -309,8 +309,12 @@ class CodePlaygroundManager {
 
             let analyzed = analyze(currentText: textView.text, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
 
-            textView.text = analyzed.text
-            textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
+            if textView.text != analyzed.text {
+                textView.text = analyzed.text
+            }
+            if textView.selectedTextRange != textRangeFrom(position: analyzed.position, textView: textView) {
+                textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
+            }
             if let autocomplete = analyzed.autocomplete {
                 if autocomplete.suggestions.count == 0 {
                     hideSuggestions()

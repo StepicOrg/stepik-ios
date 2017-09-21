@@ -109,6 +109,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         codeTextView.autocorrectionType = UITextAutocorrectionType.no
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
+        codeTextView.keyboardType = UIKeyboardType.asciiCapable
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
