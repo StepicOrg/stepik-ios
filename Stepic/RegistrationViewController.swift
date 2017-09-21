@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManagerSwift
 
 extension RegistrationViewController: RegistrationView {
     func update(with result: RegistrationResult) {
@@ -95,6 +96,8 @@ class RegistrationViewController: UIViewController {
     }
 
     @IBAction func onRegisterClick(_ sender: Any) {
+        view.endEditing(true)
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
 
         let name = nameTextField.text ?? ""
@@ -120,6 +123,13 @@ class RegistrationViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
         setup()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Reset to default value (see AppDelegate)
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -190,6 +200,8 @@ class RegistrationViewController: UIViewController {
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
+        // 24 - default value in app (see AppDelegate), 60 - offset with button
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
