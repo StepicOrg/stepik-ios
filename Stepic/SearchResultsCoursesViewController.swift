@@ -27,7 +27,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
         vc.delegate = self
         self.addChildViewController(vc)
         self.view.addSubview(vc.view)
-        vc.view.align(to: self.view)
+        vc.view.align(toView: self.view)
         vc.view.isHidden = true
         vc.hideKeyboardBlock = self.hideKeyboardBlock
         return vc
@@ -70,13 +70,13 @@ class SearchResultsCoursesViewController: CoursesViewController {
         let ai = UIActivityIndicatorView()
         ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         ai.constrainWidth("50", height: "50")
-        ai.color = UIColor.stepicGreenColor()
+        ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
-        ai.alignCenter(with: v)
+        ai.alignCenter(withView: v)
         ai.startAnimating()
         self.view.insertSubview(v, aboveSubview: tableView)
-        v.align(to: self.view)
+        v.align(toView: self.view)
         v.isHidden = false
         return v
     }

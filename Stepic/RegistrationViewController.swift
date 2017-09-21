@@ -2,245 +2,210 @@
 //  RegistrationViewController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 18.12.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
+//  Created by Vladislav Kiryukhin on 12.09.2017.
+//  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
 import UIKit
-import TextFieldEffects
 import SVProgressHUD
+import IQKeyboardManagerSwift
+
+extension RegistrationViewController: RegistrationView {
+    func update(with result: RegistrationResult) {
+        guard let navigationController = self.navigationController as? AuthNavigationViewController else {
+            return
+        }
+
+        state = .normal
+
+        switch result {
+        case .success:
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
+            navigationController.dismissAfterSuccess()
+        case .error:
+            SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
+        }
+    }
+}
 
 class RegistrationViewController: UIViewController {
+    var presenter: RegistrationPresenter?
 
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var closeBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
+    @IBOutlet var alertLabelHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var firstNameTextField: HoshiTextField!
+    @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet weak var registerButton: AuthButton!
 
-    @IBOutlet weak var lastNameTextField: HoshiTextField!
+    @IBOutlet weak var emailTextField: AuthTextField!
+    @IBOutlet weak var passwordTextField: AuthTextField!
+    @IBOutlet weak var nameTextField: AuthTextField!
+    @IBOutlet weak var inputGroupPad: UIView!
 
-    @IBOutlet weak var emailTextField: HoshiTextField!
+    @IBOutlet weak var separatorFirstHeight: NSLayoutConstraint!
+    @IBOutlet weak var separatorSecondHeight: NSLayoutConstraint!
 
-    @IBOutlet weak var passwordTextField: HoshiTextField!
+    @IBOutlet weak var titleLabel: StepikLabel!
+    @IBOutlet weak var tosTextView: UITextView!
 
-    @IBOutlet weak var visiblePasswordButton: UIButton!
-
-    @IBOutlet weak var firstNameErrorViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var lastNameErrorViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var emailErrorViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var passwordErrorViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var firstNameErrorLabel: UILabel!
-    @IBOutlet weak var lastNameErrorLabel: UILabel!
-    @IBOutlet weak var emailErrorLabel: UILabel!
-    @IBOutlet weak var passwordErrorLabel: UILabel!
-
-    var passwordSecure = false {
+    var errorMessage: NSMutableAttributedString? = nil {
         didSet {
-            visiblePasswordButton.setImage(passwordSecure ? Images.visibleImage : Images.visibleFilledImage, for: UIControlState())
-            passwordTextField.isSecureTextEntry = passwordSecure
+            alertLabel.attributedText = errorMessage
+            if errorMessage != nil {
+                alertBottomLabelConstraint.constant = 16
+                alertLabelHeightConstraint.isActive = false
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            } else {
+                alertBottomLabelConstraint.constant = 0
+                alertLabelHeightConstraint.isActive = true
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
         }
     }
 
-    fileprivate func setupLocalizations() {
-        title = NSLocalizedString("SignUp", comment: "")
-        firstNameTextField.placeholder = NSLocalizedString("FirstName", comment: "")
-        lastNameTextField.placeholder = NSLocalizedString("LastName", comment: "")
-        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
-        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
-        signUpButton.setTitle(NSLocalizedString("SignUpAction", comment: ""), for: UIControlState())
+    var state: RegistrationState = .normal {
+        didSet {
+            switch state {
+            case .normal:
+                errorMessage = nil
+                SVProgressHUD.dismiss()
+                inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.0)
+            case .loading:
+                SVProgressHUD.show()
+            case .validationError(let message):
+                let head = NSLocalizedString("WhoopsHead", comment: "")
+                let attributedString = NSMutableAttributedString(string: "\(head) \(message)")
+                attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
+                errorMessage = attributedString
+                registerButton.isEnabled = false
+
+                SVProgressHUD.dismiss()
+                inputGroupPad.backgroundColor = inputGroupPad.backgroundColor?.withAlphaComponent(0.05)
+            }
+        }
     }
 
-    fileprivate func setupTextFields() {
-        firstNameTextField.returnKeyType = .next
-        lastNameTextField.returnKeyType = .next
-        emailTextField.returnKeyType = .next
-        passwordTextField.returnKeyType = .send
-
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-
-        firstNameTextField.autocapitalizationType = .words
-        lastNameTextField.autocapitalizationType = .words
-
-        emailTextField.autocapitalizationType = .none
-        emailTextField.autocorrectionType = .no
-        emailTextField.keyboardType = .emailAddress
-
-        firstNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
-        lastNameTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
-        emailTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(RegistrationViewController.textFieldDidChange(textField:)), for: .editingChanged)
-
+    @IBAction func onCloseClick(_ sender: Any) {
+        if let navigationController = self.navigationController as? AuthNavigationViewController {
+            navigationController.route(from: .registration, to: nil)
+        }
     }
 
-    func textFieldDidChange(textField: UITextField) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+    @IBAction func onRegisterClick(_ sender: Any) {
+        view.endEditing(true)
+
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
+
+        let name = nameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+
+        presenter?.register(with: name, email: email, password: password)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        signUpButton.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreenColor())
 
-        setupLocalizations()
-        setupTextFields()
+        localize()
 
-        visiblePasswordButton.isHidden = true
+        presenter = RegistrationPresenter(authManager: AuthManager.sharedManager, stepicsAPI: ApiDataDownloader.stepics, view: self)
+
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+
+        nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+
+        setup()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Reset to default value (see AppDelegate)
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
     }
 
-    @IBAction func signUpPressed(_ sender: AnyObject) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "button"])
-        signUp()
-    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
 
-    var success: ((String) -> Void)? {
-        return (navigationController as? AuthNavigationViewController)?.loggedSuccess
-    }
-
-    func signUp() {
-        let email = emailTextField.text ?? ""
-        let firstName = firstNameTextField.text ?? ""
-        let lastName = lastNameTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-
-        SVProgressHUD.show(withStatus: "")
-        performRequest({
-            AuthManager.sharedManager.signUpWith(firstName, lastname: lastName, email: email, password: password, success: {
-                _ = AuthManager.sharedManager.logInWithUsername(email, password: password,
-                    success: {
-                        t in
-                        AuthInfo.shared.token = t
-                        NotificationRegistrator.sharedInstance.registerForRemoteNotifications(UIApplication.shared)
-                        _ = ApiDataDownloader.stepics.retrieveCurrentUser(success: {
-                            user in
-                            AuthInfo.shared.user = user
-                            User.removeAllExcept(user)
-                            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                            UIThread.performUI {
-                                self.navigationController?.dismiss(animated: true, completion: {
-                                    [weak self] in
-                                    self?.success?("registered")
-                                    })
-                            }
-                            }, error: {
-                                _ in
-                                print("successfully signed in, but could not get user")
-                                SVProgressHUD.showSuccess(withStatus: NSLocalizedString("SignedIn", comment: ""))
-                                UIThread.performUI {
-                                    self.navigationController?.dismiss(animated: true, completion: {
-                                        [weak self] in
-                                        self?.success?("registered")
-                                        })
-                                }
-                        })
-                    }, failure: {
-                        _ in
-                        SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
-                })
-                }, error: {
-                    errormsg, registrationErrorInfo in
-                    //TODO: Add localized data
-                    UIThread.performUI {SVProgressHUD.showError(withStatus: errormsg ?? NSLocalizedString("WrongFields", comment: "") )}
-                    if let info = registrationErrorInfo {
-                        self.showEmailErrorWith(message: info.email)
-                        self.showPasswordErrorWith(message: info.password)
-                        self.showFirstNameErrorWith(message: info.firstName)
-                        self.showLastNameErrorWith(message: info.lastName)
-                    }
-            })
-            }, error: {
-                [weak self]
-                error in
-                guard let s = self else { return }
-                if error == PerformRequestError.noAccessToRefreshToken {
-                    AuthInfo.shared.token = nil
-                    //TODO: Think about success & cancel closures here
-                    RoutingManager.auth.routeFrom(controller: s, success: nil, cancel: nil)
-                }
-                SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
-        })
-    }
-
-    func showEmailErrorWith(message msg: String?) {
-        changeHeightConstraint(emailErrorViewHeight, label: emailErrorLabel, text: msg)
-    }
-    func showPasswordErrorWith(message msg: String?) {
-        changeHeightConstraint(passwordErrorViewHeight, label: passwordErrorLabel, text: msg)
-    }
-    func showFirstNameErrorWith(message msg: String?) {
-        changeHeightConstraint(firstNameErrorViewHeight, label: firstNameErrorLabel, text: msg)
-    }
-    func showLastNameErrorWith(message msg: String?) {
-        changeHeightConstraint(lastNameErrorViewHeight, label: lastNameErrorLabel, text: msg)
-    }
-
-    func changeHeightConstraint(_ constraint: NSLayoutConstraint, label: UILabel, text: String?) {
-        if let msg = text {
-            let height = UILabel.heightForLabelWithText(msg, lines: 0, standardFontOfSize: 12, width: UIScreen.main.bounds.width - 32)
-            label.text = msg
-            animateConstraintChange(constraint, value: height)
-        } else {
-            animateConstraintChange(constraint, value: 0)
+        // Drop state after rotation to prevent layout issues on small screens
+        switch state {
+        case .validationError(_):
+            state = .normal
+        default:
+            break
         }
     }
-    func animateConstraintChange(_ constraint: NSLayoutConstraint, value: CGFloat) {
-        constraint.constant = value
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.layoutIfNeeded()
-        })
+
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
+
+        state = .normal
+
+        let isEmptyName = nameTextField.text?.isEmpty ?? true
+        let isEmptyEmail = emailTextField.text?.isEmpty ?? true
+        let isEmptyPassword = passwordTextField.text?.isEmpty ?? true
+        registerButton.isEnabled = !isEmptyName && !isEmptyEmail && !isEmptyPassword
     }
 
-    @IBAction func visiblePasswordButtonPressed(_ sender: AnyObject) {
-        passwordSecure = !passwordSecure
+    private func setup() {
+        // Input group
+        separatorFirstHeight.constant = 0.5
+        separatorSecondHeight.constant = 0.5
+        inputGroupPad.layer.borderWidth = 0.5
+        inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
+        passwordTextField.fieldType = .password
     }
 
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    private func localize() {
+        // Title
+        var head = NSLocalizedString("SignUpTitleHead", comment: "")
+        var attributedString = NSMutableAttributedString(string: head)
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: titleLabel.font.pointSize, weight: UIFontWeightMedium), range: NSRange(location: 0, length: head.characters.count))
+        titleLabel.attributedText = attributedString
 
+        // Term of service warning
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        head = NSLocalizedString("AgreementLabelHead", comment: "")
+        let and = NSLocalizedString("And", comment: "")
+        let termsOfService = NSLocalizedString("AgreementLabelTermsOfService", comment: "")
+        let privacyPolicy = NSLocalizedString("AgreementLabelPrivacyPolicy", comment: "")
+        let string = "\(head) \(termsOfService) \(and) \(privacyPolicy)"
+        attributedString = NSMutableAttributedString(string: string, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: tosTextView.font?.pointSize ?? 16, weight: UIFontWeightRegular), range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.mainText, range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/terms", range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + 1, length: termsOfService.characters.count))
+        attributedString.addAttribute(NSLinkAttributeName, value: "http://welcome.stepik.org/ru/privacy", range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.stepicGreen, range: NSRange(location: head.characters.count + termsOfService.characters.count + and.characters.count + 3, length: privacyPolicy.characters.count))
+        tosTextView.attributedText = attributedString
+
+        registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
+        nameTextField.placeholder = NSLocalizedString("Name", comment: "")
+        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        tosTextView.textContainerInset = UIEdgeInsets.zero
+    }
 }
 
-extension RegistrationViewController : UITextFieldDelegate {
-
+extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("did begin")
-        passwordSecure = true
-        if textField == passwordTextField {
-            visiblePasswordButton.isHidden = false
-        }
-
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("did end")
-        passwordSecure = true
-        if textField == passwordTextField && textField.text == "" {
-            visiblePasswordButton.isHidden = true
-        }
+        // 24 - default value in app (see AppDelegate), 60 - offset with button
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
-        if textField == firstNameTextField {
-            lastNameTextField.becomeFirstResponder()
-            return true
-        }
-
-        if textField == lastNameTextField {
+        if textField == nameTextField {
             emailTextField.becomeFirstResponder()
             return true
         }
@@ -252,9 +217,13 @@ extension RegistrationViewController : UITextFieldDelegate {
 
         if textField == passwordTextField {
             passwordTextField.resignFirstResponder()
+
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.nextButton, parameters: nil)
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
-            signUp()
+
+            if registerButton.isEnabled {
+                self.onRegisterClick(registerButton)
+            }
             return true
         }
 

@@ -19,6 +19,10 @@ class NotificationRegistrator: NSObject {
         super.init()
     }
 
+    func registerForRemoteNotifications() {
+        return registerForRemoteNotifications(UIApplication.shared)
+    }
+
     func registerForRemoteNotifications(_ application: UIApplication) {
         if StepicApplicationsInfo.shouldRegisterNotifications {
             let settings: UIUserNotificationSettings =

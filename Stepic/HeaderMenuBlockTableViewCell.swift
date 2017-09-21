@@ -11,7 +11,7 @@ import FLKAutoLayout
 
 class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

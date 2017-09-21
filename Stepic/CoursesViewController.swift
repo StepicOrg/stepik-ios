@@ -35,12 +35,19 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
     var refreshControl: UIRefreshControl? = UIRefreshControl()
 
+    var shouldAlignTop: Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addSubview(tableView)
-        self.tableView.alignLeading("0", trailing: "0", to: self.view)
-        self.tableView.alignTop("0", bottom: "0", to: self.view)
+        self.tableView.alignLeading("0", trailing: "0", toView: self.view)
+        self.tableView.alignBottomEdge(withView: self.view, predicate: "0")
+        if shouldAlignTop {
+            self.tableView.alignTopEdge(withView: self.view, predicate: "0")
+        }
 
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
@@ -70,10 +77,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
         lastUser = AuthInfo.shared.user
 
-        if #available(iOS 9.0, *) {
-            if(traitCollection.forceTouchCapability == .available) {
-                registerForPreviewing(with: self, sourceView: view)
-            }
+        if(traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: view)
         }
     }
 
@@ -480,11 +485,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             return nil
         }
 
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        } else {
-            return nil
-        }
+        previewingContext.sourceRect = cell.frame
 
         if !courses[indexPath.row].enrolled {
             guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {

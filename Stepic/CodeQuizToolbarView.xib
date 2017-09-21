@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,27 +21,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-ZS-1C2">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAR-ZS-1C2">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <items>
                         <barButtonItem title="Language" id="suB-p4-Ypg">
+                            <color key="tintColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="languagePressed:" destination="-1" id="GHw-e9-fh0"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="zgO-sG-As9"/>
                         <barButtonItem title="Reset" id="uX2-ZG-muf">
-                            <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.78431372549019607" green="0.15686274509803921" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="resetPressed:" destination="-1" id="CMZ-8n-HM4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Fullscreen" id="k3C-Yr-XzG">
+                            <color key="tintColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="fullscreenPressed:" destination="-1" id="0t6-Qv-fai"/>
                             </connections>
                         </barButtonItem>
                     </items>
+                    <color key="tintColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </toolbar>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>

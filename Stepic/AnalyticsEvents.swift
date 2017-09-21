@@ -15,7 +15,8 @@ struct AnalyticsEvents {
     }
 
     struct SignIn {
-        static let onLaunchScreen = "clicked_SignIn_on_launch_screen"
+        static let onSocialAuth = "clicked_SignIn_on_social_auth_screen"
+        static let onEmailAuth = "clicked_SignIn_on_email_auth_screen"
         static let onSignInScreen = "click_sign_in_with_interaction_type"
         static let nextButton = "click_sign_in_next_sign_in_screen"
         struct Fields {
@@ -29,7 +30,8 @@ struct AnalyticsEvents {
     }
 
     struct SignUp {
-        static let onLaunchScreen = "clicked_SignUp_on_launch_screen"
+        static let onSocialAuth = "clicked_SignUp_on_social_auth_screen"
+        static let onEmailAuth = "clicked_SignUp_on_email_auth_screen"
         static let onSignUpScreen = "click_registration_with_interaction_type"
         static let nextButton = "click_registration_send_ime"
         struct Fields {
@@ -115,6 +117,7 @@ struct AnalyticsEvents {
         static let findCoursesClicked = "main_choice_find_courses"
         static let downloadsClicked = "main_choice_downloads"
         static let certificatesClicked = "main_choice_certificates"
+        static let profileClicked = "main_choice_profile"
     }
 
     struct Streaks {
@@ -204,7 +207,7 @@ struct AnalyticsEvents {
         static let toolbarSelected = "code_toolbar_selected"
         static let hideKeyboard = "code_hide_keyboard"
     }
-    
+
     struct Profile {
         static let clickSettings = "main_choice_settings"
         struct Settings {

@@ -29,7 +29,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,7 +77,7 @@ class UserPreferencesContainerViewController: RGPageViewController {
 
     override var barTintColor: UIColor? {
         get {
-            return UIColor.navigationColor
+            return UIColor.mainLight
         }
     }
 

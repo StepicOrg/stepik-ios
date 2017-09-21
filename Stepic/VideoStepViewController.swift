@@ -10,7 +10,6 @@ import UIKit
 import MediaPlayer
 import SVProgressHUD
 import DownloadButton
-import FLKAutoLayout
 
 class VideoStepViewController: UIViewController {
 
@@ -64,6 +63,7 @@ class VideoStepViewController: UIViewController {
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
 
         initialize()
+        navigationController?.navigationBar.sizeToFit()
     }
 
     func sharePressed(_ item: UIBarButtonItem) {

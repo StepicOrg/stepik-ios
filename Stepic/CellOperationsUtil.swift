@@ -20,10 +20,10 @@ class CellOperationsUtil {
         v.backgroundColor = backgroundColor
         let ind = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         v.addSubview(ind)
-        ind.alignCenter(with: v)
+        ind.alignCenter(withView: v)
         ind.startAnimating()
         view.addSubview(v)
-        v.align(to: view)
+        v.align(toView: view)
         return v
     }
 

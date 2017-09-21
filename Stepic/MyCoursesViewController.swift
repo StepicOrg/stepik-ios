@@ -48,9 +48,7 @@ class MyCoursesViewController: CoursesViewController {
     }
 
     override func onRefresh() {
-        if #available(iOS 9.0, *) {
-            WatchDataHelper.parseAndAddPlainCourses(self.courses)
-        }
+        WatchDataHelper.parseAndAddPlainCourses(self.courses)
     }
 
     override func refreshBegan() {
@@ -176,7 +174,7 @@ extension MyCoursesViewController {
         }
 
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+                          NSForegroundColorAttributeName: UIColor.mainDark]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

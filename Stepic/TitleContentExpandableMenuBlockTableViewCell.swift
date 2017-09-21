@@ -10,12 +10,12 @@ import UIKit
 import FLKAutoLayout
 
 class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var arrowButton: UIButton!
 
     var bottomTitleConstraint: NSLayoutConstraint?
 
-    var labels: [UILabel] = []
+    var labels: [StepikLabel] = []
     var block: TitleContentExpandableMenuBlock?
 
     var isExpanded: Bool = false
@@ -23,7 +23,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        bottomTitleConstraint = titleLabel.alignBottomEdge(with: self.contentView, predicate: "-26").first as? NSLayoutConstraint
+        bottomTitleConstraint = titleLabel.alignBottomEdge(withView: self.contentView, predicate: "-26")
     }
 
     @IBAction func arrowButtonPressed(_ sender: UIButton) {
@@ -65,31 +65,21 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         var font: UIFont {
             switch self {
             case .title:
-                if #available(iOS 8.2, *) {
-                    return UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
-                } else {
-                    return UIFont.systemFont(ofSize: 17)
-                }
+                return UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
             case .content:
-                if #available(iOS 8.2, *) {
-                    return UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
-                } else {
-                    return UIFont.systemFont(ofSize: 15)
-                }
+                return UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
             }
         }
     }
 
-    private func buildLabel(type: LabelType, text: String) -> UILabel {
-        let label = UILabel(frame: CGRect.zero)
+    private func buildLabel(type: LabelType, text: String) -> StepikLabel {
+        let label = StepikLabel(frame: CGRect.zero)
         label.text = text
         label.font = type.font
-        switch type {
-        case .title:
-            label.textColor = block?.titleColor
-        case .content:
-            label.textColor = UIColor.newTextColor
+        if let titleColor = block?.titleColor {
+            label.textColor = titleColor
         }
+
         return label
     }
 
@@ -99,8 +89,12 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
         }
         let l = buildLabel(type: type, text: text)
         self.contentView.addSubview(l)
-        _ = l.constrainTopSpace(to: topView, predicate: type == .content ? "8" : "16")
-        l.alignLeading("24", trailing: "-24", to: self.contentView)
+        _ = l.constrainTopSpace(toView: topView, predicate: type == .content ? "8" : "16")
+//        if #available(iOS 11, *) {
+//            l.alignLeading("32", trailing: "-32", toView: self.contentView)
+//        } else {
+            l.alignLeading("24", trailing: "-24", toView: self.contentView)
+//        }
         l.numberOfLines = 0
         labels += [l]
     }
@@ -135,7 +129,7 @@ class TitleContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
                 addLabel(type: .content, text: labelText.content, after: labels.last)
             }
         }
-        _ = labels.last?.alignBottomEdge(with: self.contentView, predicate: "-26")
+        _ = labels.last?.alignBottomEdge(withView: self.contentView, predicate: "-26")
         arrowButton.setImage(#imageLiteral(resourceName: "menu_arrow_top"), for: .normal)
     }
 

@@ -60,7 +60,7 @@ class WebControllerManager: NSObject {
 
     func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true, forceCustom: Bool = false) {
 
-        if #available(iOS 9.0, *), !forceCustom {
+        if !forceCustom {
             let svc = SFSafariViewController(url: url)
             c.present(svc, animated: true, completion: nil)
             self.currentWebControllerKey = key
@@ -96,15 +96,15 @@ enum BackButtonStyle {
         switch self {
         case .close:
             let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.stepicGreenColor()
+            item.tintColor = UIColor.mainDark
             return item
         case .back:
             let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.stepicGreenColor()
+            item.tintColor = UIColor.mainDark
             return item
         case .done:
             let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.stepicGreenColor()
+            item.tintColor = UIColor.mainDark
             return item
         }
     }

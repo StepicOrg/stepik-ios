@@ -15,7 +15,7 @@ class CodeQuizViewController: QuizViewController {
     var dataset: String?
     var reply: CodeReply?
 
-    var limitsLabel: UILabel = UILabel()
+    var limitsLabel: StepikLabel = StepikLabel()
     var toolbarView: CodeQuizToolbarView = CodeQuizToolbarView(frame: CGRect.zero)
     var codeTextView: UITextView = UITextView()
 
@@ -70,7 +70,9 @@ class CodeQuizViewController: QuizViewController {
 
     var language: CodeLanguage! {
         didSet {
-            textStorage.language = language.highlightr
+            if language != oldValue {
+                textStorage.language = language.highlightr
+            }
             if let limit = step.options?.limit(language: language) {
                 setLimits(time: limit.time, memory: limit.memory)
             }
@@ -84,12 +86,16 @@ class CodeQuizViewController: QuizViewController {
             setupAccessoryView(editable: submissionStatus != .correct)
 
             if let userTemplate = step.options?.template(language: language, userGenerated: true) {
-                codeTextView.text = userTemplate.templateString
+                if codeTextView.text != userTemplate.templateString {
+                    codeTextView.text = userTemplate.templateString
+                }
                 currentCode = userTemplate.templateString
                 return
             }
             if let template = step.options?.template(language: language, userGenerated: false) {
-                codeTextView.text = template.templateString
+                if codeTextView.text != template.templateString {
+                    codeTextView.text = template.templateString
+                }
                 currentCode = template.templateString
                 return
             }
@@ -113,15 +119,15 @@ class CodeQuizViewController: QuizViewController {
         self.containerView.addSubview(limitsLabel)
         self.containerView.addSubview(toolbarView)
         self.containerView.addSubview(codeTextView)
-        limitsLabel.alignTopEdge(with: self.containerView, predicate: "8")
-        limitsLabel.alignLeading("8", trailing: "0", to: self.containerView)
+        limitsLabel.alignTopEdge(withView: self.containerView, predicate: "8")
+        limitsLabel.alignLeading("8", trailing: "0", toView: self.containerView)
         limitsLabel.constrainHeight("\(limitsLabelHeight)")
-        toolbarView.constrainTopSpace(to: self.limitsLabel, predicate: "8")
-        toolbarView.alignLeading("0", trailing: "0", to: self.containerView)
-        toolbarView.constrainBottomSpace(to: self.codeTextView, predicate: "8")
+        toolbarView.constrainTopSpace(toView: self.limitsLabel, predicate: "8")
+        toolbarView.alignLeading("0", trailing: "0", toView: self.containerView)
+        toolbarView.constrainBottomSpace(toView: self.codeTextView, predicate: "8")
         toolbarView.constrainHeight("\(toolbarHeight)")
-        codeTextView.alignLeading("0", trailing: "0", to: self.containerView)
-        codeTextView.alignBottomEdge(with: self.containerView, predicate: "0")
+        codeTextView.alignLeading("0", trailing: "0", toView: self.containerView)
+        codeTextView.alignBottomEdge(withView: self.containerView, predicate: "0")
         codeTextView.constrainHeight("\(size.elements.editor.realSizes.editorHeight)")
     }
 
@@ -151,6 +157,7 @@ class CodeQuizViewController: QuizViewController {
         codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         codeTextView.autocorrectionType = UITextAutocorrectionType.no
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
+        codeTextView.keyboardType = UIKeyboardType.asciiCapable
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
@@ -176,6 +183,11 @@ class CodeQuizViewController: QuizViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        toolbarView.layoutSubviews()
+    }
+
     func hidePicker() {
         languagePicker.removeFromParentViewController()
         languagePicker.view.removeFromSuperview()
@@ -186,7 +198,7 @@ class CodeQuizViewController: QuizViewController {
         isSubmitButtonHidden = true
         addChildViewController(languagePicker)
         view.addSubview(languagePicker.view)
-        languagePicker.view.align(to: containerView)
+        languagePicker.view.align(toView: containerView)
         languagePicker.backButton.isHidden = true
         languagePicker.selectedBlock = {
             [weak self] in
@@ -213,6 +225,8 @@ class CodeQuizViewController: QuizViewController {
             return
         }
 
+        self.submissionStatus = nil
+
         setQuizControls(enabled: true)
 
         if options.languages.count > 1 {
@@ -231,8 +245,8 @@ class CodeQuizViewController: QuizViewController {
         }
 
         self.reply = reply
-        display(reply: reply)
         self.submissionStatus = status
+        display(reply: reply)
 
         if status == .correct {
             setQuizControls(enabled: false)
@@ -249,7 +263,9 @@ class CodeQuizViewController: QuizViewController {
 
         if let l = reply.language {
             language = l
-            codeTextView.text = reply.code
+            if codeTextView.text != reply.code {
+                codeTextView.text = reply.code
+            }
             currentCode = reply.code
         } else {
             setUnsupportedQuizView()
@@ -260,16 +276,16 @@ class CodeQuizViewController: QuizViewController {
     func setUnsupportedQuizView() {
         let v = UIView()
         v.backgroundColor = UIColor.groupTableViewBackground
-        let unsupportedLabel = UILabel()
+        let unsupportedLabel = StepikLabel()
         unsupportedLabel.text = NSLocalizedString("NotSupportedLanguage", comment: "")
         unsupportedLabel.textAlignment = .center
         unsupportedLabel.numberOfLines = 0
         unsupportedLabel.font = UIFont.systemFont(ofSize: 15)
         unsupportedLabel.textColor = UIColor.gray
         v.addSubview(unsupportedLabel)
-        unsupportedLabel.align(to: v)
+        unsupportedLabel.align(toView: v)
         self.containerView.addSubview(v)
-        v.align(to: self.containerView)
+        v.align(toView: self.containerView)
     }
 
     fileprivate func setQuizControls(enabled: Bool) {

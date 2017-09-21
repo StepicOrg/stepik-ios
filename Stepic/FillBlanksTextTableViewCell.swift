@@ -10,7 +10,7 @@ import UIKit
 
 class FillBlanksTextTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var optionLabel: UILabel!
+    @IBOutlet weak var optionLabel: StepikLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

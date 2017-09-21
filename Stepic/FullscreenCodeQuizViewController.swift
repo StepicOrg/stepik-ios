@@ -93,9 +93,9 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     fileprivate func setupConstraints() {
         self.view.addSubview(codeTextView)
-        codeTextView.alignLeading("0", trailing: "0", to: self.view)
-        codeTextView.alignBottomEdge(with: self.view, predicate: "0")
-        codeTextView.constrainTopSpace(to: self.toolbar, predicate: "0")
+        codeTextView.alignLeading("0", trailing: "0", toView: self.view)
+        codeTextView.alignBottomEdge(withView: self.view, predicate: "0")
+        codeTextView.constrainTopSpace(toView: self.toolbar, predicate: "0")
     }
 
     override func viewDidLoad() {
@@ -109,6 +109,7 @@ class FullscreenCodeQuizViewController: UIViewController {
         codeTextView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         codeTextView.autocorrectionType = UITextAutocorrectionType.no
         codeTextView.autocapitalizationType = UITextAutocapitalizationType.none
+        codeTextView.keyboardType = UIKeyboardType.asciiCapable
         codeTextView.textColor = UIColor(white: 0.8, alpha: 1.0)
         highlightr = textStorage.highlightr
         highlightr.setTheme(to: "Androidstudio")
@@ -139,11 +140,13 @@ class FullscreenCodeQuizViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = true
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
 
     override func viewDidLayoutSubviews() {

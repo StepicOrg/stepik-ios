@@ -275,12 +275,20 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             self.tabsView!.addSubview(self.underlineStroke)
         }
 
-        self.contentView.alignLeading("0", trailing: "0", to: self.view)
-        self.contentView.constrainTopSpace(to: self.tabsView!, predicate: "-22")
-        self.contentView.alignBottomEdge(with: self.view, predicate: "0")
-        _ = self.tabsView?.alignTop("0", leading: "0", to: self.view)
-        _ = self.tabsView?.alignTrailingEdge(with: self.view, predicate: "0")
+        self.contentView.alignLeading("0", trailing: "0", toView: self.view)
+        self.contentView.constrainTopSpace(toView: self.tabsView!, predicate: "-22")
+        self.contentView.alignBottomEdge(withView: self.view, predicate: "0")
+        _ = self.tabsView?.alignTop("0", leading: "0", toView: self.view)
+        _ = self.tabsView?.alignTrailingEdge(withView: self.view, predicate: "0")
         _ = self.tabsView?.constrainHeight("44")
+
+        let shadowView = UIView()
+        self.contentView.addSubview(shadowView)
+        shadowView.backgroundColor = UIColor.lightGray
+        _ = shadowView.constrainHeight("0.5")
+        _ = shadowView.alignTopEdge(withView: contentView, predicate: "22")
+        _ = shadowView.alignLeadingEdge(withView: contentView, predicate: "0")
+        _ = shadowView.alignTrailingEdge(withView: contentView, predicate: "0")
 
         // Set setup done
         self.defaultSetupDone = true

@@ -12,7 +12,7 @@ class TeachersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    @IBOutlet weak var teachersTitleLabel: UILabel!
+    @IBOutlet weak var teachersTitleLabel: StepikLabel!
 
     var instructors: [User] = []
 

@@ -30,13 +30,13 @@
                 <view contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-UP-U74">
                     <rect key="frame" x="24" y="69" width="297" height="215"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Augustine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-eo-8NP">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Augustine" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vX-eo-8NP" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="8" y="57" width="281" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" text="Solarson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-c6-WyB">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="751" text="Solarson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5g2-c6-WyB" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="8" y="82" width="281" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
@@ -50,25 +50,25 @@
                                 <constraint firstAttribute="height" priority="999" constant="20" id="q6t-n1-2dj"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEK-pa-lwi">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEK-pa-lwi" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="55.5" y="149.5" width="53" height="21"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="12 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2D-m5-L2a">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="12 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2D-m5-L2a" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="188.5" y="150" width="60" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Current streak" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-fT-4hc">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="752" text="Current streak" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvp-fT-4hc" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="20.5" y="171.5" width="86" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="755" text="Best streak" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9X-4V-4rV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="755" text="Best streak" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9X-4V-4rV" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                             <rect key="frame" x="190.5" y="171.5" width="67.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <nil key="textColor"/>

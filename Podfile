@@ -11,7 +11,7 @@ def all_pods
     pod 'TextFieldEffects'
     pod "DownloadButton"
     pod 'SVProgressHUD'
-    pod 'FLKAutoLayout', '0.2.1'
+    pod 'FLKAutoLayout', '1.0.1'
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'Fabric'
     pod 'Crashlytics'
@@ -59,7 +59,7 @@ def adaptive_pods
 end
 
 target 'Stepic' do
-    platform :ios, '8.0'
+    platform :ios, '9.0'
     all_pods
     target 'StepicTests' do
         inherit! :search_paths
@@ -69,7 +69,7 @@ target 'Stepic' do
 end
 
 target 'SberbankUniversity' do 
-    platform :ios, '8.0'
+    platform :ios, '9.0'
     all_pods
 end
 

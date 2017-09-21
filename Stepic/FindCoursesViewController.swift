@@ -12,7 +12,17 @@ import FLKAutoLayout
 class FindCoursesViewController: CoursesViewController {
 
     var searchResultsVC: SearchResultsCoursesViewController!
-    var searchController: UISearchController!
+    lazy var searchBar: CustomSearchBar = {
+        CustomSearchBar()
+    }()
+
+    lazy var darkOverlayView: UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.black
+        let tapG = UITapGestureRecognizer(target: self, action: #selector(FindCoursesViewController.didTapBlackView))
+        v.addGestureRecognizer(tapG)
+        return v
+    }()
 
     var filteredCourses = [Course]()
 
@@ -27,7 +37,7 @@ class FindCoursesViewController: CoursesViewController {
     }
 
     func hideKeyboardIfNeeded() {
-        self.searchController.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
 
     override func refreshBegan() {
@@ -41,8 +51,9 @@ class FindCoursesViewController: CoursesViewController {
         }
     }
 
-    var topConstraint: NSLayoutConstraint?
-
+    override var shouldAlignTop: Bool {
+        return false
+    }
     override func viewDidLoad() {
 
         loadEnrolled = nil
@@ -56,40 +67,55 @@ class FindCoursesViewController: CoursesViewController {
             [weak self] in
             self?.hideKeyboardIfNeeded()
         }
-        searchController = UISearchController(searchResultsController: searchResultsVC)
+        searchBar.delegate = self
+        searchBar.barTintColor = navigationController?.navigationBar.barTintColor
 
-        searchController.searchBar.searchBarStyle = UISearchBarStyle.default
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.barTintColor = UIColor.navigationColor
-        searchController.searchBar.tintColor = UIColor.white
-        UITextField.appearanceWhenContained(within: [UISearchBar.self]).tintColor = UIColor.defaultDwonloadButtonBlue()
+        searchBar.mainColor = navigationController?.navigationBar.tintColor
+        searchBar.placeholder = NSLocalizedString("SearchCourses", comment: "")
 
-        definesPresentationContext = true
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = true
-        } else {
-            searchController.dimsBackgroundDuringPresentation = true
-        }
+        searchBar.textField.tintColor = UIColor.mainDark
+        searchBar.textField.textColor = UIColor.mainText
 
-        searchController.searchBar.scopeButtonTitles = []
-
+        self.view.addSubview(searchBar)
+        searchBar.constrainHeight("44")
+        searchBar.setContentCompressionResistancePriority(800, for: .vertical)
+        searchBar.alignTopEdge(withView: self.view, predicate: "0")
+        searchBar.alignLeading("0", trailing: "0", toView: self.view)
         super.viewDidLoad()
+        tableView.alignTopEdge(withView: view, predicate: "44")
 
         self.tableView.backgroundView = UIView()
         self.tableView.backgroundColor = UIColor.lightText
 
-        self.navigationItem.titleView = self.searchController.searchBar
         tableView.register(UINib(nibName: "SignInCoursesTableViewCell", bundle: nil), forCellReuseIdentifier: "SignInCoursesTableViewCell")
 
+        self.view.addSubview(darkOverlayView)
+        darkOverlayView.alignLeading("0", trailing: "0", toView: self.view)
+        darkOverlayView.constrainTopSpace(toView: searchBar, predicate: "0")
+        darkOverlayView.alignBottomEdge(withView: self.view, predicate: "0")
+        darkOverlayView.isHidden = true
+
+        self.addChildViewController(searchResultsVC)
+        self.view.addSubview(searchResultsVC.view)
+        searchResultsVC.view.alignLeading("0", trailing: "0", toView: self.view)
+        searchResultsVC.view.constrainTopSpace(toView: searchBar, predicate: "0")
+        searchResultsVC.view.alignBottomEdge(withView: self.view, predicate: "0")
+        searchResultsVC.view.isHidden = true
+
+        (navigationController as? StyledNavigationViewController)?.customShadowView?.alpha = 0
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.tableHeaderView = signInView
+        navigationController?.delegate = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if navigationController?.delegate === self {
+            navigationController?.delegate = nil
+        }
     }
 
     fileprivate var signInView: UIView? {
@@ -118,37 +144,80 @@ class FindCoursesViewController: CoursesViewController {
     }
 
     var isDisplayingFromSuggestions: Bool = false
+
+    func didTapBlackView() {
+        searchBar.cancel()
+    }
 }
 
-extension FindCoursesViewController : UISearchControllerDelegate {
-}
-
-extension FindCoursesViewController : UISearchBarDelegate {
-}
-
-extension FindCoursesViewController : UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
+extension FindCoursesViewController : CustomSearchBarDelegate {
+    func changedText(in searchBar: CustomSearchBar, to text: String) {
+        guard let results = searchResultsVC else {
+            return
+        }
         guard !isDisplayingFromSuggestions else {
             isDisplayingFromSuggestions = false
             return
         }
-        let results = searchController.searchResultsController as? SearchResultsCoursesViewController
-        results?.state = .suggestions
-        results?.query = searchController.searchBar.text!
-        results?.updateSearchBarBlock = {
+        guard text != "" else {
+            results.view.isHidden = true
+            return
+        }
+        if results.view.isHidden {
+            results.view.isHidden = false
+            results.view.alpha = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                results.view.alpha = 1
+            })
+        }
+        results.state = .suggestions
+        results.query = text
+        results.updateSearchBarBlock = {
             [weak self]
             newQuery in
             self?.isDisplayingFromSuggestions = true
-            self?.searchController.searchBar.text = newQuery
+            self?.searchBar.text = newQuery
+            self?.searchBar.becomeFirstResponder()
         }
-        results?.countTopOffset()
+        results.countTopOffset()
     }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        guard let results = searchController.searchResultsController as? SearchResultsCoursesViewController else {
+    func cancelPressed(in searchBar: CustomSearchBar) {
+        searchBar.resignFirstResponder()
+        if searchBar.text == "" {
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in
+                self?.darkOverlayView.alpha = 0
+            }, completion: {
+                [weak self]
+                _ in
+                self?.darkOverlayView.isHidden = true
+            })
+        } else {
+            self.darkOverlayView.isHidden = true
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in
+                self?.searchResultsVC.view.alpha = 0
+                }, completion: {
+                    [weak self]
+                    _ in
+                    self?.searchResultsVC.view.isHidden = true
+            })
+        }
+
+        guard let results = searchResultsVC else {
             return
         }
         AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled, parameters: ["context": results.state.rawValue])
+    }
+
+    func startedEditing(in searchBar: CustomSearchBar) {
+        darkOverlayView.isHidden = false
+        darkOverlayView.alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            [weak self] in
+            self?.darkOverlayView.alpha = 0.4
+        })
     }
 }
 
@@ -232,5 +301,14 @@ extension FindCoursesViewController {
 extension FindCoursesViewController {
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
+    }
+}
+
+extension FindCoursesViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        guard let navigation = self.navigationController as? StyledNavigationViewController else {
+            return
+        }
+        navigation.animateShadowChange(for: self)
     }
 }

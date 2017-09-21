@@ -10,7 +10,7 @@ import UIKit
 
 class LoadMoreTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var showMoreLabel: UILabel!
+    @IBOutlet weak var showMoreLabel: StepikLabel!
     @IBOutlet weak var showMoreActivityIndicator: UIActivityIndicatorView!
 
     var tapG: UITapGestureRecognizer!

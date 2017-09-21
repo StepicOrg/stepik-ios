@@ -32,7 +32,7 @@ class CellWebViewHelper: NSObject {
     func setTextWithTeX(_ text: String, color: UIColor = UIColor.black) {
         let scriptsString = "\(Scripts.localTexScript)\(Scripts.mathJaxFinishedScript)"
         let textColorHex = "#\(color.hexString)"
-        let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, addStyle: true, textColorHex: textColorHex)
+        let html = HTMLBuilder.sharedBuilder.buildHTMLStringWith(head: scriptsString, body: text, textColor: UIColor.white)
         webView?.delegate = self
         webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }

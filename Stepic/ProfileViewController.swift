@@ -137,7 +137,7 @@ class ProfileViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         if !AuthInfo.shared.isAuthorized {
             tableView.reloadData()
         }
@@ -243,7 +243,7 @@ extension ProfileViewController : DZNEmptyDataSetSource {
         let text = NSLocalizedString("SignIn", comment: "")
 
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16.0),
-                          NSForegroundColorAttributeName: UIColor.stepicGreenColor()]
+                          NSForegroundColorAttributeName: UIColor.mainDark]
 
         return NSAttributedString(string: text, attributes: attributes)
     }

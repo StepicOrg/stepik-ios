@@ -20,10 +20,10 @@ class MenuBlockTableViewCell: UITableViewCell {
         separator.isHidden = false
         separator.backgroundColor = UIColor(hex: 0x535366).withAlphaComponent(0.05)
         self.contentView.addSubview(separator)
-        _ = separator.alignBottomEdge(with: self.contentView, predicate: "0")
+        _ = separator.alignBottomEdge(withView: self.contentView, predicate: "0")
         _ = separator.constrainHeight("1")
-        _ = separator.alignLeadingEdge(with: self.contentView, predicate: "24")
-        _ = separator.alignTrailingEdge(with: self.contentView, predicate: "-24")
+        _ = separator.alignLeadingEdge(withView: self.contentView, predicate: "24")
+        _ = separator.alignTrailingEdge(withView: self.contentView, predicate: "-24")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,7 +47,7 @@ class MenuBlockTableViewCell: UITableViewCell {
         hidingView.backgroundColor = UIColor.white
         hidingView.alpha = 0
         self.contentView.addSubview(hidingView)
-        hidingView.align(to: self.contentView)
+        hidingView.align(toView: self.contentView)
         UIView.animate(withDuration: 0.2, animations: {
             [weak self] in
             self?.hidingView.alpha = 1

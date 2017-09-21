@@ -58,10 +58,8 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
 
         refreshUnits()
 
-        if #available(iOS 9.0, *) {
-            if(traitCollection.forceTouchCapability == .available) {
-                registerForPreviewing(with: self, sourceView: view)
-            }
+        if(traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: view)
         }
     }
 
@@ -306,11 +304,7 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
             return nil
         }
 
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        } else {
-            return nil
-        }
+        previewingContext.sourceRect = cell.frame
 
         guard let stepsVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
             return nil
