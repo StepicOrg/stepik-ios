@@ -18,6 +18,7 @@ class MenuViewController: UIViewController {
         didSet {
             menu?.delegate = self
             tableView.reloadData()
+//            tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
 

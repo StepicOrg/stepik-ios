@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,11 +33,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="hQi-UM-zY2" firstAttribute="leading" secondItem="J8J-jB-oOh" secondAttribute="trailing" constant="8" id="1C4-zd-EKq"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="J8J-jB-oOh" secondAttribute="bottom" constant="13" id="3kh-Cv-o6E"/>
+                    <constraint firstAttribute="bottom" secondItem="J8J-jB-oOh" secondAttribute="bottom" constant="21" id="3kh-Cv-o6E"/>
                     <constraint firstItem="hQi-UM-zY2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="63E-aP-uOG"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="J8J-jB-oOh" secondAttribute="leading" constant="-16" id="N8K-kP-CJt"/>
-                    <constraint firstAttribute="topMargin" secondItem="J8J-jB-oOh" secondAttribute="top" constant="-13" id="YcY-sG-D4v"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="hQi-UM-zY2" secondAttribute="trailing" constant="16" id="mcK-jA-qeP"/>
+                    <constraint firstAttribute="leading" secondItem="J8J-jB-oOh" secondAttribute="leading" constant="-24" id="N8K-kP-CJt"/>
+                    <constraint firstAttribute="top" secondItem="J8J-jB-oOh" secondAttribute="top" constant="-21" id="YcY-sG-D4v"/>
+                    <constraint firstAttribute="trailing" secondItem="hQi-UM-zY2" secondAttribute="trailing" constant="24" id="mcK-jA-qeP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

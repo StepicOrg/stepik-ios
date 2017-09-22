@@ -16,9 +16,9 @@ class NewSettingsViewController: MenuViewController, SettingsView {
         presenter = SettingsPresenter(view: self)
         tableView.tableHeaderView = artView
         self.title = NSLocalizedString("Settings", comment: "")
-//        if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-//        }
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }
     }
 
     lazy var artView: ArtView = {

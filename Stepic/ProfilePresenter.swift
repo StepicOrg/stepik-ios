@@ -55,6 +55,11 @@ class ProfilePresenter {
             buildNotificationsTimeSelectionBlock(),
             buildInfoExpandableBlock(user: user),
             buildSettingsTransitionBlock(),
+            buildSettingsTransitionBlock(),
+            buildSettingsTransitionBlock(),
+            buildSettingsTransitionBlock(),
+            buildSettingsTransitionBlock(),
+            buildSettingsTransitionBlock(),
             buildDownloadsTransitionBlock(),
             buildLogoutBlock()
         ].flatMap { $0 }
@@ -107,9 +112,11 @@ class ProfilePresenter {
                 return
             }
             if let newTitle = self?.notificationTimeString {
-                block.title = newTitle
+                if block.title != "\(NSLocalizedString("NotificationTime", comment: "")): \(newTitle)" {
+                    block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(newTitle)"
+                    self?.menu.update(block: block)
+                }
             }
-            self?.menu.update(block: block)
         }
 
         return block
@@ -232,7 +239,7 @@ class ProfilePresenter {
         let startHour = (PreferencesContainer.notifications.streaksNotificationStartHourUTC + NSTimeZone.system.secondsFromGMT() / 60 / 60 ) % 24
         view?.showStreakTimeSelectionAlert(startHour: startHour, selectedBlock: {
             [weak self] in
-            block.title = self?.notificationTimeString ?? ""
+            block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(self?.notificationTimeString ?? "")"
             self?.menu.update(block: block)
         })
     }
@@ -258,11 +265,16 @@ class ProfilePresenter {
                 return
             }
             if let bioBlock = s.menu.getBlock(id: s.infoBlockId) as? TitleContentExpandableMenuBlock {
-                bioBlock.content = [
+                let newContent : [TitleContentExpandableMenuBlock.TitleContent] = [
                     (title: NSLocalizedString("ShortBio", comment: ""), content: user.bio),
                     (title: NSLocalizedString("Info", comment: ""), content: user.details)
                 ]
-                self?.menu.update(block: bioBlock)
+
+                if !newContent.elementsEqual(bioBlock.content, by: { l, r in
+                    return l.title == r.title && l.content == r.content}) {
+                    bioBlock.content = newContent
+                    self?.menu.update(block: bioBlock)
+                }
             }
         }, error: {
                 _ in
