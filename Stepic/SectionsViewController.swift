@@ -51,6 +51,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
 
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         if(traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: view)
         }
@@ -270,10 +273,6 @@ extension SectionsViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showSection(section: indexPath.row)
         //        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return SectionTableViewCell.heightForCellInSection(course.sections[indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
