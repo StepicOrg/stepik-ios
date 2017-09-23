@@ -38,6 +38,11 @@ class MenuViewController: UIViewController {
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
         interfaceManager = MenuUIManager(tableView: tableView)
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
     }
 
     override func didReceiveMemoryWarning() {
