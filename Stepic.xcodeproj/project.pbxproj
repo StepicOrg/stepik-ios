@@ -2640,7 +2640,6 @@
 		2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
 		2C89A99A1F4C289900227C3B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
-		2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -12195,7 +12194,6 @@
 				2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */,
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
-				2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */,
 				2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */,
 				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,

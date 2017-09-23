@@ -54,9 +54,12 @@ class VideoQualityTableViewController: UITableViewController {
         localize()
         tableView.tableFooterView = UIView()
         self.title = action.title
+
+        #if swift(>=3.2)
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
         }
+        #endif
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
