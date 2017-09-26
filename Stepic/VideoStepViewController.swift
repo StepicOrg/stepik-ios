@@ -159,7 +159,7 @@ class VideoStepViewController: UIViewController {
         super.viewWillAppear(animated)
 
         itemView = VideoDownloadView(frame: CGRect(x: 0, y: 0, width: 100, height: 40), video: video, buttonDelegate: self, downloadDelegate: self)
-        
+
         itemView.constrainHeight("40")
         itemView.constrainWidth("100")
         let downloadItem = UIBarButtonItem(customView: itemView)
