@@ -3499,6 +3499,9 @@
 		2CA50BA01F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA50B9F1F0FE79E00418E7D /* AdaptiveOnboardingViewController.swift */; };
 		2CB425781F2B3BF600D15D93 /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */; };
 		2CB4257B1F2B590000D15D93 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */; };
+		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
+		2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */; };
+		2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
@@ -4661,6 +4664,9 @@
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB425761F2B3BF600D15D93 /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
 		2CB4257A1F2B590000D15D93 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
+		2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPresenter.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -5720,6 +5726,7 @@
 		0885F84A1BA8375C00F2A188 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2CB9E8BE1F7AA5550004E17F /* Notifications */,
 				083F2B0F1E9D8E2A00714173 /* Certificates */,
 				08FF75271DF9938E00D656C4 /* Alerts */,
 				08EF9A0B1C91D12700433E4A /* Video Player */,
@@ -6871,6 +6878,16 @@
 			name = ProgressTableViewCell;
 			sourceTree = "<group>";
 		};
+		2CB9E8BE1F7AA5550004E17F /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */,
+				2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */,
+				2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		2CC351871F682979004255B6 /* Auth social */ = {
 			isa = PBXGroup;
 			children = (
@@ -7839,6 +7856,7 @@
 				086E965E1BF6683800AB952D /* VideoDownloadView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
+				2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */,
 				080E81011F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
@@ -10553,6 +10571,7 @@
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
 				08ADDE781C2EB981006D1261 /* RegistrationErrorInfo.swift in Sources */,
 				088AADAD1D175DA00034D86D /* HTMLContentViewInteractionDelegate.swift in Sources */,
+				2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */,
 				2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
@@ -10752,6 +10771,7 @@
 				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */,
 				08AF59EE1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
