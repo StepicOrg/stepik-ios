@@ -35,14 +35,15 @@ class NotificationReactionHandler {
 
         if let notificationObject: [String: AnyObject] = deserializeObject(from: userInfo) {
             print(notificationObject)
-            if let notification = Notification(dictionary: notificationObject) {
-                switch notification.type {
-                case NotificationType.Learn:
-                    return handleLearnNotification(notification)
-                case NotificationType.Comments:
-                    return handleCommentsNotification(notification)
-                }
-            }
+            // FIXME: old notification usage
+//            if let notification = Notification(dictionary: notificationObject) {
+//                switch notification.type {
+//                case NotificationType.Learn:
+//                    return handleLearnNotification(notification)
+//                case NotificationType.Comments:
+//                    return handleCommentsNotification(notification)
+//                }
+//            }
         }
         return nil
     }
