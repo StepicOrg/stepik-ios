@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,7 +36,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="760" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-CU-R8q" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="760" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-CU-R8q" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                         <rect key="frame" x="65" y="11" width="189" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,12 +56,12 @@
                             <constraint firstAttribute="width" constant="50" id="r9O-lL-BYT"/>
                         </constraints>
                     </imageView>
-                    <progressView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" misplaced="YES" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="c0q-zs-efb">
+                    <progressView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="749" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="c0q-zs-efb">
                         <rect key="frame" x="65" y="41" width="180" height="3"/>
                         <color key="progressTintColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="trackTintColor" red="0.8980392157" green="0.95686274510000002" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </progressView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-FX-c6i" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-FX-c6i" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                         <rect key="frame" x="254" y="31" width="0.0" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -72,24 +72,24 @@
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="5CS-SD-YfT"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="QxI-CU-R8q" secondAttribute="trailing" constant="8" id="8Qk-D4-OeH"/>
                     <constraint firstItem="Sb2-Rm-6K6" firstAttribute="leading" secondItem="4dV-wS-tGY" secondAttribute="trailing" constant="4" id="9Gs-Pm-e79"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-10" id="BFx-aY-Qr2"/>
+                    <constraint firstAttribute="bottom" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-1.5" id="BFx-aY-Qr2"/>
                     <constraint firstItem="fNw-FX-c6i" firstAttribute="top" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="-1" id="DvL-NQ-oqe"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4dV-wS-tGY" secondAttribute="bottom" constant="-8" id="IQo-Pq-Z2G"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fNw-FX-c6i" secondAttribute="bottom" constant="-1" id="Ijf-O0-uLt"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="266" id="KmZ-wv-OGe"/>
-                    <constraint firstItem="QxI-CU-R8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="PPv-1d-2OG"/>
+                    <constraint firstItem="QxI-CU-R8q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="PPv-1d-2OG"/>
                     <constraint firstItem="QxI-CU-R8q" firstAttribute="leading" secondItem="Sb2-Rm-6K6" secondAttribute="trailing" constant="8" id="Tzu-Wk-X2A"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="QKu-BZ-2u6" secondAttribute="trailing" constant="8" id="UWd-IU-jKN"/>
-                    <constraint firstItem="4dV-wS-tGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="ZlV-IZ-voL"/>
+                    <constraint firstAttribute="trailing" secondItem="QKu-BZ-2u6" secondAttribute="trailing" constant="16" id="UWd-IU-jKN"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZlV-IZ-voL"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="leading" secondItem="fNw-FX-c6i" secondAttribute="trailing" constant="8" id="avB-56-1bw"/>
                     <constraint firstItem="c0q-zs-efb" firstAttribute="top" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="9" id="fNe-Po-xg0"/>
                     <constraint firstItem="Sb2-Rm-6K6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hta-op-5uC"/>
                     <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="iSE-nL-0j7"/>
-                    <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="kbe-lJ-6F6"/>
+                    <constraint firstItem="4dV-wS-tGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kbe-lJ-6F6"/>
                     <constraint firstItem="fNw-FX-c6i" firstAttribute="leading" secondItem="c0q-zs-efb" secondAttribute="trailing" constant="9" id="pbX-kf-8pB"/>
                     <constraint firstAttribute="bottomMargin" secondItem="QxI-CU-R8q" secondAttribute="bottom" constant="3" id="pt8-nV-YLB"/>
                     <constraint firstItem="QKu-BZ-2u6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="sHy-nY-VVe"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="c0q-zs-efb" secondAttribute="bottom" constant="8" id="tpJ-xa-EbT"/>
+                    <constraint firstAttribute="bottom" secondItem="c0q-zs-efb" secondAttribute="bottom" constant="16.5" id="tpJ-xa-EbT"/>
                     <constraint firstItem="c0q-zs-efb" firstAttribute="leading" secondItem="Sb2-Rm-6K6" secondAttribute="trailing" constant="8" id="xb2-eg-DQs"/>
                 </constraints>
                 <variation key="default">
