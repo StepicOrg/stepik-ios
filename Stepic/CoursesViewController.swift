@@ -52,6 +52,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.register(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
+        tableView.register(UINib(nibName: "CourseWidgetTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseWidgetTableViewCell")
 
         tableView.tableFooterView = UIView()
         tableView.delegate = self
@@ -580,14 +581,14 @@ extension CoursesViewController : UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseTableViewCell", for: indexPath) as! CourseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
 
         let course = courses[(indexPath as NSIndexPath).row]
         cell.initWithCourse(course)
-        cell.continueAction = {
-            [weak self] in
-            self?.continuePressed(course: course)
-        }
+//        cell.continueAction = {
+//            [weak self] in
+//            self?.continuePressed(course: course)
+//        }
 
         return cell
     }

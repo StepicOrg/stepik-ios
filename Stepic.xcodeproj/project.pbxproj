@@ -1021,6 +1021,54 @@
 		08EB85FC1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08ECC4481DB8D3D60005D401 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		08ECC4491DB8D56E0005D401 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
+		08EDB8B11F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B21F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */; };
+		08EDB8BB1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BC1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BD1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8BF1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C01F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C11F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C21F7C3D430028A9AE /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */; };
+		08EDB8C51F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C71F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C81F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8C91F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */; };
+		08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8CF1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D01F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D21F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDB8D41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */; };
+		08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD6191F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */; };
+		08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6211F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6221F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6231F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6251F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -4491,6 +4539,12 @@
 		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
 		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetView.xib; sourceTree = "<group>"; };
+		08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetView.swift; sourceTree = "<group>"; };
+		08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseStatCollectionViewCell.swift; sourceTree = "<group>"; };
+		08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseStatCollectionViewCell.xib; sourceTree = "<group>"; };
+		08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetTableViewCell.swift; sourceTree = "<group>"; };
+		08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetTableViewCell.xib; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -5680,6 +5734,7 @@
 				083F11761E54DB09006EF4F1 /* Picker View Controller */,
 				083F2B281E9EC11600714173 /* Loading Pagination View */,
 				089700951F6B2A820041C24E /* NibInitializableView.swift */,
+				08EDB8B91F7C3D100028A9AE /* CourseWidgetView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -5766,8 +5821,8 @@
 		0885F84C1BA8378B00F2A188 /* Courses */ = {
 			isa = PBXGroup;
 			children = (
-				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
-				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+				08EDD6151F7C6054005203E4 /* New Widgets */,
+				08EDD6281F7C6084005203E4 /* old cells */,
 				0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */,
 				08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */,
 				0801BE1B1C37123900E4F046 /* CoursesViewController.swift */,
@@ -6335,6 +6390,35 @@
 				08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */,
 			);
 			name = "SearchQueries View";
+			sourceTree = "<group>";
+		};
+		08EDB8B91F7C3D100028A9AE /* CourseWidgetView */ = {
+			isa = PBXGroup;
+			children = (
+				08EDB8B01F7C3D0C0028A9AE /* CourseWidgetView.xib */,
+				08EDB8BA1F7C3D430028A9AE /* CourseWidgetView.swift */,
+				08EDB8C31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift */,
+				08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */,
+			);
+			name = CourseWidgetView;
+			sourceTree = "<group>";
+		};
+		08EDD6151F7C6054005203E4 /* New Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */,
+				08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */,
+			);
+			name = "New Widgets";
+			sourceTree = "<group>";
+		};
+		08EDD6281F7C6084005203E4 /* old cells */ = {
+			isa = PBXGroup;
+			children = (
+				0885F8451BA833C600F2A188 /* CourseTableViewCell.swift */,
+				0885F8461BA833C600F2A188 /* CourseTableViewCell.xib */,
+			);
+			name = "old cells";
 			sourceTree = "<group>";
 		};
 		08EF9A0B1C91D12700433E4A /* Video Player */ = {
@@ -7739,6 +7823,7 @@
 				083F2B121E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				08D121111C937B2200A54ABC /* RefreshTableViewCell.xib in Resources */,
 				083F2B241E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
+				08EDB8CE1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				08EB85F91D10454E00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				086494A41E8C7A270083E0BE /* SbAuth.storyboard in Resources */,
 				0815661C1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
@@ -7747,6 +7832,7 @@
 				08D121121C937B2200A54ABC /* Main.storyboard in Resources */,
 				080E81021F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.xib in Resources */,
 				0859AEA41E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
+				08EDB8B21F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				086494A61E8C7A3B0083E0BE /* SbLaunchScreen.xib in Resources */,
 				0867D8321E8531F700B13285 /* CurrentBestStreakViewController.xib in Resources */,
 				08D121131C937B2200A54ABC /* LaunchScreen.xib in Resources */,
@@ -7754,6 +7840,7 @@
 				08D121151C937B2200A54ABC /* Images.xcassets in Resources */,
 				083F2B271E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				086494A21E8C7A180083E0BE /* GoogleService-Info.plist in Resources */,
+				08EDD6211F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				0860D91C1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				08D121161C937B2200A54ABC /* Scripts.plist in Resources */,
 				08D121171C937B2200A54ABC /* VideoDownloadView.xib in Resources */,
@@ -7831,6 +7918,8 @@
 				08A125791BDEBCC90066B2B2 /* Localizable.strings in Resources */,
 				08DF78A81F5DE66200AEEA85 /* ArtView.xib in Resources */,
 				08DB8CBB1D0BECF100A6D079 /* DiscussionTableViewCell.xib in Resources */,
+				08EDB8CD1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6201F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
 				08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
@@ -7855,6 +7944,7 @@
 				0828FF771BC5E6B0000AFEA7 /* SectionTableViewCell.xib in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
+				08EDB8B11F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
 				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
@@ -7903,6 +7993,7 @@
 				2C1B626C1F4C4AEF00236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C1B626D1F4C4AEF00236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B626E1F4C4AEF00236804 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B71F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C1B62CB1F4C517900236804 /* Tokens.plist in Resources */,
 				08CBA3641F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B62701F4C4AEF00236804 /* StepicVideoPlayerViewController.xib in Resources */,
@@ -7926,6 +8017,7 @@
 				08CBA35A1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B62841F4C4AEF00236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566211F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C1B62871F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
@@ -7955,6 +8047,7 @@
 				2C35C4F61F4DB8AC002F3BF4 /* step1.html in Resources */,
 				2C1B62A21F4C4AEF00236804 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C1B62CC1F4C517D00236804 /* GoogleService-Info.plist in Resources */,
+				08EDB8D31F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C1B62C81F4C516D00236804 /* Icons.xcassets in Resources */,
 				2C1B62A31F4C4AEF00236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B62A41F4C4AEF00236804 /* AdaptiveMain.storyboard in Resources */,
@@ -7998,6 +8091,7 @@
 				2C1B647D1F4C590700236804 /* FullscreenCodeQuizViewController.xib in Resources */,
 				2C1B647F1F4C590700236804 /* AchievementTableViewCell.xib in Resources */,
 				2C1B64801F4C590700236804 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B81F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C1B64E01F4C596500236804 /* Config.plist in Resources */,
 				08CBA3651F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C1B64DF1F4C596500236804 /* Tokens.plist in Resources */,
@@ -8021,6 +8115,7 @@
 				08CBA35B1F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C1B64961F4C590700236804 /* step5.html in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566221F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */,
@@ -8050,6 +8145,7 @@
 				2C35C4F11F4DB88E002F3BF4 /* step1.html in Resources */,
 				2C1B64DD1F4C596500236804 /* Auth.plist in Resources */,
 				2C1B64B81F4C590700236804 /* AdaptiveLaunchScreen.storyboard in Resources */,
+				08EDB8D41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C1B64B91F4C590700236804 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C1B64BC1F4C590700236804 /* AdaptiveAssets.xcassets in Resources */,
 				2C1B64BD1F4C590700236804 /* AdaptiveMain.storyboard in Resources */,
@@ -8075,6 +8171,8 @@
 				2C8654061F4B33DE00D51654 /* CertificatesStoryboard.storyboard in Resources */,
 				2C8654071F4B33DE00D51654 /* StreaksView.xib in Resources */,
 				2C8654081F4B33DE00D51654 /* overlay_hard.png in Resources */,
+				08EDB8D01F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6231F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C8654091F4B33DE00D51654 /* RateAppViewController.xib in Resources */,
 				2C86540B1F4B33DE00D51654 /* overlay_simple.png in Resources */,
 				2C86540D1F4B33DE00D51654 /* CurrentBestStreakViewController.xib in Resources */,
@@ -8141,6 +8239,7 @@
 				2C86543F1F4B33DE00D51654 /* SectionTableViewCell.xib in Resources */,
 				2C8654401F4B33DE00D51654 /* UnitTableViewCell.xib in Resources */,
 				2C8654411F4B33DE00D51654 /* Images.xcassets in Resources */,
+				08EDB8B41F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C8654421F4B33DE00D51654 /* ProgressTableViewCell.xib in Resources */,
 				0815661E1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C8654461F4B33DE00D51654 /* AchievementNotificationView.xib in Resources */,
@@ -8171,6 +8270,8 @@
 				2C89AAE91F4C289900227C3B /* CertificateTableViewCell.xib in Resources */,
 				2C89AAEA1F4C289900227C3B /* CertificatesStoryboard.storyboard in Resources */,
 				2C89AB441F4C290800227C3B /* Tokens.plist in Resources */,
+				08EDB8D11F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
+				08EDD6241F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				2C89AAEB1F4C289900227C3B /* StreaksView.xib in Resources */,
 				2C89AAEC1F4C289900227C3B /* overlay_hard.png in Resources */,
 				2C89AAED1F4C289900227C3B /* RateAppViewController.xib in Resources */,
@@ -8237,6 +8338,7 @@
 				2C89AB261F4C289900227C3B /* SectionTableViewCell.xib in Resources */,
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
+				08EDB8B51F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C89AB291F4C289900227C3B /* ProgressTableViewCell.xib in Resources */,
 				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
@@ -8285,6 +8387,7 @@
 				2C9732AE1F4C38F600AC9301 /* CongratulationViewController.xib in Resources */,
 				2C9732AF1F4C38F600AC9301 /* PickerViewController.xib in Resources */,
 				2C9732B01F4C38F600AC9301 /* StepikAlertViewController.xib in Resources */,
+				08EDB8B61F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				2C9732B11F4C38F600AC9301 /* FullscreenCodeQuizViewController.xib in Resources */,
 				08CBA3631F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C9732B21F4C38F600AC9301 /* AchievementTableViewCell.xib in Resources */,
@@ -8308,6 +8411,7 @@
 				08CBA3591F5A2D9400302154 /* Profile.storyboard in Resources */,
 				2C9732C61F4C38F600AC9301 /* step5.html in Resources */,
 				08CBA3221F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6251F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				081566201F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */,
@@ -8337,6 +8441,7 @@
 				2C35C4FB1F4DB8D4002F3BF4 /* step1.html in Resources */,
 				2C9732E01F4C38F600AC9301 /* AchievementNotificationView.xib in Resources */,
 				2C9732E11F4C38F600AC9301 /* AdaptiveLaunchScreen.storyboard in Resources */,
+				08EDB8D21F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				2C9732E21F4C38F600AC9301 /* CodeSuggestionTableViewCell.xib in Resources */,
 				2C9732E31F4C38F600AC9301 /* AdaptiveAssets.xcassets in Resources */,
 				2C9732E41F4C38F600AC9301 /* AdaptiveMain.storyboard in Resources */,
@@ -8428,6 +8533,7 @@
 				2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */,
 				2C6640E21F30BCE60033A274 /* AchievementTableViewCell.xib in Resources */,
 				86AE94751E84511A00F67691 /* StreakAlertViewController.xib in Resources */,
+				08EDB8B31F7C3D0C0028A9AE /* CourseWidgetView.xib in Resources */,
 				86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */,
 				08CBA3601F5AFDCF00302154 /* ProfileStreaksView.xib in Resources */,
 				2C04C1031F160643006B69B3 /* step2.html in Resources */,
@@ -8451,6 +8557,7 @@
 				08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA31F1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
+				08EDD6221F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */,
 				0815661D1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
@@ -8480,6 +8587,7 @@
 				2C3DA0041F3C68B700D74968 /* AchievementNotificationView.xib in Resources */,
 				86EF29411E83CEA900F8D214 /* AdaptiveLaunchScreen.storyboard in Resources */,
 				085E9E721F138C4200D6A4BC /* CodeSuggestionTableViewCell.xib in Resources */,
+				08EDB8CF1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib in Resources */,
 				86EF293E1E83CEA900F8D214 /* AdaptiveAssets.xcassets in Resources */,
 				86EF293C1E83CEA900F8D214 /* AdaptiveMain.storyboard in Resources */,
 				2C35C4E11F4DA486002F3BF4 /* nouns_f.plist in Resources */,
@@ -10183,6 +10291,7 @@
 				088AADAC1D175DA00034D86D /* HTMLStringWrapperUtil.swift in Sources */,
 				2CD8464C1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
 				08D1208D1C937B2200A54ABC /* Scripts.swift in Sources */,
+				08EDB8BC1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				08AF59E51E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
 				08AF59F51E6D9BE800423EFF /* RGPageViewController+UIScrollViewDelegate.swift in Sources */,
 				08DF789F1F5DE64300AEEA85 /* ArtView.swift in Sources */,
@@ -10211,6 +10320,7 @@
 				0829B8361E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
 				08D120991C937B2200A54ABC /* StringExtensions.swift in Sources */,
 				08D1209A1C937B2200A54ABC /* Attempt.swift in Sources */,
+				08EDD6191F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				0869F6D31CE216B600F8A6DB /* PersistentQueueRecoveryManager.swift in Sources */,
 				08BC47071CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				082EDED41D881562006B51DC /* StepsControllerRouter.swift in Sources */,
@@ -10405,6 +10515,7 @@
 				0864949E1E8C79530083E0BE /* SbAppDelegate.swift in Sources */,
 				08D120ED1C937B2200A54ABC /* Lesson+CoreDataProperties.swift in Sources */,
 				083749381DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
@@ -10736,6 +10847,7 @@
 				2CC351911F682D47004255B6 /* SocialAuthViewController.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				087F6B991CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
+				08EDD6181F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				08FF752A1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08AF59F81E6D9BE800423EFF /* UINavigationBar.swift in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
@@ -10848,8 +10960,10 @@
 				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
+				08EDB8BB1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */,
 				0801BE1C1C37123900E4F046 /* CoursesViewController.swift in Sources */,
+				08EDB8C51F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
@@ -10999,6 +11113,7 @@
 				2C1B613B1F4C4AEF00236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C1B613C1F4C4AEF00236804 /* UINavigationBar.swift in Sources */,
 				2C1B613D1F4C4AEF00236804 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61E1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B613E1F4C4AEF00236804 /* StatsManager.swift in Sources */,
 				2C1B613F1F4C4AEF00236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B61401F4C4AEF00236804 /* StepsViewController.swift in Sources */,
@@ -11176,6 +11291,7 @@
 				2C1B61EA1F4C4AEF00236804 /* Video+CoreDataProperties.swift in Sources */,
 				2C1B61EB1F4C4AEF00236804 /* Video.swift in Sources */,
 				2C1B61EC1F4C4AEF00236804 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C11F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B61ED1F4C4AEF00236804 /* AchievementTableViewCell.swift in Sources */,
 				2C1B61EE1F4C4AEF00236804 /* VideoURL.swift in Sources */,
 				2C1B61EF1F4C4AEF00236804 /* Block+CoreDataProperties.swift in Sources */,
@@ -11243,6 +11359,7 @@
 				2C1B62281F4C4AEF00236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C1B62291F4C4AEF00236804 /* UserActivity.swift in Sources */,
 				2C1B622A1F4C4AEF00236804 /* Alerts.swift in Sources */,
+				08EDB8CB1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C1B622B1F4C4AEF00236804 /* StreaksAlertManager.swift in Sources */,
 				2C1B622C1F4C4AEF00236804 /* QuizPresenter.swift in Sources */,
 				2C1B622D1F4C4AEF00236804 /* StreaksStepikAlertManager.swift in Sources */,
@@ -11416,6 +11533,7 @@
 				2C1B634C1F4C590700236804 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C1B634D1F4C590700236804 /* UINavigationBar.swift in Sources */,
 				2C1B634E1F4C590700236804 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61F1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C1B634F1F4C590700236804 /* StatsManager.swift in Sources */,
 				2C1B63501F4C590700236804 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C1B63511F4C590700236804 /* StepsViewController.swift in Sources */,
@@ -11593,6 +11711,7 @@
 				2C1B63FB1F4C590700236804 /* Video+CoreDataProperties.swift in Sources */,
 				2C1B63FC1F4C590700236804 /* Video.swift in Sources */,
 				2C1B63FD1F4C590700236804 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C21F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C1B63FE1F4C590700236804 /* AchievementTableViewCell.swift in Sources */,
 				2C1B63FF1F4C590700236804 /* VideoURL.swift in Sources */,
 				2C1B64001F4C590700236804 /* Block+CoreDataProperties.swift in Sources */,
@@ -11660,6 +11779,7 @@
 				2C1B64391F4C590700236804 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C1B643A1F4C590700236804 /* UserActivity.swift in Sources */,
 				2C1B643B1F4C590700236804 /* Alerts.swift in Sources */,
+				08EDB8CC1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C1B643C1F4C590700236804 /* StreaksAlertManager.swift in Sources */,
 				2C1B643D1F4C590700236804 /* QuizPresenter.swift in Sources */,
 				2C1B643E1F4C590700236804 /* StreaksStepikAlertManager.swift in Sources */,
@@ -11833,6 +11953,7 @@
 				2C8652E91F4B33DE00D51654 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C8652EA1F4B33DE00D51654 /* UINavigationBar.swift in Sources */,
 				2C8652EB1F4B33DE00D51654 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61B1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C8652EC1F4B33DE00D51654 /* StatsManager.swift in Sources */,
 				2C8652ED1F4B33DE00D51654 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C8652EE1F4B33DE00D51654 /* StepsViewController.swift in Sources */,
@@ -12010,6 +12131,7 @@
 				2C8653981F4B33DE00D51654 /* Video+CoreDataProperties.swift in Sources */,
 				2C8653991F4B33DE00D51654 /* Video.swift in Sources */,
 				2C86539A1F4B33DE00D51654 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BE1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C86539B1F4B33DE00D51654 /* AchievementTableViewCell.swift in Sources */,
 				2C86539C1F4B33DE00D51654 /* VideoURL.swift in Sources */,
 				2C86539D1F4B33DE00D51654 /* Block+CoreDataProperties.swift in Sources */,
@@ -12077,6 +12199,7 @@
 				2C8653D61F4B33DE00D51654 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C8653D71F4B33DE00D51654 /* UserActivity.swift in Sources */,
 				2C8653D81F4B33DE00D51654 /* Alerts.swift in Sources */,
+				08EDB8C81F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C8653D91F4B33DE00D51654 /* StreaksAlertManager.swift in Sources */,
 				2C8653DA1F4B33DE00D51654 /* QuizPresenter.swift in Sources */,
 				2C8653DB1F4B33DE00D51654 /* StreaksStepikAlertManager.swift in Sources */,
@@ -12250,6 +12373,7 @@
 				2C89A9CF1F4C289900227C3B /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C89A9D01F4C289900227C3B /* UINavigationBar.swift in Sources */,
 				2C89A9D11F4C289900227C3B /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61C1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C89A9D21F4C289900227C3B /* StatsManager.swift in Sources */,
 				2C89A9D31F4C289900227C3B /* RGPageViewControllerDelegate.swift in Sources */,
 				2C89A9D41F4C289900227C3B /* StepsViewController.swift in Sources */,
@@ -12427,6 +12551,7 @@
 				2C89AA7E1F4C289900227C3B /* Video+CoreDataProperties.swift in Sources */,
 				2C89AA7F1F4C289900227C3B /* Video.swift in Sources */,
 				2C89AA801F4C289900227C3B /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BF1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C89AA811F4C289900227C3B /* AchievementTableViewCell.swift in Sources */,
 				2C89AA821F4C289900227C3B /* VideoURL.swift in Sources */,
 				2C89AA831F4C289900227C3B /* Block+CoreDataProperties.swift in Sources */,
@@ -12494,6 +12619,7 @@
 				2C89AABC1F4C289900227C3B /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C89AABD1F4C289900227C3B /* UserActivity.swift in Sources */,
 				2C89AABE1F4C289900227C3B /* Alerts.swift in Sources */,
+				08EDB8C91F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C89AABF1F4C289900227C3B /* StreaksAlertManager.swift in Sources */,
 				2C89AAC01F4C289900227C3B /* QuizPresenter.swift in Sources */,
 				2C89AAC11F4C289900227C3B /* StreaksStepikAlertManager.swift in Sources */,
@@ -12667,6 +12793,7 @@
 				2C9731831F4C38F600AC9301 /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				2C9731841F4C38F600AC9301 /* UINavigationBar.swift in Sources */,
 				2C9731851F4C38F600AC9301 /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61D1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C9731861F4C38F600AC9301 /* StatsManager.swift in Sources */,
 				2C9731871F4C38F600AC9301 /* RGPageViewControllerDelegate.swift in Sources */,
 				2C9731881F4C38F600AC9301 /* StepsViewController.swift in Sources */,
@@ -12844,6 +12971,7 @@
 				2C9732321F4C38F600AC9301 /* Video+CoreDataProperties.swift in Sources */,
 				2C9732331F4C38F600AC9301 /* Video.swift in Sources */,
 				2C9732341F4C38F600AC9301 /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8C01F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C9732351F4C38F600AC9301 /* AchievementTableViewCell.swift in Sources */,
 				2C9732361F4C38F600AC9301 /* VideoURL.swift in Sources */,
 				2C9732371F4C38F600AC9301 /* Block+CoreDataProperties.swift in Sources */,
@@ -12911,6 +13039,7 @@
 				2C9732701F4C38F600AC9301 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				2C9732711F4C38F600AC9301 /* UserActivity.swift in Sources */,
 				2C9732721F4C38F600AC9301 /* Alerts.swift in Sources */,
+				08EDB8CA1F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				2C9732731F4C38F600AC9301 /* StreaksAlertManager.swift in Sources */,
 				2C9732741F4C38F600AC9301 /* QuizPresenter.swift in Sources */,
 				2C9732751F4C38F600AC9301 /* StreaksStepikAlertManager.swift in Sources */,
@@ -13138,6 +13267,7 @@
 				864D679A1E83E08E001E8D9E /* RGPageViewController+UIToolbarDelegate.swift in Sources */,
 				864D679B1E83E08E001E8D9E /* UINavigationBar.swift in Sources */,
 				864D679C1E83E08E001E8D9E /* RGPageViewControllerDataSource.swift in Sources */,
+				08EDD61A1F7C607A005203E4 /* CourseWidgetTableViewCell.swift in Sources */,
 				2C733C3A1F29E090000E7FAF /* StatsManager.swift in Sources */,
 				864D679D1E83E08E001E8D9E /* RGPageViewControllerDelegate.swift in Sources */,
 				864D679E1E83E08E001E8D9E /* StepsViewController.swift in Sources */,
@@ -13315,6 +13445,7 @@
 				864D66EC1E83DE03001E8D9E /* Video+CoreDataProperties.swift in Sources */,
 				864D66ED1E83DE03001E8D9E /* Video.swift in Sources */,
 				864D66EE1E83DE03001E8D9E /* VideoURL+CoreDataProperties.swift in Sources */,
+				08EDB8BD1F7C3D430028A9AE /* CourseWidgetView.swift in Sources */,
 				2C6640D41F2F7AFD0033A274 /* AchievementTableViewCell.swift in Sources */,
 				864D66EF1E83DE03001E8D9E /* VideoURL.swift in Sources */,
 				864D66F01E83DE03001E8D9E /* Block+CoreDataProperties.swift in Sources */,
@@ -13382,6 +13513,7 @@
 				864D671D1E83DE03001E8D9E /* StepsControllerDeepLinkRouter.swift in Sources */,
 				864D671E1E83DE03001E8D9E /* UserActivity.swift in Sources */,
 				864D671F1E83DE03001E8D9E /* Alerts.swift in Sources */,
+				08EDB8C71F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				864D67201E83DE03001E8D9E /* StreaksAlertManager.swift in Sources */,
 				08C1FC351F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				864D67211E83DE03001E8D9E /* StreaksStepikAlertManager.swift in Sources */,
@@ -14646,13 +14778,14 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = E9KER42773;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "1ba3f223-24ec-43ca-bbc1-e8f7da921f31";
+				PROVISIONING_PROFILE = "be156a83-9c09-40f8-950f-ddc632440396";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -14669,14 +14802,15 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E9KER42773;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "a7c69b0a-28a4-4db6-8c61-221a8a910d80";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.AlexKarpov.Stepic.watchkitapp.watchkitextension";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;

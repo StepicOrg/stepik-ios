@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="CourseStatCollectionViewCell" customModule="Adaptive_1838" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="47" height="20"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="47" height="20"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-NX-BDX" customClass="UIImageView">
+                        <rect key="frame" x="0.0" y="5" width="10" height="10"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="HXU-5s-23r"/>
+                            <constraint firstAttribute="height" constant="10" id="Jwj-jt-r59"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJT-bl-YxM" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                        <rect key="frame" x="13" y="0.0" width="34" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="aJT-bl-YxM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9Cf-46-H12"/>
+                <constraint firstItem="hYo-NX-BDX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CGe-kV-zXE"/>
+                <constraint firstItem="aJT-bl-YxM" firstAttribute="leading" secondItem="hYo-NX-BDX" secondAttribute="trailing" constant="3" id="P5J-J7-P3k"/>
+                <constraint firstAttribute="trailing" secondItem="aJT-bl-YxM" secondAttribute="trailing" id="PcO-gE-DFr"/>
+                <constraint firstItem="hYo-NX-BDX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bDf-QM-wC7"/>
+                <constraint firstAttribute="bottom" secondItem="aJT-bl-YxM" secondAttribute="bottom" id="oS8-no-Zca"/>
+            </constraints>
+            <size key="customSize" width="47" height="20"/>
+            <connections>
+                <outlet property="image" destination="hYo-NX-BDX" id="A2d-Np-tHP"/>
+                <outlet property="text" destination="aJT-bl-YxM" id="WcH-ec-lNJ"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="53"/>
+        </collectionViewCell>
+    </objects>
+</document>
