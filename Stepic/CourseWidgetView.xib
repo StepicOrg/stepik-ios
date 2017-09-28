@@ -31,23 +31,23 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-av-mN5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="116" y="0.0" width="88" height="20"/>
+                    <rect key="frame" x="116" y="0.0" width="86.5" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="pcp-7x-tKD"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sj1-d7-RHa">
-                    <rect key="frame" x="356" y="-1" width="20" height="20"/>
+                    <rect key="frame" x="364" y="-1" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="Zv2-xF-KnV"/>
                         <constraint firstAttribute="height" constant="20" id="tEw-P5-kTt"/>
                     </constraints>
-                    <state key="normal" image="dots_dark"/>
+                    <state key="normal" image="dots_vertical_dark"/>
                 </button>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-uM-Uld">
+                <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-uM-Uld">
                     <rect key="frame" x="116" y="28" width="260" height="16"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -85,7 +85,7 @@
                 <constraint firstAttribute="bottom" secondItem="JQx-VS-ijh" secondAttribute="bottom" id="KQX-ax-vCj"/>
                 <constraint firstAttribute="trailing" secondItem="o6G-uM-Uld" secondAttribute="trailing" constant="8" id="T3Q-n6-aYD"/>
                 <constraint firstItem="qgP-av-mN5" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="WMq-S3-bWq"/>
-                <constraint firstAttribute="trailing" secondItem="sj1-d7-RHa" secondAttribute="trailing" constant="8" id="Xrg-mt-jqo"/>
+                <constraint firstAttribute="trailing" secondItem="sj1-d7-RHa" secondAttribute="trailing" id="Xrg-mt-jqo"/>
                 <constraint firstItem="sj1-d7-RHa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qgP-av-mN5" secondAttribute="trailing" constant="8" id="nv7-ph-skD"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oAH-Z8-HXE"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tX3-Pz-I4I"/>
@@ -99,6 +99,6 @@
         </view>
     </objects>
     <resources>
-        <image name="dots_dark" width="33" height="33"/>
+        <image name="dots_vertical_dark" width="33" height="33"/>
     </resources>
 </document>

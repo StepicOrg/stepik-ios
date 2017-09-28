@@ -431,11 +431,11 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             unenrolledPressed(course: course)
         }
     }
-    
+
     func unenrolledPressed(course: Course) {
         self.performSegue(withIdentifier: "showCourse", sender: course)
     }
-    
+
     func continuePressed(course: Course) {
         SVProgressHUD.show()
 

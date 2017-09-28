@@ -21,7 +21,7 @@ class CourseWidgetView: NibInitializableView {
     enum ButtonState {
         case join, continueLearning
     }
-    
+
     var action: (() -> Void)?
 
     fileprivate var stats: [CourseStatData] = []
@@ -79,13 +79,13 @@ class CourseWidgetView: NibInitializableView {
     private func updateStats() {
         var newStats: [CourseStatData] = []
         if let rating = rating {
-            newStats += [CourseStatData(image: #imageLiteral(resourceName: "tab-profile"), text: String(format: "%.1f", rating))]
+            newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon"), text: String(format: "%.1f", rating))]
         }
         if let learners = learners {
-            newStats += [CourseStatData(image: #imageLiteral(resourceName: "tab-profile"), text: "\(learners)")]
+            newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]
         }
         if let progress = progress {
-            newStats += [CourseStatData(image: #imageLiteral(resourceName: "tab-profile"), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero)))%")]
+            newStats += [CourseStatData(image: progress == 100 ? #imageLiteral(resourceName: "progress_widget_icon_green") : #imageLiteral(resourceName: "progress_widget_icon_gray"), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero)))%")]
         }
         self.stats = newStats
         courseStatsCollectionView.reloadData()
