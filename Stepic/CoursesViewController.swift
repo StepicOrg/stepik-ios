@@ -540,11 +540,20 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 }
 
 extension CoursesViewController : UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+            return 60
+        } else {
+            return 100
+        }
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
             return 60
         } else {
-            return 126
+            return UITableViewAutomaticDimension
         }
     }
 
