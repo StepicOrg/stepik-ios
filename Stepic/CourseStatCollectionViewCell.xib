@@ -17,33 +17,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="47" height="20"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-NX-BDX" customClass="UIImageView">
-                        <rect key="frame" x="0.0" y="5" width="10" height="10"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="10" id="HXU-5s-23r"/>
-                            <constraint firstAttribute="height" constant="10" id="Jwj-jt-r59"/>
-                        </constraints>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJT-bl-YxM" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
                         <rect key="frame" x="13" y="0.0" width="34" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NDe-Wd-RAz">
+                        <rect key="frame" x="0.0" y="5" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="P1Q-gV-Vmv"/>
+                            <constraint firstAttribute="height" constant="10" id="cOr-uH-sf0"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="aJT-bl-YxM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9Cf-46-H12"/>
-                <constraint firstItem="hYo-NX-BDX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CGe-kV-zXE"/>
-                <constraint firstItem="aJT-bl-YxM" firstAttribute="leading" secondItem="hYo-NX-BDX" secondAttribute="trailing" constant="3" id="P5J-J7-P3k"/>
+                <constraint firstItem="NDe-Wd-RAz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="OzW-oS-5R3"/>
                 <constraint firstAttribute="trailing" secondItem="aJT-bl-YxM" secondAttribute="trailing" id="PcO-gE-DFr"/>
-                <constraint firstItem="hYo-NX-BDX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bDf-QM-wC7"/>
+                <constraint firstItem="NDe-Wd-RAz" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="aH9-RA-aD6"/>
+                <constraint firstItem="aJT-bl-YxM" firstAttribute="leading" secondItem="NDe-Wd-RAz" secondAttribute="trailing" constant="3" id="hxA-zJ-oDa"/>
                 <constraint firstAttribute="bottom" secondItem="aJT-bl-YxM" secondAttribute="bottom" id="oS8-no-Zca"/>
             </constraints>
             <size key="customSize" width="47" height="20"/>
             <connections>
-                <outlet property="image" destination="hYo-NX-BDX" id="A2d-Np-tHP"/>
+                <outlet property="image" destination="NDe-Wd-RAz" id="RVk-9z-pei"/>
                 <outlet property="text" destination="aJT-bl-YxM" id="WcH-ec-lNJ"/>
             </connections>
             <point key="canvasLocation" x="32.5" y="53"/>

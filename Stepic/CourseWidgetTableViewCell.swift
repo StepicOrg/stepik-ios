@@ -23,14 +23,10 @@ class CourseWidgetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func initWithCourse(_ course: Course) {
+    func initWithCourse(_ course: Course, action: (() -> Void)?) {
         widgetView.title = course.title
-
-//        if course.enrolled {
-//            continueButtonHeight.constant = 32
-//        } else {
-//            continueButtonHeight.constant = 0
-//        }
+        widgetView.action = action
+        widgetView.buttonState = course.enrolled ? .continueLearning : .join
         widgetView.imageURL = URL(string: course.coverURLString)
         widgetView.rating = 4.3
         widgetView.learners = 10000

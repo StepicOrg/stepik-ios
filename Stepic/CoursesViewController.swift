@@ -57,7 +57,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-
+        tableView.separatorStyle = .none
         if refreshEnabled {
             refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), for: .valueChanged)
             if #available(iOS 10.0, *) {
@@ -424,6 +424,18 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
     }
 
+    func actionPressed(course: Course) {
+        if course.enrolled {
+            continuePressed(course: course)
+        } else {
+            unenrolledPressed(course: course)
+        }
+    }
+    
+    func unenrolledPressed(course: Course) {
+        self.performSegue(withIdentifier: "showCourse", sender: course)
+    }
+    
     func continuePressed(course: Course) {
         SVProgressHUD.show()
 
@@ -584,11 +596,10 @@ extension CoursesViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
 
         let course = courses[(indexPath as NSIndexPath).row]
-        cell.initWithCourse(course)
-//        cell.continueAction = {
-//            [weak self] in
-//            self?.continuePressed(course: course)
-//        }
+        cell.initWithCourse(course, action: {
+            [weak self] in
+            self?.actionPressed(course: course)
+        })
 
         return cell
     }

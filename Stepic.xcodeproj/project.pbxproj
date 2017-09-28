@@ -1069,6 +1069,14 @@
 		08EDD6251F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
 		08EDD6261F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
 		08EDD6271F7C607A005203E4 /* CourseWidgetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */; };
+		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62B1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62C1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62D1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62E1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD62F1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD6301F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
+		08EDD6311F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
 		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
 		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		08F204951BB16B1F00D080C0 /* MyCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */; };
@@ -4545,6 +4553,7 @@
 		08EDB8C41F7C4BDB0028A9AE /* CourseStatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseStatCollectionViewCell.xib; sourceTree = "<group>"; };
 		08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetTableViewCell.swift; sourceTree = "<group>"; };
 		08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetTableViewCell.xib; sourceTree = "<group>"; };
+		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -6331,6 +6340,7 @@
 				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
 				081566231F69C39A0082B359 /* Search Bar */,
 				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
+				08EDD6291F7C6785005203E4 /* StepikButton.swift */,
 			);
 			name = "UI Elements";
 			sourceTree = "<group>";
@@ -10488,6 +10498,7 @@
 				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
 				083540681CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				087039311CD7413D00B6571B /* NotificationAlertConstructor.swift in Sources */,
+				08EDD62B1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08C1FC341F41E74500E14B46 /* QuizPresenter.swift in Sources */,
 				08D120E01C937B2200A54ABC /* CoursePreviewViewController.swift in Sources */,
 				08D120E11C937B2200A54ABC /* SortingReply.swift in Sources */,
@@ -10672,6 +10683,7 @@
 				08FB30DD1DC3858800E4684F /* UserPreferencesContainerViewController.swift in Sources */,
 				08019A821DEED7E900691F0B /* SubmissonManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
+				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08CBA3391F57565700302154 /* TitleContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
@@ -11302,6 +11314,7 @@
 				2C1B61F41F4C4AEF00236804 /* Lesson.swift in Sources */,
 				2C1B61F51F4C4AEF00236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B61F61F4C4AEF00236804 /* Unit.swift in Sources */,
+				08EDD6301F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C1B61F71F4C4AEF00236804 /* Section+CoreDataProperties.swift in Sources */,
 				2C1B61F81F4C4AEF00236804 /* Section.swift in Sources */,
 				2C1B61F91F4C4AEF00236804 /* Course+CoreDataProperties.swift in Sources */,
@@ -11722,6 +11735,7 @@
 				2C1B64051F4C590700236804 /* Lesson.swift in Sources */,
 				2C1B64061F4C590700236804 /* Unit+CoreDataProperties.swift in Sources */,
 				2C1B64071F4C590700236804 /* Unit.swift in Sources */,
+				08EDD6311F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C1B64081F4C590700236804 /* Section+CoreDataProperties.swift in Sources */,
 				2C1B64091F4C590700236804 /* Section.swift in Sources */,
 				2C1B640A1F4C590700236804 /* Course+CoreDataProperties.swift in Sources */,
@@ -12142,6 +12156,7 @@
 				2C8653A21F4B33DE00D51654 /* Lesson.swift in Sources */,
 				2C8653A31F4B33DE00D51654 /* Unit+CoreDataProperties.swift in Sources */,
 				2C8653A41F4B33DE00D51654 /* Unit.swift in Sources */,
+				08EDD62D1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C8653A51F4B33DE00D51654 /* Section+CoreDataProperties.swift in Sources */,
 				2C8653A61F4B33DE00D51654 /* Section.swift in Sources */,
 				2C8653A71F4B33DE00D51654 /* Course+CoreDataProperties.swift in Sources */,
@@ -12562,6 +12577,7 @@
 				2C89AA881F4C289900227C3B /* Lesson.swift in Sources */,
 				2C89AA891F4C289900227C3B /* Unit+CoreDataProperties.swift in Sources */,
 				2C89AA8A1F4C289900227C3B /* Unit.swift in Sources */,
+				08EDD62E1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C89AA8B1F4C289900227C3B /* Section+CoreDataProperties.swift in Sources */,
 				2C89AA8C1F4C289900227C3B /* Section.swift in Sources */,
 				2C89AA8D1F4C289900227C3B /* Course+CoreDataProperties.swift in Sources */,
@@ -12982,6 +12998,7 @@
 				2C97323C1F4C38F600AC9301 /* Lesson.swift in Sources */,
 				2C97323D1F4C38F600AC9301 /* Unit+CoreDataProperties.swift in Sources */,
 				2C97323E1F4C38F600AC9301 /* Unit.swift in Sources */,
+				08EDD62F1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C97323F1F4C38F600AC9301 /* Section+CoreDataProperties.swift in Sources */,
 				2C9732401F4C38F600AC9301 /* Section.swift in Sources */,
 				2C9732411F4C38F600AC9301 /* Course+CoreDataProperties.swift in Sources */,
@@ -13456,6 +13473,7 @@
 				864D66F51E83DE03001E8D9E /* Lesson.swift in Sources */,
 				864D66F61E83DE03001E8D9E /* Unit+CoreDataProperties.swift in Sources */,
 				864D66F71E83DE03001E8D9E /* Unit.swift in Sources */,
+				08EDD62C1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				864D66F81E83DE03001E8D9E /* Section+CoreDataProperties.swift in Sources */,
 				864D66F91E83DE03001E8D9E /* Section.swift in Sources */,
 				864D66FA1E83DE03001E8D9E /* Course+CoreDataProperties.swift in Sources */,
@@ -14123,7 +14141,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexKarpov.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e92b48f8-5d47-4919-88a2-409e06f0a3ae";
+				PROVISIONING_PROFILE = "0996e1fc-1468-45f5-84ce-81d487044f14";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -14688,7 +14706,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.stepik.ios.adaptive.1838;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5a8396c-307e-488c-bc7a-284c62e250b2";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.stepik.ios.adaptive.1838";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Stepic/Stepic-Bridging-Header.h";
@@ -14735,7 +14753,7 @@
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b62ae191-e85b-491a-9e90-b9d87a0de1f0";
+				PROVISIONING_PROFILE = "7f86d49e-e376-464e-a55a-784b580d7f5a";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.AlexKarpov.Stepic.watchkitapp";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

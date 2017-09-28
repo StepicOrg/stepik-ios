@@ -14,10 +14,17 @@ class CourseWidgetView: NibInitializableView {
     @IBOutlet weak var courseImageView: UIImageView!
     @IBOutlet weak var courseTitleLabel: StepikLabel!
     @IBOutlet weak var courseStatsCollectionView: UICollectionView!
-    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var actionButton: StepikButton!
 
     @IBOutlet weak var courseStatsCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    var stats: [CourseStatData] = []
+
+    enum ButtonState {
+        case join, continueLearning
+    }
+    
+    var action: (() -> Void)?
+
+    fileprivate var stats: [CourseStatData] = []
 
     override var nibName: String {
         return "CourseWidgetView"
@@ -54,6 +61,21 @@ class CourseWidgetView: NibInitializableView {
         }
     }
 
+    var buttonState: ButtonState = .continueLearning {
+        didSet {
+            switch buttonState {
+            case .join:
+                actionButton.isGray = true
+                actionButton.setTitle(NSLocalizedString("AboutCourse", comment: ""), for: .normal)
+                break
+            case .continueLearning:
+                actionButton.isGray = false
+                actionButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
+                break
+            }
+        }
+    }
+
     private func updateStats() {
         var newStats: [CourseStatData] = []
         if let rating = rating {
@@ -75,7 +97,14 @@ class CourseWidgetView: NibInitializableView {
         courseStatsCollectionView.delegate = self
         courseStatsCollectionView.dataSource = self
         courseStatsCollectionViewFlowLayout.estimatedItemSize = CGSize(width: 1.0, height: 1.0)
+        courseStatsCollectionViewFlowLayout.minimumInteritemSpacing = 8
+        courseStatsCollectionViewFlowLayout.minimumLineSpacing = 8
     }
+
+    @IBAction func actionButtonPressed(_ sender: Any) {
+        action?()
+    }
+
 }
 
 extension CourseWidgetView: UICollectionViewDelegate {
