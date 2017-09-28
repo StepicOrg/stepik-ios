@@ -20,7 +20,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="382" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="376" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JQx-VS-ijh">
@@ -31,16 +31,16 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgP-av-mN5" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="116" y="0.0" width="86.5" height="20"/>
+                    <rect key="frame" x="116" y="0.0" width="73.5" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="pcp-7x-tKD"/>
+                        <constraint firstAttribute="height" constant="18" id="J54-6X-quC"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sj1-d7-RHa">
-                    <rect key="frame" x="362" y="-1" width="20" height="20"/>
+                    <rect key="frame" x="356" y="-1" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="Zv2-xF-KnV"/>
                         <constraint firstAttribute="height" constant="20" id="tEw-P5-kTt"/>
@@ -48,7 +48,7 @@
                     <state key="normal" image="dots_vertical_dark"/>
                 </button>
                 <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="o6G-uM-Uld">
-                    <rect key="frame" x="116" y="28" width="258" height="16"/>
+                    <rect key="frame" x="116" y="26" width="252" height="16"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="km9-Ca-TtY"/>
@@ -61,11 +61,12 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lZ-OG-8NC" customClass="StepikButton" customModule="Adaptive_1838" customModuleProvider="target">
-                    <rect key="frame" x="116" y="52" width="258" height="48"/>
+                    <rect key="frame" x="116" y="52" width="252" height="48"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="1Ar-yW-c76"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Action"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isGray" value="NO"/>
@@ -80,7 +81,6 @@
                 <constraint firstItem="sj1-d7-RHa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-1" id="2em-Lr-5Yl"/>
                 <constraint firstItem="7lZ-OG-8NC" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="67Y-83-m09"/>
                 <constraint firstItem="o6G-uM-Uld" firstAttribute="leading" secondItem="JQx-VS-ijh" secondAttribute="trailing" constant="16" id="8JU-RC-vYg"/>
-                <constraint firstItem="7lZ-OG-8NC" firstAttribute="top" secondItem="o6G-uM-Uld" secondAttribute="bottom" priority="999" constant="8" id="8wH-fn-b0J"/>
                 <constraint firstAttribute="bottom" secondItem="7lZ-OG-8NC" secondAttribute="bottom" id="Btg-xG-RgO"/>
                 <constraint firstAttribute="bottom" secondItem="JQx-VS-ijh" secondAttribute="bottom" id="KQX-ax-vCj"/>
                 <constraint firstAttribute="trailing" secondItem="o6G-uM-Uld" secondAttribute="trailing" constant="8" id="T3Q-n6-aYD"/>
@@ -89,13 +89,14 @@
                 <constraint firstItem="sj1-d7-RHa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qgP-av-mN5" secondAttribute="trailing" constant="8" id="nv7-ph-skD"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oAH-Z8-HXE"/>
                 <constraint firstItem="JQx-VS-ijh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tX3-Pz-I4I"/>
+                <constraint firstItem="7lZ-OG-8NC" firstAttribute="top" secondItem="o6G-uM-Uld" secondAttribute="bottom" priority="999" constant="10" id="xR0-Bg-kcB"/>
                 <constraint firstItem="o6G-uM-Uld" firstAttribute="top" secondItem="qgP-av-mN5" secondAttribute="bottom" constant="8" id="xTe-dx-Ckk"/>
                 <constraint firstAttribute="trailing" secondItem="7lZ-OG-8NC" secondAttribute="trailing" constant="8" id="yIc-6i-fsU"/>
                 <constraint firstItem="qgP-av-mN5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zwM-VF-hBg"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-3" y="311"/>
+            <point key="canvasLocation" x="-6" y="317"/>
         </view>
     </objects>
     <resources>

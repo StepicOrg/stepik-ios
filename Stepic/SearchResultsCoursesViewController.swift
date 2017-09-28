@@ -157,13 +157,18 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
                         newCourses -> Void in
 
-                        s.courses = Sorter.sort(newCourses, byIds: ids)
-                        s.meta = meta
-                        s.currentPage = 1
-                        DispatchQueue.main.async {
-                            s.refreshControl?.endRefreshing()
-                            s.tableView.reloadData()
+                        let coursesCompletion = {
+                            s.courses = Sorter.sort(newCourses, byIds: ids)
+                            s.meta = meta
+                            s.currentPage = 1
+                            DispatchQueue.main.async {
+                                s.refreshControl?.endRefreshing()
+                                s.tableView.reloadData()
+                            }
                         }
+
+                        s.currentRequest = s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+
                         s.isRefreshing = false
                         }, error: {
                             error -> Void in
@@ -229,11 +234,15 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         return
                     }
 
-                    s.currentPage += 1
-                    s.courses += Sorter.sort(newCourses, byIds: ids)
-                    s.meta = meta
-                    //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI {s.tableView.reloadData()}
+                    let coursesCompletion = {
+                        s.currentPage += 1
+                        s.courses += Sorter.sort(newCourses, byIds: ids)
+                        s.meta = meta
+                        //                        self.refreshControl.endRefreshing()
+                        UIThread.performUI {s.tableView.reloadData()}
+                    }
+
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
 
                     s.isLoadingMore = false
                     s.failedLoadingMore = false

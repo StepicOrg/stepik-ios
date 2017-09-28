@@ -18,12 +18,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCl-tM-rCu" customClass="CourseWidgetView" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="8" y="8" width="304" height="30.5"/>
+                        <rect key="frame" x="16" y="8" width="296" height="30.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="gCl-tM-rCu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="FnM-5K-29T"/>
+                    <constraint firstItem="gCl-tM-rCu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FnM-5K-29T"/>
                     <constraint firstAttribute="trailing" secondItem="gCl-tM-rCu" secondAttribute="trailing" constant="8" id="KuG-KL-mdO"/>
                     <constraint firstItem="gCl-tM-rCu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="LBx-om-g3r"/>
                     <constraint firstAttribute="bottom" secondItem="gCl-tM-rCu" secondAttribute="bottom" constant="8" id="gfK-ul-aqg"/>

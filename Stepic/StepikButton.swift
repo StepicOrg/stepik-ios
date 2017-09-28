@@ -34,6 +34,15 @@ class StepikButton: UIButton {
         }
     }
 
+    private func setAnimation() {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.toValue = NSNumber(value: 1.3)
+        animation.duration = 0.1
+        animation.repeatCount = 0
+        animation.autoreverses = true
+        layer.add(animation, forKey: nil)
+    }
+
     private func applyStyles() {
         setGrayStyle()
     }

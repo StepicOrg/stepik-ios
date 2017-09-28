@@ -23,8 +23,10 @@ extension Course {
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
+    @NSManaged var managedLearnersCount: NSNumber?
 
     @NSManaged var managedSummary: String?
+    @NSManaged var managedReviewSummaryId: NSNumber?
     @NSManaged var managedWorkload: String?
     @NSManaged var managedIntroURL: String?
     @NSManaged var managedFormat: String?
@@ -61,6 +63,24 @@ extension Course {
         }
         get {
             return managedId?.intValue ?? -1
+        }
+    }
+
+    var learnersCount: Int? {
+        set(newCount) {
+            self.managedLearnersCount = newCount as NSNumber?
+        }
+        get {
+            return managedLearnersCount?.intValue
+        }
+    }
+    
+    var reviewSummaryId: Int? {
+        get {
+            return managedReviewSummaryId?.intValue
+        }
+        set(value) {
+            managedReviewSummaryId = value as NSNumber?
         }
     }
 

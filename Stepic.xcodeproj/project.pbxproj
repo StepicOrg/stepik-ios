@@ -892,6 +892,30 @@
 		08D2AE461C04BA6100BD8C3D /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE451C04BA6100BD8C3D /* Time.swift */; };
 		08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */; };
 		08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */; };
+		08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F56E1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F56F1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5701F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5721F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5731F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5741F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
+		08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57A1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5811F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5831F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
+		08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		08DB8CBA1D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -4497,6 +4521,9 @@
 		08D2AE471C04F52300BD8C3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08D2AE491C05127500BD8C3D /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnalyticsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
+		08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummary.swift; sourceTree = "<group>"; };
+		08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummariesAPI.swift; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelperLaunchExtension.swift; sourceTree = "<group>"; };
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
@@ -4554,6 +4581,7 @@
 		08EDD6161F7C607A005203E4 /* CourseWidgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseWidgetTableViewCell.swift; sourceTree = "<group>"; };
 		08EDD6171F7C607A005203E4 /* CourseWidgetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseWidgetTableViewCell.xib; sourceTree = "<group>"; };
 		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
+		08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_info_v18.xcdatamodel; sourceTree = "<group>"; };
 		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
 		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F204941BB16B1F00D080C0 /* MyCoursesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoursesViewController.swift; sourceTree = "<group>"; };
@@ -5191,6 +5219,7 @@
 				0846B0FF1EDDECE100D64D77 /* User */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
 				080C5E7E1EFC13F30036EB3D /* CodeSample */,
+				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -5554,6 +5583,7 @@
 				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
 				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
 				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
+				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -6203,6 +6233,15 @@
 				08C1FC321F41E74500E14B46 /* QuizPresenter.swift */,
 			);
 			name = Quizzes;
+			sourceTree = "<group>";
+		};
+		08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */ = {
+			isa = PBXGroup;
+			children = (
+				08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */,
+				08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */,
+			);
+			name = CourseReviewSummary;
 			sourceTree = "<group>";
 		};
 		08DE94081B8C58AC00D278AB = {
@@ -10259,6 +10298,7 @@
 				08D1207F1C937B2200A54ABC /* Progress.swift in Sources */,
 				0834C46A1E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089574571E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
+				08D5F5781F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				08D120801C937B2200A54ABC /* PlaceholderStyleExtensions.swift in Sources */,
 				0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */,
 				08D120811C937B2200A54ABC /* MathQuizViewController.swift in Sources */,
@@ -10289,6 +10329,7 @@
 				081058361E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				08FF752B1DF993BF00D656C4 /* StepikAlertViewController.swift in Sources */,
 				08EB85F61D10267900E4F345 /* WriteCommentDelegate.swift in Sources */,
+				08D5F56E1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				083F2B221E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				0867D8301E8531F700B13285 /* CurrentBestStreakViewController.swift in Sources */,
 				0859AEAE1E4F5D8200A0D206 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
@@ -10461,6 +10502,7 @@
 				083749351DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				08D120D01C937B2200A54ABC /* WKWebViewPanelManager.m in Sources */,
 				08D120D31C937B2200A54ABC /* ApiDataDownloader.swift in Sources */,
+				08D5F5811F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				0860D91A1F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
 				087F6B9A1CEA02AE002649AB /* NotificationDataExtractor.swift in Sources */,
 				083540621CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
@@ -10658,6 +10700,7 @@
 				0846B1191EDDF64F00D64D77 /* CodeTemplate+CoreDataProperties.swift in Sources */,
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08F476221E82C1480018E82C /* StreaksView.swift in Sources */,
+				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
@@ -10899,6 +10942,7 @@
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
 				08263D701DE5F230002E5B7F /* NotificationTimePickerViewController.swift in Sources */,
@@ -10915,6 +10959,7 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
+				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -11140,6 +11185,7 @@
 				2C1B61491F4C4AEF00236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */,
 				2C1B614B1F4C4AEF00236804 /* PreferencesViewController.swift in Sources */,
+				08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B614C1F4C4AEF00236804 /* FullHeightWebView.swift in Sources */,
 				2C1B614D1F4C4AEF00236804 /* ProfileViewController.swift in Sources */,
 				2C1B614E1F4C4AEF00236804 /* NotificationTimePickerViewController.swift in Sources */,
@@ -11172,6 +11218,7 @@
 				2C1B61701F4C4AEF00236804 /* TCBlobDownloadManager.swift in Sources */,
 				2C1B61711F4C4AEF00236804 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C1B61721F4C4AEF00236804 /* JSQWebViewController.swift in Sources */,
+				08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C1B61731F4C4AEF00236804 /* WatchSessionManager.swift in Sources */,
 				2C1B61741F4C4AEF00236804 /* StepReversedCardView.swift in Sources */,
 				2C1B61751F4C4AEF00236804 /* WatchSessionDataObserver.swift in Sources */,
@@ -11378,6 +11425,7 @@
 				2C1B622D1F4C4AEF00236804 /* StreaksStepikAlertManager.swift in Sources */,
 				2C1B622E1F4C4AEF00236804 /* InputAccessoryBuilder.swift in Sources */,
 				2C1B622F1F4C4AEF00236804 /* AlertManager.swift in Sources */,
+				08D5F5731F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217891F55B1B200186245 /* Menu.swift in Sources */,
 				2C1B62301F4C4AEF00236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B62311F4C4AEF00236804 /* PreferencesContainer.swift in Sources */,
@@ -11561,6 +11609,7 @@
 				2C1B635A1F4C590700236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */,
 				2C1B635C1F4C590700236804 /* PreferencesViewController.swift in Sources */,
+				08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B635D1F4C590700236804 /* FullHeightWebView.swift in Sources */,
 				2C1B635E1F4C590700236804 /* ProfileViewController.swift in Sources */,
 				2C1B635F1F4C590700236804 /* NotificationTimePickerViewController.swift in Sources */,
@@ -11593,6 +11642,7 @@
 				2C1B63811F4C590700236804 /* TCBlobDownloadManager.swift in Sources */,
 				2C1B63821F4C590700236804 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C1B63831F4C590700236804 /* JSQWebViewController.swift in Sources */,
+				08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C1B63841F4C590700236804 /* WatchSessionManager.swift in Sources */,
 				2C1B63851F4C590700236804 /* StepReversedCardView.swift in Sources */,
 				2C1B63861F4C590700236804 /* WatchSessionDataObserver.swift in Sources */,
@@ -11799,6 +11849,7 @@
 				2C1B643E1F4C590700236804 /* StreaksStepikAlertManager.swift in Sources */,
 				2C1B643F1F4C590700236804 /* InputAccessoryBuilder.swift in Sources */,
 				2C1B64401F4C590700236804 /* AlertManager.swift in Sources */,
+				08D5F5741F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				0802178A1F55B1B200186245 /* Menu.swift in Sources */,
 				2C1B64411F4C590700236804 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C1B64421F4C590700236804 /* PreferencesContainer.swift in Sources */,
@@ -11982,6 +12033,7 @@
 				2C8652F71F4B33DE00D51654 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */,
 				2C8652F91F4B33DE00D51654 /* PreferencesViewController.swift in Sources */,
+				08D5F57A1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C8652FA1F4B33DE00D51654 /* FullHeightWebView.swift in Sources */,
 				2C8652FB1F4B33DE00D51654 /* ProfileViewController.swift in Sources */,
 				2C8652FC1F4B33DE00D51654 /* NotificationTimePickerViewController.swift in Sources */,
@@ -12014,6 +12066,7 @@
 				2C86531E1F4B33DE00D51654 /* TCBlobDownloadManager.swift in Sources */,
 				2C86531F1F4B33DE00D51654 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C8653201F4B33DE00D51654 /* JSQWebViewController.swift in Sources */,
+				08D5F5831F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C8653211F4B33DE00D51654 /* WatchSessionManager.swift in Sources */,
 				2C8653221F4B33DE00D51654 /* StepReversedCardView.swift in Sources */,
 				2C8653231F4B33DE00D51654 /* WatchSessionDataObserver.swift in Sources */,
@@ -12220,6 +12273,7 @@
 				2C8653DB1F4B33DE00D51654 /* StreaksStepikAlertManager.swift in Sources */,
 				2C8653DC1F4B33DE00D51654 /* InputAccessoryBuilder.swift in Sources */,
 				2C8653DD1F4B33DE00D51654 /* AlertManager.swift in Sources */,
+				08D5F5701F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217861F55B1B200186245 /* Menu.swift in Sources */,
 				2C8653DE1F4B33DE00D51654 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C8653DF1F4B33DE00D51654 /* PreferencesContainer.swift in Sources */,
@@ -12403,6 +12457,7 @@
 				2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */,
 				2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */,
 				2C89A9DF1F4C289900227C3B /* PreferencesViewController.swift in Sources */,
+				08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C89A9E01F4C289900227C3B /* FullHeightWebView.swift in Sources */,
 				2C89A9E11F4C289900227C3B /* ProfileViewController.swift in Sources */,
 				2C89A9E21F4C289900227C3B /* NotificationTimePickerViewController.swift in Sources */,
@@ -12435,6 +12490,7 @@
 				2C89AA041F4C289900227C3B /* TCBlobDownloadManager.swift in Sources */,
 				2C89AA051F4C289900227C3B /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C89AA061F4C289900227C3B /* JSQWebViewController.swift in Sources */,
+				08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C89AA071F4C289900227C3B /* WatchSessionManager.swift in Sources */,
 				2C89AA081F4C289900227C3B /* StepReversedCardView.swift in Sources */,
 				2C89AA091F4C289900227C3B /* WatchSessionDataObserver.swift in Sources */,
@@ -12641,6 +12697,7 @@
 				2C89AAC11F4C289900227C3B /* StreaksStepikAlertManager.swift in Sources */,
 				2C89AAC21F4C289900227C3B /* InputAccessoryBuilder.swift in Sources */,
 				2C89AAC31F4C289900227C3B /* AlertManager.swift in Sources */,
+				08D5F5711F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217871F55B1B200186245 /* Menu.swift in Sources */,
 				2C89AAC41F4C289900227C3B /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C89AAC51F4C289900227C3B /* PreferencesContainer.swift in Sources */,
@@ -12824,6 +12881,7 @@
 				2C9731911F4C38F600AC9301 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */,
 				2C9731931F4C38F600AC9301 /* PreferencesViewController.swift in Sources */,
+				08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C9731941F4C38F600AC9301 /* FullHeightWebView.swift in Sources */,
 				2C9731951F4C38F600AC9301 /* ProfileViewController.swift in Sources */,
 				2C9731961F4C38F600AC9301 /* NotificationTimePickerViewController.swift in Sources */,
@@ -12856,6 +12914,7 @@
 				2C9731B81F4C38F600AC9301 /* TCBlobDownloadManager.swift in Sources */,
 				2C9731B91F4C38F600AC9301 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C9731BA1F4C38F600AC9301 /* JSQWebViewController.swift in Sources */,
+				08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C9731BB1F4C38F600AC9301 /* WatchSessionManager.swift in Sources */,
 				2C9731BC1F4C38F600AC9301 /* StepReversedCardView.swift in Sources */,
 				2C9731BD1F4C38F600AC9301 /* WatchSessionDataObserver.swift in Sources */,
@@ -13062,6 +13121,7 @@
 				2C9732751F4C38F600AC9301 /* StreaksStepikAlertManager.swift in Sources */,
 				2C9732761F4C38F600AC9301 /* InputAccessoryBuilder.swift in Sources */,
 				2C9732771F4C38F600AC9301 /* AlertManager.swift in Sources */,
+				08D5F5721F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217881F55B1B200186245 /* Menu.swift in Sources */,
 				2C9732781F4C38F600AC9301 /* CodeSuggestionTableViewCell.swift in Sources */,
 				2C9732791F4C38F600AC9301 /* PreferencesContainer.swift in Sources */,
@@ -13299,6 +13359,7 @@
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
 				864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */,
 				864D67AA1E83E08E001E8D9E /* PreferencesViewController.swift in Sources */,
+				08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				08A500521F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				864D67AB1E83E08E001E8D9E /* ProfileViewController.swift in Sources */,
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
@@ -13331,6 +13392,7 @@
 				864D673E1E83DE8A001E8D9E /* TCBlobDownloadManager.swift in Sources */,
 				864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */,
 				864D67401E83DE8A001E8D9E /* JSQWebViewController.swift in Sources */,
+				08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				864D67351E83DE76001E8D9E /* WatchSessionManager.swift in Sources */,
 				8618E3E41EA0063D00FB3D0F /* StepReversedCardView.swift in Sources */,
 				864D67361E83DE76001E8D9E /* WatchSessionDataObserver.swift in Sources */,
@@ -13537,6 +13599,7 @@
 				864D67211E83DE03001E8D9E /* StreaksStepikAlertManager.swift in Sources */,
 				085E9E6C1F138C1D00D6A4BC /* InputAccessoryBuilder.swift in Sources */,
 				864D67221E83DE03001E8D9E /* AlertManager.swift in Sources */,
+				08D5F56F1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				080217851F55B1B200186245 /* Menu.swift in Sources */,
 				085E9E6F1F138C3800D6A4BC /* CodeSuggestionTableViewCell.swift in Sources */,
 				864D67231E83DE03001E8D9E /* PreferencesContainer.swift in Sources */,
@@ -15017,6 +15080,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */,
 				08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */,
 				080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */,
 				0829B8371E9D03E3009B4A84 /* Model_certificates_v15.xcdatamodel */,
@@ -15035,7 +15099,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */;
+			currentVersion = 08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

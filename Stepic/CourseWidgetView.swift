@@ -65,15 +65,43 @@ class CourseWidgetView: NibInitializableView {
         didSet {
             switch buttonState {
             case .join:
-                actionButton.isGray = true
+                actionButton.isGray = false
                 actionButton.setTitle(NSLocalizedString("AboutCourse", comment: ""), for: .normal)
                 break
             case .continueLearning:
-                actionButton.isGray = false
+                actionButton.isGray = true
                 actionButton.setTitle(NSLocalizedString("ContinueLearning", comment: ""), for: .normal)
                 break
             }
         }
+    }
+
+    private func getCircleLayer(color: UIColor, progress: Float, inRect rect: CGRect) -> CAShapeLayer {
+        let circle = CAShapeLayer()
+        circle.fillColor = UIColor.clear.cgColor
+        circle.strokeColor = color.cgColor
+        circle.lineWidth = 5
+        circle.strokeEnd = CGFloat(progress / 100)
+        circle.lineJoin = kCALineJoinRound
+        circle.path = UIBezierPath(arcCenter: CGPoint(x: 10, y: 10), radius: 7, startAngle: -CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true).cgPath
+        return circle
+//        circle.actions = ["strokeEnd" : NSNull()]
+    }
+
+    private func getProgressImage(progress: Float) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 20, height: 20)
+//        let circleRect = CGRect(x: 3, y: 3, width: 14, height: 14)
+        let progressView = UIView(frame: rect)
+        progressView.backgroundColor = UIColor.clear
+        let circle = getCircleLayer(color: UIColor.mainDark, progress: 100, inRect: rect)
+        let progressCircle = getCircleLayer(color: UIColor.stepicGreen, progress: progress, inRect: rect)
+        progressView.layer.insertSublayer(circle, at: 1)
+        progressView.layer.insertSublayer(progressCircle, at: 2)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 20), false, 0.0)
+        progressView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img ?? #imageLiteral(resourceName: "progress_widget_icon_gray")
     }
 
     private func updateStats() {
@@ -85,7 +113,7 @@ class CourseWidgetView: NibInitializableView {
             newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]
         }
         if let progress = progress {
-            newStats += [CourseStatData(image: progress == 100 ? #imageLiteral(resourceName: "progress_widget_icon_green") : #imageLiteral(resourceName: "progress_widget_icon_gray"), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero)))%")]
+            newStats += [CourseStatData(image: getProgressImage(progress: progress), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero))) %")]
         }
         self.stats = newStats
         courseStatsCollectionView.reloadData()

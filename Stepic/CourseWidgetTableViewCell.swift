@@ -28,8 +28,8 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.action = action
         widgetView.buttonState = course.enrolled ? .continueLearning : .join
         widgetView.imageURL = URL(string: course.coverURLString)
-        widgetView.rating = 4.3
-        widgetView.learners = 10000
-        widgetView.progress = 57
+//        widgetView.rating = 4.3
+        widgetView.learners = course.learnersCount
+        widgetView.progress = course.enrolled ? course.progress?.percentPassed : nil
     }
 }

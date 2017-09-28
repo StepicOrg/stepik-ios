@@ -10,6 +10,7 @@ import UIKit
 import FLKAutoLayout
 import DZNEmptyDataSet
 import SVProgressHUD
+import Alamofire
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UIViewControllerPreviewingDelegate {
 
@@ -160,42 +161,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         s.isRefreshing = false
                     }
 
-                    var progressIds : [String] = []
-                    var progresses : [Progress] = []
-                    var lastStepIds : [String] = []
-                    var lastSteps : [LastStep] = []
-                    for course in newCourses {
-                        if let progressId = course.progressId {
-                            progressIds += [progressId]
-                        }
-                        if let progress = course.progress {
-                            progresses += [progress]
-                        }
-
-                        if let lastStepId = course.lastStepId {
-                            lastStepIds += [lastStepId]
-                        }
-                        if let lastStep = course.lastStep {
-                            lastSteps += [lastStep]
-                        }
-                    }
-
-                    _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-                        newProgresses -> Void in
-                        progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                        for i in 0 ..< min(newCourses.count, progresses.count) {
-                            newCourses[i].progress = progresses[i]
-                        }
-                        CoreDataHelper.instance.save()
-
-                        coursesCompletion()
-
-                    }, error: {
-                        _ in
-                        coursesCompletion()
-                        print("Error while dowloading progresses")
-                    })
-
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
                 }, error: {
                     [weak self]
                     _ in
@@ -224,6 +190,27 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
             self?.handleRefreshError()
         })
+    }
+
+    func matchProgresses(newProgresses: [Progress], ids progressIds: [String], courses: [Course]) {
+        let progresses = Sorter.sort(newProgresses, byIds: progressIds)
+
+        if progresses.count == 0 {
+            CoreDataHelper.instance.save()
+            return
+        }
+
+        var progressCnt = 0
+        for i in 0 ..< courses.count {
+            if courses[i].progressId == progresses[progressCnt].id {
+                courses[i].progress = progresses[progressCnt]
+            }
+            progressCnt += 1
+            if progressCnt == progresses.count {
+                break
+            }
+        }
+        CoreDataHelper.instance.save()
     }
 
     var emptyDatasetState: EmptyDatasetState = .empty {
@@ -301,6 +288,32 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
 
+    @discardableResult func updateProgresses(forCourses newCourses: [Course], completion: @escaping () -> Void) -> Request? {
+        var progressIds: [String] = []
+        var progresses: [Progress] = []
+        for course in newCourses {
+            if let progressId = course.progressId {
+                progressIds += [progressId]
+            }
+            if let progress = course.progress {
+                progresses += [progress]
+            }
+        }
+
+        return ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
+            [weak self]
+            newProgresses -> Void in
+
+            self?.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: newCourses)
+            completion()
+
+        }, error: {
+            _ in
+            completion()
+            print("Error while dowloading progresses")
+        })
+    }
+
     func loadNextPage() {
         if isRefreshing || isLoadingMore {
             return
@@ -324,12 +337,18 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         newCourses.index {$0.id == id} != nil ? id : nil
                     }
 
-                    s.currentPage += 1
-                    s.courses += Sorter.sort(newCourses, byIds: ids)
-                    s.meta = meta
-                    s.tabIds += ids
-                    //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI {s.tableView.reloadData()}
+                    let coursesCompletion = {
+                        s.courses += Sorter.sort(newCourses, byIds: ids)
+                        s.meta = meta
+                        s.currentPage += 1
+                        s.tabIds += ids
+
+                        DispatchQueue.main.async {
+                            s.tableView.reloadData()
+                        }
+                    }
+
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
 
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
