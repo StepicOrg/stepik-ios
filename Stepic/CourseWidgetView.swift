@@ -80,22 +80,22 @@ class CourseWidgetView: NibInitializableView {
         let circle = CAShapeLayer()
         circle.fillColor = UIColor.clear.cgColor
         circle.strokeColor = color.cgColor
-        circle.lineWidth = 5
+        circle.lineWidth = 2.5
         circle.strokeEnd = CGFloat(progress / 100)
         circle.lineJoin = kCALineJoinRound
-        circle.path = UIBezierPath(arcCenter: CGPoint(x: 10, y: 10), radius: 7, startAngle: -CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true).cgPath
+        circle.path = UIBezierPath(arcCenter: CGPoint(x: 5, y: 5), radius: 3.5, startAngle: -CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true).cgPath
         return circle
     }
 
     private func getProgressImage(progress: Float) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 20, height: 20)
+        let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
         let progressView = UIView(frame: rect)
         progressView.backgroundColor = UIColor.clear
         let circle = getCircleLayer(color: UIColor.mainDark, progress: 100, inRect: rect)
         let progressCircle = getCircleLayer(color: UIColor.stepicGreen, progress: progress, inRect: rect)
         progressView.layer.insertSublayer(circle, at: 1)
         progressView.layer.insertSublayer(progressCircle, at: 2)
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 20), false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 10, height: 10), false, 0.0)
         progressView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -106,12 +106,12 @@ class CourseWidgetView: NibInitializableView {
         var newStats: [CourseStatData] = []
         if let rating = rating {
             if rating > 0 {
-                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon"), text: String(format: "%.1f", rating))]
+                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon_dark"), text: String(format: "%.1f", rating))]
             }
         }
         if let learners = learners {
             if learners > 0 {
-                newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]
+                newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon_dark"), text: "\(learners)")]
             }
         }
         if let progress = progress {
