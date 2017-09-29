@@ -560,7 +560,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             return nil
         }
 
-        guard let cell = tableView.cellForRow(at: indexPath) as? CourseTableViewCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? CourseWidgetTableViewCell else {
             return nil
         }
 
