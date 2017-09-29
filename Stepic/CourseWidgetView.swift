@@ -110,7 +110,9 @@ class CourseWidgetView: NibInitializableView {
             }
         }
         if let learners = learners {
-            newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]
+            if learners > 0 {
+                newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]
+            }
         }
         if let progress = progress {
             newStats += [CourseStatData(image: getProgressImage(progress: progress), text: "\(Int(progress.rounded(.toNearestOrAwayFromZero))) %")]
