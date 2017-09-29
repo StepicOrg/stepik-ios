@@ -174,6 +174,8 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         s.currentPage = 1
                         s.refreshControl?.endRefreshing()
                         s.isRefreshing = false
+                        s.lastUser = AuthInfo.shared.user
+                        
                         }, error: {
                             error -> Void in
                             print("failed downloading courses data in refresh")
