@@ -155,7 +155,7 @@ class NewProfileViewController: MenuViewController, ProfileView {
     }
 
     func navigateToNotifications() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsViewController", storyboardName: "Notifications")
+        let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsPagerViewController", storyboardName: "Notifications")
         navigationController?.pushViewController(vc, animated: true)
     }
 

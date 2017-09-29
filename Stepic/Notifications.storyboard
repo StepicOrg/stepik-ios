@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Notifications View Controller-->
+        <!--Notifications-->
         <scene sceneID="aIX-R2-CCi">
             <objects>
-                <viewController storyboardIdentifier="NotificationsViewController" id="r7S-ZU-07R" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsPagerViewController" title="Notifications" id="r7S-ZU-07R" customClass="NotificationsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xK5-fH-mMS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,6 +24,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5r-Kj-9iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-145" y="83"/>
+        </scene>
+        <!--Notifications View Controller-->
+        <scene sceneID="OCT-sI-xvn">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsViewController" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DFQ-d9-gIu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hSs-8g-1vY">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="zmb-v1-FSp" id="adO-MK-ZT4"/>
+                                    <outlet property="delegate" destination="zmb-v1-FSp" id="qMf-fd-Uxs"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q2T-AE-dOT" firstAttribute="trailing" secondItem="hSs-8g-1vY" secondAttribute="trailing" id="0fn-gJ-iUo"/>
+                            <constraint firstItem="Q2T-AE-dOT" firstAttribute="bottom" secondItem="hSs-8g-1vY" secondAttribute="bottom" id="N6d-Mz-uBr"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="Q2T-AE-dOT" secondAttribute="leading" id="VDP-dh-SR6"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="Q2T-AE-dOT" secondAttribute="top" id="s07-5h-KrZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Q2T-AE-dOT"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="hSs-8g-1vY" id="7fF-eg-fZJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pqP-NP-e04" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="654" y="82"/>
         </scene>
     </scenes>
 </document>
