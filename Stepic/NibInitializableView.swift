@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FLKAutoLayout
 
 @IBDesignable
 class NibInitializableView: UIView {
@@ -33,6 +34,7 @@ class NibInitializableView: UIView {
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
+        view.align(toView: self)
         setupSubviews()
     }
 

@@ -100,6 +100,10 @@ class APIEndpoint {
                         obj.update(json: objectJSON)
                         newObjects += [obj]
                     default:
+                        //TODO: Fix this in the next releases! We have some problems with deleting entities from CoreData
+                        let obj = existing[0]
+                        obj.update(json: objectJSON)
+                        newObjects += [obj]
                         print("More than 1 object with the same id!")
                     }
                 }

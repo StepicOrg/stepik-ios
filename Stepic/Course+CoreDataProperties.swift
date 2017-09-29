@@ -23,8 +23,10 @@ extension Course {
     @NSManaged var managedEnrolled: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
+    @NSManaged var managedLearnersCount: NSNumber?
 
     @NSManaged var managedSummary: String?
+    @NSManaged var managedReviewSummaryId: NSNumber?
     @NSManaged var managedWorkload: String?
     @NSManaged var managedIntroURL: String?
     @NSManaged var managedFormat: String?
@@ -46,6 +48,7 @@ extension Course {
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedLastStep: LastStep?
     @NSManaged var managedCertificateEntity: Certificate?
+    @NSManaged var managedReviewSummary: CourseReviewSummary?
 
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -61,6 +64,24 @@ extension Course {
         }
         get {
             return managedId?.intValue ?? -1
+        }
+    }
+
+    var learnersCount: Int? {
+        set(newCount) {
+            self.managedLearnersCount = newCount as NSNumber?
+        }
+        get {
+            return managedLearnersCount?.intValue
+        }
+    }
+
+    var reviewSummaryId: Int? {
+        get {
+            return managedReviewSummaryId?.intValue
+        }
+        set(value) {
+            managedReviewSummaryId = value as NSNumber?
         }
     }
 
@@ -295,6 +316,15 @@ extension Course {
         }
         set(value) {
             managedIntroVideo = value
+        }
+    }
+
+    var reviewSummary: CourseReviewSummary? {
+        get {
+            return managedReviewSummary
+        }
+        set(value) {
+            managedReviewSummary = value
         }
     }
 

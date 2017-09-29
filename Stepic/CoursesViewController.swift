@@ -10,6 +10,7 @@ import UIKit
 import FLKAutoLayout
 import DZNEmptyDataSet
 import SVProgressHUD
+import Alamofire
 
 class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UIViewControllerPreviewingDelegate {
 
@@ -52,10 +53,12 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.register(UINib(nibName: "CourseTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseTableViewCell")
         tableView.register(UINib(nibName: "RefreshTableViewCell", bundle: nil), forCellReuseIdentifier: "RefreshTableViewCell")
+        tableView.register(UINib(nibName: "CourseWidgetTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseWidgetTableViewCell")
 
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
 
         #if swift(>=3.2)
             if #available(iOS 11.0, *) {
@@ -149,58 +152,24 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     guard let s = self else { return }
 
                     let coursesCompletion = {
-                        s.courses = Sorter.sort(newCourses, byIds: ids)
-                        s.meta = meta
-                        s.currentPage = 1
-                        s.tabIds = ids
-
                         DispatchQueue.main.async {
-                            s.onRefresh()
-                            s.emptyDatasetState = .empty
-                            s.refreshControl?.endRefreshing()
                             s.tableView.reloadData()
                         }
-
-                        s.lastUser = AuthInfo.shared.user
-                        s.isRefreshing = false
                     }
 
-                    var progressIds : [String] = []
-                    var progresses : [Progress] = []
-                    var lastStepIds : [String] = []
-                    var lastSteps : [LastStep] = []
-                    for course in newCourses {
-                        if let progressId = course.progressId {
-                            progressIds += [progressId]
-                        }
-                        if let progress = course.progress {
-                            progresses += [progress]
-                        }
+                    s.courses = Sorter.sort(newCourses, byIds: ids)
+                    s.meta = meta
+                    s.currentPage = 1
+                    s.tabIds = ids
+                    s.lastUser = AuthInfo.shared.user
+                    s.isRefreshing = false
+                    s.onRefresh()
+                    s.emptyDatasetState = .empty
+                    s.refreshControl?.endRefreshing()
+                    s.tableView.reloadData()
 
-                        if let lastStepId = course.lastStepId {
-                            lastStepIds += [lastStepId]
-                        }
-                        if let lastStep = course.lastStep {
-                            lastSteps += [lastStep]
-                        }
-                    }
-
-                    _ = ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
-                        newProgresses -> Void in
-                        progresses = Sorter.sort(newProgresses, byIds: progressIds)
-                        for i in 0 ..< min(newCourses.count, progresses.count) {
-                            newCourses[i].progress = progresses[i]
-                        }
-                        CoreDataHelper.instance.save()
-
-                        coursesCompletion()
-
-                    }, error: {
-                        _ in
-                        coursesCompletion()
-                        print("Error while dowloading progresses")
-                    })
-
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+                    s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                 }, error: {
                     [weak self]
                     _ in
@@ -229,6 +198,47 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
             self?.handleRefreshError()
         })
+    }
+
+    func matchProgresses(newProgresses: [Progress], ids progressIds: [String], courses: [Course]) {
+        let progresses = Sorter.sort(newProgresses, byIds: progressIds)
+
+        if progresses.count == 0 {
+            CoreDataHelper.instance.save()
+            return
+        }
+
+        var progressCnt = 0
+        for i in 0 ..< courses.count {
+            if courses[i].progressId == progresses[progressCnt].id {
+                courses[i].progress = progresses[progressCnt]
+                progressCnt += 1
+            }
+            if progressCnt == progresses.count {
+                break
+            }
+        }
+        CoreDataHelper.instance.save()
+    }
+
+    func matchReviewSummaries(newReviewSummaries: [CourseReviewSummary], ids reviewIds: [Int], courses: [Course]) {
+        let reviews = Sorter.sort(newReviewSummaries, byIds: reviewIds)
+        if reviews.count == 0 {
+            CoreDataHelper.instance.save()
+            return
+        }
+
+        var reviewCnt = 0
+        for i in 0 ..< courses.count {
+            if courses[i].reviewSummaryId == reviews[reviewCnt].id {
+                courses[i].reviewSummary = reviews[reviewCnt]
+                reviewCnt += 1
+            }
+            if reviewCnt == reviews.count {
+                break
+            }
+        }
+        CoreDataHelper.instance.save()
     }
 
     var emptyDatasetState: EmptyDatasetState = .empty {
@@ -306,6 +316,56 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
 
+    @discardableResult func updateReviewSummaries(forCourses newCourses: [Course], completion: @escaping () -> Void) -> Request? {
+        var reviewIds: [Int] = []
+        var reviews: [CourseReviewSummary] = []
+        for course in newCourses {
+            if let reviewId = course.reviewSummaryId {
+                reviewIds += [reviewId]
+            }
+            if let review = course.reviewSummary {
+                reviews += [review]
+            }
+        }
+        return ApiDataDownloader.courseReviewSummaries.retrieve(ids: reviewIds, existing: reviews, refreshMode: .update, success: {
+            [weak self]
+            newReviews -> Void in
+
+            self?.matchReviewSummaries(newReviewSummaries: newReviews, ids: reviewIds, courses: newCourses)
+            completion()
+            }, error: {
+                _ in
+                completion()
+                print("Error while dowloading progresses")
+        })
+    }
+
+    @discardableResult func updateProgresses(forCourses newCourses: [Course], completion: @escaping () -> Void) -> Request? {
+        var progressIds: [String] = []
+        var progresses: [Progress] = []
+        for course in newCourses {
+            if let progressId = course.progressId {
+                progressIds += [progressId]
+            }
+            if let progress = course.progress {
+                progresses += [progress]
+            }
+        }
+
+        return ApiDataDownloader.progresses.retrieve(ids: progressIds, existing: progresses, refreshMode: .update, success: {
+            [weak self]
+            newProgresses -> Void in
+
+            self?.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: newCourses)
+            completion()
+
+        }, error: {
+            _ in
+            completion()
+            print("Error while dowloading progresses")
+        })
+    }
+
     func loadNextPage() {
         if isRefreshing || isLoadingMore {
             return
@@ -329,13 +389,20 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                         newCourses.index {$0.id == id} != nil ? id : nil
                     }
 
-                    s.currentPage += 1
+                    let coursesCompletion = {
+                        DispatchQueue.main.async {
+                            s.tableView.reloadData()
+                        }
+                    }
+
                     s.courses += Sorter.sort(newCourses, byIds: ids)
                     s.meta = meta
+                    s.currentPage += 1
                     s.tabIds += ids
-                    //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI {s.tableView.reloadData()}
+                    s.tableView.reloadData()
 
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+                    s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
                     }, error: {
@@ -429,6 +496,18 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 
     }
 
+    func actionPressed(course: Course) {
+        if course.enrolled {
+            continuePressed(course: course)
+        } else {
+            unenrolledPressed(course: course)
+        }
+    }
+
+    func unenrolledPressed(course: Course) {
+        self.performSegue(withIdentifier: "showCourse", sender: course)
+    }
+
     func continuePressed(course: Course) {
         SVProgressHUD.show()
 
@@ -487,7 +566,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             return nil
         }
 
-        guard let cell = tableView.cellForRow(at: indexPath) as? CourseTableViewCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? CourseWidgetTableViewCell else {
             return nil
         }
 
@@ -533,29 +612,38 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 }
 
 extension CoursesViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == courses.count && needRefresh() {
             return 60
         } else {
-            return 126
+            return 100
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == courses.count && needRefresh() {
+            return 60
+        } else {
+            return UITableViewAutomaticDimension
         }
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return (indexPath as NSIndexPath).row < courses.count
+        return indexPath.row < courses.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        guard (indexPath as NSIndexPath).row < courses.count else {
+        guard indexPath.row < courses.count else {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
 
-        if courses[(indexPath as NSIndexPath).row].enrolled {
-            self.performSegue(withIdentifier: "showSections", sender: courses[(indexPath as NSIndexPath).row])
+        if courses[indexPath.row].enrolled {
+            self.performSegue(withIdentifier: "showSections", sender: courses[indexPath.row])
         } else {
-            self.performSegue(withIdentifier: "showCourse", sender: courses[(indexPath as NSIndexPath).row])
+            self.performSegue(withIdentifier: "showCourse", sender: courses[indexPath.row])
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -573,7 +661,7 @@ extension CoursesViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+        if indexPath.row == courses.count && needRefresh() {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefreshTableViewCell", for: indexPath) as! RefreshTableViewCell
             cell.initWithMessage("Loading new courses...", isRefreshing: !self.failedLoadingMore, refreshAction: { self.loadNextPage() })
 
@@ -586,14 +674,13 @@ extension CoursesViewController : UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseTableViewCell", for: indexPath) as! CourseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
 
-        let course = courses[(indexPath as NSIndexPath).row]
-        cell.initWithCourse(course)
-        cell.continueAction = {
+        let course = courses[indexPath.row]
+        cell.initWithCourse(course, action: {
             [weak self] in
-            self?.continuePressed(course: course)
-        }
+            self?.actionPressed(course: course)
+        })
 
         return cell
     }
