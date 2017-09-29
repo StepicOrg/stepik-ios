@@ -168,6 +168,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                             s.currentRequest = s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                         })
 
+                        s.tableView.reloadData()
                         s.courses = Sorter.sort(newCourses, byIds: ids)
                         s.meta = meta
                         s.currentPage = 1
@@ -248,6 +249,7 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         s.currentRequest = s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                     })
 
+                    s.tableView.reloadData()
                     s.currentPage += 1
                     s.courses += Sorter.sort(newCourses, byIds: ids)
                     s.meta = meta
