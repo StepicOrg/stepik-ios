@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -40,13 +39,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0aW-H7-DGS"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="oRI-Xv-qOd" secondAttribute="leading" constant="-16" id="8Go-0Y-HUA"/>
-                    <constraint firstItem="oRI-Xv-qOd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="VNv-C9-xMM"/>
+                    <constraint firstAttribute="leading" secondItem="oRI-Xv-qOd" secondAttribute="leading" constant="-24" id="8Go-0Y-HUA"/>
+                    <constraint firstItem="oRI-Xv-qOd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="VNv-C9-xMM"/>
                     <constraint firstItem="hBn-ex-A8Q" firstAttribute="top" secondItem="oRI-Xv-qOd" secondAttribute="bottom" priority="999" constant="4" id="c0V-fi-e0x"/>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="leading" secondItem="hBn-ex-A8Q" secondAttribute="trailing" constant="8" id="eUy-kp-vrT"/>
                     <constraint firstItem="5JC-am-9y9" firstAttribute="leading" secondItem="oRI-Xv-qOd" secondAttribute="trailing" constant="8" id="j3Y-fj-NfD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="5JC-am-9y9" secondAttribute="trailing" constant="16" id="mWZ-rQ-aLN"/>
-                    <constraint firstItem="hBn-ex-A8Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="sGt-UH-4lJ"/>
+                    <constraint firstAttribute="trailing" secondItem="5JC-am-9y9" secondAttribute="trailing" constant="24" id="mWZ-rQ-aLN"/>
+                    <constraint firstItem="hBn-ex-A8Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="sGt-UH-4lJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

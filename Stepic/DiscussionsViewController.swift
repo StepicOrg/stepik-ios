@@ -85,6 +85,12 @@ class DiscussionsViewController: UIViewController {
         tableView.addSubview(refreshControl ?? UIView())
         refreshControl?.beginRefreshing()
         reloadDiscussions()
+
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
     }
 
     struct DiscussionIds {
