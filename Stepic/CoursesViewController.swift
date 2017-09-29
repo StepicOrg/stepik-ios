@@ -59,6 +59,13 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
+
         if refreshEnabled {
             refreshControl?.addTarget(self, action: #selector(CoursesViewController.refreshCourses), for: .valueChanged)
             if #available(iOS 10.0, *) {

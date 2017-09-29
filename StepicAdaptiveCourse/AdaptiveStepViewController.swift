@@ -57,7 +57,7 @@ class AdaptiveStepViewController: UIViewController, AdaptiveStepView {
 
         self.addChildViewController(controller)
         quizPlaceholderView.addSubview(quizView!)
-        quizView!.align(to: quizPlaceholderView)
+        quizView!.align(toView: quizPlaceholderView)
 
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
