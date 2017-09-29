@@ -11,25 +11,25 @@ import CoreData
 import SwiftyJSON
 
 class CourseReviewSummary: NSManagedObject, JSONInitializable {
-    
+
     typealias idType = Int
-    
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
     }
-    
+
     func initialize(_ json: JSON) {
         id = json["id"].intValue
         average = json["average"].floatValue
         count = json["count"].intValue
         distribution = json["distribution"].arrayObject as! [Int]
     }
-    
+
     func update(json: JSON) {
         initialize(json)
     }
-    
+
     func hasEqualId(json: JSON) -> Bool {
         return id == json["id"].intValue
     }

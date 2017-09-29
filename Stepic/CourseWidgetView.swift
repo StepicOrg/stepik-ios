@@ -85,12 +85,10 @@ class CourseWidgetView: NibInitializableView {
         circle.lineJoin = kCALineJoinRound
         circle.path = UIBezierPath(arcCenter: CGPoint(x: 10, y: 10), radius: 7, startAngle: -CGFloat.pi / 2, endAngle: 3 * CGFloat.pi / 2, clockwise: true).cgPath
         return circle
-//        circle.actions = ["strokeEnd" : NSNull()]
     }
 
     private func getProgressImage(progress: Float) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 20, height: 20)
-//        let circleRect = CGRect(x: 3, y: 3, width: 14, height: 14)
         let progressView = UIView(frame: rect)
         progressView.backgroundColor = UIColor.clear
         let circle = getCircleLayer(color: UIColor.mainDark, progress: 100, inRect: rect)
@@ -107,7 +105,9 @@ class CourseWidgetView: NibInitializableView {
     private func updateStats() {
         var newStats: [CourseStatData] = []
         if let rating = rating {
-            newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon"), text: String(format: "%.1f", rating))]
+            if rating > 0 {
+                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon"), text: String(format: "%.1f", rating))]
+            }
         }
         if let learners = learners {
             newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon"), text: "\(learners)")]

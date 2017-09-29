@@ -145,23 +145,24 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     guard let s = self else { return }
 
                     let coursesCompletion = {
-                        s.courses = Sorter.sort(newCourses, byIds: ids)
-                        s.meta = meta
-                        s.currentPage = 1
-                        s.tabIds = ids
-
                         DispatchQueue.main.async {
-                            s.onRefresh()
-                            s.emptyDatasetState = .empty
-                            s.refreshControl?.endRefreshing()
                             s.tableView.reloadData()
                         }
-
-                        s.lastUser = AuthInfo.shared.user
-                        s.isRefreshing = false
                     }
 
+                    s.courses = Sorter.sort(newCourses, byIds: ids)
+                    s.meta = meta
+                    s.currentPage = 1
+                    s.tabIds = ids
+                    s.lastUser = AuthInfo.shared.user
+                    s.isRefreshing = false
+                    s.onRefresh()
+                    s.emptyDatasetState = .empty
+                    s.refreshControl?.endRefreshing()
+                    s.tableView.reloadData()
+
                     s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+                    s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                 }, error: {
                     [weak self]
                     _ in
@@ -207,6 +208,26 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             }
             progressCnt += 1
             if progressCnt == progresses.count {
+                break
+            }
+        }
+        CoreDataHelper.instance.save()
+    }
+
+    func matchReviewSummaries(newReviewSummaries: [CourseReviewSummary], ids reviewIds: [Int], courses: [Course]) {
+        let reviews = Sorter.sort(newReviewSummaries, byIds: reviewIds)
+        if reviews.count == 0 {
+            CoreDataHelper.instance.save()
+            return
+        }
+
+        var reviewCnt = 0
+        for i in 0 ..< courses.count {
+            if courses[i].reviewSummaryId == reviews[reviewCnt].id {
+                courses[i].reviewSummary = reviews[reviewCnt]
+            }
+            reviewCnt += 1
+            if reviewCnt == reviews.count {
                 break
             }
         }
@@ -288,6 +309,30 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
 
+    @discardableResult func updateReviewSummaries(forCourses newCourses: [Course], completion: @escaping () -> Void) -> Request? {
+        var reviewIds: [Int] = []
+        var reviews: [CourseReviewSummary] = []
+        for course in newCourses {
+            if let reviewId = course.reviewSummaryId {
+                reviewIds += [reviewId]
+            }
+            if let review = course.reviewSummary {
+                reviews += [review]
+            }
+        }
+        return ApiDataDownloader.courseReviewSummaries.retrieve(ids: reviewIds, existing: reviews, refreshMode: .update, success: {
+            [weak self]
+            newReviews -> Void in
+
+            self?.matchReviewSummaries(newReviewSummaries: newReviews, ids: reviewIds, courses: newCourses)
+            completion()
+            }, error: {
+                _ in
+                completion()
+                print("Error while dowloading progresses")
+        })
+    }
+
     @discardableResult func updateProgresses(forCourses newCourses: [Course], completion: @escaping () -> Void) -> Request? {
         var progressIds: [String] = []
         var progresses: [Progress] = []
@@ -338,18 +383,19 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
                     }
 
                     let coursesCompletion = {
-                        s.courses += Sorter.sort(newCourses, byIds: ids)
-                        s.meta = meta
-                        s.currentPage += 1
-                        s.tabIds += ids
-
                         DispatchQueue.main.async {
                             s.tableView.reloadData()
                         }
                     }
 
-                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+                    s.courses += Sorter.sort(newCourses, byIds: ids)
+                    s.meta = meta
+                    s.currentPage += 1
+                    s.tabIds += ids
+                    s.tableView.reloadData()
 
+                    s.updateProgresses(forCourses: newCourses, completion: coursesCompletion)
+                    s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
                     }, error: {

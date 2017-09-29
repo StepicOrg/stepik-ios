@@ -71,10 +71,10 @@
         <relationship name="managedIntroVideo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" syncable="YES"/>
         <relationship name="managedLastStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LastStep" inverseName="managedCourse" inverseEntity="LastStep" syncable="YES"/>
         <relationship name="managedProgress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Progress" inverseName="managedCourse" inverseEntity="Progress" syncable="YES"/>
-        <relationship name="managedReviewSummary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseReviewSummary" inverseName="managedCourse" inverseEntity="CourseReviewSummary" syncable="YES"/>
+        <relationship name="managedReviewSummary" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CourseReviewSummary" inverseName="managedCourse" inverseEntity="CourseReviewSummary" syncable="YES"/>
         <relationship name="managedSections" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Section" inverseName="managedCourse" inverseEntity="Section" syncable="YES"/>
     </entity>
-    <entity name="CourseReviewSummary" syncable="YES">
+    <entity name="CourseReviewSummary" representedClassName=".CourseReviewSummary" syncable="YES">
         <attribute name="managedAverage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedDistribution" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -205,6 +205,7 @@
         <element name="CodeSample" positionX="-36" positionY="135" width="128" height="90"/>
         <element name="CodeTemplate" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Course" positionX="-63" positionY="-18" width="128" height="495"/>
+        <element name="CourseReviewSummary" positionX="-36" positionY="135" width="128" height="120"/>
         <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Profile" positionX="-36" positionY="135" width="128" height="105"/>
@@ -216,6 +217,5 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
-        <element name="CourseReviewSummary" positionX="-36" positionY="135" width="128" height="120"/>
     </elements>
 </model>

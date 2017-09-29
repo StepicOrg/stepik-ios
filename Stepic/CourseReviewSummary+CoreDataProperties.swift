@@ -14,15 +14,17 @@ extension CourseReviewSummary {
     @NSManaged var managedAverage: NSNumber?
     @NSManaged var managedCount: NSNumber?
     @NSManaged var managedId: NSNumber?
-    
+
+    @NSManaged var managedCourse: Course?
+
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CourseReviewSummary", in: CoreDataHelper.instance.context)!
     }
-    
+
     convenience init() {
-        self.init(entity: Progress.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CourseReviewSummary.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
-    
+
     var id: Int {
         set(newId) {
             self.managedId = newId as NSNumber?
@@ -31,7 +33,7 @@ extension CourseReviewSummary {
             return managedId?.intValue ?? -1
         }
     }
-    
+
     var average: Float {
         get {
             return managedAverage?.floatValue ?? 0
@@ -40,7 +42,7 @@ extension CourseReviewSummary {
             managedAverage = value as NSNumber?
         }
     }
-    
+
     var count: Int {
         get {
             return managedCount?.intValue ?? 0
@@ -49,7 +51,7 @@ extension CourseReviewSummary {
             managedCount = value as NSNumber?
         }
     }
-    
+
     var distribution: [Int] {
         set(value) {
             self.managedDistribution = value as NSObject?

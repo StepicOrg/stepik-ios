@@ -48,6 +48,7 @@ extension Course {
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedLastStep: LastStep?
     @NSManaged var managedCertificateEntity: Certificate?
+    @NSManaged var managedReviewSummary: CourseReviewSummary?
 
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -74,7 +75,7 @@ extension Course {
             return managedLearnersCount?.intValue
         }
     }
-    
+
     var reviewSummaryId: Int? {
         get {
             return managedReviewSummaryId?.intValue
@@ -315,6 +316,15 @@ extension Course {
         }
         set(value) {
             managedIntroVideo = value
+        }
+    }
+
+    var reviewSummary: CourseReviewSummary? {
+        get {
+            return managedReviewSummary
+        }
+        set(value) {
+            managedReviewSummary = value
         }
     }
 
