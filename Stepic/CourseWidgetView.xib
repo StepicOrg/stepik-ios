@@ -40,9 +40,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sj1-d7-RHa">
-                    <rect key="frame" x="356" y="-1" width="20" height="20"/>
+                    <rect key="frame" x="376" y="-1" width="0.0" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="Zv2-xF-KnV"/>
+                        <constraint firstAttribute="width" id="Zv2-xF-KnV"/>
                         <constraint firstAttribute="height" constant="20" id="tEw-P5-kTt"/>
                     </constraints>
                     <state key="normal" image="dots_vertical_dark"/>

@@ -45,9 +45,6 @@ class SearchResultsAPI: APIEndpoint {
                 return
             }
 
-            print("query: \(query)")
-            print(json)
-
             let meta = Meta(json: json["meta"])
             var results = [SearchResult]()
             for resultJson in json["search-results"].arrayValue {

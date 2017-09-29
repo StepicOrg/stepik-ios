@@ -204,9 +204,10 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         var progressCnt = 0
         for i in 0 ..< courses.count {
             if courses[i].progressId == progresses[progressCnt].id {
+                print("matched progress to course \(courses[i].id)")
                 courses[i].progress = progresses[progressCnt]
+                progressCnt += 1
             }
-            progressCnt += 1
             if progressCnt == progresses.count {
                 break
             }
@@ -225,8 +226,8 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         for i in 0 ..< courses.count {
             if courses[i].reviewSummaryId == reviews[reviewCnt].id {
                 courses[i].reviewSummary = reviews[reviewCnt]
+                reviewCnt += 1
             }
-            reviewCnt += 1
             if reviewCnt == reviews.count {
                 break
             }

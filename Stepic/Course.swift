@@ -254,8 +254,8 @@ class Course: NSManagedObject, JSONInitializable {
             for i in 0 ..< sections.count {
                 if sections[i].progressId == progresses[progressCnt].id {
                     sections[i].progress = progresses[progressCnt]
+                    progressCnt += 1
                 }
-                progressCnt += 1
                 if progressCnt == progresses.count {
                     break
                 }
