@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import Presentr
 import FLKAutoLayout
+import StoreKit
 
 class RateAppViewController: UIViewController {
 
@@ -143,11 +144,16 @@ class RateAppViewController: UIViewController {
 
     func showAppStore() {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.appstore, parameters: defaultAnalyticsParams)
-        guard let appStoreURL = StepicApplicationsInfo.RateApp.appStoreURL else {
-            return
-        }
-        UIApplication.shared.openURL(appStoreURL)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            if #available(iOS 11, *) {
+                SKStoreReviewController.requestReview()
+            } else {
+                guard let appStoreURL = StepicApplicationsInfo.RateApp.appStoreURL else {
+                    return
+                }
+                UIApplication.shared.openURL(appStoreURL)
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
