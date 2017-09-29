@@ -615,7 +615,7 @@ class CoursesViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
 extension CoursesViewController : UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+        if indexPath.row == courses.count && needRefresh() {
             return 60
         } else {
             return 100
@@ -623,7 +623,7 @@ extension CoursesViewController : UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+        if indexPath.row == courses.count && needRefresh() {
             return 60
         } else {
             return UITableViewAutomaticDimension
@@ -631,20 +631,20 @@ extension CoursesViewController : UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return (indexPath as NSIndexPath).row < courses.count
+        return indexPath.row < courses.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        guard (indexPath as NSIndexPath).row < courses.count else {
+        guard indexPath.row < courses.count else {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
 
-        if courses[(indexPath as NSIndexPath).row].enrolled {
-            self.performSegue(withIdentifier: "showSections", sender: courses[(indexPath as NSIndexPath).row])
+        if courses[indexPath.row].enrolled {
+            self.performSegue(withIdentifier: "showSections", sender: courses[indexPath.row])
         } else {
-            self.performSegue(withIdentifier: "showCourse", sender: courses[(indexPath as NSIndexPath).row])
+            self.performSegue(withIdentifier: "showCourse", sender: courses[indexPath.row])
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -662,7 +662,7 @@ extension CoursesViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (indexPath as NSIndexPath).row == courses.count && needRefresh() {
+        if indexPath.row == courses.count && needRefresh() {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RefreshTableViewCell", for: indexPath) as! RefreshTableViewCell
             cell.initWithMessage("Loading new courses...", isRefreshing: !self.failedLoadingMore, refreshAction: { self.loadNextPage() })
 
@@ -677,7 +677,7 @@ extension CoursesViewController : UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "CourseWidgetTableViewCell", for: indexPath) as! CourseWidgetTableViewCell
 
-        let course = courses[(indexPath as NSIndexPath).row]
+        let course = courses[indexPath.row]
         cell.initWithCourse(course, action: {
             [weak self] in
             self?.actionPressed(course: course)
