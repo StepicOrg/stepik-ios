@@ -97,7 +97,7 @@ class StepCardView: UIView {
 
     func addContentSubview(_ view: UIView) {
         contentView.addSubview(view)
-        view.align(to: contentView)
+        view.align(toView: contentView)
 
         setNeedsLayout()
         layoutIfNeeded()

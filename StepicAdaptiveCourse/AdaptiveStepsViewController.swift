@@ -40,7 +40,7 @@ class AdaptiveStepsViewController: UIViewController, AdaptiveStepsView {
     lazy var placeholderView: UIView = {
         let v = PlaceholderView()
         self.view.insertSubview(v, aboveSubview: self.view)
-        v.align(to: self.kolodaView)
+        v.align(toView: self.kolodaView)
         v.delegate = self
         v.datasource = self
         v.backgroundColor = self.view.backgroundColor

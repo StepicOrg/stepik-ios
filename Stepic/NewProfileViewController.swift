@@ -27,9 +27,12 @@ class NewProfileViewController: MenuViewController, ProfileView {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
 
-//        if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-//        }
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            }
+        #endif
+
         self.title = NSLocalizedString("Profile", comment: "")
     }
 

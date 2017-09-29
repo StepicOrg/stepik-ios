@@ -141,7 +141,6 @@
 		081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF21C56A09300583728 /* QuizViewController.xib */; };
 		081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */; };
 		081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
-		081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		082348391ECA264100D2CB40 /* ShareableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082348381ECA264000D2CB40 /* ShareableController.swift */; };
 		0824289C1BB0104700C98185 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -373,6 +372,41 @@
 		0861E6761CD8106E00B45652 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
 		0861E67C1CD9483500B45652 /* ExecutionQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E67A1CD9483500B45652 /* ExecutionQueues.swift */; };
+		086442B51F764F67000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B81F764F69000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D674921D78B46900B60963 /* AuthNavigationViewController.swift */; };
+		086442BC1F764F90000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BD1F764F91000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BE1F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C01F764F92000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C11F764F93000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C21F764F93000CC53D /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
+		086442C31F764FED000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C41F764FEE000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C51F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C61F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C71F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
+		086442CA1F765004000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CB1F765005000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CC1F765006000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CD1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CE1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442CF1F765007000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442D01F765008000CC53D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
+		086442D11F765011000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D21F765012000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D31F765013000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D41F765013000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D51F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D61F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
+		086442D71F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		0864949B1E8C78A20083E0BE /* SbStepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948F1E8C753B0083E0BE /* SbStepicApplicationsInfo.swift */; };
 		0864949C1E8C78AA0083E0BE /* SbSocialNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948E1E8C753B0083E0BE /* SbSocialNetworks.swift */; };
 		0864949D1E8C79490083E0BE /* SbControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864948A1E8C753B0083E0BE /* SbControllerHelperLaunchExtension.swift */; };
@@ -855,7 +889,6 @@
 		08D120F61C937B2200A54ABC /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		08D120F81C937B2200A54ABC /* ChoiceDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555531C4F97C100C877E8 /* ChoiceDataset.swift */; };
 		08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
-		08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		08D120FB1C937B2200A54ABC /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		08D120FC1C937B2200A54ABC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
 		08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8591BAAD9AC00F2A188 /* FindCoursesViewController.swift */; };
@@ -1228,7 +1261,6 @@
 		2C1B61441F4C4AEF00236804 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C1B61451F4C4AEF00236804 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C1B61461F4C4AEF00236804 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C1B61471F4C4AEF00236804 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C1B61481F4C4AEF00236804 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C1B61491F4C4AEF00236804 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -1688,7 +1720,6 @@
 		2C1B63551F4C590700236804 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C1B63561F4C590700236804 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C1B63571F4C590700236804 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C1B63581F4C590700236804 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C1B63591F4C590700236804 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C1B635A1F4C590700236804 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -2243,7 +2274,6 @@
 		2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C8652F51F4B33DE00D51654 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C8652F71F4B33DE00D51654 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -2640,7 +2670,6 @@
 		2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D21C99A8F9006809D9 /* PlayerTestViewController.swift */; };
 		2C89A99A1F4C289900227C3B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
-		2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
 		2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
@@ -2703,7 +2732,6 @@
 		2C89A9D81F4C289900227C3B /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C89A9D91F4C289900227C3B /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C89A9DB1F4C289900227C3B /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -3168,7 +3196,6 @@
 		2C97318C1F4C38F600AC9301 /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		2C97318D1F4C38F600AC9301 /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
 		2C97318E1F4C38F600AC9301 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
-		2C97318F1F4C38F600AC9301 /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		2C9731901F4C38F600AC9301 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2C9731911F4C38F600AC9301 /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
@@ -3836,7 +3863,6 @@
 		864D67A11E83E08E001E8D9E /* TeacherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59DA1BBC00B9008DC44D /* TeacherCollectionViewCell.swift */; };
 		864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08047E6C1BFDC0470071C875 /* TitleTextTableViewCell.swift */; };
 		864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59D81BBC008A008DC44D /* CoursePreviewViewController.swift */; };
-		864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */; };
 		864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */; };
 		864D67AA1E83E08E001E8D9E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */; };
@@ -4124,7 +4150,6 @@
 		081A7DF41C56A0DD00583728 /* UnknownTypeQuizViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTypeQuizViewController.xib; sourceTree = "<group>"; };
 		081B7E291BAC208200554153 /* StandardsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsExtensions.swift; sourceTree = "<group>"; };
 		081BA3671E65A02700B4E84D /* Model_course_public_v12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_public_v12.xcdatamodel; sourceTree = "<group>"; };
-		081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserPreferencesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerViewController.swift; sourceTree = "<group>"; };
 		082348381ECA264000D2CB40 /* ShareableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareableController.swift; sourceTree = "<group>"; };
 		0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire-SwiftyJSON.swift"; sourceTree = "<group>"; };
@@ -5940,10 +5965,6 @@
 			children = (
 				08FB30D81DC384AD00E4684F /* old */,
 				080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */,
-				08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */,
-				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
-				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
-				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 				08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */,
 				08C02DBB1F53202600F848F5 /* new */,
 			);
@@ -6517,7 +6538,10 @@
 		08FB30D81DC384AD00E4684F /* old */ = {
 			isa = PBXGroup;
 			children = (
-				081BE8A31BB49735008CA213 /* UserPreferencesTableViewController.swift */,
+				08FB30D91DC384CC00E4684F /* UserPreferences.storyboard */,
+				08FB30DC1DC3858800E4684F /* UserPreferencesContainerViewController.swift */,
+				08FB30DF1DC385A900E4684F /* PreferencesViewController.swift */,
+				08FB30E21DC385B400E4684F /* ProfileViewController.swift */,
 			);
 			name = old;
 			sourceTree = "<group>";
@@ -10115,6 +10139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08758A9B1CDB99C400159233 /* DevicesAPI.swift in Sources */,
+				086442CA1F765004000CC53D /* AuthButton.swift in Sources */,
 				08D120751C937B2200A54ABC /* Course.swift in Sources */,
 				0890560E1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				08AF59EB1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDataSource.swift in Sources */,
@@ -10130,6 +10155,7 @@
 				08D1207A1C937B2200A54ABC /* Dataset.swift in Sources */,
 				089984301ECDE19E005C0B27 /* LessonView.swift in Sources */,
 				08D1207B1C937B2200A54ABC /* WebStepViewController.swift in Sources */,
+				086442D11F765011000CC53D /* AuthTextField.swift in Sources */,
 				085E9E761F18ED7000D6A4BC /* SignInCoursesTableViewCell.swift in Sources */,
 				0834C4711E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				087F6B971CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
@@ -10284,6 +10310,7 @@
 				08AB82391D74C44100FDEADE /* Session.swift in Sources */,
 				08C194411ED0A05D00A41B72 /* PagerController.swift in Sources */,
 				08D120B31C937B2200A54ABC /* FreeAnswerQuizViewController.swift in Sources */,
+				086442B51F764F67000CC53D /* AuthNavigationViewController.swift in Sources */,
 				08E3B9681EEA16DC0072995B /* CodeReply.swift in Sources */,
 				08F261221E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				08CBA2F91F573F6900302154 /* MenuViewController.swift in Sources */,
@@ -10374,6 +10401,7 @@
 				083622D91CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				0846B1081EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift in Sources */,
 				08E8F96D1F34DD48008CF4A1 /* SearchQueriesView.swift in Sources */,
+				086442C41F764FEE000CC53D /* EmailAuthPresenter.swift in Sources */,
 				08D120DF1C937B2200A54ABC /* EmptyDatasetState.swift in Sources */,
 				0864949F1E8C79690083E0BE /* SbEntranceViewController.swift in Sources */,
 				083540681CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
@@ -10435,7 +10463,6 @@
 				08D120F91C937B2200A54ABC /* TeacherCollectionViewCell.swift in Sources */,
 				08AF59F31E6D9BE800423EFF /* RGPageViewController+UIPageViewControllerDelegate.swift in Sources */,
 				085DF8D91C99C49E006809D9 /* VideoRate.swift in Sources */,
-				08D120FA1C937B2200A54ABC /* UserPreferencesTableViewController.swift in Sources */,
 				08AC214C1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
 				08CBA3021F57459800302154 /* MenuUIManager.swift in Sources */,
 				08E6BB6C1DC8EB45006622EC /* UserActivity.swift in Sources */,
@@ -10451,6 +10478,7 @@
 				08DF788E1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				085DF8D61C99B9FB006809D9 /* Player.swift in Sources */,
 				08D120FC1C937B2200A54ABC /* Reachability.m in Sources */,
+				086442BD1F764F91000CC53D /* EmailAuthViewController.swift in Sources */,
 				08D120FD1C937B2200A54ABC /* FindCoursesViewController.swift in Sources */,
 				08D120FE1C937B2200A54ABC /* TitleTextTableViewCell.swift in Sources */,
 				082E5E0F1F46379100F41426 /* ReplyCache.swift in Sources */,
@@ -10817,7 +10845,6 @@
 				083F2B2D1E9ECD2400714173 /* CertificatesAPIPaginatedMock.swift in Sources */,
 				08CA59DC1BBC00B9008DC44D /* TeacherCollectionViewCell.swift in Sources */,
 				085DF8D81C99C49E006809D9 /* VideoRate.swift in Sources */,
-				081BE8A41BB49735008CA213 /* UserPreferencesTableViewController.swift in Sources */,
 				0890560D1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift in Sources */,
 				0828FF8C1BC81F41000AFEA7 /* UnitTableViewCell.swift in Sources */,
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
@@ -10877,10 +10904,12 @@
 				2C1B60C71F4C4AEF00236804 /* Tokens.swift in Sources */,
 				2C1B60C81F4C4AEF00236804 /* LoadingPaginationView.swift in Sources */,
 				2C1B60C91F4C4AEF00236804 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C11F764F93000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C1B60CA1F4C4AEF00236804 /* CertificatesViewTestMock.swift in Sources */,
 				2C1B60CB1F4C4AEF00236804 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C1B60CC1F4C4AEF00236804 /* CertificatesViewController.swift in Sources */,
 				2C1B60CD1F4C4AEF00236804 /* CertificatesView.swift in Sources */,
+				086442D61F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C1B60CE1F4C4AEF00236804 /* CertificatesPresenter.swift in Sources */,
 				2C1B60CF1F4C4AEF00236804 /* CertificateViewData.swift in Sources */,
 				2C1B60D01F4C4AEF00236804 /* CertificateTableViewCell.swift in Sources */,
@@ -10903,6 +10932,7 @@
 				2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */,
 				2C1B60E01F4C4AEF00236804 /* CoursesAPI.swift in Sources */,
+				086442C81F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B60E11F4C4AEF00236804 /* SectionsAPI.swift in Sources */,
 				2C1B60E21F4C4AEF00236804 /* LessonsAPI.swift in Sources */,
 				2C1B60E31F4C4AEF00236804 /* UsersAPI.swift in Sources */,
@@ -10978,6 +11008,7 @@
 				2C1B61261F4C4AEF00236804 /* SortingQuizViewController.swift in Sources */,
 				2C1B61271F4C4AEF00236804 /* SortingQuizTableViewCell.swift in Sources */,
 				2C1B61281F4C4AEF00236804 /* MatchingQuizViewController.swift in Sources */,
+				086442CF1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C1B61291F4C4AEF00236804 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C1B612A1F4C4AEF00236804 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C1B612B1F4C4AEF00236804 /* FillBlanksQuizViewController.swift in Sources */,
@@ -10985,6 +11016,7 @@
 				2C1B612D1F4C4AEF00236804 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C1B612E1F4C4AEF00236804 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C1B612F1F4C4AEF00236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442BA1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B61301F4C4AEF00236804 /* RGPageViewController.swift in Sources */,
 				2C1B61311F4C4AEF00236804 /* RGTabBarItem.swift in Sources */,
 				2C1B61321F4C4AEF00236804 /* RGTabView.swift in Sources */,
@@ -11008,7 +11040,6 @@
 				2C1B61441F4C4AEF00236804 /* TitleTextTableViewCell.swift in Sources */,
 				2C1B61451F4C4AEF00236804 /* CoursePreviewViewController.swift in Sources */,
 				2C1B61461F4C4AEF00236804 /* Profile.swift in Sources */,
-				2C1B61471F4C4AEF00236804 /* UserPreferencesTableViewController.swift in Sources */,
 				2C1B61481F4C4AEF00236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B61491F4C4AEF00236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */,
@@ -11294,10 +11325,12 @@
 				2C1B62D81F4C590700236804 /* Tokens.swift in Sources */,
 				2C1B62D91F4C590700236804 /* LoadingPaginationView.swift in Sources */,
 				2C1B62DA1F4C590700236804 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C21F764F93000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C1B62DB1F4C590700236804 /* CertificatesViewTestMock.swift in Sources */,
 				2C1B62DC1F4C590700236804 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C1B62DD1F4C590700236804 /* CertificatesViewController.swift in Sources */,
 				2C1B62DE1F4C590700236804 /* CertificatesView.swift in Sources */,
+				086442D71F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C1B62DF1F4C590700236804 /* CertificatesPresenter.swift in Sources */,
 				2C1B62E01F4C590700236804 /* CertificateViewData.swift in Sources */,
 				2C1B62E11F4C590700236804 /* CertificateTableViewCell.swift in Sources */,
@@ -11320,6 +11353,7 @@
 				2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */,
 				2C1B62F11F4C590700236804 /* CoursesAPI.swift in Sources */,
+				086442C91F764FF1000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C1B62F21F4C590700236804 /* SectionsAPI.swift in Sources */,
 				2C1B62F31F4C590700236804 /* LessonsAPI.swift in Sources */,
 				2C1B62F41F4C590700236804 /* UsersAPI.swift in Sources */,
@@ -11395,6 +11429,7 @@
 				2C1B63371F4C590700236804 /* SortingQuizViewController.swift in Sources */,
 				2C1B63381F4C590700236804 /* SortingQuizTableViewCell.swift in Sources */,
 				2C1B63391F4C590700236804 /* MatchingQuizViewController.swift in Sources */,
+				086442D01F765008000CC53D /* AuthButton.swift in Sources */,
 				2C1B633A1F4C590700236804 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C1B633B1F4C590700236804 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C1B633C1F4C590700236804 /* FillBlanksQuizViewController.swift in Sources */,
@@ -11402,6 +11437,7 @@
 				2C1B633E1F4C590700236804 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C1B633F1F4C590700236804 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C1B63401F4C590700236804 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442BB1F764F6B000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C1B63411F4C590700236804 /* RGPageViewController.swift in Sources */,
 				2C1B63421F4C590700236804 /* RGTabBarItem.swift in Sources */,
 				2C1B63431F4C590700236804 /* RGTabView.swift in Sources */,
@@ -11425,7 +11461,6 @@
 				2C1B63551F4C590700236804 /* TitleTextTableViewCell.swift in Sources */,
 				2C1B63561F4C590700236804 /* CoursePreviewViewController.swift in Sources */,
 				2C1B63571F4C590700236804 /* Profile.swift in Sources */,
-				2C1B63581F4C590700236804 /* UserPreferencesTableViewController.swift in Sources */,
 				2C1B63591F4C590700236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B635A1F4C590700236804 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */,
@@ -11711,10 +11746,12 @@
 				2C8652751F4B33DE00D51654 /* Tokens.swift in Sources */,
 				2C8652761F4B33DE00D51654 /* LoadingPaginationView.swift in Sources */,
 				2C8652771F4B33DE00D51654 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442BE1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C8652781F4B33DE00D51654 /* CertificatesViewTestMock.swift in Sources */,
 				2C8652791F4B33DE00D51654 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C86527A1F4B33DE00D51654 /* CertificatesViewController.swift in Sources */,
 				2C86527B1F4B33DE00D51654 /* CertificatesView.swift in Sources */,
+				086442D31F765013000CC53D /* AuthTextField.swift in Sources */,
 				2C86527C1F4B33DE00D51654 /* CertificatesPresenter.swift in Sources */,
 				2C86527D1F4B33DE00D51654 /* CertificateViewData.swift in Sources */,
 				2C86527E1F4B33DE00D51654 /* CertificateTableViewCell.swift in Sources */,
@@ -11737,6 +11774,7 @@
 				2C86528C1F4B33DE00D51654 /* LaunchDefaultsContainer.swift in Sources */,
 				2C86528D1F4B33DE00D51654 /* DefaultsContainer.swift in Sources */,
 				2C86528E1F4B33DE00D51654 /* CoursesAPI.swift in Sources */,
+				086442C51F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C86528F1F4B33DE00D51654 /* SectionsAPI.swift in Sources */,
 				2C8652901F4B33DE00D51654 /* LessonsAPI.swift in Sources */,
 				2C8652911F4B33DE00D51654 /* UsersAPI.swift in Sources */,
@@ -11812,6 +11850,7 @@
 				2C8652D41F4B33DE00D51654 /* SortingQuizViewController.swift in Sources */,
 				2C8652D51F4B33DE00D51654 /* SortingQuizTableViewCell.swift in Sources */,
 				2C8652D61F4B33DE00D51654 /* MatchingQuizViewController.swift in Sources */,
+				086442CC1F765006000CC53D /* AuthButton.swift in Sources */,
 				2C8652D71F4B33DE00D51654 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C8652D81F4B33DE00D51654 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C8652D91F4B33DE00D51654 /* FillBlanksQuizViewController.swift in Sources */,
@@ -11819,6 +11858,7 @@
 				2C8652DB1F4B33DE00D51654 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C8652DC1F4B33DE00D51654 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C8652DD1F4B33DE00D51654 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B71F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C8652DE1F4B33DE00D51654 /* RGPageViewController.swift in Sources */,
 				2C8652DF1F4B33DE00D51654 /* RGTabBarItem.swift in Sources */,
 				2C8652E01F4B33DE00D51654 /* RGTabView.swift in Sources */,
@@ -11842,7 +11882,6 @@
 				2C8652F21F4B33DE00D51654 /* TitleTextTableViewCell.swift in Sources */,
 				2C8652F31F4B33DE00D51654 /* CoursePreviewViewController.swift in Sources */,
 				2C8652F41F4B33DE00D51654 /* Profile.swift in Sources */,
-				2C8652F51F4B33DE00D51654 /* UserPreferencesTableViewController.swift in Sources */,
 				2C8652F61F4B33DE00D51654 /* VideoQualityTableViewController.swift in Sources */,
 				2C8652F71F4B33DE00D51654 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C8652F81F4B33DE00D51654 /* RateAppManager.swift in Sources */,
@@ -12195,7 +12234,6 @@
 				2C89A9991F4C289900227C3B /* PlayerTestViewController.swift in Sources */,
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
-				2C89A99C1F4C289900227C3B /* DownloadsViewController.swift in Sources */,
 				2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */,
 				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,
@@ -12259,7 +12297,6 @@
 				2C89A9D81F4C289900227C3B /* TitleTextTableViewCell.swift in Sources */,
 				2C89A9D91F4C289900227C3B /* CoursePreviewViewController.swift in Sources */,
 				2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */,
-				2C89A9DB1F4C289900227C3B /* UserPreferencesTableViewController.swift in Sources */,
 				2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */,
 				2C89A9DD1F4C289900227C3B /* UserPreferencesContainerViewController.swift in Sources */,
 				2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */,
@@ -12275,6 +12312,7 @@
 				2C89A9F01F4C289900227C3B /* CourseTableViewCell.swift in Sources */,
 				2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */,
 				2C89A9F21F4C289900227C3B /* FindCoursesViewController.swift in Sources */,
+				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C89A9F31F4C289900227C3B /* MyCoursesViewController.swift in Sources */,
 				2C89A9F41F4C289900227C3B /* CoursesViewController.swift in Sources */,
 				2C89A9F51F4C289900227C3B /* DefaultsStorageManager.swift in Sources */,
@@ -12310,6 +12348,7 @@
 				2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */,
 				2C89AA121F4C289900227C3B /* AdaptiveStatsPresenter.swift in Sources */,
 				2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */,
+				086442D41F765013000CC53D /* AuthTextField.swift in Sources */,
 				2C89AA141F4C289900227C3B /* ConnectionHelper.swift in Sources */,
 				2C89AA151F4C289900227C3B /* Sorter.swift in Sources */,
 				2C89AA161F4C289900227C3B /* Messages.swift in Sources */,
@@ -12336,6 +12375,7 @@
 				2C89AA281F4C289900227C3B /* WatchDataHelper.swift in Sources */,
 				2C89AA291F4C289900227C3B /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
+				086442CD1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C89AA2A1F4C289900227C3B /* HTMLParsingUtil.swift in Sources */,
 				2C89AA2B1F4C289900227C3B /* TagDetectionUtil.swift in Sources */,
 				2C89AA2C1F4C289900227C3B /* UIImageView+SVGDownload.swift in Sources */,
@@ -12402,6 +12442,7 @@
 				2C89AA671F4C289900227C3B /* SortingDataset.swift in Sources */,
 				2C89AA681F4C289900227C3B /* FreeAnswerDataset.swift in Sources */,
 				2C89AA691F4C289900227C3B /* MatchingDataset.swift in Sources */,
+				086442B81F764F69000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C89AA6A1F4C289900227C3B /* FillBlanksDataset.swift in Sources */,
 				2C89AA6B1F4C289900227C3B /* Submission.swift in Sources */,
 				2C89AA6C1F4C289900227C3B /* SearchQueriesPersistentManager.swift in Sources */,
@@ -12469,6 +12510,7 @@
 				2C89AAA71F4C289900227C3B /* AdaptiveOnboardingPresenter.swift in Sources */,
 				2C35C4AC1F4DA3F1002F3BF4 /* LeaderboardTableViewCell.swift in Sources */,
 				08CBA2FC1F573F6900302154 /* MenuViewController.swift in Sources */,
+				086442C61F764FEF000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C89AAA81F4C289900227C3B /* DiscussionProxiesAPI.swift in Sources */,
 				2C89AAA91F4C289900227C3B /* SearchQueriesView.swift in Sources */,
 				2C89AAAA1F4C289900227C3B /* LastStepsAPI.swift in Sources */,
@@ -12545,10 +12587,12 @@
 				2C97310F1F4C38F600AC9301 /* Tokens.swift in Sources */,
 				2C9731101F4C38F600AC9301 /* LoadingPaginationView.swift in Sources */,
 				2C9731111F4C38F600AC9301 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442C01F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				2C9731121F4C38F600AC9301 /* CertificatesViewTestMock.swift in Sources */,
 				2C9731131F4C38F600AC9301 /* CoursesAPIPaginatedMock.swift in Sources */,
 				2C9731141F4C38F600AC9301 /* CertificatesViewController.swift in Sources */,
 				2C9731151F4C38F600AC9301 /* CertificatesView.swift in Sources */,
+				086442D51F765014000CC53D /* AuthTextField.swift in Sources */,
 				2C9731161F4C38F600AC9301 /* CertificatesPresenter.swift in Sources */,
 				2C9731171F4C38F600AC9301 /* CertificateViewData.swift in Sources */,
 				2C9731181F4C38F600AC9301 /* CertificateTableViewCell.swift in Sources */,
@@ -12571,6 +12615,7 @@
 				2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */,
 				2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */,
 				2C9731281F4C38F600AC9301 /* CoursesAPI.swift in Sources */,
+				086442C71F764FF0000CC53D /* EmailAuthPresenter.swift in Sources */,
 				2C9731291F4C38F600AC9301 /* SectionsAPI.swift in Sources */,
 				2C97312A1F4C38F600AC9301 /* LessonsAPI.swift in Sources */,
 				2C97312B1F4C38F600AC9301 /* UsersAPI.swift in Sources */,
@@ -12646,6 +12691,7 @@
 				2C97316E1F4C38F600AC9301 /* SortingQuizViewController.swift in Sources */,
 				2C97316F1F4C38F600AC9301 /* SortingQuizTableViewCell.swift in Sources */,
 				2C9731701F4C38F600AC9301 /* MatchingQuizViewController.swift in Sources */,
+				086442CE1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C9731711F4C38F600AC9301 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2C9731721F4C38F600AC9301 /* FillBlanksInputTableViewCell.swift in Sources */,
 				2C9731731F4C38F600AC9301 /* FillBlanksQuizViewController.swift in Sources */,
@@ -12653,6 +12699,7 @@
 				2C9731751F4C38F600AC9301 /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				2C9731761F4C38F600AC9301 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				2C9731771F4C38F600AC9301 /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B91F764F6A000CC53D /* AuthNavigationViewController.swift in Sources */,
 				2C9731781F4C38F600AC9301 /* RGPageViewController.swift in Sources */,
 				2C9731791F4C38F600AC9301 /* RGTabBarItem.swift in Sources */,
 				2C97317A1F4C38F600AC9301 /* RGTabView.swift in Sources */,
@@ -12676,7 +12723,6 @@
 				2C97318C1F4C38F600AC9301 /* TitleTextTableViewCell.swift in Sources */,
 				2C97318D1F4C38F600AC9301 /* CoursePreviewViewController.swift in Sources */,
 				2C97318E1F4C38F600AC9301 /* Profile.swift in Sources */,
-				2C97318F1F4C38F600AC9301 /* UserPreferencesTableViewController.swift in Sources */,
 				2C9731901F4C38F600AC9301 /* VideoQualityTableViewController.swift in Sources */,
 				2C9731911F4C38F600AC9301 /* UserPreferencesContainerViewController.swift in Sources */,
 				2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */,
@@ -13016,10 +13062,12 @@
 				86B56EAE1EC38F7500CFE4A3 /* Tokens.swift in Sources */,
 				860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */,
 				860BC3391EAA1E520058F440 /* CertificatesAPIPaginatedMock.swift in Sources */,
+				086442BC1F764F90000CC53D /* EmailAuthViewController.swift in Sources */,
 				860BC33A1EAA1E520058F440 /* CertificatesViewTestMock.swift in Sources */,
 				860BC33B1EAA1E520058F440 /* CoursesAPIPaginatedMock.swift in Sources */,
 				860BC33C1EAA1E520058F440 /* CertificatesViewController.swift in Sources */,
 				860BC33D1EAA1E520058F440 /* CertificatesView.swift in Sources */,
+				086442D21F765012000CC53D /* AuthTextField.swift in Sources */,
 				860BC33E1EAA1E520058F440 /* CertificatesPresenter.swift in Sources */,
 				860BC33F1EAA1E520058F440 /* CertificateViewData.swift in Sources */,
 				860BC3401EAA1E520058F440 /* CertificateTableViewCell.swift in Sources */,
@@ -13042,6 +13090,7 @@
 				864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */,
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
+				086442C31F764FED000CC53D /* EmailAuthPresenter.swift in Sources */,
 				864514EA1E9FD4F6007F73BE /* SectionsAPI.swift in Sources */,
 				864514EB1E9FD4F6007F73BE /* LessonsAPI.swift in Sources */,
 				864514EC1E9FD4F6007F73BE /* UsersAPI.swift in Sources */,
@@ -13117,6 +13166,7 @@
 				864D67831E83E08E001E8D9E /* SortingQuizViewController.swift in Sources */,
 				864D67841E83E08E001E8D9E /* SortingQuizTableViewCell.swift in Sources */,
 				864D67861E83E08E001E8D9E /* MatchingQuizViewController.swift in Sources */,
+				086442CB1F765005000CC53D /* AuthButton.swift in Sources */,
 				864D67891E83E08E001E8D9E /* FillBlanksTextTableViewCell.swift in Sources */,
 				864D678B1E83E08E001E8D9E /* FillBlanksInputTableViewCell.swift in Sources */,
 				864D678D1E83E08E001E8D9E /* FillBlanksQuizViewController.swift in Sources */,
@@ -13124,6 +13174,7 @@
 				864D678E1E83E08E001E8D9E /* FillBlanksChoiceTableViewCell.swift in Sources */,
 				0846B1121EDDEE8E00D64D77 /* CodeLimit+CoreDataProperties.swift in Sources */,
 				864D67901E83E08E001E8D9E /* FillBlanksActiveTableViewCellProtocol.swift in Sources */,
+				086442B61F764F68000CC53D /* AuthNavigationViewController.swift in Sources */,
 				864D67911E83E08E001E8D9E /* RGPageViewController.swift in Sources */,
 				864D67921E83E08E001E8D9E /* RGTabBarItem.swift in Sources */,
 				864D67931E83E08E001E8D9E /* RGTabView.swift in Sources */,
@@ -13147,7 +13198,6 @@
 				864D67A31E83E08E001E8D9E /* TitleTextTableViewCell.swift in Sources */,
 				864D67A51E83E08E001E8D9E /* CoursePreviewViewController.swift in Sources */,
 				2CD846411F25F7F300E8153C /* Profile.swift in Sources */,
-				864D67A61E83E08E001E8D9E /* UserPreferencesTableViewController.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864D67A91E83E08E001E8D9E /* UserPreferencesContainerViewController.swift in Sources */,
 				864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */,
