@@ -1,10 +1,7 @@
 Hi!
 In the new version of the Stepik iOS app we:
-• Completely changed colors. Welcome, the new bright Stepik!
-• Redesigned auth
-• Changed navigation - now downloads are available from Profile.
-• Fixed a bug, when Code Challenge was laggy and toolbar did not appear when it needed to.
-• Fixed multiple bugs and improved stability
+• Improved the courses screens. They look much better now
+• Fixed some strange iOS 11 bugs
 
 Enjoy learning,
 Stepik team
