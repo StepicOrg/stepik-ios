@@ -87,6 +87,7 @@ struct AnalyticsEvents {
             static let submit = "clicked_submit"
             static let newAttempt = "clicked_generate_new_attempt"
             static let solveInWebPressed = "clicked_solve_in_web"
+            static let created = "submission_created"
         }
 
         static let hasRestrictions = "step_with_submission_restriction"
