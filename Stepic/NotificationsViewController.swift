@@ -22,7 +22,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 10
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,5 +33,13 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = UITableViewCell()
         cell.textLabel?.text = "\(indexPath.item)"
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return NotificationsSectionHeaderView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }

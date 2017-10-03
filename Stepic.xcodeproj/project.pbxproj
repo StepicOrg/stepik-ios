@@ -3502,6 +3502,11 @@
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
 		2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */; };
 		2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */; };
+		2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C51F7E833F0004E17F /* NotificationsPagerViewController.swift */; };
+		2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C81F8397290004E17F /* NotificationsSectionHeaderView.swift */; };
+		2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */; };
+		2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */; };
+		2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBC4C091F1E548900FE96C4 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
 		2CC351861F6827BE004255B6 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
@@ -4667,6 +4672,11 @@
 		2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPresenter.swift; sourceTree = "<group>"; };
+		2CB9E8C51F7E833F0004E17F /* NotificationsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPagerViewController.swift; sourceTree = "<group>"; };
+		2CB9E8C81F8397290004E17F /* NotificationsSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSectionHeaderView.swift; sourceTree = "<group>"; };
+		2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSectionHeaderView.xib; sourceTree = "<group>"; };
+		2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
+		2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsTableViewCell.xib; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -6881,11 +6891,32 @@
 		2CB9E8BE1F7AA5550004E17F /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				2CB9E8CD1F839C710004E17F /* NotificationsTableViewCell */,
+				2CB9E8C71F8396EA0004E17F /* NotificationsSectionHeaderView */,
 				2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */,
 				2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */,
 				2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */,
+				2CB9E8C51F7E833F0004E17F /* NotificationsPagerViewController.swift */,
 			);
 			name = Notifications;
+			sourceTree = "<group>";
+		};
+		2CB9E8C71F8396EA0004E17F /* NotificationsSectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				2CB9E8C81F8397290004E17F /* NotificationsSectionHeaderView.swift */,
+				2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */,
+			);
+			name = NotificationsSectionHeaderView;
+			sourceTree = "<group>";
+		};
+		2CB9E8CD1F839C710004E17F /* NotificationsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */,
+				2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */,
+			);
+			name = NotificationsTableViewCell;
 			sourceTree = "<group>";
 		};
 		2CC351871F682979004255B6 /* Auth social */ = {
@@ -7823,6 +7854,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */,
 				0859AEA31E4F22B500A0D206 /* FillBlanksInputTableViewCell.xib in Resources */,
 				08CBA32F1F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
 				08C0A4361BF12CDF0010F049 /* CustomMessagesDesign.json in Resources */,
@@ -7876,6 +7908,7 @@
 				089056131E98021000B8FE6A /* RateAppViewController.xib in Resources */,
 				0869F6D81CE3684000F8A6DB /* default_sound.wav in Resources */,
 				08F4761E1E82C11C0018E82C /* StreaksView.xib in Resources */,
+				2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */,
 				08FEFC1E1F117257005CA0FB /* CodeSuggestionTableViewCell.xib in Resources */,
 				083F2B111E9D8E8F00714173 /* CertificatesStoryboard.storyboard in Resources */,
 				0888D0F91F1E3CEF00A16863 /* CodeInputAccessoryView.xib in Resources */,
@@ -9995,7 +10028,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E030AAE96051BB02D324B16F /* [CP] Check Pods Manifest.lock */ = {
@@ -10121,7 +10154,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+            shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -10556,6 +10589,7 @@
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
+				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
 				08E16F291BDBA731004822E1 /* ConnectionHelper.swift in Sources */,
 				089700961F6B2A830041C24E /* NibInitializableView.swift in Sources */,
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
@@ -10631,6 +10665,7 @@
 				08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */,
 				08AC21481CDD558500FBB9CD /* PersistentUserTokenRecoveryManager.swift in Sources */,
 				08970ED01C6A326900846119 /* PlaceholderViewDataSource.swift in Sources */,
+				2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */,
 				2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */,
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
@@ -10654,6 +10689,7 @@
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
+				2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */,
 				0890560A1E97CD7900B8FE6A /* DefaultsContainer.swift in Sources */,
 				084F7AAD1E775A210088368A /* LastStepsAPI.swift in Sources */,
 				0891424E1BCEED8E0000BCB0 /* VideoStepViewController.swift in Sources */,

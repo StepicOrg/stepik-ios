@@ -13,13 +13,14 @@
         <!--Notifications-->
         <scene sceneID="aIX-R2-CCi">
             <objects>
-                <viewController storyboardIdentifier="NotificationsPagerViewController" title="Notifications" id="r7S-ZU-07R" customClass="NotificationsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsPagerViewController" title="Notifications" automaticallyAdjustsScrollViewInsets="NO" id="r7S-ZU-07R" customClass="NotificationsPagerViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xK5-fH-mMS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="mz2-Zd-qEU"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5r-Kj-9iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -28,7 +29,7 @@
         <!--Notifications View Controller-->
         <scene sceneID="OCT-sI-xvn">
             <objects>
-                <viewController storyboardIdentifier="NotificationsViewController" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationsViewController" automaticallyAdjustsScrollViewInsets="NO" id="zmb-v1-FSp" customClass="NotificationsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DFQ-d9-gIu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,13 +45,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Q2T-AE-dOT" firstAttribute="trailing" secondItem="hSs-8g-1vY" secondAttribute="trailing" id="0fn-gJ-iUo"/>
-                            <constraint firstItem="Q2T-AE-dOT" firstAttribute="bottom" secondItem="hSs-8g-1vY" secondAttribute="bottom" id="N6d-Mz-uBr"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="Q2T-AE-dOT" secondAttribute="leading" id="VDP-dh-SR6"/>
-                            <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="Q2T-AE-dOT" secondAttribute="top" id="s07-5h-KrZ"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="trailing" secondItem="Q2T-AE-dOT" secondAttribute="trailing" id="Fa7-pV-PV6"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="leading" secondItem="Q2T-AE-dOT" secondAttribute="leading" id="JFJ-83-J5T"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="bottom" secondItem="Q2T-AE-dOT" secondAttribute="bottom" id="LhB-Oz-lUz"/>
+                            <constraint firstItem="hSs-8g-1vY" firstAttribute="top" secondItem="Q2T-AE-dOT" secondAttribute="top" id="lb9-cs-h4X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Q2T-AE-dOT"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="tableView" destination="hSs-8g-1vY" id="7fF-eg-fZJ"/>
                     </connections>

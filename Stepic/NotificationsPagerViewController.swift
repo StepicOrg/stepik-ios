@@ -24,8 +24,8 @@ class NotificationsPagerViewController: TabmanViewController {
 
             appearance.text.font = UIFont.systemFont(ofSize: 16.0, weight: UIFontWeightLight)
 
-            appearance.layout.height = .explicit(value: 45.0)
             appearance.layout.interItemSpacing = 30.0
+            appearance.style.background = .solid(color: UIColor(hex: 0xf6f6f6))
         })
         self.bar.items = [Item(title: "All"),
                           Item(title: "Learning"),
@@ -33,7 +33,6 @@ class NotificationsPagerViewController: TabmanViewController {
                           Item(title: "Reviews"),
                           Item(title: "Teaching"),
                           Item(title: "Other")]
-        self.automaticallyAdjustsChildScrollViewInsets = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +54,8 @@ extension NotificationsPagerViewController: PageboyViewControllerDataSource {
     }
 
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return ControllerHelper.instantiateViewController(identifier: "NotificationsViewController", storyboardName: "Notifications")
+        let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsViewController", storyboardName: "Notifications")
+        return vc
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {

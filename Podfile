@@ -45,7 +45,7 @@ def all_pods
     pod 'Highlightr'
     pod "RFKeyboardToolbar", "~> 1.3"
 
-    pod 'Tabman', '~> 1.0'
+    pod 'Tabman', '1.0.2'
 end
 
 def testing_pods
