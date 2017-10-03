@@ -16,8 +16,16 @@ class NotificationsAPI {
     let name = "notifications"
 
     // TODO: it will be good to use APIEndpoint class here, but it doesn't allow empty ids list
-    @discardableResult func retrieve(page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Notification]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request {
-        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: ["page": page], headers: headers).responseSwiftyJSON({ response in
+    @discardableResult func retrieve(page: Int = 1, notificationType: Notification.`Type`? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Notification]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request {
+        var parameters = [
+            "page": "\(page)"
+        ]
+
+        if let notificationType = notificationType {
+            parameters["type"] = notificationType.rawValue
+        }
+
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: parameters, headers: headers).responseSwiftyJSON({ response in
             var error = response.result.error
             var json: JSON = [:]
             if response.result.value == nil {
