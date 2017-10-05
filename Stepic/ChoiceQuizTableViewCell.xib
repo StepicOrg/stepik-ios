@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -55,11 +54,11 @@
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="leadingMargin" secondItem="eEG-9I-UvH" secondAttribute="leading" constant="-8" id="4Ke-rT-KkW"/>
-                    <constraint firstAttribute="topMargin" secondItem="NCz-bl-FtZ" secondAttribute="top" id="8wY-L8-voO"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="NCz-bl-FtZ" secondAttribute="bottom" id="KHp-lu-m9D"/>
+                    <constraint firstAttribute="leading" secondItem="eEG-9I-UvH" secondAttribute="leading" constant="-16" id="4Ke-rT-KkW"/>
+                    <constraint firstAttribute="top" secondItem="NCz-bl-FtZ" secondAttribute="top" constant="-8" id="8wY-L8-voO"/>
+                    <constraint firstAttribute="bottom" secondItem="NCz-bl-FtZ" secondAttribute="bottom" constant="8.5" id="KHp-lu-m9D"/>
                     <constraint firstItem="NCz-bl-FtZ" firstAttribute="leading" secondItem="eEG-9I-UvH" secondAttribute="trailing" constant="8" id="V8W-dK-GbB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="NCz-bl-FtZ" secondAttribute="trailing" id="WJJ-WE-O2s"/>
+                    <constraint firstAttribute="trailing" secondItem="NCz-bl-FtZ" secondAttribute="trailing" constant="8" id="WJJ-WE-O2s"/>
                     <constraint firstItem="eEG-9I-UvH" firstAttribute="centerY" secondItem="0Jf-kI-aYd" secondAttribute="centerY" id="xhc-TI-y7n"/>
                 </constraints>
             </tableViewCellContentView>
@@ -68,7 +67,7 @@
                 <outlet property="checkBox" destination="eEG-9I-UvH" id="1hu-EW-5Ba"/>
                 <outlet property="textContainerView" destination="NCz-bl-FtZ" id="kHs-8F-QcE"/>
             </connections>
-            <point key="canvasLocation" x="209.5" y="284"/>
+            <point key="canvasLocation" x="369" y="284"/>
         </tableViewCell>
     </objects>
 </document>

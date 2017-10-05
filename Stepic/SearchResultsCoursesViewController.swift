@@ -157,14 +157,25 @@ class SearchResultsCoursesViewController: CoursesViewController {
                     s.currentRequest = ApiDataDownloader.courses.retrieve(ids: ids, existing: Course.getAllCourses(), refreshMode: .update, success: {
                         newCourses -> Void in
 
+                        let coursesCompletion = {
+                            DispatchQueue.main.async {
+                                s.tableView.reloadData()
+                            }
+                        }
+
+                        s.currentRequest = s.updateProgresses(forCourses: newCourses, completion: {
+                            coursesCompletion()
+                            s.currentRequest = s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
+                        })
+
+                        s.tableView.reloadData()
                         s.courses = Sorter.sort(newCourses, byIds: ids)
                         s.meta = meta
                         s.currentPage = 1
-                        DispatchQueue.main.async {
-                            s.refreshControl?.endRefreshing()
-                            s.tableView.reloadData()
-                        }
+                        s.refreshControl?.endRefreshing()
                         s.isRefreshing = false
+                        s.lastUser = AuthInfo.shared.user
+                        
                         }, error: {
                             error -> Void in
                             print("failed downloading courses data in refresh")
@@ -229,12 +240,21 @@ class SearchResultsCoursesViewController: CoursesViewController {
                         return
                     }
 
+                    let coursesCompletion = {
+                        DispatchQueue.main.async {
+                            s.tableView.reloadData()
+                        }
+                    }
+
+                    s.currentRequest = s.updateProgresses(forCourses: newCourses, completion: {
+                        coursesCompletion()
+                        s.currentRequest = s.updateReviewSummaries(forCourses: newCourses, completion: coursesCompletion)
+                    })
+
+                    s.tableView.reloadData()
                     s.currentPage += 1
                     s.courses += Sorter.sort(newCourses, byIds: ids)
                     s.meta = meta
-                    //                        self.refreshControl.endRefreshing()
-                    UIThread.performUI {s.tableView.reloadData()}
-
                     s.isLoadingMore = false
                     s.failedLoadingMore = false
                     }, error: {

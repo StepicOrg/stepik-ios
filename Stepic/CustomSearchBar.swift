@@ -13,6 +13,7 @@ protocol CustomSearchBarDelegate: class {
     func changedText(in searchBar: CustomSearchBar, to text: String)
     func startedEditing(in searchBar: CustomSearchBar)
     func cancelPressed(in searchBar: CustomSearchBar)
+    func returnPressed(in searchBar: CustomSearchBar)
 }
 
 @IBDesignable
@@ -158,5 +159,11 @@ class CustomSearchBar: NibInitializableView, UITextFieldDelegate {
             setCancelButton(visible: true, animated: true)
         }
         delegate?.startedEditing(in: self)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        delegate?.returnPressed(in: self)
+        return true
     }
 }

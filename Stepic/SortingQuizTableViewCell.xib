@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="default" indentationWidth="10" id="uVR-53-g8J" customClass="SortingQuizTableViewCell" customModule="SberbankUniversity" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="44" selectionStyle="default" indentationWidth="10" id="uVR-53-g8J" customClass="SortingQuizTableViewCell" customModule="Adaptive_1838" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="43" tableViewCell="uVR-53-g8J" id="Eto-9l-oE0">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpX-wY-qFM">
@@ -26,10 +24,10 @@
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="topMargin" secondItem="SpX-wY-qFM" secondAttribute="top" id="0Gh-YO-NTY"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="SpX-wY-qFM" secondAttribute="bottom" id="3GO-Bg-374"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="SpX-wY-qFM" secondAttribute="leading" id="FdC-cv-Xsh"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="SpX-wY-qFM" secondAttribute="trailing" id="MH9-Oz-5vf"/>
+                    <constraint firstAttribute="top" secondItem="SpX-wY-qFM" secondAttribute="top" constant="-8" id="0Gh-YO-NTY"/>
+                    <constraint firstAttribute="bottom" secondItem="SpX-wY-qFM" secondAttribute="bottom" constant="8.5" id="3GO-Bg-374"/>
+                    <constraint firstAttribute="leading" secondItem="SpX-wY-qFM" secondAttribute="leading" constant="-8" id="FdC-cv-Xsh"/>
+                    <constraint firstAttribute="trailing" secondItem="SpX-wY-qFM" secondAttribute="trailing" constant="8" id="MH9-Oz-5vf"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol JSONInitializable {
 
-    associatedtype idType : Equatable
+    associatedtype idType: Equatable
 
     init(json: JSON)
     func update(json: JSON)

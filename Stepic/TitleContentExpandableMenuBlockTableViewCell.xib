@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title + content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-zG-AdZ" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="24" y="21" width="241" height="20.5"/>
+                        <rect key="frame" x="24" y="21" width="240" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktK-VW-1Ci">
-                        <rect key="frame" x="273" y="15.5" width="31" height="31"/>
+                        <rect key="frame" x="272" y="15" width="32" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="31" id="bUi-Xq-cmf"/>
-                            <constraint firstAttribute="width" constant="31" id="ioE-MN-4ll"/>
+                            <constraint firstAttribute="height" constant="32" id="bUi-Xq-cmf"/>
+                            <constraint firstAttribute="width" constant="32" id="ioE-MN-4ll"/>
                         </constraints>
                         <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                         <state key="normal" image="menu_arrow_bottom"/>
@@ -39,9 +39,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ktK-VW-1Ci" firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="trailing" constant="8" id="1Su-qe-4V1"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ktK-VW-1Ci" secondAttribute="trailing" constant="8" id="SlO-Q5-Fxu"/>
+                    <constraint firstAttribute="trailing" secondItem="ktK-VW-1Ci" secondAttribute="trailing" constant="16" id="SlO-Q5-Fxu"/>
                     <constraint firstItem="eIR-zG-AdZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="V27-wL-E9l"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="eIR-zG-AdZ" secondAttribute="leading" constant="-16" id="vrL-qL-f1a"/>
+                    <constraint firstAttribute="leading" secondItem="eIR-zG-AdZ" secondAttribute="leading" constant="-24" id="vrL-qL-f1a"/>
                     <constraint firstItem="ktK-VW-1Ci" firstAttribute="centerY" secondItem="eIR-zG-AdZ" secondAttribute="centerY" id="yyz-rf-CCP"/>
                 </constraints>
             </tableViewCellContentView>
