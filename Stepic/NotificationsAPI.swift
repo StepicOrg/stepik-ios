@@ -16,7 +16,7 @@ class NotificationsAPI {
     let name = "notifications"
 
     // TODO: it will be good to use APIEndpoint class here, but it doesn't allow empty ids list
-    @discardableResult func retrieve(page: Int = 1, notificationType: Notification.`Type`? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Notification]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request {
+    @discardableResult func retrieve(page: Int = 1, notificationType: NotificationType? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Notification]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request {
         var parameters = [
             "page": "\(page)"
         ]

@@ -57,3 +57,19 @@ class Notification: NSManagedObject, JSONInitializable {
         return dict
     }
 }
+
+enum NotificationType: String {
+    case comments = "comments"
+    case learn = "learn"
+    case `default` = "default"
+    case review = "review"
+    case teach = "teach"
+}
+
+enum NotificationAction: String {
+    case opened = "opened"
+    case replied = "replied"
+    case softDeadlineApproach = "soft_deadline_approach"
+    case hardDeadlineApproach = "hard_deadline_approach"
+    case unknown = "unknown"
+}
