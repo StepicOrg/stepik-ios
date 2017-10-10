@@ -49,6 +49,15 @@ class NotificationsPagerViewController: TabmanViewController {
             navigationController?.delegate = nil
         }
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if let vc = self.currentViewController as? NotificationsViewController,
+           vc.section == .all {
+            self.currentViewController?.view.frame.origin.y = self.bar.requiredInsets.bar
+        }
+    }
 }
 
 extension NotificationsPagerViewController: PageboyViewControllerDataSource {

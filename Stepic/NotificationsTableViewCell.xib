@@ -20,13 +20,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18.09.2017 11:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVt-gb-T6t">
-                        <rect key="frame" x="16" y="16" width="84" height="14"/>
+                        <rect key="frame" x="16" y="16" width="84" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcG-oj-Kpm">
-                        <rect key="frame" x="16" y="46" width="30" height="30"/>
+                        <rect key="frame" x="16" y="45.5" width="30" height="30"/>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="CKH-Hy-wOY"/>
@@ -42,13 +42,13 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmL-rx-LXa" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="60" y="44" width="209" height="192.5"/>
+                        <rect key="frame" x="60" y="43.5" width="209" height="193"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xec-Ph-WZD" customClass="AvatarImageView" customModule="Stepic" customModuleProvider="target">
-                        <rect key="frame" x="16" y="46" width="30" height="30"/>
+                        <rect key="frame" x="16" y="45.5" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="hFG-6A-YMb"/>
                             <constraint firstAttribute="width" constant="30" id="uRY-72-HFS"/>
@@ -72,6 +72,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="KVt-gb-T6t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0iL-Nh-3er"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vcG-oj-Kpm" secondAttribute="bottom" constant="16" id="Aku-NS-3JM"/>
                     <constraint firstItem="Xec-Ph-WZD" firstAttribute="top" secondItem="KVt-gb-T6t" secondAttribute="bottom" constant="16" id="NmO-Q8-fjp"/>
                     <constraint firstItem="KVt-gb-T6t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="PI8-hs-6Nx"/>
                     <constraint firstItem="CmL-rx-LXa" firstAttribute="leading" secondItem="vcG-oj-Kpm" secondAttribute="trailing" constant="14" id="U6B-cD-ZFu"/>
@@ -82,6 +83,7 @@
                     <constraint firstItem="CmL-rx-LXa" firstAttribute="top" secondItem="KVt-gb-T6t" secondAttribute="bottom" constant="14" id="nbf-lN-r84"/>
                     <constraint firstItem="vcG-oj-Kpm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="nrL-KE-CU0"/>
                     <constraint firstAttribute="bottom" secondItem="CmL-rx-LXa" secondAttribute="bottom" constant="16" id="pjz-nX-EaK"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Xec-Ph-WZD" secondAttribute="bottom" constant="16" id="yrx-tJ-9k7"/>
                     <constraint firstItem="Xec-Ph-WZD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zv8-5b-3Za"/>
                 </constraints>
             </tableViewCellContentView>

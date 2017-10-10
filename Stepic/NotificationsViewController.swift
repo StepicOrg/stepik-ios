@@ -25,12 +25,24 @@ class NotificationsViewController: UIViewController, NotificationsView {
     }
     var data: NotificationViewDataStruct = []
 
+    @IBOutlet weak var markAllAsReadButton: UIButton!
+    @IBOutlet weak var markAllAsReadButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var markAllAsReadButtonTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var markAllAsReadHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
 
     let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Hide "Mark all as read" button
+        if section != .all {
+            markAllAsReadButton.isHidden = true
+            markAllAsReadButtonBottomConstraint.constant = 0
+            markAllAsReadButtonTopConstraint.constant = 0
+            markAllAsReadHeightConstraint.constant = 0
+        }
 
         presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, view: self)
 
@@ -43,12 +55,10 @@ class NotificationsViewController: UIViewController, NotificationsView {
         } else {
             tableView.addSubview(refreshControl)
         }
-        view.layoutIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         presenter?.load()
     }
 
@@ -58,7 +68,6 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
     func set(notifications: NotificationViewDataStruct) {
         self.data = notifications
-
         tableView.reloadData()
     }
 }
