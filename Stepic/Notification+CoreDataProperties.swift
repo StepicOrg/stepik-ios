@@ -83,10 +83,10 @@ extension Notification {
         }
     }
 
-    var type: Type {
+    var type: NotificationType {
         get {
             if let type = managedType {
-                return Type(rawValue: type) ?? .`default`
+                return NotificationType(rawValue: type) ?? .`default`
             }
             return .`default`
         }
@@ -95,10 +95,10 @@ extension Notification {
         }
     }
 
-    var action: Action {
+    var action: NotificationAction {
         get {
             if let action = managedAction {
-                return Action(rawValue: action) ?? .unknown
+                return NotificationAction(rawValue: action) ?? .unknown
             }
             return .unknown
         }
@@ -125,21 +125,5 @@ extension Notification {
         set {
             managedLevel = newValue
         }
-    }
-
-    enum `Type`: String {
-        case comments = "comments"
-        case learn = "learn"
-        case `default` = "default"
-        case review = "review"
-        case teach = "teach"
-    }
-
-    enum Action: String {
-        case opened = "opened"
-        case replied = "replied"
-        case softDeadlineApproach = "soft_deadline_approach"
-        case hardDeadlineApproach = "hard_deadline_approach"
-        case unknown = "unknown"
     }
 }

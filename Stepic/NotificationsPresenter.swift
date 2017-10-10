@@ -11,7 +11,7 @@ import Foundation
 protocol NotificationsView: class {
     var state: NotificationsViewState { get set }
 
-    func set(notifications: [NotificationViewData])
+    func set(notifications: NotificationViewDataStruct)
 }
 
 enum NotificationsViewState {
@@ -22,21 +22,28 @@ enum NotificationsSection {
     case all, learning, comments, reviews, teaching, other
 }
 
+typealias NotificationViewDataStruct = [(date: Date, notifications: [NotificationViewData])]
+
 struct NotificationViewData {
+    var type: NotificationType
+    var time: Date
     var text: String
+    var avatarURL: URL?
 }
 
 class NotificationsPresenter {
     weak var view: NotificationsView?
 
     var notificationsAPI: NotificationsAPI
+    var usersAPI: UsersAPI
 
     private var page = 1
     private var section: NotificationsSection = .all
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
+        self.usersAPI = usersAPI
         self.view = view
     }
 
@@ -54,8 +61,54 @@ class NotificationsPresenter {
 
         // TODO: Fetch saved in Core Data
         fetchNotifications(success: { notifications in
-            self.view?.state = .normal
-            self.view?.set(notifications: notifications.map { NotificationViewData(text: $0.htmlText ?? "") })
+            // id -> url
+            var userAvatars: [Int: URL?] = [:]
+
+            var notificationsWExtractor: [(Notification, NotificationDataExtractor)] = []
+            for notification in notifications {
+                let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
+                if let userId = extractor.userId {
+                    userAvatars[userId] = nil
+                }
+                notificationsWExtractor.append((notification, extractor))
+            }
+
+            self.usersAPI.retrieve(ids: userAvatars.keys.map { $0 }, existing: [], refreshMode: .update, success: { users in
+                users.forEach { user in
+                    userAvatars[user.id] = URL(string: user.avatarURL)
+                }
+
+                // Group by date
+                var dateToNotifications: [Date: [NotificationViewData]] = [:]
+
+                notificationsWExtractor.forEach { notification, extractor in
+                    let notificationVD: NotificationViewData!
+                    if let userId = extractor.userId {
+                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatars[userId] ?? nil)
+                    } else {
+                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
+                    }
+
+                    let timestampDropHours = Int(notificationVD.time.timeIntervalSince1970 / (24 * 60 * 60)) * 24 * 60 * 60
+                    let day = Date(timeIntervalSince1970: Double(timestampDropHours))
+                    if !dateToNotifications.keys.contains(day) {
+                        dateToNotifications[day] = []
+                    }
+                    dateToNotifications[day]?.append(notificationVD)
+                }
+
+                var notificationsOut: NotificationViewDataStruct = []
+                for (key, value) in dateToNotifications {
+                    notificationsOut.append((date: key, notifications: value))
+                }
+                notificationsOut.sort { $0.date > $1.date }
+
+                self.view?.state = .normal
+                self.view?.set(notifications: notificationsOut)
+            }, error: { error in
+                // FIXME: handle error here
+                print(error)
+            })
         }, failure: { error in
             // FIXME: handle error here
             print(error)
@@ -63,7 +116,7 @@ class NotificationsPresenter {
     }
 
     fileprivate func fetchNotifications(success: @escaping ([Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {
-        var type: Notification.`Type`? = nil
+        var type: NotificationType? = nil
 
         switch section {
         case .comments:

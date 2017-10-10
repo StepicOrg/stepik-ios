@@ -8,10 +8,19 @@
 
 import UIKit
 
-class NotificationsSectionHeaderView: NibInitializableView {
+class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
+    static let reuseId = "notificationsSectionHeaderView"
 
-    override var nibName: String {
-        return "NotificationsSectionHeaderView"
+    @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var rightLabel: UILabel!
+
+    func update(with date: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMMM"
+        leftLabel.text = formatter.string(from: date)
+
+        formatter.dateFormat = "EEEE"
+        rightLabel.text = formatter.string(from: date)
     }
 
 }

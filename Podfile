@@ -46,6 +46,8 @@ def all_pods
     pod "RFKeyboardToolbar", "~> 1.3"
 
     pod 'Tabman', '1.0.2'
+    pod 'TTTAttributedLabel'
+    pod 'Atributika', '~> 3.0'
 end
 
 def testing_pods

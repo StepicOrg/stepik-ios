@@ -23,7 +23,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
             }
         }
     }
-    var notifications: [NotificationViewData] = []
+    var data: NotificationViewDataStruct = []
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -32,7 +32,10 @@ class NotificationsViewController: UIViewController, NotificationsView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, view: self)
+        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, view: self)
+
+        tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
+        tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
 
         refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
         if #available(iOS 10.0, *) {
@@ -53,8 +56,8 @@ class NotificationsViewController: UIViewController, NotificationsView {
         presenter?.refresh()
     }
 
-    func set(notifications: [NotificationViewData]) {
-        self.notifications = notifications
+    func set(notifications: NotificationViewDataStruct) {
+        self.data = notifications
 
         tableView.reloadData()
     }
@@ -62,21 +65,56 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return data.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        return data[section].notifications.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "\(notifications[indexPath.item].text.trimmingCharacters(in: .whitespacesAndNewlines))"
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NotificationsTableViewCell.reuseId)
+
+        if let cell = cell as? NotificationsTableViewCell {
+            let currentNotification = data[indexPath.section].notifications[indexPath.item]
+            cell.update(with: currentNotification)
+            DispatchQueue.global(qos: .userInitiated).async {
+                let categories: [NotificationType: String] = [
+                    .comments: "Comments",
+                    .learn: "Learn",
+                    .`default`: "Default",
+                    .review: "Review",
+                    .teach: "Teach"
+                ]
+
+                if let userId = NotificationDataExtractor(text: currentNotification.text, type: currentNotification.type).userId {
+                    ApiDataDownloader.users.retrieve(ids: [userId], existing: [], refreshMode: .update, success: { users in
+                        DispatchQueue.main.async {
+                            switch currentNotification.type {
+                            case .comments:
+                                cell.updateLeftView(.avatar(url: URL(string: users.first?.avatarURL ?? "")!))
+                            default:
+                                cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
+                            }
+                        }
+                    }, error: { _ in
+                    })
+                } else {
+                    DispatchQueue.main.async {
+                        cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
+                    }
+                }
+            }
+        }
+        return cell!
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return NotificationsSectionHeaderView()
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotificationsSectionHeaderView.reuseId)
+        if let header = header as? NotificationsSectionHeaderView {
+            header.update(with: data[section].date)
+        }
+        return header
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
