@@ -12,17 +12,37 @@ import SVGKit
 
 class AvatarImageView: UIImageView {
 
+    enum Shape {
+        case rectangle(cornerRadius: CGFloat)
+        case circle
+    }
+
     private let colors: [Int] = [0x69A1E5, 0xFFD19F, 0xE8B9B9, 0x85C096, 0xE1B3EA, 0xABE5D8]
+
+    var shape: Shape = .circle {
+        didSet {
+            updateShape()
+        }
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.setRoundedBounds(width: 0)
+        updateShape()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         image = Constants.placeholderImage
+    }
+
+    private func updateShape() {
+        switch shape {
+        case .circle:
+            self.setRoundedBounds(width: 0)
+        case .rectangle(let radius):
+            self.setRoundedCorners(cornerRadius: radius, borderWidth: 0)
+        }
     }
 
     func set(with url: URL) {

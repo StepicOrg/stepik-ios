@@ -28,6 +28,7 @@ class NotificationsTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         notificationTextLabel.delegate = self
+        avatarImageView.shape = .rectangle(cornerRadius: 4.0)
     }
 
     func update(with notification: NotificationViewData) {
