@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class CertificatesAPI: APIEndpoint {
-    let name = "certificates"
+    override var name: String { return "certificates" }
 
     @discardableResult func retrieve(userId: Int, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Meta, [Certificate]) -> Void, error errorHandler: @escaping (RetrieveError) -> Void) -> Request? {
 

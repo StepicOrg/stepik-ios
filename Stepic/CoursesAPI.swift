@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 class CoursesAPI: APIEndpoint {
-    let name = "courses"
+    override var name: String { return "courses" }
 
     @discardableResult func retrieveDisplayedIds(featured: Bool?, enrolled: Bool?, isPublic: Bool?, order: String?, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success : @escaping ([Int], Meta) -> Void, failure : @escaping (_ error: Error) -> Void) -> Request? {
 
@@ -53,7 +54,7 @@ class CoursesAPI: APIEndpoint {
             }
 //            let response = response.response
 
-            //TODO: Remove from here 
+            //TODO: Remove from here
             if let e = error {
                 print(e)
                 failure(e)
@@ -72,5 +73,70 @@ class CoursesAPI: APIEndpoint {
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course], refreshMode: RefreshMode, success: @escaping (([Course]) -> Void), error errorHandler: @escaping ((RetrieveError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, headers: headers, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    }
+
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
+        return getObjectsByIds(ids: ids, updating: existing)
+    }
+
+    //Could wrap retrieveDisplayedIds 
+    @discardableResult func retrieve(featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([Course], Meta)> {
+        return Promise { fulfill, reject in
+            var params = Parameters()
+
+            if let isFeatured = featured {
+                params["is_featured"] = isFeatured ? "true" : "false"
+            }
+
+            if let isEnrolled = enrolled {
+                params["enrolled"] = isEnrolled ? "true" : "false"
+            }
+
+            if let excludeEnded = excludeEnded {
+                params["excludeEnded"] = excludeEnded ? "true" : "false"
+            }
+
+            if let isPublic = isPublic {
+                params["is_public"] = isPublic ? "true" : "false"
+            }
+
+            if let order = order {
+                params["order"] = order
+            }
+
+            params["page"] = page
+
+            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", parameters: params, encoding: URLEncoding.default, headers: headers).validate().responseSwiftyJSON({ response in
+                switch response.result {
+
+                case .failure(let error):
+                    reject(RetrieveError(error: error))
+
+                case .success(let json):
+                    // get courses ids
+                    let jsonArray: [JSON] = json["courses"].array ?? []
+                    let ids: [Int] = jsonArray.flatMap { $0["id"].int }
+                    // recover course objects from database
+                    let recoveredCourses = try! Course.getCourses(ids)
+                    // update existing course objects or create new ones
+                    let resultCourses: [Course] = ids.enumerated().map {
+                        idIndex, id in
+                        let jsonObject = json[idIndex]
+                        if let recoveredCourseIndex = recoveredCourses.index(where: {$0.id == id}) {
+                            recoveredCourses[recoveredCourseIndex].update(json: jsonObject)
+                            return recoveredCourses[recoveredCourseIndex]
+                        } else {
+                            return Course(json: jsonObject)
+                        }
+                    }
+
+                    CoreDataHelper.instance.save()
+                    let meta = Meta(json: json["meta"])
+
+                    fulfill((resultCourses, meta))
+                }
+            })
+        }
+
     }
 }

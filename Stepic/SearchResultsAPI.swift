@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class SearchResultsAPI: APIEndpoint {
-    let name = "search-results"
+    override var name: String { return "search-results" }
 
     @discardableResult func search(query: String, type: String?, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
         var params: Parameters = [:]
