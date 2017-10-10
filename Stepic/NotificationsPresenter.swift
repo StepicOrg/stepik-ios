@@ -15,7 +15,7 @@ protocol NotificationsView: class {
 }
 
 enum NotificationsViewState {
-    case normal, refresh, loading, empty
+    case normal, refreshing, loading, empty
 }
 
 enum NotificationsSection {
@@ -38,6 +38,7 @@ class NotificationsPresenter {
     var usersAPI: UsersAPI
 
     private var page = 1
+    private var hasNext = true
     private var section: NotificationsSection = .all
 
     init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, view: NotificationsView) {
@@ -48,32 +49,49 @@ class NotificationsPresenter {
     }
 
     func refresh() {
-        view?.state = .refresh
+        view?.state = .refreshing
 
         page = 1
+        loadData(page: page) { hasNext, notifications in
+            self.hasNext = hasNext
 
-        // Reload and
-        view?.state = .normal
+            self.view?.state = .normal
+            self.view?.set(notifications: notifications)
+        }
     }
 
     func load() {
-        view?.state = .refresh
+        view?.state = .loading
 
+        if hasNext || page == 1 {
+            loadData(page: page) { hasNext, notifications in
+                self.hasNext = hasNext
+
+                self.view?.state = .normal
+                self.view?.set(notifications: notifications)
+            }
+        } else {
+            self.view?.state = .normal
+        }
+    }
+
+    fileprivate func loadData(page: Int, success: @escaping (Bool, NotificationViewDataStruct) -> Void) {
         // TODO: Fetch saved in Core Data
         fetchNotifications(success: { notifications in
             // id -> url
-            var userAvatars: [Int: URL?] = [:]
+            var userAvatars: [Int: URL] = [:]
+            var usersQuery: Set<Int> = Set()
 
             var notificationsWExtractor: [(Notification, NotificationDataExtractor)] = []
             for notification in notifications {
                 let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
                 if let userId = extractor.userId {
-                    userAvatars[userId] = nil
+                    usersQuery.insert(userId)
                 }
                 notificationsWExtractor.append((notification, extractor))
             }
 
-            self.usersAPI.retrieve(ids: userAvatars.keys.map { $0 }, existing: [], refreshMode: .update, success: { users in
+            self.usersAPI.retrieve(ids: Array(usersQuery), existing: [], refreshMode: .update, success: { users in
                 users.forEach { user in
                     userAvatars[user.id] = URL(string: user.avatarURL)
                 }
@@ -83,8 +101,8 @@ class NotificationsPresenter {
 
                 notificationsWExtractor.forEach { notification, extractor in
                     let notificationVD: NotificationViewData!
-                    if let userId = extractor.userId {
-                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatars[userId] ?? nil)
+                    if let userId = extractor.userId, let userAvatar = userAvatars[userId] {
+                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatar)
                     } else {
                         notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
                     }
@@ -103,8 +121,8 @@ class NotificationsPresenter {
                 }
                 notificationsOut.sort { $0.date > $1.date }
 
-                self.view?.state = .normal
-                self.view?.set(notifications: notificationsOut)
+                print(notificationsOut)
+                success(false, notificationsOut)
             }, error: { error in
                 // FIXME: handle error here
                 print(error)

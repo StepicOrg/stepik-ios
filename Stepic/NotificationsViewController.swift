@@ -17,8 +17,11 @@ class NotificationsViewController: UIViewController, NotificationsView {
             switch state {
             case .normal:
                 self.refreshControl.endRefreshing()
-            case .refresh:
+                self.tableView.tableFooterView?.isHidden = true
+            case .refreshing:
                 self.refreshControl.beginRefreshing()
+            case .loading:
+                self.tableView.tableFooterView?.isHidden = false
             default: break
             }
         }
@@ -63,12 +66,30 @@ class NotificationsViewController: UIViewController, NotificationsView {
     }
 
     func refreshNotifications() {
+        if state == .loading || state == .refreshing {
+            return
+        }
+
         presenter?.refresh()
     }
 
     func set(notifications: NotificationViewDataStruct) {
         self.data = notifications
         tableView.reloadData()
+        setNeedsScrollViewInsetUpdate()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if state == .loading || state == .refreshing {
+            return
+        }
+
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+
+        if maximumOffset - currentOffset <= 0 {
+            presenter?.load()
+        }
     }
 }
 
@@ -87,32 +108,22 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         if let cell = cell as? NotificationsTableViewCell {
             let currentNotification = data[indexPath.section].notifications[indexPath.item]
             cell.update(with: currentNotification)
-            DispatchQueue.global(qos: .userInitiated).async {
-                let categories: [NotificationType: String] = [
-                    .comments: "Comments",
-                    .learn: "Learn",
-                    .`default`: "Default",
-                    .review: "Review",
-                    .teach: "Teach"
-                ]
 
-                if let userId = NotificationDataExtractor(text: currentNotification.text, type: currentNotification.type).userId {
-                    ApiDataDownloader.users.retrieve(ids: [userId], existing: [], refreshMode: .update, success: { users in
-                        DispatchQueue.main.async {
-                            switch currentNotification.type {
-                            case .comments:
-                                cell.updateLeftView(.avatar(url: URL(string: users.first?.avatarURL ?? "")!))
-                            default:
-                                cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
-                            }
-                        }
-                    }, error: { _ in
-                    })
-                } else {
-                    DispatchQueue.main.async {
-                        cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
-                    }
+            let categories: [NotificationType: String] = [
+                .comments: "Comments",
+                .learn: "Learn",
+                .`default`: "Default",
+                .review: "Review",
+                .teach: "Teach"
+            ]
+
+            switch currentNotification.type {
+            case .comments:
+                if let url = currentNotification.avatarURL {
+                    cell.updateLeftView(.avatar(url: url))
                 }
+            default:
+                cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
             }
         }
         return cell!
