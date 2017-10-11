@@ -8,12 +8,14 @@
 
 import Foundation
 import PromiseKit
+import Alamofire
 
 protocol CourseListView: class {
     func display(courses: [CourseViewData])
     func update(courses: [CourseViewData])
     func setRefreshing(isRefreshing: Bool)
     func setLoadingNextPage(isLoading: Bool)
+    func setNextPageEnabled(isEnabled: Bool)
 }
 
 class CourseListPresenter {
@@ -26,6 +28,7 @@ class CourseListPresenter {
     private var listType: CourseListType
 
     private var currentPage: Int = 1
+    private var hasNextPage: Bool = false
 
     private var courses: [Course] = [] {
         didSet {
@@ -42,20 +45,113 @@ class CourseListPresenter {
         self.listType = listType
     }
 
+    private func displayCachedAndRefresh(ids: [Int], isCollection: Bool) {
+        displayCached(ids: ids)
+        if isCollection {
+            refreshCollection()
+        } else {
+            refresh()
+        }
+    }
+
     func refresh() {
         view?.setRefreshing(isRefreshing: true)
         switch listType {
-        case let .enrolled(cachedIds: cachedIds):
-            displayCached(ids: cachedIds)
-            refreshEnrolled()
-        case let .popular(cachedIds: cachedIds):
-            displayCached(ids: cachedIds)
-            refreshPopular()
+        case let .enrolled(cachedIds: cachedIds), let .popular(cachedIds: cachedIds):
+            displayCachedAndRefresh(ids: cachedIds, isCollection: false)
         case let .collection(ids: ids):
-            displayCached(ids: ids)
-            refreshCollection()
+            displayCachedAndRefresh(ids: ids, isCollection: true)
         }
     }
+
+    func loadNextPage() {
+        self.view?.setLoadingNextPage(isLoading: true)
+        coursesAPI.cancelAllTasks()
+        listType.request(page: currentPage + 1, withAPI: coursesAPI)?.then {
+            [weak self]
+            (courses, meta) -> Void in
+            self?.courses += courses
+            self?.updateReviewSummaries(for: courses)
+            self?.updateProgresses(for: courses)
+            self?.currentPage = meta.page
+            self?.hasNextPage = meta.hasNext
+        }.always {
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.view?.setLoadingNextPage(isLoading: false)
+            strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
+        }.catch {
+            _ in
+            print("error while loading next page")
+        }
+    }
+
+    private func displayCached(ids: [Int]) {
+        let recoveredCourses = try! Course.getCourses(ids)
+        courses = Sorter.sort(recoveredCourses, byIds: ids)
+    }
+
+    private func refreshCollection() {
+        if courses.isEmpty {
+            self.view?.setRefreshing(isRefreshing: true)
+        }
+        coursesAPI.cancelAllTasks()
+        switch listType {
+        case let .collection(ids: ids):
+            listType.request(coursesWithIds: ids, withAPI: coursesAPI)?.then {
+                [weak self]
+                courses -> Void in
+                self?.courses = courses
+                self?.updateReviewSummaries(for: courses)
+                self?.updateProgresses(for: courses)
+                self?.currentPage = 1
+                self?.hasNextPage = false
+            }.always {
+                [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view?.setRefreshing(isRefreshing: false)
+                strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
+            }.catch {
+                _ in
+                print("Error while refreshing collection")
+            }
+        default:
+            break
+        }
+
+    }
+
+    private func refreshNoCollection() {
+        if courses.isEmpty {
+            self.view?.setRefreshing(isRefreshing: true)
+        }
+        coursesAPI.cancelAllTasks()
+        listType.request(page: 1, withAPI: coursesAPI)?.then {
+            [weak self]
+            (courses, meta) -> Void in
+            self?.courses = courses
+            self?.updateReviewSummaries(for: courses)
+            self?.updateProgresses(for: courses)
+            self?.currentPage = meta.page
+            self?.hasNextPage = meta.hasNext
+        }.always {
+            [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.view?.setRefreshing(isRefreshing: false)
+            strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
+        }.catch {
+            _ in
+            print("error while refreshing course collection")
+        }
+    }
+
+    // Progresses
 
     private func updateProgresses(for courses: [Course]) {
         var progressIds: [String] = []
@@ -101,6 +197,8 @@ class CourseListPresenter {
         CoreDataHelper.instance.save()
     }
 
+    //Review summaries
+
     private func updateReviewSummaries(for courses: [Course]) {
         var reviewIds: [Int] = []
         var reviews: [CourseReviewSummary] = []
@@ -143,39 +241,6 @@ class CourseListPresenter {
         }
         CoreDataHelper.instance.save()
     }
-
-    func loadNextPage() {
-        self.view?.setLoadingNextPage(isLoading: true)
-        coursesAPI.cancelAllTasks()
-        coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: currentPage + 1).then {
-            [weak self]
-            (courses, _) -> Void in
-            self?.courses = courses
-            self?.view?.setLoadingNextPage(isLoading: false)
-            self?.updateReviewSummaries(for: courses)
-            self?.updateProgresses(for: courses)
-        }.catch {
-            _ in
-            print("error while loading next page")
-        }
-    }
-
-    private func displayCached(ids: [Int]) {
-        //TODO: Add implementation
-    }
-
-    private func refreshCollection() {
-        //TODO: Add implementation
-    }
-
-    private func refreshPopular() {
-        //TODO: Add implementation
-    }
-
-    private func refreshEnrolled() {
-        //TODO: Add implementation
-    }
-
 }
 
 struct CourseViewData {
@@ -194,4 +259,24 @@ enum CourseListType {
     case enrolled(cachedIds: [Int])
     case popular(cachedIds: [Int])
     case collection(ids: [Int])
+
+    func request(page: Int, withAPI coursesAPI: CoursesAPI) -> Promise<([Course], Meta)>? {
+        switch self {
+        case .enrolled(cachedIds: _):
+            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
+        case .popular(cachedIds: _):
+            return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
+        default:
+            return nil
+        }
+    }
+
+    func request(coursesWithIds ids: [Int], withAPI coursesAPI: CoursesAPI) -> Promise<[Course]>? {
+        switch self {
+        case let .collection(ids: ids):
+            return coursesAPI.retrieve(ids: ids, existing: try! Course.getCourses(ids))
+        default:
+            return nil
+        }
+    }
 }
