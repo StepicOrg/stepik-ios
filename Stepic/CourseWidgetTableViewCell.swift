@@ -32,4 +32,14 @@ class CourseWidgetTableViewCell: UITableViewCell {
         widgetView.learners = course.learnersCount
         widgetView.progress = course.enrolled ? course.progress?.percentPassed : nil
     }
+
+    func setup(courseViewData course: CourseViewData) {
+        widgetView.title = course.title
+        widgetView.action = course.action
+        widgetView.buttonState = course.isEnrolled ? .continueLearning : .join
+        widgetView.imageURL = URL(string: course.coverURLString)
+        widgetView.rating = course.rating
+        widgetView.learners = course.learners
+        widgetView.progress = course.progress
+    }
 }

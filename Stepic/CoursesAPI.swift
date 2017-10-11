@@ -121,7 +121,7 @@ class CoursesAPI: APIEndpoint {
                     // update existing course objects or create new ones
                     let resultCourses: [Course] = ids.enumerated().map {
                         idIndex, id in
-                        let jsonObject = json[idIndex]
+                        let jsonObject = jsonArray[idIndex]
                         if let recoveredCourseIndex = recoveredCourses.index(where: {$0.id == id}) {
                             recoveredCourses[recoveredCourseIndex].update(json: jsonObject)
                             return recoveredCourses[recoveredCourseIndex]

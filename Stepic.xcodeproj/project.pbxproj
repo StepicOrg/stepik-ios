@@ -506,6 +506,14 @@
 		088E58C21DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		088E58C51DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
+		088EDB501F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB521F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB531F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB541F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB551F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB561F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB571F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -4433,6 +4441,7 @@
 		088E58BC1DE33B410009B9CE /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSDKProvider.swift; sourceTree = "<group>"; };
 		088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKSocialSDKProvider.swift; sourceTree = "<group>"; };
+		088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVerticalViewController.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -5898,6 +5907,7 @@
 				08A9BD711F8CA00A0085EAF6 /* old */,
 				08E8F96A1F34DD36008CF4A1 /* Search Queries */,
 				08A9BD721F8CA02A0085EAF6 /* CourseListPresenter.swift */,
+				088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -10652,6 +10662,7 @@
 				08D120F41C937B2200A54ABC /* Styles.swift in Sources */,
 				080217841F55B1B200186245 /* Menu.swift in Sources */,
 				08D120F51C937B2200A54ABC /* SectionsViewController.swift in Sources */,
+				088EDB511F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				085E9E6D1F138C2800D6A4BC /* CodeLanguagePickerViewController.swift in Sources */,
 				082BE3AF1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
 				08DF78D31F64059900AEEA85 /* StepikLabel.swift in Sources */,
@@ -11008,6 +11019,7 @@
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				0889FEAF1BFB771200C6417E /* DownloadsViewController.swift in Sources */,
 				083749371DE5C7DC00144C14 /* LocalNotificationManager.swift in Sources */,
+				088EDB501F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
@@ -11170,6 +11182,7 @@
 				2C1B60F91F4C4AEF00236804 /* WarningView.swift in Sources */,
 				2C1B60FA1F4C4AEF00236804 /* UIViewLoadExtension.swift in Sources */,
 				08CBA36D1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
+				088EDB561F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				2C1B60FB1F4C4AEF00236804 /* StepTabView.swift in Sources */,
 				2C1B60FC1F4C4AEF00236804 /* DiscussionCountView.swift in Sources */,
 				2C1B60FD1F4C4AEF00236804 /* ProfilesAPI.swift in Sources */,
@@ -11599,6 +11612,7 @@
 				2C1B630A1F4C590700236804 /* WarningView.swift in Sources */,
 				2C1B630B1F4C590700236804 /* UIViewLoadExtension.swift in Sources */,
 				08CBA36E1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
+				088EDB571F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				2C1B630C1F4C590700236804 /* StepTabView.swift in Sources */,
 				2C1B630D1F4C590700236804 /* DiscussionCountView.swift in Sources */,
 				2C1B630E1F4C590700236804 /* ProfilesAPI.swift in Sources */,
@@ -12028,6 +12042,7 @@
 				2C8652A71F4B33DE00D51654 /* WarningView.swift in Sources */,
 				2C8652A81F4B33DE00D51654 /* UIViewLoadExtension.swift in Sources */,
 				08CBA36A1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
+				088EDB531F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				2C8652A91F4B33DE00D51654 /* StepTabView.swift in Sources */,
 				2C8652AA1F4B33DE00D51654 /* DiscussionCountView.swift in Sources */,
 				2C8652AB1F4B33DE00D51654 /* ProfilesAPI.swift in Sources */,
@@ -12733,6 +12748,7 @@
 				2C89AA971F4C289900227C3B /* AuthRoutingManager.swift in Sources */,
 				2C89AA981F4C289900227C3B /* CodeLanguages.swift in Sources */,
 				2C89AA991F4C289900227C3B /* Session.swift in Sources */,
+				088EDB541F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				2C89AA9A1F4C289900227C3B /* SocialSDKProvider.swift in Sources */,
 				2C89AA9B1F4C289900227C3B /* VKSocialSDKProvider.swift in Sources */,
 				2C89AA9C1F4C289900227C3B /* FBSocialSDKProvider.swift in Sources */,
@@ -12885,6 +12901,7 @@
 				2C9731411F4C38F600AC9301 /* WarningView.swift in Sources */,
 				2C9731421F4C38F600AC9301 /* UIViewLoadExtension.swift in Sources */,
 				08CBA36C1F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
+				088EDB551F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				2C9731431F4C38F600AC9301 /* StepTabView.swift in Sources */,
 				2C9731441F4C38F600AC9301 /* DiscussionCountView.swift in Sources */,
 				2C9731451F4C38F600AC9301 /* ProfilesAPI.swift in Sources */,
@@ -13368,6 +13385,7 @@
 				864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */,
 				864D674C1E83E08E001E8D9E /* UIViewLoadExtension.swift in Sources */,
 				08CBA3691F5B2B8800302154 /* ProfileStreaksView.swift in Sources */,
+				088EDB521F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */,
 				864D674D1E83E08E001E8D9E /* StepTabView.swift in Sources */,
 				864D674F1E83E08E001E8D9E /* DiscussionCountView.swift in Sources */,
 				2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */,
