@@ -19,6 +19,18 @@ enum NotificationsViewState {
 }
 
 enum NotificationsSection {
+    var localizedName: String {
+        let localizedNames: [NotificationsSection: String] = [
+            .all: NSLocalizedString("NotificationsAll", comment: ""),
+            .learning: NSLocalizedString("NotificationsLearning", comment: ""),
+            .comments: NSLocalizedString("NotificationsComments", comment: ""),
+            .reviews: NSLocalizedString("NotificationsReviews", comment: ""),
+            .teaching: NSLocalizedString("NotificationsTeaching", comment: ""),
+            .other: NSLocalizedString("NotificationsOther", comment: "")
+        ]
+        return localizedNames[self] ?? "Unknown"
+    }
+
     case all, learning, comments, reviews, teaching, other
 }
 

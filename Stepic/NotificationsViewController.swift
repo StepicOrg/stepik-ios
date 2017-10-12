@@ -57,6 +57,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
             markAllAsReadButtonTopConstraint.constant = 0
             markAllAsReadHeightConstraint.constant = 0
         }
+        markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
         presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, view: self)
 
@@ -107,21 +108,13 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             let currentNotification = data[indexPath.section].notifications[indexPath.item]
             cell.update(with: currentNotification)
 
-            let categories: [NotificationType: String] = [
-                .comments: "Comments",
-                .learn: "Learn",
-                .`default`: "Default",
-                .review: "Review",
-                .teach: "Teach"
-            ]
-
             switch currentNotification.type {
             case .comments:
                 if let url = currentNotification.avatarURL {
                     cell.updateLeftView(.avatar(url: url))
                 }
             default:
-                cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
+                cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.first ?? "A"))
             }
 
             cell.delegate = self

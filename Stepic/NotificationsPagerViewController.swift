@@ -11,17 +11,14 @@ import Tabman
 import Pageboy
 
 class NotificationsPagerViewController: TabmanViewController {
-    var sections: [(NotificationsSection, String)] = [
-        (.all, "All"),
-        (.learning, "Learning"),
-        (.comments, "Comments"),
-        (.reviews, "Reviews"),
-        (.teaching, "Teaching"),
-        (.other, "Other")
+    var sections: [NotificationsSection] = [
+        .all, .learning, .comments, .reviews, .teaching, .other
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationItem.title = NSLocalizedString("Notifications", comment: "")
 
         self.dataSource = self
 
@@ -35,7 +32,7 @@ class NotificationsPagerViewController: TabmanViewController {
             appearance.layout.interItemSpacing = 30.0
             appearance.style.background = .solid(color: UIColor(hex: 0xf6f6f6))
         })
-        self.bar.items = sections.map { Item(title: $0.1) }
+        self.bar.items = sections.map { Item(title: $0.localizedName) }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +64,7 @@ extension NotificationsPagerViewController: PageboyViewControllerDataSource {
 
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
         let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsViewController", storyboardName: "Notifications") as! NotificationsViewController
-        vc.section = sections[index].0
+        vc.section = sections[index]
         return vc
     }
 
