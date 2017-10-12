@@ -14,6 +14,7 @@ protocol CourseListView: class {
     func display(courses: [CourseViewData])
     func add(addedCourses: [CourseViewData], courses: [CourseViewData])
     func update(updatedCourses: [CourseViewData], courses: [CourseViewData])
+    func update(deletingCourses: [CourseViewData], deletingIds: [Int], insertingCourses: [CourseViewData], insertingIds: [Int], courses: [CourseViewData])
 
     func setRefreshing(isRefreshing: Bool)
     func setPaginationStatus(status: PaginationStatus)
@@ -95,6 +96,38 @@ class CourseListPresenter {
             _ in
             print("error while loading next page")
             self?.view?.setPaginationStatus(status: .error)
+        }
+    }
+
+    func willAppear() {
+        handleCourseSubscriptionUpdates()
+    }
+
+    func handleCourseSubscriptionUpdates() {
+        switch listType {
+        case .enrolled:
+            guard CoursesJoinManager.sharedManager.hasUpdates else {
+                return
+            }
+
+            let deletedCourses = CoursesJoinManager.sharedManager.deletedCourses
+            var deletedIds: [Int] = []
+            for deletedCourse in deletedCourses {
+                if let index = courses.index(where: { deletedCourse.id == $0.id }) {
+                    courses.remove(at: index)
+                    deletedIds += [index]
+                }
+            }
+
+            let addedCourses = CoursesJoinManager.sharedManager.addedCourses
+            courses = addedCourses + courses
+            let addedIds = Array(0 ..< addedCourses.count)
+
+            CoursesJoinManager.sharedManager.clean()
+
+            view?.update(deletingCourses: CourseViewData.getData(from: getDisplayingFrom(newCourses: deletedCourses)), deletingIds: deletedIds, insertingCourses: CourseViewData.getData(from: getDisplayingFrom(newCourses: addedCourses)), insertingIds: addedIds, courses: CourseViewData.getData(from: courses))
+        default:
+            return
         }
     }
 

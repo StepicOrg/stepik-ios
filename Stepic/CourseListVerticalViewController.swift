@@ -137,6 +137,13 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
 
         return (view: cell, index: indexPath.row)
     }
+
+    func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath]) {
+        tableView.beginUpdates()
+        tableView.insertRows(at: insertingIndexPaths, with: .automatic)
+        tableView.deleteRows(at: deletingIndexPaths, with: .automatic)
+        tableView.endUpdates()
+    }
 }
 
 extension CourseListVerticalViewController: UITableViewDelegate {

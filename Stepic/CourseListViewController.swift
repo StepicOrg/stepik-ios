@@ -20,6 +20,7 @@ protocol CourseListViewControllerDelegate: class {
     func indexPathForIndex(index: Int) -> IndexPath
     func addElements(atIndexPaths: [IndexPath])
     func updateCell(atIndexPath: IndexPath)
+    func updateCells(deletingIndexPaths: [IndexPath], insertingIndexPaths: [IndexPath])
 
     func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)?
 }
@@ -46,6 +47,11 @@ class CourseListViewController: UIViewController, CourseListView {
             delegate?.setupRefresh()
         }
         refresh()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.willAppear()
     }
 
     private func setup3dTouch() {
@@ -112,6 +118,13 @@ class CourseListViewController: UIViewController, CourseListView {
 
     func show(controller: UIViewController) {
         show(controller, sender: self)
+    }
+
+    func update(deletingCourses: [CourseViewData], deletingIds: [Int], insertingCourses: [CourseViewData], insertingIds: [Int], courses: [CourseViewData]) {
+        self.courses = courses
+        let deletingIndexPaths = deletingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        let insertingIndexPaths = insertingIds.flatMap({ delegate?.indexPathForIndex(index: $0) })
+        delegate?.updateCells(deletingIndexPaths: deletingIndexPaths, insertingIndexPaths: insertingIndexPaths)
     }
 }
 
