@@ -123,13 +123,14 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             default:
                 cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
             }
+
+            cell.delegate = self
         }
 
         // Load next page
         let isLastCell = indexPath.section == data.count - 1 && indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1
         let hasNextPage = presenter?.hasNextPage ?? false
         let isLoading = state == .loading || state == .refreshing
-        print(isLastCell, hasNextPage, !isLoading)
         if isLastCell && hasNextPage && !isLoading {
             presenter?.load()
         }
@@ -159,5 +160,13 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         let isLastSection = section == data.count - 1
         let hasNextPage = presenter?.hasNextPage ?? false
         return isLastSection && hasNextPage ? 60 : 0
+    }
+}
+
+extension NotificationsViewController: NotificationsTableViewCellDelegate {
+    func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
+        if cell.status == .unread {
+            cell.status = .read
+        }
     }
 }

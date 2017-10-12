@@ -94,9 +94,9 @@
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsMuted" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="managedIsUnread" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedLevel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedPriority" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -209,6 +209,7 @@
         <element name="Course" positionX="-63" positionY="-18" width="128" height="450"/>
         <element name="LastStep" positionX="-45" positionY="135" width="128" height="105"/>
         <element name="Lesson" positionX="-36" positionY="153" width="128" height="180"/>
+        <element name="Notification" positionX="-18" positionY="153" width="128" height="195"/>
         <element name="Profile" positionX="-36" positionY="135" width="128" height="105"/>
         <element name="Progress" positionX="-45" positionY="135" width="128" height="195"/>
         <element name="Section" positionX="-54" positionY="126" width="128" height="270"/>
@@ -218,6 +219,5 @@
         <element name="User" positionX="-63" positionY="99" width="128" height="195"/>
         <element name="Video" positionX="-45" positionY="135" width="128" height="165"/>
         <element name="VideoURL" positionX="-36" positionY="144" width="128" height="90"/>
-        <element name="Notification" positionX="-18" positionY="153" width="128" height="195"/>
     </elements>
 </model>

@@ -10,6 +10,10 @@ import UIKit
 import TTTAttributedLabel
 import Atributika
 
+protocol NotificationsTableViewCellDelegate: class {
+    func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int)
+}
+
 class NotificationsTableViewCell: UITableViewCell {
     static let reuseId = "notificationsCell"
 
@@ -24,6 +28,23 @@ class NotificationsTableViewCell: UITableViewCell {
     @IBOutlet weak var notificationTextLabel: TTTAttributedLabel!
     @IBOutlet weak var statusButton: NotificationStatusButton!
 
+    weak var delegate: NotificationsTableViewCellDelegate?
+
+    private var displayedNotification: NotificationViewData?
+
+    var status: NotificationStatus = .unread {
+        didSet {
+            switch status {
+            case .read:
+                statusButton.status = .read
+            case .opened:
+                statusButton.status = .opened
+            case .unread:
+                statusButton.status = .unread
+            }
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -32,6 +53,11 @@ class NotificationsTableViewCell: UITableViewCell {
     }
 
     func update(with notification: NotificationViewData) {
+        displayedNotification = notification
+
+        // State
+        status = notification.status
+
         // Text
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2.2
@@ -82,12 +108,15 @@ class NotificationsTableViewCell: UITableViewCell {
     }
 
     @IBAction func onStatusButtonClick(_ sender: Any) {
-        statusButton.status = .notOpened
+        guard let notification = displayedNotification else {
+            return
+        }
+        delegate?.statusButtonClicked(inCell: self, withNotificationId: notification.id)
     }
 }
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        UIApplication.shared.openURL(url)
+        print(url)
     }
 }

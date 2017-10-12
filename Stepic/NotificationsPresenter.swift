@@ -25,7 +25,9 @@ enum NotificationsSection {
 typealias NotificationViewDataStruct = [(date: Date, notifications: [NotificationViewData])]
 
 struct NotificationViewData {
+    var id: Int
     var type: NotificationType
+    var status: NotificationStatus
     var time: Date
     var text: String
     var avatarURL: URL?
@@ -106,9 +108,9 @@ class NotificationsPresenter {
                 notificationsWExtractor.forEach { notification, extractor in
                     let notificationVD: NotificationViewData!
                     if let userId = extractor.userId, let userAvatar = userAvatars[userId] {
-                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatar)
+                        notificationVD = NotificationViewData(id: notification.id, type: notification.type, status: notification.status, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: userAvatar)
                     } else {
-                        notificationVD = NotificationViewData(type: notification.type, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
+                        notificationVD = NotificationViewData(id: notification.id, type: notification.type, status: notification.status, time: notification.time ?? Date(), text: extractor.preparedText ?? "", avatarURL: nil)
                     }
 
                     let timestampDropHours = Int(notificationVD.time.timeIntervalSince1970 / (24 * 60 * 60)) * 24 * 60 * 60

@@ -22,10 +22,10 @@ class Notification: NSManagedObject, JSONInitializable {
         id = json["id"].intValue
         htmlText = json["html_text"].stringValue
         time = Parser.sharedParser.dateFromTimedateJSON(json["time"])
-        isUnread = json["is_unread"].boolValue
         isMuted = json["is_muted"].boolValue
         isFavorite = json["is_favorite"].boolValue
 
+        managedStatus = json["is_unread"].boolValue ? NotificationStatus.unread.rawValue : NotificationStatus.opened.rawValue
         managedType = json["type"].stringValue
         managedAction = json["action"].stringValue
 
@@ -46,7 +46,7 @@ class Notification: NSManagedObject, JSONInitializable {
             "id": id as AnyObject,
             "html_text": htmlText as AnyObject,
             "time": time as AnyObject,
-            "is_unread": isUnread as AnyObject,
+            "is_unread": (status == .unread) as AnyObject,
             "is_muted": isMuted as AnyObject,
             "is_favorite": isFavorite as AnyObject,
             "type": type.rawValue as AnyObject,
@@ -56,6 +56,12 @@ class Notification: NSManagedObject, JSONInitializable {
         ]
         return dict
     }
+}
+
+enum NotificationStatus: String {
+    case unread = "unread"
+    case read = "read"
+    case opened = "opened"
 }
 
 enum NotificationType: String {

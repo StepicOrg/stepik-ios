@@ -18,7 +18,7 @@ class NotificationStatusButton: UIButton {
     }
 
     enum Status {
-        case unread, notOpened, read
+        case unread, opened, read
     }
 
     var status: Status = .unread {
@@ -65,10 +65,11 @@ class NotificationStatusButton: UIButton {
         case .unread:
             self.unreadMark = unreadMarkView
             self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
-        case .notOpened:
+        case .read:
             self.unreadMark = nil
             self.setImage(#imageLiteral(resourceName: "letterSign"), for: .normal)
-        case .read:
+        case .opened:
+            self.isEnabled = false
             self.unreadMark = nil
             self.setImage(#imageLiteral(resourceName: "readSign"), for: .normal)
         }

@@ -11,7 +11,7 @@ import CoreData
 
 extension Notification {
     @NSManaged public var managedId: NSNumber?
-    @NSManaged public var managedIsUnread: NSNumber?
+    @NSManaged public var managedStatus: String?
     @NSManaged public var managedIsMuted: NSNumber?
     @NSManaged public var managedIsFavorite: NSNumber?
     @NSManaged public var managedTime: Date?
@@ -56,12 +56,15 @@ extension Notification {
         }
     }
 
-    var isUnread: Bool {
+    var status: NotificationStatus {
         get {
-            return managedIsUnread?.boolValue ?? false
+            if let status = managedStatus {
+                return NotificationStatus(rawValue: status) ?? .unread
+            }
+            return .unread
         }
         set {
-            managedIsUnread = newValue as NSNumber?
+            managedStatus = newValue.rawValue
         }
     }
 
