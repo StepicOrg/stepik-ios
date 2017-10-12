@@ -26,6 +26,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
             }
         }
     }
+
     var data: NotificationViewDataStruct = []
 
     @IBOutlet weak var markAllAsReadButton: UIButton!
@@ -35,6 +36,16 @@ class NotificationsViewController: UIViewController, NotificationsView {
     @IBOutlet weak var tableView: UITableView!
 
     let refreshControl = UIRefreshControl()
+
+    lazy var paginationView: LoadingPaginationView = {
+        let paginationView = LoadingPaginationView()
+        paginationView.refreshAction = { [weak self] in
+            self?.presenter?.load()
+        }
+
+        paginationView.setLoading()
+        return paginationView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,19 +89,6 @@ class NotificationsViewController: UIViewController, NotificationsView {
         tableView.reloadData()
         setNeedsScrollViewInsetUpdate()
     }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if state == .loading || state == .refreshing {
-            return
-        }
-
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-
-        if maximumOffset - currentOffset <= 0 {
-            presenter?.load()
-        }
-    }
 }
 
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -126,6 +124,16 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.updateLeftView(.category(firstLetter: categories[currentNotification.type]?.first ?? "A"))
             }
         }
+
+        // Load next page
+        let isLastCell = indexPath.section == data.count - 1 && indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1
+        let hasNextPage = presenter?.hasNextPage ?? false
+        let isLoading = state == .loading || state == .refreshing
+        print(isLastCell, hasNextPage, !isLoading)
+        if isLastCell && hasNextPage && !isLoading {
+            presenter?.load()
+        }
+
         return cell!
     }
 
@@ -139,5 +147,17 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let isLastSection = section == data.count - 1
+        let hasNextPage = presenter?.hasNextPage ?? false
+        return isLastSection && hasNextPage ? paginationView : UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let isLastSection = section == data.count - 1
+        let hasNextPage = presenter?.hasNextPage ?? false
+        return isLastSection && hasNextPage ? 60 : 0
     }
 }

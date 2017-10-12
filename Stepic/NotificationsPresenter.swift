@@ -38,7 +38,9 @@ class NotificationsPresenter {
     var usersAPI: UsersAPI
 
     private var page = 1
-    private var hasNext = true
+    var hasNextPage = true
+    private var displayedNotifications: NotificationViewDataStruct = []
+
     private var section: NotificationsSection = .all
 
     init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, view: NotificationsView) {
@@ -52,8 +54,10 @@ class NotificationsPresenter {
         view?.state = .refreshing
 
         page = 1
+        hasNextPage = true
+        displayedNotifications = []
         loadData(page: page) { hasNext, notifications in
-            self.hasNext = hasNext
+            self.hasNextPage = hasNext
 
             self.view?.state = .normal
             self.view?.set(notifications: notifications)
@@ -63,9 +67,9 @@ class NotificationsPresenter {
     func load() {
         view?.state = .loading
 
-        if hasNext || page == 1 {
+        if hasNextPage || page == 1 {
             loadData(page: page) { hasNext, notifications in
-                self.hasNext = hasNext
+                self.hasNextPage = hasNext
 
                 self.view?.state = .normal
                 self.view?.set(notifications: notifications)
@@ -77,7 +81,7 @@ class NotificationsPresenter {
 
     fileprivate func loadData(page: Int, success: @escaping (Bool, NotificationViewDataStruct) -> Void) {
         // TODO: Fetch saved in Core Data
-        fetchNotifications(success: { notifications in
+        fetchNotifications(success: { meta, notifications in
             // id -> url
             var userAvatars: [Int: URL] = [:]
             var usersQuery: Set<Int> = Set()
@@ -115,14 +119,25 @@ class NotificationsPresenter {
                     dateToNotifications[day]?.append(notificationVD)
                 }
 
+                // Get already displayed notifications from view and merge
+                for val in self.displayedNotifications {
+                    if dateToNotifications[val.date] != nil {
+                        dateToNotifications[val.date]?.append(contentsOf: val.notifications)
+                    } else {
+                        dateToNotifications[val.date] = val.notifications
+                    }
+                }
+
                 var notificationsOut: NotificationViewDataStruct = []
                 for (key, value) in dateToNotifications {
                     notificationsOut.append((date: key, notifications: value))
                 }
+
                 notificationsOut.sort { $0.date > $1.date }
 
-                print(notificationsOut)
-                success(false, notificationsOut)
+                self.displayedNotifications = notificationsOut
+                self.page += 1
+                success(meta.hasNext, self.displayedNotifications)
             }, error: { error in
                 // FIXME: handle error here
                 print(error)
@@ -133,7 +148,7 @@ class NotificationsPresenter {
         })
     }
 
-    fileprivate func fetchNotifications(success: @escaping ([Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {
+    fileprivate func fetchNotifications(success: @escaping (Meta, [Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {
         var type: NotificationType? = nil
 
         switch section {
@@ -151,6 +166,6 @@ class NotificationsPresenter {
             type = nil
         }
 
-        notificationsAPI.retrieve(page: page, notificationType: type, success: { success($0) }, error: { failure($0) })
+        notificationsAPI.retrieve(page: page, notificationType: type, success: { success($0, $1) }, error: { failure($0) })
     }
 }
