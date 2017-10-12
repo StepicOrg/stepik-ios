@@ -514,6 +514,14 @@
 		088EDB551F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB561F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
 		088EDB571F8E8A5D009B736E /* CourseListVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */; };
+		088EDB591F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5A1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5B1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5C1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5D1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5E1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB5F1F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
+		088EDB601F8F5A48009B736E /* CourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EDB581F8F5A48009B736E /* CourseListViewController.swift */; };
 		08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E641CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */; };
 		08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08901E691CD1019A00D94613 /* UpdateChecker.swift */; };
@@ -4442,6 +4450,7 @@
 		088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSDKProvider.swift; sourceTree = "<group>"; };
 		088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKSocialSDKProvider.swift; sourceTree = "<group>"; };
 		088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListVerticalViewController.swift; sourceTree = "<group>"; };
+		088EDB581F8F5A48009B736E /* CourseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
 		08901E621CD0EDB300D94613 /* RemoteVersionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteVersionManager.swift; sourceTree = "<group>"; };
 		08901E691CD1019A00D94613 /* UpdateChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		08901E6C1CD102DF00D94613 /* UpdatePreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePreferencesContainer.swift; sourceTree = "<group>"; };
@@ -5908,6 +5917,7 @@
 				08E8F96A1F34DD36008CF4A1 /* Search Queries */,
 				08A9BD721F8CA02A0085EAF6 /* CourseListPresenter.swift */,
 				088EDB4F1F8E8A5D009B736E /* CourseListVerticalViewController.swift */,
+				088EDB581F8F5A48009B736E /* CourseListViewController.swift */,
 			);
 			name = Courses;
 			sourceTree = "<group>";
@@ -10646,6 +10656,7 @@
 				08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
+				088EDB5A1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				080C5E851EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
@@ -11069,6 +11080,7 @@
 				08901E701CD111F200D94613 /* VersionUpdateAlertConstructor.swift in Sources */,
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
+				088EDB591F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				08AF59EC1E6D9BE800423EFF /* RGPageViewController+UICollectionViewDelegate.swift in Sources */,
 				085DF8D51C99B9FB006809D9 /* Player.swift in Sources */,
 				08E16F231BDBA4AF004822E1 /* Reachability.m in Sources */,
@@ -11208,6 +11220,7 @@
 				2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				2C1B61131F4C4AEF00236804 /* CellOperationsUtil.swift in Sources */,
+				088EDB5F1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C1B61141F4C4AEF00236804 /* AdaptiveStepPresenter.swift in Sources */,
 				2C1B61151F4C4AEF00236804 /* DiscussionCellDelegate.swift in Sources */,
 				2C1B61161F4C4AEF00236804 /* WriteCommentViewController.swift in Sources */,
@@ -11638,6 +11651,7 @@
 				2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */,
 				2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				2C1B63241F4C590700236804 /* CellOperationsUtil.swift in Sources */,
+				088EDB601F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C1B63251F4C590700236804 /* AdaptiveStepPresenter.swift in Sources */,
 				2C1B63261F4C590700236804 /* DiscussionCellDelegate.swift in Sources */,
 				2C1B63271F4C590700236804 /* WriteCommentViewController.swift in Sources */,
@@ -12068,6 +12082,7 @@
 				2C8652BF1F4B33DE00D51654 /* LoadMoreTableViewCell.swift in Sources */,
 				2C8652C01F4B33DE00D51654 /* DiscussionUpdateDelegate.swift in Sources */,
 				2C8652C11F4B33DE00D51654 /* CellOperationsUtil.swift in Sources */,
+				088EDB5C1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C8652C21F4B33DE00D51654 /* AdaptiveStepPresenter.swift in Sources */,
 				2C8652C31F4B33DE00D51654 /* DiscussionCellDelegate.swift in Sources */,
 				2C8652C41F4B33DE00D51654 /* WriteCommentViewController.swift in Sources */,
@@ -12512,6 +12527,7 @@
 				2C89A9B71F4C289900227C3B /* NumberQuizViewController.swift in Sources */,
 				2C89A9B81F4C289900227C3B /* FreeAnswerQuizViewController.swift in Sources */,
 				2C89A9B91F4C289900227C3B /* MathQuizViewController.swift in Sources */,
+				088EDB5D1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C89A9BA1F4C289900227C3B /* SortingQuizViewController.swift in Sources */,
 				2C89A9BB1F4C289900227C3B /* SortingQuizTableViewCell.swift in Sources */,
 				2C89A9BC1F4C289900227C3B /* MatchingQuizViewController.swift in Sources */,
@@ -12927,6 +12943,7 @@
 				2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */,
 				2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */,
 				2C97315B1F4C38F600AC9301 /* CellOperationsUtil.swift in Sources */,
+				088EDB5E1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C97315C1F4C38F600AC9301 /* AdaptiveStepPresenter.swift in Sources */,
 				2C97315D1F4C38F600AC9301 /* DiscussionCellDelegate.swift in Sources */,
 				2C97315E1F4C38F600AC9301 /* WriteCommentViewController.swift in Sources */,
@@ -13411,6 +13428,7 @@
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
 				864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */,
 				864D676C1E83E08E001E8D9E /* CellOperationsUtil.swift in Sources */,
+				088EDB5B1F8F5A48009B736E /* CourseListViewController.swift in Sources */,
 				2C5F48D71F0F6FBD00C3A398 /* AdaptiveStepPresenter.swift in Sources */,
 				864D676D1E83E08E001E8D9E /* DiscussionCellDelegate.swift in Sources */,
 				864D676E1E83E08E001E8D9E /* WriteCommentViewController.swift in Sources */,

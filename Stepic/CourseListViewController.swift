@@ -1,0 +1,141 @@
+//
+//  CourseListViewController.swift
+//  Stepic
+//
+//  Created by Ostrenkiy on 12.10.2017.
+//  Copyright © 2017 Alex Karpov. All rights reserved.
+//
+
+import Foundation
+
+protocol CourseListViewControllerDelegate: class {
+    func setupContentView()
+    func setupRefresh()
+    func reloadData()
+
+    func updatePagination()
+//    func setDelegateLoadingNextPage(isLoading: Bool)
+//    func setDelegateNextPageEnabled(isEnabled: Bool)
+    func setDelegateRefreshing(isRefreshing: Bool)
+
+    func indexPathsForVisibleCells() -> [IndexPath]
+    func indexPathForIndex(index: Int) -> IndexPath
+    func addElements(atIndexPaths: [IndexPath])
+    func updateCell(atIndexPath: IndexPath)
+
+    func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)?
+}
+
+class CourseListViewController: UIViewController, CourseListView {
+    var presenter: CourseListPresenter?
+    var listType: CourseListType! = CourseListType.enrolled(cachedIds: [])
+
+    var refreshEnabled: Bool = true
+    var paginationStatus: PaginationStatus = .none
+
+    weak var delegate: CourseListViewControllerDelegate?
+
+    var courses: [CourseViewData] = []
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        presenter = CourseListPresenter(view: self, listType: listType, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        delegate?.setupContentView()
+        setup3dTouch()
+        if refreshEnabled {
+            delegate?.setupRefresh()
+        }
+        refresh()
+    }
+
+    private func setup3dTouch() {
+        if(traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: view)
+        }
+    }
+
+    func refresh() {
+        presenter?.refresh()
+    }
+
+    func display(courses: [CourseViewData]) {
+        self.courses = courses
+        delegate?.reloadData()
+    }
+
+    private func getChangedIndexes(changedCourses: [CourseViewData], courses: [CourseViewData]) -> [Int] {
+        var changedIndexes: [Int] = []
+        for (id, course) in courses.enumerated() {
+            if let _ = changedCourses.filter({ $0.id == course.id }).first {
+                changedIndexes += [id]
+            }
+        }
+        return changedIndexes
+    }
+
+    func add(addedCourses: [CourseViewData], courses: [CourseViewData]) {
+        self.courses = courses
+        let addedIndexes: [Int] = getChangedIndexes(changedCourses: addedCourses, courses: courses)
+        let addedIndexPaths = addedIndexes.flatMap({ delegate?.indexPathForIndex(index: $0) })
+
+        delegate?.addElements(atIndexPaths: addedIndexPaths)
+    }
+
+    func update(updatedCourses: [CourseViewData], courses: [CourseViewData]) {
+        self.courses = courses
+
+        guard let visibleIndexPathsArray = delegate?.indexPathsForVisibleCells() else {
+            return
+        }
+
+        let updatingIndexes: [Int] = getChangedIndexes(changedCourses: updatedCourses, courses: courses)
+        let visibleIndexPaths = Set<IndexPath>(visibleIndexPathsArray)
+        let updatingIndexPaths = Set<IndexPath>(updatingIndexes.flatMap({ delegate?.indexPathForIndex(index: $0) }))
+        let visibleUpdating = Array(updatingIndexPaths.intersection(visibleIndexPaths))
+        for indexPathToUpdate in visibleUpdating {
+            delegate?.updateCell(atIndexPath: indexPathToUpdate)
+        }
+    }
+
+    func setRefreshing(isRefreshing: Bool) {
+        delegate?.setDelegateRefreshing(isRefreshing: isRefreshing)
+    }
+
+    func setPaginationStatus(status: PaginationStatus) {
+        paginationStatus = status
+        delegate?.updatePagination()
+    }
+
+//    func setLoadingNextPage(isLoading: Bool) {
+//        delegate?.setDelegateLoadingNextPage(isLoading: isLoading)
+//    }
+//
+//    func setNextPageEnabled(isEnabled: Bool) {
+//        self.nextPageEnabled = isEnabled
+//        delegate?.setDelegateNextPageEnabled(isEnabled: isEnabled)
+//    }
+
+    func present(controller: UIViewController) {
+        self.present(controller, animated: true, completion: nil)
+    }
+}
+
+extension CourseListViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+
+        guard let sourceView = delegate?.getSourceCellFor3dTouch(location: location) else {
+            return nil
+        }
+
+        previewingContext.sourceRect = sourceView.view.frame
+
+        return presenter?.getViewControllerFor3DTouchPreviewing(forCourseAtIndex: sourceView.index, withSourceView: sourceView.view)
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.popped)
+    }
+
+}

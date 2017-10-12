@@ -16,8 +16,7 @@ protocol CourseListView: class {
     func update(updatedCourses: [CourseViewData], courses: [CourseViewData])
 
     func setRefreshing(isRefreshing: Bool)
-    func setLoadingNextPage(isLoading: Bool)
-    func setNextPageEnabled(isEnabled: Bool)
+    func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
 }
@@ -32,7 +31,15 @@ class CourseListPresenter {
     private var listType: CourseListType
 
     private var currentPage: Int = 1
-    var hasNextPage: Bool = false
+    private var hasNextPage: Bool = false
+
+    private var shouldLoadNextPage: Bool {
+        if let limit = limit {
+            return hasNextPage && courses.count < limit
+        } else {
+            return hasNextPage
+        }
+    }
 
     private var courses: [Course] = []
 
@@ -60,7 +67,7 @@ class CourseListPresenter {
         guard self.hasNextPage else {
             return
         }
-        self.view?.setLoadingNextPage(isLoading: true)
+        self.view?.setPaginationStatus(status: .loading)
         coursesAPI.cancelAllTasks()
         listType.request(page: currentPage + 1, withAPI: coursesAPI)?.then {
             [weak self]
@@ -74,16 +81,12 @@ class CourseListPresenter {
             strongSelf.updateProgresses(for: courses)
             strongSelf.currentPage = meta.page
             strongSelf.hasNextPage = meta.hasNext
-        }.always {
-            [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
-            strongSelf.view?.setLoadingNextPage(isLoading: false)
+            strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
         }.catch {
+            [weak self]
             _ in
             print("error while loading next page")
+            self?.view?.setPaginationStatus(status: .error)
         }
     }
 
@@ -111,13 +114,13 @@ class CourseListPresenter {
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = 1
                 strongSelf.hasNextPage = false
+                strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
             }.always {
                 [weak self] in
                 guard let strongSelf = self else {
                     return
                 }
                 strongSelf.view?.setRefreshing(isRefreshing: false)
-                strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
             }.catch {
                 _ in
                 print("Error while refreshing collection")
@@ -135,13 +138,13 @@ class CourseListPresenter {
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = meta.page
                 strongSelf.hasNextPage = meta.hasNext
+                strongSelf.view?.setPaginationStatus(status: strongSelf.shouldLoadNextPage ? .loading : .none)
                 }.always {
                     [weak self] in
                     guard let strongSelf = self else {
                         return
                     }
                     strongSelf.view?.setRefreshing(isRefreshing: false)
-                    strongSelf.view?.setNextPageEnabled(isEnabled: strongSelf.hasNextPage)
                 }.catch {
                     _ in
                     print("error while refreshing course collection")
@@ -306,6 +309,10 @@ struct CourseViewData {
     static func getData(from courses: [Course]) -> [CourseViewData] {
         return courses.map { CourseViewData(course: $0) }
     }
+}
+
+enum PaginationStatus {
+    case loading, error, none
 }
 
 enum CourseListType {

@@ -104,14 +104,14 @@ class CourseWidgetView: NibInitializableView {
 
     private func updateStats() {
         var newStats: [CourseStatData] = []
-        if let rating = rating {
-            if rating > 0 {
-                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon_dark"), text: String(format: "%.1f", rating))]
-            }
-        }
         if let learners = learners {
             if learners > 0 {
                 newStats += [CourseStatData(image: #imageLiteral(resourceName: "learners_widget_icon_dark"), text: "\(learners)")]
+            }
+        }
+        if let rating = rating {
+            if rating > 0 {
+                newStats += [CourseStatData(image: #imageLiteral(resourceName: "rating_widget_icon_dark"), text: String(format: "%.1f", rating))]
             }
         }
         if let progress = progress {

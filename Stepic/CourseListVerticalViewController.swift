@@ -9,31 +9,44 @@
 import Foundation
 import FLKAutoLayout
 
-class CourseListVerticalViewController: UIViewController, CourseListView {
+class CourseListVerticalViewController: CourseListViewController {
     let tableView: UITableView = UITableView()
 
-    var presenter: CourseListPresenter?
-    var listType: CourseListType! = CourseListType.enrolled(cachedIds: [])
-    var refreshEnabled: Bool! = true
     var refreshControl: UIRefreshControl? = UIRefreshControl()
 
-    var courses: [CourseViewData] = []
-
     override func viewDidLoad() {
+        delegate = self
         super.viewDidLoad()
-
-        presenter = CourseListPresenter(view: self, listType: listType, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
-        setupTableView()
-        setup3dTouch()
-        if refreshEnabled {
-            setupRefresh()
-        }
-        refresh()
     }
 
     //Setup
 
-    private func setupTableView() {
+    lazy var paginationView: LoadingPaginationView = {
+        let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
+        paginationView.refreshAction = {
+            [weak self] in
+            guard let presenter = self?.presenter else {
+                return
+            }
+            presenter.loadNextPage()
+        }
+
+        return paginationView
+    }()
+
+    private func getChangedIndexes(changedCourses: [CourseViewData], courses: [CourseViewData]) -> [Int] {
+        var changedIndexes: [Int] = []
+        for (id, course) in courses.enumerated() {
+            if let _ = changedCourses.filter({ $0.id == course.id }).first {
+                changedIndexes += [id]
+            }
+        }
+        return changedIndexes
+    }
+}
+
+extension CourseListVerticalViewController : CourseListViewControllerDelegate {
+    func setupContentView() {
         self.view.addSubview(tableView)
         tableView.align(toView: self.view)
         tableView.register(UINib(nibName: "CourseWidgetTableViewCell", bundle: nil), forCellReuseIdentifier: "CourseWidgetTableViewCell")
@@ -49,112 +62,67 @@ class CourseListVerticalViewController: UIViewController, CourseListView {
         #endif
     }
 
-    private func setupRefresh() {
-        refreshControl?.addTarget(self, action: #selector(CourseListVerticalViewController.refresh), for: .valueChanged)
+    func setupRefresh() {
+        refreshControl?.addTarget(self, action: #selector(CourseListViewController.refresh), for: .valueChanged)
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
             tableView.addSubview(refreshControl ?? UIView())
         }
         refreshControl?.layoutIfNeeded()
-
     }
 
-    private func setup3dTouch() {
-        if(traitCollection.forceTouchCapability == .available) {
-            registerForPreviewing(with: self, sourceView: view)
-        }
-    }
-
-    lazy var paginationView: LoadingPaginationView = {
-        let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
-        paginationView.refreshAction = {
-            [weak self] in
-            guard let presenter = self?.presenter else {
-                return
-            }
-            presenter.loadNextPage()
-        }
-
-        return paginationView
-    }()
-
-    func refresh() {
-        presenter?.refresh()
-    }
-
-    func display(courses: [CourseViewData]) {
-        self.courses = courses
+    func reloadData() {
         tableView.reloadData()
     }
 
-    private func getChangedIndexes(changedCourses: [CourseViewData], courses: [CourseViewData]) -> [Int] {
-        var changedIndexes: [Int] = []
-        for (id, course) in courses.enumerated() {
-            if let _ = changedCourses.filter({ $0.id == course.id }).first {
-                changedIndexes += [id]
+    func updatePagination() {
+        switch paginationStatus {
+        case .none:
+            tableView.tableFooterView = nil
+        case .loading:
+            if tableView.tableFooterView != paginationView {
+                tableView.tableFooterView = paginationView
             }
-        }
-        return changedIndexes
-    }
-
-    func update(updatedCourses: [CourseViewData], courses: [CourseViewData]) {
-        self.courses = courses
-        let updatingIndexes: [Int] = getChangedIndexes(changedCourses: updatedCourses, courses: courses)
-
-        let visibleIndexPaths = Set<IndexPath>(tableView.indexPathsForVisibleRows ?? [])
-        let updatingIndexPaths = Set<IndexPath>(updatingIndexes.map({ IndexPath(row: $0, section: 0) }))
-        let visibleUpdating = Array(updatingIndexPaths.intersection(visibleIndexPaths))
-        for indexPath in visibleUpdating {
-            if let cell = tableView.cellForRow(at: indexPath) as? CourseWidgetTableViewCell {
-                cell.widgetView.progress = courses[indexPath.row].progress
-                cell.widgetView.rating = courses[indexPath.row].rating
+            paginationView.setLoading()
+        case .error:
+            if tableView.tableFooterView != paginationView {
+                tableView.tableFooterView = paginationView
             }
+            paginationView.setError()
         }
     }
 
-    func add(addedCourses: [CourseViewData], courses: [CourseViewData]) {
-        self.courses = courses
-        let addedIndexes: [Int] = getChangedIndexes(changedCourses: addedCourses, courses: courses)
-        let addedIndexPaths = addedIndexes.map({ IndexPath(row: $0, section: 0) })
-
-        tableView.insertRows(at: addedIndexPaths, with: .automatic)
-    }
-
-    func setRefreshing(isRefreshing: Bool) {
+    func setDelegateRefreshing(isRefreshing: Bool) {
         if isRefreshing {
-            refreshControl?.beginRefreshing()
+            if refreshControl?.isRefreshing == false {
+                refreshControl?.beginRefreshing()
+            }
         } else {
             refreshControl?.endRefreshing()
         }
     }
 
-    func setLoadingNextPage(isLoading: Bool) {
-        if isLoading {
-            paginationView.setLoading()
-        } else {
-            paginationView.setError()
+    func indexPathsForVisibleCells() -> [IndexPath] {
+        return tableView.indexPathsForVisibleRows ?? []
+    }
+
+    func indexPathForIndex(index: Int) -> IndexPath {
+        return IndexPath(row: index, section: 0)
+    }
+
+    func addElements(atIndexPaths indexPaths: [IndexPath]) {
+        tableView.insertRows(at: indexPaths, with: .none)
+    }
+
+    func updateCell(atIndexPath indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? CourseWidgetTableViewCell {
+            cell.widgetView.progress = courses[indexPath.row].progress
+            cell.widgetView.rating = courses[indexPath.row].rating
         }
     }
 
-    func setNextPageEnabled(isEnabled: Bool) {
-        if isEnabled {
-            tableView.tableFooterView = paginationView
-            paginationView.setLoading()
-        } else {
-            tableView.tableFooterView = nil
-        }
-    }
-
-    func present(controller: UIViewController) {
-        self.present(controller, animated: true, completion: nil)
-    }
-
-}
-
-extension CourseListVerticalViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-
+    func getSourceCellFor3dTouch(location: CGPoint) -> (view: UIView, index: Int)? {
         let locationInTableView = tableView.convert(location, from: self.view)
 
         guard let indexPath = tableView.indexPathForRow(at: locationInTableView) else {
@@ -169,14 +137,7 @@ extension CourseListVerticalViewController: UIViewControllerPreviewingDelegate {
             return nil
         }
 
-        previewingContext.sourceRect = cell.frame
-
-        return presenter?.getViewControllerFor3DTouchPreviewing(forCourseAtIndex: indexPath.row, withSourceView: cell)
-    }
-
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        show(viewControllerToCommit, sender: self)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.popped)
+        return (view: cell, index: indexPath.row)
     }
 }
 
@@ -194,12 +155,11 @@ extension CourseListVerticalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         guard indexPath.row < courses.count else {
             return UITableViewCell()
         }
 
-        if indexPath.row == courses.count - 1 && presenter?.hasNextPage == true {
+        if indexPath.row == courses.count - 1 && paginationStatus == .loading {
             presenter?.loadNextPage()
         }
 
