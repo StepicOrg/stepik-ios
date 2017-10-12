@@ -44,6 +44,7 @@ class CourseListPresenter {
 
     private var courses: [Course] = [] {
         didSet {
+            listType.cachedListCourseIds = courses.map({ $0.id })
             if let limit = limit {
                 displayingCourses = [Course](courses.prefix(limit))
             } else {
@@ -64,13 +65,10 @@ class CourseListPresenter {
 
     func refresh() {
         view?.setRefreshing(isRefreshing: true)
-        switch listType {
-        case let .enrolled(cachedIds: cachedIds), let .popular(cachedIds: cachedIds), let .collection(ids: cachedIds):
-            if courses.isEmpty {
-                displayCached(ids: cachedIds)
-            }
-            refreshCourses()
+        if courses.isEmpty {
+            displayCached(ids: listType.cachedListCourseIds)
         }
+        refreshCourses()
     }
 
     func loadNextPage() {
@@ -103,6 +101,7 @@ class CourseListPresenter {
     private func displayCached(ids: [Int]) {
         let recoveredCourses = try! Course.getCourses(ids)
         courses = Sorter.sort(recoveredCourses, byIds: ids)
+        self.view?.display(courses: CourseViewData.getData(from: self.displayingCourses))
     }
 
     private func refreshCourses() {
@@ -348,15 +347,15 @@ enum PaginationStatus {
 }
 
 enum CourseListType {
-    case enrolled(cachedIds: [Int])
-    case popular(cachedIds: [Int])
+    case enrolled
+    case popular
     case collection(ids: [Int])
 
     func request(page: Int, withAPI coursesAPI: CoursesAPI) -> Promise<([Course], Meta)>? {
         switch self {
-        case .popular(cachedIds: _):
+        case .popular:
             return coursesAPI.retrieve(featured: true, excludeEnded: true, isPublic: true, order: "-activity", page: page)
-        case .enrolled(cachedIds: _):
+        case .enrolled:
             return coursesAPI.retrieve(enrolled: true, order: "-activity", page: page)
         default:
             return nil
@@ -369,6 +368,39 @@ enum CourseListType {
             return coursesAPI.retrieve(ids: ids, existing: try! Course.getCourses(ids))
         default:
             return nil
+        }
+    }
+
+    private var cacheId: String? {
+        switch self {
+        case .popular:
+            return "PopularCoursesInfo"
+        case .enrolled:
+            return "MyCoursesInfo"
+        default:
+            return nil
+        }
+    }
+
+    var cachedListCourseIds: [Int] {
+        get {
+            guard let cacheId = self.cacheId, let ids = UserDefaults.standard.object(forKey: cacheId) as? [Int] else {
+                switch self {
+                case let .collection(ids: ids):
+                    return ids
+                default:
+                    return []
+                }
+            }
+            return ids
+        }
+
+        set(newIds) {
+            guard let cacheId = self.cacheId else {
+                return
+            }
+            UserDefaults.standard.set(newIds, forKey: cacheId)
+            UserDefaults.standard.synchronize()
         }
     }
 }
