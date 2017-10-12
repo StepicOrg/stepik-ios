@@ -54,6 +54,15 @@ class CourseListPresenter {
         }
     }
     private var displayingCourses: [Course] = []
+    private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
+        var result: [Course] = []
+        for course in displayingCourses {
+            if newCourses.index(of: course) != nil {
+                result += [course]
+            }
+        }
+        return result
+    }
 
     init(view: CourseListView, limit: Int?, listType: CourseListType, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
         self.view = view
@@ -240,16 +249,6 @@ class CourseListPresenter {
         if let controller = controller {
             self.view?.show(controller: controller)
         }
-    }
-
-    private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
-        var result: [Course] = []
-        for course in displayingCourses {
-            if newCourses.index(of: course) != nil {
-                result += [course]
-            }
-        }
-        return result
     }
 
     // Progresses
