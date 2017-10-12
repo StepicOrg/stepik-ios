@@ -140,7 +140,10 @@ extension CourseListVerticalViewController : CourseListViewControllerDelegate {
 }
 
 extension CourseListVerticalViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didSelectCourse(at: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension CourseListVerticalViewController: UITableViewDataSource {

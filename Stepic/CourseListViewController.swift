@@ -28,7 +28,7 @@ class CourseListViewController: UIViewController, CourseListView {
     var presenter: CourseListPresenter?
     var listType: CourseListType! = CourseListType.enrolled(cachedIds: [])
     var limit: Int?
-    
+
     var refreshEnabled: Bool = true
     var paginationStatus: PaginationStatus = .none
 
@@ -108,6 +108,10 @@ class CourseListViewController: UIViewController, CourseListView {
 
     func present(controller: UIViewController) {
         self.present(controller, animated: true, completion: nil)
+    }
+
+    func show(controller: UIViewController) {
+        show(controller, sender: self)
     }
 }
 

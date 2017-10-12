@@ -19,6 +19,7 @@ protocol CourseListView: class {
     func setPaginationStatus(status: PaginationStatus)
 
     func present(controller: UIViewController)
+    func show(controller: UIViewController)
 }
 
 class CourseListPresenter {
@@ -162,39 +163,51 @@ class CourseListPresenter {
 
     }
 
-    func getViewControllerFor3DTouchPreviewing(forCourseAtIndex index: Int, withSourceView sourceView: UIView) -> UIViewController? {
-        if !courses[index].enrolled {
-            guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {
-                return nil
-            }
-            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
-            courseVC.course = courses[index]
-            courseVC.parentShareBlock = {
-                [weak self]
-                shareVC in
-                AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
-                shareVC.popoverPresentationController?.sourceView = sourceView
-                self?.view?.present(controller: shareVC)
-            }
-            courseVC.hidesBottomBarWhenPushed = true
-            return courseVC
-        } else {
-            guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
-                return nil
-            }
-            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
-            courseVC.course = courses[index]
-            courseVC.parentShareBlock = {
-                [weak self]
-                shareVC in
-                AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
-                shareVC.popoverPresentationController?.sourceView = sourceView
-                self?.view?.present(controller: shareVC)
-            }
-            courseVC.hidesBottomBarWhenPushed = true
-            return courseVC
+    private func getSectionsController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {
+        guard let courseVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController else {
+            return nil
         }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
+        courseVC.course = course
+        courseVC.parentShareBlock = {
+            [weak self]
+            shareVC in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
+            shareVC.popoverPresentationController?.sourceView = sourceView
+            self?.view?.present(controller: shareVC)
+        }
+        courseVC.hidesBottomBarWhenPushed = true
+        return courseVC
+    }
 
+    private func getCoursePreviewController(for course: Course, sourceView: UIView? = nil) -> UIViewController? {
+        guard let courseVC = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as? CoursePreviewViewController else {
+            return nil
+        }
+        AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.peeked)
+        courseVC.course = course
+        courseVC.parentShareBlock = {
+            [weak self]
+            shareVC in
+            AnalyticsReporter.reportEvent(AnalyticsEvents.PeekNPop.Course.shared)
+            shareVC.popoverPresentationController?.sourceView = sourceView
+            self?.view?.present(controller: shareVC)
+        }
+        courseVC.hidesBottomBarWhenPushed = true
+        return courseVC
+    }
+
+    func getViewControllerFor3DTouchPreviewing(forCourseAtIndex index: Int, withSourceView sourceView: UIView) -> UIViewController? {
+        let course = courses[index]
+        return course.enrolled ? getSectionsController(for: course, sourceView: sourceView) : getCoursePreviewController(for: course, sourceView: sourceView)
+    }
+
+    func didSelectCourse(at index: Int) {
+        let course = courses[index]
+        let controller = course.enrolled ? getSectionsController(for: course) : getCoursePreviewController(for: course)
+        if let controller = controller {
+            self.view?.show(controller: controller)
+        }
     }
 
     private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
