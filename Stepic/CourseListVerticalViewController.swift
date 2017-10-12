@@ -19,8 +19,6 @@ class CourseListVerticalViewController: CourseListViewController {
         super.viewDidLoad()
     }
 
-    //Setup
-
     lazy var paginationView: LoadingPaginationView = {
         let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         paginationView.refreshAction = {

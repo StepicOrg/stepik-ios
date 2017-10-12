@@ -14,8 +14,6 @@ protocol CourseListViewControllerDelegate: class {
     func reloadData()
 
     func updatePagination()
-//    func setDelegateLoadingNextPage(isLoading: Bool)
-//    func setDelegateNextPageEnabled(isEnabled: Bool)
     func setDelegateRefreshing(isRefreshing: Bool)
 
     func indexPathsForVisibleCells() -> [IndexPath]
@@ -29,7 +27,8 @@ protocol CourseListViewControllerDelegate: class {
 class CourseListViewController: UIViewController, CourseListView {
     var presenter: CourseListPresenter?
     var listType: CourseListType! = CourseListType.enrolled(cachedIds: [])
-
+    var limit: Int?
+    
     var refreshEnabled: Bool = true
     var paginationStatus: PaginationStatus = .none
 
@@ -40,7 +39,7 @@ class CourseListViewController: UIViewController, CourseListView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter = CourseListPresenter(view: self, listType: listType, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
+        presenter = CourseListPresenter(view: self, limit: limit, listType: listType, coursesAPI: CoursesAPI(), progressesAPI: ProgressesAPI(), reviewSummariesAPI: CourseReviewSummariesAPI())
         delegate?.setupContentView()
         setup3dTouch()
         if refreshEnabled {
@@ -106,15 +105,6 @@ class CourseListViewController: UIViewController, CourseListView {
         paginationStatus = status
         delegate?.updatePagination()
     }
-
-//    func setLoadingNextPage(isLoading: Bool) {
-//        delegate?.setDelegateLoadingNextPage(isLoading: isLoading)
-//    }
-//
-//    func setNextPageEnabled(isEnabled: Bool) {
-//        self.nextPageEnabled = isEnabled
-//        delegate?.setDelegateNextPageEnabled(isEnabled: isEnabled)
-//    }
 
     func present(controller: UIViewController) {
         self.present(controller, animated: true, completion: nil)

@@ -41,9 +41,18 @@ class CourseListPresenter {
         }
     }
 
-    private var courses: [Course] = []
+    private var courses: [Course] = [] {
+        didSet {
+            if let limit = limit {
+                displayingCourses = [Course](courses.prefix(limit))
+            } else {
+                displayingCourses = courses
+            }
+        }
+    }
+    private var displayingCourses: [Course] = []
 
-    init(view: CourseListView, limit: Int? = nil, listType: CourseListType, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
+    init(view: CourseListView, limit: Int?, listType: CourseListType, coursesAPI: CoursesAPI, progressesAPI: ProgressesAPI, reviewSummariesAPI: CourseReviewSummariesAPI) {
         self.view = view
         self.coursesAPI = coursesAPI
         self.progressesAPI = progressesAPI
@@ -76,7 +85,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.courses += courses
-            strongSelf.view?.add(addedCourses: CourseViewData.getData(from: courses), courses: CourseViewData.getData(from: strongSelf.courses))
+            strongSelf.view?.add(addedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.displayingCourses))
             strongSelf.updateReviewSummaries(for: courses)
             strongSelf.updateProgresses(for: courses)
             strongSelf.currentPage = meta.page
@@ -109,7 +118,7 @@ class CourseListPresenter {
                     return
                 }
                 strongSelf.courses = courses
-                strongSelf.view?.display(courses: CourseViewData.getData(from: courses))
+                strongSelf.view?.display(courses: CourseViewData.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = 1
@@ -133,7 +142,7 @@ class CourseListPresenter {
                     return
                 }
                 strongSelf.courses = courses
-                strongSelf.view?.display(courses: CourseViewData.getData(from: courses))
+                strongSelf.view?.display(courses: CourseViewData.getData(from: strongSelf.displayingCourses))
                 strongSelf.updateReviewSummaries(for: courses)
                 strongSelf.updateProgresses(for: courses)
                 strongSelf.currentPage = meta.page
@@ -188,6 +197,16 @@ class CourseListPresenter {
 
     }
 
+    private func getDisplayingFrom(newCourses: [Course]) -> [Course] {
+        var result: [Course] = []
+        for course in displayingCourses {
+            if newCourses.index(of: course) != nil {
+                result += [course]
+            }
+        }
+        return result
+    }
+
     // Progresses
 
     private func updateProgresses(for courses: [Course]) {
@@ -209,7 +228,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchProgresses(newProgresses: newProgresses, ids: progressIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: courses), courses: CourseViewData.getData(from: strongSelf.courses))
+            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.displayingCourses))
         }.catch {
             _ in
             print("Error while loading progresses")
@@ -258,7 +277,7 @@ class CourseListPresenter {
                 return
             }
             strongSelf.matchReviewSummaries(newReviewSummaries: newReviews, ids: reviewIds, courses: courses)
-            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: courses), courses: CourseViewData.getData(from: strongSelf.courses) )
+            strongSelf.view?.update(updatedCourses: CourseViewData.getData(from: strongSelf.getDisplayingFrom(newCourses: courses)), courses: CourseViewData.getData(from: strongSelf.courses) )
         }.catch {
             _ in
             print("error while loading review summaries")
