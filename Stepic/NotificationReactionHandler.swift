@@ -8,9 +8,6 @@
 
 import Foundation
 
-/*
- Chooses the appropriate reaction to the notification click
- */
 class NotificationReactionHandler {
 
     fileprivate func deserializeObject(from userInfo: [AnyHashable: Any]) -> [String: AnyObject]? {

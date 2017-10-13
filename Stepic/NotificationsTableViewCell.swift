@@ -129,6 +129,9 @@ class NotificationsTableViewCell: UITableViewCell {
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-    
+        let deepLinkingUrlString = "stepic://stepik.org" + url.absoluteString
+        if let deepLinkingUrl = URL(string: deepLinkingUrlString) {
+            UIApplication.shared.openURL(deepLinkingUrl)
+        }
     }
 }
