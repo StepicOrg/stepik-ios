@@ -77,7 +77,7 @@ class NotificationsTableViewCell: UITableViewCell {
 
         notificationTextLabel.linkAttributes = link.attributes
         notificationTextLabel.activeLinkAttributes = activeLink.attributes
-        notificationTextLabel.attributedText = styledText.attributedString
+        notificationTextLabel.setText(styledText.attributedString)
 
         styledText.detections.forEach { detection in
             switch detection.type {
@@ -95,6 +95,15 @@ class NotificationsTableViewCell: UITableViewCell {
         formatter.timeStyle = .short
         let dateString = formatter.string(from: notification.time)
         timeLabel.text = dateString
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        notificationTextLabel.attributedText = nil
+        timeLabel.text = nil
+
+        updateLeftView(.category(firstLetter: " "))
     }
 
     func updateLeftView(_ view: LeftView) {
@@ -120,6 +129,6 @@ class NotificationsTableViewCell: UITableViewCell {
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        print(url)
+    
     }
 }
