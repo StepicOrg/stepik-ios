@@ -159,6 +159,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
         if cell.status == .unread {
+            presenter?.updateNotification(with: id, status: .read)
             cell.status = .read
         }
     }

@@ -69,15 +69,25 @@
                             <action selector="onStatusButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yFu-c3-Tmb"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyT-f0-chA" customClass="TapProxyView" customModule="Stepic" customModuleProvider="target">
+                        <rect key="frame" x="277" y="99.5" width="43" height="60"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="F1R-Y7-m9e"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="KVt-gb-T6t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="0iL-Nh-3er"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vcG-oj-Kpm" secondAttribute="bottom" constant="16" id="Aku-NS-3JM"/>
+                    <constraint firstItem="SyT-f0-chA" firstAttribute="top" secondItem="I3c-nA-leG" secondAttribute="top" constant="-20" id="NHF-J6-swt"/>
                     <constraint firstItem="Xec-Ph-WZD" firstAttribute="top" secondItem="KVt-gb-T6t" secondAttribute="bottom" constant="16" id="NmO-Q8-fjp"/>
                     <constraint firstItem="KVt-gb-T6t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="PI8-hs-6Nx"/>
                     <constraint firstItem="CmL-rx-LXa" firstAttribute="leading" secondItem="vcG-oj-Kpm" secondAttribute="trailing" constant="14" id="U6B-cD-ZFu"/>
+                    <constraint firstAttribute="trailing" secondItem="SyT-f0-chA" secondAttribute="trailing" id="di0-eo-dc6"/>
                     <constraint firstItem="I3c-nA-leG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dtd-eB-5Cq"/>
                     <constraint firstItem="I3c-nA-leG" firstAttribute="leading" secondItem="CmL-rx-LXa" secondAttribute="trailing" constant="14" id="eCd-JE-yGV"/>
+                    <constraint firstItem="SyT-f0-chA" firstAttribute="leading" secondItem="CmL-rx-LXa" secondAttribute="trailing" constant="8" id="klp-JC-tlX"/>
                     <constraint firstItem="vcG-oj-Kpm" firstAttribute="top" secondItem="KVt-gb-T6t" secondAttribute="bottom" constant="16" id="m4y-id-csd"/>
                     <constraint firstAttribute="trailing" secondItem="I3c-nA-leG" secondAttribute="trailing" constant="18" id="n7g-6n-FG4"/>
                     <constraint firstItem="CmL-rx-LXa" firstAttribute="top" secondItem="KVt-gb-T6t" secondAttribute="bottom" constant="14" id="nbf-lN-r84"/>
@@ -94,6 +104,7 @@
                 <outlet property="notificationTextLabel" destination="CmL-rx-LXa" id="Dvh-UC-64J"/>
                 <outlet property="sectionLabel" destination="vcG-oj-Kpm" id="I1D-1u-F4M"/>
                 <outlet property="statusButton" destination="I3c-nA-leG" id="UEo-Ig-IF4"/>
+                <outlet property="statusButtonProxyView" destination="SyT-f0-chA" id="Ito-VU-Rey"/>
                 <outlet property="timeLabel" destination="KVt-gb-T6t" id="i2X-Ce-SeP"/>
             </connections>
             <point key="canvasLocation" x="30" y="202.5"/>

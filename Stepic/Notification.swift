@@ -45,7 +45,6 @@ class Notification: NSManagedObject, JSONInitializable {
         let dict: [String: AnyObject] = [
             "id": id as AnyObject,
             "html_text": htmlText as AnyObject,
-            "time": time as AnyObject,
             "is_unread": (status == .unread) as AnyObject,
             "is_muted": isMuted as AnyObject,
             "is_favorite": isFavorite as AnyObject,

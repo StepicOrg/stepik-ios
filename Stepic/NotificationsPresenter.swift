@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol NotificationsView: class {
     var state: NotificationsViewState { get set }
@@ -160,6 +161,21 @@ class NotificationsPresenter {
             // FIXME: handle error here
             print(error)
         })
+    }
+
+    func updateNotification(with id: Int, status: NotificationStatus) {
+        guard let notification = Notification.fetch(id) else {
+            print("notifications: unable to find notification with id = \(id)")
+            return
+        }
+
+        notification.status = status
+        if status == .opened {
+            notificationsAPI.update(notification, success: { _ in }, error: { err in
+                print("notifications: unable to update notification with id = \(id), error = \(err)")
+            })
+        }
+        CoreDataHelper.instance.save()
     }
 
     fileprivate func fetchNotifications(success: @escaping (Meta, [Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {

@@ -2192,6 +2192,9 @@
 		2C5F48DB1F0FA0A500C3A398 /* AdaptiveStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */; };
 		2C5F6BA91F20B2A900C251D3 /* CongratulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */; };
 		2C5F6BAA1F20B2A900C251D3 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */; };
+		2C5F77BE1F90EE3F00E8E175 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
+		2C5F77BF1F90EE3F00E8E175 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
+		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C6640CF1F2F47A90033A274 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640CE1F2F47A90033A274 /* AchievementManager.swift */; };
 		2C6640D11F2F5B740033A274 /* AchievementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */; };
@@ -4716,6 +4719,7 @@
 		2C5F48D91F0FA04300C3A398 /* AdaptiveStepsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5F6BA71F20B2A900C251D3 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		2C5F6BA81F20B2A900C251D3 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
+		2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+FetchMethods.swift"; sourceTree = "<group>"; };
 		2C6640C91F2F35E60033A274 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		2C6640CE1F2F47A90033A274 /* AchievementManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		2C6640D01F2F5B740033A274 /* AchievementsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsHelper.swift; sourceTree = "<group>"; };
@@ -4761,7 +4765,7 @@
 		2C97041B1F3B0B7200C36F0A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step5.html; sourceTree = "<group>"; };
 		2C97041E1F3B0B7600C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step4.html; sourceTree = "<group>"; };
 		2C97041F1F3B0B7A00C36F0A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step5.html; sourceTree = "<group>"; };
-		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapProxyView.swift; sourceTree = "<group>"; };
+		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapProxyView.swift; path = Stepic/TapProxyView.swift; sourceTree = SOURCE_ROOT; };
 		2C9732EE1F4C38F600AC9301 /* Adaptive 3150.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3150.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9732F11F4C391900AC9301 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/3150/Config.plist; sourceTree = "<group>"; };
 		2C9732F21F4C391900AC9301 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/3150/AdaptiveInfo.plist; sourceTree = "<group>"; };
@@ -5800,6 +5804,7 @@
 		086E965C1BF6682000AB952D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 				08F476201E82C12B0018E82C /* StreaksView */,
 				08970EC91C6A325600846119 /* PlaceholderView */,
 				08F485911C574CFC000165AA /* VideoDownloadView */,
@@ -7016,6 +7021,7 @@
 			children = (
 				083540661CE5FC0E00BDFEA5 /* Notification.swift */,
 				2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */,
+				2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -7249,7 +7255,6 @@
 				2C76ACCE1F1653E60077D9D7 /* CongratsView.swift */,
 				2C76ACD01F18E8C00077D9D7 /* RatingProgressView.swift */,
 				2C6640D61F2F7B010033A274 /* AchievementTableViewCell */,
-				2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10657,6 +10662,7 @@
 				08EDB8C61F7C4BDB0028A9AE /* CourseStatCollectionViewCell.swift in Sources */,
 				089056121E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				080CE1621E9581960089A27F /* SubmissionsAPI.swift in Sources */,
+				2C5F77BF1F90EE3F00E8E175 /* TapProxyView.swift in Sources */,
 				08B845DD1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				080C5E851EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift in Sources */,
 				08D120EE1C937B2200A54ABC /* VideoDownloadView.swift in Sources */,
@@ -10857,6 +10863,7 @@
 				2CB9E8C61F7E833F0004E17F /* NotificationsPagerViewController.swift in Sources */,
 				2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */,
 				0800B81F1D06FDE5006C987E /* DiscussionProxiesAPI.swift in Sources */,
+				2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */,
 				08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */,
 				083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */,
 				08AF59E41E6D9BE800423EFF /* RGPageViewController.swift in Sources */,
@@ -11099,6 +11106,7 @@
 				08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */,
 				085514EB1CFB09760080CB88 /* CellWebViewHelper.swift in Sources */,
 				08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */,
+				2C5F77BE1F90EE3F00E8E175 /* TapProxyView.swift in Sources */,
 				084490091F5D67E300D01940 /* NewSettingsViewController.swift in Sources */,
 				08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,

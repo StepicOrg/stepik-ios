@@ -27,6 +27,7 @@ class NotificationsTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var notificationTextLabel: TTTAttributedLabel!
     @IBOutlet weak var statusButton: NotificationStatusButton!
+    @IBOutlet weak var statusButtonProxyView: TapProxyView!
 
     weak var delegate: NotificationsTableViewCellDelegate?
 
@@ -47,6 +48,8 @@ class NotificationsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        statusButtonProxyView.targetView = statusButton
 
         notificationTextLabel.delegate = self
         avatarImageView.shape = .rectangle(cornerRadius: 4.0)
