@@ -327,6 +327,7 @@ NotificationsTeaching = "Преподавание";
 NotificationsOther = "Другое";
 NotificationsAll = "Все";
 MarkAllAsRead = "Отметить все как прочитанные";
+MarkAllAsReadSuccess = "Все уведомления прочитаны!";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

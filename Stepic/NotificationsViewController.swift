@@ -29,7 +29,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
 
     var data: NotificationViewDataStruct = []
 
-    @IBOutlet weak var markAllAsReadButton: UIButton!
+    @IBOutlet weak var markAllAsReadButton: NotificationsMarkAsReadButton!
     @IBOutlet weak var markAllAsReadButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var markAllAsReadHeightConstraint: NSLayoutConstraint!
@@ -46,6 +46,15 @@ class NotificationsViewController: UIViewController, NotificationsView {
         paginationView.setLoading()
         return paginationView
     }()
+
+    // How can we incapsulate this?
+    func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status) {
+        markAllAsReadButton.update(with: status)
+    }
+
+    @IBAction func onMarkAllAsReadButtonClick(_ sender: Any) {
+        presenter?.markAllAsRead()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

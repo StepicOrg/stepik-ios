@@ -13,6 +13,7 @@ protocol NotificationsView: class {
     var state: NotificationsViewState { get set }
 
     func set(notifications: NotificationViewDataStruct)
+    func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status)
 }
 
 enum NotificationsViewState {
@@ -176,6 +177,26 @@ class NotificationsPresenter {
             })
         }
         CoreDataHelper.instance.save()
+    }
+
+    func markAllAsRead() {
+        view?.updateMarkAllAsReadButton(with: .loading)
+        notificationsAPI.markAllAsRead(success: {
+            self.displayedNotifications = self.displayedNotifications.map { arg -> (date: Date, notifications: [NotificationViewData]) in
+                let (date, notifications) = arg
+                return (date: date, notifications: notifications.map { notification in
+                    var openedNotification = notification
+                    openedNotification.status = .opened
+                    return openedNotification
+                })
+            }
+
+            self.view?.set(notifications: self.displayedNotifications)
+            self.view?.updateMarkAllAsReadButton(with: .normal)
+        }, error: { err in
+            print("notifications: unable to mark all as read, error = \(err)")
+            self.view?.updateMarkAllAsReadButton(with: .error)
+        })
     }
 
     fileprivate func fetchNotifications(success: @escaping (Meta, [Notification]) -> Void, failure: @escaping (RetrieveError) -> Void) {

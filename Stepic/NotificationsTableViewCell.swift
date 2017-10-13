@@ -18,7 +18,7 @@ class NotificationsTableViewCell: UITableViewCell {
     static let reuseId = "notificationsCell"
 
     enum LeftView {
-        case avatar(url: URL) // Maybe pass view?
+        case avatar(url: URL)
         case category(firstLetter: Character)
     }
 

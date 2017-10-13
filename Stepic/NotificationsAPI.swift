@@ -93,4 +93,29 @@ class NotificationsAPI {
             return
         })
     }
+
+    @discardableResult func markAllAsRead(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
+        return Alamofire.request("\(StepicApplicationsInfo.apiURL)/\(name)/mark-as-read", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({ response in
+            var error = response.result.error
+            if response.result.value == nil {
+                if error == nil {
+                    error = NSError(domain: "", code: -1, userInfo: nil)
+                }
+            }
+            let response = response.response
+
+            if let e = error as NSError? {
+                errorHandler("POST mark-as-read: error \(e.domain) \(e.code): \(e.localizedDescription)")
+                return
+            }
+
+            if response?.statusCode != 204 {
+                errorHandler("POST mark-as-read: bad response status code \(String(describing: response?.statusCode))")
+                return
+            }
+
+            success()
+            return
+        })
+    }
 }
